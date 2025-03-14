@@ -42,8 +42,8 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
                         + "  </noscript>\r\n"
                         + "</body>\r\n")
     public void asXml_jsEnabled() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<noscript><div>hello</noscript>"
             + "</body></html>";
 
@@ -56,7 +56,8 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      */
     @Test
     public void asXml_jsDisabled() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<noscript><div>hello</noscript>"
             + "</body></html>";
 
@@ -84,8 +85,8 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedTextjsEnabled() throws Exception {
-        final String htmlContent
-            = "<html><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<noscript>hello</noscript>"
             + "</body></html>";
 
@@ -98,7 +99,8 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText_jsDisabled() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<noscript>hello</noscript>"
             + "</body></html>";
 
@@ -120,7 +122,8 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      */
     @Test
     public void isEmptyXmlTagExpanded() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<noscript></noscript>"
             + "</body></html>";
 

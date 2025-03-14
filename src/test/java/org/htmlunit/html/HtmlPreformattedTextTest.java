@@ -39,7 +39,8 @@ public class HtmlPreformattedTextTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLPreElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -63,7 +64,8 @@ public class HtmlPreformattedTextTest extends WebDriverTestCase {
     @Test
     @Alerts("  hello   abc")
     public void getText() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<pre id='foo'>  hello \t abc</pre>"
             + "</body></html>";
 
@@ -77,7 +79,8 @@ public class HtmlPreformattedTextTest extends WebDriverTestCase {
     @Test
     @Alerts("1\n2\n3\n4")
     public void asTextDifferentLineBreaks() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<pre id='foo'>1\n2\r\n3\r4</pre>"
             + "</body></html>";
 
@@ -91,7 +94,8 @@ public class HtmlPreformattedTextTest extends WebDriverTestCase {
     @Test
     @Alerts("start\n  hello   abc \nend")
     public void asTextInsideDiv() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<div id='foo'>start<pre>  hello \t abc </pre>end</div>"
             + "</body></html>";
 

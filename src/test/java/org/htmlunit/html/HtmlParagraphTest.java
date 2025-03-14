@@ -32,7 +32,8 @@ public class HtmlParagraphTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml_emptyTag() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<p id='foo'></p>\n"
             + "</body></html>";
 
@@ -46,7 +47,8 @@ public class HtmlParagraphTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText_getTextContent() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<p id='p1'></p>\n"
                 + "<p id='p2'>abc</p>\n"
                 + "<p id='p3'>$24.43</p>\n"

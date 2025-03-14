@@ -38,8 +38,8 @@ public class HtmlNoFrames2Test extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleText() throws Exception {
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "  <noframes id='tester'>\n"
                 + "    Some text\n"
                 + "  </noframes>\n"

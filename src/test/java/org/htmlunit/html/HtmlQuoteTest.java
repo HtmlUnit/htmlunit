@@ -38,7 +38,8 @@ public class HtmlQuoteTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLQuoteElement]", "[object HTMLQuoteElement]"})
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

@@ -47,8 +47,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -71,7 +71,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      */
     @Test
     public void type() throws Exception {
-        final String html = "<html><head></head><body><input type='password' id='p'/></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head></head><body><input type='password' id='p'/></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
 
@@ -101,7 +102,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      */
     @Test
     public void typeWhileDisabled() throws Exception {
-        final String html = "<html><body><input type='password' id='p' disabled='disabled'/></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><input type='password' id='p' disabled='disabled'/></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
         try {
@@ -121,7 +123,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null"})
     public void typeDoesNotChangeValueAttribute() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
                 + "</head>\n"
@@ -149,7 +152,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"HtmlUnit", "HtmlUnit"})
     public void typeDoesNotChangeValueAttributeWithInitialValue() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
                 + "</head>\n"
@@ -176,8 +180,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      */
     @Test
     public void preventDefault_OnKeyDown() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function handler(e) {\n"
             + "    if (e && e.target.value.length > 2)\n"
             + "      e.preventDefault();\n"
@@ -205,8 +209,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      */
     @Test
     public void preventDefault_OnKeyPress() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function handler(e) {\n"
             + "    if (e && e.target.value.length > 2)\n"
             + "      e.preventDefault();\n"
@@ -235,8 +239,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "change", "boo", "blur", "boo", "blur"})
     public void typeOnChange() throws Exception {
-        final String html =
-              "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
             + "<body>\n"
@@ -271,8 +275,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      */
     @Test
     public void setValueOnChange() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
               + "</head>\n"
@@ -298,8 +302,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      */
     @Test
     public void setDefaultValueOnChange() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head></head>\n"
               + "<body>\n"
               + "  <input type='password' id='p' value='Hello world'"
@@ -325,7 +329,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -357,7 +362,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -394,7 +400,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                 "newValue-initial-initial", "newValue-initial-initial",
                 "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -435,7 +442,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                 "newValue-initial-initial", "newValue-initial-initial",
                 "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -475,7 +483,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                 "newValue-default-default", "newValue-attribValue-attribValue",
                 "newValue-newDefault-newDefault"})
     public void value() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -512,7 +521,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             FF = "7",
             FF_ESR = "7")
     public void textLength() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -539,8 +549,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void selection() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(getSelection(document.getElementById('text1')).length);\n"
@@ -583,7 +593,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     }
 
     private void selection2(final int selectionStart, final int selectionEnd) throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<input id='myTextInput' value='Bonjour' type='password'>\n"
             + "<script>\n"
@@ -609,7 +620,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"0,0", "4,5", "10,10", "4,4", "1,1"})
     public void selectionOnUpdate() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<input id='myTextInput' value='Hello' type='password'>\n"
             + "<script>\n"
@@ -644,8 +656,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts("password")
     public void upperCase() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(document.getElementById('myId').type);\n"
@@ -667,7 +679,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -892,8 +905,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -1018,8 +1031,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     }
 
     private void validation(final String htmlPart, final String jsPart, final String sendKeys) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"
@@ -1052,8 +1065,8 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                 + "  </form>\n"
                 + "</body></html>";
 
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head><title>second</title></head><body>\n"
                 + "  <p>hello world</p>\n"
                 + "</body></html>";
 

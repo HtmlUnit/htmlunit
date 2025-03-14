@@ -32,7 +32,8 @@ public class HtmlPreformattedText2Test extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<pre id='foo'>  hello \t abc</pre>"
             + "</body></html>";
 

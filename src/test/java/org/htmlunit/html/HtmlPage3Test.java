@@ -66,7 +66,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     public void formElementCreatedFromJavascript() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script type='text/javascript'>\n"
             + "  function modifyForm() {\n"
@@ -111,7 +112,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts({"windows-1252", "windows-1252", "windows-1252", "undefined"})
     public void getPageEncoding() throws Exception {
-        final String htmlContent = "<html><head>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <meta http-equiv='Content-Type' content='text/html; charset=Shift_JIS'>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -140,7 +142,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     public void onLoadHandler_ScriptNameRead() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
             + "  load = function() {};\n"
             + "  onload = load;\n"
@@ -158,7 +161,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     public void constructor() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
@@ -179,7 +183,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     public void getInputByName() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
@@ -207,7 +212,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLInputElement]", "1"})
     public void write_getElementById_afterParsing() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_WINDOW_NAME_FUNCTION
@@ -231,7 +237,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLInputElement]", "1"})
     public void write_getElementById_duringParsing() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body><script>\n"
             + LOG_TITLE_FUNCTION
@@ -249,7 +256,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts("Hello")
     public void application_javascript_type() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <script type='application/javascript'>\n"
             + LOG_TITLE_FUNCTION
@@ -266,7 +274,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts("Hello")
     public void application_x_javascript_type() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <script type='application/x-javascript'>\n"
             + LOG_TITLE_FUNCTION
@@ -286,7 +295,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     }
 
     private void basePath(final String baseUrl, final String expected) throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <base href='" + baseUrl + "'>\n"
             + "</head>\n"
@@ -502,8 +512,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts("interactive")
     public void readyStateInDOMContentLoaded() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -524,8 +534,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts("25")
     public void loadExternalJavaScript() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "function makeIframe() {\n"
             + "  var iframesrc = '<html><head>';\n"
@@ -574,8 +584,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts("25")
     public void loadExternalJavaScript_absolute() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "function makeIframe() {\n"
             + "  var iframesrc = '<html><head>';\n"
@@ -624,7 +634,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts({"cl2", "cl1"})
     public void onLoadHandler_idChange() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>'"
             + "<script type='text/javascript'>\n"
@@ -647,7 +658,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLTableRowElement]")
     public void getElementById_AfterAppendRemoveAppendChild() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -672,7 +684,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void getElementById_AfterAppendingToNewlyCreatedElement() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -695,8 +708,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Test
     @Alerts("works")
     public void metaWithNamespace() throws Exception {
-        final String content =
-                "<html>\n"
+        final String content = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>works\u00a7</title>\n"
                 + "</head>\n"

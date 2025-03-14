@@ -37,7 +37,8 @@ public class HtmlPageTest5 extends SimpleWebTestCase {
     @Test
     @Alerts({"focus-0", "blur-0", "focus-1", "blur-1", "focus-2"})
     public void tabNext() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>First</title>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -69,7 +70,8 @@ public class HtmlPageTest5 extends SimpleWebTestCase {
     @Test
     @Alerts({"focus-2", "blur-2", "focus-1", "blur-1", "focus-0"})
     public void tabPrevious() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>First</title>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -100,7 +102,8 @@ public class HtmlPageTest5 extends SimpleWebTestCase {
      */
     @Test
     public void keyboard_NoTabbableElements() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>First</title>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -138,7 +141,8 @@ public class HtmlPageTest5 extends SimpleWebTestCase {
     @Test
     @Alerts({"focus-0", "blur-0", "focus-0"})
     public void keyboard_OneTabbableElement() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>First</title>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -184,7 +188,8 @@ public class HtmlPageTest5 extends SimpleWebTestCase {
     @Test
     @Alerts({"focus-0", "blur-0", "focus-2", "blur-2", "focus-1"})
     public void accessKeys() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>First</title>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -216,7 +221,8 @@ public class HtmlPageTest5 extends SimpleWebTestCase {
     @Test
     @Alerts("buttonPushed")
     public void pressAccessKey_Button() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>First</title>\n"
                 + "</head>\n"
                 + "<body>\n"

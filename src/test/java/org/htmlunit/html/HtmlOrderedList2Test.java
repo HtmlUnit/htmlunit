@@ -40,8 +40,8 @@ public class HtmlOrderedList2Test extends WebDriverTestCase {
     @Test
     @Alerts("first item\nsecond item\nsomething without li node\nthird item")
     public void getVisibleText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <ol id='tester'>\n"
@@ -68,7 +68,8 @@ public class HtmlOrderedList2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLOListElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

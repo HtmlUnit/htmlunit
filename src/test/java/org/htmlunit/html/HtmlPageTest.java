@@ -84,7 +84,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void formSubmit() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
@@ -124,7 +125,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementByIdNull() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
@@ -140,7 +142,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementsByIdNull() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
@@ -158,7 +161,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementsByIdOrNameNull() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
@@ -176,7 +180,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test(expected = ElementNotFoundException.class)
     public void getElementByNameNull() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
@@ -192,7 +197,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementsByNameNull() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
@@ -211,7 +217,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getHtmlElement() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -277,7 +284,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getAnchorByText() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <a href='http://www.foo.com' id='anchor1'>anchor text</a>\n"
@@ -299,7 +307,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getTabbableElements_None() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
@@ -316,7 +325,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getTabbableElements_OneEnabled_OneDisabled() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<form><p>hello world</p>\n"
@@ -336,7 +346,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getTabbableElements() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<a id='a' tabindex='1'>foo</a>\n"
@@ -372,7 +383,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getHtmlElementByAccessKey() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<a id='a' accesskey='a'>foo</a>\n"
@@ -396,7 +408,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getHtmlElementsByAccessKey() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head><body>\n"
             + "<a id='a' accesskey='a'>foo</a>\n"
             + "<a id='b' accesskey='a'>foo</a>\n"
@@ -416,7 +429,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getFullQualifiedUrl_NoBaseSpecified() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<table><tr><td><input type='text' id='foo'/></td></tr></table>\n"
             + "</form></body></html>";
@@ -467,7 +481,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
         throws Exception {
 
         final String baseUrl = baseProtocol + "://second" + basePortPart;
-        final String htmlContent = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<base href='" + baseUrl + "'>\n"
             + "</head><body>\n"
             + "<form id='form1'>\n"
@@ -490,7 +505,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test(expected = MalformedURLException.class)
     public void getFullQualifiedUrl_invalid() throws Exception {
-        final String htmlContent = "<html><body></body></html>";
+        final String htmlContent = DOCTYPE_HTML + "<html><body></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
         page.getFullyQualifiedUrl("http://");
@@ -501,7 +516,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void testBase_Multiple() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<base href='" + URL_SECOND + "'>\n"
             + "<base href='" + URL_THIRD + "'>\n"
@@ -536,7 +552,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void testBase_InsideBody() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <base href='" + URL_SECOND + "'>\n"
             + "  <a href='somepage.html'>link</a>\n"
             + "</body></html>";
@@ -558,7 +575,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void onLoadHandler_BodyStatement() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "</head><body onLoad='alert(\"foo\")'>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
@@ -575,7 +593,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void onLoadHandler_TwoBodyStatements() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "</head><body onLoad='alert(\"foo\");alert(\"bar\")'>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
@@ -592,7 +611,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void onLoadHandler_BodyName() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
             + "  window.onload = function() {alert('foo')}</script>\n"
             + "</head><body></body></html>";
@@ -610,7 +630,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void onLoadHandler_BodyName_NotAFunction() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head>\n"
             + "<body onLoad='foo=4711'>\n"
             + "<a name='alert' href='javascript:alert(foo)'/>\n"
             + "</body></html>";
@@ -630,7 +651,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void onLoadHandler_ScriptName() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
             + "load=function() {alert('foo')};\n"
             + "onload=load\n"
@@ -648,7 +670,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void embeddedMetaTag_Regression() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "</head><body>\n"
             + "<table><tr><td>\n"
             + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">\n"
@@ -674,7 +697,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getPageEncoding_EmptyCharset() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<meta http-equiv='Content-Type' content='text/html; charset='>\n"
             + "</head><body>abc</body></html>";
         final HtmlPage page = loadPage(html);
@@ -688,7 +712,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getPageEncoding_HeaderHasPrecedenceOverMetaTag() throws Exception {
-        final String html = "<html><head><meta content='text/html; charset=iso-8859-1' http-equiv='Content-Type'/>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><meta content='text/html; charset=iso-8859-1' http-equiv='Content-Type'/>\n"
             + "</head><body></body></html>";
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html, "text/html; charset=UTF-8");
@@ -704,7 +729,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getForms() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<form name='one'>\n"
@@ -757,7 +783,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void refresh_MetaTag_NoUrl() throws Exception {
-        final String firstContent = "<html><head><title>first</title>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">\n"
             + "</head><body></body></html>";
 
@@ -785,7 +812,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void refresh_ImmediateRefresh_AvoidOOME() throws Exception {
-        final String firstContent = "<html><head><title>first</title>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">\n"
             + "</head><body></body></html>";
 
@@ -820,11 +848,13 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     private void testRefresh_MetaTag(final String metaTag) throws Exception {
-        final String firstContent = "<html><head><title>first</title>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title>\n"
             + metaTag.replace("§§URL§§", URL_SECOND.toString()) + "\n"
             + "<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='" + URL_SECOND + "\">\n"
             + "</head><body></body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
 
@@ -844,12 +874,13 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void refresh_MetaTagNoScript() throws Exception {
-        final String firstContent = "<html><head><title>first</title>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title>\n"
             + "<noscript>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=" + URL_SECOND + "\">\n"
             + "</noscript>\n"
             + "</head><body></body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
 
@@ -872,10 +903,11 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void refresh_MetaTag_CustomRefreshHandler() throws Exception {
-        final String firstContent = "<html><head><title>first</title>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title>\n"
             + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=" + URL_SECOND + "\">\n"
             + "</head><body></body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
         final List<Object> collectedItems = new ArrayList<>();
@@ -922,9 +954,10 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void refresh_HttpResponseHeader() throws Exception {
-        final String firstContent = "<html><head><title>first</title>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title>\n"
             + "</head><body></body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
 
@@ -945,7 +978,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void documentParentIsNull() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "</body></html>";
@@ -960,7 +994,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void documentElement() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "</body></html>";
@@ -978,7 +1013,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void documentNodeType() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "</body></html>";
@@ -996,7 +1032,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void deregisterFrameWithoutSrc() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<iframe></iframe>\n"
@@ -1014,7 +1051,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void onLoadReturn() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head>\n"
             + "<body onload='return true'>\n"
             + "</body></html>";
 
@@ -1026,7 +1064,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head>"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head>"
             + "<body><p>helloworld</p></body>"
             + "</html>";
 
@@ -1044,8 +1083,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void asXmlValidHtmlOutput() throws Exception {
-        final String html =
-            "<html><head><title>foo</title>"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title>"
             + "<script src='script.js'></script></head>"
             + "<body><div></div><iframe src='about:blank'></iframe></body>"
             + "</html>";
@@ -1073,7 +1112,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml2() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>var test = 15 < 16;</script></head>\n"
             + "</head>\n"
             + "<body onload='test=(1 > 2) && (45 < 78)'><p>helloworld &amp;amp; helloall</p></body>\n"
@@ -1092,7 +1132,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
     @Test
     public void asXml_unicode() throws Exception {
         final String unicodeString = "\u064A\u0627 \u0644\u064A\u064A\u0644";
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></head>\n"
             + "<body><span id='foo'>" + unicodeString + "</span></body></html>";
 
@@ -1113,7 +1154,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml_noscript() throws Exception {
-        final String html = "<html>"
+        final String html = DOCTYPE_HTML
+            + "<html>"
             + "<body>"
             + "<noscript><p><strong>your browser does not support JavaScript</strong></p></noscript>"
             + "</body></html>";
@@ -1137,7 +1179,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementsById() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
                 + "<div id='a'>foo</div>"
                 + "<div id='b'/><div id='b'/>"
                 + "<div id='c'><div id='c'/></div>"
@@ -1163,7 +1206,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementsByName() throws Exception {
-        final String html = "<html><body><div name='a'>foo</div><div name='b'/><div name='b'/></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><div name='a'>foo</div><div name='b'/><div name='b'/></body></html>";
         final HtmlPage page = loadPage(html);
         assertEquals(1, page.getElementsByName("a").size());
         assertEquals(2, page.getElementsByName("b").size());
@@ -1183,7 +1227,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementByName() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='a' name='a'>foo</div>\n"
             + "<div id='b1' name='b'>bar</div>\n"
             + "<div id='b2' name='b'>baz</div></body></html>";
@@ -1200,7 +1245,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test(expected = ElementNotFoundException.class)
     public void getElementByNameNotfound() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='a' name='a'>foo</div>\n"
             + "<div id='b1' name='b'>bar</div>\n"
             + "<div id='b2' name='b'>baz</div></body></html>";
@@ -1213,8 +1259,9 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getHtmlElementsByIdAndOrName() throws Exception {
-        final String html = "<html><body><div name='a' id='a'>foo</div><div name='b' id='c'>bar</div>"
-                            + "<div name='b' id='d'>bar</div></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><div name='a' id='a'>foo</div><div name='b' id='c'>bar</div>"
+                + "<div name='b' id='d'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
         assertEquals(1, page.getElementsByIdAndOrName("a").size());
         assertEquals(2, page.getElementsByIdAndOrName("b").size());
@@ -1236,8 +1283,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getHtmlElementByIdAfterRemove() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head>\n"
             + "<body>\n"
             + "<div id='div1'>\n"
             + "<div id='div2'>\n"
@@ -1274,8 +1321,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getHtmlElementById_idTwice() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head>\n"
             + "<body>\n"
             + "<div id='id1'>foo</div>\n"
             + "<span id='id1'>bla</span>\n"
@@ -1296,7 +1343,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
     @Test
     @Alerts("webm=none")
     public void setCookieMetaTag() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<meta http-equiv='set-cookie' content='webm=none; path=/;'>\n"
             + "</head><body>\n"
             + "<script>document.title = document.cookie</script>\n"
@@ -1325,12 +1373,12 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     private void testNoSlashURL(final String url) throws Exception {
-        final String firstContent
-            = "<html><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<iframe id='myIFrame' src='" + url + "'></iframe>\n"
             + "</body></html>";
 
-        final String secondContent = "<html><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><body></body></html>";
         final WebClient client = getWebClient();
 
         final URL secondURL = new URL("http://second/");
@@ -1360,7 +1408,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             private int nbCalls_ = 0;
             @Override
             public WebResponse getResponse(final WebRequest request) throws IOException {
-                String content = "<html><head>\n";
+                String content = DOCTYPE_HTML + "<html><head>\n";
                 if (nbCalls_ == 0) {
                     content += "<meta http-equiv='refresh' content='1; URL='>\n";
                 }
@@ -1387,8 +1435,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
         // The document.all and form.elements calls are important because they trigger the creation
         // of HTMLCollections, which have caused serialization problems in the past (see bug #606).
 
-        final String content =
-              "<html><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='myId'>Hello there!</div>\n"
             + "<script>\n"
             + "  var x = document.all;\n"
@@ -1436,8 +1484,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void serializationLambda() throws Exception {
-        final String content =
-              "<html><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='myId'>Hello there!</div>\n"
             + "<form name='f' id='f'></form>\n"
             + "<script>var y = document.body.getElementsByTagName('form').elements;</script>\n"
@@ -1465,8 +1513,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void serializationStaticDomNodeList() throws Exception {
-        final String content =
-              "<html><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='myId'>Hello there!</div>\n"
             + "<form name='f' id='f'></form>\n"
             + "<script>var y = document.querySelectorAll('*');</script>\n"
@@ -1495,7 +1543,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void clonedPageHasOwnIdMap() throws Exception {
-        final String content = "<html><head><title>foo</title>"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title>"
             + "<body>"
             + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>"
             + "</body></html>";
@@ -1529,7 +1578,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void clonedPageHasOwnDocumentElement() throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<body>\n"
             + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>\n"
             + "</body></html>";
@@ -1547,8 +1597,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlAttributeChangeListener_AddAttribute() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -1576,8 +1626,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlAttributeChangeListener_ReplaceAttribute() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -1605,8 +1655,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlAttributeChangeListener_RemoveAttribute() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -1634,8 +1684,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlAttributeChangeListener_RemoveListener() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function clickMe() {\n"
             + "    var p1 = document.getElementById('p1');\n"
@@ -1665,8 +1715,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlAttributeChangeListener_ListenerRegistersNewListener() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "</head>\n"
             + "<body>\n"
             + "<p id='p1' title='myTitle'></p>\n"
@@ -1708,7 +1758,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void caseInsensitiveRegexReplacement() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "var r = /^([#.]?)([a-z0-9\\*_-]*)/i;\n"
             + "var s = '#userAgent';\n"
             + "s = s.replace(r, '');\n"
@@ -1725,7 +1776,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void regexReplacementWithFunction() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "var r = /-([a-z])/ig;\n"
             + "var s = 'font-size';\n"
             + "s = s.replace(r, function(z,b){return b.toUpperCase();});\n"
@@ -1742,7 +1794,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void title_EmptyXmlTagExpanded() throws Exception {
-        final String content = "<html><head><title/></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title/></head>\n"
             + "<body>Hello World!</body></html>";
         final HtmlPage page = loadPage(content);
         assertTrue(page.asXml().indexOf("</title>") != -1);
@@ -1753,7 +1806,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void onunLoadHandler() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "</head><body onunload='alert(\"foo\");alert(\"bar\")'>\n"
             + "</body></html>";
 
@@ -1806,7 +1860,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
         });
 
         final String expectedMessage = "Any string value here forces a dialog box to appear before closing the window.";
-        final String firstContent = "<html><head><title>first</title>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title>\n"
             + "<script>\n"
             + "  function closeIt(event) {\n"
             + "    event.returnValue = '" + expectedMessage + "';\n"
@@ -1816,7 +1871,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "  <a href='" + URL_SECOND + "'>Second page</a>\n"
             + "</body></html>";
 
-        final String secondContent = "<html><head><title>second</title>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>second</title>\n"
             + "</head><body>\n"
             + "</body></html>";
 
@@ -1837,8 +1893,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void srcJavaScript() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<script id='ie_ready' src='javascript:void(0)'></script>\n"
             + "</body></html>";
 
@@ -1852,8 +1908,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String htmlContent
-            = "<html><head><title>test</title></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>test</title></head>\n"
             + "<body><table>\n"
             + "<tr><form><td>a</td></form></tr>\n"
             + "</table></body></html>";
@@ -1867,8 +1923,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementsByTagName() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<form><input type='button' name='button1' value='pushme'></form>\n"
             + "<div>a</div> <div>b</div> <div>c</div>\n"
@@ -1907,8 +1963,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void readyState() throws Exception {
-        final String htmlContent
-            = "<html><head><title>test</title></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>test</title></head>\n"
             + "<body><table>\n"
             + "<tr><form><td>a</td></form></tr>\n"
             + "</table></body></html>";
@@ -1922,7 +1978,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void cloneNode() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "<p>hello world</p>\n"
@@ -1938,16 +1995,16 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void cloneHtmlPageWithFrame() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head><body>\n"
                 + "<div id='content'>"
                 + "  <iframe name='content' src='frame1.html'></iframe>"
                 + "</div>"
                 + "</body></html>";
 
-        final String frameContent =
-                "<html>\n"
+        final String frameContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>"
                 + "  <p>frame1</p>"
@@ -2024,8 +2081,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void getBaseUrl() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>body</body>\n"
                 + "</html>";

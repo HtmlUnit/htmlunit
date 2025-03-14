@@ -33,8 +33,8 @@ public class HtmlNoFramesTest extends SimpleWebTestCase {
      */
     @Test
     public void preserveInnerXML() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <noframes>\n"
             + "    <b>Some bold text</b>\n"
             + "  </noframes>\n"
@@ -49,8 +49,8 @@ public class HtmlNoFramesTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <noframes id='it'>\n"
             + "    Some text\n"
             + "  </noframes>\n"

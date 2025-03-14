@@ -40,8 +40,8 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <noscript id='tester'>\n"
@@ -63,8 +63,8 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void getElementById() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -87,8 +87,8 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object Text]"})
     public void childNodes() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -112,8 +112,8 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void testJavaScript() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  alert(1);\n"
             + "</script>\n"
@@ -133,8 +133,8 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
      */
     @Test
     public void formValues() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form name='item' method='get'>\n"
             + "  <noscript>\n"
             + "    <input type=hidden name='__webpage_no_js__' value='1'>\n"

@@ -62,7 +62,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void getFullQualifiedUrl_topWindow() throws Exception {
-        final String firstHtml = "<html><head><title>first</title>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>first</title>\n"
             + "<script>\n"
             + "function init() {\n"
             + "  var iframe = window.frames['f'];\n"
@@ -74,7 +75,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
             + "<body onload='init()'>\n"
             + "  <iframe name='f'></iframe>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>second</title></head>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html><head><title>second</title></head>\n"
             + "<body><p>Form submitted successfully.</p></body></html>";
 
         final WebClient client = getWebClient();
@@ -99,7 +101,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
     @Test
     @Alerts("Hello there")
     public void save() throws Exception {
-        final String html = "<html><head><script src='" + URL_SECOND + "'>\n</script></head></html>";
+        final String html = DOCTYPE_HTML + "<html><head><script src='" + URL_SECOND + "'>\n</script></head></html>";
 
         final String js = "alert('Hello there')";
 
@@ -135,7 +137,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_image() throws Exception {
-        final String html = "<html><body><img src='" + URL_SECOND + "'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><img src='" + URL_SECOND + "'></body></html>";
 
         final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
         final WebClient webClient = getWebClientWithMockWebConnection();
@@ -168,7 +170,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_imageNotImage() throws Exception {
-        final String html = "<html><body><img src='foo.txt'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><img src='foo.txt'></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
 
@@ -191,7 +193,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_image_without_src() throws Exception {
-        final String html = "<html><body><img></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><img></body></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
         final MockWebConnection webConnection = getMockWebConnection();
@@ -214,7 +216,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_image_empty_src() throws Exception {
-        final String html = "<html><body><img src=''></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><img src=''></body></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
         final MockWebConnection webConnection = getMockWebConnection();
@@ -237,20 +239,23 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_frames() throws Exception {
-        final String mainContent
-            = "<html><head><title>First</title></head>\n"
+        final String mainContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<frameset cols='50%,*'>\n"
             + "  <frame name='left' src='" + URL_SECOND + "' frameborder='1' />\n"
             + "  <frame name='right' src='" + URL_THIRD + "' frameborder='1' />\n"
             + "  <frame name='withoutsrc' />\n"
             + "</frameset>\n"
             + "</html>";
-        final String frameLeftContent = "<html><head><title>Second</title></head><body>\n"
+        final String frameLeftContent = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body>\n"
             + "<iframe src='iframe.html'></iframe>\n"
             + "<img src='img.jpg'>\n"
             + "</body></html>";
-        final String frameRightContent = "<html><head><title>Third</title></head><body>frame right</body></html>";
-        final String iframeContent  = "<html><head><title>Iframe</title></head><body>iframe</body></html>";
+        final String frameRightContent = DOCTYPE_HTML
+                + "<html><head><title>Third</title></head><body>frame right</body></html>";
+        final String iframeContent  = DOCTYPE_HTML
+                + "<html><head><title>Iframe</title></head><body>iframe</body></html>";
 
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -297,7 +302,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_css() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/></head></html>";
 
         final String css = "body {color: blue}";
@@ -328,7 +334,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_css_without_href() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' /></head></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
@@ -352,7 +359,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_css_empty_href() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='' /></head></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
@@ -380,12 +388,12 @@ public class HtmlPage2Test extends SimpleWebTestCase {
     public void saveShouldStripLongFileNames() throws Exception {
         final RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').get();
         final String longName = generator.generate(500) + ".html";
-        final String html = "<html><body><iframe src='" + longName + "'></iframe></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><iframe src='" + longName + "'></iframe></body></html>";
 
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        webConnection.setDefaultResponse("<html/>");
+        webConnection.setDefaultResponse(DOCTYPE_HTML + "<html/>");
         webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
 
@@ -403,7 +411,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void serialization_attributeListenerLock() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "function foo() {\n"
             + "  document.getElementById('aframe').src = '" + URL_FIRST + "';\n"
             + "  return false;\n"
@@ -422,7 +431,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void save_emptyTextArea() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head/>\n"
             + "<body>\n"
             + "<textarea></textarea>\n"

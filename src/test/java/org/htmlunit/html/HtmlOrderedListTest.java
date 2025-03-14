@@ -34,7 +34,8 @@ public class HtmlOrderedListTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "  <ol id='foo'>\n"
             + "    <li>first item</li>\n"
@@ -62,8 +63,8 @@ public class HtmlOrderedListTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String content
-            = "<html><head></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<ol id='myNode'></ol>\n"
             + "foo\n"
             + "</form></body></html>";

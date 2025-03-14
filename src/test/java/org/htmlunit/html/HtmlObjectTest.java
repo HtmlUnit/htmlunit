@@ -40,7 +40,8 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     @Test
     @Alerts("undefined")
     public void classid() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             // Window Media Player CLASSID
             + "<object id='wm' classid='clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6'></object>\n"
             + "<script>\n"
