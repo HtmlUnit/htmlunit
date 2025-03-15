@@ -43,10 +43,10 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  *
  * These tests require a special setup in {@code etc/hosts}:
  * <pre>
- * 127.0.0.1       host1.htmlunit.org
- * 127.0.0.1       host2.htmlunit.org
- * 127.0.0.1       htmlunit.org
- * 127.0.0.1       htmlunit
+ * 127.0.0.1       host1.htmlunit-dev.org
+ * 127.0.0.1       host2.htmlunit-dev.org
+ * 127.0.0.1       htmlunit-dev.org
+ * 127.0.0.1       htmlunit-dev
  * </pre>
  *
  * @author Ronald Brill
@@ -56,15 +56,15 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 @RunWith(BrowserRunner.class)
 public class CookieManager4Test extends WebDriverTestCase {
 
-    /** "htmlunit.org". */
-    public static final String DOMAIN = "htmlunit.org";
+    /** "htmlunit-dev.org". */
+    public static final String DOMAIN = "htmlunit-dev.org";
     /** "http://host1." + DOMAIN + ":" + PORT + '/'. */
     public static final String URL_HOST1 = "http://host1." + DOMAIN + ":" + PORT + '/';
     private static final String URL_HOST2 = "http://host2." + DOMAIN + ":" + PORT + '/';
     /** "http://" + DOMAIN + ":" + PORT + '/'. */
     public static final String URL_HOST3 = "http://" + DOMAIN + ":" + PORT + '/';
     /** "http://" + "htmlunit" + ":" + PORT + '/'. */
-    public static final String URL_HOST4 = "http://" + "htmlunit" + ":" + PORT + '/';
+    public static final String URL_HOST4 = "http://" + "htmlunit-dev" + ":" + PORT + '/';
 
     /**
      * {@link org.junit.Assume Assumes} that the host configurations are present.
@@ -148,40 +148,40 @@ public class CookieManager4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"c1=1; c2=2; c3=3; c4=4",
-                       "c1=1; path=/; domain=.htmlunit.org; sameSite=Lax",
-                       "c2=2; path=/; domain=.htmlunit.org; sameSite=Lax",
-                       "c3=3; path=/; domain=.host1.htmlunit.org; sameSite=Lax",
-                       "c4=4; path=/; domain=.host1.htmlunit.org; sameSite=Lax"},
+                       "c1=1; path=/; domain=.htmlunit-dev.org; sameSite=Lax",
+                       "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=Lax",
+                       "c3=3; path=/; domain=.host1.htmlunit-dev.org; sameSite=Lax",
+                       "c4=4; path=/; domain=.host1.htmlunit-dev.org; sameSite=Lax"},
             FF = {"c1=1; c2=2; c3=3; c4=4",
-                  "c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                  "c2=2; path=/; domain=.htmlunit.org; sameSite=None",
-                  "c3=3; path=/; domain=.host1.htmlunit.org; sameSite=None",
-                  "c4=4; path=/; domain=.host1.htmlunit.org; sameSite=None"},
+                  "c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                  "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                  "c3=3; path=/; domain=.host1.htmlunit-dev.org; sameSite=None",
+                  "c4=4; path=/; domain=.host1.htmlunit-dev.org; sameSite=None"},
             FF_ESR = {"c1=1; c2=2; c3=3; c4=4",
-                      "c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c3=3; path=/; domain=.host1.htmlunit.org; sameSite=None",
-                      "c4=4; path=/; domain=.host1.htmlunit.org; sameSite=None"})
+                      "c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                      "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                      "c3=3; path=/; domain=.host1.htmlunit-dev.org; sameSite=None",
+                      "c4=4; path=/; domain=.host1.htmlunit-dev.org; sameSite=None"})
     @HtmlUnitNYI(CHROME = {"c1=1; c2=2; c3=3; c4=4",
-                           "c1=1; path=/; domain=.htmlunit.org",
-                           "c2=2; path=/; domain=.htmlunit.org",
-                           "c3=3; path=/; domain=.host1.htmlunit.org",
-                           "c4=4; path=/; domain=.host1.htmlunit.org"},
+                           "c1=1; path=/; domain=.htmlunit-dev.org",
+                           "c2=2; path=/; domain=.htmlunit-dev.org",
+                           "c3=3; path=/; domain=.host1.htmlunit-dev.org",
+                           "c4=4; path=/; domain=.host1.htmlunit-dev.org"},
             EDGE = {"c1=1; c2=2; c3=3; c4=4",
-                    "c1=1; path=/; domain=.htmlunit.org",
-                    "c2=2; path=/; domain=.htmlunit.org",
-                    "c3=3; path=/; domain=.host1.htmlunit.org",
-                    "c4=4; path=/; domain=.host1.htmlunit.org"},
+                    "c1=1; path=/; domain=.htmlunit-dev.org",
+                    "c2=2; path=/; domain=.htmlunit-dev.org",
+                    "c3=3; path=/; domain=.host1.htmlunit-dev.org",
+                    "c4=4; path=/; domain=.host1.htmlunit-dev.org"},
             FF = {"c1=1; c2=2; c3=3; c4=4",
-                  "c1=1; path=/; domain=.htmlunit.org",
-                  "c2=2; path=/; domain=.htmlunit.org",
-                  "c3=3; path=/; domain=.host1.htmlunit.org",
-                  "c4=4; path=/; domain=.host1.htmlunit.org"},
+                  "c1=1; path=/; domain=.htmlunit-dev.org",
+                  "c2=2; path=/; domain=.htmlunit-dev.org",
+                  "c3=3; path=/; domain=.host1.htmlunit-dev.org",
+                  "c4=4; path=/; domain=.host1.htmlunit-dev.org"},
             FF_ESR = {"c1=1; c2=2; c3=3; c4=4",
-                      "c1=1; path=/; domain=.htmlunit.org",
-                      "c2=2; path=/; domain=.htmlunit.org",
-                      "c3=3; path=/; domain=.host1.htmlunit.org",
-                      "c4=4; path=/; domain=.host1.htmlunit.org"})
+                      "c1=1; path=/; domain=.htmlunit-dev.org",
+                      "c2=2; path=/; domain=.htmlunit-dev.org",
+                      "c3=3; path=/; domain=.host1.htmlunit-dev.org",
+                      "c4=4; path=/; domain=.host1.htmlunit-dev.org"})
     public void storedDomain1() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
@@ -195,8 +195,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit-dev; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit-dev; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 MimeType.TEXT_HTML, responseHeader);
@@ -215,18 +215,19 @@ public class CookieManager4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"c1=1; c2=2",
-                       "c1=1; path=/; domain=.htmlunit.org; sameSite=Lax",
-                       "c2=2; path=/; domain=.htmlunit.org; sameSite=Lax"},
+                       "c1=1; path=/; domain=.htmlunit-dev.org; sameSite=Lax",
+                       "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=Lax"},
             FF = {"c1=1; c2=2",
-                  "c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                  "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
+                  "c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                  "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None"},
             FF_ESR = {"c1=1; c2=2",
-                      "c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"})
-    @HtmlUnitNYI(CHROME = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            EDGE = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            FF = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            FF_ESR = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"})
+                      "c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                      "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None"})
+    @HtmlUnitNYI(
+            CHROME = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            EDGE = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            FF = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            FF_ESR = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"})
     public void storedDomain2() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
@@ -240,8 +241,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit-dev; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit-dev; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 MimeType.TEXT_HTML, responseHeader);
@@ -258,18 +259,19 @@ public class CookieManager4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"c1=1; c2=2",
-                       "c1=1; path=/; domain=.htmlunit.org; sameSite=Lax",
-                       "c2=2; path=/; domain=.htmlunit.org; sameSite=Lax"},
+                       "c1=1; path=/; domain=.htmlunit-dev.org; sameSite=Lax",
+                       "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=Lax"},
             FF = {"c1=1; c2=2",
-                  "c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                  "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
+                  "c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                  "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None"},
             FF_ESR = {"c1=1; c2=2",
-                      "c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"})
-    @HtmlUnitNYI(CHROME = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            EDGE = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            FF = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            FF_ESR = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"})
+                      "c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                      "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None"})
+    @HtmlUnitNYI(
+            CHROME = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            EDGE = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            FF = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            FF_ESR = {"c1=1; c2=2", "c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"})
     public void storedDomain3() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
@@ -283,8 +285,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit-dev; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit-dev; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 MimeType.TEXT_HTML, responseHeader);
@@ -301,18 +303,18 @@ public class CookieManager4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"c11=11; c12=12",
-                       "c12=12; path=/; domain=htmlunit; sameSite=Lax",
-                       "c11=11; path=/; domain=htmlunit; sameSite=Lax"},
+                       "c12=12; path=/; domain=htmlunit-dev; sameSite=Lax",
+                       "c11=11; path=/; domain=htmlunit-dev; sameSite=Lax"},
             FF = {"c11=11; c12=12",
-                  "c12=12; path=/; domain=htmlunit; sameSite=None",
-                  "c11=11; path=/; domain=htmlunit; sameSite=None"},
+                  "c12=12; path=/; domain=htmlunit-dev; sameSite=None",
+                  "c11=11; path=/; domain=htmlunit-dev; sameSite=None"},
             FF_ESR = {"c11=11; c12=12",
-                      "c12=12; path=/; domain=htmlunit; sameSite=None",
-                      "c11=11; path=/; domain=htmlunit; sameSite=None"})
-    @HtmlUnitNYI(CHROME = {"c12=12", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"},
-            EDGE = {"c12=12", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"},
-            FF = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"},
-            FF_ESR = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"})
+                      "c12=12; path=/; domain=htmlunit-dev; sameSite=None",
+                      "c11=11; path=/; domain=htmlunit-dev; sameSite=None"})
+    @HtmlUnitNYI(CHROME = {"c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"},
+            EDGE = {"c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"},
+            FF = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"},
+            FF_ESR = {"c11=11; c12=12", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"})
     public void storedDomain4() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=." + DOMAIN + "; Path=/"));
@@ -326,8 +328,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         responseHeader.add(new NameValuePair("Set-Cookie", "c9=9; Domain=.org; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c10=10; Domain=org; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit; Path=/"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c11=11; Domain=.htmlunit-dev; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit-dev; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
                 MimeType.TEXT_HTML, responseHeader);
@@ -345,26 +347,27 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"c1=1; path=/; domain=.htmlunit.org; sameSite=Lax",
-                       "c2=2; path=/; domain=.htmlunit.org; sameSite=Lax",
-                       "c3=3; path=/; domain=.host1.htmlunit.org; sameSite=Lax",
-                       "c4=4; path=/; domain=.host1.htmlunit.org; sameSite=Lax"},
-            FF = {"c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                  "c2=2; path=/; domain=.htmlunit.org; sameSite=None",
-                  "c3=3; path=/; domain=.host1.htmlunit.org; sameSite=None",
-                  "c4=4; path=/; domain=.host1.htmlunit.org; sameSite=None"},
-            FF_ESR = {"c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c3=3; path=/; domain=.host1.htmlunit.org; sameSite=None",
-                      "c4=4; path=/; domain=.host1.htmlunit.org; sameSite=None"})
-    @HtmlUnitNYI(CHROME = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org",
-                           "c3=3; path=/; domain=.host1.htmlunit.org", "c4=4; path=/; domain=.host1.htmlunit.org"},
-            EDGE = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org",
-                    "c3=3; path=/; domain=.host1.htmlunit.org", "c4=4; path=/; domain=.host1.htmlunit.org"},
-            FF = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org",
-                  "c3=3; path=/; domain=.host1.htmlunit.org", "c4=4; path=/; domain=.host1.htmlunit.org"},
-            FF_ESR = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org",
-                      "c3=3; path=/; domain=.host1.htmlunit.org", "c4=4; path=/; domain=.host1.htmlunit.org"})
+    @Alerts(DEFAULT = {"c1=1; path=/; domain=.htmlunit-dev.org; sameSite=Lax",
+                       "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=Lax",
+                       "c3=3; path=/; domain=.host1.htmlunit-dev.org; sameSite=Lax",
+                       "c4=4; path=/; domain=.host1.htmlunit-dev.org; sameSite=Lax"},
+            FF = {"c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                  "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                  "c3=3; path=/; domain=.host1.htmlunit-dev.org; sameSite=None",
+                  "c4=4; path=/; domain=.host1.htmlunit-dev.org; sameSite=None"},
+            FF_ESR = {"c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                      "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                      "c3=3; path=/; domain=.host1.htmlunit-dev.org; sameSite=None",
+                      "c4=4; path=/; domain=.host1.htmlunit-dev.org; sameSite=None"})
+    @HtmlUnitNYI(
+            CHROME = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org",
+                      "c3=3; path=/; domain=.host1.htmlunit-dev.org", "c4=4; path=/; domain=.host1.htmlunit-dev.org"},
+            EDGE = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org",
+                    "c3=3; path=/; domain=.host1.htmlunit-dev.org", "c4=4; path=/; domain=.host1.htmlunit-dev.org"},
+            FF = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org",
+                  "c3=3; path=/; domain=.host1.htmlunit-dev.org", "c4=4; path=/; domain=.host1.htmlunit-dev.org"},
+            FF_ESR = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org",
+                      "c3=3; path=/; domain=.host1.htmlunit-dev.org", "c4=4; path=/; domain=.host1.htmlunit-dev.org"})
     public void storedDomainFromJs1() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -403,16 +406,16 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"c1=1; path=/; domain=.htmlunit.org; sameSite=Lax",
-                       "c2=2; path=/; domain=.htmlunit.org; sameSite=Lax"},
-            FF = {"c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                  "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
-            FF_ESR = {"c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"})
-    @HtmlUnitNYI(CHROME = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            EDGE = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            FF = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            FF_ESR = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"})
+    @Alerts(DEFAULT = {"c1=1; path=/; domain=.htmlunit-dev.org; sameSite=Lax",
+                       "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=Lax"},
+            FF = {"c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                  "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None"},
+            FF_ESR = {"c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                      "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None"})
+    @HtmlUnitNYI(CHROME = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            EDGE = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            FF = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            FF_ESR = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"})
     public void storedDomainFromJs2() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -449,16 +452,16 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"c1=1; path=/; domain=.htmlunit.org; sameSite=Lax",
-                       "c2=2; path=/; domain=.htmlunit.org; sameSite=Lax"},
-            FF = {"c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                  "c2=2; path=/; domain=.htmlunit.org; sameSite=None"},
-            FF_ESR = {"c1=1; path=/; domain=.htmlunit.org; sameSite=None",
-                      "c2=2; path=/; domain=.htmlunit.org; sameSite=None"})
-    @HtmlUnitNYI(CHROME = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            EDGE = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            FF = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
-            FF_ESR = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"})
+    @Alerts(DEFAULT = {"c1=1; path=/; domain=.htmlunit-dev.org; sameSite=Lax",
+                       "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=Lax"},
+            FF = {"c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                  "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None"},
+            FF_ESR = {"c1=1; path=/; domain=.htmlunit-dev.org; sameSite=None",
+                      "c2=2; path=/; domain=.htmlunit-dev.org; sameSite=None"})
+    @HtmlUnitNYI(CHROME = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            EDGE = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            FF = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"},
+            FF_ESR = {"c1=1; path=/; domain=.htmlunit-dev.org", "c2=2; path=/; domain=.htmlunit-dev.org"})
     public void storedDomainFromJs3() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -496,18 +499,18 @@ public class CookieManager4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2",
-                       "c12=12; path=/; domain=htmlunit; sameSite=Lax",
-                       "c11=11; path=/; domain=htmlunit; sameSite=Lax"},
+                       "c12=12; path=/; domain=htmlunit-dev; sameSite=Lax",
+                       "c11=11; path=/; domain=htmlunit-dev; sameSite=Lax"},
             FF = {"2",
-                  "c12=12; path=/; domain=htmlunit; sameSite=None",
-                  "c11=11; path=/; domain=htmlunit; sameSite=None"},
+                  "c12=12; path=/; domain=htmlunit-dev; sameSite=None",
+                  "c11=11; path=/; domain=htmlunit-dev; sameSite=None"},
             FF_ESR = {"2",
-                      "c12=12; path=/; domain=htmlunit; sameSite=None",
-                      "c11=11; path=/; domain=htmlunit; sameSite=None"})
-    @HtmlUnitNYI(CHROME = {"1", "c12=12; path=/; domain=htmlunit"},
-            EDGE = {"1", "c12=12; path=/; domain=htmlunit"},
-            FF = {"2", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"},
-            FF_ESR = {"2", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"})
+                      "c12=12; path=/; domain=htmlunit-dev; sameSite=None",
+                      "c11=11; path=/; domain=htmlunit-dev; sameSite=None"})
+    @HtmlUnitNYI(CHROME = {"1", "c12=12; path=/; domain=htmlunit-dev"},
+            EDGE = {"1", "c12=12; path=/; domain=htmlunit-dev"},
+            FF = {"2", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"},
+            FF_ESR = {"2", "c12=12; path=/; domain=htmlunit-dev", "c11=11; path=/; domain=htmlunit-dev"})
     public void storedDomainFromJs4() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -526,8 +529,8 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "  document.cookie = 'c8=8; Domain=host1." + DOMAIN + ":" + PORT + "; Path=/';\n"
                 + "  document.cookie = 'c9=9; Domain=.org; Path=/';\n"
                 + "  document.cookie = 'c10=10; Domain=org; Path=/';\n"
-                + "  document.cookie = 'c11=11; Domain=.htmlunit; Path=/';\n"
-                + "  document.cookie = 'c12=12; Domain=htmlunit; Path=/';\n"
+                + "  document.cookie = 'c11=11; Domain=.htmlunit-dev; Path=/';\n"
+                + "  document.cookie = 'c12=12; Domain=htmlunit-dev; Path=/';\n"
                 + "</script>\n"
                 + "</body>\n"
                 + "</html>";
@@ -1189,7 +1192,7 @@ public class CookieManager4Test extends WebDriverTestCase {
 
             + "var now = new Date();\n"
             + "now.setTime(now.getTime() + 60 * 60 * 1000);\n"
-            + "setCookie('JDSessionID', '1234567890', now, '/', 'htmlunit.org');\n"
+            + "setCookie('JDSessionID', '1234567890', now, '/', 'htmlunit-dev.org');\n"
 
 //             + "alert('cookies: ' + document.cookie);\n"
 
