@@ -60,7 +60,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      */
     @Test
     public void redirectBrokenGzip() throws Exception {
-        final String html = "<html></html>";
+        final String html = DOCTYPE_HTML + "<html></html>";
 
         final List<NameValuePair> headers = Arrays.asList(new NameValuePair("Location", URL_SECOND.toString()),
                 new NameValuePair("Content-Encoding", "gzip"));

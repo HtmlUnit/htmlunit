@@ -46,7 +46,8 @@ public final class NiceRefreshHandlerTest extends SimpleWebTestCase {
     }
 
     private void doTest(final int handlerMaxDelay, final URL expectedUrl) throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Meta Redirect Page</title>\n"
             + "<meta http-equiv='Refresh' content='2; URL=" + URL_THIRD + "'>\n"
             + "</head>\n"

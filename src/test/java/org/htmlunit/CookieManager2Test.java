@@ -43,8 +43,8 @@ public class CookieManager2Test extends SimpleWebTestCase {
      */
     @Test
     public void resettingCookie() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function createCookie(name, value, days, path) {\n"
             + "    if (days) {\n"
@@ -151,7 +151,8 @@ public class CookieManager2Test extends SimpleWebTestCase {
      */
     @Test
     public void getCookiesShouldReturnACopyOfCurentState() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<button id='it' onclick=\"document.cookie = 'foo=bla'\">click me</button>\n"
                 + "<script>\n"
                 + "document.cookie = 'cookie1=value1';\n"

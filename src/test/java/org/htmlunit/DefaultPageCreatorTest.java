@@ -375,7 +375,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             final Writer writer = response.getWriter();
-            writer.write("<html><head><title>\u00d3</title></head><body></body></html>");
+            writer.write(DOCTYPE_HTML + "<html><head><title>\u00d3</title></head><body></body></html>");
         }
     }
 
@@ -431,7 +431,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
             output.write('\u00ff');
             output.flush();
             final Writer writer = new OutputStreamWriter(output, "UTF16");
-            writer.write("<html><head></head><body></body></html>");
+            writer.write(DOCTYPE_HTML + "<html><head></head><body></body></html>");
             writer.flush();
         }
     }

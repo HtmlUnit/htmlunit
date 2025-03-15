@@ -191,7 +191,8 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         window.setJobManager(mgr);
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setDefaultResponse("<html><body><script>window.setTimeout('', 500);</script></body></html>");
+        conn.setDefaultResponse(DOCTYPE_HTML
+                + "<html><body><script>window.setTimeout('', 500);</script></body></html>");
 
         client.getPage(URL_FIRST);
         assertEquals(1, jobCount.intValue());
@@ -210,10 +211,13 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         final History history = window.getHistory();
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, "<html><body><a name='a' href='" + URL_SECOND + "'>foo</a>\n"
-            + "<a name='b' href='#b'>bar</a></body></html>");
-        conn.setResponse(URL_SECOND, "<html><body><a name='a' href='" + URL_THIRD + "'>foo</a></body></html>");
-        conn.setResponse(URL_THIRD, "<html><body><a name='a' href='" + URL_FIRST + "'>foo</a></body></html>");
+        conn.setResponse(URL_FIRST, DOCTYPE_HTML
+                + "<html><body><a name='a' href='" + URL_SECOND + "'>foo</a>\n"
+                + "<a name='b' href='#b'>bar</a></body></html>");
+        conn.setResponse(URL_SECOND, DOCTYPE_HTML
+                + "<html><body><a name='a' href='" + URL_THIRD + "'>foo</a></body></html>");
+        conn.setResponse(URL_THIRD, DOCTYPE_HTML
+                + "<html><body><a name='a' href='" + URL_FIRST + "'>foo</a></body></html>");
 
         assertEquals(0, history.getLength());
         assertEquals(-1, history.getIndex());
@@ -305,7 +309,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
      */
     @Test
     public void onBeforeUnloadCalledOnClose() throws Exception {
-        final String html = "<html><body onbeforeunload='alert(7)'>abc</body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onbeforeunload='alert(7)'>abc</body></html>";
         final List<String> alerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, alerts);
         assertTrue(alerts.isEmpty());
@@ -323,7 +327,8 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
     @Test
     @Alerts("closing")
     public void setTimeoutDuringOnUnload() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "function f() {\n"
             + "  alert('closing');\n"

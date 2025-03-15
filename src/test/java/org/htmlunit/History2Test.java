@@ -37,7 +37,8 @@ public class History2Test extends SimpleWebTestCase {
     @Test
     @Alerts("5")
     public void historyCacheLimit() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + "function log(msg) { window.document.title = msg; }\n"
                 + "function test() {\n"
@@ -63,7 +64,8 @@ public class History2Test extends SimpleWebTestCase {
      */
     @Test
     public void historyCacheSize() throws Exception {
-        final String content = "<html><head><title></title>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head><title></title>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body></html>";
@@ -96,7 +98,8 @@ public class History2Test extends SimpleWebTestCase {
      */
     @Test
     public void historyPageCacheLimit() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body></html>";
@@ -129,7 +132,8 @@ public class History2Test extends SimpleWebTestCase {
      */
     @Test
     public void historyPageCacheLimitZero() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body></html>";
@@ -162,7 +166,8 @@ public class History2Test extends SimpleWebTestCase {
      */
     @Test
     public void historyPageCacheLimitMinusOne() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body></html>";

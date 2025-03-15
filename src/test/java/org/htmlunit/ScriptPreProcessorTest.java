@@ -54,8 +54,8 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         final String alertText = "content";
         final String newAlertText = "newcontent";
-        final String content
-            = "<html><head><title>foo</title><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "<!--\n   alert('" + alertText + "');\n// -->\n"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
@@ -118,7 +118,8 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
     public void scriptPreProcessor_UnimplementedJavascript() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        final String content = "<html><head><title>foo</title></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<p>hello world</p>\n"
             + "<script>document.unimplementedFunction();</script>\n"
             + "<script>alert('implemented function');</script>\n"
@@ -151,7 +152,8 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
      */
     @Test
     public void scriptPreProcessor_Eval() throws Exception {
-        final String html = "<html><body><script>eval('aX'+'ert(\"abc\")');</script></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><script>eval('aX'+'ert(\"abc\")');</script></body></html>";
 
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();

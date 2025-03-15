@@ -292,7 +292,8 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public static class EmptyPutServlet extends ServletContentWrapper {
         /** Constructor. */
         public EmptyPutServlet() {
-            super("<html>\n"
+            super(DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + "    function test() {\n"
@@ -436,7 +437,8 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         /** Constructor. */
         public ContentLengthSmallerThanContentServlet() {
-            super("<html>\n"
+            super(DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "  <p>visible text</p>\n"
                 + "  <p>missing text</p>\n"
@@ -473,7 +475,8 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         /** Constructor. */
         public ContentLengthSmallerThanContentLargeContentServlet() {
-            super("<html>\n"
+            super(DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "  <p>"
                 + StringUtils.repeat("HtmlUnit  ", 1024 * 1024)
@@ -501,7 +504,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 + "Content-Length: 2000\r\n"
                 + "Content-Type: text/html\r\n"
                 + "\r\n"
-                + "<html><body><p>visible text</p></body></html>";
+                + DOCTYPE_HTML + "<html><body><p>visible text</p></body></html>";
 
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebClient client = getWebClient();
@@ -539,7 +542,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     @Test
     public void makeWebResponse() throws Exception {
         final URL url = new URL("http://htmlunit.sourceforge.net/");
-        final String content = "<html><head></head><body></body></html>";
+        final String content = DOCTYPE_HTML + "<html><head></head><body></body></html>";
         final DownloadedContent downloadedContent = new DownloadedContent.InMemory(content.getBytes());
         final long loadTime = 500L;
 

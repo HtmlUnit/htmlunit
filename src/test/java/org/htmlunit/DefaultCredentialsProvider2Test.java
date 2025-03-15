@@ -135,7 +135,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("SecRet")
     public void basicAuthenticationUserFromUrl() throws Exception {
-        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
         getWebClient().getCredentialsProvider().clear();
@@ -184,7 +184,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlUsedForNextSteps() throws Exception {
-        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
         getWebClient().getCredentialsProvider().clear();
@@ -248,7 +248,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlOverwrite() throws Exception {
-        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
         getWebClient().getCredentialsProvider().clear();
@@ -307,7 +307,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlOverwriteDefaultCredentials() throws Exception {
-        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
         getWebClient().getCredentialsProvider().clear();
@@ -333,7 +333,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlOverwriteWrongDefaultCredentials() throws Exception {
-        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
         getWebClient().getCredentialsProvider().clear();
@@ -372,7 +372,8 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("Hello World")
     public void basicAuthenticationXHR() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "var xhr = new XMLHttpRequest();\n"
             + "var handler = function() {\n"
             + "  if (xhr.readyState == 4)\n"
@@ -396,7 +397,8 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("HTTP ERROR 401")
     public void basicAuthenticationXHRWithUsername() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "var xhr = new XMLHttpRequest();\n"
             + "var handler = function() {\n"
             + "  if (xhr.readyState == 4) {\n"
@@ -423,7 +425,8 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("HTTP ERROR 401")
     public void basicAuthenticationXHRWithUser() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "var xhr = new XMLHttpRequest();\n"
             + "var handler = function() {\n"
             + "  if (xhr.readyState == 4) {\n"

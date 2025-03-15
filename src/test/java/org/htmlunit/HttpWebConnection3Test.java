@@ -453,7 +453,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Sec-Fetch-User: ?1",
                       "Priority: u=0, i"})
     public void formGet() throws Exception {
-        String html = "<html><body><form action='foo' method='get' accept-charset='iso-8859-1'>\n"
+        String html = DOCTYPE_HTML
+            + "<html><body><form action='foo' method='get' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"
             + "<textarea name='text2'>Hello\nworld!</textarea>\n"
             + "<input type='submit' id='submit'>\n"
@@ -662,7 +663,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "",
                       "text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21"})
     public void formPost() throws Exception {
-        String html = "<html><body><form action='foo' method='post' accept-charset='iso-8859-1'>\n"
+        String html = DOCTYPE_HTML
+            + "<html><body><form action='foo' method='post' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"
             + "<textarea name='text2'>Hello\nworld!</textarea>\n"
             + "<input type='submit' id='submit'>\n"
@@ -828,7 +830,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Sec-Fetch-User: ?1",
                       "Priority: u=0, i"})
     public void anchor() throws Exception {
-        String html = "<html><body><a id='my' href='2.html'>Click me</a></body></html>";
+        String html = DOCTYPE_HTML
+                + "<html><body><a id='my' href='2.html'>Click me</a></body></html>";
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
@@ -986,7 +989,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Priority: u=0, i"})
     public void locationSetHref() throws Exception {
         final String url = "http://localhost:" + WebTestCase.PORT_PRIMITIVE_SERVER;
-        String html = "<html><body><script>location.href='" + url + "/foo';</script></body></html>";
+        String html = DOCTYPE_HTML
+                + "<html><body><script>location.href='" + url + "/foo';</script></body></html>";
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
@@ -1142,7 +1146,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Sec-Fetch-User: ?1",
                       "Priority: u=0, i"})
     public void locationSetSearch() throws Exception {
-        String html = "<html><body><script>location.search='newSearch';</script></body></html>";
+        String html = DOCTYPE_HTML
+                + "<html><body><script>location.search='newSearch';</script></body></html>";
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
@@ -1293,7 +1298,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Sec-Fetch-User: ?1", /* wrong */
                       "Priority: u=0, i"})
     public void loadJavascript() throws Exception {
-        String html = "<html><head> <script src=\"script.js\"></script> </head><body></body></html>";
+        String html = DOCTYPE_HTML
+                + "<html><head> <script src=\"script.js\"></script> </head><body></body></html>";
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
@@ -1448,7 +1454,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     // PrimitiveWebServer
     @NotYetImplemented(value = {}, os = OS.Linux)
     public void loadJavascriptCharset() throws Exception {
-        String html = "<html><head>"
+        String html = DOCTYPE_HTML
+                + "<html><head>"
                 + "<meta http-equiv='Content-Type' content='text/html; charset=GB2312'>"
                 + "<script src=\"script.js?x=\u6211\u662F\u6211\u7684 \u4eb8 Abc\"></script>"
                 + "</head><body></body></html>";

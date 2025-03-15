@@ -67,8 +67,8 @@ public final class SgmlPageTest extends WebServerTestCase {
      */
     @Test
     public void getElementsByTagNameAsterisk() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<form><input type='button' name='button1' value='pushme'></form>\n"
             + "<div>a</div> <div>b</div> <div>c</div>\n"
@@ -107,8 +107,8 @@ public final class SgmlPageTest extends WebServerTestCase {
      */
     @Test
     public void getElementsByTagNameNSAsterisk() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<form><input type='button' name='button1' value='pushme'></form>\n"
             + "<div>a</div> <div>b</div> <div>c</div>\n"

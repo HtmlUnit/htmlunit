@@ -84,7 +84,8 @@ public class NoHttpResponseTest {
             mockWebConnection.setResponse(URL_FIRST, HTML);
             MiniServer.configureDropRequest(new URL(URL_FIRST, "page2?textfield="));
             final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
-            mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");
+            mockWebConnection.setResponse(urlRightSubmit,
+                    DOCTYPE_HTML + "<html><head><title>right submit</title></head></html>");
 
             expandExpectedAlertsVariables(URL_FIRST);
             final WebDriver driver = getWebDriver();
@@ -114,7 +115,8 @@ public class NoHttpResponseTest {
             mockWebConnection.setResponse(URL_FIRST, HTML);
             MiniServer.configureDropRequest(new URL(URL_FIRST, "page2?textfield="));
             final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
-            mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");
+            mockWebConnection.setResponse(urlRightSubmit,
+                    DOCTYPE_HTML + "<html><head><title>right submit</title></head></html>");
 
             final WebDriver driver = getWebDriver();
 
@@ -153,7 +155,8 @@ public class NoHttpResponseTest {
             mockWebConnection.setResponse(URL_FIRST, HTML);
             MiniServer.configureDropRequest(new URL(URL_FIRST, "page2?textfield="));
             final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
-            mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");
+            mockWebConnection.setResponse(urlRightSubmit,
+                    DOCTYPE_HTML + "<html><head><title>right submit</title></head></html>");
 
             expandExpectedAlertsVariables(URL_FIRST);
 
@@ -175,7 +178,8 @@ public class NoHttpResponseTest {
             mockWebConnection.setResponse(URL_FIRST, HTML);
             MiniServer.configureDropRequest(new URL(URL_FIRST, "page2?textfield="));
             final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
-            mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");
+            mockWebConnection.setResponse(urlRightSubmit,
+                    DOCTYPE_HTML + "<html><head><title>right submit</title></head></html>");
 
             try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
                 miniServer.start();

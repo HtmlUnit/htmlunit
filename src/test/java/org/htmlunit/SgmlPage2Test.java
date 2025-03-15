@@ -36,7 +36,8 @@ public final class SgmlPage2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2", "2"})
     public void getElementsByTagName() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"

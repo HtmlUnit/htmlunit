@@ -41,7 +41,7 @@ public final class ScriptExceptionTest extends SimpleWebTestCase {
     public void constructor() throws Exception {
         final String message = "bla bla";
         final Throwable t = new RuntimeException(message);
-        final HtmlPage page = loadPage("<html></html>");
+        final HtmlPage page = loadPage(DOCTYPE_HTML + "<html></html>");
         final ScriptException exception = new ScriptException(page, t);
 
         assertEquals(t, exception.getCause());
@@ -54,7 +54,7 @@ public final class ScriptExceptionTest extends SimpleWebTestCase {
      */
     @Test
     public void getPage() throws Exception {
-        final String html = "<html><script>notExisting()</script></html>";
+        final String html = DOCTYPE_HTML + "<html><script>notExisting()</script></html>";
         try {
             loadPage(html);
         }

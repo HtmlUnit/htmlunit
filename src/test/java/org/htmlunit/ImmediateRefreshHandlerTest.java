@@ -43,7 +43,7 @@ public final class ImmediateRefreshHandlerTest extends SimpleWebTestCase {
             private int nbCalls_ = 0;
             @Override
             public WebResponse getResponse(final WebRequest request) throws IOException {
-                String content = "<html><head>\n";
+                String content = DOCTYPE_HTML + "<html><head>\n";
                 if (nbCalls_ == 0) {
                     content += "<meta http-equiv='refresh' content='0;url="
                         + URL_FIRST.toExternalForm()

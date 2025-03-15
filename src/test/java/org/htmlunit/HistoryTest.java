@@ -141,7 +141,8 @@ public class HistoryTest extends WebDriverTestCase {
             response.setCharacterEncoding(UTF_8.name());
             response.setContentType(MimeType.TEXT_HTML);
             response.getWriter().write(
-                    "<html>\n"
+                    DOCTYPE_HTML
+                    + "<html>\n"
                     + "<body>\n"
                     + "  <h1>Call: " + Count_ + "</h1>\n"
                     + "  <form action='post2' method='post'>\n"

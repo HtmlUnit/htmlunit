@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -112,7 +111,7 @@ public class CookieManager4Test extends WebDriverTestCase {
     public void clearCookies() throws Exception {
         shutDownAll();
 
-        getMockWebConnection().setDefaultResponse("<html><head></head><body></body></html>");
+        getMockWebConnection().setDefaultResponse(DOCTYPE_HTML + "<html><head></head><body></body></html>");
         startWebServer(getMockWebConnection(), null);
         final WebDriver driver = getWebDriver();
         driver.get(URL_HOST1);
@@ -367,7 +366,8 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF_ESR = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org",
                       "c3=3; path=/; domain=.host1.htmlunit.org", "c4=4; path=/; domain=.host1.htmlunit.org"})
     public void storedDomainFromJs1() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -414,7 +414,8 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
             FF_ESR = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"})
     public void storedDomainFromJs2() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -459,7 +460,8 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"},
             FF_ESR = {"c1=1; path=/; domain=.htmlunit.org", "c2=2; path=/; domain=.htmlunit.org"})
     public void storedDomainFromJs3() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -507,7 +509,8 @@ public class CookieManager4Test extends WebDriverTestCase {
             FF = {"2", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"},
             FF_ESR = {"2", "c12=12; path=/; domain=htmlunit", "c11=11; path=/; domain=htmlunit"})
     public void storedDomainFromJs4() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -581,7 +584,8 @@ public class CookieManager4Test extends WebDriverTestCase {
      */
     @Test
     public void domainDuplicateLeadingDotSend() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<a href='next.html'>next page</a>\n"
                 + "</body></html>";
 
@@ -608,7 +612,8 @@ public class CookieManager4Test extends WebDriverTestCase {
      */
     @Test
     public void domainDuplicateLeadingDotRedirect() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<a href='next.html'>next page</a>\n"
                 + "</body></html>";
 
@@ -647,7 +652,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + DOMAIN + "; Path=/"));
         responseHeader1.add(new NameValuePair("Set-Cookie", "c5=5; Domain=.org; Path=/"));
 
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"
@@ -678,7 +684,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=" + DOMAIN + "; Path=/"));
         responseHeader1.add(new NameValuePair("Set-Cookie", "c5=5; Domain=.org; Path=/"));
 
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"
@@ -705,7 +712,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cross-domain=1; Domain=." + DOMAIN + "; Path=/"));
 
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<p>Cookie Domain Test</p>\n"
@@ -729,7 +737,8 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Test
     @Alerts("cross-domain=1")
     public void differentHostsSameDomainCookieFromJS() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "</head>\n"
             + "<body>\n"
@@ -755,7 +764,8 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Test
     @Alerts("cross-domain=1")
     public void differentHostsSameDomainCookieFromMeta() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <meta http-equiv='Set-Cookie', content='cross-domain=1; Domain=." + DOMAIN + "; Path=/'>\n"
             + "</head>\n"
@@ -947,7 +957,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c4=empty; SameSite="));
         responseHeader.add(new NameValuePair("Set-Cookie", "c5=unknown; SameSite=unknown"));
 
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "  <link rel='stylesheet' href='" + URL_HOST1 + "css/style.css'>\n"
                 + "</head>\n"
@@ -1002,7 +1012,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c4=empty; SameSite="));
         responseHeader.add(new NameValuePair("Set-Cookie", "c5=unknown; SameSite=unknown"));
 
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "  <link rel='stylesheet' href='" + URL_HOST1 + "css/style.css'>\n"
                 + "</head>\n"
@@ -1057,7 +1067,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c4=empty; SameSite="));
         responseHeader.add(new NameValuePair("Set-Cookie", "c5=unknown; SameSite=unknown"));
 
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -1112,7 +1122,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c4=empty; SameSite="));
         responseHeader.add(new NameValuePair("Set-Cookie", "c5=unknown; SameSite=unknown"));
 
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -1162,7 +1172,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/c"));
 
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body><script>\n"
 

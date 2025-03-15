@@ -74,7 +74,8 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
      */
     @Test
     public void failureByClickLink() throws Exception {
-        final String html = "<html><body><a href='doesntExist'>go</a></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><a href='doesntExist'>go</a></body></html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebClient client = getWebClientWithMockWebConnection();
@@ -94,7 +95,8 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
      */
     @Test
     public void failureBySubmit() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<form name='form1' method='get' action='foo.html'>\n"
                 + "  <input name='button' type='submit' id='mySubmit'/>\n"
                 + "</form>\n"

@@ -214,14 +214,16 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void usage() throws Exception {
-        final String content = "<html><head><title>page 1</title>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<script src='foo1.js'></script>\n"
             + "<script src='foo2.js'></script>\n"
             + "</head><body>\n"
             + "<a href='page2.html'>to page 2</a>\n"
             + "</body></html>";
 
-        final String content2 = "<html><head><title>page 2</title>\n"
+        final String content2 = DOCTYPE_HTML
+            + "<html><head><title>page 2</title>\n"
             + "<script src='foo2.js'></script>\n"
             + "</head><body>\n"
             + "<a href='page1.html'>to page 1</a>\n"
@@ -266,7 +268,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void jsUrlEncoded() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>page 1</title>\n"
             + "  <script src='foo1.js'></script>\n"
@@ -277,7 +280,8 @@ public class CacheTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String content2 = "<html>\n"
+        final String content2 = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>page 2</title>\n"
             + "  <script src='foo2.js?foo[1]=bar/baz'></script>\n"
@@ -323,7 +327,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void cssUrlEncoded() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>page 1</title>\n"
             + "  <link href='foo1.css' type='text/css' rel='stylesheet'>\n"
@@ -342,7 +347,8 @@ public class CacheTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String content2 = "<html>\n"
+        final String content2 = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>page 2</title>\n"
             + "  <link href='foo2.js?foo[1]=bar/baz' type='text/css' rel='stylesheet'>\n"
@@ -393,7 +399,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void maxSizeMaintained() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<script src='foo1.js' type='text/javascript'/>\n"
             + "<script src='foo2.js' type='text/javascript'/>\n"
             + "</head><body>abc</body></html>";
@@ -425,7 +432,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void cssIsCached() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<style>.x { color: red; }</style>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
@@ -455,7 +463,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void cssIsCachedIfUrlWasRedirected() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body onload='document.styleSheets.item(0); document.styleSheets.item(1);'>x</body>\n"
@@ -495,7 +504,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void cssFromCacheIsUsed() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
@@ -528,7 +538,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void cssManuallyAddeToCache() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>\n"
@@ -569,7 +580,8 @@ public class CacheTest extends SimpleWebTestCase {
     @Test
     @Alerts({"hello", "hello"})
     public void xhrContentCached() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<script>\n"
             + "  function doTest() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
@@ -600,7 +612,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void testNoStoreCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>x</body>\n"
@@ -632,7 +645,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void testNoCacheCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>page 1</title>\n"
                 + "</head>\n"
                 + "<body>x</body>\n"
                 + "</html>";
@@ -702,7 +716,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void testMaxAgeCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>x</body>\n"
@@ -746,7 +761,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void testSMaxageCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>x</body>\n"
@@ -790,7 +806,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void testExpiresCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>x</body>\n"
@@ -830,7 +847,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void testMaxAgeOverrulesExpiresCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>x</body>\n"

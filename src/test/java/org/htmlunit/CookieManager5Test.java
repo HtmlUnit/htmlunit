@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.client.utils.DateUtils;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.Cookie;
 import org.htmlunit.util.MimeType;
@@ -209,7 +208,7 @@ public class CookieManager5Test extends WebServerTestCase {
      * Helper class for {@link #updateCookieExpires}.
      */
     public abstract static class SetCookieExpiresServlet extends HttpServlet {
-        private static final String HTML_ = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        private static final String HTML_ = DOCTYPE_HTML
                 + "<html><head></head>\n"
                 + "<body>\n"
                 + "</body></html>";

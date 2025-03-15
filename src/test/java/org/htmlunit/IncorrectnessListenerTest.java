@@ -35,7 +35,8 @@ public final class IncorrectnessListenerTest extends SimpleWebTestCase {
      */
     @Test
     public void notification() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script src='script.js'></script>\n"
                 + "</head>\n"
                 + "<body>\n"
