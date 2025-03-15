@@ -41,8 +41,8 @@ public class HtmlHeadTest extends WebDriverTestCase {
     @Test
     @Alerts("HEAD")
     public void addedWhenMissing() throws Exception {
-        final String htmlContent = DOCTYPE_HTML
-            + "<html><body>\n"
+        final String htmlContent =
+            "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  log(document.firstChild.firstChild.tagName);\n"
