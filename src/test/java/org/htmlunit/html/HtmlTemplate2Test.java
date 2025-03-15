@@ -33,7 +33,8 @@ public class HtmlTemplate2Test extends SimpleWebTestCase {
      */
     @Test
     public void asXmlWithChildren() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -57,7 +58,8 @@ public class HtmlTemplate2Test extends SimpleWebTestCase {
      */
     @Test
     public void asXmlWithoutChildren() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "<body>\n"

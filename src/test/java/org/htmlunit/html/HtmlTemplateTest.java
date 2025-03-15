@@ -34,7 +34,8 @@ public class HtmlTemplateTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "null", "null"})
     public void noChilds() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -63,7 +64,8 @@ public class HtmlTemplateTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void ignoreContent() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

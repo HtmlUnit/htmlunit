@@ -33,7 +33,8 @@ public class HtmlSpanTest extends SimpleWebTestCase {
      */
     @Test
     public void emptyTag() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "<span id='myId'></span>\n"
             + "</body></html>";
@@ -48,7 +49,8 @@ public class HtmlSpanTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<span id='outside'>\n"
             + "<span>\n"
             + "before\n"

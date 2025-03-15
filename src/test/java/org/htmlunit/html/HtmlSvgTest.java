@@ -37,7 +37,7 @@ public class HtmlSvgTest extends WebDriverTestCase {
     @Test
     @Alerts("[object SVGSVGElement]")
     public void simpleScriptable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -63,7 +63,7 @@ public class HtmlSvgTest extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void style() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"
@@ -82,7 +82,7 @@ public class HtmlSvgTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "function"})
     public void functions() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"
@@ -103,7 +103,7 @@ public class HtmlSvgTest extends WebDriverTestCase {
     @Test
     @Alerts("[object SVGMatrix]")
     public void getScreenCTM() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"

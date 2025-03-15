@@ -39,8 +39,8 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts({})
     public void defaultValue() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId').value);\n"
@@ -64,8 +64,8 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts("")
     public void emptyValue() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId').value);\n"
@@ -89,8 +89,8 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts("1")
     public void onclick() throws Exception {
-        final String html =
-            "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "<form>\n"
             + "  <input id='myInput'>\n"
@@ -112,7 +112,8 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void asXmlNoEscape() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<meta http-equiv='Content-Type' content='text/html; charset=Cp1251'>\n"
             + "</head><body>\n"
             + "<input type='submit' value='&#1083;'/>\n"

@@ -49,8 +49,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
      */
     @Test
     public void notExistingLink() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>"
                 + "  <link rel='alternate' href='none.jpg'>\n"
                 + "</body>\n"
@@ -77,8 +77,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
     @Test
     public void unknownHostExceptionLink() throws Exception {
         final URL imageUrl = new URL(URL_FIRST, "none.jpg");
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>"
                 + "  <link rel='alternate' href='" + imageUrl.toExternalForm() + "'>\n"
                 + "</body>\n"
@@ -104,7 +104,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
      */
     @Test
     public void unsupportedProtocolLink() throws Exception {
-        final String html = "<html><head>"
+        final String html = DOCTYPE_HTML
+                + "<html><head>"
                 + "<link rel='alternate' href='android-app://somehost'>\n"
                 + "</head></html>";
 
@@ -127,8 +128,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
      */
     @Test
     public void notExistingImage() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>"
                 + "  <img src='none.jpg'>\n"
                 + "</body>\n"
@@ -155,8 +156,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
     @Test
     public void unknownHostExceptionImage() throws Exception {
         final URL imageUrl = new URL(URL_FIRST, "none.jpg");
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>"
                 + "  <img src='" + imageUrl.toExternalForm() + "'>\n"
                 + "</body>\n"
@@ -182,8 +183,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
      */
     @Test
     public void unsupportedProtocolImage() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>"
                 + "  <img src='android-app://somehost'>\n"
                 + "</body>\n"

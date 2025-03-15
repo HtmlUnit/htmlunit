@@ -39,8 +39,8 @@ public class HtmlTable2Test extends WebDriverTestCase {
     @Test
     @Alerts("One Two\n1 2")
     public void getVisibleText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <table id='tester'>"
@@ -65,8 +65,8 @@ public class HtmlTable2Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void cellWidth() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -101,7 +101,8 @@ public class HtmlTable2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLTableElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -127,7 +128,8 @@ public class HtmlTable2Test extends WebDriverTestCase {
     @Test
     @Alerts({"TBODY->TR->TD->Two", "THEAD->TR->TD->One", "THEAD->TR->TD->Three"})
     public void two_theads() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -157,8 +159,8 @@ public class HtmlTable2Test extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "BODY"})
     public void jsInTable() throws Exception {
-        final String content
-            = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

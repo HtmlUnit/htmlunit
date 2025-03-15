@@ -37,7 +37,8 @@ public class HtmlWeekInput2Test extends SimpleWebTestCase {
     @Test
     @NotYetImplemented({FF, FF_ESR})
     public void minValidation() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
@@ -77,7 +78,9 @@ public class HtmlWeekInput2Test extends SimpleWebTestCase {
     @Test
     @NotYetImplemented({FF, FF_ESR})
     public void naxValidation() throws Exception {
-        final String htmlContent = "<html>\n" + "<head></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
                 + "  <input type='week' id='first' max='2018-W10'>\n"

@@ -33,7 +33,8 @@ public class HtmlUnorderedList2Test extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <ul id='foo'>\n"
@@ -58,8 +59,8 @@ public class HtmlUnorderedList2Test extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String content
-            = "<html><head></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <ul id='myNode'></ul>\n"
             + "foo\n"

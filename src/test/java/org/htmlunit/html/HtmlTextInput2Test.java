@@ -58,8 +58,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts("bla")
     public void asNormalizedText() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -76,7 +76,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void type() throws Exception {
-        final String html = "<html><head></head><body><input id='t'/></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body><input id='t'/></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlTextInput t = page.getHtmlElementById("t");
         t.type("abc");
@@ -110,7 +110,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     }
 
     void type_StringIndexOutOfBoundsException(final String tag) throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + tag + "\n"
             + "<script>\n"
             + "function copy(node) {\n"
@@ -134,7 +135,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typeWhileDisabled() throws Exception {
-        final String html = "<html><body><input id='t' disabled='disabled'/></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><input id='t' disabled='disabled'/></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlTextInput t = page.getHtmlElementById("t");
         t.type("abc");
@@ -147,8 +148,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void preventDefault() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function handler(e) {\n"
             + "    if (e && e.target.value.length > 2)\n"
             + "      e.preventDefault();\n"
@@ -175,13 +176,13 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typeNewLine() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form action='" + URL_SECOND + "'>\n"
             + "<input name='myText' id='myText'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
 
@@ -205,8 +206,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"exception", "My old value", "My old value"})
     public void setSelectionText() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      document.selection.createRange().text = 'new';\n"
@@ -238,8 +239,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typeWhenSelected() throws Exception {
-        final String html =
-              "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "<input id='myInput' value='Hello world'><br>\n"
             + "</body></html>";
@@ -257,8 +258,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typeWhen_selectPositionChanged() throws Exception {
-        final String html =
-              "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "<input id='myInput' value='Hello world'><br>\n"
             + "</body></html>";
@@ -296,7 +297,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void type_specialCharacters() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form>\n"
             + "<input id='t' onkeyup='document.forms[0].lastKey.value = event.keyCode'>\n"
             + "<input id='lastKey'>\n"
@@ -324,7 +326,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void serialization() throws Exception {
-        final String html = "<html><head></head><body onload=''><input type='text' onkeydown='' /></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head></head><body onload=''><input type='text' onkeydown='' /></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlPage page2 = clone(page);
         assertNotNull(page2);
@@ -335,7 +338,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typeLeftArrow() throws Exception {
-        final String html = "<html><head></head><body><input id='t'/></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body><input id='t'/></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlTextInput t = page.getHtmlElementById("t");
         t.type('t');
@@ -359,7 +362,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typeDelKey() throws Exception {
-        final String html = "<html><head></head><body><input id='t'/></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body><input id='t'/></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlTextInput t = page.getHtmlElementById("t");
         t.type('t');
@@ -381,8 +384,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void submitOnEnter() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <form action='result.html'>\n"
             + "    <input id='t' value='hello'/>\n"
@@ -403,8 +406,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void submitOnEnterWithoutForm() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <input id='t' value='hello'/>\n"
             + "</body>\n"
@@ -423,8 +426,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typingAndClone() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -446,8 +449,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typingAndReset() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -472,8 +475,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typingAndSetValueAttribute() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -498,8 +501,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typingAndSetValue() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -526,7 +529,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"text", "x", "x", "hidden", "x", "x"})
     public void setType() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
             + "  <input type='text' id='foo' value='x'>\n"
@@ -558,8 +562,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void patternValidation() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -588,7 +592,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"true", "true", "true", "", "foo"})
     public void maxLengthValidation() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -615,7 +620,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"true", "false", "true", "", "foobar"})
     public void minLengthValidation() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -642,8 +648,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     public void clipboardCopy() throws Exception {
         Assume.assumeFalse(SKIP_);
 
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "  <form>\n"
@@ -677,8 +683,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     public void clipboardPaste() throws Exception {
         Assume.assumeFalse(SKIP_);
 
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "  <form>\n"
@@ -709,8 +715,8 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void clipboardPasteFakeClipboard() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "  <form>\n"

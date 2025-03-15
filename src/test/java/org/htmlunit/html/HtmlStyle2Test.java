@@ -39,7 +39,8 @@ public class HtmlStyle2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLStyleElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style type='text/css' id='myId'>\n"
             + "img { border: 0px }\n"
             + "</style>\n"
@@ -64,8 +65,8 @@ public class HtmlStyle2Test extends WebDriverTestCase {
      */
     @Test
     public void getText() throws Exception {
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "  <style type='text/css' id='s'>\n"
@@ -86,8 +87,8 @@ public class HtmlStyle2Test extends WebDriverTestCase {
      */
     @Test
     public void isDisplayed() throws Exception {
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "  <style type='text/css' id='s'>\n"

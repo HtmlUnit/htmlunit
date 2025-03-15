@@ -34,7 +34,8 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class HtmlTableRowTest extends SimpleWebTestCase {
 
-    private static final String HTML = "<html><head><title>foo</title></head><body>\n"
+    private static final String HTML = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<table id='table'><tr id='row'>\n"
             + "<td id='cell' width='20'><input type='text' id='foo'/></td>\n"
             + "</tr></table>\n"

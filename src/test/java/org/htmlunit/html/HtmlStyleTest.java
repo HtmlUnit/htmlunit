@@ -34,8 +34,8 @@ public class HtmlStyleTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>foo</title>\n"
             + "  <style type='text/css' id='testStyle'>\n"
@@ -58,8 +58,8 @@ public class HtmlStyleTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText_getTextContent_insideDiv() throws Exception {
-        final String html
-            =   "<html>\n"
+        final String html = DOCTYPE_HTML
+            +   "<html>\n"
             + "<head></head>\n"
             + "<body>"
             + "<div id='tester'>"
@@ -81,8 +81,8 @@ public class HtmlStyleTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String html
-            = "<html><head><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<style type='text/css'></style>\n"
             + "<style type='text/css'><!-- \n"
             + "body > p { color: red }\n"

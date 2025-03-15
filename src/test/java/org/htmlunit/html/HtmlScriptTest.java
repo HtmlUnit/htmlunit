@@ -238,7 +238,8 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      */
     @Test
     public void isDisplayed() throws Exception {
-        final String html = DOCTYPE_HTML + "<html><head><title>Page A</title></head><body><script>var x = 1;</script></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Page A</title></head><body><script>var x = 1;</script></body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
         final HtmlScript script = page.getFirstByXPath("//script");
         assertFalse(script.isDisplayed());

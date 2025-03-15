@@ -34,7 +34,8 @@ public class HtmlTableSectionTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <table>\n"
             + "    <tfoot><td>Five</td></tfoot>\n"

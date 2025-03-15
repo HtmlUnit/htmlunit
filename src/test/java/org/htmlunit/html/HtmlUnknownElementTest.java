@@ -37,7 +37,8 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLElement]"})
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -98,8 +99,8 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String html
-            = "<html><body><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><title>foo</title>\n"
             + "<foo></foo>\n"
             + "</body></html>";
 

@@ -38,8 +38,8 @@ public class HtmlUnorderedListTest extends WebDriverTestCase {
     @Test
     @Alerts("first item\nsecond item\nsomething without li node\nthird item")
     public void getVisibleText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <ul id='tester'>\n"
