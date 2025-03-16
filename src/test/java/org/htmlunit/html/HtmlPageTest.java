@@ -1064,8 +1064,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String htmlContent = DOCTYPE_HTML
-            + "<html><head><title>foo</title></head>"
+        final String htmlContent =
+            "<html><head><title>foo</title></head>"
             + "<body><p>helloworld</p></body>"
             + "</html>";
 
@@ -1083,8 +1083,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void asXmlValidHtmlOutput() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><title>foo</title>"
+        final String html =
+            "<html><head><title>foo</title>"
             + "<script src='script.js'></script></head>"
             + "<body><div></div><iframe src='about:blank'></iframe></body>"
             + "</html>";

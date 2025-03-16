@@ -43,8 +43,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     @Test
     @Alerts({"7.89", "7.89"})
     public void parseFloat() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            +  "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  log(parseFloat('\\n 7.89 '));\n"
@@ -65,8 +65,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     @Alerts({"0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100",
                 "100", "NaN", "NaN"})
     public void parseInt() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  log(parseInt('0'));\n"
@@ -133,8 +133,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     @Alerts({"http%3A%2F%2Fw3schools.com%2Fmy%20test.asp%3Fname%3Dst%C3%A5le%26car%3Dsaab",
                 "%E6%B5%8B%E8%A9%A6"})
     public void encodeURIComponent() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -160,8 +160,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     @Test
     @Alerts("%E6%B5%8B%E8%A9%A6")
     public void encodeURIComponentUtf8() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -186,8 +186,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     @Alerts({"\u00ee\u0010\u0043\u0072\u00f4\u00ef\u00b6\u0062\u0034",
                 "\u00ee\u0010\u0043\u0072\u00f4\u00ef\u00b6\u0062\u0034"})
     public void decodeURIComponent() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
