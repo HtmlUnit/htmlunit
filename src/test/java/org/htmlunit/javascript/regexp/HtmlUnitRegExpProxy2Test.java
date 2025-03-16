@@ -56,6 +56,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
             + "  s += ']';\n"
             + "  return s;\n"
             + "}\n"
+
             + "function assertArrEquals(actual, expected) {\n"
             + "  if (expected == null) {\n"
             + "    if (actual != null)\n"
@@ -67,7 +68,8 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
             + "  if (expectedStr != actualStr)\n"
             + "    throw 'Expected >' + expectedStr + '< got >' + actualStr + '<';\n"
             + "}\n"
-            + "assertArrEquals('ab'.match(), null);\n"
+
+            + "assertArrEquals('ab'.match(), ['']);\n"
             + "assertArrEquals('ab'.match('foo'), null);\n"
             + "assertArrEquals('ab'.match('a'), ['a']);\n"
             + "assertArrEquals('abab'.match('a'), ['a']);\n"
