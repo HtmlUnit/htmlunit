@@ -7,7 +7,32 @@
     </properties>
 
     <body>
-        <release version="4.11.0" date="March xx, 2025" description="Chrome/Edge 134, Firefox 136, less dependencies, Bugfixes">
+        <release version="4.11.0" date="March xx, 2025" description="Chrome/Edge 134, Firefox 136, Rhino regex, less dependencies, Bugfixes">
+            <action type="remove" dev="rbri">
+                Switched back from our RegExp translation into java regular expressions to use the core Rhino stuff. Rhino mades significant
+                progress in this arae. This simplifies out impl and supports more features in the future.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: RegExp lookbehind implemented.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: NativeObject converted from IdScriptableObject to lambda constructor
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: problem with `super` and nested lambdas
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: RegExp.prototype[Symbol.match] and String.prototype.match.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Implement Symbol.match.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: String.prototype.match. As per the spec, it is simply supposed to invoke the Symbol.match of the regexp.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix the behaviour of Regexp sticky flag.
+            </action>
             <action type="remove" dev="rbri">
                 Deprecated methods removed from EncodingSniffer, HttpClientConverter, WebResponse, and WebResponseWrapper.
             </action>
@@ -43,7 +68,7 @@
 
         <release version="4.10.0" date="February 22, 2025" description="Chrome/Edge 133, Firefox 135, Javascript Errors, Bugfixes">
             <action type="update" dev="RhinoTeam">
-                NativeGlobal now based on lambda functions.
+                core-js: NativeGlobal now based on lambda functions.
             </action>
             <action type="update" dev="rbri">
                 Avoid using XPath for implementing form submit on enter key pressed.
