@@ -34,12 +34,10 @@ import org.htmlunit.corejs.javascript.Evaluator;
 import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.debug.Debugger;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
 
 /**
  * ContextFactory that supports termination of scripts if they exceed a timeout. Based on example from
@@ -267,9 +265,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
         if (debugger_ != null) {
             cx.setDebugger(debugger_, null);
         }
-
-        // register custom RegExp processing
-        ScriptRuntime.setRegExpProxy(cx, new HtmlUnitRegExpProxy(ScriptRuntime.getRegExpProxy(cx)));
 
         cx.setMaximumInterpreterStackDepth(5_000);
 

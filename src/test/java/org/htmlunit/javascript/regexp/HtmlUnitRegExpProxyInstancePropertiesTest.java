@@ -17,7 +17,6 @@ package org.htmlunit.javascript.regexp;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -150,14 +149,6 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
     @Test
     @Alerts({"html,body,div,div,div", "undefined", "undefined", "undefined",
                 "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"})
-    @HtmlUnitNYI(CHROME = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
-                           "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
-            FF = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
-                  "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
-            FF_ESR = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
-                      "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
-            EDGE = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
-                    "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"})
     public void regExResultProperties() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
