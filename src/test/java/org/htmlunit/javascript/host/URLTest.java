@@ -475,23 +475,23 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"developer.mozilla.org",
                        "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                       "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
-                       "newhost", "https://newhost/en-US/docs/Web/API/URL/host"},
+                       "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
+                       "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"},
             CHROME =  {"developer.mozilla.org",
                        "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                       "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                       "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
                        "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host"},
             EDGE = {"developer.mozilla.org",
                     "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                    "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                    "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
                     "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host"})
     @HtmlUnitNYI(CHROME =  {"developer.mozilla.org",
                             "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                            "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                            "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
                             "%20%20", "https:// /en-US/docs/Web/API/URL/host"},
                 EDGE = {"developer.mozilla.org",
                         "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                        "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                        "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
                         "%20%20", "https:// /en-US/docs/Web/API/URL/host"})
     public void hostname() throws Exception {
         final String html =
@@ -508,7 +508,7 @@ public class URLTest extends WebDriverTestCase {
                         + "        log(u.hostname);\n"
                         + "        log(u.toString());\n"
 
-                        + "        u.hostname = 'newhost';\n"
+                        + "        u.hostname = 'htmlunit-dev.org';\n"
                         + "        log(u.hostname);\n"
                         + "        log(u.toString());\n"
 
