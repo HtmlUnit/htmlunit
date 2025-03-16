@@ -3239,5 +3239,38 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
-}
 
+    /**
+     * setInterval execution is not stopped if the callback throws an exception.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"c0", "c1", "c2", "c3", "c4", "cancelled"})
+    public void setIntervallProceeds() throws Exception {
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var intervalID = setInterval(myCallback, 50);\n"
+            + "var count = 0;\n"
+            + "function myCallback() {\n"
+            + "  log('c' + count);\n"
+            + "  if (count == 4) {\n"
+            + "    clearInterval(intervalID);\r\n"
+            + "    log('cancelled');\r\n"
+            + "  }\n"
+            + "  count++;\n"
+            + "  test.hide();\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPage2(content);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+}
