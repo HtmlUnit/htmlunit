@@ -52,7 +52,7 @@
         <jfreechart.version>1.5.5</jfreechart.version>
 
         <checkstyle.version>10.21.4</checkstyle.version>
-        <spotbugs.version>4.9.2</spotbugs.version>
+        <spotbugs.version>4.9.3</spotbugs.version>
         <pmd.version>7.11.0</pmd.version>
         <junit.version>4.13.2</junit.version>
         <archunit.version>1.4.0</archunit.version>
@@ -86,7 +86,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.9.2.0</version>
+                <version>4.9.3.0</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.github.spotbugs</groupId>
