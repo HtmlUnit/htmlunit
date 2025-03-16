@@ -58,7 +58,8 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     public void bug3012067_npe() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form action='" + URL_FIRST + "#foo' method='post'></form>\n"
             + "<script>\n"
             + "function doWork() {\n"
@@ -80,7 +81,8 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     public void readStreamTwice() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<iframe src='binaryFile.bin'></iframe>\n"
             + "<iframe src='foo.html'></iframe>\n"
@@ -93,7 +95,7 @@ public class WebClient3Test extends WebDriverTestCase {
         }
         mockConnection.setDefaultResponse(binaryContent, 200, "OK", MimeType.APPLICATION_OCTET_STREAM);
         final URL urlFoo = new URL(URL_FIRST, "foo.html");
-        mockConnection.setResponse(urlFoo, "<html></html>");
+        mockConnection.setResponse(urlFoo, DOCTYPE_HTML + "<html></html>");
 
         final WebDriver driver = loadPage2(html);
         final WebElement iframe1 = driver.findElement(By.tagName("iframe"));
@@ -161,10 +163,11 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     public void clickReturnsWhenThePageHasBeenCompleteLoaded() throws Exception {
-        final String firstContent = "<html><head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>window.setInterval(\'',1);</script></head>\n"
             + "<body><a href='" + URL_SECOND + "'>to second</a></body></html>";
-        final String secondContent = "<html><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><body></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_SECOND, secondContent);
@@ -185,7 +188,8 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts({"open", "first", "second"})
     public void windowOpenedByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
-        final String firstContent = "<html>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script type='text/javascript'>\n"
             + "  function info(msg) {\n"
@@ -196,7 +200,8 @@ public class WebClient3Test extends WebDriverTestCase {
             + "<body>\n"
             + "  <a id='testAnchor' href='" + URL_SECOND + "' target='_blank' onclick='info(\"open\")'>to second</a>\n"
             + "</body></html>";
-        final String secondContent = "<html><head>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script type='text/javascript'>\n"
             + "  function first() {\n"
             + "    window.opener.info('first');\n"
@@ -231,7 +236,8 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts({"open", "first", "second"})
     public void windowOpenedByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
-        final String firstContent = "<html>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script type='text/javascript'>\n"
             + "  function info(msg) {\n"
@@ -244,7 +250,8 @@ public class WebClient3Test extends WebDriverTestCase {
             + "  <input id='testSubmit' type='submit' value='Submit' onclick='info(\"open\")'>\n"
             + "</form>\n"
             + "</body></html>";
-        final String secondContent = "<html><head>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script type='text/javascript'>\n"
             + "  function first() {\n"
             + "    window.opener.info('first');\n"
@@ -279,7 +286,8 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts({"open", "first", "second"})
     public void windowOpenedByJavascriptIsAttachedToJavascriptEventLoop() throws Exception {
-        final String firstContent = "<html>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script type='text/javascript'>\n"
             + "  function info(msg) {\n"
@@ -291,7 +299,8 @@ public class WebClient3Test extends WebDriverTestCase {
             + "  <a id='testAnchor' href='#'"
             + "    onclick='info(\"open\");window.open(\"" + URL_SECOND + "\", \"Popup\", \"\");'>open window</a>\n"
             + "</body></html>";
-        final String secondContent = "<html><head>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script type='text/javascript'>\n"
             + "  function first() {\n"
             + "    window.opener.info('first');\n"
@@ -323,7 +332,8 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts({"open", "first", "second"})
     public void windowOpenedByJavascriptFilledByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
-        final String firstContent = "<html>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script type='text/javascript'>\n"
             + "  function info(msg) {\n"
@@ -340,7 +350,8 @@ public class WebClient3Test extends WebDriverTestCase {
             + "  >\n"
             + "</form>\n"
             + "</body></html>";
-        final String secondContent = "<html><head>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script type='text/javascript'>\n"
             + "  function first() {\n"
             + "    window.opener.info('first');\n"
@@ -369,7 +380,8 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts({"Executed", "later"})
     public void execJavascriptOnErrorPages() throws Exception {
-        final String errorHtml = "<html>\n"
+        final String errorHtml = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -395,7 +407,8 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts("hello")
     public void urlEncodingPercent20() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script src='a%20b.js'></script>\n"
                 + "</body></html>";
 
@@ -445,7 +458,8 @@ public class WebClient3Test extends WebDriverTestCase {
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_SECOND, content, 200, "OK", "text/javascript", headers);
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<title>Hello world</title>\n"
             + "<script src='" + URL_SECOND + "'></script>\n"
             + "</head><body><script>alert(document.title)</script></body></html>";
@@ -564,8 +578,8 @@ public class WebClient3Test extends WebDriverTestCase {
 
     private void encodingCharset(final String title,
             final String metaCharset, final String responseCharset) throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<meta http-equiv='Content-Type' content='text/html; charset=" + metaCharset + "'>\n"
             + "<title>" + title + "</title>\n"
             + "</head>\n"
@@ -595,8 +609,8 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts({"en-US", "en-US,en"})
     public void language() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(navigator.language);\n"
@@ -625,8 +639,8 @@ public class WebClient3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"de-DE", "de-DE,de"},
             EDGE = {"de-DE", "de-DE,de"})
     public void languageDE() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(navigator.language);\n"

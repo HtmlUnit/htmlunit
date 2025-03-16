@@ -52,8 +52,8 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     public void loadPage_HandleDoubleDotsAtRoot() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "</body></html>";
 
         final WebClient client = getWebClient();
@@ -90,12 +90,12 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     public void serialization_pageLoad() throws Exception {
-        final String page1Content = "<html><body>hello 1</body></html>";
+        final String page1Content = DOCTYPE_HTML + "<html><body>hello 1</body></html>";
         try (WebClient client = getWebClient()) {
             final HtmlPage page1 = loadPage(client, page1Content, null, URL_FIRST);
             assertEquals("hello 1", page1.asNormalizedText());
 
-            final String page2Content = "<html><body>hello 2</body></html>";
+            final String page2Content = DOCTYPE_HTML + "<html><body>hello 2</body></html>";
             try (WebClient copy = clone(client)) {
                 final HtmlPage page2 = loadPage(copy, page2Content, null, URL_SECOND);
                 assertEquals("hello 2", page2.asNormalizedText());
@@ -109,8 +109,8 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     public void serialization_withClickAfterwards() throws Exception {
-        final String html =
-              "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function foo() {\n"
             + "    document.getElementById('mybox').innerHTML='hello world';\n"
@@ -139,8 +139,8 @@ public class WebClient2Test extends SimpleWebTestCase {
     @Test
     @NotYetImplemented
     public void serialization_withJSBackgroundTasks() throws Exception {
-        final String html =
-              "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function foo() {\n"
             + "    if (window.name == 'hello') {\n"
@@ -185,7 +185,7 @@ public class WebClient2Test extends SimpleWebTestCase {
             FF = "en-US,en;q=0.5",
             FF_ESR = "en-US,en;q=0.5")
     public void acceptLanguage() throws Exception {
-        final String html = "<html><body></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body></body></html>";
         loadPage(html);
         assertEquals(getExpectedAlerts()[0],
                 getMockWebConnection().getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
@@ -197,7 +197,7 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     public void acceptLanguageFr() throws Exception {
-        final String html = "<html><body></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body></body></html>";
 
         final BrowserVersion frBrowser =
                 new BrowserVersion.BrowserVersionBuilder(getBrowserVersion())
@@ -219,7 +219,7 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     public void newWindowScopeForAboutBlank() throws Exception {
-        final HtmlPage p = loadPage("<html><body></body></html>");
+        final HtmlPage p = loadPage(DOCTYPE_HTML + "<html><body></body></html>");
         p.executeJavaScript("top.foo = 'hello';");
         final ScriptResult result = p.executeJavaScript("top.foo");
         assertEquals("hello", result.getJavaScriptResult());
@@ -292,8 +292,8 @@ public class WebClient2Test extends SimpleWebTestCase {
             FF = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"},
             FF_ESR = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"})
     public void makeSureTheCurrentJobHasEndedBeforeReplaceWindowPage() throws Exception {
-        final String htmlContent1
-            = "<html>\n"
+        final String htmlContent1 = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>"
             + "  <title>Page 1</title>\n"
             + "</head>\n"
@@ -320,8 +320,8 @@ public class WebClient2Test extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String htmlContent2
-            = "<html>\n"
+        final String htmlContent2 = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>"
             + "  <title>Page 2</title>\n"
             + "</head>\n"
@@ -356,8 +356,7 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     public void toLocaleLowerCase() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + "  function doTest() {\n"
             + "    window.document.title = '\\u0130'.toLocaleLowerCase();\n"

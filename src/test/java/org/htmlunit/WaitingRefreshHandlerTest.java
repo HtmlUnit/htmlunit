@@ -33,7 +33,8 @@ public final class WaitingRefreshHandlerTest extends SimpleWebTestCase {
      */
     @Test
     public void refreshOnJavascriptThread() throws Exception {
-        final String firstContent = "<html>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>First Page</title>\n"
             + "<script>\n"
             + "function doRedirect() {\n"
@@ -43,13 +44,15 @@ public final class WaitingRefreshHandlerTest extends SimpleWebTestCase {
             + "</head>\n"
             + "<body onload='setTimeout(doRedirect, 1);'>first page body</body>\n"
             + "</html>";
-        final String secondContent = "<html>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Meta Redirect Page</title>\n"
             + "<meta http-equiv='Refresh' content='1; URL=" + URL_THIRD + "'>\n"
             + "</head>\n"
             + "<body>redirect page body</body>\n"
             + "</html>";
-        final String thirdContent = "<html>\n"
+        final String thirdContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Expected Last Page</title></head>\n"
             + "<body>Success!</body>\n"
             + "</html>";

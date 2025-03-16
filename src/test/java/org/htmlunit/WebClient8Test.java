@@ -41,8 +41,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html =
-                "<html><head><title>foo</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head>\n"
                 + "<body><div>Hello <b>HtmlUnit</b></div></body></html>";
 
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
@@ -56,8 +56,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String html =
-                "<html><head><title>foo</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head>\n"
                 + "<body><div>Hello <b>HtmlUnit</b></div></body></html>";
 
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
@@ -81,7 +81,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void cloneNode() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "<p>hello world</p>\n"
@@ -104,13 +105,15 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void appendChildMoved() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "<p>hello</p>\n"
                 + "</body></html>";
 
-        final String html2 = "<html>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "<p id='tester'>world</p>\n"
@@ -133,13 +136,15 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void iFrame() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "  <iframe id='tester' src='second.html'></iframe>\n"
                 + "</body></html>";
 
-        final String html2 = "<html>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>frame</title></head>\n"
                 + "<body>\n"
                 + "</body></html>";
@@ -162,7 +167,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void iFrameTextContent() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "  <iframe id='tester' src='second.html'></iframe>\n"
@@ -188,13 +194,15 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void iFrameInFragment() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "<p id='para'>hello</p>\n"
                 + "</body></html>";
 
-        final String html2 = "<html>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>frame</title></head>\n"
                 + "<body>\n"
                 + "</body></html>";
@@ -221,7 +229,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void script() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "  <script src='script.js'></script>\n"
@@ -247,7 +256,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void link() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "  <link rel='stylesheet' href='simple.css'>\n"
@@ -271,7 +281,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void object() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "</head>\n"
@@ -295,7 +306,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void svgScript() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "</head>\n"
@@ -316,7 +328,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void invalidElementEventWithNoJS() throws Exception {
-        final String html = "<html>"
+        final String html = DOCTYPE_HTML
+                + "<html>"
                 + "<head>"
                 + "  <title>foo</title>"
                 + "</head>"
@@ -334,7 +347,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void checkingWithNoJS() throws Exception {
-        final String html = "<html>"
+        final String html = DOCTYPE_HTML
+                + "<html>"
                 + "<head>"
                 + "  <title>foo</title>"
                 + "</head>"
@@ -362,7 +376,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void frameSetWithNoJS() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "</head>\n"
@@ -384,7 +399,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void imageEventHandlersWithNoJs() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "  <body>\n"
@@ -402,7 +418,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void clickWithNoJs() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "  <body>\n"

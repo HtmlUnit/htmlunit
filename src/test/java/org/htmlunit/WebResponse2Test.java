@@ -42,8 +42,8 @@ public class WebResponse2Test extends SimpleWebTestCase {
      */
     @Test
     public void charsetInMetaTag() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><meta content='text/html; charset=utf-8' http-equiv='Content-Type'/></head>\n"
             + "<body>foo</body>\n"
             + "</html>";

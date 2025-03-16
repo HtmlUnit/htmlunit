@@ -229,7 +229,7 @@ public class WebClient4Test extends WebServerTestCase {
             //response.setHeader("Location", "http://www.google.com");
             response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
-            writer.write("<html><body>Going anywhere?</body></html>");
+            writer.write(DOCTYPE_HTML + "<html><body>Going anywhere?</body></html>");
         }
     }
 
@@ -260,7 +260,8 @@ public class WebClient4Test extends WebServerTestCase {
         protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
             res.setContentType(MimeType.TEXT_HTML);
             final Writer writer = res.getWriter();
-            writer.write("<html><body><form action='test2'>\n"
+            writer.write(DOCTYPE_HTML
+                    + "<html><body><form action='test2'>\n"
                     + "<input id='submit' type='submit' value='submit'></input>\n"
                     + "</form></body></html>");
         }
@@ -312,7 +313,7 @@ public class WebClient4Test extends WebServerTestCase {
                 first_ = false;
                 res.setContentType(MimeType.TEXT_HTML);
                 final Writer writer = res.getWriter();
-                writer.write("<html><body>foo</body></html>");
+                writer.write(DOCTYPE_HTML + "<html><body>foo</body></html>");
             }
             else {
                 res.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
@@ -352,7 +353,7 @@ public class WebClient4Test extends WebServerTestCase {
      */
     @Test
     public void requestHeaderCookieFromRequest() throws Exception {
-        final String content = "<html></html>";
+        final String content = DOCTYPE_HTML + "<html></html>";
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(content);
 
@@ -415,7 +416,7 @@ public class WebClient4Test extends WebServerTestCase {
             }
             res.setContentType(MimeType.TEXT_HTML);
             final Writer writer = res.getWriter();
-            writer.write("<html><head><title>hello</title></head><body>foo</body></html>");
+            writer.write(DOCTYPE_HTML + "<html><head><title>hello</title></head><body>foo</body></html>");
         }
     }
 
@@ -450,7 +451,8 @@ public class WebClient4Test extends WebServerTestCase {
         protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
             res.setContentType(MimeType.TEXT_HTML);
             final Writer writer = res.getWriter();
-            writer.write("<html><head>\n"
+            writer.write(DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "  <meta http-equiv='refresh' content='0;URL=test2'>\n"
                     + "</head><body>foo</body></html>");
         }
@@ -467,7 +469,8 @@ public class WebClient4Test extends WebServerTestCase {
         protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
             res.setContentType(MimeType.TEXT_HTML);
             final Writer writer = res.getWriter();
-            writer.write("<html><head>\n"
+            writer.write(DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "  <meta http-equiv='refresh' content='0;URL=test1'>\n"
                     + "</head><body>foo</body></html>");
         }

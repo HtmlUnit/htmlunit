@@ -59,7 +59,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
      */
     @Test
     public void dontWaitWhenUnnecessary() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
@@ -95,7 +96,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
     @Test
     @Tries(3)
     public void dontWaitWhenUnnecessary_jobRemovesOtherJob() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
@@ -143,7 +145,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
     @Test
     @Tries(3)
     public void waitCalledDuringJobExecution() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
@@ -208,7 +211,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
      */
     @Test
     public void waitWhenLastJobStartsNewOne() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
@@ -252,7 +256,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
     @Test
     @Tries(3)
     public void waitWithsubWindows() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "</head>\n"
@@ -260,7 +265,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "<iframe src='nested.html'></iframe>\n"
             + "</body>\n"
             + "</html>";
-        final String nested = "<html>\n"
+        final String nested = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>nested</title>\n"
             + "  <script>\n"
@@ -310,7 +316,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
     @Test
     @Tries(3)
     public void newJobStartedAfterWait() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
@@ -382,7 +389,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
     @Test
     @Tries(3)
     public void waitForJobThatIsAlreadyLate() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    var counter = 0;\n"
@@ -425,7 +433,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
      */
     @Test
     public void jobSchedulesJobInOtherWindow1() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    var counter = 0;\n"
@@ -463,7 +472,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
      */
     @Test
     public void jobSchedulesJobInOtherWindow2() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    var counter = 0;\n"
@@ -506,7 +516,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
     @Test
     @Tries(3)
     public void waitForBackgroundJavaScriptStartingBefore_hangs() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
@@ -553,17 +564,20 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
      */
     @Test
     public void jobsFromAClosedWindowShouldntBeIgnore() throws Exception {
-        final String html = "<html><head><title>page 1</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title></head>\n"
             + "<body>\n"
             + "<iframe src='iframe.html'></iframe>\n"
             + "</body></html>";
 
-        final String iframe = "<html><body>\n"
+        final String iframe = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + "setTimeout(function() { parent.location = '/page3.html'; }, 50);\n"
                 + "</script>\n"
                 + "</body></html>";
-        final String page3 = "<html><body><script>\n"
+        final String page3 = DOCTYPE_HTML
+                + "<html><body><script>\n"
                 + "parent.location = '/delayedPage4.html';\n"
                 + "</script></body></html>";
 

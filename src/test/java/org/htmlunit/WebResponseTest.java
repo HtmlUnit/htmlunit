@@ -59,8 +59,8 @@ public class WebResponseTest extends WebServerTestCase {
     @Test
     public void encodingCharsetUtf8() throws Exception {
         final String title = "\u6211\u662F\u6211\u7684FOCUS";
-        final String content =
-            "<html><head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<title>" + title + "</title>\n"
             + "</head>\n"
             + "<body>\n"
@@ -178,7 +178,8 @@ public class WebResponseTest extends WebServerTestCase {
      * Servlet for {@link #binaryResponseHeaders()}.
      */
     public static class BinaryResponseHeadersServlet extends HttpServlet {
-        private static final String RESPONSE = "<html><head><title>Foo</title></head><body>This is foo!</body></html>";
+        private static final String RESPONSE = DOCTYPE_HTML
+                + "<html><head><title>Foo</title></head><body>This is foo!</body></html>";
 
         /**
          * {@inheritDoc}

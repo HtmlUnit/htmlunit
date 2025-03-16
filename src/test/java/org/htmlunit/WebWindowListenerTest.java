@@ -36,8 +36,8 @@ public class WebWindowListenerTest extends SimpleWebTestCase {
     @Test
     @NotYetImplemented
     public void eventOrder() throws Exception {
-        final String firstHtml
-            = "<html>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Test 1</title></head>\n"
             + "<body>\n"
             + "<script type='text/javascript'>\n"
@@ -46,8 +46,8 @@ public class WebWindowListenerTest extends SimpleWebTestCase {
             + "<p>First Page<p>\n"
             + "</body></html>";
 
-        final String secondHtml
-            = "<html>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Test 2</title></head>\n"
             + "<body><p>Second Page<p></body>\n"
             + "</html>";
@@ -66,8 +66,8 @@ public class WebWindowListenerTest extends SimpleWebTestCase {
      */
     @Test
     public void eventOrderCloseLast() throws Exception {
-        final String firstHtml
-            = "<html>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Test 1</title></head>\n"
             + "<body>\n"
             + "</body></html>";
@@ -86,8 +86,8 @@ public class WebWindowListenerTest extends SimpleWebTestCase {
      */
     @Test
     public void eventOrderReset() throws Exception {
-        final String firstHtml
-            = "<html>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Test 1</title></head>\n"
             + "<body>\n"
             + "</body></html>";

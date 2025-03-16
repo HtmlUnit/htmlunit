@@ -32,7 +32,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertTitleEquals() throws Exception {
-        final String html = "<html><head><title>foo</title></head><body>bar</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head><title>foo</title></head><body>bar</body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertTitleEquals(page, "foo");
@@ -52,7 +52,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertTitleContains() throws Exception {
-        final String html = "<html><head><title>foo</title></head><body>bar</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head><title>foo</title></head><body>bar</body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertTitleContains(page, "o");
@@ -72,7 +72,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertTitleMatches() throws Exception {
-        final String html = "<html><head><title>foo</title></head><body>bar</body></html>";
+        final String html = DOCTYPE_HTML + "<html><head><title>foo</title></head><body>bar</body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertTitleMatches(page, "f..");
@@ -92,7 +92,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertElementPresent() throws Exception {
-        final String html = "<html><body><div id='a'>bar</div></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertElementPresent(page, "a");
@@ -112,7 +112,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertElementPresentByXPath() throws Exception {
-        final String html = "<html><body><div id='a'>bar</div></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertElementPresentByXPath(page, "html/body/div");
@@ -132,7 +132,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertElementNotPresent() throws Exception {
-        final String html = "<html><body><div id='a'>bar</div></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertElementNotPresent(page, "b");
@@ -152,7 +152,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertElementNotPresentByXPath() throws Exception {
-        final String html = "<html><body><div id='a'>bar</div></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertElementNotPresentByXPath(page, "ul");
@@ -172,7 +172,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertTextPresent() throws Exception {
-        final String html = "<html><body><div id='a'>bar</div></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertTextPresent(page, "bar");
@@ -192,7 +192,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertTextPresentInElement() throws Exception {
-        final String html = "<html><body><div id='a'>bar</div></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertTextPresentInElement(page, "bar", "a");
@@ -221,7 +221,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertTextNotPresent() throws Exception {
-        final String html = "<html><body><div id='a'>bar</div></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertTextNotPresent(page, "baz");
@@ -241,7 +241,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertTextNotPresentInElement() throws Exception {
-        final String html = "<html><body><div id='a'>bar</div></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><div id='a'>bar</div></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertTextNotPresentInElement(page, "baz", "a");
@@ -270,7 +270,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertLinkPresent() throws Exception {
-        final String html = "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertLinkPresent(page, "x");
@@ -290,7 +290,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertLinkNotPresent() throws Exception {
-        final String html = "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertLinkNotPresent(page, "z");
@@ -310,7 +310,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertLinkPresentWithText() throws Exception {
-        final String html = "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertLinkPresentWithText(page, "r");
@@ -330,7 +330,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertLinkNotPresentWithText() throws Exception {
-        final String html = "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><a href='foo.html' id='x'>bar</a></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertLinkNotPresentWithText(page, "x");
@@ -350,7 +350,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertFormPresent() throws Exception {
-        final String html = "<html><body><form name='f'>bar</form></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><form name='f'>bar</form></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertFormPresent(page, "f");
@@ -370,7 +370,7 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertFormNotPresent() throws Exception {
-        final String html = "<html><body><form name='f'>bar</form></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><form name='f'>bar</form></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertFormNotPresent(page, "x");
@@ -390,7 +390,8 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertInputPresent() throws Exception {
-        final String html = "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertInputPresent(page, "i");
@@ -410,7 +411,8 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertInputNotPresent() throws Exception {
-        final String html = "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertInputNotPresent(page, "q");
@@ -430,7 +432,8 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertInputContainsValue() throws Exception {
-        final String html = "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertInputContainsValue(page, "i", "x");
@@ -459,7 +462,8 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertInputDoesNotContainValue() throws Exception {
-        final String html = "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><form name='f'><input name='i' value='x'/></form></body></html>";
         final HtmlPage page = loadPage(html);
 
         WebAssert.assertInputDoesNotContainValue(page, "i", "z");
@@ -488,12 +492,12 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertAllTabIndexAttributesSet() throws Exception {
-        final String html1 = "<html><body><a href='#' tabindex='1'>foo</a></body></html>";
+        final String html1 = DOCTYPE_HTML + "<html><body><a href='#' tabindex='1'>foo</a></body></html>";
         final HtmlPage page1 = loadPage(html1);
 
         WebAssert.assertAllTabIndexAttributesSet(page1);
 
-        final String html2 = "<html><body><a href='#'>foo</a></body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body><a href='#'>foo</a></body></html>";
         final HtmlPage page2 = loadPage(html2);
 
         boolean caught = false;
@@ -505,7 +509,7 @@ public class WebAssertTest extends SimpleWebTestCase {
         }
         assertTrue(caught);
 
-        final String html3 = "<html><body><a href='#' tabindex='x'>foo</a></body></html>";
+        final String html3 = DOCTYPE_HTML + "<html><body><a href='#' tabindex='x'>foo</a></body></html>";
         final HtmlPage page3 = loadPage(html3);
 
         caught = false;
@@ -523,12 +527,13 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertAllAccessKeyAttributesUnique() throws Exception {
-        final String html1 = "<html><body><a accesskey='k'>foo</a></body></html>";
+        final String html1 = DOCTYPE_HTML + "<html><body><a accesskey='k'>foo</a></body></html>";
         final HtmlPage page1 = loadPage(html1);
 
         WebAssert.assertAllAccessKeyAttributesUnique(page1);
 
-        final String html2 = "<html><body><a accesskey='k'>foo</a><a accesskey='k'>bar</a></body></html>";
+        final String html2 = DOCTYPE_HTML
+                + "<html><body><a accesskey='k'>foo</a><a accesskey='k'>bar</a></body></html>";
         final HtmlPage page2 = loadPage(html2);
 
         boolean caught = false;
@@ -546,12 +551,12 @@ public class WebAssertTest extends SimpleWebTestCase {
      */
     @Test
     public void assertAllIdAttributesUnique() throws Exception {
-        final String html1 = "<html><body><a id='k'>foo</a></body></html>";
+        final String html1 = DOCTYPE_HTML + "<html><body><a id='k'>foo</a></body></html>";
         final HtmlPage page1 = loadPage(html1);
 
         WebAssert.assertAllIdAttributesUnique(page1);
 
-        final String html2 = "<html><body><a id='k'>foo</a><a id='k'>bar</a></body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body><a id='k'>foo</a><a id='k'>bar</a></body></html>";
         final HtmlPage page2 = loadPage(html2);
 
         boolean caught = false;

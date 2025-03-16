@@ -18,7 +18,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -382,8 +381,7 @@ public class WebClient6Test extends WebDriverTestCase {
     }
 
     private void redirectGet(final int code, final HttpMethod httpMethod, final String redirectUrl) throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><body><a href='redirect.html'>redirect</a></body></html>";
         final int reqCount = getMockWebConnection().getRequestCount();
 
@@ -409,8 +407,7 @@ public class WebClient6Test extends WebDriverTestCase {
 
     private void redirectPost(final int code, final HttpMethod httpMethod,
             final String redirectUrl, final boolean resendParams) throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><body><form action='redirect.html' method='POST'>\n"
                 + "  <input type='hidden' name='param1' value='paramValue'>\n"
                 + "  <input type='submit' id='postBtn' value='Submit'>\n"
@@ -462,7 +459,7 @@ public class WebClient6Test extends WebDriverTestCase {
      */
     @Test
     public void redirect302WithoutLocation() throws Exception {
-        final String html = "<html><body><a href='page2'>to redirect</a></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><a href='page2'>to redirect</a></body></html>";
         getMockWebConnection().setDefaultResponse("", 302, "Found", null);
 
         final WebDriver driver = loadPage2(html);
@@ -476,7 +473,7 @@ public class WebClient6Test extends WebDriverTestCase {
      */
     @Test
     public void redirect302ChangePageUrl() throws Exception {
-        final String html = "<html><body><a href='redirect.html'>redirect</a></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><a href='redirect.html'>redirect</a></body></html>";
 
         final URL url = new URL(URL_FIRST, "page2.html");
         getMockWebConnection().setResponse(url, html);
@@ -497,7 +494,7 @@ public class WebClient6Test extends WebDriverTestCase {
      */
     @Test
     public void redirect302UrlsInQuery() throws Exception {
-        final String html = "<html><body><a href='redirect.html'>redirect</a></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><a href='redirect.html'>redirect</a></body></html>";
 
         final URL url = new URL(URL_FIRST, "page2.html");
         getMockWebConnection().setResponse(url, html);
