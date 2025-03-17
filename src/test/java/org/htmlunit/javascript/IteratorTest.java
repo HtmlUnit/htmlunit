@@ -35,8 +35,8 @@ public class IteratorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"function", "function"},
             FF_ESR = {"undefined", "undefined"})
     public void windowIterator() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

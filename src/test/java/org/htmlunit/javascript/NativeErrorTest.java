@@ -39,8 +39,8 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts({"string", "true"})
     public void stack() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
@@ -67,8 +67,8 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts({"string", "true"})
     public void stackNewError() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
@@ -95,8 +95,8 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts({"string", "true"})
     public void stackNewErrorWithoutThrow() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var e = new Error();\n"
@@ -120,8 +120,8 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void stackInNewError() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var e = new Error();\n"
@@ -145,8 +145,8 @@ public class NativeErrorTest extends WebDriverTestCase {
             FF = "method()@url",
             FF_ESR = "method()@url")
     public void stackContent() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
@@ -186,8 +186,8 @@ public class NativeErrorTest extends WebDriverTestCase {
             FF = "method()@url",
             FF_ESR = "method()@url")
     public void stackContentNewError() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
@@ -221,8 +221,8 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "kcats"})
     public void stackOverwrite() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
@@ -254,8 +254,8 @@ public class NativeErrorTest extends WebDriverTestCase {
             FF = "undefined",
             FF_ESR = "undefined")
     public void stackTraceLimit() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(Error.stackTraceLimit);\n"
@@ -274,8 +274,8 @@ public class NativeErrorTest extends WebDriverTestCase {
             CHROME = "function captureStackTrace() { [native code] }",
             EDGE = "function captureStackTrace() { [native code] }")
     public void captureStackTrace() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(Error.captureStackTrace);\n"
@@ -295,8 +295,8 @@ public class NativeErrorTest extends WebDriverTestCase {
         try {
             System.setProperty("line.separator", "\r\n");
 
-            final String html
-                = "<html><head><script>\n"
+            final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  try {\n"

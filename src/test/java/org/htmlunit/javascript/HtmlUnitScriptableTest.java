@@ -44,8 +44,8 @@ public class HtmlUnitScriptableTest extends SimpleWebTestCase {
     @Test
     @Alerts("past focus")
     public void callInheritedFunction() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  document.form1.textfield1.focus();\n"
             + "  alert('past focus');\n"

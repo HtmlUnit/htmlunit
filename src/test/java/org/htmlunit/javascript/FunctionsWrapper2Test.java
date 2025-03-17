@@ -36,8 +36,8 @@ public class FunctionsWrapper2Test extends SimpleWebTestCase {
     @Test
     @Alerts("1")
     public void function_toString() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  x = test.toString;\n"

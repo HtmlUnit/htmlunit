@@ -35,8 +35,8 @@ public class NativeMapTest extends WebDriverTestCase {
     @Test
     @Alerts({"key type string", "value type object"})
     public void entries() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

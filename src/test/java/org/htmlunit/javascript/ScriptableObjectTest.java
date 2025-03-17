@@ -40,7 +40,8 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @Test
     @Alerts({"default", "default", "default"})
     public void readOnlyPrototype() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var proto = Object.create(Object.prototype, {\n"
@@ -67,7 +68,8 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "symbol", "symbol", "1", "c"})
     public void getOwnPropertySymbols() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  if (Object.getOwnPropertySymbols) {\n"
@@ -103,7 +105,8 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @Test
     @Alerts({"TypeError", "true", "true"})
     public void ctorNotChangeableForPrimitives() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  let val = null;\n"
@@ -136,7 +139,8 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @Alerts({"TypeError", "true", "true"})
     @NotYetImplemented
     public void ctorNotChangeableForPrimitivesStrict() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
 
@@ -170,7 +174,8 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "ctor", "true"})
     public void ctorChangeableHasNoEffectForTypeOf() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
 
@@ -200,7 +205,8 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "ctor", "true"})
     public void ctorChangeableHasNoEffectForTypeOfStrict() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + "  'use strict';\n"
                 + LOG_TITLE_FUNCTION
@@ -231,7 +237,8 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void ctorChangeableHasNoEffectForSealed() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
 
@@ -256,7 +263,8 @@ public class ScriptableObjectTest extends WebDriverTestCase {
             FF = "TypeError",
             FF_ESR = "TypeError")
     public void ctorChangeableHasNoEffectForSealedStrict() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
 

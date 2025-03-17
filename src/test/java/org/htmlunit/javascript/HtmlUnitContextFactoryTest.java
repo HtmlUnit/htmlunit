@@ -33,7 +33,7 @@ public class HtmlUnitContextFactoryTest extends SimpleWebTestCase {
      */
     @Test
     public void customBrowserVersion() throws Exception {
-        final String html = "<html></html>";
+        final String html = DOCTYPE_HTML + "<html></html>";
 
         final BrowserVersion browserVersion
                 = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_ESR)

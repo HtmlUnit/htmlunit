@@ -44,8 +44,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @HtmlUnitNYI(FF = {"5<>1", "2<>5", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"},
             FF_ESR = {"5<>1", "2<>5", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"})
     public void sortSteps() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function compare(x, y) {\n"
             + "  log('' + x + '<>' + y);\n"
@@ -68,8 +68,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts("1,1,2,5,9")
     public void sortIntComperator() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function compare(x, y) {\n"
             + "  return x - y;\n"
@@ -92,8 +92,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts("1,1,2,5,9")
     public void sortSmallDoublesComperator() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function compare(x, y) {\n"
             + "  return (x - y) / 1001;\n"
@@ -118,8 +118,8 @@ public class NativeArrayTest extends WebDriverTestCase {
             FF = "1,1,2,5,9",
             FF_ESR = "1,1,2,5,9")
     public void sortBoolComperator() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function compare(x, y) {\n"
             + "  return x >= y;\n"
@@ -142,8 +142,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts("1,1,2,5,9")
     public void sortBool2IntComperator() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function compare(x, y) {\n"
             + "  return (x >= y) === true ? 1 : -1;\n"
@@ -170,8 +170,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @HtmlUnitNYI(FF = "1,5,2,1,9",
             FF_ESR = "1,5,2,1,9")
     public void sortInvalidComperator() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function compare(x, y) {\n"
             + "  return 1;\n"
@@ -236,7 +236,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"hello", "foo", "hello"})
     public void deleteShouldNotWalkPrototypeChain() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "Array.prototype.foo = function() { log('hello')};\n"
             + "[].foo();\n"
@@ -257,8 +258,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts("function Array() { [native code] }")
     public void constructorToString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "log([].constructor.toString());\n"
             + "</script></head><body>\n"
@@ -273,8 +274,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"mandarin", "", "mandarin"})
     public void shiftOneElement() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -298,8 +299,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "undefined"})
     public void shiftEmpty() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -323,8 +324,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "a", "b", "c"})
     public void fromString() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -351,8 +352,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "a", "b", "c"})
     public void fromArray() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -379,8 +380,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "a", "b", "c"})
     public void fromArrayIterator() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -408,8 +409,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"4", "T", "e", "s", "t"})
     public void fromStringIterator() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -436,8 +437,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "abc", "[object Window]"})
     public void fromSet() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -465,8 +466,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "1,2", "3,4", "5,6"})
     public void fromMap() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -494,8 +495,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "by"})
     public void fromUserDefinedIterable() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -536,8 +537,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void fromObject() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -567,8 +568,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void fromNativeObject() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -595,8 +596,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "abc"})
     public void fromArguments() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -626,8 +627,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Alerts({"true", "true", "true", "true", "false", "false", "false",
                 "false", "false", "false", "false", "false", "false"})
     public void isArray() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -658,8 +659,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "20"})
     public void find() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -684,8 +685,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "20"})
     public void findPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -711,8 +712,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void findStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -737,8 +738,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1"})
     public void findIndex() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -763,8 +764,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1"})
     public void findIndexPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -790,8 +791,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void findIndexStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -816,8 +817,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "20,17"})
     public void filter() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -840,8 +841,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "20,17"})
     public void filterPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -865,8 +866,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void filterStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -891,8 +892,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1,2,3,4"})
     public void map() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -913,8 +914,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1,2,3,4"})
     public void mapPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -936,8 +937,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void mapStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -960,8 +961,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "false"})
     public void every() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -984,8 +985,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "false"})
     public void everyPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1009,8 +1010,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void everyStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1035,8 +1036,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "true"})
     public void some() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1059,8 +1060,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "true"})
     public void somePrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1084,8 +1085,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void someStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1110,8 +1111,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "4", "7"})
     public void forEach() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1132,8 +1133,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "4", "7"})
     public void forEachPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1155,8 +1156,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void forEachStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1179,8 +1180,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "30"})
     public void reduce() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1203,8 +1204,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "30"})
     public void reducePrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1228,8 +1229,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void reduceStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1254,8 +1255,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "2"})
     public void reduceRight() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1278,8 +1279,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "2"})
     public void reduceRightPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1303,8 +1304,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void reduceRightStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1329,8 +1330,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1,4,9,16"})
     public void join() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1351,8 +1352,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1,4,9,16"})
     public void joinPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1374,8 +1375,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void joinStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1398,8 +1399,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "16,9,4,1"})
     public void reverse() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1420,8 +1421,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "16,9,4,1"})
     public void reversePrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1443,8 +1444,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void reverseStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1467,8 +1468,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1,16,4,9"})
     public void sort() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1489,8 +1490,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1,16,4,9"})
     public void sortPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1512,8 +1513,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void sortStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1536,8 +1537,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "6", "1,4,9,16,3,7"})
     public void push() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1559,8 +1560,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "6", "1,4,9,16,3,7"})
     public void pushPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1583,8 +1584,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void pushStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1608,8 +1609,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "16", "1,4,9"})
     public void pop() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1631,8 +1632,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "16", "1,4,9"})
     public void popPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1655,8 +1656,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void popStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1680,8 +1681,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1", "4,9,16"})
     public void shift() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1703,8 +1704,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1", "4,9,16"})
     public void shiftPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1727,8 +1728,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void shiftStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1752,8 +1753,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "6", "3,7,1,4,9,16"})
     public void unshift() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1775,8 +1776,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "6", "3,7,1,4,9,16"})
     public void unshiftPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1799,8 +1800,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void unshiftStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1824,8 +1825,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "4,9", "1,16"})
     public void splice() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1847,8 +1848,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "4,9", "1,16"})
     public void splicePrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1871,8 +1872,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void spliceStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1896,8 +1897,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1,4,9,16,1,2", "1,4,9,16"})
     public void concat() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1919,8 +1920,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "1,4,9,16,1,2", "1,4,9,16"})
     public void concatPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1943,8 +1944,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void concatStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1968,8 +1969,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "4", "1,4,9,16"})
     public void slice() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1991,8 +1992,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "4", "1,4,9,16"})
     public void slicePrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2015,8 +2016,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void sliceStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2040,8 +2041,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "2", "1,4,9,16"})
     public void indexOf() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2063,8 +2064,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "2", "1,4,9,16"})
     public void indexOfPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2087,8 +2088,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void indexOfStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2112,8 +2113,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "2", "1,4,9,16"})
     public void lastIndexOf() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2135,8 +2136,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "2", "1,4,9,16"})
     public void lastIndexOfPrototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2159,8 +2160,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "TypeError"})
     public void lastIndexOfStatic() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2184,8 +2185,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts("3")
     public void of() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

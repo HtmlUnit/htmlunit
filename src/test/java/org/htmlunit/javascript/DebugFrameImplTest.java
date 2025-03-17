@@ -73,7 +73,8 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
      */
     @Test
     public void withCallable() throws Exception {
-        final String content = "<html><head><title>debug test</title>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>debug test</title>\n"
             + "<script>\n"
             + "  var counter = 0;\n"
             + "  window.__defineGetter__('foo', function(a) { return counter++ });\n"

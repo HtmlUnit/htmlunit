@@ -123,8 +123,8 @@ public class ThreadTest extends TestCase {
          * @throws Exception if the test failed
          */
         public void testCallInheritedFunction() throws Exception {
-            final String html
-                = "<html><head><title>foo</title><script>\n"
+            final String html =
+                "<html><head><title>foo</title><script>\n"
                 + "function doTest() {\n"
                 + "  document.form1.textfield1.focus();\n"
                 + "  alert('past focus');\n"

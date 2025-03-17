@@ -41,7 +41,8 @@ public class PostponedActionTest extends WebDriverTestCase {
     @Test
     @Alerts("before after second.html third.html")
     public void loadingJavaScript() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -78,7 +79,8 @@ public class PostponedActionTest extends WebDriverTestCase {
     @Test
     @Alerts("before after second.html")
     public void loadingJavaScript2() throws Exception {
-        final String firstContent = "<html>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -110,7 +112,8 @@ public class PostponedActionTest extends WebDriverTestCase {
     @Test
     @Alerts("setting timeout before after iframe.html simpleAlert")
     public void loadingJavaScriptWithTimeout() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "function test() {\n"
@@ -146,7 +149,8 @@ public class PostponedActionTest extends WebDriverTestCase {
     @Test
     @Alerts("page 2 / script executed")
     public void javascriptReload() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "<body onload='document.forms[0].submit()'>\n"
@@ -155,7 +159,8 @@ public class PostponedActionTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        final String secondContent = "<html><head>\n"
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<title>page 2</title>\n"
                 + "</head>\n"
                 + "<body>\n"

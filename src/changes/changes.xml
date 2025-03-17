@@ -8,6 +8,10 @@
 
     <body>
         <release version="4.11.0" date="March xx, 2025" description="Chrome/Edge 134, Firefox 136, Rhino regex, less dependencies, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: An issue where capture groups in quantified expressions (min = 2) were not cleared between iterations fixed.
+                For example, in /(?:(\2)(\d)){2}/, during the second iteration, \2 incorrectly retained the first iteration's value instead of being reset.
+            </action>
             <action type="remove" dev="rbri">
                 Switched back from our RegExp translation into java regular expressions to use the core Rhino stuff. Rhino mades significant
                 progress in this arae. This simplifies out impl and supports more features in the future.

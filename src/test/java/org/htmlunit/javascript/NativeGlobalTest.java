@@ -37,8 +37,8 @@ public class NativeGlobalTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "NaN", "Infinity"})
     public void assignConst() throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "undefined = 123;\n"
             + "log(undefined);\n"
@@ -58,8 +58,8 @@ public class NativeGlobalTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "NaN", "Infinity"})
     public void redeclareConst() throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "var undefined;\n"
             + "var NaN;\n"

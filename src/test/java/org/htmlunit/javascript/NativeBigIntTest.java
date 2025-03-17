@@ -34,8 +34,8 @@ public class NativeBigIntTest extends WebDriverTestCase {
     @Test
     @Alerts({"bigint", "bigint"})
     public void typeof() throws Exception {
-        final String html
-            = "<html>"
+        final String html = DOCTYPE_HTML
+            + "<html>"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

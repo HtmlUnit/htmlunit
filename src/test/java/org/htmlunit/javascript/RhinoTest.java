@@ -40,8 +40,8 @@ public class RhinoTest extends WebDriverTestCase {
     @Alerts({"true", "true"})
     @NotYetImplemented
     public void isStrict_GlobalThis() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  'use strict'\n"
@@ -65,8 +65,8 @@ public class RhinoTest extends WebDriverTestCase {
     @Alerts("true")
     @NotYetImplemented
     public void isStrict_evalVar() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  'use strict'\n"
@@ -91,8 +91,8 @@ public class RhinoTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void isStrict_argumentsCallee() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  'use strict'\n"
@@ -116,8 +116,8 @@ public class RhinoTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true"})
     public void isStrict_constructor() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  'use strict'\n"
@@ -153,7 +153,8 @@ public class RhinoTest extends WebDriverTestCase {
     @Test
     @Alerts("from script")
     public void consStringAsSetterFunctionParam() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
                 + LOG_TITLE_FUNCTION

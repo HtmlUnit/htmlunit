@@ -35,8 +35,8 @@ public class ScriptRuntimeTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "50", "100", "xxx", "zzz", "yyy"})
     public void enumChangeObject() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

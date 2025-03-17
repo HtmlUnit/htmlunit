@@ -74,8 +74,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void arguments_prototype() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "var f1 = function() {};\n"
             + "var f2 = function() {};\n"
@@ -97,8 +97,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void newFunctionWithSlashSlash() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "var f1 = new Function('log(true) //');\n"
             + "f1.call();\n"
@@ -114,8 +114,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("function\\sanonymous(\\n)\\s{\\n\\s\\s\\s\\svar\\sx\\s=\\s1;\\n}")
     public void newFunctionToString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "var f1 = new Function('    var x = 1;');\n"
             + "log(f1);\n"
@@ -131,8 +131,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("function\\sanonymous(\\n)\\s{\\n\\n}")
     public void newEmptyFunctionToString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "var f1 = new Function();\n"
             + "log(f1);\n"
@@ -148,8 +148,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("function\\sfoo()\\s{\\n\\s\\sreturn\\s1;\\n}")
     public void functionToString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "function foo() {\n"
             + "  return 1;\n"
@@ -168,8 +168,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts({"function\\sfoo(){return\\s1;}",
              "function\\sfoo(\\s)\\s\\s{\\s\\treturn\\s1\\s\\s\\n\\s;\\n\\s\\s\\s\\s;\\s}" })
     public void functionToStringMinimized() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
@@ -192,7 +192,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("foo1 done")
     public void in() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "function foo1() {\n"
             + "  for (var i in foo1) {\n"
@@ -216,7 +217,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void definitionInScope() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "var $ = function() { return 1; };\n"
             + "var ori = $;\n"
@@ -236,7 +238,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "eat", "bananas"})
     public void apply() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  var myObject = {'length': 2, '0': 'eat', '1': 'bananas'};\n"
             + "  function test() {\n"
@@ -262,7 +265,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Alerts({"t: [object Window]", "0", "t: ", "1", "a0: x",
              "t: ab", "2", "a0: x", "a1: y"})
     public void bind() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -300,7 +304,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts({"t: ab", "1", "a0: x,y"})
     public void bindArrayParam() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -332,7 +337,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("my y var")
     public void commaOperator() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var obj = {default: eval};\n"
@@ -351,7 +357,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("my y var")
     public void commaOperatorFunction() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function setFunction(o) {\n"
             + "  o.default = eval;\n"
@@ -374,7 +381,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts({"my x var", "my y var"})
     public void commaOperatorTwice() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var obj = {default: eval};\n"
@@ -395,7 +403,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("my y var")
     public void commaOperatorFunctionTry() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function setFunction(o) {\n"
             + "  o.default = eval;\n"
@@ -420,7 +429,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("my y var")
     public void commaOperatorFunctionCall() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function setFunction(o) {\n"
             + "  o.default = eval;\n"
@@ -448,7 +458,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("my y var")
     public void commaOperatorFunctionAnonymous() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function setFunction(o) {\n"
             + "  o.default = eval;\n"
@@ -474,7 +485,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("a=[object Window]")
     public void callWithNullContext() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -500,7 +512,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts("a=[object Window]")
     public void callWithUndefinedContext() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -526,7 +539,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
     @Test
     @Alerts({"configurable: true", "enumerable: false", "writable: false"})
     public void functionLength() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

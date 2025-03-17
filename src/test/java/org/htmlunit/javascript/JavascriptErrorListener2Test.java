@@ -48,7 +48,7 @@ public class JavascriptErrorListener2Test extends SimpleWebTestCase {
             }
         });
 
-        final String html = "<html><body><script>while (</script></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><script>while (</script></body></html>";
         getMockWebConnection().setDefaultResponse(html);
         webClient.getPage(URL_FIRST);
 

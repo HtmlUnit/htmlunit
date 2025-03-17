@@ -35,8 +35,8 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "1", "0"})
     public void arguments() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -60,8 +60,8 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null"})
     public void argumentsShouldBeNullOutsideFunction() throws Exception {
-        final String html
-            = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -80,8 +80,8 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Test
     @Alerts("2")
     public void passedCountDifferentFromDeclared() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -102,8 +102,8 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "world", "undefined", "undefined"})
     public void readOnlyWhenAccessedThroughFunction() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -129,7 +129,8 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "hi", "undefined", "you"})
     public void writableWithinFunction() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test1() {\n"
@@ -152,7 +153,8 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void argumentsEqualsFnArguments() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test1() {\n"
@@ -170,7 +172,8 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Test
     @Alerts("hi")
     public void argumentsAsParameter() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test1(arguments) {\n"

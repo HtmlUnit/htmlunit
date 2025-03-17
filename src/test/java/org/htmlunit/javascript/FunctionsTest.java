@@ -35,8 +35,8 @@ public class FunctionsTest extends WebDriverTestCase {
     @Test
     @Alerts("function\\sfoo()\\s{\\s\\s\\s\\sreturn\\s\\t'a'\\s+\\s'b'\\s}")
     public void function_toString() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "function test() {\n"
@@ -56,8 +56,8 @@ public class FunctionsTest extends WebDriverTestCase {
     @Test
     @Alerts("function\\sfoo()\\s\\n{\\s\\n\\sreturn\\s\\t'x'\\s\\n\\n}")
     public void function_toStringNewLines() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "function test() {\n"
@@ -77,8 +77,8 @@ public class FunctionsTest extends WebDriverTestCase {
     @Test
     @Alerts("()\\s=>\\s{\\s\\nreturn\\s\\s'=>'\\s\\s\\s}")
     public void arrowFunction_toString() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "function test() {\n"
@@ -99,8 +99,8 @@ public class FunctionsTest extends WebDriverTestCase {
     @Alerts({"function()\\s{\\n\\s\\s\\s\\s\\s\\sreturn\\s'X';\\n\\s\\s\\s\\s}",
              "function()\\s{\\n\\s\\s\\s\\s\\s\\sreturn\\s'X';\\n\\s\\s\\s\\s}"})
     public void boundFunction_toString() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "function test() {\n"
@@ -129,8 +129,8 @@ public class FunctionsTest extends WebDriverTestCase {
     @Alerts({"foo = undefined", "1"})
     @NotYetImplemented
     public void conditionallyCreatedFunction() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -151,8 +151,8 @@ public class FunctionsTest extends WebDriverTestCase {
     @Test
     @Alerts({"ReferenceError", "1"})
     public void conditionallyCreatedFunctionStrict() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + "  'use strict';\n"

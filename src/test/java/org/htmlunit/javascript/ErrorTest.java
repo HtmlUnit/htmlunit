@@ -46,8 +46,8 @@ public class ErrorTest extends WebDriverTestCase {
             FF_ESR = {"Error", "Whoops!", "undefined", "undefined", "undefined",
                       "25", "true", "Error/Error"})
     public void error() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
@@ -90,8 +90,8 @@ public class ErrorTest extends WebDriverTestCase {
             FF_ESR = {"EvalError", "Whoops!", "undefined", "undefined", "undefined",
                       "25", "true", "true", "EvalError"})
     public void evalError() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
@@ -135,8 +135,8 @@ public class ErrorTest extends WebDriverTestCase {
             FF_ESR = {"RangeError", "Whoops!", "undefined", "undefined", "undefined",
                       "25", "true", "true", "RangeError"})
     public void rangeError() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
@@ -180,8 +180,8 @@ public class ErrorTest extends WebDriverTestCase {
             FF_ESR = {"ReferenceError", "Whoops!", "undefined", "undefined", "undefined",
                       "25", "true", "true", "ReferenceError"})
     public void referenceError() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
@@ -225,8 +225,8 @@ public class ErrorTest extends WebDriverTestCase {
             FF_ESR = {"SyntaxError", "Whoops!", "undefined", "undefined", "undefined",
                       "25", "true", "true", "SyntaxError"})
     public void syntaxError() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
@@ -270,8 +270,8 @@ public class ErrorTest extends WebDriverTestCase {
             FF_ESR = {"TypeError", "Whoops!", "undefined", "undefined", "undefined",
                       "25", "true", "true", "TypeError"})
     public void typeError() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
@@ -315,8 +315,8 @@ public class ErrorTest extends WebDriverTestCase {
             FF_ESR = {"URIError", "Whoops!", "undefined", "undefined", "undefined",
                       "25", "true", "true", "URIError"})
     public void uriError() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
@@ -367,8 +367,8 @@ public class ErrorTest extends WebDriverTestCase {
                       "undefined", "undefined",
                       "25", "true", "true", "AggregateError/AggregateError"})
     public void aggregateError() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
@@ -414,8 +414,8 @@ public class ErrorTest extends WebDriverTestCase {
             FF_ESR = {"InternalError", "Whoops!", "undefined", "undefined", "undefined", "25",
                       "true", "true", "InternalError/InternalError"})
     public void internalError() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
@@ -452,8 +452,8 @@ public class ErrorTest extends WebDriverTestCase {
             FF = {"Error", "", "undefined", "undefined", "undefined", "25"},
             FF_ESR = {"Error", "", "undefined", "undefined", "undefined", "25"})
     public void ctorWithoutParams() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
@@ -487,8 +487,8 @@ public class ErrorTest extends WebDriverTestCase {
             FF = {"Error", "msg", "undefined", "undefined", "undefined", "25"},
             FF_ESR = {"Error", "msg", "undefined", "undefined", "undefined", "25"})
     public void ctorFilename() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"
@@ -522,8 +522,8 @@ public class ErrorTest extends WebDriverTestCase {
             FF = {"Error", "test", "undefined", "undefined", "undefined", "25"},
             FF_ESR = {"Error", "test", "undefined", "undefined", "undefined", "25"})
     public void ctorAsFunction() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
             + "</head>\n"

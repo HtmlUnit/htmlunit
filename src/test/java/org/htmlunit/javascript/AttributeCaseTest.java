@@ -174,7 +174,8 @@ public class AttributeCaseTest extends SimpleWebTestCase {
 
     private void setupGetAttributeTest(final String attributeName, final String attributeValue) throws Exception {
         final String elementId = "p-id";
-        final String content = "<html><head><title>AttributeCaseTest</title></head><body>\n"
+        final String content = DOCTYPE_HTML
+                          + "<html><head><title>AttributeCaseTest</title></head><body>\n"
                           + "<p id=\"" + elementId + "\" " + attributeName + "=\"" + attributeValue + "\">\n"
                           + "</body></html>";
 
@@ -187,8 +188,8 @@ public class AttributeCaseTest extends SimpleWebTestCase {
         throws Exception {
 
         final String elementId = "p-id";
-        final String content
-            = "<html><head><title>AttributeCaseTest</title></head><body>\n"
+        final String content = DOCTYPE_HTML
+             + "<html><head><title>AttributeCaseTest</title></head><body>\n"
              + "<p id=\"" + elementId + "\" " + attributeName + "=\"" + attributeValue + "\">\n"
              + "<script language=\"javascript\" type=\"text/javascript\">\n<!--\n"
              + "  document.getElementById(\"" + elementId + "\").setAttribute(\"" + attributeName + "\", \""

@@ -15,7 +15,6 @@
 package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -46,7 +45,7 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts({"text/html", "text/html"})
     public void setNonWritablePropertyContentType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -70,7 +69,7 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts({"CSS1Compat", "CSS1Compat"})
     public void setNonWritablePropertyCompatMode() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -94,7 +93,7 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object Arguments]")
     public void arguments_toString() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -114,7 +113,7 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts("3")
     public void stringWithExclamationMark() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -136,7 +135,7 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts({"x1", "x2", "x3", "x4", "x5"})
     public void arrayedMap() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -165,7 +164,7 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void parentProtoFeature() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -187,7 +186,7 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void passFunctionAsParameter() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -211,7 +210,7 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "function", "function"})
     public void callee() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -308,7 +307,7 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
     }
 
     private void set_ReadOnly(final String expression) throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -338,7 +337,7 @@ public class HtmlUnitScriptable2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"function", "true", "function length() { [native code] }", "0", "0"},
             EDGE = {"function", "true", "function length() { [native code] }", "0", "0"})
     public void lookupGetter() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

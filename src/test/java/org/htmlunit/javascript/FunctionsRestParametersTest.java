@@ -34,8 +34,8 @@ public class FunctionsRestParametersTest extends WebDriverTestCase {
     @Test
     @Alerts("1,abc,2,##")
     public void oneRestArg() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"
@@ -59,8 +59,8 @@ public class FunctionsRestParametersTest extends WebDriverTestCase {
     @Test
     @Alerts("true-0")
     public void oneRestArgNothingProvided() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"
@@ -85,8 +85,8 @@ public class FunctionsRestParametersTest extends WebDriverTestCase {
     @Test
     @Alerts("true-1")
     public void oneRestArgOneProvided() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"
@@ -111,8 +111,8 @@ public class FunctionsRestParametersTest extends WebDriverTestCase {
     @Test
     @Alerts("abc,2,##")
     public void twoRestArg() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"
@@ -136,8 +136,8 @@ public class FunctionsRestParametersTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined - true-0")
     public void twoRestArgNothingProvided() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"
@@ -161,8 +161,8 @@ public class FunctionsRestParametersTest extends WebDriverTestCase {
     @Test
     @Alerts("77 - true-0")
     public void twoRestArgOneProvided() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"
@@ -186,8 +186,8 @@ public class FunctionsRestParametersTest extends WebDriverTestCase {
     @Test
     @Alerts("1-4")
     public void arguments() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"
@@ -211,8 +211,8 @@ public class FunctionsRestParametersTest extends WebDriverTestCase {
     @Test
     @Alerts("0-1")
     public void length() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"
@@ -235,8 +235,8 @@ public class FunctionsRestParametersTest extends WebDriverTestCase {
     @Test
     @Alerts("2-1-0")
     public void argLength() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"
@@ -260,8 +260,8 @@ public class FunctionsRestParametersTest extends WebDriverTestCase {
     @Test
     @Alerts("function rest(...restArgs) { return restArgs.length; }")
     public void string() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"

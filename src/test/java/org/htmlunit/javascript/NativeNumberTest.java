@@ -36,8 +36,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "false", "true", "true", "false", "false"})
     public void isFinite() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -67,8 +67,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts({"true", "true", "true", "false", "false", "false", "false",
              "false", "false", "false", "false", "false"})
     public void isInteger() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -105,8 +105,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts({"true", "true", "true", "false", "false", "false", "false",
              "false", "false", "false", "false", "false", "false", "false"})
     public void isNaN() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -144,8 +144,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "false", "false", "false", "true"})
     public void isSafeInteger() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -175,8 +175,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts("3.14")
     public void parseFloat() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -199,8 +199,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts("4")
     public void parseInt() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -248,7 +248,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts("2.274341322658976e-309")
     public void toStringRhinoBug538172() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(2.274341322658976E-309);\n"
             + "</script></head><body>\n"
@@ -262,7 +263,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts("12,345")
     public void toLocaleString() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  log((12345).toLocaleString('en'));\n"
             + "</script></head><body>\n"
@@ -276,7 +278,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts("12.345")
     public void toLocaleStringDe() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  log((12345).toLocaleString('de'));\n"
             + "</script></head><body>\n"
@@ -290,7 +293,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts("12,345")
     public void toLocaleStringEnUS() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  log((12345).toLocaleString('en-US'));\n"
             + "</script></head><body>\n"
@@ -304,7 +308,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts("12,345")
     public void toLocaleStringNoParam() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    log((12345).toLocaleString());\n"
@@ -320,7 +325,8 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts("RangeError")
     public void toLocaleStringHintertupfingen() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    log((12345).toLocaleString('Hintertupfingen'));\n"

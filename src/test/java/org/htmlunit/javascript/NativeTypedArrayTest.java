@@ -247,7 +247,8 @@ public class NativeTypedArrayTest extends WebDriverTestCase {
 
     private static String toStringTagTest(final String init) {
         return
-            "<html></head>\n"
+            DOCTYPE_HTML
+            + "<html></head>\n"
             + "<body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

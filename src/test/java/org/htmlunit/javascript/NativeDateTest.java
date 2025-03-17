@@ -40,8 +40,8 @@ public class NativeDateTest extends WebDriverTestCase {
     @Test
     @Alerts({"-13", "84", "109"})
     public void getYear() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  log(new Date(1887, 2, 1).getYear());\n"
@@ -115,7 +115,8 @@ public class NativeDateTest extends WebDriverTestCase {
         for (final String methodName : methodNames) {
             methodList.append(", '").append(methodName).append("'");
         }
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var o = " + object + ";\n"
@@ -138,8 +139,8 @@ public class NativeDateTest extends WebDriverTestCase {
     @Alerts({"2005-12-03T07:14:15.000Z", "2005-07-12T11:04:15.000Z",
              "2005-07-03T15:14:05.000Z"})
     public void toISOString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (new Date().toISOString) {\n"
@@ -161,8 +162,8 @@ public class NativeDateTest extends WebDriverTestCase {
     @Alerts({"Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
              "Sun, 03 Jul 2005 15:14:05 GMT"})
     public void toUTCString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toUTCString());\n"
@@ -182,8 +183,8 @@ public class NativeDateTest extends WebDriverTestCase {
     @Alerts({"Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
              "Sun, 03 Jul 2005 15:14:05 GMT"})
     public void toGMTString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toGMTString());\n"
@@ -201,8 +202,8 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     public void enumerable() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "function test() {\n"
             + "  var date = new Date(2000, 0, 1);\n"
             + "  for (var x in date) {\n"

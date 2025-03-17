@@ -196,8 +196,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void ctorDateTimeString(final String js) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(" + js + ");\n"
             + "</script>\n"
@@ -282,8 +282,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void ctorDateTime(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date('2021-12-18T22:23').toISOString());\n"
             + "</script>\n"
@@ -367,8 +367,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void ctorDate(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date('2021-12-18').toISOString());\n"
             + "</script>\n"
@@ -394,8 +394,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     @Test
     @Alerts("2000-02-28T23:59:59.000Z")
     public void ctorInt() throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date(951782399000).toISOString());\n"
             + "</script>\n"
@@ -410,8 +410,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     @Test
     @Alerts("2035-11-30T01:46:40.000Z")
     public void ctorDouble() throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date(208e10).toISOString());\n"
             + "</script>\n"
@@ -569,8 +569,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void toLocale(final String js) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(" + js + ");\n"
             + "</script>\n"
@@ -658,8 +658,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void toDateString(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date('Sat, 18 Dec 2021 22:23:00 UTC').toDateString());\n"
             + "</script>\n"
@@ -783,8 +783,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void toTimeString(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date('Sat, 18 Dec 2021 22:23:00 UTC').toTimeString());\n"
             + "</script>\n"
@@ -868,8 +868,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void toUTCString(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date('Sat, 18 Dec 2021 22:23:00 UTC').toUTCString());\n"
             + "</script>\n"
@@ -965,8 +965,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void timezoneOffset(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date(0).getTimezoneOffset());\n"
             + "</script>\n"

@@ -75,8 +75,8 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void assign() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (Object.assign) {\n"
@@ -97,8 +97,8 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void assignUndefined() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "function test() {\n"
             + LOG_TITLE_FUNCTION
             + "  if (Object.assign) {\n"
@@ -119,8 +119,8 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void assignUndefined2() throws Exception {
-        final String html
-                = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + "function test() {\n"
                 + LOG_TITLE_FUNCTION
                 + "  if (Object.assign) {\n"
@@ -140,8 +140,8 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void assignNull() throws Exception {
-        final String html
-                = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + "function test() {\n"
                 + LOG_TITLE_FUNCTION
                 + "  if (Object.assign) {\n"
@@ -161,8 +161,8 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void assignNull2() throws Exception {
-        final String html
-                = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + "function test() {\n"
                 + LOG_TITLE_FUNCTION
                 + "  if (Object.assign) {\n"
@@ -184,7 +184,7 @@ public class NativeObjectTest extends WebDriverTestCase {
             FF = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
             FF_ESR = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}")
     public void proto() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
@@ -207,7 +207,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object Object]", "null"})
     public void proto2() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -231,7 +231,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void getPrototypeOfString() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -254,7 +254,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void getPrototypeOfNumber() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -277,7 +277,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void getPrototypeOfBoolean() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -300,7 +300,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts("object")
     public void getTypeOfPrototypeOfNumber() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -323,7 +323,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "true", "true"})
     public void getOwnPropertySymbols() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -356,7 +356,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void getOwnPropertySymbolsEmpty() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -383,7 +383,7 @@ public class NativeObjectTest extends WebDriverTestCase {
             FF = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
             FF_ESR = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
     public void getOwnPropertyDescriptor() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -428,7 +428,8 @@ public class NativeObjectTest extends WebDriverTestCase {
                     "x.get = function value() { [native code] }",
                     "x.get.call = function call() { [native code] }"})
     public void getOwnPropertyDescriptorGetCall() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var proto = i1.constructor.prototype;\n"
@@ -453,7 +454,8 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts({"before: [object Object]", "after: [object Object]", "true"})
     public void definePropertyUsingConsString() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  'use strict';\n"
