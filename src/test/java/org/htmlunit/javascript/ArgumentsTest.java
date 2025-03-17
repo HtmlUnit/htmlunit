@@ -78,6 +78,50 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("callee,length")
+    public void argumentsPropertyNames() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  let p = Object.getOwnPropertyNames(arguments);\n"
+            + "  p.sort();\n"
+            + "  log(p);"
+            + "}\n"
+            + "test();"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("callee,length")
+    public void argumentsPropertyNamesStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  let p = Object.getOwnPropertyNames(arguments);\n"
+            + "  p.sort();\n"
+            + "  log(p);"
+            + "}\n"
+            + "test();"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("2")
     public void passedCountDifferentFromDeclared() throws Exception {
         final String html = DOCTYPE_HTML
