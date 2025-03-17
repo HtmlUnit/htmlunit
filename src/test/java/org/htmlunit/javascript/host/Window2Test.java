@@ -3241,7 +3241,7 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * setInterval execution is not stopped if the callback throws an exception.
+     * The setInterval execution is not stopped if the callback throws an exception.
      *
      * @throws Exception if the test fails
      */

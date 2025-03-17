@@ -219,7 +219,7 @@ public class WebResponseTest extends WebServerTestCase {
                 page.getWebResponse().getContentAsString(UTF_8));
 
         assertEquals("gzip", page.getWebResponse().getResponseHeaderValue("Content-Encoding"));
-        assertEquals("73", page.getWebResponse().getResponseHeaderValue(HttpHeader.CONTENT_LENGTH));
+        assertEquals("85", page.getWebResponse().getResponseHeaderValue(HttpHeader.CONTENT_LENGTH));
     }
 
     /**
