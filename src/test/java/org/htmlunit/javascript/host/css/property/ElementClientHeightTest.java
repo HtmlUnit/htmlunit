@@ -39,7 +39,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
         }
 
         if ("frame".equals(tagName)) {
-            return "<html><head>\n"
+            return DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + LOG_TITLE_FUNCTION
                     + "function test() {\n"
@@ -53,7 +54,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
                     + "</frameset></html>";
         }
         if ("script".equals(tagName)) {
-            return "<html><head>\n"
+            return DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + LOG_TITLE_FUNCTION
                     + "function test() {\n"
@@ -67,7 +69,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
                     + "</body></html>";
         }
         if ("frameset".equals(tagName)) {
-            return "<html><head>\n"
+            return DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + LOG_TITLE_FUNCTION
                     + "function test() {\n"
@@ -81,7 +84,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
                     + "</frameset></html>";
         }
 
-        return "<html><head>\n"
+        return DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -95,7 +99,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     }
 
     private static String testInput(final String type) {
-        return "<html><head>\n"
+        return DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -109,7 +114,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     }
 
     private static String headElementClosesItself(final String tagName) {
-        return "<html><head>\n"
+        return DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<" + tagName + " id='outer'><" + tagName + ">\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -1738,7 +1744,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     public void title() throws Exception {
         // title is a bit special, we have to provide at least
         // one closing tab otherwise title spans to the end of the file
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"

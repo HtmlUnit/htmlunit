@@ -36,8 +36,8 @@ public class StyleMediaTest extends WebDriverTestCase {
             FF = "undefined",
             FF_ESR = "undefined")
     public void type() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -60,8 +60,8 @@ public class StyleMediaTest extends WebDriverTestCase {
             FF = {},
             FF_ESR = {})
     public void matchMedium() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

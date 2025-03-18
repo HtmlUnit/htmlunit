@@ -46,8 +46,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Test
     @Alerts("4")
     public void length() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <link href='style1.css'></link>\n"
             + "    <link href='style2.css' rel='stylesheet'></link>\n"
@@ -73,8 +73,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Test
     @Alerts({"rgb(255, 0, 0)", "rgb(255, 0, 0)"})
     public void getComputedStyle_Link() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
             + "    <script>\n"
@@ -107,8 +107,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "undefined", "undefined", "undefined"})
     public void arrayIndexOutOfBoundAccess() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -143,8 +143,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]"})
     public void nonExistentStylesheet() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
             + "    <script>\n"
@@ -170,8 +170,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]"})
     public void emptyGZipEncodedStylesheet() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
             + "    <script>\n"
@@ -204,8 +204,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]"})
     public void brokenGZipEncodedStylesheet() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
             + "    <script>\n"
@@ -237,8 +237,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Alerts({"1", "1"})
     @NotYetImplemented
     public void dynamicAddedStyleSheet() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
             + "    <script>\n"
@@ -274,8 +274,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "false", "true", "false", "false"})
     public void in() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
             + "    <script>\n"
@@ -306,8 +306,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "undefined", "[object CSSStyleSheet]", "undefined", "undefined"})
     public void index() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
             + "    <script>\n"
@@ -338,8 +338,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "null", "[object CSSStyleSheet]", "null", "null"})
     public void item() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
             + "    <script>\n"
@@ -369,8 +369,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "false"})
     public void equivalentValues() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "  <head>\n"
               + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
               + "    <script>\n"

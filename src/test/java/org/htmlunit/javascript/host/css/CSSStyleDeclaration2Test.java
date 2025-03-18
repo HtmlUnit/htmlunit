@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.css;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -179,8 +178,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
     private void width_like_properties(final String... properties) throws Exception {
         final String props = "'" + String.join("', '", properties) + "'";
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var properties = [" + props + "];\n"
@@ -271,8 +270,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
     private void checkPropertyValuesDirect(final String property, final String... propertyValues) throws Exception {
         final String propValues = "'" + String.join("', '", propertyValues) + "'";
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var propValues = [" + propValues + "];\n"
@@ -295,8 +294,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
     private void checkPropertyValues(final String property, final String... propertyValues) throws Exception {
         final String propValues = "'" + String.join("', '", propertyValues) + "'";
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var propValues = [" + propValues + "];\n"
@@ -322,8 +321,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      */
     @Test
     public void properties() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Tester</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -355,8 +354,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      */
     @Test
     public void properties2() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -388,8 +387,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void setLength() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -414,8 +413,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
     @Test
     @Alerts({"0", "Type error"})
     public void setLengthStrictMode() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -441,7 +440,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
     @Test
     @Alerts({"function values() { [native code] }", "no for..of", "display"})
     public void iterator() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION

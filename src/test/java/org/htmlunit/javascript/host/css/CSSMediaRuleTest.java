@@ -36,8 +36,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void ctor() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + LOG_TEXTAREA
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -56,8 +56,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object CSSMediaRule]", "[object CSSMediaRule]"})
     public void scriptableToString() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -82,8 +82,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}")
     public void cssText() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + LOG_TEXTAREA
 
@@ -109,8 +109,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("@media screen {\n}")
     public void cssTextEmpty() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + LOG_TEXTAREA
 
@@ -136,8 +136,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("@media screen {\n  p { }\n  div { }\n}")
     public void cssTextMultipleRules() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + LOG_TEXTAREA
 
@@ -172,8 +172,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             FF_ESR = "@media print {\n  *#navigation { display: none; }"
                     + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}")
     public void cssTextNested() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + LOG_TEXTAREA
 
@@ -200,8 +200,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("@media screen {\n  p { background-color: rgb(255, 255, 255); }\n}")
     public void cssTextSet() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + LOG_TEXTAREA
 
@@ -232,8 +232,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void parentRule() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -257,8 +257,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object CSSMediaRule]", "[object CSSMediaRule]"})
     public void parentRuleNested() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media print { #navigation { display: none; } "
@@ -285,8 +285,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void parentRuleSet() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -315,8 +315,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("[object CSSStyleSheet]")
     public void parentStyleSheet() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -340,8 +340,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("[object CSSStyleSheet]")
     public void parentStyleSheetSet() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -370,8 +370,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object MediaList]", "all", "1", "all", "all", "all"})
     public void mediaAll() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media all { p { background-color:#FFFFFF; }};\n"
@@ -403,8 +403,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object MediaList]", "screen", "1", "screen", "screen", "screen"})
     public void media() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -438,8 +438,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
              "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)",
              "only screen and (color), print and (max-width: 12cm) and (min-width: 30em)"})
     public void mediaQuery() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media only screen and  (color ),print and ( max-width:12cm) and (min-width: 30em) { "
@@ -471,8 +471,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Alerts({"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
              "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
     public void cssRules() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -505,8 +505,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Alerts({"[object CSSRuleList]", "[object CSSRuleList]", "1", "[object CSSStyleRule]",
              "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
     public void cssRulesMediaNotMatching() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media print { p { background-color:#FFFFFF; }};\n"
@@ -539,8 +539,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
              "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
     public void insertRule() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -575,8 +575,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("SyntaxError/DOMException")
     public void insertRuleNull() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -605,8 +605,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("SyntaxError/DOMException")
     public void insertRuleEmpty() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -635,8 +635,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("SyntaxError/DOMException")
     public void insertRuleInvalid() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -666,8 +666,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Alerts({"1", "1", "2", "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]",
              "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]"})
     public void insertRuleWithIndex() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -702,8 +702,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("SyntaxError/DOMException")
     public void insertRuleNullWithIndex() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -732,8 +732,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "SyntaxError/DOMException"})
     public void insertRuleEmptyWithIndex() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -768,8 +768,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("SyntaxError/DOMException")
     public void insertRuleInvalidWithIndex() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -799,8 +799,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
              "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
     public void insertRuleWithIndexNull() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -834,8 +834,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Alerts({"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
              "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
     public void insertRuleWithIndexNaN() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -868,8 +868,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "IndexSizeError/DOMException"})
     public void insertRuleWithIndexNegative() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -899,8 +899,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "IndexSizeError/DOMException"})
     public void insertRuleWithIndexGreaterThanLength() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; }};\n"
@@ -930,8 +930,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "1", "p { background-color: rgb(255, 255, 255); }"})
     public void deleteRule() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }};\n"
@@ -965,8 +965,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "1", "span { color: rgb(0, 0, 0); }"})
     public void deleteRuleNull() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }};\n"
@@ -1000,8 +1000,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "1", "span { color: rgb(0, 0, 0); }"})
     public void deleteRuleNaN() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }};\n"
@@ -1035,8 +1035,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "IndexSizeError/DOMException"})
     public void deleteRuleNegative() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }};\n"
@@ -1066,8 +1066,8 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "IndexSizeError/DOMException"})
     public void deleteRuleGreaterThanLength() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @media screen { p { background-color:#FFFFFF; } span { color: rgb(0, 0, 0); }};\n"

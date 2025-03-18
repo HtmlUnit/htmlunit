@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.css;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -25,12 +24,13 @@ import org.junit.runner.RunWith;
  * Tests for css pseudo selectors :placeholder-shown and :-ms-input-placeholder.
  *
  * @author Thorsten Wendelmuth
+ * @author Ronald Brill
  *
  */
 @RunWith(BrowserRunner.class)
 public class CSSSelector2Test extends WebDriverTestCase {
 
-    private static final String PLACEHOLDER_SHOWN_HTML_HEAD = HtmlPageTest.STANDARDS_MODE_PREFIX_
+    private static final String PLACEHOLDER_SHOWN_HTML_HEAD = DOCTYPE_HTML
             + "<html><head>\n"
             + "<style>:placeholder-shown {border: 10px solid;}</style>\n"
             + "<script>\n"
@@ -45,7 +45,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n";
 
-    private static final String MS_PLACEHOLDER_HTML_HEAD = HtmlPageTest.STANDARDS_MODE_PREFIX_
+    private static final String MS_PLACEHOLDER_HTML_HEAD = DOCTYPE_HTML
             + "<html><head>\n"
             + "<style>:-ms-input-placeholder {border: 10px solid;}</style>"
             + "<script>\n"

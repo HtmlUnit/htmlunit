@@ -34,7 +34,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             + "e.offsetWidth - document.documentElement.offsetWidth)";
 
     private void test(final String tagName) throws Exception {
-        String html = "<html><head>\n"
+        String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -47,7 +48,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
                 + "</body></html>";
 
         if ("basefont".equals(tagName) || "isindex".equals(tagName)) {
-            html = "<html><head>\n"
+            html = DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<" + tagName + " id='outer'><" + tagName + ">\n"
                     + "<script>\n"
                     + "function test() {\n"
@@ -62,7 +64,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
         if ("title".equals(tagName)) {
             // title is a bit special, we have to provide at least
             // one closing tab otherwise title spans to the end of the file
-            html = "<html><head>\n"
+            html = DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
@@ -75,7 +78,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
         }
 
         if ("frame".equals(tagName)) {
-            html = "<html><head>\n"
+            html = DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + LOG_TITLE_FUNCTION
                     + "function test() {\n"
@@ -89,7 +93,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
                     + "</frameset></html>";
         }
         if ("script".equals(tagName)) {
-            html = "<html><head>\n"
+            html = DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + LOG_TITLE_FUNCTION
                     + "function test() {\n"
@@ -103,7 +108,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
                     + "</body></html>";
         }
         if ("frameset".equals(tagName)) {
-            html = "<html><head>\n"
+            html = DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + LOG_TITLE_FUNCTION
                     + "function test() {\n"
@@ -127,7 +133,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     }
 
     private static String testInput(final String type) {
-        return "<html><head>\n"
+        return DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -1665,7 +1672,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     public void title() throws Exception {
         // title is a bit special, we have to provide at least
         // one closing tab otherwise title spans to the end of the file
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  var e = document.getElementById('outer');\n"

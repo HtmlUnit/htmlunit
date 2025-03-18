@@ -20,7 +20,6 @@ import java.util.Collections;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -50,8 +49,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"[object CSS2Properties]", "[object CSS2Properties]"},
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]"})
     public void scriptableToString() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  div { background-color: #FFFFFF; }\n"
@@ -103,8 +102,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     public void stringProperties() throws Exception {
-        final String html
-            = "<html><head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
             + "  <div id='myDiv'><br>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "  </div>\n"
@@ -139,8 +138,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     public void stringPropertiesDisplayNone() throws Exception {
-        final String html
-            = "<html><head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
             + "  <div id='myDiv' style='display: none'><br>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "  </div>\n"
@@ -176,8 +175,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     public void stringPropertiesNotAttached() throws Exception {
         // to fix Chrome, look into ComputedCSSStyleDeclaration.defaultIfEmpty first condition
-        final String html
-            = "<html><head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "  </div>\n"
             + "<script>\n"
@@ -210,7 +209,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "auto", "pointer"})
     public void styleElement() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style type='text/css'>\n"
             + "  /* <![CDATA[ */\n"
             + "  #myDiv2 {cursor: pointer}\n"
@@ -245,7 +245,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "pointer", "pointer"})
     public void styleElement2() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style type='text/css'>\n"
             + "  /* <![CDATA[ */\n"
             + "  #style_test_1 {cursor: pointer}\n"
@@ -275,7 +276,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"auto", "string"})
     public void zIndex() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -300,7 +302,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("50px")
     public void styleAttributePreferredOverStylesheet() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><style>div { width: 30px; }</style></head>\n"
             + "<body>\n"
             + "<div id='d' style='width:50px'>foo</div>\n"
@@ -322,7 +325,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({"1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px",
              "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px", "1em 16px"})
     public void lengthsConvertedToPixels() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='d' style='width:1em; height:1em; border:1em solid black; padding:1em; margin:1em;'>d</div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1086,7 +1090,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)"})
     public void backgroundColor() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='d0'>div 0</div>\n"
             + "<div id='d1' style='background: red'>d</div>\n"
             + "<div id='d2' style='background: white url(http://htmlunit.sf.net/foo.png) repeat-x fixed top right'>\n"
@@ -1115,7 +1120,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("10px")
     public void fontSize() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='d0' style='font-size: 10px;'>\n"
             + "<div id='d1'>inside</div>\n"
             + "</div>\n"
@@ -1143,7 +1149,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = "10px",
             FF_ESR = "10px")
     public void fontSize2() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='d0' style='font-size: 0.6em;'>\n"
             + "<div id='d1'>inside</div>\n"
             + "</div>\n"
@@ -1173,7 +1180,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = "1px",
             FF_ESR = "1px")
     public void fontSizeVH() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='d0' style='font-size: 0.6vh;'>\n"
             + "<div id='d1'>inside</div>\n"
             + "</div>\n"
@@ -1203,7 +1211,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = "1px",
             FF_ESR = "1px")
     public void fontSizeVW() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='d0' style='font-size: 0.6vw;'>\n"
             + "<div id='d1'>inside</div>\n"
             + "</div>\n"
@@ -1231,7 +1240,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"1256px", "auto"},
             FF_ESR = {"1256px", "auto"})
     public void computedWidthOfHiddenElements() throws Exception {
-        final String content = "<html><head><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('myDiv1');\n"
@@ -1258,8 +1268,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({",", "separate,separate", "collapse,", "collapse,collapse"})
     public void inheritedImplicitly() throws Exception {
-        final String html
-            = "<html><body><table id='a'><tr id='b'><td>a</td></tr></table><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table id='a'><tr id='b'><td>a</td></tr></table><script>\n"
             + LOG_TITLE_FUNCTION
             + "var a = document.getElementById('a');\n"
             + "var b = document.getElementById('b');\n"
@@ -1291,7 +1301,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = { "underline", "rgb(0, 0, 0)", "underline"},
             FF_ESR = { "underline", "rgb(0, 0, 0)", "underline"})
     public void changeInParentClassNodeReferencedByRule() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function readDecoration(id) {\n"
@@ -1324,7 +1335,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "100px,100px"})
     public void widthAndHeightPercentagesAndPx() throws Exception {
-        final String html = "<html><body onload='test()'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<div id='d1' style='width:200px;height:400px'><div id='d2' style='width:50%;height:25%'></div></div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1351,7 +1363,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"10em,20em", "160,320", "160px,320px", "50%,25%", "80,80", "80px,80px"})
     public void widthAndHeightPercentagesAndEm() throws Exception {
-        final String html = "<html><body onload='test()'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<div id='d1' style='width:10em;height:20em'><div id='d2' style='width:50%;height:25%'></div></div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1379,7 +1392,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void widthAndHeightPercentagesHTML() throws Exception {
-        final String html = "<html style='height: 100%'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html style='height: 100%'>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1399,7 +1413,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                 "true", "true", "true", "true", "false", "false",
                 "true", "true", "true", "true"})
     public void widthAndHeightInputElements() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <form id='form'>\n"
             + "    <input id='submit' type='submit'>\n"
@@ -1451,7 +1466,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String content = "<html><head><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var myImage = document.getElementById('myImage');\n"
@@ -1476,7 +1492,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void widthAndHeightEmptySpanElement() throws Exception {
-        final String content = "<html><head><script id='headScript'>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script id='headScript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var headScript = document.getElementById('headScript');\n"
@@ -1496,7 +1513,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "0", "0", "0", "0"})
     public void widthAndHeightScriptElement() throws Exception {
-        final String content = "<html><head><script id='headScript'>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script id='headScript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var headScript = document.getElementById('headScript');\n"
@@ -1531,7 +1549,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"30", "18", "0", "0"},
             FF_ESR = {"30", "18", "0", "0"})
     public void widthAndHeightChildDisplayNone() throws Exception {
-        final String content = "<html><head><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var outerSpan = document.getElementById('outerSpan');\n"
@@ -1556,7 +1575,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void widthAndHeightChildDisplayNoneWidth() throws Exception {
-        final String content = "<html><head><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var outer = document.getElementById('outer');\n"
@@ -1577,7 +1597,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({"0", "0"})
     public void widthAndHeightChildDisplayNoneWidthLineBreak() throws Exception {
         //see https://github.com/HtmlUnit/htmlunit/pull/356
-        final String content = "<html><head><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var outer = document.getElementById('outer');\n"
@@ -1599,7 +1620,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"", ""})
     public void widthAndHeightDisconnected() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1622,7 +1644,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true", "false"})
     public void widthAutoBody() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -1650,7 +1673,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "true", "true", "false"})
     public void widthAutoDiv() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -1682,7 +1706,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"red", "rgb(0, 0, 255)"},
             FF_ESR = {"red", "rgb(0, 0, 255)"})
     public void getPropertyValue() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  try {\n"
@@ -1706,7 +1731,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"roman", "swiss", "roman"})
     public void handleImportant() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    alertFF(document.getElementById('div1'));\n"
@@ -1736,7 +1762,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void offsetHeight_empty_tag() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(document.getElementById('div1').offsetHeight);\n"
@@ -1755,7 +1782,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void offsetHeight_empty() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(document.getElementById('div1').offsetHeight);\n"
@@ -1774,7 +1802,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void offsetHeight_displayNone() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(document.getElementById('div1').offsetHeight);\n"
@@ -1793,7 +1822,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("18")
     public void offsetHeight_with_content() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(document.getElementById('div1').offsetHeight);\n"
@@ -1812,7 +1842,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("18")
     public void offsetHeight_with_child() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(document.getElementById('div1').offsetHeight);\n"
@@ -1835,7 +1866,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = "18",
             FF_ESR = "18")
     public void offsetHeight_with_childHeight() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(document.getElementById('div1').offsetHeight);\n"
@@ -1854,7 +1886,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false"})
     public void offsetHeight_setting_height() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style>\n"
             + "  .v-loading-indicator {\n"
             + "    height: 100%\n"
@@ -1882,7 +1915,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false"})
     public void scrollbarWidth() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var scroller = document.createElement('div');\n"
@@ -1906,7 +1940,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false"})
     public void scrollbarWidthOverflowY() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var scroller = document.createElement('div');\n"
@@ -1930,7 +1965,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false"})
     public void scrollbarHeight() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var scroller = document.createElement('div');\n"
@@ -1954,7 +1990,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false"})
     public void scrollbarHeightOverflowX() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var scroller = document.createElement('div');\n"
@@ -1978,7 +2015,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "", "10", "10", "rgb(0, 128, 0)"})
     public void zIndexComputed() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style>\n"
             + "  .abc { z-index: 10; color:green }\n"
             + "</style>\n"
@@ -2007,7 +2045,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "0", "0", "", "", "", "", "", "", "", ""})
     public void measureNotAttached() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2046,7 +2085,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts({"104", "104", "104", "104", "auto", "100px", "100px",
              "3px", "block", "content-box", "0px", "0px"})
     public void measureAttached() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2085,7 +2125,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "left", "left", "right", "right"})
     public void cssFloat2() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style>\n"
             + "  .abc { float: right }\n"
             + "</style>\n"
@@ -2119,7 +2160,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void offsetTopTableRows() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <table>\n"
             + "    <tr id='row1'><td>row1</td></tr>\n"
@@ -2144,7 +2186,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void offsetTopListItems() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <ul>\n"
             + "    <li id='li1'>row1</li>\n"
@@ -2169,7 +2212,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void offsetLeftAfterTable() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <table>\n"
             + "    <tr><td>abcdefghijklmnopqrstuvwxyz</td></tr>\n"
@@ -2193,7 +2237,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void custom() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style>\n"
             + "  .abc { xyz: 1 }\n"
             + "</style>\n"
@@ -2218,7 +2263,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void selector() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2244,7 +2290,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(FF = {"", "0px", "20%", "80px", "25%", "100px"},
             FF_ESR = {"", "0px", "20%", "80px", "25%", "100px"})
     public void marginLeftRight() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
@@ -2286,7 +2333,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"", "auto", "", "auto", "50%", "100px", "50%", "100px"},
             FF_ESR = {"", "auto", "", "auto", "50%", "100px", "50%", "100px"})
     public void topLeft() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
@@ -2321,7 +2369,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"10", "0"})
     public void borderBoxAffectsOffsetWidth() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2358,7 +2407,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"10", "0"})
     public void borderBoxAffectsOffsetHeight() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2396,7 +2446,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("10")
     public void offsetWidthWithDisplayInline() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + LOG_TITLE_FUNCTION
             + "    var div = document.createElement('div');\n"
@@ -2417,7 +2468,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("100")
     public void borderBoxAffectsOffsetWidth2() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var divNormal = document.createElement('div');\n"
@@ -2444,7 +2496,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("100")
     public void borderBoxAffectsOffsetHeight2() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var divNormal = document.createElement('div');\n"
@@ -2475,7 +2528,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"0px", "0", "16"},
             FF_ESR = {"0px", "0", "16"})
     public void bodyOffsetWidth() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var win = window.innerWidth;\n"
@@ -2502,7 +2556,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"0", "18"},
             FF_ESR = {"0", "18"})
     public void offsetHeightTable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2531,7 +2586,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"18px", "18px"})
     public void height() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <style>\n"
             + "    .autoheight {\n"
@@ -2560,7 +2616,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"18", "18px", "36", "36px", "54", "54px"})
     public void heightManyLines() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2594,7 +2651,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = "0 0",
             FF_ESR = "0 0")
     public void iFrameInnerWidth() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var iframe = document.createElement('iframe');\n"
@@ -2610,7 +2668,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>\n";
-        getMockWebConnection().setDefaultResponse("<html><head>\n"
+        getMockWebConnection().setDefaultResponse(DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<style>\n"
                 + "  body {\n"
                 + "    width: 600px;\n"
@@ -2631,7 +2690,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({ "", "auto" })
     public void getHeightInvisible() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  function test() {\n"
@@ -2659,7 +2719,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"\"@\"", "normal", "\"@\"", "\"#\"", "normal", "\"#\""},
             FF_ESR = {"\"@\"", "normal", "\"@\"", "\"#\"", "normal", "\"#\""})
     public void pseudoBefore() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<style type='text/css'>\n"
                 + "  /* <![CDATA[ */\n"
                 + "  #myDiv:before { content: '@' }\n"
@@ -2700,8 +2761,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void calculateContentHeightAfterSVG() throws Exception {
-        final String html =
-                "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                    + "<html><body>\n"
                     + "<svg/>\n"
                     + "<img />\n"
                     + "<textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
@@ -2719,7 +2780,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("131")
     public void combineStyles() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<style type='text/css'>\n"
             + "  div { margin: 10px 20px 30px 40px; }\n"
@@ -2746,7 +2808,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("48")
     public void combineStylesImportant() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<style type='text/css'>\n"
             + "  div { margin: 10px 20px 30px 40px !important; }\n"
@@ -2773,7 +2836,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("23")
     public void combineStylesBrowserDefaults() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<style type='text/css'>\n"
             + "  body { margin: 3px; }\n"
@@ -2801,7 +2865,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void boundingClientRectIgnoreSiblingWhitespace() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<table>\n"
             + "<tr>\n"
             + "  <td>  \n\t    <div id='a'>a</div></td>\n"
@@ -2822,7 +2887,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void boundingClientRectTopOnlyHasToTakeCareOfPreviousBlockSibling() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div style='height: 100'>100</div>\n"
             + "<span style='height: 200'>200</span>\n"
             + "<span id='tester'>tester</span>\n"
@@ -2844,7 +2910,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void offsetLeft() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body style='padding:'>\n"
             + "  <div id='mydiv' >Heho</div>\n"
 
@@ -2865,7 +2932,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({",", "0,0", "auto,auto"})
     public void scriptWidthAndHeight() throws Exception {
-        final String html = "<html><body onload='test()'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<script id='e1'>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2890,7 +2958,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = "1256",
             FF_ESR = "1256")
     public void widthBlockElements() throws Exception {
-        final String content = "<html><head><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
@@ -2913,7 +2982,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts("0")
     @Test
     public void widthEmptyInlineContent() throws Exception {
-        final String content = "<html><head><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
@@ -2934,7 +3004,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("55")
     public void widthExplicitInlineContent() throws Exception {
-        final String content = "<html><head><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
@@ -2956,7 +3027,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("55")
     public void widthWhitespaceBetweenTags() throws Exception {
-        final String content = "<html><head><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
@@ -2976,7 +3048,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void widthWhitespaceSequence() throws Exception {
-        final String content = "<html><head><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var myDiv = document.getElementById('myDiv');\n"
@@ -2997,8 +3070,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void getOffsetHeightInvalidSelector() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  *:not(:invalid-pseudo) { background-color: #FFFFFF; }\n"
@@ -3024,7 +3097,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"function values() { [native code] }", "no for..of", "true"})
     public void iterator() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -3063,8 +3137,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("none")
     public void hidden() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<p id='p1' hidden>p1</p>\n"
 
             + "<script>\n"
@@ -3084,8 +3158,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("none")
     public void insideHidden() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<p hidden>\n"
             + "  <p id='p1' hidden>p1</p>\n"
             + "</p>\n"
@@ -3107,8 +3181,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts("0s")
     public void animationDuration() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<div id='myDiv'>HtmlUnit</div>\n"
 

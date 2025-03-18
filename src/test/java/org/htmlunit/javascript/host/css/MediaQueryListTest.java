@@ -35,8 +35,8 @@ public class MediaQueryListTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void matches() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -56,8 +56,8 @@ public class MediaQueryListTest extends WebDriverTestCase {
     @Test
     @Alerts({"added", "removed"})
     public void listener() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function listener(mql) {\n"

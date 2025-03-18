@@ -33,8 +33,8 @@ public class CSSStyleDeclaration4Test extends SimpleWebTestCase {
      */
     @Test
     public void serialize() throws Exception {
-        final String html
-            = "<html><head><\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><\n"
             + "<script>\n"
             + "function doTest() {\n"
             + "  var node = document.getElementById('div1');\n"

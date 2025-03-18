@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ArgumentsTest extends WebDriverTestCase {

@@ -34,8 +34,8 @@ public class CSSCounterStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void ctor() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + LOG_TEXTAREA
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION

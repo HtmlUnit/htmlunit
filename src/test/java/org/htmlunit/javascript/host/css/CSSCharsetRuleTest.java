@@ -40,8 +40,8 @@ public class CSSCharsetRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void inStyle() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>@charset \"UTF-8\";</style>\n"
 
@@ -62,8 +62,8 @@ public class CSSCharsetRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void inLink() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<link rel='stylesheet' href='imp.css'>\n"
 

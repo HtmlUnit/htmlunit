@@ -35,8 +35,8 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void ctor() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + LOG_TEXTAREA
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -55,8 +55,8 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object CSSKeyframesRule]", "7"})
     public void simple() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"
@@ -86,8 +86,8 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
     @Alerts({"[object CSSKeyframesRule]", "identifier"})
     @NotYetImplemented
     public void name() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"
@@ -117,8 +117,8 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
     @Alerts("[object CSSRuleList]")
     @NotYetImplemented
     public void cssRules() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"

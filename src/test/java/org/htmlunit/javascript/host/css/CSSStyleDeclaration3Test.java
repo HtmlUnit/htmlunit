@@ -184,8 +184,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void background(final String backgroundStyle) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <div id='tester' style='background: " + backgroundStyle + "' >hello</div>\n"
             + "  <script>\n"
@@ -361,8 +361,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void backgroundCss(final String backgroundStyle) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "</head>\n"
             + "  <style type='text/css'>div { background: " + backgroundStyle + " }</style>\n"
             + "</head>\n"
@@ -512,8 +512,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void backgroundComputed(final String backgroundStyle) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "</head>\n"
             + "  <style type='text/css'>div { background: " + backgroundStyle + " }</style>\n"
             + "</head>\n"
@@ -797,8 +797,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void font(final String fontStyle) throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "  <div id='tester' style='font: " + fontStyle + "' >hello</div>\n"
                 + "  <script>\n"
@@ -817,8 +817,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void font(final String fontStyle, final String otherStyle) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <div id='tester' style='" + otherStyle + "; font: " + fontStyle + "' >hello</div>\n"
             + "  <script>\n"
@@ -1098,8 +1098,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void fontCss(final String fontStyle) throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "</head>\n"
                 + "  <style type='text/css'>div { font: " + fontStyle + " }</style>\n"
                 + "</head>\n"
@@ -1121,8 +1121,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void fontCss(final String fontStyle, final String otherStyle) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "</head>\n"
             + "  <style type='text/css'>div { " + otherStyle + "; font: " + fontStyle + " }</style>\n"
             + "</head>\n"
@@ -1417,8 +1417,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void fontComputed(final String fontStyle) throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "</head>\n"
                 + "  <style type='text/css'>div { font: " + fontStyle + " }</style>\n"
                 + "</head>\n"
@@ -1441,8 +1441,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void fontComputed(final String fontStyle, final String otherStyle) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "</head>\n"
             + "  <style type='text/css'>div { " + otherStyle + "; font: " + fontStyle + " }</style>\n"
             + "</head>\n"
@@ -1660,8 +1660,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void border(final String borderStyle) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <div id='tester' style='border: " + borderStyle + "' >hello</div>\n"
             + "  <script>\n"
@@ -1889,8 +1889,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void borderCss(final String borderStyle) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "</head>\n"
             + "  <style type='text/css'>div { border: " + borderStyle + " }</style>\n"
             + "</head>\n"
@@ -2066,8 +2066,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     }
 
     private void borderComputed(final String borderStyle) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "</head>\n"
             + "  <style type='text/css'>div { border: " + borderStyle + " }</style>\n"
             + "</head>\n"

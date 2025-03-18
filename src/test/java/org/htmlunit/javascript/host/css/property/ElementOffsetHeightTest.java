@@ -40,8 +40,8 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      */
     @Test
     public void offsetHeight() throws Exception {
-        final String html
-            = "<html><head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
             + "  <div id='myDiv'>a</div>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "<script>\n"
@@ -71,8 +71,8 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             FF_ESR = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418")
     @NotYetImplemented // we will see other results on unix
     public void offsetHeightLineBreaks() throws Exception {
-        final String html
-            = "<html><head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
             + "  <div id='myDiv' style='width: 400px'>"
             + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt "
             + "ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo "
@@ -101,8 +101,8 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @Test
     @Alerts("true, true, true, true, true, true, true, true, true, true, true, true, true, true")
     public void offsetHeightLineBreaks2() throws Exception {
-        final String html
-            = "<html><head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
             + "  <div id='myLine'>Lorem ipsum</div>\n"
             + "  <div id='myDiv' style='width: 400px'>"
             + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt "
@@ -138,8 +138,8 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void offsetHeightManualLineBreaks() throws Exception {
-        final String html
-            = "<html><head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
 
             + "  <div id='myDiv' style='width: 400px;font-size: 12px;'>"
             + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, "
@@ -181,8 +181,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             FF = {"300", "552", "9690", "60", "294", "6885", "43"},
             FF_ESR = {"300", "552", "9690", "60", "294", "6885", "43"})
     public void issue124() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "  <head>\n"
             + "    <style>\n"

@@ -37,8 +37,8 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void ctor() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + LOG_TEXTAREA
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -59,7 +59,8 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
             FF = {"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px", "", "red"},
             FF_ESR = {"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px", "", "red"})
     public void test() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -104,7 +105,8 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"4px", "4px", "4px", "4px"})
     public void styleSheet() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { margin: 4px; }\n"
                 + "</style>\n"
@@ -135,7 +137,8 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void readOnly() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -166,7 +169,8 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void type() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -199,7 +203,8 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
             FF = {"BoDY", "H1", "A.foo", ".foo", ".foo .foo2", ".myFoo", "#byId"},
             FF_ESR = {"BoDY", "H1", "A.foo", ".foo", ".foo .foo2", ".myFoo", "#byId"})
     public void selectorText() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<style>\n"
                 + "  BoDY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -231,7 +236,8 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Alerts({"1", ""})
     @NotYetImplemented
     public void oldIEStyleFilter() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader"
                 + "(src='rightCorner.gif', sizingMethod='crop'); }\n"
@@ -259,7 +265,8 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "none"})
     public void filter() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { filter: none; }\n"
                 + "</style>\n"

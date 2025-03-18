@@ -35,8 +35,8 @@ public class CSSTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object CSS]", "undefined"})
     public void global() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<style>@charset 'UTF-8';</style>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -56,8 +56,8 @@ public class CSSTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void constructor() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<style>@charset 'UTF-8';</style>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -77,8 +77,8 @@ public class CSSTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true"})
     public void supports() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -98,8 +98,8 @@ public class CSSTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void supportsCondition() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -122,8 +122,8 @@ public class CSSTest extends WebDriverTestCase {
             FF = {"true", "true"},
             FF_ESR = {"true", "true"})
     public void supportsSelector() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"

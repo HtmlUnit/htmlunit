@@ -35,8 +35,8 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void ctor() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + LOG_TEXTAREA
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -56,8 +56,8 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     @Alerts({"[object CSSFontFaceRule]", "5",
              "@font-face { font-family: Delicious; src: url(\"Delicious-Bold.otf\"); }"})
     public void simple() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + LOG_TEXTAREA
             + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url('Delicious-Bold.otf'); }\n"
@@ -84,8 +84,8 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("@font-face { font-family: Delicious; src: url(\"//:\"); }")
     public void urlSlashSlashColon() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + LOG_TEXTAREA
             + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url(//:); }\n"
@@ -110,8 +110,8 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("@font-face { font-family: Delicious; src: url(\"/:\"); }")
     public void urlSlashColon() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + LOG_TEXTAREA
             + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url(/:); }\n"
@@ -136,8 +136,8 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("@font-face { font-family: Delicious; src: url(\"//\"); }")
     public void urlSlashSlash() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + LOG_TEXTAREA
             + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url(//); }\n"

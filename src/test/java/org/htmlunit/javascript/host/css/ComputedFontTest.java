@@ -36,7 +36,8 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "16px", "2em", "32px", "150%", "24px"})
     public void fontSizeEm() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -73,7 +74,8 @@ public class ComputedFontTest extends WebDriverTestCase {
                       "", "16px serif", "", "normal", "", "normal", "", "400",
                       "", "16px", "", "normal", "", "serif"})
     public void fontInitial() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -129,7 +131,8 @@ public class ComputedFontTest extends WebDriverTestCase {
     }
 
     private void font(final String fontToSet, final String property, final String value) throws Exception {
-        String html = "<html><head>\n"
+        String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
