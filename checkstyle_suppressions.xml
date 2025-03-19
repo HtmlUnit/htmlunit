@@ -39,7 +39,7 @@
     <suppress checks="LineLength" files="HTMLOptionsCollection.java" lines="1-30"/>
     <suppress checks="LineLength" files="HTMLScriptElementTest.java"/>
     <suppress checks="LineLength" files="HTMLTableElement.java" lines="1-30"/>
-    <suppress checks="LineLength" files="HtmlUnitRegExpProxyTest.java"/>
+    <suppress checks="LineLength" files="RegExp3Test.java"/>
     <suppress checks="LineLength" files="JQuery1x8x2Test.java"/>
     <suppress checks="LineLength" files="JQuery1x11x3Test.java"/>
     <suppress checks="LineLength" files="JQuery3x3x1Test.java"/>
