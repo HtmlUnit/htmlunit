@@ -34,7 +34,8 @@ public class DOMMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "function DOMMatrix() { [native code] }", "function DOMMatrix() { [native code] }"})
     public void webKitCSSMatrixIsAlias() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function doTest() {\n"
@@ -60,7 +61,8 @@ public class DOMMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "function SVGMatrix() { [native code] }", "function DOMMatrix() { [native code] }"})
     public void svgMatrixIsNotAlias() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function doTest() {\n"

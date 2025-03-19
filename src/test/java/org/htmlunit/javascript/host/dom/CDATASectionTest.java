@@ -36,8 +36,8 @@ public class CDATASectionTest extends WebDriverTestCase {
     @Test
     @Alerts("[object Comment]")
     public void simpleScriptable() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -54,9 +54,10 @@ public class CDATASectionTest extends WebDriverTestCase {
     @Test
     @Alerts("2")
     public void splitText() throws Exception {
-        final String html = "<html><head>\n"
-                + "<script>\n"
-                + LOG_TITLE_FUNCTION
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var root = doc.appendChild(doc.createElement('root'));\n"

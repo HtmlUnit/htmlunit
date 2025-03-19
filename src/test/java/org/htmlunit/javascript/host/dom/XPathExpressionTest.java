@@ -34,7 +34,8 @@ public class XPathExpressionTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object XPathExpression]", "first", "second", ""})
     public void simple() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"
@@ -66,7 +67,8 @@ public class XPathExpressionTest extends WebDriverTestCase {
     @Alerts({"function", "[object HTMLHtmlElement]", "[object XPathEvaluator]",
              "[object XPathExpression]", "first", "second", ""})
     public void withResolver() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"
@@ -100,7 +102,8 @@ public class XPathExpressionTest extends WebDriverTestCase {
     @Alerts({"function", "[object HTMLHtmlElement]", "[object XPathEvaluator]",
              "[object XPathExpression]", "exception", ""})
     public void evaluateContextNode() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"

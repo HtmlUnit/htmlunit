@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.draganddrop;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -36,7 +35,7 @@ public class DataTransferTest extends WebDriverTestCase {
     @Test
     @Alerts("[object DataTransfer]")
     public void ctor() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -56,7 +55,7 @@ public class DataTransferTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object FileList]", "0"})
     public void filesEmpty() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -77,7 +76,7 @@ public class DataTransferTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "0", "true"})
     public void filesStringAdded() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -104,7 +103,7 @@ public class DataTransferTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "1", "true", "true"})
     public void filesFileAdded() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -133,7 +132,7 @@ public class DataTransferTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void filesRequestTwoTimes() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -154,7 +153,7 @@ public class DataTransferTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DataTransferItemList]", "0"})
     public void itemsEmpty() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -178,7 +177,7 @@ public class DataTransferTest extends WebDriverTestCase {
             FF_ESR = "true")
     @HtmlUnitNYI(CHROME = "true", EDGE = "true")
     public void itemsRequestTwoTimes() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

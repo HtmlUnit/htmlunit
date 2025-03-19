@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -40,8 +39,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "b", "b", "true", "false", "c d", "<body onload=\"test()\" class=\"c d\"> </body>"})
     public void various() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.body.classList;\n"
@@ -70,8 +69,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "null", "false", "# removed", "", "<body onload=\"test()\"> </body>"})
     public void noAttribute() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.body.classList;\n"
@@ -96,8 +95,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "undefined", "1", "#", "<body onload=\"test()\" class=\"#\"> </body>"})
     public void noAttributeAdd() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.body.classList;\n"
@@ -119,8 +118,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "true", "1", "#"})
     public void noAttributeToggle() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.body.classList;\n"
@@ -141,8 +140,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "0", "2", "8"})
     public void length() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.getElementById('d1').classList;\n"
@@ -170,8 +169,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a", "b", "c", "d", "\u000B", "e", "f", "g", "null", "null", "null"})
     public void item() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.getElementById('d1').classList;\n"
@@ -195,8 +194,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a", "b", "c", "d", "\u000B", "e", "f", "g"})
     public void forEach() throws Exception {
-        final String html
-                = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var list = document.getElementById('d1').classList;\n"
@@ -217,8 +216,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a", "b", "c"})
     public void forEachDuplicates() throws Exception {
-        final String html
-                = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var list = document.getElementById('d1').classList;\n"
@@ -239,8 +238,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a#0#true", "b#1#true"})
     public void forEachAllParams() throws Exception {
-        final String html
-                = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var list = document.getElementById('d1').classList;\n"
@@ -261,8 +260,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"TypeError", "TypeError"})
     public void forEachWrongParam() throws Exception {
-        final String html
-                = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var list = document.getElementById('d1').classList;\n"
@@ -286,7 +285,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"value", "done", "object", "0", "a"})
     public void entries() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -318,7 +318,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
     public void entriesPropertyDescriptor() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -350,7 +351,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0,a", "1,x"})
     public void entriesForOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -381,7 +383,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
             FF = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
             FF_ESR = "0,1,2,add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values")
     public void forIn() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -413,7 +416,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
             FF = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values",
             FF_ESR = "add,contains,entries,forEach,item,keys,length,remove,replace,toggle,value,values")
     public void forInEmptyList() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -441,7 +445,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "a", "b", "g"})
     public void iterator() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -514,8 +519,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     }
 
     private void item(final String in, final int pos) throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -691,8 +696,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     }
 
     private void contains(final String in, final String toAdd) throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
@@ -931,8 +936,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     }
 
     private void add(final String in, final String toAdd) throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
@@ -971,8 +976,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "3"})
     public void addSvg() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1001,8 +1006,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"block", "none"})
     public void addStyleCheck() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style>\n"
             + "  #d1.hidden { display: none; }\n"
             + "</style>\n"
@@ -1270,8 +1275,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     }
 
     private void remove(final String in, final String toRemove) throws Exception {
-        String html
-            = "<html><head>\n"
+        String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
@@ -1410,8 +1415,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     }
 
     private void replace(final String in, final String oldToken, final String newToken) throws Exception {
-        String html
-            = "<html><head>\n"
+        String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
@@ -1458,8 +1463,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({ "none", "block"})
     public void removeStyleCheck() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style>\n"
             + "  #d1.hidden { display: none; }\n"
             + "</style>\n"
@@ -1488,8 +1493,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "false", "true", "false", "false"})
     public void in() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.getElementById('d1').classList;\n"
@@ -1514,8 +1519,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
              "2", "true", "false", "1", "false", "true", "2", "true",
              "class changed old: a e", "class changed old: a"})
     public void toggle() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var elem = document.getElementById('d1');\n"
@@ -1557,8 +1562,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"none", "block", "none"})
     public void toggleStyleCheck() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<style>\n"
             + "  #d1.hidden { display: none; }\n"
             + "</style>\n"
@@ -1671,8 +1676,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     }
 
     private void toggle(final String in, final String token) throws Exception {
-        String html
-            = "<html><head>\n"
+        String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
@@ -1719,7 +1724,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"value", "done", "number", "0"})
     public void keys() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1750,7 +1756,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
     public void keysPropertyDescriptor() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1782,7 +1789,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "2"})
     public void keysForOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1809,7 +1817,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0,1,2", ""})
     public void objectKeys() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1833,7 +1842,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"value", "done", "string", "a"})
     public void values() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1864,7 +1874,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
     public void valuesPropertyDescriptor() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1896,7 +1907,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"a", "b", "g"})
     public void valuesForOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1923,7 +1935,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts("\\sa\\sb\\sa\\s\\s\\s\\sa\\sg\\s\\s")
     public void getValue() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
@@ -1948,7 +1961,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts({"\\sa\\sb\\sa\\s\\s\\s\\sa\\sg\\s\\s", "x\\sy", "z\\sz\\s\\s\\s\\s\\sx\\sz\\s\\s"})
     public void setValue() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
@@ -1983,7 +1997,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
              "null", "<div id=\"d1\" class=\"null\"></div>",
              "17", "<div id=\"d1\" class=\"17\"></div>"})
     public void setValueEmpty() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

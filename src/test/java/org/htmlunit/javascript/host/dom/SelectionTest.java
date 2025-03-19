@@ -37,7 +37,8 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void equality_selection() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "<script>"
                 + LOG_TITLE_FUNCTION
@@ -53,7 +54,8 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void equality_getSelection() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -70,7 +72,8 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "0", "cdefg"})
     public void inputSelectionsAreIndependent() throws Exception {
-        final String html = "<html><body onload='test()'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<input id='i' value='abcdefghi'/>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -362,7 +365,8 @@ public class SelectionTest extends WebDriverTestCase {
     }
 
     private void tester(final String jsSnippet) throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload='test()'>\n"
             + "  <span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo<span>---</span>foo</span>\n"
 
@@ -402,7 +406,8 @@ public class SelectionTest extends WebDriverTestCase {
             FF = {"", "null-0", "", "null-0", "null", "null"},
             FF_ESR = {"", "null-0", "", "null-0", "null", "null"})
     public void getSelection_display() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload='test()'>\n"
             + "  <iframe id='frame1' src='about:blank'></iframe>\n"
             + "  <iframe id='frame2' src='about:blank' style='display: none'></iframe>\n"
@@ -439,7 +444,8 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "", ""})
     public void testToString() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload='test()'>\n"
             + "<input id='i' value='abcdefghi'/>\n"
             + "<script>\n"

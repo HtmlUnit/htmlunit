@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -37,7 +36,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts("[object NodeList]")
     public void defaultValue() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -57,7 +57,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "false", "true", "true", "true", "true", "true", "true"})
     public void has() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -86,7 +87,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"4", "true", "undefined"})
     public void length() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -109,7 +111,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLHtmlElement]", "[object HTMLScriptElement]", "null", "null"})
     public void item() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -133,7 +136,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLHtmlElement]", "[object HTMLScriptElement]", "undefined", "undefined"})
     public void itemBracketed() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -157,7 +161,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts("0,1,2,3,4,entries,forEach,item,keys,length,values")
     public void forIn() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -185,7 +190,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts("entries,forEach,item,keys,length,values")
     public void forInEmptyList() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -215,7 +221,8 @@ public class NodeListTest extends WebDriverTestCase {
              "[object HTMLScriptElement]", "[object HTMLBodyElement]",
              "[object HTMLDivElement]"})
     public void iterator() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -252,7 +259,8 @@ public class NodeListTest extends WebDriverTestCase {
              "[object HTMLBodyElement] 3 [object NodeList] undefined",
              "[object HTMLDivElement] 4 [object NodeList] undefined"})
     public void forEach() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -280,8 +288,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"TypeError", "TypeError"})
     public void forEachWrongParam() throws Exception {
-        final String html
-                = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var nodeList = document.querySelectorAll('*');\n"
@@ -305,7 +313,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"value", "done", "object", "0", "[object HTMLHtmlElement]"})
     public void entries() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -336,7 +345,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
     public void entriesPropertyDescriptor() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -368,7 +378,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Alerts({"0,[object HTMLHtmlElement]", "1,[object HTMLHeadElement]",
              "2,[object HTMLScriptElement]", "3,[object HTMLBodyElement]"})
     public void entriesForOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -394,7 +405,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"value", "done", "number", "0"})
     public void keys() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -424,7 +436,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
     public void keysPropertyDescriptor() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -455,7 +468,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "2", "3"})
     public void keysForOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -481,7 +495,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0,1,2,3", ""})
     public void objectKeys() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -504,7 +519,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"value", "done", "object", "[object HTMLHtmlElement]"})
     public void values() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -534,7 +550,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
     public void valuesPropertyDescriptor() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -566,7 +583,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Alerts({"[object HTMLHtmlElement]", "[object HTMLHeadElement]",
              "[object HTMLScriptElement]", "[object HTMLBodyElement]"})
     public void valuesForOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -592,7 +610,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "4", "0", "1", "2", "3"})
     public void getOwnPropertySymbols() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  if (Object.getOwnPropertySymbols) {\n"
@@ -623,7 +642,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void getOwnPropertySymbolsEmptyList() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  if (Object.getOwnPropertySymbols) {\n"
@@ -650,7 +670,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLHeadElement]", "[object HTMLHeadElement]"})
     public void setItem() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

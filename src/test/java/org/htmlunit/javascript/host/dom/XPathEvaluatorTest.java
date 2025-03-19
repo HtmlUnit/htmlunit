@@ -36,7 +36,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
     public void evaluate() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"
@@ -67,7 +68,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
     public void evaluateWithoutResult() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"
@@ -98,7 +100,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
     public void evaluateWithoutTypeResult() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"
@@ -129,7 +132,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
     public void evaluateWithoutResolverTypeResult() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"
@@ -160,7 +164,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void namespacesWithNodeInArray() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var xml = "
@@ -199,7 +204,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts("Immortality")
     public void namespacesWithCustomNSResolver() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function nsResolver(prefix) {\n"
@@ -239,7 +245,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void createExpressionNoXPath() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var res = '';\n"
@@ -259,7 +266,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object XPathExpression]§"})
     public void createExpressionUndefinedXPath() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<span id='first'>hello</span>\n"
                 + "<div><span id='second'>world</span></div>\n"
                 + "<script>\n"
@@ -290,7 +298,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object XPathExpression]§"})
     public void createExpressionNullXPath() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<span id='first'>hello</span>\n"
                 + "<div><span id='second'>world</span></div>\n"
                 + "<script>\n"
@@ -321,7 +330,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts("SyntaxError")
     public void createExpressionInvalid() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var res = '';\n"

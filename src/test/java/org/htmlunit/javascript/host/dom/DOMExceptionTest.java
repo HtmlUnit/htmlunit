@@ -36,7 +36,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"})
     public void constants() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var properties = ['INDEX_SIZE_ERR', 'DOMSTRING_SIZE_ERR', 'HIERARCHY_REQUEST_ERR',"
@@ -113,7 +114,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
              "OperationError - 0 OperationError",
              "NotAllowedError - 0 NotAllowedError"})
     public void name() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             // https://developer.mozilla.org/en-US/docs/Web/API/DOMException#error_names
@@ -169,7 +171,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "urlMismatchERRoR"})
     public void nameCaseSensitive() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -189,7 +192,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "Error"})
     public void nameNotProvided() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -209,7 +213,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "null"})
     public void nameNull() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -229,7 +234,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "Error"})
     public void nameUndefined() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -249,7 +255,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "unKnown"})
     public void nameUnknown() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -269,7 +276,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "7"})
     public void nameNumber() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -289,7 +297,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined"})
     public void properties() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -318,7 +327,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
      * FF: "Node cannot be inserted at the specified point in the hierarchy"
      */
     public void appendChild_illegal_node() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

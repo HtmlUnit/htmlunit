@@ -39,8 +39,8 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "TypeError"})
     public void specified() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  try {\n"
@@ -71,8 +71,8 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void specified2() throws Exception {
-        final String html
-            = "<html><body onload='test()'><div id='div' class='test'></div>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'><div id='div' class='test'></div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -91,8 +91,8 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLOptionElement]")
     public void ownerElement() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var s = document.getElementById('testSelect');\n"
@@ -117,8 +117,8 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined"})
     public void isId() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var d = document.getElementById('d');\n"
@@ -140,8 +140,8 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined"})
     public void expando() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var d = document.getElementById('d');\n"
@@ -166,8 +166,8 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void expandoEvent() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var d = document.getElementById('d');\n"
@@ -188,8 +188,8 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts("test()")
     public void textContent() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var a = document.body.getAttributeNode('onload');\n"
@@ -207,8 +207,8 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null", "null", "null"})
     public void getAttributeNodeUndefinedAttribute() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var elem = document.getElementById('myDiv');\n"
@@ -230,8 +230,8 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null", "null", "null"})
     public void getAttributesUndefinedAttribute() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var elem = document.getElementById('myDiv');\n"
@@ -253,7 +253,8 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object Attr]", "", "[object Attr]", ""})
     public void value() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var attr = document.createAttribute('hi');\n"
@@ -315,8 +316,8 @@ public class AttrTest extends WebDriverTestCase {
     }
 
     private void html(final String methodName) throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -383,8 +384,8 @@ public class AttrTest extends WebDriverTestCase {
     }
 
     private void xml(final String methodName) throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

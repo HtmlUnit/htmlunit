@@ -37,7 +37,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void text() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -69,7 +70,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void parentElement() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -93,7 +95,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void collapse() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -125,7 +128,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void select() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -151,7 +155,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void moveEnd() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -184,7 +189,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void moveOutOfBounds_input() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -220,7 +226,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void inRange() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -253,7 +260,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void inRange2() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form name='f'><input name='q' value=''></form>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -274,7 +282,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void moveToElementText() throws Exception {
-        final String html = "<html><body onload='test()'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo</span>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -297,7 +306,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void setEndRange() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form name='f'><input name='q' value='hello world'></form>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -323,8 +333,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void createRangeParentElement() throws Exception {
-        final String html =
-            "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -344,8 +354,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void createRangeHtmlText() throws Exception {
-        final String html =
-            "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -365,8 +375,8 @@ public class TextRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void moveToBookmark() throws Exception {
-        final String html =
-            "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -385,7 +395,8 @@ public class TextRangeTest extends WebDriverTestCase {
      */
     @Test
     public void compareEndPoints() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

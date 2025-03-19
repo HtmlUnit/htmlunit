@@ -36,8 +36,8 @@ public class CommentTest extends WebDriverTestCase {
     @Test
     @Alerts("[object Comment]")
     public void simpleScriptable() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -54,8 +54,8 @@ public class CommentTest extends WebDriverTestCase {
     @Test
     @Alerts({"after", "comment"})
     public void textContent() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='it'><!--comment-->after</div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -73,8 +73,8 @@ public class CommentTest extends WebDriverTestCase {
     @Test
     @Alerts({"after", "undefined"})
     public void innerText() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='it'><!--comment-->after</div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -86,8 +86,8 @@ public class CommentTest extends WebDriverTestCase {
     }
 
     private void property(final String property) throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='it'><!--abcdefg-->after</div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

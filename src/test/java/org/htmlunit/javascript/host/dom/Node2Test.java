@@ -38,8 +38,8 @@ public class Node2Test extends SimpleWebTestCase {
      */
     @Test
     public void replaceChild_WithSameNode() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  var a = document.getElementById('a');\n"
             + "  var b = document.getElementById('b');\n"

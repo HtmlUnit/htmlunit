@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.draganddrop;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -35,7 +34,7 @@ public class DataTransferItemListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1"})
     public void length() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -59,7 +58,7 @@ public class DataTransferItemListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "1", "0"})
     public void clear() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -87,7 +86,7 @@ public class DataTransferItemListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "2"})
     public void add() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -115,7 +114,7 @@ public class DataTransferItemListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "0"})
     public void remove() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -142,7 +141,7 @@ public class DataTransferItemListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "1", "1"})
     public void removeInvalid() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -172,7 +171,7 @@ public class DataTransferItemListTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "[object DataTransferItem]", "[object DataTransferItem]"})
     public void indexed() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -197,7 +196,7 @@ public class DataTransferItemListTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "undefined", "undefined"})
     public void indexedWrong() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -222,7 +221,7 @@ public class DataTransferItemListTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "[object DataTransferItem]", "[object DataTransferItem]"})
     public void iterator() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

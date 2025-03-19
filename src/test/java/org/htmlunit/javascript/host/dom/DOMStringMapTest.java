@@ -35,8 +35,8 @@ public class DOMStringMapTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "there"})
     public void get() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -57,8 +57,8 @@ public class DOMStringMapTest extends WebDriverTestCase {
     @Test
     @Alerts({"old", "old", "null", "null"})
     public void put() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

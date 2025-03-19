@@ -39,8 +39,8 @@ public class EventNodeTest extends WebDriverTestCase {
     @Test
     @Alerts("fireEvent not available")
     public void fireEvent() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -63,7 +63,8 @@ public class EventNodeTest extends WebDriverTestCase {
     @Test
     @Alerts("createEventObject not available")
     public void fireEvent_initFromTemplate() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -92,7 +93,8 @@ public class EventNodeTest extends WebDriverTestCase {
              "mousedown image", "focus image", "mouseup image", "click image",
              "mousedown textarea", "focus textarea", "mouseup textarea", "click textarea"})
     public void clickEvents() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -128,7 +130,8 @@ public class EventNodeTest extends WebDriverTestCase {
     @Test
     @Alerts({"mousedown label", "mouseup label", "click label", "focus text", "click text"})
     public void clickEventsLabel() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -157,7 +160,8 @@ public class EventNodeTest extends WebDriverTestCase {
     @Test
     @Alerts({"focus", "keydown", "keypress", "keyup", "change", "blur"})
     public void eventOrder() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION

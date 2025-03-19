@@ -36,8 +36,8 @@ public class TextTest extends WebDriverTestCase {
     @Test
     @Alerts("[object Text]")
     public void simpleScriptable() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -57,8 +57,8 @@ public class TextTest extends WebDriverTestCase {
     @Test
     @Alerts("abcd")
     public void wholeText() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -78,10 +78,10 @@ public class TextTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void text() throws Exception {
-        final String html
-            = "<html><head>\n"
-                    + "<script>\n"
-                    + LOG_TITLE_FUNCTION
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myId');\n"
             + "  log(div.firstChild.text);\n"

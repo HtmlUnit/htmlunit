@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -38,7 +37,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("[object DOMParser]")
     public void scriptableToString() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -59,7 +58,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLDocument]", "", "§§URL§§"})
     public void parseFromString_text_html() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -86,7 +85,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLDocument]", "<div></div>", "§§URL§§"})
     public void parseFromString_text_html_div() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -113,7 +112,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("[object XMLDocument]")
     public void parseFromString_text_xml() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -137,7 +136,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("[object XMLDocument]")
     public void parseFromString_application_xml() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -161,7 +160,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("[object XMLDocument]")
     public void parseFromString_application_xhtmlXml() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -185,7 +184,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("[object XMLDocument]")
     public void parseFromString_application_svgXml() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -209,7 +208,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void parseFromString_unknownType() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -233,7 +232,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("9")
     public void parseFromString() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -266,7 +265,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("parsererror")
     public void parseFromString_invalidXml() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -293,7 +292,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("parsererror")
     public void parseFromString_emptyString() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -321,7 +320,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void parseFromString_missingMimeType() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -347,7 +346,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Alerts({"5", "[object CDATASection]", "[object Comment]", "[object Element]",
                 "[object ProcessingInstruction]", "[object Text]"})
     public void parseFromString_processingInstructionKept() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -379,7 +378,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLDocument]")
     public void parseFromString_doNotExecuteScripts() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -403,7 +402,7 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLDocument]")
     public void parseFromString_doNotExecuteSvgScripts() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -430,8 +429,8 @@ public class DOMParserTest extends WebDriverTestCase {
     @Test
     @Alerts({"parsed", "inserted"})
     public void dontExecScriptsFromDOMParser() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head></head>\n"
               + "<body>\n"
               + "<div id='tester'><div>"

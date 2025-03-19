@@ -34,8 +34,8 @@ public class AbstractRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void prototype() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
@@ -54,8 +54,8 @@ public class AbstractRangeTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void ctor() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"

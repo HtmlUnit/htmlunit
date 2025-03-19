@@ -52,7 +52,8 @@ public class RadioNodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true"})
     public void instanceOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -74,7 +75,8 @@ public class RadioNodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "1", "1", "", "on"})
     public void getValue() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -98,7 +100,8 @@ public class RadioNodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "on", "true"})
     public void setValue() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -121,7 +124,8 @@ public class RadioNodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"first", "first", "first", "first"})
     public void iterable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"

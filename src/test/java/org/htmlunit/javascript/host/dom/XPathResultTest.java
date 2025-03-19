@@ -37,8 +37,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "TypeError"})
     public void ctor() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -70,7 +70,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"4", "1", "3"})
     public void resultType() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -113,7 +114,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"7", "id1", "id2"})
     public void snapshotType() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -155,7 +157,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"9", "id1"})
     public void singleNodeValue() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -195,7 +198,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"id1", "id2"})
     public void iterateNext() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -239,7 +243,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts("7")
     public void notOr() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -266,7 +271,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"bar", "foo", "foo"})
     public void stringType() throws Exception {
-        final String html = "<html><head><title attr=\"bar\">foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title attr=\"bar\">foo</title><script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
@@ -298,7 +304,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true"})
     public void numberType() throws Exception {
-        final String html = "<html><head><title attr=\"1234\">4321.5</title><span>foo</span><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title attr=\"1234\">4321.5</title><span>foo</span><script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
@@ -333,7 +340,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true", "true", "true"})
     public void booleanType() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -605,7 +613,8 @@ public class XPathResultTest extends WebDriverTestCase {
     }
 
     private void type(final String xpath, final String type) throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

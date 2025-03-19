@@ -41,7 +41,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
             FF = "[object CSS2Properties]",
             FF_ESR = "[object CSS2Properties]")
     public void getComputedStyleOnChild() throws Exception {
-        final String html = "<html><head><style>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><style>\n"
             + "  body > div { background-color: green#FF0000; }\n"
             + "</style></head>\n"
             + "<body>\n"
@@ -65,8 +66,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     public void createElement() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -92,7 +93,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "DIV", "DIV"})
     public void querySelector() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -120,7 +122,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void children() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -162,8 +165,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "null", "null", "1", "myDiv", "myDiv"})
     public void firstElementChild() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -200,8 +203,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "null", "null", "0", "null", "null", "1", "myDiv", "myDiv"})
     public void firstElementChildTextNode() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -242,7 +245,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null", "null", "null", "[object HTMLDivElement]", "null", "null"})
     public void getElementById() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -281,7 +285,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void ownerDocument() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -308,7 +313,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false", "true", "false", "true", "true", "false"})
     public void getRootNode() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -346,7 +352,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void ctor() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -369,7 +376,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object HTMLDivElement]"})
     public void append() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -395,7 +403,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void appendNoParam() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -420,7 +429,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Alerts({"1", "[object Text]", "abcd",
              "2", "[object Text]", "1234"})
     public void appendText() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -456,7 +466,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
              "4", "[object Text]", "1234",
              "5", "[object HTMLDivElement]"})
     public void appendMixed() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -504,7 +515,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object HTMLDivElement]"})
     public void prepend() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -530,7 +542,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void prependNoParam() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -555,7 +568,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Alerts({"1", "[object Text]", "abcd",
              "2", "[object Text]", "1234"})
     public void prependText() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -591,7 +605,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
              "4", "[object Text]", "1234",
              "5", "[object HTMLDivElement]"})
     public void prependMixed() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -639,7 +654,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object HTMLDivElement]"})
     public void replaceChildren() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -665,7 +681,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void replaceChildrenNoParam() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -690,7 +707,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Alerts({"1", "[object Text]", "abcd",
              "1", "[object Text]", "1234"})
     public void replaceChildrenText() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -726,7 +744,8 @@ public class DocumentFragmentTest extends WebDriverTestCase {
              "1", "[object Text]", "1234",
              "1", "[object HTMLDivElement]"})
     public void replaceChildrenMixed() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

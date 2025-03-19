@@ -249,7 +249,8 @@ public class Selection2Test extends SimpleWebTestCase {
     private void test(final String action, final String x, final String alert)
         throws Exception {
 
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload='test()'>\n"
             + "  <span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo</span>\n"
             + "  <input type='button' id='b' onclick=\"" + action + ";test();\" value='click'></input>\n"

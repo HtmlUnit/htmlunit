@@ -29,7 +29,8 @@ import org.junit.runner.RunWith;
  */
 @RunWith(BrowserRunner.class)
 public class TreeWalkerTest extends WebDriverTestCase {
-    private static final String CONTENT_START = "<html><head><title></title>\n"
+    private static final String CONTENT_START = DOCTYPE_HTML
+        + "<html><head><title></title>\n"
         + "<script>\n"
         + LOG_TITLE_FUNCTION
         + "function safeTagName(o) {\n"
@@ -59,7 +60,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    private static final String CONTENT_START2 = "<html><head><title></title>\n"
+    private static final String CONTENT_START2 = DOCTYPE_HTML
+        + "<html><head><title></title>\n"
         + "<script>\n"
         + LOG_TITLE_FUNCTION
         + "function safeTagName(o) {\n"

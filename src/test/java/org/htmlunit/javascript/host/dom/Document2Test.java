@@ -48,7 +48,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("InvalidCharacterError/DOMException")
     public void createElementWithAngleBrackets() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -70,7 +71,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("InvalidCharacterError/DOMException")
     public void createElementWithHtml() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -101,7 +103,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void createElementPrototype() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var HAS_EXTENDED_CREATE_ELEMENT_SYNTAX = (function() {\n"
@@ -125,8 +128,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void appendChild() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -148,8 +151,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void getElementByTagNameNS_includesHtml() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -183,7 +186,8 @@ public class Document2Test extends WebDriverTestCase {
     }
 
     private void importNode(final boolean deep) throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -213,7 +217,8 @@ public class Document2Test extends WebDriverTestCase {
                 "<?xml version=\"1.0\"?><html xmlns=\"http://www.w3.org/1999/xhtml\"><div id='child'> </div></html>",
                 200, "OK", MimeType.TEXT_XML);
 
-        final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
+        final String html =
+            "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -256,7 +261,8 @@ public class Document2Test extends WebDriverTestCase {
                 + "<div id='child'><div id='child2'><div id='child3'>-</div></div></div></html>",
                 200, "OK", MimeType.TEXT_XML);
 
-        final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
+        final String html =
+            "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -295,7 +301,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"div1", "null", "null"})
     public void adoptNode() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var newDoc = document.implementation.createHTMLDocument('something');\n"
@@ -317,7 +324,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"null", "text1"})
     public void activeElement() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  alert(document.activeElement);\n"
             + "  function test() {\n"
             + "    alert(document.activeElement.id);\n"
@@ -342,8 +350,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLBodyElement]", "§§URL§§#", "§§URL§§#"})
     public void activeElement_iframe() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
 
@@ -407,7 +415,8 @@ public class Document2Test extends WebDriverTestCase {
              "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
              "<p>a & b</p> &amp; \u0162 \" '"})
     public void createTextNodeWithHtml() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload='test()'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -434,7 +443,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void queryCommandEnabled() throws Exception {
-        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function x() {\n"
@@ -457,7 +467,8 @@ public class Document2Test extends WebDriverTestCase {
             FF_ESR = {"false", "false", "false"})
     @NotYetImplemented({FF, FF_ESR})
     public void queryCommandEnabledDesignMode() throws Exception {
-        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function x() {\n"
@@ -478,8 +489,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"bar", "null", "null"})
     public void getElementById() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -503,8 +514,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"zero", "udef"})
     public void getElementByIdNull() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -528,8 +539,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"bar", "null"})
     public void getElementById_resetId() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -553,8 +564,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("bar")
     public void getElementById_setNewId() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -578,8 +589,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("id1")
     public void getElementById_divId() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -599,8 +610,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("script1")
     public void getElementById_scriptId() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script id='script1'>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -618,7 +629,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"first", "newest"})
     public void getElementById_alwaysFirstOneInDocumentOrder() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='it' class='first'></span>\n"
             + "<span id='it' class='second'></span>\n"
             + "<script>\n"
@@ -639,8 +651,8 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     public void createStyleSheet() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -666,8 +678,8 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     public void createStyleSheet_emptyUrl() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + LOG_TITLE_FUNCTION
             + "<script>\n"
             + "  function doTest() {\n"
@@ -693,8 +705,8 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     public void createStyleSheet_insertAt() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -724,8 +736,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"Initial State:loading", "Changed:interactive", "Changed:complete"})
     public void readyStateEventListener() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"

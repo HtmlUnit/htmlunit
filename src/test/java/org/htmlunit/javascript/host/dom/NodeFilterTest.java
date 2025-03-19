@@ -35,7 +35,8 @@ public class NodeFilterTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "2", "3", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024", "2048"})
     public void constants() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var properties = ['FILTER_ACCEPT', 'FILTER_REJECT', 'FILTER_SKIP',\n"
@@ -59,7 +60,8 @@ public class NodeFilterTest extends WebDriverTestCase {
     @Test
     @Alerts("4294967295")
     public void constants_SHOW_ALL() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
