@@ -25,7 +25,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -36,11 +35,13 @@ import org.htmlunit.Page;
 import org.htmlunit.ScriptResult;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.regexp.RegExpEngineAccess;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.javascript.host.html.HTMLInputElement;
-import org.htmlunit.javascript.regexp.RegExpJsToJavaConverter;
 import org.htmlunit.util.NameValuePair;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -1011,10 +1012,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             return true;
         }
 
-        final RegExpJsToJavaConverter converter = new RegExpJsToJavaConverter();
-        final String javaPattern = converter.convert(pattern);
-        try {
-            return Pattern.matches(javaPattern, value);
+        try (Context cx = HtmlUnitContextFactory.getGlobal().enterContext()) {
+            RegExpEngineAccess.compile(cx, pattern, "");
+            final RegExpEngineAccess.CompiledRegExp compiled
+                    = RegExpEngineAccess.compile(cx, "^(?:" + pattern + ")$", "");
+
+            return RegExpEngineAccess.matches(cx, value, compiled);
         }
         catch (final Exception ignored) {
             // ignore if regex invalid

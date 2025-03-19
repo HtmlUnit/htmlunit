@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
  * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
-public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
+public class RegExp3Test extends WebDriverTestCase {
 
     private static final String SCRIPT_TEST_MATCH = "function arrayToString(_arr) {\n"
         + "  if (_arr == null) return null;\n"

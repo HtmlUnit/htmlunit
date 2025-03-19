@@ -33,7 +33,7 @@ import org.junit.runner.RunWith;
  * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
-public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
+public class RegExp2Test extends SimpleWebTestCase {
 
     private static final String STR = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";
     private static final String BEGIN = "<div>bla</div>";
