@@ -229,4 +229,53 @@ public class ArgumentsTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function/", "function/", "true"})
+    public void argumentsCallee() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
+                + "<script>\n"
+                + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
+                + "function foo() {\n"
+                + "  let desc = Object.getOwnPropertyDescriptor(arguments, 'callee');\n"
+                + "  log(typeof desc.get + '/' + desc.get.name);\n"
+                + "  log(typeof desc.set + '/' + desc.set.name);\n"
+                + "  log(desc.get === desc.set);\n"
+                + "}\n"
+                + "foo();\n"
+                + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void argumentsCalleeDifferentFunctions() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
+                + "<script>\n"
+                + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
+                + "function foo1() {\n"
+                + "  return Object.getOwnPropertyDescriptor(arguments, 'callee');\n"
+                + "}\n"
+                + "function foo2() {\n"
+                + "  return Object.getOwnPropertyDescriptor(arguments, 'callee');\n"
+                + "}\n"
+                + "let desc1 = foo1();\n"
+                + "let desc2 = foo2();\n"
+                + "log(desc1.get === desc2.get);\n"
+                + "log(desc1.set === desc2.set);\n"
+                + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

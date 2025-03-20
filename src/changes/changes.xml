@@ -9,6 +9,9 @@
     <body>
         <release version="4.11.0" date="March xx, 2025" description="Chrome/Edge 134, Firefox 136, Rhino RegExp, less dependencies, Bugfixes">
             <action type="fix" dev="rbri">
+                core-js: Arguments.callee is always the same function in strict mode.
+            </action>
+            <action type="fix" dev="rbri">
                 core-js: Arguments.caller is not available in real browsers.
             </action>
             <action type="fix" dev="RhinoTeam">
