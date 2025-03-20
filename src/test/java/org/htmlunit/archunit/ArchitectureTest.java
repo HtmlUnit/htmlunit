@@ -508,6 +508,7 @@ public class ArchitectureTest {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomElement")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlDialog")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlDialog$1")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlInput")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.util.WebClientUtils")
 
@@ -527,7 +528,6 @@ public class ArchitectureTest {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.HtmlUnitContextFactory")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.JavaScriptEngine")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.JavaScriptEngine$2")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.regexp.HtmlUnitRegExpProxy")
             .and().resideOutsideOfPackage("org.htmlunit.corejs..")
 
         .should().dependOnClassesThat().haveFullyQualifiedName("org.htmlunit.corejs.javascript.ScriptRuntime");
