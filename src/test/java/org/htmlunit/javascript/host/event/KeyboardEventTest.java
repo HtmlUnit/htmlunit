@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
@@ -59,7 +58,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Alerts({"[object KeyboardEvent]", "type", "false", "false", "false",
              ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctor() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -89,7 +88,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             FF_ESR = {"[object KeyboardEvent]", "undefined", "false", "false", "false",
                       ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorWithoutType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -112,7 +111,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Alerts({"[object KeyboardEvent]", "42", "false", "false", "false",
              ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorNumericType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -135,7 +134,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Alerts({"[object KeyboardEvent]", "null", "false", "false", "false",
              ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorNullType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -157,7 +156,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -180,7 +179,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Alerts({"[object KeyboardEvent]", "HtmlUnitEvent", "false", "false", "false",
              ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorArbitraryType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -207,7 +206,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             EDGE = {"[object KeyboardEvent]", "keyboard", "false", "false", "false",
                     "key,code,123,true,true,true,true,true,true,456,0"})
     public void create_ctorAllDetails() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -233,7 +232,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
              "null,,0,true,false,false,false,false,false,456,0"})
     public void create_ctorSomeDetails() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -257,7 +256,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
              ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorMissingData() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -281,7 +280,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
              ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorNullData() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -304,7 +303,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
              ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorUndefinedData() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -327,7 +326,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Alerts({"[object KeyboardEvent]", "keyboard", "false", "false", "false",
              ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorWrongData() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -351,8 +350,9 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"DOM3: [object KeyboardEvent]", "vendor: exception"})
     public void createEvent() throws Exception {
-        final String html = "<html><head><script>\n"
-                + LOG_TITLE_FUNCTION
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      log('DOM3: ' + document.createEvent('KeyboardEvent'));\n"
@@ -372,7 +372,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"NotSupportedError/DOMException", "0-0", "undefined-undefined"})
     public void keyCode() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
@@ -399,7 +400,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"NotSupportedError/DOMException", "TypeError"})
     public void initKeyEvent() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  var properties = ['type', 'bubbles', 'cancelable', /*'view',*/ 'ctrlKey', 'altKey',\n"
             + "        'shiftKey', 'metaKey', 'keyCode', 'charCode'];\n"
@@ -451,7 +453,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
                          "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
                          "keyup, false, false, , 7, false, false, false, false, 0, 0"})
     public void initKeyboardEvent() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  var properties = ['type', 'bubbles', 'cancelable', /*'view',*/ 'key', 'location',"
             + "        'ctrlKey', 'altKey', 'shiftKey', 'metaKey', 'keyCode', 'charCode'];\n"
@@ -489,7 +492,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
     public void keyCodes_keyup() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
@@ -514,7 +518,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
              "70", "71", "72", "73", "74", "75", "76", "77", "78", "79",
              "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90"})
     public void keyCodes2_keyup() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
@@ -538,7 +543,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
     public void keyCodes_keydown() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
@@ -564,7 +570,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
              "70", "71", "72", "73", "74", "75", "76", "77", "78", "79",
              "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90"})
     public void keyCodes2_keydown() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
@@ -588,7 +595,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57"})
     public void keyCodes_keypress() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
@@ -615,7 +623,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
              "110", "111", "112", "113", "114", "115", "116", "117", "118", "119",
              "120", "121", "122"})
     public void keyCodes2_keypress() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "</script>\n"
@@ -639,7 +648,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"13", "13", "13"})
     public void keyCodeEnter_keypress() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -735,8 +745,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
                           "keypress:13,13,13,Enter,undefined,Enter,false",
                           "keyup:13,0,13,Enter,undefined,Enter,false"})
     public void which() throws Exception {
-        final String html
-            = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<input type='text' id='keyId'>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION

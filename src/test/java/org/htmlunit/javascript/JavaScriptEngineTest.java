@@ -937,7 +937,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         }
         catch (final ScriptException e) {
             exceptionThrown = "ex thrown";
-            assertEquals(4, e.getFailingLineNumber());
+            assertEquals(5, e.getFailingLineNumber());
         }
 
         assertEquals(expectedExThrown, exceptionThrown);

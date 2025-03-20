@@ -36,7 +36,8 @@ public class EventTargetTest extends WebDriverTestCase {
     @Test
     @Alerts("not defined")
     public void cloneEvent() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('myId');\n"
@@ -66,8 +67,8 @@ public class EventTargetTest extends WebDriverTestCase {
     public void dispatchEventPostponed() throws Exception {
         getMockWebConnection().setDefaultResponse("log('external script');", MimeType.TEXT_JAVASCRIPT);
 
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

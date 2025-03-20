@@ -35,7 +35,8 @@ public class WebGLContextEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "2", "3"})
     public void constants() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"

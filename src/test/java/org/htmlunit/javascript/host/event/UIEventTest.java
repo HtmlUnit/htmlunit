@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -50,7 +49,7 @@ public class UIEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object UIEvent]", "event", "false", "false", "false", "false"})
     public void create_ctor() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -72,7 +71,7 @@ public class UIEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object UIEvent]", "event", "true", "false", "false", "true"})
     public void create_ctorWithDetails() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -97,7 +96,7 @@ public class UIEventTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void create_ctorWithDetailsViewNotWindow() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -120,7 +119,8 @@ public class UIEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"DOM2: [object UIEvent]", "DOM3: [object UIEvent]"})
     public void createEvent() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
@@ -141,7 +141,8 @@ public class UIEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object UIEvent]", "click", "true", "true", "true", "7"})
     public void initUIEvent() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var e = document.createEvent('UIEvents');\n"
@@ -170,8 +171,8 @@ public class UIEventTest extends WebDriverTestCase {
             FF_ESR = {"[object Event]", "undefined", "[object MouseEvent]", "1",
                       "[object MouseEvent]", "2", "[object MouseEvent]", "1"})
     public void detail() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function alertDetail(e) {\n"
             + "    log(e);\n"
@@ -219,8 +220,8 @@ public class UIEventTest extends WebDriverTestCase {
             FF_ESR = {"[object Event]", "undefined", "[object MouseEvent]", "1",
                       "[object MouseEvent]", "2", "[object MouseEvent]", "1"})
     public void detailInputText() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function alertDetail(e) {\n"
             + "    log(e);\n"
@@ -269,8 +270,8 @@ public class UIEventTest extends WebDriverTestCase {
             FF_ESR = {"[object Event]", "undefined", "[object MouseEvent]", "1",
                       "[object MouseEvent]", "2", "[object MouseEvent]", "1"})
     public void detailInputRadio() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function alertDetail(e) {\n"
             + "    log(e);\n"
@@ -313,8 +314,8 @@ public class UIEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"},
             FF_ESR = {"[object Event]", "undefined", "[object MouseEvent]", "[object Window]"})
     public void view() throws Exception {
-        final String html =
-              "<html><body onload='alertView(event)'><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='alertView(event)'><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function alertView(e) {\n"
             + "    log(e);\n"

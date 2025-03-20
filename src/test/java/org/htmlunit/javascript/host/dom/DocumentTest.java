@@ -1168,7 +1168,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "HierarchyRequestError/DOMException"})
+    @Alerts({"2", "HierarchyRequestError/DOMException"})
     public void appendChildAtDocumentLevel() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

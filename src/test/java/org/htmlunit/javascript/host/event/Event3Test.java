@@ -60,8 +60,8 @@ public class Event3Test extends SimpleWebTestCase {
     private void testEventOnKeyDown_Shift_Ctrl_Alt(
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
             final String... expectedAlerts) throws Exception {
-        final String content
-            = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <button type='button' id='clickId'/>\n"
@@ -114,8 +114,8 @@ public class Event3Test extends SimpleWebTestCase {
 
     private void testEventOnClick_Shift_Ctrl_Alt(final boolean shiftKey,
             final boolean ctrlKey, final boolean altKey, final String[] expectedAlerts) throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <button name='button' type='button' id='button'>Push me</button>\n"
             + "</form>\n"
@@ -143,8 +143,8 @@ public class Event3Test extends SimpleWebTestCase {
      */
     @Test
     public void eventOnBlur() throws Exception {
-        final String content
-            = "<html><head></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form action='foo'>\n"
             + "<input name='textField' id='textField' onblur='alert(event != null)'>\n"
             + "<input type='submit' id='otherField'>\n"
@@ -167,7 +167,8 @@ public class Event3Test extends SimpleWebTestCase {
     @NotYetImplemented // TODO: in IE no click event can be registered for the window
     @Alerts({"span bubbling", "div", "div bubbling"})
     public void ie_EventBubbling() throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "function t(_s) {\n"
             + "  return function() { alert(_s) };\n"
@@ -231,8 +232,8 @@ public class Event3Test extends SimpleWebTestCase {
     private void testEventBubblingReturns(final String onclick1,
         final String onclick2, final String onclick3, final boolean changesPage) throws Exception {
 
-        final String html1
-            = "<html><head><title>First</title></head><body>\n"
+        final String html1 = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<div onclick='alert(\"d\"); " + onclick1 + "'>\n"
             + "<span onclick='alert(\"s\"); " + onclick2 + "'>\n"
             + "<a href='" + URL_SECOND + "' id='a' onclick='alert(\"a\"); " + onclick3 + "'>go</a>\n"
@@ -240,7 +241,7 @@ public class Event3Test extends SimpleWebTestCase {
             + "</div>\n"
             + "</body></html>";
 
-        final String html2 = "<html><head><title>Second</title></head><body></body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();

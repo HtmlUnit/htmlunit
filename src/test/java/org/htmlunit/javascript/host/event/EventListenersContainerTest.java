@@ -35,8 +35,8 @@ public class EventListenersContainerTest extends WebDriverTestCase {
     @Test
     @Alerts({"someName", "myevent", "[object Window]"})
     public void addEventListener() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function MyEventListener(name) {\n"
@@ -73,8 +73,8 @@ public class EventListenersContainerTest extends WebDriverTestCase {
     @Test
     @Alerts({"someName", "myevent", "[object HTMLBodyElement]"})
     public void addEventListener_node() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function MyEventListener(name) {\n"
@@ -111,8 +111,8 @@ public class EventListenersContainerTest extends WebDriverTestCase {
     @Test
     @Alerts({})
     public void addEventListener_no_handleEvent() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function MyEventListener(name) {\n"

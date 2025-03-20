@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -49,7 +48,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void create_ctor() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -69,7 +68,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object BeforeUnloadEvent]", "", "false", "false", "false", ""})
     public void create_createEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -91,7 +90,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object BeforeUnloadEvent]", "beforeunload", "true", "false", "false", ""})
     public void initEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -114,7 +113,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object BeforeUnloadEvent]", "beforeunload", "true", "false", "false", ""})
     public void dispatchEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -138,7 +137,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object Event]", "beforeunload", "true", "false", "false", "true"})
     public void dispatchEvent_event() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -162,7 +161,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Test
     @Alerts("supported")
     public void onBeforeUnload_supported() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

@@ -118,7 +118,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         assertEquals("", javaScriptErrorListener.getWarnings());
         assertEquals("org.htmlunit.ScriptException: "
                 + "ReferenceError: \"unknown\" is not defined. "
-                + "(script in http://localhost:" + PORT + "/ from (1, 58) to (1, 81)#1)",
+                + "(script in http://localhost:" + PORT + "/ from (2, 58) to (2, 81)#2)",
                 javaScriptErrorListener.getScriptExceptions());
         assertEquals("", javaScriptErrorListener.getLoadScriptErrors());
         assertEquals("", javaScriptErrorListener.getMalformedScriptURLErrors());

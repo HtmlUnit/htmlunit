@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -53,7 +52,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HashChangeEvent]", "hashchange", "false", "false", "false", "", ""})
     public void create_ctor() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -75,7 +74,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HashChangeEvent]", "hashchange", "true", "false", "false", "null", "§§URL§§#1"})
     public void create_ctorWithDetails() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -102,7 +101,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HashChangeEvent]", "", "false", "false", "false", "", ""})
     public void create_createEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -124,7 +123,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HashChangeEvent]", "missing initHashChangeEvent"})
     public void initHashChangeEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -155,7 +154,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void dispatchEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -181,7 +180,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object Event]", "hashchange", "true", "false", "false", "undefined", "undefined"})
     public void dispatchEvent_event() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -205,7 +204,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Test
     @Alerts("supported")
     public void onHashChange_supported() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -223,7 +222,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HashChangeEvent]", "hashchange", "false", "false", "false", "§§URL§§", "§§URL§§#1"})
     public void onHashChange() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + DUMP_EVENT_FUNCTION

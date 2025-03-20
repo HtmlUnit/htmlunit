@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
@@ -222,8 +221,8 @@ public class Event2Test extends WebDriverTestCase {
     }
 
     private void testClickEvents(final String firstSnippet, final String secondSnippet) throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title></title>\n"
                 + "  <script type='text/javascript'>\n"
@@ -346,8 +345,8 @@ public class Event2Test extends WebDriverTestCase {
     }
 
     private void testTypeEvents(final String firstSnippet, final String secondSnippet) throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script type='text/javascript'>\n"
                 + "  <!--\n"
@@ -430,8 +429,8 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts({"pass", "fail:66", "fail:undefined"})
     public void eventOnKeyDown() throws Exception {
-        final String html
-            = "<html><head>"
+        final String html = DOCTYPE_HTML
+            + "<html><head>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>"
@@ -475,8 +474,8 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts({"object", "undefined", "undefined", "undefined", "undefined",
              "object", "false", "false", "false", "false"})
     public void keys() throws Exception {
-        final String html =
-              "<html><body onload='test(event)'><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test(event)'><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test(e) {\n"
             + "    log(typeof e);\n"
@@ -505,8 +504,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     public void preventDefault() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "function block(e) {\n"
             + "  if (e && e.preventDefault)\n"
@@ -537,7 +536,8 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts({"DOMContentLoaded type=DOMContentLoaded", "onLoad"})
     public void dOMContentLoaded() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -559,7 +559,8 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts({"false", "not canceled", "true", "canceled", "true"})
     public void testPreventDefault() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -610,8 +611,8 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "SPAN"})
     public void eventTransmission() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <span id='clickMe'>foo</span>\n"
             + "  <script>\n"
@@ -639,8 +640,8 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts({"capturing", "at target", "bubbling"})
     public void eventPhase() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function init() {\n"
@@ -678,7 +679,8 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts({"window capturing", "div capturing", "span capturing",
                 "span bubbling", "div", "div bubbling", "window bubbling"})
     public void eventCapturingAndBubbling() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -732,7 +734,8 @@ public class Event2Test extends WebDriverTestCase {
     }
 
     private void stopPropagation(final String cancelMethod) throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -779,7 +782,8 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts({"w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2"})
     public void stopPropagation_WithMultipleEventHandlers() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -832,7 +836,8 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts({"w", "w 2", "d", "d 2", "s", "w"})
     public void stopImmediatePropagation_WithMultipleEventHandlers() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -875,7 +880,8 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object Event]")
     public void windowEvent() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -897,7 +903,7 @@ public class Event2Test extends WebDriverTestCase {
                 "document onclick prevented=false",
                 "window onclick prevented=true"})
     public void returnPriority() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "<script>\n"
                 + "  function log(msg) {\n"
@@ -933,7 +939,7 @@ public class Event2Test extends WebDriverTestCase {
              "window onbeforeunload rv=1",
              "window at beforeunload rv=1"})
     public void returnPriority2() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "<script>\n"
                 + "  output = '';\n"

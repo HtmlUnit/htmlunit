@@ -18,7 +18,6 @@ import static org.htmlunit.junit.annotation.TestedBrowser.CHROME;
 import static org.htmlunit.junit.annotation.TestedBrowser.EDGE;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.NotYetImplemented;
@@ -55,7 +54,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object PopStateEvent]", "null", "popstate", "false", "false", "false", "null"})
     public void create_ctor() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -77,7 +76,7 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object PopStateEvent]", "null", "popstate", "true", "false", "false", "2"})
     public void create_ctorWithDetails() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -104,7 +103,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             FF = "NotSupportedError/DOMException",
             FF_ESR = "NotSupportedError/DOMException")
     public void create_createEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -128,7 +127,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             FF = "NotSupportedError/DOMException",
             FF_ESR = "NotSupportedError/DOMException")
     public void setState() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -153,7 +152,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             FF = "exception ctor",
             FF_ESR = "exception ctor")
     public void dispatchEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -186,7 +185,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             FF_ESR = "ctor NotSupportedError")
     @NotYetImplemented({CHROME, EDGE})
     public void dispatchEventWithoutInit() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -217,7 +216,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             FF = "exception ctor",
             FF_ESR = "exception ctor")
     public void initPopStateEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

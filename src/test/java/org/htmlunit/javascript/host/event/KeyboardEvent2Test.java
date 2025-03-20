@@ -48,7 +48,8 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
     }
 
     private HtmlPage getHtmlPage() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title><script>\n"
                 + "  function test() {\n"
                 + "    document.onkeydown = checkEvent;\n"
                 + "    document.onkeyup = checkEvent;\n"
