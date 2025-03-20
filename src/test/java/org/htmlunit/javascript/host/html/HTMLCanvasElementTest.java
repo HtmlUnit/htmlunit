@@ -37,8 +37,8 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"300", "number", "150", "number", "[object CanvasRenderingContext2D]"})
     public void test() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -120,8 +120,8 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
                     + "wAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVA"
                     + "wGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlACBB1YxAJfjJb2jAAAAAElFTkSuQmCC")
     public void toDataUrl() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body><canvas id='myCanvas'></canvas>\n"
             + LOG_TEXTAREA
             + "<script>\n"
@@ -197,8 +197,8 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
                     + "wAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVA"
                     + "wGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlACBB1YxAJfjJb2jAAAAAElFTkSuQmCC")
     public void toDataUrlPng() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body><canvas id='myCanvas'></canvas>\n"
             + LOG_TEXTAREA
             + "<script>\n"
@@ -222,8 +222,8 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
              "[object WebGLRenderingContext]", "[object WebGL2RenderingContext]", "null", "null"})
     @NotYetImplemented
     public void getContext() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -253,7 +253,8 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object CanvasRenderingContext2D]")
     public void getContextShouldNotThrowForSize0() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<canvas id='it' width=0 height=0></canvas>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -304,8 +305,8 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
     }
 
     private void getWidth(final String value) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

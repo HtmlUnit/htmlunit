@@ -47,8 +47,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
             FF = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"},
             FF_ESR = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"})
     public void defaultPaddingAndMargins() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -74,8 +74,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void attachEvent() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -105,8 +105,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts("no")
     public void doScroll() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -134,8 +134,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "#0000aa", "x"})
     public void aLink() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -161,8 +161,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "http://www.foo.com/blah.gif", "blah.gif"})
     public void background() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -189,8 +189,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "#0000aa", "x"})
     public void bgColor() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -216,8 +216,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "#0000aa", "x"})
     public void link() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -243,8 +243,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "#0000aa", "x"})
     public void text() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -270,8 +270,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "#0000aa", "x"})
     public void vLink() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -303,8 +303,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
                     + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
                     + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, "})
     public void enumeratedProperties() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -331,8 +331,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"keydown (target)", "keydown (body)"})
     public void eventHandler() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -368,8 +368,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
             FF = {"0", "0"},
             FF_ESR = {"0", "0"})
     public void top() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

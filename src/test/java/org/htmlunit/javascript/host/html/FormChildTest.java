@@ -34,8 +34,8 @@ public class FormChildTest extends WebDriverTestCase {
     @Test
     @Alerts({"f1", "f2"})
     public void formSimple() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -65,8 +65,8 @@ public class FormChildTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null"})
     public void formBeforeAfter() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

@@ -53,8 +53,8 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
      */
     @Test
     public void onClickAnchorHref() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<a href='#' onclick='document.form1.submit()'>link 1</a>\n"
             + "<form name='form1' action='foo.html' method='post'>\n"
             + "<input name='testText'>\n"
@@ -73,8 +73,8 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
      */
     @Test
     public void readWriteAnchorTarget() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"document.links[0].target += 'K';\">\n"
             + "<a href='#' target='O'>link 1</a>\n"
             + "</body></html>";
@@ -88,8 +88,8 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
      */
     @Test
     public void readWriteAnchorSearch() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"document.links[0].search += '&p2=2';\">\n"
             + "<a href='foo.html?p1=1' target='O'>link 1</a>\n"
             + "</body></html>";
@@ -103,8 +103,8 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
      */
     @Test
     public void readAnchorHash() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a id='a' href='http://blah.com/abc.html#arg'>foo</a>\n"
             + "  <script>alert(document.getElementById('a').hash);</script>\n"
@@ -120,8 +120,8 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
      */
     @Test
     public void readWriteAnchorHash() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"document.links[0].hash += 'K';\">\n"
             + "  <a href='foo.html#O'>link 1</a>\n"
             + "</body></html>";
@@ -135,8 +135,8 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
      */
     @Test
     public void readWriteAnchorPort() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"document.links[0].port += '80';\n"
             + "    document.links[1].port += '80'; \">\n"
             + "  <a href='foo.html#O'>link 1</a>\n"
@@ -154,8 +154,8 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
      */
     @Test
     public void readWritePathname() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"document.links[0].pathname = '/bar' + document.links[0].pathname;\">\n"
             + "  <a href='foo.html#B'>link 1</a>\n"
             + "</body></html>";
@@ -169,8 +169,8 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
      */
     @Test
     public void readWriteProtocol() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"document.links[0].protocol = document.links[0].protocol.substring(0,4) + 's:';\">\n"
             + "  <a href='foo.html#B'>link 1</a>\n"
             + "</body></html>";
@@ -184,8 +184,8 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
      */
     @Test
     public void readWriteAnchorHost() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"document.links[0].host += 'motion:8080';\n"
             + "    document.links[1].host += 'motion';\n"
             + "    document.links[2].host += '80';\n"
@@ -211,8 +211,8 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
      */
     @Test
     public void readWriteAnchorHostname() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload=\"document.links[0].hostname += 'motion';\">\n"
             + "  <a href='foo.html#O'>link 1</a>\n"
             + "</body></html>";

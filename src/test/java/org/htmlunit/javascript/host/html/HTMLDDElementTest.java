@@ -34,8 +34,8 @@ public class HTMLDDElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "null", "nowrap", "null", "x", "null", "x", "blah", "", "blah"})
     public void noWrap() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

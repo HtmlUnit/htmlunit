@@ -36,8 +36,8 @@ public class HTMLDialogElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void formClosesDialogWithoutJs() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body>\n"
             + "    <dialog id='tester' onclose='document.title=\"closed\"'>\n"
             + "      <p>HtmlUNit dialog</p>\n"

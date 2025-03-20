@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -38,8 +37,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void prototype() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -58,7 +57,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLAudioElement]", "function HTMLAudioElement() { [native code] }"})
     public void type() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -84,8 +83,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "AUDIO"})
     public void nodeTypeName() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<audio id='a' src='horse.mp3'></audio>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -106,7 +105,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLAudioElement]", "[object Promise]", "done"})
     public void audio() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -134,7 +133,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     protected void parentOf(final String parent, final String child) throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<title>New Tab</title>\n"
             + "<script>\n"
@@ -187,7 +186,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     public void doNotRetrieveStream() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
@@ -208,7 +207,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLAudioElement]", "maybe", "done"})
     public void nullConstructor() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -234,7 +233,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void canPlayType() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -392,7 +391,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     private void canPlayType(final String mimeType) throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -415,7 +414,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLAudioElement]", "1"})
     public void newAudioNodeType() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -438,7 +437,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLAudioElement]", "AUDIO"})
     public void newAudioNodeName() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -462,8 +461,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts({"string", "§§URL§§horse.mp3", "§§URL§§cow.mp3",
              "<audio id=\"a\" src=\"cow.mp3\"></audio>"})
     public void src() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<audio id='a' src='horse.mp3'></audio>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -490,8 +489,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts({"string", "", "§§URL§§cow.mp3",
              "<audio id=\"a\" src=\"cow.mp3\"><source src=\"horse.mp3\" type=\"audio/mpeg\"></audio>"})
     public void srcChild() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<audio id='a'><source src='horse.mp3' type='audio/mpeg'></audio>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -517,8 +516,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"string", ""})
     public void srcNotDefined() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<audio id='a'></audio>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -539,8 +538,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"string", ""})
     public void currentSrc() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<audio id='a' src='horse.mp3'></audio>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -562,8 +561,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"string", ""})
     public void currentSrcChild() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<audio id='a'><source src='horse.mp3' type='audio/mpeg'></audio>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -585,8 +584,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"string", ""})
     public void currentSrcNotDefined() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<audio id='a'></audio>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

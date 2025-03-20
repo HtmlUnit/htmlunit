@@ -704,7 +704,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void comment() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "    <script>\n"
+            + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    </script>\n"
             + "<script><!-- log(1);\n"

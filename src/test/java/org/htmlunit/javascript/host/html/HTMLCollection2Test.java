@@ -46,7 +46,8 @@ public class HTMLCollection2Test extends SimpleWebTestCase {
     @Test
     @Alerts("1")
     public void childNodes() throws Exception {
-        final String firstContent = "<html><head><title>foo</title><script>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    alert(doc.documentElement.childNodes.length);\n"

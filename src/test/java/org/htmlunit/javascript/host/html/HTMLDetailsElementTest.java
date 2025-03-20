@@ -35,8 +35,8 @@ public class HTMLDetailsElementTest extends WebDriverTestCase {
     @Alerts({"false", "null", "true", "", "false", "null", "true", "",
              "true", "", "true", "TrUE", "false", "null"})
     public void open() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -89,8 +89,8 @@ public class HTMLDetailsElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "null", "false", "null", "true", "", "true", "blah", "false", "null"})
     public void openString() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -136,8 +136,8 @@ public class HTMLDetailsElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "null", "", "", "abc", "abc", "blah", "blah", "", "null"},
             FF_ESR = {"undefined", "null", "", "null", "abc", "null", "abc", "blah", "abc", "null"})
     public void name() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

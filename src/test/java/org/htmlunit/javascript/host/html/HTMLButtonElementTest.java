@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -41,8 +40,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void readWriteAccessKey() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<button id='a1'>a1</button><button id='a2' accesskey='A'>a2</button>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -73,7 +72,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"submit", "button", "submit"})
     public void type() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -98,7 +98,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"submit", "submit", "submit", "submit", "reset", "button", "submit"})
     public void getType() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -135,7 +136,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"myFormId", "null", "null", "null", "null", "myFormId", "null", "myForm2Id", "myForm2Id"})
     public void getForm() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -187,8 +189,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"test", "4", "42", "2", "[object HTMLButtonElement]", "26"})
     public void getAttributeAndSetValue() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -225,8 +227,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "4", "null", "4"})
     public void getAttributeAndSetValueNull() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -258,8 +260,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
@@ -295,8 +297,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLFormElement]")
     public void form() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <form>\n"
             + "    <button id='a'>button</button><br>\n"
@@ -317,8 +319,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts("mouse over [btn]")
     public void mouseOver() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -366,8 +367,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts("Test:mouse over [disabledBtn]")
     public void mouseOverDiabled() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "  <head>\n"
             + "    <title>Test:</title>\n"
@@ -415,7 +415,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "true", "false"})
     public void formNoValidate() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -445,8 +446,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             FF = {"true", "false", "true", "true", "true"},
             FF_ESR = {"true", "false", "true", "true", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"

@@ -3086,7 +3086,7 @@ public class DocumentTest extends WebDriverTestCase {
     public void fireEvent() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
-            + " <span id='s' onclick='\n"
+            + "  <span id='s' onclick='\n"
             + "  if(document.fireEvent) {\n"
             + "    document.onkeydown = function() {log(\"x\")};\n"
             + "    document.fireEvent(\"onkeydown\");\n"

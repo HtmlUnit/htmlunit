@@ -33,7 +33,8 @@ public class HTMLDataElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLDataElement]")
     public void tag() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <data id='it' value='1234'>onetwothreefour</data>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -49,7 +50,8 @@ public class HTMLDataElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1234", "#12o", "", "#12o"})
     public void value() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <data id='d1' value='1234'>onetwothreefour</data>\n"
             + "  <data id='d2' >onetwothreefour</data>\n"
             + "<script>\n"

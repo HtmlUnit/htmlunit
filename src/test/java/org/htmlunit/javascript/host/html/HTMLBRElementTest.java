@@ -38,8 +38,8 @@ public class HTMLBRElementTest extends WebDriverTestCase {
     @Alerts({"", "left", "all", "right", "none", "2", "foo", "left",
              "none", "right", "all", "2", "abc", "8"})
     public void clear() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<br id='br1'/>\n"
             + "<br id='br2' clear='left'/>\n"
             + "<br id='br3' clear='all'/>\n"
@@ -95,8 +95,8 @@ public class HTMLBRElementTest extends WebDriverTestCase {
     @Test
     @Alerts("<br id=\"myId\">")
     public void outerHTML() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  log(document.getElementById('myId').outerHTML);\n"
