@@ -43,8 +43,8 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
     @Test
     @Alerts("exception occurred")
     public void write_AssignedToVar() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "function doTheFoo() {\n"
             + "var d = document.writeln;\n"
             + "try {\n"
@@ -64,7 +64,8 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
      */
     @Test
     public void writeFrameRelativeURLMultipleFrameset() throws Exception {
-        final String html = "<html><head><title>frameset</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>frameset</title></head>\n"
             + "<script>\n"
             + "    document.write('<frameset><frame src=\"frame.html\"/></frameset>');\n"
             + "</script>\n"

@@ -54,8 +54,8 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      */
     @Test
     public void clickHashAnchor() throws Exception {
-        final String html
-            = "<html><head><title>HashAnchor</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>HashAnchor</title></head>\n"
             + "<body>\n"
             + "  <script language='javascript'>\n"
             + "    function test() {alert('test hash');}\n"
@@ -98,14 +98,16 @@ public class HTMLElement3Test extends SimpleWebTestCase {
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String firstHtml = "<html><head><title>First</title></head>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body><form name='form1'>\n"
             + "<input id='text1' onfocus='alert(\"onfocus text1\")'>\n"
             + "<button type='button' id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
             + "</form></body></html>";
         webConnection.setResponse(URL_FIRST, firstHtml);
 
-        final String secondHtml = "<html><head><title>Second</title></head>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head>\n"
             + "<body onLoad='doTest()'>\n"
             + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
             + "<script>\n"
@@ -142,14 +144,16 @@ public class HTMLElement3Test extends SimpleWebTestCase {
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String firstHtml = "<html><head><title>First</title></head>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body><form name='form1'>\n"
             + "<input id='text1' onblur='alert(\"onblur text1\")'>\n"
             + "<button type='button' id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
             + "</form></body></html>";
         webConnection.setResponse(URL_FIRST, firstHtml);
 
-        final String secondHtml = "<html><head><title>Second</title></head>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head>\n"
             + "<body onLoad='doTest()'>\n"
             + "<input id='text2' onblur='alert(\"onblur text2\")'>\n"
             + "<script>\n"
@@ -178,8 +182,8 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      */
     @Test
     public void offsetHeight() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "<div>1</div>\n"
             + "</body>\n"

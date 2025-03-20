@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -39,8 +38,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
     @Test
     @Alerts("no")
     public void doScroll() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -68,8 +67,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"left", "right", "justify", "center", "wrong", ""})
     public void getAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <div id='d1' align='left' ></div>\n"
             + "    <div id='d2' align='right' ></div>\n"
@@ -96,8 +95,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"CenTer", "8", "foo", "left", "right", "justify", "center"})
     public void setAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <div id='d1' align='left' ></div>\n"
             + "  </table>\n"
@@ -134,8 +133,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "true", "null", "true"})
     public void handlers() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='d1'></div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -156,8 +155,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true", "true", "true"})
     public void clientHeight() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -201,8 +199,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true", "true", "true"})
     public void clientWidth() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -246,8 +243,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true", "true", "true"})
     public void clientWidthNested() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -291,8 +287,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "null", "nowrap", "null", "x", "null", "x", "blah", "", "blah"})
     public void noWrap() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
