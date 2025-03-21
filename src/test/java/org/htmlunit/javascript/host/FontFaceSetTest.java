@@ -36,8 +36,8 @@ public class FontFaceSetTest extends WebDriverTestCase {
             FF = "function FontFaceSet() { [native code] }",
             FF_ESR = "function FontFaceSet() { [native code] }")
     public void window() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -54,8 +54,8 @@ public class FontFaceSetTest extends WebDriverTestCase {
     @Test
     @Alerts("[object FontFaceSet]")
     public void documentFonts() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -72,8 +72,8 @@ public class FontFaceSetTest extends WebDriverTestCase {
     @Test
     @Alerts("then: ")
     public void load() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

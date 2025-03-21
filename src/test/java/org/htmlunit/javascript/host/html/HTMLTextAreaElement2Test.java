@@ -38,8 +38,8 @@ public class HTMLTextAreaElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void type_onchange() throws Exception {
-        final String content
-            = "<html><head><title>foo</title>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function changed(e) {\n"
             + "    log('changed: ' + e.value);\n"

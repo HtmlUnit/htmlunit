@@ -48,7 +48,8 @@ public class XMLDocument3Test extends WebDriverTestCase {
     @Test
     @Alerts({"1610", "1575", "32", "1604", "1610", "1610", "1610", "1610", "1610", "1610", "1604"})
     public void load_Encoding() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -78,7 +79,8 @@ public class XMLDocument3Test extends WebDriverTestCase {
     @Test
     @Alerts({"230", "230"})
     public void parseIso88591Encoding() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -106,7 +108,8 @@ public class XMLDocument3Test extends WebDriverTestCase {
     @Test
     @Alerts({"1044", "1044"})
     public void parseUtf8Encoding() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

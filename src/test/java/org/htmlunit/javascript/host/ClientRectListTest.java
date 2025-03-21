@@ -34,8 +34,8 @@ public class ClientRectListTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DOMRectList]", "1", "[object DOMRect]", "[object DOMRect]"})
     public void getClientRects() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -59,8 +59,8 @@ public class ClientRectListTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DOMRectList]", "1", "null", "null"})
     public void itemOutside() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -91,8 +91,8 @@ public class ClientRectListTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DOMRectList]", "1", "undefined", "undefined"})
     public void indexOutside() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -123,8 +123,8 @@ public class ClientRectListTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DOMRectList]", "0", "undefined", "undefined"})
     public void empty() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

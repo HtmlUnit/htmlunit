@@ -42,7 +42,8 @@ public class HTMLUListElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLUListElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -67,8 +68,8 @@ public class HTMLUListElementTest extends WebDriverTestCase {
     @Alerts({"false", "true", "true", "true", "null", "", "blah", "2",
              "true", "false", "true", "false", "", "null", "", "null"})
     public void compact() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -114,8 +115,8 @@ public class HTMLUListElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "blah", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "u"})
     public void type() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
                 + LOG_TITLE_FUNCTION

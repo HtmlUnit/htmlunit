@@ -57,7 +57,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts({"error [object ProgressEvent]", "error", "false", "0", "false"})
     public void noCorsHeaderCallsErrorHandler() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -92,7 +93,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void simple() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -134,7 +136,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void simpleHead() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -169,7 +172,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void simplePost() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -204,7 +208,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void simplePut() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -285,7 +290,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     private void incorrectAccessControlAllowOrigin(final String header) throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -430,7 +436,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                             throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT)); // url without trailing "/"
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var xhr = new XMLHttpRequest();\n"
@@ -540,7 +547,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void preflight_incorrect_headers() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -577,7 +585,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void preflight_many_header_values() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -617,7 +626,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void withCredentials_defaultValue() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -642,7 +652,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false", "true"})
     public void withCredentials_setBeforeOpenSync() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -683,7 +694,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false", "true"})
     public void withCredentials_setBeforeOpenAsync() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -725,7 +737,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "true", "false"})
     public void withCredentials_setAfterOpenSync() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -759,7 +772,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "true", "false"})
     public void withCredentials_setAfterOpenAsync() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -845,7 +859,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             final String accessControlAllowCredentials) throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -898,7 +913,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts("done 200")
     public void testWithCredentialsIFrame() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_WINDOW_NAME_FUNCTION
 

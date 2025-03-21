@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host;
 import java.util.Map;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -38,7 +37,8 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "value1"})
     public void get() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -63,8 +63,7 @@ public class MapTest extends WebDriverTestCase {
     @Alerts({"function entries() { [native code] }",
              "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"})
     public void iterator() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -99,8 +98,7 @@ public class MapTest extends WebDriverTestCase {
     @Alerts({"function entries() { [native code] }",
              "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"})
     public void entries() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -135,8 +133,7 @@ public class MapTest extends WebDriverTestCase {
     @Alerts({"function values() { [native code] }",
              "[object Map Iterator]", "foo", "bar", "baz", "undefined"})
     public void values() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -171,8 +168,7 @@ public class MapTest extends WebDriverTestCase {
     @Alerts({"function keys() { [native code] }",
              "[object Map Iterator]", "0", "1", "[object Object]", "undefined"})
     public void keys() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -206,8 +202,8 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts("2")
     public void constructorArray() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -226,8 +222,8 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void constructorInt32Array() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -251,8 +247,8 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void constructorStringParam() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -275,8 +271,8 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void constructorSetParam() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -299,8 +295,8 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts("2")
     public void constructorMapParam() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -321,8 +317,8 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "77", "one"})
     public void constructorIteratorParam() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function logElement(value, key) {\n"
@@ -365,8 +361,8 @@ public class MapTest extends WebDriverTestCase {
              "null", "key3", "[object Map]", "[object Window]",
              "undefined", "key4", "[object Map]", "[object Window]"})
     public void forEach() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function logElement(value, key, m) {\n"
@@ -398,8 +394,8 @@ public class MapTest extends WebDriverTestCase {
              "null", "key3", "[object Map]", "undefined",
              "undefined", "key4", "[object Map]", "undefined"})
     public void forEachStrict() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "'use strict';\n"
             + LOG_TITLE_FUNCTION
@@ -432,8 +428,8 @@ public class MapTest extends WebDriverTestCase {
              "null", "key3", "[object Map]", "hello",
              "undefined", "key4", "[object Map]", "hello"})
     public void forEachThis() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function logElement(value, key, m) {\n"
@@ -460,8 +456,7 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts("[object Map Iterator]")
     public void iteratorPrototype() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -488,8 +483,8 @@ public class MapTest extends WebDriverTestCase {
     @Alerts({"value1", "undefined", "[object Map]", "[object Window]",
              "[object Object]", "key2", "[object Map]", "[object Window]"})
     public void forEach_withElision() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function logElement(value, key, m) {\n"
@@ -516,8 +511,8 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void setSize() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -542,8 +537,8 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "Type error"})
     public void setSizeStrictMode() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

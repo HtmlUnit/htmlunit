@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -45,8 +44,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1234", "PoohBear"})
     public void getValue() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -73,8 +72,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts("foo")
     public void onChange() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <p>hello world</p>\n"
@@ -100,8 +99,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"TEXTAREA", "INPUT"})
     public void setValue() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <form name='form1'>\n"
@@ -126,8 +125,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"11", "0"})
     public void textLength() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <textarea id='myTextArea'></textarea>\n"
@@ -173,8 +172,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     }
 
     private void selection(final int selectionStart, final int selectionEnd) throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <textarea id='myTextArea'></textarea>\n"
@@ -203,8 +202,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts("no")
     public void doScroll() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -246,8 +245,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     }
 
     private void value(final String textAreaBody) throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
@@ -272,8 +271,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"\\sfoo\\s\\n\\sbar\\s", "\\sfoo\\s\\n\\sbar\\s"})
     public void defaultValue() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
@@ -299,8 +298,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false"})
     public void readOnly() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -327,8 +326,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void accessKey() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <textarea id='a1'>a1</textarea>\n"
@@ -369,8 +368,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"20", "5", "8", "4", "20", "20", "20", "3"})
     public void cols() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function setCols(e, value) {\n"
@@ -418,8 +417,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "5", "8", "4", "2", "2", "2", "3"})
     public void rows() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function setRows(e, value) {\n"
@@ -468,8 +467,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"9", "9", "2", "7"})
     public void selectionRange() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -497,8 +496,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"test", "4", "42", "2", "[object HTMLTextAreaElement]", "28"})
     public void getAttributeAndSetValue() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -535,8 +534,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "4", "", "0"})
     public void getAttributeAndSetValueNull() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -568,8 +567,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"12", "2", "[object HTMLTextAreaElement]", "28"})
     public void getAttributeAndSetValueOther() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -601,8 +600,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"-1", "null", "32", "32", "-1", "ms"})
     public void maxLength() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -633,8 +632,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"-1", "null", "32", "32", "-1", "ms"})
     public void minLength() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -665,8 +664,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"10", "10", "IndexSizeError/DOMException", "10", "10", "0", "0"})
     public void setMaxLength() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -708,8 +707,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLFormElement]")
     public void form() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <form>\n"
             + "    <textarea id='a'></textarea>\n"
@@ -745,8 +744,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     }
 
     private void mouseOver(final String element) throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -793,8 +791,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"HtmlUnit", "</> htmx rocks!"})
     public void innerHtml() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Page Title</title>\n"
             + "    <script>\n"
@@ -822,8 +820,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"HtmlUnit", "<div>htmx rocks</div>"})
     public void innerHtmlTag() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Page Title</title>\n"
             + "    <script>\n"
@@ -851,8 +849,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "</> htmx rocks!"})
     public void innerHtmlEscaping() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Page Title</title>\n"
             + "    <script>\n"
@@ -880,8 +878,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"

@@ -36,7 +36,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -65,8 +64,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Alerts({"function", "function", "function", "function", "function", "function",
              "function", "function", "function", "function"})
     public void functions() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -94,8 +92,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void empty() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
@@ -136,8 +133,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void append() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
@@ -198,8 +194,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void appendFile() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
@@ -332,8 +327,7 @@ public class FormDataTest extends WebDriverTestCase {
     }
 
     private String appendFile(final String extension, final String name) throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
@@ -392,8 +386,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void appendInMemoryFile() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
@@ -448,8 +441,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void appendBlob() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
@@ -505,8 +497,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"myKey", "myKey1"})
     public void delete() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
@@ -558,8 +549,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"myValue", "null", "null", "null", "null"})
     public void get() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -603,8 +593,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"myValue,myValue2", "", "", "", ""})
     public void getAll() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -648,8 +637,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "false"})
     public void has() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -689,8 +677,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no set",
             FF = "")
     public void set() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
@@ -754,8 +741,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void setInMemoryFile() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
@@ -810,8 +796,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void setBlob() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
@@ -866,8 +851,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void fromForm() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
@@ -943,8 +927,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void fromFormAndAppend() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
@@ -1001,8 +984,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void fromFormChangeBeforeSend() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
@@ -1132,8 +1114,8 @@ public class FormDataTest extends WebDriverTestCase {
     }
 
     private void enctype(final String enctype) throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1179,8 +1161,8 @@ public class FormDataTest extends WebDriverTestCase {
     @Alerts({"function keys() { [native code] }", "[object FormData Iterator]",
              "key1", "key2", "key1", "undefined", "true"})
     public void keys() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1229,8 +1211,8 @@ public class FormDataTest extends WebDriverTestCase {
     @Alerts({"function values() { [native code] }", "[object FormData Iterator]",
              "val1", "undefined", "val3", "val4", "true"})
     public void values() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1277,8 +1259,8 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"val1", "undefined", "val3", "val4"})
     public void valuesForOf() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1316,8 +1298,8 @@ public class FormDataTest extends WebDriverTestCase {
              "key1-val1", "key3-val3",
              "key2-val2", "key3-val3"})
     public void forEach() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -1364,8 +1346,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
     public void entries_forOf() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1409,8 +1390,7 @@ public class FormDataTest extends WebDriverTestCase {
             FF_ESR = {"true", "[object FormData Iterator]", "value", "done",
                       "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
     public void entriesIterator() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1457,8 +1437,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false"})
     public void fromFormDisabled() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

@@ -35,8 +35,8 @@ public class HTMLTimeElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined"})
     public void text() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -63,8 +63,8 @@ public class HTMLTimeElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "20:40", "2001-05-15 19:00", ""})
     public void datetime() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

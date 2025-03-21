@@ -56,7 +56,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             FF_ESR = "<html><body><h2>My CD Collection</h2>"
                 + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>")
     public void transformToDocument() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
 
@@ -130,7 +131,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "<xsl:template match=\"/\">*<xsl:value-of select=\"foo\" />*</xsl:template>"
             + "</xsl:stylesheet>";
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
 
@@ -159,7 +161,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Alerts({"function", "function", "function", "function", "function",
              "undefined", "undefined", "undefined", "undefined"})
     public void methods() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -193,7 +196,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Alerts({"function", "function XSLTProcessor() { [native code] }",
              "[object XSLTProcessor]"})
     public void type() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -215,7 +219,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"})
     public void browserDetection() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -255,7 +260,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             FF = {"preparation done", "exception InternalError"},
             FF_ESR = {"preparation done", "exception InternalError"})
     public void testSecurity() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
 

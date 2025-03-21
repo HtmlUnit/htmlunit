@@ -40,8 +40,8 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
     @Test
     @Alerts("no")
     public void doScroll() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -69,8 +69,8 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLSpanElement] undefined")
     public void cite() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -94,7 +94,8 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
     @Test
     @Alerts("beforeSpace afterSpace")
     public void getText() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<div id='foo'><span>beforeSpace</span><span> </span><span>afterSpace</span></div>\n"
             + "</body></html>";
 

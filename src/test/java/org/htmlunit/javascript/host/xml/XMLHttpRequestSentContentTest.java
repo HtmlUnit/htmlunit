@@ -113,7 +113,8 @@ public final class XMLHttpRequestSentContentTest extends WebDriverTestCase {
     }
 
     private void testSendBody(final String method, final boolean bodyIncluded) throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + "  function test() {\n"
                 + "    var xhr = new XMLHttpRequest();\n"
                 + "    xhr.open('" + method + "', 'second.html?a=x', false);\n"

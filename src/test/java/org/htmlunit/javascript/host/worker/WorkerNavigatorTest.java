@@ -190,7 +190,8 @@ public class WorkerNavigatorTest extends WebDriverTestCase {
     }
 
     private void testJs(final String workerJs) throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script async>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "try {\n"

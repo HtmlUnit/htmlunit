@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.NotYetImplemented;
@@ -39,8 +38,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"left", "right", "3", "center", "8", "foo"})
     public void align() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1' align='left'>a</td>\n"
             + "    <td id='td2' align='right'>b</td>\n"
@@ -78,8 +77,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"p", "po", "", "u", "8", "U8"})
     public void ch() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1' char='p'>a</td>\n"
             + "    <td id='td2' char='po'>b</td>\n"
@@ -112,8 +111,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "4", "", "5.2", "-3", "abc"})
     public void chOff() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1' charoff='0'>a</td>\n"
             + "    <td id='td2' charoff='4'>b</td>\n"
@@ -146,8 +145,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"top", "baseline", "3", "middle", "8", "BOTtom"})
     public void vAlign() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1' valign='top'>a</td>\n"
             + "    <td id='td2' valign='baseline'>b</td>\n"
@@ -185,8 +184,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "#0000aa", "x"})
     public void bgColor() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -214,8 +213,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "null", "true", "", "true", "", "true", "blah", "false", "null"})
     public void noWrap() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -252,8 +251,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "blah", "3", ""})
     public void abbr() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -283,8 +282,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "3", "1", "2", "1", "5", "1", "2", "1"})
     public void colSpan() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1'>a</td>\n"
             + "    <td id='td2' colspan='3'>b</td>\n"
@@ -328,8 +327,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts("3")
     public void colSpanLineBreaks() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1' colspan='\r3\t\n  '>b</td>\n"
             + "  </tr>\n"
@@ -350,8 +349,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1", "3", "3", "3"})
     public void colSpanInvalid() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1' colspan='-1'>b</td>\n"
             + "    <td id='td2' colspan='0'>b</td>\n"
@@ -384,8 +383,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"999", "1000", "1000"})
     public void colSpanLarge() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1' colspan='999'>b</td>\n"
             + "    <td id='td2' colspan='1000'>b</td>\n"
@@ -414,8 +413,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
             CHROME = {"1", "3", "1", "2", "0", "5", "1", "2", "0"},
             EDGE = {"1", "3", "1", "2", "0", "5", "1", "2", "0"})
     public void rowSpan() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1'>a</td>\n"
             + "    <td id='td2' rowspan='3'>b</td>\n"
@@ -464,8 +463,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts("3")
     public void rowSpanLineBreaks() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1' rowspan='\r3\t\n  '>a</td>\n"
             + "  </tr>\n"
@@ -488,8 +487,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
             FF = {"1", "1", "3", "3", "3"},
             FF_ESR = {"1", "1", "3", "3", "3"})
     public void rowSpanInvalid() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1' rowspan='-1'>b</td>\n"
             + "    <td id='td2' rowspan='0'>b</td>\n"
@@ -522,8 +521,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"999", "1001", "65534", "65534"})
     public void rowSpanLarge() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td1' rowspan='999'>b</td>\n"
             + "    <td id='td2' rowspan='1001'>b</td>\n"
@@ -553,8 +552,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "blah", "abc , xyz", "3", ""})
     public void axis() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -588,8 +587,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Alerts({"100,42", "90,36"})
     @NotYetImplemented
     public void cellWidthHeightWithBorderCollapse() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body><table id='t'><tr>\n"
             + "<td id='td1' style='width: 80px; height: 30px; "
                         + "border: 2px solid blue; border-width: 2px 7px 10px 13px; padding: 0px;'>a</td>\n"
@@ -616,8 +614,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Alerts({"84,42", "84,42", "100,42", "82,36", "88,36", "90,36"})
     @NotYetImplemented
     public void cellWidthHeightWithBorderCollapseCellsInRow() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body><table id='t'><tr>\n"
             + "<td id='td1' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
             + "<td id='td2' style='width: 80px; height: 30px; "
@@ -654,8 +651,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Alerts({"84,34", "84,34", "84,34", "82,32", "82,32", "82,32"})
     @NotYetImplemented
     public void cellWidthHeightWithBorderCollapseSameCellLayout() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body><table id='t'><tr>\n"
             + "<td id='td1' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
             + "<td id='td2' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
@@ -687,8 +683,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"100px", "200px", "400", "abc", "-5", "100.2", "10%"})
     public void width() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -730,8 +726,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void offsetHeight() throws Exception {
-        final String html =
-            "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<table><tr>\n"
             + "<td style='padding:0' id='it'></td>\n"
             + "<td style='display: none'>t</td>\n"
@@ -752,8 +748,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "#667788", "unknown", "undefined", "undefined", "undefined"})
     public void borderColor() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table><tr><td id='tabd1'></td></tr></table>\n"
             + "  <table><tr><td id='tabd2' borderColor='red'></td></tr></table>\n"
             + "  <table><tr><td id='tabd3' borderColor='#123456'></td></tr></table>\n"
@@ -787,8 +783,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void borderColorDark() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table><tr><td id='tabd1'></td></tr></table>\n"
             + "  <table><tr><td id='tabd2' borderColor='red'></td></tr></table>\n"
             + "  <table><tr><td id='tabd3' borderColor='#123456'></td></tr></table>\n"
@@ -822,8 +818,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void borderColorLight() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table><tr><td id='tabd1'></td></tr></table>\n"
             + "  <table><tr><td id='tabd2' borderColor='red'></td></tr></table>\n"
             + "  <table><tr><td id='tabd3' borderColor='#123456'></td></tr></table>\n"
@@ -857,7 +853,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "false", "false"})
     public void offsetHeightParentHidden() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

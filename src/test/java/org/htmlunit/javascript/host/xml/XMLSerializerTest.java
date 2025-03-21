@@ -262,7 +262,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
             FF_ESR = {"<html><body id=\"bodyId\"></body></html>",
                       "<html><body id=\"bodyId\"></body></html>"})
     public void xhtmlDocument() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -294,7 +295,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
             FF_ESR = {"<html><body id=\"bodyId\"></body></html>",
                       "<html><body id=\"bodyId\"></body></html>"})
     public void xhtmlDocumentBodyEmptyNamespace() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -327,7 +329,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
             FF_ESR = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>",
                       "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>"})
     public void soapTest() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -351,7 +354,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts({"<foo/>", "<foo/>"})
     public void document() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -370,7 +374,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts("#")
     public void emptyDocumentFragment() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -392,7 +397,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
             FF = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" >HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\" >is great</h2>",
             FF_ESR = "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" >HtmlUnit</h1><h2 xmlns=\"http://www.w3.org/1999/xhtml\" >is great</h2>")
     public void documentFragment() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -419,7 +425,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts({"<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>"})
     public void xml() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -446,7 +453,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts("<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>")
     public void namespace() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -475,7 +483,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts("<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
     public void mixedCase() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -500,7 +509,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
              "<link xmlns=\"http://www.w3.org/1999/xhtml\" />",
              "<meta xmlns=\"http://www.w3.org/1999/xhtml\" />"})
     public void noClosingTag() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -538,7 +548,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts("<input xmlns=\"http://www.w3.org/1999/xhtml\" />")
     public void inputTagWithoutType() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -562,7 +573,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
              "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
              "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>"})
     public void otherTags() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -588,7 +600,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts("<img xmlns=\"http://www.w3.org/1999/xhtml\" href=\"mypage.htm\" />")
     public void noClosingTagWithAttribute() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -746,7 +759,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
                 + "  </xsl:template>"
                 + "</xsl:stylesheet>";
 
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title><script>\n"
                 + "  function test() {\n"
                 + "    var ta = document.getElementById('myLog');\n"
                 + "    try {\n"

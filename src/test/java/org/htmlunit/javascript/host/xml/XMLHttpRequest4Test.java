@@ -45,8 +45,8 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
      */
     @Test
     public void setLocation_onreadystatechange() throws Exception {
-        final String content =
-              "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Page1</title>\n"
             + "    <script>\n"
@@ -79,8 +79,8 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
      */
     @Test
     public void setLocation_addEventListener() throws Exception {
-        final String content =
-              "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Page1</title>\n"
             + "    <script>\n"
@@ -134,7 +134,7 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
              "onreadystatechange_3: readyState=4",
              "onreadystatechange_4: readyState=4"})
     public void eventInvocationOrder() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"

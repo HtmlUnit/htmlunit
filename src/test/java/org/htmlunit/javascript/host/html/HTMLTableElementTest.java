@@ -41,8 +41,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Alerts({"caption1", "caption2", "null", "caption3", "TypeError",
              "[object HTMLTableCaptionElement]", "caption3", "caption4"})
     public void tableCaptions() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <table id='table_1'><caption>caption1</caption><caption>caption2</caption>\n"
             + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
@@ -84,8 +84,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Alerts({"thead1", "thead2", "null", "thead3", "TypeError",
              "[object HTMLTableSectionElement]", "thead3", "thead4"})
     public void tableHeaders() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <table id='table_1'>\n"
             + "    <thead id='thead1'><tr><td>cell1</td><td>cell2</td><td>cell3</td></tr></thead>\n"
@@ -128,8 +128,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "true", "4 2 2", "6 3 3"})
     public void tableBodies() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <table id='table_1'>\n"
             + "    <tbody id='tbody1'>\n"
@@ -165,8 +165,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "true", "3", "2", "3", "2"})
     public void tableRows() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <table id='table_1'>\n"
             + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
@@ -200,7 +200,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1"})
     public void tableHeadRows() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -228,7 +229,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Alerts({"2", "true", "8 2 2 2 2",
              "9 2 2 2 3", "8 2 2 1 3", "9 2 3 1 3", "8 1 3 1 3"})
     public void tableRowsWithManySections() throws Exception {
-        final String html = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <table id='table_1'>\n"
             + "    <thead>\n"
@@ -287,8 +289,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Alerts({"tfoot1", "tfoot2", "null", "tfoot3", "TypeError",
              "[object HTMLTableSectionElement]", "tfoot3", "tfoot4"})
     public void tableFooters() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <table id='table_1'>\n"
             + "    <tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
@@ -331,8 +333,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "0", "1", "-1"})
     public void cellIndex() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -352,8 +354,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     }
 
     private void insertRow(final String rowIndex) throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <table id='table_1'>\n"
             + "    <tr><td>first</td></tr>\n"
@@ -444,8 +446,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"mytable", "mytable"})
     public void insertRowNested() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -476,8 +478,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"TBODY", "TABLE"})
     public void insertRowInEmptyTable() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -504,8 +506,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"TBODY", "TBODY", "TBODY"})
     public void insertRowInTableWithEmptyTbody() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -532,8 +534,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1"})
     public void nestedTables() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -568,8 +570,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
              "headcell: [object HTMLTableCellElement]",
              "datacell: [object HTMLTableCellElement]"})
     public void stringValues() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
@@ -601,8 +603,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts("21")
     public void cellSpacing() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
                 + "<body>\n"
                 + "<table id='tableID' cellspacing='2'><tr><td></td></tr></table>\n"
                 + "<script language='javascript'>\n"
@@ -621,8 +623,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts("21")
     public void cellPadding() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
                 + "<body>\n"
                 + "<table id='tableID' cellpadding='2'><tr><td></td></tr></table>\n"
                 + "<script language='javascript'>\n"
@@ -641,8 +643,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts("no refresh function")
     public void refresh() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -667,8 +669,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "hello", "left", "hi", "right"})
     public void align() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -709,8 +711,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "#0000aa", "x"})
     public void bgColor() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -738,8 +740,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"cell1", "[object Text]", "abc", "[object Text]", ""})
     public void innerText() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table id='tab'>\n"
             + "    <tr><td>cell1</td></tr>\n"
             + "  </table>\n"
@@ -766,8 +768,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"\\n\\s\\s\\s\\scell1\\n\\s\\s", "[object\\sText]", "abc", "[object\\sText]", ""})
     public void textContent() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table id='tab'>\n"
             + "    <tr><td>cell1</td></tr>\n"
             + "  </table>\n"
@@ -794,8 +796,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "#667788", "unknown", "undefined", "undefined", "undefined"})
     public void borderColor() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table id='tab1'></table>\n"
             + "  <table id='tab2' borderColor='red'></table>\n"
             + "  <table id='tab3' borderColor='#123456'></table>\n"
@@ -829,8 +831,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void borderColorDark() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table id='tab1'></table>\n"
             + "  <table id='tab2' borderColorDark='red'></table>\n"
             + "  <table id='tab3' borderColorDark='#123456'></table>\n"
@@ -864,8 +866,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void borderColorLight() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table id='tab1'></table>\n"
             + "  <table id='tab2' borderColorLight='red'></table>\n"
             + "  <table id='tab3' borderColorLight='#123456'></table>\n"
@@ -899,8 +901,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "hello", "unknown", "ReferenceError", "", "test"})
     public void summary() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table id='tab1'></table>\n"
             + "  <table id='tab2' summary=''></table>\n"
             + "  <table id='tab3' summary='test'></table>\n"
@@ -935,8 +937,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"none", "groups", "rows", "cols", "wrong", ""})
     public void getRules() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table id='t1' rules='none'></table>\n"
             + "  <table id='t2' rules='groups'></table>\n"
             + "  <table id='t3' rules='rows'></table>\n"
@@ -961,8 +963,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"groUPs", "8", "foo", "rows", "cols"})
     public void setRules() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table id='t1' rules='groups'></table>\n"
 
             + "<script>\n"

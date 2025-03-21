@@ -36,7 +36,8 @@ public class ExternalTest extends WebDriverTestCase {
     @Test
     @Alerts({"external defined", "no AutoCompleteSaveForm"})
     public void autoCompleteSaveForm() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function fnSaveForm() {\n"
@@ -73,7 +74,8 @@ public class ExternalTest extends WebDriverTestCase {
     @Test
     @Alerts("AddSearchProvider defined")
     public void addSearchProvider() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -100,7 +102,8 @@ public class ExternalTest extends WebDriverTestCase {
     @Test
     @Alerts({"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"})
     public void isSearchProviderInstalled() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

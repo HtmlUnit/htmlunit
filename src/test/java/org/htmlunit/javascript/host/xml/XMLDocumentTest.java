@@ -117,7 +117,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined"})
     public void async() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -137,7 +138,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void load() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -175,7 +177,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Alerts("TypeError")
     // TODO what is the difference to load()?
     public void load_relativeURL() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -212,7 +215,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void preserveWhiteSpace() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -231,7 +235,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void setProperty() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -252,7 +257,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void selectNodes() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -286,7 +292,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void selectNodes_caseSensitive() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -319,7 +326,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void selectNodes_namespace() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -359,7 +367,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void selectNodes_nextNodeAndReset() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -396,7 +405,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"book", "exception /title", "TypeError", "exception title", "TypeError"})
     public void selectNodes_fromRoot() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -430,7 +440,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void selectSingleNode() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -455,7 +466,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("someprefix:test")
     public void loadXML_Namespace() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -484,7 +496,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("7")
     public void loadXML_XMLSpaceAttribute() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -507,7 +520,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("ReferenceError")
     public void parseError() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -552,7 +566,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("http://myNS")
     public void createNSResolver() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -583,7 +598,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void xmlInsideHtml() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -610,7 +626,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void instanceOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -639,7 +656,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("button")
     public void evaluate() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -667,7 +685,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
              "ownerDocument: doc1", "getRootNode(): doc1", "in first: 2", "in 2nd: 3",
              "ownerDocument: doc2", "getRootNode(): doc2", "in first: 1", "in 2nd: 4"})
     public void moveChildBetweenDocuments() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -733,7 +752,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "0", "1", "0"})
     public void getElementsByTagName() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -769,7 +789,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "0", "1"})
     public void getElementsByTagNameWithNamespace() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -808,7 +829,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Alerts({"false", "false", "true", "false"})
     // XML ID handling not yet correctly implemented
     public void getElementById_xml() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -844,7 +866,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Alerts({"true", "true"})
     // XML ID handling not yet correctly implemented
     public void getElementById_html() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -870,7 +893,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void getElementById_xhtml() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -896,7 +920,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void xpathWithNamespaces() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -937,7 +962,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({})
     public void selectionNamespaces() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var selectionNamespaces = 'xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
@@ -979,7 +1005,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("nodeFromID not available")
     public void nodeFromID() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1013,7 +1040,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object XMLDocument]", "OK"})
     public void test() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1080,7 +1108,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"myAttr", ""})
     public void createAttributeNameValue() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1103,7 +1132,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("about:blank")
     public void url() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1126,7 +1156,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("[object XMLDocument]")
     public void string() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

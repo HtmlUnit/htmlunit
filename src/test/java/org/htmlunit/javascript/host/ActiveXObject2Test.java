@@ -37,7 +37,8 @@ public class ActiveXObject2Test extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "NaN", "false", "No", "No", "No", "No"})
     public void browserDetection() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
@@ -64,7 +65,8 @@ public class ActiveXObject2Test extends WebDriverTestCase {
     @Test
     @Alerts("ReferenceError")
     public void xmlDocument() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + " <head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -87,7 +89,8 @@ public class ActiveXObject2Test extends WebDriverTestCase {
     @Test
     @Alerts("ActiveXObject undefined")
     public void activex() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

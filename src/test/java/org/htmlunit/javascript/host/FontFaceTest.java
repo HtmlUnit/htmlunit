@@ -36,8 +36,8 @@ public class FontFaceTest extends WebDriverTestCase {
             CHROME = "function\\sFontFace()\\s{\\s[native\\scode]\\s}",
             EDGE = "function\\sFontFace()\\s{\\s[native\\scode]\\s}")
     public void window() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE

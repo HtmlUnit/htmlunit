@@ -51,8 +51,8 @@ public class LocationTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String content
-            = "<html><head><title>First</title><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
             + "  alert(window.location.href);\n"
             + "}\n"
@@ -105,8 +105,8 @@ public class LocationTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String content
-            = "<html><head><title>First</title><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "  var location = document.location;\n"
             + "  alert(location.hash);\n"
@@ -140,10 +140,11 @@ public class LocationTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://xyz.com/index.html#bottom");
-        final String html
-            = "<html><head><title>Test 1</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.hostname=\"xyz.com\"'>...</body></html>";
-        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = DOCTYPE_HTML
+                + "<html><head><title>Test 2</title></head><body>...</body></html>";
         webConnection.setResponse(url, html);
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
@@ -162,10 +163,11 @@ public class LocationTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://xyz.com/index.html#bottom");
-        final String html
-            = "<html><head><title>Test 1</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.host=\"xyz.com\"'>...</body></html>";
-        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = DOCTYPE_HTML
+                + "<html><head><title>Test 2</title></head><body>...</body></html>";
         webConnection.setResponse(url, html);
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
@@ -184,10 +186,11 @@ public class LocationTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://xyz.com:8080/index.html#bottom");
-        final String html
-            = "<html><head><title>Test 1</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.host=\"xyz.com:8080\"'>...</body></html>";
-        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = DOCTYPE_HTML
+                + "<html><head><title>Test 2</title></head><body>...</body></html>";
         webConnection.setResponse(url, html);
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
@@ -204,10 +207,11 @@ public class LocationTest extends SimpleWebTestCase {
     public void setPathname() throws Exception {
         final URL url = new URL("http://abc.com/index.html?blah=bleh");
         final URL url2 = new URL("http://abc.com/en/index.html?blah=bleh");
-        final String html
-            = "<html><head><title>Test 1</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.pathname=\"/en/index.html\"'>...</body></html>";
-        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = DOCTYPE_HTML
+                + "<html><head><title>Test 2</title></head><body>...</body></html>";
 
         getMockWebConnection().setResponse(url, html);
         getMockWebConnection().setResponse(url2, html2);
@@ -226,10 +230,11 @@ public class LocationTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html#bottom");
         final URL url2 = new URL("http://abc.com:88/index.html#bottom");
-        final String html
-            = "<html><head><title>Test 1</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.port=\"88\"'>...</body></html>";
-        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = DOCTYPE_HTML
+                + "<html><head><title>Test 2</title></head><body>...</body></html>";
         webConnection.setResponse(url, html);
         webConnection.setResponse(url2, html2);
         webClient.setWebConnection(webConnection);
@@ -246,10 +251,11 @@ public class LocationTest extends SimpleWebTestCase {
     public void setProtocol() throws Exception {
         final URL url = new URL("http://abc.com/index.html?blah=bleh");
         final URL url2 = new URL("ftp://abc.com/index.html?blah=bleh");
-        final String html
-            = "<html><head><title>Test 1</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.protocol=\"ftp\"'>...</body></html>";
-        final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
+        final String html2 = DOCTYPE_HTML
+                + "<html><head><title>Test 2</title></head><body>...</body></html>";
 
         getMockWebConnection().setResponse(url, html);
         getMockWebConnection().setResponse(url2, html2);
@@ -271,8 +277,8 @@ public class LocationTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
 
-        final String html
-            = "<html><head><title>Test</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>Test</title></head><body>\n"
             + "<a id='a' onclick='alert(location.hash);location.hash=\"b\";alert(location.hash);'>go</a>\n"
             + "<h2 id='b'>...</h2></body></html>";
 
@@ -304,20 +310,22 @@ public class LocationTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String mainContent
-            = "<html>\n"
+        final String mainContent = DOCTYPE_HTML
+            + "<html>\n"
             + "  <frameset rows='100,*'>\n"
             + "    <frame name='menu' src='menu.html'/>\n"
             + "    <frame name='content' src='content.html'/>\n"
             + "  </frameset>\n"
             + "</html>";
-        final String frameMenu =
-            "<html><body>\n"
+        final String frameMenu = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<a href='#' id='myLink' target='content' "
             + "onclick='parent.frames.content.location.replace(\"test.html\");return false;'>Test2</a>\n"
             + "</body></html>";
-        final String frameContent = "<html><head><title>Start content</title></head><body></body></html>";
-        final String frameTest = "<html><head><title>Test</title></head><body></body></html>";
+        final String frameContent = DOCTYPE_HTML
+                + "<html><head><title>Start content</title></head><body></body></html>";
+        final String frameTest = DOCTYPE_HTML
+                + "<html><head><title>Test</title></head><body></body></html>";
 
         webConnection.setResponse(URL_FIRST, mainContent);
         webConnection.setResponse(new URL(URL_FIRST, "menu.html"), frameMenu);
@@ -342,8 +350,8 @@ public class LocationTest extends SimpleWebTestCase {
      */
     @Test
     public void reload() throws Exception {
-        final String content =
-              "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head><title>test</title></head>\n"
             + "  <body>\n"
             + "    <a href='javascript:window.location.reload();' id='link1'>reload</a>\n"

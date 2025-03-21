@@ -37,8 +37,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"left", "right", "justify", "char", "center", "wrong", ""})
     public void getAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <col id='c1' align='left' ></col>\n"
             + "    <col id='c2' align='right' ></col>\n"
@@ -66,8 +66,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"CenTer", "8", "foo", "left", "right", "justify", "char", "center"})
     public void setAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <col id='c1' align='left' ></col>\n"
             + "  </table>\n"
@@ -104,8 +104,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"p", "po", "", "u", "8", "U8"})
     public void ch() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <col id='c1' char='p'></col>\n"
             + "  <col id='c2' char='po'></col>\n"
             + "  <col id='c3'></col>\n"
@@ -141,8 +141,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "4", "", "5.2", "-3", "abc"})
     public void chOff() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <col id='c1' charoff='0'></col>\n"
             + "  <col id='c2' charoff='4'></col>\n"
             + "  <col id='c3'></col>\n"
@@ -178,8 +178,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "2", "1", "5", "1", "1"})
     public void span() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <col id='c1' span='0'></col>\n"
             + "  <col id='c2' span='2'></col>\n"
             + "  <col id='c3'></col>\n"
@@ -220,8 +220,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"top", "baseline", "3", "middle", "8", "BOTtom"})
     public void vAlign() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <col id='c1' valign='top'></col>\n"
             + "  <col id='c2' valign='baseline'></col>\n"
             + "  <col id='c3' valign='3'></col>\n"
@@ -262,8 +262,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"50", "75%", "foo", "-7", "20.2", "", "80", "40", "abc", "-10", "30%", "33.3"})
     public void width() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <col id='c1' width='50'></col>\n"
             + "  <col id='c2' width='75%'></col>\n"
             + "  <col id='c3' width='foo'></col>\n"
@@ -320,8 +320,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts("128px")
     public void width_px() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -345,8 +345,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "string"})
     public void width_null() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -370,8 +370,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts("<table><colgroup><col></colgroup></table>")
     public void parsing() throws Exception {
-        final String html
-            = "<html><body><div><table><colgroup><col></colgroup></table></div>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><div><table><colgroup><col></colgroup></table></div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  log(document.body.firstChild.innerHTML);\n"

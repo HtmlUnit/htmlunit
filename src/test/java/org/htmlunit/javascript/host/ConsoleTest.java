@@ -44,8 +44,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "object", "true"})
     public void prototype() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -66,8 +66,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "false"})
     public void prototypeUppercase() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -88,8 +88,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @Alerts({})
     public void timeStamp() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -109,8 +109,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "function", "function", "function", "function", "function"})
     public void methods() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -132,8 +132,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void windowProperty() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -153,8 +153,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @Alerts("success")
     public void fromWindow() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -175,8 +175,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @BuggyWebDriver
     public void simpleString() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  for (i = 0; i < 4; i++) {\n"
@@ -209,8 +209,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @BuggyWebDriver
     public void assertOnly() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  number = 1;\n"
@@ -236,8 +236,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @BuggyWebDriver
     public void assertString() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  number = 1;\n"
@@ -263,8 +263,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @BuggyWebDriver
     public void assertObject() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  var number = 1;\n"
@@ -291,8 +291,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @BuggyWebDriver
     public void assertObjects() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  number = 1;\n"
@@ -319,8 +319,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @BuggyWebDriver
     public void assertParams() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  console.assert(false, 'the word is %s', 'foo');\n"
@@ -346,8 +346,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @BuggyWebDriver
     public void trace() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  function foo() {\n"
@@ -382,8 +382,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @BuggyWebDriver
     public void errorCall() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  function foo() {\n"

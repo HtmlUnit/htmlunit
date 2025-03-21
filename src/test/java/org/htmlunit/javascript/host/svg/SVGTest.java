@@ -37,7 +37,8 @@ public class SVGTest extends WebDriverTestCase {
     @Test
     @Alerts("svgElem")
     public void getAttribute() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -58,8 +59,8 @@ public class SVGTest extends WebDriverTestCase {
     @Test
     @Alerts("clicked")
     public void triggerEvent() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION

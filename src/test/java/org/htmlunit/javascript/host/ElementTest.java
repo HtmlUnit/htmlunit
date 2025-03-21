@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.javascript.host.xml.XMLDocumentTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
@@ -43,7 +42,8 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts({"1", "attrName attrValue", "attrValue", "null", "anotherValue",
              "1", "4", "<span id='label'>changed</span>"})
     public void attributes() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
@@ -83,7 +83,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void selectNodes() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
@@ -115,7 +116,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "1"})
     public void removeChild() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
@@ -140,7 +142,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"lbl_SettingName", "outerHTML", "undefined"})
     public void getAttributeNode() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
@@ -190,7 +193,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"book", "TypeError"})
     public void selectNode_root() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
@@ -217,7 +221,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1"})
     public void getElementsByTagNameNS() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
@@ -248,7 +253,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "2", "3"})
     public void getElementsByTagNameNSAsterisk() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
@@ -280,7 +286,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "<nested>Three</nested>", "Four", "1", "Two", "0", "0"})
     public void getElementsByTagNameXml() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "</head><body>\n"
             + "<script>\n"
@@ -325,7 +332,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void hasAttribute() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
@@ -354,7 +362,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void attributes2() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
@@ -382,7 +391,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined"})
     public void xml() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var text = '<a><b c=\"d\">e</b></a>';\n"
@@ -476,8 +486,8 @@ public class ElementTest extends WebDriverTestCase {
     }
 
     private void html(final String methodName) throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -676,8 +686,8 @@ public class ElementTest extends WebDriverTestCase {
     }
 
     private void xml(final String methodName) throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -726,8 +736,7 @@ public class ElementTest extends WebDriverTestCase {
                     + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
                     + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, "})
     public void enumeratedProperties() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -755,7 +764,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("finished")
     public void removeAttribute() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -790,7 +800,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("function")
     public void getBoundingClientRect() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(typeof Element.prototype.getBoundingClientRect);\n"
@@ -805,7 +816,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void commentIsElement() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='myId'><!-- --></div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -823,7 +835,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void nodeHasUndefinedInnerText() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -861,8 +874,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "first", "third", "second", "second"})
     public void firstElementChild() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -921,7 +934,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§", "§§URL§§"})
     public void baseURI() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -948,7 +962,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLCollection] 1", "[object HTMLCollection] 2", "[object HTMLCollection] 0"})
     public void children() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var text = '<hello><child></child></hello>';\n"
@@ -983,7 +998,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "a b c"})
     public void classList() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var text = '<hello><child></child></hello>';\n"
@@ -1007,7 +1023,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"test value", "true", "false", "finished"})
     public void attributeNS() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1036,7 +1053,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"ab", "ab"})
     public void removeAttribute_case_sensitive() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1072,7 +1090,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("test")
     public void setAttributeNode() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1099,7 +1118,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined"})
     public void currentStyle() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1123,7 +1143,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined"})
     public void allowKeyboardInput() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1144,8 +1165,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void enumeratedPropertiesForNativeFunction() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1169,8 +1190,8 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts({"function Element() { [native code] }", "[object Element]",
              "function Element() { [native code] }"})
     public void prototypConstructor() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1200,7 +1221,7 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts({"function Element() { [native code] }", "[object Element]",
              "function Element() { [native code] }"})
     public void prototypConstructorStandards() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1226,7 +1247,7 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0-0", "0-1", "2-5"})
     public void childElementCount() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1261,7 +1282,7 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1-2", "3-7"})
     public void childElementCountTable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1295,7 +1316,7 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false"})
     public void hasAttributes() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1318,7 +1339,7 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("Philippine eagle")
     public void matches() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1354,7 +1375,7 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"SyntaxError/DOMException", "done"})
     public void matchesInvalidSelector() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1386,7 +1407,7 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"TypeError", "done"})
     public void matchesWindow() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1419,7 +1440,7 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"div-02", "div-03", "div-01", "article-01", "null"})
     public void closest() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1455,8 +1476,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "true", "true", "false", "false"})
     public void toggleAttribute() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var d0 = document.getElementById('div0');\n"
@@ -1853,8 +1874,8 @@ public class ElementTest extends WebDriverTestCase {
     }
 
     private void modifySiblings(final String check, final String call, final String content) throws Exception {
-        final String html =
-            "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <div id='div0'><div id='div1'>" + content + "</div></div>\n"
 
@@ -2274,8 +2295,8 @@ public class ElementTest extends WebDriverTestCase {
     }
 
     private void modifyChildren(final String check, final String call, final String content) throws Exception {
-        final String html =
-            "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <div id='div0'>" + content + "</div>\n"
 
@@ -2340,8 +2361,8 @@ public class ElementTest extends WebDriverTestCase {
             FF_ESR = {"0,0", "onscroll 10,30", "10,30", "onscroll 22,64", "22,64",
                       "onscroll 5,0", "5,0", "type error", "5,0"})
     public void scrollBy() throws Exception {
-        final String html
-            = "<html><body onload='test()'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<div id='d' style='width: 100px;height: 99px;overflow: scroll;'>\n"
             + "<div style='width:10000px;height:10000px;background-color:blue;'></div>\n"
             + "</div>"
@@ -2383,8 +2404,8 @@ public class ElementTest extends WebDriverTestCase {
             FF_ESR = {"0,0", "onscroll 10,30", "10,30", "onscroll 22,64", "22,64",
                       "onscroll 5,0", "5,0", "onscroll 49,0", "49,0", "onscroll 49,0", "49,0"})
     public void scrollByOptions() throws Exception {
-        final String html
-            = "<html><body onload='test()'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<div id='d' style='width: 100px;height: 99px;overflow: scroll;'>\n"
             + "<div style='width:10000px;height:10000px;background-color:blue;'></div>\n"
             + "</div>"
@@ -2429,8 +2450,8 @@ public class ElementTest extends WebDriverTestCase {
             FF_ESR = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
                       "onscroll 0,0", "0,0", "type error", "0,0"})
     public void scrollTo() throws Exception {
-        final String html
-            = "<html><body onload='test()'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<div id='d' style='width: 100px;height: 99px;overflow: scroll;'>\n"
             + "<div style='width:10000px;height:10000px;background-color:blue;'></div>\n"
             + "</div>"
@@ -2472,8 +2493,8 @@ public class ElementTest extends WebDriverTestCase {
             FF_ESR = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
                       "onscroll 0,0", "0,0", "onscroll 44,0", "44,0", "onscroll 44,0", "44,0"})
     public void scrollToOptions() throws Exception {
-        final String html
-            = "<html><body onload='test()'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<div id='d' style='width: 100px;height: 99px;overflow: scroll;'>\n"
             + "<div style='width:10000px;height:10000px;background-color:blue;'></div>\n"
             + "</div>"
@@ -2518,8 +2539,8 @@ public class ElementTest extends WebDriverTestCase {
             FF_ESR = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
                       "onscroll 0,0", "0,0", "type error", "0,0"})
     public void scroll() throws Exception {
-        final String html
-            = "<html><body onload='test()'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<div id='d' style='width: 100px;height: 99px;overflow: scroll;'>\n"
             + "<div style='width:10000px;height:10000px;background-color:blue;'></div>\n"
             + "</div>"
@@ -2561,8 +2582,8 @@ public class ElementTest extends WebDriverTestCase {
             FF_ESR = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
                       "onscroll 0,0", "0,0", "onscroll 44,0", "44,0", "onscroll 44,0", "44,0"})
     public void scrollOptions() throws Exception {
-        final String html
-            = "<html><body onload='test()'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<div id='d' style='width: 100px;height: 99px;overflow: scroll;'>\n"
             + "<div style='width:10000px;height:10000px;background-color:blue;'></div>\n"
             + "</div>"

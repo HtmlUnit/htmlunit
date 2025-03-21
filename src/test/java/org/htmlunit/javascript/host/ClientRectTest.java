@@ -34,7 +34,8 @@ public class ClientRectTest extends WebDriverTestCase {
     @Test
     @Alerts({"100", "400", "100", "450", "50", "0"})
     public void properties() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -62,7 +63,8 @@ public class ClientRectTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void getBoundingClientRect_WidthPercent() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

@@ -36,8 +36,8 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"left", "right", "bottom", "top", "wrong", ""})
     public void getAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <caption id='c1' align='left' ></caption>\n"
             + "    <caption id='c2' align='right' ></caption>\n"
@@ -64,8 +64,8 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"CenTer", "8", "foo", "left", "right", "bottom", "top"})
     public void setAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <caption id='c1' align='left' ></caption>\n"
             + "  </table>\n"
@@ -101,8 +101,8 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "middle", "8", "BOTtom"})
     public void vAlign() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <caption id='c1' valign='top'>a</caption>\n"
             + "  <caption id='c2' valign='baseline'>b</caption>\n"
             + "  <caption id='c3' valign='3'>c</caption>\n"
@@ -143,8 +143,8 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"<caption id=\"cap\">a</caption>", "new"})
     public void outerHTML() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

@@ -179,8 +179,8 @@ public class Console2Test extends SimpleWebTestCase {
         final List<String> messages = new ArrayList<>();
         console.setLogger(new LoggerMock(messages));
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  window.console.log(" + logInput + ");\n"
@@ -207,7 +207,8 @@ public class Console2Test extends SimpleWebTestCase {
         final String workerJs = "console.log('from worker');\n";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
 
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script async>\n"
                 + "try {\n"
                 + "  var myWorker = new Worker('worker.js');\n"

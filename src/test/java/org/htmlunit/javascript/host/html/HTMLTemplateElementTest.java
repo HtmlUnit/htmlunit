@@ -34,8 +34,8 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void prototype() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -53,8 +53,8 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void contentCheck() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -81,8 +81,8 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
              "[object DocumentFragment]", "0-1",
              "[object DocumentFragment]", "0-2"})
     public void content() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -122,8 +122,8 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true"})
     public void contentSame() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -158,8 +158,8 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DocumentFragment]", "0-0", "1-0"})
     public void appendChild() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -191,8 +191,8 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "<p></p>", "", "HtmlUnit", "<div>HtmlUnit</div><div>is great</div>"})
     public void innerHTML() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -239,8 +239,8 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
     @Alerts({"<template></template>", "<template>HtmlUnit</template>",
              "<template><div>HtmlUnit</div><div>is great</div></template>"})
     public void innerHTMLIncludingTemplate() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -275,8 +275,8 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
              "<template id=\"tText\">HtmlUnit</template>",
              "<template id=\"tDiv\"><div>HtmlUnit</div><div>is great</div></template>"})
     public void outerHTML() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -321,8 +321,8 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"myTemplate", "null"})
     public void getElementById() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -351,8 +351,8 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"myTemplate", "0"})
     public void getElementsByTagName() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -381,8 +381,8 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"myTemplate", "0"})
     public void childNodes() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

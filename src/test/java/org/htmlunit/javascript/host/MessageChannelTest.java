@@ -39,7 +39,8 @@ public class MessageChannelTest extends WebDriverTestCase {
     @Test
     @Alerts("Message back from the IFrame, Hello from the main page!")
     public void test() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<p>My body</p>\n"
                 + "<iframe src='" + URL_SECOND + "' width='480' height='320'></iframe>\n"
                 + "</body>\n"
@@ -60,7 +61,8 @@ public class MessageChannelTest extends WebDriverTestCase {
                 + "  }\n"
                 + "</script></html>";
 
-        final String html2 = "<html><body>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "  <p>iFrame body</p>\n"
                 + "</body>\n"
                 + "<script>\n"

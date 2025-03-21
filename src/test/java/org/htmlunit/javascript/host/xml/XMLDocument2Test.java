@@ -37,7 +37,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"myTarget,myData,7", "myTarget,myData", "<?myTarget myData?>"})
     public void createProcessingInstruction() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -65,7 +66,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"#cdata-section,abcdefghij,4", "abcdefghij", "<![CDATA[abcdefghij]]>"})
     public void createCDATASection() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -91,7 +93,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"#cdata-section,<>&?,4", "<>&?", "<![CDATA[<>&?]]>"})
     public void createCDATASection_specialChars() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -118,7 +121,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts("createNode not available")
     public void createNode() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -144,7 +148,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts("createNode not available")
     public void createNode_element() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -169,7 +174,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"a", "null", "b"})
     public void documentElementCaching() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -196,7 +202,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts("a:b")
     public void createElement_namespace() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -219,7 +226,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts("ReferenceError")
     public void text() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -250,7 +258,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "foo"})
     public void firstChild_element() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -280,7 +289,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Alerts({"foo", "foo"})
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -309,7 +319,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"apache", "foo"})
     public void firstChild_processingInstruction() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -339,7 +350,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"dtd", "a"})
     public void firstChild_documentType() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -366,7 +378,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"#comment", "foo"})
     public void firstChild_comment() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -396,7 +409,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "fooc1", "null"})
     public void firstElementChild() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
@@ -428,7 +442,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "fooc2", "null"})
     public void lastElementChild() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -462,7 +477,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({"name: item1", "id: 1", "id: 2", "name: item2", "name: item3", "id: 3"})
     public void attributeOrder() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

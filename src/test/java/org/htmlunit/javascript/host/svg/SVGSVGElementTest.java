@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.svg;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -38,7 +37,7 @@ public class SVGSVGElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object SVGRect]")
     public void createSVGRect() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -58,7 +57,7 @@ public class SVGSVGElementTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void getInnerTextOfSvg() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><body>\n"
                 + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'></svg>\n"
                 + "  <script>\n"
@@ -77,7 +76,7 @@ public class SVGSVGElementTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getInnerTextOfElementContainingSvg() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><body>\n"
                 + "  <div id='myDivId'><svg xmlns='http://www.w3.org/2000/svg' version='1.1'></svg></div>\n"
                 + "  <script>\n"

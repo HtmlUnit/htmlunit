@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.svg;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.NotYetImplemented;
@@ -36,7 +35,7 @@ public class SVGTextElementTest extends WebDriverTestCase {
     @Test
     @Alerts("function SVGTextElement() { [native code] }")
     public void simpleScriptable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -56,7 +55,7 @@ public class SVGTextElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object SVGTextElement]", "true"})
     public void getComputedTextLengthAvailable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -84,7 +83,7 @@ public class SVGTextElementTest extends WebDriverTestCase {
     @Alerts({"[object SVGTextElement]", "117.3"})
     @NotYetImplemented
     public void getComputedTextLength() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

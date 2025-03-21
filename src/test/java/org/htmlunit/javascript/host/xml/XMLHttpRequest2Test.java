@@ -42,7 +42,6 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpMethod;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebRequest;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.javascript.host.xml.XMLHttpRequestTest.BasicAuthenticationServlet;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
@@ -103,7 +102,9 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "  xhr.open('GET', url, true);\n"
             + "  xhr.send('');\n"
             + "}\n";
-        final String html = "<html><head><script>\n"
+
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + jsCallSynchXHR
             + jsCallASynchXHR
             + "function testMain() {\n"
@@ -117,7 +118,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "<iframe id='myFrame' src='frame.html'></iframe>\n"
             + "</body></html>";
 
-        final String frame = "<html><head><script>\n"
+        final String frame = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + jsCallSynchXHR
             + jsCallASynchXHR
             + "function testFrame() {\n"
@@ -141,7 +143,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     public void setRequestHeader() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('GET', 'second.html', false);\n"
@@ -176,7 +179,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final String body = "hello world";
         final String setHeader = headerValue == null ? ""
                 : "xhr.setRequestHeader('Content-length', 1234);\n";
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "var xhr = new XMLHttpRequest();\n"
             + "xhr.open('POST', 'second.html', false);\n"
             + "var body = '" + body + "';\n"
@@ -198,7 +202,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     public void requestHeaderSendBlob() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "var xhr = new XMLHttpRequest();\n"
             + "xhr.open('POST', 'second.html', false);\n"
             + "xhr.setRequestHeader('Content-Type', 'text/plain');\n"
@@ -223,7 +228,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     public void requestHeaderSendFile() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<input id='fileupload' type='file'/>"
             + "<button id='testBtn' onclick='test()'>Tester</button>\n"
@@ -267,7 +273,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts({"5", "pass", "pass", "pass", "pass"})
     public void openThrowOnEmptyUrl() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var xhr = new XMLHttpRequest();\n"
@@ -310,7 +317,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void responseXML_badContentType() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -330,7 +338,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     }
 
     private void testResponseXML(final String contentType) throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -365,7 +374,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void responseXML_sendNotCalled() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -404,7 +414,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     }
 
     private void sameOriginPolicy(final String url) throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -427,7 +438,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     public void put() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('PUT', 'second.html', false);\n"
@@ -451,7 +463,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object XMLDocument]")
     public void iframeInResponse() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var xhr = new XMLHttpRequest();\n"
@@ -460,7 +473,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "log(xhr.responseXML);\n"
             + "</script></head><body></body></html>";
 
-        final String xml = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
+        final String xml = DOCTYPE_HTML
+            + "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<body><iframe></iframe></body></html>";
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageVerifyTitle2(html);
@@ -479,7 +493,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             FF = {"hello", "in timeout"},
             FF_ESR = {"hello", "in timeout"})
     public void xhrDownloadInBackground() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var xhr = new XMLHttpRequest();\n"
@@ -506,7 +521,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("hello in timeout")
     public void xhrCallbackBeforeTimeout() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "function wait() {\n"
             + "  var xhr = new XMLHttpRequest();\n"
             + "  xhr.open('GET', '/delay200/foo.txt', false);\n"
@@ -539,7 +555,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("a=b,0; cookie: null")
     public void post() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -563,7 +580,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("a=b,0; cookie: cookie=sweet")
     public void post_cookies() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -613,8 +631,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("4")
     public void onreadystatechange_sync() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -652,8 +670,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object Event]#[object XMLHttpRequest]")
     public void onreadystatechangeSyncWithParam() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -693,8 +711,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object Event]#[object XMLHttpRequest]")
     public void onreadystatechangeAsyncWithParam() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -735,7 +753,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts({"ok", "4"})
     public void sameOriginCorsSimple() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -769,7 +788,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts({"ok", "4", "<null>"})
     public void baseUrlAbsoluteRequest() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<base href='" + URL_CROSS_ORIGIN_BASE + "'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -813,7 +833,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts({"ok", "4", "§§URL§§"})
     public void baseUrlAbsoluteRequestOtherUrl() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<base href='" + URL_CROSS_ORIGIN_BASE + "'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -858,7 +879,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts({"ok", "4", "§§URL§§"})
     public void baseUrlRelativeRequest() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<base href='" + URL_CROSS_ORIGIN_BASE + "'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -908,8 +930,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("Basic:Zm9vOmJhcg==")
     public void basicAuthenticationRequest() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "  <head>\n"
                         + "    <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -969,7 +991,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("PATCH|some body data")
     public void patch() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1041,8 +1064,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", EncodedXmlServlet.class);
 
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "  <head>\n"
                         + "    <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -1087,8 +1110,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                                 + "Transfer-Encoding: chunked\\n"
                                 + "Server: Jetty(XXX)\\n"})
     public void getAllResponseHeaders() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "  <head>\n"
                         + "    <script>\n"
                         + "      function log(msg) {\n"
@@ -1133,8 +1156,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
              "text/xml;charset=iso-8859-1", "text/xml;charset=iso-8859-1",
              "text/xml;charset=iso-8859-1", "null"})
     public void getResponseHeader() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "  <head>\n"
                         + "    <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -1177,7 +1200,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("exception catched")
     public void createFromPrototypeAndDefineProperty() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var f = function() {};\n"
@@ -1201,7 +1225,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             FF = "read onerror",
             FF_ESR = "read onerror")
     public void readPropertyFromPrototypeShouldThrow() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var p = 'onerror';\n"
@@ -1220,8 +1245,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("4")
     public void onreadystatechange_eventListener() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1271,7 +1296,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
     private void postRedirect(final int code, final HttpMethod httpMethod,
             final String redirectUrl, final String content) throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var xhr = new XMLHttpRequest();\n"

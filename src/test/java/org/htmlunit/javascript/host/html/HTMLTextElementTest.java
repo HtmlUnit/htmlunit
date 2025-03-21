@@ -33,8 +33,8 @@ public class HTMLTextElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "New Text"})
     public void text() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -60,8 +60,8 @@ public class HTMLTextElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "New Text"})
     public void textCreateElement() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

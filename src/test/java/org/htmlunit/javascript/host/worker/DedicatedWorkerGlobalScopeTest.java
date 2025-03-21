@@ -38,7 +38,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: Result = 15")
     public void onmessage() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -67,7 +68,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: Result = 15")
     public void selfOnmessage() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
@@ -95,7 +97,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: Result = 15")
     public void selfAddEventListener() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
@@ -123,7 +126,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: timeout")
     public void selfSetTimeout() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
@@ -149,7 +153,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: interval")
     public void selfSetInterval() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
@@ -176,7 +181,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: func=function addEventListener() { [native code] }")
     public void functionDefaultValue() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
@@ -202,7 +208,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             FF = {},
             FF_ESR = {})
     public void workerCodeWithWrongMimeType() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -231,7 +238,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: Bob [GSCE] [undefined]")
     public void workerName() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -271,7 +279,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: Bob the builder")
     public void workerNameSet() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -300,7 +309,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: working")
     public void workerOptionsUndefined() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -328,7 +338,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: working")
     public void workerOptionsNull() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"

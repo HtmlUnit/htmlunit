@@ -37,8 +37,8 @@ public class HTMLTableElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void width() throws Exception {
-        final String content
-            = "<html><head></head><body>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head></head><body>\n"
                 + "<table id='tableID' style='background:blue'><tr><td></td></tr></table>\n"
                 + "<script language='javascript'>\n"
                 + "    var table = document.getElementById('tableID');\n"

@@ -58,8 +58,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     }
 
     private void align(final String id) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -122,8 +122,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     }
 
     private void vAlign(final String id) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -198,8 +198,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     }
 
     private void ch(final String id) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -274,8 +274,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     }
 
     private void chOff(final String id) throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -328,7 +328,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts("<tr><td>world</td></tr>")
     public void TBODY_innerHTML() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -354,8 +355,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
     public void innerText_body() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <tbody id='tab_row'><tr><td>cell1</td></tr></tbody>\n"
             + "  </table>\n"
@@ -382,8 +383,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
     public void innerText_header() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <thead id='tab_row'><tr><td>cell1</td></tr></thead>\n"
             + "  </table>\n"
@@ -410,8 +411,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
     public void innerText_footer() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <tfoot id='tab_row'><tr><td>cell1</td></tr></tfoot>\n"
             + "  </table>\n"
@@ -438,8 +439,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
     public void textContent_body() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <tbody id='tab_row'><tr><td>cell1</td></tr></tbody>\n"
             + "  </table>\n"
@@ -466,8 +467,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
     public void textContent_header() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <thead id='tab_row'><tr><td>cell1</td></tr></thead>\n"
             + "  </table>\n"
@@ -494,8 +495,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", ""})
     public void textContent_footer() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <tfoot id='tab_row'><tr><td>cell1</td></tr></tfoot>\n"
             + "  </table>\n"
@@ -522,8 +523,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "#0000aa", "x"})
     public void bgColorFooter() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -551,8 +552,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "#0000aa", "x"})
     public void bgColorHeader() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -580,8 +581,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"<thead id=\"thead\"><tr><td>cell1</td></tr></thead>", "new"})
     public void outerHTML() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
