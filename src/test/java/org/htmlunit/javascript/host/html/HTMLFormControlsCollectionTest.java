@@ -35,7 +35,8 @@ public class HTMLFormControlsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "2", "true", "1", "null"})
     public void namedItem() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -71,7 +72,8 @@ public class HTMLFormControlsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts({"first", "first", "first", "first", "second"})
     public void iterable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"

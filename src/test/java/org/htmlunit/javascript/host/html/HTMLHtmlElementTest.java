@@ -44,7 +44,8 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLHtmlElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html id='myId'><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"
             + "  }\n"
@@ -64,7 +65,8 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLHtmlElement]", "function HTMLHtmlElement() { [native code] }"})
     public void HTMLHtmlElement_toString() throws Exception {
-        final String html = "<html id='myId'><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html id='myId'><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
@@ -88,7 +90,8 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     public void childNodes_1() throws Exception {
         // The whitespace in this HTML is very important, because we're verifying
         // that it doesn't get included in the childNodes collection.
-        final String html = "<html> \n <body> \n <script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html> \n <body> \n <script>\n"
             + LOG_TITLE_FUNCTION
             + "var nodes = document.documentElement.childNodes;\n"
             + "log(nodes.length);\n"
@@ -109,7 +112,8 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     public void childNodes_2() throws Exception {
         // The whitespace in this HTML is very important, because we're verifying
         // that it doesn't get included in the childNodes collection.
-        final String html = "<html> \n <head> \n <script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html> \n <head> \n <script>\n"
             + LOG_TITLE_FUNCTION
             + "var nodes = document.documentElement.childNodes;\n"
             + "log(nodes.length);\n"
@@ -149,7 +153,8 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     @Test
     @Alerts("Hello World")
     public void innerText() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -246,7 +251,8 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     }
 
     private void offsetsHtml(final String style) throws Exception {
-        final String html = "<html id='my' style='" + style + "'>\n"
+        final String html = DOCTYPE_HTML
+              + "<html id='my' style='" + style + "'>\n"
               + "<head></head>\n"
               + "<body>\n"
               + "</div></body>\n"

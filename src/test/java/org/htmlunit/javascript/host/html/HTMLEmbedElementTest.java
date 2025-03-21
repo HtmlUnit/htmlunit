@@ -45,8 +45,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                       "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""})
     @NotYetImplemented({FF, FF_ESR})
     public void getAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <embed id='e1' align='left' ></embed>\n"
             + "  <embed id='e2' align='right' ></embed>\n"
             + "  <embed id='e3' align='bottom' ></embed>\n"
@@ -82,8 +82,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                       "absbottom", "absmiddle", "bottom", "texttop"})
     @NotYetImplemented({FF, FF_ESR})
     public void setAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <embed id='e1' align='left' ></embed>\n"
 
             + "<script>\n"
@@ -122,8 +122,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"10px", "20em", "80%", "40", "wrong", ""})
     public void getHeight() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <embed id='e1' height='10px' ></embed>\n"
             + "  <embed id='e2' height='20em' ></embed>\n"
             + "  <embed id='e3' height='80%' ></embed>\n"
@@ -148,8 +148,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"20px", "8", "foo"})
     public void setHeight() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <embed id='e1' height='10px' ></embed>\n"
 
             + "<script>\n"
@@ -179,8 +179,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"10px", "20em", "80%", "40", "wrong", ""})
     public void getWidth() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <embed id='e1' width='10px' ></embed>\n"
             + "  <embed id='e2' width='20em' ></embed>\n"
             + "  <embed id='e3' width='80%' ></embed>\n"
@@ -205,8 +205,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"20px", "8", "foo"})
     public void setWidth() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <embed id='e1' width='10px' ></embed>\n"
 
             + "<script>\n"

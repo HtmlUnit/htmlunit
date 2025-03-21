@@ -35,8 +35,8 @@ public class HTMLHRElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"left", "right", "center", "wrong", ""})
     public void getAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <hr id='h1' align='left' />\n"
             + "  <hr id='h2' align='right' />\n"
             + "  <hr id='h3' align='center' />\n"
@@ -60,8 +60,8 @@ public class HTMLHRElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"CenTer", "8", "foo", "left", "right", "center"})
     public void setAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <hr id='h1' align='left' />\n"
 
             + "<script>\n"

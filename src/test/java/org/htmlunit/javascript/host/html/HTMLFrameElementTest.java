@@ -43,8 +43,8 @@ public class HTMLFrameElementTest extends SimpleWebTestCase {
     @Test
     @Alerts("Frame2")
     public void serialization() throws Exception {
-        final String html
-            = "<html><head><title>first</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "  <frame id='frame1'>\n"
             + "  <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"

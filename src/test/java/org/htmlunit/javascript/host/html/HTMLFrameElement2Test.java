@@ -50,8 +50,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("Frame2")
     public void frameName() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -70,8 +70,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLDocument]", "true"})
     public void contentDocument() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -96,8 +95,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void contentWindow() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -120,8 +119,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"frame=OK", "frames.length=2", "frame=OK", "frames.length=0", "frame=OK", "frames.length=0"})
     public void frameTag1192854() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var root=this;\n"
@@ -154,8 +153,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"function handler() {}", "null", "null"})
     public void onloadNull() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function handler() {}\n"
@@ -190,13 +189,13 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     }
 
     private void location(final String jsExpr) throws Exception {
-        final String firstContent
-            = "<html><head><title>first</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title></head>\n"
             + "<frameset cols='*' onload='" + jsExpr + "'>\n"
             + "  <frame name='Frame1' src='subdir/frame.html'>\n"
             + "</frameset></html>";
-        final String defaultContent
-            = "<html><head><script>alert(location)</script></head></html>";
+        final String defaultContent = DOCTYPE_HTML
+            + "<html><head><script>alert(location)</script></head></html>";
 
         getMockWebConnection().setDefaultResponse(defaultContent);
 
@@ -215,7 +214,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("2")
     public void writeFrameset() throws Exception {
-        final String content1 = "<html><head>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "    document.write('<frameset>');\n"
@@ -223,7 +223,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "    document.write('</frameset>');\n"
             + "</script>\n"
             + "</head></html>";
-        final String content2 = "<html><head><script>parent.log(2)</script></head></html>";
+        final String content2 = DOCTYPE_HTML + "<html><head><script>parent.log(2)</script></head></html>";
 
         getMockWebConnection().setDefaultResponse(content2);
 
@@ -237,8 +237,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("DIV")
     public void frameLoadedAfterParent() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -246,8 +246,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "<iframe name='testFrame' src='testFrame.html'></iframe>\n"
             + "<div id='aButton'>test text</div>\n"
             + "</body></html>";
-        final String frameContent
-            = "<html><head></head><body>\n"
+        final String frameContent = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<script>\n"
             + "parent.log(top.document.getElementById('aButton').tagName);\n"
             + "</script>\n"
@@ -266,7 +266,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Alerts({"about:blank", "oFrame.foo: undefined", "/frame1.html", "oFrame.foo: foo of frame 1",
              "/frame2.html", "oFrame.foo: foo of frame 2"})
     public void changingFrameDocumentLocation() throws Exception {
-        final String firstHtml = "<html><head>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var oFrame;\n"
@@ -290,7 +291,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "<button id='btn3' onclick='test(\"about:blank\")'>load about:blank</button>\n"
             + "</body></html>";
 
-        final String frame1Html = "<html><head><title>frame 1</title>\n"
+        final String frame1Html = DOCTYPE_HTML
+            + "<html><head><title>frame 1</title>\n"
             + "<script>var foo = 'foo of frame 1'</script></head>\n"
             + "<body>frame 1</body></html>";
         final String frame2Html = frame1Html.replaceAll("frame 1", "frame 2");
@@ -315,8 +317,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLFrameElement]")
     public void frames_framesetOnLoad() throws Exception {
-        final String mainHtml =
-            "<html><head>\n"
+        final String mainHtml = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>"
@@ -327,7 +329,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final String frame1 = "<html><head><title>1</title></head>\n"
+        final String frame1 = DOCTYPE_HTML
+            + "<html><head><title>1</title></head>\n"
             + "<body></body>\n"
             + "</html>";
 
@@ -342,8 +345,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLFrameElement]")
     public void frames_bodyOnLoad() throws Exception {
-        final String mainHtml =
-            "<html><head>\n"
+        final String mainHtml = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -353,7 +356,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final String frame1 = "<html><head><title>1</title></head>\n"
+        final String frame1 = DOCTYPE_HTML
+            + "<html><head><title>1</title></head>\n"
             + "<body onload=\"parent.log(parent.frames['f1'])\"></body>\n"
             + "</html>";
 
@@ -368,8 +372,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLFrameElement]")
     public void parent_frames() throws Exception {
-        final String mainHtml =
-            "<html><head>\n"
+        final String mainHtml = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -379,7 +383,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final String frame1 = "<html><head><title>f1</title>\n"
+        final String frame1 = DOCTYPE_HTML
+            + "<html><head><title>f1</title>\n"
             + "<script type='text/javascript'>\n"
             + "  function test() {\n"
             + "    parent.log(parent.frames['f1']);\n"
@@ -400,17 +405,20 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("OnloadTest head bottom frameset")
     public void onloadOrderRows() throws Exception {
-        final String html = "<html><head><title>OnloadTest</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50%,*' onLoad='document.title += \" frameset\"'>\n"
                 + "  <frame name='head' src='head.html'>\n"
                 + "  <frame name='bottom' src='bottom.html'>\n"
                 + "</frameset>\n"
                 + "</html>";
 
-        final String top = "<html><head><title>Head</title></head>\n"
+        final String top = DOCTYPE_HTML
+                + "<html><head><title>Head</title></head>\n"
                 + "<body onload='top.document.title += \" head\"'>head</body>\n"
                 + "</html>";
-        final String bottom = "<html><head><title>Bottom</title></head>\n"
+        final String bottom = DOCTYPE_HTML
+                + "<html><head><title>Bottom</title></head>\n"
                 + "<body onload='top.document.title += \" bottom\"'>bottom</body>\n"
                 + "</html>";
 
@@ -428,17 +436,20 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("OnloadTest left right frameset")
     public void onloadOrderCols() throws Exception {
-        final String html = "<html><head><title>OnloadTest</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset cols='50%,*' onLoad='document.title += \" frameset\"'>\n"
                 + "  <frame name='left' src='left.html'>\n"
                 + "  <frame name='right' src='right.html'>\n"
                 + "</frameset>\n"
                 + "</html>";
 
-        final String left = "<html><head><title>Left</title></head>\n"
+        final String left = DOCTYPE_HTML
+                + "<html><head><title>Left</title></head>\n"
                 + "<body onload='top.document.title += \" left\"'>left</body>\n"
                 + "</html>";
-        final String right = "<html><head><title>Right</title></head>\n"
+        final String right = DOCTYPE_HTML
+                + "<html><head><title>Right</title></head>\n"
                 + "<body onload='top.document.title += \" right\"'>right</body>\n"
                 + "</html>";
 
@@ -459,7 +470,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
              "header -> content -> frameSet -> onloadFrame",
              "onloadFrame\nNew content loaded..."})
     public void windowLocationReplaceOnload() throws Exception {
-        final String html = "<html><head><title>OnloadTest</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
                 + "  <frame name='header' src='header.html'>\n"
                 + "  <frame name='content' id='content' "
@@ -467,7 +479,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "</frameset>\n"
                 + "</html>";
 
-        final String headerFrame = "<html><head><title>headerFrame</title></head>\n"
+        final String headerFrame = DOCTYPE_HTML
+                + "<html><head><title>headerFrame</title></head>\n"
                 + "<script type='text/javascript'>\n"
                 + "  function addToFrameOrder(frame) {\n"
                 + "    var spacer = ' -> ';\n"
@@ -480,14 +493,16 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "  <div id=\"frameOrder\"></div>\n"
                 + "</body></html>";
 
-        final String contentFrame = "<html><head><title>contentFrame</title></head>\n"
+        final String contentFrame = DOCTYPE_HTML
+                + "<html><head><title>contentFrame</title></head>\n"
                 + "<body onload=\"top.header.addToFrameOrder('content');\">\n"
                 + "  <h3>content</h3>\n"
                 + "  <a name='onloadFrameAnchor' href='onload.html' "
                         + "target='content'>Click for new frame content with onload</a>\n"
                 + "</body></html>";
 
-        final String onloadFrame = "<html><head><title>onloadFrame</title></head>\n"
+        final String onloadFrame = DOCTYPE_HTML
+                + "<html><head><title>onloadFrame</title></head>\n"
                 + "<body onload=\"alert('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
                 + "  <script type='text/javascript'>\n"
                 + "    alert('Body alert.');\n"
@@ -537,7 +552,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
              "header -> content -> frameSet -> onloadFrame",
              "onloadFrame\nNew content loaded..."})
     public void windowLocationAssignOnload() throws Exception {
-        final String html = "<html><head><title>OnloadTest</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
                 + "  <frame name='header' src='header.html'>\n"
                 + "  <frame name='content' id='content' "
@@ -545,7 +561,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "</frameset>\n"
                 + "</html>";
 
-        final String headerFrame = "<html><head><title>headerFrame</title></head>\n"
+        final String headerFrame = DOCTYPE_HTML
+                + "<html><head><title>headerFrame</title></head>\n"
                 + "<script type='text/javascript'>\n"
                 + "  function addToFrameOrder(frame) {\n"
                 + "    var spacer = ' -> ';\n"
@@ -558,14 +575,16 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "  <div id='frameOrder'></div>\n"
                 + "</body></html>";
 
-        final String contentFrame = "<html><head><title>contentFrame</title></head>\n"
+        final String contentFrame = DOCTYPE_HTML
+                + "<html><head><title>contentFrame</title></head>\n"
                 + "<body onload=\"top.header.addToFrameOrder('content');\">\n"
                 + "  <h3>content</h3>\n"
                 + "  <a name='onloadFrameAnchor' href='onload.html' "
                         + "target='content'>Click for new frame content with onload</a>\n"
                 + "</body></html>";
 
-        final String onloadFrame = "<html><head><title>onloadFrame</title></head>\n"
+        final String onloadFrame = DOCTYPE_HTML
+                + "<html><head><title>onloadFrame</title></head>\n"
                 + "<body onload=\"alert('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
                 + "  <script type='text/javascript'>\n"
                 + "    alert('Body alert.');\n"
@@ -615,7 +634,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
              "onloadFrame\nNew content loaded..."})
     @NotYetImplemented
     public void windowLocationSetOnload() throws Exception {
-        final String html = "<html><head><title>OnloadTest</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
                 + "  <frame name='header' src='header.html'>\n"
                 + "  <frame name='content' id='content' "
@@ -623,7 +643,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "</frameset>\n"
                 + "</html>";
 
-        final String headerFrame = "<html><head><title>headerFrame</title></head>\n"
+        final String headerFrame = DOCTYPE_HTML
+                + "<html><head><title>headerFrame</title></head>\n"
                 + "<script type='text/javascript'>\n"
                 + "  function addToFrameOrder(frame) {\n"
                 + "    var spacer = ' -> ';\n"
@@ -636,14 +657,16 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "  <div id='frameOrder'></div>\n"
                 + "</body></html>";
 
-        final String contentFrame = "<html><head><title>contentFrame</title></head>\n"
+        final String contentFrame = DOCTYPE_HTML
+                + "<html><head><title>contentFrame</title></head>\n"
                 + "<body onload=\"top.header.addToFrameOrder('content');\">\n"
                 + "  <h3>content</h3>\n"
                 + "  <a name='onloadFrameAnchor' href='onload.html' "
                         + "target='content'>Click for new frame content with onload</a>\n"
                 + "</body></html>";
 
-        final String onloadFrame = "<html><head><title>onloadFrame</title></head>\n"
+        final String onloadFrame = DOCTYPE_HTML
+                + "<html><head><title>onloadFrame</title></head>\n"
                 + "<body onload=\"top.header.addToFrameOrder('onloadFrame');\">\n"
                 + "  <h3>onloadFrame</h3>\n"
                 + "  <p id='newContent'>New content loaded...</p>\n"
@@ -682,7 +705,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"localhost", "localhost", "localhost", "localhost"})
     public void domain() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -701,7 +725,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "</frameset>\n"
                 + "</html>";
 
-        final String left = "<html><head><title>Left</title></head>\n"
+        final String left = DOCTYPE_HTML
+                + "<html><head><title>Left</title></head>\n"
                 + "<body>left</body>\n"
                 + "</html>";
 
@@ -717,8 +742,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"loaded", "null"})
     public void deny() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -736,7 +760,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final String left = "<html><head><title>Frame Title</title></head>\n"
+        final String left = DOCTYPE_HTML
+                + "<html><head><title>Frame Title</title></head>\n"
                 + "<body>Frame Content</body>\n"
                 + "</html>";
 
