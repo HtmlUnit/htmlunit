@@ -208,7 +208,8 @@ public class ScreenTest extends WebDriverTestCase {
     }
 
     private void testBooleanProperty(final String prop) throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
@@ -230,7 +231,8 @@ public class ScreenTest extends WebDriverTestCase {
     }
 
     private void testNumericProperty(final String prop) throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
@@ -257,7 +259,8 @@ public class ScreenTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object ScreenOrientation]", "landscape-primary", "0"})
     public void orientation() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
@@ -284,7 +287,8 @@ public class ScreenTest extends WebDriverTestCase {
             FF = "landscape-primary",
             FF_ESR = "landscape-primary")
     public void mozOrientation() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
@@ -309,7 +313,8 @@ public class ScreenTest extends WebDriverTestCase {
             FF = "undefined",
             FF_ESR = "undefined")
     public void isExtended() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"

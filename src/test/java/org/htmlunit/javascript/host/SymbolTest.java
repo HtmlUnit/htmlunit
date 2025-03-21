@@ -130,8 +130,7 @@ public class SymbolTest extends WebDriverTestCase {
     }
 
     private void name(final String name) throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -183,8 +182,7 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts({"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)"})
     public void defaultValue() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -211,8 +209,7 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "symbol", "symbol", "symbol"})
     public void typeOf() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -240,8 +237,7 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "Symbol(mario)"})
     public void symbolFor() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -270,8 +266,7 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false"})
     public void symbolForGlobal() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -300,8 +295,7 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts({"TypeError", "TypeError"})
     public void symbolNew() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -329,8 +323,7 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts({"TypeError", "TypeError"})
     public void globalSymbolRegistry() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -358,7 +351,8 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts("called")
     public void inFunction() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -381,7 +375,8 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts("called")
     public void inFunction2() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -406,7 +401,8 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts("function")
     public void prototypeAddFunction() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -427,7 +423,8 @@ public class SymbolTest extends WebDriverTestCase {
     @Test
     @Alerts("object")
     public void prototypeTypeOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"

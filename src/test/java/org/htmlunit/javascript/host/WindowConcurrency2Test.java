@@ -39,8 +39,8 @@ public class WindowConcurrency2Test extends WebDriverTestCase {
     @Test
     @Alerts("xxx")
     public void setIntervalZeroDelay() throws Exception {
-        final String html
-            = "<html><body><div id='d'></div>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'></div>\n"
             + "<script>\n"
             + "  var count = 0;\n"
 

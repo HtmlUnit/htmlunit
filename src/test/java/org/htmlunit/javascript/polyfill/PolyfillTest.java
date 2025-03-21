@@ -36,7 +36,8 @@ public class PolyfillTest extends SimpleWebTestCase {
     @Test
     @Alerts("Content fetched")
     public void fetch() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  if (typeof fetch == 'function') {\n"
@@ -62,7 +63,8 @@ public class PolyfillTest extends SimpleWebTestCase {
     @Test
     @Alerts("false")
     public void fetchPolyfillDisabled() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(typeof fetch == 'function');\n"

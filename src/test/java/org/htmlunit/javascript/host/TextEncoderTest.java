@@ -35,7 +35,8 @@ public class TextEncoderTest extends WebDriverTestCase {
     @Test
     @Alerts("utf-8")
     public void encoding() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -61,7 +62,8 @@ public class TextEncoderTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "8", "72", "116"})
     public void encode() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -93,7 +95,8 @@ public class TextEncoderTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "4"})
     public void encode2() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

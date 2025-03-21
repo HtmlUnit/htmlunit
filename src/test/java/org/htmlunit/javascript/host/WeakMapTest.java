@@ -35,8 +35,8 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "one"})
     public void constructorArray() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -58,8 +58,8 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void constructorSetParam() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -82,8 +82,8 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void constructorMapParam() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -109,8 +109,8 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void constructorIteratorParam() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -151,7 +151,8 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "value2"})
     public void get() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -171,7 +172,8 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void setNonObject() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

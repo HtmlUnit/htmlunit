@@ -59,7 +59,8 @@ public class WebSocketTest extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§", "", "blob"})
     public void initialNoServerAvailable() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -89,7 +90,8 @@ public class WebSocketTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object WebSocket]", "§§URL§§"})
     public void earlyConstruction() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var location = 'ws://localhost:" + PORT + "/';\n"
@@ -128,7 +130,8 @@ public class WebSocketTest extends WebDriverTestCase {
             FF_ESR = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
                       "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"})
     public void initialWithoutUrl() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
@@ -173,7 +176,8 @@ public class WebSocketTest extends WebDriverTestCase {
     @Test
     @Alerts({"blob", "blob", "arraybuffer", "blob", "blob"})
     public void binaryType() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var location = 'ws://localhost:" + PORT + "/';\n"
@@ -658,7 +662,8 @@ public class WebSocketTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void prototypeUrl() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"

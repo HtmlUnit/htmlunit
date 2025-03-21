@@ -38,7 +38,8 @@ public class Popup2Test extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void popup() throws Exception {
-        final String html = "<html><head></title><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></title><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
@@ -62,7 +63,8 @@ public class Popup2Test extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void popupBodyStyle() throws Exception {
-        final String html = "<html><head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
             + "<script language='javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"

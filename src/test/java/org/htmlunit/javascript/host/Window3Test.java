@@ -27,7 +27,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.NotYetImplemented;
@@ -62,7 +61,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("about:blank")
     public void openWindow_emptyUrl() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -82,7 +81,7 @@ public class Window3Test extends WebDriverTestCase {
     public void opener() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
 
-        final String firstContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String firstContent = DOCTYPE_HTML
             + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
             + "  alert(window.opener);\n"
@@ -94,7 +93,7 @@ public class Window3Test extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final String secondContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String secondContent = DOCTYPE_HTML
             + "<html><head><title>Second</title><script>\n"
             + "function test() {\n"
             + "  opener.calllog('two');\n"
@@ -103,7 +102,7 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "<form name='form1' action='" + urlThird + "' method='post'><input type='submit'></form>\n"
             + "</body></html>";
-        final String thirdContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String thirdContent = DOCTYPE_HTML
             + "<html><head><title>Third</title><script>\n"
             + "function test() {\n"
             + "  opener.calllog('three');\n"
@@ -124,7 +123,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("one")
     public void windowFrames() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<script language='JavaScript'>\n"
             + LOG_TITLE_FUNCTION
@@ -144,7 +143,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("foo")
     public void javascriptVariableFromWindow() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -166,20 +165,20 @@ public class Window3Test extends WebDriverTestCase {
     public void javascriptVariableFromTopAndParentFrame() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
 
-        final String firstContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String firstContent = DOCTYPE_HTML
             + "<html><head><title>First</title></head><body><script>\n"
             + "myVariable = 'first'"
             + "  </script><iframe name='left' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
 
-        final String secondContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String secondContent = DOCTYPE_HTML
             + "<html><head><title>Second</title></head><body><script>\n"
             + "myVariable = 'second'"
             + "  </script><iframe name='innermost' src='" + urlThird + "'></iframe>\n"
             + "</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
-        final String thirdContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String thirdContent = DOCTYPE_HTML
             + "<html><head><title>Third</title><script>\n"
             + "myVariable = 'third';\n"
             + "function doTest() {\n"
@@ -205,7 +204,7 @@ public class Window3Test extends WebDriverTestCase {
         final URL urlThird = new URL(URL_FIRST, "third/");
         final URL urlFourth = new URL(URL_FIRST, "fourth/");
 
-        final String firstContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String firstContent = DOCTYPE_HTML
             + "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "  <frameset rows='30%,70%'>\n"
@@ -215,19 +214,19 @@ public class Window3Test extends WebDriverTestCase {
             + "  <frame src='" + urlFourth + "' name='fourth'>\n"
             + "</frameset></html>";
 
-        final String secondContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String secondContent = DOCTYPE_HTML
             + "<html><head><title>second</title></head><body><script>\n"
             + "myVariable = 'second';\n"
             + "</script><p>second</p></body></html>";
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
-        final String thirdContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String thirdContent = DOCTYPE_HTML
             + "<html><head><title>third</title></head><body><script>\n"
             + "myVariable = 'third';\n"
             + "</script><p>third</p></body></html>";
         getMockWebConnection().setResponse(urlThird, thirdContent);
 
-        final String fourthContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String fourthContent = DOCTYPE_HTML
             + "<html><head><title>fourth</title></head><body onload='doTest()'><script>\n"
             + "myVariable = 'fourth';\n"
             + "function doTest() {\n"
@@ -248,7 +247,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void javascriptVariableFromWindow_NotFound() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -269,7 +268,7 @@ public class Window3Test extends WebDriverTestCase {
         final URL urlThird = new URL(URL_FIRST, "third/");
         final URL urlFourth = new URL(URL_FIRST, "fourth/");
 
-        final String firstContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String firstContent = DOCTYPE_HTML
             + "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "  <frameset rows='30%,70%'>\n"
@@ -279,15 +278,15 @@ public class Window3Test extends WebDriverTestCase {
             + "  <frame src='" + urlFourth + "' name='fourth'>\n"
             + "</frameset></html>";
 
-        final String secondContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String secondContent = DOCTYPE_HTML
             + "<html><head><title>second</title></head><body><p>second</p></body></html>";
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
-        final String thirdContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String thirdContent = DOCTYPE_HTML
             + "<html><head><title>third</title></head><body><p>third</p></body></html>";
         getMockWebConnection().setResponse(urlThird, thirdContent);
 
-        final String fourthContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String fourthContent = DOCTYPE_HTML
             + "<html><head><title>fourth</title></head><body onload='doTest()'><script>\n"
             + "function doTest() {\n"
             + "alert('fourth-second='+parent.second.document.location);\n"
@@ -314,7 +313,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "true"})
     public void closed() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -337,7 +336,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     public void moveTo() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -353,7 +352,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     public void moveBy() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -369,7 +368,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     public void resizeTo() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -385,7 +384,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     public void resizeBy() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -401,7 +400,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     public void scroll() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -417,7 +416,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"document", "body"})
     public void scrollEvents() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -443,7 +442,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     public void scrollBy() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -459,7 +458,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"document", "body"})
     public void scrollByEvents() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -488,7 +487,7 @@ public class Window3Test extends WebDriverTestCase {
             FF = {},
             FF_ESR = {})
     public void scrollByLines() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -509,7 +508,7 @@ public class Window3Test extends WebDriverTestCase {
             FF = {},
             FF_ESR = {})
     public void scrollByPages() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -527,7 +526,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     public void scrollTo() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -543,7 +542,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"document", "body"})
     public void scrollToEvents() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -569,7 +568,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"form1", "form1", "2", "2"})
     public void formByName() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -613,7 +612,7 @@ public class Window3Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final String frame = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String frame = DOCTYPE_HTML
                 + "<html><head><title>frame</title></head><body></body></html>";
         getMockWebConnection().setDefaultResponse(frame);
 
@@ -626,7 +625,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"frame1", "frame1", "0", "0"})
     public void iframeByName() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -657,7 +656,7 @@ public class Window3Test extends WebDriverTestCase {
     // The iframe tag is treated as frame and as such has priority over the other tags, which would make the test
     // useless.
     public void elementsByName() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -823,7 +822,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"2-2", "3-3", "4-4", "5-5", "6-6", "7-7", "8-8", "9-9", "10-10", "11-11", "10-10"})
     public void elementsByName_changedAfterGet() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -911,7 +910,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"2-2", "3-3"})
     public void elementsByName_changedAfterGet2() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -947,7 +946,7 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts({"form1", "form1", "f1", "f1", "input1", "input1", "anchor1", "anchor1", "image1",
                 "image1", "element1", "element1"})
     public void elementsById() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -998,7 +997,7 @@ public class Window3Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final String frame = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String frame = DOCTYPE_HTML
                 + "<html><head><title>frame</title></head><body></body></html>";
         getMockWebConnection().setDefaultResponse(frame);
 
@@ -1012,7 +1011,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void execScript() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -1047,7 +1046,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"test2", "test"})
     public void onLoadFunction() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -1080,7 +1079,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"a", "null"})
     public void onloadNotAFunction() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1098,7 +1097,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "test1", "test2", "onload"})
     public void addOnLoadEventListener() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -1125,7 +1124,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "TypeError", "onload"})
     public void attachOnLoadEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -1154,7 +1153,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void detachEventInAttachEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -1180,7 +1179,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"window.name before: ", "window.name after: main"})
     public void windowName() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
@@ -1203,7 +1202,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"number", "number", "number", "number"})
     public void viewport() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
@@ -1227,13 +1226,13 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§")
     public void openWindow_refererHeader() throws Exception {
-        final String firstContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String firstContent = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
             + "</body></html>";
 
-        final String secondContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String secondContent = DOCTYPE_HTML
             + "<html><head><title>Second</title></head><body></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
@@ -1261,11 +1260,11 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void evalScopeOtherWindow() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <iframe src='iframe.html'></iframe>\n"
             + "</body></html>";
-        final String iframe = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String iframe = DOCTYPE_HTML
             + "<html><body>\n"
             + "<script>\n"
             + "  window.parent.eval('var foo = 1');\n"
@@ -1285,7 +1284,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"elementValue", "elementValue", "elementValue"})
     public void evalScopeLocal() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1312,7 +1311,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("string")
     public void evalScopeEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body onload='test()'><script>\n"
             + LOG_TITLE_FUNCTION
             + "   function test() {\n"
@@ -1335,7 +1334,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void functionEquality() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1354,7 +1353,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"123", "captured"})
     public void captureEvents() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1380,7 +1379,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void onLoadContext() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1398,7 +1397,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("INPUT")
     public void eval() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><body>\n"
             + "<input type='button' id='myButton' value='Click Me' onclick='test(this)'>\n"
             + "<script>\n"
@@ -1421,7 +1420,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "true"})
     public void undefinedProperty() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1442,7 +1441,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("First")
     public void frames() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>First§</title></head>\n"
             + "<frameset id='fs' rows='20%,*'>\n"
             + "  <frame name='top' src='" + URL_SECOND + "' />\n"
@@ -1450,7 +1449,7 @@ public class Window3Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final String frameContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String frameContent = DOCTYPE_HTML
             + "<html><head><title>TopFrame</title>\n"
             + "<script>\n"
             + "function doTest() {\n"
@@ -1471,7 +1470,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void openWindow_numericName() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1492,7 +1491,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("about:blank")
     public void openWindow_aboutblank_location() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1512,7 +1511,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("about:blank")
     public void openWindow_empty_location() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1533,7 +1532,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§img.gif")
     public void openWindow_aboutblank_img() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1559,7 +1558,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§img.gif")
     public void openWindow_aboutblank_document_img() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1586,7 +1585,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§img.gif")
     public void openWindow_empty_img() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1613,7 +1612,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void stop() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1634,13 +1633,13 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     public void open() throws Exception {
-        final String firstHtml = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String firstHtml = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<button id='clickme' onClick='window.open(new String(\"" + URL_SECOND + "\"));'>Click me</a>\n"
             + "</body></html>";
 
-        final String secondHtml = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String secondHtml = DOCTYPE_HTML
             + "<html><head><title>Second</title></head><body></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
@@ -1656,8 +1655,8 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("First")
     public void navigate() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title><script>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
             + "    if (window.navigate) {\n"
             + "      window.navigate('" + URL_SECOND + "');\n"
@@ -1666,7 +1665,8 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head><title>Second</title></head><body></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
@@ -1680,8 +1680,8 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void devicePixelRatio() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(window.devicePixelRatio);\n"
@@ -1700,8 +1700,8 @@ public class Window3Test extends WebDriverTestCase {
             CHROME = "true",
             EDGE = "true")
     public void offscreenBuffering() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1719,8 +1719,8 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("TypeError")
     public void getComputedStyle() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
@@ -1760,7 +1760,7 @@ public class Window3Test extends WebDriverTestCase {
              "window at load 2 capture",
              "after"})
     public void onload() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
@@ -1849,7 +1849,7 @@ public class Window3Test extends WebDriverTestCase {
     public void onloadScript() throws Exception {
         getMockWebConnection().setResponse(URL_SECOND, "");
 
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
@@ -1920,7 +1920,7 @@ public class Window3Test extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg, target) {\n"
@@ -2005,7 +2005,7 @@ public class Window3Test extends WebDriverTestCase {
              "frameset onload",
              "after"})
     public void onloadFrame() throws Exception {
-        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String content = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
@@ -2048,7 +2048,7 @@ public class Window3Test extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse(content);
 
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "<script>\n"
                 + "  function log(msg) {\n"
@@ -2098,7 +2098,7 @@ public class Window3Test extends WebDriverTestCase {
              "function () { log(\"onload from body\") }",
              "onload from body"})
     public void onloadFromBody() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
@@ -2137,7 +2137,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({})
     public void onloadListenerFromBody() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
@@ -2161,7 +2161,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts("onload from window")
     public void onloadListenerFromBodyAndWindow() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
@@ -2187,7 +2187,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({})
     public void onloadListenerFromBodyAndWindowRemoved() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
@@ -2227,7 +2227,7 @@ public class Window3Test extends WebDriverTestCase {
                 "window at click 1",
                 "window at click 2"})
     public void propagation() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
@@ -2286,7 +2286,7 @@ public class Window3Test extends WebDriverTestCase {
              "window at click 1",
              "window at click 2"})
     public void propagationNested() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
@@ -2359,7 +2359,7 @@ public class Window3Test extends WebDriverTestCase {
                 "window at click 1",
                 "window at click 2"})
     public void propagationNestedDetached() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
@@ -2437,7 +2437,7 @@ public class Window3Test extends WebDriverTestCase {
              "listener: prevented=true returnValue: false -> x (false)",
              "listener: prevented=true returnValue: false -> null (false)"})
     public void stopPropagation() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"

@@ -36,7 +36,8 @@ public class NotificationTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "true"})
     public void prototype() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(typeof window.Notification);\n"
@@ -53,7 +54,8 @@ public class NotificationTest extends WebDriverTestCase {
     @Test
     @Alerts("default")
     public void permission() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(Notification.permission);\n"
@@ -69,7 +71,8 @@ public class NotificationTest extends WebDriverTestCase {
     @Test
     @Alerts({})
     public void minimalUsage() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  new Notification('Hello here');\n"
@@ -85,7 +88,8 @@ public class NotificationTest extends WebDriverTestCase {
     @Test
     @Alerts("function")
     public void requestPermission() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(typeof Notification.requestPermission);\n"

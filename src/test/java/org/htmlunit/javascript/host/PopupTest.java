@@ -42,7 +42,8 @@ public class PopupTest extends SimpleWebTestCase {
     @Test
     @Alerts("Pop-up window is Open")
     public void popupWindowBecomesCurrent() throws Exception {
-        final String content = "<html><head><title>First</title><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>First</title><body>\n"
             + "<span id='button' onClick='openPopup()'>Push me</span>\n"
             + "<script>\n"
             + "  function openPopup() {\n "

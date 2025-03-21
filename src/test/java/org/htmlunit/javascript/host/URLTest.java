@@ -20,7 +20,6 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -44,8 +43,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts("function URL() { [native code] }")
     public void windowURL() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -69,8 +68,8 @@ public class URLTest extends WebDriverTestCase {
              "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
              "http://www.example.com/", "type error", "type error" })
     public void ctor() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -108,8 +107,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts("http://developer.mozilla.org")
     public void origin() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -133,8 +132,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts("http://developer.mozilla.org")
     public void originDefaultPort() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -158,8 +157,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts("http://developer.mozilla.org:1234")
     public void originPort() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -182,8 +181,7 @@ public class URLTest extends WebDriverTestCase {
      */
     @Test
     public void createObjectURL() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -231,8 +229,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "a=u&x="})
     public void searchParams() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -258,8 +256,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "a=u&x=", "x=22", "x=22"})
     public void searchParamsSyncedWithUrlChanges() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -291,8 +289,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts({"/", "/en-US/docs", "/en-US/docs"})
     public void getPathName() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -322,8 +320,8 @@ public class URLTest extends WebDriverTestCase {
              "http://developer.mozilla.org/new/path?a=u&x",
              "http://developer.mozilla.org/?a=u&x"})
     public void setPathName() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -359,8 +357,8 @@ public class URLTest extends WebDriverTestCase {
              "#undefined", "http://developer.mozilla.org/#undefined",
              "#null", "http://developer.mozilla.org/#null"})
     public void hash() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -412,8 +410,8 @@ public class URLTest extends WebDriverTestCase {
              "new.host", "new.host",
              "developer.mozilla.org", "developer.mozilla.org:4097", "developer.mozilla.org:80"})
     public void host() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -494,8 +492,8 @@ public class URLTest extends WebDriverTestCase {
                         "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
                         "%20%20", "https:// /en-US/docs/Web/API/URL/host"})
     public void hostname() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -532,8 +530,8 @@ public class URLTest extends WebDriverTestCase {
     @Alerts({"https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
              "http://new.com/href", "http://new.com/hrefWithPort"})
     public void href() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -568,8 +566,8 @@ public class URLTest extends WebDriverTestCase {
              "undefined", "https://anonymous:undefined@developer.mozilla.org/",
              "null", "https://anonymous:null@developer.mozilla.org/"})
     public void password() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -614,8 +612,8 @@ public class URLTest extends WebDriverTestCase {
     @Alerts({"80", "123", "", "https://mydomain.com/svn/Repos/",
              "", "http://mydomain.com/svn/Repos/"})
     public void port() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -657,8 +655,8 @@ public class URLTest extends WebDriverTestCase {
              "http:", "http://mydomain.com/svn/Repos/",
              "ex-unknown", "ReferenceError"})
     public void protocol() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -730,8 +728,8 @@ public class URLTest extends WebDriverTestCase {
              "http:", "http://mydomain.com/svn/Repos/",
              "ex-unknown", "ReferenceError"})
     public void protocol2() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -799,8 +797,8 @@ public class URLTest extends WebDriverTestCase {
              "http:", "http://mydomain.com/svn/Repos/",
              "ex-unknown", "ReferenceError"})
     public void protocol3() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -900,8 +898,8 @@ public class URLTest extends WebDriverTestCase {
                       "wss:", "wss://mydomain.com/svn/Repos/",
                       "file:", "file://mydomain.com/svn/Repos/"})
     public void specialScheme() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -962,8 +960,8 @@ public class URLTest extends WebDriverTestCase {
              "?undefined", "https://developer.mozilla.org/search?undefined",
              "?null", "https://developer.mozilla.org/search?null"})
     public void search() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -1028,8 +1026,8 @@ public class URLTest extends WebDriverTestCase {
                  FF = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
                  FF_ESR = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"})
     public void searchEncoding() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -1061,8 +1059,8 @@ public class URLTest extends WebDriverTestCase {
              "undefined", "https://undefined:pass@developer.mozilla.org/",
              "null", "https://null:pass@developer.mozilla.org/"})
     public void username() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -1127,7 +1125,8 @@ public class URLTest extends WebDriverTestCase {
              "https://developer.mozilla.org/",
              "https://developer.mozilla.org/"})
     public void testToString() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  if (typeof window.URL === 'function') {\n"
@@ -1152,7 +1151,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts("https://developer.mozilla.org/")
     public void testToJSON() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  if (typeof window.URL === 'function') {\n"
@@ -1171,8 +1171,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts({"https://htmlunit.org/", "https://htmlunit.org/", "true"})
     public void webkitURL() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

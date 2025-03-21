@@ -39,7 +39,8 @@ public class PluginTest extends WebDriverTestCase {
         "Microsoft Edge PDF Viewer", "Portable Document Format", "internal-pdf-viewer", "undefined",
         "WebKit built-in PDF", "Portable Document Format", "internal-pdf-viewer", "undefined"})
     public void plugins() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -68,7 +69,8 @@ public class PluginTest extends WebDriverTestCase {
     @Test
     @Alerts("Chromium PDF Viewer")
     public void index() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(navigator.plugins[2].name);\n"
@@ -85,7 +87,8 @@ public class PluginTest extends WebDriverTestCase {
     @Test
     @Alerts("Microsoft Edge PDF Viewer")
     public void item() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(navigator.plugins.item(3).name);\n"
@@ -102,7 +105,8 @@ public class PluginTest extends WebDriverTestCase {
     @Test
     @Alerts("Chromium PDF Viewer")
     public void namedItem() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(navigator.plugins.namedItem('Chromium PDF Viewer').name);\n"
@@ -119,7 +123,8 @@ public class PluginTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false"})
     public void in() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log('PDF Viewer' in navigator.plugins);\n"
@@ -137,7 +142,8 @@ public class PluginTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "[object MimeType]", "application/pdf", "[object MimeType]", "text/pdf", "undefined"})
     public void pluginIndex() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  let pl = navigator.plugins.item(4);\n"
@@ -163,7 +169,8 @@ public class PluginTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "[object MimeType]", "application/pdf", "[object MimeType]", "text/pdf", "null"})
     public void pluginItem() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  let pl = navigator.plugins.item(4);\n"
@@ -189,7 +196,8 @@ public class PluginTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object MimeType]", "application/pdf", "[object MimeType]", "application/pdf", "null"})
     public void pluginNamedItem() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  let pl = navigator.plugins.item(4);\n"
@@ -215,7 +223,8 @@ public class PluginTest extends WebDriverTestCase {
     @Alerts({"5", "PDF Viewer", "Chrome PDF Viewer", "Chromium PDF Viewer",
              "Microsoft Edge PDF Viewer", "WebKit built-in PDF"})
     public void iterator() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var plugs = navigator.plugins;\n"
@@ -238,7 +247,8 @@ public class PluginTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "application/pdf", "text/pdf"})
     public void pluginIterator() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  let pl = navigator.plugins.item(4);\n"

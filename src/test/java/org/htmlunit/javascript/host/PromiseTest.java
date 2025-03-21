@@ -42,8 +42,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Alerts({"function", "function", "undefined", "undefined",
              "undefined", "undefined", "function", "function"})
     public void staticMethods() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -112,7 +112,8 @@ public class PromiseTest extends WebDriverTestCase {
                       "[object Window]",
                       "done", "resolved value"})
     public void constructor() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -156,7 +157,8 @@ public class PromiseTest extends WebDriverTestCase {
                       "undefined",
                       "done", "resolved value"})
     public void constructorStrict() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + "    'use strict';"
@@ -190,7 +192,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true"})
     public void constructorWithoutFunction() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -230,8 +233,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "Rejected"})
     public void reject() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -261,8 +264,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "false", "[object Promise]"})
     public void rejectPromise() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -295,8 +298,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "Resolved"})
     public void resolve() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -326,8 +329,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "undefined"})
     public void resolveEmpty() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -357,8 +360,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "1"})
     public void resolveArray() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -387,8 +390,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "HtmlUnit"})
     public void resolveString() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -417,8 +420,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "true", "42"})
     public void resolvePromise() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -449,7 +452,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "fulfilled!"})
     public void resolveThenable() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -487,7 +491,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "aaa"})
     public void resolveThenablePrototype() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -531,7 +536,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts("TypeError: Throwing 1")
     public void resolveThenableThrows() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -570,7 +576,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts("Resolving")
     public void resolveThenableThrowsAfterCallback() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -608,7 +615,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "[object Object]"})
     public void resolveThenablesWithoutThen() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -640,8 +648,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "1", "2"})
     public void thenChanining() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -676,7 +684,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "undefined"})
     public void then() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -705,7 +714,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "undefined"})
     public void thenAsync() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -738,7 +748,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "1 yes", "2 yes"})
     public void thenTwice() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -770,7 +781,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "1 yes", "2 yes"})
     public void thenTwiceAsync() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -806,7 +818,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "first", "second"})
     public void thenAsyncPromiseResolved() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -843,7 +856,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "first", "second"})
     public void thenAsyncPromiseRejected() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -883,7 +897,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "first", "second"})
     public void thenAsyncPromiseAsyncResolved() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -924,7 +939,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "first", "second"})
     public void thenAsyncPromiseAsyncRejected() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -968,7 +984,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "Success first"})
     public void thenTestAsyncChainedResolve() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -1007,7 +1024,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "Failure first"})
     public void thenTestAsyncChainedReject() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -1046,7 +1064,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "Success first"})
     public void thenTestAsyncChainedNotAFunction() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -1084,7 +1103,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"Success", "string", "oh, no!", "after catch"})
     public void catchTest() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -1123,7 +1143,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"Success", "string", "oh, no!", "after catch"})
     public void catchTestAsync() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -1163,7 +1184,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "Success first"})
     public void catchTestAsyncChained() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -1202,7 +1224,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "Success"})
     public void thenInsideEventHandler() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -1240,7 +1263,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"create thenable 4", "fulfilled"})
     public void thenThenable() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1277,7 +1301,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts("failure1")
     public void thenThenableThrows() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1318,7 +1343,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "failure1"})
     public void thenNotThenable() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1361,7 +1387,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void thenThenableThrowsAfterCallback() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1401,7 +1428,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "object", "3", "3,1337,Success"})
     public void allAsyncArray() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1438,7 +1466,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "first 3,1337,Success", "second 3,Success"})
     public void allAsyncArray2() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1476,7 +1505,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "object", "3", "3,1337,Success"})
     public void allAsyncSet() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1513,7 +1543,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "string", "Failed"})
     public void allRejectAsync() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1551,7 +1582,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "first Failed", "second Failed"})
     public void allRejectAsync2() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1593,7 +1625,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "Success 2"})
     public void raceAsync() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1633,7 +1666,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "first Success 2", "second Success 2"})
     public void raceAsync2() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1678,7 +1712,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "Failed"})
     public void raceRejectAsync() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1718,7 +1753,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts({"done", "first Failed", "second Failed"})
     public void raceRejectAsync2() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -1763,8 +1799,8 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void changeLocationFromPromise() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "  <title>test</title>\n"
               + "  <script>\n"
@@ -1794,8 +1830,8 @@ public class PromiseTest extends WebDriverTestCase {
             FF = {"function\\sPromise()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}", "true", "[GC]"},
             FF_ESR = {"function\\sPromise()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}", "true", "[GC]"})
     public void speciesValue() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head>\n"
               + "  <script>\n"
               + LOG_TITLE_FUNCTION_NORMALIZE

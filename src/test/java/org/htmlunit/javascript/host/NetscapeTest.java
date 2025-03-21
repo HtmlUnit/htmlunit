@@ -39,7 +39,8 @@ public class NetscapeTest extends WebDriverTestCase {
             FF = {"[object Object]", "undefined", "[object Object]", "undefined"},
             FF_ESR = {"[object Object]", "undefined", "[object Object]", "undefined"})
     public void netscape() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -64,7 +65,8 @@ public class NetscapeTest extends WebDriverTestCase {
     @HtmlUnitNYI(FF = {"undefined", "true", "true"},
             FF_ESR = {"undefined", "true", "true"})
     public void netscapeDescriptor() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
