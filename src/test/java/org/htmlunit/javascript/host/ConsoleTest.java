@@ -346,8 +346,8 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @BuggyWebDriver
     public void trace() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html>\n"
+        final String html
+            = "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + "  function foo() {\n"
