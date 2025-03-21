@@ -36,7 +36,8 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLMeterElement]")
     public void tag() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<meter id='it' min='200' max='500' value='350'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -52,7 +53,8 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"number200", "number500", "number200", "number500", "number350", "number350"})
     public void properties() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<meter id='it' min='200' max='500' value='350'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -76,8 +78,8 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"

@@ -35,8 +35,8 @@ public class HTMLProgressElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
@@ -72,8 +72,8 @@ public class HTMLProgressElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "number"})
     public void value() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"

@@ -35,8 +35,8 @@ public class HTMLPhraseElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLElement] undefined", "[object HTMLElement] undefined"})
     public void cite() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

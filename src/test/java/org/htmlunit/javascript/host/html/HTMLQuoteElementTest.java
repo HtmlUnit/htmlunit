@@ -35,7 +35,7 @@ public class HTMLQuoteElementTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void prototypeComparison() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

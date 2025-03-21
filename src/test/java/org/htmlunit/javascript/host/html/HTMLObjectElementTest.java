@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
@@ -39,7 +38,7 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
     @Alerts("undefined")
     public void classid() throws Exception {
         final String clsid = "clsid:TESTING-CLASS-ID";
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"

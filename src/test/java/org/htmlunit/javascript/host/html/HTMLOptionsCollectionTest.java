@@ -371,8 +371,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     }
 
     private void add(final String param, final boolean empty, final boolean multi) throws Exception {
-        String html
-            = "<html>\n"
+        String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -481,8 +481,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     }
 
     private void get(final String pos, final boolean empty) throws Exception {
-        String html
-            = "<html>\n"
+        String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -693,8 +693,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     }
 
     private void put(final String pos, final String param, final boolean empty, final boolean multi) throws Exception {
-        String html
-            = "<html>\n"
+        String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -875,8 +875,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     }
 
     private void remove(final String pos, final boolean empty, final boolean multi) throws Exception {
-        String html
-            = "<html>\n"
+        String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -916,8 +916,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "3"})
     public void length() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var sel = document.form1.select0;\n"
@@ -1004,8 +1004,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     }
 
     private void setLength(final String lenght) throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var sel = document.form1.select0;\n"
@@ -1061,8 +1061,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "", "4", "One", "1", "", "0"})
     public void setLength_increase() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var sel = document.form1.select0;\n"
@@ -1102,8 +1102,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "false", "true", "false", "false"})
     public void in() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var opts = document.form1.select.options;\n"
@@ -1131,8 +1131,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "undefined", "[object HTMLOptionElement]", "undefined", "undefined"})
     public void index() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var opts = document.form1.select.options;\n"
@@ -1160,8 +1160,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "null", "[object HTMLOptionElement]", "null", "null"})
     public void item() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var opts = document.form1.select.options;\n"

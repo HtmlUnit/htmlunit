@@ -41,8 +41,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void htmlForNone() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -66,8 +66,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void htmlForEmpty() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -91,8 +91,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("unknown")
     public void htmlForUnknown() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -116,8 +116,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("text1")
     public void htmlForKnown() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -141,8 +141,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"unknown", "null", "null"})
     public void htmlForSetToUnknown() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -175,8 +175,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"div1", "null", "null"})
     public void htmlForSetToNotLabelable() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -209,8 +209,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"text1", "[object HTMLInputElement]", "[object HTMLFormElement]"})
     public void htmlForSetToLabelable() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -573,7 +573,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     }
 
     private static String generateControlPage(final String snippet) {
-        return "<html>\n"
+        return DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -594,8 +595,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void controlSet() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -757,7 +758,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     }
 
     private static String generateFormPage(final String snippet) {
-        return "<html>\n"
+        return DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -781,8 +783,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void formSet() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -812,8 +814,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      */
     @Test
     public void clickAfterHtmlForSetByJS() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function doTest() {\n"
@@ -839,8 +841,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      */
     @Test
     public void clickAfterNestedByJS() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function doTest() {\n"
@@ -866,8 +868,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      */
     @Test
     public void clickByJSAfterHtmlForSetByJS() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function doTest() {\n"
@@ -899,8 +901,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      */
     @Test
     public void clickByJSAfterNestedByJS() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function doTest() {\n"
@@ -933,8 +935,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
     public void accessKey() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body>\n"
             + "    <label id='a1'>a1</label>\n"
             + "    <label id='a2' accesskey='A'>a2</label>\n"

@@ -34,7 +34,8 @@ public class HTMLMapElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "true", "true", "true"})
     public void areas() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

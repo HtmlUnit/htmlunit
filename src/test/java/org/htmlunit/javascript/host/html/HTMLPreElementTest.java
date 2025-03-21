@@ -34,8 +34,8 @@ public class HTMLPreElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "number", "100", "77", "number", "123"})
     public void width() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -70,8 +70,8 @@ public class HTMLPreElementTest extends WebDriverTestCase {
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
              "undefined", "left", "none", "right", "all", "2", "abc", "8"})
     public void clear() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<pre id='p1'>pre1</pre>\n"
             + "<pre id='p2' clear='left'>pre2</pre>\n"
             + "<pre id='p3' clear='all'>pre3</pre>\n"

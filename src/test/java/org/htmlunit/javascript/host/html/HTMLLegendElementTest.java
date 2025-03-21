@@ -36,8 +36,8 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void accessKey() throws Exception {
-        final String html
-            = "<html><body><legend id='a1'>a1</legend><legend id='a2' accesskey='A'>a2</legend><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><legend id='a1'>a1</legend><legend id='a2' accesskey='A'>a2</legend><script>\n"
             + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
             + "log(a1.accessKey);\n"
@@ -65,8 +65,8 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLFormElement]")
     public void form() throws Exception {
-        final String html
-            = "<html><body><form><fieldset><legend id='a'>a</legend></fieldset></form><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><form><fieldset><legend id='a'>a</legend></fieldset></form><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(document.getElementById('a').form);\n"
             + "</script></body></html>";
@@ -80,8 +80,8 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"left", "right", "bottom", "top", "wrong", ""})
     public void getAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <form><fieldset>\n"
             + "    <legend id='i1' align='left' ></legend>\n"
             + "    <legend id='i2' align='right' ></legend>\n"
@@ -108,8 +108,8 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"CenTer", "8", "foo", "left", "right", "bottom", "top"})
     public void setAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <form><fieldset>\n"
             + "    <legend id='i1' align='left' ></legend>\n"
             + "  </fieldset></form>\n"

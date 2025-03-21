@@ -34,8 +34,8 @@ public class HTMLOptGroupElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "true", "false", "true"})
     public void disabledAttribute() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -76,8 +76,8 @@ public class HTMLOptGroupElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "newLabel", "", "label"})
     public void labelAttribute() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

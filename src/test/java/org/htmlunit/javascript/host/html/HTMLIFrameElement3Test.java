@@ -24,7 +24,6 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -61,8 +60,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void style() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -82,8 +80,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({"1", "myIFrame"})
     public void referenceFromJavaScript() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -104,8 +101,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({"about:blank", "about:blank"})
     public void directAccessPerName() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -128,14 +124,12 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts("IFRAME")
     public void onLoadGetsIFrameElementByIdInParent() throws Exception {
-        final String firstContent
-            = "<!DOCTYPE html>\n"
+        final String firstContent = DOCTYPE_HTML
             + "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<iframe id='myIFrame' src='frame.html'></iframe></body></html>";
 
-        final String frameContent
-            = "<!DOCTYPE html>\n"
+        final String frameContent = DOCTYPE_HTML
             + "<html><head><title>Frame</title><script>\n"
             + "function doTest() {\n"
             + "  alert(parent.document.getElementById('myIFrame').tagName);\n"
@@ -156,8 +150,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLDocument]", "true"})
     public void contentDocument() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -180,8 +173,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void frameElement() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -205,8 +197,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "true", "true", "true", "object", "object"})
     public void writeToIFrame() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><body onload='test()'><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -245,16 +236,17 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({"123", "undefined"})
     public void iFrameReinitialized() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<body>\n"
             + "  <a id='test' href='2.html' target='theFrame'>page 2 in frame</a>\n"
             + "  <iframe name='theFrame' src='1.html'></iframe>\n"
             + "</body></html>";
 
-        final String frame1 = "<html><head><script>window.foo = 123; alert(window.foo);</script></head></html>";
-        final String frame2 = "<html><head><script>alert(window.foo);</script></head></html>";
+        final String frame1 = DOCTYPE_HTML
+                + "<html><head><script>window.foo = 123; alert(window.foo);</script></head></html>";
+        final String frame2 = DOCTYPE_HTML
+                + "<html><head><script>alert(window.foo);</script></head></html>";
 
         final String[] alerts = getExpectedAlerts();
         final MockWebConnection webConnection = getMockWebConnection();
@@ -277,8 +269,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts("about:blank")
     public void setSrc_JavascriptUrl() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -300,8 +291,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56"})
     public void width() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<iframe id='i1'></iframe>\n"
             + "<iframe id='i2' width='100'></iframe>\n"
@@ -352,8 +342,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56"})
     public void height() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<iframe id='i1'></iframe>\n"
             + "<iframe id='i2' height='100'></iframe>\n"
@@ -411,8 +400,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             FF = {"loading", "complete"},
             FF_ESR = {"loading", "complete"})
     public void readyState_IFrame() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "  <body>\n"
             + "    <iframe id='i'></iframe>\n"
@@ -435,13 +423,13 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({"null", "[object HTMLBodyElement]"})
     public void body() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <iframe name='theFrame' src='1.html'></iframe>\n"
             + "</body></html>";
 
-        final String frame = "<html><head><script>alert(document.body);</script></head>\n"
+        final String frame = DOCTYPE_HTML
+            + "<html><head><script>alert(document.body);</script></head>\n"
             + "<body><script>alert(document.body);</script></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
@@ -457,8 +445,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts("128px")
     public void width_px() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -482,8 +469,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", ""})
     public void idByName() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -508,8 +494,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts("foo")
     public void settingInnerHtmlTriggersFrameLoad() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><body><div id='d' onclick='loadFrame()'>Click me to show frame</div><script>\n"
             + "function loadFrame() {\n"
             + "  var s = '<iframe id=\"i\" src=\"frame.html\">';\n"
@@ -519,7 +504,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "  d.innerHTML = s;\n"
             + "}\n"
             + "</script></body></html>";
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(new URL(URL_FIRST, "frame.html"), html2);
@@ -539,8 +524,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts("something")
     public void window() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
             + "  var iframe = document.getElementById('myIFrame');\n"
@@ -563,8 +547,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts("something")
     public void settingSrc() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
             + "  var iframe = document.createElement('iframe');\n"
@@ -590,8 +573,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts("iframe onload")
     public void writeTriggersOnload() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
             + "  var iframe = document.createElement('iframe');\n"
@@ -619,8 +601,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts({"localhost", "localhost", "localhost", "localhost",
                 "true", "true", "true"})
     public void domain() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -647,7 +628,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String left = "<html><head><title>Left</title></head>\n"
+        final String left = DOCTYPE_HTML
+                + "<html><head><title>Left</title></head>\n"
                 + "<body>left</body>\n"
                 + "</html>";
 
@@ -663,8 +645,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({"localhost", "localhost", "true"})
     public void domainDynamic() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -700,8 +681,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Ignore
     // check expectations
     public void contentWindowAndActiveElement() throws Exception {
-        final String firstContent
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String firstContent = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -717,8 +697,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "  <iframe id='frame' name='frame' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
 
-        final String frameContent
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String frameContent = DOCTYPE_HTML
             + "<html>\n"
             + "<body id='framebody'>\n"
             + "  <input id='frameinput'>\n"
@@ -827,8 +806,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     }
 
     private void retrictByHeader(final NameValuePair header, final URL contentUrl) throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -846,7 +824,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String content = "<html><head><title>IFrame Title</title></head>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head><title>IFrame Title</title></head>\n"
                 + "<body>IFrame Content</body>\n"
                 + "</html>";
 
@@ -872,8 +851,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({"loaded", "[object HTMLDocument]", "2"})
     public void recursive() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <title>Deny</title>\n"
@@ -913,8 +891,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             FF = {"loaded", "2"},
             FF_ESR = {"loaded", "2"})
     public void recursiveContent() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <title>Deny</title>\n"
@@ -925,7 +902,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String content = "<html>"
+        final String content = DOCTYPE_HTML
+                + "<html>"
                 + "<head><title>IFrame Title</title></head>\n"
                 + "<body>IFrame Content\n"
                 + "  <iframe id='frame1' src='content.html'></iframe>\n"
@@ -953,8 +931,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             FF = {"loaded", "21"},
             FF_ESR = {"loaded", "21"})
     public void recursiveContentRedirectHeader() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <title>Deny</title>\n"
@@ -965,7 +942,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String content = "<html>"
+        final String content = DOCTYPE_HTML
+                + "<html>"
                 + "<head><title>IFrame Title</title></head>\n"
                 + "<body>IFrame Content\n"
                 + "  <iframe id='frame1' src='content.html'></iframe>\n"
@@ -993,8 +971,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts("Injected from parent frame")
     public void writeIntoIFrameContentDocument() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"

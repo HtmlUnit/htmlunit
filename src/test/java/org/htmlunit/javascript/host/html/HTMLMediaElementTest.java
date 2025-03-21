@@ -135,8 +135,8 @@ public class HTMLMediaElementTest extends WebDriverTestCase {
     }
 
     private void canPlayType(final String type) throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -160,7 +160,7 @@ public class HTMLMediaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLAudioElement]", "done"})
     public void pause() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION

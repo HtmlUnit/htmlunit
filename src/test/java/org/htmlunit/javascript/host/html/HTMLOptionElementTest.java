@@ -39,8 +39,8 @@ public class HTMLOptionElementTest extends SimpleWebTestCase {
     @Test
     @Alerts({"value1", "text1", "label1", "value2", "text2", "text2"})
     public void label() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var s = document.getElementById('testSelect');\n"
             + "  var lastIndex = s.length;\n"

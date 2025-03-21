@@ -42,8 +42,8 @@ public class HTMLInputElement2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"hello", "me te"})
     public void selectionRange() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var input = document.getElementById('myInput');\n"
             + "  input.setSelectionRange(2, 7);\n"
@@ -68,10 +68,12 @@ public class HTMLInputElement2Test extends SimpleWebTestCase {
     @Test
     @Alerts("initial")
     public void focus() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<iframe name='theFrame' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
-        final String frame = "<html><body>\n"
+        final String frame = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<input id='input' value='initial' onfocus='alert(this.value)'>\n"
             + "<div id='div'>click me</div>\n"
             + "</body></html>";

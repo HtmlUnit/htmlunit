@@ -20,7 +20,6 @@ import java.util.Collections;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -53,8 +52,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "text", "textfield1", "form1", "cat"})
     public void standardProperties_Text() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -152,7 +150,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     }
 
     private void testValue(final String value) throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + "function log(msg) { window.document.title += msg.replace(' ', '.') + '§';}\n"
             + "function doTest() {\n"
@@ -339,8 +337,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     }
 
     private void testAttribute(final String property, final String attrib, final String value) throws Exception {
-        String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n";
@@ -718,8 +715,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
     private void testAttribute(final String itemId, final String property,
                     final String attrib, final String value) throws Exception {
-        String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n";
@@ -779,8 +775,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts({"abc-abc", "abc-abc", "jkl-abc"})
     @Test
     public void typeChangeNotDirty() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -809,8 +804,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts({"abc-abc", "def-abc", "ghi-abc", "ghi-abc", "jkl-abc"})
     @Test
     public void typeChangeDirty() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -845,8 +839,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true"})
     public void checkedAttribute_Checkbox() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -877,8 +870,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "false", "false", "true", "false"})
     public void checkedAttribute_Radio() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -921,8 +913,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false", "true", "false", "true"})
     public void disabledAttribute() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -967,8 +958,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     public void inputValue() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  document.form1.textfield1.value = 'blue';\n"
@@ -993,8 +983,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     public void inputSelect_NotDefinedAsPropertyAndFunction() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  document.form1.textfield1.select();\n"
@@ -1020,8 +1009,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void thisDotFormInOnClick() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<body>\n"
             + "<form name='form1'>\n"
@@ -1045,8 +1033,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true", "true"})
     public void fieldDotForm() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -1079,8 +1066,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     public void inputNameChange() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  document.form1.textfield1.name = 'changed';\n"
@@ -1106,8 +1092,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "from button"})
     public void onChange() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title></title>\n"
             + "</head><body>\n"
             + "<p>hello world</p>\n"
@@ -1134,8 +1119,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "from button"})
     public void onChangeSetByJavaScript() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "</head><body>\n"
             + "<p>hello world</p>\n"
@@ -1167,8 +1151,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"on", "on"})
     public void defautValue() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1206,8 +1189,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                     + "email, text, submit, radio, hidden, password, "
                     + "image, reset, button, file, number, range, search, tel, url, text, text"})
     public void changeType() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1255,8 +1237,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
              "text: false, false, function, function, , ",
              "password: false, false, function, function, , "})
     public void defaultValues() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head></head><body>\n"
             + "<form name='myForm'>\n"
             + "<input type='button' name='myButton'/>\n"
@@ -1299,8 +1280,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"text", "null", "hidden", "hidden"})
     public void createInputAndChangeType() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1324,8 +1304,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"text", "null", "text", "text"})
     public void createInputAndChangeTypeToText() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1349,8 +1328,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts("123")
     public void buttonOutsideForm() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head></head><body>\n"
             + "<button id='clickme' onclick='alert(123)'>click me</button>\n"
             + "</body></html>";
@@ -1374,8 +1352,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
@@ -1385,7 +1362,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse("<html><title>page 2</title><body></body></html>");
+        getMockWebConnection().setDefaultResponse(DOCTYPE_HTML + "<html><title>page 2</title><body></body></html>");
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("field1")).sendKeys("bla");
@@ -1399,8 +1376,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number"})
     public void maxLength() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input = document.getElementById('text1');\n"
@@ -1431,8 +1408,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number"})
     public void minLength() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input = document.getElementById('text1');\n"
@@ -1462,8 +1439,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     public void typeMaxLength() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<form>\n"
             + "<input type='text' id='text1' maxlength='5'/>\n"
@@ -1491,8 +1467,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     public void typeMaxLengthZero() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<form>\n"
             + "<input type='text' id='text1' maxlength='0'/>\n"
@@ -1518,8 +1493,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     public void typeMaxLengthAndBlanks() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<form>\n"
             + "<input type='text' id='text1' maxlength=' 2 '/>\n"
@@ -1549,8 +1523,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts({"text TeXt", "password PassWord", "hidden Hidden",
              "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX"})
     public void typeCase() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1593,8 +1566,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"text-text", "text- password", "text-hidden ", "text-checkbox ", "text-\\tradio"})
     public void typeTrim() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "function log(msg) { window.document.title += msg.replace('\t', '\\\\t') + '§';}\n"
@@ -1631,8 +1603,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void readOnly() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -1656,8 +1627,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true"})
     public void readOnlyInputFile() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -1684,8 +1654,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"left", "right", "bottom", "middle", "top", "wrong", ""})
     public void getAlign() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <form>\n"
             + "    <input id='i1' align='left' />\n"
@@ -1713,8 +1682,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top"})
     public void setAlign() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <form>\n"
             + "    <input id='i1' type='text' align='left' value=''/>\n"
@@ -1751,8 +1719,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void accessKey() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <input id='a1'>\n"
             + "  <input id='a2' accesskey='A'>\n"
@@ -1790,8 +1757,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"test", "4", "42", "2", "[object HTMLInputElement]", "25"})
     public void getAttributeAndSetValue() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1828,8 +1795,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "4", "", "0"})
     public void getAttributeAndSetValueNull() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -1862,8 +1828,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "2", "7"})
     public void selectionRange() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1889,8 +1854,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts("onsubmit")
     public void submitNonRequired() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + "function submitMe() {\n"
             + "  alert('onsubmit');\n"
@@ -1920,8 +1884,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "§§URL§§"})
     public void submitRequired() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + "function submitMe() {\n"
             + "  alert('onsubmit');\n"
@@ -1949,8 +1912,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true"})
     public void checkValidity() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + "function checkStatus() {\n"
             + "  var elem = document.getElementById('myInput');\n"
@@ -1980,8 +1942,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§?myName=abcdefg")
     public void maxLengthJavaScript() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + "function updateValue() {\n"
             + "  document.getElementById('myInput').value = 'abcdefg';\n"
@@ -2010,8 +1971,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§?myName=ab")
     public void maxLength2() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + "</script></head>\n"
             + "<body>\n"
@@ -2037,8 +1997,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"30", "undefined", "30", "30", "40", "50", "string", "string"})
     public void min() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input = document.getElementById('text1');\n"
@@ -2067,8 +2027,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"30", "undefined", "30", "30", "40", "50", "string", "string"})
     public void max() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input = document.getElementById('text1');\n"
@@ -2097,8 +2057,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
@@ -2136,7 +2096,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             FF = {"161", "18", "161", "18", "14", "14", "14", "14"},
             FF_ESR = {"154", "18", "154", "18", "10", "10", "10", "10"})
     public void defaultClientWidthHeight() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -2171,8 +2132,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLFormElement]")
     public void form() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <form>\n"
             + "    <input type='text' id='a'>\n"
@@ -2331,8 +2292,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     }
 
     private void mouseOver(final String element) throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
@@ -2379,8 +2339,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"Test-Test-Test", "text1-text1-text1"})
     public void getAttribute() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2403,8 +2362,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"Test-Test-Test", "text1-text1-text1"})
     public void getAttributeCase() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2427,8 +2385,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"Test-Test-Test", "Test-Test-Test"})
     public void setAttribute() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2451,8 +2408,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts("finish")
     public void setAttributeFromJavaScript() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2473,8 +2429,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     public void sendKeys() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "  <input id='myInput' value='Test' onchange=\"alert('changed')\">\n"
@@ -2491,8 +2446,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     public void clear() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"
@@ -2512,8 +2466,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -2544,8 +2498,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void willValidateFormNoValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -2568,7 +2522,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "true", "false"})
     public void formNoValidate() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

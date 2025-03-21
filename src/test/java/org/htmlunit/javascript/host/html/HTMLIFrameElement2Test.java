@@ -42,8 +42,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("loaded")
     public void onLoad() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -52,7 +52,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPageVerifyTitle2(html);
@@ -64,8 +64,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("loaded")
     public void onLoad_noSrc() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -83,8 +83,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("loaded")
     public void documentWrite_onLoad() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -92,7 +92,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPageVerifyTitle2(html);
@@ -104,8 +104,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("loaded")
     public void documentWrite_onLoad_noSrc() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -123,8 +123,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"loaded", "foo"})
     public void documentCreateElement_onLoad() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function handleFrameLoad() {\n"
@@ -145,7 +145,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPageVerifyTitle2(html);
@@ -157,8 +157,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"loaded", ""})
     public void documentCreateElement_onLoad_noSrc() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function handleFrameLoad() {\n"
@@ -188,8 +188,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"createIFrame", "loaded", "foo"})
     public void documentCreateElement_onLoad2() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -211,7 +211,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "  <body onload='createIFrame();' >\n"
             + "  </body>\n"
             + "</html>";
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPage2(html);
@@ -224,8 +224,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"createIFrame", "loaded", ""})
     public void documentCreateElement_onLoad2_noSrc() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -257,7 +257,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("created")
     public void documentCreateElement_noAppendNoLoad() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "var myFrame = document.createElement('iframe');\n"
             + "myFrame.src = 'notExisting.html';\n"
@@ -275,8 +276,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"createIFrame", "loaded"})
     public void documentCreateElement_iFrameInsideDiv() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head><script type='text/javascript'>\n"
               + LOG_TITLE_FUNCTION
               + "  function createIFrame() {\n"
@@ -293,7 +294,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
               + "    <a id='test' onclick='createIFrame();'>insert frame</a>\n"
               + "  </body>\n"
               + "</html>";
-        final String html2 = "<html><body>"
+        final String html2 = DOCTYPE_HTML
+                + "<html><body>"
                 + "<script>window.parent.document.title += 'loaded\\u00a7';</script></body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
@@ -311,8 +313,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"createIFrame", "loaded", "foo"})
     public void documentCreateElement_onLoad3() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -334,7 +336,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "  <body onload='createIFrame();' >\n"
             + "  </body>\n"
             + "</html>";
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPage2(html);
@@ -347,8 +349,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"createIFrame", "loaded", ""})
     public void documentCreateElement_onLoad3_noSrc() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -378,8 +380,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     public void documentFragmentCreateElement_onLoad() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function handleFrameLoad() {\n"
@@ -398,7 +400,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPageVerifyTitle2(html);
@@ -438,8 +440,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("createIFrame")
     public void documentFragmentCreateElement_onLoad2() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -459,7 +461,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "  <body onload='createIFrame();' >\n"
             + "  </body>\n"
             + "</html>";
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPageVerifyTitle2(html);
@@ -471,8 +473,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("createIFrame")
     public void documentFragmentCreateElement_onLoad2_noSrc() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -501,8 +503,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("createIFrame")
     public void documentFragmentCreateElement_onLoad3() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -522,7 +524,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "  <body onload='createIFrame();' >\n"
             + "  </body>\n"
             + "</html>";
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPageVerifyTitle2(html);
@@ -547,7 +549,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     }
 
     private void documentCreateElement_onLoad_srcX(final String iframeSrc) throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "function createIFrame() {\n"
             + "  log('createIFrame');\n"
@@ -579,8 +582,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("createIFrame")
     public void documentFragmentCreateElement_onLoad3_noSrc() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -609,8 +612,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function handleFrameLoad() {\n"
@@ -632,7 +635,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPageVerifyTitle2(html);
@@ -644,8 +647,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad_noSrc() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function handleFrameLoad() {\n"
@@ -676,8 +679,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"createIFrame", "fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad2() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -700,7 +703,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "  <body onload='createIFrame();' >\n"
             + "  </body>\n"
             + "</html>";
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPage2(html);
@@ -713,8 +716,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"createIFrame", "fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad2_noSrc() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -746,8 +749,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"createIFrame", "fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad3() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -770,7 +773,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "  <body onload='createIFrame();' >\n"
             + "  </body>\n"
             + "</html>";
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPage2(html);
@@ -783,8 +786,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"createIFrame", "fragment append done", "loaded"})
     public void documentDocumentFragmentCreateElement_onLoad3_noSrc() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function createIFrame() {\n"
@@ -817,8 +820,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"left", "right", "bottom", "middle", "top", "wrong", ""})
     public void getAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <iframe id='i1' align='left' ></iframe>\n"
             + "  <iframe id='i2' align='right' ></iframe>\n"
             + "  <iframe id='i3' align='bottom' ></iframe>\n"
@@ -844,8 +847,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top"})
     public void setAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <iframe id='i1' align='left' ></iframe>\n"
 
             + "<script>\n"
@@ -880,8 +883,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"loaded", "loaded", "loaded"})
     public void onLoadCalledEachTimeFrameContentChanges() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -893,7 +896,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final String frameHtml = "<html><body>foo</body></html>";
+        final String frameHtml = DOCTYPE_HTML + "<html><body>foo</body></html>";
 
         getMockWebConnection().setDefaultResponse(frameHtml);
 
@@ -911,8 +914,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"about:blank", "§§URL§§", "§§URL§§"})
     public void location() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head><script>\n"
               + LOG_TITLE_FUNCTION
               + "  function test() {\n"
@@ -943,8 +946,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"loaded", "§§URL§§", "§§URL§§", "loaded", "about:blank"})
     public void removeSourceAttribute() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><script>\n"
                 + LOG_TEXTAREA_FUNCTION
 
@@ -972,7 +975,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                 + "  </body>\n"
                 + "</html>";
 
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         final WebDriver driver = loadPage2(html);
@@ -991,8 +994,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                 "1", "[object Window]", "[object HTMLDocument]", "http://localhost:22222/second/",
                 "0", "#[object Window]", "#[object HTMLDocument]", "http://localhost:22222/second/"})
     public void detach() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><script>\n"
                 + LOG_TEXTAREA_FUNCTION
 
@@ -1023,7 +1026,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                 + "  </body>\n"
                 + "</html>";
 
-        final String html2 = "<html><body>foo</body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         final WebDriver driver = loadPage2(html);
@@ -1049,8 +1052,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             FF_ESR = {"iframe script", "loaded", "null", "loaded", "[object Window]",
                       "about:blank", "iframe script", "loaded"})
     public void detachAppend() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><script>\n"
                 + LOG_TEXTAREA_FUNCTION
 
@@ -1075,7 +1078,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                 + "  </body>\n"
                 + "</html>";
 
-        final String html2 = "<html><body>foo<script>parent.log('iframe script');</script></body></html>";
+        final String html2 = DOCTYPE_HTML
+                + "<html><body>foo<script>parent.log('iframe script');</script></body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         final WebDriver driver = loadPage2(html);
@@ -1106,8 +1110,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             FF_ESR = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
                       "about:blank", "iframe external script", "loaded"})
     public void detachAppendExternalScript() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><script>\n"
                 + LOG_TEXTAREA_FUNCTION
 
@@ -1132,8 +1136,9 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                 + "  </body>\n"
                 + "</html>";
 
-        final String html2 = "<html><body>foo<script src='"
-                                + URL_SECOND + "ext.js'></script></body></html>";
+        final String html2 = DOCTYPE_HTML
+                + "<html><body>foo<script src='"
+                      + URL_SECOND + "ext.js'></script></body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
         final String js = "parent.log('iframe external script');";
         getMockWebConnection().setResponse(new URL(URL_SECOND, "ext.js"), js, MimeType.TEXT_JAVASCRIPT);

@@ -35,8 +35,8 @@ public class HTMLIsIndexElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLUnknownElement]")
     public void createElement() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "  </head>\n"
             + "  <body id='body'>\n"

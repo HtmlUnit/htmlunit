@@ -44,8 +44,8 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      */
     @Test
     public void setSrcAttribute() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title><script>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
             + "    document.getElementById('iframe1').setAttribute('src', '" + URL_SECOND + "');\n"
             + "  }\n"
@@ -54,8 +54,8 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
             + "<iframe id='iframe1'>\n"
             + "</body></html>";
 
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
-        final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent = DOCTYPE_HTML + "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = getMockWebConnection();
@@ -84,7 +84,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      */
     @Test
     public void srcJavaScriptUrl_JavaScriptDisabled() throws Exception {
-        final String html = "<html><body><iframe src='javascript:false;'></iframe></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><iframe src='javascript:false;'></iframe></body></html>";
 
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);
@@ -101,7 +101,8 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      */
     @Test
     public void removeFrameWindow() throws Exception {
-        final String index = "<html><head></head><body>\n"
+        final String index = DOCTYPE_HTML
+                + "<html><head></head><body>\n"
                 + "<div id='content'>\n"
                 + "  <iframe name='content' src='second/'></iframe>\n"
                 + "</div>\n"
@@ -109,7 +110,8 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
                 +     "onClick=\"document.getElementById('content').innerHTML = 'new content';\">Item</button>\n"
                 + "</body></html>";
 
-        final String frame1 = "<html><head></head><body>\n"
+        final String frame1 = DOCTYPE_HTML
+                + "<html><head></head><body>\n"
                 + "<p>frame content</p>\n"
                 + "</body></html>";
 

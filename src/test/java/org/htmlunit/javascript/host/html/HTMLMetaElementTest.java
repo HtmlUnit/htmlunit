@@ -37,8 +37,8 @@ public class HTMLMetaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "text/html; charset=utf-8", HttpHeader.CONTENT_TYPE, "", "", "undefined", ""})
     public void name() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\n"
             + "    <script>\n"
@@ -67,8 +67,8 @@ public class HTMLMetaElementTest extends WebDriverTestCase {
     @Test
     @Alerts("only screen and (max-width: 600px)")
     public void media() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <meta http-equiv='Content-Type' media='only screen and (max-width: 600px)'>\n"
             + "    <script>\n"

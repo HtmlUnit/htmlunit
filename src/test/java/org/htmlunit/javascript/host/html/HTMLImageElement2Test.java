@@ -48,7 +48,8 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void onLoad_notDownloadedWhenJavascriptDisabled() throws Exception {
-        final String html = "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         client.getOptions().setJavaScriptEnabled(false);
@@ -74,8 +75,8 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
                     MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "  function test(i) {\n"
@@ -122,8 +123,8 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
                     MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "  function test(i) {\n"
