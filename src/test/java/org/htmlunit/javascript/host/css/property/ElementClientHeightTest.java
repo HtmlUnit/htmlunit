@@ -325,14 +325,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "621",
-            EDGE = "630",
-            FF = "675",
-            FF_ESR = "677")
-    @HtmlUnitNYI(CHROME = "605",
-            EDGE = "605",
-            FF = "605",
-            FF_ESR = "605")
+    @Alerts("0")
     public void body() throws Exception {
         loadPageVerifyTitle2(test("body"));
     }
@@ -1044,11 +1037,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
-    @HtmlUnitNYI(CHROME = "18",
-            EDGE = "18",
-            FF = "18",
-            FF_ESR = "18")
+    @Alerts("18")
     public void marquee() throws Exception {
         loadPageVerifyTitle2(test("marquee"));
     }

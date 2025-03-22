@@ -325,7 +325,11 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts("-16")
+    @HtmlUnitNYI(CHROME = "0",
+            EDGE = "0",
+            FF = "0",
+            FF_ESR = "0")
     public void body() throws Exception {
         loadPageVerifyTitle2(test("body"));
     }
