@@ -24,6 +24,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
@@ -2056,8 +2057,14 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0 622 / 722", "1 622 / 722", "2 622 / 722", "3 622 / 722",
-             "4 622 / 722", "5 622 / 722", "6 622 / 722"})
+    @Alerts(CHROME = "break at: 10 660.5833740234375 / 622",
+        EDGE = "break at: 10 660.5833740234375 / 631",
+        FF = "break at: 11 726.63330078125 / 676",
+        FF_ESR = "break at: 11 726.63330078125 / 677")
+    @HtmlUnitNYI(CHROME = "break at: 33 620 / 605",
+        EDGE = "break at: 33 620 / 605",
+        FF = "break at: 33 620 / 605",
+        FF_ESR = "break at: 33 620 / 605")
     public void endlessLoop() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -2069,16 +2076,21 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
 
+            + "  var lastBottom = 0;\n"
             + "  for (let i = 0; i < 70; i++) {\n"
             + "    let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;\n"
-            + "    let stop = document.documentElement.clientHeight + 100;"
+            + "    let stop = document.documentElement.clientHeight;"
             + "    if (windowRelativeBottom > stop) {\n"
             + "      log('break at: ' + i + ' ' + windowRelativeBottom + ' / ' + stop);\n"
             + "      break;\n"
             + "    }\n"
-            + "    log(i + ' ' + windowRelativeBottom + ' / ' + stop);\n"
+            + "    if (lastBottom >= windowRelativeBottom) {\n"
+            + "      log('error at: ' + i + ' ' + windowRelativeBottom + ' / ' + lastBottom);\n"
+            + "      break;\n"
+            + "    }\n"
+            + "    lastBottom = windowRelativeBottom;\n"
 
-            + "    document.body.insertAdjacentHTML('beforeend', `<p>Date: ${new Date()}</p>`);\n"
+            + "    document.body.insertAdjacentHTML('beforeend', '<h1>H 1</h1>');\n"
             + "  }\n"
             + "</script>\n"
 

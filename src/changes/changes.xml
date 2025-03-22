@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.11.0" date="March xx, 2025" description="Chrome/Edge 134, Firefox 136, Rhino RegExp, less dependencies, Bugfixes">
+            <action type="fix" dev="rbri" issue="#942">
+                The style cache has to handle all parents of added or deleted nodes.
+            </action>
             <action type="remove" dev="rbri">
                 Class HiddenFunctionObject removed, this was a leftover from the IE age.
             </action>

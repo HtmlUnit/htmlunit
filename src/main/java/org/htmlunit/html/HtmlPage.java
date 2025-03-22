@@ -2783,7 +2783,8 @@ public class HtmlPage extends SgmlPage {
             }
 
             // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
-            final boolean clearParents = ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
+            // null means that a node was added/removed; we always have to take care of this for the parents
+            final boolean clearParents = attribName == null || ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
             if (computedStylesCache_ != null) {
                 computedStylesCache_.nodeChanged(changedNode, clearParents);
             }
