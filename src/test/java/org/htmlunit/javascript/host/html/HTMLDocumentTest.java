@@ -177,6 +177,15 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("CSS1Compat")
+    public void compatMode_htmlLowercase() throws Exception {
+        compatMode("<!doctype html>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("BackCompat")
     public void compatMode_question() throws Exception {
         compatMode("<?DOCTYPE html>");

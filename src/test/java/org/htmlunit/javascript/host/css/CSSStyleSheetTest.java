@@ -2055,7 +2055,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * Test for #942.
      * @throws Exception if the test fails
      */
-    // @Test
+    @Test
     @Alerts({"0 622 / 722", "1 622 / 722", "2 622 / 722", "3 622 / 722",
              "4 622 / 722", "5 622 / 722", "6 622 / 722"})
     public void endlessLoop() throws Exception {

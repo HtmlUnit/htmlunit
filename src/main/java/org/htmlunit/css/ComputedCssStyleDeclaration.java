@@ -44,6 +44,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.Page;
+import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
 import org.htmlunit.css.CssPixelValueConverter.CssValue;
 import org.htmlunit.css.StyleAttributes.Definition;
@@ -104,6 +105,7 @@ import org.htmlunit.html.HtmlNoFrames;
 import org.htmlunit.html.HtmlNoLayer;
 import org.htmlunit.html.HtmlNoScript;
 import org.htmlunit.html.HtmlOutput;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlPasswordInput;
 import org.htmlunit.html.HtmlPlainText;
 import org.htmlunit.html.HtmlRadioButtonInput;
@@ -1432,12 +1434,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         if (!element.isAttachedToPage()) {
             return 0;
         }
-        int height = getCalculatedHeight();
+        int height = getCalculatedHeight(element);
         if (!"border-box".equals(getStyleAttribute(Definition.BOX_SIZING, true))) {
             if (includeBorder) {
                 height += getBorderVertical();
             }
-            else if (isScrollable(true, true) && !(element instanceof HtmlBody)) {
+            else if (isScrollable(element, true, true) && !(element instanceof HtmlBody)) {
                 height -= 17;
             }
 
@@ -1452,13 +1454,11 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * Returns the element's calculated height, taking both relevant CSS and the element's children into account.
      * @return the element's calculated height, taking both relevant CSS and the element's children into account
      */
-    private int getCalculatedHeight() {
+    private int getCalculatedHeight(final DomElement element) {
         final Integer cachedHeight = getCachedHeight();
         if (cachedHeight != null) {
             return cachedHeight.intValue();
         }
-
-        final DomElement element = getDomElement();
 
         if (element instanceof HtmlImage) {
             return updateCachedHeight(((HtmlImage) element).getHeightOrDefault());
@@ -1473,7 +1473,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
         }
 
-        return updateCachedHeight(getEmptyHeight());
+        return updateCachedHeight(getEmptyHeight(element));
     }
 
     /**
@@ -1493,7 +1493,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             if (includeBorder) {
                 width += getBorderHorizontal();
             }
-            else if (isScrollable(false, true) && !(element instanceof HtmlBody)) {
+            else if (isScrollable(element, false, true) && !(element instanceof HtmlBody)) {
                 width -= 17;
             }
 
@@ -1659,13 +1659,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the element's calculated height taking relevant CSS into account, but <b>not</b> the element's child
      *         elements
      */
-    private int getEmptyHeight() {
+    private int getEmptyHeight(final DomElement element) {
         final Integer cachedHeight2 = getCachedEmptyHeight();
         if (cachedHeight2 != null) {
             return cachedHeight2.intValue();
         }
 
-        final DomElement element = getDomElement();
         if (!element.mayBeDisplayed()) {
             return updateCachedEmptyHeight(0);
         }
@@ -1675,11 +1674,16 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return updateCachedEmptyHeight(0);
         }
 
-        final WebWindow webWindow = element.getPage().getEnclosingWindow();
+        final SgmlPage page = element.getPage();
+        final WebWindow webWindow = page.getEnclosingWindow();
         final int windowHeight = webWindow.getInnerHeight();
 
         if (element instanceof HtmlBody) {
-            return updateCachedEmptyHeight(windowHeight);
+            if (page instanceof HtmlPage && ((HtmlPage) page).isQuirksMode()) {
+                return updateCachedEmptyHeight(windowHeight);
+            }
+
+            return updateCachedEmptyHeight(0);
         }
 
         final boolean isInline = INLINE.equals(display) && !(element instanceof HtmlInlineFrame);
@@ -1922,15 +1926,14 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return {@code true} if the element is scrollable along the specified axis
      */
     public boolean isScrollable(final boolean horizontal) {
-        return isScrollable(horizontal, false);
+        return isScrollable(getDomElement(), horizontal, false);
     }
 
     /**
      * @param ignoreSize whether to consider the content/calculated width/height
      */
-    private boolean isScrollable(final boolean horizontal, final boolean ignoreSize) {
+    private boolean isScrollable(final DomElement element, final boolean horizontal, final boolean ignoreSize) {
         final boolean scrollable;
-        final DomElement element = getDomElement();
 
         String overflow;
         if (horizontal) {
@@ -1956,7 +1959,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
 
             scrollable = (element instanceof HtmlBody || SCROLL.equals(overflow) || AUTO.equals(overflow))
-                && (ignoreSize || getContentHeight() > getEmptyHeight());
+                && (ignoreSize || getContentHeight() > getEmptyHeight(element));
         }
         return scrollable;
     }

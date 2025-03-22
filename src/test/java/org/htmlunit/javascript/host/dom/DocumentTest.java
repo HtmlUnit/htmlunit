@@ -3762,4 +3762,177 @@ public class DocumentTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"0", "0", "8", "1256"},
+            EDGE = {"0", "0", "8", "1248"},
+            FF = {"0", "0", "8", "1256"},
+            FF_ESR = {"0", "0", "8", "1260"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "8", "1256"},
+            EDGE = {"0", "0", "8", "1256"},
+            FF = {"0", "0", "8", "1256"},
+            FF_ESR = {"0", "0", "8", "1256"})
+    public void documentElementBoundingClientRect() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let rect = document.documentElement.getBoundingClientRect();\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"0", "0", "621", "1256"},
+            EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "8", "1256"},
+            FF_ESR = {"0", "0", "8", "1260"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "613", "1256"},
+            EDGE = {"0", "0", "613", "1256"},
+            FF = {"0", "0", "613", "1256"},
+            FF_ESR = {"0", "0", "613", "1256"})
+    public void documentElementBoundingClientRectQuirks() throws Exception {
+        final String html =
+            "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let rect = document.documentElement.getBoundingClientRect();\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"0", "0", "8", "1256"},
+            EDGE = {"0", "0", "8", "1248"},
+            FF = {"0", "0", "8", "1256"},
+            FF_ESR = {"0", "0", "8", "1260"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "8", "1256"},
+            EDGE = {"0", "0", "8", "1256"},
+            FF = {"0", "0", "8", "1256"},
+            FF_ESR = {"0", "0", "8", "1256"})
+    public void documentElementOffset() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let doc = document.documentElement;\n"
+            + "  log(doc.offsetTop);\n"
+            + "  log(doc.offsetLeft);\n"
+            + "  log(doc.offsetHeight);\n"
+            + "  log(doc.offsetWidth);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"0", "0", "621", "1256"},
+            EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "8", "1256"},
+            FF_ESR = {"0", "0", "8", "1260"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "613", "1256"},
+            EDGE = {"0", "0", "613", "1256"},
+            FF = {"0", "0", "613", "1256"},
+            FF_ESR = {"0", "0", "613", "1256"})
+    public void documentElementOffsetQuirks() throws Exception {
+        final String html =
+            "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let doc = document.documentElement;\n"
+            + "  log(doc.offsetTop);\n"
+            + "  log(doc.offsetLeft);\n"
+            + "  log(doc.offsetHeight);\n"
+            + "  log(doc.offsetWidth);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"0", "0", "621", "1256"},
+            EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "675", "1256"},
+            FF_ESR = {"0", "0", "677", "1260"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "605", "1256"},
+            EDGE = {"0", "0", "605", "1256"},
+            FF = {"0", "0", "605", "1256"},
+            FF_ESR = {"0", "0", "605", "1256"})
+    public void documentElementClientWidthHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.documentElement.clientTop);\n"
+            + "  log(document.documentElement.clientLeft);\n"
+            + "  log(document.documentElement.clientHeight);\n"
+            + "  log(document.documentElement.clientWidth);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"0", "0", "621", "1256"},
+            EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "8", "1256"},
+            FF_ESR = {"0", "0", "8", "1260"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "605", "1256"},
+            EDGE = {"0", "0", "605", "1256"},
+            FF = {"0", "0", "605", "1256"},
+            FF_ESR = {"0", "0", "605", "1256"})
+    public void documentElementClientWidthHeightQuirks() throws Exception {
+        final String html =
+            "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.documentElement.clientTop);\n"
+            + "  log(document.documentElement.clientLeft);\n"
+            + "  log(document.documentElement.clientHeight);\n"
+            + "  log(document.documentElement.clientWidth);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
