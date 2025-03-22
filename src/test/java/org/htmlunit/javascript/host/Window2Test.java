@@ -955,17 +955,47 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"true", "true", "147", "true", "true", "16"},
-            EDGE = {"true", "true", "138", "true", "true", "24"},
-            FF = {"true", "true", "93", "true", "true", "16"},
-            FF_ESR = {"true", "true", "91", "true", "true", "12"})
+    @Alerts(CHROME = {"true", "621", "147", "true", "16", "16"},
+            EDGE = {"true", "630", "138", "true", "16", "24"},
+            FF = {"true", "675", "93", "true", "16", "16"},
+            FF_ESR = {"true", "677", "91", "true", "16", "12"})
+    @HtmlUnitNYI(CHROME = {"true", "605", "147", "true", "0", "16"},
+            EDGE = {"true", "605", "138", "true", "0", "24"},
+            FF = {"true", "605", "93", "true", "0", "16"},
+            FF_ESR = {"true", "605", "91", "true", "0", "12"})
     public void heightsAndWidths() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body onload='test()'><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(window.innerHeight > 0);\n"
-            + "  log(window.innerHeight == document.body.clientHeight);\n"
+            + "  log(window.innerHeight - document.body.clientHeight);\n"
+            + "  log(window.outerHeight - window.innerHeight);\n"
+            + "  log(window.innerWidth > 0);\n"
+            + "  log(window.innerWidth - document.body.clientWidth);\n"
+            + "  log(window.outerWidth - window.innerWidth);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Regression test for bug 2897473.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"true", "0", "147", "true", "true", "16"},
+            EDGE = {"true", "0", "138", "true", "true", "24"},
+            FF = {"true", "0", "93", "true", "true", "16"},
+            FF_ESR = {"true", "0", "91", "true", "true", "12"})
+    public void heightsAndWidthsQuirks() throws Exception {
+        final String html =
+            "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(window.innerHeight > 0);\n"
+            + "  log(window.innerHeight - document.body.clientHeight);\n"
             + "  log(window.outerHeight - window.innerHeight);\n"
             + "  log(window.innerWidth > 0);\n"
             + "  log(window.innerWidth == document.body.clientWidth);\n"
@@ -1057,16 +1087,58 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"621", "1256", "604", "1239"},
-            EDGE = {"630", "1248", "615", "1233"},
-            FF = {"675", "1256", "658", "1239"},
-            FF_ESR = {"677", "1260", "660", "1243"})
-    @NotYetImplemented
+    @Alerts(CHROME = {"0", "1240", "100", "1240"},
+            EDGE = {"0", "1232", "100", "1232"},
+            FF = {"0", "1240", "100", "1240"},
+            FF_ESR = {"0", "1244", "100", "1244"})
+    @HtmlUnitNYI(CHROME = {"0", "1256", "100", "1256"},
+            EDGE = {"0", "1256", "100", "1256"},
+            FF = {"0", "1256", "100", "1256"},
+            FF_ESR = {"0", "1256", "100", "1256"})
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple
     public void changeHeightsAndWidths() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
+            + "<script language='javascript'>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var oldHeight = document.body.clientHeight;\n"
+            + "    var oldWidth = document.body.clientWidth;\n"
+            + "    log(document.body.clientHeight);\n"
+            + "    log(document.body.clientWidth);\n"
+            + "    newDiv = document.createElement('div');\n"
+            + "    document.body.appendChild(newDiv);\n"
+            + "    newDiv.style['height'] = oldHeight + 100 + 'px';\n"
+            + "    newDiv.style['width'] = oldWidth + 100 + 'px';\n"
+            + "    log(document.body.clientHeight);\n"
+            + "    log(document.body.clientWidth);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Regression test for bug 2944261.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"621", "1256", "604", "1239"},
+            EDGE = {"630", "1248", "615", "1233"},
+            FF = {"675", "1256", "658", "1239"},
+            FF_ESR = {"677", "1260", "660", "1243"})
+    // TODO width and height calculation needs to be reworked in HtmlUnit
+    // but as the calculation might be effected by e.g. current windows style it is not that simple
+    @HtmlUnitNYI(CHROME = {"605", "1256", "705", "1256"},
+            EDGE = {"605", "1256", "705", "1256"},
+            FF = {"605", "1256", "705", "1256"},
+            FF_ESR = {"605", "1256", "705", "1256"})
+    public void changeHeightsAndWidthsQuirks() throws Exception {
+        final String html =
+            "<html><head>\n"
             + "<script language='javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
