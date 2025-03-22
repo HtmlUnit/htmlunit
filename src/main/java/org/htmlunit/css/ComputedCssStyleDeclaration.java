@@ -88,6 +88,12 @@ import org.htmlunit.html.HtmlFigureCaption;
 import org.htmlunit.html.HtmlFileInput;
 import org.htmlunit.html.HtmlFooter;
 import org.htmlunit.html.HtmlHeader;
+import org.htmlunit.html.HtmlHeading1;
+import org.htmlunit.html.HtmlHeading2;
+import org.htmlunit.html.HtmlHeading3;
+import org.htmlunit.html.HtmlHeading4;
+import org.htmlunit.html.HtmlHeading5;
+import org.htmlunit.html.HtmlHeading6;
 import org.htmlunit.html.HtmlHiddenInput;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlInlineFrame;
@@ -1795,10 +1801,77 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
         }
         else {
-            final String fontSize = getFontSize();
+            final String fontSize;
+
+            boolean isHeading = false;
+            if (element instanceof HtmlHeading1) {
+                isHeading = true;
+                final String value = getStyleAttribute(Definition.FONT_SIZE, false);
+                if (value.isEmpty()) {
+                    fontSize = "32px";
+                }
+                else {
+                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                }
+            }
+            else if (element instanceof HtmlHeading2) {
+                isHeading = true;
+                final String value = getStyleAttribute(Definition.FONT_SIZE, false);
+                if (value.isEmpty()) {
+                    fontSize = "24px";
+                }
+                else {
+                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                }
+            }
+            else if (element instanceof HtmlHeading3) {
+                isHeading = true;
+                final String value = getStyleAttribute(Definition.FONT_SIZE, false);
+                if (value.isEmpty()) {
+                    fontSize = "19px";
+                }
+                else {
+                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                }
+            }
+            else if (element instanceof HtmlHeading4) {
+                isHeading = true;
+                final String value = getStyleAttribute(Definition.FONT_SIZE, false);
+                if (value.isEmpty()) {
+                    fontSize = "16px";
+                }
+                else {
+                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                }
+            }
+            else if (element instanceof HtmlHeading5) {
+                isHeading = true;
+                final String value = getStyleAttribute(Definition.FONT_SIZE, false);
+                if (value.isEmpty()) {
+                    fontSize = "13px";
+                }
+                else {
+                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                }
+            }
+            else if (element instanceof HtmlHeading6) {
+                isHeading = true;
+                final String value = getStyleAttribute(Definition.FONT_SIZE, false);
+                if (value.isEmpty()) {
+                    fontSize = "11px";
+                }
+                else {
+                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                }
+            }
+            else {
+                fontSize = getFontSize();
+            }
+
             defaultHeight = webWindow.getWebClient().getBrowserVersion().getFontHeight(fontSize);
 
-            if (element instanceof HtmlDivision
+            if (isHeading
+                    || element instanceof HtmlDivision
                     || element instanceof HtmlSpan) {
                 String width = getStyleAttribute(Definition.WIDTH, false);
 

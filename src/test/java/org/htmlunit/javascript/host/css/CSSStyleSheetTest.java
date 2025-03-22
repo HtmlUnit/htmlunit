@@ -2061,10 +2061,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         EDGE = "break at: 10 660.5833740234375 / 631",
         FF = "break at: 11 726.63330078125 / 676",
         FF_ESR = "break at: 11 726.63330078125 / 677")
-    @HtmlUnitNYI(CHROME = "break at: 33 620 / 605",
-        EDGE = "break at: 33 620 / 605",
-        FF = "break at: 33 620 / 605",
-        FF_ESR = "break at: 33 620 / 605")
+    @HtmlUnitNYI(CHROME = "break at: 16 637 / 605",
+        EDGE = "break at: 16 637 / 605",
+        FF = "break at: 15 616 / 605",
+        FF_ESR = "break at: 15 616 / 605")
     public void endlessLoop() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

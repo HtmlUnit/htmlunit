@@ -87,4 +87,84 @@ public class HTMLHeadingElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"37", "27", "22", "18", "16", "12"},
+            FF = {"38", "28", "22", "18", "16", "13"},
+            FF_ESR = {"38", "28", "22", "18", "16", "13"})
+    public void clientHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var elt = document.getElementById('h1');\n"
+            + "      log(elt.clientHeight);\n"
+            + "      var elt = document.getElementById('h2');\n"
+            + "      log(elt.clientHeight);\n"
+            + "      var elt = document.getElementById('h3');\n"
+            + "      log(elt.clientHeight);\n"
+            + "      var elt = document.getElementById('h4');\n"
+            + "      log(elt.clientHeight);\n"
+            + "      var elt = document.getElementById('h5');\n"
+            + "      log(elt.clientHeight);\n"
+            + "      var elt = document.getElementById('h6');\n"
+            + "      log(elt.clientHeight);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <h1 id='h1'>HtmlUnit</h1>\n"
+            + "  <h2 id='h2'>HtmlUnit</h2>\n"
+            + "  <h3 id='h3'>HtmlUnit</h3>\n"
+            + "  <h4 id='h4'>HtmlUnit</h4>\n"
+            + "  <h5 id='h5'>HtmlUnit</h5>\n"
+            + "  <h6 id='h6'>HtmlUnit</h6>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "0", "0", "0", "0", "0"})
+    public void clientHeightEmpty() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var elt = document.getElementById('h1');\n"
+            + "      log(elt.clientHeight);\n"
+            + "      var elt = document.getElementById('h2');\n"
+            + "      log(elt.clientHeight);\n"
+            + "      var elt = document.getElementById('h3');\n"
+            + "      log(elt.clientHeight);\n"
+            + "      var elt = document.getElementById('h4');\n"
+            + "      log(elt.clientHeight);\n"
+            + "      var elt = document.getElementById('h5');\n"
+            + "      log(elt.clientHeight);\n"
+            + "      var elt = document.getElementById('h6');\n"
+            + "      log(elt.clientHeight);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <h1 id='h1'></h1>\n"
+            + "  <h2 id='h2'></h2>\n"
+            + "  <h3 id='h3'></h3>\n"
+            + "  <h4 id='h4'></h4>\n"
+            + "  <h5 id='h5'></h5>\n"
+            + "  <h6 id='h6'></h6>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

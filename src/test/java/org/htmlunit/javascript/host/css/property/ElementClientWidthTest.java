@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Unit tests for {@code offsetWidth} of an element.
+ * Unit tests for {@code clientWidth} of an element.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
