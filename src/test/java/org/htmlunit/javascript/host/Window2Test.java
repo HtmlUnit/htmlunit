@@ -1518,8 +1518,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"string string 25 number string",
-                "string string 26 number object"})
+    @Alerts({"string string 26 number string",
+                "string string 27 number object"})
     public void onErrorExceptionInstance() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -1544,7 +1544,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"string string 25 number object", "string string 1 number object"})
+    @Alerts({"string string 26 number object", "string string 1 number object"})
     public void onErrorExceptionInstance2() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"

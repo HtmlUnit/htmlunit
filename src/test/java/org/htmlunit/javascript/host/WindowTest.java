@@ -331,7 +331,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "</body></html>";
         final String thirdContent = DOCTYPE_HTML
             + "<html><head><title>Third</title></head><body>\n"
-            + "    <a id='link' onClick='window.open(\"http://fourth\", \"_top\"); "
+            + "  <a id='link' onClick='window.open(\"http://fourth\", \"_top\"); "
             + "return false;'>Click me</a>\n"
             + "</body></html>";
         final String fourthContent = DOCTYPE_HTML
@@ -399,7 +399,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "</body></html>";
         final String thirdContent = DOCTYPE_HTML
             + "<html><head><title>Third</title></head><body>\n"
-            + "    <a id='link' onClick='window.open(\"http://fourth\", \"_parent\"); "
+            + "  <a id='link' onClick='window.open(\"http://fourth\", \"_parent\"); "
             + "return false;'>Click me</a>\n"
             + "</body></html>";
         final String fourthContent = DOCTYPE_HTML
