@@ -82,28 +82,36 @@ public class Window3Test extends WebDriverTestCase {
         final URL urlThird = new URL(URL_FIRST, "third/");
 
         final String firstContent = DOCTYPE_HTML
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head>\n"
+            + "<title>First</title>\n"
+            + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "function test() {\n"
-            + "  alert(window.opener);\n"
-            + "  alert('one');\n"
+            + "  log(window.opener);\n"
+            + "  log('one');\n"
             + "  open('" + URL_SECOND + "', 'foo');\n"
             + "}\n"
             + "function calllog(text) {\n"
-            + "  alert(text);\n"
+            + "  log(text);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         final String secondContent = DOCTYPE_HTML
-            + "<html><head><title>Second</title><script>\n"
+            + "<html><head>\n"
+            + "<title>Second</title>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  opener.calllog('two');\n"
             + "  document.form1.submit();\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "<form name='form1' action='" + urlThird + "' method='post'><input type='submit'></form>\n"
             + "</body></html>";
         final String thirdContent = DOCTYPE_HTML
-            + "<html><head><title>Third</title><script>\n"
+            + "<html><head>\n"
+            + "<title>Third</title>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  opener.calllog('three');\n"
             + "}\n"
@@ -113,8 +121,9 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
         getMockWebConnection().setResponse(urlThird, thirdContent);
 
-        final WebDriver driver = loadPageWithAlerts2(firstContent);
+        final WebDriver driver = loadPage2(firstContent);
         assertTitle(driver, "First");
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -166,31 +175,41 @@ public class Window3Test extends WebDriverTestCase {
         final URL urlThird = new URL(URL_FIRST, "third/");
 
         final String firstContent = DOCTYPE_HTML
-            + "<html><head><title>First</title></head><body><script>\n"
-            + "myVariable = 'first'"
-            + "  </script><iframe name='left' src='" + URL_SECOND + "'></iframe>\n"
+            + "<html><head>\n"
+            + "<title>First</title>\n"
+            + "</head><body>\n"
+            + "<script>myVariable = 'first'</script>\n"
+            + "<iframe name='left' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
 
         final String secondContent = DOCTYPE_HTML
-            + "<html><head><title>Second</title></head><body><script>\n"
-            + "myVariable = 'second'"
-            + "  </script><iframe name='innermost' src='" + urlThird + "'></iframe>\n"
+            + "<html><head>\n"
+            + "<title>Second</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>myVariable = 'second'</script>\n"
+            + "<iframe name='innermost' src='" + urlThird + "'></iframe>\n"
             + "</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final String thirdContent = DOCTYPE_HTML
-            + "<html><head><title>Third</title><script>\n"
+            + "<html><head>\n"
+            + "<title>Third</title>\n"
+            + "<script>\n"
             + "myVariable = 'third';\n"
+
+            + LOG_WINDOW_NAME_FUNCTION
             + "function doTest() {\n"
-            + "alert('parent.myVariable = ' + parent.myVariable);\n"
-            + "alert('top.myVariable = ' + top.myVariable);\n"
+            + "  log('parent.myVariable = ' + parent.myVariable);\n"
+            + "  log('top.myVariable = ' + top.myVariable);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'></body></html>";
         getMockWebConnection().setResponse(urlThird, thirdContent);
 
-        final WebDriver driver = loadPageWithAlerts2(firstContent);
+        final WebDriver driver = loadPage2(firstContent);
         assertTitle(driver, "First");
+        verifyWindowName2(driver, getExpectedAlerts());
     }
 
     /**
@@ -215,29 +234,40 @@ public class Window3Test extends WebDriverTestCase {
             + "</frameset></html>";
 
         final String secondContent = DOCTYPE_HTML
-            + "<html><head><title>second</title></head><body><script>\n"
-            + "myVariable = 'second';\n"
-            + "</script><p>second</p></body></html>";
+            + "<html><head>\n"
+            + "<title>second</title>\n"
+            + "</head><body>\n"
+            + "<script>myVariable = 'second';</script>\n"
+            + "<p>second</p></body></html>";
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final String thirdContent = DOCTYPE_HTML
-            + "<html><head><title>third</title></head><body><script>\n"
-            + "myVariable = 'third';\n"
-            + "</script><p>third</p></body></html>";
+            + "<html><head>\n"
+            + "<title>third</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>myVariable = 'third';</script>\n"
+            + "<p>third</p></body></html>";
         getMockWebConnection().setResponse(urlThird, thirdContent);
 
         final String fourthContent = DOCTYPE_HTML
-            + "<html><head><title>fourth</title></head><body onload='doTest()'><script>\n"
-            + "myVariable = 'fourth';\n"
-            + "function doTest() {\n"
-            + "alert('parent.second.myVariable = ' + parent.second.myVariable);\n"
-            + "alert('parent.third.myVariable = ' + parent.third.myVariable);\n"
+            + "<html><head>\n"
+            + "<title>fourth</title>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<script>\n"
+            + "  myVariable = 'fourth';\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "  function doTest() {\n"
+            + "    log('parent.second.myVariable = ' + parent.second.myVariable);\n"
+            + "    log('parent.third.myVariable = ' + parent.third.myVariable);\n"
             + "}\n"
             + "</script></body></html>";
         getMockWebConnection().setResponse(urlFourth, fourthContent);
 
-        final WebDriver driver = loadPageWithAlerts2(firstContent);
+        final WebDriver driver = loadPage2(firstContent);
         assertTitle(driver, "first");
+        verifyWindowName2(driver, getExpectedAlerts());
     }
 
     /**
@@ -287,10 +317,14 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlThird, thirdContent);
 
         final String fourthContent = DOCTYPE_HTML
-            + "<html><head><title>fourth</title></head><body onload='doTest()'><script>\n"
-            + "function doTest() {\n"
-            + "alert('fourth-second='+parent.second.document.location);\n"
-            + "alert('fourth-third='+parent.third.document.location);\n"
+            + "<html><head>\n"
+            + "<title>fourth</title>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'><script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "  function doTest() {\n"
+            + "    log('fourth-second='+parent.second.document.location);\n"
+            + "    log('fourth-third='+parent.third.document.location);\n"
             + "}\n"
             + "</script></body></html>";
         getMockWebConnection().setResponse(urlFourth, fourthContent);
@@ -302,8 +336,9 @@ public class Window3Test extends WebDriverTestCase {
         }
         setExpectedAlerts(expectedAlerts);
 
-        final WebDriver driver = loadPageWithAlerts2(firstContent);
+        final WebDriver driver = loadPage2(firstContent);
         assertTitle(driver, "first");
+        verifyWindowName2(driver, expectedAlerts);
     }
 
     /**
@@ -1267,13 +1302,15 @@ public class Window3Test extends WebDriverTestCase {
         final String iframe = DOCTYPE_HTML
             + "<html><body>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  window.parent.eval('var foo = 1');\n"
-            + "  alert(window.parent.foo);\n"
+            + "  log(window.parent.foo);\n"
             + "</script>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(iframe);
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -1401,8 +1438,9 @@ public class Window3Test extends WebDriverTestCase {
             + "<html><body>\n"
             + "<input type='button' id='myButton' value='Click Me' onclick='test(this)'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test(f) {\n"
-            + "  alert(eval('f.tagName'));\n"
+            + "  log(eval('f.tagName'));\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
@@ -1410,8 +1448,7 @@ public class Window3Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(content);
 
         driver.findElement(By.id("myButton")).click();
-
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
