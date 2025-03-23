@@ -137,6 +137,38 @@
             color: var(--secondary-color);
             font-size: 0.9rem;
         }
+
+        .filter-section {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .filter-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-item label {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .filter-item input,
+        .filter-item select {
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -164,6 +196,32 @@
             <div class="summary-item">
                 <div class="value" th:text="${latestRun}">2024-03-23</div>
                 <div class="label">Latest Run</div>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-grid">
+                <div class="filter-item">
+                    <label for="dateFrom">From Date</label>
+                    <input type="date" id="dateFrom">
+                </div>
+                <div class="filter-item">
+                    <label for="dateTo">To Date</label>
+                    <input type="date" id="dateTo">
+                </div>
+                <div class="filter-item">
+                    <label for="status">Test Status</label>
+                    <select id="status">
+                        <option value="">All</option>
+                        <option value="passed">Passed</option>
+                        <option value="failed">Failed</option>
+                        <option value="skipped">Skipped</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="search">Search Tests</label>
+                    <input type="text" id="search" placeholder="Search by test name...">
+                </div>
             </div>
         </div>
 
@@ -248,6 +306,36 @@
                 hideDetails();
             }
         });
+
+        // Add filter functionality
+        function applyFilters() {
+            const dateFrom = document.getElementById('dateFrom').value;
+            const dateTo = document.getElementById('dateTo').value;
+            const status = document.getElementById('status').value;
+            const search = document.getElementById('search').value.toLowerCase();
+
+            document.querySelectorAll('.date-card').forEach(card => {
+                const date = card.querySelector('.date-header').textContent;
+                const passRate = parseFloat(card.querySelector('.stat-item:nth-child(3) strong').textContent);
+                const testNames = Array.from(card.querySelectorAll('.test-item h3')).map(h => h.textContent.toLowerCase());
+
+                let showCard = true;
+
+                if (dateFrom && new Date(date) < new Date(dateFrom)) showCard = false;
+                if (dateTo && new Date(date) > new Date(dateTo)) showCard = false;
+                if (status === 'passed' && passRate < 100) showCard = false;
+                if (status === 'failed' && passRate === 100) showCard = false;
+                if (search && !testNames.some(name => name.includes(search))) showCard = false;
+
+                card.style.display = showCard ? 'block' : 'none';
+            });
+        }
+
+        // Add event listeners for filters
+        document.getElementById('dateFrom').addEventListener('change', applyFilters);
+        document.getElementById('dateTo').addEventListener('change', applyFilters);
+        document.getElementById('status').addEventListener('change', applyFilters);
+        document.getElementById('search').addEventListener('input', applyFilters);
     </script>
 </body>
 </html>

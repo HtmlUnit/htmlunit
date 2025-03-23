@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Test Documentation</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --success-color: #27ae60;
+            --light-gray: #ecf0f1;
+            --code-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f6fa;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .doc-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin: 0.5rem 0;
+        }
+
+        .sidebar a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .sidebar a:hover {
+            background: var(--light-gray);
+        }
+
+        .content-area {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .doc-section {
+            margin-bottom: 3rem;
+        }
+
+        .doc-section h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            border: 1px solid var(--light-gray);
+        }
+
+        th {
+            background: var(--light-gray);
+        }
+
+        .method-card {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .method-header {
+            font-weight: bold;
+            color: var(--success-color);
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="https://htmlunit.sourceforge.io/" style="text-decoration: none; color: white;">
+            <img src="../images/htmlunit.png" alt="HTMLUnit Logo"
+                style="height: 30px; vertical-align: middle; margin-right: 10px;">
+        </a>
+        <h1 style="display: inline; vertical-align: middle; font-size: 1.5rem;">Test Documentation</h1>
+    </div>
+
+    <div class="container">
+        <div class="doc-grid">
+            <aside class="sidebar">
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#setup">Test Setup</a></li>
+                    <li><a href="#test-classes">Test Classes</a></li>
+                    <li><a href="#methods">Test Methods</a></li>
+                    <li><a href="#examples">Examples</a></li>
+                    <li><a href="#best-practices">Best Practices</a></li>
+                </ul>
+            </aside>
+
+            <main class="content-area">
+                <div id="overview" class="doc-section">
+                    <h2>Overview</h2>
+                    <p>This documentation provides comprehensive information about the test suite implementation.</p>
+                </div>
+
+                <div id="setup" class="doc-section">
+                    <h2>Test Setup</h2>
+                    <div class="method-card">
+                        <div class="method-header">Basic Configuration</div>
+                        <pre><code>@BeforeEach
+void setUp() {
+    // Setup code example
+}</code></pre>
+                    </div>
+                </div>
+
+                <div id="test-classes" class="doc-section">
+                    <h2>Test Classes</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class Name</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ExampleTest</td>
+                                <td>Contains basic test examples</td>
+                                <td>Unit Tests</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="methods" class="doc-section">
+                    <h2>Test Methods</h2>
+                    <div class="method-card">
+                        <div class="method-header">@Test Methods</div>
+                        <p>Documentation for test methods will appear here.</p>
+                    </div>
+                </div>
+
+                <div id="examples" class="doc-section">
+                    <h2>Examples</h2>
+                    <pre><code>// Example test code will be shown here
+    @Test
+    void exampleTest() {
+        // Test implementation
+    }
+                    </code></pre>
+                </div>
+
+                <div id="best-practices" class="doc-section">
+                    <h2>Best Practices</h2>
+                    <ul>
+                        <li>Write descriptive test names</li>
+                        <li>Follow the AAA pattern (Arrange-Act-Assert)</li>
+                        <li>Keep tests independent</li>
+                        <li>Use meaningful assertions</li>
+                    </ul>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
