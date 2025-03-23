@@ -20,4 +20,4 @@
  *
  * @author Akif-jpg
  */
-package org.htmlunit.suite.reporter;
+package org.htmlunit.suite.recorder;

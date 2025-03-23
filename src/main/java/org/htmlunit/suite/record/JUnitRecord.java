@@ -20,7 +20,6 @@ package org.htmlunit.suite.record;
  * @author Akif Esad
  */
 public class JUnitRecord extends Record {
-    
     /**
      * Creates a new JUnitRecord.
      * @param testName the test name

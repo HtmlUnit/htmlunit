@@ -27,6 +27,8 @@ public abstract class Record implements IRecord {
     private final String className_;
     private final String testStatus_;
     private final JsonObject record_;
+
+    /** Gson instance for JSON serialization. */
     protected static final Gson GSON = new Gson();
 
     /**
