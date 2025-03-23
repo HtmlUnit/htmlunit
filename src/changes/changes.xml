@@ -35,7 +35,7 @@
                 core-js: NativeObject converted from IdScriptableObject to lambda constructor
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: problem with `super` and nested lambdas
+                core-js: problem with 'super' and nested lambdas
             </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: RegExp.prototype[Symbol.match] and String.prototype.match.
@@ -51,6 +51,9 @@
             </action>
             <action type="remove" dev="rbri">
                 Deprecated methods removed from EncodingSniffer, HttpClientConverter, WebResponse, and WebResponseWrapper.
+            </action>
+            <action type="add" dev="rbri">
+                cssparser: improved support for var initial values.
             </action>
             <action type="update" dev="rbri">
                 Apache commons-codec is no longer a runtime dependency.
