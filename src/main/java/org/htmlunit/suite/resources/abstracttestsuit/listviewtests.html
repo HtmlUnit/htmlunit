@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test List View</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #c0392b;
+            --light-gray: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f6fa;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .filters {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        select, input {
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .test-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--primary-color);
+            color: white;
+            text-align: left;
+            padding: 1rem;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        tr:hover {
+            background-color: var(--light-gray);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-passed {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--success-color);
+        }
+
+        .status-failed {
+            background-color: rgba(192, 57, 43, 0.2);
+            color: var(--danger-color);
+        }
+
+        .status-skipped {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: var(--warning-color);
+        }
+
+        .pagination {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .pagination button {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--primary-color);
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pagination button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <a href="https://htmlunit.sourceforge.io/" style="text-decoration: none; color: white;">
+                <img src="./images/htmlunit.png" alt="HTMLUnit Logo" style="height: 30px; vertical-align: middle; margin-right: 10px;">
+            </a>
+            <h1 style="display: inline; vertical-align: middle; font-size: 1.5rem;">Test List View</h1>
+        </div>
+        <div class="navbar-links">
+            <a href="index.html">Archive View</a>
+            <a href="test-list.html" class="active">Test List</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="filters">
+            <div class="filter-item">
+                <label for="dateFilter">Date:</label>
+                <input type="date" id="dateFilter" />
+            </div>
+            <div class="filter-item">
+                <label for="statusFilter">Status:</label>
+                <select id="statusFilter">
+                    <option value="">All</option>
+                    <option value="passed">Passed</option>
+                    <option value="failed">Failed</option>
+                    <option value="skipped">Skipped</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="search">Search:</label>
+                <input type="text" id="search" placeholder="Search tests..." />
+            </div>
+        </div>
+
+        <div class="test-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test Name</th>
+                        <th>Date</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="test : ${tests}">
+                        <td th:text="${test.name}">Test Name</td>
+                        <td th:text="${#temporals.format(test.date, 'MMM dd, yyyy HH:mm')}">Mar 23, 2024 14:30</td>
+                        <td th:text="${test.duration}">1.5s</td>
+                        <td>
+                            <span th:class="'status-badge status-' + ${test.status.toLowerCase()}"
+                                  th:text="${test.status}">PASSED</span>
+                        </td>
+                        <td>
+                            <button th:if="${test.status == 'FAILED'}"
+                                    th:onclick="'showTestDetails(\'' + ${test.id} + '\')'">
+                                View Details
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            <button th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+                    th:text="${pageNum}"
+                    th:class="${currentPage == pageNum ? 'active' : ''}">
+                1
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Filter functionality
+        document.getElementById('dateFilter').addEventListener('change', filterTests);
+        document.getElementById('statusFilter').addEventListener('change', filterTests);
+        document.getElementById('search').addEventListener('input', filterTests);
+
+        function filterTests() {
+            // Implementation for filtering tests
+            // This would typically make an AJAX call to the server
+            // or filter the existing data on the client side
+        }
+
+        function showTestDetails(testId) {
+            // Implementation for showing test details
+            // This could open a modal or navigate to a details page
+        }
+    </script>
+</body>
+</html>

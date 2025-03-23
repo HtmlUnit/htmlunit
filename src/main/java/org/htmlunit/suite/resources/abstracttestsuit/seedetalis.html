@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test Details</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #c0392b;
+            --light-gray: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f6fa;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .details-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .details-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .details-header h2 {
+            margin: 0;
+        }
+
+        .details-content {
+            padding: 2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .status-failed {
+            background-color: rgba(192, 57, 43, 0.2);
+            color: var(--danger-color);
+        }
+
+        .error-section {
+            background: #fff5f5;
+            border-left: 4px solid var(--danger-color);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stack-trace {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 1.5rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Consolas', monospace;
+            margin-top: 1rem;
+        }
+
+        .test-steps {
+            margin-top: 2rem;
+        }
+
+        .step-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .step-item:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <button onclick="history.back()" class="back-button">
+            ← Back to Test List
+        </button>
+        <div class="navbar-brand">
+            <a href="https://htmlunit.sourceforge.io/" style="text-decoration: none; color: white;">
+                <img src="./images/htmlunit.png" alt="HTMLUnit Logo" style="height: 30px; vertical-align: middle; margin-right: 10px;">
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="details-card">
+            <div class="details-header">
+                <h2 th:text="${test.name}">Test Name</h2>
+            </div>
+            <div class="details-content">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Test ID</span>
+                        <span class="info-value" th:text="${test.id}">TEST-123</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Status</span>
+                        <span class="status-badge status-failed" th:text="${test.status}">FAILED</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Execution Date</span>
+                        <span class="info-value" th:text="${#temporals.format(test.date, 'MMM dd, yyyy HH:mm:ss')}">
+                            Mar 23, 2024 14:30:45
+                        </span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Duration</span>
+                        <span class="info-value" th:text="${test.duration}">1.5s</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Class Name</span>
+                        <span class="info-value" th:text="${test.className}">TestClass</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Method Name</span>
+                        <span class="info-value" th:text="${test.methodName}">testMethod</span>
+                    </div>
+                </div>
+
+                <div class="test-steps">
+                    <h3>Test Steps</h3>
+                    <div class="step-item" th:each="step, stepStat : ${test.steps}">
+                        <span class="step-number" th:text="${stepStat.count}">1</span>
+                        <span th:text="${step.description}">Test step description</span>
+                        <div th:if="${step.result}" th:text="${'Result: ' + step.result}">
+                            Result: Expected value matches actual value
+                        </div>
+                    </div>
+                </div>
+
+                <div th:if="${test.status == 'FAILED'}" class="error-section">
+                    <h3>Error Details</h3>
+                    <p th:text="${test.errorMessage}">Assertion failed: expected [true] but was [false]</p>
+                    <div class="stack-trace">
+                        <pre th:text="${test.stackTrace}">at org.junit.Assert.fail(Assert.java:88)
+    at org.junit.Assert.assertTrue(Assert.java:41)
+    at com.example.TestClass.testMethod(TestClass.java:25)</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update the showTestDetails function in listviewtests.html to navigate to this page
+        function showTestDetails(testId) {
+            window.location.href = `seedetails.html?id=${testId}`;
+        }
+    </script>
+</body>
+</html>

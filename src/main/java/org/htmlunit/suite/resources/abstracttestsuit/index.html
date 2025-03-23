@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test Results Archive</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #c0392b;
+            --light-gray: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f6fa;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .date-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .date-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .date-header {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .test-details {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+        }
+
+        .details-content {
+            background: white;
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .test-item {
+            border-left: 4px solid var(--light-gray);
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--light-gray);
+        }
+
+        .test-item.passed { border-color: var(--success-color); }
+        .test-item.failed { border-color: var(--danger-color); }
+        .test-item.skipped { border-color: var(--warning-color); }
+
+        .summary-bar {
+            display: flex;
+            justify-content: space-between;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-item .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .summary-item .label {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="https://htmlunit.sourceforge.io/" style="text-decoration: none; color: white;">
+            <img src="./images/htmlunit.png" alt="HTMLUnit Logo" style="height: 30px; vertical-align: middle; margin-right: 10px;">
+        </a>
+        <h1 style="display: inline; vertical-align: middle; font-size: 1.5rem;">Test Results Archive</h1>
+    </div>
+
+    <div class="container">
+        <div class="summary-bar">
+            <div class="summary-item">
+                <div class="value" th:text="${totalRuns}">150</div>
+                <div class="label">Total Test Runs</div>
+            </div>
+            <div class="summary-item">
+                <div class="value" th:text="${totalTests}">1500</div>
+                <div class="label">Total Tests</div>
+            </div>
+            <div class="summary-item">
+                <div class="value" th:text="${overallSuccess}">98.5%</div>
+                <div class="label">Overall Success Rate</div>
+            </div>
+            <div class="summary-item">
+                <div class="value" th:text="${latestRun}">2024-03-23</div>
+                <div class="label">Latest Run</div>
+            </div>
+        </div>
+
+        <div class="archive-grid">
+            <div th:each="run : ${testRuns}" class="date-card" th:onclick="'showDetails(\'' + ${run.id} + '\')'">
+                <div class="date-header">
+                    <span th:text="${#temporals.format(run.date, 'MMMM dd, yyyy')}">March 23, 2024</span>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <strong th:text="${run.totalTests}">50</strong>
+                        <div>Tests</div>
+                    </div>
+                    <div class="stat-item">
+                        <strong th:text="${run.duration}">2m 30s</strong>
+                        <div>Duration</div>
+                    </div>
+                    <div class="stat-item">
+                        <strong th:text="${run.passRate + '%'}">98%</strong>
+                        <div>Pass Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <strong th:text="${run.failures}">1</strong>
+                        <div>Failures</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Details Modal -->
+    <div id="testDetails" class="test-details">
+        <div class="details-content">
+            <button class="close-btn" onclick="hideDetails()">&times;</button>
+            <h2 th:text="${'Test Run Details - ' + #temporals.format(selectedRun.date, 'MMMM dd, yyyy')}">Test Run Details</h2>
+            
+            <div class="test-summary">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <strong>Start Time:</strong>
+                        <span th:text="${#temporals.format(selectedRun.startTime, 'HH:mm:ss')}">09:00:00</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>End Time:</strong>
+                        <span th:text="${#temporals.format(selectedRun.endTime, 'HH:mm:ss')}">09:02:30</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-list">
+                <div th:each="test : ${selectedRun.tests}" 
+                     th:class="'test-item ' + ${test.status.toLowerCase()}">
+                    <h3 th:text="${test.name}">Test Name</h3>
+                    <div class="test-meta">
+                        <span th:text="${'Duration: ' + test.duration}">Duration: 1.5s</span>
+                        <span th:if="${test.status == 'FAILED'}" class="error-message">
+                            <strong>Error:</strong>
+                            <pre th:text="${test.errorMessage}">Error message here</pre>
+                            <details>
+                                <summary>Stack Trace</summary>
+                                <pre th:text="${test.stackTrace}">Stack trace here</pre>
+                            </details>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showDetails(runId) {
+            document.getElementById('testDetails').style.display = 'block';
+        }
+
+        function hideDetails() {
+            document.getElementById('testDetails').style.display = 'none';
+        }
+
+        // Close modal when clicking outside the content
+        document.querySelector('.test-details').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideDetails();
+            }
+        });
+    </script>
+</body>
+</html>
