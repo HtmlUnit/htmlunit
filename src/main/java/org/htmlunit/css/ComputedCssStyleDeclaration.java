@@ -1811,7 +1811,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     fontSize = "32px";
                 }
                 else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                    fontSize = getFontSize();
                 }
             }
             else if (element instanceof HtmlHeading2) {
@@ -1821,7 +1821,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     fontSize = "24px";
                 }
                 else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                    fontSize = getFontSize();
                 }
             }
             else if (element instanceof HtmlHeading3) {
@@ -1831,7 +1831,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     fontSize = "19px";
                 }
                 else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                    fontSize = getFontSize();
                 }
             }
             else if (element instanceof HtmlHeading4) {
@@ -1841,7 +1841,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     fontSize = "16px";
                 }
                 else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                    fontSize = getFontSize();
                 }
             }
             else if (element instanceof HtmlHeading5) {
@@ -1851,7 +1851,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     fontSize = "13px";
                 }
                 else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                    fontSize = getFontSize();
                 }
             }
             else if (element instanceof HtmlHeading6) {
@@ -1861,7 +1861,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     fontSize = "11px";
                 }
                 else {
-                    fontSize = getStyleAttribute(Definition.FONT_SIZE, true);
+                    fontSize = getFontSize();
                 }
             }
             else {
