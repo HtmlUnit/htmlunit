@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.11.0" date="March xx, 2025" description="Chrome/Edge 134, Firefox 136, Rhino RegExp, less dependencies, Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: Refactor NativeString based on lambdas and stop using IdScriptableObject.
+            </action>
             <action type="fix" dev="rbri" issue="#942">
                 The style cache has to handle all parents of added or deleted nodes.
             </action>
@@ -35,7 +38,7 @@
                 core-js: NativeObject converted from IdScriptableObject to lambda constructor
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: problem with `super` and nested lambdas
+                core-js: problem with 'super' and nested lambdas
             </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: RegExp.prototype[Symbol.match] and String.prototype.match.
@@ -51,6 +54,9 @@
             </action>
             <action type="remove" dev="rbri">
                 Deprecated methods removed from EncodingSniffer, HttpClientConverter, WebResponse, and WebResponseWrapper.
+            </action>
+            <action type="add" dev="rbri">
+                cssparser: improved support for var initial values.
             </action>
             <action type="update" dev="rbri">
                 Apache commons-codec is no longer a runtime dependency.
