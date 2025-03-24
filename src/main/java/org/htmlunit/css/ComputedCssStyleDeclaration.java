@@ -1646,7 +1646,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 final DomNode parent = child.getParentNode();
                 if (parent instanceof HtmlElement) {
                     final ComputedCssStyleDeclaration style = webWindow.getComputedStyle((DomElement) parent, null);
-                    final int height = browserVersion.getFontHeight(style.getStyleAttribute(Definition.FONT_SIZE, true));
+                    final int height = browserVersion.getFontHeight(
+                                        style.getStyleAttribute(Definition.FONT_SIZE, true));
                     width += child.getVisibleText().length() * (int) (height / 1.8f);
                 }
                 else {
