@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.11.0" date="March xx, 2025" description="Chrome/Edge 134, Firefox 136, Rhino RegExp, less dependencies, Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: Refactor NativeString based on lambdas and stop using IdScriptableObject.
+            </action>
             <action type="fix" dev="rbri" issue="#942">
                 The style cache has to handle all parents of added or deleted nodes.
             </action>
