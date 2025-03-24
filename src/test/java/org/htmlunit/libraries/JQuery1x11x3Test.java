@@ -6978,7 +6978,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented
     public void effects__CSS_Auto_to_show() throws Exception {
         runTest("effects: CSS Auto to show");
     }
@@ -7029,7 +7028,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 5, 5")
-    @NotYetImplemented
     public void effects__JS_Auto_to_show() throws Exception {
         runTest("effects: JS Auto to show");
     }
