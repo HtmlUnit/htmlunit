@@ -40,7 +40,7 @@
 
 
         <htmlunitdriver.version>4.29.0</htmlunitdriver.version>
-        <selenium.version>4.29.0</selenium.version>
+        <selenium.version>4.30.0</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v133</selenium.devtools.artifactId>
 
         <jetty.version>9.4.57.v20241219</jetty.version>
