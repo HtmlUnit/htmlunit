@@ -26,6 +26,7 @@ import java.util.Set;
 import java.util.TimeZone;
 
 import org.apache.commons.io.FilenameUtils;
+import org.htmlunit.css.CssPixelValueConverter;
 import org.htmlunit.javascript.configuration.BrowserFeature;
 import org.htmlunit.javascript.configuration.SupportedBrowser;
 import org.htmlunit.util.MimeType;
@@ -800,13 +801,46 @@ public final class BrowserVersion implements Serializable {
      * @return the corresponding height
      */
     public int getFontHeight(final String fontSize) {
-        if (fontHeights_ == null) {
+        if (fontHeights_ == null || fontSize.isEmpty()) {
             return 18;
         }
-        final int fontSizeInt = Integer.parseInt(fontSize.substring(0, fontSize.length() - 2));
+
+        if ("xx-small".equalsIgnoreCase(fontSize)) {
+            return fontHeights_[10];
+        }
+        if ("x-small".equalsIgnoreCase(fontSize)) {
+            return fontHeights_[10];
+        }
+        if ("small".equalsIgnoreCase(fontSize)) {
+            return fontHeights_[12];
+        }
+        if ("medium".equalsIgnoreCase(fontSize)) {
+            return fontHeights_[16];
+        }
+        if ("large".equalsIgnoreCase(fontSize)) {
+            return fontHeights_[18];
+        }
+        if ("x-large".equalsIgnoreCase(fontSize)) {
+            return fontHeights_[25];
+        }
+        if ("xx-large".equalsIgnoreCase(fontSize)) {
+            return fontHeights_[32];
+        }
+        if ("xxx-large".equalsIgnoreCase(fontSize)) {
+            return fontHeights_[48];
+        }
+        if ("smaller".equalsIgnoreCase(fontSize)) {
+            return fontHeights_[12];
+        }
+        if ("larger".equalsIgnoreCase(fontSize)) {
+            return fontHeights_[19];
+        }
+
+        final int fontSizeInt = CssPixelValueConverter.pixelValue(fontSize);
         if (fontSizeInt < fontHeights_.length) {
             return fontHeights_[fontSizeInt];
         }
+
         return (int) (fontSizeInt * 1.2);
     }
 

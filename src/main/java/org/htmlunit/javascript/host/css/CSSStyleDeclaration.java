@@ -112,6 +112,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     private static final String[] ALIGN_KEYWORDS =
         {"baseline", "sub", "super", "text-top", "text-bottom", "middle", "top", "bottom",
          "inherit", "initial", "revert", "unset"};
+    private static final String[] FONT_SIZES =
+        {"xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large", "xxx-large",
+         "smaller", "larger"};
 
     // private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
 
@@ -741,7 +744,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setFontSize(final Object fontSize) {
-        setStyleLengthAttribute(Definition.FONT_SIZE.getAttributeName(), fontSize, "", false, true, false, null);
+        setStyleLengthAttribute(Definition.FONT_SIZE.getAttributeName(), fontSize, "", false, true, false, FONT_SIZES);
         updateFont(getFont(), false);
     }
 

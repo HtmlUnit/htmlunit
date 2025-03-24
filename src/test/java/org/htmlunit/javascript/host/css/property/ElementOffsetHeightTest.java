@@ -170,6 +170,92 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     }
 
     /**
+     * Tests the relation between {@code fontSize} and {@code offsetHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "11, 11, 15, 18, 21, 28, 37, 55",
+            FF = "11, 11, 15, 19, 21, 28, 37, 56",
+            FF_ESR = "11, 11, 15, 19, 21, 28, 37, 56")
+    @HtmlUnitNYI(FF = "12, 12, 15, 18, 21, 29, 38, 56",
+            FF_ESR = "12, 12, 15, 18, 21, 29, 38, 56")
+    public void offsetHeightSmallLarge() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv'>a</div>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "<script>\n"
+            + "var e = document.getElementById('myDiv');\n"
+            + "var array = [];\n"
+
+            + "e.style.fontSize = 'xx-small';\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e.style.fontSize = 'x-small';\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e.style.fontSize = 'small';\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e.style.fontSize = 'medium';\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e.style.fontSize = 'large';\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e.style.fontSize = 'x-large';\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e.style.fontSize = 'xx-large';\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e.style.fontSize = 'xxx-large';\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
+     * Tests the relation between {@code fontSize} and {@code offsetHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "15, 22",
+            FF = "15, 23",
+            FF_ESR = "15, 23")
+    @HtmlUnitNYI(FF = "15, 22",
+            FF_ESR = "15, 22")
+    public void offsetHeightSmallerLarger() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDiv'>a</div>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "<script>\n"
+            + "var e = document.getElementById('myDiv');\n"
+            + "var array = [];\n"
+
+            + "e.style.fontSize = 'smaller';\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e.style.fontSize = 'larger';\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
      * Test case for #124.
      *
      * @throws Exception if the test fails

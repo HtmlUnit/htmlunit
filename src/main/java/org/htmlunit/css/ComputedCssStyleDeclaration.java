@@ -732,11 +732,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getFontSize() {
-        String value = getStyleAttribute(Definition.FONT_SIZE, true);
-        if (!value.isEmpty()) {
-            value = CssPixelValueConverter.pixelValue(value) + "px";
-        }
-        return value;
+        return getStyleAttribute(Definition.FONT_SIZE, true);
     }
 
     /**
