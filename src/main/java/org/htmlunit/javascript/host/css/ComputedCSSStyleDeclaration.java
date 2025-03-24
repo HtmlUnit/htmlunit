@@ -19,6 +19,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
+import org.htmlunit.css.CssPixelValueConverter;
+import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -285,7 +287,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getFontSize() {
-        return getCssStyleDeclaration().getFontSize();
+        String value = getStyleAttribute(Definition.FONT_SIZE, true);
+        if (!value.isEmpty()) {
+            value = CssPixelValueConverter.pixelValue(value) + "px";
+        }
+        return value;
     }
 
     /**
