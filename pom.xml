@@ -39,7 +39,7 @@
         <brotli.version>0.1.2</brotli.version>
 
 
-        <htmlunitdriver.version>4.30.0</htmlunitdriver.version>
+        <htmlunitdriver.version>4.30.0-SNAPSHOT</htmlunitdriver.version>
         <selenium.version>4.30.0</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v134</selenium.devtools.artifactId>
 
