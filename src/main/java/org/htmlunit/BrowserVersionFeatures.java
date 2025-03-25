@@ -310,12 +310,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_EVENT_KEYBOARD_CTOR_WHICH,
 
-    /**
-     * Do not trigger the onload event if the frame content
-     * was not shown because of the csp. */
-    @BrowserFeature(FF_ESR)
-    JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY,
-
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
     @BrowserFeature({FF, FF_ESR})
     JS_FORM_DISPATCHEVENT_SUBMITS,

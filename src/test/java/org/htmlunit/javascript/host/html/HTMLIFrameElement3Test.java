@@ -130,9 +130,12 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "<iframe id='myIFrame' src='frame.html'></iframe></body></html>";
 
         final String frameContent = DOCTYPE_HTML
-            + "<html><head><title>Frame</title><script>\n"
+            + "<html><head>\n"
+            + "<title>Frame</title>\n"
+            + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "function doTest() {\n"
-            + "  alert(parent.document.getElementById('myIFrame').tagName);\n"
+            + "  log(parent.document.getElementById('myIFrame').tagName);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
@@ -141,7 +144,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
 
         webConnection.setDefaultResponse(frameContent);
 
-        loadPageWithAlerts2(firstContent);
+        loadPage2(firstContent);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -244,9 +248,19 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "</body></html>";
 
         final String frame1 = DOCTYPE_HTML
-                + "<html><head><script>window.foo = 123; alert(window.foo);</script></head></html>";
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_WINDOW_NAME_FUNCTION
+                + "window.foo = 123; log(window.foo);\n"
+                + "</script>\n"
+                + "</head></html>";
         final String frame2 = DOCTYPE_HTML
-                + "<html><head><script>alert(window.foo);</script></head></html>";
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_WINDOW_NAME_FUNCTION
+                + "log(window.foo);\n"
+                + "</script>\n"
+                + "</head></html>";
 
         final String[] alerts = getExpectedAlerts();
         final MockWebConnection webConnection = getMockWebConnection();
@@ -255,10 +269,10 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         webConnection.setResponse(new URL(URL_FIRST, "2.html"), frame2);
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, alerts[0]);
+        verifyWindowName2(driver, alerts[0]);
 
         driver.findElement(By.id("test")).click();
-        verifyAlerts(driver, alerts[1]);
+        verifyWindowName2(driver, alerts[1]);
 
         assertEquals(3, getMockWebConnection().getRequestCount());
     }
@@ -429,14 +443,20 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "</body></html>";
 
         final String frame = DOCTYPE_HTML
-            + "<html><head><script>alert(document.body);</script></head>\n"
-            + "<body><script>alert(document.body);</script></html>";
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "log(document.body);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body><script>log(document.body);</script></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
 
         webConnection.setDefaultResponse(frame);
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -574,13 +594,15 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts("iframe onload")
     public void writeTriggersOnload() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
             + "function test() {\n"
+            + LOG_TITLE_FUNCTION
             + "  var iframe = document.createElement('iframe');\n"
             + "  var content = 'something';\n"
             + "  document.body.appendChild(iframe);\n"
 
-            + "  iframe.onload = function() {alert('iframe onload')};\n"
+            + "  iframe.onload = function() {log('iframe onload')};\n"
             + "  iframe.contentWindow.document.open('text/html', 'replace');\n"
             + "  iframe.contentWindow.document.write(content);\n"
             + "  iframe.contentWindow.document.close();\n"
@@ -591,7 +613,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickme")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -739,8 +761,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"loaded", "null"},
-            FF_ESR = "null")
+    @Alerts({"loaded", "null"})
     public void csp_None() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'none';"),
@@ -784,8 +805,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"loaded", "null"},
-            FF_ESR = "null")
+    @Alerts({"loaded", "null"})
     public void csp_UrlDifferentPort() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY, "frame-ancestors 'self';"),
@@ -796,8 +816,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"loaded", "null"},
-            FF_ESR = "null")
+    @Alerts({"loaded", "null"})
     public void csp_many() throws Exception {
         retrictByHeader(
                 new NameValuePair(HttpHeader.CONTENT_SECURIRY_POLICY,
@@ -810,16 +829,17 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "    function check() {\n"
             + "      try {\n"
-            + "        alert(document.getElementById(\"frame1\").contentDocument);\n"
-            + "      } catch(e) { alert('error'); }\n"
+            + "        log(document.getElementById(\"frame1\").contentDocument);\n"
+            + "      } catch(e) { log('error'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <iframe id='frame1' src='" + contentUrl + "' "
-                    + "onLoad='alert(\"loaded\")' onError='alert(\"error\")'></iframe>\n"
+                    + "onLoad='log(\"loaded\")' onError='log(\"error\")'></iframe>\n"
             + "  <button type='button' id='clickme' onClick='check()'>Click me</a>\n"
             + "</body>\n"
             + "</html>";
@@ -836,11 +856,11 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
                 200, "OK", MimeType.TEXT_HTML, headers);
 
         final String[] expectedAlerts = getExpectedAlerts();
-        setExpectedAlerts(Arrays.copyOf(expectedAlerts, expectedAlerts.length - 1));
-        final WebDriver driver = loadPageWithAlerts2(html, new URL(URL_FIRST, "path"));
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "path"));
+        verifyWindowName2(driver, Arrays.copyOf(expectedAlerts, expectedAlerts.length - 1));
 
         driver.findElement(By.id("clickme")).click();
-        verifyAlerts(driver, expectedAlerts[expectedAlerts.length - 1]);
+        verifyWindowName2(driver, expectedAlerts);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
@@ -854,28 +874,28 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
-            + "  <title>Deny</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function check() {\n"
             + "      try {\n"
-            + "        alert(document.getElementById(\"frame1\").contentDocument);\n"
-            + "      } catch(e) { alert('error'); }\n"
+            + "        log(document.getElementById(\"frame1\").contentDocument);\n"
+            + "      } catch(e) { log('error'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <iframe id='frame1' src='" + URL_FIRST + "' "
-                        + "onLoad='alert(\"loaded\")'></iframe>\n"
+                        + "onLoad='log(\"loaded\")'></iframe>\n"
             + "  <button type='button' id='clickme' onClick='check()'>Click me</a>\n"
             + "</body>\n"
             + "</html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        setExpectedAlerts(Arrays.copyOf(expectedAlerts, 1));
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(driver, expectedAlerts[0]);
 
         driver.findElement(By.id("clickme")).click();
-        verifyAlerts(driver, expectedAlerts[1]);
+        verifyTitle2(driver, expectedAlerts[0], expectedAlerts[1]);
 
         assertEquals(Integer.parseInt(expectedAlerts[2]), getMockWebConnection().getRequestCount());
     }
@@ -894,11 +914,13 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
-            + "  <title>Deny</title>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <iframe id='frame1' src='content.html' "
-                        + "onLoad='alert(\"loaded\")'></iframe>\n"
+                        + "onLoad='log(\"loaded\")'></iframe>\n"
             + "</body>\n"
             + "</html>";
 
@@ -913,8 +935,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(content);
 
         final String[] expectedAlerts = getExpectedAlerts();
-        setExpectedAlerts(Arrays.copyOf(expectedAlerts, 1));
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(getWebDriver(), expectedAlerts[0]);
 
         assertEquals(Integer.parseInt(expectedAlerts[1]), getMockWebConnection().getRequestCount());
     }
@@ -934,11 +956,13 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
-            + "  <title>Deny</title>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  </script>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <iframe id='frame1' src='content.html' "
-                        + "onLoad='alert(\"loaded\")'></iframe>\n"
+                        + "onLoad='log(\"loaded\")'></iframe>\n"
             + "</body>\n"
             + "</html>";
 
@@ -959,8 +983,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
                     302, "Moved", MimeType.TEXT_HTML, headers);
 
         final String[] expectedAlerts = getExpectedAlerts();
-        setExpectedAlerts(Arrays.copyOf(expectedAlerts, 1));
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(getWebDriver(), expectedAlerts[0]);
 
         assertEquals(Integer.parseInt(expectedAlerts[1]), getMockWebConnection().getRequestCount());
     }
