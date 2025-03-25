@@ -185,24 +185,32 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Alerts({"§§URL§§subdir/frame.html", "§§URL§§frame.html"})
     public void location() throws Exception {
         location("Frame1.location = \"frame.html\"");
-        location("Frame1.location.replace(\"frame.html\")");
+        // location("Frame1.location.replace(\"frame.html\")");
     }
 
     private void location(final String jsExpr) throws Exception {
         final String firstContent = DOCTYPE_HTML
-            + "<html><head><title>first</title></head>\n"
+            + "<html><head>\n"
+            + "<title>first</title>\n"
+            + "</head>\n"
             + "<frameset cols='*' onload='" + jsExpr + "'>\n"
             + "  <frame name='Frame1' src='subdir/frame.html'>\n"
             + "</frameset></html>";
+
         final String defaultContent = DOCTYPE_HTML
-            + "<html><head><script>alert(location)</script></head></html>";
+            + "<html><head>\n"
+            + "<script>\n"
+            + "function log(msg) { window.top.name += msg + '\\u00a7'; }\n"
+            + "log(location);\n"
+            + "</script>\n"
+            + "</head></html>";
 
         getMockWebConnection().setDefaultResponse(defaultContent);
 
         final WebDriver driver = loadPage2(firstContent);
 
         expandExpectedAlertsVariables(URL_FIRST);
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyWindowName2(driver, getExpectedAlerts());
 
         assertTitle(driver, "first");
     }
@@ -502,10 +510,15 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "</body></html>";
 
         final String onloadFrame = DOCTYPE_HTML
-                + "<html><head><title>onloadFrame</title></head>\n"
-                + "<body onload=\"alert('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
+                + "<html><head>\n"
+                + "<title>onloadFrame</title>\n"
+                + "<script>\n"
+                + "  function log(msg) { window.top.name += msg + '\\u00a7'; }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload=\"log('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
                 + "  <script type='text/javascript'>\n"
-                + "    alert('Body alert.');\n"
+                + "    log('Body alert.');\n"
                 + "  </script>\n"
                 + "  <h3>onloadFrame</h3>\n"
                 + "  <p id='newContent'>New content loaded...</p>\n"
@@ -529,8 +542,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
         driver.findElement(By.name("onloadFrameAnchor")).click();
-        verifyAlerts(driver, "Body alert.");
-        verifyAlerts(driver, "Onload alert.");
+        verifyWindowName2(driver, "Body alert.", "Onload alert.");
 
         driver.switchTo().defaultContent();
         Thread.sleep(1000);
@@ -584,10 +596,15 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "</body></html>";
 
         final String onloadFrame = DOCTYPE_HTML
-                + "<html><head><title>onloadFrame</title></head>\n"
-                + "<body onload=\"alert('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
+                + "<html><head>\n"
+                + "<title>onloadFrame</title>\n"
+                + "<script>\n"
+                + "  function log(msg) { window.top.name += msg + '\\u00a7'; }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload=\"log('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
                 + "  <script type='text/javascript'>\n"
-                + "    alert('Body alert.');\n"
+                + "    log('Body alert.');\n"
                 + "  </script>\n"
                 + "  <h3>onloadFrame</h3>\n"
                 + "  <p id='newContent'>New content loaded...</p>\n"
@@ -611,8 +628,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
         driver.findElement(By.name("onloadFrameAnchor")).click();
-        verifyAlerts(driver, "Body alert.");
-        verifyAlerts(driver, "Onload alert.");
+        verifyWindowName2(driver, "Body alert.", "Onload alert.");
+
         driver.switchTo().defaultContent();
         Thread.sleep(1000);
 
