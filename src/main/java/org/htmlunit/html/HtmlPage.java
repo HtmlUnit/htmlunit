@@ -66,7 +66,6 @@ import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
-import org.htmlunit.html.FrameWindow.PageDenied;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.html.parser.HTMLParserDOMBuilder;
 import org.htmlunit.http.HttpStatus;
