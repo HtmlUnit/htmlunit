@@ -311,7 +311,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(iFrameUrl, iFrame);
 
         loadPage2(framesContent, new URL(URL_FIRST.toString() + "index.html?test#ref"));
-        Thread.sleep(DEFAULT_WAIT_TIME / 10);
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 10);
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();

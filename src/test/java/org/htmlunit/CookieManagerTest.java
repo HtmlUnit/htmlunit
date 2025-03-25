@@ -323,7 +323,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeader1);
 
         loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
-        verifyTitle2(DEFAULT_WAIT_TIME * 4, getWebDriver(), getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(4), getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -555,7 +555,7 @@ public class CookieManagerTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPage2(html);
-        verifyTitle2(4 * DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(4), getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -676,7 +676,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", MimeType.TEXT_HTML, responseHeader1);
 
         loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
-        verifyTitle2(DEFAULT_WAIT_TIME * 4, getWebDriver(), getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(4), getWebDriver(), getExpectedAlerts());
     }
 
     /**

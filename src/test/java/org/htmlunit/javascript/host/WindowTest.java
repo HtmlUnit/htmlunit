@@ -1612,7 +1612,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         HtmlPage page = webClient.getPage(URL_FIRST);
         page.getElementById("click").click();
-        webClient.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
+        webClient.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME.toMillis());
 
         assertEquals(getExpectedAlerts()[0], page.getTitleText());
 
@@ -1620,7 +1620,7 @@ public class WindowTest extends SimpleWebTestCase {
             @Override
             public void handlePrint(final HtmlPage pageToPrint) {
                 try {
-                    Thread.sleep(DEFAULT_WAIT_TIME);
+                    Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
                 }
                 catch (final InterruptedException e) {
                     pageToPrint.executeJavaScript("log('" + e.getMessage() + "');");
@@ -1631,7 +1631,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         page = webClient.getPage(URL_FIRST);
         page.getElementById("click").click();
-        webClient.waitForBackgroundJavaScript(200000 * DEFAULT_WAIT_TIME);
+        webClient.waitForBackgroundJavaScript(200000 * DEFAULT_WAIT_TIME.toMillis());
 
         assertEquals(getExpectedAlerts()[1], page.getTitleText());
     }
@@ -1737,7 +1737,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         page.getElementById("click").click();
-        webClient.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
+        webClient.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME.toMillis());
 
         assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
@@ -1792,7 +1792,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         page.getElementById("click").click();
-        webClient.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
+        webClient.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME.toMillis());
 
         assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }

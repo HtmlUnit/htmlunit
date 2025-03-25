@@ -352,7 +352,7 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
             assertTrue(tmpFile.delete());
         }
 
-        final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+        final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
 
         while (System.currentTimeMillis() < maxWait) {
             try {

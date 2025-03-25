@@ -175,7 +175,7 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
             + "</html>\n";
 
         getMockWebConnection().setDefaultResponse("");
-        loadPageWithAlerts(html, URL_FIRST, 1000);
+        loadPageWithAlerts(html, URL_FIRST, DEFAULT_WAIT_TIME);
     }
 
     /**

@@ -59,7 +59,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), -1);
+        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), null);
     }
 
     /**
@@ -80,7 +80,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts(html, new URL("http://localhost"), -1);
+        loadPageWithAlerts(html, new URL("http://localhost"), null);
     }
 
     /**
@@ -103,7 +103,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts(html, urlGargoyleUpperCase, -1);
+        loadPageWithAlerts(html, urlGargoyleUpperCase, null);
     }
 
     /**
@@ -123,7 +123,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), -1);
+        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), null);
     }
 
     /**
@@ -146,7 +146,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts(html, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"), -1);
+        loadPageWithAlerts(html, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"), null);
     }
 
     /**
@@ -167,7 +167,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts(html, new URL("http://localhost"), -1);
+        loadPageWithAlerts(html, new URL("http://localhost"), null);
     }
 
     /**
@@ -218,7 +218,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<iframe src='about:blank'></iframe>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), -1);
+        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), null);
     }
 
     /**

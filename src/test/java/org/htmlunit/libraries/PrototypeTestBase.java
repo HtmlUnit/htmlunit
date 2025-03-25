@@ -82,7 +82,7 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
         driver.get(getBaseUrl() + filename);
 
         // wait
-        final long runTime = 60 * DEFAULT_WAIT_TIME;
+        final long runTime = 60 * DEFAULT_WAIT_TIME.toMillis();
         final long endTime = System.currentTimeMillis() + runTime;
 
         while (!testFinished(driver)) {

@@ -216,7 +216,7 @@ public class ExtJS22Test extends WebDriverTestCase {
         // usually this need 1s but sometimes our build machine is slower
         // this is not a performance test, we only like to ensure that all
         // functionality is running
-        Thread.sleep(2 * DEFAULT_WAIT_TIME);
+        Thread.sleep(DEFAULT_WAIT_TIME.multipliedBy(2).toMillis());
 
         final WebElement detailPanel = driver.findElement(By.id("detailPanel"));
         final WebElement resultsDiv = detailPanel.findElement(By.xpath("div/div[1]"));

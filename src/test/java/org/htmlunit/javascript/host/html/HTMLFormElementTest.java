@@ -2640,7 +2640,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(html2);
 
         loadPage2(html, URL_FIRST);
-        verifyTitle2(5 * DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(5), getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -2683,7 +2683,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(html2);
 
         loadPage2(html, URL_FIRST);
-        verifyTitle2(5 * DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(5), getWebDriver(), getExpectedAlerts());
     }
 
     /**

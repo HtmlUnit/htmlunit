@@ -228,7 +228,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     private static void assertLog(final WebDriver driver, final String expected) throws InterruptedException {
-        final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+        final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
         while (true) {
             try {
                 final String text = driver
@@ -720,7 +720,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME * 2, driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
     }
 
     /**
@@ -837,7 +837,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME * 2, driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
     }
 
     /**
@@ -865,7 +865,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME * 2, driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
     }
 
     /**
@@ -897,7 +897,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME * 2, driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
     }
 
     /**
@@ -930,7 +930,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME * 2, driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
     }
 
     /**

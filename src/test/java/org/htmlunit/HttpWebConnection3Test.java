@@ -260,7 +260,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             final WebDriver driver = getWebDriver();
 
             driver.get(url);
-            Thread.sleep(DEFAULT_WAIT_TIME);
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
             assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
             assertEquals(2, primitiveWebServer.getRequests().size());
             assertTrue(driver.getPageSource(), driver.getPageSource().contains("Hi"));

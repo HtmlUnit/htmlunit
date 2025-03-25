@@ -144,7 +144,7 @@ public class AnimationEventTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(DEFAULT_WAIT_TIME / 2);
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 2);
         verifyTitle2(driver, getExpectedAlerts());
     }
 }

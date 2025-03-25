@@ -14,8 +14,6 @@
  */
 package org.htmlunit.libraries;
 
-import java.time.Duration;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.junit.After;
@@ -61,19 +59,19 @@ public abstract class GWTTest extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
         driver.get(url);
 
-        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(DEFAULT_WAIT_TIME));
+        final WebDriverWait wait = new WebDriverWait(driver, DEFAULT_WAIT_TIME);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elementXPathToWaitFor)));
 
         return driver;
     }
 
     protected void textToBePresentInElement(final WebDriver driver, final WebElement elem, final String expected) {
-        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(DEFAULT_WAIT_TIME));
+        final WebDriverWait wait = new WebDriverWait(driver, DEFAULT_WAIT_TIME);
         wait.until(ExpectedConditions.textToBePresentInElement(elem, expected));
     }
 
     protected void textToBePresentInElementLocated(final WebDriver driver, final By by, final String expected) {
-        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(DEFAULT_WAIT_TIME));
+        final WebDriverWait wait = new WebDriverWait(driver, DEFAULT_WAIT_TIME);
         wait.until(ExpectedConditions.textToBePresentInElementLocated(by, expected));
     }
 }

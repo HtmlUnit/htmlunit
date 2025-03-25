@@ -27,6 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -115,7 +116,7 @@ public abstract class WebTestCase {
     public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
 
     /** The default time used to wait for the expected alerts. */
-    protected static final long DEFAULT_WAIT_TIME = 1000;
+    protected static final Duration DEFAULT_WAIT_TIME = Duration.ofSeconds(1);
 
     /** Constant for the URL which is used in the tests. */
     public static final URL URL_FIRST;
@@ -485,8 +486,8 @@ public abstract class WebTestCase {
      * @throws Exception in case of failure
      */
     protected void verify(final Supplier<String> func, final String expected,
-            final long maxWaitTime) throws Exception {
-        final long maxWait = System.currentTimeMillis() + maxWaitTime;
+            final Duration maxWaitTime) throws Exception {
+        final long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
 
         String actual = null;
         while (System.currentTimeMillis() < maxWait) {

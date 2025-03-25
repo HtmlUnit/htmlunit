@@ -128,11 +128,11 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);
         assertEquals(1, jobManager.getJobCount());
-        jobManager.waitForJobs(DEFAULT_WAIT_TIME);
+        jobManager.waitForJobs(DEFAULT_WAIT_TIME.toMillis());
         assertEquals(0, jobManager.getJobCount());
         assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
 
-        assertMaxTestRunTime(DEFAULT_WAIT_TIME + 100);
+        assertMaxTestRunTime(DEFAULT_WAIT_TIME.toMillis() + 100);
     }
 
     /**

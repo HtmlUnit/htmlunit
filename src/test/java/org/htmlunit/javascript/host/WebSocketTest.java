@@ -231,7 +231,7 @@ public class WebSocketTest extends WebDriverTestCase {
             assertVisible("joined", driver);
 
             final WebElement chatE = driver.findElement(By.id("chat"));
-            long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+            long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
 
             do {
                 Thread.sleep(100);
@@ -243,7 +243,7 @@ public class WebSocketTest extends WebDriverTestCase {
             driver.findElement(By.id("phrase")).sendKeys("Hope you are fine!");
             driver.findElement(By.id("sendB")).click();
 
-            maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+            maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
             do {
                 Thread.sleep(100);
             }
@@ -362,7 +362,7 @@ public class WebSocketTest extends WebDriverTestCase {
             driver.findElement(By.id("joinB")).click();
             final WebElement chatE = driver.findElement(By.id("chat"));
 
-            long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+            long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
             do {
                 Thread.sleep(100);
             }
@@ -373,7 +373,7 @@ public class WebSocketTest extends WebDriverTestCase {
             driver.findElement(By.id("phrase")).sendKeys("Hope you are fine!");
             driver.findElement(By.id("sendB")).click();
 
-            maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+            maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
             do {
                 Thread.sleep(100);
             }
@@ -467,7 +467,7 @@ public class WebSocketTest extends WebDriverTestCase {
             driver.get(URL_FIRST + "WebSocketTest_events.html");
 
             final WebElement logElement = driver.findElement(By.id("log"));
-            final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+            final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
 
             String text;
             do {
@@ -539,7 +539,7 @@ public class WebSocketTest extends WebDriverTestCase {
             driver.get(URL_FIRST + "WebSocketTest_wasClean.html");
 
             final WebElement logElement = driver.findElement(By.id("log"));
-            final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+            final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
 
             String text;
             do {
@@ -573,7 +573,7 @@ public class WebSocketTest extends WebDriverTestCase {
             int counter = 0;
             String text;
             do {
-                Thread.sleep(DEFAULT_WAIT_TIME);
+                Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
 
                 text = logElement.getDomProperty("value").trim().replaceAll("\r", "");
             }

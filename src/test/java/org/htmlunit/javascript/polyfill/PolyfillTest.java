@@ -54,7 +54,7 @@ public class PolyfillTest extends SimpleWebTestCase {
         getMockWebConnection().setResponse(fetchUrl, "Content fetched");
 
         getWebClientWithMockWebConnection().getOptions().setFetchPolyfillEnabled(true);
-        loadPageWithAlerts(html, URL_FIRST, (int) DEFAULT_WAIT_TIME);
+        loadPageWithAlerts(html, URL_FIRST, DEFAULT_WAIT_TIME);
     }
 
     /**

@@ -15,6 +15,7 @@
 package org.htmlunit.libraries;
 
 import java.net.URL;
+import java.time.Duration;
 
 import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebDriverTestCase;
@@ -93,8 +94,8 @@ public class Html2CanvasTest extends WebDriverTestCase {
         verify(DEFAULT_WAIT_TIME, textArea);
     }
 
-    private static void verify(final long maxWaitTime, final WebElement textArea) throws Exception {
-        final long maxWait = System.currentTimeMillis() + maxWaitTime;
+    private static void verify(final Duration maxWaitTime, final WebElement textArea) throws Exception {
+        final long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
 
         String value = "";
         while (System.currentTimeMillis() < maxWait) {

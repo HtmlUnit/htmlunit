@@ -40,7 +40,7 @@ public abstract class HtmxTest extends WebDriverTestCase {
     private static final boolean BUG_HUNTING = false;
 
     private static final int RETRIES = 2;
-    private static final long RUN_TIME = 42 * DEFAULT_WAIT_TIME;
+    private static final long RUN_TIME = 42 * DEFAULT_WAIT_TIME.toMillis();
 
     protected void htmx(final String subDir) throws Exception {
         startWebServer("src/test/resources/libraries/htmx/" + subDir, null, null);

@@ -745,7 +745,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
                 .keyUp(Keys.CONTROL)
                 .perform();
 
-        Thread.sleep(DEFAULT_WAIT_TIME);
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
         assertEquals("Should have opened a new window",
                 windowsSize + Integer.parseInt(getExpectedAlerts()[0]), driver.getWindowHandles().size());
         assertEquals("Should not have navigated away", getExpectedAlerts()[1], driver.getTitle());
@@ -872,7 +872,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
                 .keyUp(Keys.CONTROL)
                 .build().perform();
 
-        Thread.sleep(DEFAULT_WAIT_TIME / 10);
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 10);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 

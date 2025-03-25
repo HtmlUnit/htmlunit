@@ -18,6 +18,7 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Duration;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.MockWebConnection;
@@ -76,7 +77,7 @@ public class LibraryDependencyTest extends WebDriverTestCase {
         webConnection.setResponse(URL_SECOND, secondHtml);
         webConnection.setResponse(URL_THIRD, prototype, MimeType.TEXT_JAVASCRIPT);
 
-        loadPageWithAlerts2(firstHtml, 10_000);
+        loadPageWithAlerts2(firstHtml, Duration.ofMillis(10_000));
     }
 
     private String getContent(final String resourceName) throws IOException {

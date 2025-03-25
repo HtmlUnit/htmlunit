@@ -1870,7 +1870,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("mySubmit")).click();
         verifyAlerts(driver, getExpectedAlerts());
-        Thread.sleep(DEFAULT_WAIT_TIME / 10);
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 10);
         assertTrue("Url '" + driver.getCurrentUrl() + "' does not contain 'myName'",
                 driver.getCurrentUrl().contains("myName"));
 

@@ -1083,11 +1083,11 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(DEFAULT_WAIT_TIME);
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
         final int start = getMockWebConnection().getRequestCount();
 
         driver.findElement(By.id("clickMe")).click();
-        Thread.sleep(DEFAULT_WAIT_TIME);
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
 
         assertEquals(1, getMockWebConnection().getRequestCount() - start);
 
@@ -1144,11 +1144,11 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_SECOND, "ext.js"), js, MimeType.TEXT_JAVASCRIPT);
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(DEFAULT_WAIT_TIME);
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
         final int start = getMockWebConnection().getRequestCount();
 
         driver.findElement(By.id("clickMe")).click();
-        Thread.sleep(DEFAULT_WAIT_TIME);
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
 
         assertEquals(2, getMockWebConnection().getRequestCount() - start);
 

@@ -94,7 +94,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
             assertEquals("Test number not found for: " + testName, NO_ALERTS_DEFINED, getExpectedAlerts());
             return;
         }
-        final long runTime = 60 * DEFAULT_WAIT_TIME;
+        final long runTime = 60 * DEFAULT_WAIT_TIME.toMillis();
         final long endTime = System.currentTimeMillis() + runTime;
 
         try {

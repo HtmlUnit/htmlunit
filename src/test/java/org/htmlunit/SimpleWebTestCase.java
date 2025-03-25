@@ -15,6 +15,7 @@
 package org.htmlunit;
 
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -188,7 +189,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final HtmlPage loadPageWithAlerts(final String html) throws Exception {
-        return loadPageWithAlerts(html, URL_FIRST, -1);
+        return loadPageWithAlerts(html, URL_FIRST, null);
     }
 
     /**
@@ -201,7 +202,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      * @return the new page
      * @throws Exception if something goes wrong
      */
-    protected final HtmlPage loadPageWithAlerts(final String html, final URL url, final int waitForJS)
+    protected final HtmlPage loadPageWithAlerts(final String html, final URL url, final Duration waitForJS)
         throws Exception {
         if (getExpectedAlerts() == null) {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
@@ -218,8 +219,8 @@ public abstract class SimpleWebTestCase extends WebTestCase {
         webConnection.setResponse(url, html);
 
         final HtmlPage page = client.getPage(url);
-        if (waitForJS > 0) {
-            assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(waitForJS));
+        if (waitForJS != null) {
+            assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(waitForJS.toMillis()));
         }
         assertEquals(getExpectedAlerts(), collectedAlerts);
         return page;

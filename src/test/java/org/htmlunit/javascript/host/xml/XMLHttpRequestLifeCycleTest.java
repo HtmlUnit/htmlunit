@@ -475,7 +475,8 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_Error403() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_403), URL_FIRST,
                     servlets_);
-            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n",
+                    getExpectedAlerts()), DEFAULT_WAIT_TIME.multipliedBy(10));
         }
 
         /**
@@ -516,7 +517,8 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_Error500() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500), URL_FIRST,
                     servlets_);
-            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()),
+                    DEFAULT_WAIT_TIME.multipliedBy(10));
         }
 
         /**
@@ -695,7 +697,8 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_networkErrorTriggered_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()),
+                    DEFAULT_WAIT_TIME.multipliedBy(10));
         }
 
         /**
@@ -900,7 +903,8 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_Error403() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_403), URL_FIRST,
                     servlets_);
-            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()),
+                    DEFAULT_WAIT_TIME.multipliedBy(10));
         }
 
         /**
@@ -943,7 +947,8 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_Error500() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_500), URL_FIRST,
                     servlets_);
-            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()),
+                    DEFAULT_WAIT_TIME.multipliedBy(10));
         }
 
         /**

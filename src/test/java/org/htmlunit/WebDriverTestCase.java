@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -1094,7 +1095,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return verifyTitle2(driver, expectedAlerts);
     }
 
-    protected final WebDriver verifyTitle2(final long maxWaitTime, final WebDriver driver,
+    protected final WebDriver verifyTitle2(final Duration maxWaitTime, final WebDriver driver,
             final String... expectedAlerts) throws Exception {
 
         final StringBuilder expected = new StringBuilder();
@@ -1103,7 +1104,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         final String expectedTitle = expected.toString();
 
-        final long maxWait = System.currentTimeMillis() + maxWaitTime;
+        final long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
 
         while (System.currentTimeMillis() < maxWait) {
             try {
@@ -1200,9 +1201,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return driver;
     }
 
-    protected final WebDriver verifyWindowName2(final long maxWaitTime, final WebDriver driver,
+    protected final WebDriver verifyWindowName2(final Duration maxWaitTime, final WebDriver driver,
             final String... expectedAlerts) throws Exception {
-        final long maxWait = System.currentTimeMillis() + maxWaitTime;
+        final long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
 
         while (System.currentTimeMillis() < maxWait) {
             try {
@@ -1245,7 +1246,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the web driver
      * @throws Exception if something goes wrong
      */
-    protected final WebDriver loadPageWithAlerts2(final String html, final long maxWaitTime) throws Exception {
+    protected final WebDriver loadPageWithAlerts2(final String html, final Duration maxWaitTime) throws Exception {
         return loadPageWithAlerts2(html, URL_FIRST, maxWaitTime);
     }
 
@@ -1268,7 +1269,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the web driver
      * @throws Exception if something goes wrong
      */
-    protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final long maxWaitTime)
+    protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final Duration maxWaitTime)
             throws Exception {
         final WebDriver driver = loadPage2(html, url);
 
@@ -1294,7 +1295,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param expected the expected alerts
      * @throws Exception in case of failure
      */
-    protected void verifyAlerts(final long maxWaitTime, final WebDriver driver, final String... expected)
+    protected void verifyAlerts(final Duration maxWaitTime, final WebDriver driver, final String... expected)
             throws Exception {
         final List<String> actualAlerts = getCollectedAlerts(maxWaitTime, driver, expected.length);
 
@@ -1342,7 +1343,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the web driver
      * @throws Exception if something goes wrong
      */
-    protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final long maxWaitTime,
+    protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final Duration maxWaitTime,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
 
         expandExpectedAlertsVariables(URL_FIRST);
@@ -1371,7 +1372,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the web driver
      * @throws Exception if something goes wrong
      */
-    protected final WebDriver loadPageWithAlerts2(final URL url, final long maxWaitTime) throws Exception {
+    protected final WebDriver loadPageWithAlerts2(final URL url, final Duration maxWaitTime) throws Exception {
         startWebServer(getMockWebConnection(), null);
 
         final WebDriver driver = getWebDriver();
@@ -1413,11 +1414,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @return the collected alerts
      * @throws Exception in case of problem
      */
-    protected List<String> getCollectedAlerts(final long maxWaitTime, final WebDriver driver, final int alertsLength)
-            throws Exception {
+    protected List<String> getCollectedAlerts(final Duration maxWaitTime,
+            final WebDriver driver, final int alertsLength) throws Exception {
         final List<String> collectedAlerts = new ArrayList<>();
 
-        long maxWait = System.currentTimeMillis() + maxWaitTime;
+        long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
 
         while (collectedAlerts.size() < alertsLength && System.currentTimeMillis() < maxWait) {
             try {
@@ -1567,7 +1568,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception in case of failure
      */
     protected void assertTitle(final WebDriver webdriver, final String expected) throws Exception {
-        final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+        final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME.toMillis();
 
         while (true) {
             final String title = webdriver.getTitle();

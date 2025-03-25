@@ -66,7 +66,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
             final WebDriver webdriver = getWebDriver();
             webdriver.get(getUrl(module));
 
-            final long runTime = waitTime * DEFAULT_WAIT_TIME;
+            final long runTime = waitTime * DEFAULT_WAIT_TIME.toMillis();
             final long endTime = System.currentTimeMillis() + runTime;
 
             // wait a bit to let the tests start

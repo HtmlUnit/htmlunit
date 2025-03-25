@@ -407,7 +407,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         }
         ((HtmlSubmitInput) elem).click();
 
-        client.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
+        client.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME.toMillis());
         assertEquals(COLLECTED_HEADERS.toString(), 2, COLLECTED_HEADERS.size());
 
         String headers = COLLECTED_HEADERS.get(0);
