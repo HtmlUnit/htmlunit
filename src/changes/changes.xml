@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.11.0" date="March xx, 2025" description="Chrome/Edge 134, Firefox 136, Rhino RegExp, less dependencies, Bugfixes">
+        <release version="4.11.0" date="March 25, 2025" description="Chrome/Edge 134, Firefox 136, Rhino RegExp, less dependencies, Bugfixes">
             <action type="fix" dev="rbri">
                 Event 'onload' is trigger by FF ESR also if the frame content was not shown because of csp.
             </action>
