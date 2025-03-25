@@ -7,13 +7,17 @@
     </properties>
 
     <body>
+        <release version="4.12.0" date="April xx, 2025" description="Bugfixes">
+        </release>
+
+
         <release version="4.11.0" date="March 25, 2025" description="Chrome/Edge 134, Firefox 136, Rhino RegExp, less dependencies, Bugfixes">
             <action type="fix" dev="rbri">
                 Event 'onload' is trigger by FF ESR also if the frame content was not shown because of csp.
             </action>
             <action type="add" dev="rbri">
                 Initial support for font sizes 'xx-small', 'x-small', 'small', 'medium', 'large',
-                'x-large', 'xx-large', 'xxx-large'., 'smaller', and 'larger'.
+                'x-large', 'xx-large', 'xxx-large', 'smaller', and 'larger'.
             </action>
             <action type="fix" dev="rbri">
                 core-js: Refactor NativeString based on lambdas and stop using IdScriptableObject.
