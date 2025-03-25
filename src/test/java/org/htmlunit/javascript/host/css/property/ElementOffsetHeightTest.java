@@ -256,6 +256,86 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     }
 
     /**
+     * Tests the relation between {@code fontSize} and {@code offsetHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "11, 49, 6",
+            FF = "12, 49, 3",
+            FF_ESR = "12, 49, 3")
+    @HtmlUnitNYI(CHROME = "11, 49, 2",
+            EDGE = "11, 49, 2",
+            FF = "12, 49, 3",
+            FF_ESR = "12, 49, 3")
+    public void offsetHeightUnits() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDivPX' style='font-size: 10px;'>a</div>\n"
+            + "  <div id='myDivEM' style='font-size: 2.7em;'>a</div>\n"
+            + "  <div id='myDivP' style='font-size: 10%;'>a</div>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "<script>\n"
+            + "var array = [];\n"
+
+            + "var e = document.getElementById('myDivPX');\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e = document.getElementById('myDivEM');\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e = document.getElementById('myDivP');\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
+     * Tests the relation between {@code fontSize} and {@code offsetHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "12, 49, 6",
+            FF = "13, 49, 4",
+            FF_ESR = "13, 49, 4")
+    @HtmlUnitNYI(CHROME = "12, 49, 4",
+            EDGE = "12, 49, 4",
+            FF = "13, 49, 5",
+            FF_ESR = "13, 49, 5")
+    public void offsetHeightUnitsWidth() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDivPX' style='font-size: 11.4px; width: 40px;'>a</div>\n"
+            + "  <div id='myDivEM' style='font-size: 2.7em; width: 40px;'>a</div>\n"
+            + "  <div id='myDivP' style='font-size: 17%; width: 40px;'>a</div>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "<script>\n"
+            + "var array = [];\n"
+
+            + "var e = document.getElementById('myDivPX');\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e = document.getElementById('myDivEM');\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "e = document.getElementById('myDivP');\n"
+            + "array.push(e.offsetHeight);\n"
+
+            + "document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
      * Test case for #124.
      *
      * @throws Exception if the test fails

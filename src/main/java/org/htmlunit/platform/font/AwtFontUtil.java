@@ -20,6 +20,7 @@ import java.awt.font.TextAttribute;
 import java.text.AttributedString;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.css.CssPixelValueConverter;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -32,7 +33,7 @@ public class AwtFontUtil implements FontUtil {
     public int countLines(final String content, final int pixelWidth, final String fontSize) {
         final String[] lines = StringUtils.split(content, '\n');
         int lineCount = 0;
-        final int fontSizeInt = Integer.parseInt(fontSize.substring(0, fontSize.length() - 2));
+        final int fontSizeInt = CssPixelValueConverter.pixelValue(fontSize);
         final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, true);
         for (final String line : lines) {
             if (StringUtils.isBlank(line)) {

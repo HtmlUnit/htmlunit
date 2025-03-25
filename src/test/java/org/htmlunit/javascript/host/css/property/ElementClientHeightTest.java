@@ -20,6 +20,8 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Unit tests for {@code clientHeight} of an element.
@@ -2030,4 +2032,171 @@ public class ElementClientHeightTest extends WebDriverTestCase {
         loadPageVerifyTitle2(test("slot"));
     }
 
+    /**
+     * Tests the relation between {@code fontSize} and {@code clientHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "10, 11, 16, 18, 21, 27, 37, 55",
+            FF = "11, 12, 16, 18, 21, 28, 38, 56",
+            FF_ESR = "11, 12, 16, 18, 21, 28, 38, 56")
+    @HtmlUnitNYI(CHROME = "11, 11, 15, 18, 21, 28, 37, 55",
+            EDGE = "11, 11, 15, 18, 21, 28, 37, 55",
+            FF = "12, 12, 15, 18, 21, 29, 38, 56",
+            FF_ESR = "12, 12, 15, 18, 21, 29, 38, 56")
+    public void clientHeightSmallLarge() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><body>\n"
+                + "  <div id='myDiv'>a</div>\n"
+                + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+                + "<script>\n"
+                + "var e = document.getElementById('myDiv');\n"
+                + "var array = [];\n"
+
+                + "e.style.fontSize = 'xx-small';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'x-small';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'small';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'medium';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'large';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'x-large';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'xx-large';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'xxx-large';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "document.getElementById('myTextarea').value = array.join(', ');\n"
+                + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
+     * Tests the relation between {@code fontSize} and {@code clientHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("16, 22")
+    @HtmlUnitNYI(CHROME = "15, 22",
+            EDGE = "15, 22",
+            FF = "15, 22",
+            FF_ESR = "15, 22")
+    public void clientHeightSmallerLarger() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><body>\n"
+                + "  <div id='myDiv'>a</div>\n"
+                + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+                + "<script>\n"
+                + "var e = document.getElementById('myDiv');\n"
+                + "var array = [];\n"
+
+                + "e.style.fontSize = 'smaller';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'larger';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "document.getElementById('myTextarea').value = array.join(', ');\n"
+                + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
+     * Tests the relation between {@code fontSize} and {@code clientHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "11, 49, 6",
+            FF = "12, 49, 3",
+            FF_ESR = "12, 49, 3")
+    @HtmlUnitNYI(CHROME = "11, 49, 2",
+            EDGE = "11, 49, 2",
+            FF = "12, 49, 3",
+            FF_ESR = "12, 49, 3")
+    public void clientHeightUnits() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDivPX' style='font-size: 10px;'>a</div>\n"
+            + "  <div id='myDivEM' style='font-size: 2.7em;'>a</div>\n"
+            + "  <div id='myDivP' style='font-size: 10%;'>a</div>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "<script>\n"
+            + "var array = [];\n"
+
+            + "var e = document.getElementById('myDivPX');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "e = document.getElementById('myDivEM');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "e = document.getElementById('myDivP');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
+     * Tests the relation between {@code fontSize} and {@code clientHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "12, 49, 6",
+            FF = "13, 49, 4",
+            FF_ESR = "13, 49, 4")
+    @HtmlUnitNYI(CHROME = "12, 49, 4",
+            EDGE = "12, 49, 4",
+            FF = "13, 49, 5",
+            FF_ESR = "13, 49, 5")
+    public void clientHeightUnitsWidth() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDivPX' style='font-size: 11.4px; width: 40px;'>a</div>\n"
+            + "  <div id='myDivEM' style='font-size: 2.7em; width: 40px;'>a</div>\n"
+            + "  <div id='myDivP' style='font-size: 17%; width: 40px;'>a</div>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "<script>\n"
+            + "var array = [];\n"
+
+            + "var e = document.getElementById('myDivPX');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "e = document.getElementById('myDivEM');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "e = document.getElementById('myDivP');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
 }

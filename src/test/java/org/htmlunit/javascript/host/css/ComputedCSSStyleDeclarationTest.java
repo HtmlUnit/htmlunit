@@ -1119,7 +1119,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("10px")
-    public void fontSize() throws Exception {
+    public void fontSizePX() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<div id='d0' style='font-size: 10px;'>\n"
@@ -1148,7 +1148,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             EDGE =  "10px",
             FF = "10px",
             FF_ESR = "10px")
-    public void fontSize2() throws Exception {
+    public void fontSizeEM() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<div id='d0' style='font-size: 0.6em;'>\n"
