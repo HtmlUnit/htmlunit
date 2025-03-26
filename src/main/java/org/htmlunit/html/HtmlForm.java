@@ -556,16 +556,6 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * @return returns a list of all form controls contained in the &lt;form&gt; element or referenced by formId
-     *         but ignoring elements that are contained in a nested form
-     * @deprecated as of version 4.4.0; use {@link #getFormElements()}, {@link #getElementsJS()} instead
-     */
-    @Deprecated
-    public List<HtmlElement> getElements() {
-        return getElements(htmlElement -> SUBMITTABLE_TAG_NAMES.contains(htmlElement.getTagName()));
-    }
-
-    /**
      * @return A List containing all form controls in the form.
      *         The form controls in the returned collection are in the same order
      *         in which they appear in the form by following a preorder,
