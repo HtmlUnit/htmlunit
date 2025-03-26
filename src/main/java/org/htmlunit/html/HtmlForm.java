@@ -541,18 +541,9 @@ public class HtmlForm extends HtmlElement {
             final String attributeName,
             final String attributeValue) {
 
-        final List<E> list = new ArrayList<>();
-        final String lowerCaseTagName = elementName.toLowerCase(Locale.ROOT);
-
-        for (final HtmlElement element : getElements()) {
-            if (element.getTagName().equals(lowerCaseTagName)) {
-                final String attValue = element.getAttribute(attributeName);
-                if (attValue.equals(attributeValue)) {
-                    list.add((E) element);
-                }
-            }
-        }
-        return list;
+        return (List<E>) getElements(htmlElement ->
+                                htmlElement.getTagName().equals(elementName)
+                                && htmlElement.getAttribute(attributeName).equals(attributeValue));
     }
 
     /**
