@@ -265,9 +265,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             FF = "12, 49, 3",
             FF_ESR = "12, 49, 3")
     @HtmlUnitNYI(CHROME = "11, 49, 2",
-            EDGE = "11, 49, 2",
-            FF = "12, 49, 3",
-            FF_ESR = "12, 49, 3")
+            EDGE = "11, 49, 2")
     public void offsetHeightUnits() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><body>\n"

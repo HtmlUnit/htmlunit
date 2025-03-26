@@ -213,7 +213,7 @@ public class Architecture2Test {
      * Validate test annotations.
      */
     @ArchTest
-    public static final ArchRule jsxGetterAnnotationStartsWithGet = methods()
+    public static final ArchRule consistentTestAnnotations = methods()
             .that().areAnnotatedWith(Test.class)
             .and().areNotDeclaredIn("org.htmlunit.junit.annotation.AnnotationUtilsTest")
             .should(haveConsistentTestAnnotations);
