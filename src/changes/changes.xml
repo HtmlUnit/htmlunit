@@ -13,6 +13,9 @@
                 core-js: Named capture groups in RegularExpressions now supported.
             </action>
             <action type="remove" dev="rbri">
+                Deprecated method CssStyleSheet.validateSelectors(SelectorList, int, DomNode) removed.
+            </action>
+            <action type="remove" dev="rbri">
                 Deprecated method HtmlForm.getElements() removed.
             </action>
             <action type="remove" dev="rbri">

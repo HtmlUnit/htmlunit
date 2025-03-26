@@ -1047,25 +1047,6 @@ public class CssStyleSheet implements Serializable {
     /**
      * Validates the list of selectors.
      * @param selectorList the selectors
-     * @param documentMode see {@link Document#getDocumentMode()}
-     * @param domNode the dom node the query should work on
-     * @throws CSSException if a selector is invalid
-     *
-     * @deprecated as of version 4.5.0; use {@link #validateSelectors(SelectorList, DomNode)} instead
-     */
-    @Deprecated
-    public static void validateSelectors(final SelectorList selectorList, final int documentMode,
-                final DomNode domNode) throws CSSException {
-        for (final Selector selector : selectorList) {
-            if (!isValidSelector(selector, domNode)) {
-                throw new CSSException("Invalid selector: " + selector, null);
-            }
-        }
-    }
-
-    /**
-     * Validates the list of selectors.
-     * @param selectorList the selectors
      * @param domNode the dom node the query should work on
      * @throws CSSException if a selector is invalid
      */
