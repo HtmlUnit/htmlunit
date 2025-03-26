@@ -560,17 +560,6 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * Sets the referer HTTP header - only if the provided url is valid.
-     * @param url the url for the referer HTTP header
-     *
-     * @deprecated as of version 4.5.0; use {@link #setRefererHeader(URL)} instead
-     */
-    @Deprecated
-    public void setRefererlHeader(final URL url) {
-        setRefererHeader(url);
-    }
-
-    /**
      * Sets the specified name/value pair in the additional HTTP headers.
      * @param name the name of the additional HTTP header
      * @param value the value of the additional HTTP header

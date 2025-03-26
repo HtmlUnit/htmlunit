@@ -8,8 +8,12 @@
 
     <body>
         <release version="4.12.0" date="April xx, 2025" description="Rhino RegExp, Bugfixes">
+		setRefererlHeader(URL)
             <action type="add" dev="RhinoTeam">
                 core-js: Named capture groups in RegularExpressions now supported.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated method WebRequest.setRefererlHeader(URL) removed.
             </action>
         </release>
 
