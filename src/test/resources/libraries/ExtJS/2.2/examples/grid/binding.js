@@ -6,6 +6,8 @@
  * http://extjs.com/license
  */
 
+Ext.BLANK_IMAGE_URL = '../../resources/images/default/s.gif';
+
 Ext.onReady(function(){
 	
     // create the Data Store
