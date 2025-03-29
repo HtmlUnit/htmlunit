@@ -60,7 +60,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.cookie.MalformedCookieException;
-import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.htmlunit.attachment.Attachment;
 import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.csp.Policy;
