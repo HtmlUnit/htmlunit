@@ -28,6 +28,7 @@ import org.htmlunit.util.Cookie;
  * A helper class for {@link WebSocket}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 class WebSocketCookieStore implements CookieStore {
 

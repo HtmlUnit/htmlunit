@@ -31,9 +31,25 @@ import org.htmlunit.jetty.websocket.client.WebSocketClient;
  *
  * @author Ronald Brill
  */
-public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
+public final class JettyWebSocketAdapter implements WebSocketAdapter {
+
+    /**
+     * Our {@link WebSocketAdapterFactory}.
+     */
+    public static final class JettyWebSocketAdapterFactory implements WebSocketAdapterFactory {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public WebSocketAdapter buildWebSocketAdapter(final WebClient webClient,
+                final WebSocketListener webSocketListener) {
+            return new JettyWebSocketAdapter(webClient, webSocketListener);
+        }
+    }
+
     private final Object clientLock_ = new Object();
     private WebSocketClient client_;
+    private WebSocketListener listener_;
 
     private volatile Session incomingSession_;
     private Session outgoingSession_;
@@ -41,8 +57,9 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
     /**
      * Ctor.
      * @param webClient the {@link WebClient}
+     * @param listener the {@link WebSocketListener}
      */
-    public JettyWebSocketAdapter(final WebClient webClient) {
+    public JettyWebSocketAdapter(final WebClient webClient, final WebSocketListener listener) {
         super();
         final WebClientOptions options = webClient.getOptions();
 
@@ -55,6 +72,8 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
         else {
             client_ = new WebSocketClient();
         }
+
+        listener_ = listener;
 
         // use the same executor as the rest
         client_.setExecutor(webClient.getExecutor());
@@ -99,11 +118,11 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
             final Future<Session> connectFuture = client_.connect(new JettyWebSocketAdapterImpl(), url);
             client_.getExecutor().execute(() -> {
                 try {
-                    onWebSocketConnecting();
+                    listener_.onWebSocketConnecting();
                     incomingSession_ = connectFuture.get();
                 }
                 catch (final Exception e) {
-                    onWebSocketConnectError(e);
+                    listener_.onWebSocketConnectError(e);
                 }
             });
         }
@@ -179,7 +198,7 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
             super.onWebSocketConnect(session);
             outgoingSession_ = session;
 
-            JettyWebSocketAdapter.this.onWebSocketConnect();
+            listener_.onWebSocketConnect();
         }
 
         /**
@@ -190,7 +209,7 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
             super.onWebSocketClose(statusCode, reason);
             outgoingSession_ = null;
 
-            JettyWebSocketAdapter.this.onWebSocketClose(statusCode, reason);
+            listener_.onWebSocketClose(statusCode, reason);
         }
 
         /**
@@ -200,7 +219,7 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
         public void onWebSocketText(final String message) {
             super.onWebSocketText(message);
 
-            JettyWebSocketAdapter.this.onWebSocketText(message);
+            listener_.onWebSocketText(message);
         }
 
         /**
@@ -210,7 +229,7 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
         public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
             super.onWebSocketBinary(data, offset, length);
 
-            JettyWebSocketAdapter.this.onWebSocketBinary(data, offset, length);
+            listener_.onWebSocketBinary(data, offset, length);
         }
 
         /**
@@ -221,7 +240,7 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
             super.onWebSocketError(cause);
             outgoingSession_ = null;
 
-            JettyWebSocketAdapter.this.onWebSocketError(cause);
+            listener_.onWebSocketError(cause);
         }
     }
 }

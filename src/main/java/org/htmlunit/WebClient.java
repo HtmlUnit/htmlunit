@@ -60,6 +60,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.cookie.MalformedCookieException;
+import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.htmlunit.attachment.Attachment;
 import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.csp.Policy;
@@ -99,6 +100,9 @@ import org.htmlunit.util.HeaderUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
+import org.htmlunit.websocket.JettyWebSocketAdapter.JettyWebSocketAdapterFactory;
+import org.htmlunit.websocket.WebSocketAdapterFactory;
+import org.htmlunit.websocket.WebSocketListener;
 import org.htmlunit.webstart.WebStartHandler;
 
 /**
@@ -191,6 +195,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private transient WebConnection webConnection_;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private CookieManager cookieManager_ = new CookieManager();
+    private WebSocketAdapterFactory webSocketAdapterFactory_;
     private transient AbstractJavaScriptEngine<?> scriptEngine_;
     private transient List<LoadJob> loadQueue_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<>(89));
@@ -331,6 +336,8 @@ public class WebClient implements Serializable, AutoCloseable {
             scriptEngine_ = new JavaScriptEngine(this);
         }
         loadQueue_ = new ArrayList<>();
+
+        webSocketAdapterFactory_ = new JettyWebSocketAdapterFactory();
 
         // The window must be constructed AFTER the script engine.
         currentWindowTracker_ = new CurrentWindowTracker(this, true);
@@ -2886,6 +2893,25 @@ public class WebClient implements Serializable, AutoCloseable {
 
         htmlParser.parse(webResponse, page, true, false);
         return page;
+    }
+
+    /**
+     * Creates a new {@link WebSocketAdapter}.
+     *
+     * @param webSocketListener the {@link WebSocketListener}
+     * @return a new {@link org.htmlunit.websocket.WebSocketAdapter}
+     */
+    public org.htmlunit.websocket.WebSocketAdapter buildWebSocketAdapter(final WebSocketListener webSocketListener) {
+        return webSocketAdapterFactory_.buildWebSocketAdapter(this, webSocketListener);
+    }
+
+    /**
+     * Defines a new factory method to create a new WebSocketAdapter.
+     *
+     * @param factory a {@link WebSocketAdapterFactory}
+     */
+    public void setWebSocketAdapter(final WebSocketAdapterFactory factory) {
+        webSocketAdapterFactory_ = factory;
     }
 
     /**

@@ -44,8 +44,8 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.util.UrlUtils;
-import org.htmlunit.websocket.JettyWebSocketAdapter;
 import org.htmlunit.websocket.WebSocketAdapter;
+import org.htmlunit.websocket.WebSocketListener;
 
 /**
  * A JavaScript object for {@code WebSocket}.
@@ -112,7 +112,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             final WebClient webClient = webWindow.getWebClient();
             originSet_ = true;
 
-            webSocketImpl_ = new JettyWebSocketAdapter(webClient) {
+            final WebSocketListener webSocketListener = new WebSocketListener() {
 
                 @Override
                 public void onWebSocketConnecting() {
@@ -204,6 +204,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     callFunction(closeHandler_, new Object[] {closeEvent});
                 }
             };
+
+            webSocketImpl_ = webClient.buildWebSocketAdapter(webSocketListener);
 
             webSocketImpl_.start();
             containingPage_.addAutoCloseable(this);
