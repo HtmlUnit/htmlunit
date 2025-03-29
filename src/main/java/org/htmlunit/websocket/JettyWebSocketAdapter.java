@@ -27,7 +27,9 @@ import org.htmlunit.jetty.websocket.api.WebSocketPolicy;
 import org.htmlunit.jetty.websocket.client.WebSocketClient;
 
 /**
- * Jetty based impl of the WebSocketAdapter.
+ * Jetty9 based impl of the WebSocketAdapter.
+ * To avoid conflicts with other jetty versions used by projects, we use
+ * our own shaded version of jetty9 (https://github.com/HtmlUnit/htmlunit-websocket-client).
  *
  * @author Ronald Brill
  */

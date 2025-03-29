@@ -91,6 +91,19 @@ public class ArchitectureTest {
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
 
     /**
+     * The jetty websocket stuff is only used by one class.
+     */
+    @ArchTest
+    public static final ArchRule webSocketPackageRule = noClasses()
+            .that()
+                .resideOutsideOfPackage("org.htmlunit.jetty..")
+                .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter")
+                .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter$JettyWebSocketAdapterFactory")
+                .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter$JettyWebSocketAdapterImpl")
+            .should()
+                .dependOnClassesThat().resideInAnyPackage("org.htmlunit.jetty..");
+
+    /**
      * JsxClasses are always in the javascript package.
      */
     @ArchTest
