@@ -100,6 +100,7 @@ import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.websocket.JettyWebSocketAdapter.JettyWebSocketAdapterFactory;
+import org.htmlunit.websocket.WebSocketAdapter;
 import org.htmlunit.websocket.WebSocketAdapterFactory;
 import org.htmlunit.websocket.WebSocketListener;
 import org.htmlunit.webstart.WebStartHandler;
@@ -2898,9 +2899,9 @@ public class WebClient implements Serializable, AutoCloseable {
      * Creates a new {@link WebSocketAdapter}.
      *
      * @param webSocketListener the {@link WebSocketListener}
-     * @return a new {@link org.htmlunit.websocket.WebSocketAdapter}
+     * @return a new {@link WebSocketAdapter}
      */
-    public org.htmlunit.websocket.WebSocketAdapter buildWebSocketAdapter(final WebSocketListener webSocketListener) {
+    public WebSocketAdapter buildWebSocketAdapter(final WebSocketListener webSocketListener) {
         return webSocketAdapterFactory_.buildWebSocketAdapter(this, webSocketListener);
     }
 
