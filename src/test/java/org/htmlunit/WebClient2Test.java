@@ -395,7 +395,7 @@ public class WebClient2Test extends SimpleWebTestCase {
             file = file.substring(1);
         }
 
-        assertTrue(new File(file).exists());
+        assertTrue("File '" + file + "' does not exist", new File(file).exists());
 
         try (WebClient webClient = new WebClient(getBrowserVersion())) {
             final HtmlPage page = webClient.getPage(file);
@@ -418,7 +418,7 @@ public class WebClient2Test extends SimpleWebTestCase {
             file = file.substring(1);
         }
 
-        assertTrue(new File(file).exists());
+        assertTrue("File '" + file + "' does not exist", new File(file).exists());
 
         try (WebClient webClient = new WebClient(getBrowserVersion())) {
             final HtmlPage page = webClient.getPage("file://" + file);
