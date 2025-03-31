@@ -514,7 +514,8 @@ public class WebClient implements Serializable, AutoCloseable {
     /**
      * Convenient method to build a URL and load it into the current WebWindow as it would be done
      * by {@link #getPage(WebWindow, WebRequest)}.
-     * @param url the URL of the new content
+     * @param url the URL of the new content; in contrast to real browsers plain file url's are not supported.
+     *        You have to use the 'file', 'data', 'blob', 'http' or 'https' protocol.
      * @param <P> the page type
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
@@ -530,7 +531,8 @@ public class WebClient implements Serializable, AutoCloseable {
     /**
      * Convenient method to load a URL into the current top WebWindow as it would be done
      * by {@link #getPage(WebWindow, WebRequest)}.
-     * @param url the URL of the new content
+     * @param url the URL of the new content; in contrast to real browsers plain file url's are not supported.
+     *        You have to use the 'file', 'data', 'blob', 'http' or 'https' protocol.
      * @param <P> the page type
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
@@ -541,7 +543,6 @@ public class WebClient implements Serializable, AutoCloseable {
         final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader(),
                                                           getBrowserVersion().getAcceptEncodingHeader());
         request.setCharset(UTF_8);
-
         return getPage(getCurrentWindow().getTopWindow(), request);
     }
 
@@ -1546,7 +1547,8 @@ public class WebClient implements Serializable, AutoCloseable {
      * @return the WebResponse
      */
     public WebResponse loadWebResponse(final WebRequest webRequest) throws IOException {
-        switch (webRequest.getUrl().getProtocol()) {
+        final String protocol = webRequest.getUrl().getProtocol();
+        switch (protocol) {
             case UrlUtils.ABOUT:
                 return makeWebResponseForAboutUrl(webRequest);
 
@@ -1559,8 +1561,12 @@ public class WebClient implements Serializable, AutoCloseable {
             case "blob":
                 return makeWebResponseForBlobUrl(webRequest);
 
-            default:
+            case "http":
+            case "https":
                 return loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL);
+
+            default:
+                throw new IOException("Unsupported protocol '" + protocol + "'");
         }
     }
 
