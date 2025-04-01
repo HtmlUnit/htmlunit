@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.12.0" date="April xx, 2025" description="Rhino RegExp, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: Some fixes for strict handling.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Several code improvements for the RegExp implementation.
+            </action>
             <action type="add" dev="rbri" issue="#946">
                 WebClient.setWebSocketAdapter(WebSocketAdapterFactory) added. This should
                 help to use a different WebSocket implementation.
