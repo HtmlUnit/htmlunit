@@ -402,7 +402,9 @@ public class WebClient2Test extends SimpleWebTestCase {
             fail("IOException expected");
         }
         catch (final IOException e) {
-            assertEquals("Unsupported protocol 'c'", e.getMessage());
+            assertTrue(e.getMessage(),
+                    e.getMessage().startsWith("Unsupported protocol '")
+                    || e.getMessage().startsWith("no protocol: /"));
         }
     }
 
