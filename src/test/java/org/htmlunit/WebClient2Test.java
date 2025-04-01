@@ -391,7 +391,7 @@ public class WebClient2Test extends SimpleWebTestCase {
     public void localFile() throws Exception {
         final URL url = getClass().getClassLoader().getResource("simple.html");
         String file = url.getFile();
-        if (file.startsWith("/")) {
+        if (file.startsWith("/") && file.contains(":")) {
             file = file.substring(1);
         }
 
@@ -414,7 +414,7 @@ public class WebClient2Test extends SimpleWebTestCase {
     public void localFileFile() throws Exception {
         final URL url = getClass().getClassLoader().getResource("simple.html");
         String file = url.getFile();
-        if (file.startsWith("/")) {
+        if (file.startsWith("/") && file.contains(":")) {
             file = file.substring(1);
         }
 
