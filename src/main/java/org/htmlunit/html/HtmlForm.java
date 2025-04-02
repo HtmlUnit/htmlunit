@@ -191,7 +191,7 @@ public class HtmlForm extends HtmlElement {
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
         // Calling form.submit() twice forces double download.
-        webClient.download(webWindow, target, request, false, false, null, "JS form.submit()");
+        webClient.download(webWindow, target, request, false, null, "JS form.submit()");
     }
 
     /**

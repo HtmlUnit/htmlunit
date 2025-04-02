@@ -2602,13 +2602,12 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param target the name of the target window
      * @param request the request to perform
      * @param checkHash if true check for hashChenage
-     * @param forceLoad if true always load the request even if there is already the same in the queue
      * @param forceAttachmentWithFilename if not {@code null} the AttachmentHandler isAttachment() method is not called,
      *        the response has to be handled as attachment in any case
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,
-        final WebRequest request, final boolean checkHash, final boolean forceLoad,
+        final WebRequest request, final boolean checkHash,
         final String forceAttachmentWithFilename, final String description) {
 
         final WebWindow targetWindow = resolveWindow(requestingWindow, target);
@@ -2645,9 +2644,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 final WebRequest otherRequest = otherLoadJob.request_;
                 final URL otherUrl = otherRequest.getUrl();
 
-                // TODO: investigate but it seems that IE considers query string too but not FF
-                if (!forceLoad
-                    && url.getPath().equals(otherUrl.getPath()) // fail fast
+                if (url.getPath().equals(otherUrl.getPath()) // fail fast
                     && url.toString().equals(otherUrl.toString())
                     && request.getRequestParameters().equals(otherRequest.getRequestParameters())
                     && Objects.equals(request.getRequestBody(), otherRequest.getRequestBody())) {
