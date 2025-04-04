@@ -136,7 +136,7 @@ public class NativeArrayTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for sort callback..
+     * Test for sort callback.
      * @throws Exception if the test fails
      */
     @Test
@@ -160,7 +160,7 @@ public class NativeArrayTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for sort callback..
+     * Test for sort callback.
      * @throws Exception if the test fails
      */
     @Test

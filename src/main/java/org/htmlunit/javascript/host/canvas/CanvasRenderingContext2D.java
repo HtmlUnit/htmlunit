@@ -91,7 +91,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
     /**
      * Specifies the alpha (transparency) value that is applied to shapes and images
-     * before they are drawn onto the canvas..
+     * before they are drawn onto the canvas.
      * @return the {@code globalAlpha} property
      */
     @JsxGetter

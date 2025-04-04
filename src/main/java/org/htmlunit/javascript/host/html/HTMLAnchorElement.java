@@ -254,7 +254,7 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Sets the search portion of the link's URL (the portion starting with '?'
-     * and up to but not including any '#')..
+     * and up to but not including any '#').
      * @param search the new search portion of the link's URL
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>

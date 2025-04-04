@@ -923,7 +923,7 @@ public class HtmlPage extends SgmlPage {
      * <p><b>Please note:</b> Although this method is public, it is not intended for
      * general execution of JavaScript. Users of HtmlUnit should interact with the pages
      * as a user would by clicking on buttons or links and having the JavaScript event
-     * handlers execute as needed..
+     * handlers execute as needed.
      * </p>
      *
      * @param sourceCode the JavaScript code to execute
