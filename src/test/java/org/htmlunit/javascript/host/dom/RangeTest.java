@@ -151,6 +151,31 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("<div id=\"myDiv2\"></div>hello:<div id=\"myDiv3\"></div>")
+    public void createContextualStrangeCode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var element = document.getElementById('myDiv2');\n"
+            + "    var range = element.ownerDocument.createRange();\n"
+            + "    range.setStartAfter(element);\n"
+            + "    var fragment = range.createContextualFragment('hello:<world');\n"
+            + "    element.parentNode.insertBefore(fragment, element.nextSibling);\n"
+            + "    log(element.parentNode.innerHTML);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv'><div id='myDiv2'></div><div id='myDiv3'></div></div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
              "[object HTMLSpanElement]"})
     public void extractContents() throws Exception {
