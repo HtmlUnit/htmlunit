@@ -219,6 +219,9 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ByTagName("input")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         final URL requestedUrl = getMockWebConnection().getLastWebRequest().getUrl();
