@@ -344,8 +344,8 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"text/html;charset=UTF-8",
-                       "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">"
-                               + "<html><head><title>foo</title><script>\n"
+                       "<!DOCTYPE html>"
+                            + "<html><head><title>foo</title><script>\n"
                             + "  function test() {\n"
                             + "    try {\n"
                             + "    var doc = document;\n"
@@ -361,7 +361,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                             + "</body></html>"},
             FF = {"text/html;charset=UTF-8",
                   "<!DOCTYPE html>"
-                                + "<html><head><title>foo</title><script>\n"
+                             + "<html><head><title>foo</title><script>\n"
                              + "  function test() {\n"
                              + "    try {\n"
                              + "    var doc = document;\n"
@@ -377,7 +377,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                              + "</body></html>"},
             FF_ESR = {"text/html;charset=UTF-8",
                       "<!DOCTYPE html>"
-                                + "<html><head><title>foo</title><script>\n"
+                             + "<html><head><title>foo</title><script>\n"
                              + "  function test() {\n"
                              + "    try {\n"
                              + "    var doc = document;\n"
@@ -392,7 +392,8 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                              + "<body onload=\"test()\">\n"
                              + "</body></html>"})
     @HtmlUnitNYI(CHROME = {"text/html;charset=UTF-8",
-                           "<html xmlns=\"http://www.w3.org/1999/xhtml\" ><head><title>foo</title><script>\n"
+                           "<!DOCTYPE html>"
+                             + "<html><head><title>foo</title><script>\n"
                              + "  function test() {\n"
                              + "    try {\n"
                              + "    var doc = document;\n"
@@ -407,7 +408,8 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                              + "<body onload=\"test()\">\n"
                              + "</body></html>"},
                  EDGE = {"text/html;charset=UTF-8",
-                         "<html xmlns=\"http://www.w3.org/1999/xhtml\" ><head><title>foo</title><script>\n"
+                         "<!DOCTYPE html>"
+                           + "<html><head><title>foo</title><script>\n"
                            + "  function test() {\n"
                            + "    try {\n"
                            + "    var doc = document;\n"
@@ -422,7 +424,8 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "<body onload=\"test()\">\n"
                            + "</body></html>"},
                  FF = {"text/html;charset=UTF-8",
-                       "<html xmlns=\"http://www.w3.org/1999/xhtml\" ><head><title>foo</title><script>\n"
+                       "<!DOCTYPE html>"
+                           + "<html><head><title>foo</title><script>\n"
                            + "  function test() {\n"
                            + "    try {\n"
                            + "    var doc = document;\n"
@@ -437,7 +440,8 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "<body onload=\"test()\">\n"
                            + "</body></html>"},
                  FF_ESR = {"text/html;charset=UTF-8",
-                           "<html xmlns=\"http://www.w3.org/1999/xhtml\" ><head><title>foo</title><script>\n"
+                           "<!DOCTYPE html>"
+                           + "<html><head><title>foo</title><script>\n"
                            + "  function test() {\n"
                            + "    try {\n"
                            + "    var doc = document;\n"

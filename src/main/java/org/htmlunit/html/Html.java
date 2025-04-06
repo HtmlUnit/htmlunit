@@ -21,6 +21,9 @@ package org.htmlunit.html;
  */
 public final class Html {
 
+    /** The html5 doctype. */
+    public static final String DOCTYPE_HTML = "<!DOCTYPE html>";
+
     /** XHTML namespace. */
     public static final String XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
 

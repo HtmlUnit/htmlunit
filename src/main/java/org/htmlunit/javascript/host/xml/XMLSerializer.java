@@ -118,7 +118,8 @@ public class XMLSerializer extends HtmlUnitScriptable {
             return builder.toString().trim();
         }
 
-        if (root instanceof Document) {
+        final boolean rootIsDocument = root instanceof Document;
+        if (rootIsDocument) {
             root = ((Document) root).getDocumentElement();
         }
 
@@ -129,7 +130,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
             final boolean isHtmlPage = page != null && page.isHtmlPage();
 
             String forcedNamespace = null;
-            if (isHtmlPage) {
+            if (!rootIsDocument && isHtmlPage) {
                 forcedNamespace = "http://www.w3.org/1999/xhtml";
             }
             toXml(1, node, builder, forcedNamespace);

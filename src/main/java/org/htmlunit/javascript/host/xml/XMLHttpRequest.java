@@ -64,6 +64,7 @@ import org.htmlunit.corejs.javascript.json.JsonParser;
 import org.htmlunit.corejs.javascript.json.JsonParser.ParseException;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
+import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
@@ -822,7 +823,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Setting request body to: " + body);
                 }
-                webRequest_.setRequestBody(body);
+                webRequest_.setRequestBody(Html.DOCTYPE_HTML + body);
                 if (setEncodingType) {
                     webRequest_.setAdditionalHeader(HttpHeader.CONTENT_TYPE, "text/html;charset=UTF-8");
                 }

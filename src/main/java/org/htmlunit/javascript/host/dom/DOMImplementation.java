@@ -19,6 +19,7 @@ import java.io.IOException;
 import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
+import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -241,10 +242,11 @@ public class DOMImplementation extends HtmlUnitScriptable {
             final WebWindow webWindow = getWindow().getWebWindow();
             final String html;
             if (JavaScriptEngine.isUndefined(titleObj)) {
-                html = "<!DOCTYPE html><html><head></head><body></body></html>";
+                html = Html.DOCTYPE_HTML + "<html><head></head><body></body></html>";
             }
             else {
-                html = "<!DOCTYPE html><html><head><title>"
+                html = Html.DOCTYPE_HTML
+                        + "<html><head><title>"
                         + JavaScriptEngine.toString(titleObj)
                         + "</title></head><body></body></html>";
             }
