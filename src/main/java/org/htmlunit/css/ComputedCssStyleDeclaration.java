@@ -18,6 +18,9 @@ import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_17;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_18;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_10;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_14;
+import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RB_17;
+import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RT_9;
+import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RUBY_17;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_154;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_10;
@@ -1726,10 +1729,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 || element instanceof HtmlNoLayer
                 || element instanceof HtmlNoScript
                 || element instanceof HtmlPlainText
-                || element instanceof HtmlRuby
-                || element instanceof HtmlRb
                 || element instanceof HtmlRp
-                || element instanceof HtmlRt
                 || element instanceof HtmlRtc
                 || element instanceof HtmlS
                 || element instanceof HtmlSample
@@ -1792,6 +1792,33 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
             else if (element instanceof HtmlInlineFrame) {
                 defaultHeight = 154;
+            }
+            else {
+                defaultHeight = 0;
+            }
+        }
+        else if (element instanceof HtmlRb) {
+            final BrowserVersion browser = webWindow.getWebClient().getBrowserVersion();
+            if (browser.hasFeature(JS_CLIENTHEIGHT_RB_17)) {
+                defaultHeight = 17;
+            }
+            else {
+                defaultHeight = 0;
+            }
+        }
+        else if (element instanceof HtmlRt) {
+            final BrowserVersion browser = webWindow.getWebClient().getBrowserVersion();
+            if (browser.hasFeature(JS_CLIENTHEIGHT_RT_9)) {
+                defaultHeight = 9;
+            }
+            else {
+                defaultHeight = 0;
+            }
+        }
+        else if (element instanceof HtmlRuby) {
+            final BrowserVersion browser = webWindow.getWebClient().getBrowserVersion();
+            if (browser.hasFeature(JS_CLIENTHEIGHT_RUBY_17)) {
+                defaultHeight = 17;
             }
             else {
                 defaultHeight = 0;

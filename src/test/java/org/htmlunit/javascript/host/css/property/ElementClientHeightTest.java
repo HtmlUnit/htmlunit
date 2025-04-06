@@ -804,8 +804,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "621",
             EDGE = "630",
-            FF = "8",
-            FF_ESR = "8")
+            FF = "675",
+            FF_ESR = "677")
     @HtmlUnitNYI(CHROME = "605",
             EDGE = "605",
             FF = "605",
@@ -1341,7 +1341,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            FF = "17",
+            FF_ESR = "17")
     public void ruby() throws Exception {
         loadPageVerifyTitle2(test("ruby"));
     }
@@ -1352,7 +1354,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            FF = "17",
+            FF_ESR = "17")
     public void rb() throws Exception {
         loadPageVerifyTitle2(test("rb"));
     }
@@ -1374,7 +1378,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            FF = "9",
+            FF_ESR = "9")
     public void rt() throws Exception {
         loadPageVerifyTitle2(test("rt"));
     }
@@ -2041,10 +2047,6 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "10, 11, 16, 18, 21, 27, 37, 55",
             FF = "11, 12, 16, 18, 21, 28, 38, 56",
             FF_ESR = "11, 12, 16, 18, 21, 28, 38, 56")
-    @HtmlUnitNYI(CHROME = "11, 11, 15, 18, 21, 28, 37, 55",
-            EDGE = "11, 11, 15, 18, 21, 28, 37, 55",
-            FF = "12, 12, 15, 18, 21, 29, 38, 56",
-            FF_ESR = "12, 12, 15, 18, 21, 29, 38, 56")
     public void clientHeightSmallLarge() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><body>\n"
@@ -2093,10 +2095,6 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("16, 22")
-    @HtmlUnitNYI(CHROME = "15, 22",
-            EDGE = "15, 22",
-            FF = "15, 22",
-            FF_ESR = "15, 22")
     public void clientHeightSmallerLarger() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><body>\n"
