@@ -271,7 +271,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Etc/GMT+5",
+    @Alerts(DEFAULT = "America/Panama",
             FF = "EST",
             FF_ESR = "EST")
     @BuggyWebDriver(FF = "Europe/Berlin", FF_ESR = "Europe/Berlin")
