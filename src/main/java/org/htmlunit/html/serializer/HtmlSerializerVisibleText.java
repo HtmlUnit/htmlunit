@@ -512,9 +512,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendOption(final HtmlSerializerTextBuilder builder,
             final HtmlOption htmlOption, final Mode mode) {
-        builder.ignoreHtmlBreaks();
         appendChildren(builder, htmlOption, mode);
-        builder.processHtmlBreaks();
     }
 
     /**
@@ -787,7 +785,6 @@ public class HtmlSerializerVisibleText {
         private final StringBuilder builder_;
         private int trimRightPos_;
         private boolean contentAdded_;
-        private boolean ignoreHtmlBreaks_;
 
         /**
          * Ctor.
@@ -985,10 +982,6 @@ public class HtmlSerializerVisibleText {
          * @param mode the {@link Mode}
          */
         public void appendBreak(final Mode mode) {
-            if (ignoreHtmlBreaks_) {
-                return;
-            }
-
             builder_.setLength(trimRightPos_);
 
             builder_.append('\n');
@@ -1044,20 +1037,6 @@ public class HtmlSerializerVisibleText {
          */
         public void resetContentAdded() {
             contentAdded_ = false;
-        }
-
-        /**
-         * Ignore the following html breaks in the content to be added.
-         */
-        public void ignoreHtmlBreaks() {
-            ignoreHtmlBreaks_ = true;
-        }
-
-        /**
-         * Prozess the following html breaks in the content to be added.
-         */
-        public void processHtmlBreaks() {
-            ignoreHtmlBreaks_ = false;
         }
 
         /**
