@@ -80,8 +80,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             Definition.BORDER_TOP_WIDTH.getAttributeName(),
             Definition.BORDER_LEFT_WIDTH.getAttributeName(),
             Definition.BORDER_BOTTOM_WIDTH.getAttributeName(),
-            Definition.BORDER_RIGHT_WIDTH.getAttributeName(),
-            Definition.LETTER_SPACING.getAttributeName()));
+            Definition.BORDER_RIGHT_WIDTH.getAttributeName()));
 
     private static final Set<String> LENGTH_PROPERTIES_TTFF = new HashSet<>(Arrays.asList(
             Definition.HEIGHT.getAttributeName(),
@@ -1844,24 +1843,28 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         }
 
         if (LENGTH_PROPERTIES_FFFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, false, false, false, null);
+            setStyleLengthAttribute(name, value, imp, false, false, true, null);
         }
         else if (LENGTH_PROPERTIES_TTFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, true, true, false, null);
+            setStyleLengthAttribute(name, value, imp, true, true, true, null);
         }
         else if (LENGTH_PROPERTIES_FTFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, false, true, false, null);
+            setStyleLengthAttribute(name, value, imp, false, true, true, null);
         }
         else if (Definition.OUTLINE_WIDTH.getAttributeName().equals(name)) {
             setStyleLengthAttribute(Definition.OUTLINE_WIDTH.getAttributeName(),
                     value, imp, false, false, true, THIN_MED_THICK);
         }
+        else if (Definition.LETTER_SPACING.getAttributeName().equals(name)) {
+            setStyleLengthAttribute(Definition.LETTER_SPACING.getAttributeName(), value, imp,
+                    false, getBrowserVersion().hasFeature(JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT), true, null);
+        }
         else if (Definition.WORD_SPACING.getAttributeName().equals(name)) {
             setStyleLengthAttribute(Definition.WORD_SPACING.getAttributeName(), value, imp,
-                    false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, null);
+                    false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), true, null);
         }
         else if (Definition.VERTICAL_ALIGN.getAttributeName().equals(name)) {
-            setStyleLengthAttribute(Definition.VERTICAL_ALIGN.getAttributeName(), value, imp, false, true, false, null);
+            setStyleLengthAttribute(Definition.VERTICAL_ALIGN.getAttributeName(), value, imp, false, true, true, null);
         }
         else {
             setStyleAttribute(name, JavaScriptEngine.toString(value), imp);
