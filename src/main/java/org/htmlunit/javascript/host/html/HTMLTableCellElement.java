@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_SET_ZERO_IF_INVALID;
-
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomNode;
@@ -210,7 +208,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     public void setRowSpan(final String rowSpan) {
         try {
             final int i = (int) Double.parseDouble(rowSpan);
-            if (i < 0 && getBrowserVersion().hasFeature(JS_TABLE_SPAN_SET_ZERO_IF_INVALID)) {
+            if (i < 0) {
                 getDomNodeOrDie().setAttribute("rowSpan", "1");
                 return;
             }
@@ -220,12 +218,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             getDomNodeOrDie().setAttribute("rowSpan", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_SET_ZERO_IF_INVALID)) {
-                getDomNodeOrDie().setAttribute("rowSpan", "0");
-            }
-            else {
-                getDomNodeOrDie().setAttribute("rowSpan", "1");
-            }
+            getDomNodeOrDie().setAttribute("rowSpan", "0");
         }
     }
 

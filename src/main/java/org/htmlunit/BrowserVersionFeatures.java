@@ -412,10 +412,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT,
 
-    /** Set span zo zero if provided value is invalid. */
-    @BrowserFeature({CHROME, EDGE})
-    JS_TABLE_SPAN_SET_ZERO_IF_INVALID,
-
     /** window.getComputedStyle works with pseudo selectors without colon in front. */
     @BrowserFeature({CHROME, EDGE})
     JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON,

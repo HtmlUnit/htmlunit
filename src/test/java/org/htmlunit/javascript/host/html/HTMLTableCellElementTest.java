@@ -409,9 +409,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "3", "1", "2", "1", "5", "1", "2", "1"},
-            CHROME = {"1", "3", "1", "2", "0", "5", "1", "2", "0"},
-            EDGE = {"1", "3", "1", "2", "0", "5", "1", "2", "0"})
+    @Alerts({"1", "3", "1", "2", "0", "5", "1", "2", "0"})
     public void rowSpan() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body><table>\n"
@@ -483,9 +481,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "0", "3", "3", "3"},
-            FF = {"1", "1", "3", "3", "3"},
-            FF_ESR = {"1", "1", "3", "3", "3"})
+    @Alerts({"1", "0", "3", "3", "3"})
     public void rowSpanInvalid() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body><table>\n"

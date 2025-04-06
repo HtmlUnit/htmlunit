@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_SET_ZERO_IF_INVALID;
-
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -80,18 +78,11 @@ public abstract class HtmlTableCell extends HtmlElement {
         }
         try {
             final int span = (int) Double.parseDouble(spanString);
-            if (getPage().getWebClient().getBrowserVersion().hasFeature(JS_TABLE_SPAN_SET_ZERO_IF_INVALID)) {
-                if (span < 0) {
-                    return 1;
-                }
-                if (span < 1) {
-                    return 0;
-                }
+            if (span < 0) {
+                return 1;
             }
-            else {
-                if (span < 1) {
-                    return 1;
-                }
+            if (span < 1) {
+                return 0;
             }
 
             if (span > 65_534) {
