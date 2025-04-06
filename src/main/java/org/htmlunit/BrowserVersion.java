@@ -818,13 +818,13 @@ public final class BrowserVersion implements Serializable {
         }
 
         if ("xx-small".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[10];
+            return fontHeights_[9];
         }
         if ("x-small".equalsIgnoreCase(fontSize)) {
             return fontHeights_[10];
         }
         if ("small".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[12];
+            return fontHeights_[13];
         }
         if ("medium".equalsIgnoreCase(fontSize)) {
             return fontHeights_[16];
@@ -833,7 +833,7 @@ public final class BrowserVersion implements Serializable {
             return fontHeights_[18];
         }
         if ("x-large".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[25];
+            return fontHeights_[24];
         }
         if ("xx-large".equalsIgnoreCase(fontSize)) {
             return fontHeights_[32];
@@ -841,8 +841,9 @@ public final class BrowserVersion implements Serializable {
         if ("xxx-large".equalsIgnoreCase(fontSize)) {
             return fontHeights_[48];
         }
+
         if ("smaller".equalsIgnoreCase(fontSize)) {
-            return fontHeights_[12];
+            return fontHeights_[13];
         }
         if ("larger".equalsIgnoreCase(fontSize)) {
             return fontHeights_[19];
