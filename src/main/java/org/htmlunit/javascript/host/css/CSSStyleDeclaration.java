@@ -400,7 +400,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setBorderBottomWidth(final Object borderBottomWidth) {
         setStyleLengthAttribute(Definition.BORDER_BOTTOM_WIDTH.getAttributeName(), borderBottomWidth, "",
-                false, false, true, null);
+                false, false, null);
     }
 
     /**
@@ -464,7 +464,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setBorderLeftWidth(final Object borderLeftWidth) {
         setStyleLengthAttribute(Definition.BORDER_LEFT_WIDTH.getAttributeName(), borderLeftWidth, "",
-                false, false, true, null);
+                false, false, null);
     }
 
     /**
@@ -528,7 +528,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setBorderRightWidth(final Object borderRightWidth) {
         setStyleLengthAttribute(Definition.BORDER_RIGHT_WIDTH.getAttributeName(), borderRightWidth, "",
-                false, false, true, null);
+                false, false, null);
     }
 
     /**
@@ -613,7 +613,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setBorderTopWidth(final Object borderTopWidth) {
         setStyleLengthAttribute(Definition.BORDER_TOP_WIDTH.getAttributeName(), borderTopWidth, "",
-                false, false, true, null);
+                false, false, null);
     }
 
     /**
@@ -634,7 +634,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setBottom(final Object bottom) {
-        setStyleLengthAttribute(Definition.BOTTOM.getAttributeName(), bottom, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.BOTTOM.getAttributeName(), bottom, "", true, true, null);
     }
 
     /**
@@ -744,7 +744,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setFontSize(final Object fontSize) {
-        setStyleLengthAttribute(Definition.FONT_SIZE.getAttributeName(), fontSize, "", false, true, true, FONT_SIZES);
+        setStyleLengthAttribute(Definition.FONT_SIZE.getAttributeName(), fontSize, "", false, true, FONT_SIZES);
         updateFont(getFont(), false);
     }
 
@@ -867,7 +867,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setHeight(final Object height) {
-        setStyleLengthAttribute(Definition.HEIGHT.getAttributeName(), height, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.HEIGHT.getAttributeName(), height, "", true, true, null);
     }
 
     /**
@@ -888,7 +888,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setLeft(final Object left) {
-        setStyleLengthAttribute(Definition.LEFT.getAttributeName(), left, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.LEFT.getAttributeName(), left, "", true, true, null);
     }
 
     /**
@@ -944,7 +944,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setLetterSpacing(final Object letterSpacing) {
         setStyleLengthAttribute(Definition.LETTER_SPACING.getAttributeName(), letterSpacing, "",
-                false, getBrowserVersion().hasFeature(JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT), true, null);
+                false, getBrowserVersion().hasFeature(JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT), null);
     }
 
     /**
@@ -986,7 +986,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMarginBottom(final Object marginBottom) {
-        setStyleLengthAttribute(Definition.MARGIN_BOTTOM.getAttributeName(), marginBottom, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.MARGIN_BOTTOM.getAttributeName(), marginBottom, "", true, true, null);
     }
 
     /**
@@ -1007,7 +1007,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMarginLeft(final Object marginLeft) {
-        setStyleLengthAttribute(Definition.MARGIN_LEFT.getAttributeName(), marginLeft, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.MARGIN_LEFT.getAttributeName(), marginLeft, "", true, true, null);
     }
 
     /**
@@ -1028,7 +1028,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMarginRight(final Object marginRight) {
-        setStyleLengthAttribute(Definition.MARGIN_RIGHT.getAttributeName(), marginRight, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.MARGIN_RIGHT.getAttributeName(), marginRight, "", true, true, null);
     }
 
     /**
@@ -1049,7 +1049,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMarginTop(final Object marginTop) {
-        setStyleLengthAttribute(Definition.MARGIN_TOP.getAttributeName(), marginTop, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.MARGIN_TOP.getAttributeName(), marginTop, "", true, true, null);
     }
 
     /**
@@ -1070,7 +1070,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMaxHeight(final Object maxHeight) {
-        setStyleLengthAttribute(Definition.MAX_HEIGHT.getAttributeName(), maxHeight, "", false, true, true, null);
+        setStyleLengthAttribute(Definition.MAX_HEIGHT.getAttributeName(), maxHeight, "", false, true, null);
     }
 
     /**
@@ -1091,7 +1091,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMaxWidth(final Object maxWidth) {
-        setStyleLengthAttribute(Definition.MAX_WIDTH.getAttributeName(), maxWidth, "", false, true, true, null);
+        setStyleLengthAttribute(Definition.MAX_WIDTH.getAttributeName(), maxWidth, "", false, true, null);
     }
 
     /**
@@ -1112,7 +1112,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMinHeight(final Object minHeight) {
-        setStyleLengthAttribute(Definition.MIN_HEIGHT.getAttributeName(), minHeight, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.MIN_HEIGHT.getAttributeName(), minHeight, "", true, true, null);
     }
 
     /**
@@ -1133,7 +1133,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMinWidth(final Object minWidth) {
-        setStyleLengthAttribute(Definition.MIN_WIDTH.getAttributeName(), minWidth, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.MIN_WIDTH.getAttributeName(), minWidth, "", true, true, null);
     }
 
     /**
@@ -1362,7 +1362,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setOutlineWidth(final Object outlineWidth) {
         setStyleLengthAttribute(Definition.OUTLINE_WIDTH.getAttributeName(), outlineWidth, "",
-                false, false, true, THIN_MED_THICK);
+                false, false, THIN_MED_THICK);
     }
 
     /**
@@ -1405,7 +1405,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setPaddingBottom(final Object paddingBottom) {
         setStyleLengthAttribute(Definition.PADDING_BOTTOM.getAttributeName(),
-                paddingBottom, "", false, true, true, null);
+                paddingBottom, "", false, true, null);
     }
 
     /**
@@ -1426,7 +1426,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setPaddingLeft(final Object paddingLeft) {
-        setStyleLengthAttribute(Definition.PADDING_LEFT.getAttributeName(), paddingLeft, "", false, true, true, null);
+        setStyleLengthAttribute(Definition.PADDING_LEFT.getAttributeName(), paddingLeft, "", false, true, null);
     }
 
     /**
@@ -1448,7 +1448,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setPaddingRight(final Object paddingRight) {
         setStyleLengthAttribute(Definition.PADDING_RIGHT.getAttributeName(),
-                paddingRight, "", false, true, true, null);
+                paddingRight, "", false, true, null);
     }
 
     /**
@@ -1469,7 +1469,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setPaddingTop(final Object paddingTop) {
-        setStyleLengthAttribute(Definition.PADDING_TOP.getAttributeName(), paddingTop, "", false, true, true, null);
+        setStyleLengthAttribute(Definition.PADDING_TOP.getAttributeName(), paddingTop, "", false, true, null);
     }
 
     /**
@@ -1514,7 +1514,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setRight(final Object right) {
-        setStyleLengthAttribute(Definition.RIGHT.getAttributeName(), right, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.RIGHT.getAttributeName(), right, "", true, true, null);
     }
 
     /**
@@ -1577,7 +1577,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setTextIndent(final Object textIndent) {
-        setStyleLengthAttribute(Definition.TEXT_INDENT.getAttributeName(), textIndent, "", false, true, true, null);
+        setStyleLengthAttribute(Definition.TEXT_INDENT.getAttributeName(), textIndent, "", false, true, null);
     }
 
     /**
@@ -1598,7 +1598,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setTop(final Object top) {
-        setStyleLengthAttribute(Definition.TOP.getAttributeName(), top, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.TOP.getAttributeName(), top, "", true, true, null);
     }
 
     /**
@@ -1620,7 +1620,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setVerticalAlign(final Object verticalAlign) {
         setStyleLengthAttribute(Definition.VERTICAL_ALIGN.getAttributeName(),
-                verticalAlign, "", false, true, true, ALIGN_KEYWORDS);
+                verticalAlign, "", false, true, ALIGN_KEYWORDS);
     }
 
     /**
@@ -1641,7 +1641,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setWidth(final Object width) {
-        setStyleLengthAttribute(Definition.WIDTH.getAttributeName(), width, "", true, true, true, null);
+        setStyleLengthAttribute(Definition.WIDTH.getAttributeName(), width, "", true, true, null);
     }
 
     /**
@@ -1750,7 +1750,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setWordSpacing(final Object wordSpacing) {
         setStyleLengthAttribute(Definition.WORD_SPACING.getAttributeName(), wordSpacing, "",
-                false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), true, null);
+                false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), null);
     }
 
     /**
@@ -1843,28 +1843,28 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         }
 
         if (LENGTH_PROPERTIES_FFFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, false, false, true, null);
+            setStyleLengthAttribute(name, value, imp, false, false, null);
         }
         else if (LENGTH_PROPERTIES_TTFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, true, true, true, null);
+            setStyleLengthAttribute(name, value, imp, true, true, null);
         }
         else if (LENGTH_PROPERTIES_FTFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, false, true, true, null);
+            setStyleLengthAttribute(name, value, imp, false, true, null);
         }
         else if (Definition.OUTLINE_WIDTH.getAttributeName().equals(name)) {
             setStyleLengthAttribute(Definition.OUTLINE_WIDTH.getAttributeName(),
-                    value, imp, false, false, true, THIN_MED_THICK);
+                    value, imp, false, false, THIN_MED_THICK);
         }
         else if (Definition.LETTER_SPACING.getAttributeName().equals(name)) {
             setStyleLengthAttribute(Definition.LETTER_SPACING.getAttributeName(), value, imp,
-                    false, getBrowserVersion().hasFeature(JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT), true, null);
+                    false, getBrowserVersion().hasFeature(JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT), null);
         }
         else if (Definition.WORD_SPACING.getAttributeName().equals(name)) {
             setStyleLengthAttribute(Definition.WORD_SPACING.getAttributeName(), value, imp,
-                    false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), true, null);
+                    false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), null);
         }
         else if (Definition.VERTICAL_ALIGN.getAttributeName().equals(name)) {
-            setStyleLengthAttribute(Definition.VERTICAL_ALIGN.getAttributeName(), value, imp, false, true, true, null);
+            setStyleLengthAttribute(Definition.VERTICAL_ALIGN.getAttributeName(), value, imp, false, true, null);
         }
         else {
             setStyleAttribute(name, JavaScriptEngine.toString(value), imp);
@@ -1931,8 +1931,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param validValues valid values
      */
     private void setStyleLengthAttribute(final String name, final Object value, final String important,
-                final boolean auto, final boolean percent, final boolean unitRequired, final String[] validValues) {
-
+                final boolean auto, final boolean percent, final String[] validValues) {
         if (JavaScriptEngine.isNaN(value)) {
             return;
         }
@@ -1940,83 +1939,79 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         final double doubleValue;
         String unit = "px";
         if (value instanceof Number) {
-            if (unitRequired) {
-                return;
-            }
-            doubleValue = ((Number) value).doubleValue();
+            return;
+        }
+
+        String valueString = JavaScriptEngine.toString(value);
+        if (null == value) {
+            valueString = "";
+        }
+
+        if (StringUtils.isEmpty(valueString)) {
+            setStyleAttribute(name, valueString, important);
+            return;
+        }
+
+        if ((auto && AUTO.equals(valueString))
+                || INITIAL.equals(valueString)
+                || INHERIT.equals(valueString)) {
+            setStyleAttribute(name, valueString, important);
+            return;
+        }
+
+        if (validValues != null && ArrayUtils.contains(validValues, valueString)) {
+            setStyleAttribute(name, valueString, important);
+            return;
+        }
+
+        if (percent && valueString.endsWith("%")) {
+            unit = valueString.substring(valueString.length() - 1);
+            valueString = valueString.substring(0, valueString.length() - 1);
+        }
+        else if (valueString.endsWith("px")
+            || valueString.endsWith("em")
+            || valueString.endsWith("ex")
+            || valueString.endsWith("pt")
+            || valueString.endsWith("cm")
+            || valueString.endsWith("mm")
+            || valueString.endsWith("in")
+            || valueString.endsWith("pc")
+            || valueString.endsWith("ch")
+            || valueString.endsWith("vh")
+            || valueString.endsWith("vw")) {
+            unit = valueString.substring(valueString.length() - 2);
+            valueString = valueString.substring(0, valueString.length() - 2);
+        }
+        else if (valueString.endsWith("rem")
+            || valueString.endsWith("vmin")
+            || valueString.endsWith("vmax")) {
+            unit = valueString.substring(valueString.length() - 3);
+            valueString = valueString.substring(0, valueString.length() - 3);
         }
         else {
-            String valueString = JavaScriptEngine.toString(value);
-            if (null == value) {
-                valueString = "";
-            }
-
-            if (StringUtils.isEmpty(valueString)) {
-                setStyleAttribute(name, valueString, important);
-                return;
-            }
-
-            if ((auto && AUTO.equals(valueString))
-                    || INITIAL.equals(valueString)
-                    || INHERIT.equals(valueString)) {
-                setStyleAttribute(name, valueString, important);
-                return;
-            }
-
-            if (validValues != null && ArrayUtils.contains(validValues, valueString)) {
-                setStyleAttribute(name, valueString, important);
-                return;
-            }
-
-            if (percent && valueString.endsWith("%")) {
-                unit = valueString.substring(valueString.length() - 1);
-                valueString = valueString.substring(0, valueString.length() - 1);
-            }
-            else if (valueString.endsWith("px")
-                || valueString.endsWith("em")
-                || valueString.endsWith("ex")
-                || valueString.endsWith("pt")
-                || valueString.endsWith("cm")
-                || valueString.endsWith("mm")
-                || valueString.endsWith("in")
-                || valueString.endsWith("pc")
-                || valueString.endsWith("ch")
-                || valueString.endsWith("vh")
-                || valueString.endsWith("vw")) {
-                unit = valueString.substring(valueString.length() - 2);
-                valueString = valueString.substring(0, valueString.length() - 2);
-            }
-            else if (valueString.endsWith("rem")
-                || valueString.endsWith("vmin")
-                || valueString.endsWith("vmax")) {
-                unit = valueString.substring(valueString.length() - 3);
-                valueString = valueString.substring(0, valueString.length() - 3);
-            }
-            else if (unitRequired) {
-                return;
-            }
-
-            if (!valueString.equals(valueString.trim())) {
-                // we have a unit but surrounding blanks
-                return;
-            }
-            doubleValue = JavaScriptEngine.toNumber(valueString);
+            return;
         }
+
+        if (!valueString.equals(valueString.trim())) {
+            // we have a unit but surrounding blanks
+            return;
+        }
+        doubleValue = JavaScriptEngine.toNumber(valueString);
 
         try {
             if (Double.isNaN(doubleValue) || Double.isInfinite(doubleValue)) {
                 return;
             }
 
-            final String valueString;
+            final String valueStr;
             if (doubleValue % 1 == 0) {
-                valueString = (int) doubleValue + unit;
+                valueStr = (int) doubleValue + unit;
             }
             else {
-                valueString = doubleValue + unit;
+                valueStr = doubleValue + unit;
             }
 
-            setStyleAttribute(name, valueString, important);
+            setStyleAttribute(name, valueStr, important);
         }
         catch (final Exception ignored) {
             // ignore
