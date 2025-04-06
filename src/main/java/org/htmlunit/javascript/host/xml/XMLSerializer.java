@@ -33,6 +33,7 @@ import org.w3c.dom.NamedNodeMap;
 
 /**
  * A JavaScript object for {@code XMLSerializer}.
+ * see https://w3c.github.io/DOM-Parsing/#the-xmlserializer-interface
  *
  * @author Ahmed Ashour
  * @author Darrell DeBoer

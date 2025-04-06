@@ -51,6 +51,7 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.FormEncodingType;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.HttpMethod;
+import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebRequest.HttpHint;
@@ -64,7 +65,6 @@ import org.htmlunit.corejs.javascript.json.JsonParser;
 import org.htmlunit.corejs.javascript.json.JsonParser.ParseException;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
-import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
@@ -77,6 +77,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.DOMException;
@@ -92,6 +93,7 @@ import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.WebResponseWrapper;
 import org.htmlunit.util.XUserDefinedCharset;
 import org.htmlunit.xml.XmlPage;
+import org.w3c.dom.DocumentType;
 
 /**
  * A JavaScript object for an {@code XMLHttpRequest}.
@@ -819,11 +821,19 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             if (content instanceof HTMLDocument) {
                 // final String body = ((HTMLDocument) content).getDomNodeOrDie().asXml();
-                final String body = new XMLSerializer().serializeToString((HTMLDocument) content);
+                String body = new XMLSerializer().serializeToString((HTMLDocument) content);
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Setting request body to: " + body);
                 }
-                webRequest_.setRequestBody(Html.DOCTYPE_HTML + body);
+
+                final Element docElement = ((Document) content).getDocumentElement();
+                final SgmlPage page = docElement.getDomNodeOrDie().getPage();
+                final DocumentType doctype = page.getDoctype();
+                if (doctype != null && StringUtils.isNotEmpty(doctype.getName())) {
+                    body = "<!DOCTYPE " + doctype.getName() + ">" + body;
+                }
+
+                webRequest_.setRequestBody(body);
                 if (setEncodingType) {
                     webRequest_.setAdditionalHeader(HttpHeader.CONTENT_TYPE, "text/html;charset=UTF-8");
                 }
