@@ -1126,7 +1126,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"621", "1256", "604", "1239"},
+    @Alerts(CHROME = {"621", "1256", "606", "1241"},
             EDGE = {"630", "1248", "615", "1233"},
             FF = {"675", "1256", "658", "1239"},
             FF_ESR = {"677", "1260", "660", "1243"})

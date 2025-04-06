@@ -1214,6 +1214,8 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts({"window.name before: ", "window.name after: main"})
     public void windowName() throws Exception {
+        shutDownAll();
+
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head></head>\n"
