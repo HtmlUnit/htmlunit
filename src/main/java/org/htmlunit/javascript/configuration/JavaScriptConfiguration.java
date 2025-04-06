@@ -446,6 +446,7 @@ import org.htmlunit.javascript.host.svg.SVGClipPathElement;
 import org.htmlunit.javascript.host.svg.SVGComponentTransferFunctionElement;
 import org.htmlunit.javascript.host.svg.SVGDefsElement;
 import org.htmlunit.javascript.host.svg.SVGDescElement;
+import org.htmlunit.javascript.host.svg.SVGDiscardElement;
 import org.htmlunit.javascript.host.svg.SVGElement;
 import org.htmlunit.javascript.host.svg.SVGEllipseElement;
 import org.htmlunit.javascript.host.svg.SVGFEBlendElement;
@@ -674,7 +675,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGDefsElement.class, SVGDescElement.class, SVGElement.class,
         SVGEllipseElement.class, SVGFEBlendElement.class, SVGFEColorMatrixElement.class,
         SVGFEComponentTransferElement.class, SVGFECompositeElement.class, SVGFEConvolveMatrixElement.class,
-        SVGFEDiffuseLightingElement.class, SVGFEDisplacementMapElement.class, SVGFEDistantLightElement.class,
+        SVGFEDiffuseLightingElement.class, SVGDiscardElement.class,
+        SVGFEDisplacementMapElement.class, SVGFEDistantLightElement.class,
         SVGFEDropShadowElement.class,
         SVGFEFloodElement.class, SVGFEFuncAElement.class, SVGFEFuncBElement.class, SVGFEFuncGElement.class,
         SVGFEFuncRElement.class, SVGFEGaussianBlurElement.class, SVGFEImageElement.class, SVGFEMergeElement.class,
