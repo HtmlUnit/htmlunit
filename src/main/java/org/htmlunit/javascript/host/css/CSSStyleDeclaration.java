@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
+import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static org.htmlunit.css.CssStyleSheet.AUTO;
@@ -400,7 +401,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setBorderBottomWidth(final Object borderBottomWidth) {
         setStyleLengthAttribute(Definition.BORDER_BOTTOM_WIDTH.getAttributeName(), borderBottomWidth, "",
-                false, false, false, null);
+                false, false, true, null);
     }
 
     /**
@@ -464,7 +465,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setBorderLeftWidth(final Object borderLeftWidth) {
         setStyleLengthAttribute(Definition.BORDER_LEFT_WIDTH.getAttributeName(), borderLeftWidth, "",
-                false, false, false, null);
+                false, false, true, null);
     }
 
     /**
@@ -528,7 +529,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setBorderRightWidth(final Object borderRightWidth) {
         setStyleLengthAttribute(Definition.BORDER_RIGHT_WIDTH.getAttributeName(), borderRightWidth, "",
-                false, false, false, null);
+                false, false, true, null);
     }
 
     /**
@@ -613,7 +614,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setBorderTopWidth(final Object borderTopWidth) {
         setStyleLengthAttribute(Definition.BORDER_TOP_WIDTH.getAttributeName(), borderTopWidth, "",
-                false, false, false, null);
+                false, false, true, null);
     }
 
     /**
@@ -634,7 +635,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setBottom(final Object bottom) {
-        setStyleLengthAttribute(Definition.BOTTOM.getAttributeName(), bottom, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.BOTTOM.getAttributeName(), bottom, "", true, true, true, null);
     }
 
     /**
@@ -744,7 +745,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setFontSize(final Object fontSize) {
-        setStyleLengthAttribute(Definition.FONT_SIZE.getAttributeName(), fontSize, "", false, true, false, FONT_SIZES);
+        setStyleLengthAttribute(Definition.FONT_SIZE.getAttributeName(), fontSize, "", false, true, true, FONT_SIZES);
         updateFont(getFont(), false);
     }
 
@@ -867,7 +868,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setHeight(final Object height) {
-        setStyleLengthAttribute(Definition.HEIGHT.getAttributeName(), height, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.HEIGHT.getAttributeName(), height, "", true, true, true, null);
     }
 
     /**
@@ -888,7 +889,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setLeft(final Object left) {
-        setStyleLengthAttribute(Definition.LEFT.getAttributeName(), left, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.LEFT.getAttributeName(), left, "", true, true, true, null);
     }
 
     /**
@@ -944,7 +945,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setLetterSpacing(final Object letterSpacing) {
         setStyleLengthAttribute(Definition.LETTER_SPACING.getAttributeName(), letterSpacing, "",
-                false, false, false, null);
+                false, getBrowserVersion().hasFeature(JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT), true, null);
     }
 
     /**
@@ -986,7 +987,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMarginBottom(final Object marginBottom) {
-        setStyleLengthAttribute(Definition.MARGIN_BOTTOM.getAttributeName(), marginBottom, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.MARGIN_BOTTOM.getAttributeName(), marginBottom, "", true, true, true, null);
     }
 
     /**
@@ -1007,7 +1008,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMarginLeft(final Object marginLeft) {
-        setStyleLengthAttribute(Definition.MARGIN_LEFT.getAttributeName(), marginLeft, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.MARGIN_LEFT.getAttributeName(), marginLeft, "", true, true, true, null);
     }
 
     /**
@@ -1028,7 +1029,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMarginRight(final Object marginRight) {
-        setStyleLengthAttribute(Definition.MARGIN_RIGHT.getAttributeName(), marginRight, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.MARGIN_RIGHT.getAttributeName(), marginRight, "", true, true, true, null);
     }
 
     /**
@@ -1049,7 +1050,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMarginTop(final Object marginTop) {
-        setStyleLengthAttribute(Definition.MARGIN_TOP.getAttributeName(), marginTop, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.MARGIN_TOP.getAttributeName(), marginTop, "", true, true, true, null);
     }
 
     /**
@@ -1070,7 +1071,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMaxHeight(final Object maxHeight) {
-        setStyleLengthAttribute(Definition.MAX_HEIGHT.getAttributeName(), maxHeight, "", false, true, false, null);
+        setStyleLengthAttribute(Definition.MAX_HEIGHT.getAttributeName(), maxHeight, "", false, true, true, null);
     }
 
     /**
@@ -1091,7 +1092,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMaxWidth(final Object maxWidth) {
-        setStyleLengthAttribute(Definition.MAX_WIDTH.getAttributeName(), maxWidth, "", false, true, false, null);
+        setStyleLengthAttribute(Definition.MAX_WIDTH.getAttributeName(), maxWidth, "", false, true, true, null);
     }
 
     /**
@@ -1112,7 +1113,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMinHeight(final Object minHeight) {
-        setStyleLengthAttribute(Definition.MIN_HEIGHT.getAttributeName(), minHeight, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.MIN_HEIGHT.getAttributeName(), minHeight, "", true, true, true, null);
     }
 
     /**
@@ -1133,7 +1134,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setMinWidth(final Object minWidth) {
-        setStyleLengthAttribute(Definition.MIN_WIDTH.getAttributeName(), minWidth, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.MIN_WIDTH.getAttributeName(), minWidth, "", true, true, true, null);
     }
 
     /**
@@ -1405,7 +1406,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setPaddingBottom(final Object paddingBottom) {
         setStyleLengthAttribute(Definition.PADDING_BOTTOM.getAttributeName(),
-                paddingBottom, "", false, true, false, null);
+                paddingBottom, "", false, true, true, null);
     }
 
     /**
@@ -1426,7 +1427,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setPaddingLeft(final Object paddingLeft) {
-        setStyleLengthAttribute(Definition.PADDING_LEFT.getAttributeName(), paddingLeft, "", false, true, false, null);
+        setStyleLengthAttribute(Definition.PADDING_LEFT.getAttributeName(), paddingLeft, "", false, true, true, null);
     }
 
     /**
@@ -1448,7 +1449,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setPaddingRight(final Object paddingRight) {
         setStyleLengthAttribute(Definition.PADDING_RIGHT.getAttributeName(),
-                paddingRight, "", false, true, false, null);
+                paddingRight, "", false, true, true, null);
     }
 
     /**
@@ -1469,7 +1470,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setPaddingTop(final Object paddingTop) {
-        setStyleLengthAttribute(Definition.PADDING_TOP.getAttributeName(), paddingTop, "", false, true, false, null);
+        setStyleLengthAttribute(Definition.PADDING_TOP.getAttributeName(), paddingTop, "", false, true, true, null);
     }
 
     /**
@@ -1514,7 +1515,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setRight(final Object right) {
-        setStyleLengthAttribute(Definition.RIGHT.getAttributeName(), right, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.RIGHT.getAttributeName(), right, "", true, true, true, null);
     }
 
     /**
@@ -1577,7 +1578,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setTextIndent(final Object textIndent) {
-        setStyleLengthAttribute(Definition.TEXT_INDENT.getAttributeName(), textIndent, "", false, true, false, null);
+        setStyleLengthAttribute(Definition.TEXT_INDENT.getAttributeName(), textIndent, "", false, true, true, null);
     }
 
     /**
@@ -1598,7 +1599,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setTop(final Object top) {
-        setStyleLengthAttribute(Definition.TOP.getAttributeName(), top, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.TOP.getAttributeName(), top, "", true, true, true, null);
     }
 
     /**
@@ -1620,7 +1621,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setVerticalAlign(final Object verticalAlign) {
         setStyleLengthAttribute(Definition.VERTICAL_ALIGN.getAttributeName(),
-                verticalAlign, "", false, true, false, ALIGN_KEYWORDS);
+                verticalAlign, "", false, true, true, ALIGN_KEYWORDS);
     }
 
     /**
@@ -1641,7 +1642,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setWidth(final Object width) {
-        setStyleLengthAttribute(Definition.WIDTH.getAttributeName(), width, "", true, true, false, null);
+        setStyleLengthAttribute(Definition.WIDTH.getAttributeName(), width, "", true, true, true, null);
     }
 
     /**
@@ -1750,7 +1751,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setWordSpacing(final Object wordSpacing) {
         setStyleLengthAttribute(Definition.WORD_SPACING.getAttributeName(), wordSpacing, "",
-                false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, null);
+                false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), true, null);
     }
 
     /**

@@ -1426,7 +1426,7 @@ public final class StyleAttributes implements Serializable {
         HYPHENATE_CHARACTER_("hyphenate-character", "hyphenate-character", ff("auto")),
 
         /** The style property {@code hyphenateLimitChars}. */
-        HYPHENATE_LIMIT_CHAR("hyphenateLimitChars", "hyphenate-limit-char", chromeAndEdgeAuto()),
+        HYPHENATE_LIMIT_CHAR("hyphenateLimitChars", "hyphenate-limit-char", chromeAndEdgeAuto(), ffLatest("auto")),
 
         /** The style property {@code hyphens}. */
         HYPHENS("hyphens", "hyphens", ff("manual"), chromeAndEdge("manual")),

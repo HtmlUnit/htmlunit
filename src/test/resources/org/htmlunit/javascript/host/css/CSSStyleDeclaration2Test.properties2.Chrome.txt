@@ -236,6 +236,7 @@ insetBlockStart
 insetInline
 insetInlineEnd
 insetInlineStart
+interactivity
 interpolateSize
 isolation
 justifyContent
@@ -309,7 +310,9 @@ outlineStyle
 outlineWidth
 overflow
 overflowAnchor
+overflowBlock
 overflowClipMargin
+overflowInline
 overflowWrap
 overflowX
 overflowY
@@ -377,6 +380,7 @@ scrollMarginInlineStart
 scrollMarginLeft
 scrollMarginRight
 scrollMarginTop
+scrollMarkerGroup
 scrollPadding
 scrollPaddingBlock
 scrollPaddingBlockEnd
