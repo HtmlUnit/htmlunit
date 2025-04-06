@@ -338,7 +338,7 @@ public final class StyleAttributes implements Serializable {
         BASELINE_SOURCE_("baseline-source", "baseline-source", ff("auto")),
 
         /** The style property {@code blockSize}. */
-        BLOCK_SIZE("blockSize", "block-size", chromeAndEdge("324px"), ff("328px")),
+        BLOCK_SIZE("blockSize", "block-size", chromeAndEdgeAndFirefox("328px")),
 
         /** The style property {@code block-size}. */
         BLOCK_SIZE_("block-size", "block-size", ff("328px")),
@@ -1505,6 +1505,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code inset-inline-start}. */
         INSET_INLINE_START_("inset-inline-start", "inset-inline-start", ff("auto")),
 
+        /** The style property {@code interactivity}. */
+        INTERACTIVITY("interactivity", "interpolate-size", chromeAndEdge("auto")),
+
         /** The style property {@code interpolateSize}. */
         INTERPOLATE_SIZE("interpolateSize", "interpolate-size", chromeAndEdge("numeric-only")),
 
@@ -2257,7 +2260,7 @@ public final class StyleAttributes implements Serializable {
         OVERFLOW_ANCHOR_("overflow-anchor", "overflow-anchor", ff("auto")),
 
         /** The style property {@code overflowBlock}. */
-        OVERFLOW_BLOCK("overflowBlock", "overflow-block", ff("visible")),
+        OVERFLOW_BLOCK("overflowBlock", "overflow-block", chromeAndEdgeAndFirefox("visible")),
 
         /** The style property {@code overflow-block}. */
         OVERFLOW_BLOCK_("overflow-block", "overflow-block", ff("visible")),
@@ -2269,7 +2272,7 @@ public final class StyleAttributes implements Serializable {
         OVERFLOW_CLIP_MARGIN_("overflow-clip-margin", "overflow-clip-margin", ff("0px")),
 
         /** The style property {@code overflowInline}. */
-        OVERFLOW_INLINE("overflowInline", "overflow-inline", ff("visible")),
+        OVERFLOW_INLINE("overflowInline", "overflow-inline", chromeAndEdgeAndFirefox("visible")),
 
         /** The style property {@code overflow-inline}. */
         OVERFLOW_INLINE_("overflow-inline", "overflow-inline", ff("visible")),
@@ -2433,7 +2436,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ffEsr("622px 164px"), ffLatest("620px 164px"), chrome("620px 162px"), edge("616px 162px")),
+                ffEsr("622px 164px"), ffLatest("620px 164px"), chrome("620px 164px"), edge("616px 162px")),
 
         /** The style property {@code perspective-origin}. */
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin", ffEsr("622px 164px"), ffLatest("620px 164px")),
@@ -2618,6 +2621,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code scroll-margin-top}. */
         SCROLL_MARGIN_TOP_("scroll-margin-top", "scroll-margin-top", ff("0px")),
+
+        /** The style property {@code scrollMarkerGroup}. */
+        SCROLL_MARKER_GROUP("scrollMarkerGroup", "scroll-marker-group", chromeAndEdgeNone()),
 
         /** The style property {@code scrollPadding}. */
         SCROLL_PADDING("scrollPadding", "scroll-padding", chromeAndEdgeAuto(), ff("auto")),
@@ -3062,7 +3068,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ffEsr("622px 164px"), ffLatest("620px 164px"), chrome("620px 162px"), edge("616px 162px")),
+                ffEsr("622px 164px"), ffLatest("620px 164px"), chrome("620px 164px"), edge("616px 162px")),
 
         /** The style property {@code transform-origin}. */
         TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ffEsr("622px 164px"), ffLatest("620px 164px")),
@@ -3706,7 +3712,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_LOCALE("webkitLocale", "webkit-locale", chromeAndEdgeAuto()),
 
         /** The style property {@code webkitLogicalHeight}. */
-        WEBKIT_LOGICAL_HEIGHT("webkitLogicalHeight", "webkit-logical-height", chromeAndEdge("324px")),
+        WEBKIT_LOGICAL_HEIGHT("webkitLogicalHeight", "webkit-logical-height", chromeAndEdge("328px")),
 
         /** The style property {@code webkitLogicalWidth}. */
         WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chrome("1240px"), edge("1232px")),
@@ -3879,7 +3885,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin",
-                ffEsr("622px 164px"), ffLatest("620px 164px"), chrome("620px 162px"), edge("616px 162px")),
+                ffEsr("622px 164px"), ffLatest("620px 164px"), chrome("620px 164px"), edge("616px 162px")),
 
         /** The style property {@code WebkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin",
@@ -4013,7 +4019,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin",
-                ffEsr("622px 164px"), ffLatest("620px 164px"), chrome("620px 162px"), edge("616px 162px")),
+                ffEsr("622px 164px"), ffLatest("620px 164px"), chrome("620px 164px"), edge("616px 162px")),
 
         /** The style property {@code WebkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN_("WebkitTransformOrigin", "webkit-transform-origin",

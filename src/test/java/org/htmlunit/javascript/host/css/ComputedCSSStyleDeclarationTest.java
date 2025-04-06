@@ -1174,7 +1174,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4.05px",
             CHROME = "3.726px",
-            EDGE = "3.792px")
+            EDGE = "3.78px")
     @HtmlUnitNYI(CHROME = "1px",
             EDGE =  "1px",
             FF = "1px",
@@ -1203,9 +1203,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "7.55px",
-            CHROME = "7.536px",
-            EDGE = "7.248px")
+    @Alerts(CHROME = "7.536px",
+            EDGE = "7.488px",
+            FF = "7.53333px",
+            FF_ESR = "7.55px")
     @HtmlUnitNYI(CHROME = "1px",
             EDGE =  "1px",
             FF = "1px",
@@ -1511,7 +1512,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"0", "0", "0", "0", "0", "0"})
+    @Alerts(DEFAULT = {"0", "0", "0", "0", "0", "0"},
+            FF_ESR = {"0", "0", "0", "0", "0", "17"})
     public void widthAndHeightScriptElement() throws Exception {
         final String content = DOCTYPE_HTML
             + "<html><head><script id='headScript'>\n"
@@ -1541,9 +1543,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"33", "17", "0", "17"},
-            FF = {"33", "17", "0", "0"},
-            FF_ESR = {"33", "17", "0", "0"})
+    @Alerts({"33", "17", "0", "17"})
     @HtmlUnitNYI(CHROME = {"30", "18", "0", "0"},
             EDGE = {"30", "18", "0", "0"},
             FF = {"30", "18", "0", "0"},
@@ -1573,7 +1573,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"0", "0"})
+    @Alerts(DEFAULT = {"0", "0"},
+            FF_ESR = {"0", "17"})
     public void widthAndHeightChildDisplayNoneWidth() throws Exception {
         final String content = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1594,7 +1595,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"0", "0"})
+    @Alerts(DEFAULT = {"0", "0"},
+            FF_ESR = {"0", "17"})
     public void widthAndHeightChildDisplayNoneWidthLineBreak() throws Exception {
         //see https://github.com/HtmlUnit/htmlunit/pull/356
         final String content = DOCTYPE_HTML
@@ -1860,7 +1862,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("81")
+    @Alerts("85")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -1884,7 +1886,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "false"})
+    @Alerts({"true", "true"})
     public void offsetHeight_setting_height() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -2645,6 +2647,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0 17",
+            CHROME = "0 15",
             EDGE = "0 15")
     @HtmlUnitNYI(CHROME = "0 0",
             EDGE = "0 0",
