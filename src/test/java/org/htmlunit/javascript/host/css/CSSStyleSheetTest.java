@@ -2026,9 +2026,23 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "true"})
+    @Alerts({"true", "false"})
     public void widthHeightPercent() throws Exception {
-        final String html = DOCTYPE_HTML
+        widthHeightPercent(DOCTYPE_HTML);
+    }
+
+    /**
+     * Test for #941.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void widthHeightPercentQuirks() throws Exception {
+        widthHeightPercent("");
+    }
+
+    private void widthHeightPercent(final String doctype) throws Exception {
+        final String html = doctype
             + "<html>\n"
             + "  <head>"
             + "    <style>#testDiv { width: 50%; height: 50%; background-color: blue; }</style>\n"
@@ -2057,10 +2071,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "break at: 10 660.5833740234375 / 622",
-            EDGE = "break at: 10 660.5833740234375 / 631",
-            FF = "break at: 11 726.63330078125 / 676",
-            FF_ESR = "break at: 11 726.63330078125 / 677")
+    @Alerts(CHROME = "break at: 10 664.25 / 621",
+            EDGE = "break at: 10 664.25 / 630",
+            FF = "break at: 10 675.2000122070312 / 675",
+            FF_ESR = "break at: 11 734.63330078125 / 677")
     @HtmlUnitNYI(CHROME = "break at: 16 637 / 605",
             EDGE = "break at: 16 637 / 605",
             FF = "break at: 15 616 / 605",

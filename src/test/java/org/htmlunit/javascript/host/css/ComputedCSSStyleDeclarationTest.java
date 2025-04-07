@@ -1891,16 +1891,41 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<style>\n"
-            + "  .v-loading-indicator {\n"
-            + "    height: 100%\n"
-            + "  }\n"
+            + "  .height100Percent { height: 100% }\n"
             + "</style>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
             + "    log(div1.offsetHeight == 0);\n"
-            + "    div1.className = 'v-loading-indicator';\n"
+            + "    div1.className = 'height100Percent';\n"
+            + "    log(div1.offsetHeight == 0);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'/>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void offsetHeight_setting_height_quirks() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<style>\n"
+            + "  .height100Percent { height: 100% }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var div1 = document.getElementById('div1');\n"
+            + "    log(div1.offsetHeight == 0);\n"
+            + "    div1.className = 'height100Percent';\n"
             + "    log(div1.offsetHeight == 0);\n"
             + "  }\n"
             + "</script>\n"
