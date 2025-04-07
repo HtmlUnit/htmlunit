@@ -1674,9 +1674,9 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      *         elements
      */
     private int getEmptyHeight(final DomElement element) {
-        final Integer cachedHeight2 = getCachedEmptyHeight();
-        if (cachedHeight2 != null) {
-            return cachedHeight2.intValue();
+        final Integer cachedEmptyHeight = getCachedEmptyHeight();
+        if (cachedEmptyHeight != null) {
+            return cachedEmptyHeight.intValue();
         }
 
         if (!element.mayBeDisplayed()) {
