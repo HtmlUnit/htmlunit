@@ -20,6 +20,8 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -390,8 +392,9 @@ public class WebClient2Test extends SimpleWebTestCase {
     @Test
     public void localFile() throws Exception {
         final URL url = getClass().getClassLoader().getResource("simple.html");
-        String file = url.getFile();
+        String file = URLDecoder.decode(url.getFile(), StandardCharsets.UTF_8);
         if (file.startsWith("/") && file.contains(":")) {
+            // we have to remove the trailing slash to test the c:\.... case.
             file = file.substring(1);
         }
 
