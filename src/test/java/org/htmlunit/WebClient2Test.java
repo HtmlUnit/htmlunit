@@ -401,7 +401,7 @@ public class WebClient2Test extends SimpleWebTestCase {
         assertTrue("File '" + file + "' does not exist", new File(file).exists());
 
         try (WebClient webClient = new WebClient(getBrowserVersion())) {
-            final HtmlPage page = webClient.getPage(file);
+            webClient.getPage(file);
             fail("IOException expected");
         }
         catch (final IOException e) {
