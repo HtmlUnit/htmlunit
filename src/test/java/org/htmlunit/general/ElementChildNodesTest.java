@@ -1379,7 +1379,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "2", "2", "3", "3", "2"})
+    @Alerts({"1", "0", "1", "1", "0", "1"})
     public void table() throws Exception {
         loadPageVerifyTitle2(test("table"));
     }

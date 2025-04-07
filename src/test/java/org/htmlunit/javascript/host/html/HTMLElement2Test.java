@@ -328,7 +328,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"50", "50"})
+    @Alerts({"8", "8"})
     public void offsetTopAndLeft_AbsolutelyPositioned() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -558,7 +558,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"30px", "46", "55px", "71", "71", "0", "0", "0", "0"})
+    @Alerts(DEFAULT = {"", "1240", "", "34", "34", "0", "0", "0", "0"},
+            EDGE = {"", "1232", "", "34", "34", "0", "0", "0", "0"},
+            FF_ESR = {"", "1244", "", "34", "34", "0", "0", "0", "0"})
     public void offsetWidthAndHeight() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
