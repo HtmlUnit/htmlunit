@@ -529,6 +529,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getBackgroundColor() {
+        if (!getDomElement().isAttachedToPage()) {
+            return EMPTY_FINAL;
+        }
+
         final String value = super.getBackgroundColor();
         if (StringUtils.isEmpty(value)) {
             return Definition.BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
@@ -1180,6 +1184,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getZIndex() {
+        if (!getDomElement().isAttachedToPage()) {
+            return EMPTY_FINAL;
+        }
+
         final String response = super.getZIndex();
         if (response.isEmpty()) {
             return AUTO;
