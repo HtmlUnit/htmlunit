@@ -14,7 +14,9 @@
  */
 package org.htmlunit.javascript.configuration;
 
-import org.htmlunit.SimpleWebTestCase;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.junit.Test;
 
@@ -23,8 +25,9 @@ import org.junit.Test;
  *
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-public class ClassConfigurationTest extends SimpleWebTestCase {
+public class ClassConfigurationTest {
 
     /**
      * @throws Exception on error

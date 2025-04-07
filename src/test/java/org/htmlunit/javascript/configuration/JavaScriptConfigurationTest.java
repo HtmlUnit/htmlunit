@@ -15,6 +15,8 @@
 package org.htmlunit.javascript.configuration;
 
 import static org.htmlunit.BrowserVersion.FIREFOX;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -36,8 +38,8 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.text.RandomStringGenerator;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.MockWebConnection;
-import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
+import org.htmlunit.WebTestCase;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.junit.Test;
@@ -51,7 +53,7 @@ import org.junit.Test;
  * @author Frank Danek
  * @author Joerg Werner
  */
-public class JavaScriptConfigurationTest extends SimpleWebTestCase {
+public class JavaScriptConfigurationTest {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptConfigurationTest.class);
 
@@ -317,7 +319,8 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     private static void test(final BrowserVersion browserVersion) throws IOException {
         try (WebClient webClient = new WebClient(browserVersion)) {
             final MockWebConnection conn = new MockWebConnection();
-            conn.setDefaultResponse(DOCTYPE_HTML + "<html><body onload='document.body.firstChild'></body></html>");
+            conn.setDefaultResponse(WebTestCase.DOCTYPE_HTML
+                    + "<html><body onload='document.body.firstChild'></body></html>");
             webClient.setWebConnection(conn);
 
             webClient.getPage("http://localhost/");

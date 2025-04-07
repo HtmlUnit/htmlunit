@@ -250,10 +250,10 @@ public class LocationTest extends SimpleWebTestCase {
     @Test
     public void setProtocol() throws Exception {
         final URL url = new URL("http://abc.com/index.html?blah=bleh");
-        final URL url2 = new URL("ftp://abc.com/index.html?blah=bleh");
+        final URL url2 = new URL("https://abc.com/index.html?blah=bleh");
         final String html = DOCTYPE_HTML
             + "<html><head><title>Test 1</title></head>\n"
-            + "<body onload='location.protocol=\"ftp\"'>...</body></html>";
+            + "<body onload='location.protocol=\"https\"'>...</body></html>";
         final String html2 = DOCTYPE_HTML
                 + "<html><head><title>Test 2</title></head><body>...</body></html>";
 
