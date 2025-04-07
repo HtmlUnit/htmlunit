@@ -244,7 +244,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             FF = "1240",
             FF_ESR = "1244")
     @HtmlUnitNYI(EDGE = "1240",
-            FF = "1240",
             FF_ESR = "1240")
     public void aside() throws Exception {
         test("aside");
@@ -445,7 +444,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             FF = "1240",
             FF_ESR = "1244")
     @HtmlUnitNYI(EDGE = "1240",
-            FF = "1240",
             FF_ESR = "1240")
     public void center() throws Exception {
         test("center");
@@ -506,7 +504,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             FF = "1240",
             FF_ESR = "1244")
     @HtmlUnitNYI(EDGE = "1240",
-            FF = "1240",
             FF_ESR = "1240")
     public void details() throws Exception {
         test("details");
@@ -661,8 +658,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             FF_ESR = "1240")
     @HtmlUnitNYI(CHROME = "1240",
             EDGE = "1240",
-            FF = "1240",
-            FF_ESR = "1240")
+            FF = "1240")
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -678,7 +674,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             FF = "1240",
             FF_ESR = "1244")
     @HtmlUnitNYI(EDGE = "1240",
-            FF = "1240",
             FF_ESR = "1240")
     public void figcaption() throws Exception {
         test("figcaption");
@@ -756,7 +751,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             FF = "1256",
             FF_ESR = "1260")
     @HtmlUnitNYI(EDGE = "1256",
-            FF = "1256",
             FF_ESR = "1256")
     public void frame() throws Exception {
         test("frame");
@@ -773,7 +767,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             FF = "1256",
             FF_ESR = "1260")
     @HtmlUnitNYI(EDGE = "1256",
-            FF = "1256",
             FF_ESR = "1256")
     public void frameset() throws Exception {
         test("frameset");
@@ -897,7 +890,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             FF = "1240",
             FF_ESR = "1244")
     @HtmlUnitNYI(EDGE = "1240",
-            FF = "1240",
             FF_ESR = "1240")
     public void header() throws Exception {
         test("header");
@@ -1385,7 +1377,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             FF = "1240",
             FF_ESR = "1244")
     @HtmlUnitNYI(EDGE = "1240",
-        FF_ESR = "1240")
+            FF_ESR = "1240")
     public void option() throws Exception {
         test("option");
     }
