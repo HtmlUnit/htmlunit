@@ -1120,14 +1120,14 @@ public class HTMLElement extends Element {
         int top = getPosY();
 
         // account for any scrolled ancestors
-        Object parentNode = getOffsetParentInternal(false);
+        Node parentNode = getOffsetParentInternal(false).getScriptableObject();
         while ((parentNode instanceof HTMLElement)
                 && !(parentNode instanceof HTMLBodyElement)) {
             final HTMLElement elem = (HTMLElement) parentNode;
             left -= elem.getScrollLeft();
             top -= elem.getScrollTop();
 
-            parentNode = elem.getParentNode();
+            parentNode = elem.getParent();
         }
 
         textRectangle.setBottom(top + getOffsetHeight());

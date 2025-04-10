@@ -676,7 +676,7 @@ public class Node extends EventTarget {
      * @return the parent node
      */
     @JsxGetter
-    public Object getParentNode() {
+    public Node getParentNode() {
         return getJavaScriptNode(getDomNodeOrDie().getParentNode());
     }
 
