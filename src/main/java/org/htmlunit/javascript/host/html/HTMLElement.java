@@ -392,7 +392,7 @@ public class HTMLElement extends Element {
     @JsxGetter
     public String getInnerText() {
         final HtmlSerializerInnerOuterText ser = new HtmlSerializerInnerOuterText(getBrowserVersion());
-        return ser.asText(this.getDomNodeOrDie());
+        return ser.asText(getDomNodeOrDie());
     }
 
     /**
@@ -905,58 +905,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns this element's <code>offsetLeft</code>, which is the calculated left position of this
-     * element relative to the <code>offsetParent</code>.
-     *
-     * @return this element's <code>offsetLeft</code>
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534200.aspx">MSDN Documentation</a>
-     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
-     * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
-     */
-    @JsxGetter
-    public int getOffsetLeft() {
-        if (this instanceof HTMLBodyElement) {
-            return 0;
-        }
-
-        int left = 0;
-
-        // Add the offset for this node.
-        DomNode node = getDomNodeOrDie();
-        HTMLElement element = node.getScriptableObject();
-        final WebWindow webWindow = element.getWindow().getWebWindow();
-        ComputedCssStyleDeclaration style = webWindow.getComputedStyle(element.getDomNodeOrDie(), null);
-        left += style.getLeft(true, false, false);
-
-        // If this node is absolutely positioned, we're done.
-        final String position = style.getPositionWithInheritance();
-        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
-            return left;
-        }
-
-        final HTMLElement offsetParent = getOffsetParent();
-
-        // Add the offset for the ancestor nodes.
-        node = node.getParentNode();
-        while (node != null && node.getScriptableObject() != offsetParent) {
-            if (node.getScriptableObject() instanceof HTMLElement) {
-                element = node.getScriptableObject();
-                style = webWindow.getComputedStyle(element.getDomNodeOrDie(), null);
-                left += style.getLeft(true, true, true);
-            }
-            node = node.getParentNode();
-        }
-
-        if (offsetParent != null) {
-            style = webWindow.getComputedStyle(offsetParent.getDomNodeOrDie(), null);
-            left += style.getMarginLeftValue();
-            left += style.getPaddingLeftValue();
-        }
-
-        return left;
-    }
-
-    /**
      * Returns this element's X position.
      * @return this element's X position
      */
@@ -1026,10 +974,9 @@ public class HTMLElement extends Element {
         int top = 0;
 
         // Add the offset for this node.
-        DomNode node = getDomNodeOrDie();
-        HTMLElement element = node.getScriptableObject();
-        final WebWindow webWindow = element.getWindow().getWebWindow();
-        ComputedCssStyleDeclaration style = webWindow.getComputedStyle(element.getDomNodeOrDie(), null);
+        final HtmlElement htmlElement = getDomNodeOrDie();
+        final WebWindow webWindow = getWindow().getWebWindow();
+        ComputedCssStyleDeclaration style = webWindow.getComputedStyle(htmlElement, null);
         top += style.getTop(true, false, false);
 
         // If this node is absolutely positioned, we're done.
@@ -1041,18 +988,17 @@ public class HTMLElement extends Element {
         final HTMLElement offsetParent = getOffsetParent();
 
         // Add the offset for the ancestor nodes.
-        node = node.getParentNode();
-        while (node != null && node.getScriptableObject() != offsetParent) {
-            if (node.getScriptableObject() instanceof HTMLElement) {
-                element = node.getScriptableObject();
-                style = webWindow.getComputedStyle(element.getDomNodeOrDie(), null);
+        DomNode parentNode = htmlElement.getParentNode();
+        while (parentNode != null && parentNode.getScriptableObject() != offsetParent) {
+            if (parentNode instanceof HtmlElement) {
+                style = webWindow.getComputedStyle((HtmlElement) parentNode, null);
                 top += style.getTop(false, true, true);
             }
-            node = node.getParentNode();
+            parentNode = parentNode.getParentNode();
         }
 
         if (offsetParent != null) {
-            style = webWindow.getComputedStyle(getDomNodeOrDie(), null);
+            style = webWindow.getComputedStyle(htmlElement, null);
             final boolean thisElementHasTopMargin = style.getMarginTopValue() != 0;
 
             style = webWindow.getComputedStyle(offsetParent.getDomNodeOrDie(), null);
@@ -1063,6 +1009,60 @@ public class HTMLElement extends Element {
         }
 
         return top;
+    }
+
+    /**
+     * Returns this element's <code>offsetLeft</code>, which is the calculated left position of this
+     * element relative to the <code>offsetParent</code>.
+     *
+     * @return this element's <code>offsetLeft</code>
+     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534200.aspx">MSDN Documentation</a>
+     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
+     * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
+     */
+    @JsxGetter
+    public int getOffsetLeft() {
+        if (this instanceof HTMLBodyElement) {
+            return 0;
+        }
+
+        int left = 0;
+
+        // Add the offset for this node.
+        final HtmlElement htmlElement = getDomNodeOrDie();
+        final WebWindow webWindow = getWindow().getWebWindow();
+        ComputedCssStyleDeclaration style = webWindow.getComputedStyle(htmlElement, null);
+        left += style.getLeft(true, false, false);
+
+        // If this node is absolutely positioned, we're done.
+        final String position = style.getPositionWithInheritance();
+        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
+            return left;
+        }
+
+        final HTMLElement offsetParent = getOffsetParent();
+
+        DomNode parentNode = htmlElement.getParentNode();
+        while (parentNode != null && parentNode.getScriptableObject() != offsetParent) {
+            if (parentNode instanceof HtmlElement) {
+                style = webWindow.getComputedStyle((HtmlElement) parentNode, null);
+                left += style.getLeft(true, true, true);
+            }
+            parentNode = parentNode.getParentNode();
+        }
+
+        if (offsetParent != null) {
+            style = webWindow.getComputedStyle(htmlElement, null);
+            final boolean thisElementHasLeftMargin = style.getMarginLeftValue() != 0;
+
+            style = webWindow.getComputedStyle(offsetParent.getDomNodeOrDie(), null);
+            if (!thisElementHasLeftMargin) {
+                left += style.getMarginLeftValue();
+            }
+            left += style.getPaddingLeftValue();
+        }
+
+        return left;
     }
 
     /**
