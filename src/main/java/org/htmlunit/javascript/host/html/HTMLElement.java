@@ -1052,13 +1052,8 @@ public class HTMLElement extends Element {
         }
 
         if (offsetParent != null) {
-            style = webWindow.getComputedStyle(htmlElement, null);
-            final boolean thisElementHasLeftMargin = style.getMarginLeftValue() != 0;
-
             style = webWindow.getComputedStyle(offsetParent.getDomNodeOrDie(), null);
-            if (!thisElementHasLeftMargin) {
-                left += style.getMarginLeftValue();
-            }
+            left += style.getMarginLeftValue();
             left += style.getPaddingLeftValue();
         }
 
