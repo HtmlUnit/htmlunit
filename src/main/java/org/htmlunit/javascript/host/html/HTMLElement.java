@@ -919,7 +919,7 @@ public class HTMLElement extends Element {
                         webWindow.getComputedStyle(element.getDomNodeOrDie(), null);
                 cumulativeOffset += style.getBorderLeftValue();
             }
-            element = element.getOffsetParent();
+            element = element.getOffsetParentInternal(false).getScriptableObject();
         }
         return cumulativeOffset;
     }
@@ -939,21 +939,9 @@ public class HTMLElement extends Element {
                         webWindow.getComputedStyle(element.getDomNodeOrDie(), null);
                 cumulativeOffset += style.getBorderTopValue();
             }
-            element = element.getOffsetParent();
+            element = element.getOffsetParentInternal(false).getScriptableObject();
         }
         return cumulativeOffset;
-    }
-
-    /**
-     * Gets the offset parent or {@code null} if this is not an {@link HTMLElement}.
-     * @return the offset parent or {@code null}
-     */
-    private HTMLElement getOffsetParent() {
-        final Object offsetParent = getOffsetParentInternal(false);
-        if (offsetParent instanceof HTMLElement) {
-            return (HTMLElement) offsetParent;
-        }
-        return null;
     }
 
     /**
@@ -985,11 +973,11 @@ public class HTMLElement extends Element {
             return top;
         }
 
-        final HTMLElement offsetParent = getOffsetParent();
+        final HtmlElement offsetParent = getOffsetParentInternal(false);
 
         // Add the offset for the ancestor nodes.
         DomNode parentNode = htmlElement.getParentNode();
-        while (parentNode != null && parentNode.getScriptableObject() != offsetParent) {
+        while (parentNode != null && parentNode != offsetParent) {
             if (parentNode instanceof HtmlElement) {
                 style = webWindow.getComputedStyle((HtmlElement) parentNode, null);
                 top += style.getTop(false, true, true);
@@ -1001,7 +989,7 @@ public class HTMLElement extends Element {
             style = webWindow.getComputedStyle(htmlElement, null);
             final boolean thisElementHasTopMargin = style.getMarginTopValue() != 0;
 
-            style = webWindow.getComputedStyle(offsetParent.getDomNodeOrDie(), null);
+            style = webWindow.getComputedStyle(offsetParent, null);
             if (!thisElementHasTopMargin) {
                 top += style.getMarginTopValue();
             }
@@ -1040,10 +1028,10 @@ public class HTMLElement extends Element {
             return left;
         }
 
-        final HTMLElement offsetParent = getOffsetParent();
+        final HtmlElement offsetParent = getOffsetParentInternal(false);
 
         DomNode parentNode = htmlElement.getParentNode();
-        while (parentNode != null && parentNode.getScriptableObject() != offsetParent) {
+        while (parentNode != null && parentNode != offsetParent) {
             if (parentNode instanceof HtmlElement) {
                 style = webWindow.getComputedStyle((HtmlElement) parentNode, null);
                 left += style.getLeft(true, true, true);
@@ -1052,7 +1040,7 @@ public class HTMLElement extends Element {
         }
 
         if (offsetParent != null) {
-            style = webWindow.getComputedStyle(offsetParent.getDomNodeOrDie(), null);
+            style = webWindow.getComputedStyle(offsetParent, null);
             left += style.getMarginLeftValue();
             left += style.getPaddingLeftValue();
         }
@@ -1074,25 +1062,25 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(propertyName = "offsetParent")
     public HtmlUnitScriptable getOffsetParent_js() {
-        return getOffsetParentInternal(getBrowserVersion().hasFeature(JS_OFFSET_PARENT_NULL_IF_FIXED));
+        final boolean feature = getBrowserVersion().hasFeature(JS_OFFSET_PARENT_NULL_IF_FIXED);
+        return getOffsetParentInternal(feature).getScriptableObject();
     }
 
-    private HtmlUnitScriptable getOffsetParentInternal(final boolean returnNullIfFixed) {
+    private HtmlElement getOffsetParentInternal(final boolean returnNullIfFixed) {
         DomNode currentElement = getDomNodeOrDie();
 
         if (currentElement.getParentNode() == null) {
             return null;
         }
 
-        final HTMLElement htmlElement = currentElement.getScriptableObject();
         if (returnNullIfFixed
-                && FIXED.equals(htmlElement.getStyle().getStyleAttribute(
+                && FIXED.equals(getStyle().getStyleAttribute(
                 StyleAttributes.Definition.POSITION, true))) {
             return null;
         }
 
-        final WebWindow webWindow = htmlElement.getWindow().getWebWindow();
-        final ComputedCssStyleDeclaration style = webWindow.getComputedStyle(htmlElement.getDomNodeOrDie(), null);
+        final WebWindow webWindow = getWindow().getWebWindow();
+        final ComputedCssStyleDeclaration style = webWindow.getComputedStyle((DomElement) currentElement, null);
         final String position = style.getPositionWithInheritance();
         final boolean staticPos = "static".equals(position);
 
@@ -1102,16 +1090,16 @@ public class HTMLElement extends Element {
             if (parentNode instanceof HtmlBody
                 || (staticPos && parentNode instanceof HtmlTableDataCell)
                 || (staticPos && parentNode instanceof HtmlTable)) {
-                return parentNode.getScriptableObject();
+                return (HtmlElement) parentNode;
             }
 
-            if (parentNode != null && parentNode.getScriptableObject() instanceof HTMLElement) {
+            if (parentNode != null && parentNode instanceof HtmlElement) {
                 final HTMLElement parentElement = parentNode.getScriptableObject();
                 final ComputedCssStyleDeclaration parentStyle =
                         webWindow.getComputedStyle(parentElement.getDomNodeOrDie(), null);
                 final String parentPosition = parentStyle.getPositionWithInheritance();
                 if (!"static".equals(parentPosition)) {
-                    return parentNode.getScriptableObject();
+                    return (HtmlElement) parentNode;
                 }
             }
 
