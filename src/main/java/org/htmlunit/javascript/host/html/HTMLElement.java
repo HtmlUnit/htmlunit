@@ -919,7 +919,7 @@ public class HTMLElement extends Element {
                         webWindow.getComputedStyle(element.getDomNodeOrDie(), null);
                 cumulativeOffset += style.getBorderLeftValue();
             }
-            element = element.getOffsetParentInternal(false).getScriptableObject();
+            element = element.getOffestParentElement(false);
         }
         return cumulativeOffset;
     }
@@ -939,7 +939,7 @@ public class HTMLElement extends Element {
                         webWindow.getComputedStyle(element.getDomNodeOrDie(), null);
                 cumulativeOffset += style.getBorderTopValue();
             }
-            element = element.getOffsetParentInternal(false).getScriptableObject();
+            element = element.getOffestParentElement(false);
         }
         return cumulativeOffset;
     }
@@ -1063,7 +1063,15 @@ public class HTMLElement extends Element {
     @JsxGetter(propertyName = "offsetParent")
     public HtmlUnitScriptable getOffsetParent_js() {
         final boolean feature = getBrowserVersion().hasFeature(JS_OFFSET_PARENT_NULL_IF_FIXED);
-        return getOffsetParentInternal(feature).getScriptableObject();
+        return getOffestParentElement(feature);
+    }
+
+    private HTMLElement getOffestParentElement(final boolean returnNullIfFixed) {
+        final HtmlElement html = getOffsetParentInternal(returnNullIfFixed);
+        if (html == null) {
+            return null;
+        }
+        return html.getScriptableObject();
     }
 
     private HtmlElement getOffsetParentInternal(final boolean returnNullIfFixed) {
@@ -1120,7 +1128,7 @@ public class HTMLElement extends Element {
         int top = getPosY();
 
         // account for any scrolled ancestors
-        Node parentNode = getOffsetParentInternal(false).getScriptableObject();
+        Node parentNode = getOffestParentElement(false);
         while ((parentNode instanceof HTMLElement)
                 && !(parentNode instanceof HTMLBodyElement)) {
             final HTMLElement elem = (HTMLElement) parentNode;
