@@ -16,6 +16,9 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
 import static org.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
+import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
+import static org.htmlunit.css.CssStyleSheet.FIXED;
+import static org.htmlunit.css.CssStyleSheet.STATIC;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +34,8 @@ import org.htmlunit.ScriptResult;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
+import org.htmlunit.WebWindow;
+import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.html.impl.SelectableTextInput;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.host.dom.Document;
@@ -1421,6 +1426,186 @@ public abstract class HtmlElement extends DomElement {
                 removeAttribute(ATTRIBUTE_REQUIRED);
             }
         }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param returnNullIfFixed if position is 'fixed' return null
+     * @return the offset parent {@link HtmlElement}
+     */
+    public HtmlElement getOffsetParentInternal(final boolean returnNullIfFixed) {
+        if (getParentNode() == null) {
+            return null;
+        }
+
+        final WebWindow webWindow = getPage().getEnclosingWindow();
+        final ComputedCssStyleDeclaration style = webWindow.getComputedStyle(this, null);
+        final String position = style.getPositionWithInheritance();
+
+        if (returnNullIfFixed && FIXED.equals(position)) {
+            return null;
+        }
+
+        final boolean staticPos = STATIC.equals(position);
+
+        DomNode currentElement = this;
+        while (currentElement != null) {
+
+            final DomNode parentNode = currentElement.getParentNode();
+            if (parentNode instanceof HtmlBody
+                || (staticPos && parentNode instanceof HtmlTableDataCell)
+                || (staticPos && parentNode instanceof HtmlTable)) {
+                return (HtmlElement) parentNode;
+            }
+
+            if (parentNode instanceof HtmlElement) {
+                final ComputedCssStyleDeclaration parentStyle =
+                        webWindow.getComputedStyle((HtmlElement) parentNode, null);
+                final String parentPosition = parentStyle.getPositionWithInheritance();
+                if (!STATIC.equals(parentPosition)) {
+                    return (HtmlElement) parentNode;
+                }
+            }
+
+            currentElement = currentElement.getParentNode();
+        }
+
+        return null;
+    }
+
+    /**
+     * @return this element's top offset, which is the calculated left position of this
+     *         element relative to the <code>offsetParent</code>.
+     */
+    public int getOffsetTop() {
+        if (this instanceof HtmlBody) {
+            return 0;
+        }
+
+        int top = 0;
+
+        // Add the offset for this node.
+        final WebWindow webWindow = getPage().getEnclosingWindow();
+        ComputedCssStyleDeclaration style = webWindow.getComputedStyle(this, null);
+        top += style.getTop(true, false, false);
+
+        // If this node is absolutely positioned, we're done.
+        final String position = style.getPositionWithInheritance();
+        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
+            return top;
+        }
+
+        final HtmlElement offsetParent = getOffsetParentInternal(false);
+
+        // Add the offset for the ancestor nodes.
+        DomNode parentNode = getParentNode();
+        while (parentNode != null && parentNode != offsetParent) {
+            if (parentNode instanceof HtmlElement) {
+                style = webWindow.getComputedStyle((HtmlElement) parentNode, null);
+                top += style.getTop(false, true, true);
+            }
+            parentNode = parentNode.getParentNode();
+        }
+
+        if (offsetParent != null) {
+            style = webWindow.getComputedStyle(this, null);
+            final boolean thisElementHasTopMargin = style.getMarginTopValue() != 0;
+
+            style = webWindow.getComputedStyle(offsetParent, null);
+            if (!thisElementHasTopMargin) {
+                top += style.getMarginTopValue();
+            }
+            top += style.getPaddingTopValue();
+        }
+
+        return top;
+    }
+
+    /**
+     * @return this element's left offset, which is the calculated left position of this
+     *         element relative to the <code>offsetParent</code>.
+     */
+    public int getOffsetLeft() {
+        if (this instanceof HtmlBody) {
+            return 0;
+        }
+
+        int left = 0;
+
+        // Add the offset for this node.
+        final WebWindow webWindow = getPage().getEnclosingWindow();
+        ComputedCssStyleDeclaration style = webWindow.getComputedStyle(this, null);
+        left += style.getLeft(true, false, false);
+
+        // If this node is absolutely positioned, we're done.
+        final String position = style.getPositionWithInheritance();
+        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
+            return left;
+        }
+
+        final HtmlElement offsetParent = getOffsetParentInternal(false);
+
+        DomNode parentNode = getParentNode();
+        while (parentNode != null && parentNode != offsetParent) {
+            if (parentNode instanceof HtmlElement) {
+                style = webWindow.getComputedStyle((HtmlElement) parentNode, null);
+                left += style.getLeft(true, true, true);
+            }
+            parentNode = parentNode.getParentNode();
+        }
+
+        if (offsetParent != null) {
+            style = webWindow.getComputedStyle(offsetParent, null);
+            left += style.getMarginLeftValue();
+            left += style.getPaddingLeftValue();
+        }
+
+        return left;
+    }
+
+    /**
+     * Returns this element's X position.
+     * @return this element's X position
+     */
+    public int getPosX() {
+        int cumulativeOffset = 0;
+        final WebWindow webWindow = getPage().getEnclosingWindow();
+
+        HtmlElement element = this;
+        while (element != null) {
+            cumulativeOffset += element.getOffsetLeft();
+            if (element != this) {
+                final ComputedCssStyleDeclaration style =
+                        webWindow.getComputedStyle(element, null);
+                cumulativeOffset += style.getBorderLeftValue();
+            }
+            element = element.getOffsetParentInternal(false);
+        }
+
+        return cumulativeOffset;
+    }
+
+    /**
+     * Returns this element's Y position.
+     * @return this element's Y position
+     */
+    public int getPosY() {
+        int cumulativeOffset = 0;
+        final WebWindow webWindow = getPage().getEnclosingWindow();
+
+        HtmlElement element = this;
+        while (element != null) {
+            cumulativeOffset += element.getOffsetTop();
+            if (element != this) {
+                final ComputedCssStyleDeclaration style =
+                        webWindow.getComputedStyle(element, null);
+                cumulativeOffset += style.getBorderTopValue();
+            }
+            element = element.getOffsetParentInternal(false);
+        }
+
+        return cumulativeOffset;
     }
 
     /**

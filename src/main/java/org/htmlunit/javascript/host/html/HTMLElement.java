@@ -15,8 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
-import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
-import static org.htmlunit.css.CssStyleSheet.FIXED;
 import static org.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_VALUE_EMPTY;
@@ -35,11 +33,9 @@ import java.util.Set;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
-import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
-import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
@@ -52,7 +48,6 @@ import org.htmlunit.html.HtmlBaseFont;
 import org.htmlunit.html.HtmlBidirectionalIsolation;
 import org.htmlunit.html.HtmlBidirectionalOverride;
 import org.htmlunit.html.HtmlBig;
-import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlBold;
 import org.htmlunit.html.HtmlBreak;
 import org.htmlunit.html.HtmlCenter;
@@ -95,8 +90,6 @@ import org.htmlunit.html.HtmlStrong;
 import org.htmlunit.html.HtmlSubscript;
 import org.htmlunit.html.HtmlSummary;
 import org.htmlunit.html.HtmlSuperscript;
-import org.htmlunit.html.HtmlTable;
-import org.htmlunit.html.HtmlTableDataCell;
 import org.htmlunit.html.HtmlTeletype;
 import org.htmlunit.html.HtmlUnderlined;
 import org.htmlunit.html.HtmlVariable;
@@ -909,19 +902,7 @@ public class HTMLElement extends Element {
      * @return this element's X position
      */
     public int getPosX() {
-        int cumulativeOffset = 0;
-        HTMLElement element = this;
-        final WebWindow webWindow = element.getWindow().getWebWindow();
-        while (element != null) {
-            cumulativeOffset += element.getOffsetLeft();
-            if (element != this) {
-                final ComputedCssStyleDeclaration style =
-                        webWindow.getComputedStyle(element.getDomNodeOrDie(), null);
-                cumulativeOffset += style.getBorderLeftValue();
-            }
-            element = element.getOffestParentElement(false);
-        }
-        return cumulativeOffset;
+        return getDomNodeOrDie().getPosX();
     }
 
     /**
@@ -929,19 +910,7 @@ public class HTMLElement extends Element {
      * @return this element's Y position
      */
     public int getPosY() {
-        int cumulativeOffset = 0;
-        HTMLElement element = this;
-        final WebWindow webWindow = element.getWindow().getWebWindow();
-        while (element != null) {
-            cumulativeOffset += element.getOffsetTop();
-            if (element != this) {
-                final ComputedCssStyleDeclaration style =
-                        webWindow.getComputedStyle(element.getDomNodeOrDie(), null);
-                cumulativeOffset += style.getBorderTopValue();
-            }
-            element = element.getOffestParentElement(false);
-        }
-        return cumulativeOffset;
+        return getDomNodeOrDie().getPosY();
     }
 
     /**
@@ -955,48 +924,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public int getOffsetTop() {
-        if (this instanceof HTMLBodyElement) {
-            return 0;
-        }
-
-        int top = 0;
-
-        // Add the offset for this node.
-        final HtmlElement htmlElement = getDomNodeOrDie();
-        final WebWindow webWindow = getWindow().getWebWindow();
-        ComputedCssStyleDeclaration style = webWindow.getComputedStyle(htmlElement, null);
-        top += style.getTop(true, false, false);
-
-        // If this node is absolutely positioned, we're done.
-        final String position = style.getPositionWithInheritance();
-        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
-            return top;
-        }
-
-        final HtmlElement offsetParent = getOffsetParentInternal(false);
-
-        // Add the offset for the ancestor nodes.
-        DomNode parentNode = htmlElement.getParentNode();
-        while (parentNode != null && parentNode != offsetParent) {
-            if (parentNode instanceof HtmlElement) {
-                style = webWindow.getComputedStyle((HtmlElement) parentNode, null);
-                top += style.getTop(false, true, true);
-            }
-            parentNode = parentNode.getParentNode();
-        }
-
-        if (offsetParent != null) {
-            style = webWindow.getComputedStyle(htmlElement, null);
-            final boolean thisElementHasTopMargin = style.getMarginTopValue() != 0;
-
-            style = webWindow.getComputedStyle(offsetParent, null);
-            if (!thisElementHasTopMargin) {
-                top += style.getMarginTopValue();
-            }
-            top += style.getPaddingTopValue();
-        }
-
-        return top;
+        return getDomNodeOrDie().getOffsetTop();
     }
 
     /**
@@ -1010,42 +938,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public int getOffsetLeft() {
-        if (this instanceof HTMLBodyElement) {
-            return 0;
-        }
-
-        int left = 0;
-
-        // Add the offset for this node.
-        final HtmlElement htmlElement = getDomNodeOrDie();
-        final WebWindow webWindow = getWindow().getWebWindow();
-        ComputedCssStyleDeclaration style = webWindow.getComputedStyle(htmlElement, null);
-        left += style.getLeft(true, false, false);
-
-        // If this node is absolutely positioned, we're done.
-        final String position = style.getPositionWithInheritance();
-        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
-            return left;
-        }
-
-        final HtmlElement offsetParent = getOffsetParentInternal(false);
-
-        DomNode parentNode = htmlElement.getParentNode();
-        while (parentNode != null && parentNode != offsetParent) {
-            if (parentNode instanceof HtmlElement) {
-                style = webWindow.getComputedStyle((HtmlElement) parentNode, null);
-                left += style.getLeft(true, true, true);
-            }
-            parentNode = parentNode.getParentNode();
-        }
-
-        if (offsetParent != null) {
-            style = webWindow.getComputedStyle(offsetParent, null);
-            left += style.getMarginLeftValue();
-            left += style.getPaddingLeftValue();
-        }
-
-        return left;
+        return getDomNodeOrDie().getOffsetLeft();
     }
 
     /**
@@ -1067,54 +960,11 @@ public class HTMLElement extends Element {
     }
 
     private HTMLElement getOffestParentElement(final boolean returnNullIfFixed) {
-        final HtmlElement html = getOffsetParentInternal(returnNullIfFixed);
+        final HtmlElement html = getDomNodeOrDie().getOffsetParentInternal(returnNullIfFixed);
         if (html == null) {
             return null;
         }
         return html.getScriptableObject();
-    }
-
-    private HtmlElement getOffsetParentInternal(final boolean returnNullIfFixed) {
-        DomNode currentElement = getDomNodeOrDie();
-
-        if (currentElement.getParentNode() == null) {
-            return null;
-        }
-
-        if (returnNullIfFixed
-                && FIXED.equals(getStyle().getStyleAttribute(
-                StyleAttributes.Definition.POSITION, true))) {
-            return null;
-        }
-
-        final WebWindow webWindow = getWindow().getWebWindow();
-        final ComputedCssStyleDeclaration style = webWindow.getComputedStyle((DomElement) currentElement, null);
-        final String position = style.getPositionWithInheritance();
-        final boolean staticPos = "static".equals(position);
-
-        while (currentElement != null) {
-
-            final DomNode parentNode = currentElement.getParentNode();
-            if (parentNode instanceof HtmlBody
-                || (staticPos && parentNode instanceof HtmlTableDataCell)
-                || (staticPos && parentNode instanceof HtmlTable)) {
-                return (HtmlElement) parentNode;
-            }
-
-            if (parentNode != null && parentNode instanceof HtmlElement) {
-                final HTMLElement parentElement = parentNode.getScriptableObject();
-                final ComputedCssStyleDeclaration parentStyle =
-                        webWindow.getComputedStyle(parentElement.getDomNodeOrDie(), null);
-                final String parentPosition = parentStyle.getPositionWithInheritance();
-                if (!"static".equals(parentPosition)) {
-                    return (HtmlElement) parentNode;
-                }
-            }
-
-            currentElement = currentElement.getParentNode();
-        }
-
-        return null;
     }
 
     /**

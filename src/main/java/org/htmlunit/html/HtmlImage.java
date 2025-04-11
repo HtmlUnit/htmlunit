@@ -47,7 +47,6 @@ import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
-import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.platform.Platform;
 import org.htmlunit.platform.geom.IntDimension2D;
 import org.htmlunit.platform.image.ImageData;
@@ -876,12 +875,11 @@ public class HtmlImage extends HtmlElement {
     public ScriptResult fireEvent(final Event event) {
         if (event instanceof MouseEvent) {
             final MouseEvent mouseEvent = (MouseEvent) event;
-            final HTMLElement scriptableObject = getScriptableObject();
             if (lastClickX_ >= 0) {
-                mouseEvent.setClientX(scriptableObject.getPosX() + lastClickX_);
+                mouseEvent.setClientX(getPosX() + lastClickX_);
             }
             if (lastClickY_ >= 0) {
-                mouseEvent.setClientY(scriptableObject.getPosX() + lastClickY_);
+                mouseEvent.setClientY(getPosX() + lastClickY_);
             }
         }
 
