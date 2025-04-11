@@ -340,6 +340,27 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     }
 
     /**
+     * Gets the {@code blockSize} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter
+    public String getBlockSize() {
+        if (styleDeclaration_ == null) {
+            return null; // prototype
+        }
+        return styleDeclaration_.getBlockSize();
+    }
+
+    /**
+     * Sets the {@code blockSize} style attribute.
+     * @param blockSize the new attribute
+     */
+    @JsxSetter
+    public void setBlockSize(final String blockSize) {
+        setStyleAttribute(Definition.BLOCK_SIZE.getAttributeName(), blockSize);
+    }
+
+    /**
      * Gets the {@code borderBottomColor} style attribute.
      * @return the style attribute
      */

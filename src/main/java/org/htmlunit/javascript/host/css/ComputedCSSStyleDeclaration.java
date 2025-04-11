@@ -142,6 +142,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getBlockSize() {
+        return getCssStyleDeclaration().getBlockSize();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getBorderBottomColor() {
         return getCssStyleDeclaration().getBorderBottomColor();
     }

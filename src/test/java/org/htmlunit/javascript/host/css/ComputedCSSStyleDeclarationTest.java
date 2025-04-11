@@ -1511,6 +1511,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "0", "0", "0", "0", "0"},
             FF_ESR = {"0", "0", "0", "0", "0", "17"})
+    @HtmlUnitNYI(FF_ESR = {"0", "0", "0", "0", "0", "0"})
     public void widthAndHeightScriptElement() throws Exception {
         final String content = DOCTYPE_HTML
             + "<html><head><script id='headScript'>\n"
@@ -1572,6 +1573,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "0"},
             FF_ESR = {"0", "17"})
+    @HtmlUnitNYI(FF_ESR = {"0", "0"})
     public void widthAndHeightChildDisplayNoneWidth() throws Exception {
         final String content = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1594,6 +1596,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "0"},
             FF_ESR = {"0", "17"})
+    @HtmlUnitNYI(FF_ESR = {"0", "0"})
     public void widthAndHeightChildDisplayNoneWidthLineBreak() throws Exception {
         //see https://github.com/HtmlUnit/htmlunit/pull/356
         final String content = DOCTYPE_HTML
@@ -3228,7 +3231,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0px", "0px", "auto", "auto"})
+    @Alerts({"0px", "0px", "18px", "18px", "auto", "auto"})
     public void blockSize() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -3236,21 +3239,27 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    var d = document.getElementById('myDiv');\n"
+            + "    var d = document.getElementById('myDivEmpty');\n"
             + "    var style = window.getComputedStyle(d, null);\n"
             + "    log(style['blockSize']);\n"
             + "    log(style.blockSize);\n"
 
+            + "    d = document.getElementById('myDivText');\n"
+            + "    style = window.getComputedStyle(d, null);\n"
+            + "    log(style['blockSize']);\n"
+            + "    log(style.blockSize);\n"
+
             + "    d = document.getElementById('myDivNone');\n"
-            + "    var style = window.getComputedStyle(d, null);\n"
+            + "    style = window.getComputedStyle(d, null);\n"
             + "    log(style['blockSize']);\n"
             + "    log(style.blockSize);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='myDiv'></div>\n"
-            + "  <div id='myDivNone' style='display: none'><br>\n"
+            + "  <div id='myDivEmpty'></div>\n"
+            + "  <div id='myDivText'>HtmlUnit</div>\n"
+            + "  <div id='myDivNone' style='display: none'>A<br>B</div>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

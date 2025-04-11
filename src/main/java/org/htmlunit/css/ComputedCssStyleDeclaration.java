@@ -569,6 +569,38 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String getBlockSize() {
+        if (NONE.equals(getDisplay())) {
+            return defaultIfEmpty(super.getBlockSize(), Definition.BLOCK_SIZE);
+        }
+
+        final DomElement domElem = getDomElement();
+        if (!domElem.isAttachedToPage()) {
+            return defaultIfEmpty(super.getBlockSize(), Definition.BLOCK_SIZE);
+        }
+
+        return CssPixelValueConverter.pixelString(domElem, new CssPixelValueConverter.CssValue(0, 0) {
+            @Override
+            public String get(final ComputedCssStyleDeclaration style) {
+                final String value = style.getStyleAttribute(Definition.HEIGHT, true);
+                if (StringUtils.isEmpty(value)) {
+                    final String content = domElem.getVisibleText();
+                    // do this only for small content
+                    // at least for empty div's this is more correct
+                    if (null == content) {
+                        return getDefaultValue() + "px";
+                    }
+                    return getEmptyHeight(domElem) + "px";
+                }
+                return value;
+            }
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getBorderBottomColor() {
         return defaultIfEmpty(super.getBorderBottomColor(), Definition.BORDER_BOTTOM_COLOR);
     }

@@ -438,6 +438,14 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
     }
 
     /**
+     * Gets the {@code blockSize} style attribute.
+     * @return the style attribute
+     */
+    public String getBlockSize() {
+        return getStyleAttribute(Definition.BLOCK_SIZE, true);
+    }
+
+    /**
      * Gets the {@code borderBottomColor} style attribute.
      * @return the style attribute
      */
