@@ -104,9 +104,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     public void stringProperties() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><body>\n"
-            + "  <div id='myDiv'><br>\n"
+            + "  <div id='myDiv'>HtmlUnit</div>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
-            + "  </div>\n"
             + "<script>\n"
             + "var e = document.getElementById('myDiv');\n"
             + "var array = [];\n"
@@ -140,9 +139,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     public void stringPropertiesDisplayNone() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><body>\n"
-            + "  <div id='myDiv' style='display: none'><br>\n"
+            + "  <div id='myDiv' style='display: none'>HtmlUnit</div>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
-            + "  </div>\n"
             + "<script>\n"
             + "var e = document.getElementById('myDiv');\n"
             + "var array = [];\n"
@@ -178,7 +176,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html><head><body>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
-            + "  </div>\n"
             + "<script>\n"
             + "var e = document.createElement('div');\n"
             + "var array = [];\n"
@@ -3221,6 +3218,39 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  log(decl.animationDuration);\n"
             + "</script>\n"
 
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0px", "0px", "auto", "auto"})
+    public void blockSize() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('myDiv');\n"
+            + "    var style = window.getComputedStyle(d, null);\n"
+            + "    log(style['blockSize']);\n"
+            + "    log(style.blockSize);\n"
+
+            + "    d = document.getElementById('myDivNone');\n"
+            + "    var style = window.getComputedStyle(d, null);\n"
+            + "    log(style['blockSize']);\n"
+            + "    log(style.blockSize);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "  <div id='myDivNone' style='display: none'><br>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

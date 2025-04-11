@@ -338,11 +338,10 @@ public final class StyleAttributes implements Serializable {
         BASELINE_SOURCE_("baseline-source", "baseline-source", ff("auto")),
 
         /** The style property {@code blockSize}. */
-        BLOCK_SIZE("blockSize", "block-size", chromeAndEdge("328px"),
-                ff("328.5px")),
+        BLOCK_SIZE("blockSize", "block-size", chromeAndEdgeAndFirefox("auto")),
 
         /** The style property {@code block-size}. */
-        BLOCK_SIZE_("block-size", "block-size", ff("328.5px")),
+        BLOCK_SIZE_("block-size", "block-size", ff("auto")),
 
         /** The style property {@code border}. */
         BORDER("border", "border", chromeAndEdge("0px none rgb(0, 0, 0)"), ff("0px rgb(0, 0, 0)")),
