@@ -328,8 +328,42 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"8", "8"})
+    @Alerts({"50", "50"})
     public void offsetTopAndLeft_AbsolutelyPositioned() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var e = document.getElementById('d');\n"
+            + "        log(e.offsetTop);\n"
+            + "        log(e.offsetLeft);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <div>\n"
+            + "      <div>\n"
+            + "        <div id='d' style='position:absolute; top:50px; left:50px;'>d</div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"8", "8"})
+    // so far we still support the quirks behaviour
+    @HtmlUnitNYI(CHROME = {"50", "50"},
+            EDGE = {"50", "50"},
+            FF = {"50", "50"},
+            FF_ESR = {"50", "50"})
+    public void offsetTopAndLeft_AbsolutelyPositionedValueWithoutUnit() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "  <head>\n"
@@ -561,6 +595,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "1240", "", "34", "34", "0", "0", "0", "0"},
             EDGE = {"", "1232", "", "34", "34", "0", "0", "0", "0"},
             FF_ESR = {"", "1244", "", "34", "34", "0", "0", "0", "0"})
+    @HtmlUnitNYI(EDGE = {"", "1240", "", "34", "34", "0", "0", "0", "0"},
+            FF_ESR = {"", "1240", "", "34", "34", "0", "0", "0", "0"})
     public void offsetWidthAndHeight() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
