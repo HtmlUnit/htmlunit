@@ -16743,7 +16743,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "writing-mode[GSCE],writingMode[GSCE],x[GSCE],y[GSCE],z-index[GSCE],zIndex[GSCE],"
                 + "zoom[GSCE]")
     @HtmlUnitNYI(CHROME = "backgroundAttachment[GSCE],backgroundColor[GSCE],backgroundImage[GSCE],"
-                + "backgroundPosition[GSCE],backgroundRepeat[GSCE],borderBottomColor[GSCE],borderBottomStyle[GSCE],"
+                + "backgroundPosition[GSCE],backgroundRepeat[GSCE],blockSize[GSCE],"
+                + "borderBottomColor[GSCE],borderBottomStyle[GSCE],"
                 + "borderBottomWidth[GSCE],borderLeftColor[GSCE],borderLeftStyle[GSCE],borderLeftWidth[GSCE],"
                 + "borderRightColor[GSCE],borderRightStyle[GSCE],borderRightWidth[GSCE],borderTop[GSCE],"
                 + "borderTopColor[GSCE],borderTopStyle[GSCE],borderTopWidth[GSCE],bottom[GSCE],color[GSCE],"
@@ -16758,7 +16759,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "textIndent[GSCE],top[GSCE],verticalAlign[GSCE],widows[GSCE],width[GSCE],wordSpacing[GSCE],"
                 + "zIndex[GSCE]",
             EDGE = "backgroundAttachment[GSCE],backgroundColor[GSCE],backgroundImage[GSCE],"
-                + "backgroundPosition[GSCE],backgroundRepeat[GSCE],borderBottomColor[GSCE],borderBottomStyle[GSCE],"
+                + "backgroundPosition[GSCE],backgroundRepeat[GSCE],blockSize[GSCE],"
+                + "borderBottomColor[GSCE],borderBottomStyle[GSCE],"
                 + "borderBottomWidth[GSCE],borderLeftColor[GSCE],borderLeftStyle[GSCE],borderLeftWidth[GSCE],"
                 + "borderRightColor[GSCE],borderRightStyle[GSCE],borderRightWidth[GSCE],borderTop[GSCE],"
                 + "borderTopColor[GSCE],borderTopStyle[GSCE],borderTopWidth[GSCE],bottom[GSCE],color[GSCE],"
@@ -17376,7 +17378,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "writing-mode[GSCE],writingMode[GSCE],x[GSCE],y[GSCE],z-index[GSCE],zIndex[GSCE],"
                 + "zoom[GSCE]")
     @HtmlUnitNYI(CHROME = "backgroundAttachment[GSCE],backgroundColor[GSCE],backgroundImage[GSCE],"
-                + "backgroundPosition[GSCE],backgroundRepeat[GSCE],borderBottomColor[GSCE],borderBottomStyle[GSCE],"
+                + "backgroundPosition[GSCE],backgroundRepeat[GSCE],blockSize[GSCE],"
+                + "borderBottomColor[GSCE],borderBottomStyle[GSCE],"
                 + "borderBottomWidth[GSCE],borderLeftColor[GSCE],borderLeftStyle[GSCE],borderLeftWidth[GSCE],"
                 + "borderRightColor[GSCE],borderRightStyle[GSCE],borderRightWidth[GSCE],borderTop[GSCE],"
                 + "borderTopColor[GSCE],borderTopStyle[GSCE],borderTopWidth[GSCE],bottom[GSCE],color[GSCE],"
@@ -17391,7 +17394,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "textIndent[GSCE],top[GSCE],verticalAlign[GSCE],widows[GSCE],width[GSCE],wordSpacing[GSCE],"
                 + "zIndex[GSCE]",
             EDGE = "backgroundAttachment[GSCE],backgroundColor[GSCE],backgroundImage[GSCE],"
-                + "backgroundPosition[GSCE],backgroundRepeat[GSCE],borderBottomColor[GSCE],borderBottomStyle[GSCE],"
+                + "backgroundPosition[GSCE],backgroundRepeat[GSCE],blockSize[GSCE],"
+                + "borderBottomColor[GSCE],borderBottomStyle[GSCE],"
                 + "borderBottomWidth[GSCE],borderLeftColor[GSCE],borderLeftStyle[GSCE],borderLeftWidth[GSCE],"
                 + "borderRightColor[GSCE],borderRightStyle[GSCE],borderRightWidth[GSCE],borderTop[GSCE],"
                 + "borderTopColor[GSCE],borderTopStyle[GSCE],borderTopWidth[GSCE],bottom[GSCE],color[GSCE],"
@@ -17406,7 +17410,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "textIndent[GSCE],top[GSCE],verticalAlign[GSCE],widows[GSCE],width[GSCE],wordSpacing[GSCE],"
                 + "zIndex[GSCE]",
             FF_ESR = "backgroundAttachment[GSCE],backgroundColor[GSCE],backgroundImage[GSCE],backgroundPosition[GSCE],"
-                + "backgroundRepeat[GSCE],borderBottomColor[GSCE],borderBottomStyle[GSCE],borderBottomWidth[GSCE],"
+                + "backgroundRepeat[GSCE],blockSize[GSCE],"
+                + "borderBottomColor[GSCE],borderBottomStyle[GSCE],borderBottomWidth[GSCE],"
                 + "borderLeftColor[GSCE],borderLeftStyle[GSCE],borderLeftWidth[GSCE],borderRightColor[GSCE],"
                 + "borderRightStyle[GSCE],borderRightWidth[GSCE],borderTop[GSCE],borderTopColor[GSCE],"
                 + "borderTopStyle[GSCE],borderTopWidth[GSCE],bottom[GSCE],color[GSCE],constructor(),cssFloat[GSCE],"
@@ -17419,7 +17424,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "right[GSCE],rubyAlign[GSCE],setProperty(),textIndent[GSCE],top[GSCE],verticalAlign[GSCE],"
                 + "width[GSCE],wordSpacing[GSCE],zIndex[GSCE]",
             FF = "backgroundAttachment[GSCE],backgroundColor[GSCE],backgroundImage[GSCE],backgroundPosition[GSCE],"
-                + "backgroundRepeat[GSCE],borderBottomColor[GSCE],borderBottomStyle[GSCE],borderBottomWidth[GSCE],"
+                + "backgroundRepeat[GSCE],blockSize[GSCE],"
+                + "borderBottomColor[GSCE],borderBottomStyle[GSCE],borderBottomWidth[GSCE],"
                 + "borderLeftColor[GSCE],borderLeftStyle[GSCE],borderLeftWidth[GSCE],borderRightColor[GSCE],"
                 + "borderRightStyle[GSCE],borderRightWidth[GSCE],borderTop[GSCE],borderTopColor[GSCE],"
                 + "borderTopStyle[GSCE],borderTopWidth[GSCE],bottom[GSCE],color[GSCE],constructor(),cssFloat[GSCE],"
