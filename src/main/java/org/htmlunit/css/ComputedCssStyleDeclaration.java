@@ -1969,6 +1969,13 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                         defaultHeight *= StringUtils.countMatches(content, '\n') + 1;
                     }
                 }
+
+                final String styleHeight = getStyleAttribute(Definition.HEIGHT, true);
+                if (styleHeight.endsWith("%")) {
+                    if (page instanceof HtmlPage && !((HtmlPage) page).isQuirksMode()) {
+                        return defaultHeight;
+                    }
+                }
             }
         }
 
