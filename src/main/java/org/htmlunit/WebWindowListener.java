@@ -25,6 +25,10 @@ package org.htmlunit;
  * process. This implies, the initial window is already open at the time you attach this listener.
  * Therefore you will receive no open event for this.
  * </p>
+ * <p>
+ * Caution: Frames and also iFrames are handled as separate windows. Therefore the listener is also
+ * called for each and every containing (i)Frame when e.g. closing a {@link TopLevelWindow}.
+ * </p>
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ronald Brill
