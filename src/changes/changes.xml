@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.12.0" date="April xx, 2025" description="Chrome/Edge 135, Firefox 137, Rhino RegExp, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Function.prototype[Symbol.hasInstance] fixed.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: regression in hex and unicode hex parsing or regexp fixed
+            </action>
             <action type="update" dev="rbri">
                 CSS blockSize support improved.
             </action>
