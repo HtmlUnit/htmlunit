@@ -2157,6 +2157,45 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Tests that JavaScript scrollIntoView() scrollEvent.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("container [object HTMLDivElement]")
+    public void scrollIntoViewTriggersOnScroll() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+
+            + "<body>\n"
+            + "  <div id='container' style='overflow-y: scroll; height: 100px;'>\n"
+            + "    <div style='height: 1000px;'>spacer</div>\n"
+            + "    <div id='target' style='background: red;'>Target</div>"
+            + "  </div>\n"
+
+            + "  <script>\n"
+            + "    document.addEventListener('scroll', function(e) { log('document ' + e.target) });\n"
+            + "    document.body.addEventListener('scroll', function(e) { log('body ' + e.target) });\n"
+
+            + "    var c = document.getElementById('container');\n"
+            + "    c.addEventListener('scroll', function(e) { log('container ' + e.target) });\n"
+
+            + "    var s = document.getElementById('target');"
+            + "    s.addEventListener('scroll', function(e) { log('target ' + e.target) });\n"
+
+            + "    s.scrollIntoView();\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Tests the offsetParent property.
      * @throws Exception if the test fails
      */

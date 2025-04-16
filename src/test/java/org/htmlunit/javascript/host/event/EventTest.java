@@ -1518,4 +1518,43 @@ public class EventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Tests that JavaScript scrollIntoView() scrollEvent.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Event]", "scroll", "false", "false", "false"},
+            FF = {"[object UIEvent]", "scroll", "false", "true", "false"},
+            FF_ESR = {"[object UIEvent]", "scroll", "false", "true", "false"})
+    @HtmlUnitNYI(FF = {"[object UIEvent]", "scroll", "false", "false", "false"},
+            FF_ESR = {"[object UIEvent]", "scroll", "false", "false", "false"})
+    public void scrollEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+
+            + "<body>\n"
+            + "  <div id='container' style='overflow-y: scroll; height: 100px;'>\n"
+            + "    <div style='height: 1000px;'>spacer</div>\n"
+            + "    <div id='target' style='background: red;'>Target</div>"
+            + "  </div>\n"
+
+            + "  <script>\n"
+            + "    var c = document.getElementById('container');\n"
+            + "    c.addEventListener('scroll', function(e) { dump(e); });\n"
+
+            + "    var s = document.getElementById('target');"
+            + "    s.scrollIntoView();\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

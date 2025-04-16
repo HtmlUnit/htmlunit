@@ -562,6 +562,7 @@ public class Event extends HtmlUnitScriptable {
         else if (
                 TYPE_FOCUS.equals(type)
                 || TYPE_BLUR.equals(type)
+                || TYPE_SCROLL.equals(type)
                 || TYPE_BEFOREPRINT.equals(type)
                 || TYPE_AFTERPRINT.equals(type)) {
             bubbles_ = false;

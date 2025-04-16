@@ -90,6 +90,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED,
 
+    /** Scroll events are of type 'UIEvent'. */
+    @BrowserFeature({FF, FF_ESR})
+    EVENT_SCROLL_UIEVENT,
+
     /** Supports event type 'TextEvent'. */
     @BrowserFeature({FF, FF_ESR})
     EVENT_TYPE_MUTATIONEVENT,
