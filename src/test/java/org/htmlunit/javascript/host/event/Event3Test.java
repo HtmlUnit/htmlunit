@@ -27,7 +27,6 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.Keyboard;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -157,41 +156,6 @@ public class Event3Test extends SimpleWebTestCase {
         page.getHtmlElementById("otherField").focus();
         final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Test for event bubbling in IE.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented // TODO: in IE no click event can be registered for the window
-    @Alerts({"span bubbling", "div", "div bubbling"})
-    public void ie_EventBubbling() throws Exception {
-        final String content = DOCTYPE_HTML
-            + "<html><head><title>foo</title>\n"
-            + "<script>\n"
-            + "function t(_s) {\n"
-            + "  return function() { alert(_s) };\n"
-            + "}\n"
-            + "function init() {\n"
-            + "  window.attachEvent('onclick', t('window bubbling'));\n"
-            + "  var oDiv = document.getElementById('theDiv');\n"
-            + "  oDiv.attachEvent('onclick', t('div bubbling'));\n"
-            + "  var oSpan = document.getElementById('theSpan');\n"
-            + "  oSpan.attachEvent('onclick', t('span bubbling'));\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='init()'>\n"
-            + "<div onclick=\"alert('div')\" id='theDiv'>\n"
-            + "<span id='theSpan'>blabla</span>\n"
-            + "</div>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        page.getHtmlElementById("theSpan").click();
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
