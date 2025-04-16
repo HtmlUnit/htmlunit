@@ -1246,7 +1246,9 @@ public class Element extends Node {
         }
         else {
             event = new Event(node, Event.TYPE_SCROLL);
+            event.setCancelable(false);
         }
+        event.setBubbles(false);
         node.fireEvent(event);
     }
 

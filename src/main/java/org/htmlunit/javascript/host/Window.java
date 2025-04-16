@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host;
 
+import static org.htmlunit.BrowserVersionFeatures.EVENT_SCROLL_UIEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -101,11 +102,13 @@ import org.htmlunit.javascript.host.css.StyleMedia;
 import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.Document;
+import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.dom.Selection;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.MouseEvent;
+import org.htmlunit.javascript.host.event.UIEvent;
 import org.htmlunit.javascript.host.html.DocumentProxy;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.html.HTMLDocument;
@@ -1156,9 +1159,20 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             body.setScrollLeft(body.getScrollLeft() + xOff);
             body.setScrollTop(body.getScrollTop() + yOff);
 
-            final Event event = new Event(body, Event.TYPE_SCROLL);
-            body.fireEvent(event);
+            fireScrollEvent(body);
         }
+    }
+
+    private void fireScrollEvent(final Node node) {
+        final Event event;
+        if (getBrowserVersion().hasFeature(EVENT_SCROLL_UIEVENT)) {
+            event = new UIEvent(node, Event.TYPE_SCROLL);
+        }
+        else {
+            event = new Event(node, Event.TYPE_SCROLL);
+            event.setCancelable(false);
+        }
+        node.fireEvent(event);
     }
 
     /**
@@ -1171,8 +1185,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         if (body != null) {
             body.setScrollTop(body.getScrollTop() + (19 * lines));
 
-            final Event event = new Event(body, Event.TYPE_SCROLL);
-            body.fireEvent(event);
+            fireScrollEvent(body);
         }
     }
 
@@ -1186,8 +1199,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         if (body != null) {
             body.setScrollTop(body.getScrollTop() + (getInnerHeight() * pages));
 
-            final Event event = new Event(body, Event.TYPE_SCROLL);
-            body.fireEvent(event);
+            fireScrollEvent(body);
         }
     }
 
@@ -1224,8 +1236,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             body.setScrollLeft(xOff);
             body.setScrollTop(yOff);
 
-            final Event event = new Event(body, Event.TYPE_SCROLL);
-            body.fireEvent(event);
+            fireScrollEvent(body);
         }
     }
 
