@@ -12,7 +12,7 @@
                 Upgrade Apache commons-io to 2.19.0.
             </action>
             <action type="update" dev="rbri">
-                scrollIntoView() now triggers a scroll event on the parent.
+                Element.scrollIntoView() now triggers scroll events on all parents.
             </action>
             <action type="update" dev="rbri">
                 For FF scroll events are of type UIEvent.

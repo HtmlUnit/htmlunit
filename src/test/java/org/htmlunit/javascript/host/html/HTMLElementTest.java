@@ -2162,6 +2162,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("container [object HTMLDivElement]")
+    @HtmlUnitNYI(CHROME = {"container [object HTMLDivElement]", "body [object HTMLBodyElement]"},
+            EDGE = {"container [object HTMLDivElement]", "body [object HTMLBodyElement]"},
+            FF = {"container [object HTMLDivElement]", "body [object HTMLBodyElement]"},
+            FF_ESR = {"container [object HTMLDivElement]", "body [object HTMLBodyElement]"})
     public void scrollIntoViewTriggersOnScroll() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -2193,6 +2197,128 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests that JavaScript scrollIntoView() scrollEvent.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"target-1 [object HTMLDivElement]", "container [object HTMLDivElement]"})
+    @HtmlUnitNYI(CHROME = {"target-1 [object HTMLDivElement]",
+                           "container [object HTMLDivElement]", "body [object HTMLBodyElement]"},
+            EDGE = {"target-1 [object HTMLDivElement]",
+                    "container [object HTMLDivElement]", "body [object HTMLBodyElement]"},
+            FF = {"target-1 [object HTMLDivElement]",
+                  "container [object HTMLDivElement]", "body [object HTMLBodyElement]"},
+            FF_ESR = {"target-1 [object HTMLDivElement]",
+                      "container [object HTMLDivElement]", "body [object HTMLBodyElement]"})
+    public void scrollIntoViewTriggersOnScrollBubbling() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+
+            + "<body>\n"
+            + "  <div id='container' style='overflow-y: scroll; height: 100px;'>\n"
+            + "    <div style='height: 1000px;'>spacer</div>\n"
+            + "    <div id='target-1' style='overflow-y: scroll; height: 100px;'>\n"
+            + "      <div style='height: 1000px;'>spacer</div>\n"
+            + "      <div id='target' style='background: red;'>Target</div>"
+            + "    </div>\n"
+            + "  </div>\n"
+
+            + "  <script>\n"
+            + "    document.addEventListener('scroll', function(e) { log('document ' + e.target) });\n"
+            + "    document.body.addEventListener('scroll', function(e) { log('body ' + e.target) });\n"
+
+            + "    var c = document.getElementById('container');\n"
+            + "    c.onscroll = (e) => { log('container ' + e.target); };\n"
+
+            + "    var t = document.getElementById('target-1');\n"
+            + "    t.onscroll = (e) => { log('target-1 ' + e.target); };\n"
+
+            + "    var s = document.getElementById('target');"
+            + "    s.onscroll = (e) => { log('target ' + e.target); };\n"
+
+            + "    s.scrollIntoView();\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests for issue #942.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"50", "100"})
+    public void scrollIntoViewIssue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+
+            + "<body>\n"
+            + "  <button id='myButton' onClick='tester();'>Press</button>\n"
+            + "  <div id='table-container' style='max-height: 400px; overflow-y: auto;'>\n"
+            + "    <table>\n"
+            + "      <thead><tr><th>ID</th><th>Name</th></tr></thead>\n"
+            + "      <tbody id='table-body'></tbody>\n"
+            + "    </table>\n"
+            + "  </div>\n"
+
+            + "  <script>\n"
+            + "    let counter = 1;\n"
+            + "    const tableBody = document.getElementById('table-body');\n"
+            + "    const container = document.getElementById('table-container');\n"
+
+            + "    function tester() {\n"
+            + "      const xPathLast = \"//tbody[@id='table-body']//tr[last()]\";\n"
+            + "      const last = document.evaluate(xPathLast, document, null, "
+                            + "XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;\n"
+            + "      last.scrollIntoView();\n"
+            + "    }\n"
+
+            + "    function loadMoreRows() {\n"
+            + "      for (let i = 0; i < 50; i++) {\n"
+            + "        const row = document.createElement('tr');\n"
+            + "        row.innerHTML = `<td>${counter}</td><td>Item ${counter}</td>`;\n"
+            + "        tableBody.appendChild(row);\n"
+            + "        counter++;\n"
+            + "      }\n"
+            + "    }\n"
+
+            + "    container.addEventListener('scroll', function() {\n"
+            + "      if (container.scrollTop + container.clientHeight >= container.scrollHeight) {\n"
+            + "        loadMoreRows();\r\n"
+            + "      };\n"
+            + "    });\n"
+
+            + "    // Initial load\n"
+            + "    loadMoreRows();"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final By tableRows = By.xpath("//tbody[@id='table-body']//tr");
+        int rowCount = driver.findElements(tableRows).size();
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), rowCount);
+
+        driver.findElement(By.id("myButton")).click();
+
+        rowCount = driver.findElements(tableRows).size();
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), rowCount);
     }
 
     /**

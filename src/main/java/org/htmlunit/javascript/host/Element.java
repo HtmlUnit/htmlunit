@@ -1293,13 +1293,14 @@ public class Element extends Node {
      */
     @JsxFunction
     public void scrollIntoView() {
-        /* do nothing at the moment, only trigger the scroll event */
+        // do nothing at the moment, only trigger the scroll event
 
+        // we do not really handle scrollable elements (we are headless)
+        // we trigger the event for the whole parent tree (to inform all)
         Node parent = getParent();
         while (parent != null) {
             if (parent instanceof HTMLElement) {
                 fireScrollEvent(parent);
-                return;
             }
 
             parent = parent.getParent();
