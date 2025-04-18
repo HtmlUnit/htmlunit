@@ -1554,6 +1554,7 @@ public class EventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
