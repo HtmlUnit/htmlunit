@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.Page;
 import org.htmlunit.ScriptResult;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -125,6 +126,11 @@ public class EventTarget extends HtmlUnitScriptable {
             // Then add all our parents if we have any (pure JS object such as XMLHttpRequest
             // and MessagePort, etc. will not have any parents)
             for (DomNode parent = ourParentNode; parent != null; parent = parent.getParentNode()) {
+                // scroll does not bubble into the document/window
+                if (Event.TYPE_SCROLL.equals(event.getType()) && parent instanceof Page) {
+                    break;
+                }
+
                 propagationPath.add(parent.getScriptableObject());
             }
 

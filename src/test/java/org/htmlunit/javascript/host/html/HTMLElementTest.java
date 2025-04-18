@@ -2157,7 +2157,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests that JavaScript scrollIntoView() scrollEvent.
      * @throws Exception if the test fails
      */
     @Test
@@ -2200,7 +2199,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests that JavaScript scrollIntoView() scrollEvent.
      * @throws Exception if the test fails
      */
     @Test
@@ -2253,7 +2251,37 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests for issue #942.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("window [object HTMLDocument]")
+    public void scrollIntoViewTriggersWindowOnScroll() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+
+            + "<body>\n"
+            + "  <div style='height: 10000px;'>spacer</div>\n"
+            + "  <div id='target' style='background: red;'>Target</div>"
+
+            + "  <script>\n"
+            + "    window.addEventListener('scroll', function(e) { log('window ' + e.target) });\n"
+
+            + "    var s = document.getElementById('target');"
+            + "    s.scrollIntoView();\n"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test for issue #942.
      * @throws Exception if the test fails
      */
     @Test

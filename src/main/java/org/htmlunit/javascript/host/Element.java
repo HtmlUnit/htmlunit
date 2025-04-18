@@ -1252,6 +1252,18 @@ public class Element extends Node {
         node.fireEvent(event);
     }
 
+    private void fireScrollEvent(final Window window) {
+        final Event event;
+        if (getBrowserVersion().hasFeature(EVENT_SCROLL_UIEVENT)) {
+            event = new UIEvent(window.getDocument(), Event.TYPE_SCROLL);
+        }
+        else {
+            event = new Event(window.getDocument(), Event.TYPE_SCROLL);
+            event.setCancelable(false);
+        }
+        window.fireEvent(event);
+    }
+
     /**
      * Scrolls to a particular set of coordinates inside a given element.
      * @param x the horizontal pixel value that you want to scroll to
@@ -1305,6 +1317,7 @@ public class Element extends Node {
 
             parent = parent.getParent();
         }
+        fireScrollEvent(getWindow());
     }
 
     /**

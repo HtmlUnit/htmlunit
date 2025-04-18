@@ -482,7 +482,8 @@ public class Window3Test extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "window.scrollBy(10, 20);\n"
-            + "</script></head><body>\n"
+            + "</script></head>\n"
+            + "<body>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
     }
@@ -491,7 +492,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"document", "body"})
+    @Alerts({"document [object HTMLDocument]", "body", "window [object HTMLDocument]"})
     public void scrollByEvents() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -499,7 +500,9 @@ public class Window3Test extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
-            + "    document.addEventListener('scroll', function(e) { log(\"document\") });\n"
+            + "    window.addEventListener('scroll', function(e) { log(\"window \" + e.target) });\n"
+            + "    document.addEventListener('scroll', function(e) { log(\"document \" + e.target) });\n"
+
             + "    window.scrollBy(10, 20);\n"
             + "  }\n"
             + "</script>\n"
@@ -575,7 +578,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"document", "body"})
+    @Alerts({"document[object HTMLDocument]", "body", "document[object HTMLDocument]"})
     public void scrollToEvents() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -583,7 +586,8 @@ public class Window3Test extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
-            + "    document.addEventListener('scroll', function(e) { log(\"document\") });\n"
+            + "    window.addEventListener('scroll', function(e) { log(\"document\" + e.target) });\n"
+            + "    document.addEventListener('scroll', function(e) { log(\"document\" + e.target) });\n"
             + "    window.scrollTo(10, 20);\n"
             + "  }\n"
             + "</script>\n"

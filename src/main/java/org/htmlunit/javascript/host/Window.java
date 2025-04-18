@@ -1161,6 +1161,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
             fireScrollEvent(body);
         }
+
+        fireScrollEvent(document_);
     }
 
     private void fireScrollEvent(final Node node) {
@@ -1187,6 +1189,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
             fireScrollEvent(body);
         }
+
+        fireScrollEvent(document_);
     }
 
     /**
@@ -1201,6 +1205,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
             fireScrollEvent(body);
         }
+
+        fireScrollEvent(document_);
     }
 
     /**
@@ -1238,6 +1244,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
             fireScrollEvent(body);
         }
+
+        fireScrollEvent(document_);
     }
 
     /**
