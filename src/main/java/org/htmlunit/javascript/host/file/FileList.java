@@ -59,8 +59,8 @@ public class FileList extends HtmlUnitScriptable {
         super();
         files_ = new ArrayList<>();
 
-        for (int i = 0; i < array.length; i++) {
-            files_.add(new File(array[i].getAbsolutePath()));
+        for (final java.io.File f : array) {
+            files_.add(new File(f.getAbsolutePath()));
         }
     }
 

@@ -1173,7 +1173,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     private void fireRemoval(final DomNode exParent) {
         final SgmlPage page = getPage();
-        if (page != null && page instanceof HtmlPage) {
+        if (page instanceof HtmlPage) {
             // some actions executed on removal need an intact parent relationship (e.g. for the
             // DocumentPositionComparator) so we have to restore it temporarily
             parent_ = exParent;

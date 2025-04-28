@@ -29,22 +29,21 @@ public final class ArrayUtils {
     }
 
     /**
-     * @param s the string[] to check
+     * @param strings the string[] to check
      * @param expected the string that we expect
      * @return true if at least one element of the array equalsIgnoreCase to the expected string
      */
-    public static boolean containsIgnoreCase(final String[] s, final String expected) {
+    public static boolean containsIgnoreCase(final String[] strings, final String expected) {
         if (expected == null) {
             throw new IllegalArgumentException("Expected string can't be null");
         }
 
-        if (s == null) {
+        if (strings == null) {
             return false;
         }
 
-        for (int i = 0; i < s.length; i++) {
-            final String string = s[i];
-            if (expected.equalsIgnoreCase(string)) {
+        for (final String s : strings) {
+            if (expected.equalsIgnoreCase(s)) {
                 return true;
             }
         }

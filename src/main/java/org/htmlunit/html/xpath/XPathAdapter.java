@@ -45,14 +45,6 @@ public class XPathAdapter {
     }
 
     private final Expression mainExp_;
-    private FunctionTable funcTable_;
-
-    /**
-     * Initiates the function table.
-     */
-    private void initFunctionTable() {
-        funcTable_ = new FunctionTable();
-    }
 
     /**
      * Constructor.
@@ -64,11 +56,9 @@ public class XPathAdapter {
     public XPathAdapter(final String exprString, final PrefixResolver prefixResolver, final boolean caseSensitive)
                 throws TransformerException {
 
-        initFunctionTable();
-
         final ErrorListener errorHandler = new DefaultErrorHandler();
         final XPathParser parser = new XPathParser(errorHandler);
-        final Compiler compiler = new Compiler(errorHandler, funcTable_);
+        final Compiler compiler = new Compiler(errorHandler, new FunctionTable());
 
         final String expression = preProcessXPath(exprString, caseSensitive);
         parser.initXPath(compiler, expression, prefixResolver);

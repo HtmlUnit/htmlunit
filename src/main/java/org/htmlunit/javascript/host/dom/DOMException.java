@@ -140,7 +140,7 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxConstant
     public static final int DATA_CLONE_ERR = 25;
 
-    private static final List<String> COMMON_ERROR_NAMES = Arrays.asList(new String[] {
+    private static final List<String> COMMON_ERROR_NAMES = Arrays.asList(
         "IndexSizeError",
         null,
         "HierarchyRequestError",
@@ -165,7 +165,7 @@ public class DOMException extends HtmlUnitScriptable {
         "QuotaExceededError",
         "TimeoutError",
         "InvalidNodeTypeError",
-        "DataCloneError"});
+        "DataCloneError");
 
     private int code_;
     private String name_;

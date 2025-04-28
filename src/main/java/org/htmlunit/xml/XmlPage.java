@@ -127,7 +127,8 @@ public class XmlPage extends SgmlPage {
                     LOG.warn("Failed parsing XML document '" + webResponse.getWebRequest().getUrl() + "'", e);
                 }
                 if (!ignoreSAXException) {
-                    throw new IOException(e.getMessage());
+                    throw new IOException(
+                            "Failed parsing XML document '" + webResponse.getWebRequest().getUrl() + "'", e);
                 }
             }
         }

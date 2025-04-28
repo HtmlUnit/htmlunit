@@ -475,7 +475,7 @@ public final class EncodingSniffer {
                 int start = declaration.indexOf("encoding");
                 if (start != -1) {
                     start += 8;
-                    char delimiter;
+                    final char delimiter;
                 outer:
                     while (true) {
                         switch (declaration.charAt(start)) {
