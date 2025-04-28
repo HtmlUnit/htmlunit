@@ -308,8 +308,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
 
     /**
      * Regression test for bug #693 with clearInterval.
-     * @see <a href="http://sourceforge.net/p/htmlunit/bugs/693/">
-     * bug details</a>
+     * @see <a href="http://sourceforge.net/p/htmlunit/bugs/693/">bug details</a>
      * @throws Exception if the test fails
      */
     @Test
@@ -319,8 +318,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
 
     /**
      * Regression test for bug #2093370 with clearTimeout.
-     * @see <a href="http://sourceforge.net/p/htmlunit/bugs/693/">
-     * bug details</a>
+     * @see <a href="http://sourceforge.net/p/htmlunit/bugs/693/">bug details</a>
      * @throws Exception if the test fails
      */
     @Test

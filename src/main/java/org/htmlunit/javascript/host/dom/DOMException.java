@@ -31,7 +31,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * Exception for DOM manipulations.
  *
  * @see <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-17189187">
- * DOM-Level-2-Core</a>
+ *     DOM-Level-2-Core</a>
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ahmed Ashour

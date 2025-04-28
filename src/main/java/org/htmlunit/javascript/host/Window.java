@@ -484,7 +484,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * and does not contain an other page than the one that originated the setTimeout.
      *
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout">
-     * MDN web docs</a>
+     *     MDN web docs</a>
      *
      * @param context the JavaScript context
      * @param scope the scope
@@ -503,7 +503,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed.
      *
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval">
-     * MDN web docs</a>
+     *     MDN web docs</a>
      * @param context the JavaScript context
      * @param scope the scope
      * @param thisObj the scriptable
@@ -1676,7 +1676,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Prints the current page. The current implementation uses the {@link PrintHandler}
      * defined for the {@link WebClient} to process the window.
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref85.html">
-     * Mozilla documentation</a>
+     *     Mozilla documentation</a>
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536672.aspx">MSDN documentation</a>
      */
     @JsxFunction

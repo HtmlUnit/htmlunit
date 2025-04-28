@@ -240,7 +240,7 @@ public class WebResponse implements Serializable {
      * @return {@code true} if the charset of the previous call to {@link #getContentCharset()} was
      *         "tentative".
      * @see <a href="https://html.spec.whatwg.org/multipage/parsing.html#concept-encoding-confidence">
-     * https://html.spec.whatwg.org/multipage/parsing.html#concept-encoding-confidence</a>
+     *     https://html.spec.whatwg.org/multipage/parsing.html#concept-encoding-confidence</a>
      */
     public boolean wasContentCharsetTentative() {
         return wasContentCharsetTentative_;

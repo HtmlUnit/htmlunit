@@ -224,7 +224,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION">
-     * initial value if value attribute is not set</a>
+     *     initial value if value attribute is not set</a>
      * @return the value of the attribute {@code value}
      */
     public final String getValueAttribute() {

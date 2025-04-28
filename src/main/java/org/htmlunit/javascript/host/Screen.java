@@ -38,7 +38,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * @author cd alexndr
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535868.aspx">
- * MSDN documentation</a>
+ *     MSDN documentation</a>
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>
  */
 @JsxClass

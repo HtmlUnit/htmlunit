@@ -85,7 +85,7 @@ import org.htmlunit.util.UrlUtils;
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535862.aspx">MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
- * W3C DOM Level 1</a>
+ *     W3C DOM Level 1</a>
  */
 @JsxClass
 public class HTMLDocument extends Document {

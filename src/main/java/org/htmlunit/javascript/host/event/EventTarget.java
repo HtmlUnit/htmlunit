@@ -284,7 +284,7 @@ public class EventTarget extends HtmlUnitScriptable {
      * @param listener the event listener
      * @param useCapture If {@code true}, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
-     * documentation</a>
+     *     documentation</a>
      */
     @JsxFunction
     public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {

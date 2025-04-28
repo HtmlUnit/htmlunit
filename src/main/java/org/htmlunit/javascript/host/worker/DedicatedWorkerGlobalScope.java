@@ -393,7 +393,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
      * and does not contain another page than the one that originated the setTimeout.
      *
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout">
-     * MDN web docs</a>
+     *     MDN web docs</a>
      *
      * @param context the JavaScript context
      * @param scope the scope
@@ -413,7 +413,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
      * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed.
      *
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval">
-     * MDN web docs</a>
+     *     MDN web docs</a>
      * @param context the JavaScript context
      * @param scope the scope
      * @param thisObj the scriptable

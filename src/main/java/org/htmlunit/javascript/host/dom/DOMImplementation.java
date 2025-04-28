@@ -42,7 +42,7 @@ import org.htmlunit.xml.XmlPage;
  * @author Adam Afeltowicz
  *
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-102161490">
- * W3C Dom Level 1</a>
+ *     W3C Dom Level 1</a>
  */
 @JsxClass
 public class DOMImplementation extends HtmlUnitScriptable {
@@ -229,7 +229,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
     /**
      * Creates an {@link HTMLDocument}.
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMImplementation/createHTMLDocument">
-     *   createHTMLDocument (MDN)</a>
+     *     createHTMLDocument (MDN)</a>
      *
      * @param titleObj the document title
      * @return the newly created {@link HTMLDocument}

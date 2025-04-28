@@ -74,7 +74,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @return the index of the row within the enclosing thead, tbody or tfoot
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534621.aspx">MSDN Documentation</a>
      * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-79105901">
-     * DOM Level 1</a>
+     *     DOM Level 1</a>
      */
     @JsxGetter
     public int getSectionRowIndex() {

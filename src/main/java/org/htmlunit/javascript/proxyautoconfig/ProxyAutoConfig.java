@@ -31,8 +31,8 @@ import org.htmlunit.util.SubnetUtils;
  * Provides an implementation of Proxy Auto-Config (PAC).
  *
  * @see <a href=
- * "https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file">
- * Proxy Auto-Configuration (PAC) file</a>
+ *     "https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file">
+ *     Proxy Auto-Configuration (PAC) file</a>
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

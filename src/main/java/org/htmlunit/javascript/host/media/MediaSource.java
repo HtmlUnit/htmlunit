@@ -39,7 +39,7 @@ public class MediaSource extends EventTarget {
 
     /**
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaSource/isTypeSupported">
-     * MDN MediaSource#isTypeSupported </a>
+     *     MDN MediaSource#isTypeSupported </a>
      *
      * @param mimeType the mimeType to check
      * @return indicating if the given MIME type is supported by the

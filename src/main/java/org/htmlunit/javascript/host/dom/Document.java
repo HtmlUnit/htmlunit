@@ -790,7 +790,7 @@ public class Document extends Node {
      * Returns the value of the JavaScript property {@code anchors}.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537435.aspx">MSDN documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_doc_ref4.html#1024543">
-     * Gecko DOM reference</a>
+     *     Gecko DOM reference</a>
      * @return the value of this property
      */
     @JsxGetter
@@ -823,9 +823,9 @@ public class Document extends Node {
     /**
      * Returns the value of the JavaScript property {@code applets}.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537436.aspx">
-     * MSDN documentation</a>
+     *     MSDN documentation</a>
      * @see <a href="https://developer.mozilla.org/En/DOM:document.applets">
-     * Gecko DOM reference</a>
+     *     Gecko DOM reference</a>
      * @return the value of this property
      */
     @JsxGetter
@@ -1303,7 +1303,7 @@ public class Document extends Node {
      * cannot be identified by a domain name.
      * @return the domain name of the server that served the document
      * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147">
-     * W3C documentation</a>
+     *     W3C documentation</a>
      */
     @JsxGetter
     public String getDomain() {

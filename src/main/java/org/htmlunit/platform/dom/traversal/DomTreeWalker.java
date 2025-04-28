@@ -24,7 +24,7 @@ import org.w3c.dom.traversal.TreeWalker;
  * An implementation of {@link TreeWalker} backed by {@link org.htmlunit.html.HtmlDomTreeWalker}.
  *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">
- * DOM-Level-2-Traversal-Range</a>
+ *     DOM-Level-2-Traversal-Range</a>
  * @author Ronald Brill
  */
 public class DomTreeWalker implements TreeWalker {

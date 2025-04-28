@@ -29,7 +29,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * A Notification.
  *
  * @see <a href="https://developer.mozilla.org/en/docs/Web/API/notification">
- * MDN - Notification</a>
+ *     MDN - Notification</a>
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Ahmed Ashour
