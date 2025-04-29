@@ -283,7 +283,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
         private final DateTimeFormatter formatter_;
         private Chronology chronology_;
-        private String locale_;
+        private final String locale_;
 
         DateTimeFormatHelper(final String locale, final BrowserVersion browserVersion, final String pattern) {
             locale_ = locale;

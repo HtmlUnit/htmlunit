@@ -2553,6 +2553,7 @@ public class WebClient implements Serializable, AutoCloseable {
         scriptEngine_ = new JavaScriptEngine(this);
         jobManagers_ = Collections.synchronizedList(new ArrayList<>());
         loadQueue_ = new ArrayList<>();
+        css3ParserPool_ = new CSS3ParserPool();
     }
 
     private static class LoadJob {
@@ -2948,7 +2949,7 @@ public class WebClient implements Serializable, AutoCloseable {
          * Our pool. We only hold data when it is available. In addition, synchronization against
          * this deque is cheap.
          */
-        private ConcurrentLinkedDeque<PooledCSS3Parser> parsers_ = new ConcurrentLinkedDeque<>();
+        private final ConcurrentLinkedDeque<PooledCSS3Parser> parsers_ = new ConcurrentLinkedDeque<>();
 
         /**
          * Fetch a new or recycled CSS3parser. Make sure you use the try-with-resource concept

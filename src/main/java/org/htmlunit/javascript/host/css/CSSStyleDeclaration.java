@@ -1957,8 +1957,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             return;
         }
 
-        final double doubleValue;
-        String unit = "px";
         if (value instanceof Number) {
             return;
         }
@@ -1985,7 +1983,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             return;
         }
 
-        if (percent && valueString.endsWith("%")) {
+        String unit = "px";
+                if (percent && valueString.endsWith("%")) {
             unit = valueString.substring(valueString.length() - 1);
             valueString = valueString.substring(0, valueString.length() - 1);
         }
@@ -2017,7 +2016,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             // we have a unit but surrounding blanks
             return;
         }
-        doubleValue = JavaScriptEngine.toNumber(valueString);
+        final double doubleValue = JavaScriptEngine.toNumber(valueString);
 
         try {
             if (Double.isNaN(doubleValue) || Double.isInfinite(doubleValue)) {

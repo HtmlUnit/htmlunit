@@ -143,15 +143,7 @@ public class DomNodeIterator implements NodeIterator {
             }
             else {
                 if (beforeNode) {
-                    final DomNode left = getSibling(node, true);
-                    if (left == null) {
-                        final Node parent = node.getParentNode();
-                        if (parent == null) {
-                            node = null;
-                        }
-                    }
-
-                    DomNode follow = left;
+                    DomNode follow = getSibling(node, true);
                     if (follow != null) {
                         while (follow.hasChildNodes()) {
                             final DomNode toFollow = getChild(follow, false);

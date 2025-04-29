@@ -203,7 +203,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
     private Object controllers_;
     private Object opener_;
-    private Object top_ = NOT_FOUND; // top can be set from JS to any value!
+    private final Object top_ = NOT_FOUND; // top can be set from JS to any value!
     private Crypto crypto_;
     private Scriptable performance_;
 
