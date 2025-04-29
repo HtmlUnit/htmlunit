@@ -32,9 +32,9 @@ import static org.htmlunit.css.BrowserConfiguration.ffNotIterable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.htmlunit.BrowserVersion;
 
@@ -48,7 +48,7 @@ import org.htmlunit.BrowserVersion;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class StyleAttributes implements Serializable {
-    private static final Map<String, Definition> STYLES = new HashMap<>();
+    private static final Map<String, Definition> STYLES = new ConcurrentHashMap<>();
 
     static {
         for (final Definition definition : Definition.values()) {

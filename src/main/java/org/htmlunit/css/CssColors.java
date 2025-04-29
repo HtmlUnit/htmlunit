@@ -14,9 +14,9 @@
  */
 package org.htmlunit.css;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Helper to work with colors.
@@ -25,7 +25,7 @@ import java.util.Map;
  */
 public final class CssColors {
 
-    private static final Map<String, String> CSS_COLORS = new HashMap<>();
+    private static final Map<String, String> CSS_COLORS = new ConcurrentHashMap<>();
 
     static {
         CSS_COLORS.put("aqua", "rgb(0, 255, 255)");

@@ -21,9 +21,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.htmlunit.ObjectInstantiationException;
 import org.htmlunit.Page;
@@ -73,7 +73,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
      */
     public static final SvgElementFactory SVG_FACTORY = new SvgElementFactory();
 
-    private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new HashMap<>();
+    private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new ConcurrentHashMap<>();
 
     static {
         final DefaultElementFactory defaultElementFactory = new DefaultElementFactory();
