@@ -29,6 +29,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlNoScriptTest extends WebDriverTestCase {
@@ -150,4 +151,40 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
         assertFalse(webDriver.getCurrentUrl().contains("__webpage_no_js__"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Has Script")
+    public void jsDetection() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<noscript>\n"
+            + "  <meta http-equiv='refresh' content='0;url=" + URL_SECOND + "'>\n"
+            + "</noscript>\n"
+            + "<title>start</title>\n"
+            + "</head>\n"
+            + "<body onload='document.form.submit()'>\n"
+            + "<form name='form' action='" + URL_THIRD + "'></form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String htmlNoScript = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head><title>No Script\u00A7</title></head>\n"
+            + "<body></body>\n"
+            + "</html>";
+        getMockWebConnection().setResponse(URL_SECOND, htmlNoScript);
+
+        final String htmlHasScript = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head><title>Has Script\u00A7</title></head>\n"
+                + "<body></body>\n"
+                + "</html>";
+        getMockWebConnection().setResponse(URL_THIRD, htmlHasScript);
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }
