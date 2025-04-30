@@ -37,6 +37,7 @@ import org.apache.commons.io.FileUtils;
  * @author Madis Pärn
  * @author Ronald Brill
  */
+@SuppressWarnings("PMD.TooManyFields")
 public class WebClientOptions implements Serializable {
 
     /** 1920. */

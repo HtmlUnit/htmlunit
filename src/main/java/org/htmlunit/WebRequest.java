@@ -54,6 +54,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Lai Quang Duong
  * @author Kristof Neirynck
  */
+@SuppressWarnings("PMD.TooManyFields")
 public class WebRequest implements Serializable {
 
     /**

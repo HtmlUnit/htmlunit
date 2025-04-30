@@ -151,6 +151,7 @@ import org.htmlunit.webstart.WebStartHandler;
  * @author René Schwietzke
  * @author Sven Strickroth
  */
+@SuppressWarnings("PMD.TooManyFields")
 public class WebClient implements Serializable, AutoCloseable {
 
     /** Logging support. */

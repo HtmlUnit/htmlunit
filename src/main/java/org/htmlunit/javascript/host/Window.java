@@ -143,6 +143,7 @@ import org.htmlunit.xml.XmlPage;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
+@SuppressWarnings("PMD.TooManyFields")
 public class Window extends EventTarget implements WindowOrWorkerGlobalScope, AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(Window.class);
