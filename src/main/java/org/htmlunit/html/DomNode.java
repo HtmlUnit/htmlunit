@@ -2296,9 +2296,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * An unmodifiable empty {@link NamedNodeMap} implementation.
      */
     private static final class ReadOnlyEmptyNamedNodeMapImpl implements NamedNodeMap, Serializable {
-        private ReadOnlyEmptyNamedNodeMapImpl() {
-            super();
-        }
 
         /**
          * {@inheritDoc}
