@@ -20,8 +20,10 @@ import java.io.Serializable;
  * Implementations of this interface receive notifications of changes to the Character Data.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  * @see CharacterDataChangeEvent
  */
+@FunctionalInterface
 public interface CharacterDataChangeListener extends Serializable {
 
     /**

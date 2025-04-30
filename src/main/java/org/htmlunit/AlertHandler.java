@@ -23,6 +23,7 @@ import java.io.Serializable;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ronald Brill
  */
+@FunctionalInterface
 public interface AlertHandler extends Serializable {
 
     /**

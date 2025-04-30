@@ -20,7 +20,9 @@ package org.htmlunit;
  * that HtmlUnit can handle but that denote a badly written application.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
+@FunctionalInterface
 public interface IncorrectnessListener {
 
     /**

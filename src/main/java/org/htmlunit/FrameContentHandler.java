@@ -23,6 +23,7 @@ import org.htmlunit.html.BaseFrameElement;
  *
  * @author Ronald Brill
  */
+@FunctionalInterface
 public interface FrameContentHandler {
 
     /**

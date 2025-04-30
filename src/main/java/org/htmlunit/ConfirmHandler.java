@@ -21,7 +21,9 @@ import java.io.Serializable;
  * are triggered when the JavaScript function <code>window.confirm()</code> is invoked.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ronald Brill
  */
+@FunctionalInterface
 public interface ConfirmHandler extends Serializable {
 
     /**
