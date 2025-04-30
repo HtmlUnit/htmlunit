@@ -196,17 +196,17 @@ public abstract class HtmlElement extends DomElement {
             final String attributeValue, final boolean notifyAttributeChangeListeners,
             final boolean notifyMutationObservers) {
 
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
-        if (null == getHtmlPageOrNull()) {
+        if (null == htmlPage) {
             super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);
             return;
         }
 
         final String oldAttributeValue = getAttribute(qualifiedName);
-        final HtmlPage htmlPage = (HtmlPage) getPage();
         final boolean mappedElement = isAttachedToPage()
-                && htmlPage != null
                 && (DomElement.NAME_ATTRIBUTE.equals(qualifiedName) || DomElement.ID_ATTRIBUTE.equals(qualifiedName));
         if (mappedElement) {
             // cast is save here because isMappedElement checks for HtmlPage
@@ -292,12 +292,19 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public Attr setAttributeNode(final Attr attribute) {
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+
+        // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
+        if (null == htmlPage) {
+            return super.setAttributeNode(attribute);
+        }
+
         final String qualifiedName = attribute.getName();
         final String oldAttributeValue = getAttribute(qualifiedName);
-        final HtmlPage htmlPage = (HtmlPage) getPage();
+
         final boolean mappedElement = isAttachedToPage()
-                && htmlPage != null
-                && (DomElement.NAME_ATTRIBUTE.equals(qualifiedName) || DomElement.ID_ATTRIBUTE.equals(qualifiedName));
+                && (DomElement.NAME_ATTRIBUTE.equals(qualifiedName)
+                        || DomElement.ID_ATTRIBUTE.equals(qualifiedName));
         if (mappedElement) {
             htmlPage.removeMappedElement(this, false, false);
         }
@@ -330,23 +337,27 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
-        final boolean mapped = htmlPage != null
-                && (DomElement.NAME_ATTRIBUTE.equals(attributeName) || DomElement.ID_ATTRIBUTE.equals(attributeName));
+
+        // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
+        if (null == htmlPage) {
+            super.removeAttribute(attributeName);
+            return;
+        }
+
+        final boolean mapped = DomElement.NAME_ATTRIBUTE.equals(attributeName) || DomElement.ID_ATTRIBUTE.equals(attributeName);
         if (mapped) {
             htmlPage.removeMappedElement(this, false, false);
         }
 
         super.removeAttribute(attributeName);
 
-        if (htmlPage != null) {
-            if (mapped) {
-                htmlPage.addMappedElement(this, false);
-            }
-
-            final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, value);
-            fireHtmlAttributeRemoved(event);
-            htmlPage.fireHtmlAttributeRemoved(event);
+        if (mapped) {
+            htmlPage.addMappedElement(this, false);
         }
+
+        final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, value);
+        fireHtmlAttributeRemoved(event);
+        htmlPage.fireHtmlAttributeRemoved(event);
     }
 
     /**
