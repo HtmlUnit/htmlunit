@@ -61,7 +61,7 @@ import org.htmlunit.util.MimeType;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@SuppressWarnings({"PMD.AvoidDuplicateLiterals", "PMD.TooManyFields"})
 public final class BrowserVersion implements Serializable {
 
     /** Latest Firefox. */
