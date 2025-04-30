@@ -135,10 +135,13 @@ public class Storage extends HtmlUnitScriptable {
      */
     @JsxFunction
     public String key(final int index) {
-        int counter = 0;
-        for (final String key : store_.keySet()) {
-            if (counter++ == index) {
-                return key;
+        if (index >= 0) {
+            int counter = 0;
+            for (final String key : store_.keySet()) {
+                if (counter == index) {
+                    return key;
+                }
+                counter++;
             }
         }
         return null;

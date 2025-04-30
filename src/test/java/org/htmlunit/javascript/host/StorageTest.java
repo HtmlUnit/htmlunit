@@ -194,6 +194,34 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"true", "true", "null", "null"})
+    public void localStorageKey() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  if (window.localStorage) {\n"
+            + "    localStorage.clear();\n"
+
+            + "    localStorage.setItem('HtmlUnit', '0');\n"
+            + "    localStorage.setItem('HtmlUnit 1', '1');\n"
+            + "    localStorage.setItem('HtmlUnit 2', '2');\n"
+
+            + "    log(localStorage.key(0).startsWith('HtmlUnit'));\n"
+            + "    log(localStorage.key(1).startsWith('HtmlUnit'));\n"
+            + "    log(localStorage.key(3));\n"
+            + "    log(localStorage.key(-1));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"0", "2", "there", "world", "1", "0"})
     public void sessionStorage() throws Exception {
         final String html = DOCTYPE_HTML
