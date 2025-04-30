@@ -1227,7 +1227,7 @@ public class WebClientTest extends SimpleWebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final HtmlPage pageInFrame = (HtmlPage) ((WebWindow) page.getFrames().get(0)).getEnclosedPage();
+        final HtmlPage pageInFrame = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
         pageInFrame.getAnchors().get(0).click();
 
         final String[] expectedAlerts = {"null", "null"};

@@ -20,7 +20,6 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.FrameWindow;
-import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
@@ -130,7 +129,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
         assertEquals("frame content", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).asNormalizedText());
 
         // replace frame tag with javascript
-        ((HtmlElement) page.getElementById("clickId")).click();
+        page.getElementById("clickId").click();
 
         assertEquals("new content", page.getElementById("content").asNormalizedText());
 

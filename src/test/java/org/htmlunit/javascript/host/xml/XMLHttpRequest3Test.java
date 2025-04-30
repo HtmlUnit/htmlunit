@@ -42,7 +42,6 @@ import org.htmlunit.html.DomChangeListener;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.html.HtmlSubmitInput;
 import org.htmlunit.javascript.host.xml.XMLHttpRequestTest.StreamingServlet;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
@@ -405,7 +404,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         while (STATE_ < 1) {
             Thread.sleep(42);
         }
-        ((HtmlSubmitInput) elem).click();
+        elem.click();
 
         client.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME.toMillis());
         assertEquals(COLLECTED_HEADERS.toString(), 2, COLLECTED_HEADERS.size());
