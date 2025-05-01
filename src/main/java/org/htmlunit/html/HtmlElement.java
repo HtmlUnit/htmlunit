@@ -344,7 +344,7 @@ public abstract class HtmlElement extends DomElement {
             return;
         }
 
-        final boolean mapped = DomElement.NAME_ATTRIBUTE.equals(attributeName) 
+        final boolean mapped = DomElement.NAME_ATTRIBUTE.equals(attributeName)
                                 || DomElement.ID_ATTRIBUTE.equals(attributeName);
         if (mapped) {
             htmlPage.removeMappedElement(this, false, false);
