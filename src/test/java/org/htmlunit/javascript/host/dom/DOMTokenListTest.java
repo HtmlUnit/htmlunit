@@ -214,6 +214,90 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"4", "a", "b", "c", "d", "4"})
+    public void forEachAdd() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var list = document.getElementById('d1').classList;\n"
+                + "  log(list.length);\n"
+
+                + "  list.forEach((i) => {\n"
+                + "    log(i);\n"
+                + "    if (list.lenght < 7) { list.add('new ' + i); }\n"
+                + "  });\n"
+
+                + "  log(list.length);\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "  <div id='d1' class='a b c d'></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"4", "a", "c", "d", "3"})
+    public void forEachRemove() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var list = document.getElementById('d1').classList;\n"
+                + "  log(list.length);\n"
+
+                + "  list.forEach((i) => {\n"
+                + "    log(i);\n"
+                + "    list.remove('a');\n"
+                + "  });\n"
+
+                + "  log(list.length);\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "  <div id='d1' class='a b c d'></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"4", "a", "1"})
+    public void forEachRemove2() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var list = document.getElementById('d1').classList;\n"
+                + "  log(list.length);\n"
+
+                + "  list.forEach((i) => {\n"
+                + "    log(i);\n"
+                + "    list.remove('a');\n"
+                + "    list.remove('c');\n"
+                + "    list.remove('d');\n"
+                + "  });\n"
+
+                + "  log(list.length);\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "  <div id='d1' class='a b c d'></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"a", "b", "c"})
     public void forEachDuplicates() throws Exception {
         final String html = DOCTYPE_HTML

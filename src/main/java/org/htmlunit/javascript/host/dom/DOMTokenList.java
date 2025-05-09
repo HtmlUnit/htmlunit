@@ -421,10 +421,16 @@ public class DOMTokenList extends HtmlUnitScriptable {
         final ContextAction<Object> contextAction = cx -> {
             final Function function = (Function) callback;
             final Scriptable scope = getParentScope();
-            final List<String> parts = split(value);
+
+            List<String> parts = split(value);
             final int size = parts.size();
-            for (int i = 0; i < size; i++) {
+            int i = 0;
+            while (i < size && i < parts.size()) {
                 function.call(cx, scope, this, new Object[] {parts.get(i), i, this});
+
+                // refresh
+                parts = split(getValue());
+                i++;
             }
             return null;
         };
