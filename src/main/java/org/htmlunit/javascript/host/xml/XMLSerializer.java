@@ -169,7 +169,8 @@ public class XMLSerializer extends HtmlUnitScriptable {
         }
 
         final NamedNodeMap attributesMap = node.getAttributes();
-        for (int i = 0; i < attributesMap.getLength(); i++) {
+        final int lenght = attributesMap.getLength();
+        for (int i = 0; i < lenght; i++) {
             final DomAttr attrib = (DomAttr) attributesMap.item(i);
             builder.append(' ').append(attrib.getQualifiedName())
                    .append("=\"").append(attrib.getValue()).append('"');

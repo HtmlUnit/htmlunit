@@ -160,7 +160,8 @@ public class NodeList extends AbstractList implements Callable {
         final ContextAction<Object> contextAction = cx -> {
             final Function function = (Function) callback;
             final Scriptable scope = getParentScope();
-            for (int i = 0; i < nodes.size(); i++) {
+            final int size = nodes.size();
+            for (int i = 0; i < size; i++) {
                 function.call(cx, scope, this, new Object[] {nodes.get(i).getScriptableObject(), i, this});
             }
             return null;

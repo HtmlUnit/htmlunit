@@ -426,7 +426,8 @@ public class HttpWebConnection implements WebConnection {
                 final KeyDataPair pairWithFile = (KeyDataPair) pair;
                 if (pairWithFile.getData() == null && pairWithFile.getFile() != null) {
                     final String fileName = pairWithFile.getFile().getName();
-                    for (int i = 0; i < fileName.length(); i++) {
+                    final int length = fileName.length();
+                    for (int i = 0; i < length; i++) {
                         if (fileName.codePointAt(i) > 127) {
                             return charset;
                         }

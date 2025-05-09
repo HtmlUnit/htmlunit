@@ -112,7 +112,8 @@ public final class XPathHelper {
 
             if (result instanceof XNodeSet) {
                 final NodeList nodelist = result.nodelist();
-                for (int i = 0; i < nodelist.getLength(); i++) {
+                final int length = nodelist.getLength();
+                for (int i = 0; i < length; i++) {
                     list.add((T) nodelist.item(i));
                 }
             }

@@ -223,7 +223,8 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         final CharArrayBuffer buffer = new CharArrayBuffer(20 * cookies.size());
         buffer.append(SM.COOKIE);
         buffer.append(": ");
-        for (int i = 0; i < cookies.size(); i++) {
+        final int size = cookies.size();
+        for (int i = 0; i < size; i++) {
             final Cookie cookie = cookies.get(i);
             if (i > 0) {
                 buffer.append("; ");

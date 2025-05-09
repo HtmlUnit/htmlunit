@@ -91,9 +91,11 @@ public class HtmlTable extends HtmlElement {
                         return cell;
                     }
                 }
-                if (cell.getRowSpan() > 1 || cell.getColumnSpan() > 1) {
-                    for (int i = 0; i < cell.getRowSpan(); i++) {
-                        for (int j = 0; j < cell.getColumnSpan(); j++) {
+                final int rowSpan = cell.getRowSpan();
+                final int columnSpan = cell.getColumnSpan();
+                if (rowSpan > 1 || columnSpan > 1) {
+                    for (int i = 0; i < rowSpan; i++) {
+                        for (int j = 0; j < columnSpan; j++) {
                             occupied.add(new Position(row + i, col + j));
                         }
                     }

@@ -246,7 +246,8 @@ public class XSLTProcessor extends HtmlUnitScriptable {
         if (result instanceof org.w3c.dom.Node) {
             final SgmlPage parentPage = fragment.getPage();
             final NodeList children = ((org.w3c.dom.Node) result).getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
+            final int length = children.getLength();
+            for (int i = 0; i < length; i++) {
                 XmlUtils.appendChild(parentPage, fragment, children.item(i), true);
             }
         }

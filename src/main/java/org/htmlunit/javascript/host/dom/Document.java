@@ -624,7 +624,8 @@ public class Document extends Node {
                         "createElement: Provided string '" + tagNameString + "' contains an invalid character",
                         org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
             }
-            for (int i = 1; i < tagNameString.length(); i++) {
+            final int length = tagNameString.length();
+            for (int i = 1; i < length; i++) {
                 final int c = tagNameString.charAt(i);
                 if (!(Character.isLetterOrDigit(c)
                         || ':' == c

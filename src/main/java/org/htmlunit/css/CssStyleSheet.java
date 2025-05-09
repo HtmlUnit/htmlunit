@@ -1205,7 +1205,8 @@ public class CssStyleSheet implements Serializable {
             return true;
         }
 
-        for (int i = 0; i < mediaList.getLength(); i++) {
+        final int length = mediaList.getLength();
+        for (int i = 0; i < length; i++) {
             final MediaQuery mediaQuery = mediaList.mediaQuery(i);
             boolean isActive = isActive(mediaQuery, webWindow);
             if (mediaQuery.isNot()) {

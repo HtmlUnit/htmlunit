@@ -157,7 +157,8 @@ public class Blob extends HtmlUnitScriptable {
             }
 
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
-            for (long i = 0; i < fileBits.getLength(); i++) {
+            final long length = fileBits.getLength();
+            for (long i = 0; i < length; i++) {
                 final Object fileBit = fileBits.get(i);
                 if (fileBit instanceof NativeArrayBuffer) {
                     final byte[] bytes = ((NativeArrayBuffer) fileBit).getBuffer();

@@ -679,7 +679,8 @@ public abstract class HtmlElement extends DomElement {
             }
         }
 
-        for (int i = 0; i < keys.size(); i++) {
+        final int size = keys.size();
+        for (int i = 0; i < size; i++) {
             final Object[] entry = keys.get(i);
             if (entry.length == 1) {
                 type((char) entry[0], i == keys.size() - 1);
