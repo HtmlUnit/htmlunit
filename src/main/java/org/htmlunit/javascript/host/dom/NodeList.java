@@ -152,6 +152,10 @@ public class NodeList extends AbstractList implements Callable {
                     "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
 
+        if (getElements().size() == 0) {
+            return;
+        }
+
         final WebClient client = getWindow().getWebWindow().getWebClient();
         final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
 
