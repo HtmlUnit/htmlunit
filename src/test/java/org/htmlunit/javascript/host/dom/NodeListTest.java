@@ -283,6 +283,140 @@ public class NodeListTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4", "4",
+             "[object HTMLElement]/0", "3", "3",
+             "[object HTMLElement]/1", "2", "2",
+             "2", "2"})
+    public void forEachRemove() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nodeList = document.getElementById('myId').childNodes;\n"
+                + "    if (nodeList.forEach) {\n"
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+
+                + "      nodeList.forEach(myFunction);\n"
+
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+                + "    } else {\n"
+                + "      log('no forEach');\n"
+                + "    }\n"
+                + "  }\n"
+
+                + "  function myFunction(value, index, list, arg) {\n"
+                + "    log(value + '/' + index);\n"
+                + "    document.getElementById('myId').removeChild(value);\n"
+                + "    log(document.getElementById('myId').childNodes.length);\n"
+                + "    log(list.length);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <div id='myId'><strong>a</strong>b<b>d</b>e</div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4", "4",
+             "[object HTMLElement]/0", "5", "5",
+             "[object Text]/1", "6", "6",
+             "[object HTMLElement]/2", "7", "7",
+             "[object Text]/3", "8", "8",
+             "8", "8"})
+    public void forEachAppend() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nodeList = document.getElementById('myId').childNodes;\n"
+                + "    if (nodeList.forEach) {\n"
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+
+                + "      nodeList.forEach(myFunction);\n"
+
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+                + "    } else {\n"
+                + "      log('no forEach');\n"
+                + "    }\n"
+                + "  }\n"
+
+                + "  function myFunction(value, index, list, arg) {\n"
+                + "    log(value + '/' + index);\n"
+                + "    if (index < 4) {\n"
+                + "      document.getElementById('myId').appendChild(document.createElement('p'));\n"
+                + "    }\n"
+                + "    log(document.getElementById('myId').childNodes.length);\n"
+                + "    log(list.length);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <div id='myId'><strong>a</strong>b<b>d</b>e</div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4", "4",
+             "[object HTMLElement]/0", "5", "5",
+             "[object HTMLElement]/1", "6", "6",
+             "[object HTMLElement]/2", "7", "7",
+             "[object HTMLElement]/3", "8", "8",
+             "8", "8"})
+    public void forEachInsert() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nodeList = document.getElementById('myId').childNodes;\n"
+                + "    if (nodeList.forEach) {\n"
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+
+                + "      nodeList.forEach(myFunction);\n"
+
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+                + "    } else {\n"
+                + "      log('no forEach');\n"
+                + "    }\n"
+                + "  }\n"
+
+                + "  function myFunction(value, index, list, arg) {\n"
+                + "    log(value + '/' + index);\n"
+                + "    if (index < 4) {\n"
+                + "      document.getElementById('myId').insertBefore(document.createElement('p'), value);\n"
+                + "    }\n"
+                + "    log(document.getElementById('myId').childNodes.length);\n"
+                + "    log(list.length);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <div id='myId'><strong>a</strong>b<b>d</b>e</div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

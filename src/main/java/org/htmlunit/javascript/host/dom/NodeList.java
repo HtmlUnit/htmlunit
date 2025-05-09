@@ -152,18 +152,20 @@ public class NodeList extends AbstractList implements Callable {
                     "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
 
-        final List<DomNode> nodes = getElements();
-
         final WebClient client = getWindow().getWebWindow().getWebClient();
         final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
 
         final ContextAction<Object> contextAction = cx -> {
             final Function function = (Function) callback;
             final Scriptable scope = getParentScope();
-            final int size = nodes.size();
-            for (int i = 0; i < size; i++) {
-                function.call(cx, scope, this, new Object[] {nodes.get(i).getScriptableObject(), i, this});
+
+            final int size = getElements().size();
+            int i = 0;
+            while (i < size) {
+                function.call(cx, scope, this, new Object[] {getElements().get(i).getScriptableObject(), i, this});
+                i++;
             }
+
             return null;
         };
         cf.call(contextAction);
