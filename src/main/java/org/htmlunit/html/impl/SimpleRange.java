@@ -521,8 +521,7 @@ public class SimpleRange implements Serializable {
         }
         else {
             final DomNodeList<DomNode> children = node.getChildNodes();
-            final int length = children.getLength();
-            for (int i = 0; i < offset && i < length; i++) {
+            for (int i = 0; i < offset && i < children.getLength(); i++) {
                 final DomNode child = children.get(i);
                 child.remove();
                 i--;
@@ -541,8 +540,7 @@ public class SimpleRange implements Serializable {
         }
         else {
             final DomNodeList<DomNode> children = node.getChildNodes();
-            final int length = children.getLength();
-            for (int i = offset; i < length; i++) {
+            for (int i = offset; i < children.getLength(); i++) {
                 final DomNode child = children.get(i);
                 child.remove();
                 i--;
