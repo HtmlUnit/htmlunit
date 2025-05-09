@@ -159,10 +159,14 @@ public class NodeList extends AbstractList implements Callable {
             final Function function = (Function) callback;
             final Scriptable scope = getParentScope();
 
-            final int size = getElements().size();
+            List<DomNode> nodes = getElements();
+            final int size = nodes.size();
             int i = 0;
-            while (i < size) {
-                function.call(cx, scope, this, new Object[] {getElements().get(i).getScriptableObject(), i, this});
+            while (i < size && i < nodes.size()) {
+                function.call(cx, scope, this, new Object[] {nodes.get(i).getScriptableObject(), i, this});
+
+                // refresh
+                nodes = getElements();
                 i++;
             }
 
