@@ -40,7 +40,7 @@
 
         <!-- selenium -->
         <htmlunitdriver.version>4.31.0-SNAPSHOT</htmlunitdriver.version>
-        <selenium.version>4.31.0</selenium.version>
+        <selenium.version>4.32.0</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v135</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
