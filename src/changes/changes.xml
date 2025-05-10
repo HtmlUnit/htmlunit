@@ -8,6 +8,32 @@
 
     <body>
         <release version="4.12.0" date="April xx, 2025" description="Chrome/Edge 135, Firefox 137, Rhino RegExp, Bugfixes">
+            <action type="update" dev="rbri">
+                neko: HTMLScanner always requires a document handler; the null check is moved to the setter
+                and all the others are removed.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: avoid HTML1011 error for self closing tags.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: ignore whitespace before the closing &gt; when parsing special tags.
+            </action>
+            <action type="update" dev="rbri">
+                neko: remove two superfluous conversions from the code.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: NativeArray impl is now lambda based.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: improved date string parser; support optional ms digits,
+                skip ms digits, extended year support is not available in es6
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: detailed message added to IndexOutOfBoundsExceptions
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: add double null check pattern when initializing cache values.
+            </action>
             <action type="fix" dev="rbri">
                 DomTokenList.forEach() now takes care of the current state of the list
                 (e.g. the forEach function might add/remove elements to the list itself).
