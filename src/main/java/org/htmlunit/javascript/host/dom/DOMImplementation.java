@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.dom;
 import java.io.IOException;
 
 import org.htmlunit.StringWebResponse;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.html.Html;
@@ -263,8 +264,9 @@ public class DOMImplementation extends HtmlUnitScriptable {
             // document.setWindow(getWindow());
             document.setDomNode(page);
 
-            final HTMLParser htmlParser = webWindow.getWebClient().getPageCreator().getHtmlParser();
-            htmlParser.parse(webResponse, page, false, false);
+            final WebClient webClient = webWindow.getWebClient();
+            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
+            htmlParser.parse(webClient, webResponse, page, false, false);
             return page.getScriptableObject();
         }
         catch (final IOException e) {

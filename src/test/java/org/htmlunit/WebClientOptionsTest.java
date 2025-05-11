@@ -54,6 +54,16 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
 
         assertEquals(original.isGeolocationEnabled(), deserialized.isGeolocationEnabled());
         assertEquals(original.getGeolocation(), deserialized.getGeolocation());
+
+        assertEquals(original.getNekoReaderBufferSize(), deserialized.getNekoReaderBufferSize());
+
+        assertEquals(original.isWebSocketEnabled(), deserialized.isWebSocketEnabled());
+        assertEquals(original.getWebSocketMaxTextMessageSize(), deserialized.getWebSocketMaxTextMessageSize());
+        assertEquals(original.getWebSocketMaxTextMessageBufferSize(), deserialized.getWebSocketMaxTextMessageBufferSize());
+        assertEquals(original.getWebSocketMaxBinaryMessageSize(), deserialized.getWebSocketMaxBinaryMessageSize());
+        assertEquals(original.getWebSocketMaxBinaryMessageBufferSize(), deserialized.getWebSocketMaxBinaryMessageBufferSize());
+
+        assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
     }
 
     /**
@@ -73,6 +83,16 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
 
         original.setGeolocationEnabled(true);
         original.setGeolocation(new WebClientOptions.Geolocation(1d, 2d, 3d, 4d, 5d, 6d, 7d));
+
+        original.setNekoReaderBufferSize(1234567);
+
+        original.setWebSocketEnabled(false);
+        original.setWebSocketMaxTextMessageSize(77);
+        original.setWebSocketMaxTextMessageBufferSize(771);
+        original.setWebSocketMaxBinaryMessageSize(44);
+        original.setWebSocketMaxBinaryMessageBufferSize(441);
+
+        original.setFetchPolyfillEnabled(true);
 
         final byte[] bytes = SerializationUtils.serialize(original);
         final WebClientOptions deserialized = (WebClientOptions) SerializationUtils.deserialize(bytes);
@@ -96,6 +116,16 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
                 deserialized.getGeolocation().getAltitudeAccuracy());
         assertEquals(original.getGeolocation().getHeading(), deserialized.getGeolocation().getHeading());
         assertEquals(original.getGeolocation().getSpeed(), deserialized.getGeolocation().getSpeed());
+
+        assertEquals(original.getNekoReaderBufferSize(), deserialized.getNekoReaderBufferSize());
+
+        assertEquals(original.isWebSocketEnabled(), deserialized.isWebSocketEnabled());
+        assertEquals(original.getWebSocketMaxTextMessageSize(), deserialized.getWebSocketMaxTextMessageSize());
+        assertEquals(original.getWebSocketMaxTextMessageBufferSize(), deserialized.getWebSocketMaxTextMessageBufferSize());
+        assertEquals(original.getWebSocketMaxBinaryMessageSize(), deserialized.getWebSocketMaxBinaryMessageSize());
+        assertEquals(original.getWebSocketMaxBinaryMessageBufferSize(), deserialized.getWebSocketMaxBinaryMessageBufferSize());
+
+        assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
     }
 
     /**

@@ -297,7 +297,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         final HtmlPage page = new HtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
-        HTML_PARSER.parse(webResponse, page, false, false);
+        HTML_PARSER.parse(webWindow.getWebClient(), webResponse, page, false, false);
         return page;
     }
 
@@ -313,7 +313,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
-        HTML_PARSER.parse(webResponse, page, true, false);
+        HTML_PARSER.parse(webWindow.getWebClient(), webResponse, page, true, false);
         return page;
     }
 

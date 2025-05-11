@@ -1120,7 +1120,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @throws SAXException in case of error
      */
     public void parseHtmlSnippet(final String source) throws SAXException, IOException {
-        getPage().getWebClient().getPageCreator().getHtmlParser().parseFragment(this, source);
+        final WebClient webClient = getPage().getWebClient();
+        webClient.getPageCreator().getHtmlParser().parseFragment(webClient, this, this, source, false);
     }
 
     /**

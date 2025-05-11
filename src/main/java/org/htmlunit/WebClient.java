@@ -2875,7 +2875,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final HtmlPage page = new HtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
-        htmlParser.parse(webResponse, page, false, false);
+        htmlParser.parse(this, webResponse, page, false, false);
         return page;
     }
 
@@ -2896,7 +2896,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
-        htmlParser.parse(webResponse, page, true, false);
+        htmlParser.parse(this, webResponse, page, true, false);
         return page;
     }
 

@@ -83,6 +83,8 @@ public class WebClientOptions implements Serializable {
     private boolean geolocationEnabled_;
     private Geolocation geolocation_;
 
+    private int nekoReaderBufferSize_ = -1;
+
     private boolean webSocketEnabled_ = true;
     private int webSocketMaxTextMessageSize_ = -1;
     private int webSocketMaxTextMessageBufferSize_ = -1;
@@ -725,6 +727,23 @@ public class WebClientOptions implements Serializable {
     public int getScreenHeight() {
         return screenHeight_;
     }
+
+    /**
+     * @return the Neko Html parser reader buffer size
+     */
+    public int getNekoReaderBufferSize() {
+        return nekoReaderBufferSize_;
+    }
+
+    /**
+     * Sets the Neko Html parser reader buffer size.
+     *
+     * @param webSocketMaxTextMessageSize the new value
+     */
+    public void setNekoReaderBufferSize(final int nekoReaderBufferSize) {
+        nekoReaderBufferSize_ = nekoReaderBufferSize;
+    }
+
 
     /**
      * Enables/disables WebSocket support. By default, this property is enabled.

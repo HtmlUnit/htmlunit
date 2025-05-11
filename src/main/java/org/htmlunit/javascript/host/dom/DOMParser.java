@@ -145,7 +145,7 @@ public class DOMParser extends HtmlUnitScriptable {
 
         final WebClient webClient = webWindow.getWebClient();
         final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-        htmlParser.parse(webResponse, page, false, true);
+        htmlParser.parse(webClient, webResponse, page, false, true);
         return page.getScriptableObject();
     }
 }

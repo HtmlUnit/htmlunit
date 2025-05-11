@@ -217,7 +217,8 @@ public class WebClient8Test extends SimpleWebTestCase {
 
             final HtmlPage page = webClient.getPage(URL_FIRST);
             final DomElement para = page.getElementById("para");
-            page.getWebClient().getPageCreator().getHtmlParser().parseFragment(para, fragment);
+            page.getWebClient().getPageCreator().getHtmlParser()
+                    .parseFragment(para, para, fragment, false);
 
             final HtmlInlineFrame iFrame = (HtmlInlineFrame) page.getElementById("tester");
             assertEquals("frame", ((HtmlPage) iFrame.getEnclosedWindow().getEnclosedPage()).getTitleText());
