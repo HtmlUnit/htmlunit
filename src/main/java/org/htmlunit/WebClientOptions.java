@@ -738,7 +738,7 @@ public class WebClientOptions implements Serializable {
     /**
      * Sets the Neko Html parser reader buffer size.
      *
-     * @param webSocketMaxTextMessageSize the new value
+     * @param nekoReaderBufferSize the new value
      */
     public void setNekoReaderBufferSize(final int nekoReaderBufferSize) {
         nekoReaderBufferSize_ = nekoReaderBufferSize;
