@@ -16,6 +16,7 @@ package org.htmlunit.libraries;
 
 import static org.junit.Assert.fail;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -66,7 +67,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
             final WebDriver webdriver = getWebDriver();
             webdriver.get(getUrl(module));
 
-            final long runTime = waitTime * DEFAULT_WAIT_TIME.toMillis();
+            final long runTime = waitTime * Duration.ofSeconds(1).toMillis();
             final long endTime = System.currentTimeMillis() + runTime;
 
             // wait a bit to let the tests start
@@ -90,7 +91,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
                 status = getResultElementText(webdriver);
             }
 
-            Thread.sleep(100); // to make tests a bit more stable
+            Thread.sleep(Duration.ofSeconds(1).toMillis()); // to make tests a bit more stable
             final WebElement output = webdriver.findElement(By.id("logBody"));
             final List<WebElement> lines = output.findElements(By.xpath(".//div"));
 
