@@ -510,7 +510,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false", FF = "true")
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _SVGAnimationElement_SVGDiscardElement() throws Exception {
         test("SVGAnimationElement", "SVGDiscardElement");
     }
@@ -609,7 +610,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false", FF = "true")
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _SVGDiscardElement_SVGDiscardElement() throws Exception {
         test("SVGDiscardElement", "SVGDiscardElement");
     }
@@ -708,7 +710,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false", FF = "true")
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _SVGElement_SVGDiscardElement() throws Exception {
         test("SVGElement", "SVGDiscardElement");
     }
