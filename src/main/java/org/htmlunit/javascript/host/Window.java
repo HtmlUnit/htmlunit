@@ -1450,40 +1450,38 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * To be called when the property detection fails in normal scenarios.
-     *
-     * @param name the name
-     * @return the found object, or {@link Scriptable#NOT_FOUND}
+     * {@inheritDoc}
      */
-    public Object getWithFallback(final String name) {
-        Object result = NOT_FOUND;
-
+    @Override
+    protected Object getWithPreemption(final String name) {
         final DomNode domNode = getDomNodeOrNull();
-        if (domNode != null) {
+        if (domNode == null) {
+            return NOT_FOUND;
+        }
 
-            // May be attempting to retrieve a frame by name.
-            final HtmlPage page = (HtmlPage) domNode.getPage();
-            result = getFrameWindowByName(page, name);
+
+        // May be attempting to retrieve a frame by name.
+        final HtmlPage page = (HtmlPage) domNode.getPage();
+        Object result = getFrameWindowByName(page, name);
+
+        if (result == NOT_FOUND) {
+            result = getElementsByName(page, name);
 
             if (result == NOT_FOUND) {
-                result = getElementsByName(page, name);
-
-                if (result == NOT_FOUND) {
-                    // May be attempting to retrieve element by ID (try map-backed operation again instead of XPath).
-                    try {
-                        final HtmlElement htmlElement = page.getHtmlElementById(name);
-                        result = getScriptableFor(htmlElement);
-                    }
-                    catch (final ElementNotFoundException e) {
-                        result = NOT_FOUND;
-                    }
+                // May be attempting to retrieve element by ID (try map-backed operation again instead of XPath).
+                try {
+                    final HtmlElement htmlElement = page.getHtmlElementById(name);
+                    result = getScriptableFor(htmlElement);
+                }
+                catch (final ElementNotFoundException e) {
+                    result = NOT_FOUND;
                 }
             }
+        }
 
-            if (result instanceof Window) {
-                final WebWindow webWindow = ((Window) result).getWebWindow();
-                result = getProxy(webWindow);
-            }
+        if (result instanceof Window) {
+            final WebWindow webWindow = ((Window) result).getWebWindow();
+            result = getProxy(webWindow);
         }
 
         return result;
