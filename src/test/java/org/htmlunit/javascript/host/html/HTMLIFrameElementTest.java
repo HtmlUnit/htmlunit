@@ -16,6 +16,8 @@ package org.htmlunit.javascript.host.html;
 
 import java.util.List;
 
+import javax.net.ssl.SSLHandshakeException;
+
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
@@ -23,6 +25,7 @@ import org.htmlunit.html.FrameWindow;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.annotation.Alerts;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -136,5 +139,34 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
         // frame has to be gone
         frames = page.getFrames();
         assertTrue(frames.isEmpty());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "2"})
+    public void iframeUrlInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function log(msg) { window.document.title += msg + '\\u00a7'; }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <iframe id='frame1' src='" + URL_SECOND + "' "
+                        + "onLoad='log(\"loaded\")' onError='log(\"error\")'></iframe>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        getMockWebConnection().setThrowable(URL_SECOND, new SSLHandshakeException("Test"));
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final HtmlPage page = loadPage(html);
+        assertEquals(expectedAlerts[0], page.getTitleText());
+
+        assertEquals(Integer.parseInt(expectedAlerts[1]), getMockWebConnection().getRequestCount());
     }
 }
