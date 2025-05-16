@@ -3,18 +3,20 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
     <version>4.12.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
     <name>HtmlUnit</name>
+    <description>
+        A headless browser intended for use in testing web-based applications.
+    </description>
     <organization>
         <name>Gargoyle Software Inc.</name>
         <url>http://www.GargoyleSoftware.com/</url>
     </organization>
-    <packaging>jar</packaging>
-    <description>
-        A headless browser intended for use in testing web-based applications.
-    </description>
     <url>https://www.htmlunit.org</url>
 
     <properties>
@@ -25,12 +27,12 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitcsp.version>4.11.0</htmlunitcsp.version>
-        <htmlunitcssparser.version>4.11.0</htmlunitcssparser.version>
+        <htmlunitcsp.version>4.12.0</htmlunitcsp.version>
+        <htmlunitcssparser.version>4.12.0</htmlunitcssparser.version>
         <htmlunitcorejs.version>4.12.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitneko.version>4.12.0-SNAPSHOT</htmlunitneko.version>
-        <htmlunitwebsocketclient.version>4.11.0</htmlunitwebsocketclient.version>
-        <htmlunitxpath.version>4.12.0-SNAPSHOT</htmlunitxpath.version>
+        <htmlunitwebsocketclient.version>4.12.0</htmlunitwebsocketclient.version>
+        <htmlunitxpath.version>4.12.0</htmlunitxpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <commons-lang3.version>3.17.0</commons-lang3.version>
