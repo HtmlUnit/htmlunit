@@ -82,7 +82,7 @@ public class FaqTest {
                 + "  </body>"
                 + "</html> ";
         try (WebClient webClient = new WebClient(browserVersion)) {
-            final HtmlPage page = webClient.loadXHtmlCodeIntoCurrentWindow(htmlCode);
+            final HtmlPage page = webClient.loadHtmlCodeIntoCurrentWindow(htmlCode);
 
             // work with the html page
 
