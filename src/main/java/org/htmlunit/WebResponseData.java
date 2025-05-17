@@ -43,6 +43,7 @@ import org.htmlunit.util.NameValuePair;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 public class WebResponseData implements Serializable {
     private static final Log LOG = LogFactory.getLog(WebResponseData.class);
@@ -123,7 +124,7 @@ public class WebResponseData implements Serializable {
                                  + "</html>", ISO_8859_1);
                 }
                 if (stream != null && bomHeaders != null) {
-                    stream = new BOMInputStream(stream, bomHeaders);
+                    stream = BOMInputStream.builder().setInputStream(stream).setByteOrderMarks(bomHeaders).get();
                 }
                 return stream;
             }
@@ -168,7 +169,7 @@ public class WebResponseData implements Serializable {
         }
 
         if (stream != null && bomHeaders != null) {
-            stream = new BOMInputStream(stream, bomHeaders);
+            stream = BOMInputStream.builder().setInputStream(stream).setByteOrderMarks(bomHeaders).get();
         }
         return stream;
     }
