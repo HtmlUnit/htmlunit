@@ -180,6 +180,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     HTMLLINK_CHECK_RESPONSE_TYPE_FOR_STYLESHEET,
 
+    /** If the type is present for a link only use if type is text/css. */
+    @BrowserFeature({CHROME, EDGE})
+    HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,
+
     /** willValidate does not check the readonly property. */
     @BrowserFeature({FF, FF_ESR})
     HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY,

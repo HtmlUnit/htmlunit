@@ -1247,4 +1247,28 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Make sure we use the TopScope, otherwise some GeneratorFunction stuff
+     * does not work.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"anonymous", "false", "false", "true"})
+    public void generatorFunction() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var GeneratorFunction = Object.getPrototypeOf(function*() {}).constructor;\n"
+
+            + "log(GeneratorFunction().name);\n"
+            + "log(Object.getOwnPropertyDescriptor(GeneratorFunction(), 'name').enumerable);\n"
+            + "log(Object.getOwnPropertyDescriptor(GeneratorFunction(), 'name').writable);\n"
+            + "log(Object.getOwnPropertyDescriptor(GeneratorFunction(), 'name').configurable);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
 }

@@ -15,6 +15,7 @@
 package org.htmlunit.css;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.io.IOException;
@@ -312,8 +313,10 @@ public class CssStyleSheet implements Serializable {
                 request = link.getWebRequest();
 
                 final String type = link.getTypeAttribute();
-                if (StringUtils.isNotBlank(type) && !MimeType.TEXT_CSS.equals(type)) {
-                    return new CssStyleSheet(element, "", uri);
+                if (client.getBrowserVersion().hasFeature(HTMLLINK_CHECK_TYPE_FOR_STYLESHEET)) {
+                    if (StringUtils.isNotBlank(type) && !MimeType.TEXT_CSS.equals(type)) {
+                        return new CssStyleSheet(element, "", uri);
+                    }
                 }
 
                 if (request.getCharset() != null) {
@@ -327,7 +330,10 @@ public class CssStyleSheet implements Serializable {
                 // our cache is a bit strange;
                 // loadWebResponse check the cache for the web response
                 // AND also fixes the request url for the following cache lookups
-                response = link.getWebResponse(true, request, true);
+                response = link.getWebResponse(true, request, true, type);
+                if (response == null) {
+                    return new CssStyleSheet(element, "", uri);
+                }
             }
 
             // now we can look into the cache with the fixed request for
