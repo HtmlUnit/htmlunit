@@ -65,7 +65,7 @@ import org.htmlunit.util.MimeType;
 public final class BrowserVersion implements Serializable {
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(137, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(138, "FF");
 
     private static final int FIREFOX_ESR_NUMERIC = 128;
 
@@ -73,10 +73,10 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
 
     /** Latest Edge. */
-    public static final BrowserVersion EDGE = new BrowserVersion(135, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(136, "Edge");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(135, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(136, "Chrome");
 
     /**
      * Array with all supported browsers.

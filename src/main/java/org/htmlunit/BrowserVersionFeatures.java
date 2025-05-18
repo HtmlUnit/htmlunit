@@ -176,9 +176,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_TYPE_WEEK_SUPPORTED,
 
-    /** If the type is present for a link only use if type is text/css. */
-    @BrowserFeature({CHROME, EDGE})
-    HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,
+    /** For a stylesheet link report an error if the response type is not text/css. */
+    @BrowserFeature({FF, FF_ESR})
+    HTMLLINK_CHECK_RESPONSE_TYPE_FOR_STYLESHEET,
 
     /** willValidate does not check the readonly property. */
     @BrowserFeature({FF, FF_ESR})

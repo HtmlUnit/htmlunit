@@ -22,6 +22,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
@@ -33,6 +34,7 @@ import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLLinkElement;
 import org.htmlunit.util.ArrayUtils;
+import org.htmlunit.util.MimeType;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
 
@@ -179,7 +181,7 @@ public class HtmlLink extends HtmlElement {
      * @throws IOException if an error occurs while downloading the content
      */
     public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
-        return getWebResponse(downloadIfNeeded, null);
+        return getWebResponse(downloadIfNeeded, null, false);
     }
 
     /**
@@ -190,11 +192,13 @@ public class HtmlLink extends HtmlElement {
      *
      * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
      * @param request the request; if null getWebRequest() is called to create one
+     * @param isStylesheetRequest true if this should return a stylesheet
      * @return {@code null} if no download should be performed and when this wasn't already done; the response
      *         received when performing a request for the content referenced by this tag otherwise
      * @throws IOException if an error occurs while downloading the content
      */
-    public WebResponse getWebResponse(final boolean downloadIfNeeded, WebRequest request) throws IOException {
+    public WebResponse getWebResponse(final boolean downloadIfNeeded, WebRequest request,
+            final boolean isStylesheetRequest) throws IOException {
         final WebClient webclient = getPage().getWebClient();
         if (null == request) {
             request = getWebRequest();
@@ -204,11 +208,20 @@ public class HtmlLink extends HtmlElement {
             try {
                 final WebResponse response = webclient.loadWebResponse(request);
                 if (response.isSuccess()) {
+                    if (isStylesheetRequest
+                            && webclient.getBrowserVersion()
+                                 .hasFeature(BrowserVersionFeatures.HTMLLINK_CHECK_RESPONSE_TYPE_FOR_STYLESHEET)) {
+                        final String type = response.getContentType();
+                        if (org.apache.commons.lang3.StringUtils.isNotBlank(type)
+                                && !MimeType.TEXT_CSS.equals(type)) {
+                            executeEvent(Event.TYPE_ERROR);
+                            return response;
+                        }
+                    }
                     executeEvent(Event.TYPE_LOAD);
+                    return response;
                 }
-                else {
-                    executeEvent(Event.TYPE_ERROR);
-                }
+                executeEvent(Event.TYPE_ERROR);
                 return response;
             }
             catch (final IOException e) {
