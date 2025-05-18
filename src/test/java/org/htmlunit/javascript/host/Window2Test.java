@@ -1165,9 +1165,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
-            FF = {"0,0", "100,200", "110,230", "0,0", "0,0", "0,0", "0,0"},
-            FF_ESR = {"0,0", "100,200", "110,230", "0,0", "0,0", "0,0", "0,0"})
+    @Alerts(DEFAULT = {"0,0", "0,0", "0,0", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
+            FF = {"0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"},
+            FF_ESR = {"0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"})
     @NotYetImplemented({FF, FF_ESR})
     public void scrolling1() throws Exception {
         scrolling(true);
@@ -1224,9 +1224,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
-            FF = {"0,0", "100,200", "110,230", "0,0", "0,0", "0,0", "0,0"},
-            FF_ESR = {"0,0", "100,200", "110,230", "0,0", "0,0", "0,0", "0,0"})
+    @Alerts(DEFAULT = {"0,0", "0,0", "0,0", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
+            FF = {"0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"},
+            FF_ESR = {"0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"})
     @NotYetImplemented({FF, FF_ESR})
     public void scrollingOptions1() throws Exception {
         scrollingOptions(true);
