@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -40,7 +41,7 @@ public class Notification extends EventTarget {
     /**
      * The maximum number of actions supported.
      */
-    @JsxConstant({CHROME, EDGE})
+    @JsxConstant({CHROME, EDGE, FF})
     public static final int maxActions = 2;
 
     /**

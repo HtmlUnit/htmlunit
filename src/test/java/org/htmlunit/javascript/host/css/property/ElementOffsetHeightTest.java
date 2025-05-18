@@ -1400,7 +1400,8 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("16")
+    @Alerts(DEFAULT = "16",
+            FF = "18")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
