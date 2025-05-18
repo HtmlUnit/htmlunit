@@ -1404,7 +1404,6 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             FF = "18")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
-            FF = "18",
             FF_ESR = "18")
     public void progress() throws Exception {
         test("progress");
