@@ -82,9 +82,9 @@ public class WorkerNavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
-                        + "(KHTML,\\slike\\sGecko)\\sChrome/135.0.0.0\\sSafari/537.36",
+                        + "(KHTML,\\slike\\sGecko)\\sChrome/136.0.0.0\\sSafari/537.36",
             EDGE = "5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
-                        + "(KHTML,\\slike\\sGecko)\\sChrome/135.0.0.0\\sSafari/537.36\\sEdg/135.0.0.0",
+                        + "(KHTML,\\slike\\sGecko)\\sChrome/136.0.0.0\\sSafari/537.36\\sEdg/136.0.0.0",
             FF = "5.0\\s(Windows)",
             FF_ESR = "5.0\\s(Windows)")
     public void appVersion() throws Exception {
@@ -161,10 +161,10 @@ public class WorkerNavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
-                        + "(KHTML,\\slike\\sGecko)\\sChrome/135.0.0.0\\sSafari/537.36",
+                        + "(KHTML,\\slike\\sGecko)\\sChrome/136.0.0.0\\sSafari/537.36",
             EDGE = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64)\\sAppleWebKit/537.36\\s"
-                        + "(KHTML,\\slike\\sGecko)\\sChrome/135.0.0.0\\sSafari/537.36\\sEdg/135.0.0.0",
-            FF = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64;\\srv:137.0)\\sGecko/20100101\\sFirefox/137.0",
+                        + "(KHTML,\\slike\\sGecko)\\sChrome/136.0.0.0\\sSafari/537.36\\sEdg/136.0.0.0",
+            FF = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64;\\srv:138.0)\\sGecko/20100101\\sFirefox/138.0",
             FF_ESR = "Mozilla/5.0\\s(Windows\\sNT\\s10.0;\\sWin64;\\sx64;\\srv:128.0)\\sGecko/20100101\\sFirefox/128.0")
     public void userAgent() throws Exception {
         final String workerJs = "postMessage(navigator.userAgent);\n";
