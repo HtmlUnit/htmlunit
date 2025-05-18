@@ -137,7 +137,7 @@ public enum BrowserVersionFeatures {
     HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY,
 
     /** Calls to <code>document.XYZ</code> also looks at frames. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     HTMLDOCUMENT_GET_ALSO_FRAMES,
 
     /** Removing the active element from the dom tree triggers the onblur event. */
@@ -311,7 +311,7 @@ public enum BrowserVersionFeatures {
     JS_DOCUMENT_SELECTION_RANGE_COUNT,
 
     /** Javascript {@code Error.captureStackTrace}. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     JS_ERROR_CAPTURE_STACK_TRACE,
 
     /** Javascript {@code Error.stackTraceLimit}. */

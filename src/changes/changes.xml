@@ -9,6 +9,12 @@
     <body>
         <release version="4.13.0" date="June xx, 2025" description="Chrome/Edge 136, Firefox 138, Bugfixes">
             <action type="add" dev="rbri">
+                FF138: Frame elements are accessible by name.
+            </action>
+            <action type="add" dev="rbri">
+                FF138: Error.captureStackTrace() is supported.
+            </action>
+            <action type="add" dev="rbri">
                 FF138: js constant maxActions added to Notification.
             </action>
             <action type="update" dev="rbri">

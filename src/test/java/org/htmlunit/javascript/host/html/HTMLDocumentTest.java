@@ -800,7 +800,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Window]", "true"},
-            FF = {"undefined", "false"},
             FF_ESR = {"undefined", "false"})
     public void frameAccessByName() throws Exception {
         final String html = DOCTYPE_HTML
