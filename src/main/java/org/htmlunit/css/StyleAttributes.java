@@ -1049,6 +1049,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code dominant-baseline}. */
         DOMINANT_BASELINE_("dominant-baseline", "dominant-baseline", ff("auto")),
 
+        /** The style property {@code dynamicRangeLimit}. */
+        DYNAMIC_RANGE_LIMIT("dynamicRangeLimit", "dynamic-range-limit", chromeAndEdge("no-limit")),
+
         /** The style property {@code emptyCells}. */
         EMPTY_CELLS("emptyCells", "empty-cells", ff("show"),
                 chromeAndEdge("show")),
@@ -2494,7 +2497,8 @@ public final class StyleAttributes implements Serializable {
         PREFIX("prefix", "prefix", chromeAndEdgeEmpty()),
 
         /** The style property {@code printColorAdjust}. */
-        PRINT_COLOR_ADJUST("printColorAdjust", "print-color-adjust", ff("economy")),
+        PRINT_COLOR_ADJUST("printColorAdjust", "print-color-adjust", ff("economy"),
+                chromeAndEdge("economy")),
 
         /** The style property {@code print-color-adjust}. */
         PRINT_COLOR_ADJUST_("print-color-adjust", "print-color-adjust", ff("economy")),
