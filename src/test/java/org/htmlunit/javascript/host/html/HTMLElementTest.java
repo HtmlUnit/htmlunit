@@ -6292,7 +6292,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
-                       "7 until-found/until-found", "8 show/true", "9 Until-Found/true", "10 HIDDEN/true"},
+                       "7 until-found/until-found", "8 show/true", "9 Until-Found/until-found", "10 HIDDEN/true"},
             FF = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
                   "7 until-found/true", "8 show/true", "9 Until-Found/true", "10 HIDDEN/true"},
             FF_ESR = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
