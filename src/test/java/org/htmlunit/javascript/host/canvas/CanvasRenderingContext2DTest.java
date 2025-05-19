@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host.canvas;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.CHROME;
-import static org.htmlunit.junit.annotation.TestedBrowser.EDGE;
-
 import java.io.InputStream;
 import java.util.Collections;
 
@@ -25,7 +22,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -925,7 +921,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1", "0.5", "0", "0.699999988079071", "0"},
             CHROME = {"1", "0.5", "0", "0.7", "0"},
             EDGE = {"1", "0.5", "0", "0.7", "0"})
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = {"1", "0.5", "0", "0.699999988079071", "0"},
+            EDGE = {"1", "0.5", "0", "0.699999988079071", "0"})
     public void globalAlpha() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

@@ -21,7 +21,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1223,7 +1222,10 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2 1")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "1 2",
+            EDGE = "1 2",
+            FF = "1 2",
+            FF_ESR = "1 2")
     public void async2() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"

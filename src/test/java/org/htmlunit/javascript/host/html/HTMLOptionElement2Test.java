@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.FF;
-import static org.htmlunit.junit.annotation.TestedBrowser.FF_ESR;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
@@ -1312,7 +1309,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                   "false-selected", "false-null", "false-true"},
             FF_ESR = {"false-null", "true-true", "true-null",
                       "false-selected", "false-null", "false-true"})
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(FF = {"false-null", "true-true", "true-null", "false-selected", "false-null", "true-true"},
+            FF_ESR = {"false-null", "true-true", "true-null", "false-selected", "false-null", "true-true"})
     public void setSelectedAttribute() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

@@ -25,7 +25,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
@@ -438,7 +437,10 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"#myDataTable=foo%3Dojkoj", "§§URL§§#myDataTable=foo%3Dojkoj"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj"},
+            EDGE = {"#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj"},
+            FF = {"#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj"},
+            FF_ESR = {"#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj"})
     public void hashEncoding2() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -991,19 +993,21 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§test.html")
-    //real browsers don't show the alert, since it is quickly closed through JavaScript
-    @NotYetImplemented
+    @Alerts({"opened", "closed", "href changed", "§§URL§§test.html"})
     public void locationAfterOpenClosePopup() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_SESSION_STORAGE_FUNCTION
             + "    function test() {\n"
             + "      var win = window.open('" + URL_SECOND + "','test','',true);\n"
+            + "      log('opened');\n"
             + "      win.close();\n"
+            + "      log('closed');\n"
             + "      location.href = 'test.html';\n"
+            + "      log('href changed');\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1016,7 +1020,8 @@ public class Location2Test extends WebDriverTestCase {
               + "<head>\n"
               + "  <title>popup with script</title>\n"
               + "  <script>\n"
-              + "    alert('the root of all evil');\n"
+              + LOG_SESSION_STORAGE_FUNCTION
+              + "    log('the root of all evil');\n"
               + "  </script>\n"
               + "</head>\n"
               + "<body>Popup</body>\n"
@@ -1035,13 +1040,9 @@ public class Location2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
-        try {
-            assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
-        }
-        finally {
-            releaseResources();
-            shutDownAll();
-        }
+
+        verifySessionStorage2(driver, getExpectedAlerts()[0], getExpectedAlerts()[1], getExpectedAlerts()[2]);
+        assertEquals(getExpectedAlerts()[3], driver.getCurrentUrl());
     }
 
     /**

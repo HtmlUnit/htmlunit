@@ -14,14 +14,10 @@
  */
 package org.htmlunit.javascript.host;
 
-import java.util.List;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -252,14 +248,11 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("I was here")
-    @BuggyWebDriver(CHROME = "",
-                    EDGE = "",
-                    FF = "",
-                    FF_ESR = "")
-    // The way ChromeDriver and FFDriver start the real browsers clears the LocalStorage somehow.
-    // But when executed manually the LocalStorage is shared.
-    @NotYetImplemented
+    @Alerts({"", "I was here§"})
+    @HtmlUnitNYI(CHROME = {"", "null§"},
+            EDGE = {"", "null§"},
+            FF = {"", "null§"},
+            FF_ESR = {"", "null§"})
     // TODO somehow persist the LocalStorage
     public void localStorageShouldBeShared() throws Exception {
         final String html1 = DOCTYPE_HTML
@@ -271,33 +264,26 @@ public class StorageTest extends WebDriverTestCase {
             + "  localStorage.setItem('hello', 'I was here');\n"
             + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
-        final WebDriver driver = loadPage2(html1);
-        final List<String> alerts = getCollectedAlerts(driver);
+
+        WebDriver driver = loadPage2(html1);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        releaseResources();
 
         final String html2 = DOCTYPE_HTML
             + "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  log(localStorage.getItem('hello'));\n"
             + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
-        releaseResources();
-
         getMockWebConnection().setResponse(URL_FIRST, html2);
 
         // we have to control 2nd driver by ourself
-        WebDriver driver2 = null;
-        try {
-            driver2 = buildWebDriver();
-            driver2.get(URL_FIRST.toString());
-            final List<String> newAlerts = getCollectedAlerts(driver2);
-            alerts.addAll(newAlerts);
-            assertEquals(getExpectedAlerts(), alerts);
-        }
-        finally {
-            driver2.close();
-            if (!(driver2 instanceof HtmlUnitDriver)) {
-                shutDownAll();
-            }
+        driver = loadPage2(html2);
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+
+        if (!(driver instanceof HtmlUnitDriver)) {
+            shutDownAll();
         }
     }
 
