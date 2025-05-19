@@ -17,7 +17,7 @@ package org.htmlunit.javascript;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +38,10 @@ public class RhinoTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "true"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"false", "false"},
+            EDGE = {"false", "false"},
+            FF = {"false", "false"},
+            FF_ESR = {"false", "false"})
     public void isStrict_GlobalThis() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -63,7 +66,10 @@ public class RhinoTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false",
+            FF = "false",
+            FF_ESR = "false")
     public void isStrict_evalVar() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

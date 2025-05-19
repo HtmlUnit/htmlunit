@@ -29,7 +29,7 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1888,7 +1888,34 @@ public class Window3Test extends WebDriverTestCase {
              "window at load",
              "window at load capture",
              "body onload"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"element 1 onload",
+                           "element 2 onerror",
+                           "document DOMContentLoaded",
+                           "window DOMContentLoaded",
+                           "window at load",
+                           "window at load capture",
+                           "body onload"},
+            EDGE = {"element 1 onload",
+                    "element 2 onerror",
+                    "document DOMContentLoaded",
+                    "window DOMContentLoaded",
+                    "window at load",
+                    "window at load capture",
+                    "body onload"},
+            FF = {"element 1 onload",
+                  "element 2 onerror",
+                  "document DOMContentLoaded",
+                  "window DOMContentLoaded",
+                  "window at load",
+                  "window at load capture",
+                  "body onload"},
+            FF_ESR = {"element 1 onload",
+                      "element 2 onerror",
+                      "document DOMContentLoaded",
+                      "window DOMContentLoaded",
+                      "window at load",
+                      "window at load capture",
+                      "body onload"})
     public void onloadScript() throws Exception {
         getMockWebConnection().setResponse(URL_SECOND, "");
 

@@ -18,9 +18,9 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriverException;
 
 /**
  * Tests for general scriptable objects in the browser context.
@@ -137,7 +137,10 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError", "true", "true"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "org.htmlunit.ScriptException: TypeError: Cannot set property \"constructor\" of abc",
+            EDGE = "org.htmlunit.ScriptException: TypeError: Cannot set property \"constructor\" of abc",
+            FF = "org.htmlunit.ScriptException: TypeError: Cannot set property \"constructor\" of abc",
+            FF_ESR = "org.htmlunit.ScriptException: TypeError: Cannot set property \"constructor\" of abc")
     public void ctorNotChangeableForPrimitivesStrict() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>\n"
@@ -165,7 +168,12 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>\n";
 
-        loadPageVerifyTitle2(html);
+        try {
+            loadPageVerifyTitle2(html);
+        }
+        catch (final WebDriverException e) {
+            assertTrue(e.getMessage(), e.getMessage().startsWith(getExpectedAlerts()[0]));
+        }
     }
 
     /**
