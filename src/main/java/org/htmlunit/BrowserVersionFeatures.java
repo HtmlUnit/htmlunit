@@ -160,10 +160,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLIMAGE_HTMLUNKNOWNELEMENT,
 
-    /** Clicking an image input submits the value as param if defined. */
-    @BrowserFeature({CHROME, EDGE})
-    HTMLIMAGE_NAME_VALUE_PARAMS,
-
     /** HTMLInputElement image type is not supported. */
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY,

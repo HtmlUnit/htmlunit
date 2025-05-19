@@ -28,6 +28,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Tests for {@link HtmlImageInput}.
@@ -84,6 +86,34 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form></body></html>";
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.name("button")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], webDriver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
+            CHROME = "§§URL§§?button.x=18&button.y=12",
+            EDGE = "§§URL§§?button.x=18&button.y=12")
+    @HtmlUnitNYI(CHROME = "§§URL§§?button.x=0&button.y=0",
+            EDGE = "§§URL§§?button.x=0&button.y=0")
+    public void click_Position() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='image' name='button' value='foo'/>\n"
+            + "</form></body></html>";
+        final WebDriver webDriver = loadPage2(html);
+
+        WebElement elem = webDriver.findElement(By.name("button"));
+        Actions actions = new Actions(webDriver);
+        actions.moveToElement(elem).moveByOffset(1, 4).click().perform();
         if (useRealBrowser()) {
             Thread.sleep(400);
         }

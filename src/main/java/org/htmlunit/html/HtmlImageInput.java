@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_NAME_VALUE_PARAMS;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -87,10 +85,6 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
         if (wasPositionSpecified_) {
             final NameValuePair valueX = new NameValuePair(prefix + 'x', Integer.toString(xPosition_));
             final NameValuePair valueY = new NameValuePair(prefix + 'y', Integer.toString(yPosition_));
-            if (!prefix.isEmpty() && hasFeature(HTMLIMAGE_NAME_VALUE_PARAMS) && !getRawValue().isEmpty()) {
-                return new NameValuePair[] {valueX, valueY,
-                    new NameValuePair(getNameAttribute(), getRawValue()) };
-            }
             return new NameValuePair[] {valueX, valueY};
         }
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), getRawValue())};

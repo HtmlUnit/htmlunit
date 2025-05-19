@@ -9,6 +9,9 @@
     <body>
         <release version="4.13.0" date="June xx, 2025" description="Chrome/Edge 136, Firefox 138, Bugfixes">
             <action type="add" dev="rbri">
+                Chrome/Edge 136: Clicking an image input no longer submits the value as param.
+            </action>
+            <action type="add" dev="rbri">
                 FF138: Frame elements are accessible by name.
             </action>
             <action type="add" dev="rbri">
