@@ -14,9 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.CHROME;
-import static org.htmlunit.junit.annotation.TestedBrowser.EDGE;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
@@ -26,7 +23,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +47,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
             CHROME = "§§URL§§?button.x=16&button.y=8",
             EDGE = "§§URL§§?button.x=16&button.y=8")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "§§URL§§?button.x=0&button.y=0",
+            EDGE = "§§URL§§?button.x=0&button.y=0")
     public void click_NoPosition() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title></head><body>\n"
@@ -77,7 +74,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
             CHROME = "§§URL§§?button.x=28&button.y=8",
             EDGE = "§§URL§§?button.x=28&button.y=8")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "§§URL§§?button.x=0&button.y=0",
+            EDGE = "§§URL§§?button.x=0&button.y=0")
     public void click_NoPosition_NoValue() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title></head><body>\n"

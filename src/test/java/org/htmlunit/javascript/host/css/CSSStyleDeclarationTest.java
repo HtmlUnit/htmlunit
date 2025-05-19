@@ -34,7 +34,6 @@ import org.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -350,8 +349,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             EDGE = {"", "abc"},
             FF = {"", "abc"},
             FF_ESR = {"", "abc"})
-    @NotYetImplemented
-    // FIXME styles not validated/ignored for direct styles?
     public void cssTextSetInvalid() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"

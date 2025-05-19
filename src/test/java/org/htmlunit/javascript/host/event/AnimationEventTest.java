@@ -18,7 +18,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.javascript.host.animations.AnimationEvent;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -115,7 +115,10 @@ public class AnimationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"animationstart", "animationend"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {},
+            EDGE = {},
+            FF = {},
+            FF_ESR = {})
     public void animate() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

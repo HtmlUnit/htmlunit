@@ -19,7 +19,6 @@ import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -169,7 +168,14 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Test
     @Alerts({"4", "[object HTMLParagraphElement]", "[object Text]",
                 "[object HTMLScriptElement]", "[object Text]"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"3", "[object HTMLParagraphElement]", "[object HTMLScriptElement]",
+                           "[object Text]", "undefined"},
+            EDGE = {"3", "[object HTMLParagraphElement]", "[object HTMLScriptElement]",
+                    "[object Text]", "undefined"},
+            FF = {"3", "[object HTMLParagraphElement]", "[object HTMLScriptElement]",
+                  "[object Text]", "undefined"},
+            FF_ESR = {"3", "[object HTMLParagraphElement]", "[object HTMLScriptElement]",
+                      "[object Text]", "undefined"})
     public void badlyFormedHTML_scriptAfterHtml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
@@ -710,7 +716,10 @@ public class HTMLParser4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"titles", "HEAD", "Inner Html", "misc", "true", "BODY"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"titles", "HTML", "Inner Html", "misc", "false", "HTML"},
+            EDGE = {"titles", "HTML", "Inner Html", "misc", "false", "HTML"},
+            FF = {"titles", "HTML", "Inner Html", "misc", "false", "HTML"},
+            FF_ESR = {"titles", "HTML", "Inner Html", "misc", "false", "HTML"})
     // currently the content of HEAD and BODY are added directly to HTML
     public void setCompleteHtmlToHTML_innerHTML() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

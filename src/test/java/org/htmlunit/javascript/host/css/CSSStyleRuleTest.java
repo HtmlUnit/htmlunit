@@ -17,7 +17,7 @@ package org.htmlunit.javascript.host.css;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -234,7 +234,10 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", ""})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"1", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)"},
+            EDGE = {"1", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)"},
+            FF = {"1", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)"},
+            FF_ESR = {"1", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)"})
     public void oldIEStyleFilter() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"

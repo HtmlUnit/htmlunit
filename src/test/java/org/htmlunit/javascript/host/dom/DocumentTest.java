@@ -23,7 +23,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.junit.annotation.Retry;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
@@ -2734,7 +2733,10 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("test")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "undefined",
+            EDGE = "undefined",
+            FF = "undefined",
+            FF_ESR = "undefined")
     public void createEvent_caller() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -2761,7 +2763,10 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "undefined",
+            EDGE = "undefined",
+            FF = "undefined",
+            FF_ESR = "undefined")
     public void caller() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

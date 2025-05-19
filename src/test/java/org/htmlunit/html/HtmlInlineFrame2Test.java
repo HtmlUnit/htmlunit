@@ -14,9 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.CHROME;
-import static org.htmlunit.junit.annotation.TestedBrowser.EDGE;
-
 import java.io.File;
 import java.net.URL;
 import java.util.Map;
@@ -27,7 +24,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -218,7 +214,8 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "about:blank",
             CHROME = "about://unsupported",
             EDGE = "about://unsupported")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "about:blank",
+            EDGE = "about:blank")
     public void aboutSrc() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

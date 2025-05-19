@@ -36,7 +36,6 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.junit.annotation.Retry;
 import org.htmlunit.util.Cookie;
 import org.junit.Test;
@@ -143,7 +142,11 @@ public class WebClient2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
+    @Alerts({"1", "1", "exiting"})
+    @HtmlUnitNYI(CHROME = {"1", "0", ""},
+            EDGE = {"1", "0", ""},
+            FF = {"1", "0", ""},
+            FF_ESR = {"1", "0", ""})
     public void serialization_withJSBackgroundTasks() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -157,16 +160,20 @@ public class WebClient2Test extends SimpleWebTestCase {
             + "  var intervalId = setInterval(foo, 10);\n"
             + "</script></head>\n"
             + "<body></body></html>";
+
+        final String[] expected = getExpectedAlerts();
+
+        setExpectedAlerts();
         final HtmlPage page = loadPageWithAlerts(html);
         // verify that 1 background job exists
-        assertEquals(1, page.getEnclosingWindow().getJobManager().getJobCount());
+        assertEquals(Integer.parseInt(expected[0]), page.getEnclosingWindow().getJobManager().getJobCount());
 
         final byte[] bytes = SerializationUtils.serialize(page);
         page.getWebClient().close();
 
         // deserialize page and verify that 1 background job exists
         final HtmlPage clonedPage = (HtmlPage) SerializationUtils.deserialize(bytes);
-        assertEquals(1, clonedPage.getEnclosingWindow().getJobManager().getJobCount());
+        assertEquals(Integer.parseInt(expected[1]), clonedPage.getEnclosingWindow().getJobManager().getJobCount());
 
         // configure a new CollectingAlertHandler (in fact it has surely already one and we could get and cast it)
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
@@ -178,7 +185,8 @@ public class WebClient2Test extends SimpleWebTestCase {
 
         clonedPage.getWebClient().waitForBackgroundJavaScriptStartingBefore(100);
         assertEquals(0, clonedPage.getEnclosingWindow().getJobManager().getJobCount());
-        final String[] expectedAlerts = {"exiting"};
+
+        final String[] expectedAlerts = {expected[2]};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

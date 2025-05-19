@@ -21,7 +21,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -176,7 +175,10 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("second fourth third first")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "fourth second third first",
+            EDGE = "fourth second third first",
+            FF = "fourth second third first",
+            FF_ESR = "fourth second third first")
     public void frameOnloadFrameInFrame() throws Exception {
         final String html = "<FRAMESET rows='50%,50%' onload=\"document.title += ' first'\">\n"
             + "  <FRAME name='second' src='second.html'>\n"

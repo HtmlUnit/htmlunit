@@ -14,9 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.CHROME;
-import static org.htmlunit.junit.annotation.TestedBrowser.EDGE;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
@@ -26,7 +23,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -106,7 +103,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "2",
             CHROME = "1",
             EDGE = "1")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "2",
+            EDGE = "2")
     public void loadImageUnknown2() throws Exception {
         loadImageImportNodeHtml("src='unknown'");
     }
@@ -161,7 +159,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "2",
             CHROME = "1",
             EDGE = "1")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "2",
+            EDGE = "2")
     public void loadImageWrongType2() throws Exception {
         loadImageImportNodeHtml("src='" + URL_FIRST + "'");
     }
@@ -420,7 +419,10 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"58", "29", "58", "29"},
             FF = {"58", "29", "70", "118"},
             FF_ESR = {"58", "29", "68", "118"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"18", "18", "18", "18"},
+            EDGE = {"18", "18", "18", "18"},
+            FF = {"18", "18", "18", "18"},
+            FF_ESR = {"18", "18", "18", "18"})
     public void clickWithCoordinates() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);

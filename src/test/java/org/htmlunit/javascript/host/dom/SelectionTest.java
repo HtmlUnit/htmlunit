@@ -17,7 +17,7 @@ package org.htmlunit.javascript.host.dom;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -257,7 +257,18 @@ public class SelectionTest extends WebDriverTestCase {
             FF_ESR = {"1:null/0/null/0/true/None/0/",
                       "2:s1/1/s3/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
                       "3:null/0/null/0/true/None/0/"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"1:null/0/null/0/true/None/0/",
+                           "2:s1/0/s1/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
+                           "3:null/0/null/0/true/None/0/"},
+            EDGE = {"1:null/0/null/0/true/None/0/",
+                    "2:s1/0/s1/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
+                    "3:null/0/null/0/true/None/0/"},
+            FF = {"1:null/0/null/0/true/None/0/",
+                    "2:s1/0/s1/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
+                    "3:null/0/null/0/true/None/0/"},
+            FF_ESR = {"1:null/0/null/0/true/None/0/",
+                    "2:s1/0/s1/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
+                    "3:null/0/null/0/true/None/0/"})
     public void selectAllChildrenAddRange() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -315,7 +326,22 @@ public class SelectionTest extends WebDriverTestCase {
                       "2:s1/1/s2/1/false/Range/2/abcxyz[abc[xyz",
                       "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
                       "4:null/0/null/0/true/None/0/"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"1:null/0/null/0/true/None/0/",
+                           "2:s1/0/s1/1/false/Range/2/abcxyz[abc[xyz",
+                           "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
+                           "4:null/0/null/0/true/None/0/"},
+            EDGE = {"1:null/0/null/0/true/None/0/",
+                    "2:s1/0/s1/1/false/Range/2/abcxyz[abc[xyz",
+                    "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
+                    "4:null/0/null/0/true/None/0/"},
+            FF = {"1:null/0/null/0/true/None/0/",
+                    "2:s1/0/s1/1/false/Range/2/abcxyz[abc[xyz",
+                    "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
+                    "4:null/0/null/0/true/None/0/"},
+            FF_ESR = {"1:null/0/null/0/true/None/0/",
+                    "2:s1/0/s1/1/false/Range/2/abcxyz[abc[xyz",
+                    "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
+                    "4:null/0/null/0/true/None/0/"})
     public void addRangeAddRange() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"

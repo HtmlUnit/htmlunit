@@ -26,7 +26,8 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -37,6 +38,7 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Hans Donner
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlFrameSetTest extends SimpleWebTestCase {
@@ -348,7 +350,11 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @Alerts("3")
+    @HtmlUnitNYI(CHROME = "2",
+            EDGE = "2",
+            FF = "2",
+            FF_ESR = "2")
     public void onunload() throws Exception {
         final String mainHtml =
             "<frameset onunload=\"document.location.href='3.html'\">\n"
@@ -383,7 +389,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         final HtmlPage mainPage = webClient.getPage(URL_FIRST);
         final HtmlPage framePage = (HtmlPage) mainPage.getFrameByName("f1").getEnclosedPage();
         final HtmlPage page = framePage.getHtmlElementById("myButton").click();
-        assertEquals("3", page.getTitleText());
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
 
     /**

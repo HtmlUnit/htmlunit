@@ -14,13 +14,10 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.CHROME;
-import static org.htmlunit.junit.annotation.TestedBrowser.EDGE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -183,7 +180,8 @@ public class PopStateEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "InvalidStateError/DOMException",
             FF = "ctor NotSupportedError",
             FF_ESR = "ctor NotSupportedError")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "dispatched",
+            EDGE = "dispatched")
     public void dispatchEventWithoutInit() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

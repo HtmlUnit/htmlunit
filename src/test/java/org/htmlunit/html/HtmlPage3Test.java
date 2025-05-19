@@ -15,8 +15,6 @@
 package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static org.htmlunit.junit.annotation.TestedBrowser.FF;
-import static org.htmlunit.junit.annotation.TestedBrowser.FF_ESR;
 
 import java.net.URL;
 import java.util.List;
@@ -26,7 +24,7 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -481,7 +479,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "error",
             CHROME = "Something",
             EDGE = "Something")
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(FF = "Something",
+            FF_ESR = "Something")
     public void shouldBeAbleToFindElementByXPathInXmlDocument() throws Exception {
         final String html = "<?xml version='1.0' encoding='UTF-8'?>\n"
             + "<html xmlns='http://www.w3.org/1999/xhtml'\n"

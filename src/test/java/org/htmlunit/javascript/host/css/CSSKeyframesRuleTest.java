@@ -17,7 +17,7 @@ package org.htmlunit.javascript.host.css;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -84,7 +84,10 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object CSSKeyframesRule]", "identifier"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"[object CSSKeyframesRule]", "undefined"},
+            EDGE = {"[object CSSKeyframesRule]", "undefined"},
+            FF = {"[object CSSKeyframesRule]", "undefined"},
+            FF_ESR = {"[object CSSKeyframesRule]", "undefined"})
     public void name() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -115,7 +118,10 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object CSSRuleList]")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "undefined",
+            EDGE = "undefined",
+            FF = "undefined",
+            FF_ESR = "undefined")
     public void cssRules() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"

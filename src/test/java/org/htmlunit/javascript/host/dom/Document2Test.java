@@ -14,16 +14,13 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.FF;
-import static org.htmlunit.junit.annotation.TestedBrowser.FF_ESR;
-
 import java.net.URL;
 
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -465,7 +462,8 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true", "true", "true"},
             FF = {"false", "false", "false"},
             FF_ESR = {"false", "false", "false"})
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(FF = {"true", "true", "true"},
+            FF_ESR = {"true", "true", "true"})
     public void queryCommandEnabledDesignMode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"

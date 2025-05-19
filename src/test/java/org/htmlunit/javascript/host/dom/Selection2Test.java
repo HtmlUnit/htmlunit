@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.CHROME;
-import static org.htmlunit.junit.annotation.TestedBrowser.EDGE;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +28,7 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -195,7 +192,8 @@ public class Selection2Test extends SimpleWebTestCase {
     @Alerts(DEFAULT = {"0", "1"},
             CHROME = {"0", "3"},
             EDGE = {"0", "3"})
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = {"0", "1"},
+            EDGE = {"0", "1"})
     public void extend() throws Exception {
         test("try{selection.extend(s2, 1)}catch(e){alert('exception')}", "selection.focusOffset", "x");
     }

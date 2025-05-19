@@ -48,6 +48,7 @@ import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.css.StyleElement;
 import org.htmlunit.css.WrappedCssStyleDeclaration;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.DOMExceptionImpl;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -723,7 +724,13 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             fixedValue = "";
         }
 
-        styleDeclaration_.setCssText(fixedValue);
+        try {
+            styleDeclaration_.setCssText(fixedValue);
+        }
+        catch (final DOMExceptionImpl e) {
+            // parsing errors handled this way
+            styleDeclaration_.setCssText("");
+        }
     }
 
     /**

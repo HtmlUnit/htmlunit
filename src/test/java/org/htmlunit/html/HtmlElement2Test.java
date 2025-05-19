@@ -23,7 +23,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -174,7 +174,10 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Alerts("something")
     @BuggyWebDriver(FF = "",
             FF_ESR = "")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "initialsomething",
+            EDGE = "initialsomething",
+            FF = "initialsomething",
+            FF_ESR = "initialsomething")
     //TODO: fails because of HTMLElement.getContentEditable doesn't detect DomElement.ATTRIBUTE_VALUE_EMPTY
     // this could be a general attribute issue
     public void contentEditable() throws Exception {

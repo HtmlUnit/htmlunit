@@ -30,7 +30,6 @@ import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
@@ -129,7 +128,11 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @Alerts("0")
+    @HtmlUnitNYI(CHROME = "1",
+            EDGE = "1",
+            FF = "1",
+            FF_ESR = "1")
     public void escapeRequestQuery2a() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
@@ -138,7 +141,7 @@ public class WebClient3Test extends WebDriverTestCase {
 
         // real browsers do not send this request
         // 'Unable to parse URI query'
-        assertEquals(0, getMockWebConnection().getRequestCount());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
     }
 
     /**
@@ -545,7 +548,11 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @NotYetImplemented
+    @Alerts({})
+    @HtmlUnitNYI(CHROME = "executed",
+            EDGE = "executed",
+            FF = "executed",
+            FF_ESR = "executed")
     public void javascriptContentDetectorContentTypeApplicationJavascript() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", MimeType.TEXT_JAVASCRIPT);

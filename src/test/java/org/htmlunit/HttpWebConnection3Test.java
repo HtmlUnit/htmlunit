@@ -311,7 +311,11 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @Alerts("para=%u65E5")
+    @HtmlUnitNYI(CHROME = "para=%25u65E5",
+            EDGE = "para=%25u65E5",
+            FF = "para=%25u65E5",
+            FF_ESR = "para=%25u65E5")
     public void queryString() throws Exception {
         final String response = "HTTP/1.1 302 Found\r\n"
                 + "Content-Length: 0\r\n"
@@ -323,7 +327,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             driver.get("http://localhost:" + primitiveWebServer.getPort() + "?para=%u65E5");
             assertTrue(primitiveWebServer.getRequests().get(0),
-                        primitiveWebServer.getRequests().get(0).contains("para=%u65E5"));
+                        primitiveWebServer.getRequests().get(0).contains(getExpectedAlerts()[0]));
         }
     }
 
@@ -1449,7 +1453,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Sec-Fetch-Site: same-origin",
                       "Sec-Fetch-User: ?1", /* wrong */
                       "Priority: u=0, i"})
-    // this fails on our CI but i have no idea why
+    // this fails on our CI but I have no idea why
     // seems like the request for downloading the script never reaches the
     // PrimitiveWebServer
     @NotYetImplemented(value = {}, os = OS.Linux)

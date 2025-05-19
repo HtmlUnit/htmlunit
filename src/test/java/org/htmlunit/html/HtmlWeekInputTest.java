@@ -14,13 +14,10 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.FF;
-import static org.htmlunit.junit.annotation.TestedBrowser.FF_ESR;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -117,7 +114,8 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "36",
             CHROME = "",
             EDGE = "")
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(FF = "",
+            FF_ESR = "")
     public void typing() throws Exception {
         final String htmlContent = DOCTYPE_HTML
             + "<html><head><title>foo</title></head><body>\n"

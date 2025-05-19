@@ -18,7 +18,8 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +31,7 @@ import org.junit.runner.RunWith;
  * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTableRowTest extends SimpleWebTestCase {
@@ -229,11 +231,16 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * Ensure that a script can set the disabled property on a DOM node.
      */
     @Test
-    @NotYetImplemented
+    @Alerts("disabled")
+    @HtmlUnitNYI(CHROME = "",
+            EDGE = "",
+            FF = "",
+            FF_ESR = "")
     public void cloneScriptCanSetDisabledOnCell() {
         final String cmd = "document.getElementById('cell').disabled = 'true'";
         page_.executeJavaScript(cmd);
-        assertEquals("disabled", cell_.getAttribute("disabled"));
+
+        assertEquals(getExpectedAlerts()[0], cell_.getAttribute("disabled"));
     }
 
     /**
@@ -266,13 +273,17 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * that same attribute on the clone.
      */
     @Test
-    @NotYetImplemented
+    @Alerts({"disabled", ""})
+    @HtmlUnitNYI(CHROME = {"", ""},
+            EDGE = {"", ""},
+            FF = {"", ""},
+            FF_ESR = {"", ""})
     public void cloneScriptSetDisabledIndependentOfOriginal() {
         final String cmd = "document.getElementById('cell').disabled = 'true'";
         page_.executeJavaScript(cmd);
 
-        assertEquals("disabled", cell_.getAttribute("disabled"));
-        assertFalse("disabled".equals(cellClone_.getAttribute("disabled")));
+        assertEquals(getExpectedAlerts()[0], cell_.getAttribute("disabled"));
+        assertEquals(getExpectedAlerts()[1], cellClone_.getAttribute("disabled"));
     }
 
     /**
