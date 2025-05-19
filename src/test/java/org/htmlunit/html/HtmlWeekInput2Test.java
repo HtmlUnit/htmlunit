@@ -35,7 +35,7 @@ public class HtmlWeekInput2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts({"true", "false", "true", "true", "true", "true"})
-    @HtmlUnitNYI(FF= {"true", "true", "true", "true", "true", "true"},
+    @HtmlUnitNYI(FF = {"true", "true", "true", "true", "true", "true"},
             FF_ESR = {"true", "true", "true", "true", "true", "true"})
     public void minValidation() throws Exception {
         final String htmlContent = DOCTYPE_HTML
@@ -78,7 +78,7 @@ public class HtmlWeekInput2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts({"true", "true", "true", "false", "true", "true"})
-    @HtmlUnitNYI(FF= {"true", "true", "true", "true", "true", "true"},
+    @HtmlUnitNYI(FF = {"true", "true", "true", "true", "true", "true"},
             FF_ESR = {"true", "true", "true", "true", "true", "true"})
     public void naxValidation() throws Exception {
         final String htmlContent = DOCTYPE_HTML

@@ -34,9 +34,9 @@ public class HtmlMonthInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "false" , "true", "true", "true", "true"})
-    @HtmlUnitNYI(FF = {"true", "true" , "true", "true", "true", "true"},
-            FF_ESR = {"true", "true" , "true", "true", "true", "true"})
+    @Alerts({"true", "false", "true", "true", "true", "true"})
+    @HtmlUnitNYI(FF = {"true", "true", "true", "true", "true", "true"},
+            FF_ESR = {"true", "true", "true", "true", "true", "true"})
     public void minValidation() throws Exception {
         final String htmlContent = DOCTYPE_HTML
                 + "<html>\n"
@@ -78,9 +78,9 @@ public class HtmlMonthInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "true" , "true", "false", "true", "true"})
-    @HtmlUnitNYI(FF = {"true", "true" , "true", "true", "true", "true"},
-            FF_ESR = {"true", "true" , "true", "true", "true", "true"})
+    @Alerts({"true", "true", "true", "false", "true", "true"})
+    @HtmlUnitNYI(FF = {"true", "true", "true", "true", "true", "true"},
+            FF_ESR = {"true", "true", "true", "true", "true", "true"})
     public void maxValidation() throws Exception {
         final String htmlContent = DOCTYPE_HTML
                 + "<html>\n"

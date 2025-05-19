@@ -234,10 +234,15 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", ""})
-    @HtmlUnitNYI(CHROME = {"1", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)"},
-            EDGE = {"1", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)"},
-            FF = {"1", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)"},
-            FF_ESR = {"1", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)"})
+    @HtmlUnitNYI(CHROME = {"1",
+                           "progid:DXImageTransform.Microsoft.AlphaImageLoader"
+                                   + "(src=rightCorner.gif, sizingMethod=crop)"},
+            EDGE = {"1",
+                    "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)"},
+            FF = {"1",
+                  "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)"},
+            FF_ESR = {"1",
+                      "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=rightCorner.gif, sizingMethod=crop)"})
     public void oldIEStyleFilter() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"

@@ -119,7 +119,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
                     // success
                     break;
                 }
-                catch (AssertionError ignored) {
+                catch (final AssertionError ignored) {
                     // fails, give it another try
                 }
             }

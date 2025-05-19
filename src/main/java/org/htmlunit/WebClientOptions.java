@@ -744,7 +744,6 @@ public class WebClientOptions implements Serializable {
         nekoReaderBufferSize_ = nekoReaderBufferSize;
     }
 
-
     /**
      * Enables/disables WebSocket support. By default, this property is enabled.
      *

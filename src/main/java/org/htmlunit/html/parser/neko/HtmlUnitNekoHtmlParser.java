@@ -84,11 +84,11 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
     }
 
     /**
-     *{@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
-    public void parseFragment(final WebClient webClient, final DomNode parent, final DomNode context, final String source,
-            final boolean createdByJavascript)
+    public void parseFragment(final WebClient webClient, final DomNode parent, final DomNode context,
+            final String source, final boolean createdByJavascript)
         throws SAXException, IOException {
         final Page page = parent.getPage();
         if (!(page instanceof HtmlPage)) {

@@ -45,23 +45,35 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
         assertEquals(original.isJavaScriptEnabled(), deserialized.isJavaScriptEnabled());
         assertEquals(original.isCssEnabled(), deserialized.isCssEnabled());
 
-        assertEquals(original.isPrintContentOnFailingStatusCode(), deserialized.isPrintContentOnFailingStatusCode());
+        assertEquals(original.isPrintContentOnFailingStatusCode(),
+                        deserialized.isPrintContentOnFailingStatusCode());
         assertEquals(original.isThrowExceptionOnFailingStatusCode(),
                         deserialized.isThrowExceptionOnFailingStatusCode());
-        assertEquals(original.isThrowExceptionOnScriptError(), deserialized.isThrowExceptionOnScriptError());
-        assertEquals(original.isPopupBlockerEnabled(), deserialized.isPopupBlockerEnabled());
-        assertEquals(original.isRedirectEnabled(), deserialized.isRedirectEnabled());
+        assertEquals(original.isThrowExceptionOnScriptError(),
+                        deserialized.isThrowExceptionOnScriptError());
+        assertEquals(original.isPopupBlockerEnabled(),
+                        deserialized.isPopupBlockerEnabled());
+        assertEquals(original.isRedirectEnabled(),
+                        deserialized.isRedirectEnabled());
 
-        assertEquals(original.isGeolocationEnabled(), deserialized.isGeolocationEnabled());
-        assertEquals(original.getGeolocation(), deserialized.getGeolocation());
+        assertEquals(original.isGeolocationEnabled(),
+                        deserialized.isGeolocationEnabled());
+        assertEquals(original.getGeolocation(),
+                        deserialized.getGeolocation());
 
-        assertEquals(original.getNekoReaderBufferSize(), deserialized.getNekoReaderBufferSize());
+        assertEquals(original.getNekoReaderBufferSize(),
+                        deserialized.getNekoReaderBufferSize());
 
-        assertEquals(original.isWebSocketEnabled(), deserialized.isWebSocketEnabled());
-        assertEquals(original.getWebSocketMaxTextMessageSize(), deserialized.getWebSocketMaxTextMessageSize());
-        assertEquals(original.getWebSocketMaxTextMessageBufferSize(), deserialized.getWebSocketMaxTextMessageBufferSize());
-        assertEquals(original.getWebSocketMaxBinaryMessageSize(), deserialized.getWebSocketMaxBinaryMessageSize());
-        assertEquals(original.getWebSocketMaxBinaryMessageBufferSize(), deserialized.getWebSocketMaxBinaryMessageBufferSize());
+        assertEquals(original.isWebSocketEnabled(),
+                        deserialized.isWebSocketEnabled());
+        assertEquals(original.getWebSocketMaxTextMessageSize(),
+                        deserialized.getWebSocketMaxTextMessageSize());
+        assertEquals(original.getWebSocketMaxTextMessageBufferSize(),
+                        deserialized.getWebSocketMaxTextMessageBufferSize());
+        assertEquals(original.getWebSocketMaxBinaryMessageSize(),
+                        deserialized.getWebSocketMaxBinaryMessageSize());
+        assertEquals(original.getWebSocketMaxBinaryMessageBufferSize(),
+                        deserialized.getWebSocketMaxBinaryMessageBufferSize());
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
     }
@@ -119,11 +131,16 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
 
         assertEquals(original.getNekoReaderBufferSize(), deserialized.getNekoReaderBufferSize());
 
-        assertEquals(original.isWebSocketEnabled(), deserialized.isWebSocketEnabled());
-        assertEquals(original.getWebSocketMaxTextMessageSize(), deserialized.getWebSocketMaxTextMessageSize());
-        assertEquals(original.getWebSocketMaxTextMessageBufferSize(), deserialized.getWebSocketMaxTextMessageBufferSize());
-        assertEquals(original.getWebSocketMaxBinaryMessageSize(), deserialized.getWebSocketMaxBinaryMessageSize());
-        assertEquals(original.getWebSocketMaxBinaryMessageBufferSize(), deserialized.getWebSocketMaxBinaryMessageBufferSize());
+        assertEquals(original.isWebSocketEnabled(),
+                        deserialized.isWebSocketEnabled());
+        assertEquals(original.getWebSocketMaxTextMessageSize(),
+                        deserialized.getWebSocketMaxTextMessageSize());
+        assertEquals(original.getWebSocketMaxTextMessageBufferSize(),
+                        deserialized.getWebSocketMaxTextMessageBufferSize());
+        assertEquals(original.getWebSocketMaxBinaryMessageSize(),
+                        deserialized.getWebSocketMaxBinaryMessageSize());
+        assertEquals(original.getWebSocketMaxBinaryMessageBufferSize(),
+                        deserialized.getWebSocketMaxBinaryMessageBufferSize());
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
     }

@@ -261,7 +261,8 @@ public class Range extends AbstractRange {
         try {
             final WebClient webClient = page.getWebClient();
             webClient.getPageCreator().getHtmlParser()
-                    .parseFragment(webClient, fragment, internGetStartContainer().getDomNodeOrDie(), valueAsString, false);
+                    .parseFragment(webClient, fragment,
+                            internGetStartContainer().getDomNodeOrDie(), valueAsString, false);
         }
         catch (final Exception e) {
             LogFactory.getLog(Range.class).error("Unexpected exception occurred in createContextualFragment", e);

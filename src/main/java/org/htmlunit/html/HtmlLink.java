@@ -14,6 +14,8 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_RESPONSE_TYPE_FOR_STYLESHEET;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,7 +24,6 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
@@ -211,7 +212,7 @@ public class HtmlLink extends HtmlElement {
                 if (response.isSuccess()) {
                     if (isStylesheetRequest
                             && webclient.getBrowserVersion()
-                                 .hasFeature(BrowserVersionFeatures.HTMLLINK_CHECK_RESPONSE_TYPE_FOR_STYLESHEET)) {
+                                 .hasFeature(HTMLLINK_CHECK_RESPONSE_TYPE_FOR_STYLESHEET)) {
 
                         if (org.apache.commons.lang3.StringUtils.isNotBlank(type)
                                 && !MimeType.TEXT_CSS.equals(type)) {

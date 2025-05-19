@@ -1459,7 +1459,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             return NOT_FOUND;
         }
 
-
         // May be attempting to retrieve a frame by name.
         final HtmlPage page = (HtmlPage) domNode.getPage();
         Object result = getFrameWindowByName(page, name);

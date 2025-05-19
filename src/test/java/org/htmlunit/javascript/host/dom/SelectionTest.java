@@ -264,11 +264,11 @@ public class SelectionTest extends WebDriverTestCase {
                     "2:s1/0/s1/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
                     "3:null/0/null/0/true/None/0/"},
             FF = {"1:null/0/null/0/true/None/0/",
-                    "2:s1/0/s1/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
-                    "3:null/0/null/0/true/None/0/"},
+                  "2:s1/0/s1/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
+                  "3:null/0/null/0/true/None/0/"},
             FF_ESR = {"1:null/0/null/0/true/None/0/",
-                    "2:s1/0/s1/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
-                    "3:null/0/null/0/true/None/0/"})
+                      "2:s1/0/s1/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
+                      "3:null/0/null/0/true/None/0/"})
     public void selectAllChildrenAddRange() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -335,13 +335,13 @@ public class SelectionTest extends WebDriverTestCase {
                     "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
                     "4:null/0/null/0/true/None/0/"},
             FF = {"1:null/0/null/0/true/None/0/",
-                    "2:s1/0/s1/1/false/Range/2/abcxyz[abc[xyz",
-                    "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
-                    "4:null/0/null/0/true/None/0/"},
+                  "2:s1/0/s1/1/false/Range/2/abcxyz[abc[xyz",
+                  "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
+                  "4:null/0/null/0/true/None/0/"},
             FF_ESR = {"1:null/0/null/0/true/None/0/",
-                    "2:s1/0/s1/1/false/Range/2/abcxyz[abc[xyz",
-                    "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
-                    "4:null/0/null/0/true/None/0/"})
+                      "2:s1/0/s1/1/false/Range/2/abcxyz[abc[xyz",
+                      "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
+                      "4:null/0/null/0/true/None/0/"})
     public void addRangeAddRange() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"

@@ -78,10 +78,10 @@ public interface HTMLParser {
      * @throws IOException if an IO error occurs
      *
      * @deprecated as of version 4.12.0; use
-     * {@link #parseFragment(WebClient, DomNode, DomNode, String, boolean)} instead.
+     *     {@link #parseFragment(WebClient, DomNode, DomNode, String, boolean)} instead.
      */
     @Deprecated
-    default void parseFragment(DomNode parent, String source) throws SAXException, IOException {
+    default void parseFragment(final DomNode parent, final String source) throws SAXException, IOException {
         parseFragment(null, parent, parent, source, false);
     }
 
@@ -110,11 +110,11 @@ public interface HTMLParser {
      * @throws IOException if an IO error occurs
      *
      * @deprecated as of version 4.12.0; use
-     * {@link #parseFragment(WebClient, DomNode, DomNode, String, boolean)} instead.
+     *     {@link #parseFragment(WebClient, DomNode, DomNode, String, boolean)} instead.
      */
     @Deprecated
-    default void parseFragment(DomNode parent, DomNode context, String source,
-            boolean createdByJavascript) throws SAXException, IOException {
+    default void parseFragment(final DomNode parent, final DomNode context, final String source,
+            final boolean createdByJavascript) throws SAXException, IOException {
         parseFragment(null, parent, context, source, createdByJavascript);
     }
 
@@ -141,10 +141,11 @@ public interface HTMLParser {
      * @throws IOException if there is an IO error
      *
      * @deprecated as of version 4.12.0; use
-     * {@link #parse(WebClient, WebResponse, HtmlPage, boolean, boolean)} instead.
+     *     {@link #parse(WebClient, WebResponse, HtmlPage, boolean, boolean)} instead.
      */
     @Deprecated
-    default void parse(WebResponse webResponse, HtmlPage page, boolean xhtml, boolean createdByJavascript) throws IOException {
+    default void parse(final WebResponse webResponse, final HtmlPage page, final boolean xhtml,
+            final boolean createdByJavascript) throws IOException {
         parse(null, webResponse, page, xhtml, createdByJavascript);
     }
 }

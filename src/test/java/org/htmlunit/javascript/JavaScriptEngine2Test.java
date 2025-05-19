@@ -1275,7 +1275,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         try {
             loadPageVerifyTitle2(html);
         }
-        catch (WebDriverException e) {
+        catch (final WebDriverException e) {
             assertTrue(e.getMessage(), e.getMessage().startsWith(getExpectedAlerts()[0]));
         }
     }
