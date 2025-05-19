@@ -269,8 +269,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"15", "15"},
             FF = {"12", "12"},
             FF_ESR = {"12", "12"})
-    @HtmlUnitNYI(CHROME = {"15", "15"},
-            EDGE = {"15", "15"})
+    @HtmlUnitNYI(CHROME = {"12", "12"},
+            EDGE = {"12", "12"})
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
