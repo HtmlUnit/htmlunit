@@ -17,7 +17,7 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -581,7 +581,10 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"100,42", "90,36"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"100,30", "90,30"},
+            EDGE = {"100,30", "90,30"},
+            FF = {"100,30", "90,30"},
+            FF_ESR = {"100,30", "90,30"})
     public void cellWidthHeightWithBorderCollapse() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body><table id='t'><tr>\n"
@@ -608,7 +611,10 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"84,42", "84,42", "100,42", "82,36", "88,36", "90,36"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"84,30", "80,30", "100,30", "82,30", "80,30", "90,30"},
+            EDGE = {"84,30", "80,30", "100,30", "82,30", "80,30", "90,30"},
+            FF = {"84,30", "80,30", "100,30", "82,30", "80,30", "90,30"},
+            FF_ESR = {"84,30", "80,30", "100,30", "82,30", "80,30", "90,30"})
     public void cellWidthHeightWithBorderCollapseCellsInRow() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body><table id='t'><tr>\n"
@@ -645,7 +651,10 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"84,34", "84,34", "84,34", "82,32", "82,32", "82,32"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"84,30", "84,30", "84,30", "82,30", "82,30", "82,30"},
+            EDGE = {"84,30", "84,30", "84,30", "82,30", "82,30", "82,30"},
+            FF = {"84,30", "84,30", "84,30", "82,30", "82,30", "82,30"},
+            FF_ESR = {"84,30", "84,30", "84,30", "82,30", "82,30", "82,30"})
     public void cellWidthHeightWithBorderCollapseSameCellLayout() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body><table id='t'><tr>\n"

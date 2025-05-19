@@ -22,7 +22,6 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -93,8 +92,11 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"opt-a", "opt-b"},
             CHROME = "opt-b")
     @BuggyWebDriver({"opt-a", "b"})
-    @NotYetImplemented
-    //TODO: Needs further investigation of clicking an option without clicking the select
+    @HtmlUnitNYI(CHROME = {"opt-a", "b"},
+            EDGE = {"opt-a", "b"},
+            FF = {"opt-a", "b"},
+            FF_ESR = {"opt-a", "b"})
+    // TODO: Needs further investigation of clicking an option without clicking the select
     // See the first comment in http://code.google.com/p/selenium/issues/detail?id=2131#c1
     // Additionally, FF and Chrome drivers look buggy as they don't allow to capture
     // what happens when running the test manually in the browser.

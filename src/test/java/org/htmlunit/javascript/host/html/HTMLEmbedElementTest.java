@@ -14,13 +14,10 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.FF;
-import static org.htmlunit.junit.annotation.TestedBrowser.FF_ESR;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -43,7 +40,10 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                   "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             FF_ESR = {"left", "right", "bottom", "middle", "top",
                       "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""})
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(FF = {"left", "right", "bottom", "middle", "top",
+                       "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
+            FF_ESR = {"left", "right", "bottom", "middle", "top",
+                      "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""})
     public void getAlign() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -80,7 +80,10 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                   "absbottom", "absmiddle", "bottom", "texttop"},
             FF_ESR = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                       "absbottom", "absmiddle", "bottom", "texttop"})
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(FF = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
+                       "absbottom", "absmiddle", "baseline", "texttop"},
+            FF_ESR = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
+                      "absbottom", "absmiddle", "baseline", "texttop"})
     public void setAlign() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"

@@ -17,7 +17,7 @@ package org.htmlunit.javascript.host.svg;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -83,7 +83,10 @@ public class SVGTSpanElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object SVGTSpanElement]", "109.4"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"[object SVGTSpanElement]", "120.0"},
+            EDGE = {"[object SVGTSpanElement]", "120.0"},
+            FF = {"[object SVGTSpanElement]", "120.0"},
+            FF_ESR = {"[object SVGTSpanElement]", "120.0"})
     public void getComputedTextLength() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

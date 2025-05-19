@@ -14,14 +14,10 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.CHROME;
-import static org.htmlunit.junit.annotation.TestedBrowser.EDGE;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -182,7 +178,10 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "true"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"true", "false"},
+            EDGE = {"true", "false"},
+            FF = {"true", "false"},
+            FF_ESR = {"true", "false"})
     public void offsetWidth_spanWithDifferentFonts() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -270,7 +269,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"15", "15"},
             FF = {"12", "12"},
             FF_ESR = {"12", "12"})
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = {"15", "15"},
+            EDGE = {"15", "15"})
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

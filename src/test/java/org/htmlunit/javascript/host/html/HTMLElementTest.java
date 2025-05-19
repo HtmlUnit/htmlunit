@@ -14,16 +14,12 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.FF;
-import static org.htmlunit.junit.annotation.TestedBrowser.FF_ESR;
-
 import java.net.URL;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -231,7 +227,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined"},
             CHROME = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"},
             EDGE = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"})
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(FF = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"},
+            FF_ESR = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"})
     public void attributesAccess() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -1205,7 +1202,14 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts("Outer = <p id=\"myNode\">New  cell value\n"
                     + "  <textarea id=\"myLog\" cols=\"80\" rows=\"22\"></textarea>\n\n</p>")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "Outer = <p id=\"myNode\">New  cell value\n"
+                            + "  <textarea id=\"myLog\" cols=\"80\" rows=\"22\"></textarea>\n</p>",
+            EDGE = "Outer = <p id=\"myNode\">New  cell value\n"
+                    + "  <textarea id=\"myLog\" cols=\"80\" rows=\"22\"></textarea>\n</p>",
+            FF = "Outer = <p id=\"myNode\">New  cell value\n"
+                    + "  <textarea id=\"myLog\" cols=\"80\" rows=\"22\"></textarea>\n</p>",
+            FF_ESR = "Outer = <p id=\"myNode\">New  cell value\n"
+                    + "  <textarea id=\"myLog\" cols=\"80\" rows=\"22\"></textarea>\n</p>")
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
         loadPageVerifyTextArea2(html);
@@ -1462,7 +1466,14 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
              "New = <div><div></div></div>", "Children: 1"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
+                           "New = <div></div><div></div>", "Children: 2"},
+            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <div></div><div></div>", "Children: 2"},
+            FF = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
+                  "New = <div></div><div></div>", "Children: 2"},
+            FF_ESR = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
+                      "New = <div></div><div></div>", "Children: 2"})
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
         loadPageVerifyTextArea2(html);
@@ -6169,7 +6180,14 @@ public class HTMLElementTest extends WebDriverTestCase {
                     + "mouseup--body\nmouseup--undefined\nclick-body-body\nclick-body-undefined",
             FF_ESR = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
                     + "mouseup--body\nmouseup--undefined\nclick-body-body\nclick-body-undefined")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
+                    + "mouseup-over-over\nmouseup-over-body\nmouseup-over-undefined",
+            EDGE = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
+                    + "mouseup-over-over\nmouseup-over-body\nmouseup-over-undefined",
+            FF = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
+                    + "mouseup-over-over\nmouseup-over-body\nmouseup-over-undefined",
+            FF_ESR = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
+                    + "mouseup-over-over\nmouseup-over-body\nmouseup-over-undefined")
     public void clickAnElementThatDisappears() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

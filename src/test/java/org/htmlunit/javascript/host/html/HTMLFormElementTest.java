@@ -29,7 +29,7 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -2329,7 +2329,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"", "foo4?foo=", "script4.js"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"", "foo0?foo=", "foo1?foo=", "foo2?foo=", "foo3?foo=", "foo4?foo=", "script4.js"},
+            EDGE = {"", "foo0?foo=", "foo1?foo=", "foo2?foo=", "foo3?foo=", "foo4?foo=", "script4.js"},
+            FF = {"", "foo0?foo=", "foo1?foo=", "foo2?foo=", "foo3?foo=", "foo4?foo=", "script4.js"},
+            FF_ESR = {"", "foo0?foo=", "foo1?foo=", "foo2?foo=", "foo3?foo=", "foo4?foo=", "script4.js"})
     public void submitTriggersRequestNotParsed() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
