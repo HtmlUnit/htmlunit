@@ -26,6 +26,7 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -153,7 +154,16 @@ public class YuiTest extends WebDriverTestCase {
                     "test_createlink", "test_selected_element", "test_dom_path"},
             FF = "test_createlink",
             FF_ESR = "test_createlink")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"test_blank_image", "test_insertimage", "test_image_props",
+                           "test_close_window", "test_bold", "test_selected_element",
+                           "test_dom_path", "test_createlink"},
+            EDGE = {"test_blank_image", "test_insertimage", "test_image_props",
+                    "test_close_window", "test_bold", "test_selected_element",
+                    "test_dom_path", "test_createlink"},
+            FF = {"test_blank_image", "test_insertimage", "test_image_props",
+                  "test_bold", "test_createlink", "test_hidden_elements"},
+            FF_ESR = {"test_blank_image", "test_insertimage", "test_image_props",
+                      "test_bold", "test_createlink", "test_hidden_elements"})
     public void editor() throws Exception {
         doTest("editor.html", Arrays.asList(getExpectedAlerts()));
     }

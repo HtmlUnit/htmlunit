@@ -20,7 +20,7 @@ import java.util.List;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,7 +57,10 @@ public class TinyMceTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"89", "0"},
             CHROME = {"89", "1"},
             EDGE = {"89", "1"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"70", "50"},
+            EDGE = {"70", "50"},
+            FF = {"70", "50"},
+            FF_ESR = {"70", "50"})
     public void basic() throws Exception {
         test("basic", Integer.parseInt(getExpectedAlerts()[0]), Integer.parseInt(getExpectedAlerts()[1]));
     }
@@ -86,7 +89,7 @@ public class TinyMceTest extends WebDriverTestCase {
 
         final WebElement failedSpan = result.findElement(By.xpath("./span[@class='bad']"));
         final int failed = Integer.parseInt(failedSpan.getText());
-        assertEquals(msg.toString(), expectedFailed, failed);
+        assertEquals(expectedFailed, failed);
     }
 
     /**
