@@ -1255,6 +1255,10 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"anonymous", "false", "false", "true"})
+    @HtmlUnitNYI(CHROME = "org.htmlunit.ScriptException: TypeError: Cannot read property \"constructor\" from null",
+            EDGE = "org.htmlunit.ScriptException: TypeError: Cannot read property \"constructor\" from null",
+            FF = "org.htmlunit.ScriptException: TypeError: Cannot read property \"constructor\" from null",
+            FF_ESR = "org.htmlunit.ScriptException: TypeError: Cannot read property \"constructor\" from null")
     public void generatorFunction() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>"
@@ -1268,7 +1272,12 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "log(Object.getOwnPropertyDescriptor(GeneratorFunction(), 'name').configurable);\n"
             + "</script></body></html>";
 
-        loadPageVerifyTitle2(html);
+        try {
+            loadPageVerifyTitle2(html);
+        }
+        catch (WebDriverException e) {
+            assertTrue(e.getMessage(), e.getMessage().startsWith(getExpectedAlerts()[0]));
+        }
     }
 
 }

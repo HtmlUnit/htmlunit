@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.junit.annotation.TestedBrowser.FF;
-import static org.htmlunit.junit.annotation.TestedBrowser.FF_ESR;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStreamWriter;
@@ -29,7 +26,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1168,7 +1164,10 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"0,0", "0,0", "0,0", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
             FF = {"0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"},
             FF_ESR = {"0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"})
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
+            EDGE = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
+            FF = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1210"},
+            FF_ESR = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1210"})
     public void scrolling1() throws Exception {
         scrolling(true);
     }
@@ -1227,7 +1226,10 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"0,0", "0,0", "0,0", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
             FF = {"0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"},
             FF_ESR = {"0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0"})
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
+            EDGE = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
+            FF = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1210"},
+            FF_ESR = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1210"})
     public void scrollingOptions1() throws Exception {
         scrollingOptions(true);
     }
