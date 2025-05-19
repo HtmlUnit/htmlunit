@@ -111,8 +111,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form></body></html>";
         final WebDriver webDriver = loadPage2(html);
 
-        WebElement elem = webDriver.findElement(By.name("button"));
-        Actions actions = new Actions(webDriver);
+        final WebElement elem = webDriver.findElement(By.name("button"));
+        final Actions actions = new Actions(webDriver);
         actions.moveToElement(elem).moveByOffset(1, 4).click().perform();
         if (useRealBrowser()) {
             Thread.sleep(400);
