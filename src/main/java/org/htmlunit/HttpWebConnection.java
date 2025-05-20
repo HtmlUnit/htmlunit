@@ -168,6 +168,11 @@ public class HttpWebConnection implements WebConnection {
      */
     @Override
     public WebResponse getResponse(final WebRequest webRequest) throws IOException {
+        // check if the host is known
+        // this shows a better error message for hosts blocked in the DNS
+        final URL url = webRequest.getUrl();
+        InetAddress.getByName(url.getHost());
+
         final HttpClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder(), webRequest);
 
         HttpUriRequest httpMethod = null;
@@ -180,7 +185,6 @@ public class HttpWebConnection implements WebConnection {
                         + " (reason: " + e.getMessage() + ")", e);
             }
 
-            final URL url = webRequest.getUrl();
             final HttpHost httpHost = new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
             final long startTime = System.currentTimeMillis();
 
