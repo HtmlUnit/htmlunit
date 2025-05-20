@@ -225,21 +225,23 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         formatter_ = new DateTimeFormatHelper(locale, chronology, pattern);
     }
 
-    private static String getPattern(final Map<String, String> formats, final String locale) {
+    private static String getPattern(final Map<String, String> formats, String locale) {
         if ("no-NO-NY".equals(locale)) {
             throw JavaScriptEngine.rangeError("Invalid language tag: " + locale);
         }
         String pattern = formats.get(locale);
-        if (pattern == null && locale.indexOf('-') != -1) {
-            pattern = formats.get(locale.substring(0, locale.indexOf('-')));
+        while (pattern == null && locale.indexOf('-') != -1) {
+            locale = locale.substring(0, locale.lastIndexOf('-'));
+            pattern = formats.get(locale);
         }
         return pattern;
     }
 
-    private static Chronology getChronology(final Map<String, Chronology> chronologies, final String locale) {
+    private static Chronology getChronology(final Map<String, Chronology> chronologies, String locale) {
         Chronology chronology = chronologies.get(locale);
-        if (chronology == null && locale.indexOf('-') != -1) {
-            chronology = chronologies.get(locale.substring(0, locale.indexOf('-')));
+        while (chronology == null && locale.indexOf('-') != -1) {
+            locale = locale.substring(0, locale.lastIndexOf('-'));
+            chronology = chronologies.get(locale);
         }
         return chronology;
     }
