@@ -235,15 +235,13 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\u0627\u0644\u062c\u0645\u0639\u0629\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2013 "
-                + "\u0645\u064a\u0644\u0627\u062f\u064a \u0641\u064a 2:00:00 \u0635")
-    @BuggyWebDriver(
-            FF = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
-                + " \u0662\u0660\u0661\u0663 \u0645\u064a\u0644\u0627\u062f\u064a"
-                + " \u0641\u064a \u0668:\u0660\u0660:\u0660\u0660 \u0635",
-            FF_ESR = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
-                + " \u0662\u0660\u0661\u0663 \u0645\u064a\u0644\u0627\u062f\u064a"
-                + " \u0641\u064a \u0668:\u0660\u0660:\u0660\u0660 \u0635")
+    @Alerts(DEFAULT = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2013 "
+                    + "\u0645\u064a\u0644\u0627\u062f\u064a \u0641\u064a 2:00:00 \u0635",
+            FF = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2013 "
+                    + "\u0645\u064a\u0644\u0627\u062f\u064a \u0641\u064a 8:00:00 \u0635",
+            FF_ESR = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631 "
+                    + "\u0662\u0660\u0661\u0663 \u0645\u064a\u0644\u0627\u062f\u064a "
+                    + "\u0641\u064a \u0668:\u0660\u0660:\u0660\u0660 \u0635")
     @HtmlUnitNYI(CHROME = "\u0662\u0660\u200f/\u0661\u0662\u200f/\u0662\u0660\u0661\u0663",
             EDGE = "\u0662\u0660\u200f/\u0661\u0662\u200f/\u0662\u0660\u0661\u0663",
             FF = "\u0662\u0660\u200f/\u0661\u0662\u200f/\u0662\u0660\u0661\u0663",
@@ -441,7 +439,8 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\u0661\u0667\u200f/\u0662\u200f/\u0661\u0664\u0663\u0665 \u0647\u0640")
+    @Alerts(DEFAULT = "\u0661\u0667\u200f/\u0662\u200f/\u0661\u0664\u0663\u0665 \u0647\u0640",
+            FF = "\u0662\u0660\u200f/\u0661\u0662\u200f/\u0662\u0660\u0661\u0663")
     public void format_ar_sa() throws Exception {
         test("new Intl.DateTimeFormat('ar-SA').format(date)");
     }
@@ -1263,9 +1262,9 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "20.12.2013",
-            CHROME = "12/20/2013",
-            EDGE = "12/20/2013")
+    @Alerts(DEFAULT = "12/20/2013",
+            FF = "20.12.2013 \u0433.",
+            FF_ESR = "20.12.2013")
     public void format_mk() throws Exception {
         test("new Intl.DateTimeFormat('mk').format(date)");
     }
@@ -1274,9 +1273,9 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "20.12.2013",
-            CHROME = "12/20/2013",
-            EDGE = "12/20/2013")
+    @Alerts(DEFAULT = "12/20/2013",
+            FF = "20.12.2013 \u0433.",
+            FF_ESR = "20.12.2013")
     public void format_mk_mk() throws Exception {
         test("new Intl.DateTimeFormat('mk-MK').format(date)");
     }

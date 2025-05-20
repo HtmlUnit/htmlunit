@@ -72,7 +72,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         final Map<String, String> commonFormats = new HashMap<>();
         commonFormats.put("", ddDot);
         commonFormats.put("ar", "dd\u200F/MM\u200F/YYYY");
-        commonFormats.put("ar-SA", "d\u200F/M\u200F/YYYY هـ");
         commonFormats.put("ban", mmSlash);
         commonFormats.put("be", ddDot);
         commonFormats.put("bg", ddDot + "\u200E \u0433.");
@@ -141,6 +140,9 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("fr-CH", ddDot);
 
         FF_FORMATS_.putAll(commonFormats);
+        FF_FORMATS_.put("mk", ddDot + "\u200E \u0433.");
+
+        commonFormats.put("ar-SA", "d\u200F/M\u200F/YYYY هـ");
         FF_ESR_FORMATS_.putAll(commonFormats);
 
         commonFormats.put("be", mmSlash);
@@ -305,6 +307,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
                     break;
 
                 case "ar-SA":
+                    if (!browserVersion.isFirefox() || browserVersion.isFirefoxESR())
                     chronology_ = HijrahChronology.INSTANCE;
                     break;
 
