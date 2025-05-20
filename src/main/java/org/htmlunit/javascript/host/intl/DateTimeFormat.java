@@ -55,6 +55,11 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     private static final ConcurrentHashMap<String, String> FF_FORMATS_ = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, String> FF_ESR_FORMATS_ = new ConcurrentHashMap<>();
 
+    private static final ConcurrentHashMap<String, Chronology> CHROME_CHRONOLOGIES_ = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Chronology> EDGE_CHRONOLOGIES_ = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Chronology> FF_CHRONOLOGIES_ = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Chronology> FF_ESR_CHRONOLOGIES_ = new ConcurrentHashMap<>();
+
     private transient DateTimeFormatHelper formatter_;
 
     static {
@@ -154,6 +159,18 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
         CHROME_FORMATS_.putAll(commonFormats);
         CHROME_FORMATS_.put("sq", mmSlash);
+
+        final Map<String, Chronology> commonChronologies = new HashMap<>();
+        commonChronologies.put("ja-JP-u-ca-japanese", JapaneseChronology.INSTANCE);
+        commonChronologies.put("th", ThaiBuddhistChronology.INSTANCE);
+        commonChronologies.put("th-TH", ThaiBuddhistChronology.INSTANCE);
+
+        FF_CHRONOLOGIES_.putAll(commonChronologies);
+
+        commonChronologies.put("ar-SA", HijrahChronology.INSTANCE);
+        CHROME_CHRONOLOGIES_.putAll(commonChronologies);
+        EDGE_CHRONOLOGIES_.putAll(commonChronologies);
+        FF_ESR_CHRONOLOGIES_.putAll(commonChronologies);
     }
 
     /**
@@ -167,17 +184,22 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         super();
 
         final Map<String, String> formats;
+        final Map<String, Chronology> chronologies;
         if (browserVersion.isChrome()) {
             formats = CHROME_FORMATS_;
+            chronologies = CHROME_CHRONOLOGIES_;
         }
         else if (browserVersion.isEdge()) {
             formats = EDGE_FORMATS_;
+            chronologies = EDGE_CHRONOLOGIES_;
         }
         else if (browserVersion.isFirefoxESR()) {
             formats = FF_ESR_FORMATS_;
+            chronologies = FF_ESR_CHRONOLOGIES_;
         }
         else {
             formats = FF_FORMATS_;
+            chronologies = FF_CHRONOLOGIES_;
         }
 
         String locale = browserVersion.getBrowserLocale().toLanguageTag();
@@ -198,7 +220,9 @@ public class DateTimeFormat extends HtmlUnitScriptable {
             pattern = pattern.replace("\u200E", "");
         }
 
-        formatter_ = new DateTimeFormatHelper(locale, browserVersion, pattern);
+        final Chronology chronology = getChronology(chronologies, locale);
+
+        formatter_ = new DateTimeFormatHelper(locale, chronology, pattern);
     }
 
     private static String getPattern(final Map<String, String> formats, final String locale) {
@@ -210,6 +234,14 @@ public class DateTimeFormat extends HtmlUnitScriptable {
             pattern = formats.get(locale.substring(0, locale.indexOf('-')));
         }
         return pattern;
+    }
+
+    private static Chronology getChronology(final Map<String, Chronology> chronologies, final String locale) {
+        Chronology chronology = chronologies.get(locale);
+        if (chronology == null && locale.indexOf('-') != -1) {
+            chronology = chronologies.get(locale.substring(0, locale.indexOf('-')));
+        }
+        return chronology;
     }
 
     /**
@@ -287,8 +319,10 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         private Chronology chronology_;
         private final String locale_;
 
-        DateTimeFormatHelper(final String locale, final BrowserVersion browserVersion, final String pattern) {
+        DateTimeFormatHelper(final String locale, final Chronology chronology, final String pattern) {
             locale_ = locale;
+            chronology_ = chronology;
+
             if (locale.startsWith("ar")
                     && !"ar-DZ".equals(locale)
                     && !"ar-LY".equals(locale)
@@ -299,24 +333,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
             }
             else {
                 formatter_ = DateTimeFormatter.ofPattern(pattern);
-            }
-
-            switch (locale) {
-                case "ja-JP-u-ca-japanese":
-                    chronology_ = JapaneseChronology.INSTANCE;
-                    break;
-
-                case "ar-SA":
-                    if (!browserVersion.isFirefox() || browserVersion.isFirefoxESR())
-                    chronology_ = HijrahChronology.INSTANCE;
-                    break;
-
-                case "th":
-                case "th-TH":
-                    chronology_ = ThaiBuddhistChronology.INSTANCE;
-                    break;
-
-                default:
             }
         }
 
