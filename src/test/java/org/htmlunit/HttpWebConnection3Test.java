@@ -26,12 +26,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
-import org.htmlunit.junit.annotation.OS;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -1456,7 +1455,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     // this fails on our CI but I have no idea why
     // seems like the request for downloading the script never reaches the
     // PrimitiveWebServer
-    @NotYetImplemented(value = {}, os = OS.Linux)
     public void loadJavascriptCharset() throws Exception {
         String html = DOCTYPE_HTML
                 + "<html><head>"
@@ -1493,6 +1491,21 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void unknownHost() throws Exception {
+        try {
+            getWebDriver().get("https://thisserverisnotknown.dom");
+            System.out.println("ööööööööööööö");
+        }
+        catch (final WebDriverException e) {
+            assertEquals(getExpectedAlerts()[0], e.getMessage());
         }
     }
 }

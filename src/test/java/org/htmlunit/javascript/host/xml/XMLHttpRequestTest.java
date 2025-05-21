@@ -40,7 +40,6 @@ import org.htmlunit.WebRequest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.junit.annotation.Tries;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -1446,8 +1445,11 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
-    @NotYetImplemented
+    @Alerts({"§§URL§§/", "null", "null"})
+    @HtmlUnitNYI(CHROME = {"§§URL§§/foo.xml", "null", "null"},
+            EDGE = {"§§URL§§/foo.xml", "null", "null"},
+            FF = {"§§URL§§/foo.xml", "null", "null"},
+            FF_ESR = {"§§URL§§/foo.xml", "null", "null"})
     public void originHeaderPatch() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1464,10 +1466,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
         loadPage2(html);
 
+        expandExpectedAlertsVariables(URL_FIRST);
+
         final WebRequest request = getMockWebConnection().getLastWebRequest();
-        assertEquals(URL_FIRST, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
-        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getUrl());
+        assertEquals(getExpectedAlerts()[1],
+                        "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[2],
+                        "" + request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
     /**

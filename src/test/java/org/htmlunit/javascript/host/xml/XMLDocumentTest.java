@@ -21,7 +21,7 @@ import java.net.URL;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1089,17 +1089,25 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object XMLDocument]")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "Cannot find elements by id",
+            EDGE = "Cannot find elements by id",
+            FF = "Cannot find elements by id",
+            FF_ESR = "Cannot find elements by id")
     public void svg() throws Exception {
         final String svg
             = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
             + "<svg xmlns=\"http://www.w3.org/2000/svg\">\n"
             + "  <rect id=\"rect\" width=\"50\" height=\"50\" fill=\"green\" onclick=\"alert(document)\"/>\n"
             + "</svg>";
-        final WebDriver driver = loadPage2(svg, URL_FIRST, MimeType.TEXT_XML, ISO_8859_1);
-        driver.findElement(By.id("rect")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        final WebDriver driver = loadPage2(svg, URL_FIRST, MimeType.TEXT_XML, ISO_8859_1);
+        try {
+            driver.findElement(By.id("rect")).click();
+            verifyAlerts(driver, getExpectedAlerts());
+        }
+        catch (final IllegalStateException e) {
+            assertTrue(e.getMessage(), e.getMessage().startsWith(getExpectedAlerts()[0]));
+        }
     }
 
     /**

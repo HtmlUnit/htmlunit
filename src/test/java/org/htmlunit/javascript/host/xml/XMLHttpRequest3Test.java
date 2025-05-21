@@ -45,7 +45,7 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.host.xml.XMLHttpRequestTest.StreamingServlet;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -318,7 +318,11 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
+    @Alerts({"0", "10"})
+    @HtmlUnitNYI(CHROME = {"0", "1"},
+            EDGE = {"0", "1"},
+            FF = {"0", "1"},
+            FF_ESR = {"0", "1"})
     public void streaming() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", StreamingServlet.class);
@@ -327,9 +331,9 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         startWebServer(resourceBase, null, servlets);
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "XMLHttpRequestTest_streaming.html");
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), client.waitForBackgroundJavaScriptStartingBefore(1000));
         final HtmlElement body = page.getBody();
-        assertEquals(10, body.asNormalizedText().split("\n").length);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), body.asNormalizedText().split("\n").length);
     }
 
     /**
