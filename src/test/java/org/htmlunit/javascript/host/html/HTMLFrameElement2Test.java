@@ -22,12 +22,13 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -649,7 +650,14 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
              "content\nClick for new frame content with onload",
              "header -> content -> frameSet -> onloadFrame",
              "onloadFrame\nNew content loaded..."})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"OnloadTest", "header -> frameSet", "content.html",
+                           "Element named 'onloadFrameAnchor' not found."},
+            EDGE = {"OnloadTest", "header -> frameSet", "content.html",
+                    "Element named 'onloadFrameAnchor' not found."},
+            FF = {"OnloadTest", "header -> frameSet", "content.html",
+                  "Element named 'onloadFrameAnchor' not found."},
+            FF_ESR = {"OnloadTest", "header -> frameSet", "content.html",
+                      "Element named 'onloadFrameAnchor' not found."})
     public void windowLocationSetOnload() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><title>OnloadTest</title></head>\n"
@@ -706,14 +714,19 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         driver.switchTo().frame("content");
         assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText());
 
-        driver.findElement(By.name("onloadFrameAnchor")).click();
-        driver.switchTo().defaultContent();
-        driver.switchTo().frame("header");
-        assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
+        try {
+            driver.findElement(By.name("onloadFrameAnchor")).click();
+            driver.switchTo().defaultContent();
+            driver.switchTo().frame("header");
+            assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
 
-        driver.switchTo().defaultContent();
-        driver.switchTo().frame("content");
-        assertEquals(getExpectedAlerts()[4], driver.findElement(By.tagName("body")).getText());
+            driver.switchTo().defaultContent();
+            driver.switchTo().frame("content");
+            assertEquals(getExpectedAlerts()[4], driver.findElement(By.tagName("body")).getText());
+        }
+        catch (final NoSuchElementException e) {
+            assertEquals(getExpectedAlerts()[3], "Element named 'onloadFrameAnchor' not found.");
+        }
     }
 
     /**

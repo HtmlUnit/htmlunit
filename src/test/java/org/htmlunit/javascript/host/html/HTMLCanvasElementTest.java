@@ -17,7 +17,7 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -220,7 +220,10 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object CanvasRenderingContext2D]", "[object WebGLRenderingContext]",
              "[object WebGLRenderingContext]", "[object WebGL2RenderingContext]", "null", "null"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"[object CanvasRenderingContext2D]", "null", "null", "null", "null", "null"},
+            EDGE = {"[object CanvasRenderingContext2D]", "null", "null", "null", "null", "null"},
+            FF = {"[object CanvasRenderingContext2D]", "null", "null", "null", "null", "null"},
+            FF_ESR = {"[object CanvasRenderingContext2D]", "null", "null", "null", "null", "null"})
     public void getContext() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

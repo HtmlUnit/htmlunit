@@ -18,7 +18,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -69,7 +68,10 @@ public class ElementOffsetHeight2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "12, 27, 44, 60, 80, 108, 126, 161, 208, 216, 270, 288, 340, 407",
             FF = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418",
             FF_ESR = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 297, 350, 418")
-    @NotYetImplemented // we will see other results on unix
+    @HtmlUnitNYI(CHROME = "12, 27, 44, 60, 80, 108, 126, 161, 208, 216, 270, 320, 374, 407",
+            EDGE = "12, 27, 44, 60, 80, 108, 126, 161, 208, 216, 270, 320, 374, 407",
+            FF = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 330, 385, 418",
+            FF_ESR = "14, 30, 48, 60, 80, 108, 126, 161, 208, 224, 279, 330, 385, 418")
     public void offsetHeightLineBreaks() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><body>\n"
