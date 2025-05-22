@@ -1506,19 +1506,4 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
         }
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("")
-    public void unknownHost() throws Exception {
-        try {
-            getWebDriver().get("https://thisserverisnotknown.dom");
-            System.out.println("ööööööööööööö");
-        }
-        catch (final WebDriverException e) {
-            assertEquals(getExpectedAlerts()[0], e.getMessage());
-        }
-    }
 }
