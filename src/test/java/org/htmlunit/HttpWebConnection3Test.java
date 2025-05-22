@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1488,6 +1489,18 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
                         getBrowserVersion().getScriptAcceptHeader());
             }
+
+            // let's try some wait on our CI server
+            final long endTime = System.currentTimeMillis() + Duration.ofSeconds(4).toMillis();
+            while (primitiveWebServer.getRequests().size() < 1
+                        && System.currentTimeMillis() < endTime) {
+                Thread.sleep(100);
+            }
+
+            if (primitiveWebServer.getRequests().size() < 1) {
+                Assert.fail("Still no request / request count:" + primitiveWebServer.getRequests().size());
+            }
+
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");
             assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
