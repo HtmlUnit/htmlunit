@@ -31,7 +31,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -1497,7 +1496,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 Thread.sleep(100);
             }
 
-            if (primitiveWebServer.getRequests().size() < 1) {
+            if (primitiveWebServer.getRequests().size() < 2) {
                 Assert.fail("Still no request / request count:" + primitiveWebServer.getRequests().size());
             }
 
