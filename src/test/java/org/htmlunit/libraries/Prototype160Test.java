@@ -18,7 +18,6 @@ import java.util.List;
 
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -108,7 +107,6 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented
     public void dom() throws Exception {
         test("dom.html");
     }
@@ -167,7 +165,6 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented
     public void position() throws Exception {
         test("position.html");
     }
@@ -201,7 +198,6 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented
     public void unitTests() throws Exception {
         test("unit_tests.html");
     }

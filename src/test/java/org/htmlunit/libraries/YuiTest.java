@@ -27,14 +27,13 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -172,7 +171,8 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
+    @Alerts("")
+    @HtmlUnitNYI("org.htmlunit.ScriptException: TypeError: Cannot call method \"appendChild\" of null")
     public void yuiLoaderRollup() throws Exception {
         doTest("yuiloader_rollup.html");
     }
@@ -240,7 +240,13 @@ public class YuiTest extends WebDriverTestCase {
         assertNotNull(url);
 
         final WebDriver driver = getWebDriver();
-        driver.get(url);
+        try {
+            driver.get(url);
+        }
+        catch (final WebDriverException e) {
+            assertTrue(e.getMessage(), e.getMessage().startsWith(getExpectedAlerts()[0]));
+            return;
+        }
 
         if (buttonToPush != null) {
             driver.findElement(By.id(buttonToPush)).click();
@@ -260,13 +266,7 @@ public class YuiTest extends WebDriverTestCase {
         }
 
         for (final WebElement pre : tests) {
-            final String[] parts;
-            try {
-                parts = pre.getText().split(" ");
-            }
-            catch (final StaleElementReferenceException e) {
-                continue; // happens for FF17 on imageLoader test
-            }
+            final String[] parts = pre.getText().split(" ");
             final String result = parts[0];
             final String testName = parts[1].substring(0, parts[1].length() - 1);
             if ("pass".equalsIgnoreCase(result)) {

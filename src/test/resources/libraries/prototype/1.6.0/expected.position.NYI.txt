@@ -1,0 +1,7 @@
+2 tests, 13 assertions, 3 failures, 0 errors
+Status Test Message
+passed testPrepare 4 assertions, 0 failures, 0 errors
+failed testWithin 9 assertions, 3 failures, 0 errors
+Failure: outside bottom
+Failure: outside bottom
+Failure: outside bottom
