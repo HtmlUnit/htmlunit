@@ -1,4 +1,10 @@
-2 tests, 16 assertions, 0 failures, 0 errors
+2 tests, 13 assertions, 3 failures, 0 errors
 Status Test Message
 testPrepare passed 4 assertions, 0 failures, 0 errors
-testWithin passed 12 assertions, 0 failures, 0 errors
+testWithin failed 9 assertions, 3 failures, 0 errors
+Failure: outside bottom
+got <false>
+Failure: outside bottom
+got <false>
+Failure: outside bottom
+got <false>

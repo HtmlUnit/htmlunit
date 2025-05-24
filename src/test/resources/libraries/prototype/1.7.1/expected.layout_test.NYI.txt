@@ -1,10 +1,24 @@
-2 tests, 13 assertions, 3 failures, 0 errors
+13 tests, 64 assertions, 4 failures, 0 errors
 Status Test Message
-testPrepare passed 4 assertions, 0 failures, 0 errors
-testWithin failed 9 assertions, 3 failures, 0 errors
-Failure: outside bottom
-got <false>
-Failure: outside bottom
-got <false>
-Failure: outside bottom
-got <false>
+test preCompute argument of layout passed 24 assertions, 0 failures, 0 errors
+test layout on absolutely-positioned elements passed 6 assertions, 0 failures, 0 errors
+test layout on elements with display: none and exact width passed 6 assertions, 0 failures, 0 errors
+test layout on elements with negative margins passed 3 assertions, 0 failures, 0 errors
+test layout on elements with display: none and width: auto passed 7 assertions, 0 failures, 0 errors
+test layout on elements with display: none ancestors passed 6 assertions, 0 failures, 0 errors
+test positioning on absolutely-positioned elements failed 1 assertions, 2 failures, 0 errors
+Failure: right (percentage value)
+expected: <60>, actual: <-198>
+Failure: left
+expected: <340>, actual: <598>
+test positioning on absolutely-positioned element with top=0 and left=0 passed 2 assertions, 0 failures, 0 errors
+test layout on statically-positioned element with percentage width passed 1 assertions, 0 failures, 0 errors
+test layout on absolutely-positioned element with percentage width passed 1 assertions, 0 failures, 0 errors
+test layout on fixed-position element with percentage width passed 2 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+test #toCSS, #toObject, #toHash passed 5 assertions, 0 failures, 0 errors
+test dimensions on absolutely-positioned, hidden elements failed 0 assertions, 2 failures, 0 errors
+Failure: width
+expected: <278>, actual: <0>
+Failure: height
+expected: <591>, actual: <586>
