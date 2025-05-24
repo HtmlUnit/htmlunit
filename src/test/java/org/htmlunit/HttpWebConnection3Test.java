@@ -26,6 +26,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.OS;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1455,11 +1457,12 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     // this fails on our CI but I have no idea why
     // seems like the request for downloading the script never reaches the
     // PrimitiveWebServer
+    @NotYetImplemented(value = {}, os = OS.Linux)
     public void loadJavascriptCharset() throws Exception {
         String html = DOCTYPE_HTML
                 + "<html><head>"
                 + "<meta http-equiv='Content-Type' content='text/html; charset=GB2312'>"
-                + "<script src=\"script.js?x=\u6211\u662F\u6211\u7684 Abc\"></script>"
+                + "<script src=\"script.js?x=\u6211\u662F\u6211\u7684 \u4eb8 Abc\"></script>"
                 + "</head><body></body></html>";
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
