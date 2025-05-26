@@ -546,6 +546,11 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         final String textValue = characters_.toString();
         characters_.clear();
 
+        if (org.apache.commons.lang3.StringUtils.isBlank(textValue)) {
+            appendChild(currentNode_, new DomText(page_, textValue));
+            return;
+        }
+
         // malformed HTML: </td>some text</tr> => text comes before the table
         if (currentNode_ instanceof HtmlTableRow) {
             final HtmlTableRow row = (HtmlTableRow) currentNode_;
