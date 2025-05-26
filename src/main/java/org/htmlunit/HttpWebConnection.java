@@ -1293,6 +1293,8 @@ public class HttpWebConnection implements WebConnection {
     @Override
     public void close() {
         httpClientBuilder_.clear();
+        sharedAuthCache_.clear();
+        httpClientContextByThread_.clear();
 
         if (connectionManager_ != null) {
             connectionManager_.shutdown();
