@@ -24,7 +24,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ObjectInstantiationException;
 import org.htmlunit.WebClient;
@@ -270,10 +269,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             headParsed_ = lastTagWasSynthesized_ ? HeadParsed.SYNTHESIZED : HeadParsed.YES;
         }
 
-        if (namespaceURI != null) {
-            namespaceURI = namespaceURI.trim();
-        }
-
         // If we're adding a body element, keep track of any temporary synthetic ones
         // that we may have had to create earlier (for document.write(), for example).
         HtmlBody oldBody = null;
@@ -285,6 +280,9 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             }
         }
 
+        if (namespaceURI != null) {
+            namespaceURI = namespaceURI.trim();
+        }
         // Add the new node.
         if (!(page_ instanceof XHtmlPage) && Html.XHTML_NAMESPACE.equals(namespaceURI)) {
             namespaceURI = null;
@@ -295,6 +293,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         if (factory == HtmlUnitNekoHtmlParser.SVG_FACTORY) {
             namespaceURI = Html.SVG_NAMESPACE;
         }
+
         final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts);
         newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
@@ -310,7 +309,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         // Forms own elements simply by enclosing source-wise rather than DOM parent-child relationship
         // Forms without a </form> will keep consuming forever
-        if (newElement instanceof HtmlForm) {
+        else if (newElement instanceof HtmlForm) {
             consumingForm_ = (HtmlForm) newElement;
             formEndingIsAdjusting_ = false;
         }
@@ -416,20 +415,28 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         appendChild(currentNode, newElement);
     }
 
-    private DomNode findElementOnStack(final String... searchedElementNames) {
-        DomNode searchedNode = null;
+    private DomNode findElementOnStack(final String searchedElementName) {
         for (final DomNode node : stack_) {
-            if (ArrayUtils.contains(searchedElementNames, node.getNodeName())) {
-                searchedNode = node;
-                break;
+            if (searchedElementName.equals(node.getNodeName())) {
+                return node;
             }
         }
 
-        if (searchedNode == null) {
-            searchedNode = stack_.peek(); // this is surely wrong but at least it won't throw a NPE
+        // this is surely wrong but at least it won't throw a NPE
+        return stack_.peek();
+    }
+
+    private DomNode findElementOnStack(final String... searchedElementNames) {
+        for (final DomNode node : stack_) {
+            for (final String searchedElementName : searchedElementNames) {
+                if (searchedElementName.equals(node.getNodeName())) {
+                    return node;
+                }
+            }
         }
 
-        return searchedNode;
+        // this is surely wrong but at least it won't throw a NPE
+        return stack_.peek();
     }
 
     private static boolean isTableChild(final String nodeName) {
@@ -539,26 +546,11 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         final String textValue = characters_.toString();
         characters_.clear();
 
-        if (org.apache.commons.lang3.StringUtils.isBlank(textValue)) {
-            appendChild(currentNode_, new DomText(page_, textValue));
-        }
-        else {
-            // malformed HTML: </td>some text</tr> => text comes before the table
-            if (currentNode_ instanceof HtmlTableRow) {
-                final HtmlTableRow row = (HtmlTableRow) currentNode_;
-                final HtmlTable enclosingTable = row.getEnclosingTable();
-                if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
-                    if (enclosingTable.getPreviousSibling() instanceof DomText) {
-                        final DomText domText = (DomText) enclosingTable.getPreviousSibling();
-                        domText.setTextContent(domText.getWholeText() + textValue);
-                    }
-                    else {
-                        enclosingTable.insertBefore(new DomText(page_, textValue));
-                    }
-                }
-            }
-            else if (currentNode_ instanceof HtmlTable) {
-                final HtmlTable enclosingTable = (HtmlTable) currentNode_;
+        // malformed HTML: </td>some text</tr> => text comes before the table
+        if (currentNode_ instanceof HtmlTableRow) {
+            final HtmlTableRow row = (HtmlTableRow) currentNode_;
+            final HtmlTable enclosingTable = row.getEnclosingTable();
+            if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
                 if (enclosingTable.getPreviousSibling() instanceof DomText) {
                     final DomText domText = (DomText) enclosingTable.getPreviousSibling();
                     domText.setTextContent(domText.getWholeText() + textValue);
@@ -567,12 +559,22 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                     enclosingTable.insertBefore(new DomText(page_, textValue));
                 }
             }
-            else if (currentNode_ instanceof HtmlImage) {
-                currentNode_.getParentNode().appendChild(new DomText(page_, textValue));
+        }
+        else if (currentNode_ instanceof HtmlTable) {
+            final HtmlTable enclosingTable = (HtmlTable) currentNode_;
+            if (enclosingTable.getPreviousSibling() instanceof DomText) {
+                final DomText domText = (DomText) enclosingTable.getPreviousSibling();
+                domText.setTextContent(domText.getWholeText() + textValue);
             }
             else {
-                appendChild(currentNode_, new DomText(page_, textValue));
+                enclosingTable.insertBefore(new DomText(page_, textValue));
             }
+        }
+        else if (currentNode_ instanceof HtmlImage) {
+            currentNode_.getParentNode().appendChild(new DomText(page_, textValue));
+        }
+        else {
+            appendChild(currentNode_, new DomText(page_, textValue));
         }
     }
 
