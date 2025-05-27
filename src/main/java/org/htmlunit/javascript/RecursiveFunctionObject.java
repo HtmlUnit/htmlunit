@@ -59,13 +59,23 @@ public class RecursiveFunctionObject extends FunctionObject {
         if (super.has(name, start)) {
             return true;
         }
-        for (Class<?> c = getMethodOrConstructor().getDeclaringClass().getSuperclass();
-                c != null; c = c.getSuperclass()) {
-            final Object scripatble = getParentScope().get(c.getSimpleName(), this);
-            if (scripatble instanceof Scriptable && ((Scriptable) scripatble).has(name, start)) {
-                return true;
+        Class<?> klass = getPrototypeProperty().getClass();
+        while (HtmlUnitScriptable.class.isAssignableFrom(klass)) {
+            final ClassConfiguration config = JavaScriptConfiguration.getInstance(browserVersion_)
+                    .getClassConfiguration(klass.getSimpleName());
+            if (config != null) {
+                final List<ConstantInfo> constants = config.getConstants();
+                if (constants != null) {
+                    for (final ConstantInfo constantInfo : constants) {
+                        if (constantInfo.getName().equals(name)) {
+                            return true;
+                        }
+                    }
+                }
             }
+            klass = klass.getSuperclass();
         }
+
         return false;
     }
 
@@ -77,12 +87,19 @@ public class RecursiveFunctionObject extends FunctionObject {
         final Set<Object> objects = new LinkedHashSet<>();
         objects.addAll(Arrays.asList(super.getIds()));
 
-        for (Class<?> c = getMethodOrConstructor().getDeclaringClass().getSuperclass();
-                c != null; c = c.getSuperclass()) {
-            final Object scripatble = getParentScope().get(c.getSimpleName(), this);
-            if (scripatble instanceof Scriptable) {
-                objects.addAll(Arrays.asList(((Scriptable) scripatble).getIds()));
+        Class<?> klass = getPrototypeProperty().getClass();
+        while (HtmlUnitScriptable.class.isAssignableFrom(klass)) {
+            final ClassConfiguration config = JavaScriptConfiguration.getInstance(browserVersion_)
+                    .getClassConfiguration(klass.getSimpleName());
+            if (config != null) {
+                final List<ConstantInfo> constants = config.getConstants();
+                if (constants != null) {
+                    for (final ConstantInfo constantInfo : constants) {
+                        objects.add(constantInfo.getName());
+                    }
+                }
             }
+            klass = klass.getSuperclass();
         }
         return objects.toArray(new Object[0]);
     }
@@ -98,7 +115,6 @@ public class RecursiveFunctionObject extends FunctionObject {
         }
 
         Class<?> klass = getPrototypeProperty().getClass();
-
         while (value == NOT_FOUND && HtmlUnitScriptable.class.isAssignableFrom(klass)) {
             final ClassConfiguration config = JavaScriptConfiguration.getInstance(browserVersion_)
                     .getClassConfiguration(klass.getSimpleName());
