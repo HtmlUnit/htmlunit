@@ -220,8 +220,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
 
         final ClassConfiguration windowConfig = jsConfig_.getWindowClassConfiguration();
-        final FunctionObject functionObject = new RecursiveFunctionObject(jsWindowScope.getClassName(),
-                        windowConfig.getJsConstructor().getValue(), jsWindowScope, browserVersion);
+        final FunctionObject functionObject = new FunctionObject(jsWindowScope.getClassName(),
+                        windowConfig.getJsConstructor().getValue(), jsWindowScope);
         ScriptableObject.defineProperty(jsWindowScope, "constructor", functionObject,
                 ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
 
@@ -324,6 +324,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         // setup constructors
+        final Map<String, Function> ctorPrototypesPerJSName = new HashMap<>();
         for (final ClassConfiguration config : jsConfig.getAll()) {
             final String jsClassName = config.getClassName();
             final Scriptable prototype = prototypesPerJSName.get(jsClassName);
@@ -343,9 +344,17 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);
                 }
                 else {
-                    final FunctionObject function = new RecursiveFunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsScope, browserVersion);
+                    final FunctionObject function = new FunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsScope);
+                    ctorPrototypesPerJSName.put(jsClassName, function);
+
                     addAsConstructorAndAlias(function, jsScope, prototype, config);
                     configureConstantsStaticPropertiesAndStaticFunctions(config, function);
+
+                    // adjust prototype if needed
+                    if (!StringUtils.isEmpty(config.getExtendedClassName())) {
+                        final Scriptable parentPrototype = ctorPrototypesPerJSName.get(config.getExtendedClassName());
+                        function.setPrototype(parentPrototype);
+                    }
                 }
             }
         }

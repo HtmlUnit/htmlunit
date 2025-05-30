@@ -22,12 +22,12 @@ import java.util.Locale;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.javascript.RecursiveFunctionObject;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -100,7 +100,7 @@ public class V8BreakIterator extends HtmlUnitScriptable {
 
         final Window window = getWindow(ctorObj);
         iterator.setParentScope(window);
-        iterator.setPrototype(((RecursiveFunctionObject) ctorObj).getClassPrototype());
+        iterator.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return iterator;
     }
 

@@ -16,11 +16,11 @@ package org.htmlunit.javascript.host.intl;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.javascript.RecursiveFunctionObject;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.host.Window;
@@ -64,7 +64,7 @@ public class Collator extends HtmlUnitScriptable {
         final Window window = getWindow(ctorObj);
         final Collator format = new Collator(/*locales, window.getBrowserVersion()*/);
         format.setParentScope(window);
-        format.setPrototype(((RecursiveFunctionObject) ctorObj).getClassPrototype());
+        format.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return format;
     }
 }

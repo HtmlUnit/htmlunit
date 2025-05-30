@@ -39,7 +39,6 @@ import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.javascript.RecursiveFunctionObject;
 import org.htmlunit.javascript.background.BasicJavaScriptJob;
 import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
@@ -147,8 +146,8 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         prototypesPerJSName.put(config.getClassName(), prototype);
 
         final FunctionObject functionObject =
-                new RecursiveFunctionObject(DedicatedWorkerGlobalScope.class.getSimpleName(),
-                        config.getJsConstructor().getValue(), this, browserVersion);
+                new FunctionObject(DedicatedWorkerGlobalScope.class.getSimpleName(),
+                        config.getJsConstructor().getValue(), this);
         functionObject.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
 
         JavaScriptEngine.configureScope(this, config, functionObject, jsConfig,
