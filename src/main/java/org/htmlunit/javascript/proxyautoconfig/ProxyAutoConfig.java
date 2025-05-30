@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
+import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.util.SubnetUtils;
 
@@ -44,6 +45,14 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
 
     private ProxyAutoConfig() {
         super();
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+        // nothing to do
     }
 
     /**

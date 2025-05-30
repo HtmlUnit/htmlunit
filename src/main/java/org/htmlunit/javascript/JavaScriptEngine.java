@@ -328,19 +328,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 continue;
             }
 
-            final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
             if (prototype != null && config.isJsObject()) {
-                if (jsConstructor == null) {
-                    final ScriptableObject constructor = config.getHostClass().getDeclaredConstructor().newInstance();
-                    ((HtmlUnitScriptable) constructor).setClassName(jsClassName);
-                    defineConstructor(jsScope, prototype, constructor);
-                    configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);
-                }
-                else {
-                    final FunctionObject function = new RecursiveFunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsScope, browserVersion);
-                    addAsConstructorAndAlias(function, jsScope, prototype, config);
-                    configureConstantsStaticPropertiesAndStaticFunctions(config, function);
-                }
+                final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
+
+                // we have an Architecture test to make sure this is never null (jsxClassesShouldHaveJsxConstructor)
+                final FunctionObject function = new RecursiveFunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsScope, browserVersion);
+                addAsConstructorAndAlias(function, jsScope, prototype, config);
+                configureConstantsStaticPropertiesAndStaticFunctions(config, function);
             }
         }
     }
