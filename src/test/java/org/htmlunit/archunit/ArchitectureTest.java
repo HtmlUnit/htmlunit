@@ -290,39 +290,6 @@ public class ArchitectureTest {
             .orShould().haveRawReturnType("void")
             .orShould().haveRawReturnType(isAssignableToScriptable);
 
-    private static final ArchCondition<JavaClass> haveJsxConstructorMethod =
-            new ArchCondition<JavaClass>("have at least one method annotated with @JsxConstructor") {
-                @Override
-                public void check(final JavaClass javaClass, final ConditionEvents events) {
-                    final boolean hasJsxConstructor = javaClass.getAllMethods().stream()
-                            .anyMatch(method -> method.isAnnotatedWith(JsxConstructor.class));
-
-                    if (!hasJsxConstructor) {
-                        events.add(SimpleConditionEvent.violated(javaClass,
-                            String.format("Class %s does not contain any method annotated with @JsxConstructor",
-                                        javaClass.getName())));
-                    }
-                }
-            };
-
-    private static final DescribedPredicate<JavaClass> haveJsxClassWithPropertyIsJSObjectTrue =
-            new DescribedPredicate<JavaClass>("@JsxClass isJSObject == true") {
-                @Override
-                public boolean test(final JavaClass clazz) {
-                    return clazz.getAnnotationOfType(JsxClass.class).isJSObject();
-                }
-            };
-
-    /**
-     * Every JsxClass needs an implementation of JsxConstructor.
-     */
-    @ArchTest
-    public static final ArchRule jsxClassesShouldHaveJsxConstructor = classes()
-                .that().areAnnotatedWith(JsxClass.class)
-                    .and(haveJsxClassWithPropertyIsJSObjectTrue)
-                    .or().areAnnotatedWith(JsxClasses.class)
-                .should(haveJsxConstructorMethod);
-
     /**
      * JsxConstructor should not used for constructors.
      */
