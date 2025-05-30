@@ -282,6 +282,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final BrowserVersion browserVersion,
             final Map<Class<? extends Scriptable>, Scriptable> prototypes,
             final Map<String, Scriptable> prototypesPerJSName) throws Exception {
+
+        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(jsScope);
+
         // setup the prototypes
         for (final ClassConfiguration config : jsConfig.getAll()) {
             if (config != scopeConfig) {
@@ -299,21 +302,14 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 }
                 prototypes.put(config.getHostClass(), prototype);
                 prototypesPerJSName.put(config.getClassName(), prototype);
-            }
-        }
 
-        // once all prototypes have been build, it's possible to configure the chains
-        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(jsScope);
-        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
-            final String name = entry.getKey();
-            final ClassConfiguration config = jsConfig.getClassConfiguration(name);
-            final Scriptable prototype = entry.getValue();
-            if (!StringUtils.isEmpty(config.getExtendedClassName())) {
-                final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
-                prototype.setPrototype(parentPrototype);
-            }
-            else {
-                prototype.setPrototype(objectPrototype);
+                if (!StringUtils.isEmpty(config.getExtendedClassName())) {
+                    final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
+                    prototype.setPrototype(parentPrototype);
+                }
+                else {
+                    prototype.setPrototype(objectPrototype);
+                }
             }
         }
 

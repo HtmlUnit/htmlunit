@@ -22,7 +22,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -50,19 +52,19 @@ public abstract class AbstractJavaScriptConfiguration {
 
     private Map<Class<?>, Class<? extends HtmlUnitScriptable>> domJavaScriptMap_;
 
-    private final Map<String, ClassConfiguration> configuration_;
+    private final ArrayList<ClassConfiguration> configuration_;
 
     /**
      * Constructor.
      * @param browser the browser version to use
      */
     protected AbstractJavaScriptConfiguration(final BrowserVersion browser) {
-        configuration_ = new ConcurrentHashMap<>(getClasses().length);
+        configuration_ = new ArrayList<>(getClasses().length);
 
         for (final Class<? extends HtmlUnitScriptable> klass : getClasses()) {
             final ClassConfiguration config = getClassConfiguration(klass, browser);
             if (config != null) {
-                configuration_.put(config.getClassName(), config);
+                configuration_.add(config);
             }
         }
     }
@@ -77,7 +79,7 @@ public abstract class AbstractJavaScriptConfiguration {
      * @return the class configurations
      */
     public Iterable<ClassConfiguration> getAll() {
-        return configuration_.values();
+        return configuration_;
     }
 
     /**
@@ -383,7 +385,12 @@ public abstract class AbstractJavaScriptConfiguration {
      * @return the class configuration for the supplied JavaScript class name
      */
     public ClassConfiguration getClassConfiguration(final String hostClassName) {
-        return configuration_.get(hostClassName);
+        for (final ClassConfiguration classConfig : configuration_) {
+            if (hostClassName.equals(classConfig.getClassName())) {
+                return classConfig;
+            }
+        }
+        return null;
     }
 
     /**
@@ -399,12 +406,11 @@ public abstract class AbstractJavaScriptConfiguration {
                     new ConcurrentHashMap<>(configuration_.size());
 
             final boolean debug = LOG.isDebugEnabled();
-            for (final Map.Entry<String, ClassConfiguration> entry : configuration_.entrySet()) {
-                final ClassConfiguration classConfig = entry.getValue();
+            for (final ClassConfiguration classConfig : configuration_) {
                 for (final Class<?> domClass : classConfig.getDomClasses()) {
                     // preload and validate that the class exists
                     if (debug) {
-                        LOG.debug("Mapping " + domClass.getName() + " to " + entry.getKey());
+                        LOG.debug("Mapping " + domClass.getName() + " to " + classConfig.getClassName());
                     }
                     map.put(domClass, classConfig.getHostClass());
                 }
