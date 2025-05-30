@@ -287,7 +287,17 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         // setup the prototypes
         for (final ClassConfiguration config : jsConfig.getAll()) {
-            if (config != scopeConfig) {
+            if (config == scopeConfig) {
+                final Scriptable prototype = prototypesPerJSName.get(config.getClassName());
+                if (!StringUtils.isEmpty(config.getExtendedClassName())) {
+                    final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
+                    prototype.setPrototype(parentPrototype);
+                }
+                else {
+                    prototype.setPrototype(objectPrototype);
+                }
+            }
+            else {
                 final HtmlUnitScriptable prototype = configureClass(config, jsScope);
                 if (config.isJsObject()) {
                     // Place object with prototype property in Window scope
