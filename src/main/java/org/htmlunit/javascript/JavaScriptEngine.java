@@ -219,7 +219,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
 
-        final ClassConfiguration windowConfig = jsConfig_.getClassConfiguration("Window");
+        final ClassConfiguration windowConfig = jsConfig_.getWindowClassConfiguration();
         final FunctionObject functionObject = new RecursiveFunctionObject(jsWindowScope.getClassName(),
                         windowConfig.getJsConstructor().getValue(), jsWindowScope, browserVersion);
         ScriptableObject.defineProperty(jsWindowScope, "constructor", functionObject,

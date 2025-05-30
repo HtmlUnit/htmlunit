@@ -40,7 +40,7 @@ public final class ProxyAutoConfigJavaScriptConfiguration extends AbstractJavaSc
      * @param browser the browser version to use
      */
     private ProxyAutoConfigJavaScriptConfiguration(final BrowserVersion browser) {
-        super(browser);
+        super(browser, ProxyAutoConfig.class);
     }
 
     /**

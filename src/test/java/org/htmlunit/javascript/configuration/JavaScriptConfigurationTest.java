@@ -26,7 +26,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -42,6 +44,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebTestCase;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -262,19 +265,45 @@ public class JavaScriptConfigurationTest {
     }
 
     /**
-     * Test of alphabetical order.
+     * Test of order.
      */
     @Test
-    public void lexicographicOrder() {
-        String lastClassName = null;
+    public void treeOrder() {
+        final List<String> defined = new ArrayList<>(JavaScriptConfiguration.CLASSES_.length);
+
+        final HashMap<Integer, List<String>> levels = new HashMap<>();
         for (final Class<?> c : JavaScriptConfiguration.CLASSES_) {
-            final String name = c.getSimpleName();
-            if (lastClassName != null && name.compareToIgnoreCase(lastClassName) < 0) {
-                fail("JavaScriptConfiguration.CLASSES_: '"
-                    + name + "' should be before '" + lastClassName + "'");
+            defined.add(c.getSimpleName());
+
+            int level = 1;
+            Class<?> parent = c.getSuperclass();
+            while (parent != HtmlUnitScriptable.class) {
+                level++;
+                parent = parent.getSuperclass();
             }
-            lastClassName = name;
+
+            List<String> clsAtLevel = levels.get(level);
+            if (clsAtLevel == null) {
+                clsAtLevel = new ArrayList<>();
+                levels.put(level, clsAtLevel);
+            }
+            clsAtLevel.add(c.getSimpleName());
         }
+
+        final List<String> all = new ArrayList<>(JavaScriptConfiguration.CLASSES_.length);
+        for (int level = 1; level <= levels.size(); level++) {
+            final List<String> clsAtLevel = levels.get(level);
+            Collections.sort(clsAtLevel);
+            all.addAll(clsAtLevel);
+
+            // dump
+            // System.out.println("// level " + level);
+            // for (String cls : clsAtLevel) {
+            //     System.out.print(cls + ".class, ");
+            // }
+            // System.out.println();
+        }
+        Assert.assertEquals(all, defined);
     }
 
     /**

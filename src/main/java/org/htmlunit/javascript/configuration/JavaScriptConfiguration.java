@@ -696,7 +696,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
      * @param browser the browser version to use
      */
     private JavaScriptConfiguration(final BrowserVersion browser) {
-        super(browser);
+        super(browser, Window.class);
     }
 
     /**
@@ -722,5 +722,12 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     @Override
     protected Class<? extends HtmlUnitScriptable>[] getClasses() {
         return CLASSES_;
+    }
+
+    /**
+     * @return the configuration of the scope class
+     */
+    public ClassConfiguration getWindowClassConfiguration() {
+        return getScopeConfiguration();
     }
 }

@@ -136,13 +136,8 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
         final WorkerJavaScriptConfiguration jsConfig = WorkerJavaScriptConfiguration.getInstance(browserVersion);
 
-        ClassConfiguration config = jsConfig.getClassConfiguration(
-                DedicatedWorkerGlobalScope.class.getSuperclass().getSimpleName());
-        final HtmlUnitScriptable parentPrototype = JavaScriptEngine.configureClass(config, this);
-
-        config = jsConfig.getClassConfiguration(DedicatedWorkerGlobalScope.class.getSimpleName());
+        final ClassConfiguration config = jsConfig.getDedicatedWorkerGlobalScopeClassConfiguration();
         final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this);
-        prototype.setPrototype(parentPrototype);
         setPrototype(prototype);
 
         final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();

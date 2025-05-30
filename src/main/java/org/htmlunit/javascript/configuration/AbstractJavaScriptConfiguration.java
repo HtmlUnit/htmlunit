@@ -24,7 +24,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -53,18 +52,23 @@ public abstract class AbstractJavaScriptConfiguration {
     private Map<Class<?>, Class<? extends HtmlUnitScriptable>> domJavaScriptMap_;
 
     private final ArrayList<ClassConfiguration> configuration_;
+    private ClassConfiguration scopeConfiguration_;
 
     /**
      * Constructor.
      * @param browser the browser version to use
+     * @param scopeClass the scope class for faster access
      */
-    protected AbstractJavaScriptConfiguration(final BrowserVersion browser) {
+    protected AbstractJavaScriptConfiguration(final BrowserVersion browser, final Class<?> scopeClass) {
         configuration_ = new ArrayList<>(getClasses().length);
 
         for (final Class<? extends HtmlUnitScriptable> klass : getClasses()) {
             final ClassConfiguration config = getClassConfiguration(klass, browser);
             if (config != null) {
                 configuration_.add(config);
+                if (klass == scopeClass) {
+                    scopeConfiguration_ = config;
+                }
             }
         }
     }
@@ -420,5 +424,9 @@ public abstract class AbstractJavaScriptConfiguration {
         }
 
         return domJavaScriptMap_.get(clazz);
+    }
+
+    protected ClassConfiguration getScopeConfiguration() {
+        return scopeConfiguration_;
     }
 }
