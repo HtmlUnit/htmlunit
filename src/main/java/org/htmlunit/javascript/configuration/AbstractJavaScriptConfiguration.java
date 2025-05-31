@@ -386,20 +386,6 @@ public abstract class AbstractJavaScriptConfiguration {
     }
 
     /**
-     * Gets the class configuration for the supplied JavaScript class name.
-     * @param hostClassName the JavaScript class name
-     * @return the class configuration for the supplied JavaScript class name
-     */
-    public ClassConfiguration getClassConfiguration(final String hostClassName) {
-        for (final ClassConfiguration classConfig : configuration_) {
-            if (hostClassName.equals(classConfig.getClassName())) {
-                return classConfig;
-            }
-        }
-        return null;
-    }
-
-    /**
      * Returns an immutable map containing the DOM to JavaScript mappings. Keys are
      * java classes for the various DOM classes (e.g. HtmlInput.class) and the values
      * are the JavaScript class names (e.g. "HTMLAnchorElement").

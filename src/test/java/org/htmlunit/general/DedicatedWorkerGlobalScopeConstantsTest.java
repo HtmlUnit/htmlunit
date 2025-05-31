@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -132,8 +133,13 @@ public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
 
         final WorkerJavaScriptConfiguration javaScriptConfig
                 = WorkerJavaScriptConfiguration.getInstance(getBrowserVersion());
+        final HashMap<String, ClassConfiguration> classConfigurationIndex = new HashMap<>();
+        for (final ClassConfiguration config : javaScriptConfig.getAll()) {
+            classConfigurationIndex.put(config.getClassName(), config);
+        }
+
         final List<String> constants = new ArrayList<>();
-        ClassConfiguration classConfig = javaScriptConfig.getClassConfiguration(className);
+        ClassConfiguration classConfig = classConfigurationIndex.get(className);
 
         boolean first = true;
         while (classConfig != null) {
@@ -148,7 +154,7 @@ public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
                     }
                 }
             }
-            classConfig = javaScriptConfig.getClassConfiguration(classConfig.getExtendedClassName());
+            classConfig = classConfigurationIndex.get(classConfig.getExtendedClassName());
             first = false;
         }
 
