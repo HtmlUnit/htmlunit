@@ -319,7 +319,6 @@ import org.htmlunit.javascript.host.html.HTMLTrackElement;
 import org.htmlunit.javascript.host.html.HTMLUListElement;
 import org.htmlunit.javascript.host.html.HTMLUnknownElement;
 import org.htmlunit.javascript.host.html.HTMLVideoElement;
-import org.htmlunit.javascript.host.html.RowContainer;
 import org.htmlunit.javascript.host.html.ValidityState;
 import org.htmlunit.javascript.host.idb.IDBCursor;
 import org.htmlunit.javascript.host.idb.IDBCursorWithValue;
@@ -655,7 +654,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLSelectElement.class, HTMLSlotElement.class, HTMLSourceElement.class, HTMLSpanElement.class,
         HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableComponent.class,
         HTMLTemplateElement.class, HTMLTextAreaElement.class, HTMLTimeElement.class, HTMLTitleElement.class,
-        HTMLTrackElement.class, HTMLUnknownElement.class, RowContainer.class, SVGAnimationElement.class,
+        HTMLTrackElement.class, HTMLUnknownElement.class, SVGAnimationElement.class,
         SVGClipPathElement.class, SVGComponentTransferFunctionElement.class, SVGDescElement.class,
         SVGFEBlendElement.class, SVGFEColorMatrixElement.class, SVGFEComponentTransferElement.class,
         SVGFECompositeElement.class, SVGFEConvolveMatrixElement.class, SVGFEDiffuseLightingElement.class,

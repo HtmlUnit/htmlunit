@@ -17,10 +17,13 @@ package org.htmlunit.javascript.host.html;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlTable;
 import org.htmlunit.html.HtmlTableBody;
 import org.htmlunit.html.HtmlTableFooter;
@@ -48,7 +51,7 @@ import org.htmlunit.javascript.host.dom.Node;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlTable.class)
-public class HTMLTableElement extends RowContainer {
+public class HTMLTableElement extends HTMLElement {
 
     /**
      * JavaScript constructor.
@@ -248,36 +251,54 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Indicates if the row belongs to this container.
-     * @param row the row to test
-     * @return {@code true} if it belongs to this container
+     * Inserts a new row at the given position.
+     * @param index the index where the row should be inserted (0 &lt;= index &lt;= nbRows)
+     * @return the inserted row
      */
-    @Override
-    protected boolean isContainedRow(final HtmlTableRow row) {
-        final DomNode parent = row.getParentNode(); // the tbody, thead or tfoo
-        return parent != null
-                && parent.getParentNode() == getDomNodeOrDie();
+    public HtmlUnitScriptable insertRow(final int index) {
+        final HTMLCollection rows = getRows();
+        final int rowCount = rows.getLength();
+        final DomElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createElement("tr");
+        if (rowCount == 0) {
+            getDomNodeOrDie().appendChild(newRow);
+        }
+        else if (index == rowCount) {
+            final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(index - 1));
+            row.getDomNodeOrDie().getParentNode().appendChild(newRow);
+        }
+        else {
+            final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(index));
+            // if at the end, then in the same "sub-container" as the last existing row
+            if (index > rowCount - 1) {
+                row.getDomNodeOrDie().getParentNode().appendChild(newRow);
+            }
+            else {
+                row.getDomNodeOrDie().insertBefore(newRow);
+            }
+        }
+        return getScriptableFor(newRow);
     }
 
     /**
      * Handle special case where table is empty.
-     * {@inheritDoc}
+     * @param index the index where the row should be inserted (0 &lt;= index &lt;= nbRows)
+     * @return the inserted row
      */
-    @Override
-    public HtmlUnitScriptable insertRow(final int index) {
+    @JsxFunction(functionName = "insertRow")
+    public HtmlUnitScriptable js_insertRow(final int index) {
         // check if a tbody should be created
         if (index != 0) {
             for (final HtmlElement htmlElement : getDomNodeOrDie().getHtmlElementDescendants()) {
                 if (htmlElement instanceof HtmlTableBody
                         || htmlElement instanceof HtmlTableHeader
                         || htmlElement instanceof HtmlTableFooter) {
-                    return super.insertRow(index);
+                    return insertRow(index);
                 }
             }
         }
 
         final HtmlElement tBody = getDomNodeOrDie().appendChildIfNoneExists("tbody");
-        return ((RowContainer) getScriptableFor(tBody)).insertRow(0);
+        return ((HTMLTableSectionElement) getScriptableFor(tBody)).insertRow(0);
     }
 
     /**
@@ -428,4 +449,64 @@ public class HTMLTableElement extends RowContainer {
         setAttribute("rules", rules);
     }
 
+    /**
+     * Returns the value of the {@code align} property.
+     * @return the value of the {@code align} property
+     */
+    @JsxGetter
+    public String getAlign() {
+        return getAlign(true);
+    }
+
+    /**
+     * Sets the value of the {@code align} property.
+     * @param align the value of the {@code align} property
+     */
+    @JsxSetter
+    public void setAlign(final String align) {
+        setAlign(align, false);
+    }
+
+    /**
+     * Deletes the row at the specified index.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536408.aspx">MSDN Documentation</a>
+     * @param rowIndex the zero-based index of the row to delete
+     */
+    @JsxFunction
+    public void deleteRow(int rowIndex) {
+        final HTMLCollection rows = getRows();
+        final int rowCount = rows.getLength();
+        if (rowIndex == -1) {
+            rowIndex = rowCount - 1;
+        }
+        final boolean rowIndexValid = rowIndex >= 0 && rowIndex < rowCount;
+        if (rowIndexValid) {
+            final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(rowIndex));
+            row.getDomNodeOrDie().remove();
+        }
+    }
+
+    /**
+     * Returns the rows in the element.
+     * @return the rows in the element
+     */
+    @JsxGetter
+    public HTMLCollection getRows() {
+        final HTMLCollection rows = new HTMLCollection(getDomNodeOrDie(), false);
+        rows.setIsMatchingPredicate(
+                (Predicate<DomNode> & Serializable)
+                node -> node instanceof HtmlTableRow && isContainedRow((HtmlTableRow) node));
+        return rows;
+    }
+
+    /**
+     * Indicates if the row belongs to this container.
+     * @param row the row to test
+     * @return {@code true} if it belongs to this container
+     */
+    private boolean isContainedRow(final HtmlTableRow row) {
+        final DomNode parent = row.getParentNode(); // the tbody, thead or tfoo
+        return parent != null
+                && parent.getParentNode() == getDomNodeOrDie();
+    }
 }

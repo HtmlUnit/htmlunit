@@ -13152,22 +13152,26 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "deleteRow(),deleteTFoot(),deleteTHead(),frame[GSCE],insertRow(),rows[GCE],rules[GSCE],"
                 + "summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],"
                 + "width[GSCE]")
-    @HtmlUnitNYI(CHROME = "bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
-                + "constructor(),createCaption(),createTBody(),"
-                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),"
-                + "rules[GSCE],summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],width[GSCE]",
-            EDGE = "bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
-                + "constructor(),createCaption(),createTBody(),"
-                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),"
-                + "rules[GSCE],summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],width[GSCE]",
-            FF_ESR = "bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
-                + "constructor(),createCaption(),createTBody(),"
-                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),"
-                + "rules[GSCE],summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],width[GSCE]",
-            FF = "bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
-                + "constructor(),createCaption(),createTBody(),"
-                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),"
-                + "rules[GSCE],summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],width[GSCE]")
+    @HtmlUnitNYI(CHROME = "align[GSCE],bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
+                + "constructor(),createCaption(),createTBody(),createTFoot(),createTHead(),deleteCaption(),"
+                + "deleteRow(),deleteTFoot(),deleteTHead(),insertRow(),rows[GCE],rules[GSCE],"
+                + "summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],"
+                + "width[GSCE]",
+            EDGE = "align[GSCE],bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
+                + "constructor(),createCaption(),createTBody(),createTFoot(),createTHead(),deleteCaption(),"
+                + "deleteRow(),deleteTFoot(),deleteTHead(),insertRow(),rows[GCE],rules[GSCE],"
+                + "summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],"
+                + "width[GSCE]",
+            FF_ESR = "align[GSCE],bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
+                + "constructor(),createCaption(),createTBody(),createTFoot(),createTHead(),deleteCaption(),"
+                + "deleteRow(),deleteTFoot(),deleteTHead(),insertRow(),rows[GCE],rules[GSCE],"
+                + "summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],"
+                + "width[GSCE]",
+            FF = "align[GSCE],bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
+                + "constructor(),createCaption(),createTBody(),createTFoot(),createTHead(),deleteCaption(),"
+                + "deleteRow(),deleteTFoot(),deleteTHead(),insertRow(),rows[GCE],rules[GSCE],"
+                + "summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],"
+                + "width[GSCE]")
     public void table() throws Exception {
         test("table");
     }
@@ -13218,10 +13222,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]")
-    @HtmlUnitNYI(CHROME = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
-            EDGE = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
-            FF_ESR = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
-            FF = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]")
     public void tbody() throws Exception {
         test("tbody");
     }
@@ -13394,10 +13394,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]")
-    @HtmlUnitNYI(CHROME = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
-            EDGE = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
-            FF_ESR = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
-            FF = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]")
     public void tfoot() throws Exception {
         test("tfoot");
     }
@@ -13412,10 +13408,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]")
-    @HtmlUnitNYI(CHROME = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
-            EDGE = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
-            FF_ESR = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
-            FF = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]")
     public void thead() throws Exception {
         test("thead");
     }
