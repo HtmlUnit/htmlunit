@@ -191,6 +191,7 @@ public class HTMLAllCollection extends AbstractList implements Callable {
 
         return super.equivalentValues(value);
     }
+
     /**
      * @return the Iterator symbol
      */

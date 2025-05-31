@@ -44,7 +44,7 @@
                 HTMLTableElement now supports the 'align' and 'rows' properties.
             </action>
             <action type="fix" dev="rbri">
-                Internal javascript class RowContainer removed. The prototype for HTMLTableElement, and 
+                Internal javascript class RowContainer removed. The prototype for HTMLTableElement, and
                 HTMLTableSectionElement is now the correct HTMLElement.
             </action>
             <action type="update" dev="rbri">
