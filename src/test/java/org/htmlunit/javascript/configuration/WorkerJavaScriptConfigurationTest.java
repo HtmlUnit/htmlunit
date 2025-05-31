@@ -36,10 +36,10 @@ public class WorkerJavaScriptConfigurationTest {
      */
     @Test
     public void treeOrder() {
-        final List<String> defined = new ArrayList<>(JavaScriptConfiguration.CLASSES_.length);
+        final List<String> defined = new ArrayList<>(WorkerJavaScriptConfiguration.CLASSES_.length);
 
         final HashMap<Integer, List<String>> levels = new HashMap<>();
-        for (final Class<?> c : JavaScriptConfiguration.CLASSES_) {
+        for (final Class<?> c : WorkerJavaScriptConfiguration.CLASSES_) {
             defined.add(c.getSimpleName());
 
             int level = 1;
@@ -57,18 +57,31 @@ public class WorkerJavaScriptConfigurationTest {
             clsAtLevel.add(c.getSimpleName());
         }
 
-        final List<String> all = new ArrayList<>(JavaScriptConfiguration.CLASSES_.length);
+        final List<String> all = new ArrayList<>(WorkerJavaScriptConfiguration.CLASSES_.length);
         for (int level = 1; level <= levels.size(); level++) {
             final List<String> clsAtLevel = levels.get(level);
             Collections.sort(clsAtLevel);
             all.addAll(clsAtLevel);
 
             // dump
-            // System.out.println("// level " + level);
-            // for (String cls : clsAtLevel) {
-            //     System.out.print(cls + ".class, ");
-            // }
-            // System.out.println();
+            /*
+            final String indent = "       ";
+            System.out.println(indent + " // level " + level);
+
+            System.out.print(indent);
+            int chars = indent.length();
+            for (final String cls : clsAtLevel) {
+                final String toPrint = " " + cls + ".class,";
+                chars += toPrint.length();
+                if (chars > 120) {
+                    System.out.println();
+                    System.out.print(indent);
+                    chars = indent.length() + toPrint.length();
+                }
+                System.out.print(toPrint);
+            }
+            System.out.println();
+            */
         }
         Assert.assertEquals(all, defined);
     }

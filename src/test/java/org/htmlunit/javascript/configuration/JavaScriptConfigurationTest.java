@@ -297,11 +297,24 @@ public class JavaScriptConfigurationTest {
             all.addAll(clsAtLevel);
 
             // dump
-            // System.out.println("// level " + level);
-            // for (String cls : clsAtLevel) {
-            //     System.out.print(cls + ".class, ");
-            // }
-            // System.out.println();
+            /*
+            final String indent = "       ";
+            System.out.println(indent + " // level " + level);
+
+            System.out.print(indent);
+            int chars = indent.length();
+            for (final String cls : clsAtLevel) {
+                final String toPrint = " " + cls + ".class,";
+                chars += toPrint.length();
+                if (chars > 120) {
+                    System.out.println();
+                    System.out.print(indent);
+                    chars = indent.length() + toPrint.length();
+                }
+                System.out.print(toPrint);
+            }
+            System.out.println();
+            */
         }
         Assert.assertEquals(all, defined);
     }
