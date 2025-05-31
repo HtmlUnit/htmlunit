@@ -15,8 +15,11 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.html.HtmlDefinitionList;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * The JavaScript object {@code HTMLDListElement}.
@@ -25,7 +28,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlDefinitionList.class)
-public class HTMLDListElement extends HTMLListElement {
+public class HTMLDListElement extends HTMLElement {
 
     /**
      * JavaScript constructor.
@@ -34,5 +37,28 @@ public class HTMLDListElement extends HTMLListElement {
     @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
+    }
+
+    /**
+     * Returns the value of the {@code compact} attribute.
+     * @return the value of the {@code compact} attribute
+     */
+    @JsxGetter
+    public boolean isCompact() {
+        return getDomNodeOrDie().hasAttribute("compact");
+    }
+
+    /**
+     * Sets the value of the {@code compact} attribute.
+     * @param compact the value of the {@code compact} attribute
+     */
+    @JsxSetter
+    public void setCompact(final Object compact) {
+        if (JavaScriptEngine.toBoolean(compact)) {
+            getDomNodeOrDie().setAttribute("compact", "");
+        }
+        else {
+            getDomNodeOrDie().removeAttribute("compact");
+        }
     }
 }

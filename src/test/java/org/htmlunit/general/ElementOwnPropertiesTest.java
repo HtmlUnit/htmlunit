@@ -4872,10 +4872,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "compact[GSCE],constructor()",
             FF = "compact[GSCE],constructor()",
             FF_ESR = "compact[GSCE],constructor()")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF_ESR = "constructor()",
-            FF = "constructor()")
     public void dir() throws Exception {
         test("dir");
     }
@@ -4904,10 +4900,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "compact[GSCE],constructor()",
             FF = "compact[GSCE],constructor()",
             FF_ESR = "compact[GSCE],constructor()")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF_ESR = "constructor()",
-            FF = "constructor()")
     public void dl() throws Exception {
         test("dl");
     }
@@ -7475,10 +7467,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),type[GSCE],value[GSCE]",
             FF = "constructor(),type[GSCE],value[GSCE]",
             FF_ESR = "constructor(),type[GSCE],value[GSCE]")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF_ESR = "constructor()",
-            FF = "constructor()")
+    @HtmlUnitNYI(CHROME = "constructor(),type[GSCE]",
+            EDGE = "constructor(),type[GSCE]",
+            FF_ESR = "constructor(),type[GSCE]",
+            FF = "constructor(),type[GSCE]")
     public void li() throws Exception {
         test("li");
     }
@@ -8019,10 +8011,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "compact[GSCE],constructor()",
             FF = "compact[GSCE],constructor()",
             FF_ESR = "compact[GSCE],constructor()")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF_ESR = "constructor()",
-            FF = "constructor()")
     public void menu() throws Exception {
         test("menu");
     }
@@ -9414,10 +9402,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "compact[GSCE],constructor(),reversed[GSCE],start[GSCE],type[GSCE]",
             FF = "compact[GSCE],constructor(),reversed[GSCE],start[GSCE],type[GSCE]",
             FF_ESR = "compact[GSCE],constructor(),reversed[GSCE],start[GSCE],type[GSCE]")
-    @HtmlUnitNYI(CHROME = "constructor(),type[GSCE]",
-            EDGE = "constructor(),type[GSCE]",
-            FF_ESR = "constructor(),type[GSCE]",
-            FF = "constructor(),type[GSCE]")
+    @HtmlUnitNYI(CHROME = "compact[GSCE],constructor(),type[GSCE]",
+            EDGE = "compact[GSCE],constructor(),type[GSCE]",
+            FF_ESR = "compact[GSCE],constructor(),type[GSCE]",
+            FF = "compact[GSCE],constructor(),type[GSCE]")
     public void ol() throws Exception {
         test("ol");
     }
@@ -13951,10 +13939,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "compact[GSCE],constructor(),type[GSCE]",
             FF = "compact[GSCE],constructor(),type[GSCE]",
             FF_ESR = "compact[GSCE],constructor(),type[GSCE]")
-    @HtmlUnitNYI(CHROME = "constructor(),type[GSCE]",
-            EDGE = "constructor(),type[GSCE]",
-            FF_ESR = "constructor(),type[GSCE]",
-            FF = "constructor(),type[GSCE]")
     public void ul() throws Exception {
         test("ul");
     }

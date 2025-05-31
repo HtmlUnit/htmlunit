@@ -18,8 +18,11 @@ import static org.htmlunit.BrowserVersionFeatures.JS_MENU_TYPE_PASS;
 
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlMenu;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * The JavaScript object {@code HTMLMenuElement}.
@@ -29,7 +32,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlMenu.class)
-public class HTMLMenuElement extends HTMLListElement {
+public class HTMLMenuElement extends HTMLElement {
 
     /**
      * JavaScript constructor.
@@ -44,8 +47,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Returns the value of the {@code type} property.
      * @return the value of the {@code type} property
      */
-    @Override
-    public String getType() {
+    protected String getType() {
         final String type = getDomNodeOrDie().getAttributeDirect("type");
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_PASS)) {
             return type;
@@ -65,8 +67,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Sets the value of the {@code type} property.
      * @param type the value of the {@code type} property
      */
-    @Override
-    public void setType(final String type) {
+    protected void setType(final String type) {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_PASS)) {
             getDomNodeOrDie().setAttribute(DomElement.TYPE_ATTRIBUTE, type);
             return;
@@ -82,5 +83,28 @@ public class HTMLMenuElement extends HTMLListElement {
         }
 
         getDomNodeOrDie().setAttribute(DomElement.TYPE_ATTRIBUTE, "list");
+    }
+
+    /**
+     * Returns the value of the {@code compact} attribute.
+     * @return the value of the {@code compact} attribute
+     */
+    @JsxGetter
+    public boolean isCompact() {
+        return getDomNodeOrDie().hasAttribute("compact");
+    }
+
+    /**
+     * Sets the value of the {@code compact} attribute.
+     * @param compact the value of the {@code compact} attribute
+     */
+    @JsxSetter
+    public void setCompact(final Object compact) {
+        if (JavaScriptEngine.toBoolean(compact)) {
+            getDomNodeOrDie().setAttribute("compact", "");
+        }
+        else {
+            getDomNodeOrDie().removeAttribute("compact");
+        }
     }
 }

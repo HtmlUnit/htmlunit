@@ -2273,10 +2273,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("type,value")
-    @HtmlUnitNYI(CHROME = "-",
-            EDGE = "-",
-            FF_ESR = "-",
-            FF = "-")
+    @HtmlUnitNYI(CHROME = "type",
+            EDGE = "type",
+            FF_ESR = "type",
+            FF = "type")
     public void li() throws Exception {
         test("li");
     }

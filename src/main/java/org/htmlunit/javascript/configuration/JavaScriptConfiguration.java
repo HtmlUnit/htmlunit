@@ -279,7 +279,6 @@ import org.htmlunit.javascript.host.html.HTMLLIElement;
 import org.htmlunit.javascript.host.html.HTMLLabelElement;
 import org.htmlunit.javascript.host.html.HTMLLegendElement;
 import org.htmlunit.javascript.host.html.HTMLLinkElement;
-import org.htmlunit.javascript.host.html.HTMLListElement;
 import org.htmlunit.javascript.host.html.HTMLMapElement;
 import org.htmlunit.javascript.host.html.HTMLMarqueeElement;
 import org.htmlunit.javascript.host.html.HTMLMediaElement;
@@ -648,7 +647,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLFormElement.class, HTMLFrameElement.class, HTMLFrameSetElement.class, HTMLHRElement.class,
         HTMLHeadElement.class, HTMLHeadingElement.class, HTMLHtmlElement.class, HTMLIFrameElement.class,
         HTMLImageElement.class, HTMLInputElement.class, HTMLLIElement.class, HTMLLabelElement.class,
-        HTMLLegendElement.class, HTMLLinkElement.class, HTMLListElement.class, HTMLMapElement.class,
+        HTMLLegendElement.class, HTMLLinkElement.class, HTMLMapElement.class,
         HTMLMarqueeElement.class, HTMLMediaElement.class, HTMLMetaElement.class, HTMLMeterElement.class,
         HTMLModElement.class, HTMLObjectElement.class, HTMLOptGroupElement.class, HTMLOptionElement.class,
         HTMLOutputElement.class, HTMLParagraphElement.class, HTMLParamElement.class, HTMLPictureElement.class,
