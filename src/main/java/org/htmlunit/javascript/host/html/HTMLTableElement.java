@@ -36,6 +36,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.Node;
 
 /**
@@ -251,48 +252,75 @@ public class HTMLTableElement extends HTMLElement {
     }
 
     /**
+     * Inserts a new row at the specified index in the element's row collection. If the index
+     * is -1 or there is no index specified, then the row is appended at the end of the
+     * element's row collection.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536457.aspx">MSDN Documentation</a>
+     * @param index specifies where to insert the row in the rows collection.
+     *        The default value is -1, which appends the new row to the end of the rows collection
+     * @return the newly-created row
+     */
+    @JsxFunction
+    public HtmlUnitScriptable insertRow(final Object index) {
+        int rowIndex = -1;
+        if (!JavaScriptEngine.isUndefined(index)) {
+            rowIndex = (int) JavaScriptEngine.toNumber(index);
+        }
+        final HTMLCollection rows = getRows();
+        final int rowCount = rows.getLength();
+        final int r;
+        if (rowIndex == -1 || rowIndex == rowCount) {
+            r = Math.max(0, rowCount);
+        }
+        else {
+            r = rowIndex;
+        }
+
+        if (r < 0 || r > rowCount) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "Index or size is negative or greater than the allowed amount "
+                            + "(index: " + rowIndex + ", " + rowCount + " rows)",
+                    DOMException.INDEX_SIZE_ERR);
+        }
+
+        return insertRow(r);
+    }
+
+    /**
      * Inserts a new row at the given position.
      * @param index the index where the row should be inserted (0 &lt;= index &lt;= nbRows)
      * @return the inserted row
      */
     public HtmlUnitScriptable insertRow(final int index) {
-        final HTMLCollection rows = getRows();
-        final int rowCount = rows.getLength();
-        final DomElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createElement("tr");
-        if (rowCount == 0) {
-            getDomNodeOrDie().appendChild(newRow);
-        }
-        else if (index == rowCount) {
-            final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(index - 1));
-            row.getDomNodeOrDie().getParentNode().appendChild(newRow);
-        }
-        else {
-            final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(index));
-            // if at the end, then in the same "sub-container" as the last existing row
-            if (index > rowCount - 1) {
-                row.getDomNodeOrDie().getParentNode().appendChild(newRow);
-            }
-            else {
-                row.getDomNodeOrDie().insertBefore(newRow);
-            }
-        }
-        return getScriptableFor(newRow);
-    }
-
-    /**
-     * Handle special case where table is empty.
-     * @param index the index where the row should be inserted (0 &lt;= index &lt;= nbRows)
-     * @return the inserted row
-     */
-    @JsxFunction(functionName = "insertRow")
-    public HtmlUnitScriptable js_insertRow(final int index) {
         // check if a tbody should be created
         if (index != 0) {
             for (final HtmlElement htmlElement : getDomNodeOrDie().getHtmlElementDescendants()) {
                 if (htmlElement instanceof HtmlTableBody
                         || htmlElement instanceof HtmlTableHeader
                         || htmlElement instanceof HtmlTableFooter) {
-                    return insertRow(index);
+
+                    final HTMLCollection rows = getRows();
+                    final int rowCount = rows.getLength();
+                    final DomElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createElement("tr");
+                    if (rowCount == 0) {
+                        getDomNodeOrDie().appendChild(newRow);
+                    }
+                    else if (index == rowCount) {
+                        final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(index - 1));
+                        row.getDomNodeOrDie().getParentNode().appendChild(newRow);
+                    }
+                    else {
+                        final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(index));
+                        // if at the end, then in the same "sub-container" as the last existing row
+                        if (index > rowCount - 1) {
+                            row.getDomNodeOrDie().getParentNode().appendChild(newRow);
+                        }
+                        else {
+                            row.getDomNodeOrDie().insertBefore(newRow);
+                        }
+                    }
+                    return getScriptableFor(newRow);
                 }
             }
         }
