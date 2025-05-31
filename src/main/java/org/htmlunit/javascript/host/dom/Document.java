@@ -1705,13 +1705,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public HTMLCollection getForms() {
-        final HTMLCollection forms = new HTMLCollection(getDomNodeOrDie(), false) {
-            @Override
-            public Object call(final Context cx, final Scriptable scope,
-                    final Scriptable thisObj, final Object[] args) {
-                throw JavaScriptEngine.typeError("document.forms is not a function");
-            }
-        };
+        final HTMLCollection forms = new HTMLCollection(getDomNodeOrDie(), false);
 
         forms.setIsMatchingPredicate(
                 (Predicate<DomNode> & Serializable)
@@ -1725,13 +1719,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public HTMLCollection getEmbeds() {
-        final HTMLCollection embeds = new HTMLCollection(getDomNodeOrDie(), false) {
-            @Override
-            public Object call(final Context cx, final Scriptable scope,
-                    final Scriptable thisObj, final Object[] args) {
-                throw JavaScriptEngine.typeError("document.embeds is not a function");
-            }
-        };
+        final HTMLCollection embeds = new HTMLCollection(getDomNodeOrDie(), false);
 
         embeds.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> node instanceof HtmlEmbed);
         return embeds;
@@ -1743,13 +1731,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public HTMLCollection getImages() {
-        final HTMLCollection images = new HTMLCollection(getDomNodeOrDie(), false) {
-            @Override
-            public Object call(final Context cx, final Scriptable scope,
-                    final Scriptable thisObj, final Object[] args) {
-                throw JavaScriptEngine.typeError("document.images is not a function");
-            }
-        };
+        final HTMLCollection images = new HTMLCollection(getDomNodeOrDie(), false);
 
         images.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> node instanceof HtmlImage);
         return images;
@@ -1761,13 +1743,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public HTMLCollection getScripts() {
-        final HTMLCollection scripts = new HTMLCollection(getDomNodeOrDie(), false) {
-            @Override
-            public Object call(final Context cx, final Scriptable scope,
-                    final Scriptable thisObj, final Object[] args) {
-                throw JavaScriptEngine.typeError("document.scripts is not a function");
-            }
-        };
+        final HTMLCollection scripts = new HTMLCollection(getDomNodeOrDie(), false);
 
         scripts.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> node instanceof HtmlScript);
         return scripts;
@@ -3505,8 +3481,8 @@ public class Document extends Node {
      * @return the value of the {@code all} property
      */
     @JsxGetter
-    public HTMLCollection getAll() {
-        final HTMLCollection all = new HTMLAllCollection(getDomNodeOrDie());
+    public HTMLAllCollection getAll() {
+        final HTMLAllCollection all = new HTMLAllCollection(getDomNodeOrDie());
         all.setAvoidObjectDetection(true);
         all.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> true);
         return all;

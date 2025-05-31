@@ -21,8 +21,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.corejs.javascript.Callable;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -53,7 +51,7 @@ import org.htmlunit.javascript.host.dom.AbstractList;
  * @author Ronald Brill
  */
 @JsxClass
-public class HTMLCollection extends AbstractList implements Callable {
+public class HTMLCollection extends AbstractList {
 
     /**
      * Creates an instance.
@@ -127,34 +125,6 @@ public class HTMLCollection extends AbstractList implements Callable {
     @Override
     public final int getLength() {
         return super.getLength();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (supportsParentheses()) {
-            if (args.length == 0) {
-                throw JavaScriptEngine.reportRuntimeError("Zero arguments; need an index or a key.");
-            }
-            final Object object = getIt(args[0]);
-            if (object == NOT_FOUND) {
-                return null;
-            }
-            return object;
-        }
-
-        throw JavaScriptEngine.typeError("HTMLCollection does nont support function like access");
-    }
-
-    /**
-     * Is parentheses supported.
-     *
-     * @return true or false
-     */
-    protected boolean supportsParentheses() {
-        return false;
     }
 
     /**
