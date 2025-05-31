@@ -281,9 +281,10 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
 
     private void item(final String name) throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
-            + "  alerts = ''\n"
-            + "  function log(msg) { alerts += msg + '§';}\n"
+            + "<html id='myHtml'>\n"
+            + "<head id='myHead'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function report(result) {\n"
             + "    if (result == null || result == undefined) {\n"
             + "      log(result);\n"
@@ -304,7 +305,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "      var item = document.all.item(" + name + ");\n"
             + "      report(item);\n"
             + "    } catch(e) { logEx(e); }\n"
-            + "    document.title = alerts;"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -391,16 +391,17 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("myTitle-undefined")
+    @Alerts("myScript-undefined")
     public void arrayIndex_IndexAsString() throws Exception {
         arrayIndex("'2'");
     }
 
     private void arrayIndex(final String name) throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
-            + "  alerts = ''\n"
-            + "  function log(msg) { alerts += msg + '§';}\n"
+            + "<html id='myHtml'>\n"
+            + "<head id='myHead'>\n"
+            + "<script id='myScript'>\n"
+            + LOG_TITLE_FUNCTION
             + "  function report(result) {\n"
             + "    if (result == null || result == undefined) {\n"
             + "      log(result);\n"
@@ -421,7 +422,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "      var item = document.all[" + name + "];\n"
             + "      report(item);\n"
             + "    } catch(e) { logEx(e); }\n"
-            + "    document.title = alerts;"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -508,16 +508,17 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("myTitle-undefined")
+    @Alerts("myScript-undefined")
     public void functionIndex_IndexAsString() throws Exception {
         functionIndex("'2'");
     }
 
     private void functionIndex(final String name) throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
-            + "  alerts = ''\n"
-            + "  function log(msg) { alerts += msg + '§';}\n"
+            + "<html id='myHtml'>\n"
+            + "<head id='myHead'>\n"
+            + "<script id='myScript'>\n"
+            + LOG_TITLE_FUNCTION
             + "  function report(result) {\n"
             + "    if (result == null || result == undefined) {\n"
             + "      log(result);\n"
@@ -538,7 +539,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "      var item = document.all(" + name + ");\n"
             + "      report(item);\n"
             + "    } catch(e) { logEx(e); }\n"
-            + "    document.title = alerts;"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
