@@ -307,7 +307,6 @@ import org.htmlunit.javascript.host.html.HTMLStyleElement;
 import org.htmlunit.javascript.host.html.HTMLTableCaptionElement;
 import org.htmlunit.javascript.host.html.HTMLTableCellElement;
 import org.htmlunit.javascript.host.html.HTMLTableColElement;
-import org.htmlunit.javascript.host.html.HTMLTableComponent;
 import org.htmlunit.javascript.host.html.HTMLTableElement;
 import org.htmlunit.javascript.host.html.HTMLTableRowElement;
 import org.htmlunit.javascript.host.html.HTMLTableSectionElement;
@@ -652,7 +651,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLOutputElement.class, HTMLParagraphElement.class, HTMLParamElement.class, HTMLPictureElement.class,
         HTMLPreElement.class, HTMLProgressElement.class, HTMLQuoteElement.class, HTMLScriptElement.class,
         HTMLSelectElement.class, HTMLSlotElement.class, HTMLSourceElement.class, HTMLSpanElement.class,
-        HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableComponent.class,
+        HTMLStyleElement.class, HTMLTableCaptionElement.class,
         HTMLTemplateElement.class, HTMLTextAreaElement.class, HTMLTimeElement.class, HTMLTitleElement.class,
         HTMLTrackElement.class, HTMLUnknownElement.class, SVGAnimationElement.class,
         SVGClipPathElement.class, SVGComponentTransferFunctionElement.class, SVGDescElement.class,

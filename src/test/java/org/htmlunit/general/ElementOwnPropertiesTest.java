@@ -13186,10 +13186,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
             FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]")
-    @HtmlUnitNYI(CHROME = "constructor(),span[GSCE],width[GSCE]",
-            EDGE = "constructor(),span[GSCE],width[GSCE]",
-            FF_ESR = "constructor(),span[GSCE],width[GSCE]",
-            FF = "constructor(),span[GSCE],width[GSCE]")
     public void col() throws Exception {
         test("col");
     }
@@ -13204,10 +13200,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]",
             FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),span[GSCE],vAlign[GSCE],width[GSCE]")
-    @HtmlUnitNYI(CHROME = "constructor(),span[GSCE],width[GSCE]",
-            EDGE = "constructor(),span[GSCE],width[GSCE]",
-            FF_ESR = "constructor(),span[GSCE],width[GSCE]",
-            FF = "constructor(),span[GSCE],width[GSCE]")
     public void colgroup() throws Exception {
         test("colgroup");
     }
@@ -13234,28 +13226,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "abbr[GSCE],align[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],ch[GSCE],chOff[GSCE],"
                 + "colSpan[GSCE],constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],"
-                + "vAlign[GSCE],"
-                + "width[GSCE]",
+                + "vAlign[GSCE],width[GSCE]",
             EDGE = "abbr[GSCE],align[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],ch[GSCE],chOff[GSCE],"
                 + "colSpan[GSCE],constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],"
-                + "vAlign[GSCE],"
-                + "width[GSCE]",
+                + "vAlign[GSCE],width[GSCE]",
             FF = "abbr[GSCE],align[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],ch[GSCE],chOff[GSCE],"
                 + "colSpan[GSCE],constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],"
-                + "vAlign[GSCE],"
-                + "width[GSCE]",
+                + "vAlign[GSCE],width[GSCE]",
             FF_ESR = "abbr[GSCE],align[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],ch[GSCE],chOff[GSCE],"
                 + "colSpan[GSCE],constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],"
-                + "vAlign[GSCE],"
-                + "width[GSCE]")
-    @HtmlUnitNYI(CHROME = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],constructor(),"
-                + "headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
-            EDGE = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],constructor(),"
-                + "headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
-            FF_ESR = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],constructor(),"
-                + "headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
-            FF = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],constructor(),"
-                + "headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]")
+                + "vAlign[GSCE],width[GSCE]")
     public void td() throws Exception {
         test("td");
     }
@@ -13268,28 +13248,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "abbr[GSCE],align[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],ch[GSCE],chOff[GSCE],"
                 + "colSpan[GSCE],constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],"
-                + "vAlign[GSCE],"
-                + "width[GSCE]",
+                + "vAlign[GSCE],width[GSCE]",
             EDGE = "abbr[GSCE],align[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],ch[GSCE],chOff[GSCE],"
                 + "colSpan[GSCE],constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],"
-                + "vAlign[GSCE],"
-                + "width[GSCE]",
+                + "vAlign[GSCE],width[GSCE]",
             FF = "abbr[GSCE],align[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],ch[GSCE],chOff[GSCE],"
                 + "colSpan[GSCE],constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],"
-                + "vAlign[GSCE],"
-                + "width[GSCE]",
+                + "vAlign[GSCE],width[GSCE]",
             FF_ESR = "abbr[GSCE],align[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],ch[GSCE],chOff[GSCE],"
                 + "colSpan[GSCE],constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],"
-                + "vAlign[GSCE],"
-                + "width[GSCE]")
-    @HtmlUnitNYI(CHROME = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],"
-                + "constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
-            EDGE = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],"
-                + "constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
-            FF_ESR = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],"
-                + "constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
-            FF = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],"
-                + "constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]")
+                + "vAlign[GSCE],width[GSCE]")
     public void th() throws Exception {
         test("th");
     }
@@ -13301,25 +13269,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "align[GSCE],bgColor[GSCE],cells[GCE],ch[GSCE],chOff[GSCE],constructor(),deleteCell(),"
-                + "insertCell(),rowIndex[GCE],sectionRowIndex[GCE],"
-                + "vAlign[GSCE]",
+                + "insertCell(),rowIndex[GCE],sectionRowIndex[GCE],vAlign[GSCE]",
             EDGE = "align[GSCE],bgColor[GSCE],cells[GCE],ch[GSCE],chOff[GSCE],constructor(),deleteCell(),"
-                + "insertCell(),rowIndex[GCE],sectionRowIndex[GCE],"
-                + "vAlign[GSCE]",
+                + "insertCell(),rowIndex[GCE],sectionRowIndex[GCE],vAlign[GSCE]",
             FF = "align[GSCE],bgColor[GSCE],cells[GCE],ch[GSCE],chOff[GSCE],constructor(),deleteCell(),"
-                + "insertCell(),rowIndex[GCE],sectionRowIndex[GCE],"
-                + "vAlign[GSCE]",
+                + "insertCell(),rowIndex[GCE],sectionRowIndex[GCE],vAlign[GSCE]",
             FF_ESR = "align[GSCE],bgColor[GSCE],cells[GCE],ch[GSCE],chOff[GSCE],constructor(),deleteCell(),"
-                + "insertCell(),rowIndex[GCE],sectionRowIndex[GCE],"
-                + "vAlign[GSCE]")
-    @HtmlUnitNYI(CHROME = "bgColor[GSCE],cells[GCE],constructor(),deleteCell(),insertCell(),"
-                + "rowIndex[GCE],sectionRowIndex[GCE]",
-            EDGE = "bgColor[GSCE],cells[GCE],constructor(),deleteCell(),insertCell(),"
-                + "rowIndex[GCE],sectionRowIndex[GCE]",
-            FF_ESR = "bgColor[GSCE],cells[GCE],constructor(),deleteCell(),insertCell(),"
-                + "rowIndex[GCE],sectionRowIndex[GCE]",
-            FF = "bgColor[GSCE],cells[GCE],constructor(),deleteCell(),insertCell(),"
-                + "rowIndex[GCE],sectionRowIndex[GCE]")
+                + "insertCell(),rowIndex[GCE],sectionRowIndex[GCE],vAlign[GSCE]")
     public void tr() throws Exception {
         test("tr");
     }
