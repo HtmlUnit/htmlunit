@@ -248,4 +248,12 @@ public class HTMLAllCollection extends AbstractList implements Callable {
     protected boolean isGetWithPreemptionSearchName() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected HTMLCollection create(final DomNode parentScope, final List<DomNode> initialElements) {
+        return new HTMLCollection(parentScope, initialElements);
+    }
 }

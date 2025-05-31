@@ -95,7 +95,7 @@ public class Console2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("info: [\"one\",\"two\",\"three\",\"[object HTMLCollection]\"]")
+    @Alerts("info: [\"one\",\"two\",\"three\",{}]")
     public void log() throws Exception {
         log("['one', 'two', 'three', document.body.children]");
     }
