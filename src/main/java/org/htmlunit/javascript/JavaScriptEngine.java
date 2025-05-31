@@ -332,6 +332,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             if (config == scopeConfig) {
                 addAsConstructorAndAlias(scopeContructorFunctionObject, jsScope, prototype, config);
                 configureConstantsStaticPropertiesAndStaticFunctions(config, scopeContructorFunctionObject);
+
+                // adjust prototype if needed
+                if (!StringUtils.isEmpty(config.getExtendedClassName())) {
+                    final Scriptable parentPrototype = ctorPrototypesPerJSName.get(config.getExtendedClassName());
+                    scopeContructorFunctionObject.setPrototype(parentPrototype);
+                }
                 continue;
             }
 
