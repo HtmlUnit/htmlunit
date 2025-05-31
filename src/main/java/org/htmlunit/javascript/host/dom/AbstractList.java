@@ -34,7 +34,6 @@ import org.htmlunit.html.HtmlAttributeChangeListener;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.htmlunit.javascript.configuration.JsxClass;
 
 /**
  * The parent class of {@link NodeList} and {@link org.htmlunit.javascript.host.html.HTMLCollection}.
@@ -46,7 +45,6 @@ import org.htmlunit.javascript.configuration.JsxClass;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@JsxClass(isJSObject = false)
 public class AbstractList extends HtmlUnitScriptable implements ExternalArrayData {
 
     /**

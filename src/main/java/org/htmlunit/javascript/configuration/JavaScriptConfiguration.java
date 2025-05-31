@@ -126,7 +126,6 @@ import org.htmlunit.javascript.host.css.MediaQueryList;
 import org.htmlunit.javascript.host.css.StyleMedia;
 import org.htmlunit.javascript.host.css.StyleSheet;
 import org.htmlunit.javascript.host.css.StyleSheetList;
-import org.htmlunit.javascript.host.dom.AbstractList;
 import org.htmlunit.javascript.host.dom.AbstractRange;
 import org.htmlunit.javascript.host.dom.Attr;
 import org.htmlunit.javascript.host.dom.CDATASection;
@@ -545,7 +544,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     @SuppressWarnings("unchecked")
     static final Class<? extends HtmlUnitScriptable>[] CLASSES_ = new Class[] {
          // level 1
-        AbortController.class, AbstractList.class, AbstractRange.class, Atomics.class, AudioBuffer.class,
+        AbortController.class, AbstractRange.class, Atomics.class, AudioBuffer.class,
         AudioListener.class, AudioParam.class, BarProp.class, Blob.class, CSS.class, CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, Cache.class, CacheStorage.class, CanvasGradient.class,
         CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class, ClientRect.class,

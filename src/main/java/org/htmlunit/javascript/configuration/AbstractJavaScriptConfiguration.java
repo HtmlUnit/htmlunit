@@ -132,7 +132,8 @@ public abstract class AbstractJavaScriptConfiguration {
 
                 final String extendedClassName;
                 final Class<?> superClass = klass.getSuperclass();
-                if (superClass == HtmlUnitScriptable.class) {
+                if (superClass.getAnnotation(JsxClass.class) == null
+                        && superClass.getAnnotation(JsxClasses.class) == null) {
                     extendedClassName = "";
                 }
                 else {
@@ -175,7 +176,8 @@ public abstract class AbstractJavaScriptConfiguration {
 
                 final String extendedClassName;
                 final Class<?> superClass = klass.getSuperclass();
-                if (superClass == HtmlUnitScriptable.class) {
+                if (superClass.getAnnotation(JsxClass.class) == null
+                        && superClass.getAnnotation(JsxClasses.class) == null) {
                     extendedClassName = "";
                 }
                 else {
