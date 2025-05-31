@@ -8,7 +8,87 @@
 
     <body>
         <release version="4.13.0" date="June xx, 2025" description="Chrome/Edge 136, Firefox 138, Bugfixes">
-            <action type="add" dev="rbri">
+            <action type="update" dev="RhinoTeam">
+                core-js: Adjust order of evaluation of function arguments to match the spec.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Major tidy up of 'NativeTypedArrayView' to better match spec.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Refactor functions to be lambdas rather than IdScriptableObject's.
+            </action>
+            <action type="fix" dev="rbri">
+                The prototype for HTMLAllCollectionis no longer the HTMLCollection, it is now object.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLTableCellElement now supports the 'align', 'ch', 'chOff', 'headers', 'height', 'noWrap',
+                'rowSpan', 'scope', 'vAlign', 'width' properties.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLTableColElement now supports the 'align', 'ch', 'chOff', and 'vAlign' properties.
+            </action>
+            <action type="fix" dev="rbri">
+                Internal javascript class HTMLTableComponent removed. The prototype for HTMLTableCellElement,
+                HTMLTableColElement, and HTMLTableRowElement is now the correct HTMLElement.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLTableSectionElement now supports the deleteRow() and insertRow() functions.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLTableSectionElement now supports the 'align' and 'rows' properties.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLTableElement now supports the deleteRow() and insertRow() functions.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLTableElement now supports the 'align' and 'rows' properties.
+            </action>
+            <action type="fix" dev="rbri">
+                Internal javascript class RowContainer removed. The prototype for HTMLTableElement, and 
+                HTMLTableSectionElement is now the correct HTMLElement.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLUListElement now supports the 'compact' property.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLOListElement now supports the 'compact' property.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLMenuElement now supports the 'compact' property.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLLIElement now supports the 'type' property.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLDListElement now supports the 'compact' property.
+            </action>
+            <action type="update" dev="rbri">
+                HTMLDListElement now supports the 'compact' property.
+            </action>
+            <action type="fix" dev="rbri">
+                Internal javascript class HTMLListElement removed. The prototype for HTMLDListElement,
+                HTMLDirectoryElement, HTMLLIElement, HTMLMenuElement, HTMLOListElement, and HTMLUListElement
+                is now the correct HTMLElement.
+            </action>
+            <action type="fix" dev="rbri">
+                Internal javascript class HTMLListElement removed. The prototype for HTMLDListElement,
+                HTMLDirectoryElement, HTMLLIElement, HTMLMenuElement, HTMLOListElement, andHTMLUListElement
+                is now the correct HTMLElement.
+            </action>
+            <action type="update" dev="rbri">
+                Javascript class configuration reworked, this allows some optimizations in the furture.
+            </action>
+            <action type="fix" dev="rbri">
+                Constructor prototype fixes, now we have the correct prototypes for most classes.
+                The RecursiveFunctionObject workaround is no longer required.
+            </action>
+            <action type="fix" dev="rbri">
+                DomNodeIterator is now serializable.
+            </action>
+            <action type="update" dev="rbri">
+                FF138: adjust datetimeformat for several locales.
+            </action>
+            <action type="update" dev="rbri">
                 Chrome/Edge 136: Clicking an image input no longer submits the value as param.
             </action>
             <action type="add" dev="rbri">
