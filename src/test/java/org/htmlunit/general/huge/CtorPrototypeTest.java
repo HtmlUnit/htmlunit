@@ -776,6 +776,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _FileSystemEntry() throws Exception {
         test("FileSystemEntry");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1600,6 +1601,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _InputEvent() throws Exception {
         test("InputEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1608,6 +1610,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _KeyboardEvent() throws Exception {
         test("KeyboardEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1616,6 +1619,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _KeyframeEffect() throws Exception {
         test("KeyframeEffect");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1624,6 +1628,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MIDIAccess() throws Exception {
         test("MIDIAccess");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1632,6 +1637,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MIDIConnectionEvent() throws Exception {
         test("MIDIConnectionEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1640,6 +1646,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MIDIInput() throws Exception {
         test("MIDIInput");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1648,6 +1655,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MIDIMessageEvent() throws Exception {
         test("MIDIMessageEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1656,6 +1664,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MIDIOutput() throws Exception {
         test("MIDIOutput");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1664,6 +1673,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MIDIPort() throws Exception {
         test("MIDIPort");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1672,6 +1682,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaDevices() throws Exception {
         test("MediaDevices");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1680,6 +1691,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaElementAudioSourceNode() throws Exception {
         test("MediaElementAudioSourceNode");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1688,6 +1700,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaEncryptedEvent() throws Exception {
         test("MediaEncryptedEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1698,6 +1711,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaKeyError() throws Exception {
         test("MediaKeyError");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1706,6 +1720,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaKeyMessageEvent() throws Exception {
         test("MediaKeyMessageEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1714,6 +1729,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaKeySession() throws Exception {
         test("MediaKeySession");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1722,6 +1738,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaQueryList() throws Exception {
         test("MediaQueryList");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1730,6 +1747,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaQueryListEvent() throws Exception {
         test("MediaQueryListEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1738,6 +1756,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaRecorder() throws Exception {
         test("MediaRecorder");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1746,6 +1765,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaSource() throws Exception {
         test("MediaSource");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1754,6 +1774,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaStream() throws Exception {
         test("MediaStream");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1762,6 +1783,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaStreamAudioDestinationNode() throws Exception {
         test("MediaStreamAudioDestinationNode");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1770,6 +1792,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaStreamAudioSourceNode() throws Exception {
         test("MediaStreamAudioSourceNode");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1778,6 +1801,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaStreamEvent() throws Exception {
         test("MediaStreamEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1786,6 +1810,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaStreamTrack() throws Exception {
         test("MediaStreamTrack");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1794,6 +1819,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MediaStreamTrackEvent() throws Exception {
         test("MediaStreamTrackEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1802,6 +1828,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MessageEvent() throws Exception {
         test("MessageEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1810,6 +1837,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MessagePort() throws Exception {
         test("MessagePort");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1818,6 +1846,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MouseEvent() throws Exception {
         test("MouseEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1828,6 +1857,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _MouseScrollEvent() throws Exception {
         test("MouseScrollEvent");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -3376,7 +3406,6 @@ public class CtorPrototypeTest extends WebDriverTestCase {
         test("WebKitMutationObserver");
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -3387,6 +3416,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     public void _WebKitMediaStream() throws Exception {
         test("webkitMediaStream");
     }
+
     /**
      * @throws Exception if the test fails
      */
