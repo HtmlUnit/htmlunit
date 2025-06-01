@@ -160,10 +160,10 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts("false/false")
-    @HtmlUnitNYI(CHROME = "true/true",
-            EDGE = "true/true",
-            FF = "true/true",
-            FF_ESR = "true/true")
+    @HtmlUnitNYI(CHROME = "true/false",
+            EDGE = "true/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _Atomics_Atomics() throws Exception {
         test("Atomics", "Atomics");
     }
