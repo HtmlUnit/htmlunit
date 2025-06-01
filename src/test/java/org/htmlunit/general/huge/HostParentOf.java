@@ -76,7 +76,7 @@ public abstract class HostParentOf extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     @Default
     public void isParentOf() throws Exception {
         test(parent_, child_);
@@ -98,15 +98,16 @@ public abstract class HostParentOf extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
 
-            + "  function isParentOf(o1, o2) {"
+            + "  function isParentOf(p, c) {\n"
             + "    detector = function() {};\n"
-            + "    o1.prototype.myCustomFunction = detector;\n"
-            + "    return o2.prototype.myCustomFunction === detector;\n"
+            + "    p.prototype.myCustomFunction = detector;\n"
+            + "    return (c.prototype.myCustomFunction === detector) + '/'"
+            + "      + (Object.getPrototypeOf(c) === p);\n"
             + "  }\n"
 
             + "  try {\n"
             + "    document.title = isParentOf(" + parent + ", " + child + ");\n"
-            + "  } catch(e) { document.title = 'false'; }\n"
+            + "  } catch(e) { document.title = 'false/false'; }\n"
             + "</script>\n"
             + "</body></html>";
 

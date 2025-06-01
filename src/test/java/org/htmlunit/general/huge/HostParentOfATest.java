@@ -51,7 +51,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AbortController_AbortController() throws Exception {
         test("AbortController", "AbortController");
     }
@@ -60,7 +60,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AbortSignal_AbortSignal() throws Exception {
         test("AbortSignal", "AbortSignal");
     }
@@ -69,7 +69,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AbstractRange_AbstractRange() throws Exception {
         test("AbstractRange", "AbstractRange");
     }
@@ -78,7 +78,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AbstractRange_Range() throws Exception {
         test("AbstractRange", "Range");
     }
@@ -87,7 +87,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _ActiveXObject_ActiveXObject() throws Exception {
         test("ActiveXObject", "ActiveXObject");
     }
@@ -96,7 +96,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AnalyserNode_AnalyserNode() throws Exception {
         test("AnalyserNode", "AnalyserNode");
     }
@@ -105,7 +105,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _ANGLE_instanced_arrays_ANGLE_instanced_arrays() throws Exception {
         test("ANGLE_instanced_arrays", "ANGLE_instanced_arrays");
     }
@@ -114,7 +114,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Animation_Animation() throws Exception {
         test("Animation", "Animation");
     }
@@ -123,7 +123,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AnimationEvent_AnimationEvent() throws Exception {
         test("AnimationEvent", "AnimationEvent");
     }
@@ -132,7 +132,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _ApplicationCache_ApplicationCache() throws Exception {
         test("ApplicationCache", "ApplicationCache");
     }
@@ -141,7 +141,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _ApplicationCacheErrorEvent_ApplicationCacheErrorEvent() throws Exception {
         test("ApplicationCacheErrorEvent", "ApplicationCacheErrorEvent");
     }
@@ -150,7 +150,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ArrayBuffer_ArrayBuffer() throws Exception {
         test("ArrayBuffer", "ArrayBuffer");
     }
@@ -159,11 +159,11 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @HtmlUnitNYI(CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("false/false")
+    @HtmlUnitNYI(CHROME = "true/true",
+            EDGE = "true/true",
+            FF = "true/true",
+            FF_ESR = "true/true")
     public void _Atomics_Atomics() throws Exception {
         test("Atomics", "Atomics");
     }
@@ -172,7 +172,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Attr_Attr() throws Exception {
         test("Attr", "Attr");
     }
@@ -181,7 +181,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Audio_Audio() throws Exception {
         test("Audio", "Audio");
     }
@@ -190,11 +190,11 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false",
-            FF = "false",
-            FF_ESR = "false")
+    @Alerts("true/false")
+    @HtmlUnitNYI(CHROME = "false/false",
+            EDGE = "false/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
     public void _Audio_HTMLAudioElement() throws Exception {
         test("Audio", "HTMLAudioElement");
     }
@@ -203,7 +203,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioBuffer_AudioBuffer() throws Exception {
         test("AudioBuffer", "AudioBuffer");
     }
@@ -212,7 +212,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioBufferSourceNode_AudioBufferSourceNode() throws Exception {
         test("AudioBufferSourceNode", "AudioBufferSourceNode");
     }
@@ -221,7 +221,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioContext_AudioContext() throws Exception {
         test("AudioContext", "AudioContext");
     }
@@ -230,7 +230,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioDestinationNode_AudioDestinationNode() throws Exception {
         test("AudioDestinationNode", "AudioDestinationNode");
     }
@@ -239,7 +239,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioListener_AudioListener() throws Exception {
         test("AudioListener", "AudioListener");
     }
@@ -248,7 +248,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_AnalyserNode() throws Exception {
         test("AudioNode", "AnalyserNode");
     }
@@ -257,7 +257,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioNode_AudioBufferSourceNode() throws Exception {
         test("AudioNode", "AudioBufferSourceNode");
     }
@@ -266,7 +266,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_AudioDestinationNode() throws Exception {
         test("AudioNode", "AudioDestinationNode");
     }
@@ -275,7 +275,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioNode_AudioNode() throws Exception {
         test("AudioNode", "AudioNode");
     }
@@ -284,7 +284,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_AudioScheduledSourceNode() throws Exception {
         test("AudioNode", "AudioScheduledSourceNode");
     }
@@ -293,7 +293,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_BiquadFilterNode() throws Exception {
         test("AudioNode", "BiquadFilterNode");
     }
@@ -302,7 +302,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_ChannelMergerNode() throws Exception {
         test("AudioNode", "ChannelMergerNode");
     }
@@ -311,7 +311,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_ChannelSplitterNode() throws Exception {
         test("AudioNode", "ChannelSplitterNode");
     }
@@ -320,7 +320,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioNode_ConstantSourceNode() throws Exception {
         test("AudioNode", "ConstantSourceNode");
     }
@@ -329,7 +329,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_ConvolverNode() throws Exception {
         test("AudioNode", "ConvolverNode");
     }
@@ -338,7 +338,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_DelayNode() throws Exception {
         test("AudioNode", "DelayNode");
     }
@@ -347,7 +347,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_DynamicsCompressorNode() throws Exception {
         test("AudioNode", "DynamicsCompressorNode");
     }
@@ -356,7 +356,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_GainNode() throws Exception {
         test("AudioNode", "GainNode");
     }
@@ -365,7 +365,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_IIRFilterNode() throws Exception {
         test("AudioNode", "IIRFilterNode");
     }
@@ -374,7 +374,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_MediaElementAudioSourceNode() throws Exception {
         test("AudioNode", "MediaElementAudioSourceNode");
     }
@@ -383,7 +383,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_MediaStreamAudioDestinationNode() throws Exception {
         test("AudioNode", "MediaStreamAudioDestinationNode");
     }
@@ -392,7 +392,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_MediaStreamAudioSourceNode() throws Exception {
         test("AudioNode", "MediaStreamAudioSourceNode");
     }
@@ -401,7 +401,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioNode_OscillatorNode() throws Exception {
         test("AudioNode", "OscillatorNode");
     }
@@ -410,7 +410,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_PannerNode() throws Exception {
         test("AudioNode", "PannerNode");
     }
@@ -419,7 +419,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_ScriptProcessorNode() throws Exception {
         test("AudioNode", "ScriptProcessorNode");
     }
@@ -428,7 +428,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_StereoPannerNode() throws Exception {
         test("AudioNode", "StereoPannerNode");
     }
@@ -437,7 +437,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioNode_WaveShaperNode() throws Exception {
         test("AudioNode", "WaveShaperNode");
     }
@@ -446,7 +446,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioParam_AudioParam() throws Exception {
         test("AudioParam", "AudioParam");
     }
@@ -455,7 +455,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioProcessingEvent_AudioProcessingEvent() throws Exception {
         test("AudioProcessingEvent", "AudioProcessingEvent");
     }
@@ -464,7 +464,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioScheduledSourceNode_AudioBufferSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "AudioBufferSourceNode");
     }
@@ -473,7 +473,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _AudioScheduledSourceNode_AudioScheduledSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "AudioScheduledSourceNode");
     }
@@ -482,7 +482,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioScheduledSourceNode_ConstantSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "ConstantSourceNode");
     }
@@ -491,7 +491,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _AudioScheduledSourceNode_OscillatorNode() throws Exception {
         test("AudioScheduledSourceNode", "OscillatorNode");
     }

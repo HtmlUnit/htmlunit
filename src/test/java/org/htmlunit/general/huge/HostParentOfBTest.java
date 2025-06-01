@@ -50,7 +50,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _BarProp_BarProp() throws Exception {
         test("BarProp", "BarProp");
     }
@@ -59,7 +59,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _BaseAudioContext_AudioContext() throws Exception {
         test("BaseAudioContext", "AudioContext");
     }
@@ -68,7 +68,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _BaseAudioContext_BaseAudioContext() throws Exception {
         test("BaseAudioContext", "BaseAudioContext");
     }
@@ -77,7 +77,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _BaseAudioContext_OfflineAudioContext() throws Exception {
         test("BaseAudioContext", "OfflineAudioContext");
     }
@@ -86,9 +86,9 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            FF_ESR = "false")
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
     public void _BatteryManager_BatteryManager() throws Exception {
         test("BatteryManager", "BatteryManager");
     }
@@ -97,9 +97,9 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _BeforeInstallPromptEvent_BeforeInstallPromptEvent() throws Exception {
         test("BeforeInstallPromptEvent", "BeforeInstallPromptEvent");
     }
@@ -108,7 +108,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _BeforeUnloadEvent_BeforeUnloadEvent() throws Exception {
         test("BeforeUnloadEvent", "BeforeUnloadEvent");
     }
@@ -117,7 +117,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _BiquadFilterNode_BiquadFilterNode() throws Exception {
         test("BiquadFilterNode", "BiquadFilterNode");
     }
@@ -126,7 +126,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Blob_Blob() throws Exception {
         test("Blob", "Blob");
     }
@@ -135,7 +135,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _Blob_File() throws Exception {
         test("Blob", "File");
     }
@@ -144,7 +144,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _BlobEvent_BlobEvent() throws Exception {
         test("BlobEvent", "BlobEvent");
     }
@@ -153,7 +153,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _BroadcastChannel_BroadcastChannel() throws Exception {
         test("BroadcastChannel", "BroadcastChannel");
     }
