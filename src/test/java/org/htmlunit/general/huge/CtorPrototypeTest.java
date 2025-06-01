@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 package org.htmlunit.general.huge;import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +28,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.openqa.selenium.WebDriver;/**
+import org.openqa.selenium.WebDriver;
+
+/**
  * Tests the prototype.
  *
  * @author Ronald Brill
@@ -82,10 +85,12 @@ public class CtorPrototypeTest extends WebDriverTestCase {
             + "<title>-</title>\n"
             + "</head>\n"
             + "<body>\n"
-            + "<script>\n"            + "  function check(c) {\n"
+            + "<script>\n"
+            + "  function check(c) {\n"
             + "    detector = function() {};\n"
             + "    return (Object.getPrototypeOf(c) === Function.prototype);\n"
-            + "  }\n"            + "  try {\n"
+            + "  }\n"
+            + "  try {\n"
             + "    document.title = check(" + jsClassName + ");\n"
             + "  } catch(e) { document.title = 'exception'; }\n"
             + "</script>\n"
