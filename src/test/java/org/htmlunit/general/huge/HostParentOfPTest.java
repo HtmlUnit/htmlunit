@@ -53,7 +53,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PageTransitionEvent_PageTransitionEvent() throws Exception {
         test("PageTransitionEvent", "PageTransitionEvent");
     }
@@ -63,7 +63,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PannerNode_PannerNode() throws Exception {
         test("PannerNode", "PannerNode");
     }
@@ -72,9 +72,9 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _PasswordCredential_PasswordCredential() throws Exception {
         test("PasswordCredential", "PasswordCredential");
     }
@@ -84,7 +84,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Path2D_Path2D() throws Exception {
         test("Path2D", "Path2D");
     }
@@ -94,9 +94,9 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _PaymentAddress_PaymentAddress() throws Exception {
         test("PaymentAddress", "PaymentAddress");
     }
@@ -106,9 +106,9 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _PaymentRequest_PaymentRequest() throws Exception {
         test("PaymentRequest", "PaymentRequest");
     }
@@ -118,9 +118,9 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _PaymentResponse_PaymentResponse() throws Exception {
         test("PaymentResponse", "PaymentResponse");
     }
@@ -130,7 +130,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Performance_Performance() throws Exception {
         test("Performance", "Performance");
     }
@@ -140,7 +140,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PerformanceEntry_PerformanceEntry() throws Exception {
         test("PerformanceEntry", "PerformanceEntry");
     }
@@ -150,7 +150,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _PerformanceEntry_PerformanceMark() throws Exception {
         test("PerformanceEntry", "PerformanceMark");
     }
@@ -160,7 +160,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _PerformanceEntry_PerformanceMeasure() throws Exception {
         test("PerformanceEntry", "PerformanceMeasure");
     }
@@ -170,7 +170,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PerformanceEntry_PerformanceNavigationTiming() throws Exception {
         test("PerformanceEntry", "PerformanceNavigationTiming");
     }
@@ -180,7 +180,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _PerformanceEntry_PerformanceResourceTiming() throws Exception {
         test("PerformanceEntry", "PerformanceResourceTiming");
     }
@@ -190,7 +190,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PerformanceMark_PerformanceMark() throws Exception {
         test("PerformanceMark", "PerformanceMark");
     }
@@ -200,7 +200,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PerformanceMeasure_PerformanceMeasure() throws Exception {
         test("PerformanceMeasure", "PerformanceMeasure");
     }
@@ -210,7 +210,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PerformanceNavigation_PerformanceNavigation() throws Exception {
         test("PerformanceNavigation", "PerformanceNavigation");
     }
@@ -219,7 +219,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PerformanceNavigationTiming_PerformanceNavigationTiming() throws Exception {
         test("PerformanceNavigationTiming", "PerformanceNavigationTiming");
     }
@@ -229,7 +229,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PerformanceObserver_PerformanceObserver() throws Exception {
         test("PerformanceObserver", "PerformanceObserver");
     }
@@ -239,7 +239,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PerformanceObserverEntryList_PerformanceObserverEntryList() throws Exception {
         test("PerformanceObserverEntryList", "PerformanceObserverEntryList");
     }
@@ -249,7 +249,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _PerformanceResourceTiming_PerformanceNavigationTiming() throws Exception {
         test("PerformanceResourceTiming", "PerformanceNavigationTiming");
     }
@@ -259,7 +259,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PerformanceResourceTiming_PerformanceResourceTiming() throws Exception {
         test("PerformanceResourceTiming", "PerformanceResourceTiming");
     }
@@ -269,7 +269,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PerformanceTiming_PerformanceTiming() throws Exception {
         test("PerformanceTiming", "PerformanceTiming");
     }
@@ -279,9 +279,9 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _PeriodicSyncManager_PeriodicSyncManager() throws Exception {
         test("PeriodicSyncManager", "PeriodicSyncManager");
     }
@@ -291,7 +291,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PeriodicWave_PeriodicWave() throws Exception {
         test("PeriodicWave", "PeriodicWave");
     }
@@ -301,7 +301,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Permissions_Permissions() throws Exception {
         test("Permissions", "Permissions");
     }
@@ -311,7 +311,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PermissionStatus_PermissionStatus() throws Exception {
         test("PermissionStatus", "PermissionStatus");
     }
@@ -321,7 +321,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Plugin_Plugin() throws Exception {
         test("Plugin", "Plugin");
     }
@@ -331,7 +331,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PluginArray_PluginArray() throws Exception {
         test("PluginArray", "PluginArray");
     }
@@ -341,7 +341,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PointerEvent_PointerEvent() throws Exception {
         test("PointerEvent", "PointerEvent");
     }
@@ -351,7 +351,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PopStateEvent_PopStateEvent() throws Exception {
         test("PopStateEvent", "PopStateEvent");
     }
@@ -361,7 +361,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Position_Position() throws Exception {
         test("Position", "Position");
     }
@@ -371,7 +371,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _PositionError_PositionError() throws Exception {
         test("PositionError", "PositionError");
     }
@@ -380,9 +380,9 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _Presentation_Presentation() throws Exception {
         test("Presentation", "Presentation");
     }
@@ -391,9 +391,9 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _PresentationAvailability_PresentationAvailability() throws Exception {
         test("PresentationAvailability", "PresentationAvailability");
     }
@@ -402,9 +402,9 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _PresentationConnection_PresentationConnection() throws Exception {
         test("PresentationConnection", "PresentationConnection");
     }
@@ -413,9 +413,9 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _PresentationConnectionAvailableEvent_PresentationConnectionAvailableEvent() throws Exception {
         test("PresentationConnectionAvailableEvent", "PresentationConnectionAvailableEvent");
     }
@@ -424,9 +424,9 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _PresentationConnectionCloseEvent_PresentationConnectionCloseEvent() throws Exception {
         test("PresentationConnectionCloseEvent", "PresentationConnectionCloseEvent");
     }
@@ -435,9 +435,9 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _PresentationRequest_PresentationRequest() throws Exception {
         test("PresentationRequest", "PresentationRequest");
     }
@@ -447,7 +447,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ProcessingInstruction_ProcessingInstruction() throws Exception {
         test("ProcessingInstruction", "ProcessingInstruction");
     }
@@ -457,7 +457,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ProgressEvent_ProgressEvent() throws Exception {
         test("ProgressEvent", "ProgressEvent");
     }
@@ -467,7 +467,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Promise_Promise() throws Exception {
         test("Promise", "Promise");
     }
@@ -476,7 +476,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PromiseRejectionEvent_PromiseRejectionEvent() throws Exception {
         test("PromiseRejectionEvent", "PromiseRejectionEvent");
     }
@@ -486,7 +486,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PushManager_PushManager() throws Exception {
         test("PushManager", "PushManager");
     }
@@ -496,7 +496,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PushSubscription_PushSubscription() throws Exception {
         test("PushSubscription", "PushSubscription");
     }
@@ -505,7 +505,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _PushSubscriptionOptions_PushSubscriptionOptions() throws Exception {
         test("PushSubscriptionOptions", "PushSubscriptionOptions");
     }
@@ -515,7 +515,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _RadioNodeList_RadioNodeList() throws Exception {
         test("RadioNodeList", "RadioNodeList");
     }
@@ -525,7 +525,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Range_Range() throws Exception {
         test("Range", "Range");
     }
@@ -535,7 +535,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ReadableStream_ReadableStream() throws Exception {
         test("ReadableStream", "ReadableStream");
     }
@@ -544,9 +544,9 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _RemotePlayback_RemotePlayback() throws Exception {
         test("RemotePlayback", "RemotePlayback");
     }
@@ -556,7 +556,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Request_Request() throws Exception {
         test("Request", "Request");
     }
@@ -566,7 +566,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Response_Response() throws Exception {
         test("Response", "Response");
     }
@@ -575,7 +575,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _RTCCertificate_RTCCertificate() throws Exception {
         test("RTCCertificate", "RTCCertificate");
     }
@@ -585,7 +585,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _RTCDataChannelEvent_RTCDataChannelEvent() throws Exception {
         test("RTCDataChannelEvent", "RTCDataChannelEvent");
     }
@@ -595,7 +595,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _RTCIceCandidate_mozRTCIceCandidate() throws Exception {
         test("RTCIceCandidate", "mozRTCIceCandidate");
     }
@@ -605,7 +605,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _RTCIceCandidate_RTCIceCandidate() throws Exception {
         test("RTCIceCandidate", "RTCIceCandidate");
     }
@@ -614,7 +614,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _RTCPeerConnection_mozRTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "mozRTCPeerConnection");
     }
@@ -623,7 +623,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _RTCPeerConnection_RTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "RTCPeerConnection");
     }
@@ -632,9 +632,9 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _RTCPeerConnection_webkitRTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "webkitRTCPeerConnection");
     }
@@ -644,7 +644,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _RTCPeerConnectionIceEvent_RTCPeerConnectionIceEvent() throws Exception {
         test("RTCPeerConnectionIceEvent", "RTCPeerConnectionIceEvent");
     }
@@ -653,7 +653,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _RTCSctpTransport_RTCSctpTransport() throws Exception {
         test("RTCSctpTransport", "RTCSctpTransport");
     }
@@ -662,7 +662,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _RTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("RTCSessionDescription", "mozRTCSessionDescription");
     }
@@ -672,7 +672,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _RTCSessionDescription_RTCSessionDescription() throws Exception {
         test("RTCSessionDescription", "RTCSessionDescription");
     }
@@ -681,7 +681,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _RTCStatsReport_RTCStatsReport() throws Exception {
         test("RTCStatsReport", "RTCStatsReport");
     }

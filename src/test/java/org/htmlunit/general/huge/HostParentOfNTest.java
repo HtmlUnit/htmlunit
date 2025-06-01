@@ -54,7 +54,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _NamedNodeMap_NamedNodeMap() throws Exception {
         test("NamedNodeMap", "NamedNodeMap");
     }
@@ -64,7 +64,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Navigator_Navigator() throws Exception {
         test("Navigator", "Navigator");
     }
@@ -74,9 +74,11 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    @HtmlUnitNYI(CHROME = "true/true",
+            EDGE = "true/true")
     public void _NetworkInformation_NetworkInformation() throws Exception {
         test("NetworkInformation", "NetworkInformation");
     }
@@ -86,7 +88,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _Node_Attr() throws Exception {
         test("Node", "Attr");
     }
@@ -96,7 +98,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_Audio() throws Exception {
         test("Node", "Audio");
     }
@@ -106,7 +108,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_CDATASection() throws Exception {
         test("Node", "CDATASection");
     }
@@ -116,7 +118,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _Node_CharacterData() throws Exception {
         test("Node", "CharacterData");
     }
@@ -126,7 +128,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_Comment() throws Exception {
         test("Node", "Comment");
     }
@@ -136,7 +138,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _Node_Document() throws Exception {
         test("Node", "Document");
     }
@@ -146,7 +148,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _Node_DocumentFragment() throws Exception {
         test("Node", "DocumentFragment");
     }
@@ -156,7 +158,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _Node_DocumentType() throws Exception {
         test("Node", "DocumentType");
     }
@@ -166,7 +168,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _Node_Element() throws Exception {
         test("Node", "Element");
     }
@@ -176,7 +178,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLAnchorElement() throws Exception {
         test("Node", "HTMLAnchorElement");
     }
@@ -186,7 +188,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLAppletElement() throws Exception {
         test("Node", "HTMLAppletElement");
     }
@@ -196,7 +198,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLAreaElement() throws Exception {
         test("Node", "HTMLAreaElement");
     }
@@ -206,7 +208,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLAudioElement() throws Exception {
         test("Node", "HTMLAudioElement");
     }
@@ -216,7 +218,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLBaseElement() throws Exception {
         test("Node", "HTMLBaseElement");
     }
@@ -226,7 +228,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLBaseFontElement() throws Exception {
         test("Node", "HTMLBaseFontElement");
     }
@@ -236,7 +238,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLBGSoundElement() throws Exception {
         test("Node", "HTMLBGSoundElement");
     }
@@ -246,7 +248,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLBlockElement() throws Exception {
         test("Node", "HTMLBlockElement");
     }
@@ -256,7 +258,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLBodyElement() throws Exception {
         test("Node", "HTMLBodyElement");
     }
@@ -266,7 +268,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLBRElement() throws Exception {
         test("Node", "HTMLBRElement");
     }
@@ -276,7 +278,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLButtonElement() throws Exception {
         test("Node", "HTMLButtonElement");
     }
@@ -286,7 +288,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLCanvasElement() throws Exception {
         test("Node", "HTMLCanvasElement");
     }
@@ -296,7 +298,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLDataElement() throws Exception {
         test("Node", "HTMLDataElement");
     }
@@ -306,7 +308,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLDataListElement() throws Exception {
         test("Node", "HTMLDataListElement");
     }
@@ -316,7 +318,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLDDElement() throws Exception {
         test("Node", "HTMLDDElement");
     }
@@ -326,7 +328,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLDetailsElement() throws Exception {
         test("Node", "HTMLDetailsElement");
     }
@@ -336,7 +338,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLDialogElement() throws Exception {
         test("Node", "HTMLDialogElement");
     }
@@ -346,7 +348,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLDirectoryElement() throws Exception {
         test("Node", "HTMLDirectoryElement");
     }
@@ -356,7 +358,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLDivElement() throws Exception {
         test("Node", "HTMLDivElement");
     }
@@ -366,7 +368,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLDListElement() throws Exception {
         test("Node", "HTMLDListElement");
     }
@@ -376,7 +378,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLDocument() throws Exception {
         test("Node", "HTMLDocument");
     }
@@ -386,7 +388,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLDTElement() throws Exception {
         test("Node", "HTMLDTElement");
     }
@@ -396,7 +398,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLElement() throws Exception {
         test("Node", "HTMLElement");
     }
@@ -406,7 +408,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLEmbedElement() throws Exception {
         test("Node", "HTMLEmbedElement");
     }
@@ -416,7 +418,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLFieldSetElement() throws Exception {
         test("Node", "HTMLFieldSetElement");
     }
@@ -426,7 +428,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLFontElement() throws Exception {
         test("Node", "HTMLFontElement");
     }
@@ -436,7 +438,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLFormElement() throws Exception {
         test("Node", "HTMLFormElement");
     }
@@ -446,7 +448,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLFrameElement() throws Exception {
         test("Node", "HTMLFrameElement");
     }
@@ -456,7 +458,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLFrameSetElement() throws Exception {
         test("Node", "HTMLFrameSetElement");
     }
@@ -466,7 +468,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLHeadElement() throws Exception {
         test("Node", "HTMLHeadElement");
     }
@@ -476,7 +478,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLHeadingElement() throws Exception {
         test("Node", "HTMLHeadingElement");
     }
@@ -486,7 +488,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLHRElement() throws Exception {
         test("Node", "HTMLHRElement");
     }
@@ -496,7 +498,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLHtmlElement() throws Exception {
         test("Node", "HTMLHtmlElement");
     }
@@ -506,7 +508,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLIFrameElement() throws Exception {
         test("Node", "HTMLIFrameElement");
     }
@@ -516,7 +518,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLImageElement() throws Exception {
         test("Node", "HTMLImageElement");
     }
@@ -526,7 +528,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLInputElement() throws Exception {
         test("Node", "HTMLInputElement");
     }
@@ -536,7 +538,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLIsIndexElement() throws Exception {
         test("Node", "HTMLIsIndexElement");
     }
@@ -546,7 +548,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLLabelElement() throws Exception {
         test("Node", "HTMLLabelElement");
     }
@@ -556,7 +558,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLLegendElement() throws Exception {
         test("Node", "HTMLLegendElement");
     }
@@ -566,7 +568,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLLIElement() throws Exception {
         test("Node", "HTMLLIElement");
     }
@@ -576,7 +578,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLLinkElement() throws Exception {
         test("Node", "HTMLLinkElement");
     }
@@ -586,7 +588,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLMapElement() throws Exception {
         test("Node", "HTMLMapElement");
     }
@@ -596,7 +598,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLMarqueeElement() throws Exception {
         test("Node", "HTMLMarqueeElement");
     }
@@ -606,7 +608,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLMediaElement() throws Exception {
         test("Node", "HTMLMediaElement");
     }
@@ -616,7 +618,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLMenuElement() throws Exception {
         test("Node", "HTMLMenuElement");
     }
@@ -626,7 +628,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLMenuItemElement() throws Exception {
         test("Node", "HTMLMenuItemElement");
     }
@@ -636,7 +638,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLMetaElement() throws Exception {
         test("Node", "HTMLMetaElement");
     }
@@ -646,7 +648,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLMeterElement() throws Exception {
         test("Node", "HTMLMeterElement");
     }
@@ -656,7 +658,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLModElement() throws Exception {
         test("Node", "HTMLModElement");
     }
@@ -666,7 +668,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLNextIdElement() throws Exception {
         test("Node", "HTMLNextIdElement");
     }
@@ -676,7 +678,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLObjectElement() throws Exception {
         test("Node", "HTMLObjectElement");
     }
@@ -686,7 +688,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLOListElement() throws Exception {
         test("Node", "HTMLOListElement");
     }
@@ -696,7 +698,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLOptGroupElement() throws Exception {
         test("Node", "HTMLOptGroupElement");
     }
@@ -706,7 +708,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLOptionElement() throws Exception {
         test("Node", "HTMLOptionElement");
     }
@@ -716,7 +718,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLOutputElement() throws Exception {
         test("Node", "HTMLOutputElement");
     }
@@ -726,7 +728,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLParagraphElement() throws Exception {
         test("Node", "HTMLParagraphElement");
     }
@@ -736,7 +738,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLParamElement() throws Exception {
         test("Node", "HTMLParamElement");
     }
@@ -746,7 +748,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLPhraseElement() throws Exception {
         test("Node", "HTMLPhraseElement");
     }
@@ -756,7 +758,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLPictureElement() throws Exception {
         test("Node", "HTMLPictureElement");
     }
@@ -766,7 +768,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLPreElement() throws Exception {
         test("Node", "HTMLPreElement");
     }
@@ -776,7 +778,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLProgressElement() throws Exception {
         test("Node", "HTMLProgressElement");
     }
@@ -786,7 +788,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLQuoteElement() throws Exception {
         test("Node", "HTMLQuoteElement");
     }
@@ -796,7 +798,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLScriptElement() throws Exception {
         test("Node", "HTMLScriptElement");
     }
@@ -806,7 +808,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLSelectElement() throws Exception {
         test("Node", "HTMLSelectElement");
     }
@@ -815,7 +817,7 @@ public class HostParentOfNTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLSlotElement() throws Exception {
         test("Node", "HTMLSlotElement");
     }
@@ -825,7 +827,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLSourceElement() throws Exception {
         test("Node", "HTMLSourceElement");
     }
@@ -835,7 +837,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLSpanElement() throws Exception {
         test("Node", "HTMLSpanElement");
     }
@@ -845,7 +847,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLStyleElement() throws Exception {
         test("Node", "HTMLStyleElement");
     }
@@ -855,7 +857,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLTableCaptionElement() throws Exception {
         test("Node", "HTMLTableCaptionElement");
     }
@@ -865,7 +867,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLTableCellElement() throws Exception {
         test("Node", "HTMLTableCellElement");
     }
@@ -875,7 +877,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLTableColElement() throws Exception {
         test("Node", "HTMLTableColElement");
     }
@@ -885,7 +887,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLTableDataCellElement() throws Exception {
         test("Node", "HTMLTableDataCellElement");
     }
@@ -895,7 +897,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLTableElement() throws Exception {
         test("Node", "HTMLTableElement");
     }
@@ -905,7 +907,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _Node_HTMLTableHeaderCellElement() throws Exception {
         test("Node", "HTMLTableHeaderCellElement");
     }
@@ -915,7 +917,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLTableRowElement() throws Exception {
         test("Node", "HTMLTableRowElement");
     }
@@ -925,7 +927,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLTableSectionElement() throws Exception {
         test("Node", "HTMLTableSectionElement");
     }
@@ -935,7 +937,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLTemplateElement() throws Exception {
         test("Node", "HTMLTemplateElement");
     }
@@ -945,7 +947,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLTextAreaElement() throws Exception {
         test("Node", "HTMLTextAreaElement");
     }
@@ -955,7 +957,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLTimeElement() throws Exception {
         test("Node", "HTMLTimeElement");
     }
@@ -965,7 +967,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLTitleElement() throws Exception {
         test("Node", "HTMLTitleElement");
     }
@@ -975,7 +977,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLTrackElement() throws Exception {
         test("Node", "HTMLTrackElement");
     }
@@ -985,7 +987,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLUListElement() throws Exception {
         test("Node", "HTMLUListElement");
     }
@@ -995,7 +997,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLUnknownElement() throws Exception {
         test("Node", "HTMLUnknownElement");
     }
@@ -1005,7 +1007,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_HTMLVideoElement() throws Exception {
         test("Node", "HTMLVideoElement");
     }
@@ -1015,7 +1017,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_Image() throws Exception {
         test("Node", "Image");
     }
@@ -1025,7 +1027,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_Node() throws Exception {
         test("Node", "Node");
     }
@@ -1035,7 +1037,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_Option() throws Exception {
         test("Node", "Option");
     }
@@ -1045,7 +1047,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_ProcessingInstruction() throws Exception {
         test("Node", "ProcessingInstruction");
     }
@@ -1055,7 +1057,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_ShadowRoot() throws Exception {
         test("Node", "ShadowRoot");
     }
@@ -1065,7 +1067,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGAElement() throws Exception {
         test("Node", "SVGAElement");
     }
@@ -1075,7 +1077,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGAnimateElement() throws Exception {
         test("Node", "SVGAnimateElement");
     }
@@ -1085,7 +1087,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGAnimateMotionElement() throws Exception {
         test("Node", "SVGAnimateMotionElement");
     }
@@ -1095,7 +1097,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGAnimateTransformElement() throws Exception {
         test("Node", "SVGAnimateTransformElement");
     }
@@ -1105,7 +1107,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGAnimationElement() throws Exception {
         test("Node", "SVGAnimationElement");
     }
@@ -1115,7 +1117,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGCircleElement() throws Exception {
         test("Node", "SVGCircleElement");
     }
@@ -1125,7 +1127,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGClipPathElement() throws Exception {
         test("Node", "SVGClipPathElement");
     }
@@ -1135,7 +1137,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGComponentTransferFunctionElement() throws Exception {
         test("Node", "SVGComponentTransferFunctionElement");
     }
@@ -1145,7 +1147,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGDefsElement() throws Exception {
         test("Node", "SVGDefsElement");
     }
@@ -1155,7 +1157,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGDescElement() throws Exception {
         test("Node", "SVGDescElement");
     }
@@ -1165,10 +1167,11 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            EDGE = "false",
-            FF_ESR = "false")
+    @Alerts(DEFAULT = "false/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    @HtmlUnitNYI(FF = "true/false",
+            FF_ESR = "true/false")
     public void _Node_SVGDiscardElement() throws Exception {
         test("Node", "SVGDiscardElement");
     }
@@ -1178,7 +1181,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGElement() throws Exception {
         test("Node", "SVGElement");
     }
@@ -1188,7 +1191,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGEllipseElement() throws Exception {
         test("Node", "SVGEllipseElement");
     }
@@ -1198,7 +1201,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEBlendElement() throws Exception {
         test("Node", "SVGFEBlendElement");
     }
@@ -1208,7 +1211,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEColorMatrixElement() throws Exception {
         test("Node", "SVGFEColorMatrixElement");
     }
@@ -1218,7 +1221,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEComponentTransferElement() throws Exception {
         test("Node", "SVGFEComponentTransferElement");
     }
@@ -1228,7 +1231,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFECompositeElement() throws Exception {
         test("Node", "SVGFECompositeElement");
     }
@@ -1238,7 +1241,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEConvolveMatrixElement() throws Exception {
         test("Node", "SVGFEConvolveMatrixElement");
     }
@@ -1248,7 +1251,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEDiffuseLightingElement() throws Exception {
         test("Node", "SVGFEDiffuseLightingElement");
     }
@@ -1258,7 +1261,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEDisplacementMapElement() throws Exception {
         test("Node", "SVGFEDisplacementMapElement");
     }
@@ -1268,7 +1271,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEDistantLightElement() throws Exception {
         test("Node", "SVGFEDistantLightElement");
     }
@@ -1278,7 +1281,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEDropShadowElement() throws Exception {
         test("Node", "SVGFEDropShadowElement");
     }
@@ -1288,7 +1291,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEFloodElement() throws Exception {
         test("Node", "SVGFEFloodElement");
     }
@@ -1298,7 +1301,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEFuncAElement() throws Exception {
         test("Node", "SVGFEFuncAElement");
     }
@@ -1308,7 +1311,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEFuncBElement() throws Exception {
         test("Node", "SVGFEFuncBElement");
     }
@@ -1318,7 +1321,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEFuncGElement() throws Exception {
         test("Node", "SVGFEFuncGElement");
     }
@@ -1328,7 +1331,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEFuncRElement() throws Exception {
         test("Node", "SVGFEFuncRElement");
     }
@@ -1338,7 +1341,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEGaussianBlurElement() throws Exception {
         test("Node", "SVGFEGaussianBlurElement");
     }
@@ -1348,7 +1351,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEImageElement() throws Exception {
         test("Node", "SVGFEImageElement");
     }
@@ -1358,7 +1361,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEMergeElement() throws Exception {
         test("Node", "SVGFEMergeElement");
     }
@@ -1368,7 +1371,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEMergeNodeElement() throws Exception {
         test("Node", "SVGFEMergeNodeElement");
     }
@@ -1378,7 +1381,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEMorphologyElement() throws Exception {
         test("Node", "SVGFEMorphologyElement");
     }
@@ -1388,7 +1391,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEOffsetElement() throws Exception {
         test("Node", "SVGFEOffsetElement");
     }
@@ -1398,7 +1401,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFEPointLightElement() throws Exception {
         test("Node", "SVGFEPointLightElement");
     }
@@ -1408,7 +1411,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFESpecularLightingElement() throws Exception {
         test("Node", "SVGFESpecularLightingElement");
     }
@@ -1418,7 +1421,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFESpotLightElement() throws Exception {
         test("Node", "SVGFESpotLightElement");
     }
@@ -1428,7 +1431,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFETileElement() throws Exception {
         test("Node", "SVGFETileElement");
     }
@@ -1438,7 +1441,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFETurbulenceElement() throws Exception {
         test("Node", "SVGFETurbulenceElement");
     }
@@ -1448,7 +1451,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGFilterElement() throws Exception {
         test("Node", "SVGFilterElement");
     }
@@ -1458,7 +1461,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGForeignObjectElement() throws Exception {
         test("Node", "SVGForeignObjectElement");
     }
@@ -1468,7 +1471,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGGElement() throws Exception {
         test("Node", "SVGGElement");
     }
@@ -1478,7 +1481,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGGeometryElement() throws Exception {
         test("Node", "SVGGeometryElement");
     }
@@ -1488,7 +1491,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGGradientElement() throws Exception {
         test("Node", "SVGGradientElement");
     }
@@ -1498,7 +1501,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGGraphicsElement() throws Exception {
         test("Node", "SVGGraphicsElement");
     }
@@ -1508,7 +1511,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGImageElement() throws Exception {
         test("Node", "SVGImageElement");
     }
@@ -1518,7 +1521,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGLinearGradientElement() throws Exception {
         test("Node", "SVGLinearGradientElement");
     }
@@ -1528,7 +1531,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGLineElement() throws Exception {
         test("Node", "SVGLineElement");
     }
@@ -1538,7 +1541,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGMarkerElement() throws Exception {
         test("Node", "SVGMarkerElement");
     }
@@ -1548,7 +1551,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGMaskElement() throws Exception {
         test("Node", "SVGMaskElement");
     }
@@ -1558,7 +1561,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGMetadataElement() throws Exception {
         test("Node", "SVGMetadataElement");
     }
@@ -1568,7 +1571,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGMPathElement() throws Exception {
         test("Node", "SVGMPathElement");
     }
@@ -1578,7 +1581,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGPathElement() throws Exception {
         test("Node", "SVGPathElement");
     }
@@ -1588,7 +1591,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGPatternElement() throws Exception {
         test("Node", "SVGPatternElement");
     }
@@ -1598,7 +1601,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGPolygonElement() throws Exception {
         test("Node", "SVGPolygonElement");
     }
@@ -1608,7 +1611,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGPolylineElement() throws Exception {
         test("Node", "SVGPolylineElement");
     }
@@ -1618,7 +1621,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGRadialGradientElement() throws Exception {
         test("Node", "SVGRadialGradientElement");
     }
@@ -1628,7 +1631,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGRectElement() throws Exception {
         test("Node", "SVGRectElement");
     }
@@ -1638,7 +1641,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGScriptElement() throws Exception {
         test("Node", "SVGScriptElement");
     }
@@ -1648,7 +1651,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGSetElement() throws Exception {
         test("Node", "SVGSetElement");
     }
@@ -1658,7 +1661,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGStopElement() throws Exception {
         test("Node", "SVGStopElement");
     }
@@ -1668,7 +1671,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGStyleElement() throws Exception {
         test("Node", "SVGStyleElement");
     }
@@ -1678,7 +1681,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGSVGElement() throws Exception {
         test("Node", "SVGSVGElement");
     }
@@ -1688,7 +1691,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGSwitchElement() throws Exception {
         test("Node", "SVGSwitchElement");
     }
@@ -1698,7 +1701,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGSymbolElement() throws Exception {
         test("Node", "SVGSymbolElement");
     }
@@ -1708,7 +1711,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGTextContentElement() throws Exception {
         test("Node", "SVGTextContentElement");
     }
@@ -1718,7 +1721,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGTextElement() throws Exception {
         test("Node", "SVGTextElement");
     }
@@ -1728,7 +1731,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGTextPathElement() throws Exception {
         test("Node", "SVGTextPathElement");
     }
@@ -1738,7 +1741,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGTextPositioningElement() throws Exception {
         test("Node", "SVGTextPositioningElement");
     }
@@ -1748,7 +1751,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGTitleElement() throws Exception {
         test("Node", "SVGTitleElement");
     }
@@ -1758,7 +1761,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGTSpanElement() throws Exception {
         test("Node", "SVGTSpanElement");
     }
@@ -1768,7 +1771,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGUseElement() throws Exception {
         test("Node", "SVGUseElement");
     }
@@ -1778,7 +1781,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_SVGViewElement() throws Exception {
         test("Node", "SVGViewElement");
     }
@@ -1788,7 +1791,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_Text() throws Exception {
         test("Node", "Text");
     }
@@ -1798,7 +1801,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Node_XMLDocument() throws Exception {
         test("Node", "XMLDocument");
     }
@@ -1808,11 +1811,11 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
-    @HtmlUnitNYI(CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("false/false")
+    @HtmlUnitNYI(CHROME = "true/false",
+            EDGE = "true/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _NodeFilter_NodeFilter() throws Exception {
         test("NodeFilter", "NodeFilter");
     }
@@ -1822,7 +1825,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _NodeIterator_NodeIterator() throws Exception {
         test("NodeIterator", "NodeIterator");
     }
@@ -1832,7 +1835,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _NodeList_NodeList() throws Exception {
         test("NodeList", "NodeList");
     }
@@ -1842,7 +1845,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _NodeList_RadioNodeList() throws Exception {
         test("NodeList", "RadioNodeList");
     }
@@ -1852,7 +1855,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Notification_Notification() throws Exception {
         test("Notification", "Notification");
     }
@@ -1861,7 +1864,7 @@ public class HostParentOfNTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _OES_element_index_uint_OES_element_index_uint() throws Exception {
         test("OES_element_index_uint", "OES_element_index_uint");
     }
@@ -1870,7 +1873,7 @@ public class HostParentOfNTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _OES_standard_derivatives_OES_standard_derivatives() throws Exception {
         test("OES_standard_derivatives", "OES_standard_derivatives");
     }
@@ -1879,7 +1882,7 @@ public class HostParentOfNTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _OES_texture_float_linear_OES_texture_float_linear() throws Exception {
         test("OES_texture_float_linear", "OES_texture_float_linear");
     }
@@ -1888,7 +1891,7 @@ public class HostParentOfNTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _OES_texture_float_OES_texture_float() throws Exception {
         test("OES_texture_float", "OES_texture_float");
     }
@@ -1898,7 +1901,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _OfflineAudioCompletionEvent_OfflineAudioCompletionEvent() throws Exception {
         test("OfflineAudioCompletionEvent", "OfflineAudioCompletionEvent");
     }
@@ -1908,7 +1911,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _OfflineAudioContext_OfflineAudioContext() throws Exception {
         test("OfflineAudioContext", "OfflineAudioContext");
     }
@@ -1918,7 +1921,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _OfflineResourceList_OfflineResourceList() throws Exception {
         test("OfflineResourceList", "OfflineResourceList");
     }
@@ -1928,7 +1931,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Option_HTMLOptionElement() throws Exception {
         // although Option != HTMLOptionElement, they seem to be synonyms!!!
         test("Option", "HTMLOptionElement");
@@ -1939,7 +1942,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Option_Option() throws Exception {
         test("Option", "Option");
     }
@@ -1949,7 +1952,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _OscillatorNode_OscillatorNode() throws Exception {
         test("OscillatorNode", "OscillatorNode");
     }
