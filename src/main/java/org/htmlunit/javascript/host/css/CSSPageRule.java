@@ -21,7 +21,6 @@ import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.css.WrappedCssStyleDeclaration;
-import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -38,7 +37,7 @@ import org.w3c.dom.DOMException;
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSPageRule">MDN doc</a>
  */
 @JsxClass
-public class CSSPageRule extends CSSGroupingRule {
+public class CSSPageRule extends CSSRule {
 
     /**
      * Creates a new instance.
@@ -61,7 +60,7 @@ public class CSSPageRule extends CSSGroupingRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSPageRule(final CSSStyleSheet stylesheet, final AbstractCSSRuleImpl rule) {
+    protected CSSPageRule(final CSSStyleSheet stylesheet, final CSSPageRuleImpl rule) {
         super(stylesheet, rule);
     }
 

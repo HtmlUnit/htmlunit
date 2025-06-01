@@ -64,7 +64,7 @@ public class CSSGroupingRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSGroupingRule(final CSSStyleSheet stylesheet, final AbstractCSSRuleImpl rule) {
+    protected CSSGroupingRule(final CSSStyleSheet stylesheet, final CSSMediaRuleImpl rule) {
         super(stylesheet, rule);
     }
 
