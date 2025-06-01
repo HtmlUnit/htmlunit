@@ -50,9 +50,9 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _FederatedCredential_FederatedCredential() throws Exception {
         test("FederatedCredential", "FederatedCredential");
     }
@@ -61,7 +61,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _File_File() throws Exception {
         test("File", "File");
     }
@@ -70,7 +70,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _FileList_FileList() throws Exception {
         test("FileList", "FileList");
     }
@@ -79,7 +79,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _FileReader_FileReader() throws Exception {
         test("FileReader", "FileReader");
     }
@@ -88,9 +88,9 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _FileSystem_FileSystem() throws Exception {
         test("FileSystem", "FileSystem");
     }
@@ -99,9 +99,9 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _FileSystemDirectoryEntry_FileSystemDirectoryEntry() throws Exception {
         test("FileSystemDirectoryEntry", "FileSystemDirectoryEntry");
     }
@@ -110,9 +110,9 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _FileSystemDirectoryReader_FileSystemDirectoryReader() throws Exception {
         test("FileSystemDirectoryReader", "FileSystemDirectoryReader");
     }
@@ -121,9 +121,9 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/true",
+            FF_ESR = "true/true")
     public void _FileSystemEntry_FileSystemDirectoryEntry() throws Exception {
         test("FileSystemEntry", "FileSystemDirectoryEntry");
     }
@@ -132,9 +132,9 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _FileSystemEntry_FileSystemEntry() throws Exception {
         test("FileSystemEntry", "FileSystemEntry");
     }
@@ -143,9 +143,9 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/true",
+            FF_ESR = "true/true")
     public void _FileSystemEntry_FileSystemFileEntry() throws Exception {
         test("FileSystemEntry", "FileSystemFileEntry");
     }
@@ -154,9 +154,9 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _FileSystemFileEntry_FileSystemFileEntry() throws Exception {
         test("FileSystemFileEntry", "FileSystemFileEntry");
     }
@@ -165,7 +165,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Float32Array_Float32Array() throws Exception {
         test("Float32Array", "Float32Array");
     }
@@ -174,7 +174,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Float64Array_Float64Array() throws Exception {
         test("Float64Array", "Float64Array");
     }
@@ -183,7 +183,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _FocusEvent_FocusEvent() throws Exception {
         test("FocusEvent", "FocusEvent");
     }
@@ -192,7 +192,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _FontFace_FontFace() throws Exception {
         test("FontFace", "FontFace");
     }
@@ -201,9 +201,9 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _FontFaceSet_FontFaceSet() throws Exception {
         test("FontFaceSet", "FontFaceSet");
     }
@@ -212,7 +212,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _FormData_FormData() throws Exception {
         test("FormData", "FormData");
     }
@@ -221,7 +221,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _GainNode_GainNode() throws Exception {
         test("GainNode", "GainNode");
     }
@@ -230,7 +230,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Gamepad_Gamepad() throws Exception {
         test("Gamepad", "Gamepad");
     }
@@ -239,7 +239,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _GamepadButton_GamepadButton() throws Exception {
         test("GamepadButton", "GamepadButton");
     }
@@ -248,7 +248,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _GamepadEvent_GamepadEvent() throws Exception {
         test("GamepadEvent", "GamepadEvent");
     }
@@ -257,7 +257,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Geolocation_Geolocation() throws Exception {
         test("Geolocation", "Geolocation");
     }
@@ -266,7 +266,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _GeolocationCoordinates_GeolocationCoordinates() throws Exception {
         test("GeolocationCoordinates", "GeolocationCoordinates");
     }
@@ -275,7 +275,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _GeolocationPosition_GeolocationPosition() throws Exception {
         test("GeolocationPosition", "GeolocationPosition");
     }
@@ -284,7 +284,7 @@ public class HostParentOfFTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _GeolocationPositionError_GeolocationPositionError() throws Exception {
         test("GeolocationPositionError", "GeolocationPositionError");
     }
