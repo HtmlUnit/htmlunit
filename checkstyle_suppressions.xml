@@ -73,6 +73,7 @@
     <suppress checks="MethodName" files="CssStyleSheetEncodingTest.java"/>
     <suppress checks="MethodName" files="ScriptEncodingTest.java"/>
 
+    <suppress checks="MethodName" files="CtorPrototypeTest.java"/>
     <suppress checks="MethodName" files="ElementClosesElementTest.java"/>
     <suppress checks="MethodName" files="HostConstructorTest.java"/>
     <suppress checks="MethodName" files="DedicatedWorkerGlobalScopeConstantsTest.java"/>

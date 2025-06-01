@@ -440,6 +440,7 @@
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
+                                <include>**/huge/CtorPrototypeTest.java</include>
                                 <include>**/huge/ElementClosesElementTest.java</include>
                             </includes>
                             <argLine>-Xms256m -Xmx512m</argLine>
