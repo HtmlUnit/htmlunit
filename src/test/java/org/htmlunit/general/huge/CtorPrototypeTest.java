@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 package org.htmlunit.general.huge;import java.util.ArrayList;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -94,11 +93,14 @@ public class CtorPrototypeTest extends WebDriverTestCase {
             + "    document.title = check(" + jsClassName + ");\n"
             + "  } catch(e) { document.title = 'exception'; }\n"
             + "</script>\n"
-            + "</body></html>";        ServerRestartCount_++;
+            + "</body></html>";
+
+        ServerRestartCount_++;
         if (ServerRestartCount_ == 200) {
             stopWebServers();
             ServerRestartCount_ = 0;
         }
+
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
     }
