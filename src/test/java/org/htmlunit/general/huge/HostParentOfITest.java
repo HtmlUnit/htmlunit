@@ -53,7 +53,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IDBCursor_IDBCursor() throws Exception {
         test("IDBCursor", "IDBCursor");
     }
@@ -63,7 +63,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _IDBCursor_IDBCursorWithValue() throws Exception {
         test("IDBCursor", "IDBCursorWithValue");
     }
@@ -73,7 +73,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IDBCursorWithValue_IDBCursorWithValue() throws Exception {
         test("IDBCursorWithValue", "IDBCursorWithValue");
     }
@@ -83,7 +83,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IDBDatabase_IDBDatabase() throws Exception {
         test("IDBDatabase", "IDBDatabase");
     }
@@ -93,7 +93,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IDBFactory_IDBFactory() throws Exception {
         test("IDBFactory", "IDBFactory");
     }
@@ -103,7 +103,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IDBIndex_IDBIndex() throws Exception {
         test("IDBIndex", "IDBIndex");
     }
@@ -113,7 +113,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IDBKeyRange_IDBKeyRange() throws Exception {
         test("IDBKeyRange", "IDBKeyRange");
     }
@@ -122,7 +122,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _IDBMutableFile_IDBMutableFile() throws Exception {
         test("IDBMutableFile", "IDBMutableFile");
     }
@@ -132,7 +132,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IDBObjectStore_IDBObjectStore() throws Exception {
         test("IDBObjectStore", "IDBObjectStore");
     }
@@ -142,7 +142,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IDBOpenDBRequest_IDBOpenDBRequest() throws Exception {
         test("IDBOpenDBRequest", "IDBOpenDBRequest");
     }
@@ -152,7 +152,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _IDBRequest_IDBOpenDBRequest() throws Exception {
         test("IDBRequest", "IDBOpenDBRequest");
     }
@@ -162,7 +162,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IDBRequest_IDBRequest() throws Exception {
         test("IDBRequest", "IDBRequest");
     }
@@ -172,7 +172,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IDBTransaction_IDBTransaction() throws Exception {
         test("IDBTransaction", "IDBTransaction");
     }
@@ -182,7 +182,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IDBVersionChangeEvent_IDBVersionChangeEvent() throws Exception {
         test("IDBVersionChangeEvent", "IDBVersionChangeEvent");
     }
@@ -191,7 +191,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IdleDeadline_IdleDeadline() throws Exception {
         test("IdleDeadline", "IdleDeadline");
     }
@@ -200,7 +200,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IIRFilterNode_IIRFilterNode() throws Exception {
         test("IIRFilterNode", "IIRFilterNode");
     }
@@ -210,7 +210,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Image_HTMLImageElement() throws Exception {
         // although Image != HTMLImageElement, they seem to be synonyms!!!
         test("Image", "HTMLImageElement");
@@ -221,7 +221,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Image_Image() throws Exception {
         test("Image", "Image");
     }
@@ -231,7 +231,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ImageBitmap_ImageBitmap() throws Exception {
         test("ImageBitmap", "ImageBitmap");
     }
@@ -240,7 +240,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ImageBitmapRenderingContext_ImageBitmapRenderingContext() throws Exception {
         test("ImageBitmapRenderingContext", "ImageBitmapRenderingContext");
     }
@@ -250,7 +250,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ImageData_ImageData() throws Exception {
         test("ImageData", "ImageData");
     }
@@ -259,9 +259,9 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _InputDeviceCapabilities_InputDeviceCapabilities() throws Exception {
         test("InputDeviceCapabilities", "InputDeviceCapabilities");
     }
@@ -271,7 +271,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _InputEvent_InputEvent() throws Exception {
         test("InputEvent", "InputEvent");
     }
@@ -280,7 +280,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _InstallTrigger_InstallTrigger() throws Exception {
         test("InstallTrigger", "InstallTrigger");
     }
@@ -290,7 +290,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Int16Array_Int16Array() throws Exception {
         test("Int16Array", "Int16Array");
     }
@@ -300,7 +300,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Int32Array_Int32Array() throws Exception {
         test("Int32Array", "Int32Array");
     }
@@ -310,7 +310,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Int8Array_Int8Array() throws Exception {
         test("Int8Array", "Int8Array");
     }
@@ -319,7 +319,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IntersectionObserver_IntersectionObserver() throws Exception {
         test("IntersectionObserver", "IntersectionObserver");
     }
@@ -328,7 +328,7 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _IntersectionObserverEntry_IntersectionObserverEntry() throws Exception {
         test("IntersectionObserverEntry", "IntersectionObserverEntry");
     }
@@ -338,7 +338,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _KeyboardEvent_KeyboardEvent() throws Exception {
         test("KeyboardEvent", "KeyboardEvent");
     }
@@ -348,7 +348,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _KeyframeEffect_KeyframeEffect() throws Exception {
         test("KeyframeEffect", "KeyframeEffect");
     }
@@ -358,7 +358,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _LocalMediaStream_LocalMediaStream() throws Exception {
         test("LocalMediaStream", "LocalMediaStream");
     }
@@ -368,7 +368,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Location_Location() throws Exception {
         test("Location", "Location");
     }

@@ -53,7 +53,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MIDIAccess_MIDIAccess() throws Exception {
         test("MIDIAccess", "MIDIAccess");
     }
@@ -63,7 +63,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MIDIConnectionEvent_MIDIConnectionEvent() throws Exception {
         test("MIDIConnectionEvent", "MIDIConnectionEvent");
     }
@@ -73,7 +73,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MIDIInputMap_MIDIInputMap() throws Exception {
         test("MIDIInputMap", "MIDIInputMap");
     }
@@ -83,7 +83,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MIDIInput_MIDIInput() throws Exception {
         test("MIDIInput", "MIDIInput");
     }
@@ -93,7 +93,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MIDIMessageEvent_MIDIMessageEvent() throws Exception {
         test("MIDIMessageEvent", "MIDIMessageEvent");
     }
@@ -103,7 +103,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MIDIOutputMap_MIDIOutputMap() throws Exception {
         test("MIDIOutputMap", "MIDIOutputMap");
     }
@@ -113,7 +113,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MIDIOutput_MIDIOutput() throws Exception {
         test("MIDIOutput", "MIDIOutput");
     }
@@ -123,7 +123,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _MIDIPort_MIDIInput() throws Exception {
         test("MIDIPort", "MIDIInput");
     }
@@ -133,7 +133,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _MIDIPort_MIDIOutput() throws Exception {
         test("MIDIPort", "MIDIOutput");
     }
@@ -143,7 +143,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MIDIPort_MIDIPort() throws Exception {
         test("MIDIPort", "MIDIPort");
     }
@@ -153,7 +153,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaDeviceInfo_MediaDeviceInfo() throws Exception {
         test("MediaDeviceInfo", "MediaDeviceInfo");
     }
@@ -163,7 +163,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaDevices_MediaDevices() throws Exception {
         test("MediaDevices", "MediaDevices");
     }
@@ -173,7 +173,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaElementAudioSourceNode_MediaElementAudioSourceNode() throws Exception {
         test("MediaElementAudioSourceNode", "MediaElementAudioSourceNode");
     }
@@ -183,7 +183,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaEncryptedEvent_MediaEncryptedEvent() throws Exception {
         test("MediaEncryptedEvent", "MediaEncryptedEvent");
     }
@@ -193,7 +193,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaError_MediaError() throws Exception {
         test("MediaError", "MediaError");
     }
@@ -203,9 +203,9 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _MediaKeyError_MediaKeyError() throws Exception {
         test("MediaKeyError", "MediaKeyError");
     }
@@ -215,7 +215,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaKeyMessageEvent_MediaKeyMessageEvent() throws Exception {
         test("MediaKeyMessageEvent", "MediaKeyMessageEvent");
     }
@@ -225,7 +225,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaKeySession_MediaKeySession() throws Exception {
         test("MediaKeySession", "MediaKeySession");
     }
@@ -235,7 +235,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaKeyStatusMap_MediaKeyStatusMap() throws Exception {
         test("MediaKeyStatusMap", "MediaKeyStatusMap");
     }
@@ -245,7 +245,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaKeySystemAccess_MediaKeySystemAccess() throws Exception {
         test("MediaKeySystemAccess", "MediaKeySystemAccess");
     }
@@ -255,7 +255,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaKeys_MediaKeys() throws Exception {
         test("MediaKeys", "MediaKeys");
     }
@@ -265,7 +265,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaList_MediaList() throws Exception {
         test("MediaList", "MediaList");
     }
@@ -275,7 +275,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaQueryListEvent_MediaQueryListEvent() throws Exception {
         test("MediaQueryListEvent", "MediaQueryListEvent");
     }
@@ -285,7 +285,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaQueryList_MediaQueryList() throws Exception {
         test("MediaQueryList", "MediaQueryList");
     }
@@ -295,7 +295,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaRecorder_MediaRecorder() throws Exception {
         test("MediaRecorder", "MediaRecorder");
     }
@@ -305,7 +305,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaSource_MediaSource() throws Exception {
         test("MediaSource", "MediaSource");
     }
@@ -315,7 +315,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaStreamAudioDestinationNode_MediaStreamAudioDestinationNode() throws Exception {
         test("MediaStreamAudioDestinationNode", "MediaStreamAudioDestinationNode");
     }
@@ -325,7 +325,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaStreamAudioSourceNode_MediaStreamAudioSourceNode() throws Exception {
         test("MediaStreamAudioSourceNode", "MediaStreamAudioSourceNode");
     }
@@ -335,7 +335,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaStreamEvent_MediaStreamEvent() throws Exception {
         test("MediaStreamEvent", "MediaStreamEvent");
     }
@@ -345,7 +345,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaStreamTrackEvent_MediaStreamTrackEvent() throws Exception {
         test("MediaStreamTrackEvent", "MediaStreamTrackEvent");
     }
@@ -355,9 +355,9 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            FF_ESR = "false")
+    @Alerts(DEFAULT = "true/true",
+            FF = "false/false",
+            FF_ESR = "false/false")
     public void _MediaStreamTrack_CanvasCaptureMediaStreamTrack() throws Exception {
         test("MediaStreamTrack", "CanvasCaptureMediaStreamTrack");
     }
@@ -367,7 +367,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaStreamTrack_MediaStreamTrack() throws Exception {
         test("MediaStreamTrack", "MediaStreamTrack");
     }
@@ -377,7 +377,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MediaStream_MediaStream() throws Exception {
         test("MediaStream", "MediaStream");
     }
@@ -387,9 +387,9 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/true",
+            FF_ESR = "true/true")
     public void _MediaStream_CanvasCaptureMediaStream() throws Exception {
         test("MediaStream", "CanvasCaptureMediaStream");
     }
@@ -399,9 +399,9 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            FF_ESR = "false")
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
     public void _MediaStream_webkitMediaStream() throws Exception {
         test("MediaStream", "webkitMediaStream");
     }
@@ -411,7 +411,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MessageChannel_MessageChannel() throws Exception {
         test("MessageChannel", "MessageChannel");
     }
@@ -421,7 +421,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MessageEvent_MessageEvent() throws Exception {
         test("MessageEvent", "MessageEvent");
     }
@@ -431,7 +431,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MessagePort_MessagePort() throws Exception {
         test("MessagePort", "MessagePort");
     }
@@ -441,7 +441,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MimeTypeArray_MimeTypeArray() throws Exception {
         test("MimeTypeArray", "MimeTypeArray");
     }
@@ -451,7 +451,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MimeType_MimeType() throws Exception {
         test("MimeType", "MimeType");
     }
@@ -461,7 +461,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _MouseEvent_DragEvent() throws Exception {
         test("MouseEvent", "DragEvent");
     }
@@ -471,7 +471,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MouseEvent_MouseEvent() throws Exception {
         test("MouseEvent", "MouseEvent");
     }
@@ -481,9 +481,9 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/true",
+            FF_ESR = "true/true")
     public void _MouseEvent_MouseScrollEvent() throws Exception {
         test("MouseEvent", "MouseScrollEvent");
     }
@@ -493,7 +493,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _MouseEvent_PointerEvent() throws Exception {
         test("MouseEvent", "PointerEvent");
     }
@@ -503,7 +503,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _MouseEvent_WheelEvent() throws Exception {
         test("MouseEvent", "WheelEvent");
     }
@@ -513,9 +513,9 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _MouseScrollEvent_MouseScrollEvent() throws Exception {
         test("MouseScrollEvent", "MouseScrollEvent");
     }
@@ -525,9 +525,9 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _MutationEvent_MutationEvent() throws Exception {
         test("MutationEvent", "MutationEvent");
     }
@@ -537,7 +537,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MutationObserver_MutationObserver() throws Exception {
         test("MutationObserver", "MutationObserver");
     }
@@ -547,9 +547,9 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            FF_ESR = "false")
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
     public void _MutationObserver_WebKitMutationObserver() throws Exception {
         test("MutationObserver", "WebKitMutationObserver");
     }
@@ -559,7 +559,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _MutationRecord_MutationRecord() throws Exception {
         test("MutationRecord", "MutationRecord");
     }

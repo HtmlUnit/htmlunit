@@ -51,7 +51,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HashChangeEvent_HashChangeEvent() throws Exception {
         test("HashChangeEvent", "HashChangeEvent");
     }
@@ -60,7 +60,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Headers_Headers() throws Exception {
         test("Headers", "Headers");
     }
@@ -69,7 +69,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _History_History() throws Exception {
         test("History", "History");
     }
@@ -78,7 +78,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLAllCollection_HTMLAllCollection() throws Exception {
         test("HTMLAllCollection", "HTMLAllCollection");
     }
@@ -87,7 +87,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLAnchorElement_HTMLAnchorElement() throws Exception {
         test("HTMLAnchorElement", "HTMLAnchorElement");
     }
@@ -96,7 +96,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLAppletElement_HTMLAppletElement() throws Exception {
         test("HTMLAppletElement", "HTMLAppletElement");
     }
@@ -105,7 +105,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLAreaElement_HTMLAreaElement() throws Exception {
         test("HTMLAreaElement", "HTMLAreaElement");
     }
@@ -114,7 +114,11 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
+    @HtmlUnitNYI(CHROME = "true/true",
+            EDGE = "true/true",
+            FF = "true/true",
+            FF_ESR = "true/true")
     public void _HTMLAudioElement_Audio() throws Exception {
         test("HTMLAudioElement", "Audio");
     }
@@ -123,7 +127,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLAudioElement_HTMLAudioElement() throws Exception {
         test("HTMLAudioElement", "HTMLAudioElement");
     }
@@ -132,7 +136,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLBaseElement_HTMLBaseElement() throws Exception {
         test("HTMLBaseElement", "HTMLBaseElement");
     }
@@ -141,7 +145,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLBaseFontElement_HTMLBaseFontElement() throws Exception {
         test("HTMLBaseFontElement", "HTMLBaseFontElement");
     }
@@ -150,7 +154,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLBGSoundElement_HTMLBGSoundElement() throws Exception {
         test("HTMLBGSoundElement", "HTMLBGSoundElement");
     }
@@ -159,7 +163,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLBlockElement_HTMLBlockElement() throws Exception {
         test("HTMLBlockElement", "HTMLBlockElement");
     }
@@ -168,7 +172,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLBodyElement_HTMLBodyElement() throws Exception {
         test("HTMLBodyElement", "HTMLBodyElement");
     }
@@ -177,7 +181,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLBRElement_HTMLBRElement() throws Exception {
         test("HTMLBRElement", "HTMLBRElement");
     }
@@ -186,7 +190,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLButtonElement_HTMLButtonElement() throws Exception {
         test("HTMLButtonElement", "HTMLButtonElement");
     }
@@ -195,7 +199,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLCanvasElement_HTMLCanvasElement() throws Exception {
         test("HTMLCanvasElement", "HTMLCanvasElement");
     }
@@ -204,11 +208,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @HtmlUnitNYI(CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts("false/false")
     public void _HTMLCollection_HTMLAllCollection() throws Exception {
         test("HTMLCollection", "HTMLAllCollection");
     }
@@ -217,7 +217,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLCollection_HTMLCollection() throws Exception {
         test("HTMLCollection", "HTMLCollection");
     }
@@ -226,7 +226,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLCollection_HTMLFormControlsCollection() throws Exception {
         test("HTMLCollection", "HTMLFormControlsCollection");
     }
@@ -235,11 +235,11 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false",
-            FF = "false",
-            FF_ESR = "false")
+    @Alerts("true/true")
+    @HtmlUnitNYI(CHROME = "false/false",
+            EDGE = "false/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
     public void _HTMLCollection_HTMLOptionsCollection() throws Exception {
         test("HTMLCollection", "HTMLOptionsCollection");
     }
@@ -248,7 +248,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLDataElement_HTMLDataElement() throws Exception {
         test("HTMLDataElement", "HTMLDataElement");
     }
@@ -257,7 +257,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLDataListElement_HTMLDataListElement() throws Exception {
         test("HTMLDataListElement", "HTMLDataListElement");
     }
@@ -266,7 +266,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLDDElement_HTMLDDElement() throws Exception {
         test("HTMLDDElement", "HTMLDDElement");
     }
@@ -275,7 +275,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLDetailsElement_HTMLDetailsElement() throws Exception {
         test("HTMLDetailsElement", "HTMLDetailsElement");
     }
@@ -284,7 +284,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLDialogElement_HTMLDialogElement() throws Exception {
         test("HTMLDialogElement", "HTMLDialogElement");
     }
@@ -293,7 +293,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLDirectoryElement_HTMLDirectoryElement() throws Exception {
         test("HTMLDirectoryElement", "HTMLDirectoryElement");
     }
@@ -302,7 +302,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLDivElement_HTMLDivElement() throws Exception {
         test("HTMLDivElement", "HTMLDivElement");
     }
@@ -311,7 +311,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLDListElement_HTMLDListElement() throws Exception {
         test("HTMLDListElement", "HTMLDListElement");
     }
@@ -320,7 +320,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLDocument_HTMLDocument() throws Exception {
         test("HTMLDocument", "HTMLDocument");
     }
@@ -329,7 +329,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLDTElement_HTMLDTElement() throws Exception {
         test("HTMLDTElement", "HTMLDTElement");
     }
@@ -338,7 +338,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLElement_Audio() throws Exception {
         test("HTMLElement", "Audio");
     }
@@ -347,7 +347,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLAnchorElement() throws Exception {
         test("HTMLElement", "HTMLAnchorElement");
     }
@@ -356,7 +356,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLAppletElement() throws Exception {
         test("HTMLElement", "HTMLAppletElement");
     }
@@ -365,7 +365,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLAreaElement() throws Exception {
         test("HTMLElement", "HTMLAreaElement");
     }
@@ -374,7 +374,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLElement_HTMLAudioElement() throws Exception {
         test("HTMLElement", "HTMLAudioElement");
     }
@@ -383,7 +383,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLBaseElement() throws Exception {
         test("HTMLElement", "HTMLBaseElement");
     }
@@ -392,7 +392,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLBaseFontElement() throws Exception {
         test("HTMLElement", "HTMLBaseFontElement");
     }
@@ -401,7 +401,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLBGSoundElement() throws Exception {
         test("HTMLElement", "HTMLBGSoundElement");
     }
@@ -410,7 +410,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLBlockElement() throws Exception {
         test("HTMLElement", "HTMLBlockElement");
     }
@@ -419,7 +419,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLBodyElement() throws Exception {
         test("HTMLElement", "HTMLBodyElement");
     }
@@ -428,7 +428,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLBRElement() throws Exception {
         test("HTMLElement", "HTMLBRElement");
     }
@@ -437,7 +437,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLButtonElement() throws Exception {
         test("HTMLElement", "HTMLButtonElement");
     }
@@ -446,7 +446,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLCanvasElement() throws Exception {
         test("HTMLElement", "HTMLCanvasElement");
     }
@@ -455,7 +455,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLDataElement() throws Exception {
         test("HTMLElement", "HTMLDataElement");
     }
@@ -464,7 +464,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLDataListElement() throws Exception {
         test("HTMLElement", "HTMLDataListElement");
     }
@@ -473,7 +473,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLDDElement() throws Exception {
         test("HTMLElement", "HTMLDDElement");
     }
@@ -482,7 +482,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLDetailsElement() throws Exception {
         test("HTMLElement", "HTMLDetailsElement");
     }
@@ -491,7 +491,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLDialogElement() throws Exception {
         test("HTMLElement", "HTMLDialogElement");
     }
@@ -500,7 +500,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLDirectoryElement() throws Exception {
         test("HTMLElement", "HTMLDirectoryElement");
     }
@@ -509,7 +509,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLDivElement() throws Exception {
         test("HTMLElement", "HTMLDivElement");
     }
@@ -518,7 +518,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLDListElement() throws Exception {
         test("HTMLElement", "HTMLDListElement");
     }
@@ -527,7 +527,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLDTElement() throws Exception {
         test("HTMLElement", "HTMLDTElement");
     }
@@ -536,7 +536,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLElement_HTMLElement() throws Exception {
         test("HTMLElement", "HTMLElement");
     }
@@ -545,7 +545,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLEmbedElement() throws Exception {
         test("HTMLElement", "HTMLEmbedElement");
     }
@@ -554,7 +554,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLFieldSetElement() throws Exception {
         test("HTMLElement", "HTMLFieldSetElement");
     }
@@ -563,7 +563,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLFontElement() throws Exception {
         test("HTMLElement", "HTMLFontElement");
     }
@@ -572,7 +572,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLFormElement() throws Exception {
         test("HTMLElement", "HTMLFormElement");
     }
@@ -581,7 +581,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLFrameElement() throws Exception {
         test("HTMLElement", "HTMLFrameElement");
     }
@@ -590,7 +590,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLFrameSetElement() throws Exception {
         test("HTMLElement", "HTMLFrameSetElement");
     }
@@ -599,7 +599,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLHeadElement() throws Exception {
         test("HTMLElement", "HTMLHeadElement");
     }
@@ -608,7 +608,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLHeadingElement() throws Exception {
         test("HTMLElement", "HTMLHeadingElement");
     }
@@ -617,7 +617,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLHRElement() throws Exception {
         test("HTMLElement", "HTMLHRElement");
     }
@@ -626,7 +626,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLHtmlElement() throws Exception {
         test("HTMLElement", "HTMLHtmlElement");
     }
@@ -635,7 +635,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLIFrameElement() throws Exception {
         test("HTMLElement", "HTMLIFrameElement");
     }
@@ -644,7 +644,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLImageElement() throws Exception {
         test("HTMLElement", "HTMLImageElement");
     }
@@ -653,7 +653,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLInputElement() throws Exception {
         test("HTMLElement", "HTMLInputElement");
     }
@@ -662,7 +662,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLIsIndexElement() throws Exception {
         test("HTMLElement", "HTMLIsIndexElement");
     }
@@ -671,7 +671,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLLabelElement() throws Exception {
         test("HTMLElement", "HTMLLabelElement");
     }
@@ -680,7 +680,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLLegendElement() throws Exception {
         test("HTMLElement", "HTMLLegendElement");
     }
@@ -689,7 +689,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLLIElement() throws Exception {
         test("HTMLElement", "HTMLLIElement");
     }
@@ -698,7 +698,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLLinkElement() throws Exception {
         test("HTMLElement", "HTMLLinkElement");
     }
@@ -707,7 +707,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLMapElement() throws Exception {
         test("HTMLElement", "HTMLMapElement");
     }
@@ -716,7 +716,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLMarqueeElement() throws Exception {
         test("HTMLElement", "HTMLMarqueeElement");
     }
@@ -725,7 +725,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLMediaElement() throws Exception {
         test("HTMLElement", "HTMLMediaElement");
     }
@@ -734,7 +734,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLMenuElement() throws Exception {
         test("HTMLElement", "HTMLMenuElement");
     }
@@ -743,7 +743,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLMenuItemElement() throws Exception {
         test("HTMLElement", "HTMLMenuItemElement");
     }
@@ -752,7 +752,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLMetaElement() throws Exception {
         test("HTMLElement", "HTMLMetaElement");
     }
@@ -761,7 +761,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLMeterElement() throws Exception {
         test("HTMLElement", "HTMLMeterElement");
     }
@@ -770,7 +770,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLModElement() throws Exception {
         test("HTMLElement", "HTMLModElement");
     }
@@ -779,7 +779,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLNextIdElement() throws Exception {
         test("HTMLElement", "HTMLNextIdElement");
     }
@@ -788,7 +788,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLObjectElement() throws Exception {
         test("HTMLElement", "HTMLObjectElement");
     }
@@ -797,7 +797,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLOListElement() throws Exception {
         test("HTMLElement", "HTMLOListElement");
     }
@@ -806,7 +806,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLOptGroupElement() throws Exception {
         test("HTMLElement", "HTMLOptGroupElement");
     }
@@ -815,7 +815,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLOptionElement() throws Exception {
         test("HTMLElement", "HTMLOptionElement");
     }
@@ -824,7 +824,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLOutputElement() throws Exception {
         test("HTMLElement", "HTMLOutputElement");
     }
@@ -833,7 +833,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLParagraphElement() throws Exception {
         test("HTMLElement", "HTMLParagraphElement");
     }
@@ -842,7 +842,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLParamElement() throws Exception {
         test("HTMLElement", "HTMLParamElement");
     }
@@ -851,7 +851,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLPhraseElement() throws Exception {
         test("HTMLElement", "HTMLPhraseElement");
     }
@@ -860,7 +860,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLPictureElement() throws Exception {
         test("HTMLElement", "HTMLPictureElement");
     }
@@ -869,7 +869,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLPreElement() throws Exception {
         test("HTMLElement", "HTMLPreElement");
     }
@@ -878,7 +878,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLProgressElement() throws Exception {
         test("HTMLElement", "HTMLProgressElement");
     }
@@ -887,7 +887,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLQuoteElement() throws Exception {
         test("HTMLElement", "HTMLQuoteElement");
     }
@@ -896,7 +896,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLScriptElement() throws Exception {
         test("HTMLElement", "HTMLScriptElement");
     }
@@ -905,7 +905,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLSelectElement() throws Exception {
         test("HTMLElement", "HTMLSelectElement");
     }
@@ -914,7 +914,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLSlotElement() throws Exception {
         test("HTMLElement", "HTMLSlotElement");
     }
@@ -923,7 +923,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLSourceElement() throws Exception {
         test("HTMLElement", "HTMLSourceElement");
     }
@@ -932,7 +932,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLSpanElement() throws Exception {
         test("HTMLElement", "HTMLSpanElement");
     }
@@ -941,7 +941,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLStyleElement() throws Exception {
         test("HTMLElement", "HTMLStyleElement");
     }
@@ -950,7 +950,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLTableCaptionElement() throws Exception {
         test("HTMLElement", "HTMLTableCaptionElement");
     }
@@ -959,7 +959,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLTableCellElement() throws Exception {
         test("HTMLElement", "HTMLTableCellElement");
     }
@@ -968,7 +968,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLTableColElement() throws Exception {
         test("HTMLElement", "HTMLTableColElement");
     }
@@ -977,7 +977,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLTableDataCellElement() throws Exception {
         test("HTMLElement", "HTMLTableDataCellElement");
     }
@@ -986,7 +986,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLTableElement() throws Exception {
         test("HTMLElement", "HTMLTableElement");
     }
@@ -995,7 +995,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLElement_HTMLTableHeaderCellElement() throws Exception {
         test("HTMLElement", "HTMLTableHeaderCellElement");
     }
@@ -1004,7 +1004,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLTableRowElement() throws Exception {
         test("HTMLElement", "HTMLTableRowElement");
     }
@@ -1013,7 +1013,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLTableSectionElement() throws Exception {
         test("HTMLElement", "HTMLTableSectionElement");
     }
@@ -1022,7 +1022,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLTemplateElement() throws Exception {
         test("HTMLElement", "HTMLTemplateElement");
     }
@@ -1031,7 +1031,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLTextAreaElement() throws Exception {
         test("HTMLElement", "HTMLTextAreaElement");
     }
@@ -1040,7 +1040,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLTimeElement() throws Exception {
         test("HTMLElement", "HTMLTimeElement");
     }
@@ -1049,7 +1049,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLTitleElement() throws Exception {
         test("HTMLElement", "HTMLTitleElement");
     }
@@ -1058,7 +1058,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLTrackElement() throws Exception {
         test("HTMLElement", "HTMLTrackElement");
     }
@@ -1067,7 +1067,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLUListElement() throws Exception {
         test("HTMLElement", "HTMLUListElement");
     }
@@ -1076,7 +1076,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLElement_HTMLUnknownElement() throws Exception {
         test("HTMLElement", "HTMLUnknownElement");
     }
@@ -1085,7 +1085,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLElement_HTMLVideoElement() throws Exception {
         test("HTMLElement", "HTMLVideoElement");
     }
@@ -1094,7 +1094,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLElement_Image() throws Exception {
         test("HTMLElement", "Image");
     }
@@ -1103,7 +1103,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLElement_Option() throws Exception {
         test("HTMLElement", "Option");
     }
@@ -1112,7 +1112,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLEmbedElement_HTMLEmbedElement() throws Exception {
         test("HTMLEmbedElement", "HTMLEmbedElement");
     }
@@ -1121,7 +1121,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLFieldSetElement_HTMLFieldSetElement() throws Exception {
         test("HTMLFieldSetElement", "HTMLFieldSetElement");
     }
@@ -1130,7 +1130,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLFontElement_HTMLFontElement() throws Exception {
         test("HTMLFontElement", "HTMLFontElement");
     }
@@ -1139,7 +1139,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLFormControlsCollection_HTMLFormControlsCollection() throws Exception {
         test("HTMLFormControlsCollection", "HTMLFormControlsCollection");
     }
@@ -1148,7 +1148,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLFormElement_HTMLFormElement() throws Exception {
         test("HTMLFormElement", "HTMLFormElement");
     }
@@ -1157,7 +1157,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLFrameElement_HTMLFrameElement() throws Exception {
         test("HTMLFrameElement", "HTMLFrameElement");
     }
@@ -1166,7 +1166,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLFrameSetElement_HTMLFrameSetElement() throws Exception {
         test("HTMLFrameSetElement", "HTMLFrameSetElement");
     }
@@ -1175,7 +1175,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLHeadElement_HTMLHeadElement() throws Exception {
         test("HTMLHeadElement", "HTMLHeadElement");
     }
@@ -1184,7 +1184,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLHeadingElement_HTMLHeadingElement() throws Exception {
         test("HTMLHeadingElement", "HTMLHeadingElement");
     }
@@ -1193,7 +1193,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLHRElement_HTMLHRElement() throws Exception {
         test("HTMLHRElement", "HTMLHRElement");
     }
@@ -1202,7 +1202,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLHtmlElement_HTMLHtmlElement() throws Exception {
         test("HTMLHtmlElement", "HTMLHtmlElement");
     }
@@ -1211,7 +1211,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLIFrameElement_HTMLIFrameElement() throws Exception {
         test("HTMLIFrameElement", "HTMLIFrameElement");
     }
@@ -1220,7 +1220,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLImageElement_HTMLImageElement() throws Exception {
         test("HTMLImageElement", "HTMLImageElement");
     }
@@ -1229,7 +1229,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLImageElement_Image() throws Exception {
         //although Image != HTMLImageElement, they seem to be synonyms!!!
         test("HTMLImageElement", "Image");
@@ -1239,7 +1239,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLInputElement_HTMLInputElement() throws Exception {
         test("HTMLInputElement", "HTMLInputElement");
     }
@@ -1248,7 +1248,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLIsIndexElement_HTMLIsIndexElement() throws Exception {
         test("HTMLIsIndexElement", "HTMLIsIndexElement");
     }
@@ -1257,7 +1257,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLLabelElement_HTMLLabelElement() throws Exception {
         test("HTMLLabelElement", "HTMLLabelElement");
     }
@@ -1266,7 +1266,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLLegendElement_HTMLLegendElement() throws Exception {
         test("HTMLLegendElement", "HTMLLegendElement");
     }
@@ -1275,7 +1275,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLLIElement_HTMLLIElement() throws Exception {
         test("HTMLLIElement", "HTMLLIElement");
     }
@@ -1284,7 +1284,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLLinkElement_HTMLLinkElement() throws Exception {
         test("HTMLLinkElement", "HTMLLinkElement");
     }
@@ -1293,7 +1293,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLMapElement_HTMLMapElement() throws Exception {
         test("HTMLMapElement", "HTMLMapElement");
     }
@@ -1302,7 +1302,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLMarqueeElement_HTMLMarqueeElement() throws Exception {
         test("HTMLMarqueeElement", "HTMLMarqueeElement");
     }
@@ -1311,7 +1311,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLMediaElement_Audio() throws Exception {
         test("HTMLMediaElement", "Audio");
     }
@@ -1320,7 +1320,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLMediaElement_HTMLAudioElement() throws Exception {
         test("HTMLMediaElement", "HTMLAudioElement");
     }
@@ -1329,7 +1329,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLMediaElement_HTMLMediaElement() throws Exception {
         test("HTMLMediaElement", "HTMLMediaElement");
     }
@@ -1338,7 +1338,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _HTMLMediaElement_HTMLVideoElement() throws Exception {
         test("HTMLMediaElement", "HTMLVideoElement");
     }
@@ -1347,7 +1347,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLMenuElement_HTMLMenuElement() throws Exception {
         test("HTMLMenuElement", "HTMLMenuElement");
     }
@@ -1356,7 +1356,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLMenuItemElement_HTMLMenuItemElement() throws Exception {
         test("HTMLMenuItemElement", "HTMLMenuItemElement");
     }
@@ -1365,7 +1365,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLMetaElement_HTMLMetaElement() throws Exception {
         test("HTMLMetaElement", "HTMLMetaElement");
     }
@@ -1374,7 +1374,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLMeterElement_HTMLMeterElement() throws Exception {
         test("HTMLMeterElement", "HTMLMeterElement");
     }
@@ -1383,7 +1383,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLModElement_HTMLModElement() throws Exception {
         test("HTMLModElement", "HTMLModElement");
     }
@@ -1392,7 +1392,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLNextIdElement_HTMLNextIdElement() throws Exception {
         test("HTMLNextIdElement", "HTMLNextIdElement");
     }
@@ -1401,7 +1401,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLObjectElement_HTMLObjectElement() throws Exception {
         test("HTMLObjectElement", "HTMLObjectElement");
     }
@@ -1410,7 +1410,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLOListElement_HTMLOListElement() throws Exception {
         test("HTMLOListElement", "HTMLOListElement");
     }
@@ -1419,7 +1419,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLOptGroupElement_HTMLOptGroupElement() throws Exception {
         test("HTMLOptGroupElement", "HTMLOptGroupElement");
     }
@@ -1428,7 +1428,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLOptionElement_HTMLOptionElement() throws Exception {
         test("HTMLOptionElement", "HTMLOptionElement");
     }
@@ -1437,7 +1437,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLOptionElement_Option() throws Exception {
         //although Option != HTMLOptionElement, they seem to be synonyms!!!
         test("HTMLOptionElement", "Option");
@@ -1447,7 +1447,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLOptionsCollection_HTMLOptionsCollection() throws Exception {
         test("HTMLOptionsCollection", "HTMLOptionsCollection");
     }
@@ -1456,7 +1456,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLOutputElement_HTMLOutputElement() throws Exception {
         test("HTMLOutputElement", "HTMLOutputElement");
     }
@@ -1465,7 +1465,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLParagraphElement_HTMLParagraphElement() throws Exception {
         test("HTMLParagraphElement", "HTMLParagraphElement");
     }
@@ -1474,7 +1474,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLParamElement_HTMLParamElement() throws Exception {
         test("HTMLParamElement", "HTMLParamElement");
     }
@@ -1483,7 +1483,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLPhraseElement_HTMLPhraseElement() throws Exception {
         test("HTMLPhraseElement", "HTMLPhraseElement");
     }
@@ -1492,7 +1492,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLPictureElement_HTMLPictureElement() throws Exception {
         test("HTMLPictureElement", "HTMLPictureElement");
     }
@@ -1501,7 +1501,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLPreElement_HTMLPreElement() throws Exception {
         test("HTMLPreElement", "HTMLPreElement");
     }
@@ -1510,7 +1510,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLProgressElement_HTMLProgressElement() throws Exception {
         test("HTMLProgressElement", "HTMLProgressElement");
     }
@@ -1519,7 +1519,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLQuoteElement_HTMLQuoteElement() throws Exception {
         test("HTMLQuoteElement", "HTMLQuoteElement");
     }
@@ -1528,7 +1528,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLScriptElement_HTMLScriptElement() throws Exception {
         test("HTMLScriptElement", "HTMLScriptElement");
     }
@@ -1537,7 +1537,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLSelectElement_HTMLSelectElement() throws Exception {
         test("HTMLSelectElement", "HTMLSelectElement");
     }
@@ -1546,7 +1546,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLSlotElement_HTMLSlotElement() throws Exception {
         test("HTMLSlotElement", "HTMLSlotElement");
     }
@@ -1555,7 +1555,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLSourceElement_HTMLSourceElement() throws Exception {
         test("HTMLSourceElement", "HTMLSourceElement");
     }
@@ -1564,7 +1564,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLSpanElement_HTMLSpanElement() throws Exception {
         test("HTMLSpanElement", "HTMLSpanElement");
     }
@@ -1573,7 +1573,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLStyleElement_HTMLStyleElement() throws Exception {
         test("HTMLStyleElement", "HTMLStyleElement");
     }
@@ -1582,7 +1582,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLTableCaptionElement_HTMLTableCaptionElement() throws Exception {
         test("HTMLTableCaptionElement", "HTMLTableCaptionElement");
     }
@@ -1591,7 +1591,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLTableCellElement_HTMLTableCellElement() throws Exception {
         test("HTMLTableCellElement", "HTMLTableCellElement");
     }
@@ -1600,7 +1600,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLTableCellElement_HTMLTableDataCellElement() throws Exception {
         test("HTMLTableCellElement", "HTMLTableDataCellElement");
     }
@@ -1609,7 +1609,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLTableCellElement_HTMLTableHeaderCellElement() throws Exception {
         test("HTMLTableCellElement", "HTMLTableHeaderCellElement");
     }
@@ -1618,7 +1618,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLTableColElement_HTMLTableColElement() throws Exception {
         test("HTMLTableColElement", "HTMLTableColElement");
     }
@@ -1627,7 +1627,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLTableDataCellElement_HTMLTableDataCellElement() throws Exception {
         test("HTMLTableDataCellElement", "HTMLTableDataCellElement");
     }
@@ -1636,7 +1636,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLTableElement_HTMLTableElement() throws Exception {
         test("HTMLTableElement", "HTMLTableElement");
     }
@@ -1645,7 +1645,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _HTMLTableHeaderCellElement_HTMLTableHeaderCellElement() throws Exception {
         test("HTMLTableHeaderCellElement", "HTMLTableHeaderCellElement");
     }
@@ -1654,7 +1654,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLTableRowElement_HTMLTableRowElement() throws Exception {
         test("HTMLTableRowElement", "HTMLTableRowElement");
     }
@@ -1663,7 +1663,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLTableSectionElement_HTMLTableSectionElement() throws Exception {
         test("HTMLTableSectionElement", "HTMLTableSectionElement");
     }
@@ -1672,7 +1672,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLTemplateElement_HTMLTemplateElement() throws Exception {
         test("HTMLTemplateElement", "HTMLTemplateElement");
     }
@@ -1681,7 +1681,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLTextAreaElement_HTMLTextAreaElement() throws Exception {
         test("HTMLTextAreaElement", "HTMLTextAreaElement");
     }
@@ -1690,7 +1690,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLTimeElement_HTMLTimeElement() throws Exception {
         test("HTMLTimeElement", "HTMLTimeElement");
     }
@@ -1699,7 +1699,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLTitleElement_HTMLTitleElement() throws Exception {
         test("HTMLTitleElement", "HTMLTitleElement");
     }
@@ -1708,7 +1708,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLTrackElement_HTMLTrackElement() throws Exception {
         test("HTMLTrackElement", "HTMLTrackElement");
     }
@@ -1717,7 +1717,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLUListElement_HTMLUListElement() throws Exception {
         test("HTMLUListElement", "HTMLUListElement");
     }
@@ -1726,7 +1726,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLUnknownElement_HTMLUnknownElement() throws Exception {
         test("HTMLUnknownElement", "HTMLUnknownElement");
     }
@@ -1735,7 +1735,7 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _HTMLVideoElement_HTMLVideoElement() throws Exception {
         test("HTMLVideoElement", "HTMLVideoElement");
     }
