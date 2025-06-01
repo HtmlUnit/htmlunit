@@ -273,6 +273,7 @@ public class ArchitectureTest {
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.css.CSSRuleList.item(int)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.css.StyleSheetList.item(int)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.NodeList.item(java.lang.Object)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLAllCollection.item(java.lang.Object)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLCollection.item(java.lang.Object)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLOptionsCollection.item(int)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLSelectElement.item(int)")
