@@ -180,7 +180,7 @@ public class CSSRule extends HtmlUnitScriptable {
             return new CSSFontFaceRule(stylesheet, (CSSFontFaceRuleImpl) rule);
         }
         if (rule instanceof CSSPageRuleImpl) {
-            return new CSSPageRule(stylesheet, (CSSPageRuleImpl) rule);
+            return new CSSPageRule(stylesheet, rule);
         }
         if (rule instanceof CSSUnknownRuleImpl) {
             final CSSUnknownRuleImpl unknownRule = (CSSUnknownRuleImpl) rule;
