@@ -24,6 +24,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -184,6 +185,19 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts("false")
     public void _Attr() throws Exception {
         test("Attr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false",
+            FF = "false",
+            FF_ESR = "false")
+    public void _Audio() throws Exception {
+        test("Audio");
     }
 
     /**
@@ -599,6 +613,10 @@ public class CtorPrototypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true",
+            FF = "true",
+            FF_ESR = "true")
     public void _DOMRect() throws Exception {
         test("DOMRect");
     }
@@ -1263,6 +1281,10 @@ public class CtorPrototypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true",
+            FF = "true",
+            FF_ESR = "true")
     public void _HTMLOptionsCollection() throws Exception {
         test("HTMLOptionsCollection");
     }
@@ -1625,6 +1647,10 @@ public class CtorPrototypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true",
+            FF = "true",
+            FF_ESR = "true")
     public void _KeyframeEffect() throws Exception {
         test("KeyframeEffect");
     }
@@ -2350,6 +2376,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
+    @HtmlUnitNYI(FF = "false")
     public void _SVGDiscardElement() throws Exception {
         test("SVGDiscardElement");
     }
@@ -3272,6 +3299,8 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true")
     public void _WebGLBuffer() throws Exception {
         test("WebGLBuffer");
     }
@@ -3292,6 +3321,8 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true")
     public void _WebGLFramebuffer() throws Exception {
         test("WebGLFramebuffer");
     }
@@ -3303,6 +3334,8 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true")
     public void _WebGLProgram() throws Exception {
         test("WebGLProgram");
     }
@@ -3314,6 +3347,8 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true")
     public void _WebGLQuery() throws Exception {
         test("WebGLQuery");
     }
@@ -3325,6 +3360,8 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true")
     public void _WebGLRenderbuffer() throws Exception {
         test("WebGLRenderbuffer");
     }
@@ -3336,6 +3373,8 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true")
     public void _WebGLSampler() throws Exception {
         test("WebGLSampler");
     }
@@ -3347,6 +3386,8 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true")
     public void _WebGLShader() throws Exception {
         test("WebGLShader");
     }
@@ -3358,6 +3399,8 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true")
     public void _WebGLSync() throws Exception {
         test("WebGLSync");
     }
@@ -3369,6 +3412,8 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true")
     public void _WebGLTexture() throws Exception {
         test("WebGLTexture");
     }
@@ -3380,6 +3425,8 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true")
     public void _WebGLTransformFeedback() throws Exception {
         test("WebGLTransformFeedback");
     }
@@ -3391,6 +3438,8 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "true",
             FF_ESR = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true")
     public void _WebGLVertexArrayObject() throws Exception {
         test("WebGLVertexArrayObject");
     }
