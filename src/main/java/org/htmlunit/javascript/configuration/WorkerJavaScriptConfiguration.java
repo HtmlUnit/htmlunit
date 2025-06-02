@@ -22,7 +22,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.host.BroadcastChannel;
 import org.htmlunit.javascript.host.Cache;
 import org.htmlunit.javascript.host.CacheStorage;
-import org.htmlunit.javascript.host.ClientRect;
+import org.htmlunit.javascript.host.DOMRect;
 import org.htmlunit.javascript.host.FontFace;
 import org.htmlunit.javascript.host.FontFaceSet;
 import org.htmlunit.javascript.host.ImageBitmap;
@@ -140,28 +140,29 @@ public final class WorkerJavaScriptConfiguration extends AbstractJavaScriptConfi
     static final Class<? extends HtmlUnitScriptable>[] CLASSES_ = new Class[] {
         // level 1
         AbortController.class, Atomics.class, Blob.class, Cache.class, CacheStorage.class, CanvasGradient.class,
-        CanvasPattern.class, ClientRect.class, Crypto.class, CryptoKey.class, DOMException.class,
-        DOMMatrixReadOnly.class, DOMPointReadOnly.class, DOMRectReadOnly.class, DOMStringList.class, Event.class,
-        EventTarget.class, FileList.class, FontFace.class, FormData.class, Headers.class, IDBCursor.class,
-        IDBFactory.class, IDBIndex.class, IDBKeyRange.class, IDBObjectStore.class, ImageBitmap.class,
-        ImageBitmapRenderingContext.class, ImageData.class, MessageChannel.class, Path2D.class, PerformanceEntry.class,
-        PerformanceObserver.class, PerformanceObserverEntryList.class, PeriodicSyncManager.class, Permissions.class,
-        PushManager.class, PushSubscription.class, PushSubscriptionOptions.class, ReadableStream.class, Request.class,
-        Response.class, StorageManager.class, SubtleCrypto.class, SyncManager.class, TextDecoder.class,
-        TextEncoder.class, TextMetrics.class, URL.class, URLSearchParams.class, WebGL2RenderingContext.class,
-        WebGLActiveInfo.class, WebGLBuffer.class, WebGLFramebuffer.class, WebGLProgram.class, WebGLQuery.class,
-        WebGLRenderbuffer.class, WebGLRenderingContext.class, WebGLSampler.class, WebGLShader.class,
-        WebGLShaderPrecisionFormat.class, WebGLSync.class, WebGLTexture.class, WebGLTransformFeedback.class,
-        WebGLUniformLocation.class, WebGLVertexArrayObject.class, WorkerLocation.class, WorkerNavigator.class,
+        CanvasPattern.class, Crypto.class, CryptoKey.class, DOMException.class, DOMMatrixReadOnly.class,
+        DOMPointReadOnly.class, DOMRectReadOnly.class, DOMStringList.class, Event.class, EventTarget.class,
+        FileList.class, FontFace.class, FormData.class, Headers.class, IDBCursor.class, IDBFactory.class,
+        IDBIndex.class, IDBKeyRange.class, IDBObjectStore.class, ImageBitmap.class, ImageBitmapRenderingContext.class,
+        ImageData.class, MessageChannel.class, Path2D.class, PerformanceEntry.class, PerformanceObserver.class,
+        PerformanceObserverEntryList.class, PeriodicSyncManager.class, Permissions.class, PushManager.class,
+        PushSubscription.class, PushSubscriptionOptions.class, ReadableStream.class, Request.class, Response.class,
+        StorageManager.class, SubtleCrypto.class, SyncManager.class, TextDecoder.class, TextEncoder.class,
+        TextMetrics.class, URL.class, URLSearchParams.class, WebGL2RenderingContext.class, WebGLActiveInfo.class,
+        WebGLBuffer.class, WebGLFramebuffer.class, WebGLProgram.class, WebGLQuery.class, WebGLRenderbuffer.class,
+        WebGLRenderingContext.class, WebGLSampler.class, WebGLShader.class, WebGLShaderPrecisionFormat.class,
+        WebGLSync.class, WebGLTexture.class, WebGLTransformFeedback.class, WebGLUniformLocation.class,
+        WebGLVertexArrayObject.class, WorkerLocation.class, WorkerNavigator.class,
         // level 2
         AbortSignal.class, BroadcastChannel.class, CloseEvent.class, CustomEvent.class, DOMMatrix.class, DOMPoint.class,
-        ErrorEvent.class, EventSource.class, File.class, FileReader.class, FontFaceSet.class, IDBCursorWithValue.class,
-        IDBDatabase.class, IDBRequest.class, IDBTransaction.class, IDBVersionChangeEvent.class, MediaSource.class,
-        MessageEvent.class, MessagePort.class, NetworkInformation.class, Notification.class, Performance.class,
-        PerformanceMark.class, PerformanceMeasure.class, PerformanceResourceTiming.class, PermissionStatus.class,
-        ProgressEvent.class, PromiseRejectionEvent.class, SecurityPolicyViolationEvent.class,
-        ServiceWorkerRegistration.class, SourceBuffer.class, SourceBufferList.class, WebGLContextEvent.class,
-        WebSocket.class, Worker.class, WorkerGlobalScope.class, XMLHttpRequestEventTarget.class,
+        DOMRect.class, ErrorEvent.class, EventSource.class, File.class, FileReader.class, FontFaceSet.class,
+        IDBCursorWithValue.class, IDBDatabase.class, IDBRequest.class, IDBTransaction.class,
+        IDBVersionChangeEvent.class, MediaSource.class, MessageEvent.class, MessagePort.class, NetworkInformation.class,
+        Notification.class, Performance.class, PerformanceMark.class, PerformanceMeasure.class,
+        PerformanceResourceTiming.class, PermissionStatus.class, ProgressEvent.class, PromiseRejectionEvent.class,
+        SecurityPolicyViolationEvent.class, ServiceWorkerRegistration.class, SourceBuffer.class, SourceBufferList.class,
+        WebGLContextEvent.class, WebSocket.class, Worker.class, WorkerGlobalScope.class,
+        XMLHttpRequestEventTarget.class,
         // level 3
         DedicatedWorkerGlobalScope.class, IDBOpenDBRequest.class, XMLHttpRequest.class, XMLHttpRequestUpload.class,
     };

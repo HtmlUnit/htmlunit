@@ -324,10 +324,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts("true/true")
-    @HtmlUnitNYI(CHROME = "false/false",
-            EDGE = "false/false",
-            FF = "false/false",
-            FF_ESR = "false/false")
     public void _DOMRectReadOnly_DOMRect() throws Exception {
         test("DOMRectReadOnly", "DOMRect");
     }

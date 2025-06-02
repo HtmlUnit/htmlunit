@@ -29,8 +29,8 @@ import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.host.ClientRect;
-import org.htmlunit.javascript.host.ClientRectList;
+import org.htmlunit.javascript.host.DOMRect;
+import org.htmlunit.javascript.host.DOMRectList;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.html.HTMLElement;
 
@@ -441,9 +441,9 @@ public class Range extends AbstractRange {
      * @return a collection of rectangles that describes the layout of the contents
      */
     @JsxFunction
-    public ClientRectList getClientRects() {
+    public DOMRectList getClientRects() {
         final Window w = getWindow();
-        final ClientRectList rectList = new ClientRectList();
+        final DOMRectList rectList = new DOMRectList();
         rectList.setParentScope(w);
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
@@ -452,7 +452,7 @@ public class Range extends AbstractRange {
             for (final DomNode node : getSimpleRange().containedNodes()) {
                 final HtmlUnitScriptable scriptable = node.getScriptableObject();
                 if (scriptable instanceof HTMLElement) {
-                    final ClientRect rect = new ClientRect(0, 0, 1, 1);
+                    final DOMRect rect = new DOMRect(0, 0, 1, 1);
                     rect.setParentScope(w);
                     rect.setPrototype(getPrototype(rect.getClass()));
                     rectList.add(rect);
@@ -472,8 +472,8 @@ public class Range extends AbstractRange {
      * @return an object the bounds the contents of the range
      */
     @JsxFunction
-    public ClientRect getBoundingClientRect() {
-        final ClientRect rect = new ClientRect();
+    public DOMRect getBoundingClientRect() {
+        final DOMRect rect = new DOMRect();
         rect.setParentScope(getWindow());
         rect.setPrototype(getPrototype(rect.getClass()));
 
@@ -482,7 +482,7 @@ public class Range extends AbstractRange {
             for (final DomNode node : getSimpleRange().containedNodes()) {
                 final HtmlUnitScriptable scriptable = node.getScriptableObject();
                 if (scriptable instanceof HTMLElement) {
-                    final ClientRect childRect = ((HTMLElement) scriptable).getBoundingClientRect();
+                    final DOMRect childRect = ((HTMLElement) scriptable).getBoundingClientRect();
                     rect.setTop(Math.min(rect.getTop(), childRect.getTop()));
                     rect.setLeft(Math.min(rect.getLeft(), childRect.getLeft()));
                     rect.setRight(Math.max(rect.getRight(), childRect.getRight()));

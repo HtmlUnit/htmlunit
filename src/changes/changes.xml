@@ -8,6 +8,15 @@
 
     <body>
         <release version="4.13.0" date="June xx, 2025" description="Chrome/Edge 136, Firefox 138, Bugfixes">
+            <action type="fix" dev="rbri">
+                The prototype for DOMRect is now DOMRectReadOnly.
+            </action>
+            <action type="update" dev="rbri">
+                Internal javascript class ClientRect renamed to DOMRect (the old name was a leftover from IE).
+            </action>
+            <action type="update" dev="rbri">
+                Internal javascript class ClientRectList renamed to DOMRectList (the old name was a leftover from IE).
+            </action>
             <action type="update" dev="RhinoTeam">
                 core-js: Adjust order of evaluation of function arguments to match the spec.
             </action>

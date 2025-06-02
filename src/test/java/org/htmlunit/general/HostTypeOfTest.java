@@ -934,26 +934,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.ClientRect}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void clientRect() throws Exception {
-        test("ClientRect");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void clientRectList() throws Exception {
-        test("ClientRectList");
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1909,7 +1889,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.ClientRect}.
+     * Test {@link org.htmlunit.javascript.host.DOMRect}.
      *
      * @throws Exception if an error occurs
      */

@@ -613,10 +613,6 @@ public class CtorPrototypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @HtmlUnitNYI(CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
     public void _DOMRect() throws Exception {
         test("DOMRect");
     }

@@ -25,22 +25,22 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code ClientRectList}.
+ * A JavaScript object for {@code DOMRectList}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(className = "DOMRectList")
-public class ClientRectList extends HtmlUnitScriptable {
+@JsxClass
+public class DOMRectList extends HtmlUnitScriptable {
 
-    private final List<ClientRect> clientRects_;
+    private final List<DOMRect> domRects_;
 
     /**
      * Creates an instance.
      */
-    public ClientRectList() {
+    public DOMRectList() {
         super();
-        clientRects_ = new ArrayList<>();
+        domRects_ = new ArrayList<>();
     }
 
     /**
@@ -57,7 +57,7 @@ public class ClientRectList extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
-        return clientRects_.size();
+        return domRects_.size();
     }
 
     /**
@@ -66,8 +66,8 @@ public class ClientRectList extends HtmlUnitScriptable {
      */
     @Override
     public final Object get(final int index, final Scriptable start) {
-        if (index >= 0 && index < clientRects_.size()) {
-            return clientRects_.get(index);
+        if (index >= 0 && index < domRects_.size()) {
+            return domRects_.get(index);
         }
         return NOT_FOUND;
     }
@@ -78,9 +78,9 @@ public class ClientRectList extends HtmlUnitScriptable {
      * @return the found item
      */
     @JsxFunction
-    public ClientRect item(final int index) {
-        if (index >= 0 && index < clientRects_.size()) {
-            return clientRects_.get(index);
+    public DOMRect item(final int index) {
+        if (index >= 0 && index < domRects_.size()) {
+            return domRects_.get(index);
         }
         return null;
     }
@@ -89,7 +89,7 @@ public class ClientRectList extends HtmlUnitScriptable {
      * Add a rect.
      * @param clientRect the rect to add
      */
-    public void add(final ClientRect clientRect) {
-        clientRects_.add(clientRect);
+    public void add(final DOMRect clientRect) {
+        domRects_.add(clientRect);
     }
 }

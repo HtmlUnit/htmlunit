@@ -102,7 +102,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
-import org.htmlunit.javascript.host.ClientRect;
+import org.htmlunit.javascript.host.DOMRect;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import org.htmlunit.javascript.host.dom.DOMStringMap;
@@ -971,8 +971,8 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    public ClientRect getBoundingClientRect() {
-        final ClientRect textRectangle = super.getBoundingClientRect();
+    public DOMRect getBoundingClientRect() {
+        final DOMRect textRectangle = super.getBoundingClientRect();
 
         int left = getPosX();
         int top = getPosY();

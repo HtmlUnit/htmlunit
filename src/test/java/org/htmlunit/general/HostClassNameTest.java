@@ -954,28 +954,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.ClientRect}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("ReferenceError")
-    public void clientRect() throws Exception {
-        test("ClientRect");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.ClientRectList}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("ReferenceError")
-    public void clientRectList() throws Exception {
-        test("ClientRectList");
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1933,7 +1911,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.ClientRect}.
+     * Test {@link org.htmlunit.javascript.host.DOMRect}.
      *
      * @throws Exception if an error occurs
      */

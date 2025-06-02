@@ -199,24 +199,6 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false/false")
-    public void _ClientRect_ClientRect() throws Exception {
-        test("ClientRect", "ClientRect");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false/false")
-    public void _ClientRectList_ClientRectList() throws Exception {
-        test("ClientRectList", "ClientRectList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
     public void _ClipboardEvent_ClipboardEvent() throws Exception {
         test("ClipboardEvent", "ClipboardEvent");

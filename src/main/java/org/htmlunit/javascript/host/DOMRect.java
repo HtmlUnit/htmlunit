@@ -14,21 +14,21 @@
  */
 package org.htmlunit.javascript.host;
 
-import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.DOMRectReadOnly;
 
 /**
  * Specifies a rectangle that contains a line of text in either an element or a TextRange object.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
- * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535906.aspx">MSDN Documentation</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMRect">DOMRect</a>
  */
-@JsxClass(className = "DOMRect")
-public class ClientRect extends HtmlUnitScriptable {
+@JsxClass
+public class DOMRect extends DOMRectReadOnly {
 
     private int bottom_;
     private int left_;
@@ -38,7 +38,7 @@ public class ClientRect extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    public ClientRect() {
+    public DOMRect() {
         super();
     }
 
@@ -46,8 +46,9 @@ public class ClientRect extends HtmlUnitScriptable {
      * JavaScript constructor.
      */
     @JsxConstructor
+    @Override
     public void jsConstructor() {
-        // nothing to do
+        super.jsConstructor();
     }
 
     /**
@@ -58,7 +59,7 @@ public class ClientRect extends HtmlUnitScriptable {
      * @param right the right coordinate of the rectangle surrounding the object content
      * @param top the top coordinate of the rectangle surrounding the object content
      */
-    public ClientRect(final int bottom, final int left, final int right, final int top) {
+    public DOMRect(final int bottom, final int left, final int right, final int top) {
         this();
         bottom_ = bottom;
         left_ = left;

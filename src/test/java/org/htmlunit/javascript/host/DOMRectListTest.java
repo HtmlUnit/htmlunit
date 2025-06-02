@@ -21,12 +21,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Tests for {@link ClientRectList}.
+ * Tests for {@link DOMRectList}.
  *
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class ClientRectListTest extends WebDriverTestCase {
+public class DOMRectListTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails

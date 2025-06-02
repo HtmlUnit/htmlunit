@@ -339,8 +339,8 @@ public class Element extends Node {
      * @return an object that specifies the bounds of a collection of TextRectangle objects
      */
     @JsxFunction
-    public ClientRect getBoundingClientRect() {
-        final ClientRect textRectangle = new ClientRect(1, 1, 1, 1);
+    public DOMRect getBoundingClientRect() {
+        final DOMRect textRectangle = new DOMRect(1, 1, 1, 1);
         textRectangle.setParentScope(getWindow());
         textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
         return textRectangle;
@@ -656,14 +656,14 @@ public class Element extends Node {
      * @return a collection of rectangles that describes the layout of the contents
      */
     @JsxFunction
-    public ClientRectList getClientRects() {
+    public DOMRectList getClientRects() {
         final Window w = getWindow();
-        final ClientRectList rectList = new ClientRectList();
+        final DOMRectList rectList = new DOMRectList();
         rectList.setParentScope(w);
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
         if (!isDisplayNone() && getDomNodeOrDie().isAttachedToPage()) {
-            final ClientRect rect = new ClientRect(0, 0, 1, 1);
+            final DOMRect rect = new DOMRect(0, 0, 1, 1);
             rect.setParentScope(w);
             rect.setPrototype(getPrototype(rect.getClass()));
             rectList.add(rect);
