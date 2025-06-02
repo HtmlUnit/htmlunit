@@ -288,16 +288,17 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Map<String, Function> ctorPrototypesPerJSName = new HashMap<>();
         for (final ClassConfiguration config : jsConfig.getAll()) {
             final String jsClassName = config.getClassName();
+            Scriptable prototype = prototypesPerJSName.get(jsClassName);
+            final String extendedClassName =
+                    StringUtils.isEmpty(config.getExtendedClassName()) ? null : config.getExtendedClassName();
 
             // setup the prototypes
             if (config == scopeConfig) {
-                final Scriptable prototype = prototypesPerJSName.get(jsClassName);
-                if (StringUtils.isEmpty(config.getExtendedClassName())) {
+                if (extendedClassName == null) {
                     prototype.setPrototype(objectPrototype);
                 }
                 else {
-                    final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
-                    prototype.setPrototype(parentPrototype);
+                    prototype.setPrototype(prototypesPerJSName.get(extendedClassName));
                 }
             }
             else {
@@ -315,27 +316,24 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 }
                 prototypes.put(config.getHostClass(), classPrototype);
                 prototypesPerJSName.put(jsClassName, classPrototype);
+                prototype = classPrototype;
 
-                if (StringUtils.isEmpty(config.getExtendedClassName())) {
+                if (extendedClassName == null) {
                     classPrototype.setPrototype(objectPrototype);
                 }
                 else {
-                    final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
-                    classPrototype.setPrototype(parentPrototype);
+                    classPrototype.setPrototype(prototypesPerJSName.get(extendedClassName));
                 }
             }
 
             // setup constructors
-            final Scriptable prototype = prototypesPerJSName.get(jsClassName);
-
             if (config == scopeConfig) {
                 addAsConstructorAndAlias(scopeContructorFunctionObject, jsScope, prototype, config);
                 configureConstantsStaticPropertiesAndStaticFunctions(config, scopeContructorFunctionObject);
 
                 // adjust prototype if needed
-                if (!StringUtils.isEmpty(config.getExtendedClassName())) {
-                    final Scriptable parentPrototype = ctorPrototypesPerJSName.get(config.getExtendedClassName());
-                    scopeContructorFunctionObject.setPrototype(parentPrototype);
+                if (extendedClassName != null) {
+                    scopeContructorFunctionObject.setPrototype(ctorPrototypesPerJSName.get(extendedClassName));
                 }
             }
             else {
@@ -355,9 +353,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         configureConstantsStaticPropertiesAndStaticFunctions(config, function);
 
                         // adjust prototype if needed
-                        if (!StringUtils.isEmpty(config.getExtendedClassName())) {
-                            final Scriptable parentPrototype = ctorPrototypesPerJSName.get(config.getExtendedClassName());
-                            function.setPrototype(parentPrototype);
+                        if (extendedClassName != null) {
+                            function.setPrototype(ctorPrototypesPerJSName.get(extendedClassName));
                         }
                     }
                 }
