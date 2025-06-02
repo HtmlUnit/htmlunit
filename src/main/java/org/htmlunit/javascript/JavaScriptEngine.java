@@ -300,6 +300,15 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 else {
                     prototype.setPrototype(prototypesPerJSName.get(extendedClassName));
                 }
+
+                // setup constructors
+                addAsConstructorAndAlias(scopeContructorFunctionObject, jsScope, prototype, config);
+                configureConstantsStaticPropertiesAndStaticFunctions(config, scopeContructorFunctionObject);
+
+                // adjust prototype if needed
+                if (extendedClassName != null) {
+                    scopeContructorFunctionObject.setPrototype(ctorPrototypesPerJSName.get(extendedClassName));
+                }
             }
             else {
                 final HtmlUnitScriptable classPrototype = configureClass(config, jsScope);
@@ -324,21 +333,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 else {
                     classPrototype.setPrototype(prototypesPerJSName.get(extendedClassName));
                 }
-            }
 
-            // setup constructors
-            if (config == scopeConfig) {
-                addAsConstructorAndAlias(scopeContructorFunctionObject, jsScope, prototype, config);
-                configureConstantsStaticPropertiesAndStaticFunctions(config, scopeContructorFunctionObject);
-
-                // adjust prototype if needed
-                if (extendedClassName != null) {
-                    scopeContructorFunctionObject.setPrototype(ctorPrototypesPerJSName.get(extendedClassName));
-                }
-            }
-            else {
-                final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
+                // setup constructors
                 if (prototype != null && config.isJsObject()) {
+                    final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
                     if (jsConstructor == null) {
                         final ScriptableObject constructor = config.getHostClass().getDeclaredConstructor().newInstance();
                         ((HtmlUnitScriptable) constructor).setClassName(jsClassName);
