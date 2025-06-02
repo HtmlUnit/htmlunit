@@ -285,48 +285,47 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(jsScope);
 
-        // setup the prototypes
+        final Map<String, Function> ctorPrototypesPerJSName = new HashMap<>();
         for (final ClassConfiguration config : jsConfig.getAll()) {
+            final String jsClassName = config.getClassName();
+
+            // setup the prototypes
             if (config == scopeConfig) {
-                final Scriptable prototype = prototypesPerJSName.get(config.getClassName());
-                if (!StringUtils.isEmpty(config.getExtendedClassName())) {
+                final Scriptable prototype = prototypesPerJSName.get(jsClassName);
+                if (StringUtils.isEmpty(config.getExtendedClassName())) {
+                    prototype.setPrototype(objectPrototype);
+                }
+                else {
                     final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
                     prototype.setPrototype(parentPrototype);
                 }
-                else {
-                    prototype.setPrototype(objectPrototype);
-                }
             }
             else {
-                final HtmlUnitScriptable prototype = configureClass(config, jsScope);
+                final HtmlUnitScriptable classPrototype = configureClass(config, jsScope);
                 if (config.isJsObject()) {
                     // Place object with prototype property in Window scope
                     final HtmlUnitScriptable obj = config.getHostClass().getDeclaredConstructor().newInstance();
-                    prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
-                    obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
+                    classPrototype.defineProperty("__proto__", classPrototype, ScriptableObject.DONTENUM);
+                    obj.defineProperty("prototype", classPrototype, ScriptableObject.DONTENUM); // but not setPrototype!
                     obj.setParentScope(jsScope);
-                    obj.setClassName(config.getClassName());
+                    obj.setClassName(jsClassName);
                     ScriptableObject.defineProperty(jsScope, obj.getClassName(), obj, ScriptableObject.DONTENUM);
                     // this obj won't have prototype, constants need to be configured on it again
                     configureConstants(config, obj);
                 }
-                prototypes.put(config.getHostClass(), prototype);
-                prototypesPerJSName.put(config.getClassName(), prototype);
+                prototypes.put(config.getHostClass(), classPrototype);
+                prototypesPerJSName.put(jsClassName, classPrototype);
 
-                if (!StringUtils.isEmpty(config.getExtendedClassName())) {
-                    final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
-                    prototype.setPrototype(parentPrototype);
+                if (StringUtils.isEmpty(config.getExtendedClassName())) {
+                    classPrototype.setPrototype(objectPrototype);
                 }
                 else {
-                    prototype.setPrototype(objectPrototype);
+                    final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
+                    classPrototype.setPrototype(parentPrototype);
                 }
             }
-        }
 
-        // setup constructors
-        final Map<String, Function> ctorPrototypesPerJSName = new HashMap<>();
-        for (final ClassConfiguration config : jsConfig.getAll()) {
-            final String jsClassName = config.getClassName();
+            // setup constructors
             final Scriptable prototype = prototypesPerJSName.get(jsClassName);
 
             if (config == scopeConfig) {
@@ -338,28 +337,28 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     final Scriptable parentPrototype = ctorPrototypesPerJSName.get(config.getExtendedClassName());
                     scopeContructorFunctionObject.setPrototype(parentPrototype);
                 }
-                continue;
             }
+            else {
+                final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
+                if (prototype != null && config.isJsObject()) {
+                    if (jsConstructor == null) {
+                        final ScriptableObject constructor = config.getHostClass().getDeclaredConstructor().newInstance();
+                        ((HtmlUnitScriptable) constructor).setClassName(jsClassName);
+                        defineConstructor(jsScope, prototype, constructor);
+                        configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);
+                    }
+                    else {
+                        final FunctionObject function = new FunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsScope);
+                        ctorPrototypesPerJSName.put(jsClassName, function);
 
-            final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
-            if (prototype != null && config.isJsObject()) {
-                if (jsConstructor == null) {
-                    final ScriptableObject constructor = config.getHostClass().getDeclaredConstructor().newInstance();
-                    ((HtmlUnitScriptable) constructor).setClassName(jsClassName);
-                    defineConstructor(jsScope, prototype, constructor);
-                    configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);
-                }
-                else {
-                    final FunctionObject function = new FunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsScope);
-                    ctorPrototypesPerJSName.put(jsClassName, function);
+                        addAsConstructorAndAlias(function, jsScope, prototype, config);
+                        configureConstantsStaticPropertiesAndStaticFunctions(config, function);
 
-                    addAsConstructorAndAlias(function, jsScope, prototype, config);
-                    configureConstantsStaticPropertiesAndStaticFunctions(config, function);
-
-                    // adjust prototype if needed
-                    if (!StringUtils.isEmpty(config.getExtendedClassName())) {
-                        final Scriptable parentPrototype = ctorPrototypesPerJSName.get(config.getExtendedClassName());
-                        function.setPrototype(parentPrototype);
+                        // adjust prototype if needed
+                        if (!StringUtils.isEmpty(config.getExtendedClassName())) {
+                            final Scriptable parentPrototype = ctorPrototypesPerJSName.get(config.getExtendedClassName());
+                            function.setPrototype(parentPrototype);
+                        }
                     }
                 }
             }
