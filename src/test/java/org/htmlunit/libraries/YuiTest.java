@@ -172,7 +172,10 @@ public class YuiTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("")
-    @HtmlUnitNYI("org.htmlunit.ScriptException: TypeError: Cannot call method \"appendChild\" of null")
+    @HtmlUnitNYI(CHROME = "org.htmlunit.ScriptException: TypeError: Cannot call method \"appendChild\" of null",
+            EDGE = "org.htmlunit.ScriptException: TypeError: Cannot call method \"appendChild\" of null",
+            FF = "org.htmlunit.ScriptException: TypeError: Cannot call method \"appendChild\" of null",
+            FF_ESR = "org.htmlunit.ScriptException: TypeError: Cannot call method \"appendChild\" of null")
     public void yuiLoaderRollup() throws Exception {
         doTest("yuiloader_rollup.html");
     }
