@@ -497,6 +497,10 @@ public class Node extends EventTarget {
             return true;
         }
 
+        if (other == null) {
+            return false;
+        }
+
         if (!getClassName().equals(other.getClassName())) {
             return false;
         }
@@ -586,7 +590,7 @@ public class Node extends EventTarget {
             }
 
             final int length = childNodes.getLength();
-            final int otherLength = childNodes.getLength();
+            final int otherLength = otherChildNodes.getLength();
             if (length != otherLength) {
                 return false;
             }
@@ -616,7 +620,7 @@ public class Node extends EventTarget {
      */
     @JsxFunction
     public boolean isSameNode(final Object other) {
-        return other == this;
+        return this == other;
     }
 
     /**

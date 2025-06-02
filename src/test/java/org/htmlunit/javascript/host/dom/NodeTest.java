@@ -374,26 +374,20 @@ public class NodeTest extends WebDriverTestCase {
         verifyTitle2(driver, getExpectedAlerts());
     }
 
+
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"false", "false", "true", "false", "false", "false"})
-    public void isEqualNode() throws Exception {
+    @Alerts("true")
+    public void isEqualNodeSame() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var list1 = document.getElementById('list1');\n"
-                + "    var list2 = document.getElementById('list2');\n"
-                + "    log(list1.isEqualNode(list2));\n"
+                + "    log(list1.isEqualNode(list1));\n"
                 + "\n"
-                + "    var nodes = document.getElementsByClassName('test');\n"
-                + "    log(nodes[0].isEqualNode(nodes[1]));\n"
-                + "    log(nodes[0].isEqualNode(nodes[2]));\n"
-                + "    log(nodes[0].isEqualNode(nodes[3]));\n"
-                + "    log(nodes[0].isEqualNode(nodes[4]));\n"
-                + "    log(nodes[0].isEqualNode(nodes[5]));"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
@@ -401,11 +395,129 @@ public class NodeTest extends WebDriverTestCase {
                 + "    <li>foo</li>\n"
                 + "    <li>bar</li>\n"
                 + "  </ul>\n"
-                + "  <ul id='list2'>\n"
+                + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false"})
+    public void isEqualNodeNull() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var list1 = document.getElementById('list1');\n"
+                + "    log(list1.isEqualNode(null));\n"
+                + "    log(list1.isEqualNode(undefined));\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <ul id='list1'>\n"
                 + "    <li>foo</li>\n"
                 + "    <li>bar</li>\n"
                 + "  </ul>\n"
-                + "\n"
+                + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "false", "true", "true", "false", "false", "false", "true"})
+    public void isEqualNodeEmpty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var list1 = document.getElementById('list1');\n"
+                + "    var list1 = document.getElementById('list2');\n"
+
+                + "    log(list1.isEqualNode(list1));\n"
+                + "    log(list1.isEqualNode(list2));\n"
+                + "    log(list1.isEqualNode(list3));\n"
+
+                + "    log(list2.isEqualNode(list1));\n"
+                + "    log(list2.isEqualNode(list2));\n"
+                + "    log(list2.isEqualNode(list3));\n"
+
+                + "    log(list3.isEqualNode(list1));\n"
+                + "    log(list3.isEqualNode(list2));\n"
+                + "    log(list3.isEqualNode(list3));\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <ul id='list1'>\n"
+                + "  </ul>\n"
+                + "  <ul id='list2'>\n"
+                + "  </ul>\n"
+                + "  <ul id='list3'>\n"
+                + "    <li>foo</li>\n"
+                + "    <li>bar</li>\n"
+                + "  </ul>\n"
+                + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"6", "false", "true", "false", "false", "false",
+             "true", "false", "false", "false", "false",
+             "false", "true", "false", "false", "false",
+             "false", "false", "true", "false", "false",
+             "false", "false", "false", "true", "false",
+             "false", "false", "false", "false", "true"})
+    public void isEqualNodeAttr() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nodes = document.getElementsByClassName('test');\n"
+                + "    log(nodes.length);\n"
+
+                + "    log(nodes[0].isEqualNode(nodes[1]));\n"
+                + "    log(nodes[0].isEqualNode(nodes[2]));\n"
+                + "    log(nodes[0].isEqualNode(nodes[3]));\n"
+                + "    log(nodes[0].isEqualNode(nodes[4]));\n"
+                + "    log(nodes[0].isEqualNode(nodes[5]));\n"
+
+                + "    log(nodes[1].isEqualNode(nodes[1]));\n"
+                + "    log(nodes[1].isEqualNode(nodes[2]));\n"
+                + "    log(nodes[1].isEqualNode(nodes[3]));\n"
+                + "    log(nodes[1].isEqualNode(nodes[4]));\n"
+                + "    log(nodes[1].isEqualNode(nodes[5]));\n"
+
+                + "    log(nodes[2].isEqualNode(nodes[1]));\n"
+                + "    log(nodes[2].isEqualNode(nodes[2]));\n"
+                + "    log(nodes[2].isEqualNode(nodes[3]));\n"
+                + "    log(nodes[2].isEqualNode(nodes[4]));\n"
+                + "    log(nodes[2].isEqualNode(nodes[5]));\n"
+
+                + "    log(nodes[3].isEqualNode(nodes[1]));\n"
+                + "    log(nodes[3].isEqualNode(nodes[2]));\n"
+                + "    log(nodes[3].isEqualNode(nodes[3]));\n"
+                + "    log(nodes[3].isEqualNode(nodes[4]));\n"
+                + "    log(nodes[3].isEqualNode(nodes[5]));\n"
+
+                + "    log(nodes[4].isEqualNode(nodes[1]));\n"
+                + "    log(nodes[4].isEqualNode(nodes[2]));\n"
+                + "    log(nodes[4].isEqualNode(nodes[3]));\n"
+                + "    log(nodes[4].isEqualNode(nodes[4]));\n"
+                + "    log(nodes[4].isEqualNode(nodes[5]));\n"
+
+                + "    log(nodes[5].isEqualNode(nodes[1]));\n"
+                + "    log(nodes[5].isEqualNode(nodes[2]));\n"
+                + "    log(nodes[5].isEqualNode(nodes[3]));\n"
+                + "    log(nodes[5].isEqualNode(nodes[4]));\n"
+                + "    log(nodes[5].isEqualNode(nodes[5]));\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
                 + "  <ul class='test'>\n"
                 + "    <li>foo</li>\n"
                 + "    <li>bar</li>\n"
