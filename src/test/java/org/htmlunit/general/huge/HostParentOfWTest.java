@@ -50,7 +50,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WaveShaperNode_WaveShaperNode() throws Exception {
         test("WaveShaperNode", "WaveShaperNode");
     }
@@ -59,7 +59,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WeakMap_WeakMap() throws Exception {
         test("WeakMap", "WeakMap");
     }
@@ -68,7 +68,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WeakSet_WeakSet() throws Exception {
         test("WeakSet", "WeakSet");
     }
@@ -77,7 +77,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _WEBGL_compressed_texture_s3tc_WEBGL_compressed_texture_s3tc() throws Exception {
         test("WEBGL_compressed_texture_s3tc", "WEBGL_compressed_texture_s3tc");
     }
@@ -86,7 +86,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _WEBGL_debug_renderer_info_WEBGL_debug_renderer_info() throws Exception {
         test("WEBGL_debug_renderer_info", "WEBGL_debug_renderer_info");
     }
@@ -95,7 +95,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGL2RenderingContext_WebGL2RenderingContext() throws Exception {
         test("WebGL2RenderingContext", "WebGL2RenderingContext");
     }
@@ -104,7 +104,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLActiveInfo_WebGLActiveInfo() throws Exception {
         test("WebGLActiveInfo", "WebGLActiveInfo");
     }
@@ -113,7 +113,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLBuffer_WebGLBuffer() throws Exception {
         test("WebGLBuffer", "WebGLBuffer");
     }
@@ -122,7 +122,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLContextEvent_WebGLContextEvent() throws Exception {
         test("WebGLContextEvent", "WebGLContextEvent");
     }
@@ -131,7 +131,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLFramebuffer_WebGLFramebuffer() throws Exception {
         test("WebGLFramebuffer", "WebGLFramebuffer");
     }
@@ -140,7 +140,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLProgram_WebGLProgram() throws Exception {
         test("WebGLProgram", "WebGLProgram");
     }
@@ -149,7 +149,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLQuery_WebGLQuery() throws Exception {
         test("WebGLQuery", "WebGLQuery");
     }
@@ -158,7 +158,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLRenderbuffer_WebGLRenderbuffer() throws Exception {
         test("WebGLRenderbuffer", "WebGLRenderbuffer");
     }
@@ -167,7 +167,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLRenderingContext_WebGLRenderingContext() throws Exception {
         test("WebGLRenderingContext", "WebGLRenderingContext");
     }
@@ -176,7 +176,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLSampler_WebGLSampler() throws Exception {
         test("WebGLSampler", "WebGLSampler");
     }
@@ -185,7 +185,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLShader_WebGLShader() throws Exception {
         test("WebGLShader", "WebGLShader");
     }
@@ -194,7 +194,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLShaderPrecisionFormat_WebGLShaderPrecisionFormat() throws Exception {
         test("WebGLShaderPrecisionFormat", "WebGLShaderPrecisionFormat");
     }
@@ -203,7 +203,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLSync_WebGLSync() throws Exception {
         test("WebGLSync", "WebGLSync");
     }
@@ -212,7 +212,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLTexture_WebGLTexture() throws Exception {
         test("WebGLTexture", "WebGLTexture");
     }
@@ -221,7 +221,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLTransformFeedback_WebGLTransformFeedback() throws Exception {
         test("WebGLTransformFeedback", "WebGLTransformFeedback");
     }
@@ -230,7 +230,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLUniformLocation_WebGLUniformLocation() throws Exception {
         test("WebGLUniformLocation", "WebGLUniformLocation");
     }
@@ -239,7 +239,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebGLVertexArrayObject_WebGLVertexArrayObject() throws Exception {
         test("WebGLVertexArrayObject", "WebGLVertexArrayObject");
     }
@@ -248,7 +248,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebKitCSSMatrix_DOMMatrix() throws Exception {
         test("WebKitCSSMatrix", "DOMMatrix");
     }
@@ -257,7 +257,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebKitCSSMatrix_WebKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix", "WebKitCSSMatrix");
     }
@@ -266,9 +266,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _webkitMediaStream_MediaStream() throws Exception {
         test("webkitMediaStream", "MediaStream");
     }
@@ -277,9 +277,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _webkitMediaStream_webkitMediaStream() throws Exception {
         test("webkitMediaStream", "webkitMediaStream");
     }
@@ -288,9 +288,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _WebKitMutationObserver_MutationObserver() throws Exception {
         test("WebKitMutationObserver", "MutationObserver");
     }
@@ -299,9 +299,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _WebKitMutationObserver_WebKitMutationObserver() throws Exception {
         test("WebKitMutationObserver", "WebKitMutationObserver");
     }
@@ -310,9 +310,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _webkitRTCPeerConnection_RTCPeerConnection() throws Exception {
         test("webkitRTCPeerConnection", "RTCPeerConnection");
     }
@@ -321,9 +321,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _webkitRTCPeerConnection_webkitRTCPeerConnection() throws Exception {
         test("webkitRTCPeerConnection", "webkitRTCPeerConnection");
     }
@@ -332,9 +332,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _webkitSpeechGrammar_webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar", "webkitSpeechGrammar");
     }
@@ -343,9 +343,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _webkitSpeechGrammarList_webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList", "webkitSpeechGrammarList");
     }
@@ -354,9 +354,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _webkitSpeechRecognition_webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition", "webkitSpeechRecognition");
     }
@@ -365,9 +365,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _webkitSpeechRecognitionError_webkitSpeechRecognitionError() throws Exception {
         test("webkitSpeechRecognitionError", "webkitSpeechRecognitionError");
     }
@@ -376,9 +376,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _webkitSpeechRecognitionEvent_webkitSpeechRecognitionEvent() throws Exception {
         test("webkitSpeechRecognitionEvent", "webkitSpeechRecognitionEvent");
     }
@@ -387,7 +387,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _webkitURL_URL() throws Exception {
         test("webkitURL", "URL");
     }
@@ -396,7 +396,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _webkitURL_webkitURL() throws Exception {
         test("webkitURL", "webkitURL");
     }
@@ -405,7 +405,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WebSocket_WebSocket() throws Exception {
         test("WebSocket", "WebSocket");
     }
@@ -414,7 +414,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _WheelEvent_WheelEvent() throws Exception {
         test("WheelEvent", "WheelEvent");
     }
@@ -423,7 +423,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Window_Window() throws Exception {
         test("Window", "Window");
     }
@@ -432,7 +432,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Worker_Worker() throws Exception {
         test("Worker", "Worker");
     }
@@ -441,7 +441,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _XMLDocument_XMLDocument() throws Exception {
         test("XMLDocument", "XMLDocument");
     }
@@ -450,7 +450,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _XMLHttpRequest_XMLHttpRequest() throws Exception {
         test("XMLHttpRequest", "XMLHttpRequest");
     }
@@ -459,7 +459,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _XMLHttpRequestEventTarget_XMLHttpRequest() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequest");
     }
@@ -468,7 +468,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _XMLHttpRequestEventTarget_XMLHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequestEventTarget");
     }
@@ -477,7 +477,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _XMLHttpRequestEventTarget_XMLHttpRequestUpload() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequestUpload");
     }
@@ -486,7 +486,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _XMLHttpRequestUpload_XMLHttpRequestUpload() throws Exception {
         test("XMLHttpRequestUpload", "XMLHttpRequestUpload");
     }
@@ -495,7 +495,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _XMLSerializer_XMLSerializer() throws Exception {
         test("XMLSerializer", "XMLSerializer");
     }
@@ -504,7 +504,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _XPathEvaluator_XPathEvaluator() throws Exception {
         test("XPathEvaluator", "XPathEvaluator");
     }
@@ -513,7 +513,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _XPathExpression_XPathExpression() throws Exception {
         test("XPathExpression", "XPathExpression");
     }
@@ -522,7 +522,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _XPathResult_XPathResult() throws Exception {
         test("XPathResult", "XPathResult");
     }
@@ -531,7 +531,7 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _XSLTProcessor_XSLTProcessor() throws Exception {
         test("XSLTProcessor", "XSLTProcessor");
     }

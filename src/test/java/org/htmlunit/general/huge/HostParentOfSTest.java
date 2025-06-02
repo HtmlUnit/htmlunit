@@ -19,6 +19,7 @@ import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameters;
@@ -51,7 +52,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Screen_Screen() throws Exception {
         test("Screen", "Screen");
     }
@@ -60,7 +61,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ScreenOrientation_ScreenOrientation() throws Exception {
         test("ScreenOrientation", "ScreenOrientation");
     }
@@ -69,7 +70,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ScriptProcessorNode_ScriptProcessorNode() throws Exception {
         test("ScriptProcessorNode", "ScriptProcessorNode");
     }
@@ -78,7 +79,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SecurityPolicyViolationEvent_SecurityPolicyViolationEvent() throws Exception {
         test("SecurityPolicyViolationEvent", "SecurityPolicyViolationEvent");
     }
@@ -87,7 +88,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Selection_Selection() throws Exception {
         test("Selection", "Selection");
     }
@@ -96,7 +97,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ServiceWorker_ServiceWorker() throws Exception {
         test("ServiceWorker", "ServiceWorker");
     }
@@ -105,7 +106,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ServiceWorkerContainer_ServiceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer", "ServiceWorkerContainer");
     }
@@ -114,7 +115,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ServiceWorkerRegistration_ServiceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration", "ServiceWorkerRegistration");
     }
@@ -123,7 +124,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Set_Set() throws Exception {
         test("Set", "Set");
     }
@@ -132,7 +133,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _SharedArrayBuffer_SharedArrayBuffer() throws Exception {
         test("SharedArrayBuffer", "SharedArrayBuffer");
     }
@@ -141,7 +142,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ShadowRoot_ShadowRoot() throws Exception {
         test("ShadowRoot", "ShadowRoot");
     }
@@ -150,7 +151,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SharedWorker_SharedWorker() throws Exception {
         test("SharedWorker", "SharedWorker");
     }
@@ -159,7 +160,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SourceBuffer_SourceBuffer() throws Exception {
         test("SourceBuffer", "SourceBuffer");
     }
@@ -168,7 +169,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SourceBufferList_SourceBufferList() throws Exception {
         test("SourceBufferList", "SourceBufferList");
     }
@@ -177,7 +178,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SpeechSynthesis_SpeechSynthesis() throws Exception {
         test("SpeechSynthesis", "SpeechSynthesis");
     }
@@ -186,7 +187,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SpeechSynthesisErrorEvent_SpeechSynthesisErrorEvent() throws Exception {
         test("SpeechSynthesisErrorEvent", "SpeechSynthesisErrorEvent");
     }
@@ -195,7 +196,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SpeechSynthesisEvent_SpeechSynthesisErrorEvent() throws Exception {
         test("SpeechSynthesisEvent", "SpeechSynthesisErrorEvent");
     }
@@ -204,7 +205,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SpeechSynthesisEvent_SpeechSynthesisEvent() throws Exception {
         test("SpeechSynthesisEvent", "SpeechSynthesisEvent");
     }
@@ -213,7 +214,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SpeechSynthesisUtterance_SpeechSynthesisUtterance() throws Exception {
         test("SpeechSynthesisUtterance", "SpeechSynthesisUtterance");
     }
@@ -222,7 +223,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SpeechSynthesisVoice_SpeechSynthesisVoice() throws Exception {
         test("SpeechSynthesisVoice", "SpeechSynthesisVoice");
     }
@@ -231,7 +232,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _StereoPannerNode_StereoPannerNode() throws Exception {
         test("StereoPannerNode", "StereoPannerNode");
     }
@@ -240,7 +241,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Storage_Storage() throws Exception {
         test("Storage", "Storage");
     }
@@ -249,7 +250,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _StorageEvent_StorageEvent() throws Exception {
         test("StorageEvent", "StorageEvent");
     }
@@ -258,7 +259,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _StorageManager_StorageManager() throws Exception {
         test("StorageManager", "StorageManager");
     }
@@ -267,7 +268,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _StyleMedia_StyleMedia() throws Exception {
         test("StyleMedia", "StyleMedia");
     }
@@ -276,7 +277,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _StyleSheet_CSSStyleSheet() throws Exception {
         test("StyleSheet", "CSSStyleSheet");
     }
@@ -285,7 +286,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _StyleSheet_StyleSheet() throws Exception {
         test("StyleSheet", "StyleSheet");
     }
@@ -294,7 +295,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _StyleSheetList_StyleSheetList() throws Exception {
         test("StyleSheetList", "StyleSheetList");
     }
@@ -303,7 +304,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SubmitEvent_SubmitEvent() throws Exception {
         test("SubmitEvent", "SubmitEvent");
     }
@@ -312,7 +313,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SubtleCrypto_SubtleCrypto() throws Exception {
         test("SubtleCrypto", "SubtleCrypto");
     }
@@ -321,7 +322,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAElement_SVGAElement() throws Exception {
         test("SVGAElement", "SVGAElement");
     }
@@ -330,7 +331,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAngle_SVGAngle() throws Exception {
         test("SVGAngle", "SVGAngle");
     }
@@ -339,7 +340,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedAngle_SVGAnimatedAngle() throws Exception {
         test("SVGAnimatedAngle", "SVGAnimatedAngle");
     }
@@ -348,7 +349,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedBoolean_SVGAnimatedBoolean() throws Exception {
         test("SVGAnimatedBoolean", "SVGAnimatedBoolean");
     }
@@ -357,7 +358,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedEnumeration_SVGAnimatedEnumeration() throws Exception {
         test("SVGAnimatedEnumeration", "SVGAnimatedEnumeration");
     }
@@ -366,7 +367,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedInteger_SVGAnimatedInteger() throws Exception {
         test("SVGAnimatedInteger", "SVGAnimatedInteger");
     }
@@ -375,7 +376,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedLength_SVGAnimatedLength() throws Exception {
         test("SVGAnimatedLength", "SVGAnimatedLength");
     }
@@ -384,7 +385,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedLengthList_SVGAnimatedLengthList() throws Exception {
         test("SVGAnimatedLengthList", "SVGAnimatedLengthList");
     }
@@ -393,7 +394,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedNumber_SVGAnimatedNumber() throws Exception {
         test("SVGAnimatedNumber", "SVGAnimatedNumber");
     }
@@ -402,7 +403,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedNumberList_SVGAnimatedNumberList() throws Exception {
         test("SVGAnimatedNumberList", "SVGAnimatedNumberList");
     }
@@ -411,7 +412,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedPreserveAspectRatio_SVGAnimatedPreserveAspectRatio() throws Exception {
         test("SVGAnimatedPreserveAspectRatio", "SVGAnimatedPreserveAspectRatio");
     }
@@ -420,7 +421,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedRect_SVGAnimatedRect() throws Exception {
         test("SVGAnimatedRect", "SVGAnimatedRect");
     }
@@ -429,7 +430,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedString_SVGAnimatedString() throws Exception {
         test("SVGAnimatedString", "SVGAnimatedString");
     }
@@ -438,7 +439,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimatedTransformList_SVGAnimatedTransformList() throws Exception {
         test("SVGAnimatedTransformList", "SVGAnimatedTransformList");
     }
@@ -447,7 +448,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimateElement_SVGAnimateElement() throws Exception {
         test("SVGAnimateElement", "SVGAnimateElement");
     }
@@ -456,7 +457,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimateMotionElement_SVGAnimateMotionElement() throws Exception {
         test("SVGAnimateMotionElement", "SVGAnimateMotionElement");
     }
@@ -465,7 +466,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimateTransformElement_SVGAnimateTransformElement() throws Exception {
         test("SVGAnimateTransformElement", "SVGAnimateTransformElement");
     }
@@ -474,7 +475,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGAnimationElement_SVGAnimateElement() throws Exception {
         test("SVGAnimationElement", "SVGAnimateElement");
     }
@@ -483,7 +484,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGAnimationElement_SVGAnimateMotionElement() throws Exception {
         test("SVGAnimationElement", "SVGAnimateMotionElement");
     }
@@ -492,7 +493,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGAnimationElement_SVGAnimateTransformElement() throws Exception {
         test("SVGAnimationElement", "SVGAnimateTransformElement");
     }
@@ -501,7 +502,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGAnimationElement_SVGAnimationElement() throws Exception {
         test("SVGAnimationElement", "SVGAnimationElement");
     }
@@ -510,8 +511,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts("false/false")
+    @HtmlUnitNYI(FF = "true/true")
     public void _SVGAnimationElement_SVGDiscardElement() throws Exception {
         test("SVGAnimationElement", "SVGDiscardElement");
     }
@@ -520,7 +521,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGAnimationElement_SVGSetElement() throws Exception {
         test("SVGAnimationElement", "SVGSetElement");
     }
@@ -529,7 +530,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGCircleElement_SVGCircleElement() throws Exception {
         test("SVGCircleElement", "SVGCircleElement");
     }
@@ -538,7 +539,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGClipPathElement_SVGClipPathElement() throws Exception {
         test("SVGClipPathElement", "SVGClipPathElement");
     }
@@ -547,7 +548,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGComponentTransferFunctionElement_SVGComponentTransferFunctionElement() throws Exception {
         test("SVGComponentTransferFunctionElement", "SVGComponentTransferFunctionElement");
     }
@@ -556,7 +557,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGComponentTransferFunctionElement_SVGFEFuncAElement() throws Exception {
         test("SVGComponentTransferFunctionElement", "SVGFEFuncAElement");
     }
@@ -565,7 +566,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGComponentTransferFunctionElement_SVGFEFuncBElement() throws Exception {
         test("SVGComponentTransferFunctionElement", "SVGFEFuncBElement");
     }
@@ -574,7 +575,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGComponentTransferFunctionElement_SVGFEFuncGElement() throws Exception {
         test("SVGComponentTransferFunctionElement", "SVGFEFuncGElement");
     }
@@ -583,7 +584,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGComponentTransferFunctionElement_SVGFEFuncRElement() throws Exception {
         test("SVGComponentTransferFunctionElement", "SVGFEFuncRElement");
     }
@@ -592,7 +593,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGDefsElement_SVGDefsElement() throws Exception {
         test("SVGDefsElement", "SVGDefsElement");
     }
@@ -601,7 +602,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGDescElement_SVGDescElement() throws Exception {
         test("SVGDescElement", "SVGDescElement");
     }
@@ -610,8 +611,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts("false/false")
+    @HtmlUnitNYI(FF = "true/false")
     public void _SVGDiscardElement_SVGDiscardElement() throws Exception {
         test("SVGDiscardElement", "SVGDiscardElement");
     }
@@ -620,7 +621,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGAElement() throws Exception {
         test("SVGElement", "SVGAElement");
     }
@@ -629,7 +630,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGAnimateElement() throws Exception {
         test("SVGElement", "SVGAnimateElement");
     }
@@ -638,7 +639,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGAnimateMotionElement() throws Exception {
         test("SVGElement", "SVGAnimateMotionElement");
     }
@@ -647,7 +648,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGAnimateTransformElement() throws Exception {
         test("SVGElement", "SVGAnimateTransformElement");
     }
@@ -656,7 +657,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGAnimationElement() throws Exception {
         test("SVGElement", "SVGAnimationElement");
     }
@@ -665,7 +666,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGCircleElement() throws Exception {
         test("SVGElement", "SVGCircleElement");
     }
@@ -674,7 +675,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGClipPathElement() throws Exception {
         test("SVGElement", "SVGClipPathElement");
     }
@@ -683,7 +684,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGComponentTransferFunctionElement() throws Exception {
         test("SVGElement", "SVGComponentTransferFunctionElement");
     }
@@ -692,7 +693,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGDefsElement() throws Exception {
         test("SVGElement", "SVGDefsElement");
     }
@@ -701,7 +702,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGDescElement() throws Exception {
         test("SVGElement", "SVGDescElement");
     }
@@ -710,8 +711,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts("false/false")
+    @HtmlUnitNYI(FF = "true/false")
     public void _SVGElement_SVGDiscardElement() throws Exception {
         test("SVGElement", "SVGDiscardElement");
     }
@@ -720,7 +721,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGElement() throws Exception {
         test("SVGElement", "SVGElement");
     }
@@ -729,7 +730,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGEllipseElement() throws Exception {
         test("SVGElement", "SVGEllipseElement");
     }
@@ -738,7 +739,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEBlendElement() throws Exception {
         test("SVGElement", "SVGFEBlendElement");
     }
@@ -747,7 +748,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEColorMatrixElement() throws Exception {
         test("SVGElement", "SVGFEColorMatrixElement");
     }
@@ -756,7 +757,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEComponentTransferElement() throws Exception {
         test("SVGElement", "SVGFEComponentTransferElement");
     }
@@ -765,7 +766,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFECompositeElement() throws Exception {
         test("SVGElement", "SVGFECompositeElement");
     }
@@ -774,7 +775,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEConvolveMatrixElement() throws Exception {
         test("SVGElement", "SVGFEConvolveMatrixElement");
     }
@@ -783,7 +784,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEDiffuseLightingElement() throws Exception {
         test("SVGElement", "SVGFEDiffuseLightingElement");
     }
@@ -792,7 +793,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEDisplacementMapElement() throws Exception {
         test("SVGElement", "SVGFEDisplacementMapElement");
     }
@@ -801,7 +802,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEDistantLightElement() throws Exception {
         test("SVGElement", "SVGFEDistantLightElement");
     }
@@ -810,7 +811,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEDropShadowElement() throws Exception {
         test("SVGElement", "SVGFEDropShadowElement");
     }
@@ -819,7 +820,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEFloodElement() throws Exception {
         test("SVGElement", "SVGFEFloodElement");
     }
@@ -828,7 +829,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGFEFuncAElement() throws Exception {
         test("SVGElement", "SVGFEFuncAElement");
     }
@@ -837,7 +838,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGFEFuncBElement() throws Exception {
         test("SVGElement", "SVGFEFuncBElement");
     }
@@ -846,7 +847,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGFEFuncGElement() throws Exception {
         test("SVGElement", "SVGFEFuncGElement");
     }
@@ -855,7 +856,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGFEFuncRElement() throws Exception {
         test("SVGElement", "SVGFEFuncRElement");
     }
@@ -864,7 +865,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEGaussianBlurElement() throws Exception {
         test("SVGElement", "SVGFEGaussianBlurElement");
     }
@@ -873,7 +874,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEImageElement() throws Exception {
         test("SVGElement", "SVGFEImageElement");
     }
@@ -882,7 +883,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEMergeElement() throws Exception {
         test("SVGElement", "SVGFEMergeElement");
     }
@@ -891,7 +892,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEMergeNodeElement() throws Exception {
         test("SVGElement", "SVGFEMergeNodeElement");
     }
@@ -900,7 +901,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEMorphologyElement() throws Exception {
         test("SVGElement", "SVGFEMorphologyElement");
     }
@@ -909,7 +910,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEOffsetElement() throws Exception {
         test("SVGElement", "SVGFEOffsetElement");
     }
@@ -918,7 +919,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFEPointLightElement() throws Exception {
         test("SVGElement", "SVGFEPointLightElement");
     }
@@ -927,7 +928,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFESpecularLightingElement() throws Exception {
         test("SVGElement", "SVGFESpecularLightingElement");
     }
@@ -936,7 +937,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFESpotLightElement() throws Exception {
         test("SVGElement", "SVGFESpotLightElement");
     }
@@ -945,7 +946,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFETileElement() throws Exception {
         test("SVGElement", "SVGFETileElement");
     }
@@ -954,7 +955,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFETurbulenceElement() throws Exception {
         test("SVGElement", "SVGFETurbulenceElement");
     }
@@ -963,7 +964,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGFilterElement() throws Exception {
         test("SVGElement", "SVGFilterElement");
     }
@@ -972,7 +973,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGForeignObjectElement() throws Exception {
         test("SVGElement", "SVGForeignObjectElement");
     }
@@ -981,7 +982,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGGElement() throws Exception {
         test("SVGElement", "SVGGElement");
     }
@@ -990,7 +991,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGGeometryElement() throws Exception {
         test("SVGElement", "SVGGeometryElement");
     }
@@ -999,7 +1000,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGGradientElement() throws Exception {
         test("SVGElement", "SVGGradientElement");
     }
@@ -1008,7 +1009,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGGraphicsElement() throws Exception {
         test("SVGElement", "SVGGraphicsElement");
     }
@@ -1017,7 +1018,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGImageElement() throws Exception {
         test("SVGElement", "SVGImageElement");
     }
@@ -1026,7 +1027,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGLinearGradientElement() throws Exception {
         test("SVGElement", "SVGLinearGradientElement");
     }
@@ -1035,7 +1036,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGLineElement() throws Exception {
         test("SVGElement", "SVGLineElement");
     }
@@ -1044,7 +1045,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGMarkerElement() throws Exception {
         test("SVGElement", "SVGMarkerElement");
     }
@@ -1053,7 +1054,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGMaskElement() throws Exception {
         test("SVGElement", "SVGMaskElement");
     }
@@ -1062,7 +1063,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGMetadataElement() throws Exception {
         test("SVGElement", "SVGMetadataElement");
     }
@@ -1071,7 +1072,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGMPathElement() throws Exception {
         test("SVGElement", "SVGMPathElement");
     }
@@ -1080,7 +1081,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGPathElement() throws Exception {
         test("SVGElement", "SVGPathElement");
     }
@@ -1089,7 +1090,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGPatternElement() throws Exception {
         test("SVGElement", "SVGPatternElement");
     }
@@ -1098,7 +1099,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGPolygonElement() throws Exception {
         test("SVGElement", "SVGPolygonElement");
     }
@@ -1107,7 +1108,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGPolylineElement() throws Exception {
         test("SVGElement", "SVGPolylineElement");
     }
@@ -1116,7 +1117,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGRadialGradientElement() throws Exception {
         test("SVGElement", "SVGRadialGradientElement");
     }
@@ -1125,7 +1126,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGRectElement() throws Exception {
         test("SVGElement", "SVGRectElement");
     }
@@ -1134,7 +1135,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGScriptElement() throws Exception {
         test("SVGElement", "SVGScriptElement");
     }
@@ -1143,7 +1144,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGSetElement() throws Exception {
         test("SVGElement", "SVGSetElement");
     }
@@ -1152,7 +1153,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGStopElement() throws Exception {
         test("SVGElement", "SVGStopElement");
     }
@@ -1161,7 +1162,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGStyleElement() throws Exception {
         test("SVGElement", "SVGStyleElement");
     }
@@ -1170,7 +1171,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGSVGElement() throws Exception {
         test("SVGElement", "SVGSVGElement");
     }
@@ -1179,7 +1180,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGSwitchElement() throws Exception {
         test("SVGElement", "SVGSwitchElement");
     }
@@ -1188,7 +1189,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGSymbolElement() throws Exception {
         test("SVGElement", "SVGSymbolElement");
     }
@@ -1197,7 +1198,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGTextContentElement() throws Exception {
         test("SVGElement", "SVGTextContentElement");
     }
@@ -1206,7 +1207,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGTextElement() throws Exception {
         test("SVGElement", "SVGTextElement");
     }
@@ -1215,7 +1216,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGTextPathElement() throws Exception {
         test("SVGElement", "SVGTextPathElement");
     }
@@ -1224,7 +1225,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGTextPositioningElement() throws Exception {
         test("SVGElement", "SVGTextPositioningElement");
     }
@@ -1233,7 +1234,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGTitleElement() throws Exception {
         test("SVGElement", "SVGTitleElement");
     }
@@ -1242,7 +1243,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGTSpanElement() throws Exception {
         test("SVGElement", "SVGTSpanElement");
     }
@@ -1251,7 +1252,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGElement_SVGUseElement() throws Exception {
         test("SVGElement", "SVGUseElement");
     }
@@ -1260,7 +1261,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _SVGElement_SVGViewElement() throws Exception {
         test("SVGElement", "SVGViewElement");
     }
@@ -1269,7 +1270,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGEllipseElement_SVGEllipseElement() throws Exception {
         test("SVGEllipseElement", "SVGEllipseElement");
     }
@@ -1278,7 +1279,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEBlendElement_SVGFEBlendElement() throws Exception {
         test("SVGFEBlendElement", "SVGFEBlendElement");
     }
@@ -1287,7 +1288,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEColorMatrixElement_SVGFEColorMatrixElement() throws Exception {
         test("SVGFEColorMatrixElement", "SVGFEColorMatrixElement");
     }
@@ -1296,7 +1297,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEComponentTransferElement_SVGFEComponentTransferElement() throws Exception {
         test("SVGFEComponentTransferElement", "SVGFEComponentTransferElement");
     }
@@ -1305,7 +1306,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFECompositeElement_SVGFECompositeElement() throws Exception {
         test("SVGFECompositeElement", "SVGFECompositeElement");
     }
@@ -1314,7 +1315,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEConvolveMatrixElement_SVGFEConvolveMatrixElement() throws Exception {
         test("SVGFEConvolveMatrixElement", "SVGFEConvolveMatrixElement");
     }
@@ -1323,7 +1324,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEDiffuseLightingElement_SVGFEDiffuseLightingElement() throws Exception {
         test("SVGFEDiffuseLightingElement", "SVGFEDiffuseLightingElement");
     }
@@ -1332,7 +1333,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEDisplacementMapElement_SVGFEDisplacementMapElement() throws Exception {
         test("SVGFEDisplacementMapElement", "SVGFEDisplacementMapElement");
     }
@@ -1341,7 +1342,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEDistantLightElement_SVGFEDistantLightElement() throws Exception {
         test("SVGFEDistantLightElement", "SVGFEDistantLightElement");
     }
@@ -1350,7 +1351,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEDropShadowElement_SVGFEDropShadowElement() throws Exception {
         test("SVGFEDropShadowElement", "SVGFEDropShadowElement");
     }
@@ -1359,7 +1360,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEFloodElement_SVGFEFloodElement() throws Exception {
         test("SVGFEFloodElement", "SVGFEFloodElement");
     }
@@ -1368,7 +1369,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEFuncAElement_SVGFEFuncAElement() throws Exception {
         test("SVGFEFuncAElement", "SVGFEFuncAElement");
     }
@@ -1377,7 +1378,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEFuncBElement_SVGFEFuncBElement() throws Exception {
         test("SVGFEFuncBElement", "SVGFEFuncBElement");
     }
@@ -1386,7 +1387,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEFuncGElement_SVGFEFuncGElement() throws Exception {
         test("SVGFEFuncGElement", "SVGFEFuncGElement");
     }
@@ -1395,7 +1396,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEFuncRElement_SVGFEFuncRElement() throws Exception {
         test("SVGFEFuncRElement", "SVGFEFuncRElement");
     }
@@ -1404,7 +1405,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEGaussianBlurElement_SVGFEGaussianBlurElement() throws Exception {
         test("SVGFEGaussianBlurElement", "SVGFEGaussianBlurElement");
     }
@@ -1413,7 +1414,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEImageElement_SVGFEImageElement() throws Exception {
         test("SVGFEImageElement", "SVGFEImageElement");
     }
@@ -1422,7 +1423,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEMergeElement_SVGFEMergeElement() throws Exception {
         test("SVGFEMergeElement", "SVGFEMergeElement");
     }
@@ -1431,7 +1432,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEMergeNodeElement_SVGFEMergeNodeElement() throws Exception {
         test("SVGFEMergeNodeElement", "SVGFEMergeNodeElement");
     }
@@ -1440,7 +1441,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEMorphologyElement_SVGFEMorphologyElement() throws Exception {
         test("SVGFEMorphologyElement", "SVGFEMorphologyElement");
     }
@@ -1449,7 +1450,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEOffsetElement_SVGFEOffsetElement() throws Exception {
         test("SVGFEOffsetElement", "SVGFEOffsetElement");
     }
@@ -1458,7 +1459,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFEPointLightElement_SVGFEPointLightElement() throws Exception {
         test("SVGFEPointLightElement", "SVGFEPointLightElement");
     }
@@ -1467,7 +1468,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFESpecularLightingElement_SVGFESpecularLightingElement() throws Exception {
         test("SVGFESpecularLightingElement", "SVGFESpecularLightingElement");
     }
@@ -1476,7 +1477,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFESpotLightElement_SVGFESpotLightElement() throws Exception {
         test("SVGFESpotLightElement", "SVGFESpotLightElement");
     }
@@ -1485,7 +1486,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFETileElement_SVGFETileElement() throws Exception {
         test("SVGFETileElement", "SVGFETileElement");
     }
@@ -1494,7 +1495,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFETurbulenceElement_SVGFETurbulenceElement() throws Exception {
         test("SVGFETurbulenceElement", "SVGFETurbulenceElement");
     }
@@ -1503,7 +1504,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGFilterElement_SVGFilterElement() throws Exception {
         test("SVGFilterElement", "SVGFilterElement");
     }
@@ -1512,7 +1513,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _SVGForeignObjectElement_SVGForeignObjectElement() throws Exception {
         test("SVGForeignObjectElement", "SVGForeignObjectElement");
     }

@@ -77,8 +77,6 @@ public class HostParentOfNTest extends HostParentOf {
     @Alerts(DEFAULT = "true/false",
             FF = "false/false",
             FF_ESR = "false/false")
-    @HtmlUnitNYI(CHROME = "true/true",
-            EDGE = "true/true")
     public void _NetworkInformation_NetworkInformation() throws Exception {
         test("NetworkInformation", "NetworkInformation");
     }
@@ -1167,11 +1165,8 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false/false",
-            FF = "false/false",
-            FF_ESR = "false/false")
-    @HtmlUnitNYI(FF = "true/false",
-            FF_ESR = "true/false")
+    @Alerts("false/false")
+    @HtmlUnitNYI(FF = "true/false")
     public void _Node_SVGDiscardElement() throws Exception {
         test("Node", "SVGDiscardElement");
     }

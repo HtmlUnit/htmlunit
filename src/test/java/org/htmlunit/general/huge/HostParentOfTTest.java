@@ -50,7 +50,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _Text_CDATASection() throws Exception {
         test("Text", "CDATASection");
     }
@@ -59,7 +59,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Text_Text() throws Exception {
         test("Text", "Text");
     }
@@ -68,7 +68,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _TextDecoder_TextDecoder() throws Exception {
         test("TextDecoder", "TextDecoder");
     }
@@ -77,7 +77,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _TextEncoder_TextEncoder() throws Exception {
         test("TextEncoder", "TextEncoder");
     }
@@ -86,8 +86,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF_ESR = "false")
+    @Alerts(DEFAULT = "true/false",
+            FF_ESR = "false/false")
     public void _TextEvent_TextEvent() throws Exception {
         test("TextEvent", "TextEvent");
     }
@@ -96,7 +96,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _TextMetrics_TextMetrics() throws Exception {
         test("TextMetrics", "TextMetrics");
     }
@@ -105,7 +105,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _TextRange_TextRange() throws Exception {
         test("TextRange", "TextRange");
     }
@@ -114,7 +114,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _TextTrack_TextTrack() throws Exception {
         test("TextTrack", "TextTrack");
     }
@@ -123,7 +123,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _TextTrackCue_TextTrackCue() throws Exception {
         test("TextTrackCue", "TextTrackCue");
     }
@@ -132,7 +132,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _TextTrackCue_VTTCue() throws Exception {
         test("TextTrackCue", "VTTCue");
     }
@@ -141,7 +141,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _TextTrackCueList_TextTrackCueList() throws Exception {
         test("TextTrackCueList", "TextTrackCueList");
     }
@@ -150,7 +150,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _TextTrackList_TextTrackList() throws Exception {
         test("TextTrackList", "TextTrackList");
     }
@@ -159,9 +159,9 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _TimeEvent_TimeEvent() throws Exception {
         test("TimeEvent", "TimeEvent");
     }
@@ -170,7 +170,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _TimeRanges_TimeRanges() throws Exception {
         test("TimeRanges", "TimeRanges");
     }
@@ -179,9 +179,9 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _Touch_Touch() throws Exception {
         test("Touch", "Touch");
     }
@@ -190,9 +190,9 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _TouchEvent_TouchEvent() throws Exception {
         test("TouchEvent", "TouchEvent");
     }
@@ -201,9 +201,9 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     public void _TouchList_TouchList() throws Exception {
         test("TouchList", "TouchList");
     }
@@ -212,7 +212,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _TrackEvent_TrackEvent() throws Exception {
         test("TrackEvent", "TrackEvent");
     }
@@ -221,7 +221,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _TransitionEvent_TransitionEvent() throws Exception {
         test("TransitionEvent", "TransitionEvent");
     }
@@ -230,7 +230,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _TreeWalker_TreeWalker() throws Exception {
         test("TreeWalker", "TreeWalker");
     }
@@ -239,7 +239,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _UIEvent_CompositionEvent() throws Exception {
         test("UIEvent", "CompositionEvent");
     }
@@ -248,7 +248,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _UIEvent_DragEvent() throws Exception {
         test("UIEvent", "DragEvent");
     }
@@ -257,7 +257,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _UIEvent_FocusEvent() throws Exception {
         test("UIEvent", "FocusEvent");
     }
@@ -266,7 +266,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _UIEvent_InputEvent() throws Exception {
         test("UIEvent", "InputEvent");
     }
@@ -275,7 +275,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _UIEvent_KeyboardEvent() throws Exception {
         test("UIEvent", "KeyboardEvent");
     }
@@ -284,7 +284,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/true")
     public void _UIEvent_MouseEvent() throws Exception {
         test("UIEvent", "MouseEvent");
     }
@@ -293,9 +293,9 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            FF_ESR = "true")
+    @Alerts(DEFAULT = "false/false",
+            FF = "true/false",
+            FF_ESR = "true/false")
     public void _UIEvent_MouseScrollEvent() throws Exception {
         test("UIEvent", "MouseScrollEvent");
     }
@@ -304,7 +304,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _UIEvent_MouseWheelEvent() throws Exception {
         test("UIEvent", "MouseWheelEvent");
     }
@@ -313,7 +313,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _UIEvent_MSGestureEvent() throws Exception {
         test("UIEvent", "MSGestureEvent");
     }
@@ -322,7 +322,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _UIEvent_PointerEvent() throws Exception {
         test("UIEvent", "PointerEvent");
     }
@@ -331,7 +331,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _UIEvent_SVGZoomEvent() throws Exception {
         test("UIEvent", "SVGZoomEvent");
     }
@@ -340,8 +340,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF_ESR = "false")
+    @Alerts(DEFAULT = "true/true",
+            FF_ESR = "false/false")
     public void _UIEvent_TextEvent() throws Exception {
         test("UIEvent", "TextEvent");
     }
@@ -350,9 +350,9 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/true",
+            EDGE = "true/true")
     public void _UIEvent_TouchEvent() throws Exception {
         test("UIEvent", "TouchEvent");
     }
@@ -361,7 +361,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _UIEvent_UIEvent() throws Exception {
         test("UIEvent", "UIEvent");
     }
@@ -370,7 +370,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _UIEvent_WheelEvent() throws Exception {
         test("UIEvent", "WheelEvent");
     }
@@ -379,7 +379,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Uint16Array_Uint16Array() throws Exception {
         test("Uint16Array", "Uint16Array");
     }
@@ -388,7 +388,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Uint32Array_Uint32Array() throws Exception {
         test("Uint32Array", "Uint32Array");
     }
@@ -397,7 +397,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Uint8Array_Uint8Array() throws Exception {
         test("Uint8Array", "Uint8Array");
     }
@@ -406,7 +406,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _Uint8ClampedArray_Uint8ClampedArray() throws Exception {
         test("Uint8ClampedArray", "Uint8ClampedArray");
     }
@@ -415,7 +415,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _URIError_URIError() throws Exception {
         test("URIError", "URIError");
     }
@@ -424,7 +424,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _URL_URL() throws Exception {
         test("URL", "URL");
     }
@@ -433,7 +433,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _URL_webkitURL() throws Exception {
         test("URL", "webkitURL");
     }
@@ -442,7 +442,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _URLSearchParams_URLSearchParams() throws Exception {
         test("URLSearchParams", "URLSearchParams");
     }
@@ -451,7 +451,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts("false/false")
     public void _UserProximityEvent_UserProximityEvent() throws Exception {
         test("UserProximityEvent", "UserProximityEvent");
     }
@@ -460,7 +460,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _ValidityState_ValidityState() throws Exception {
         test("ValidityState", "ValidityState");
     }
@@ -469,7 +469,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _VideoPlaybackQuality_VideoPlaybackQuality() throws Exception {
         test("VideoPlaybackQuality", "VideoPlaybackQuality");
     }
@@ -478,7 +478,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts("true/false")
     public void _VTTCue_VTTCue() throws Exception {
         test("VTTCue", "VTTCue");
     }
