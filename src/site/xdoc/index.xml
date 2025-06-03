@@ -92,9 +92,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>May 17, 2025</date></dt>
+                    <dt>Latest release <date>June 03, 2025</date></dt>
                     <dd>
-                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/4.12.0">version 4.12.0</a></p>
+                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/4.13.0">version 4.13.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>
@@ -220,20 +220,20 @@
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.12.0</version>
+    <version>4.13.0</version>
 </dependency>]]></source>
             </p>
 
             <p>
                 For gradle, you would add:
             <source><![CDATA[
-implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.12.0']]></source>
+implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.13.0']]></source>
             </p>
 
             <p>
                 If you like to use the latest available snapshot build you have to add the sonatype
                 snapshot repository to your pom repositories section; also (check
-                <a href="https://twitter.com/HtmlUnit">Twitter</a> for regular information about new
+                <a href="https://bsky.app/profile/htmlunit.bsky.social">Bsky</a> for regular information about new
                 snapshot builds).
             <source><![CDATA[
 <repository>
