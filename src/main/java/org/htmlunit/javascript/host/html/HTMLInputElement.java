@@ -37,6 +37,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.DOMRectList;
+import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.event.Event;
@@ -104,7 +106,7 @@ public class HTMLInputElement extends HTMLElement {
         }
 
         final String val = JavaScriptEngine.toString(newValue);
-        if ("file".equalsIgnoreCase(getType())) {
+        if ("file".equals(getType())) {
             if (StringUtils.isNotEmpty(val)) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
@@ -221,7 +223,7 @@ public class HTMLInputElement extends HTMLElement {
     public Integer getSelectionStart() {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
-            if ("number".equalsIgnoreCase(getType())) {
+            if ("number".equals(getType())) {
                 return null;
             }
 
@@ -239,7 +241,7 @@ public class HTMLInputElement extends HTMLElement {
     public void setSelectionStart(final int start) {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
-            if ("number".equalsIgnoreCase(getType())) {
+            if ("number".equals(getType())) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
                         "Failed to set the 'selectionStart' property"
@@ -267,7 +269,7 @@ public class HTMLInputElement extends HTMLElement {
     public Integer getSelectionEnd() {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
-            if ("number".equalsIgnoreCase(getType())) {
+            if ("number".equals(getType())) {
                 return null;
             }
 
@@ -285,7 +287,7 @@ public class HTMLInputElement extends HTMLElement {
     public void setSelectionEnd(final int end) {
         final DomNode dom = getDomNodeOrDie();
         if (dom instanceof SelectableTextInput) {
-            if ("number".equalsIgnoreCase(getType())) {
+            if ("number".equals(getType())) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
                         "Failed to set the 'selectionEnd' property"
@@ -823,5 +825,22 @@ public class HTMLInputElement extends HTMLElement {
     @JsxSetter
     public void setFormNoValidate(final boolean value) {
         getDomNodeOrDie().setFormNoValidate(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DOMRectList getClientRects() {
+        if ("hidden".equals(getType())) {
+            final Window w = getWindow();
+            final DOMRectList rectList = new DOMRectList();
+            rectList.setParentScope(w);
+            rectList.setPrototype(getPrototype(rectList.getClass()));
+
+            return rectList;
+        }
+
+        return super.getClientRects();
     }
 }

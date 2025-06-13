@@ -2909,6 +2909,92 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"[object DOMRectList]", "0"})
+    public void getClientRectsInputHidden() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d1 = document.getElementById('hidden1');\n"
+            + "    display(d1);\n"
+            + "  }\n"
+            + "\n"
+            + "  function display(elem) {\n"
+            + "    log(elem.getClientRects());\n"
+            + "    log(elem.getClientRects().length);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input type='hidden' name='hidden' id='hidden1'></input>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object DOMRectList]", "1"})
+    public void getClientRectsInputText() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d1 = document.getElementById('text1');\n"
+            + "    display(d1);\n"
+            + "  }\n"
+            + "\n"
+            + "  function display(elem) {\n"
+            + "    log(elem.getClientRects());\n"
+            + "    log(elem.getClientRects().length);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input type='text' name='text' id='text1'></input>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object DOMRectList]", "1"})
+    @HtmlUnitNYI(FF = {"[object DOMRectList]", "0"},
+            FF_ESR = {"[object DOMRectList]", "0"})
+    public void getClientRectsArea() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d1 = document.getElementById('area1');\n"
+            + "    display(d1);\n"
+            + "  }\n"
+            + "\n"
+            + "  function display(elem) {\n"
+            + "    log(elem.getClientRects());\n"
+            + "    log(elem.getClientRects().length);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <img id='myImg' usemap='#imgmap'"
+                    + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                    + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+            + "  <map id='myMap' name='imgmap'>\n"
+            + "    <area id='area1' shape='rect' coords='0,0,1,1'>\n"
+            + "  </map>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"null", "null"})
     public void innerHTML_parentNode() throws Exception {
         final String html = DOCTYPE_HTML
