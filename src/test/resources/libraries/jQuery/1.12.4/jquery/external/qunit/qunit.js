@@ -2624,7 +2624,8 @@ function appendTest( name, testId, moduleName ) {
 	title.innerHTML = getNameHtml( name, moduleName );
 
 	rerunTrigger = document.createElement( "a" );
-	rerunTrigger.innerHTML = "Rerun";
+	/* HtmlUnit rerunTrigger.innerHTML = "Rerun"; */
+	rerunTrigger.innerHTML = "Rerun [" + testId + "]";
 	rerunTrigger.href = setUrl({ testId: testId });
 
 	testBlock = document.createElement( "li" );
