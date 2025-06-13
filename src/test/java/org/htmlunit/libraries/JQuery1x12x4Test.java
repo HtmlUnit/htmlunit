@@ -89,7 +89,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {1=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -99,7 +99,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {2=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {2=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -109,7 +109,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {3=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {3=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -119,7 +119,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {4=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {4=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -129,7 +129,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {5=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {5=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -139,7 +139,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {6=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {6=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -149,7 +149,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {7=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {7=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -159,7 +159,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {8=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {8=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -169,7 +169,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {9=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {9=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -179,7 +179,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {10=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {10=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -189,7 +189,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {11=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {11=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -199,7 +199,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {12=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {12=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -209,7 +209,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {13=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {13=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -219,7 +219,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {14=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {14=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -229,7 +229,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {15=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {15=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -239,7 +239,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {16=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {16=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -249,7 +249,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {17=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {17=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -259,7 +259,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {18=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {18=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -269,7 +269,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {19=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {19=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -279,7 +279,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {20=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {20=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -289,7 +289,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {22=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {22=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -299,7 +299,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {23=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {23=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -309,7 +309,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {24=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {24=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -319,7 +319,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {25=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {25=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -329,7 +329,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {26=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {26=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -339,7 +339,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {27=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {27=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -349,7 +349,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {28=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {28=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -359,7 +359,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {29=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {29=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -369,7 +369,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {30=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {30=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -379,7 +379,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {31=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {31=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -389,7 +389,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {32=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {32=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -399,7 +399,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {33=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {33=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -409,7 +409,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {34=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {34=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -419,7 +419,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {35=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {35=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -429,7 +429,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {36=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {36=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -439,7 +439,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {37=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {37=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -449,7 +449,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {38=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {38=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -459,7 +459,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {39=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {39=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -469,7 +469,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {40=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {40=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -479,7 +479,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {41=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {41=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -489,7 +489,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {42=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {42=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -499,7 +499,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {43=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {43=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -509,7 +509,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {44=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {44=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -519,7 +519,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {45=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {45=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -529,7 +529,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {46=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {46=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -539,7 +539,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {47=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {47=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -549,7 +549,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {48=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {48=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -559,7 +559,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {49=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {49=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -569,7 +569,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {50=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {50=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -579,7 +579,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {51=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {51=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -589,7 +589,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {52=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {52=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -599,7 +599,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {53=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {53=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -609,7 +609,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {54=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {54=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -619,7 +619,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {55=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {55=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -629,7 +629,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {56=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {56=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -639,7 +639,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {57=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {57=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -649,7 +649,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {58=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {58=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -659,7 +659,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {59=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {59=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -669,7 +669,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {60=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {60=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -679,7 +679,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {61=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {61=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -689,7 +689,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {62=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {62=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -699,7 +699,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {63=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {63=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -709,7 +709,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {64=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {64=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -719,7 +719,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {65=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {65=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -729,7 +729,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {66=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {66=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -739,7 +739,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {67=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {67=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -749,7 +749,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {68=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {68=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -759,7 +759,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {69=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {69=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -769,7 +769,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {70=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {70=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -779,7 +779,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {71=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {71=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -789,7 +789,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {72=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {72=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -799,7 +799,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {73=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {73=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -809,7 +809,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {74=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {74=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -819,7 +819,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {75=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {75=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -829,7 +829,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {76=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {76=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -839,7 +839,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {77=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {77=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -849,7 +849,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {78=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {78=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -859,7 +859,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {79=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {79=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -869,7 +869,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {80=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {80=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -879,7 +879,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {81=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {81=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -889,7 +889,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {82=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {82=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -899,7 +899,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {83=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {83=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -909,7 +909,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {84=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {84=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -919,7 +919,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {85=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {85=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -929,7 +929,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {86=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {86=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -939,7 +939,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {87=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {87=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -949,7 +949,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {88=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {88=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -959,7 +959,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {89=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {89=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -969,7 +969,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {90=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {90=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -979,7 +979,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {91=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {91=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -989,7 +989,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {92=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {92=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -999,7 +999,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {93=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {93=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1009,7 +1009,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {94=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {94=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1019,7 +1019,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {95=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {95=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1029,7 +1029,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {96=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {96=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1039,7 +1039,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {97=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {97=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1049,7 +1049,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {98=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {98=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1059,7 +1059,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {99=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {99=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1069,7 +1069,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {100=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {100=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1079,7 +1079,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {101=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {101=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1089,7 +1089,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {102=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {102=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1099,7 +1099,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {103=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {103=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1109,7 +1109,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {104=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {104=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1119,7 +1119,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {105=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {105=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1129,7 +1129,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {106=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {106=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1139,7 +1139,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {107=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {107=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1149,7 +1149,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {108=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {108=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1159,7 +1159,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {109=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {109=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1169,7 +1169,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {110=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {110=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1179,7 +1179,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {111=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {111=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1189,7 +1189,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {112=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {112=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1199,7 +1199,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {113=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {113=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1209,7 +1209,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {114=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {114=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1219,7 +1219,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {115=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {115=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1229,7 +1229,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {116=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {116=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1239,7 +1239,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {117=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {117=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1249,7 +1249,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {118=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {118=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1259,7 +1259,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {119=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {119=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1269,7 +1269,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {120=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {120=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1279,7 +1279,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {121=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {121=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1289,7 +1289,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {122=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {122=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1299,7 +1299,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {123=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {123=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1309,7 +1309,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {124=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {124=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1319,7 +1319,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {125=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {125=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1329,7 +1329,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {126=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {126=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1339,7 +1339,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {127=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {127=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1349,7 +1349,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {128=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {128=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1359,7 +1359,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {129=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {129=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1369,7 +1369,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {130=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {130=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1379,7 +1379,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {131=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {131=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1389,7 +1389,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {132=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {132=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1399,7 +1399,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {133=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {133=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1409,7 +1409,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {134=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {134=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1419,7 +1419,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {135=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {135=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1429,7 +1429,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {136=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {136=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1439,7 +1439,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {137=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {137=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1449,7 +1449,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {138=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {138=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1459,7 +1459,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {139=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {139=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1469,7 +1469,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {140=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {140=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1479,7 +1479,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {141=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {141=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1489,7 +1489,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {142=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {142=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1499,7 +1499,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {143=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {143=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1509,7 +1509,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {144=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {144=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1519,7 +1519,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {145=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {145=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1532,7 +1532,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {146=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {146=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1542,7 +1542,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {147=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {147=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1552,7 +1552,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {148=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {148=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1562,7 +1562,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {149=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {149=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1572,7 +1572,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {150=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {150=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1582,7 +1582,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {151=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {151=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1592,7 +1592,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {152=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {152=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1602,7 +1602,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {153=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {153=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1612,7 +1612,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {154=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {154=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1622,7 +1622,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {155=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {155=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1632,7 +1632,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {156=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {156=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1642,7 +1642,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {157=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {157=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1652,7 +1652,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {158=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {158=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1662,7 +1662,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {159=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {159=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1672,7 +1672,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {160=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {160=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1682,7 +1682,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {161=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {161=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1692,7 +1692,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {162=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {162=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1702,7 +1702,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {163=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {163=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1712,7 +1712,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {164=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {164=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1722,7 +1722,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {165=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {165=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1732,7 +1732,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {166=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {166=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1742,7 +1742,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {167=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {167=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1752,7 +1752,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {168=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {168=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1762,7 +1762,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {169=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {169=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1772,7 +1772,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {170=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {170=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1782,7 +1782,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {171=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {171=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1792,7 +1792,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {172=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {172=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1802,7 +1802,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {173=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {173=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1812,7 +1812,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {174=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {174=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1822,7 +1822,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {175=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {175=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1832,7 +1832,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {176=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {176=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1842,7 +1842,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {177=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {177=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1852,7 +1852,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {178=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {178=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1862,7 +1862,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {179=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {179=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1872,7 +1872,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {180=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {180=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1882,7 +1882,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {181=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {181=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1892,7 +1892,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {182=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {182=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1902,7 +1902,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {183=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {183=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1912,7 +1912,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {184=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {184=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1922,7 +1922,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {185=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {185=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1932,7 +1932,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {186=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {186=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1942,7 +1942,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {187=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {187=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1952,7 +1952,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {188=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {188=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1962,7 +1962,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {189=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {189=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1972,7 +1972,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {190=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {190=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1982,7 +1982,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {191=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {191=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1992,7 +1992,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {192=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {192=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2002,7 +2002,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {193=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {193=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2012,7 +2012,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {194=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {194=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2022,7 +2022,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {195=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {195=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2032,7 +2032,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {196=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {196=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2042,7 +2042,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {197=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {197=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2052,7 +2052,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {198=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {198=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2062,7 +2062,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {199=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {199=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2072,7 +2072,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {200=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {200=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2082,7 +2082,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {201=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {201=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2092,7 +2092,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {202=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {202=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2102,7 +2102,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {203=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {203=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2112,7 +2112,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {204=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {204=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2122,7 +2122,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {205=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {205=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2132,7 +2132,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {206=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {206=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2142,7 +2142,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {207=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {207=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2152,7 +2152,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {208=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {208=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2162,7 +2162,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {209=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {209=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2172,7 +2172,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {210=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {210=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2182,7 +2182,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {211=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {211=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2192,7 +2192,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {212=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {212=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2202,7 +2202,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {213=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {213=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2212,7 +2212,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {214=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {214=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2222,7 +2222,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {215=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {215=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2232,7 +2232,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {216=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {216=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2242,7 +2242,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {217=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {217=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2252,7 +2252,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {218=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {218=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2262,7 +2262,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {219=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {219=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2272,7 +2272,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {220=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {220=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2282,7 +2282,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {221=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {221=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2292,7 +2292,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {222=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {222=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2302,7 +2302,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {223=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {223=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2312,7 +2312,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {224=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {224=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2322,7 +2322,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {225=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {225=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2332,7 +2332,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {226=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {226=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2342,7 +2342,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {227=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {227=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2352,7 +2352,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {228=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {228=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2362,7 +2362,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {229=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {229=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2372,7 +2372,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {230=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {230=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2382,7 +2382,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {231=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {231=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2392,7 +2392,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {232=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {232=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2402,7 +2402,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {233=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {233=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2412,7 +2412,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {234=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {234=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2422,7 +2422,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {235=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {235=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2432,7 +2432,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {236=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {236=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2442,7 +2442,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {237=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {237=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2452,7 +2452,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {238=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {238=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2462,7 +2462,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {239=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {239=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2472,7 +2472,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {240=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {240=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2482,7 +2482,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {241=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {241=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2492,7 +2492,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {242=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {242=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2502,7 +2502,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {243=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {243=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2512,7 +2512,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {244=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {244=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2522,7 +2522,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {245=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {245=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2532,7 +2532,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {246=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {246=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2542,7 +2542,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {247=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {247=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2552,7 +2552,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {248=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {248=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2562,7 +2562,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {249=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {249=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2572,7 +2572,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {250=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {250=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2582,7 +2582,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {251=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {251=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2592,7 +2592,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {252=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {252=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2602,7 +2602,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {253=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {253=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2612,7 +2612,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {254=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {254=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2622,7 +2622,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {255=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {255=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2632,7 +2632,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {256=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {256=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2642,7 +2642,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {257=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {257=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2652,7 +2652,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {258=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {258=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2662,7 +2662,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {259=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {259=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2672,7 +2672,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {260=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {260=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2682,7 +2682,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {261=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {261=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2692,7 +2692,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {262=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {262=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2702,7 +2702,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {263=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {263=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2712,7 +2712,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {264=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {264=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2722,7 +2722,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {265=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {265=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2732,7 +2732,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {266=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {266=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2742,7 +2742,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {267=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {267=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2752,7 +2752,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {268=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {268=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2762,7 +2762,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {269=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {269=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2772,7 +2772,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {270=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {270=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2782,7 +2782,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {271=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {271=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2792,7 +2792,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {272=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {272=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2802,7 +2802,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {273=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {273=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2812,7 +2812,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {274=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {274=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2822,7 +2822,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {275=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {275=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2832,7 +2832,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {276=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {276=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2842,7 +2842,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {277=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {277=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2852,7 +2852,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {278=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {278=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2862,7 +2862,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {279=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {279=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2872,7 +2872,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {280=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {280=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2882,7 +2882,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {281=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {281=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2892,7 +2892,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {282=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {282=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2902,7 +2902,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {283=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {283=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2912,7 +2912,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {284=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {284=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2922,7 +2922,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {285=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {285=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2932,7 +2932,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {286=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {286=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2942,7 +2942,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {287=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {287=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2952,7 +2952,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {288=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {288=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2962,7 +2962,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {289=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {289=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2972,7 +2972,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {290=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {290=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2982,7 +2982,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {291=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {291=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2992,7 +2992,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {292=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {292=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3002,7 +3002,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {293=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {293=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3012,7 +3012,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {294=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {294=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3022,7 +3022,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {295=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {295=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3032,7 +3032,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {296=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {296=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3042,7 +3042,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {297=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {297=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3052,7 +3052,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {298=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {298=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3062,7 +3062,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {299=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {299=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3072,7 +3072,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {300=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {300=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3082,7 +3082,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {301=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {301=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3092,7 +3092,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {302=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {302=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3102,7 +3102,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {303=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {303=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3112,7 +3112,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {304=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {304=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3122,7 +3122,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {305=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {305=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3132,7 +3132,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {306=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {306=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3142,7 +3142,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {307=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {307=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3152,7 +3152,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {308=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {308=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3162,7 +3162,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {309=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {309=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3172,7 +3172,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {310=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {310=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3182,7 +3182,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {311=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {311=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3192,7 +3192,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {312=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {312=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3202,7 +3202,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {313=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {313=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3212,7 +3212,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {314=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {314=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3222,7 +3222,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {315=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {315=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3232,7 +3232,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {316=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {316=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3242,7 +3242,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {317=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {317=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3252,7 +3252,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {318=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {318=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3262,7 +3262,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {319=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {319=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3272,7 +3272,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {320=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {320=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3282,7 +3282,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {321=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {321=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3292,7 +3292,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {322=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {322=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3302,7 +3302,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {323=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {323=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3312,7 +3312,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {324=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {324=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3322,7 +3322,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {325=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {325=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3332,7 +3332,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {326=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {326=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3342,7 +3342,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {327=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {327=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3352,7 +3352,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {328=[CHROME, EDGE, FF, FF_ESR]}.
+     * Test {328=[CHROME, EDGE, FF, FF-ESR]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3373,7 +3373,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {329=[FF, FF_ESR], 331=[CHROME, EDGE]}.
+     * Test {329=[FF, FF-ESR], 331=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3394,7 +3394,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {330=[FF, FF_ESR], 332=[CHROME, EDGE]}.
+     * Test {330=[FF, FF-ESR], 332=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3404,7 +3404,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {331=[FF, FF_ESR], 333=[CHROME, EDGE]}.
+     * Test {331=[FF, FF-ESR], 333=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3414,7 +3414,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {332=[FF, FF_ESR], 334=[CHROME, EDGE]}.
+     * Test {332=[FF, FF-ESR], 334=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3424,7 +3424,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {333=[FF, FF_ESR], 335=[CHROME, EDGE]}.
+     * Test {333=[FF, FF-ESR], 335=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3434,7 +3434,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {334=[FF, FF_ESR], 336=[CHROME, EDGE]}.
+     * Test {334=[FF, FF-ESR], 336=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3444,7 +3444,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {335=[FF, FF_ESR], 337=[CHROME, EDGE]}.
+     * Test {335=[FF, FF-ESR], 337=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3454,7 +3454,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {336=[FF, FF_ESR], 338=[CHROME, EDGE]}.
+     * Test {336=[FF, FF-ESR], 338=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3464,7 +3464,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {337=[FF, FF_ESR], 339=[CHROME, EDGE]}.
+     * Test {337=[FF, FF-ESR], 339=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3474,7 +3474,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {338=[FF, FF_ESR], 340=[CHROME, EDGE]}.
+     * Test {338=[FF, FF-ESR], 340=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3484,7 +3484,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {339=[FF, FF_ESR], 341=[CHROME, EDGE]}.
+     * Test {339=[FF, FF-ESR], 341=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3494,7 +3494,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {340=[FF, FF_ESR], 342=[CHROME, EDGE]}.
+     * Test {340=[FF, FF-ESR], 342=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3504,7 +3504,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {341=[FF, FF_ESR], 343=[CHROME, EDGE]}.
+     * Test {341=[FF, FF-ESR], 343=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3514,7 +3514,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {342=[FF, FF_ESR], 344=[CHROME, EDGE]}.
+     * Test {342=[FF, FF-ESR], 344=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3524,7 +3524,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {343=[FF, FF_ESR], 345=[CHROME, EDGE]}.
+     * Test {343=[FF, FF-ESR], 345=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3534,7 +3534,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {344=[FF, FF_ESR], 346=[CHROME, EDGE]}.
+     * Test {344=[FF, FF-ESR], 346=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3544,7 +3544,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {345=[FF, FF_ESR], 347=[CHROME, EDGE]}.
+     * Test {345=[FF, FF-ESR], 347=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3554,7 +3554,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {346=[FF, FF_ESR], 348=[CHROME, EDGE]}.
+     * Test {346=[FF, FF-ESR], 348=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3564,7 +3564,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {347=[FF, FF_ESR], 349=[CHROME, EDGE]}.
+     * Test {347=[FF, FF-ESR], 349=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3574,7 +3574,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {348=[FF, FF_ESR], 350=[CHROME, EDGE]}.
+     * Test {348=[FF, FF-ESR], 350=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3584,7 +3584,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {349=[FF, FF_ESR], 351=[CHROME, EDGE]}.
+     * Test {349=[FF, FF-ESR], 351=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3594,7 +3594,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {350=[FF, FF_ESR], 352=[CHROME, EDGE]}.
+     * Test {350=[FF, FF-ESR], 352=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3604,7 +3604,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {351=[FF, FF_ESR], 353=[CHROME, EDGE]}.
+     * Test {351=[FF, FF-ESR], 353=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3614,7 +3614,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {352=[FF, FF_ESR], 354=[CHROME, EDGE]}.
+     * Test {352=[FF, FF-ESR], 354=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3624,7 +3624,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {353=[FF, FF_ESR], 355=[CHROME, EDGE]}.
+     * Test {353=[FF, FF-ESR], 355=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3634,7 +3634,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {354=[FF, FF_ESR], 356=[CHROME, EDGE]}.
+     * Test {354=[FF, FF-ESR], 356=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3644,7 +3644,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {355=[FF, FF_ESR], 357=[CHROME, EDGE]}.
+     * Test {355=[FF, FF-ESR], 357=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3654,7 +3654,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {356=[FF, FF_ESR], 358=[CHROME, EDGE]}.
+     * Test {356=[FF, FF-ESR], 358=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3664,7 +3664,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {357=[FF, FF_ESR], 359=[CHROME, EDGE]}.
+     * Test {357=[FF, FF-ESR], 359=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3674,7 +3674,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {358=[FF, FF_ESR], 360=[CHROME, EDGE]}.
+     * Test {358=[FF, FF-ESR], 360=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3684,7 +3684,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {359=[FF, FF_ESR], 361=[CHROME, EDGE]}.
+     * Test {359=[FF, FF-ESR], 361=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3694,7 +3694,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {360=[FF, FF_ESR], 362=[CHROME, EDGE]}.
+     * Test {360=[FF, FF-ESR], 362=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3704,7 +3704,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {361=[FF, FF_ESR], 363=[CHROME, EDGE]}.
+     * Test {361=[FF, FF-ESR], 363=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3714,7 +3714,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {362=[FF, FF_ESR], 364=[CHROME, EDGE]}.
+     * Test {362=[FF, FF-ESR], 364=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3724,7 +3724,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {363=[FF, FF_ESR], 365=[CHROME, EDGE]}.
+     * Test {363=[FF, FF-ESR], 365=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3734,7 +3734,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {364=[FF, FF_ESR], 366=[CHROME, EDGE]}.
+     * Test {364=[FF, FF-ESR], 366=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3744,7 +3744,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {365=[FF, FF_ESR], 367=[CHROME, EDGE]}.
+     * Test {365=[FF, FF-ESR], 367=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3754,7 +3754,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {366=[FF, FF_ESR], 368=[CHROME, EDGE]}.
+     * Test {366=[FF, FF-ESR], 368=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3764,7 +3764,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {367=[FF, FF_ESR], 369=[CHROME, EDGE]}.
+     * Test {367=[FF, FF-ESR], 369=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3774,7 +3774,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {368=[FF, FF_ESR], 370=[CHROME, EDGE]}.
+     * Test {368=[FF, FF-ESR], 370=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3784,7 +3784,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {369=[FF, FF_ESR], 371=[CHROME, EDGE]}.
+     * Test {369=[FF, FF-ESR], 371=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3794,7 +3794,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {370=[FF, FF_ESR], 372=[CHROME, EDGE]}.
+     * Test {370=[FF, FF-ESR], 372=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3804,7 +3804,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {371=[FF, FF_ESR], 373=[CHROME, EDGE]}.
+     * Test {371=[FF, FF-ESR], 373=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3814,7 +3814,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {372=[FF, FF_ESR], 374=[CHROME, EDGE]}.
+     * Test {372=[FF, FF-ESR], 374=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3824,7 +3824,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {373=[FF, FF_ESR], 375=[CHROME, EDGE]}.
+     * Test {373=[FF, FF-ESR], 375=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3834,7 +3834,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {374=[FF, FF_ESR], 376=[CHROME, EDGE]}.
+     * Test {374=[FF, FF-ESR], 376=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3844,7 +3844,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {375=[FF, FF_ESR], 377=[CHROME, EDGE]}.
+     * Test {375=[FF, FF-ESR], 377=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3854,7 +3854,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {376=[FF, FF_ESR], 378=[CHROME, EDGE]}.
+     * Test {376=[FF, FF-ESR], 378=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3864,7 +3864,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {377=[FF, FF_ESR], 379=[CHROME, EDGE]}.
+     * Test {377=[FF, FF-ESR], 379=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3874,7 +3874,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {378=[FF, FF_ESR], 380=[CHROME, EDGE]}.
+     * Test {378=[FF, FF-ESR], 380=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3884,7 +3884,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {379=[FF, FF_ESR], 381=[CHROME, EDGE]}.
+     * Test {379=[FF, FF-ESR], 381=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3894,7 +3894,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {380=[FF, FF_ESR], 382=[CHROME, EDGE]}.
+     * Test {380=[FF, FF-ESR], 382=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3904,7 +3904,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {381=[FF, FF_ESR], 383=[CHROME, EDGE]}.
+     * Test {381=[FF, FF-ESR], 383=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3914,7 +3914,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {382=[FF, FF_ESR], 384=[CHROME, EDGE]}.
+     * Test {382=[FF, FF-ESR], 384=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3924,7 +3924,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {383=[FF, FF_ESR], 385=[CHROME, EDGE]}.
+     * Test {383=[FF, FF-ESR], 385=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3934,7 +3934,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {384=[FF, FF_ESR], 386=[CHROME, EDGE]}.
+     * Test {384=[FF, FF-ESR], 386=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3944,7 +3944,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {385=[FF, FF_ESR], 387=[CHROME, EDGE]}.
+     * Test {385=[FF, FF-ESR], 387=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3954,7 +3954,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {386=[FF, FF_ESR], 388=[CHROME, EDGE]}.
+     * Test {386=[FF, FF-ESR], 388=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3964,7 +3964,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {387=[FF, FF_ESR], 389=[CHROME, EDGE]}.
+     * Test {387=[FF, FF-ESR], 389=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3974,7 +3974,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {388=[FF, FF_ESR], 390=[CHROME, EDGE]}.
+     * Test {388=[FF, FF-ESR], 390=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3984,7 +3984,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {389=[FF, FF_ESR], 391=[CHROME, EDGE]}.
+     * Test {389=[FF, FF-ESR], 391=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3994,7 +3994,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {390=[FF, FF_ESR], 392=[CHROME, EDGE]}.
+     * Test {390=[FF, FF-ESR], 392=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4004,7 +4004,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {391=[FF, FF_ESR], 393=[CHROME, EDGE]}.
+     * Test {391=[FF, FF-ESR], 393=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4014,7 +4014,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {392=[FF, FF_ESR], 394=[CHROME, EDGE]}.
+     * Test {392=[FF, FF-ESR], 394=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4024,7 +4024,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {393=[FF, FF_ESR], 395=[CHROME, EDGE]}.
+     * Test {393=[FF, FF-ESR], 395=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4034,7 +4034,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {394=[FF, FF_ESR], 396=[CHROME, EDGE]}.
+     * Test {394=[FF, FF-ESR], 396=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4044,7 +4044,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {395=[FF, FF_ESR], 397=[CHROME, EDGE]}.
+     * Test {395=[FF, FF-ESR], 397=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4054,7 +4054,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {396=[FF, FF_ESR], 398=[CHROME, EDGE]}.
+     * Test {396=[FF, FF-ESR], 398=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4064,7 +4064,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {397=[FF, FF_ESR], 399=[CHROME, EDGE]}.
+     * Test {397=[FF, FF-ESR], 399=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4074,7 +4074,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {398=[FF, FF_ESR], 400=[CHROME, EDGE]}.
+     * Test {398=[FF, FF-ESR], 400=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4084,7 +4084,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {399=[FF, FF_ESR], 401=[CHROME, EDGE]}.
+     * Test {399=[FF, FF-ESR], 401=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4094,7 +4094,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {400=[FF, FF_ESR], 402=[CHROME, EDGE]}.
+     * Test {400=[FF, FF-ESR], 402=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4104,7 +4104,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {401=[FF, FF_ESR], 403=[CHROME, EDGE]}.
+     * Test {401=[FF, FF-ESR], 403=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4114,7 +4114,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {402=[FF, FF_ESR], 404=[CHROME, EDGE]}.
+     * Test {402=[FF, FF-ESR], 404=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4124,7 +4124,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {403=[FF, FF_ESR], 405=[CHROME, EDGE]}.
+     * Test {403=[FF, FF-ESR], 405=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4134,7 +4134,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {404=[FF, FF_ESR], 406=[CHROME, EDGE]}.
+     * Test {404=[FF, FF-ESR], 406=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4144,7 +4144,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {405=[FF, FF_ESR], 407=[CHROME, EDGE]}.
+     * Test {405=[FF, FF-ESR], 407=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4154,7 +4154,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {406=[FF, FF_ESR], 408=[CHROME, EDGE]}.
+     * Test {406=[FF, FF-ESR], 408=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4164,7 +4164,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {407=[FF, FF_ESR], 409=[CHROME, EDGE]}.
+     * Test {407=[FF, FF-ESR], 409=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4174,7 +4174,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {408=[FF, FF_ESR], 410=[CHROME, EDGE]}.
+     * Test {408=[FF, FF-ESR], 410=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4184,7 +4184,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {409=[FF, FF_ESR], 411=[CHROME, EDGE]}.
+     * Test {409=[FF, FF-ESR], 411=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4194,7 +4194,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {410=[FF, FF_ESR], 412=[CHROME, EDGE]}.
+     * Test {410=[FF, FF-ESR], 412=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4204,7 +4204,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {411=[FF, FF_ESR], 413=[CHROME, EDGE]}.
+     * Test {411=[FF, FF-ESR], 413=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4214,7 +4214,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {412=[FF, FF_ESR], 414=[CHROME, EDGE]}.
+     * Test {412=[FF, FF-ESR], 414=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4224,7 +4224,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {413=[FF, FF_ESR], 415=[CHROME, EDGE]}.
+     * Test {413=[FF, FF-ESR], 415=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4234,7 +4234,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {414=[FF, FF_ESR], 416=[CHROME, EDGE]}.
+     * Test {414=[FF, FF-ESR], 416=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4244,7 +4244,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {415=[FF, FF_ESR], 417=[CHROME, EDGE]}.
+     * Test {415=[FF, FF-ESR], 417=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4254,7 +4254,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {416=[FF, FF_ESR], 418=[CHROME, EDGE]}.
+     * Test {416=[FF, FF-ESR], 418=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4264,7 +4264,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {417=[FF, FF_ESR], 419=[CHROME, EDGE]}.
+     * Test {417=[FF, FF-ESR], 419=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4274,7 +4274,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {418=[FF, FF_ESR], 420=[CHROME, EDGE]}.
+     * Test {418=[FF, FF-ESR], 420=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4284,7 +4284,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {419=[FF, FF_ESR], 421=[CHROME, EDGE]}.
+     * Test {419=[FF, FF-ESR], 421=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4294,7 +4294,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {420=[FF, FF_ESR], 422=[CHROME, EDGE]}.
+     * Test {420=[FF, FF-ESR], 422=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4304,7 +4304,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {421=[FF, FF_ESR], 423=[CHROME, EDGE]}.
+     * Test {421=[FF, FF-ESR], 423=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4314,7 +4314,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {422=[FF, FF_ESR], 424=[CHROME, EDGE]}.
+     * Test {422=[FF, FF-ESR], 424=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4324,7 +4324,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {423=[FF, FF_ESR], 425=[CHROME, EDGE]}.
+     * Test {423=[FF, FF-ESR], 425=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4334,7 +4334,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {424=[FF, FF_ESR], 426=[CHROME, EDGE]}.
+     * Test {424=[FF, FF-ESR], 426=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4344,7 +4344,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {425=[FF, FF_ESR], 427=[CHROME, EDGE]}.
+     * Test {425=[FF, FF-ESR], 427=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4354,7 +4354,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {426=[FF, FF_ESR], 428=[CHROME, EDGE]}.
+     * Test {426=[FF, FF-ESR], 428=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4364,7 +4364,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {427=[FF, FF_ESR], 429=[CHROME, EDGE]}.
+     * Test {427=[FF, FF-ESR], 429=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4374,7 +4374,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {428=[FF, FF_ESR], 430=[CHROME, EDGE]}.
+     * Test {428=[FF, FF-ESR], 430=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4384,7 +4384,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {429=[FF, FF_ESR], 431=[CHROME, EDGE]}.
+     * Test {429=[FF, FF-ESR], 431=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4394,7 +4394,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {430=[FF, FF_ESR], 432=[CHROME, EDGE]}.
+     * Test {430=[FF, FF-ESR], 432=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4404,7 +4404,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {431=[FF, FF_ESR], 433=[CHROME, EDGE]}.
+     * Test {431=[FF, FF-ESR], 433=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4414,7 +4414,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {432=[FF, FF_ESR], 434=[CHROME, EDGE]}.
+     * Test {432=[FF, FF-ESR], 434=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4424,7 +4424,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {433=[FF, FF_ESR], 435=[CHROME, EDGE]}.
+     * Test {433=[FF, FF-ESR], 435=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4434,7 +4434,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {434=[FF, FF_ESR], 436=[CHROME, EDGE]}.
+     * Test {434=[FF, FF-ESR], 436=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4444,7 +4444,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {435=[FF, FF_ESR], 437=[CHROME, EDGE]}.
+     * Test {435=[FF, FF-ESR], 437=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4454,7 +4454,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {436=[FF, FF_ESR], 438=[CHROME, EDGE]}.
+     * Test {436=[FF, FF-ESR], 438=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4464,7 +4464,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {437=[FF, FF_ESR], 439=[CHROME, EDGE]}.
+     * Test {437=[FF, FF-ESR], 439=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4474,7 +4474,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {438=[FF, FF_ESR], 440=[CHROME, EDGE]}.
+     * Test {438=[FF, FF-ESR], 440=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4484,7 +4484,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {439=[FF, FF_ESR], 441=[CHROME, EDGE]}.
+     * Test {439=[FF, FF-ESR], 441=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4494,7 +4494,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {440=[FF, FF_ESR], 442=[CHROME, EDGE]}.
+     * Test {440=[FF, FF-ESR], 442=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4504,7 +4504,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {441=[FF, FF_ESR], 443=[CHROME, EDGE]}.
+     * Test {441=[FF, FF-ESR], 443=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4514,7 +4514,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {442=[FF, FF_ESR], 444=[CHROME, EDGE]}.
+     * Test {442=[FF, FF-ESR], 444=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4524,7 +4524,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {443=[FF, FF_ESR], 445=[CHROME, EDGE]}.
+     * Test {443=[FF, FF-ESR], 445=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4534,7 +4534,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {444=[FF, FF_ESR], 446=[CHROME, EDGE]}.
+     * Test {444=[FF, FF-ESR], 446=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4544,7 +4544,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {445=[FF, FF_ESR], 447=[CHROME, EDGE]}.
+     * Test {445=[FF, FF-ESR], 447=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4554,7 +4554,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {446=[FF, FF_ESR], 448=[CHROME, EDGE]}.
+     * Test {446=[FF, FF-ESR], 448=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4564,7 +4564,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {447=[FF, FF_ESR], 449=[CHROME, EDGE]}.
+     * Test {447=[FF, FF-ESR], 449=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4574,7 +4574,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {448=[FF, FF_ESR], 450=[CHROME, EDGE]}.
+     * Test {448=[FF, FF-ESR], 450=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4584,7 +4584,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {449=[FF, FF_ESR], 451=[CHROME, EDGE]}.
+     * Test {449=[FF, FF-ESR], 451=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4594,7 +4594,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {450=[FF, FF_ESR], 452=[CHROME, EDGE]}.
+     * Test {450=[FF, FF-ESR], 452=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4604,7 +4604,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {452=[FF, FF_ESR], 454=[CHROME, EDGE]}.
+     * Test {452=[FF, FF-ESR], 454=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4614,7 +4614,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {454=[FF, FF_ESR], 456=[CHROME, EDGE]}.
+     * Test {454=[FF, FF-ESR], 456=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4624,7 +4624,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {455=[FF, FF_ESR], 457=[CHROME, EDGE]}.
+     * Test {455=[FF, FF-ESR], 457=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4634,7 +4634,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {456=[FF, FF_ESR], 458=[CHROME, EDGE]}.
+     * Test {456=[FF, FF-ESR], 458=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4644,7 +4644,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {457=[FF, FF_ESR], 459=[CHROME, EDGE]}.
+     * Test {457=[FF, FF-ESR], 459=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4654,7 +4654,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {458=[FF, FF_ESR], 460=[CHROME, EDGE]}.
+     * Test {458=[FF, FF-ESR], 460=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4664,7 +4664,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {459=[FF, FF_ESR], 461=[CHROME, EDGE]}.
+     * Test {459=[FF, FF-ESR], 461=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4674,7 +4674,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {460=[FF, FF_ESR], 462=[CHROME, EDGE]}.
+     * Test {460=[FF, FF-ESR], 462=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4684,7 +4684,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {461=[FF, FF_ESR], 463=[CHROME, EDGE]}.
+     * Test {461=[FF, FF-ESR], 463=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4694,7 +4694,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {462=[FF, FF_ESR], 464=[CHROME, EDGE]}.
+     * Test {462=[FF, FF-ESR], 464=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4704,7 +4704,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {463=[FF, FF_ESR], 465=[CHROME, EDGE]}.
+     * Test {463=[FF, FF-ESR], 465=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4714,7 +4714,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {464=[FF, FF_ESR], 466=[CHROME, EDGE]}.
+     * Test {464=[FF, FF-ESR], 466=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4724,7 +4724,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {465=[FF, FF_ESR], 467=[CHROME, EDGE]}.
+     * Test {465=[FF, FF-ESR], 467=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4734,7 +4734,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {466=[FF, FF_ESR], 468=[CHROME, EDGE]}.
+     * Test {466=[FF, FF-ESR], 468=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4744,7 +4744,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {467=[FF, FF_ESR], 469=[CHROME, EDGE]}.
+     * Test {467=[FF, FF-ESR], 469=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4754,7 +4754,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {468=[FF, FF_ESR], 470=[CHROME, EDGE]}.
+     * Test {468=[FF, FF-ESR], 470=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4764,7 +4764,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {469=[FF, FF_ESR], 471=[CHROME, EDGE]}.
+     * Test {469=[FF, FF-ESR], 471=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4774,7 +4774,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {470=[FF, FF_ESR], 472=[CHROME, EDGE]}.
+     * Test {470=[FF, FF-ESR], 472=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4784,7 +4784,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {471=[FF, FF_ESR], 473=[CHROME, EDGE]}.
+     * Test {471=[FF, FF-ESR], 473=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4794,7 +4794,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {472=[FF, FF_ESR], 474=[CHROME, EDGE]}.
+     * Test {472=[FF, FF-ESR], 474=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4804,7 +4804,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {473=[FF, FF_ESR], 475=[CHROME, EDGE]}.
+     * Test {473=[FF, FF-ESR], 475=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4814,7 +4814,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {474=[FF, FF_ESR], 476=[CHROME, EDGE]}.
+     * Test {474=[FF, FF-ESR], 476=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4824,7 +4824,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {475=[FF, FF_ESR], 477=[CHROME, EDGE]}.
+     * Test {475=[FF, FF-ESR], 477=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4834,7 +4834,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {476=[FF, FF_ESR], 478=[CHROME, EDGE]}.
+     * Test {476=[FF, FF-ESR], 478=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4844,7 +4844,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {477=[FF, FF_ESR], 479=[CHROME, EDGE]}.
+     * Test {477=[FF, FF-ESR], 479=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4854,7 +4854,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {478=[FF, FF_ESR], 480=[CHROME, EDGE]}.
+     * Test {478=[FF, FF-ESR], 480=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4864,7 +4864,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {479=[FF, FF_ESR], 481=[CHROME, EDGE]}.
+     * Test {479=[FF, FF-ESR], 481=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4874,7 +4874,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {480=[FF, FF_ESR], 482=[CHROME, EDGE]}.
+     * Test {480=[FF, FF-ESR], 482=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4884,7 +4884,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {481=[FF, FF_ESR], 483=[CHROME, EDGE]}.
+     * Test {481=[FF, FF-ESR], 483=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4894,7 +4894,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {482=[FF, FF_ESR], 484=[CHROME, EDGE]}.
+     * Test {482=[FF, FF-ESR], 484=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4904,7 +4904,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {483=[FF, FF_ESR], 485=[CHROME, EDGE]}.
+     * Test {483=[FF, FF-ESR], 485=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4914,7 +4914,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {484=[FF, FF_ESR], 486=[CHROME, EDGE]}.
+     * Test {484=[FF, FF-ESR], 486=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4924,7 +4924,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {485=[FF, FF_ESR], 487=[CHROME, EDGE]}.
+     * Test {485=[FF, FF-ESR], 487=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4934,7 +4934,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {486=[FF, FF_ESR], 488=[CHROME, EDGE]}.
+     * Test {486=[FF, FF-ESR], 488=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4944,7 +4944,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {487=[FF, FF_ESR], 489=[CHROME, EDGE]}.
+     * Test {487=[FF, FF-ESR], 489=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4954,7 +4954,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {488=[FF, FF_ESR], 490=[CHROME, EDGE]}.
+     * Test {488=[FF, FF-ESR], 490=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4964,7 +4964,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {489=[FF, FF_ESR], 491=[CHROME, EDGE]}.
+     * Test {489=[FF, FF-ESR], 491=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4974,7 +4974,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {490=[FF, FF_ESR], 492=[CHROME, EDGE]}.
+     * Test {490=[FF, FF-ESR], 492=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4984,7 +4984,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {491=[FF, FF_ESR], 493=[CHROME, EDGE]}.
+     * Test {491=[FF, FF-ESR], 493=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4994,7 +4994,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {492=[FF, FF_ESR], 494=[CHROME, EDGE]}.
+     * Test {492=[FF, FF-ESR], 494=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5004,7 +5004,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {493=[FF, FF_ESR], 495=[CHROME, EDGE]}.
+     * Test {493=[FF, FF-ESR], 495=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5014,7 +5014,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {494=[FF, FF_ESR], 496=[CHROME, EDGE]}.
+     * Test {494=[FF, FF-ESR], 496=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5024,7 +5024,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {495=[FF, FF_ESR], 497=[CHROME, EDGE]}.
+     * Test {495=[FF, FF-ESR], 497=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5034,7 +5034,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {496=[FF, FF_ESR], 498=[CHROME, EDGE]}.
+     * Test {496=[FF, FF-ESR], 498=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5044,7 +5044,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {497=[FF, FF_ESR], 499=[CHROME, EDGE]}.
+     * Test {497=[FF, FF-ESR], 499=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5054,7 +5054,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {498=[FF, FF_ESR], 500=[CHROME, EDGE]}.
+     * Test {498=[FF, FF-ESR], 500=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5064,7 +5064,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {499=[FF, FF_ESR], 501=[CHROME, EDGE]}.
+     * Test {499=[FF, FF-ESR], 501=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5074,7 +5074,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {500=[FF, FF_ESR], 502=[CHROME, EDGE]}.
+     * Test {500=[FF, FF-ESR], 502=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5084,7 +5084,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {501=[FF, FF_ESR], 503=[CHROME, EDGE]}.
+     * Test {501=[FF, FF-ESR], 503=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5094,7 +5094,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {502=[FF, FF_ESR], 504=[CHROME, EDGE]}.
+     * Test {502=[FF, FF-ESR], 504=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5104,7 +5104,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {503=[FF, FF_ESR], 505=[CHROME, EDGE]}.
+     * Test {503=[FF, FF-ESR], 505=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5114,7 +5114,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {504=[FF, FF_ESR], 506=[CHROME, EDGE]}.
+     * Test {504=[FF, FF-ESR], 506=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5124,7 +5124,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {505=[FF, FF_ESR], 507=[CHROME, EDGE]}.
+     * Test {505=[FF, FF-ESR], 507=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5134,7 +5134,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {506=[FF, FF_ESR], 508=[CHROME, EDGE]}.
+     * Test {506=[FF, FF-ESR], 508=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5144,7 +5144,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {507=[FF, FF_ESR], 509=[CHROME, EDGE]}.
+     * Test {507=[FF, FF-ESR], 509=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5154,7 +5154,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {508=[FF, FF_ESR], 510=[CHROME, EDGE]}.
+     * Test {508=[FF, FF-ESR], 510=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5164,7 +5164,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {509=[FF, FF_ESR], 511=[CHROME, EDGE]}.
+     * Test {509=[FF, FF-ESR], 511=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5174,7 +5174,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {510=[FF, FF_ESR], 512=[CHROME, EDGE]}.
+     * Test {510=[FF, FF-ESR], 512=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5184,7 +5184,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {511=[FF, FF_ESR], 513=[CHROME, EDGE]}.
+     * Test {511=[FF, FF-ESR], 513=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5194,7 +5194,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {512=[FF, FF_ESR], 514=[CHROME, EDGE]}.
+     * Test {512=[FF, FF-ESR], 514=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5204,7 +5204,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {513=[FF, FF_ESR], 515=[CHROME, EDGE]}.
+     * Test {513=[FF, FF-ESR], 515=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5214,7 +5214,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {514=[FF, FF_ESR], 516=[CHROME, EDGE]}.
+     * Test {514=[FF, FF-ESR], 516=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5224,7 +5224,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {515=[FF, FF_ESR], 517=[CHROME, EDGE]}.
+     * Test {515=[FF, FF-ESR], 517=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5234,7 +5234,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {516=[FF, FF_ESR], 518=[CHROME, EDGE]}.
+     * Test {516=[FF, FF-ESR], 518=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5244,7 +5244,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {517=[FF, FF_ESR], 519=[CHROME, EDGE]}.
+     * Test {517=[FF, FF-ESR], 519=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5254,7 +5254,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {518=[FF, FF_ESR], 520=[CHROME, EDGE]}.
+     * Test {518=[FF, FF-ESR], 520=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5264,7 +5264,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {519=[FF, FF_ESR], 521=[CHROME, EDGE]}.
+     * Test {519=[FF, FF-ESR], 521=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5274,7 +5274,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {520=[FF, FF_ESR], 522=[CHROME, EDGE]}.
+     * Test {520=[FF, FF-ESR], 522=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5284,7 +5284,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {521=[FF, FF_ESR], 523=[CHROME, EDGE]}.
+     * Test {521=[FF, FF-ESR], 523=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5294,7 +5294,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {522=[FF, FF_ESR], 524=[CHROME, EDGE]}.
+     * Test {522=[FF, FF-ESR], 524=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5304,7 +5304,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {523=[FF, FF_ESR], 525=[CHROME, EDGE]}.
+     * Test {523=[FF, FF-ESR], 525=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5314,7 +5314,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {524=[FF, FF_ESR], 526=[CHROME, EDGE]}.
+     * Test {524=[FF, FF-ESR], 526=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5324,7 +5324,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {525=[FF, FF_ESR], 527=[CHROME, EDGE]}.
+     * Test {525=[FF, FF-ESR], 527=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5334,7 +5334,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {526=[FF, FF_ESR], 528=[CHROME, EDGE]}.
+     * Test {526=[FF, FF-ESR], 528=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5344,7 +5344,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {527=[FF, FF_ESR], 529=[CHROME, EDGE]}.
+     * Test {527=[FF, FF-ESR], 529=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5354,7 +5354,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {528=[FF, FF_ESR], 530=[CHROME, EDGE]}.
+     * Test {528=[FF, FF-ESR], 530=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5364,7 +5364,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {529=[FF, FF_ESR], 531=[CHROME, EDGE]}.
+     * Test {529=[FF, FF-ESR], 531=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5374,7 +5374,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {530=[FF, FF_ESR], 532=[CHROME, EDGE]}.
+     * Test {530=[FF, FF-ESR], 532=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5384,7 +5384,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {531=[FF, FF_ESR], 533=[CHROME, EDGE]}.
+     * Test {531=[FF, FF-ESR], 533=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5394,7 +5394,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {532=[FF, FF_ESR], 534=[CHROME, EDGE]}.
+     * Test {532=[FF, FF-ESR], 534=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5404,7 +5404,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {533=[FF, FF_ESR], 535=[CHROME, EDGE]}.
+     * Test {533=[FF, FF-ESR], 535=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5414,7 +5414,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {534=[FF, FF_ESR], 536=[CHROME, EDGE]}.
+     * Test {534=[FF, FF-ESR], 536=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5424,7 +5424,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {535=[FF, FF_ESR], 537=[CHROME, EDGE]}.
+     * Test {535=[FF, FF-ESR], 537=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5434,7 +5434,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {536=[FF, FF_ESR], 538=[CHROME, EDGE]}.
+     * Test {536=[FF, FF-ESR], 538=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5444,7 +5444,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {537=[FF, FF_ESR], 539=[CHROME, EDGE]}.
+     * Test {537=[FF, FF-ESR], 539=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5454,7 +5454,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {538=[FF, FF_ESR], 540=[CHROME, EDGE]}.
+     * Test {538=[FF, FF-ESR], 540=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5464,7 +5464,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {539=[FF, FF_ESR], 541=[CHROME, EDGE]}.
+     * Test {539=[FF, FF-ESR], 541=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5474,7 +5474,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {540=[FF, FF_ESR], 542=[CHROME, EDGE]}.
+     * Test {540=[FF, FF-ESR], 542=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5484,7 +5484,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {541=[FF, FF_ESR], 543=[CHROME, EDGE]}.
+     * Test {541=[FF, FF-ESR], 543=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5494,7 +5494,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {542=[FF, FF_ESR], 544=[CHROME, EDGE]}.
+     * Test {542=[FF, FF-ESR], 544=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5504,7 +5504,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {543=[FF, FF_ESR], 545=[CHROME, EDGE]}.
+     * Test {543=[FF, FF-ESR], 545=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5514,7 +5514,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {544=[FF, FF_ESR], 546=[CHROME, EDGE]}.
+     * Test {544=[FF, FF-ESR], 546=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5524,7 +5524,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {545=[FF, FF_ESR], 547=[CHROME, EDGE]}.
+     * Test {545=[FF, FF-ESR], 547=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5534,7 +5534,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {546=[FF, FF_ESR], 548=[CHROME, EDGE]}.
+     * Test {546=[FF, FF-ESR], 548=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5544,7 +5544,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {547=[FF, FF_ESR], 549=[CHROME, EDGE]}.
+     * Test {547=[FF, FF-ESR], 549=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5554,7 +5554,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {548=[FF, FF_ESR], 550=[CHROME, EDGE]}.
+     * Test {548=[FF, FF-ESR], 550=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5564,7 +5564,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {549=[FF, FF_ESR], 551=[CHROME, EDGE]}.
+     * Test {549=[FF, FF-ESR], 551=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5574,7 +5574,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {550=[FF, FF_ESR], 552=[CHROME, EDGE]}.
+     * Test {550=[FF, FF-ESR], 552=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5584,7 +5584,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {551=[FF, FF_ESR], 553=[CHROME, EDGE]}.
+     * Test {551=[FF, FF-ESR], 553=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5594,7 +5594,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {552=[FF, FF_ESR], 554=[CHROME, EDGE]}.
+     * Test {552=[FF, FF-ESR], 554=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5604,7 +5604,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {553=[FF, FF_ESR], 555=[CHROME, EDGE]}.
+     * Test {553=[FF, FF-ESR], 555=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5614,7 +5614,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {554=[FF, FF_ESR], 556=[CHROME, EDGE]}.
+     * Test {554=[FF, FF-ESR], 556=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5624,7 +5624,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {555=[FF, FF_ESR], 557=[CHROME, EDGE]}.
+     * Test {555=[FF, FF-ESR], 557=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5634,7 +5634,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {556=[FF, FF_ESR], 558=[CHROME, EDGE]}.
+     * Test {556=[FF, FF-ESR], 558=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5644,7 +5644,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {557=[FF, FF_ESR], 559=[CHROME, EDGE]}.
+     * Test {557=[FF, FF-ESR], 559=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5654,7 +5654,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {558=[FF, FF_ESR], 560=[CHROME, EDGE]}.
+     * Test {558=[FF, FF-ESR], 560=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5664,7 +5664,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {559=[FF, FF_ESR], 561=[CHROME, EDGE]}.
+     * Test {559=[FF, FF-ESR], 561=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5674,7 +5674,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {560=[FF, FF_ESR], 562=[CHROME, EDGE]}.
+     * Test {560=[FF, FF-ESR], 562=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5684,7 +5684,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {561=[FF, FF_ESR], 563=[CHROME, EDGE]}.
+     * Test {561=[FF, FF-ESR], 563=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5694,7 +5694,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {562=[FF, FF_ESR], 564=[CHROME, EDGE]}.
+     * Test {562=[FF, FF-ESR], 564=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5707,7 +5707,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {563=[FF, FF_ESR], 565=[CHROME, EDGE]}.
+     * Test {563=[FF, FF-ESR], 565=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5717,7 +5717,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {564=[FF, FF_ESR], 566=[CHROME, EDGE]}.
+     * Test {564=[FF, FF-ESR], 566=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5727,7 +5727,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {565=[FF, FF_ESR], 567=[CHROME, EDGE]}.
+     * Test {565=[FF, FF-ESR], 567=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5737,7 +5737,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {566=[FF, FF_ESR], 568=[CHROME, EDGE]}.
+     * Test {566=[FF, FF-ESR], 568=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5747,7 +5747,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {567=[FF, FF_ESR], 569=[CHROME, EDGE]}.
+     * Test {567=[FF, FF-ESR], 569=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5757,7 +5757,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {568=[FF, FF_ESR], 570=[CHROME, EDGE]}.
+     * Test {568=[FF, FF-ESR], 570=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5767,7 +5767,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {569=[FF, FF_ESR], 571=[CHROME, EDGE]}.
+     * Test {569=[FF, FF-ESR], 571=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5777,7 +5777,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {570=[FF, FF_ESR], 572=[CHROME, EDGE]}.
+     * Test {570=[FF, FF-ESR], 572=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5787,7 +5787,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {571=[FF, FF_ESR], 573=[CHROME, EDGE]}.
+     * Test {571=[FF, FF-ESR], 573=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5797,7 +5797,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {572=[FF, FF_ESR], 574=[CHROME, EDGE]}.
+     * Test {572=[FF, FF-ESR], 574=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5807,7 +5807,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {573=[FF, FF_ESR], 575=[CHROME, EDGE]}.
+     * Test {573=[FF, FF-ESR], 575=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5817,7 +5817,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {574=[FF, FF_ESR], 576=[CHROME, EDGE]}.
+     * Test {574=[FF, FF-ESR], 576=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5827,7 +5827,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {575=[FF, FF_ESR], 577=[CHROME, EDGE]}.
+     * Test {575=[FF, FF-ESR], 577=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5837,7 +5837,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {576=[FF, FF_ESR], 578=[CHROME, EDGE]}.
+     * Test {576=[FF, FF-ESR], 578=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5847,7 +5847,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {577=[FF, FF_ESR], 579=[CHROME, EDGE]}.
+     * Test {577=[FF, FF-ESR], 579=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5857,7 +5857,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {578=[FF, FF_ESR], 580=[CHROME, EDGE]}.
+     * Test {578=[FF, FF-ESR], 580=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5867,7 +5867,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {580=[FF, FF_ESR], 582=[CHROME, EDGE]}.
+     * Test {580=[FF, FF-ESR], 582=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5877,7 +5877,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {581=[FF, FF_ESR], 583=[CHROME, EDGE]}.
+     * Test {581=[FF, FF-ESR], 583=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5887,7 +5887,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {582=[FF, FF_ESR], 584=[CHROME, EDGE]}.
+     * Test {582=[FF, FF-ESR], 584=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5897,7 +5897,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {583=[FF, FF_ESR], 585=[CHROME, EDGE]}.
+     * Test {583=[FF, FF-ESR], 585=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5907,7 +5907,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {585=[FF, FF_ESR], 587=[CHROME, EDGE]}.
+     * Test {585=[FF, FF-ESR], 587=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5917,7 +5917,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {586=[FF, FF_ESR], 588=[CHROME, EDGE]}.
+     * Test {586=[FF, FF-ESR], 588=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5927,7 +5927,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {587=[FF, FF_ESR], 589=[CHROME, EDGE]}.
+     * Test {587=[FF, FF-ESR], 589=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5937,7 +5937,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {588=[FF, FF_ESR], 590=[CHROME, EDGE]}.
+     * Test {588=[FF, FF-ESR], 590=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5947,7 +5947,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {589=[FF, FF_ESR], 591=[CHROME, EDGE]}.
+     * Test {589=[FF, FF-ESR], 591=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5957,7 +5957,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {590=[FF, FF_ESR], 592=[CHROME, EDGE]}.
+     * Test {590=[FF, FF-ESR], 592=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5967,7 +5967,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {591=[FF, FF_ESR], 593=[CHROME, EDGE]}.
+     * Test {591=[FF, FF-ESR], 593=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5977,7 +5977,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {592=[FF, FF_ESR], 594=[CHROME, EDGE]}.
+     * Test {592=[FF, FF-ESR], 594=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5987,7 +5987,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {593=[FF, FF_ESR], 595=[CHROME, EDGE]}.
+     * Test {593=[FF, FF-ESR], 595=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5997,7 +5997,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {594=[FF, FF_ESR], 596=[CHROME, EDGE]}.
+     * Test {594=[FF, FF-ESR], 596=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6007,7 +6007,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {595=[FF, FF_ESR], 597=[CHROME, EDGE]}.
+     * Test {595=[FF, FF-ESR], 597=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6017,7 +6017,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {596=[FF, FF_ESR], 598=[CHROME, EDGE]}.
+     * Test {596=[FF, FF-ESR], 598=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6027,7 +6027,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {597=[FF, FF_ESR], 599=[CHROME, EDGE]}.
+     * Test {597=[FF, FF-ESR], 599=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6037,7 +6037,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {598=[FF, FF_ESR], 600=[CHROME, EDGE]}.
+     * Test {598=[FF, FF-ESR], 600=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6047,7 +6047,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {599=[FF, FF_ESR], 601=[CHROME, EDGE]}.
+     * Test {599=[FF, FF-ESR], 601=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6057,7 +6057,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {600=[FF, FF_ESR], 602=[CHROME, EDGE]}.
+     * Test {600=[FF, FF-ESR], 602=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6067,7 +6067,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {601=[FF, FF_ESR], 603=[CHROME, EDGE]}.
+     * Test {601=[FF, FF-ESR], 603=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6077,7 +6077,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {602=[FF, FF_ESR], 604=[CHROME, EDGE]}.
+     * Test {602=[FF, FF-ESR], 604=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6087,7 +6087,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {603=[FF, FF_ESR], 605=[CHROME, EDGE]}.
+     * Test {603=[FF, FF-ESR], 605=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6097,7 +6097,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {604=[FF, FF_ESR], 606=[CHROME, EDGE]}.
+     * Test {604=[FF, FF-ESR], 606=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6107,7 +6107,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {605=[FF, FF_ESR], 607=[CHROME, EDGE]}.
+     * Test {605=[FF, FF-ESR], 607=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6117,7 +6117,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {606=[FF, FF_ESR], 608=[CHROME, EDGE]}.
+     * Test {606=[FF, FF-ESR], 608=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6127,7 +6127,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {607=[FF, FF_ESR], 609=[CHROME, EDGE]}.
+     * Test {607=[FF, FF-ESR], 609=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6137,7 +6137,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {608=[FF, FF_ESR], 610=[CHROME, EDGE]}.
+     * Test {608=[FF, FF-ESR], 610=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6147,7 +6147,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {609=[FF, FF_ESR], 611=[CHROME, EDGE]}.
+     * Test {609=[FF, FF-ESR], 611=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6157,7 +6157,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {610=[FF, FF_ESR], 612=[CHROME, EDGE]}.
+     * Test {610=[FF, FF-ESR], 612=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6167,7 +6167,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {611=[FF, FF_ESR], 613=[CHROME, EDGE]}.
+     * Test {611=[FF, FF-ESR], 613=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6177,7 +6177,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {612=[FF, FF_ESR], 614=[CHROME, EDGE]}.
+     * Test {612=[FF, FF-ESR], 614=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6187,7 +6187,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {613=[FF, FF_ESR], 615=[CHROME, EDGE]}.
+     * Test {613=[FF, FF-ESR], 615=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6197,7 +6197,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {614=[FF, FF_ESR], 616=[CHROME, EDGE]}.
+     * Test {614=[FF, FF-ESR], 616=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6207,7 +6207,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {615=[FF, FF_ESR], 617=[CHROME, EDGE]}.
+     * Test {615=[FF, FF-ESR], 617=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6217,7 +6217,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {616=[FF, FF_ESR], 618=[CHROME, EDGE]}.
+     * Test {616=[FF, FF-ESR], 618=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6227,7 +6227,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {617=[FF, FF_ESR], 619=[CHROME, EDGE]}.
+     * Test {617=[FF, FF-ESR], 619=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6237,7 +6237,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {618=[FF, FF_ESR], 620=[CHROME, EDGE]}.
+     * Test {618=[FF, FF-ESR], 620=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6247,7 +6247,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {619=[FF, FF_ESR], 621=[CHROME, EDGE]}.
+     * Test {619=[FF, FF-ESR], 621=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6257,7 +6257,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {620=[FF, FF_ESR], 622=[CHROME, EDGE]}.
+     * Test {620=[FF, FF-ESR], 622=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6267,7 +6267,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {621=[FF, FF_ESR], 623=[CHROME, EDGE]}.
+     * Test {621=[FF, FF-ESR], 623=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6277,7 +6277,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {622=[FF, FF_ESR], 624=[CHROME, EDGE]}.
+     * Test {622=[FF, FF-ESR], 624=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6287,7 +6287,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {623=[FF, FF_ESR], 625=[CHROME, EDGE]}.
+     * Test {623=[FF, FF-ESR], 625=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6297,7 +6297,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {624=[FF, FF_ESR], 626=[CHROME, EDGE]}.
+     * Test {624=[FF, FF-ESR], 626=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6307,7 +6307,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {625=[FF, FF_ESR], 627=[CHROME, EDGE]}.
+     * Test {625=[FF, FF-ESR], 627=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6317,7 +6317,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {626=[FF, FF_ESR], 628=[CHROME, EDGE]}.
+     * Test {626=[FF, FF-ESR], 628=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6327,7 +6327,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {627=[FF, FF_ESR], 629=[CHROME, EDGE]}.
+     * Test {627=[FF, FF-ESR], 629=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6337,7 +6337,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {628=[FF, FF_ESR], 630=[CHROME, EDGE]}.
+     * Test {628=[FF, FF-ESR], 630=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6347,7 +6347,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {629=[FF, FF_ESR], 631=[CHROME, EDGE]}.
+     * Test {629=[FF, FF-ESR], 631=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6357,7 +6357,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {630=[FF, FF_ESR], 632=[CHROME, EDGE]}.
+     * Test {630=[FF, FF-ESR], 632=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6367,7 +6367,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {631=[FF, FF_ESR], 633=[CHROME, EDGE]}.
+     * Test {631=[FF, FF-ESR], 633=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6377,7 +6377,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {632=[FF, FF_ESR], 634=[CHROME, EDGE]}.
+     * Test {632=[FF, FF-ESR], 634=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6387,7 +6387,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {633=[FF, FF_ESR], 635=[CHROME, EDGE]}.
+     * Test {633=[FF, FF-ESR], 635=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6397,7 +6397,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {634=[FF, FF_ESR], 636=[CHROME, EDGE]}.
+     * Test {634=[FF, FF-ESR], 636=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6407,7 +6407,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {635=[FF, FF_ESR], 637=[CHROME, EDGE]}.
+     * Test {635=[FF, FF-ESR], 637=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6417,7 +6417,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {636=[FF, FF_ESR], 638=[CHROME, EDGE]}.
+     * Test {636=[FF, FF-ESR], 638=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6427,7 +6427,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {637=[FF, FF_ESR], 639=[CHROME, EDGE]}.
+     * Test {637=[FF, FF-ESR], 639=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6437,7 +6437,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {638=[FF, FF_ESR], 640=[CHROME, EDGE]}.
+     * Test {638=[FF, FF-ESR], 640=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6447,7 +6447,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {639=[FF, FF_ESR], 641=[CHROME, EDGE]}.
+     * Test {639=[FF, FF-ESR], 641=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6457,7 +6457,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {640=[FF, FF_ESR], 642=[CHROME, EDGE]}.
+     * Test {640=[FF, FF-ESR], 642=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6467,7 +6467,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {641=[FF, FF_ESR], 643=[CHROME, EDGE]}.
+     * Test {641=[FF, FF-ESR], 643=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6477,7 +6477,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {642=[FF, FF_ESR], 644=[CHROME, EDGE]}.
+     * Test {642=[FF, FF-ESR], 644=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6487,7 +6487,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {643=[FF, FF_ESR], 645=[CHROME, EDGE]}.
+     * Test {643=[FF, FF-ESR], 645=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6497,7 +6497,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {644=[FF, FF_ESR], 646=[CHROME, EDGE]}.
+     * Test {644=[FF, FF-ESR], 646=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6507,7 +6507,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {645=[FF, FF_ESR], 647=[CHROME, EDGE]}.
+     * Test {645=[FF, FF-ESR], 647=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6517,7 +6517,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {646=[FF, FF_ESR], 648=[CHROME, EDGE]}.
+     * Test {646=[FF, FF-ESR], 648=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6527,7 +6527,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {647=[FF, FF_ESR], 649=[CHROME, EDGE]}.
+     * Test {647=[FF, FF-ESR], 649=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6537,7 +6537,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {648=[FF, FF_ESR], 650=[CHROME, EDGE]}.
+     * Test {648=[FF, FF-ESR], 650=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6547,7 +6547,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {649=[FF, FF_ESR], 651=[CHROME, EDGE]}.
+     * Test {649=[FF, FF-ESR], 651=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6557,7 +6557,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {650=[FF, FF_ESR], 652=[CHROME, EDGE]}.
+     * Test {650=[FF, FF-ESR], 652=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6567,7 +6567,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {651=[FF, FF_ESR], 653=[CHROME, EDGE]}.
+     * Test {651=[FF, FF-ESR], 653=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6577,7 +6577,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {652=[FF, FF_ESR], 654=[CHROME, EDGE]}.
+     * Test {652=[FF, FF-ESR], 654=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6587,7 +6587,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {653=[FF, FF_ESR], 655=[CHROME, EDGE]}.
+     * Test {653=[FF, FF-ESR], 655=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6597,7 +6597,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {654=[FF, FF_ESR], 656=[CHROME, EDGE]}.
+     * Test {654=[FF, FF-ESR], 656=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6607,7 +6607,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {655=[FF, FF_ESR], 657=[CHROME, EDGE]}.
+     * Test {655=[FF, FF-ESR], 657=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6617,7 +6617,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {656=[FF, FF_ESR], 658=[CHROME, EDGE]}.
+     * Test {656=[FF, FF-ESR], 658=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6627,7 +6627,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {657=[FF, FF_ESR], 659=[CHROME, EDGE]}.
+     * Test {657=[FF, FF-ESR], 659=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6637,7 +6637,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {658=[FF, FF_ESR], 660=[CHROME, EDGE]}.
+     * Test {658=[FF, FF-ESR], 660=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6647,7 +6647,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {659=[FF, FF_ESR], 661=[CHROME, EDGE]}.
+     * Test {659=[FF, FF-ESR], 661=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6657,7 +6657,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {660=[FF, FF_ESR], 662=[CHROME, EDGE]}.
+     * Test {660=[FF, FF-ESR], 662=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6667,7 +6667,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {661=[FF, FF_ESR], 663=[CHROME, EDGE]}.
+     * Test {661=[FF, FF-ESR], 663=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6677,7 +6677,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {662=[FF, FF_ESR], 664=[CHROME, EDGE]}.
+     * Test {662=[FF, FF-ESR], 664=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6687,7 +6687,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {663=[FF, FF_ESR], 665=[CHROME, EDGE]}.
+     * Test {663=[FF, FF-ESR], 665=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6697,7 +6697,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {664=[FF, FF_ESR], 666=[CHROME, EDGE]}.
+     * Test {664=[FF, FF-ESR], 666=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6707,7 +6707,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {665=[FF, FF_ESR], 667=[CHROME, EDGE]}.
+     * Test {665=[FF, FF-ESR], 667=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6717,7 +6717,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {666=[FF, FF_ESR], 668=[CHROME, EDGE]}.
+     * Test {666=[FF, FF-ESR], 668=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6730,7 +6730,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {667=[FF, FF_ESR], 669=[CHROME, EDGE]}.
+     * Test {667=[FF, FF-ESR], 669=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6740,7 +6740,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {668=[FF, FF_ESR], 670=[CHROME, EDGE]}.
+     * Test {668=[FF, FF-ESR], 670=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6750,7 +6750,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {670=[FF, FF_ESR], 672=[CHROME, EDGE]}.
+     * Test {670=[FF, FF-ESR], 672=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6760,7 +6760,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {671=[FF, FF_ESR], 673=[CHROME, EDGE]}.
+     * Test {671=[FF, FF-ESR], 673=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6770,7 +6770,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {672=[FF, FF_ESR], 674=[CHROME, EDGE]}.
+     * Test {672=[FF, FF-ESR], 674=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6780,7 +6780,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {673=[FF, FF_ESR], 675=[CHROME, EDGE]}.
+     * Test {673=[FF, FF-ESR], 675=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6790,7 +6790,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {674=[FF, FF_ESR], 676=[CHROME, EDGE]}.
+     * Test {674=[FF, FF-ESR], 676=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6800,7 +6800,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {675=[FF, FF_ESR], 677=[CHROME, EDGE]}.
+     * Test {675=[FF, FF-ESR], 677=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6810,7 +6810,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {676=[FF, FF_ESR], 678=[CHROME, EDGE]}.
+     * Test {676=[FF, FF-ESR], 678=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6820,7 +6820,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {677=[FF, FF_ESR], 679=[CHROME, EDGE]}.
+     * Test {677=[FF, FF-ESR], 679=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6830,7 +6830,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {678=[FF, FF_ESR], 680=[CHROME, EDGE]}.
+     * Test {678=[FF, FF-ESR], 680=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6840,7 +6840,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {679=[FF, FF_ESR], 681=[CHROME, EDGE]}.
+     * Test {679=[FF, FF-ESR], 681=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6850,7 +6850,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {680=[FF, FF_ESR], 682=[CHROME, EDGE]}.
+     * Test {680=[FF, FF-ESR], 682=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6860,7 +6860,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {681=[FF, FF_ESR], 683=[CHROME, EDGE]}.
+     * Test {681=[FF, FF-ESR], 683=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6870,7 +6870,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {682=[FF, FF_ESR], 684=[CHROME, EDGE]}.
+     * Test {682=[FF, FF-ESR], 684=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6880,7 +6880,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {683=[FF, FF_ESR], 685=[CHROME, EDGE]}.
+     * Test {683=[FF, FF-ESR], 685=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6890,7 +6890,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {684=[FF, FF_ESR], 686=[CHROME, EDGE]}.
+     * Test {684=[FF, FF-ESR], 686=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6900,7 +6900,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {685=[FF, FF_ESR], 687=[CHROME, EDGE]}.
+     * Test {685=[FF, FF-ESR], 687=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6910,7 +6910,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {686=[FF, FF_ESR], 688=[CHROME, EDGE]}.
+     * Test {686=[FF, FF-ESR], 688=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6920,7 +6920,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {687=[FF, FF_ESR], 689=[CHROME, EDGE]}.
+     * Test {687=[FF, FF-ESR], 689=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6930,7 +6930,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {688=[FF, FF_ESR], 690=[CHROME, EDGE]}.
+     * Test {688=[FF, FF-ESR], 690=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6940,7 +6940,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {689=[FF, FF_ESR], 691=[CHROME, EDGE]}.
+     * Test {689=[FF, FF-ESR], 691=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6950,7 +6950,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {690=[FF, FF_ESR], 692=[CHROME, EDGE]}.
+     * Test {690=[FF, FF-ESR], 692=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6960,7 +6960,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {691=[FF, FF_ESR], 693=[CHROME, EDGE]}.
+     * Test {691=[FF, FF-ESR], 693=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6970,7 +6970,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {692=[FF, FF_ESR], 694=[CHROME, EDGE]}.
+     * Test {692=[FF, FF-ESR], 694=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6980,7 +6980,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {693=[FF, FF_ESR], 695=[CHROME, EDGE]}.
+     * Test {693=[FF, FF-ESR], 695=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6990,7 +6990,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {694=[FF, FF_ESR], 696=[CHROME, EDGE]}.
+     * Test {694=[FF, FF-ESR], 696=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7000,7 +7000,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {695=[FF, FF_ESR], 697=[CHROME, EDGE]}.
+     * Test {695=[FF, FF-ESR], 697=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7010,7 +7010,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {696=[FF, FF_ESR], 698=[CHROME, EDGE]}.
+     * Test {696=[FF, FF-ESR], 698=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7020,7 +7020,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {697=[FF, FF_ESR], 699=[CHROME, EDGE]}.
+     * Test {697=[FF, FF-ESR], 699=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7030,7 +7030,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {698=[FF, FF_ESR], 700=[CHROME, EDGE]}.
+     * Test {698=[FF, FF-ESR], 700=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7040,7 +7040,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {699=[FF, FF_ESR], 701=[CHROME, EDGE]}.
+     * Test {699=[FF, FF-ESR], 701=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7050,7 +7050,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {700=[FF, FF_ESR], 702=[CHROME, EDGE]}.
+     * Test {700=[FF, FF-ESR], 702=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7060,7 +7060,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {701=[FF, FF_ESR], 703=[CHROME, EDGE]}.
+     * Test {701=[FF, FF-ESR], 703=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7070,7 +7070,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {702=[FF, FF_ESR], 704=[CHROME, EDGE]}.
+     * Test {702=[FF, FF-ESR], 704=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7080,7 +7080,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {703=[FF, FF_ESR], 705=[CHROME, EDGE]}.
+     * Test {703=[FF, FF-ESR], 705=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7090,7 +7090,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {704=[FF, FF_ESR], 706=[CHROME, EDGE]}.
+     * Test {704=[FF, FF-ESR], 706=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7100,7 +7100,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {705=[FF, FF_ESR], 707=[CHROME, EDGE]}.
+     * Test {705=[FF, FF-ESR], 707=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7110,7 +7110,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {706=[FF, FF_ESR], 708=[CHROME, EDGE]}.
+     * Test {706=[FF, FF-ESR], 708=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7120,7 +7120,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {707=[FF, FF_ESR], 709=[CHROME, EDGE]}.
+     * Test {707=[FF, FF-ESR], 709=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7130,7 +7130,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {708=[FF, FF_ESR], 710=[CHROME, EDGE]}.
+     * Test {708=[FF, FF-ESR], 710=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7140,7 +7140,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {709=[FF, FF_ESR], 711=[CHROME, EDGE]}.
+     * Test {709=[FF, FF-ESR], 711=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7150,7 +7150,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {710=[FF, FF_ESR], 712=[CHROME, EDGE]}.
+     * Test {710=[FF, FF-ESR], 712=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7160,7 +7160,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {711=[FF, FF_ESR], 713=[CHROME, EDGE]}.
+     * Test {711=[FF, FF-ESR], 713=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7170,7 +7170,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {712=[FF, FF_ESR], 714=[CHROME, EDGE]}.
+     * Test {712=[FF, FF-ESR], 714=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7180,7 +7180,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {713=[FF, FF_ESR], 715=[CHROME, EDGE]}.
+     * Test {713=[FF, FF-ESR], 715=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7190,7 +7190,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {714=[FF, FF_ESR], 716=[CHROME, EDGE]}.
+     * Test {714=[FF, FF-ESR], 716=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7200,7 +7200,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {715=[FF, FF_ESR], 717=[CHROME, EDGE]}.
+     * Test {715=[FF, FF-ESR], 717=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7210,7 +7210,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {716=[FF, FF_ESR], 718=[CHROME, EDGE]}.
+     * Test {716=[FF, FF-ESR], 718=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7220,7 +7220,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {717=[FF, FF_ESR], 719=[CHROME, EDGE]}.
+     * Test {717=[FF, FF-ESR], 719=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7230,7 +7230,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {718=[FF, FF_ESR], 720=[CHROME, EDGE]}.
+     * Test {718=[FF, FF-ESR], 720=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7240,7 +7240,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {719=[FF, FF_ESR], 721=[CHROME, EDGE]}.
+     * Test {719=[FF, FF-ESR], 721=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7250,7 +7250,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {720=[FF, FF_ESR], 722=[CHROME, EDGE]}.
+     * Test {720=[FF, FF-ESR], 722=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7260,7 +7260,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {721=[FF, FF_ESR], 723=[CHROME, EDGE]}.
+     * Test {721=[FF, FF-ESR], 723=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7270,7 +7270,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {722=[FF, FF_ESR], 724=[CHROME, EDGE]}.
+     * Test {722=[FF, FF-ESR], 724=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7280,7 +7280,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {723=[FF, FF_ESR], 725=[CHROME, EDGE]}.
+     * Test {723=[FF, FF-ESR], 725=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7290,7 +7290,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {724=[FF, FF_ESR], 726=[CHROME, EDGE]}.
+     * Test {724=[FF, FF-ESR], 726=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7300,7 +7300,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {725=[FF, FF_ESR], 727=[CHROME, EDGE]}.
+     * Test {725=[FF, FF-ESR], 727=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7310,7 +7310,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {726=[FF, FF_ESR], 728=[CHROME, EDGE]}.
+     * Test {726=[FF, FF-ESR], 728=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7320,7 +7320,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {727=[FF, FF_ESR], 729=[CHROME, EDGE]}.
+     * Test {727=[FF, FF-ESR], 729=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7330,7 +7330,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {728=[FF, FF_ESR], 730=[CHROME, EDGE]}.
+     * Test {728=[FF, FF-ESR], 730=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7340,7 +7340,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {729=[FF, FF_ESR], 731=[CHROME, EDGE]}.
+     * Test {729=[FF, FF-ESR], 731=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7350,7 +7350,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {730=[FF, FF_ESR], 732=[CHROME, EDGE]}.
+     * Test {730=[FF, FF-ESR], 732=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7360,7 +7360,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {731=[FF, FF_ESR], 733=[CHROME, EDGE]}.
+     * Test {731=[FF, FF-ESR], 733=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7370,7 +7370,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {732=[FF, FF_ESR], 734=[CHROME, EDGE]}.
+     * Test {732=[FF, FF-ESR], 734=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7380,7 +7380,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {733=[FF, FF_ESR], 735=[CHROME, EDGE]}.
+     * Test {733=[FF, FF-ESR], 735=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7390,7 +7390,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {734=[FF, FF_ESR], 736=[CHROME, EDGE]}.
+     * Test {734=[FF, FF-ESR], 736=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7400,7 +7400,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {735=[FF, FF_ESR], 737=[CHROME, EDGE]}.
+     * Test {735=[FF, FF-ESR], 737=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7410,7 +7410,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {736=[FF, FF_ESR], 738=[CHROME, EDGE]}.
+     * Test {736=[FF, FF-ESR], 738=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7420,7 +7420,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {737=[FF, FF_ESR], 739=[CHROME, EDGE]}.
+     * Test {737=[FF, FF-ESR], 739=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7430,7 +7430,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {738=[FF, FF_ESR], 740=[CHROME, EDGE]}.
+     * Test {738=[FF, FF-ESR], 740=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7440,7 +7440,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {739=[FF, FF_ESR], 741=[CHROME, EDGE]}.
+     * Test {739=[FF, FF-ESR], 741=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7450,7 +7450,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {740=[FF, FF_ESR], 742=[CHROME, EDGE]}.
+     * Test {740=[FF, FF-ESR], 742=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7460,7 +7460,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {741=[FF, FF_ESR], 743=[CHROME, EDGE]}.
+     * Test {741=[FF, FF-ESR], 743=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7470,7 +7470,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {742=[FF, FF_ESR], 744=[CHROME, EDGE]}.
+     * Test {742=[FF, FF-ESR], 744=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7480,7 +7480,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {743=[FF, FF_ESR], 745=[CHROME, EDGE]}.
+     * Test {743=[FF, FF-ESR], 745=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7490,7 +7490,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {744=[FF, FF_ESR], 746=[CHROME, EDGE]}.
+     * Test {744=[FF, FF-ESR], 746=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7500,7 +7500,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {745=[FF, FF_ESR], 747=[CHROME, EDGE]}.
+     * Test {745=[FF, FF-ESR], 747=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7510,7 +7510,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {746=[FF, FF_ESR], 748=[CHROME, EDGE]}.
+     * Test {746=[FF, FF-ESR], 748=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7520,7 +7520,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {747=[FF, FF_ESR], 749=[CHROME, EDGE]}.
+     * Test {747=[FF, FF-ESR], 749=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7530,7 +7530,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {748=[FF, FF_ESR], 750=[CHROME, EDGE]}.
+     * Test {748=[FF, FF-ESR], 750=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7540,7 +7540,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {749=[FF, FF_ESR], 751=[CHROME, EDGE]}.
+     * Test {749=[FF, FF-ESR], 751=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7550,7 +7550,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {750=[FF, FF_ESR], 752=[CHROME, EDGE]}.
+     * Test {750=[FF, FF-ESR], 752=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7560,7 +7560,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {751=[FF, FF_ESR], 753=[CHROME, EDGE]}.
+     * Test {751=[FF, FF-ESR], 753=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7570,7 +7570,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {752=[FF, FF_ESR], 754=[CHROME, EDGE]}.
+     * Test {752=[FF, FF-ESR], 754=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7580,7 +7580,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {753=[FF, FF_ESR], 755=[CHROME, EDGE]}.
+     * Test {753=[FF, FF-ESR], 755=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7590,7 +7590,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {754=[FF, FF_ESR], 756=[CHROME, EDGE]}.
+     * Test {754=[FF, FF-ESR], 756=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7600,7 +7600,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {755=[FF, FF_ESR], 757=[CHROME, EDGE]}.
+     * Test {755=[FF, FF-ESR], 757=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7610,7 +7610,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {756=[FF, FF_ESR], 758=[CHROME, EDGE]}.
+     * Test {756=[FF, FF-ESR], 758=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7620,7 +7620,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {757=[FF, FF_ESR], 759=[CHROME, EDGE]}.
+     * Test {757=[FF, FF-ESR], 759=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7630,7 +7630,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {758=[FF, FF_ESR], 760=[CHROME, EDGE]}.
+     * Test {758=[FF, FF-ESR], 760=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7640,7 +7640,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {759=[FF, FF_ESR], 761=[CHROME, EDGE]}.
+     * Test {759=[FF, FF-ESR], 761=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7650,7 +7650,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {760=[FF, FF_ESR], 762=[CHROME, EDGE]}.
+     * Test {760=[FF, FF-ESR], 762=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7660,7 +7660,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {761=[FF, FF_ESR], 763=[CHROME, EDGE]}.
+     * Test {761=[FF, FF-ESR], 763=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7670,7 +7670,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {762=[FF, FF_ESR], 764=[CHROME, EDGE]}.
+     * Test {762=[FF, FF-ESR], 764=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7680,7 +7680,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {763=[FF, FF_ESR], 765=[CHROME, EDGE]}.
+     * Test {763=[FF, FF-ESR], 765=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7690,7 +7690,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {764=[FF, FF_ESR], 766=[CHROME, EDGE]}.
+     * Test {764=[FF, FF-ESR], 766=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7700,7 +7700,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {765=[FF, FF_ESR], 767=[CHROME, EDGE]}.
+     * Test {765=[FF, FF-ESR], 767=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7710,7 +7710,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {766=[FF, FF_ESR], 768=[CHROME, EDGE]}.
+     * Test {766=[FF, FF-ESR], 768=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7720,7 +7720,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {767=[FF, FF_ESR], 769=[CHROME, EDGE]}.
+     * Test {767=[FF, FF-ESR], 769=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7730,7 +7730,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {768=[FF, FF_ESR], 770=[CHROME, EDGE]}.
+     * Test {768=[FF, FF-ESR], 770=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7740,7 +7740,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {769=[FF, FF_ESR], 771=[CHROME, EDGE]}.
+     * Test {769=[FF, FF-ESR], 771=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7750,7 +7750,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {770=[FF, FF_ESR], 772=[CHROME, EDGE]}.
+     * Test {770=[FF, FF-ESR], 772=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7760,7 +7760,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {771=[FF, FF_ESR], 773=[CHROME, EDGE]}.
+     * Test {771=[FF, FF-ESR], 773=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7770,7 +7770,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {772=[FF, FF_ESR], 774=[CHROME, EDGE]}.
+     * Test {772=[FF, FF-ESR], 774=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7780,7 +7780,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {773=[FF, FF_ESR], 775=[CHROME, EDGE]}.
+     * Test {773=[FF, FF-ESR], 775=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7790,7 +7790,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {774=[FF, FF_ESR], 776=[CHROME, EDGE]}.
+     * Test {774=[FF, FF-ESR], 776=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7800,7 +7800,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {775=[FF, FF_ESR], 777=[CHROME, EDGE]}.
+     * Test {775=[FF, FF-ESR], 777=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7810,7 +7810,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {776=[FF, FF_ESR], 778=[CHROME, EDGE]}.
+     * Test {776=[FF, FF-ESR], 778=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7820,7 +7820,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {777=[FF, FF_ESR], 779=[CHROME, EDGE]}.
+     * Test {777=[FF, FF-ESR], 779=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7830,7 +7830,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {778=[FF, FF_ESR], 780=[CHROME, EDGE]}.
+     * Test {778=[FF, FF-ESR], 780=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7840,7 +7840,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {779=[FF, FF_ESR], 781=[CHROME, EDGE]}.
+     * Test {779=[FF, FF-ESR], 781=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7850,7 +7850,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {780=[FF, FF_ESR], 782=[CHROME, EDGE]}.
+     * Test {780=[FF, FF-ESR], 782=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7860,7 +7860,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {781=[FF, FF_ESR], 783=[CHROME, EDGE]}.
+     * Test {781=[FF, FF-ESR], 783=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7870,7 +7870,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {782=[FF, FF_ESR], 784=[CHROME, EDGE]}.
+     * Test {782=[FF, FF-ESR], 784=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7880,7 +7880,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {783=[FF, FF_ESR], 785=[CHROME, EDGE]}.
+     * Test {783=[FF, FF-ESR], 785=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7890,7 +7890,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {784=[FF, FF_ESR], 786=[CHROME, EDGE]}.
+     * Test {784=[FF, FF-ESR], 786=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7900,7 +7900,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {785=[FF, FF_ESR], 787=[CHROME, EDGE]}.
+     * Test {785=[FF, FF-ESR], 787=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7910,7 +7910,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {786=[FF, FF_ESR], 788=[CHROME, EDGE]}.
+     * Test {786=[FF, FF-ESR], 788=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7920,7 +7920,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {787=[FF, FF_ESR], 789=[CHROME, EDGE]}.
+     * Test {787=[FF, FF-ESR], 789=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7930,7 +7930,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {788=[FF, FF_ESR], 790=[CHROME, EDGE]}.
+     * Test {788=[FF, FF-ESR], 790=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7940,7 +7940,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {789=[FF, FF_ESR], 791=[CHROME, EDGE]}.
+     * Test {789=[FF, FF-ESR], 791=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7950,7 +7950,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {790=[FF, FF_ESR], 792=[CHROME, EDGE]}.
+     * Test {790=[FF, FF-ESR], 792=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7960,7 +7960,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {791=[FF, FF_ESR], 793=[CHROME, EDGE]}.
+     * Test {791=[FF, FF-ESR], 793=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7970,7 +7970,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {792=[FF, FF_ESR], 794=[CHROME, EDGE]}.
+     * Test {792=[FF, FF-ESR], 794=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7980,7 +7980,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {793=[FF, FF_ESR], 795=[CHROME, EDGE]}.
+     * Test {793=[FF, FF-ESR], 795=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7990,7 +7990,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {794=[FF, FF_ESR], 796=[CHROME, EDGE]}.
+     * Test {794=[FF, FF-ESR], 796=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8000,7 +8000,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {795=[FF, FF_ESR], 797=[CHROME, EDGE]}.
+     * Test {795=[FF, FF-ESR], 797=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8010,7 +8010,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {796=[FF, FF_ESR], 798=[CHROME, EDGE]}.
+     * Test {796=[FF, FF-ESR], 798=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8020,7 +8020,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {797=[FF, FF_ESR], 799=[CHROME, EDGE]}.
+     * Test {797=[FF, FF-ESR], 799=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8030,7 +8030,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {798=[FF, FF_ESR], 800=[CHROME, EDGE]}.
+     * Test {798=[FF, FF-ESR], 800=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8040,7 +8040,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {799=[FF, FF_ESR], 801=[CHROME, EDGE]}.
+     * Test {799=[FF, FF-ESR], 801=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8050,7 +8050,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {800=[FF, FF_ESR], 802=[CHROME, EDGE]}.
+     * Test {800=[FF, FF-ESR], 802=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8060,7 +8060,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {801=[FF, FF_ESR], 803=[CHROME, EDGE]}.
+     * Test {801=[FF, FF-ESR], 803=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8070,7 +8070,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {802=[FF, FF_ESR], 804=[CHROME, EDGE]}.
+     * Test {802=[FF, FF-ESR], 804=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8080,7 +8080,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {803=[FF, FF_ESR], 805=[CHROME, EDGE]}.
+     * Test {803=[FF, FF-ESR], 805=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8090,7 +8090,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {804=[FF, FF_ESR], 806=[CHROME, EDGE]}.
+     * Test {804=[FF, FF-ESR], 806=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8100,7 +8100,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {805=[FF, FF_ESR], 807=[CHROME, EDGE]}.
+     * Test {805=[FF, FF-ESR], 807=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8110,7 +8110,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {806=[FF, FF_ESR], 808=[CHROME, EDGE]}.
+     * Test {806=[FF, FF-ESR], 808=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8120,7 +8120,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {807=[FF, FF_ESR], 809=[CHROME, EDGE]}.
+     * Test {807=[FF, FF-ESR], 809=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8130,7 +8130,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {808=[FF, FF_ESR], 810=[CHROME, EDGE]}.
+     * Test {808=[FF, FF-ESR], 810=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8140,7 +8140,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {809=[FF, FF_ESR], 811=[CHROME, EDGE]}.
+     * Test {809=[FF, FF-ESR], 811=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8150,7 +8150,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {810=[FF, FF_ESR], 812=[CHROME, EDGE]}.
+     * Test {810=[FF, FF-ESR], 812=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8160,7 +8160,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {811=[FF, FF_ESR], 813=[CHROME, EDGE]}.
+     * Test {811=[FF, FF-ESR], 813=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8170,7 +8170,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {812=[FF, FF_ESR], 814=[CHROME, EDGE]}.
+     * Test {812=[FF, FF-ESR], 814=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8180,7 +8180,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {813=[FF, FF_ESR], 815=[CHROME, EDGE]}.
+     * Test {813=[FF, FF-ESR], 815=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8190,7 +8190,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {814=[FF, FF_ESR], 816=[CHROME, EDGE]}.
+     * Test {814=[FF, FF-ESR], 816=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8200,7 +8200,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {815=[FF, FF_ESR], 817=[CHROME, EDGE]}.
+     * Test {815=[FF, FF-ESR], 817=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8210,7 +8210,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {816=[FF, FF_ESR], 818=[CHROME, EDGE]}.
+     * Test {816=[FF, FF-ESR], 818=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8220,7 +8220,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {817=[FF, FF_ESR], 819=[CHROME, EDGE]}.
+     * Test {817=[FF, FF-ESR], 819=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8230,7 +8230,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {818=[FF, FF_ESR], 820=[CHROME, EDGE]}.
+     * Test {818=[FF, FF-ESR], 820=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8240,7 +8240,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {819=[FF, FF_ESR], 821=[CHROME, EDGE]}.
+     * Test {819=[FF, FF-ESR], 821=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8250,7 +8250,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {820=[FF, FF_ESR], 822=[CHROME, EDGE]}.
+     * Test {820=[FF, FF-ESR], 822=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8260,7 +8260,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {821=[FF, FF_ESR], 823=[CHROME, EDGE]}.
+     * Test {821=[FF, FF-ESR], 823=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8270,7 +8270,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {822=[FF, FF_ESR], 824=[CHROME, EDGE]}.
+     * Test {822=[FF, FF-ESR], 824=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8280,7 +8280,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {823=[FF, FF_ESR], 825=[CHROME, EDGE]}.
+     * Test {823=[FF, FF-ESR], 825=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8290,7 +8290,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {824=[FF, FF_ESR], 826=[CHROME, EDGE]}.
+     * Test {824=[FF, FF-ESR], 826=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8300,7 +8300,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {825=[FF, FF_ESR], 827=[CHROME, EDGE]}.
+     * Test {825=[FF, FF-ESR], 827=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8310,7 +8310,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {826=[FF, FF_ESR], 828=[CHROME, EDGE]}.
+     * Test {826=[FF, FF-ESR], 828=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8320,7 +8320,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {827=[FF, FF_ESR], 829=[CHROME, EDGE]}.
+     * Test {827=[FF, FF-ESR], 829=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8330,7 +8330,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {828=[FF, FF_ESR], 830=[CHROME, EDGE]}.
+     * Test {828=[FF, FF-ESR], 830=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8340,7 +8340,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {830=[FF, FF_ESR], 832=[CHROME, EDGE]}.
+     * Test {830=[FF, FF-ESR], 832=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8350,7 +8350,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {831=[FF, FF_ESR], 833=[CHROME, EDGE]}.
+     * Test {831=[FF, FF-ESR], 833=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8360,7 +8360,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {832=[FF, FF_ESR], 834=[CHROME, EDGE]}.
+     * Test {832=[FF, FF-ESR], 834=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8370,7 +8370,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {833=[FF, FF_ESR], 835=[CHROME, EDGE]}.
+     * Test {833=[FF, FF-ESR], 835=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8380,7 +8380,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {834=[FF, FF_ESR], 836=[CHROME, EDGE]}.
+     * Test {834=[FF, FF-ESR], 836=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8390,7 +8390,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {835=[FF, FF_ESR], 837=[CHROME, EDGE]}.
+     * Test {835=[FF, FF-ESR], 837=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8403,7 +8403,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {836=[FF, FF_ESR], 838=[CHROME, EDGE]}.
+     * Test {836=[FF, FF-ESR], 838=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8413,7 +8413,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {837=[FF, FF_ESR], 839=[CHROME, EDGE]}.
+     * Test {837=[FF, FF-ESR], 839=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8423,7 +8423,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {838=[FF, FF_ESR], 840=[CHROME, EDGE]}.
+     * Test {838=[FF, FF-ESR], 840=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8433,7 +8433,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {839=[FF, FF_ESR], 841=[CHROME, EDGE]}.
+     * Test {839=[FF, FF-ESR], 841=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8443,7 +8443,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {840=[FF, FF_ESR], 842=[CHROME, EDGE]}.
+     * Test {840=[FF, FF-ESR], 842=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8453,7 +8453,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {841=[FF, FF_ESR], 843=[CHROME, EDGE]}.
+     * Test {841=[FF, FF-ESR], 843=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8463,7 +8463,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {842=[FF, FF_ESR], 844=[CHROME, EDGE]}.
+     * Test {842=[FF, FF-ESR], 844=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8473,7 +8473,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {843=[FF, FF_ESR], 845=[CHROME, EDGE]}.
+     * Test {843=[FF, FF-ESR], 845=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8483,7 +8483,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {844=[FF, FF_ESR], 846=[CHROME, EDGE]}.
+     * Test {844=[FF, FF-ESR], 846=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8493,7 +8493,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {845=[FF, FF_ESR], 847=[CHROME, EDGE]}.
+     * Test {845=[FF, FF-ESR], 847=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8503,7 +8503,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {846=[FF, FF_ESR], 848=[CHROME, EDGE]}.
+     * Test {846=[FF, FF-ESR], 848=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8513,7 +8513,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {847=[FF, FF_ESR], 849=[CHROME, EDGE]}.
+     * Test {847=[FF, FF-ESR], 849=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8523,7 +8523,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {848=[FF, FF_ESR], 850=[CHROME, EDGE]}.
+     * Test {848=[FF, FF-ESR], 850=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8533,7 +8533,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {849=[FF, FF_ESR], 851=[CHROME, EDGE]}.
+     * Test {849=[FF, FF-ESR], 851=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8543,7 +8543,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {850=[FF, FF_ESR], 852=[CHROME, EDGE]}.
+     * Test {850=[FF, FF-ESR], 852=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8553,7 +8553,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {851=[FF, FF_ESR], 853=[CHROME, EDGE]}.
+     * Test {851=[FF, FF-ESR], 853=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8563,7 +8563,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {852=[FF, FF_ESR], 854=[CHROME, EDGE]}.
+     * Test {852=[FF, FF-ESR], 854=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8573,7 +8573,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {853=[FF, FF_ESR], 855=[CHROME, EDGE]}.
+     * Test {853=[FF, FF-ESR], 855=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8583,7 +8583,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {854=[FF, FF_ESR], 856=[CHROME, EDGE]}.
+     * Test {854=[FF, FF-ESR], 856=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8593,7 +8593,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {855=[FF, FF_ESR], 857=[CHROME, EDGE]}.
+     * Test {855=[FF, FF-ESR], 857=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8603,7 +8603,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {856=[FF, FF_ESR], 858=[CHROME, EDGE]}.
+     * Test {856=[FF, FF-ESR], 858=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8613,7 +8613,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {857=[FF, FF_ESR], 859=[CHROME, EDGE]}.
+     * Test {857=[FF, FF-ESR], 859=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8623,7 +8623,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {858=[FF, FF_ESR], 860=[CHROME, EDGE]}.
+     * Test {858=[FF, FF-ESR], 860=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8633,7 +8633,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {859=[FF, FF_ESR], 861=[CHROME, EDGE]}.
+     * Test {859=[FF, FF-ESR], 861=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8643,7 +8643,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {860=[FF, FF_ESR], 862=[CHROME, EDGE]}.
+     * Test {860=[FF, FF-ESR], 862=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8653,7 +8653,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
     }
 
     /**
-     * Test {861=[FF, FF_ESR], 863=[CHROME, EDGE]}.
+     * Test {861=[FF, FF-ESR], 863=[CHROME, EDGE]}.
      * @throws Exception if an error occurs
      */
     @Test
