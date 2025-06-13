@@ -41,6 +41,7 @@ import org.apache.commons.lang3.reflect.MethodUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.junit.annotation.TestedBrowser;
+import org.htmlunit.libraries.JQuery1x12x4Test;
 import org.htmlunit.libraries.JQuery1x8x2Test;
 
 /**
@@ -71,14 +72,15 @@ public final class JQueryExtractor {
      * @throws Exception s
      */
     public static void main(final String[] args) throws Exception {
-        final Class<? extends WebDriverTestCase> testClass = JQuery1x8x2Test.class;
+        // final Class<? extends WebDriverTestCase> testClass = JQuery1x8x2Test.class;
         // final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
+        final Class<? extends WebDriverTestCase> testClass = JQuery1x12x4Test.class;
         // final Class<? extends WebDriverTestCase> testClass = JQuery3x3x1Test.class;
 
         final String version = (String) MethodUtils.invokeExactMethod(testClass.newInstance(), "getVersion");
         final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
 
-        for (final String browser : new String[] {"CHROME", "EDGE", "FF", "FF_ESR"}) {
+        for (final String browser : new String[] {"CHROME", "EDGE", "FF", "FF-ESR"}) {
             final File out = new File(baseDir, browser + ".out");
             final File results = new File(baseDir, "results." + browser + ".txt");
             extractExpectations(out, results);
@@ -103,12 +105,9 @@ public final class JQueryExtractor {
                 while ((line = reader.readLine()) != null) {
                     line = line.trim();
 
-                    // for jQuery 3.3.1 we have patched the test output
+                    // for jQuery 1.12.4 & 3.x we have patched the test output
                     // to make the hash visible
                     if (line.contains(RERUN_ID)) {
-                        // cleanup ie output
-                        line = line.replace(".skipped", ".");
-
                         final int start = line.indexOf(RERUN_ID) + RERUN_ID.length();
                         final int end = line.indexOf(']', start);
                         final String testId = line.substring(start, end);
@@ -162,34 +161,20 @@ public final class JQueryExtractor {
         // main browsers regardless of version e.g. "FF"
         final List<String> mainNames = new ArrayList<>();
         for (final TestedBrowser b : browsers) {
-            final String name = b.name();
-            if (!"NONE".equals(name) && Character.isLetter(name.charAt(name.length() - 1))) {
-                mainNames.add(name);
+            String name = b.name();
+            if ("FF_ESR".equals(name)) {
+                name = "FF-ESR";
             }
+            mainNames.add(name);
         }
 
-        final Map<String, List<String>> browserVersions = new HashMap<>();
-        for (final TestedBrowser b : browsers) {
-            final String name = b.name();
-            for (final String mainName : mainNames) {
-                if (!name.equals(mainName) && name.startsWith(mainName)) {
-                    List<String> list = browserVersions.get(mainName);
-                    if (list == null) {
-                        list = new ArrayList<>();
-                        browserVersions.put(mainName, list);
-                    }
-                    list.add(name);
-                }
-            }
-        }
         final Map<String, Expectations> browserExpectations = new HashMap<>();
         final File[] files = dir.listFiles();
         if (files != null) {
             for (final File file : files) {
                 if (file.isFile() && file.getName().endsWith(".txt")) {
-                    for (final TestedBrowser b : browsers) {
-                        final String browserName = b.name();
-                        if (file.getName().equalsIgnoreCase("results." + browserName.replace('_', '.') + ".txt")) {
+                    for (final String browserName : mainNames) {
+                        if (file.getName().equalsIgnoreCase("results." + browserName + ".txt")) {
                             browserExpectations.put(browserName, Expectations.readExpectations(file));
                         }
                     }
@@ -309,7 +294,7 @@ public final class JQueryExtractor {
                         Collections.sort(browserNames);
 
                         // TODO dirty hack
-                        if (browserNames.size() == 5
+                        if (browserNames.size() == 4
                                 && browserNames.contains("CHROME")
                                 && browserNames.contains("EDGE")
                                 && browserNames.contains("FF")
@@ -346,12 +331,14 @@ public final class JQueryExtractor {
         for (final Expectations expectations : browserExpectations.values()) {
             for (final Expectation expectation : expectations) {
                 final String testName = expectation.getTestName();
-                Test test = map.get(testName);
-                if (test == null) {
-                    test = new Test(testName);
-                    map.put(testName, test);
+                if (!testName.startsWith("skipped")) {
+                    Test test = map.get(testName);
+                    if (test == null) {
+                        test = new Test(testName);
+                        map.put(testName, test);
+                    }
+                    test.addLine(expectation.getLine());
                 }
-                test.addLine(expectation.getLine());
             }
         }
 
