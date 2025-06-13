@@ -7635,8 +7635,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF = "function SVGDiscardElement() { [native code] }")
+    @Alerts("ReferenceError")
     public void svgDiscardElement() throws Exception {
         test("SVGDiscardElement");
     }

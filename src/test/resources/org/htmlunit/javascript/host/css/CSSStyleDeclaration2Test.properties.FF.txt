@@ -42,6 +42,11 @@ MozTextSizeAdjust
 MozTransform
 MozTransformOrigin
 MozTransformStyle
+MozTransition
+MozTransitionDelay
+MozTransitionDuration
+MozTransitionProperty
+MozTransitionTimingFunction
 MozUserSelect
 MozWindowDragging
 WebkitAlignContent

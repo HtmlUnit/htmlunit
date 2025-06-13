@@ -442,7 +442,6 @@ import org.htmlunit.javascript.host.svg.SVGClipPathElement;
 import org.htmlunit.javascript.host.svg.SVGComponentTransferFunctionElement;
 import org.htmlunit.javascript.host.svg.SVGDefsElement;
 import org.htmlunit.javascript.host.svg.SVGDescElement;
-import org.htmlunit.javascript.host.svg.SVGDiscardElement;
 import org.htmlunit.javascript.host.svg.SVGElement;
 import org.htmlunit.javascript.host.svg.SVGEllipseElement;
 import org.htmlunit.javascript.host.svg.SVGFEBlendElement;
@@ -661,7 +660,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGStyleElement.class, SVGSymbolElement.class, SVGTitleElement.class, SVGViewElement.class,
         // level 6
         HTMLAudioElement.class, HTMLVideoElement.class, SVGAElement.class, SVGAnimateElement.class,
-        SVGAnimateMotionElement.class, SVGAnimateTransformElement.class, SVGDefsElement.class, SVGDiscardElement.class,
+        SVGAnimateMotionElement.class, SVGAnimateTransformElement.class, SVGDefsElement.class,
         SVGFEFuncAElement.class, SVGFEFuncBElement.class, SVGFEFuncGElement.class, SVGFEFuncRElement.class,
         SVGForeignObjectElement.class, SVGGElement.class, SVGGeometryElement.class, SVGImageElement.class,
         SVGLinearGradientElement.class, SVGRadialGradientElement.class, SVGSVGElement.class, SVGSetElement.class,

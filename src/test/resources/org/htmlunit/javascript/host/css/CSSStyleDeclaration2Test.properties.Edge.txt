@@ -361,6 +361,8 @@ printColorAdjust
 quotes
 r
 range
+readingFlow
+readingOrder
 resize
 right
 rotate

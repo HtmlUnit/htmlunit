@@ -312,9 +312,8 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0663",
-            CHROME = "20\u200f/12\u200f/2013",
-            EDGE = "20\u200f/12\u200f/2013")
+    @Alerts(DEFAULT = "20\u200f/12\u200f/2013",
+            FF_ESR = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0663")
     @HtmlUnitNYI(CHROME = "\u0662\u0660\u200f/\u0661\u0662\u200f/\u0662\u0660\u0661\u0663",
             EDGE = "\u0662\u0660\u200f/\u0661\u0662\u200f/\u0662\u0660\u0661\u0663")
     public void format_ar() throws Exception {
