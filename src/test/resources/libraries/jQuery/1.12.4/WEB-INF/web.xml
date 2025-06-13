@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+    <servlet>
+        <servlet-name>QuercusServlet</servlet-name>
+        <servlet-class>com.caucho.quercus.servlet.QuercusServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>QuercusServlet</servlet-name>
+        <url-pattern>*.php</url-pattern>
+    </servlet-mapping>
+
+</web-app>
