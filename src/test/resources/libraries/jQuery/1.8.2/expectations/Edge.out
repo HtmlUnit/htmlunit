@@ -1,9 +1,9 @@
 jQuery Test Suite
 Hide passed testsCheck for GlobalsNo try-catchminnoqsaModule:
 < All Modules >
-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36 Edg/84.0.522.61
-Tests completed in 68495 milliseconds.
-6917 tests of 6920 passed, 3 failed.
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+Tests completed in 64271 milliseconds.
+6910 tests of 6920 passed, 10 failed.
 
 core: Unit Testing Environment (0, 2, 2)Rerun
 core: Basic requirements (0, 7, 7)Rerun
@@ -398,11 +398,11 @@ css: widows & orphans #8936 (2, 2, 4)Rerun
 widows correctly start with value 0
 Expected:   
 0
-Result:     
+Result:   
 "2"
 Diff:   
 0 "2" 
-Source:     
+Source:   
     at Object.<anonymous> (http://localhost:22222/jquery/test/unit/css.js:694:3)
     at Test.run (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:136:18)
     at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:279:10
@@ -411,11 +411,11 @@ Source:
 orphans correctly start with value 0
 Expected:   
 0
-Result:     
+Result:   
 "2"
 Diff:   
 0 "2" 
-Source:     
+Source:   
     at Object.<anonymous> (http://localhost:22222/jquery/test/unit/css.js:695:3)
     at Test.run (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:136:18)
     at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:279:10
@@ -555,7 +555,26 @@ effects: stop(clearQueue) (0, 4, 4)Rerun
 effects: stop(clearQueue, gotoEnd) (0, 1, 1)Rerun
 effects: stop( queue, ..., ... ) - Stop single queues (0, 3, 3)Rerun
 effects: toggle() (0, 6, 6)Rerun
-effects: jQuery.fx.prototype.cur() - <1.8 Back Compat (0, 7, 7)Rerun
+effects: jQuery.fx.prototype.cur() - <1.8 Back Compat (1, 6, 7)Rerun
+Return the same value as jQuery.css for complex properties (bug #7912)
+Return simple values parsed as Float
+Expected:   
+5
+Result:   
+4.66667
+Diff:   
+5 4.66667 
+Source:   
+    at Object.<anonymous> (http://localhost:22222/jquery/test/unit/effects.js:757:2)
+    at Test.run (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:136:18)
+    at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:279:10
+    at process (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1277:24)
+    at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:383:5
+hook used
+hook used
+Return 0 when jQuery.css returns an empty string
+Return 0 when jQuery.css returns 'auto'
+support negative values < -10000 (bug #7193)
 effects: JS Overflow and Display (0, 2, 2)Rerun
 effects: CSS Overflow and Display (0, 2, 2)Rerun
 effects: CSS Auto to 0 (0, 6, 6)Rerun
@@ -651,7 +670,85 @@ offset: relative (0, 60, 60)Rerun
 offset: static (0, 80, 80)Rerun
 offset: fixed (0, 30, 30)Rerun
 offset: table (0, 4, 4)Rerun
-offset: scroll (0, 24, 24)Rerun
+offset: scroll (6, 18, 24)Rerun
+jQuery('#scroll-1').offset().top
+jQuery('#scroll-1').offset().left
+jQuery('#scroll-1-1').offset().top
+Expected:   
+11
+Result:   
+10.6666259765625
+Diff:   
+11 10.6666259765625 
+Source:   
+    at http://localhost:22222/jquery/test/unit/offset.js:383:2
+    at http://localhost:22222/jquery/test/data/testinit.js:192:10
+jQuery('#scroll-1-1').offset().left
+Expected:   
+11
+Result:   
+10.6666259765625
+Diff:   
+11 10.6666259765625 
+Source:   
+    at http://localhost:22222/jquery/test/unit/offset.js:384:2
+    at http://localhost:22222/jquery/test/data/testinit.js:192:10
+jQuery('#scroll-1').scrollTop()
+Expected:   
+5
+Result:   
+5.333333492279053
+Diff:   
+5 5.333333492279053 
+Source:   
+    at http://localhost:22222/jquery/test/unit/offset.js:388:2
+    at http://localhost:22222/jquery/test/data/testinit.js:192:10
+jQuery('#scroll-1').scrollLeft()
+Expected:   
+5
+Result:   
+5.333333492279053
+Diff:   
+5 5.333333492279053 
+Source:   
+    at http://localhost:22222/jquery/test/unit/offset.js:389:2
+    at http://localhost:22222/jquery/test/data/testinit.js:192:10
+jQuery('#scroll-1-1').scrollTop()
+jQuery('#scroll-1-1').scrollLeft()
+.scrollTop(undefined) is chainable (#5571)
+Expected:   
+5
+Result:   
+5.333333492279053
+Diff:   
+5 5.333333492279053 
+Source:   
+    at http://localhost:22222/jquery/test/unit/offset.js:395:2
+    at http://localhost:22222/jquery/test/data/testinit.js:192:10
+.scrollLeft(undefined) is chainable (#5571)
+Expected:   
+5
+Result:   
+5.333333492279053
+Diff:   
+5 5.333333492279053 
+Source:   
+    at http://localhost:22222/jquery/test/unit/offset.js:396:2
+    at http://localhost:22222/jquery/test/data/testinit.js:192:10
+jQuery(window).scrollTop()
+jQuery(window).scrollLeft()
+jQuery(document).scrollTop()
+jQuery(document).scrollLeft()
+jQuery(window).scrollTop() other window
+jQuery(window).scrollLeft() other window
+jQuery(window).scrollTop() other document
+jQuery(window).scrollLeft() other document
+jQuery().scrollTop(100) testing setter on empty jquery object
+jQuery().scrollLeft(100) testing setter on empty jquery object
+jQuery().scrollTop(null) testing setter on empty jquery object
+jQuery().scrollLeft(null) testing setter on empty jquery object
+jQuery().scrollTop(100) testing setter on empty jquery object
+jQuery().scrollLeft(100) testing setter on empty jquery object
 offset: body (0, 2, 2)Rerun
 offset: chaining (0, 3, 3)Rerun
 offset: offsetParent (0, 12, 12)Rerun
@@ -659,11 +756,11 @@ offset: fractions (see #7730 and #7885) (1, 1, 2)Rerun
 Check top
 Expected:   
 1000
-Result:     
-999.984375
+Result:   
+999.9896240234375
 Diff:   
-1000 999.984375 
-Source:     
+1000 999.9896240234375 
+Source:   
     at Object.<anonymous> (http://localhost:22222/jquery/test/unit/offset.js:496:2)
     at Test.run (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:136:18)
     at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:279:10

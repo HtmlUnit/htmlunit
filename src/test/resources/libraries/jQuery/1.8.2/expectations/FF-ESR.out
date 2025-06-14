@@ -1,10 +1,10 @@
 
 jQuery Test Suite
 Hide passed testsCheck for GlobalsNo try-catchminnoqsaModule:
-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0
+Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0
 
-Tests completed in 60100 milliseconds.
-6917 tests of 6917 passed, 0 failed.
+Tests completed in 60496 milliseconds.
+6914 tests of 6917 passed, 3 failed.
 
     core: Unit Testing Environment (0, 2, 2)Rerun
     core: Basic requirements (0, 7, 7)Rerun
@@ -528,7 +528,34 @@ Tests completed in 60100 milliseconds.
     effects: stop(clearQueue, gotoEnd) (0, 1, 1)Rerun
     effects: stop( queue, ..., ... ) - Stop single queues (0, 3, 3)Rerun
     effects: toggle() (0, 6, 6)Rerun
-    effects: jQuery.fx.prototype.cur() - <1.8 Back Compat (0, 7, 7)Rerun
+    effects: jQuery.fx.prototype.cur() - <1.8 Back Compat (1, 6, 7)Rerun
+        Return the same value as jQuery.css for complex properties (bug #7912)
+        Return simple values parsed as Float
+        Expected:   
+
+        5
+
+        Result:   
+
+        4.66667
+
+        Diff:   
+
+        5 4.66667 
+
+        Source:   
+
+        @http://localhost:22222/jquery/test/unit/effects.js:757:13
+        run@http://localhost:22222/jquery/test/qunit/qunit/qunit.js:136:18
+        queue/run/<@http://localhost:22222/jquery/test/qunit/qunit/qunit.js:279:10
+        process@http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1277:24
+        start/<@http://localhost:22222/jquery/test/qunit/qunit/qunit.js:383:12
+
+        hook used
+        hook used
+        Return 0 when jQuery.css returns an empty string
+        Return 0 when jQuery.css returns 'auto'
+        support negative values < -10000 (bug #7193)
     effects: JS Overflow and Display (0, 2, 2)Rerun
     effects: CSS Overflow and Display (0, 2, 2)Rerun
     effects: CSS Auto to 0 (0, 6, 6)Rerun
@@ -624,7 +651,65 @@ Tests completed in 60100 milliseconds.
     offset: static (0, 80, 80)Rerun
     offset: fixed (0, 30, 30)Rerun
     offset: table (0, 4, 4)Rerun
-    offset: scroll (0, 24, 24)Rerun
+    offset: scroll (2, 22, 24)Rerun
+        jQuery('#scroll-1').offset().top
+        jQuery('#scroll-1').offset().left
+        jQuery('#scroll-1-1').offset().top
+        Expected:   
+
+        11
+
+        Result:   
+
+        10.66668701171875
+
+        Diff:   
+
+        11 10.66668701171875 
+
+        Source:   
+
+        @http://localhost:22222/jquery/test/unit/offset.js:383:7
+        this.testIframe/</interval<@http://localhost:22222/jquery/test/data/testinit.js:192:10
+
+        jQuery('#scroll-1-1').offset().left
+        Expected:   
+
+        11
+
+        Result:   
+
+        10.66668701171875
+
+        Diff:   
+
+        11 10.66668701171875 
+
+        Source:   
+
+        @http://localhost:22222/jquery/test/unit/offset.js:384:7
+        this.testIframe/</interval<@http://localhost:22222/jquery/test/data/testinit.js:192:10
+
+        jQuery('#scroll-1').scrollTop()
+        jQuery('#scroll-1').scrollLeft()
+        jQuery('#scroll-1-1').scrollTop()
+        jQuery('#scroll-1-1').scrollLeft()
+        .scrollTop(undefined) is chainable (#5571)
+        .scrollLeft(undefined) is chainable (#5571)
+        jQuery(window).scrollTop()
+        jQuery(window).scrollLeft()
+        jQuery(document).scrollTop()
+        jQuery(document).scrollLeft()
+        jQuery(window).scrollTop() other window
+        jQuery(window).scrollLeft() other window
+        jQuery(window).scrollTop() other document
+        jQuery(window).scrollLeft() other document
+        jQuery().scrollTop(100) testing setter on empty jquery object
+        jQuery().scrollLeft(100) testing setter on empty jquery object
+        jQuery().scrollTop(null) testing setter on empty jquery object
+        jQuery().scrollLeft(null) testing setter on empty jquery object
+        jQuery().scrollTop(100) testing setter on empty jquery object
+        jQuery().scrollLeft(100) testing setter on empty jquery object
     offset: body (0, 2, 2)Rerun
     offset: chaining (0, 3, 3)Rerun
     offset: offsetParent (0, 12, 12)Rerun
