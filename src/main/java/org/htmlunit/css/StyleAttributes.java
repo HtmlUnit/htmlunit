@@ -2140,6 +2140,38 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code -moz-transform-style}. */
         MOZ_TRANSFORM_STYLE__("-moz-transform-style", "-moz-transform-style", ffLatest("flat")),
 
+        /** The style property {@code MozTransition}. */
+        MOZ_TRANSITION("MozTransition", "-moz-transition", ffLatest("all")),
+
+        /** The style property {@code -moz-transition}. */
+        MOZ_TRANSITION__("-moz-transition", "-moz-transition", ffLatest("all")),
+
+        /** The style property {@code MozTransitionDelay}. */
+        MOZ_TRANSITION_DELAY("MozTransitionDelay", "-moz-transition-delay", ffLatest("0s")),
+
+        /** The style property {@code -moz-transition-delay}. */
+        MOZ_TRANSITION_DELAY__("-moz-transition-delay", "-moz-transition-delay", ffLatest("0s")),
+
+        /** The style property {@code MozTransitionDuration}. */
+        MOZ_TRANSITION_DURATION("MozTransitionDuration", "-moz-transition-duration", ffLatest("0s")),
+
+        /** The style property {@code -moz-transition-duration}. */
+        MOZ_TRANSITION_DURATION__("-moz-transition-duration", "-moz-transition-duration", ffLatest("0s")),
+
+        /** The style property {@code MozTransitionProperty}. */
+        MOZ_TRANSITION_PROPERTY("MozTransitionProperty", "-moz-transition-property", ffLatest("all")),
+
+        /** The style property {@code -moz-transition-property}. */
+        MOZ_TRANSITION_PROPERTY__("-moz-transition-property", "-moz-transition-property", ffLatest("all")),
+
+        /** The style property {@code MozTransitionTimingFunction}. */
+        MOZ_TRANSITION_TIMING_FUNCTION("MozTransitionTimingFunction", "-moz-transition-timing-function",
+                ffLatest("ease")),
+
+        /** The style property {@code -moz-transition-timing-function}. */
+        MOZ_TRANSITION_TIMING_FUNCTION__("-moz-transition-timing-function", "-moz-transition-timing-function",
+                ffLatest("ease")),
+
         /** The style property {@code MozUserInput}. */
         MOZ_USER_INPUT("MozUserInput", "-moz-user-input", ffEsr("auto")),
 
@@ -2511,6 +2543,12 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code range}. */
         RANGE("range", "range", chromeAndEdgeEmpty()),
+
+        /** The style property {@code readingFlow}. */
+        READING_FLOW("readingFlow", "readingFlow", chromeAndEdgeNormal()),
+
+        /** The style property {@code readingOrder}. */
+        READING_ORDER("readingOrder", "readingOrder", chromeAndEdge("0")),
 
         /** The style property {@code resize}. */
         RESIZE("resize", "resize", ffNone(), chromeAndEdgeNone()),
