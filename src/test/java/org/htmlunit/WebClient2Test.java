@@ -426,7 +426,7 @@ public class WebClient2Test extends SimpleWebTestCase {
     @Alerts("titel - simple.html")
     public void localFileFile() throws Exception {
         final URL url = getClass().getClassLoader().getResource("simple.html");
-        String file = URLDecoder.decode(url.getFile(), StandardCharsets.UTF_8);
+        String file = URLDecoder.decode(url.getFile(), StandardCharsets.UTF_8.name());
         if (file.startsWith("/") && file.contains(":")) {
             // we have to remove the trailing slash to test the c:\.... case.
             file = file.substring(1);
