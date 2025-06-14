@@ -19,6 +19,7 @@ import java.util.Comparator;
 
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1527,6 +1528,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
             EDGE = "37",
             FF = "1, 36, 37",
             FF_ESR = "1, 36, 37")
+    @HtmlUnitNYI(CHROME = "1, 36, 37",
+            EDGE = "1, 36, 37",
+            FF = "37",
+            FF_ESR = "37")
     public void support__Verify_that_support_tests_resolve_as_expected_per_browser() throws Exception {
         runTest("support: Verify that support tests resolve as expected per browser");
     }
@@ -3709,6 +3714,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1, 1, 2")
+    @HtmlUnitNYI(CHROME = "2",
+            EDGE = "2",
+            FF = "2",
+            FF_ESR = "2")
     public void traversing__closest___with_positional_selectors() throws Exception {
         runTest("traversing: closest() with positional selectors");
     }
@@ -5669,6 +5678,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
+    @HtmlUnitNYI(CHROME = "1, 1, 2",
+            EDGE = "1, 1, 2",
+            FF = "1, 1, 2",
+            FF_ESR = "1, 1, 2")
     public void css__computed_margins__trac_3333__gh_2237_() throws Exception {
         runTest("css: computed margins (trac-3333; gh-2237)");
     }
@@ -5972,6 +5985,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
+    @HtmlUnitNYI(CHROME = "Test #e0d0b3c1 runs too long (longer than 60s)",
+            EDGE = "Test #e0d0b3c1 runs too long (longer than 60s)",
+            FF = "Test #e0d0b3c1 runs too long (longer than 60s)",
+            FF_ESR = "Test #e0d0b3c1 runs too long (longer than 60s)")
     public void ajax__XMLHttpRequest___Attempt_to_block_tests_because_of_dangling_XHR_requests__IE_() throws Exception {
         runTest("ajax: XMLHttpRequest - Attempt to block tests because of dangling XHR requests (IE)");
     }
@@ -6725,6 +6742,8 @@ public class JQuery1x12x4Test extends JQueryTestBase {
             EDGE = "1, 0, 1",
             FF = "1",
             FF_ESR = "1")
+    @HtmlUnitNYI(CHROME = "1",
+            EDGE = "1")
     public void ajax___14379___jQuery_ajax___on_unload() throws Exception {
         runTest("ajax: #14379 - jQuery.ajax() on unload");
     }
@@ -6825,6 +6844,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
+    @HtmlUnitNYI(CHROME = "2, 0, 2",
+            EDGE = "2, 0, 2",
+            FF = "2, 0, 2",
+            FF_ESR = "2, 0, 2")
     public void ajax__jQuery_ajaxSetup___timeout__Number______with_global_timeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout");
     }
@@ -7035,6 +7058,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("7")
+    @HtmlUnitNYI(CHROME = "1, 8, 9",
+            EDGE = "1, 8, 9",
+            FF = "1, 8, 9",
+            FF_ESR = "1, 8, 9")
     public void ajax__jQuery_fn_load__String__Function_____check_scripts() throws Exception {
         runTest("ajax: jQuery.fn.load( String, Function ) - check scripts");
     }
@@ -7255,6 +7282,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
+    @HtmlUnitNYI(CHROME = "1, 0, 1",
+            EDGE = "1, 0, 1",
+            FF = "1, 0, 1",
+            FF_ESR = "1, 0, 1")
     public void effects__animate_negative_padding() throws Exception {
         runTest("effects: animate negative padding");
     }
@@ -7305,6 +7336,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
+    @HtmlUnitNYI(CHROME = "2, 1, 3",
+            EDGE = "2, 1, 3",
+            FF = "2, 1, 3",
+            FF_ESR = "2, 1, 3")
     public void effects__animate_table_row_width_height() throws Exception {
         runTest("effects: animate table-row width/height");
     }
@@ -7315,6 +7350,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
+    @HtmlUnitNYI(CHROME = "2, 1, 3",
+            EDGE = "2, 1, 3",
+            FF = "2, 1, 3",
+            FF_ESR = "2, 1, 3")
     public void effects__animate_table_cell_width_height() throws Exception {
         runTest("effects: animate table-cell width/height");
     }
@@ -7475,6 +7514,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1, 6, 7")
+    @HtmlUnitNYI(CHROME = "7",
+            EDGE = "7",
+            FF = "7",
+            FF_ESR = "7")
     public void effects__jQuery_fx_prototype_cur______1_8_Back_Compat() throws Exception {
         runTest("effects: jQuery.fx.prototype.cur() - <1.8 Back Compat");
     }
@@ -8015,6 +8058,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("12")
+    @HtmlUnitNYI(CHROME = "8, 4, 12",
+            EDGE = "8, 4, 12",
+            FF = "8, 4, 12",
+            FF_ESR = "8, 4, 12")
     public void effects__line_height_animates_correctly___13855_() throws Exception {
         runTest("effects: line-height animates correctly (#13855)");
     }
@@ -8145,6 +8192,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
+    @HtmlUnitNYI(CHROME = "1, 0, 1",
+            EDGE = "1, 0, 1",
+            FF = "1, 0, 1",
+            FF_ESR = "1, 0, 1")
     public void effects__animate_does_not_change_start_value_for_non_px_animation___7109_() throws Exception {
         runTest("effects: animate does not change start value for non-px animation (#7109)");
     }
@@ -8345,6 +8396,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("178")
+    @HtmlUnitNYI(CHROME = "4",
+            EDGE = "4",
+            FF = "4",
+            FF_ESR = "4")
     public void offset__absolute() throws Exception {
         runTest("offset: absolute");
     }
@@ -8355,6 +8410,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("60")
+    @HtmlUnitNYI(CHROME = "4, 56, 60",
+            EDGE = "4, 56, 60",
+            FF = "4, 56, 60",
+            FF_ESR = "4, 56, 60")
     public void offset__relative() throws Exception {
         runTest("offset: relative");
     }
@@ -8385,6 +8444,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
+    @HtmlUnitNYI(CHROME = "2, 2, 4",
+            EDGE = "2, 2, 4",
+            FF = "2, 2, 4",
+            FF_ESR = "2, 2, 4")
     public void offset__table() throws Exception {
         runTest("offset: table");
     }
@@ -8398,6 +8461,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
             EDGE = "6, 18, 24",
             FF = "2, 22, 24",
             FF_ESR = "2, 22, 24")
+    @HtmlUnitNYI(CHROME = "3, 21, 24",
+            EDGE = "3, 21, 24",
+            FF = "3, 21, 24",
+            FF_ESR = "3, 21, 24")
     public void offset__scroll() throws Exception {
         runTest("offset: scroll");
     }
@@ -8408,6 +8475,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
+    @HtmlUnitNYI(CHROME = "4, 0, 4",
+            EDGE = "4, 0, 4",
+            FF = "4, 0, 4",
+            FF_ESR = "4, 0, 4")
     public void offset__body() throws Exception {
         runTest("offset: body");
     }
@@ -8448,6 +8519,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
+    @HtmlUnitNYI(CHROME = "2, 0, 2",
+            EDGE = "2, 0, 2",
+            FF = "2, 0, 2",
+            FF_ESR = "2, 0, 2")
     public void offset__iframe_scrollTop_Left__see_gh_1945_() throws Exception {
         runTest("offset: iframe scrollTop/Left (see gh-1945)");
     }
@@ -8638,6 +8713,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
+    @HtmlUnitNYI(CHROME = "2, 0, 2",
+            EDGE = "2, 0, 2",
+            FF = "2, 0, 2",
+            FF_ESR = "2, 0, 2")
     public void dimensions__window_vs__large_document() throws Exception {
         runTest("dimensions: window vs. large document");
     }
@@ -8658,6 +8737,10 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
+    @HtmlUnitNYI(CHROME = "Test #6719e036 runs too long (longer than 60s)",
+            EDGE = "Test #6719e036 runs too long (longer than 60s)",
+            FF = "Test #6719e036 runs too long (longer than 60s)",
+            FF_ESR = "Test #6719e036 runs too long (longer than 60s)")
     public void dimensions__outside_view_position__gh_2836_() throws Exception {
         runTest("dimensions: outside view position (gh-2836)");
     }
