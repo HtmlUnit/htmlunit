@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 137, Firefox 139, Bugfixes">
+            <action type="add" dev="rbri">
+                jQuery 1.12.4 test suite added.
+            </action>
+            <action type="update" dev="rbri">
+                jQuery 1.8.2, 1.11.3, and 3.3.1 test suite refreshed.
+            </action>
             <action type="remove" dev="rbri">
                 FF139: SVGDiscardElement is gone.
             </action>
