@@ -228,6 +228,7 @@ public class ArchitectureTest {
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.file.FileReader.getResult()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLButtonElement.getValue()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLDataElement.getValue()")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLElement.getHidden()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLInputElement.getValue()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLMeterElement.getValue()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLOptionElement.getValue()")
