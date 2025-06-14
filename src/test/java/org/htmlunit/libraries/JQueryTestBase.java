@@ -113,7 +113,9 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
                 Thread.sleep(42);
 
                 if (System.currentTimeMillis() > endTime) {
-                    fail("Test #" + testNumber + " runs too long (longer than " + runTime / 1000 + "s)");
+                    final String result = "Test #" + testNumber
+                                            + " runs too long (longer than " + runTime / 1000 + "s)";
+                    assertEquals(getExpectedAlerts()[0], result);
                 }
             }
 

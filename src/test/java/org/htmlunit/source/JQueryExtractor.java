@@ -22,7 +22,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -39,9 +38,8 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.junit.annotation.TestedBrowser;
-import org.htmlunit.libraries.JQuery1x11x3Test;
+import org.htmlunit.libraries.JQuery3x3x1Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
@@ -72,9 +70,9 @@ public final class JQueryExtractor {
      */
     public static void main(final String[] args) throws Exception {
         // final Class<? extends WebDriverTestCase> testClass = JQuery1x8x2Test.class;
-        final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
+        // final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
         // final Class<? extends WebDriverTestCase> testClass = JQuery1x12x4Test.class;
-        // final Class<? extends WebDriverTestCase> testClass = JQuery3x3x1Test.class;
+        final Class<? extends WebDriverTestCase> testClass = JQuery3x3x1Test.class;
 
         final String version = (String) MethodUtils.invokeExactMethod(testClass.newInstance(), "getVersion");
         final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
