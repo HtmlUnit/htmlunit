@@ -1235,6 +1235,13 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * @return the value of the 'hidden' attribute or an empty string if not set.
+     */
+    public String getHidden() {
+        return getAttributeDirect(ATTRIBUTE_HIDDEN);
+    }
+
+    /**
      * @return true if the hidden attribute is set.
      */
     public boolean isHidden() {
@@ -1243,16 +1250,24 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Sets the {@code hidden} property.
+     * If the provided string is empty, the 'hidden' attribute will be removed.
+     * If the provided string is 'until-found' then the attribute value will be 'until-found'.
+     * For all other provided strings the attribute will be set to ''.
+     * @see #setHidden(boolean)
      * @param hidden the {@code hidden} property
      */
     public void setHidden(final String hidden) {
-        if ("false".equalsIgnoreCase(hidden)) {
-            removeAttribute(ATTRIBUTE_HIDDEN);
+        if ("until-found".equalsIgnoreCase(hidden)) {
+            setAttribute(ATTRIBUTE_HIDDEN, "until-found");
+            return;
         }
 
-        if (StringUtils.isNotEmpty(hidden)) {
-            setAttribute(ATTRIBUTE_HIDDEN, "");
+        if (org.htmlunit.util.StringUtils.isEmptyString(hidden)) {
+            removeAttribute(ATTRIBUTE_HIDDEN);
+            return;
         }
+
+        setAttribute(ATTRIBUTE_HIDDEN, "");
     }
 
     /**
@@ -1261,11 +1276,11 @@ public abstract class HtmlElement extends DomElement {
      */
     public void setHidden(final boolean hidden) {
         if (hidden) {
-            setAttribute("hidden", "");
+            setAttribute(ATTRIBUTE_HIDDEN, "");
             return;
         }
 
-        removeAttribute("hidden");
+        removeAttribute(ATTRIBUTE_HIDDEN);
     }
 
     /**

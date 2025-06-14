@@ -6399,10 +6399,8 @@ public class HTMLElementTest extends WebDriverTestCase {
                        "7 until-found/until-found", "8 show/true", "9 Until-Found/until-found", "10 HIDDEN/true"},
             FF_ESR = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
                       "7 until-found/true", "8 show/true", "9 Until-Found/true", "10 HIDDEN/true"})
-    @HtmlUnitNYI(CHROME = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
-                           "7 until-found/true", "8 show/true", "9 Until-Found/true", "10 HIDDEN/true"},
-            EDGE = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
-                    "7 until-found/true", "8 show/true", "9 Until-Found/true", "10 HIDDEN/true"})
+    @HtmlUnitNYI(FF_ESR = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
+                           "7 until-found/until-found", "8 show/true", "9 Until-Found/until-found", "10 HIDDEN/true"})
     public void hiddenGet() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -6454,27 +6452,21 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
                        "6 null/false", "7 /true", "8 /true",
                        "9 null/false", "10 /true", "11 /true",
-                       "12 null/false", "13 until-found/until-found",
-                       "14 null/false", "15 until-found/until-found",
-                       "16 null/false", "17 /true"},
+                       "12 null/false", "13 until-found/until-found", "14 null/false",
+                       "15 null/false", "16 until-found/until-found",
+                       "17 null/false", "18 /true"},
             FF_ESR = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
                       "6 null/false", "7 /true", "8 /true",
                       "9 null/false", "10 /true", "11 /true",
-                      "12 null/false", "13 /true",
-                      "14 null/false", "15 /true",
-                      "16 null/false", "17 /true"})
-    @HtmlUnitNYI(CHROME = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
+                      "12 null/false", "13 /true", "14 null/false",
+                      "15 null/false", "16 /true",
+                      "17 null/false", "18 /true"})
+    @HtmlUnitNYI(FF_ESR = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
                            "6 null/false", "7 /true", "8 /true",
                            "9 null/false", "10 /true", "11 /true",
-                           "12 null/false", "13 /true",
-                           "14 null/false", "15 /true",
-                           "16 null/false", "17 /true"},
-          EDGE = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
-                  "6 null/false", "7 /true", "8 /true",
-                  "9 null/false", "10 /true", "11 /true",
-                  "12 null/false", "13 /true",
-                  "14 null/false", "15 /true",
-                  "16 null/false", "17 /true"})
+                           "12 null/false", "13 until-found/until-found", "14 null/false",
+                           "15 null/false", "16 until-found/until-found",
+                           "17 null/false", "18 /true"})
     public void hiddenSet() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -6536,15 +6528,18 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "set(p4, 'until-found');\n"
             + "log('13 ' + p4.getAttribute('hidden') + '/' + p4.hidden);\n"
 
+            + "set(p4, '');\n"
+            + "log('14 ' + p4.getAttribute('hidden') + '/' + p4.hidden);\n"
+
             // p5
-            + "log('14 ' + p5.getAttribute('hidden') + '/' + p5.hidden);\n"
-            + "set(p5, 'Until-Found');\n"
             + "log('15 ' + p5.getAttribute('hidden') + '/' + p5.hidden);\n"
+            + "set(p5, 'Until-Found');\n"
+            + "log('16 ' + p5.getAttribute('hidden') + '/' + p5.hidden);\n"
 
             // p6
-            + "log('16 ' + p6.getAttribute('hidden') + '/' + p6.hidden);\n"
-            + "set(p6, 'HIDDEN');\n"
             + "log('17 ' + p6.getAttribute('hidden') + '/' + p6.hidden);\n"
+            + "set(p6, 'HIDDEN');\n"
+            + "log('18 ' + p6.getAttribute('hidden') + '/' + p6.hidden);\n"
 
             + "</script>\n"
             + "</body></html>";

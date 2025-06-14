@@ -1435,8 +1435,13 @@ public class HTMLElement extends Element {
      * @return the {@code hidden} property
      */
     @JsxGetter
-    public boolean isHidden() {
-        return getDomNodeOrDie().isHidden();
+    public Object getHidden() {
+        final String hidden = getDomNodeOrDie().getHidden();
+        if ("until-found".equalsIgnoreCase(hidden)) {
+            return "until-found";
+        }
+
+        return ATTRIBUTE_NOT_DEFINED != hidden;
     }
 
     /**

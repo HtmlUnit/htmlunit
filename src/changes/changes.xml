@@ -9,6 +9,14 @@
     <body>
         <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 137, Firefox 139, Bugfixes">
             <action type="add" dev="rbri">
+                The hidden attribute now supports the 'until-found' value.
+            </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: To add support for the 'until-found' hidden attribute value, the parameter
+                handing of method HtmlElement.setHidden(String) was changed. Please have a look at the javadoc for
+                details about the current implementation.
+            </action>
+            <action type="add" dev="rbri">
                 jQuery 1.12.4 test suite added.
             </action>
             <action type="update" dev="rbri">
