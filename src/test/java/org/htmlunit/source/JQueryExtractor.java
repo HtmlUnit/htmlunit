@@ -41,8 +41,7 @@ import org.apache.commons.lang3.reflect.MethodUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.junit.annotation.TestedBrowser;
-import org.htmlunit.libraries.JQuery1x12x4Test;
-import org.htmlunit.libraries.JQuery1x8x2Test;
+import org.htmlunit.libraries.JQuery1x11x3Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
@@ -73,8 +72,8 @@ public final class JQueryExtractor {
      */
     public static void main(final String[] args) throws Exception {
         // final Class<? extends WebDriverTestCase> testClass = JQuery1x8x2Test.class;
-        // final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
-        final Class<? extends WebDriverTestCase> testClass = JQuery1x12x4Test.class;
+        final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
+        // final Class<? extends WebDriverTestCase> testClass = JQuery1x12x4Test.class;
         // final Class<? extends WebDriverTestCase> testClass = JQuery3x3x1Test.class;
 
         final String version = (String) MethodUtils.invokeExactMethod(testClass.newInstance(), "getVersion");
@@ -281,43 +280,6 @@ public final class JQueryExtractor {
             System.out.println(")");
 
             final String methodName = test.getName().replaceAll("\\W", "_");
-            try {
-                final Method method = testClass.getMethod(methodName);
-                final NotYetImplemented notYetImplemented = method.getAnnotation(NotYetImplemented.class);
-                if (null != notYetImplemented) {
-                    final TestedBrowser[] notYetImplementedBrowsers = notYetImplemented.value();
-                    if (notYetImplementedBrowsers.length > 0) {
-                        final List<String> browserNames = new ArrayList<>(notYetImplementedBrowsers.length);
-                        for (final TestedBrowser browser : notYetImplementedBrowsers) {
-                            browserNames.add(browser.name());
-                        }
-                        Collections.sort(browserNames);
-
-                        // TODO dirty hack
-                        if (browserNames.size() == 4
-                                && browserNames.contains("CHROME")
-                                && browserNames.contains("EDGE")
-                                && browserNames.contains("FF")
-                                && browserNames.contains("FF_ESR")) {
-                            System.out.println("    @NotYetImplemented");
-                        }
-                        else {
-                            System.out.print("    @NotYetImplemented(");
-                            if (browserNames.size() > 1) {
-                                System.out.print("{ ");
-                            }
-                            System.out.print(String.join(", ", browserNames));
-                            if (browserNames.size() > 1) {
-                                System.out.print(" }");
-                            }
-                            System.out.println(")");
-                        }
-                    }
-                }
-            }
-            catch (final NoSuchMethodException e) {
-                // ignore
-            }
 
             System.out.println("    public void " + methodName + "() throws Exception {");
             System.out.println("        runTest(\"" + test.getName().replace("\"", "\\\"") + "\");");
