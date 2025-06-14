@@ -1753,7 +1753,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "close(),open,requestClose(),returnValue,show(),showModal()",
             FF_ESR = "close(),open,returnValue,show(),showModal()")
     @HtmlUnitNYI(CHROME = "close(),open,returnValue,show(),showModal()",
-            EDGE = "close(),open,returnValue,show(),showModal()")
+            EDGE = "close(),open,returnValue,show(),showModal()",
+            FF = "close(),open,returnValue,show(),showModal()")
     public void dialog() throws Exception {
         test("dialog");
     }
@@ -6996,7 +6997,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "pageBreakInside,pageOrientation,paintOrder,parentRule,perspective,perspectiveOrigin,placeContent,"
                 + "placeItems,placeSelf,pointerEvents,position,"
                 + "positionAnchor,positionArea,positionTry,positionTryFallbacks,positionTryOrder,positionVisibility,"
-                + "prefix,printColorAdjust,quotes,r,range,removeProperty(),resize,right,"
+                + "prefix,printColorAdjust,quotes,r,range,readingFlow,readingOrder,removeProperty(),resize,right,"
                 + "rotate,rowGap,rubyAlign,rubyPosition,rx,ry,"
                 + "scale,scrollbarColor,scrollbarGutter,scrollbarWidth,scrollBehavior,scrollInitialTarget,"
                 + "scrollMargin,scrollMarginBlock,"
@@ -7129,7 +7130,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "pageBreakInside,pageOrientation,paintOrder,parentRule,perspective,perspectiveOrigin,placeContent,"
                 + "placeItems,placeSelf,pointerEvents,position,"
                 + "positionAnchor,positionArea,positionTry,positionTryFallbacks,positionTryOrder,positionVisibility,"
-                + "prefix,printColorAdjust,quotes,r,range,removeProperty(),resize,right,"
+                + "prefix,printColorAdjust,quotes,r,range,readingFlow,readingOrder,removeProperty(),resize,right,"
                 + "rotate,rowGap,rubyAlign,rubyPosition,rx,ry,"
                 + "scale,scrollbarColor,scrollbarGutter,scrollbarWidth,scrollBehavior,scrollInitialTarget,"
                 + "scrollMargin,scrollMarginBlock,"
@@ -7205,7 +7206,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "-moz-font-feature-settings,-moz-font-language-override,-moz-force-broken-image-icon,-moz-hyphens,"
                 + "-moz-margin-end,-moz-margin-start,-moz-orient,-moz-padding-end,"
                 + "-moz-padding-start,-moz-perspective,-moz-perspective-origin,-moz-tab-size,-moz-text-size-adjust,"
-                + "-moz-transform,-moz-transform-origin,-moz-transform-style,"
+                + "-moz-transform,-moz-transform-origin,-moz-transform-style,-moz-transition,-moz-transition-delay,"
+                + "-moz-transition-duration,-moz-transition-property,-moz-transition-timing-function,"
                 + "-moz-user-select,-moz-window-dragging,"
                 + "-webkit-align-content,-webkit-align-items,-webkit-align-self,-webkit-animation,"
                 + "-webkit-animation-delay,-webkit-animation-direction,-webkit-animation-duration,"
@@ -7335,7 +7337,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "MozBoxPack,MozBoxSizing,MozFloatEdge,MozFontFeatureSettings,MozFontLanguageOverride,"
                 + "MozForceBrokenImageIcon,MozHyphens,MozMarginEnd,MozMarginStart,MozOrient,"
                 + "MozPaddingEnd,MozPaddingStart,MozPerspective,MozPerspectiveOrigin,MozTabSize,MozTextSizeAdjust,"
-                + "MozTransform,MozTransformOrigin,MozTransformStyle,"
+                + "MozTransform,MozTransformOrigin,MozTransformStyle,MozTransition,MozTransitionDelay,"
+                + "MozTransitionDuration,MozTransitionProperty,MozTransitionTimingFunction,"
                 + "MozUserSelect,MozWindowDragging,object-fit,object-position,objectFit,"
                 + "objectPosition,offset,offset-anchor,offset-distance,"
                 + "offset-path,offset-position,offset-rotate,offsetAnchor,"
