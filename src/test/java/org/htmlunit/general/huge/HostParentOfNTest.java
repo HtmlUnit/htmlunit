@@ -1166,7 +1166,6 @@ public class HostParentOfNTest extends HostParentOf {
      */
     @Test
     @Alerts("false/false")
-    @HtmlUnitNYI(FF = "true/false")
     public void _Node_SVGDiscardElement() throws Exception {
         test("Node", "SVGDiscardElement");
     }

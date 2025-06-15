@@ -19,7 +19,6 @@ import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameters;
@@ -512,7 +511,6 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts("false/false")
-    @HtmlUnitNYI(FF = "true/true")
     public void _SVGAnimationElement_SVGDiscardElement() throws Exception {
         test("SVGAnimationElement", "SVGDiscardElement");
     }
@@ -612,7 +610,6 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts("false/false")
-    @HtmlUnitNYI(FF = "true/false")
     public void _SVGDiscardElement_SVGDiscardElement() throws Exception {
         test("SVGDiscardElement", "SVGDiscardElement");
     }
@@ -712,7 +709,6 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts("false/false")
-    @HtmlUnitNYI(FF = "true/false")
     public void _SVGElement_SVGDiscardElement() throws Exception {
         test("SVGElement", "SVGDiscardElement");
     }

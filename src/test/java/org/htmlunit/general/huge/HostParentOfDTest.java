@@ -1291,7 +1291,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts("false/false")
-    @HtmlUnitNYI(FF = "true/false")
     public void _Element_SVGDiscardElement() throws Exception {
         test("Element", "SVGDiscardElement");
     }
@@ -4102,7 +4101,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts("false/false")
-    @HtmlUnitNYI(FF = "true/false")
     public void _EventTarget_SVGDiscardElement() throws Exception {
         test("EventTarget", "SVGDiscardElement");
     }

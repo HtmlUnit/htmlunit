@@ -2372,7 +2372,6 @@ public class CtorPrototypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @HtmlUnitNYI(FF = "false")
     public void _SVGDiscardElement() throws Exception {
         test("SVGDiscardElement");
     }
