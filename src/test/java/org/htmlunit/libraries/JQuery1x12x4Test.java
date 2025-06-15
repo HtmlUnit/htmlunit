@@ -38,6 +38,8 @@ import org.openqa.selenium.WebElement;
 @RunWith(BrowserRunner.class)
 public class JQuery1x12x4Test extends JQueryTestBase {
 
+    private String[] testResultLines_ = null;
+
     /**
      * {@inheritDoc}
      */
@@ -51,12 +53,16 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Override
     protected String readTestNumber(final String testName) throws Exception {
-        final String testResults = loadExpectation("/libraries/jQuery/"
+        if (testResultLines_ == null) {
+            final String testResults = loadExpectation("/libraries/jQuery/"
                                         + getVersion() + "/expectations/results", ".txt");
-        final String[] lines = testResults.split("\n");
-        Arrays.sort(lines, Comparator.comparingInt(String::length));
-        for (int i = 0; i < lines.length; i++) {
-            final String line = lines[i];
+            final String[] lines = testResults.split("\n");
+            Arrays.sort(lines, Comparator.comparingInt(String::length));
+            testResultLines_ = lines;
+        }
+
+        for (int i = 0; i < testResultLines_.length; i++) {
+            final String line = testResultLines_[i];
             final int pos = line.indexOf(testName);
             if (pos != -1) {
                 final int start = line.lastIndexOf('[') + 1;
@@ -72,7 +78,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      */
     @Override
     protected String buildUrl(final String testNumber) {
-        return URL_FIRST + "jquery/test/index.html?dev&testId=" + testNumber;
+        return URL_FIRST + "jquery/test/index.html?testId=" + testNumber;
     }
 
     /**
