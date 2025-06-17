@@ -18,7 +18,6 @@ import java.lang.reflect.Method;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -37,6 +36,11 @@ public class SetExpectedAlertsBeforeTestExecutionCallback implements BeforeTestE
 
     /** If no alerts defined. */
     public static final String[] NO_ALERTS_DEFINED = {"no alerts defined"};
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     */
+    public static final String EMPTY_DEFAULT = "~InTerNal_To_BrowSeRRunNer#@$";
 
     @Override
     public void beforeTestExecution(final ExtensionContext context) throws Exception {
@@ -126,11 +130,11 @@ public class SetExpectedAlertsBeforeTestExecutionCallback implements BeforeTestE
 
 
     /**
-     * @param alerts the alerst to check
+     * @param alerts the alerts to check
      * @return true if there is exactly one alert defined
      */
     public static boolean isDefined(final String[] alerts) {
-        return alerts.length != 1 || !alerts[0].equals(BrowserRunner.EMPTY_DEFAULT);
+        return alerts.length != 1 || !alerts[0].equals(EMPTY_DEFAULT);
     }
 
     private static String[] firstDefined(final String[]... variants) {

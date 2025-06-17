@@ -21,6 +21,8 @@ import java.util.stream.Stream;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebServerTestCase;
+import org.htmlunit.WebTestCase;
 import org.junit.jupiter.api.extension.ClassTemplateInvocationContext;
 import org.junit.jupiter.api.extension.ClassTemplateInvocationContextProvider;
 import org.junit.jupiter.api.extension.Extension;
@@ -104,10 +106,14 @@ public class BrowserVersionClassTemplateInvocationContextProvider implements Cla
 
                     @Override
                     public void postProcessTestInstance(final Object testInstance, final ExtensionContext context) {
+                        if (testInstance instanceof WebTestCase) {
+                            final WebTestCase webTestCase = (WebTestCase) testInstance;
+
+                            webTestCase.setBrowserVersion(browserVersion);
+                        }
                         if (testInstance instanceof WebDriverTestCase) {
                             final WebDriverTestCase webDriverTestCase = (WebDriverTestCase) testInstance;
 
-                            webDriverTestCase.setBrowserVersion(browserVersion);
                             webDriverTestCase.setUseRealBrowser(realBrowser);
                         }
                     }
