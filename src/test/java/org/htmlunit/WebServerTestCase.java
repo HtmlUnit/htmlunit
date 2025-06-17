@@ -49,7 +49,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.util.MimeType;
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 
 /**
  * A WebTestCase which starts a local server, and doens't use WebDriver.
@@ -236,7 +236,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * Performs post-test deconstruction.
      * @throws Exception if an error occurs
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         if (server_ != null) {
             server_.stop();
@@ -506,7 +506,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * Cleanup after a test.
      */
     @Override
-    @After
+    @AfterEach
     public void releaseResources() {
         super.releaseResources();
         if (webClient_ != null) {

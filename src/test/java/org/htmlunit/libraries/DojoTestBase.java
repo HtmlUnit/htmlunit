@@ -14,8 +14,6 @@
  */
 package org.htmlunit.libraries;
 
-import static org.junit.Assert.fail;
-
 import java.time.Duration;
 import java.util.List;
 
@@ -24,6 +22,7 @@ import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebServerTestCase;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -83,7 +82,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
                 Thread.sleep(42);
 
                 if (System.currentTimeMillis() > endTime) {
-                    fail("Test runs too long (longer than " + runTime / 1000 + "s)");
+                    Assertions.fail("Test runs too long (longer than " + runTime / 1000 + "s)");
                 }
                 status = getResultElementText(webdriver);
             }

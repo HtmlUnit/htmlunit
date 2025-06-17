@@ -15,7 +15,6 @@
 package org.htmlunit.libraries;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.util.List;
@@ -26,7 +25,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebDriverTestCase;
-import org.junit.AfterClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -89,7 +89,7 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
             Thread.sleep(100);
 
             if (System.currentTimeMillis() > endTime) {
-                fail("Test '" + filename + "' runs too long (longer than " + runTime / 1000 + "s)");
+                Assertions.fail("Test '" + filename + "' runs too long (longer than " + runTime / 1000 + "s)");
             }
         }
 
@@ -130,7 +130,7 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @AfterClass
+    @AfterAll
     public static void stopServer() throws Exception {
         if (SERVER_ != null) {
             SERVER_.stop();

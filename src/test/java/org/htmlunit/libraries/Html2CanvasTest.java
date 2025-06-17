@@ -22,8 +22,8 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.NotYetImplemented;
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -104,7 +104,7 @@ public class Html2CanvasTest extends WebDriverTestCase {
             Thread.sleep(50);
         }
 
-        Assert.assertTrue("'" + value + "' does not start with 'data:image/png;base64'",
-                            value.startsWith("data:image/png;base64,"));
+        Assertions.assertTrue(value.startsWith("data:image/png;base64,"),
+                "'" + value + "' does not start with 'data:image/png;base64'");
     }
 }

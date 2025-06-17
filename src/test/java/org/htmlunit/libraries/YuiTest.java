@@ -14,8 +14,6 @@
  */
 package org.htmlunit.libraries;
 
-import static org.junit.Assert.fail;
-
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,6 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -102,7 +101,7 @@ public class YuiTest extends WebDriverTestCase {
     public void config() throws Exception {
         // Test currently commented out as there are problems with the YUI test.
         // A bug has been filed against YUI regarding the problems with the test.
-        fail("YUI test has a bug that causes this to fail.");
+        Assertions.fail("YUI test has a bug that causes this to fail.");
         //doTest("config.html");
     }
 
@@ -262,7 +261,7 @@ public class YuiTest extends WebDriverTestCase {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         final List<WebElement> tests = driver.findElements(By.xpath("//p[span[@class='pass' or @class='fail']]"));
         if (tests.isEmpty()) {
-            fail("No tests were executed!");
+            Assertions.fail("No tests were executed!");
         }
 
         for (final WebElement pre : tests) {
