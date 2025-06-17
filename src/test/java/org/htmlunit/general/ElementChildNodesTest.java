@@ -15,11 +15,9 @@
 package org.htmlunit.general;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the result of {@code element.childNodes.length}.
@@ -29,7 +27,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class ElementChildNodesTest extends WebDriverTestCase {
 
     private static String test(final String tagName) {

@@ -42,7 +42,6 @@ import org.htmlunit.javascript.host.dom.XPathEvaluator;
 import org.htmlunit.javascript.host.dom.XPathResult;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.performance.Performance;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserVersionClassRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -54,17 +53,15 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LayeredBarRenderer;
 import org.jfree.chart.util.SortOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests own properties of an object.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class ElementOwnPropertiesTest extends WebDriverTestCase {
 
     private static BrowserVersion BROWSER_VERSION_;
@@ -176,7 +173,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     /**
      * Resets browser-specific values.
      */
-    @BeforeClass
+    @BeforeAll
     public static void beforeClass() {
         BROWSER_VERSION_ = null;
     }
@@ -186,7 +183,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      *
      * @throws IOException if an error occurs
      */
-    @AfterClass
+    @AfterAll
     public static void saveAll() throws IOException {
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         final int[] counts = {0, 0};

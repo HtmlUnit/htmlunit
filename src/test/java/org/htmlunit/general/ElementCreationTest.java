@@ -15,10 +15,8 @@
 package org.htmlunit.general;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the result of <code>document.createElement()</code>.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class ElementCreationTest extends WebDriverTestCase {
 
     private void test(final String tagName) throws Exception {

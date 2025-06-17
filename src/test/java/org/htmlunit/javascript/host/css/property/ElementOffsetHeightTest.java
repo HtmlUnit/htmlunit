@@ -15,11 +15,9 @@
 package org.htmlunit.javascript.host.css.property;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@code offsetHeight} of an element.
@@ -27,7 +25,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class ElementOffsetHeightTest extends WebDriverTestCase {
 
     private static final String VALUE_ = "e == null ? e : e.offsetHeight";

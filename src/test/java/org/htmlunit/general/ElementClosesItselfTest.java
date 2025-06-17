@@ -15,10 +15,8 @@
 package org.htmlunit.general;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for an element to close itself, which is defined in
@@ -28,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class ElementClosesItselfTest extends WebDriverTestCase {
 
     private void test(final String tagName) throws Exception {
