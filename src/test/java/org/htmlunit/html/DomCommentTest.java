@@ -15,9 +15,7 @@
 package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DomComment}.
@@ -25,8 +23,8 @@ import org.junit.runner.RunWith;
  * @author Karel Kolman
  * @author Ahmed Ashour
  * @author Philip Graf
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DomCommentTest extends SimpleWebTestCase {
 
     /**

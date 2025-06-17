@@ -17,11 +17,9 @@ package org.htmlunit.libraries;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,7 +33,6 @@ import org.openqa.selenium.WebElement;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class JQuery3x3x1Test extends JQueryTestBase {
 
     /**

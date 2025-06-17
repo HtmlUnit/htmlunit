@@ -23,9 +23,8 @@ import javax.net.ssl.SSLHandshakeException;
 import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for custom trust store.
@@ -34,7 +33,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HttpWebConnectionTruststoreTest extends WebServerTestCase {
 
     /**
@@ -54,10 +52,12 @@ public class HttpWebConnectionTruststoreTest extends WebServerTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @Test(expected = SSLHandshakeException.class)
+    @Test
     public void selfSignedCertNotInTruststore() throws Exception {
         final URL https = new URL("https://localhost:" + PORT2 + "/");
-        loadPage("<div>test</div>", https);
+
+        Assertions.assertThrows(SSLHandshakeException.class,
+                    () -> loadPage("<div>test</div>", https));
     }
 
     @Override

@@ -18,17 +18,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BeforeUnloadEvent}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class BeforeUnloadEvent2Test extends WebServerTestCase {
 
     /**

@@ -23,12 +23,10 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.FileUtils;
 import org.htmlunit.CookieManager4Test;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -46,7 +44,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Colin Alworth
  * @author Christoph Burgmer
  */
-@RunWith(BrowserRunner.class)
 public class Window2Test extends WebDriverTestCase {
 
     /**

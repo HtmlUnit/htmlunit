@@ -24,13 +24,11 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -45,7 +43,6 @@ import org.openqa.selenium.WebElement;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class YuiTest extends WebDriverTestCase {
     private static final Log LOG = LogFactory.getLog(YuiTest.class);
 
@@ -101,7 +98,7 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Ignore
+    @Disabled
     public void config() throws Exception {
         // Test currently commented out as there are problems with the YUI test.
         // A bug has been filed against YUI regarding the problems with the test.
@@ -287,7 +284,7 @@ public class YuiTest extends WebDriverTestCase {
      * Performs pre-test initialization.
      * @throws Exception if an error occurs
      */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         startWebServer("src/test/resources/libraries/yui/2.3.0", null, null);
     }

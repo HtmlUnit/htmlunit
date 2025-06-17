@@ -14,18 +14,15 @@
  */
 package org.htmlunit.libraries;
 
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for <a href="https://htmx.org/">htmx</a>.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmxTest2x0x2 extends HtmxTest {
 
     /**

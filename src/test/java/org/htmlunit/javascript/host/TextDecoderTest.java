@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TextDecoder}.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder">TextDecoder() - Web APIs | MDN</a>
  */
-@RunWith(BrowserRunner.class)
 public class TextDecoderTest extends WebDriverTestCase {
 
     /**

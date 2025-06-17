@@ -22,12 +22,10 @@ import java.util.List;
 import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebServerTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,7 +38,6 @@ import org.openqa.selenium.WebElement;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class MooTools121Test extends WebDriverTestCase {
 
     private static Server SERVER_;
@@ -48,7 +45,7 @@ public class MooTools121Test extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @BeforeClass
+    @BeforeAll
     public static void startSesrver() throws Exception {
         SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/mootools/1.2.1", null);
     }
@@ -56,7 +53,7 @@ public class MooTools121Test extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @AfterClass
+    @AfterAll
     public static void stopServer() throws Exception {
         if (SERVER_ != null) {
             SERVER_.stop();

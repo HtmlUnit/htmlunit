@@ -17,16 +17,14 @@ package org.htmlunit;
 import java.net.URL;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link NiceRefreshHandler}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public final class NiceRefreshHandlerTest extends SimpleWebTestCase {
 
     /**

@@ -17,16 +17,13 @@ package org.htmlunit.attachment;
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.UnexpectedPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link CollectingAttachmentHandler}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class CollectingAttachmentHandlerTest extends SimpleWebTestCase {
 
     /**

@@ -14,12 +14,12 @@
  */
 package org.htmlunit.junit.annotation;
 
+import static org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback.EMPTY_DEFAULT;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Indicates that the test runs manually in a real browser but not when using WebDriver to drive the browser.
@@ -37,35 +37,35 @@ public @interface BuggyWebDriver {
      * Alerts that is used for all browsers (if defined, the other values are ignored).
      * @return the alerts
      */
-    String[] value() default { BrowserRunner.EMPTY_DEFAULT };
+    String[] value() default { EMPTY_DEFAULT };
 
     /**
      * Alerts for latest Edge.
      * @return the alerts
      */
-    String[] EDGE() default { BrowserRunner.EMPTY_DEFAULT };
+    String[] EDGE() default { EMPTY_DEFAULT };
 
     /**
      * Alerts for latest Firefox.
      * @return the alerts
      */
-    String[] FF() default { BrowserRunner.EMPTY_DEFAULT };
+    String[] FF() default { EMPTY_DEFAULT };
 
     /**
      * Alerts for Firefox ESR.
      * @return the alerts
      */
-    String[] FF_ESR() default { BrowserRunner.EMPTY_DEFAULT };
+    String[] FF_ESR() default { EMPTY_DEFAULT };
 
     /**
      * Alerts for latest Chrome.
      * @return the alerts
      */
-    String[] CHROME() default { BrowserRunner.EMPTY_DEFAULT };
+    String[] CHROME() default { EMPTY_DEFAULT };
 
     /**
      * The default alerts, if nothing more specific is defined.
      * @return the alerts
      */
-    String[] DEFAULT() default { BrowserRunner.EMPTY_DEFAULT };
+    String[] DEFAULT() default { EMPTY_DEFAULT };
 }

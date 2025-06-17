@@ -15,10 +15,8 @@
 package org.htmlunit.libraries;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,13 +29,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public abstract class GWTTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
-    @Before
+    @BeforeEach
     public void startSesrver() throws Exception {
         startWebServer("src/test/resources/libraries/GWT/" + getDirectory(), null, null);
     }
@@ -45,7 +42,7 @@ public abstract class GWTTest extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @After
+    @AfterEach
     public void stopServer() throws Exception {
         stopWebServers();
     }

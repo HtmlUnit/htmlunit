@@ -16,9 +16,7 @@ package org.htmlunit.libraries;
 
 import java.util.List;
 
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,7 +26,6 @@ import org.openqa.selenium.WebElement;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class GWTTest2x11x0 extends GWTTest {
 
     @Override

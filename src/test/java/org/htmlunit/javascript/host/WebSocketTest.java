@@ -30,12 +30,10 @@ import org.eclipse.jetty.websocket.servlet.WebSocketCreator;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,7 +45,6 @@ import org.openqa.selenium.WebElement;
  * @author Ronald Brill
  * @author Madis Pärn
  */
-@RunWith(BrowserRunner.class)
 public class WebSocketTest extends WebDriverTestCase {
 
     /**
@@ -306,7 +303,7 @@ public class WebSocketTest extends WebDriverTestCase {
     /**
      * {@inheritDoc}
      */
-    @After
+    @AfterEach
     @Override
     public void releaseResources() {
         super.releaseResources();

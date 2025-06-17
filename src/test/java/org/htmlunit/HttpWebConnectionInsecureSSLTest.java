@@ -23,10 +23,9 @@ import javax.net.ssl.SSLHandshakeException;
 import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.WebConnectionWrapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for insecure SSL.
@@ -34,16 +33,16 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HttpWebConnectionInsecureSSLTest extends WebServerTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
-    @Test(expected = SSLHandshakeException.class)
+    @Test
     public void normal() throws Exception {
         final URL https = new URL("https://localhost:" + PORT2 + "/");
-        loadPage("<div>test</div>", https);
+        Assertions.assertThrows(SSLHandshakeException.class,
+                () -> loadPage("<div>test</div>", https));
     }
 
     /**

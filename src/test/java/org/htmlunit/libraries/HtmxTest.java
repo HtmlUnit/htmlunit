@@ -20,8 +20,6 @@ import org.htmlunit.Page;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -34,7 +32,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public abstract class HtmxTest extends WebDriverTestCase {
 
     private static final boolean BUG_HUNTING = false;

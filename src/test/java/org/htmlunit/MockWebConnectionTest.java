@@ -17,17 +17,15 @@ package org.htmlunit;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link MockWebConnection}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class MockWebConnectionTest extends SimpleWebTestCase {
 
     /**

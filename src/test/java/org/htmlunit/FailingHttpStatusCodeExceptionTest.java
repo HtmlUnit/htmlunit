@@ -21,10 +21,8 @@ import java.util.Collections;
 import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FailingHttpStatusCodeException}.
@@ -32,7 +30,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase {
 
     /**

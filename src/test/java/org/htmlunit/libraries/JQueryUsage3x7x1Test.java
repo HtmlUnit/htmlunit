@@ -15,10 +15,8 @@
 package org.htmlunit.libraries;
 
 import org.htmlunit.WebClient;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -27,7 +25,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class JQueryUsage3x7x1Test extends JQueryTestBase {
 
     /**

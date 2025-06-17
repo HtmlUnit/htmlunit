@@ -20,8 +20,8 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserVersionClassRunner;
+import org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback;
 
 /**
  * Utility functions for working with our annotations.
@@ -142,7 +142,7 @@ public final class AnnotationUtils {
 
     private static void assertNotEquals(final String annotation, final Method method, final BrowserVersion browser,
             final String[] value1, final String[] value2) {
-        if (value1.length != 0 && !BrowserRunner.EMPTY_DEFAULT.equals(value1[0])
+        if (value1.length != 0 && !SetExpectedAlertsBeforeTestExecutionCallback.EMPTY_DEFAULT.equals(value1[0])
                 && value1.length == value2.length
                 && Arrays.asList(value1).toString().equals(Arrays.asList(value2).toString())) {
             final String nickname = browser == null ? "DEFAULT" : browser.getNickname();

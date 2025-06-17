@@ -18,10 +18,8 @@ import java.time.Duration;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,7 +31,6 @@ import org.openqa.selenium.WebElement;
  * @author Frank Danek
  * @author Ronald Brill#
  */
-@RunWith(BrowserRunner.class)
 public abstract class MochiKitTest extends WebDriverTestCase {
 
     /**
@@ -195,7 +192,7 @@ public abstract class MochiKitTest extends WebDriverTestCase {
      * Performs pre-test initialization.
      * @throws Exception if an error occurs
      */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         startWebServer("src/test/resources/libraries/MochiKit/" + srcFolder(), null, null);
     }

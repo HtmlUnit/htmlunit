@@ -15,7 +15,6 @@
 package org.htmlunit.libraries;
 
 import static org.htmlunit.junit.BrowserVersionClassRunner.NO_ALERTS_DEFINED;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -30,12 +29,10 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.WebConnectionWrapper;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.ComparisonFailure;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -48,7 +45,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public abstract class JQueryTestBase extends WebDriverTestCase {
 
     protected static final class OnlyLocalConnectionWrapper extends WebConnectionWrapper {
@@ -135,7 +131,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
                 }
                 System.out.println("--------------------------------------------");
 
-                fail(new ComparisonFailure("", expected, result).getMessage());
+                Assertions.fail("ToDo" /* new ComparisonFailure("", expected, result).getMessage()*/);
             }
         }
         catch (final Exception e) {
@@ -210,7 +206,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @Before
+    @BeforeEach
     public void aaa_startSesrver() throws Exception {
         if (SERVER_ == null) {
             SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/jQuery/" + getVersion(), null);
@@ -220,7 +216,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @AfterClass
+    @AfterAll
     public static void zzz_stopServer() throws Exception {
         if (SERVER_ != null) {
             SERVER_.stop();

@@ -16,16 +16,14 @@ package org.htmlunit.javascript.host.css;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link CSSStyleDeclaration}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class CSSStyleDeclaration4Test extends SimpleWebTestCase {
 
     /**

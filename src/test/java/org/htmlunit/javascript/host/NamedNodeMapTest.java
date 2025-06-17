@@ -16,11 +16,9 @@ package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.javascript.host.xml.XMLDocumentTest;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link org.htmlunit.javascript.host.NamedNodeMap}.
@@ -31,7 +29,6 @@ import org.junit.runner.RunWith;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class NamedNodeMapTest extends WebDriverTestCase {
 
     /**

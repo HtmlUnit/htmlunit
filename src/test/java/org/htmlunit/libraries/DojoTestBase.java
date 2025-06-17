@@ -23,10 +23,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebServerTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -43,7 +41,6 @@ import org.openqa.selenium.WebElement;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public abstract class DojoTestBase extends WebDriverTestCase {
 
     private static final String BASE_FILE_PATH = "libraries/dojo";
@@ -209,7 +206,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @Before
+    @BeforeEach
     public void startSesrver() throws Exception {
         if (SERVER_ == null) {
             SERVER_ = WebServerTestCase.createWebServer("src/test/resources/"
@@ -220,7 +217,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @AfterClass
+    @AfterAll
     public static void stopServer() throws Exception {
         if (SERVER_ != null) {
             SERVER_.stop();

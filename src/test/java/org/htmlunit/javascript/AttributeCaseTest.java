@@ -19,17 +19,15 @@ import java.util.Locale;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlElement} attributes.
  *
  * @author David D. Kilzer
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class AttributeCaseTest extends SimpleWebTestCase {
 
     private static final String ATTRIBUTE_NAME = "randomAttribute";

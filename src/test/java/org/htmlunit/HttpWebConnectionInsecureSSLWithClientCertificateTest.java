@@ -15,7 +15,6 @@
 package org.htmlunit;
 
 import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
-import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -26,9 +25,8 @@ import javax.net.ssl.SSLHandshakeException;
 import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for insecure SSL, with client certificate.
@@ -37,17 +35,17 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends WebServerTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
-    @Test(expected = SSLHandshakeException.class)
+    @Test
     public void insecureSSL_clientCertificates_fail() throws Exception {
         final URL https = new URL("https://localhost:" + PORT2 + "/");
-        loadPage("<div>test</div>", https);
-        fail("SSLHandshakeException expected");
+
+        Assertions.assertThrows(SSLHandshakeException.class,
+                    () -> loadPage("<div>test</div>", https));
     }
 
     /**
@@ -70,10 +68,12 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends WebSe
      *
      * @throws Exception if an error occurs
      */
-    @Test(expected = SSLHandshakeException.class)
+    @Test
     public void insecureSSL_clientCertificatesInputStream_fail() throws Exception {
         final URL https = new URL("https://localhost:" + PORT2 + "/");
-        loadPage("<div>test</div>", https);
+
+        Assertions.assertThrows(SSLHandshakeException.class,
+                () -> loadPage("<div>test</div>", https));
     }
 
     /**

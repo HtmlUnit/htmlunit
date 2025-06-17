@@ -34,13 +34,11 @@ import java.util.Map;
 import org.apache.commons.lang3.time.DateUtils;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.mocks.WebResponseMock;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Cache}.
@@ -53,7 +51,6 @@ import org.junit.runner.RunWith;
  * @author Ashley Frieze
  * @author Lai Quang Duong
  */
-@RunWith(BrowserRunner.class)
 public class CacheTest extends SimpleWebTestCase {
 
     private static final long ONE_MINUTE = 60_000L;

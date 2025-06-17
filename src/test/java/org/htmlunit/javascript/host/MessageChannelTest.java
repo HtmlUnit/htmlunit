@@ -18,10 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -29,8 +27,8 @@ import org.openqa.selenium.WebDriver;
  * Tests for {@link MessageChannel}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class MessageChannelTest extends WebDriverTestCase {
 
     /**

@@ -14,11 +14,9 @@
  */
 package org.htmlunit.libraries;
 
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for compatibility with web server loading of
@@ -32,7 +30,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class JQuery1x11x3Test extends JQueryTestBase {
 
     /**

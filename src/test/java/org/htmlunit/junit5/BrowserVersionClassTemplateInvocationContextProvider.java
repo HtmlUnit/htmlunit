@@ -21,7 +21,6 @@ import java.util.stream.Stream;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.WebServerTestCase;
 import org.htmlunit.WebTestCase;
 import org.junit.jupiter.api.extension.ClassTemplateInvocationContext;
 import org.junit.jupiter.api.extension.ClassTemplateInvocationContextProvider;

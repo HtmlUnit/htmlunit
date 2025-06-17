@@ -17,10 +17,8 @@ package org.htmlunit.libraries;
 import java.util.List;
 
 import org.htmlunit.WebServerTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,13 +32,12 @@ import org.openqa.selenium.WebElement;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class Prototype150rc1Test extends PrototypeTestBase {
 
     /**
      * @throws Exception if an error occurs
      */
-    @BeforeClass
+    @BeforeAll
     public static void startSesrver() throws Exception {
         SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/prototype/1.5.0-rc1/", null);
     }

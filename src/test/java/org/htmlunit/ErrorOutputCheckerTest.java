@@ -14,17 +14,15 @@
  */
 package org.htmlunit;
 
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.NotYetImplemented;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for the unit test utility {@link ErrorOutputChecker}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class ErrorOutputCheckerTest extends WebTestCase {
 
     // no need to specify Rule here as it is specified in {@link WebTestCase}

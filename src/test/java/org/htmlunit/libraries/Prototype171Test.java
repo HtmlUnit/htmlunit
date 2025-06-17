@@ -15,10 +15,8 @@
 package org.htmlunit.libraries;
 
 import org.htmlunit.WebServerTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for compatibility with version 1.7.1 of
@@ -26,13 +24,12 @@ import org.junit.runner.RunWith;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class Prototype171Test extends PrototypeTestBase {
 
     /**
      * @throws Exception if an error occurs
      */
-    @BeforeClass
+    @BeforeAll
     public static void aaa_startSesrver() throws Exception {
         SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/prototype/1.7.1/test/unit/", null);
     }

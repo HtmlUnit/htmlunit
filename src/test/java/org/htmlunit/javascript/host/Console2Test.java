@@ -21,11 +21,9 @@ import java.util.List;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebConsole;
 import org.htmlunit.WebConsole.Logger;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for Console.
@@ -34,7 +32,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class Console2Test extends SimpleWebTestCase {
 
     private final class LoggerMock implements Logger {

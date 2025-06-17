@@ -33,10 +33,8 @@ import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.javascript.host.html.HTMLStyleElement;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.NodeList;
 
 /**
@@ -45,8 +43,8 @@ import org.w3c.dom.NodeList;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
     /**

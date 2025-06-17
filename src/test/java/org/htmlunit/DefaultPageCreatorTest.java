@@ -28,10 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.xml.XmlPage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DefaultPageCreator}.
@@ -40,7 +38,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DefaultPageCreatorTest extends WebServerTestCase {
 
     /**

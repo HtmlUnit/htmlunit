@@ -52,13 +52,11 @@ import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.ServletContentWrapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests methods in {@link HttpWebConnection}.
@@ -69,7 +67,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Carsten Steul
  */
-@RunWith(BrowserRunner.class)
 public class HttpWebConnectionTest extends WebServerTestCase {
 
     /**

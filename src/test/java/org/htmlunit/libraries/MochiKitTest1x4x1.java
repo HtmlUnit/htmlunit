@@ -14,9 +14,6 @@
  */
 package org.htmlunit.libraries;
 
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.runner.RunWith;
-
 /**
  * Tests for compatibility with <a href="http://mochikit.com">MochiKit</a>.
  *
@@ -24,7 +21,6 @@ import org.junit.runner.RunWith;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class MochiKitTest1x4x1 extends MochiKitTest {
 
     @Override

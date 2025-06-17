@@ -14,25 +14,23 @@
  */
 package org.htmlunit;
 
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BrowserRunner}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class BrowserRunnerTest extends SimpleWebTestCase {
     private static int Counter_ = 0;
 
     /**
      * Setup.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setupClass() {
         Counter_++;
     }
@@ -40,7 +38,7 @@ public class BrowserRunnerTest extends SimpleWebTestCase {
     /**
      * Tear down.
      */
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() {
         Counter_--;
     }

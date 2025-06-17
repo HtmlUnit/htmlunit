@@ -17,18 +17,15 @@ package org.htmlunit.html;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.xml.XmlPage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DomElement}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public final class DomElement2Test extends SimpleWebTestCase {
 
     /**

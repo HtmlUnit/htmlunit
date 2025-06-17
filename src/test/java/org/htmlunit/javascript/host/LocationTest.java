@@ -24,10 +24,8 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Location}.
@@ -40,7 +38,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Lai Quang Duong
  */
-@RunWith(BrowserRunner.class)
 public class LocationTest extends SimpleWebTestCase {
 
     /**
