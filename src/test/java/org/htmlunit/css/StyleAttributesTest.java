@@ -27,12 +27,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.htmlunit.css.StyleAttributes.Definition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link StyleAttributes}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class StyleAttributesTest {
 
