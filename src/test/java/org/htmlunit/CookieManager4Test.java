@@ -25,15 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -53,7 +51,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ahmed Ashour
  * @author Jacob Childress
  */
-@RunWith(BrowserRunner.class)
 public class CookieManager4Test extends WebDriverTestCase {
 
     /** "htmlunit-dev.org". */
@@ -71,7 +68,7 @@ public class CookieManager4Test extends WebDriverTestCase {
      *
      * @throws Exception if the test fails
      */
-    @BeforeClass
+    @BeforeAll
     public static void checkSettings() throws Exception {
         try {
             InetAddress.getByName(new URL(URL_HOST1).getHost());
@@ -107,7 +104,7 @@ public class CookieManager4Test extends WebDriverTestCase {
      *
      * @throws Exception if the test fails
      */
-    @Before
+    @BeforeEach
     public void clearCookies() throws Exception {
         shutDownAll();
 

@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.css;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for css pseudo selectors :placeholder-shown and :-ms-input-placeholder.
@@ -27,7 +25,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  *
  */
-@RunWith(BrowserRunner.class)
 public class CSSSelector2Test extends WebDriverTestCase {
 
     private static final String PLACEHOLDER_SHOWN_HTML_HEAD = DOCTYPE_HTML

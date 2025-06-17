@@ -18,11 +18,9 @@ import java.net.URL;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link CSSCharsetRuleImpl}.
@@ -31,7 +29,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class CSSCharsetRuleTest extends WebDriverTestCase {
 
     /**

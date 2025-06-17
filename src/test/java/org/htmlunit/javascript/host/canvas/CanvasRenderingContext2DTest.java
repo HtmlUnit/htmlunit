@@ -19,12 +19,10 @@ import java.util.Collections;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link CanvasRenderingContext2D}.
@@ -34,7 +32,6 @@ import org.junit.runner.RunWith;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class CanvasRenderingContext2DTest extends WebDriverTestCase {
 
     /**
