@@ -17,6 +17,7 @@ package org.htmlunit.junit5;
 import java.lang.reflect.Method;
 
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
@@ -42,14 +43,14 @@ public class SetExpectedAlertsBeforeTestExecutionCallback implements BeforeTestE
         final Method testMethod = context.getRequiredTestMethod();
         final Object testInstance = context.getRequiredTestInstance();
 
-        if (testInstance instanceof Junit5WebDriverTestCase) {
-            final Junit5WebDriverTestCase webDriverTestCase = (Junit5WebDriverTestCase) testInstance;
+        if (testInstance instanceof WebDriverTestCase) {
+            final WebDriverTestCase webDriverTestCase = (WebDriverTestCase) testInstance;
 
             setAlerts(webDriverTestCase, testMethod);
         }
     }
 
-    private static void setAlerts(final Junit5WebDriverTestCase webDriverTestCase, final Method method) {
+    private static void setAlerts(final WebDriverTestCase webDriverTestCase, final Method method) {
         final Alerts alerts = method.getAnnotation(Alerts.class);
         final BrowserVersion browserVersion = webDriverTestCase.getBrowserVersion();
         final boolean realBrowser = webDriverTestCase.useRealBrowser();

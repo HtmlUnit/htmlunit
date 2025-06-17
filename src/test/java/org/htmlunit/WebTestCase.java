@@ -41,11 +41,15 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.junit.RetryRule;
+import org.htmlunit.junit5.BrowserVersionClassTemplateInvocationContextProvider;
+import org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
+import org.junit.jupiter.api.ClassTemplate;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.rules.MethodRule;
 import org.junit.rules.TestName;
 
@@ -66,6 +70,9 @@ import com.github.romankh3.image.comparison.model.ImageComparisonState;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
+@ClassTemplate
+@ExtendWith({BrowserVersionClassTemplateInvocationContextProvider.class,
+             SetExpectedAlertsBeforeTestExecutionCallback.class})
 public abstract class WebTestCase {
 
     /** The html5 doctype. */
@@ -397,7 +404,7 @@ public abstract class WebTestCase {
      * Returns the current {@link BrowserVersion}.
      * @return current {@link BrowserVersion}
      */
-    protected final BrowserVersion getBrowserVersion() {
+    public final BrowserVersion getBrowserVersion() {
         if (browserVersion_ == null) {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
         }

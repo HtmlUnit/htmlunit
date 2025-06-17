@@ -68,15 +68,11 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.htmlunit.MockWebConnection.RawResponseData;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.junit5.BrowserVersionClassTemplateInvocationContextProvider;
-import org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.ClassTemplate;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -147,9 +143,6 @@ import junit.framework.AssertionFailedError;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@ClassTemplate
-@ExtendWith({BrowserVersionClassTemplateInvocationContextProvider.class,
-             SetExpectedAlertsBeforeTestExecutionCallback.class})
 public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final String LOG_EX_FUNCTION =
@@ -501,7 +494,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * @return whether to use real browser or not.
      */
-    protected boolean useRealBrowser() {
+    public boolean useRealBrowser() {
         return useRealBrowser_;
     }
 

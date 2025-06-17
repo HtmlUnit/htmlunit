@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.WebDriverTestCase;
 import org.junit.jupiter.api.extension.ClassTemplateInvocationContext;
 import org.junit.jupiter.api.extension.ClassTemplateInvocationContextProvider;
 import org.junit.jupiter.api.extension.Extension;
@@ -55,7 +56,7 @@ public class BrowserVersionClassTemplateInvocationContextProvider implements Cla
 
         final ArrayList<ClassTemplateInvocationContext> invocationContexts = new ArrayList<>();
 
-        final Set<String> browsers = Junit5WebDriverTestCase.getBrowsersProperties();
+        final Set<String> browsers = WebDriverTestCase.getBrowsersProperties();
         if (browsers.contains(REAL_CHROME)) {
             invocationContexts.add(invocationContext(BrowserVersion.CHROME, true));
         }
@@ -103,8 +104,8 @@ public class BrowserVersionClassTemplateInvocationContextProvider implements Cla
 
                     @Override
                     public void postProcessTestInstance(final Object testInstance, final ExtensionContext context) {
-                        if (testInstance instanceof Junit5WebDriverTestCase) {
-                            final Junit5WebDriverTestCase webDriverTestCase = (Junit5WebDriverTestCase) testInstance;
+                        if (testInstance instanceof WebDriverTestCase) {
+                            final WebDriverTestCase webDriverTestCase = (WebDriverTestCase) testInstance;
 
                             webDriverTestCase.setBrowserVersion(browserVersion);
                             webDriverTestCase.setUseRealBrowser(realBrowser);
