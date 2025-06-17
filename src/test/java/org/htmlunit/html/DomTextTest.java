@@ -22,11 +22,9 @@ import java.util.List;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.StringUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DomText}.
@@ -36,8 +34,8 @@ import org.junit.runner.RunWith;
  * @author Rodney Gitzel
  * @author Sudhan Moghe
  * @author Philip Graf
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DomTextTest extends SimpleWebTestCase {
 
     /**

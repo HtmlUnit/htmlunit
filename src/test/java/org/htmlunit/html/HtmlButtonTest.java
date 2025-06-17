@@ -19,11 +19,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlButton}.
@@ -33,8 +31,8 @@ import org.junit.runner.RunWith;
  * @author Brad Clarke
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlButtonTest extends SimpleWebTestCase {
 
     /**

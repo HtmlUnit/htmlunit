@@ -18,9 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlCheckBoxInput}.
@@ -28,8 +26,8 @@ import org.junit.runner.RunWith;
  * @author Mike Bresnahan
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
 
     /**

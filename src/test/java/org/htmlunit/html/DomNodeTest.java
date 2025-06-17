@@ -23,12 +23,10 @@ import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.DomNode.DescendantHtmlElementsIterator;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.xml.XmlPage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.helpers.AttributesImpl;
 
 /**
@@ -38,7 +36,6 @@ import org.xml.sax.helpers.AttributesImpl;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DomNodeTest extends SimpleWebTestCase {
 
     /**

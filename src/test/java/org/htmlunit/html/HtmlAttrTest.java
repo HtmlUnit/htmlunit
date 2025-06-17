@@ -20,9 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DomAttr}.
@@ -31,8 +29,8 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author David K. Taylor
  * @author Frank Danek
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlAttrTest extends SimpleWebTestCase {
 
     /** Test object. */

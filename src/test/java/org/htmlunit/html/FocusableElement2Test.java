@@ -15,12 +15,10 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -33,14 +31,13 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class FocusableElement2Test extends WebDriverTestCase {
 
     /**
      * We like to start with a new browser for each test.
      * @throws Exception If an error occurs
      */
-    @After
+    @AfterEach
     public void shutDownRealBrowsers() throws Exception {
         super.shutDownAll();
     }
