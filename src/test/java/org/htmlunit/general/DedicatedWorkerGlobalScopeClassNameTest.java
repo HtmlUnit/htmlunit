@@ -20,19 +20,16 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.javascript.host.css.CSSStyleRule;
 import org.htmlunit.javascript.host.css.CSSStyleSheet;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests that {@code typeof} host class is correct.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
 
     private void test(final String className) throws Exception {

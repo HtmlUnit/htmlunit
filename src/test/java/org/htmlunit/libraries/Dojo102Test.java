@@ -14,9 +14,7 @@
  */
 package org.htmlunit.libraries;
 
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for compatibility with version 1.0.2 of the <a href="http://dojotoolkit.org/">Dojo
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class Dojo102Test extends DojoTestBase {
 
     @Override

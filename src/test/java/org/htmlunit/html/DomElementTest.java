@@ -15,10 +15,9 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.InvalidElementStateException;
@@ -32,7 +31,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public final class DomElementTest extends WebDriverTestCase {
 
     /**
@@ -68,7 +66,7 @@ public final class DomElementTest extends WebDriverTestCase {
     /**
      * @throws Exception on test failure
      */
-    @Test(expected = ElementNotInteractableException.class)
+    @Test
     public void clickInvisible() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -77,7 +75,8 @@ public final class DomElementTest extends WebDriverTestCase {
                 + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("link")).click();
+        Assertions.assertThrows(ElementNotInteractableException.class,
+                        () -> driver.findElement(By.id("link")).click());
     }
 
     /**
@@ -126,7 +125,7 @@ public final class DomElementTest extends WebDriverTestCase {
     /**
      * @throws Exception on test failure
      */
-    @Test(expected = InvalidElementStateException.class)
+    @Test
     public void sendKeysToDisabled() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -135,7 +134,8 @@ public final class DomElementTest extends WebDriverTestCase {
                 + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("id1")).sendKeys("Hello");
+        Assertions.assertThrows(InvalidElementStateException.class,
+                () -> driver.findElement(By.id("id1")).sendKeys("Hello"));
     }
 
     /**
@@ -194,7 +194,7 @@ public final class DomElementTest extends WebDriverTestCase {
     /**
      * @throws Exception on test failure
      */
-    @Test(expected = ElementNotInteractableException.class)
+    @Test
     public void clickHiddenSubmit() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
@@ -208,7 +208,8 @@ public final class DomElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("myButton")).click();
+        Assertions.assertThrows(ElementNotInteractableException.class,
+                () -> driver.findElement(By.id("myButton")).click());
     }
 
 }

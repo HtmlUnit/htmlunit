@@ -17,9 +17,7 @@ package org.htmlunit.platform.dom.traversal;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlHead;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.w3c.dom.Node;
@@ -32,7 +30,6 @@ import org.w3c.dom.traversal.TreeWalker;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public final class DomTreeWalkerTest extends WebDriverTestCase {
 
     /**

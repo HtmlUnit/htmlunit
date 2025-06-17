@@ -16,13 +16,11 @@ package org.htmlunit.javascript.host.intl;
 
 import org.apache.commons.lang3.CharUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.ComparisonFailure;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DateTimeFormat}.
@@ -30,7 +28,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class DateTimeFormat2Test extends WebDriverTestCase {
 
     private void test(final String... string) throws Exception {

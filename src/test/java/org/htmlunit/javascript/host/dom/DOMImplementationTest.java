@@ -15,11 +15,9 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -31,7 +29,6 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  * @author Adam Afeltowicz
  */
-@RunWith(BrowserRunner.class)
 public class DOMImplementationTest extends WebDriverTestCase {
 
     /**
