@@ -15,11 +15,9 @@
 package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AudioProcessingEvent}.
@@ -28,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author Madis Pärn
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class AudioProcessingEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
