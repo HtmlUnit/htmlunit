@@ -23,15 +23,13 @@ import java.util.stream.Collectors;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.junit.annotation.AnnotationUtils;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.domain.JavaMethod;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
-import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.ConditionEvents;
@@ -42,7 +40,6 @@ import com.tngtech.archunit.lang.SimpleConditionEvent;
  *
  * @author Ronald Brill
  */
-@RunWith(ArchUnitRunner.class)
 @AnalyzeClasses(packages = "org.htmlunit")
 public class Architecture2Test {
 
@@ -98,18 +95,18 @@ public class Architecture2Test {
 
         if (tmp.size() + oneTests.size() > 0) {
             if (tmp.size() == 0) {
-                Assert.fail("The " + oneTests.size() + " method(s) "
+                Assertions.fail("The " + oneTests.size() + " method(s) "
                     + oneTests.stream().sorted().collect(Collectors.toList())
                     + " are available in " + oneName + " but missing in " + anotherName + ".");
             }
             else if (oneTests.size() == 0) {
                 anotherTests.removeAll(oneTests);
-                Assert.fail("The " + tmp.size() + " method(s) "
+                Assertions.fail("The " + tmp.size() + " method(s) "
                     + tmp.stream().sorted().collect(Collectors.toList())
                     + " are available in " + anotherName + " but missing in " + oneName + ".");
             }
 
-            Assert.fail("The " + tmp.size() + " method(s) "
+            Assertions.fail("The " + tmp.size() + " method(s) "
                     + tmp.stream().sorted().collect(Collectors.toList())
                     + " are available in " + anotherName + " but missing in " + oneName
                     + " and the " + oneTests.size() + " method(s) "
