@@ -68,12 +68,15 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.htmlunit.MockWebConnection.RawResponseData;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.junit5.BrowserVersionClassTemplateInvocationContextProvider;
+import org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback;
 import org.htmlunit.util.NameValuePair;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ComparisonFailure;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.ClassTemplate;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -103,6 +106,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.htmlunit.options.HtmlUnitDriverOptions;
 import org.openqa.selenium.htmlunit.options.HtmlUnitOption;
 import org.openqa.selenium.remote.UnreachableBrowserException;
+
+import junit.framework.AssertionFailedError;
 
 /**
  * Base class for tests using WebDriver.
@@ -142,6 +147,9 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
  * @author Ronald Brill
  * @author Frank Danek
  */
+@ClassTemplate
+@ExtendWith({BrowserVersionClassTemplateInvocationContextProvider.class,
+             SetExpectedAlertsBeforeTestExecutionCallback.class})
 public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final String LOG_EX_FUNCTION =
@@ -395,7 +403,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Closes the drivers.
      * @throws Exception If an error occurs
      */
-    @AfterClass
+    @AfterAll
     public static void shutDownAll() throws Exception {
         for (final WebDriver driver : WEB_DRIVERS_.values()) {
             driver.quit();
@@ -460,9 +468,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if it fails
      */
     protected static void assertWebServersStopped() throws Exception {
-        Assert.assertNull(STATIC_SERVER_STARTER_, STATIC_SERVER_);
-        Assert.assertNull(STATIC_SERVER2_STARTER_, STATIC_SERVER2_);
-        Assert.assertNull(STATIC_SERVER3_STARTER_, STATIC_SERVER3_);
+        Assertions.assertNull(STATIC_SERVER_, STATIC_SERVER_STARTER_);
+        Assertions.assertNull(STATIC_SERVER2_, STATIC_SERVER2_STARTER_);
+        Assertions.assertNull(STATIC_SERVER3_, STATIC_SERVER3_STARTER_);
     }
 
     /**
@@ -1489,21 +1497,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
         // check for duplicates
         if (realBrowserNyiExpectation != null) {
             if (realNyiExpectation != null) {
-                Assert.assertNotEquals("Duplicate NYI Expectation for Browser " + browserVersion.getNickname(),
-                        realBrowserNyiExpectation, realNyiExpectation);
+                Assertions.assertNotEquals(realBrowserNyiExpectation, realNyiExpectation,
+                        "Duplicate NYI Expectation for Browser " + browserVersion.getNickname());
             }
 
             if (browserExpectation == null) {
                 if (expectation != null) {
-                    Assert.assertNotEquals("NYI Expectation matches the expected "
-                            + "result for Browser " + browserVersion.getNickname(),
-                            realBrowserNyiExpectation, expectation);
+                    Assertions.assertNotEquals(realBrowserNyiExpectation, expectation,
+                            "NYI Expectation matches the expected "
+                                    + "result for Browser " + browserVersion.getNickname());
                 }
             }
             else {
-                Assert.assertNotEquals("NYI Expectation matches the expected "
-                        + "browser specific result for Browser " + browserVersion.getNickname(),
-                        realBrowserNyiExpectation, browserExpectation);
+                Assertions.assertNotEquals(realBrowserNyiExpectation, browserExpectation,
+                        "NYI Expectation matches the expected "
+                                + "browser specific result for Browser "
+                                + browserVersion.getNickname());
             }
 
             return realBrowserNyiExpectation;
@@ -1512,24 +1521,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (realNyiExpectation != null) {
             if (browserExpectation == null) {
                 if (expectation != null) {
-                    Assert.assertNotEquals("NYI Expectation matches the expected "
-                            + "result for Browser " + browserVersion.getNickname(),
-                            realNyiExpectation, expectation);
+                    Assertions.assertNotEquals(realNyiExpectation, expectation,
+                            "NYI Expectation matches the expected "
+                                    + "result for Browser " + browserVersion.getNickname());
                 }
             }
             else {
-                Assert.assertNotEquals("NYI Expectation matches the expected "
-                        + "browser specific result for Browser " + browserVersion.getNickname(),
-                        realNyiExpectation, browserExpectation);
+                Assertions.assertNotEquals(realNyiExpectation, browserExpectation,
+                            "NYI Expectation matches the expected "
+                                    + "browser specific result for Browser "
+                                    + browserVersion.getNickname());
             }
             return realNyiExpectation;
         }
 
         if (browserExpectation != null) {
             if (expectation != null) {
-                Assert.assertNotEquals("Browser specific NYI Expectation matches the expected "
-                        + "result for Browser " + browserVersion.getNickname(),
-                        browserExpectation, expectation);
+                Assertions.assertNotEquals(browserExpectation, expectation,
+                            "Browser specific NYI Expectation matches the expected "
+                                    + "result for Browser " + browserVersion.getNickname());
             }
             return browserExpectation;
         }
@@ -1552,7 +1562,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * This should be always 0, if {@link #isWebClientCached()} is {@code false}.
      * @throws InterruptedException in case of problems
      */
-    @Before
+    @BeforeEach
     public void beforeTest() throws InterruptedException {
         if (!isWebClientCached()) {
             if (!getJavaScriptThreads().isEmpty()) {
@@ -1577,7 +1587,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 assertEquals(expected, title);
                 return;
             }
-            catch (final ComparisonFailure e) {
+            catch (final AssertionFailedError e) {
                 if (expected.length() <= title.length()
                         || System.currentTimeMillis() > maxWait) {
                     throw e;
@@ -1591,7 +1601,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Release resources but DON'T close the browser if we are running with a real browser.
      * Note that HtmlUnitDriver is not cached by default, but that can be configured by {@link #isWebClientCached()}.
      */
-    @After
+    @AfterEach
     @Override
     public void releaseResources() {
         final List<String> unhandledAlerts = new ArrayList<>();
