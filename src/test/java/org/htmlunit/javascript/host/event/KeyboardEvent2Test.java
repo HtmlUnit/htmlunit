@@ -16,10 +16,9 @@ package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link KeyboardEvent}.
@@ -30,7 +29,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class KeyboardEvent2Test extends SimpleWebTestCase {
 
     /**
@@ -78,10 +76,11 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      * Test .type(KeyboardEvent.DOM_VK_A).
      * @throws Exception if the test fails
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void dom_vk_a() throws Exception {
         final HtmlPage page = getHtmlPage();
-        page.getDocumentElement().type(KeyboardEvent.DOM_VK_A);
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> page.getDocumentElement().type(KeyboardEvent.DOM_VK_A));
     }
 
     /**
