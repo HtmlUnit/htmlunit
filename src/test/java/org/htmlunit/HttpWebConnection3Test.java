@@ -23,10 +23,10 @@ import java.util.Arrays;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.NotYetImplemented;
-import org.htmlunit.junit.annotation.OS;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -1452,7 +1452,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     // this fails on our CI but I have no idea why
     // seems like the request for downloading the script never reaches the
     // PrimitiveWebServer
-    @NotYetImplemented(value = {}, os = OS.Linux)
+    @DisabledOnOs(OS.LINUX)
     public void loadJavascriptCharset() throws Exception {
         String html = DOCTYPE_HTML
                 + "<html><head>"

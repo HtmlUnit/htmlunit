@@ -14,7 +14,7 @@
  */
 package org.htmlunit;
 
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -31,7 +31,7 @@ public class ErrorOutputCheckerTest extends WebTestCase {
      * Test expected to fail because it produces output on {@link System#err}.
      */
     @Test
-    @NotYetImplemented // in fact it IS implemented, but this allows to test that the test fails due to the output
+    @Disabled // in fact it IS implemented, but this allows to test that the test fails due to the output
     public void systemErrOutputShouldBreakTest() {
         System.err.println("Dummy output to test ErrorOutputChecker");
     }

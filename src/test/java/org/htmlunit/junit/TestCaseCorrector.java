@@ -14,9 +14,11 @@
  */
 package org.htmlunit.junit;
 
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+
 /**
  * This is meant to automatically correct the test case to put either the real browser expectations,
- * or the {@link org.htmlunit.junit.annotation.NotYetImplemented} annotation for HtmlUnit.
+ * or the {@link HtmlUnitNYI} annotation for HtmlUnit.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

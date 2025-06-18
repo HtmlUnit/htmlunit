@@ -21,7 +21,7 @@ import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.NotYetImplemented;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -72,7 +72,10 @@ public class Html2CanvasTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("data:image/png;base64")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "nyi",
+            EDGE = "nyi",
+            FF = "nyi",
+            FF_ESR = "nyi")
     public void helloWorld() throws Exception {
         // this does not produce an image in html unit so far
         // have added this test to not forget it
@@ -91,10 +94,10 @@ public class Html2CanvasTest extends WebDriverTestCase {
         verify(DEFAULT_WAIT_TIME, textArea);
     }
 
-    private static void verify(final Duration maxWaitTime, final WebElement textArea) throws Exception {
+    private void verify(final Duration maxWaitTime, final WebElement textArea) throws Exception {
         final long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
 
-        String value = "";
+        String value = "nyi";
         while (System.currentTimeMillis() < maxWait) {
             value = textArea.getDomProperty("value");
             if (value != null && value.startsWith("data:image/png;base64,")) {
@@ -104,7 +107,7 @@ public class Html2CanvasTest extends WebDriverTestCase {
             Thread.sleep(50);
         }
 
-        Assertions.assertTrue(value.startsWith("data:image/png;base64,"),
-                "'" + value + "' does not start with 'data:image/png;base64'");
+        Assertions.assertTrue(value.startsWith(getExpectedAlerts()[0]),
+                "'" + value + "' does not start with '" + getExpectedAlerts()[0] + "'");
     }
 }
