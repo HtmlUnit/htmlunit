@@ -268,7 +268,7 @@ public class ExternalTest {
 
             // it is ok if the pom uses a more recent version
             if (!isVersionAfter(pomVersion, latestMavenCentralVersion)) {
-                Assertions.assertEquals(/* groupId + ":" + artifactId, */ latestMavenCentralVersion, pomVersion);
+                Assertions.assertEquals(latestMavenCentralVersion, pomVersion, groupId + ":" + artifactId);
             }
         }
     }

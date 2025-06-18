@@ -40,6 +40,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -926,6 +927,7 @@ public class CodeStyleTest {
                                             && method.getAnnotation(AfterEach.class) == null
                                             && method.getAnnotation(AfterAll.class) == null
                                             && method.getAnnotation(Test.class) == null
+                                            && method.getAnnotation(RepeatedTest.class) == null
                                             && method.getReturnType() == Void.TYPE
                                             && method.getParameterTypes().length == 0) {
                                         final List<String> lines = FileUtils.readLines(file, SOURCE_ENCODING);

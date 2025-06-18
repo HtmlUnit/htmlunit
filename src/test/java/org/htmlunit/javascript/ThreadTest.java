@@ -38,7 +38,7 @@ public class ThreadTest {
     /**
      * @throws InterruptedException if the test fails
      */
-    public void testJavaScriptEngineInMultipleThreads() throws InterruptedException {
+    private void testJavaScriptEngineInMultipleThreads() throws InterruptedException {
         final TestThread thread1 = new TestThread("thread1");
         final TestThread thread2 = new TestThread("thread2");
         final TestThread thread3 = new TestThread("thread3");

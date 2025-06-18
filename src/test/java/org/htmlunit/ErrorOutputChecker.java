@@ -23,8 +23,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
+
 /**
- * JUnit 4 {@link org.junit.Rule} verifying that nothing is printed to {@link System#err}
+ * JUnit callback verifying that nothing is printed to {@link System#err}
  * during test execution. If this is the case, the rule generates a failure for
  * the unit test.
  *

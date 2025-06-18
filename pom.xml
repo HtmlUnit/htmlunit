@@ -46,10 +46,11 @@
         <selenium.devtools.artifactId>selenium-devtools-v136</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
-        <junit.version>5.13.0</junit.version>
+        <junit.version>5.13.1</junit.version>
+        <junit-launcher.version>1.13.1</junit-launcher.version>
         <jetty.version>9.4.57.v20241219</jetty.version>
         <quercus.version>4.0.66</quercus.version>
-        <log4j.version>2.24.3</log4j.version>
+        <log4j.version>2.25.0</log4j.version>
         <slf4j.version>2.0.17</slf4j.version>
         <commons-text.version>1.13.1</commons-text.version>
         <commons-fileupload.version>1.6.0</commons-fileupload.version>
@@ -1328,7 +1329,7 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <version>1.13.0</version>
+            <version>${junit-launcher.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
