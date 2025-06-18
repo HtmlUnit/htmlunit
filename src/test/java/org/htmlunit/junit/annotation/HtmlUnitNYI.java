@@ -14,7 +14,7 @@
  */
 package org.htmlunit.junit.annotation;
 
-import static org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback.EMPTY_DEFAULT;
+import static org.htmlunit.junit.SetExpectedAlertsBeforeTestExecutionCallback.EMPTY_DEFAULT;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

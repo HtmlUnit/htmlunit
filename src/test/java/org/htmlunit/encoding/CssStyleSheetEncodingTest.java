@@ -27,14 +27,12 @@ import java.util.List;
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserParameterizedRunner;
-import org.htmlunit.junit.BrowserParameterizedRunner.Default;
+import org.htmlunit.javascript.host.css.CSSStyleSheet;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
@@ -44,7 +42,6 @@ import org.openqa.selenium.WebDriverException;
  * @author Ronald Brill
  * @author Lai Quang Duong
  */
-@RunWith(BrowserParameterizedRunner.class)
 public class CssStyleSheetEncodingTest extends WebDriverTestCase {
 
     private static final String BOM_UTF_16LE = "BOMUTF16LE";
@@ -81,9 +78,8 @@ public class CssStyleSheetEncodingTest extends WebDriverTestCase {
      * @return the parameterized data
      * @throws Exception if an error occurs
      */
-    @Parameters
-    public static Collection<Object[]> data() throws Exception {
-        final List<Object[]> list = new ArrayList<>();
+    public static Collection<Arguments> data() throws Exception {
+        final List<Arguments> list = new ArrayList<>();
 
         final TestCharset[] charsetHtmlResponseHeader =
                 new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.GB2312};
@@ -97,7 +93,7 @@ public class CssStyleSheetEncodingTest extends WebDriverTestCase {
                 for (final Object responseEncoding : charsetResponseEncoding) {
                     for (final Object at : charsetAt) {
                         for (final Object b : bom) {
-                            list.add(new Object[] {charsetHtml, responseHeader, responseEncoding, at, b});
+                            list.add(Arguments.of(charsetHtml, responseHeader, responseEncoding, at, b));
                         }
                     }
                 }
@@ -107,47 +103,13 @@ public class CssStyleSheetEncodingTest extends WebDriverTestCase {
     }
 
     /**
-     * The charsetHtmlResponseHeader.
-     */
-    @Parameter
-    public TestCharset charsetHtmlResponseHeader_;
-
-    /**
-     * The charsetResponseHeader.
-     */
-    @Parameter(1)
-    public TestCharset charsetResponseHeader_;
-
-    /**
-     * The charsetResponseEncoding.
-     */
-    @Parameter(2)
-    public TestCharset charsetResponseEncoding_;
-
-    /**
-     * The charsetAt.
-     */
-    @Parameter(3)
-    public TestCharset charsetAt_;
-
-    /**
-     * The bom.
-     */
-    @Parameter(4)
-    public String bom_;
-
-    /**
      * The default test.
      * @throws Exception if an error occurs
      */
-    @Test
+    @ParameterizedTest(name = "_{0}_{1}_{2}_{3}_{4}")
+    @MethodSource("data")
     @Alerts({"\"a\"", "\"\u00E4\"", "\"\u0623\u0647\u0644\u0627\u064B\"", "\"\u043C\u0438\u0440\"", "\"\u623F\u95F4\""})
-    @Default
-    public void charset() throws Exception {
-        charset(charsetHtmlResponseHeader_, charsetResponseHeader_, charsetResponseEncoding_, charsetAt_, bom_);
-    }
-
-    private void charset(
+    void charset(
             final TestCharset charsetHtmlResponse,
             final TestCharset charsetCssResponseHeader,
             final TestCharset charsetCssResponseEncoding,
@@ -206,7 +168,7 @@ public class CssStyleSheetEncodingTest extends WebDriverTestCase {
                 + ".c4::before { content: \"\u043C\u0438\u0440\"}"
                 + ".c5::before { content: \"\u623F\u95F4\"}";
 
-        if (charsetAt_ != null) {
+        if (charsetCssAt != null) {
             css = "@charset \"" + charsetCssAt.name() + "\";\n" + css;
         }
 
@@ -263,1209 +225,673 @@ public class CssStyleSheetEncodingTest extends WebDriverTestCase {
         }
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591____() throws Exception {
+    void _ISO88591_null_null_null_null() throws Exception {
         charset(TestCharset.ISO88591, null, null, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591__UTF8__() throws Exception {
+    void _ISO88591_null_UTF8_null_null() throws Exception {
         charset(TestCharset.ISO88591, null, TestCharset.UTF8, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591__ISO88591__() throws Exception {
+    void _ISO88591_null_ISO88591_null_null() throws Exception {
         charset(TestCharset.ISO88591, null, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591_UTF8_ISO88591__() throws Exception {
+    void _ISO88591_UTF8_ISO88591_null_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591_ISO88591___() throws Exception {
+    void _ISO88591_ISO88591_null_null_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591___BOMUTF8() throws Exception {
+    void _ISO88591_ISO88591_null_null_BOMUTF8() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591_ISO88591_UTF8__() throws Exception {
+    void _ISO88591_ISO88591_UTF8_null_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_UTF8__BOMUTF8() throws Exception {
+    void _ISO88591_ISO88591_UTF8_null_BOMUTF8() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591_ISO88591_ISO88591__() throws Exception {
+    void _ISO88591_ISO88591_ISO88591_null_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_ISO88591__BOMUTF16BE() throws Exception {
+    void _ISO88591_ISO88591_ISO88591_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_ISO88591__BOMUTF16LE() throws Exception {
+    void _ISO88591_ISO88591_ISO88591_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_UTF8__BOMUTF16BE() throws Exception {
+    void _ISO88591_ISO88591_UTF8_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_UTF8__BOMUTF16LE() throws Exception {
+    void _ISO88591_ISO88591_UTF8_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591___BOMUTF16BE() throws Exception {
+    void _ISO88591_ISO88591_null_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591___BOMUTF16LE() throws Exception {
+    void _ISO88591_ISO88591_null_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8_UTF8__BOMUTF16BE() throws Exception {
+    void _ISO88591_UTF8_UTF8_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8_UTF8__BOMUTF16LE() throws Exception {
+    void _ISO88591_UTF8_UTF8_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8___BOMUTF16BE() throws Exception {
+    void _ISO88591_UTF8_null_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, null, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8___BOMUTF16LE() throws Exception {
+    void _ISO88591_UTF8_null_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, null, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8_ISO88591__BOMUTF16BE() throws Exception {
+    void _ISO88591_UTF8_ISO88591_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_UTF8_ISO88591__BOMUTF16LE() throws Exception {
+    void _ISO88591_UTF8_ISO88591_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8__ISO88591__() throws Exception {
+    void _UTF8_null_ISO88591_null_null() throws Exception {
         charset(TestCharset.UTF8, null, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8_ISO88591_ISO88591__() throws Exception {
+    void _UTF8_ISO88591_ISO88591_null_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _UTF8_ISO88591_UTF8__() throws Exception {
+    void _UTF8_ISO88591_UTF8_null_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _UTF8_ISO88591___() throws Exception {
+    void _UTF8_ISO88591_null_null_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, null, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8_UTF8_ISO88591__() throws Exception {
+    void _UTF8_UTF8_ISO88591_null_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8_ISO88591__BOMUTF16BE() throws Exception {
+    void _UTF8_UTF8_ISO88591_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8_ISO88591__BOMUTF16LE() throws Exception {
+    void _UTF8_UTF8_ISO88591_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8_UTF8__BOMUTF16BE() throws Exception {
+    void _UTF8_UTF8_UTF8_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8_UTF8__BOMUTF16LE() throws Exception {
+    void _UTF8_UTF8_UTF8_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8___BOMUTF16BE() throws Exception {
+    void _UTF8_UTF8_null_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, null, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_UTF8___BOMUTF16LE() throws Exception {
+    void _UTF8_UTF8_null_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, null, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_UTF8__BOMUTF8() throws Exception {
+    void _UTF8_ISO88591_UTF8_null_BOMUTF8() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591___BOMUTF8() throws Exception {
+    void _UTF8_ISO88591_null_null_BOMUTF8() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, null, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void __ISO88591_ISO88591__() throws Exception {
+    void _null_ISO88591_ISO88591_null_null() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void __ISO88591_UTF8__() throws Exception {
+    void _null_ISO88591_UTF8_null_null() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.UTF8, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void __ISO88591___() throws Exception {
+    void _null_ISO88591_null_null_null() throws Exception {
         charset(null, TestCharset.ISO88591, null, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void __UTF8_ISO88591__() throws Exception {
+    void _null_UTF8_ISO88591_null_null() throws Exception {
         charset(null, TestCharset.UTF8, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8_ISO88591__BOMUTF16BE() throws Exception {
+    void _null_UTF8_ISO88591_null_BOMUTF16BE() throws Exception {
         charset(null, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8_ISO88591__BOMUTF16LE() throws Exception {
+    void _null_UTF8_ISO88591_null_BOMUTF16LE() throws Exception {
         charset(null, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8_UTF8__BOMUTF16BE() throws Exception {
+    void _null_UTF8_UTF8_null_BOMUTF16BE() throws Exception {
         charset(null, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8_UTF8__BOMUTF16LE() throws Exception {
+    void _null_UTF8_UTF8_null_BOMUTF16LE() throws Exception {
         charset(null, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8___BOMUTF16BE() throws Exception {
+    void _null_UTF8_null_null_BOMUTF16BE() throws Exception {
         charset(null, TestCharset.UTF8, null, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __UTF8___BOMUTF16LE() throws Exception {
+    void _null_UTF8_null_null_BOMUTF16LE() throws Exception {
         charset(null, TestCharset.UTF8, null, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void ___ISO88591__() throws Exception {
+    void _null_null_ISO88591_null_null() throws Exception {
         charset(null, null, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void ___UTF8__() throws Exception {
+    void _null_null_UTF8_null_null() throws Exception {
         charset(null, null, TestCharset.UTF8, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _____() throws Exception {
+    void _null_null_null_null_null() throws Exception {
         charset(null, null, null, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_UTF8__BOMUTF8() throws Exception {
+    void _null_ISO88591_UTF8_null_BOMUTF8() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591___BOMUTF8() throws Exception {
+    void _null_ISO88591_null_null_BOMUTF8() throws Exception {
         charset(null, TestCharset.ISO88591, null, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312_ISO88591_ISO88591__() throws Exception {
+    void _GB2312_ISO88591_ISO88591_null_null() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _GB2312_ISO88591_UTF8__() throws Exception {
+    void _GB2312_ISO88591_UTF8_null_null() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _GB2312_ISO88591___() throws Exception {
+    void _GB2312_ISO88591_null_null_null() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, null, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312_UTF8_ISO88591__() throws Exception {
+    void _GB2312_UTF8_ISO88591_null_null() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312__ISO88591__() throws Exception {
+    void _GB2312_null_ISO88591_null_null() throws Exception {
         charset(TestCharset.GB2312, null, TestCharset.ISO88591, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"盲\"", "\"兀賴賱丕賸\"", "\"屑懈褉\"", "\"鎴块棿\""})
-    public void _GB2312__UTF8__() throws Exception {
+    void _GB2312_null_UTF8_null_null() throws Exception {
         charset(TestCharset.GB2312, null, TestCharset.UTF8, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"盲\"", "\"兀賴賱丕賸\"", "\"屑懈褉\"", "\"鎴块棿\""})
-    public void _GB2312____() throws Exception {
+    void _GB2312_null_null_null_null() throws Exception {
         charset(TestCharset.GB2312, null, null, null, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_UTF8__BOMUTF8() throws Exception {
+    void _GB2312_ISO88591_UTF8_null_BOMUTF8() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591___BOMUTF8() throws Exception {
+    void _GB2312_ISO88591_null_null_BOMUTF8() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, null, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_ISO88591__BOMUTF8() throws Exception {
+    void _GB2312_ISO88591_ISO88591_null_BOMUTF8() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_ISO88591__BOMUTF16BE() throws Exception {
+    void _GB2312_ISO88591_ISO88591_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_ISO88591__BOMUTF16LE() throws Exception {
+    void _GB2312_ISO88591_ISO88591_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_UTF8__BOMUTF16BE() throws Exception {
+    void _GB2312_ISO88591_UTF8_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591_UTF8__BOMUTF16LE() throws Exception {
+    void _GB2312_ISO88591_UTF8_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591___BOMUTF16BE() throws Exception {
+    void _GB2312_ISO88591_null_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, null, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_ISO88591___BOMUTF16LE() throws Exception {
+    void _GB2312_ISO88591_null_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, null, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _ISO88591_ISO88591_ISO88591__BOMUTF8() throws Exception {
+    void _ISO88591_ISO88591_ISO88591_null_BOMUTF8() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_ISO88591__BOMUTF8() throws Exception {
+    void _UTF8_ISO88591_ISO88591_null_BOMUTF8() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_ISO88591__BOMUTF16BE() throws Exception {
+    void _UTF8_ISO88591_ISO88591_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_ISO88591__BOMUTF16LE() throws Exception {
+    void _UTF8_ISO88591_ISO88591_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_UTF8__BOMUTF16BE() throws Exception {
+    void _UTF8_ISO88591_UTF8_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591_UTF8__BOMUTF16LE() throws Exception {
+    void _UTF8_ISO88591_UTF8_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591___BOMUTF16BE() throws Exception {
+    void _UTF8_ISO88591_null_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, null, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8_ISO88591___BOMUTF16LE() throws Exception {
+    void _UTF8_ISO88591_null_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, null, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_ISO88591__BOMUTF8() throws Exception {
+    void _null_ISO88591_ISO88591_null_BOMUTF8() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_ISO88591__BOMUTF16BE() throws Exception {
+    void _null_ISO88591_ISO88591_null_BOMUTF16BE() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_ISO88591__BOMUTF16LE() throws Exception {
+    void _null_ISO88591_ISO88591_null_BOMUTF16LE() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_UTF8__BOMUTF16BE() throws Exception {
+    void _null_ISO88591_UTF8_null_BOMUTF16BE() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591_UTF8__BOMUTF16LE() throws Exception {
+    void _null_ISO88591_UTF8_null_BOMUTF16LE() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591___BOMUTF16BE() throws Exception {
+    void _null_ISO88591_null_null_BOMUTF16BE() throws Exception {
         charset(null, TestCharset.ISO88591, null, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void __ISO88591___BOMUTF16LE() throws Exception {
+    void _null_ISO88591_null_null_BOMUTF16LE() throws Exception {
         charset(null, TestCharset.ISO88591, null, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8_ISO88591__BOMUTF16BE() throws Exception {
+    void _GB2312_UTF8_ISO88591_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8_ISO88591__BOMUTF16LE() throws Exception {
+    void _GB2312_UTF8_ISO88591_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8_UTF8__BOMUTF16BE() throws Exception {
+    void _GB2312_UTF8_UTF8_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8_UTF8__BOMUTF16LE() throws Exception {
+    void _GB2312_UTF8_UTF8_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8___BOMUTF16BE() throws Exception {
+    void _GB2312_UTF8_null_null_BOMUTF16BE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, null, null, BOM_UTF_16BE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _GB2312_UTF8___BOMUTF16LE() throws Exception {
+    void _GB2312_UTF8_null_null_BOMUTF16LE() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, null, null, BOM_UTF_16LE);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312_ISO88591_ISO88591_UTF8_() throws Exception {
+    void _GB2312_ISO88591_ISO88591_UTF8_null() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _GB2312_ISO88591_UTF8_UTF8_() throws Exception {
+    void _GB2312_ISO88591_UTF8_UTF8_null() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _GB2312_ISO88591__UTF8_() throws Exception {
+    void _GB2312_ISO88591_null_UTF8_null() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, null, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312_UTF8_ISO88591_UTF8_() throws Exception {
+    void _GB2312_UTF8_ISO88591_UTF8_null() throws Exception {
         charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312__ISO88591_UTF8_() throws Exception {
+    void _GB2312_null_ISO88591_UTF8_null() throws Exception {
         charset(TestCharset.GB2312, null, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591_ISO88591_ISO88591_UTF8_() throws Exception {
+    void _ISO88591_ISO88591_ISO88591_UTF8_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591_ISO88591_UTF8_UTF8_() throws Exception {
+    void _ISO88591_ISO88591_UTF8_UTF8_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591_ISO88591__UTF8_() throws Exception {
+    void _ISO88591_ISO88591_null_UTF8_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, null, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591_UTF8_ISO88591_UTF8_() throws Exception {
+    void _ISO88591_UTF8_ISO88591_UTF8_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591__ISO88591_UTF8_() throws Exception {
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    void _ISO88591_null_ISO88591_UTF8_null() throws Exception {
         charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8_ISO88591_ISO88591_UTF8_() throws Exception {
+    void _UTF8_ISO88591_ISO88591_UTF8_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _UTF8_ISO88591_UTF8_UTF8_() throws Exception {
+    void _UTF8_ISO88591_UTF8_UTF8_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _UTF8_ISO88591__UTF8_() throws Exception {
+    void _UTF8_ISO88591_null_UTF8_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, null, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8_UTF8_ISO88591_UTF8_() throws Exception {
+    void _UTF8_UTF8_ISO88591_UTF8_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8__ISO88591_UTF8_() throws Exception {
+    void _UTF8_null_ISO88591_UTF8_null() throws Exception {
         charset(TestCharset.UTF8, null, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void __ISO88591_ISO88591_UTF8_() throws Exception {
+    void _null_ISO88591_ISO88591_UTF8_null() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void __ISO88591_UTF8_UTF8_() throws Exception {
+    void _null_ISO88591_UTF8_UTF8_null() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void __ISO88591__UTF8_() throws Exception {
+    void _null_ISO88591_null_UTF8_null() throws Exception {
         charset(null, TestCharset.ISO88591, null, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void __UTF8_ISO88591_UTF8_() throws Exception {
+    void _null_UTF8_ISO88591_UTF8_null() throws Exception {
         charset(null, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void ___ISO88591_UTF8_() throws Exception {
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    void _null_null_ISO88591_UTF8_null() throws Exception {
         charset(null, null, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312_ISO88591_ISO88591_ISO88591_() throws Exception {
+    void _GB2312_ISO88591_ISO88591_ISO88591_null() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312_ISO88591_UTF8_ISO88591_() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312_UTF8_ISO88591_ISO88591_() throws Exception {
-        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _GB2312_ISO88591__ISO88591_() throws Exception {
+    void _GB2312_ISO88591_UTF8_ISO88591_null() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null);
+    }
+
+    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
+    void _GB2312_UTF8_ISO88591_ISO88591_null() throws Exception {
+        charset(TestCharset.GB2312, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    void _GB2312_ISO88591_null_ISO88591_null() throws Exception {
         charset(TestCharset.GB2312, TestCharset.ISO88591, null, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _GB2312__ISO88591_ISO88591_() throws Exception {
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    void _GB2312_null_ISO88591_ISO88591_null() throws Exception {
         charset(TestCharset.GB2312, null, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"\"a\"", "\"盲\"", "\"兀賴賱丕賸\"", "\"屑懈褉\"", "\"鎴块棿\""})
-    public void _GB2312__UTF8_ISO88591_() throws Exception {
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    void _GB2312_null_UTF8_ISO88591_null() throws Exception {
         charset(TestCharset.GB2312, null, TestCharset.UTF8, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"\"a\"", "\"盲\"", "\"兀賴賱丕賸\"", "\"屑懈褉\"", "\"鎴块棿\""})
-    public void _GB2312___ISO88591_() throws Exception {
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    void _GB2312_null_null_ISO88591_null() throws Exception {
         charset(TestCharset.GB2312, null, null, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591_ISO88591_ISO88591_ISO88591_() throws Exception {
+    void _ISO88591_ISO88591_ISO88591_ISO88591_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591_ISO88591_UTF8_ISO88591_() throws Exception {
+    void _ISO88591_ISO88591_UTF8_ISO88591_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591_ISO88591__ISO88591_() throws Exception {
+    void _ISO88591_ISO88591_null_ISO88591_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.ISO88591, null, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591_UTF8_ISO88591_ISO88591_() throws Exception {
+    void _ISO88591_UTF8_ISO88591_ISO88591_null() throws Exception {
         charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _ISO88591__ISO88591_ISO88591_() throws Exception {
+    void _ISO88591_null_ISO88591_ISO88591_null() throws Exception {
         charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591__UTF8_ISO88591_() throws Exception {
+    void _ISO88591_null_UTF8_ISO88591_null() throws Exception {
         charset(TestCharset.ISO88591, null, TestCharset.UTF8, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _ISO88591___ISO88591_() throws Exception {
+    void _ISO88591_null_null_ISO88591_null() throws Exception {
         charset(TestCharset.ISO88591, null, null, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8_ISO88591_ISO88591_ISO88591_() throws Exception {
+    void _UTF8_ISO88591_ISO88591_ISO88591_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _UTF8_ISO88591_UTF8_ISO88591_() throws Exception {
+    void _UTF8_ISO88591_UTF8_ISO88591_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void _UTF8_ISO88591__ISO88591_() throws Exception {
+    void _UTF8_ISO88591_null_ISO88591_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.ISO88591, null, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8_UTF8_ISO88591_ISO88591_() throws Exception {
+    void _UTF8_UTF8_ISO88591_ISO88591_null() throws Exception {
         charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void _UTF8__ISO88591_ISO88591_() throws Exception {
+    @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
+    void _UTF8_null_ISO88591_ISO88591_null() throws Exception {
         charset(TestCharset.UTF8, null, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8__UTF8_ISO88591_() throws Exception {
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    void _UTF8_null_UTF8_ISO88591_null() throws Exception {
         charset(TestCharset.UTF8, null, TestCharset.UTF8, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"\"a\"", "\"ä\"", "\"أهلاً\"", "\"мир\"", "\"房间\""})
-    public void _UTF8___ISO88591_() throws Exception {
+    @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
+    void _UTF8_null_null_ISO88591_null() throws Exception {
         charset(TestCharset.UTF8, null, null, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void __ISO88591_ISO88591_ISO88591_() throws Exception {
+    void _null_ISO88591_ISO88591_ISO88591_null() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void __ISO88591_UTF8_ISO88591_() throws Exception {
+    void _null_ISO88591_UTF8_ISO88591_null() throws Exception {
         charset(null, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void __ISO88591__ISO88591_() throws Exception {
+    void _null_ISO88591_null_ISO88591_null() throws Exception {
         charset(null, TestCharset.ISO88591, null, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"�\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void __UTF8_ISO88591_ISO88591_() throws Exception {
+    void _null_UTF8_ISO88591_ISO88591_null() throws Exception {
         charset(null, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"ä\"", "\"?????\"", "\"???\"", "\"??\""})
-    public void ___ISO88591_ISO88591_() throws Exception {
+    void _null_null_ISO88591_ISO88591_null() throws Exception {
         charset(null, null, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void ___UTF8_ISO88591_() throws Exception {
+    void _null_null_UTF8_ISO88591_null() throws Exception {
         charset(null, null, TestCharset.UTF8, TestCharset.ISO88591, null);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"\"a\"", "\"Ã¤\"", "\"Ø£Ù‡Ù„Ø§Ù‹\"", "\"Ð¼Ð¸Ñ€\"", "\"æˆ¿é—´\""})
-    public void ____ISO88591_() throws Exception {
+    void _null_null_null_ISO88591_null() throws Exception {
         charset(null, null, null, TestCharset.ISO88591, null);
     }
 }

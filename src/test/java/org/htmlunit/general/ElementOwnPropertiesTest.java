@@ -15,8 +15,8 @@
 package org.htmlunit.general;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback.firstDefinedOrGiven;
-import static org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback.isDefined;
+import static org.htmlunit.junit.SetExpectedAlertsBeforeTestExecutionCallback.firstDefinedOrGiven;
+import static org.htmlunit.junit.SetExpectedAlertsBeforeTestExecutionCallback.isDefined;
 
 import java.awt.Color;
 import java.awt.GradientPaint;

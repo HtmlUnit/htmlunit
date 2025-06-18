@@ -14,14 +14,14 @@
  */
 package org.htmlunit.junit.annotation;
 
-import static org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback.isDefined;
+import static org.htmlunit.junit.SetExpectedAlertsBeforeTestExecutionCallback.isDefined;
 import static org.junit.Assert.assertFalse;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback;
+import org.htmlunit.junit.SetExpectedAlertsBeforeTestExecutionCallback;
 
 /**
  * Utility functions for working with our annotations.

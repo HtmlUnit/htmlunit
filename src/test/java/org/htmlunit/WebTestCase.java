@@ -40,8 +40,8 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
-import org.htmlunit.junit5.BrowserVersionClassTemplateInvocationContextProvider;
-import org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback;
+import org.htmlunit.junit.BrowserVersionClassTemplateInvocationContextProvider;
+import org.htmlunit.junit.SetExpectedAlertsBeforeTestExecutionCallback;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;

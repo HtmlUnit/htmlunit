@@ -19,13 +19,10 @@ import java.util.Collection;
 import java.util.List;
 
 import org.htmlunit.javascript.host.xml.XMLHttpRequest;
-import org.htmlunit.junit.BrowserParameterizedRunner;
-import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.util.MimeType;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -33,7 +30,6 @@ import org.openqa.selenium.WebDriver;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserParameterizedRunner.class)
 public class XMLHttpRequestResponseXMLEncodingTest extends AbstractXMLHttpRequestEncodingTest {
 
     /**
@@ -41,9 +37,8 @@ public class XMLHttpRequestResponseXMLEncodingTest extends AbstractXMLHttpReques
      * @return the parameterized data
      * @throws Exception if an error occurs
      */
-    @Parameters
-    public static Collection<Object[]> data() throws Exception {
-        final List<Object[]> list = new ArrayList<>();
+    public static Collection<Arguments> data() throws Exception {
+        final List<Arguments> list = new ArrayList<>();
 
         final String[] xmlEncodingHeaders = {"", "utf8"};
         final TestCharset[] charsetHtmlResponseHeaders =
@@ -58,11 +53,11 @@ public class XMLHttpRequestResponseXMLEncodingTest extends AbstractXMLHttpReques
                 for (final Object mimeTypeXml : mimeTypeXmls) {
                     for (final Object charsetXmlResponseHeader : charsetXmlResponseHeaders) {
                         for (final Object bom : boms) {
-                            list.add(new Object[] {xmlEncodingHeader,
+                            list.add(Arguments.of(xmlEncodingHeader,
                                                    charsetHtmlResponseHeader,
                                                    mimeTypeXml,
                                                    charsetXmlResponseHeader,
-                                                   bom});
+                                                   bom));
                         }
                     }
                 }
@@ -73,46 +68,12 @@ public class XMLHttpRequestResponseXMLEncodingTest extends AbstractXMLHttpReques
     }
 
     /**
-     * The xmlEncodingHeader.
-     */
-    @Parameter
-    public String xmlEncodingHeader_;
-
-    /**
-     * The charsetHtmlResponseHeader.
-     */
-    @Parameter(1)
-    public TestCharset charsetHtmlResponseHeader_;
-
-    /**
-     * The charsetHtmlResponseHeader.
-     */
-    @Parameter(2)
-    public TestMimeType mimeTypeXml_;
-
-    /**
-     * The charsetXmlResponseHeader.
-     */
-    @Parameter(3)
-    public TestCharset charsetXmlResponseHeader_;
-
-    /**
-     * The charsetXmlResponseHeader.
-     */
-    @Parameter(4)
-    public String bom_;
-
-    /**
      * The default test.
      * @throws Exception if an error occurs
      */
-    @Test
-    @Default
-    public void responseText() throws Exception {
-        responseText(xmlEncodingHeader_, charsetHtmlResponseHeader_, mimeTypeXml_, charsetXmlResponseHeader_, bom_);
-    }
-
-    private void responseText(
+    @ParameterizedTest(name = "_{0}_{1}_{2}_{3}_{4}")
+    @MethodSource("data")
+    void responseText(
            final String xmlEncodingHeader,
             final TestCharset charsetHtmlResponseHeader,
             final TestMimeType mimeTypeXml,

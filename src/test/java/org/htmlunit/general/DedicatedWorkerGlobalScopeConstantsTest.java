@@ -30,21 +30,18 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import org.htmlunit.javascript.configuration.WorkerJavaScriptConfiguration;
-import org.htmlunit.junit.BrowserParameterizedRunner;
-import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  * Tests that constants class are correct.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserParameterizedRunner.class)
 public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
 
     /**
@@ -52,32 +49,25 @@ public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
      * @return the parameterized data
      * @throws Exception if an error occurs
      */
-    @Parameters
-    public static Collection<Object[]> data() throws Exception {
-        final List<Object[]> list = new ArrayList<>();
+    public static Collection<Arguments> data() throws Exception {
+        final List<Arguments> list = new ArrayList<>();
         final Set<String> strings = TestCaseTest.getAllConfiguredJsClassNames();
         for (final String host : strings) {
             if (!"Audio".equals(host)) {
-                list.add(new Object[] {host});
+                list.add(Arguments.of(host));
             }
         }
         return list;
     }
 
     /**
-     * The parent element name.
-     */
-    @Parameter
-    public String host_;
-
-    /**
      * The default test.
      * @throws Exception if an error occurs
      */
-    @Test
-    @Default
-    public void test() throws Exception {
-        test(host_, getExpectedString(host_));
+    @ParameterizedTest(name = "_{0}")
+    @MethodSource("data")
+    void test(final String host) throws Exception {
+        test(host, getExpectedString(host));
     }
 
     private void test(final String className, final String[] expectedAlerts) throws Exception {

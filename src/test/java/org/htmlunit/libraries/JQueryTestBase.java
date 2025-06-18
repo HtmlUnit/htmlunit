@@ -27,7 +27,7 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback;
+import org.htmlunit.junit.SetExpectedAlertsBeforeTestExecutionCallback;
 import org.htmlunit.util.WebConnectionWrapper;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
