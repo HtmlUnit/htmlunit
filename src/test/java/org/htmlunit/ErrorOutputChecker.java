@@ -20,10 +20,9 @@ import java.io.PrintStream;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.rules.MethodRule;
-import org.junit.runners.model.FrameworkMethod;
-import org.junit.runners.model.Statement;
-
+import org.junit.jupiter.api.extension.AfterEachCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
 /**
  * JUnit 4 {@link org.junit.Rule} verifying that nothing is printed to {@link System#err}
  * during test execution. If this is the case, the rule generates a failure for
@@ -34,7 +33,7 @@ import org.junit.runners.model.Statement;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-public class ErrorOutputChecker implements MethodRule {
+public class ErrorOutputChecker implements BeforeEachCallback, AfterEachCallback {
     private PrintStream originalErr_;
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
     private static final Pattern[] PATTERNS = {
@@ -50,31 +49,19 @@ public class ErrorOutputChecker implements MethodRule {
             Pattern.compile(".*Quercus finished initialization in \\d*ms\r?\n"),
     };
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public Statement apply(final Statement base, final FrameworkMethod method, final Object target) {
-        if (target instanceof WebDriverTestCase) {
-            final WebDriverTestCase testCase = (WebDriverTestCase) target;
-            if (testCase.useRealBrowser()) {
-                return base;
-            }
-        }
+    public void beforeEach(final ExtensionContext context) throws Exception {
+        wrapSystemErr();
+    }
 
-        return new Statement() {
-            @Override
-            public void evaluate() throws Throwable {
-                wrapSystemErr();
-                try {
-                    base.evaluate();
-                    verifyNoOutput();
-                }
-                finally {
-                    restoreSystemErr();
-                }
-            }
-        };
+    @Override
+    public void afterEach(final ExtensionContext context) throws Exception {
+        try {
+            verifyNoOutput();
+        }
+        finally {
+            restoreSystemErr();
+        }
     }
 
     void verifyNoOutput() {

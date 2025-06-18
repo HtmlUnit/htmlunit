@@ -41,7 +41,6 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.Retry;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.experimental.runners.Enclosed;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -130,6 +129,7 @@ public final class XMLHttpRequestLifeCycleTest {
     /**
      * Test using our JettyServer.
      */
+    @Nested
     public static class JettyServerTest extends WebDriverTestCase {
 
         /**

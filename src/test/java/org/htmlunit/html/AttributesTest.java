@@ -19,16 +19,16 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Stream;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebTestCase;
 import org.htmlunit.html.parser.HTMLParser;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.TestFactory;
 
 /**
  * <p>Tests for all the generated attribute accessors. This test case will
@@ -46,11 +46,7 @@ import junit.framework.TestSuite;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class AttributesTest extends TestCase {
-
-    private final Class<?> classUnderTest_;
-    private final Method method_;
-    private final String attributeName_;
+public class AttributesTest {
 
     private static final List<String> EXCLUDED_METHODS = new ArrayList<>();
     static {
@@ -61,13 +57,13 @@ public class AttributesTest extends TestCase {
     }
 
     /**
-     * Returns a test suite containing a separate test for each attribute on each element.
+     * Creates dynamic tests for each attribute on each element.
      *
-     * @return the test suite
+     * @return stream of dynamic tests
      * @throws Exception if the tests cannot be created
      */
-    public static Test suite() throws Exception {
-        final TestSuite suite = new TestSuite();
+    @TestFactory
+    Stream<DynamicTest> attributeTests() throws Exception {
         final String[] classesToTest = {
             "HtmlAbbreviated", "HtmlAcronym",
             "HtmlAnchor", "HtmlAddress", "HtmlArea",
@@ -123,10 +119,11 @@ public class AttributesTest extends TestCase {
         };
 
         final HashSet<String> supportedTags = new HashSet<>(DefaultElementFactory.SUPPORTED_TAGS_);
+        final List<DynamicTest> tests = new ArrayList<>();
 
         for (final String testClass : classesToTest) {
             final Class<?> clazz = Class.forName("org.htmlunit.html." + testClass);
-            addTestsForClass(clazz, suite);
+            tests.addAll(createTestsForClass(clazz));
 
             String tag;
             if (DomComment.class == clazz) {
@@ -150,71 +147,77 @@ public class AttributesTest extends TestCase {
         if (!supportedTags.isEmpty()) {
             throw new RuntimeException("Missing tag class(es) " + supportedTags);
         }
-        return suite;
+        return tests.stream();
     }
 
     /**
-     * Adds all the tests for a given class.
+     * Creates all the tests for a given class.
      *
      * @param clazz the class to create tests for
-     * @param page the page that will be passed into the constructor of the objects to be tested
-     * @param suite the suite that all the tests will be placed inside
      * @throws Exception if the tests cannot be created
      */
-    private static void addTestsForClass(final Class<?> clazz, final TestSuite suite)
-        throws Exception {
-
+    private List<DynamicTest> createTestsForClass(final Class<?> clazz) throws Exception {
+        final List<DynamicTest> tests = new ArrayList<>();
         final Method[] methods = clazz.getMethods();
+
         for (final Method method : methods) {
             final String methodName = method.getName();
             if (methodName.startsWith("get")
                 && methodName.endsWith("Attribute")
                 && !EXCLUDED_METHODS.contains(methodName)) {
 
-                String attributeName = methodName.substring(3, methodName.length() - 9).toLowerCase(Locale.ROOT);
-                if ("xmllang".equals(attributeName)) {
-                    attributeName = "xml:lang";
-                }
-                else if ("columns".equals(attributeName)) {
-                    attributeName = "cols";
-                }
-                else if ("columnspan".equals(attributeName)) {
-                    attributeName = "colspan";
-                }
-                else if ("textdirection".equals(attributeName)) {
-                    attributeName = "dir";
-                }
-                else if ("httpequiv".equals(attributeName)) {
-                    attributeName = "http-equiv";
-                }
-                else if ("acceptcharset".equals(attributeName)) {
-                    attributeName = "accept-charset";
-                }
-                else if ("htmlfor".equals(attributeName)) {
-                    attributeName = "for";
-                }
-                suite.addTest(new AttributesTest(attributeName, clazz, method));
+                final String attributeName =
+                        normalizeAttributeName(
+                                methodName.substring(3, methodName.length() - 9).toLowerCase(Locale.ROOT));
+
+                final String testName = createTestName(clazz, method);
+                tests.add(DynamicTest.dynamicTest(testName, () -> {
+                    executeAttributeTest(clazz, method, attributeName);
+                }));
             }
+        }
+        return tests;
+    }
+
+    /**
+     * Normalizes attribute names for special cases.
+     */
+    private static String normalizeAttributeName(final String attributeName) {
+        switch (attributeName) {
+            case "xmllang": return "xml:lang";
+            case "columns": return "cols";
+            case "columnspan": return "colspan";
+            case "textdirection": return "dir";
+            case "httpequiv": return "http-equiv";
+            case "acceptcharset": return "accept-charset";
+            case "htmlfor": return "for";
+            default: return attributeName;
         }
     }
 
     /**
-     * Creates an instance of the test. This will test one specific attribute
-     * on one specific class.
-     * @param attributeName the name of the attribute to test
-     * @param classUnderTest the class containing the attribute
-     * @param method the "getter" method for the specified attribute
+     * Executes the actual test for a specific attribute.
+     * @param classUnderTest the class under test
+     * @param method the getter method
+     * @param attributeName the attribute name
+     * @throws Exception if the test fails
      */
-    public AttributesTest(
-            final String attributeName,
-            final Class<?> classUnderTest,
-            final Method method) {
-
-        super(createTestName(classUnderTest, method));
-        classUnderTest_ = classUnderTest;
-        method_ = method;
-        attributeName_ = attributeName;
+    private static void executeAttributeTest(final Class<?> classUnderTest,
+            final Method method, final String attributeName) throws Exception {
+        try (WebClient webClient = new WebClient(BrowserVersion.BEST_SUPPORTED)) {
+            final MockWebConnection connection = new MockWebConnection();
+            connection.setDefaultResponse("<html><head><title>foo</title></head><body></body></html>");
+            webClient.setWebConnection(connection);
+            final HtmlPage page = webClient.getPage(WebTestCase.URL_FIRST);
+            final String value = "value";
+            final DomElement objectToTest = getNewInstanceForClassUnderTest(classUnderTest, page);
+            objectToTest.setAttribute(attributeName, value);
+            final Object[] noObjects = new Object[0];
+            final Object result = method.invoke(objectToTest, noObjects);
+            Assertions.assertSame(value, result);
+        }
     }
+
 
     /**
      * Creates a name for this particular test that reflects the attribute being tested.
@@ -231,50 +234,28 @@ public class AttributesTest extends TestCase {
     }
 
     /**
-     * Runs the actual test.
-     * @throws Exception if the test fails
-     */
-    @Override
-    protected void runTest() throws Exception {
-        try (WebClient webClient = new WebClient(BrowserVersion.BEST_SUPPORTED)) {
-            final MockWebConnection connection = new MockWebConnection();
-            connection.setDefaultResponse("<html><head><title>foo</title></head><body></body></html>");
-            webClient.setWebConnection(connection);
-            final HtmlPage page = webClient.getPage(WebTestCase.URL_FIRST);
-
-            final String value = "value";
-
-            final DomElement objectToTest = getNewInstanceForClassUnderTest(page);
-            objectToTest.setAttribute(attributeName_, value);
-
-            final Object[] noObjects = new Object[0];
-            final Object result = method_.invoke(objectToTest, noObjects);
-            assertSame(value, result);
-        }
-    }
-
-    /**
      * Creates a new instance of the class being tested.
      * @return the new instance
      * @throws Exception if the new object cannot be created
      */
-    private DomElement getNewInstanceForClassUnderTest(final HtmlPage page) throws Exception {
+    private static DomElement getNewInstanceForClassUnderTest(
+                        final Class<?> classUnderTest, final HtmlPage page) throws Exception {
         final HTMLParser htmlParser = page.getWebClient().getPageCreator().getHtmlParser();
         final DomElement newInstance;
-        if (classUnderTest_ == HtmlTableRow.class) {
+        if (classUnderTest == HtmlTableRow.class) {
             newInstance = htmlParser.getFactory(HtmlTableRow.TAG_NAME)
                     .createElement(page, HtmlTableRow.TAG_NAME, null);
         }
-        else if (classUnderTest_ == HtmlTableHeaderCell.class) {
+        else if (classUnderTest == HtmlTableHeaderCell.class) {
             newInstance = htmlParser.getFactory(HtmlTableHeaderCell.TAG_NAME)
                     .createElement(page, HtmlTableHeaderCell.TAG_NAME, null);
         }
-        else if (classUnderTest_ == HtmlTableDataCell.class) {
+        else if (classUnderTest == HtmlTableDataCell.class) {
             newInstance = htmlParser.getFactory(HtmlTableDataCell.TAG_NAME)
                     .createElement(page, HtmlTableDataCell.TAG_NAME, null);
         }
         else {
-            final String tagName = (String) classUnderTest_.getField("TAG_NAME").get(null);
+            final String tagName = (String) classUnderTest.getField("TAG_NAME").get(null);
             newInstance = htmlParser.getFactory(tagName).createElement(page, tagName, null);
         }
 

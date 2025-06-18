@@ -23,26 +23,17 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebTestCase;
 import org.htmlunit.html.HtmlPage;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.RepeatedTest;
 
 /**
  * Multi-threaded JavaScript engine test.
  *
  * @author David D. Kilzer
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-public class ThreadTest extends TestCase {
-
-    /**
-     * Creates a new instance.
-     * @param name the name of the test
-     */
-    public ThreadTest(final String name) {
-        super(name);
-    }
+public class ThreadTest {
 
     /**
      * @throws InterruptedException if the test fails
@@ -63,23 +54,18 @@ public class ThreadTest extends TestCase {
         thread3.join();
         thread4.join();
 
-        assertTrue("thread1 not successful", thread1.isSuccessful());
-        assertTrue("thread2 not successful", thread2.isSuccessful());
-        assertTrue("thread3 not successful", thread3.isSuccessful());
-        assertTrue("thread4 not successful", thread4.isSuccessful());
+        Assertions.assertTrue(thread1.isSuccessful(), "thread1 not successful");
+        Assertions.assertTrue(thread2.isSuccessful(), "thread2 not successful");
+        Assertions.assertTrue(thread3.isSuccessful(), "thread3 not successful");
+        Assertions.assertTrue(thread4.isSuccessful(), "thread4 not successful");
     }
 
     /**
-     * Runs this test many times.
-     * @return a suite
+     * Repeated test - runs the multi-threaded test 99 times.
      */
-    public static Test suite() {
-        final TestSuite suite = new TestSuite("Run this many times");
-        suite.addTestSuite(ThreadTest.class);
-        for (int i = 1; i < 100; i++) {
-            suite.addTest(new ThreadTest("testJavaScriptEngineInMultipleThreads"));
-        }
-        return suite;
+    @RepeatedTest(value = 99, name = "Multi-threaded JS test repetition {currentRepetition}/{totalRepetitions}")
+    public void repeatedMultiThreadTest() throws InterruptedException {
+        testJavaScriptEngineInMultipleThreads();
     }
 
     /** A test object for threads. */
@@ -146,12 +132,13 @@ public class ThreadTest extends TestCase {
 
                 final HtmlPage page = webClient.getPage(WebTestCase.URL_FIRST);
 
-                assertEquals("foo", page.getTitleText());
-                assertEquals("focus not changed to textfield1",
+                Assertions.assertEquals("foo", page.getTitleText());
+                Assertions.assertEquals(
                              page.getFormByName("form1").getInputByName("textfield1"),
-                             page.getFocusedElement());
+                             page.getFocusedElement(),
+                             "focus not changed to textfield1");
                 final List<String> expectedAlerts = Collections.singletonList("past focus");
-                assertEquals(expectedAlerts, collectedAlerts);
+                Assertions.assertEquals(expectedAlerts, collectedAlerts);
             }
         }
     }

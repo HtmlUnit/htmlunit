@@ -72,7 +72,8 @@ import com.github.romankh3.image.comparison.model.ImageComparisonState;
  */
 @ClassTemplate
 @ExtendWith({BrowserVersionClassTemplateInvocationContextProvider.class,
-             SetExpectedAlertsBeforeTestExecutionCallback.class})
+             SetExpectedAlertsBeforeTestExecutionCallback.class,
+             ErrorOutputChecker.class})
 @TestMethodOrder(MethodOrderer.DisplayName.class)
 public abstract class WebTestCase {
 
