@@ -48,7 +48,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.ClassTemplate;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.github.romankh3.image.comparison.ImageComparison;
@@ -71,6 +73,7 @@ import com.github.romankh3.image.comparison.model.ImageComparisonState;
 @ClassTemplate
 @ExtendWith({BrowserVersionClassTemplateInvocationContextProvider.class,
              SetExpectedAlertsBeforeTestExecutionCallback.class})
+@TestMethodOrder(MethodOrderer.DisplayName.class)
 public abstract class WebTestCase {
 
     /** The html5 doctype. */

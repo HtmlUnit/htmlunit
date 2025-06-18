@@ -15,6 +15,7 @@
 package org.htmlunit.junit5;
 
 import java.lang.reflect.Method;
+import java.util.Optional;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
@@ -25,6 +26,7 @@ import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.platform.commons.util.ReflectionUtils;
 import org.opentest4j.AssertionFailedError;
 
 
@@ -45,11 +47,17 @@ public class SetExpectedAlertsBeforeTestExecutionCallback implements BeforeTestE
 
     @Override
     public void beforeTestExecution(final ExtensionContext context) throws Exception {
-        final Method testMethod = context.getRequiredTestMethod();
         final Object testInstance = context.getRequiredTestInstance();
 
         if (testInstance instanceof WebTestCase) {
             final WebTestCase webTestCase = (WebTestCase) testInstance;
+
+            Method testMethod = context.getRequiredTestMethod();
+            final Optional<Method> potentialOberwrittenMethod =
+                    ReflectionUtils.findMethod(testInstance.getClass(), context.getDisplayName(), new Class[] {});
+            if (potentialOberwrittenMethod.isPresent()) {
+                testMethod = potentialOberwrittenMethod.get();
+            }
 
             setAlerts(webTestCase, testMethod);
         }

@@ -29,12 +29,9 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import org.htmlunit.junit.BrowserParameterizedRunner;
-import org.htmlunit.junit.BrowserParameterizedRunner.Default;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  * Test all {@code constant}s defined in host classes.
@@ -42,7 +39,6 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserParameterizedRunner.class)
 public class HostConstantsTest extends WebDriverTestCase {
 
     /**
@@ -50,32 +46,21 @@ public class HostConstantsTest extends WebDriverTestCase {
      * @return the parameterized data
      * @throws Exception if an error occurs
      */
-    @Parameters
-    public static Collection<Object[]> data() throws Exception {
-        final List<Object[]> list = new ArrayList<>();
+    public static Collection<Arguments> data() throws Exception {
+        final List<Arguments> list = new ArrayList<>();
         final Set<String> strings = TestCaseTest.getAllConfiguredJsClassNames();
         for (final String host : strings) {
             if (!"Audio".equals(host)) {
-                list.add(new Object[] {host});
+                list.add(Arguments.of(host));
             }
         }
         return list;
     }
 
-    /**
-     * The parent element name.
-     */
-    @Parameter
-    public String host_;
-
-    /**
-     * The default test.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Default
-    public void test() throws Exception {
-        setExpectedAlerts(getExpectedString());
+    @ParameterizedTest
+    @MethodSource("data")
+    void test(final String host) throws Exception {
+        setExpectedAlerts(getExpectedString(host));
 
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
@@ -84,8 +69,8 @@ public class HostConstantsTest extends WebDriverTestCase {
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var all = [];\n"
-                + "    for (var x in " + host_ + ") {\n"
-                + "      if (typeof " + host_ + "[x] == 'number') {\n"
+                + "    for (var x in " + host + ") {\n"
+                + "      if (typeof " + host + "[x] == 'number') {\n"
                 + "        all.push(x);\n"
                 + "      }\n"
                 + "    }\n"
@@ -103,7 +88,7 @@ public class HostConstantsTest extends WebDriverTestCase {
 
                 + "    for (var i in all) {\n"
                 + "      var x = all[i];\n"
-                + "      log(x + ':' + " + host_ + "[x]);\n"
+                + "      log(x + ':' + " + host + "[x]);\n"
                 + "    }\n"
                 + "  } catch(e) {}\n"
                 + "}\n"
@@ -116,11 +101,11 @@ public class HostConstantsTest extends WebDriverTestCase {
         loadPageVerifyTextArea2(html);
     }
 
-    private String[] getExpectedString() throws Exception {
-        if (host_.endsWith("Array") || "Image".equals(host_) || "Option".equals(host_)) {
+    private String[] getExpectedString(final String host) throws Exception {
+        if (host.endsWith("Array") || "Image".equals(host) || "Option".equals(host)) {
             return new String[0];
         }
-        if ("Error".equals(host_) && getBrowserVersion().hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
+        if ("Error".equals(host) && getBrowserVersion().hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
             return new String[] {"stackTraceLimit:10"};
         }
 
@@ -131,7 +116,7 @@ public class HostConstantsTest extends WebDriverTestCase {
         }
 
         final List<String> constants = new ArrayList<>();
-        ClassConfiguration classConfig = classConfigurationIndex.get(host_);
+        ClassConfiguration classConfig = classConfigurationIndex.get(host);
 
         boolean first = true;
         while (classConfig != null) {
