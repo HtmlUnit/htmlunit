@@ -36,7 +36,8 @@ public class AnnotationUtilsTest {
             FF = "ff",
             FF_ESR = "ff esr")
     public void obsoleteDefaultBecauseAllBrowserExpectationsDefinedIndividually() throws Exception {
-        testFail("Obsolete DEFAULT because all browser expectations defined individually",
+        testFail("Obsolete DEFAULT because all browser expectations defined individually"
+                    + " ==> expected: <false> but was: <true>",
                 "obsoleteDefaultBecauseAllBrowserExpectationsDefinedIndividually");
     }
 

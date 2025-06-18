@@ -26,6 +26,7 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
 import org.htmlunit.junit.annotation.Tries;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 /**
  * Tests for {@link WebClient#waitForBackgroundJavaScriptStartingBefore(long)} and
@@ -90,8 +91,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Test
-    @Tries(3)
+    @RetryingTest(3)
     public void dontWaitWhenUnnecessary_jobRemovesOtherJob() throws Exception {
         final String content = DOCTYPE_HTML
             + "<html>\n"
@@ -139,8 +139,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
      * to wait for this job to finish, even if this clearXXX has been called for it.
      * @throws Exception if the test fails
      */
-    @Test
-    @Tries(3)
+    @RetryingTest(3)
     public void waitCalledDuringJobExecution() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -250,8 +249,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
      * a few retries should be done to see if new jobs exists.
      * @throws Exception if the test fails
      */
-    @Test
-    @Tries(3)
+    @RetryingTest(3)
     public void waitWithsubWindows() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -310,8 +308,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
      * .
      * @throws Exception if the test fails
      */
-    @Test
-    @Tries(3)
+    @RetryingTest(3)
     public void newJobStartedAfterWait() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -383,8 +380,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
      * jobs occurs when one of this job is not active.
      * @throws Exception if the test fails
      */
-    @Test
-    @Tries(3)
+    @RetryingTest(3)
     public void waitForJobThatIsAlreadyLate() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -510,8 +506,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
      * has not done its job correctly).
      * @throws Exception if the test fails
      */
-    @Test
-    @Tries(3)
+    @RetryingTest(3)
     public void waitForBackgroundJavaScriptStartingBefore_hangs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

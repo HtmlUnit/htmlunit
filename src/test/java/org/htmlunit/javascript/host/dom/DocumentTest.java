@@ -2918,7 +2918,6 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Retry
     @Alerts(DEFAULT = {"0", "0", "0"},
             FF = {"0", "1", "1"},
             FF_ESR = {"0", "1", "1"})

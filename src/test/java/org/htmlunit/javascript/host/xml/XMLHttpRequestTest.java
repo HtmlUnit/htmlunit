@@ -43,6 +43,7 @@ import org.htmlunit.junit.annotation.Tries;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.opentest4j.AssertionFailedError;
@@ -70,8 +71,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * Tests synchronous use of XMLHttpRequest.
      * @throws Exception if the test fails
      */
-    @Test
-    @Tries(3)
+    @RetryingTest(3)
     public void syncUse() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

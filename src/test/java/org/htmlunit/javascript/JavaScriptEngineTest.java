@@ -1175,7 +1175,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Retry
     @Alerts("starting")
     public void shutdownShouldKill() throws Exception {
         final String html = DOCTYPE_HTML
@@ -1218,7 +1217,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Retry
     @Alerts("starting")
     public void shutdownShouldKillJavaScriptTimeout() throws Exception {
         final String html = DOCTYPE_HTML

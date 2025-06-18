@@ -48,6 +48,7 @@
         <!-- test dependencies -->
         <junit.version>5.13.1</junit.version>
         <junit-launcher.version>1.13.1</junit-launcher.version>
+        <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <jetty.version>9.4.57.v20241219</jetty.version>
         <quercus.version>4.0.66</quercus.version>
         <log4j.version>2.25.0</log4j.version>
@@ -1332,6 +1333,13 @@
             <version>${junit-launcher.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit-pioneer</groupId>
+            <artifactId>junit-pioneer</artifactId>
+            <version>${junit-pioneer.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit5</artifactId>

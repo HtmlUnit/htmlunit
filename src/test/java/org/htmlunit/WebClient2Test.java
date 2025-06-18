@@ -296,7 +296,6 @@ public class WebClient2Test extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Retry
     @Alerts({"loadExtraContent started at Page 1", " loadExtraContent finished at Page 1"})
     @HtmlUnitNYI(CHROME = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"},
             EDGE = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"},

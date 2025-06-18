@@ -73,7 +73,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Retry
     @Alerts("Content-Disposition: form-data; name=\"myInput\"; filename=\"\"")
     public void empty() throws Exception {
         final String htmlContent = DOCTYPE_HTML
@@ -133,7 +132,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Retry
     public void chunked() throws Exception {
         final String htmlContent = DOCTYPE_HTML
                 + "<html>\n"
