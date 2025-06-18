@@ -25,7 +25,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.platform.AwtClipboardHandler;
-import org.junit.Assume;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -643,7 +643,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void clipboardCopy() throws Exception {
-        Assume.assumeFalse(SKIP_);
+        Assumptions.assumeFalse(SKIP_);
 
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
@@ -678,7 +678,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void clipboardPaste() throws Exception {
-        Assume.assumeFalse(SKIP_);
+        Assumptions.assumeFalse(SKIP_);
 
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"

@@ -24,8 +24,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Assume;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
@@ -1151,7 +1151,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"abcx", "", "abcx", "abcx"})
     public void clipboard() throws Exception {
-        Assume.assumeFalse(SKIP_);
+        Assumptions.assumeFalse(SKIP_);
 
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"

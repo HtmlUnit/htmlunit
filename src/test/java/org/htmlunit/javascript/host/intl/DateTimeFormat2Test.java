@@ -19,8 +19,8 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.ComparisonFailure;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 /**
  * Tests for {@link DateTimeFormat}.
@@ -53,7 +53,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
         try {
             loadPageVerifyTextArea2(html.toString());
         }
-        catch (final ComparisonFailure e) {
+        catch (final AssertionFailedError e) {
             final String msg = e.getMessage();
             for (int i = 0; i < msg.length(); i++) {
                 final char c = msg.charAt(i);

@@ -15,7 +15,6 @@
 package org.htmlunit;
 
 import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
-import static org.junit.Assume.assumeTrue;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -28,6 +27,7 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
 import org.htmlunit.html.HtmlPage;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -98,7 +98,7 @@ public class SocksProxyTest extends WebServerTestCase {
             }
         }
         catch (final IOException e) {
-            assumeTrue("Socks proxy is not available", false);
+            Assumptions.assumeTrue(false, "Socks proxy is not available");
         }
     }
 

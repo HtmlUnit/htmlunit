@@ -42,10 +42,10 @@ import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.junit.annotation.Tries;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.ComparisonFailure;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.opentest4j.AssertionFailedError;
 
 /**
  * Tests for {@link XMLHttpRequest}.
@@ -235,7 +235,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                 assertEquals(expected, text);
                 return;
             }
-            catch (final ComparisonFailure e) {
+            catch (final AssertionFailedError e) {
                 if (System.currentTimeMillis() > maxWait) {
                     throw e;
                 }
