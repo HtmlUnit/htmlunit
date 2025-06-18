@@ -50,6 +50,8 @@ public class TextPageTest extends WebServerTestCase {
             final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
             tmpFolder.mkdir();
             final File file = new File(tmpFolder, "hu_txt.plain");
+            FileUtils.deleteQuietly(file);
+
             page.save(file);
             assertTrue(file.exists());
             assertTrue(file.isFile());

@@ -117,6 +117,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
         tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save.html");
+        FileUtils.deleteQuietly(file);
+
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
@@ -149,7 +151,10 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
         tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save2.html");
+        FileUtils.deleteQuietly(file);
         final File imgFile = new File(tmpFolder, "hu_HtmlPageTest_save2/second.jpeg");
+        FileUtils.deleteQuietly(imgFile);
+
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
@@ -176,6 +181,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
         tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_save.html");
+        FileUtils.deleteQuietly(file);
+
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
@@ -200,6 +207,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
         tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save3.html");
+        FileUtils.deleteQuietly(file);
+
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
@@ -224,6 +233,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
         tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save3.html");
+        FileUtils.deleteQuietly(file);
+
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
@@ -276,10 +287,15 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
         tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_saveFrame.html");
+        FileUtils.deleteQuietly(file);
         final File expectedLeftFrameFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/second.html");
+        FileUtils.deleteQuietly(expectedLeftFrameFile);
         final File expectedRightFrameFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/third.html");
+        FileUtils.deleteQuietly(expectedRightFrameFile);
         final File expectedIFrameFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/second/iframe.html");
+        FileUtils.deleteQuietly(expectedIFrameFile);
         final File expectedImgFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/second/img.jpg");
+        FileUtils.deleteQuietly(expectedImgFile);
         final File[] allFiles = {file, expectedLeftFrameFile, expectedImgFile, expectedIFrameFile,
             expectedRightFrameFile};
 
@@ -320,7 +336,10 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
         tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save4.html");
+        FileUtils.deleteQuietly(file);
         final File cssFile = new File(tmpFolder, "hu_HtmlPageTest_save4/second.css");
+        FileUtils.deleteQuietly(cssFile);
+
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
@@ -347,6 +366,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
         tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save5.html");
+        FileUtils.deleteQuietly(file);
+
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
@@ -373,6 +394,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
         tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save5.html");
+        FileUtils.deleteQuietly(file);
+
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
@@ -404,6 +427,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
         tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save.html");
+        FileUtils.deleteQuietly(file);
+
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());

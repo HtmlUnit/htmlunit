@@ -761,6 +761,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
         tmpFolder.mkdir();
         final File file = new File(tmpFolder, "test.html");
+        FileUtils.deleteQuietly(file);
+
         page.save(file);
         final String html2 = FileUtils.readFileToString(file, UTF_8);
         final HtmlPage page2 = loadPage(html2);
