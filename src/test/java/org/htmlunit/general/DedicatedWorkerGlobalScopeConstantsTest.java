@@ -32,7 +32,6 @@ import org.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import org.htmlunit.javascript.configuration.WorkerJavaScriptConfiguration;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -110,8 +109,15 @@ public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
     }
 
     private String[] getExpectedString(final String className) {
-        if (getExpectedAlerts() != null && getExpectedAlerts().length > 0) {
-            return getExpectedAlerts();
+        final String[] expectedAlerts = getExpectedAlerts();
+
+        if (expectedAlerts != null && expectedAlerts.length == 1
+                && "-".equals(expectedAlerts[0])) {
+            return new String[0];
+        }
+
+        if (expectedAlerts != null && expectedAlerts.length > 0) {
+            return expectedAlerts;
         }
 
         if (className.endsWith("Array") || "Image".equals(className) || "Option".equals(className)) {
@@ -168,17 +174,11 @@ public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Test
     @Alerts(CHROME = {"AT_TARGET:2", "BUBBLING_PHASE:3", "CAPTURING_PHASE:1", "NONE:0"},
             EDGE = {"AT_TARGET:2", "BUBBLING_PHASE:3", "CAPTURING_PHASE:1", "NONE:0"},
             FF = "-",
             FF_ESR = "-")
     public void _SecurityPolicyViolationEvent() throws Exception {
-        final String[] expected = getExpectedAlerts();
-        if (expected.length == 1 && "-".equals(expected[0])) {
-            test("SecurityPolicyViolationEvent", new String[0]);
-            return;
-        }
-        test("SecurityPolicyViolationEvent", expected);
+        test("SecurityPolicyViolationEvent", getExpectedString("SecurityPolicyViolationEvent"));
     }
 }
