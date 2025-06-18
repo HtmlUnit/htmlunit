@@ -21,9 +21,7 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link HtmlInlineFrame}.
@@ -34,7 +32,6 @@ import org.junit.runner.RunWith;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlInlineFrameTest extends SimpleWebTestCase {
 
     /**

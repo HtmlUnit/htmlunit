@@ -24,9 +24,7 @@ import org.htmlunit.TopLevelWindow;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JavaScriptJobManagerImpl} using the full HtmlUnit stack. Minimal unit tests
@@ -35,7 +33,6 @@ import org.junit.runner.RunWith;
  * @author Brad Clarke
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class JavaScriptJobManagerTest extends SimpleWebTestCase {
     private long startTime_;
 

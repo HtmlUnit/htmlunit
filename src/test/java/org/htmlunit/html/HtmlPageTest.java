@@ -49,14 +49,13 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.Cookie;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.NodeList;
 
 /**
@@ -72,7 +71,6 @@ import org.w3c.dom.NodeList;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlPageTest extends SimpleWebTestCase {
 
     /** The doctype prefix for standards mode. */
@@ -178,7 +176,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Test(expected = ElementNotFoundException.class)
+    @Test
     public void getElementByNameNull() throws Exception {
         final String htmlContent = DOCTYPE_HTML
             + "<html>\n"
@@ -189,7 +187,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        assertNull(page.getElementByName(null));
+        Assertions.assertThrows(ElementNotFoundException.class, () -> page.getElementByName(null));
     }
 
     /**
@@ -503,12 +501,12 @@ public class HtmlPageTest extends SimpleWebTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Test(expected = MalformedURLException.class)
+    @Test
     public void getFullQualifiedUrl_invalid() throws Exception {
         final String htmlContent = DOCTYPE_HTML + "<html><body></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        page.getFullyQualifiedUrl("http://");
+        Assertions.assertThrows(MalformedURLException.class, () -> page.getFullyQualifiedUrl("http://"));
     }
 
     /**
@@ -1243,7 +1241,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     /**
      * @exception Exception if the test fails
      */
-    @Test(expected = ElementNotFoundException.class)
+    @Test
     public void getElementByNameNotfound() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -1251,7 +1249,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "<div id='b1' name='b'>bar</div>\n"
             + "<div id='b2' name='b'>baz</div></body></html>";
         final HtmlPage page = loadPage(html);
-        page.getElementByName("c");
+
+        Assertions.assertThrows(ElementNotFoundException.class, () -> page.getElementByName("c"));
     }
 
     /**

@@ -23,12 +23,10 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.platform.AwtClipboardHandler;
 import org.junit.Assume;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlTextInput}.
@@ -39,7 +37,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Anton Demydenko
  */
-@RunWith(BrowserRunner.class)
 public class HtmlTextInput2Test extends SimpleWebTestCase {
 
     private static boolean SKIP_ = false;

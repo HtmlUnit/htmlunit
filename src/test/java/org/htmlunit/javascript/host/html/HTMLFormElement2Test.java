@@ -24,10 +24,8 @@ import org.htmlunit.html.HtmlButton;
 import org.htmlunit.html.HtmlFileInput;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlSubmitInput;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLFormElement}.
@@ -39,7 +37,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HTMLFormElement2Test extends SimpleWebTestCase {
 
     /**

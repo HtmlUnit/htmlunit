@@ -25,7 +25,7 @@ import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
 
 import org.htmlunit.HttpHeader;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link EncodingSniffer}.

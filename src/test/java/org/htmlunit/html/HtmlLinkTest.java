@@ -17,10 +17,8 @@ package org.htmlunit.html;
 import java.net.URL;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlLink}.
@@ -28,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-@RunWith(BrowserRunner.class)
 public class HtmlLinkTest extends SimpleWebTestCase {
 
     /**

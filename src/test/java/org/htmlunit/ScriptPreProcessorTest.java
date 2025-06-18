@@ -22,9 +22,7 @@ import java.util.List;
 
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ScriptPreProcessor}.
@@ -41,7 +39,6 @@ import org.junit.runner.RunWith;
  * @author Daniel Gredler
  * @author Sudhan Moghe
  */
-@RunWith(BrowserRunner.class)
 public class ScriptPreProcessorTest extends WebServerTestCase {
 
     /**

@@ -21,9 +21,7 @@ import java.io.StringWriter;
 import java.net.URL;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ScriptException}.
@@ -31,7 +29,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public final class ScriptExceptionTest extends SimpleWebTestCase {
 
     /**

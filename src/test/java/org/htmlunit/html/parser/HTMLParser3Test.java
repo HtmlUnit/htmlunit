@@ -32,10 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for {@link HTMLParser}.
@@ -45,7 +43,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  */
-@RunWith(BrowserRunner.class)
 public class HTMLParser3Test extends WebServerTestCase {
 
     /**

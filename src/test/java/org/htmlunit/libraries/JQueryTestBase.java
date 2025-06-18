@@ -14,8 +14,6 @@
  */
 package org.htmlunit.libraries;
 
-import static org.htmlunit.junit.BrowserVersionClassRunner.NO_ALERTS_DEFINED;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -29,6 +27,7 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.http.HttpStatus;
+import org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback;
 import org.htmlunit.util.WebConnectionWrapper;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
@@ -87,7 +86,8 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
     protected void runTest(final String testName) throws Exception {
         final String testNumber = readTestNumber(testName);
         if (testNumber == null) {
-            assertEquals("Test number not found for: " + testName, NO_ALERTS_DEFINED, getExpectedAlerts());
+            assertEquals("Test number not found for: " + testName,
+                    SetExpectedAlertsBeforeTestExecutionCallback.NO_ALERTS_DEFINED, getExpectedAlerts());
             return;
         }
         final long runTime = 60 * DEFAULT_WAIT_TIME.toMillis();

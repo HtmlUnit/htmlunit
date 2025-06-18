@@ -15,9 +15,7 @@
 package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlSpan}.
@@ -25,7 +23,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  */
-@RunWith(BrowserRunner.class)
 public class HtmlSpanTest extends SimpleWebTestCase {
 
     /**

@@ -21,9 +21,7 @@ import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
@@ -32,7 +30,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Carsten Steul
  */
-@RunWith(BrowserRunner.class)
 public class RegExp2Test extends SimpleWebTestCase {
 
     private static final String STR = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";

@@ -19,9 +19,7 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlTextArea}.
@@ -33,7 +31,6 @@ import org.junit.runner.RunWith;
  * @author Amit Khanna
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlTextAreaTest extends SimpleWebTestCase {
 
     /**

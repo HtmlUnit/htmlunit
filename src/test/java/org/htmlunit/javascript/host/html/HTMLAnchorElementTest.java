@@ -23,9 +23,7 @@ import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLAnchorElement}.
@@ -35,7 +33,6 @@ import org.junit.runner.RunWith;
  * @author Sudhan Moghe
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class HTMLAnchorElementTest extends SimpleWebTestCase {
     private static final URL URL_GARGOYLE;
 

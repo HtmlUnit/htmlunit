@@ -15,16 +15,13 @@
 package org.htmlunit;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebAssert}.
  *
  * @author Daniel Gredler
  */
-@RunWith(BrowserRunner.class)
 public class WebAssertTest extends SimpleWebTestCase {
 
     /**

@@ -18,10 +18,8 @@ import java.net.URL;
 
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -32,7 +30,6 @@ import org.openqa.selenium.WebDriver;
  * @author Marc Guillemot
  * @author Matthias Brandt
  */
-@RunWith(BrowserRunner.class)
 public class PostponedActionTest extends WebDriverTestCase {
 
     /**

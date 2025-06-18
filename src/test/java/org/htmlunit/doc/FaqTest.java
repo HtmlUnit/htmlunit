@@ -30,7 +30,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the sample code from the documentation to make sure

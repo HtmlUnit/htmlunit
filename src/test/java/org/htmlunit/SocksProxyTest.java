@@ -27,9 +27,8 @@ import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for SOCKS proxy support.
@@ -40,7 +39,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class SocksProxyTest extends WebServerTestCase {
 
     /**
@@ -56,9 +54,9 @@ public class SocksProxyTest extends WebServerTestCase {
      * Ensure that an error occurs if no SOCKS proxy runs on the configured port.
      * @throws Exception if an error occurs
      */
-    @Test(expected = SocketException.class)
+    @Test
     public void httpWithBadProxyPortShouldFail() throws Exception {
-        doHttpTest(getWebClientWithWrongSocksProxy());
+        Assertions.assertThrows(SocketException.class, () -> doHttpTest(getWebClientWithWrongSocksProxy()));
     }
 
     private static void doHttpTest(final WebClient client) throws Exception, IOException, MalformedURLException {
@@ -81,9 +79,9 @@ public class SocksProxyTest extends WebServerTestCase {
      * it shows that the proxy isn't used.
      * @throws Exception if an error occurs
      */
-    @Test(expected = SocketException.class)
+    @Test
     public void httpsWithBadProxyPortShouldFail() throws Exception {
-        doHttpsTest(getWebClientWithWrongSocksProxy());
+        Assertions.assertThrows(SocketException.class, () -> doHttpsTest(getWebClientWithWrongSocksProxy()));
     }
 
     private void doHttpsTest(final WebClient webClient) throws Exception {

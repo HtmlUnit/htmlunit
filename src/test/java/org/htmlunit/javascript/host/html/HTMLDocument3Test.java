@@ -17,7 +17,7 @@ package org.htmlunit.javascript.host.html;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLDocument}.

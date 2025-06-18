@@ -28,11 +28,9 @@ import org.htmlunit.javascript.host.css.CSSStyleSheet;
 import org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import org.htmlunit.javascript.host.css.MediaList;
 import org.htmlunit.javascript.host.css.StyleSheetList;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.css.CSS2Properties;
 
 /**
@@ -43,7 +41,6 @@ import org.w3c.dom.css.CSS2Properties;
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API">Web API Interfaces</a>
  */
-@RunWith(BrowserRunner.class)
 public class HostClassNameTest extends WebDriverTestCase {
 
     private void test(final String className) throws Exception {

@@ -17,16 +17,13 @@ package org.htmlunit;
 import java.util.Map;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link StorageHolder}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class StorageHolderTest extends SimpleWebTestCase {
 
     /**

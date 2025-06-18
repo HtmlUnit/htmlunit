@@ -24,7 +24,7 @@ import java.util.TreeSet;
 
 import org.apache.commons.io.FileUtils;
 import org.htmlunit.general.ElementPropertiesTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Generates HTML file with all <tt>NotYetImplemented</tt> methods.

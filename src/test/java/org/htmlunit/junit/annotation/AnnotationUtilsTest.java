@@ -17,7 +17,7 @@ package org.htmlunit.junit.annotation;
 import java.lang.reflect.Method;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AnnotationUtils}.

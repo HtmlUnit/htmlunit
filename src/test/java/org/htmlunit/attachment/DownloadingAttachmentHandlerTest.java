@@ -27,11 +27,9 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DownloadingAttachmentHandler}.
@@ -39,7 +37,6 @@ import org.junit.runner.RunWith;
  * @author Marek Andreansky
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
 
     /**

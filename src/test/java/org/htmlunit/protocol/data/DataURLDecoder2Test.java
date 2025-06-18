@@ -22,7 +22,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.imageio.ImageIO;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DataUrlDecoder}.

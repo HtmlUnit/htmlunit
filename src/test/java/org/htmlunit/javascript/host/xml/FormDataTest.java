@@ -36,12 +36,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -54,7 +52,6 @@ import org.openqa.selenium.WebDriver;
  * @author Thorsten Wendelmuth
  * @author Lai Quang Duong
  */
-@RunWith(BrowserRunner.class)
 public class FormDataTest extends WebDriverTestCase {
 
     /**

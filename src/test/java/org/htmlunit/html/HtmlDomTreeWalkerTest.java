@@ -16,17 +16,14 @@ package org.htmlunit.html;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlDomTreeWalker}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlDomTreeWalkerTest extends SimpleWebTestCase {
 
     /**

@@ -19,10 +19,8 @@ import java.io.ObjectOutputStream;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLFrameElement} when used for {@link org.htmlunit.html.HtmlFrame}.
@@ -34,7 +32,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HTMLFrameElementTest extends SimpleWebTestCase {
 
     /**

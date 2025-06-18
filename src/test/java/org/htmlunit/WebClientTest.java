@@ -49,14 +49,12 @@ import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.neko.HtmlUnitNekoHtmlParser;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.javascript.host.html.HTMLStyleElement;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xml.XmlPage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebClient}.
@@ -76,7 +74,6 @@ import org.junit.runner.RunWith;
  * @author Carsten Steul
  * @author Joerg Werner
  */
-@RunWith(BrowserRunner.class)
 public class WebClientTest extends SimpleWebTestCase {
 
     /**

@@ -26,7 +26,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.htmlunit.CookieManager;
 import org.htmlunit.util.Cookie;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the HtmlUnitCookieStore, which is a wrapper around the CookieManager.

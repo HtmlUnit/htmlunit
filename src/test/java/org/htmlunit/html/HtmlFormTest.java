@@ -31,12 +31,10 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebWindow;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlForm}.
@@ -49,7 +47,6 @@ import org.junit.runner.RunWith;
  * @author Philip Graf
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlFormTest extends SimpleWebTestCase {
 
     /**

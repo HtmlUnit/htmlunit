@@ -29,18 +29,15 @@ import org.htmlunit.html.DomNodeList;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlDivision;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link SgmlPage}.
  *
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public final class SgmlPageTest extends WebServerTestCase {
 
     /**

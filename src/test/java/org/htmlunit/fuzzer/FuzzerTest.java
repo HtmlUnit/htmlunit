@@ -21,9 +21,7 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for issues reported by Google OSS-Fuzz
@@ -31,7 +29,6 @@ import org.junit.runner.RunWith;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class FuzzerTest extends WebTestCase {
 
     /**

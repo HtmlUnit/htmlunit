@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.html.HTMLBaseFontElement;
 
 /**
@@ -27,7 +25,6 @@ import org.w3c.dom.html.HTMLBaseFontElement;
  * @author Frank Danek
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class HTMLBaseFontElementTest extends WebDriverTestCase {
 
     /**

@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.htmlunit.DefaultPageCreator.PageType;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DefaultPageCreator}.

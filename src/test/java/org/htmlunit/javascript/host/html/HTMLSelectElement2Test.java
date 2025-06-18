@@ -27,9 +27,7 @@ import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlSelect;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLSelectElement}.
@@ -41,7 +39,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-@RunWith(BrowserRunner.class)
 public class HTMLSelectElement2Test extends SimpleWebTestCase {
 
     /**

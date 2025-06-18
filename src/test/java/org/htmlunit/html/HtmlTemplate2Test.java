@@ -15,9 +15,7 @@
 package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlTemplate}.
@@ -25,7 +23,6 @@ import org.junit.runner.RunWith;
  * @author Ronny Shapiro
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlTemplate2Test extends SimpleWebTestCase {
 
     /**

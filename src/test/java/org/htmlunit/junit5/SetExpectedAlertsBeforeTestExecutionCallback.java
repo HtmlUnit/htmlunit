@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
@@ -47,17 +48,20 @@ public class SetExpectedAlertsBeforeTestExecutionCallback implements BeforeTestE
         final Method testMethod = context.getRequiredTestMethod();
         final Object testInstance = context.getRequiredTestInstance();
 
-        if (testInstance instanceof WebDriverTestCase) {
-            final WebDriverTestCase webDriverTestCase = (WebDriverTestCase) testInstance;
+        if (testInstance instanceof WebTestCase) {
+            final WebTestCase webTestCase = (WebTestCase) testInstance;
 
-            setAlerts(webDriverTestCase, testMethod);
+            setAlerts(webTestCase, testMethod);
         }
     }
 
-    private static void setAlerts(final WebDriverTestCase webDriverTestCase, final Method method) {
+    private static void setAlerts(final WebTestCase webTestCase, final Method method) {
         final Alerts alerts = method.getAnnotation(Alerts.class);
-        final BrowserVersion browserVersion = webDriverTestCase.getBrowserVersion();
-        final boolean realBrowser = webDriverTestCase.useRealBrowser();
+        final BrowserVersion browserVersion = webTestCase.getBrowserVersion();
+        boolean realBrowser = false;
+        if (webTestCase instanceof WebDriverTestCase) {
+            realBrowser = ((WebDriverTestCase) webTestCase).useRealBrowser();
+        }
 
         String[] expectedAlerts = {};
         if (alerts != null) {
@@ -125,7 +129,7 @@ public class SetExpectedAlertsBeforeTestExecutionCallback implements BeforeTestE
             }
         }
 
-        webDriverTestCase.setExpectedAlerts(expectedAlerts);
+        webTestCase.setExpectedAlerts(expectedAlerts);
     }
 
 

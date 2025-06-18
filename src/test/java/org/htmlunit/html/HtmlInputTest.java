@@ -26,9 +26,7 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlInput}.
@@ -39,7 +37,6 @@ import org.junit.runner.RunWith;
  * @author Anton Demydenko
  * @author Ronny Shapiro
  */
-@RunWith(BrowserRunner.class)
 public final class HtmlInputTest extends SimpleWebTestCase {
 
     /**

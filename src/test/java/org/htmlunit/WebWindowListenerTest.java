@@ -16,18 +16,15 @@ package org.htmlunit;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebWindowListener}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class WebWindowListenerTest extends SimpleWebTestCase {
 
     /**

@@ -15,10 +15,8 @@
 package org.htmlunit.html.parser;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
 
 /**
@@ -27,7 +25,6 @@ import org.openqa.selenium.JavascriptExecutor;
  * @author Atsushi Nakagawa
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLParser5Test extends WebDriverTestCase {
 
     private static final String LOG_INPUT_FORMS =

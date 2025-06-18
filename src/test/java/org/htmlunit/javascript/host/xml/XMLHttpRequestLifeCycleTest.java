@@ -37,7 +37,6 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.Retry;
 import org.htmlunit.util.MimeType;
@@ -132,7 +131,6 @@ public final class XMLHttpRequestLifeCycleTest {
     /**
      * Test using our JettyServer.
      */
-    @RunWith(BrowserRunner.class)
     public static class JettyServerTest extends WebDriverTestCase {
 
         /**
@@ -1223,7 +1221,6 @@ public final class XMLHttpRequestLifeCycleTest {
     /**
      * Test using our MiniServer to be able to simulate special error conditions.
      */
-    @RunWith(BrowserRunner.class)
     public static class MiniServerTest extends WebDriverTestCase {
 
         /**

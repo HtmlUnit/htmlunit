@@ -18,16 +18,13 @@ import org.htmlunit.ScriptException;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JavaScriptErrorListener}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class JavascriptErrorListener2Test extends SimpleWebTestCase {
 
     /**

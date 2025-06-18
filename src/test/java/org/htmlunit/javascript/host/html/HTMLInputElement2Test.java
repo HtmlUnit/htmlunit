@@ -20,10 +20,8 @@ import java.util.List;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlTextInput;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLInputElement} and buttons.
@@ -33,7 +31,6 @@ import org.junit.runner.RunWith;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class HTMLInputElement2Test extends SimpleWebTestCase {
 
     /**

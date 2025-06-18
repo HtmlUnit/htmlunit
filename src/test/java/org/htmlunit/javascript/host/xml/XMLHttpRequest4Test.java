@@ -21,10 +21,8 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link XMLHttpRequest}.
@@ -37,7 +35,6 @@ import org.junit.runner.RunWith;
  * @author Thorsten Wendelmuth
  * @author Atsushi Nakagawa
  */
-@RunWith(BrowserRunner.class)
 public class XMLHttpRequest4Test extends SimpleWebTestCase {
 
     /**

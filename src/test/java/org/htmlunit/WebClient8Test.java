@@ -22,10 +22,8 @@ import org.htmlunit.html.HtmlCheckBoxInput;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlRadioButtonInput;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebClient} running with js disabled.
@@ -33,7 +31,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Ronny Shapiro
  */
-@RunWith(BrowserRunner.class)
 public class WebClient8Test extends SimpleWebTestCase {
 
     /**

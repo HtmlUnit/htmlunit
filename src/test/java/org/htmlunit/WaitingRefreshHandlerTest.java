@@ -15,16 +15,13 @@
 package org.htmlunit;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WaitingRefreshHandlerTest}.
  *
  * @author Brad Clarke
  */
-@RunWith(BrowserRunner.class)
 public final class WaitingRefreshHandlerTest extends SimpleWebTestCase {
 
     /**

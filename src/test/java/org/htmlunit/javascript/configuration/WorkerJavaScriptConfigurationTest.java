@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WorkerJavaScriptConfiguration}.

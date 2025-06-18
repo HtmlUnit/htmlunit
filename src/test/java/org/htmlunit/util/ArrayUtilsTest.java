@@ -17,7 +17,7 @@ package org.htmlunit.util;
 import static org.junit.Assert.assertThrows;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ArrayUtils}.

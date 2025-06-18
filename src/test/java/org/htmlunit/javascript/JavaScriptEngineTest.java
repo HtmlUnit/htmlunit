@@ -49,13 +49,11 @@ import org.htmlunit.html.HtmlFrame;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlScript;
 import org.htmlunit.html.HtmlTextInput;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.Retry;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link JavaScriptEngine}.
@@ -71,7 +69,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Carsten Steul
  */
-@RunWith(BrowserRunner.class)
 public class JavaScriptEngineTest extends SimpleWebTestCase {
 
     /**

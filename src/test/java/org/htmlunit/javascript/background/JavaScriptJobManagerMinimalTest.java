@@ -23,7 +23,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Minimal tests for {@link JavaScriptJobManagerImpl}. Tests which use the full HtmlUnit stack

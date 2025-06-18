@@ -20,12 +20,12 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.After;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -57,7 +57,6 @@ public class NoHttpResponseTest {
     /**
      * Test using WebDriver.
      */
-    @RunWith(BrowserRunner.class)
     public static class WithWebDriverTest extends WebDriverTestCase {
 
         /**
@@ -133,7 +132,6 @@ public class NoHttpResponseTest {
     /**
      * Test using WebClient with default configuration allowing to throw exception.
      */
-    @RunWith(BrowserRunner.class)
     public static class WithWebClientTest extends SimpleWebTestCase {
 
         /**
@@ -149,10 +147,14 @@ public class NoHttpResponseTest {
         /**
          * @throws Throwable if the test fails
          */
-        @Test(expected = FailingHttpStatusCodeException.class)
+        @Test
+        @Alerts("§§URL§§")
         public void submit() throws Throwable {
+            expandExpectedAlertsVariables(URL_FIRST);
+
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(URL_FIRST, HTML);
+
             MiniServer.configureDropRequest(new URL(URL_FIRST, "page2?textfield="));
             final URL urlRightSubmit = new URL(URL_FIRST, "page2?textfield=new+value");
             mockWebConnection.setResponse(urlRightSubmit,
@@ -163,8 +165,11 @@ public class NoHttpResponseTest {
             try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
                 miniServer.start();
 
-                HtmlPage page = getWebClient().getPage(URL_FIRST);
-                page = page.getElementById("inputSubmit").click();
+                final HtmlPage page = getWebClient().getPage(URL_FIRST);
+
+                Assertions.assertThrows(FailingHttpStatusCodeException.class,
+                            () -> page.getElementById("inputSubmit").click());
+
                 assertEquals(getExpectedAlerts()[0], page.getUrl());
             }
         }

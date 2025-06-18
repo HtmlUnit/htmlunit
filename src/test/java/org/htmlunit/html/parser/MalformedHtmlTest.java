@@ -16,11 +16,9 @@ package org.htmlunit.html.parser;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -34,7 +32,6 @@ import org.openqa.selenium.WebDriver;
  * @author Carsten Steul
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class MalformedHtmlTest extends WebDriverTestCase {
 
     /**

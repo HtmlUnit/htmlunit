@@ -18,19 +18,16 @@ import java.util.TimeZone;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for the Date support.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class NativeDate2Test extends WebDriverTestCase {
 
     /**

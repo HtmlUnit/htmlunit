@@ -17,17 +17,14 @@ package org.htmlunit.javascript;
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FunctionWrapper}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class FunctionsWrapper2Test extends SimpleWebTestCase {
 
     /**

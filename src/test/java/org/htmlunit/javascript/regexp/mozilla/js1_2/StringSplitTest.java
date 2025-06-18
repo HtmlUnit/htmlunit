@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.regexp.mozilla.js1_2;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests originally in '/js/src/tests/js1_2/regexp/string_split.js'.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class StringSplitTest extends WebDriverTestCase {
 
     /**

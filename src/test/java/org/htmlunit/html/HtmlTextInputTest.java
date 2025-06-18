@@ -22,12 +22,11 @@ import java.util.Collections;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.junit.Assume;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.Keys;
@@ -41,7 +40,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ronald Brill
  * @author Anton Demydenko
  */
-@RunWith(BrowserRunner.class)
 public class HtmlTextInputTest extends WebDriverTestCase {
 
     private static boolean SKIP_ = false;
@@ -713,7 +711,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void submitWithoutForm() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -723,7 +721,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("t")).submit();
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> driver.findElement(By.id("t")).submit());
 
         assertEquals(1, getMockWebConnection().getRequestCount());
     }

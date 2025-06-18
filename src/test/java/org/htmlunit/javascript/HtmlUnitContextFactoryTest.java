@@ -16,16 +16,13 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlUnitContextFactory}.
  *
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class HtmlUnitContextFactoryTest extends SimpleWebTestCase {
 
     /**

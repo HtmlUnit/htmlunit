@@ -27,12 +27,10 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebServerTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.platform.image.ImageData;
 import org.htmlunit.platform.image.ImageIOImageData;
 import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlImage}.
@@ -42,7 +40,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Lukas Botsch
  */
-@RunWith(BrowserRunner.class)
 public class HtmlImageDownloadTest extends WebServerTestCase {
     private static final String BASE_FILE_PATH = "src/test/resources/org/htmlunit/html";
 

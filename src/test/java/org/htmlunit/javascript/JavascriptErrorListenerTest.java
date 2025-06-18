@@ -26,10 +26,9 @@ import org.htmlunit.ScriptException;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /**
  * Tests for {@link JavaScriptErrorListener}.
@@ -37,7 +36,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Marc Guillemot
  */
-@RunWith(BrowserRunner.class)
 
 public class JavascriptErrorListenerTest extends WebServerTestCase {
 
@@ -194,7 +192,8 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
      * Configured with a timeout as the build server seemed to have problem with this test from time to time.
      * @throws Exception if the test fails
      */
-    @Test(timeout = 10_000)
+    @Test
+    @Timeout(10)
     public void listenForTimeoutError() throws Exception {
         final WebClient webClient = getWebClient();
         webClient.getOptions().setThrowExceptionOnScriptError(false);

@@ -24,10 +24,8 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TopLevelWindow}.
@@ -37,7 +35,6 @@ import org.junit.runner.RunWith;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class TopLevelWindowTest extends SimpleWebTestCase {
 
     /**

@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.TimeZone;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BrowserVersion}.

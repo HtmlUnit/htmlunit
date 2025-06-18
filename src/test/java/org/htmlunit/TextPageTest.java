@@ -18,18 +18,15 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
-import org.htmlunit.junit.BrowserRunner;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
-import org.junit.runner.RunWith;
 
 /**
  * Tests for text content.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class TextPageTest extends WebServerTestCase {
 
     /**

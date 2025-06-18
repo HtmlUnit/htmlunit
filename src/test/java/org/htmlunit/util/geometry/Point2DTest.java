@@ -16,7 +16,7 @@ package org.htmlunit.util.geometry;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Point2D}.

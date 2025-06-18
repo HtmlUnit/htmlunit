@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.intl;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link V8BreakIterator}.
@@ -29,7 +27,6 @@ import org.junit.runner.RunWith;
  * @see <a href="https://code.google.com/p/v8/source/browse#svn%2Ftrunk%2Ftest%2Fintl%2Fbreak-iterator">
  *          https://code.google.com/p/v8/source/browse#svn%2Ftrunk%2Ftest%2Fintl%2Fbreak-iterator</a>
  */
-@RunWith(BrowserRunner.class)
 public class V8BreakIteratorTest extends WebDriverTestCase {
 
     private static final String LINE_ = "line";

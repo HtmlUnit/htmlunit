@@ -25,7 +25,7 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link ProxyAutoConfig}.

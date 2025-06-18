@@ -15,11 +15,9 @@
 package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriverException;
 
 /**
@@ -28,7 +26,6 @@ import org.openqa.selenium.WebDriverException;
  * @author Jake Cobb
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class ScriptableObjectTest extends WebDriverTestCase {
 
     /**

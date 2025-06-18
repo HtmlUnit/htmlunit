@@ -27,9 +27,7 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.html.HtmlTableColumnGroup;
 import org.htmlunit.html.XHtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for {@link HTMLParser}.
@@ -40,7 +38,6 @@ import org.junit.runner.RunWith;
  * @author Sudhan Moghe
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HTMLParserTest extends SimpleWebTestCase {
 
     /**

@@ -21,10 +21,8 @@ import java.util.List;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.NodeList;
 
 /**
@@ -39,7 +37,6 @@ import org.w3c.dom.NodeList;
  * @author Ronald Brill
  * @author Lai Quang Duong
  */
-@RunWith(BrowserRunner.class)
 public class HtmlElementTest extends SimpleWebTestCase {
 
     /**

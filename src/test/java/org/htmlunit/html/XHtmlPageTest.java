@@ -23,17 +23,14 @@ import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link XHtmlPage}.
  *
  * @author Daniel Gredler
  */
-@RunWith(BrowserRunner.class)
 public class XHtmlPageTest extends SimpleWebTestCase {
 
     /**

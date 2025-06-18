@@ -15,10 +15,8 @@
 package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlSearchInput}.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Anton Demydenko
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlSearchInput2Test extends SimpleWebTestCase {
 
     /**

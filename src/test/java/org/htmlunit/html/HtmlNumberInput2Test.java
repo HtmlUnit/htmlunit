@@ -16,10 +16,8 @@ package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlNumberInput}.
@@ -28,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author Anton Demydenko
  * @author Michael Lueck
  */
-@RunWith(BrowserRunner.class)
 public class HtmlNumberInput2Test extends SimpleWebTestCase {
 
     /**

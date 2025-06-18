@@ -20,11 +20,9 @@ import org.htmlunit.MiniServer;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -33,7 +31,6 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  *
  */
-@RunWith(BrowserRunner.class)
 public final class XMLHttpRequestSentContentTest extends WebDriverTestCase {
 
     /**

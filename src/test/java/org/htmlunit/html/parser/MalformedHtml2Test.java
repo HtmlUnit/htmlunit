@@ -16,9 +16,7 @@ package org.htmlunit.html.parser;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Set of tests for ill formed HTML code.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Sudhan Moghe
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class MalformedHtml2Test extends SimpleWebTestCase {
 
     /**

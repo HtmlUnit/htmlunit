@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 
 import org.htmlunit.util.Cookie;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link CookieManager}.

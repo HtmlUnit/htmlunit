@@ -15,6 +15,8 @@
 package org.htmlunit.general;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback.firstDefinedOrGiven;
+import static org.htmlunit.junit5.SetExpectedAlertsBeforeTestExecutionCallback.isDefined;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -39,10 +41,10 @@ import org.htmlunit.javascript.host.crypto.SubtleCrypto;
 import org.htmlunit.javascript.host.dom.CDATASection;
 import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.dom.XPathEvaluator;
+import org.htmlunit.javascript.host.dom.XPathExpression;
 import org.htmlunit.javascript.host.dom.XPathResult;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.performance.Performance;
-import org.htmlunit.junit.BrowserVersionClassRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.jfree.chart.ChartFactory;
@@ -212,24 +214,20 @@ public class ElementPropertiesTest extends WebDriverTestCase {
 
                 final Alerts alerts = method.getAnnotation(Alerts.class);
                 String[] expectedAlerts = {};
-                if (BrowserVersionClassRunner.isDefined(alerts.value())) {
+                if (isDefined(alerts.value())) {
                     expectedAlerts = alerts.value();
                 }
                 if (browserVersion == BrowserVersion.EDGE) {
-                    expectedAlerts = BrowserVersionClassRunner
-                            .firstDefinedOrGiven(expectedAlerts, alerts.EDGE(), alerts.DEFAULT());
+                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, alerts.EDGE(), alerts.DEFAULT());
                 }
                 else if (browserVersion == BrowserVersion.FIREFOX_ESR) {
-                    expectedAlerts = BrowserVersionClassRunner
-                            .firstDefinedOrGiven(expectedAlerts, alerts.FF_ESR(), alerts.DEFAULT());
+                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, alerts.FF_ESR(), alerts.DEFAULT());
                 }
                 else if (browserVersion == BrowserVersion.FIREFOX) {
-                    expectedAlerts = BrowserVersionClassRunner
-                            .firstDefinedOrGiven(expectedAlerts, alerts.FF(), alerts.DEFAULT());
+                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, alerts.FF(), alerts.DEFAULT());
                 }
                 else if (browserVersion == BrowserVersion.CHROME) {
-                    expectedAlerts = BrowserVersionClassRunner
-                            .firstDefinedOrGiven(expectedAlerts, alerts.CHROME(), alerts.DEFAULT());
+                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, alerts.CHROME(), alerts.DEFAULT());
                 }
 
                 final List<String> realProperties = stringAsArray(String.join(",", expectedAlerts));
@@ -239,16 +237,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 String[] nyiAlerts = {};
                 if (htmlUnitNYI != null) {
                     if (browserVersion == BrowserVersion.EDGE) {
-                        nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.EDGE());
+                        nyiAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.EDGE());
                     }
                     else if (browserVersion == BrowserVersion.FIREFOX_ESR) {
-                        nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF_ESR());
+                        nyiAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF_ESR());
                     }
                     else if (browserVersion == BrowserVersion.FIREFOX) {
-                        nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF());
+                        nyiAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF());
                     }
                     else if (browserVersion == BrowserVersion.CHROME) {
-                        nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.CHROME());
+                        nyiAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.CHROME());
                     }
 
                     simulatedProperties = stringAsArray(String.join(",", nyiAlerts));

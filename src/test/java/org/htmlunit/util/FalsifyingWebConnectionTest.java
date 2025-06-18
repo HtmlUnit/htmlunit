@@ -28,16 +28,13 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FalsifyingWebConnection}.
  *
  * @author Marc Guillemot
  */
-@RunWith(BrowserRunner.class)
 public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
 
     /**

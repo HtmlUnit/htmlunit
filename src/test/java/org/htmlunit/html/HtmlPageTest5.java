@@ -18,17 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlPage}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlPageTest5 extends SimpleWebTestCase {
     /**
      * Test tabbing to the next element.

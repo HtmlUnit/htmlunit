@@ -25,10 +25,8 @@ import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlButton;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLElement}.
@@ -46,7 +44,6 @@ import org.junit.runner.RunWith;
  * @author Ethan Glasser-Camp
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HTMLElement3Test extends SimpleWebTestCase {
 
     /**

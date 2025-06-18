@@ -20,7 +20,7 @@ import java.net.InetAddress;
 import java.net.URL;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link UrlUtils}.

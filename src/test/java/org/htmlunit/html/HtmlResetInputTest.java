@@ -18,9 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlResetInput}.
@@ -28,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class HtmlResetInputTest extends SimpleWebTestCase {
 
     /**

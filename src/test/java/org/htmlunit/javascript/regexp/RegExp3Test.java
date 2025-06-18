@@ -18,10 +18,9 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
@@ -35,7 +34,6 @@ import org.junit.runner.RunWith;
  * @author Atsushi Nakagawa
  * @author Lai Quang Duong
  */
-@RunWith(BrowserRunner.class)
 public class RegExp3Test extends WebDriverTestCase {
 
     private static final String SCRIPT_TEST_MATCH = "function arrayToString(_arr) {\n"
@@ -1027,7 +1025,8 @@ public class RegExp3Test extends WebDriverTestCase {
      * Test from Prototype suite running very fast with Java 6 but taking ages with Java 7 &amp; 8.
      * @throws Exception if an error occurs
      */
-    @Test(timeout = 1000)
+    @Test
+    @Timeout(1)
     @Alerts({"2200915", "2000915"})
     public void replace_huge() throws Exception {
         final String html = "<html><body><script>\n"

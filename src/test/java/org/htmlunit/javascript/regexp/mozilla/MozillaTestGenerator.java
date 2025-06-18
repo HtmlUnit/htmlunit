@@ -50,7 +50,7 @@ public final class MozillaTestGenerator {
         System.out.println("package org.htmlunit.javascript.regexp.mozilla."
                 + jsPathTokens[4] + ";");
         System.out.println();
-        System.out.println("import org.junit.Test;");
+        System.out.println("import org.junit.jupiter.api.Test;");
         System.out.println("import org.junit.runner.RunWith;");
         System.out.println();
         System.out.println("import org.htmlunit.BrowserRunner;");

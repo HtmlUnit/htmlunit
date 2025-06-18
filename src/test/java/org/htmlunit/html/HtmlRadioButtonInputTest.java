@@ -20,10 +20,8 @@ import java.util.List;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlRadioButtonInput}.
@@ -33,7 +31,6 @@ import org.junit.runner.RunWith;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
 
     /**

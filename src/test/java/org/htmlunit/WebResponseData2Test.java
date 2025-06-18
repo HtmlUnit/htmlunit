@@ -14,9 +14,7 @@
  */
 package org.htmlunit;
 
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebResponseData}.
@@ -24,7 +22,6 @@ import org.junit.runner.RunWith;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class WebResponseData2Test extends SimpleWebTestCase {
 
     /**

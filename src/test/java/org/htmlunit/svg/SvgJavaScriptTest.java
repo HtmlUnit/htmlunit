@@ -17,9 +17,7 @@ package org.htmlunit.svg;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,7 +27,6 @@ import org.openqa.selenium.WebElement;
  *
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class SvgJavaScriptTest extends WebDriverTestCase {
 
     /**

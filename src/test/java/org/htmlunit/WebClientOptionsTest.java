@@ -19,17 +19,14 @@ import java.security.KeyStore;
 import javax.net.ssl.SSLContext;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.htmlunit.junit.BrowserRunner;
 import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebClientOptions}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class WebClientOptionsTest extends SimpleWebTestCase {
 
     /**

@@ -23,13 +23,11 @@ import java.util.List;
 
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.NameValuePair;
 import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Additional tests for {@link XMLHttpRequest} blob handling.
@@ -37,7 +35,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Thorsten Wendelmuth
  */
-@RunWith(BrowserRunner.class)
 public class XMLHttpRequest5Test extends WebDriverTestCase {
 
     /**

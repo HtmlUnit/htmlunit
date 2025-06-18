@@ -17,16 +17,13 @@ package org.htmlunit.html.impl;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for SimpleRange.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class SimpleRangeTest extends SimpleWebTestCase {
 
     /**

@@ -15,10 +15,8 @@
 package org.htmlunit;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -27,7 +25,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  *
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public final class SgmlPage2Test extends WebDriverTestCase {
 
     /**
