@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 137, Firefox 139, Bugfixes">
+            <action type="update" dev="rbri">
+                Test suite updated to junit 5 and cleaned up.
+            </action>
             <action type="add" dev="rbri">
                 The hidden attribute now supports the 'until-found' value.
             </action>

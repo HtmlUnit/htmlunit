@@ -66,10 +66,6 @@ public class SetExpectedAlertsBeforeTestExecutionCallback implements BeforeTestE
     private static void setAlerts(final WebTestCase webTestCase, final Method method) {
         final Alerts alerts = method.getAnnotation(Alerts.class);
         final BrowserVersion browserVersion = webTestCase.getBrowserVersion();
-        boolean realBrowser = false;
-        if (webTestCase instanceof WebDriverTestCase) {
-            realBrowser = ((WebDriverTestCase) webTestCase).useRealBrowser();
-        }
 
         String[] expectedAlerts = {};
         if (alerts != null) {
@@ -93,6 +89,10 @@ public class SetExpectedAlertsBeforeTestExecutionCallback implements BeforeTestE
             }
         }
 
+        boolean realBrowser = false;
+        if (webTestCase instanceof WebDriverTestCase) {
+            realBrowser = ((WebDriverTestCase) webTestCase).useRealBrowser();
+        }
         if (realBrowser) {
             final BuggyWebDriver buggyWebDriver = method.getAnnotation(BuggyWebDriver.class);
             if (buggyWebDriver != null) {
