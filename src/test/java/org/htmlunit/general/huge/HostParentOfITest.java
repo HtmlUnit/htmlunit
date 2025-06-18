@@ -16,11 +16,8 @@ package org.htmlunit.general.huge;
 
 import java.util.Collection;
 
-import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.provider.Arguments;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -30,7 +27,6 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserParameterizedRunner.class)
 public class HostParentOfITest extends HostParentOf {
 
     /**
@@ -40,336 +36,178 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception
      *             if an error occurs
      */
-    @Parameters
-    public static Collection<Object[]> data() throws Exception {
+    public static Collection<Arguments> data() throws Exception {
         return HostParentOf.data(input -> {
             final char ch = Character.toUpperCase(input.charAt(0));
             return ch >= 'I' && ch <= 'L';
         });
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IDBCursor_IDBCursor() throws Exception {
+    void _IDBCursor_IDBCursor() throws Exception {
         test("IDBCursor", "IDBCursor");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/true")
-    public void _IDBCursor_IDBCursorWithValue() throws Exception {
+    void _IDBCursor_IDBCursorWithValue() throws Exception {
         test("IDBCursor", "IDBCursorWithValue");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IDBCursorWithValue_IDBCursorWithValue() throws Exception {
+    void _IDBCursorWithValue_IDBCursorWithValue() throws Exception {
         test("IDBCursorWithValue", "IDBCursorWithValue");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IDBDatabase_IDBDatabase() throws Exception {
+    void _IDBDatabase_IDBDatabase() throws Exception {
         test("IDBDatabase", "IDBDatabase");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IDBFactory_IDBFactory() throws Exception {
+    void _IDBFactory_IDBFactory() throws Exception {
         test("IDBFactory", "IDBFactory");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IDBIndex_IDBIndex() throws Exception {
+    void _IDBIndex_IDBIndex() throws Exception {
         test("IDBIndex", "IDBIndex");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IDBKeyRange_IDBKeyRange() throws Exception {
+    void _IDBKeyRange_IDBKeyRange() throws Exception {
         test("IDBKeyRange", "IDBKeyRange");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("false/false")
-    public void _IDBMutableFile_IDBMutableFile() throws Exception {
+    void _IDBMutableFile_IDBMutableFile() throws Exception {
         test("IDBMutableFile", "IDBMutableFile");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IDBObjectStore_IDBObjectStore() throws Exception {
+    void _IDBObjectStore_IDBObjectStore() throws Exception {
         test("IDBObjectStore", "IDBObjectStore");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IDBOpenDBRequest_IDBOpenDBRequest() throws Exception {
+    void _IDBOpenDBRequest_IDBOpenDBRequest() throws Exception {
         test("IDBOpenDBRequest", "IDBOpenDBRequest");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/true")
-    public void _IDBRequest_IDBOpenDBRequest() throws Exception {
+    void _IDBRequest_IDBOpenDBRequest() throws Exception {
         test("IDBRequest", "IDBOpenDBRequest");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IDBRequest_IDBRequest() throws Exception {
+    void _IDBRequest_IDBRequest() throws Exception {
         test("IDBRequest", "IDBRequest");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IDBTransaction_IDBTransaction() throws Exception {
+    void _IDBTransaction_IDBTransaction() throws Exception {
         test("IDBTransaction", "IDBTransaction");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IDBVersionChangeEvent_IDBVersionChangeEvent() throws Exception {
+    void _IDBVersionChangeEvent_IDBVersionChangeEvent() throws Exception {
         test("IDBVersionChangeEvent", "IDBVersionChangeEvent");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IdleDeadline_IdleDeadline() throws Exception {
+    void _IdleDeadline_IdleDeadline() throws Exception {
         test("IdleDeadline", "IdleDeadline");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IIRFilterNode_IIRFilterNode() throws Exception {
+    void _IIRFilterNode_IIRFilterNode() throws Exception {
         test("IIRFilterNode", "IIRFilterNode");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _Image_HTMLImageElement() throws Exception {
+    void _Image_HTMLImageElement() throws Exception {
         // although Image != HTMLImageElement, they seem to be synonyms!!!
         test("Image", "HTMLImageElement");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _Image_Image() throws Exception {
+    void _Image_Image() throws Exception {
         test("Image", "Image");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _ImageBitmap_ImageBitmap() throws Exception {
+    void _ImageBitmap_ImageBitmap() throws Exception {
         test("ImageBitmap", "ImageBitmap");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _ImageBitmapRenderingContext_ImageBitmapRenderingContext() throws Exception {
+    void _ImageBitmapRenderingContext_ImageBitmapRenderingContext() throws Exception {
         test("ImageBitmapRenderingContext", "ImageBitmapRenderingContext");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _ImageData_ImageData() throws Exception {
+    void _ImageData_ImageData() throws Exception {
         test("ImageData", "ImageData");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false/false",
             CHROME = "true/false",
             EDGE = "true/false")
-    public void _InputDeviceCapabilities_InputDeviceCapabilities() throws Exception {
+    void _InputDeviceCapabilities_InputDeviceCapabilities() throws Exception {
         test("InputDeviceCapabilities", "InputDeviceCapabilities");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _InputEvent_InputEvent() throws Exception {
+    void _InputEvent_InputEvent() throws Exception {
         test("InputEvent", "InputEvent");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("false/false")
-    public void _InstallTrigger_InstallTrigger() throws Exception {
+    void _InstallTrigger_InstallTrigger() throws Exception {
         test("InstallTrigger", "InstallTrigger");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _Int16Array_Int16Array() throws Exception {
+    void _Int16Array_Int16Array() throws Exception {
         test("Int16Array", "Int16Array");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _Int32Array_Int32Array() throws Exception {
+    void _Int32Array_Int32Array() throws Exception {
         test("Int32Array", "Int32Array");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _Int8Array_Int8Array() throws Exception {
+    void _Int8Array_Int8Array() throws Exception {
         test("Int8Array", "Int8Array");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IntersectionObserver_IntersectionObserver() throws Exception {
+    void _IntersectionObserver_IntersectionObserver() throws Exception {
         test("IntersectionObserver", "IntersectionObserver");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _IntersectionObserverEntry_IntersectionObserverEntry() throws Exception {
+    void _IntersectionObserverEntry_IntersectionObserverEntry() throws Exception {
         test("IntersectionObserverEntry", "IntersectionObserverEntry");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _KeyboardEvent_KeyboardEvent() throws Exception {
+    void _KeyboardEvent_KeyboardEvent() throws Exception {
         test("KeyboardEvent", "KeyboardEvent");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _KeyframeEffect_KeyframeEffect() throws Exception {
+    void _KeyframeEffect_KeyframeEffect() throws Exception {
         test("KeyframeEffect", "KeyframeEffect");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("false/false")
-    public void _LocalMediaStream_LocalMediaStream() throws Exception {
+    void _LocalMediaStream_LocalMediaStream() throws Exception {
         test("LocalMediaStream", "LocalMediaStream");
     }
 
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _Location_Location() throws Exception {
+    void _Location_Location() throws Exception {
         test("Location", "Location");
     }
 }

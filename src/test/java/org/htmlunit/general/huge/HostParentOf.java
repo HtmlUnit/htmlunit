@@ -22,11 +22,10 @@ import java.util.function.Predicate;
 
 import org.htmlunit.TestCaseTest;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.After;
-import org.junit.jupiter.api.Test;
-import org.junit.runners.Parameterized.Parameter;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -45,41 +44,18 @@ public abstract class HostParentOf extends WebDriverTestCase {
      * @return the parameterized data
      * @throws Exception if an error occurs
      */
-    protected static Collection<Object[]> data(final Predicate<String> predicate)  throws Exception {
+    protected static Collection<Arguments> data(final Predicate<String> predicate)  throws Exception {
         final Set<String> jsClassNames = TestCaseTest.getAllConfiguredJsConstructorNames();
 
-        final List<Object[]> list = new ArrayList<>(jsClassNames.size() * jsClassNames.size() / 10);
+        final List<Arguments> list = new ArrayList<>(jsClassNames.size() * jsClassNames.size() / 10);
         for (final String parent : jsClassNames) {
             if (predicate.test(parent)) {
                 for (final String child : jsClassNames) {
-                    list.add(new Object[] {parent, child});
+                    list.add(Arguments.of(parent, child));
                 }
             }
         }
         return list;
-    }
-
-    /**
-     * The parent element name.
-     */
-    @Parameter
-    public String parent_;
-
-    /**
-     * The child element name.
-     */
-    @Parameter(1)
-    public String child_;
-
-    /**
-     * The default test.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("false/false")
-    @Default
-    public void isParentOf() throws Exception {
-        test(parent_, child_);
     }
 
     /**
@@ -89,6 +65,9 @@ public abstract class HostParentOf extends WebDriverTestCase {
      * @param child the child host name
      * @throws Exception if an error occurs
      */
+    @ParameterizedTest(name = "_{0}_{1}")
+    @MethodSource("data")
+    @Alerts("false/false")
     protected void test(final String parent, final String child) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -126,14 +105,5 @@ public abstract class HostParentOf extends WebDriverTestCase {
     @Override
     protected boolean isWebClientCached() {
         return true;
-    }
-
-    /**
-     * Cleanup.
-     */
-    @After
-    public void after() {
-        parent_ = null;
-        child_ = null;
     }
 }

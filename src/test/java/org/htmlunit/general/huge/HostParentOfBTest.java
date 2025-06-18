@@ -16,11 +16,8 @@ package org.htmlunit.general.huge;
 
 import java.util.Collection;
 
-import org.htmlunit.junit.BrowserParameterizedRunner;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.provider.Arguments;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -30,7 +27,6 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserParameterizedRunner.class)
 public class HostParentOfBTest extends HostParentOf {
 
     /**
@@ -38,123 +34,74 @@ public class HostParentOfBTest extends HostParentOf {
      * @return the parameterized data
      * @throws Exception if an error occurs
      */
-    @Parameters
-    public static Collection<Object[]> data() throws Exception {
+    public static Collection<Arguments> data() throws Exception {
         return HostParentOf.data(input -> {
             final char ch = Character.toUpperCase(input.charAt(0));
             return ch == 'B';
         });
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _BarProp_BarProp() throws Exception {
+    void _BarProp_BarProp() throws Exception {
         test("BarProp", "BarProp");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/true")
-    public void _BaseAudioContext_AudioContext() throws Exception {
+    void _BaseAudioContext_AudioContext() throws Exception {
         test("BaseAudioContext", "AudioContext");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _BaseAudioContext_BaseAudioContext() throws Exception {
+    void _BaseAudioContext_BaseAudioContext() throws Exception {
         test("BaseAudioContext", "BaseAudioContext");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/true")
-    public void _BaseAudioContext_OfflineAudioContext() throws Exception {
+    void _BaseAudioContext_OfflineAudioContext() throws Exception {
         test("BaseAudioContext", "OfflineAudioContext");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true/false",
             FF = "false/false",
             FF_ESR = "false/false")
-    public void _BatteryManager_BatteryManager() throws Exception {
+    void _BatteryManager_BatteryManager() throws Exception {
         test("BatteryManager", "BatteryManager");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false/false",
             CHROME = "true/false",
             EDGE = "true/false")
-    public void _BeforeInstallPromptEvent_BeforeInstallPromptEvent() throws Exception {
+    void _BeforeInstallPromptEvent_BeforeInstallPromptEvent() throws Exception {
         test("BeforeInstallPromptEvent", "BeforeInstallPromptEvent");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _BeforeUnloadEvent_BeforeUnloadEvent() throws Exception {
+    void _BeforeUnloadEvent_BeforeUnloadEvent() throws Exception {
         test("BeforeUnloadEvent", "BeforeUnloadEvent");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _BiquadFilterNode_BiquadFilterNode() throws Exception {
+    void _BiquadFilterNode_BiquadFilterNode() throws Exception {
         test("BiquadFilterNode", "BiquadFilterNode");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _Blob_Blob() throws Exception {
+    void _Blob_Blob() throws Exception {
         test("Blob", "Blob");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/true")
-    public void _Blob_File() throws Exception {
+    void _Blob_File() throws Exception {
         test("Blob", "File");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _BlobEvent_BlobEvent() throws Exception {
+    void _BlobEvent_BlobEvent() throws Exception {
         test("BlobEvent", "BlobEvent");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true/false")
-    public void _BroadcastChannel_BroadcastChannel() throws Exception {
+    void _BroadcastChannel_BroadcastChannel() throws Exception {
         test("BroadcastChannel", "BroadcastChannel");
     }
 }

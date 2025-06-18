@@ -22,15 +22,11 @@ import java.util.List;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.DefaultElementFactory;
-import org.htmlunit.junit.BrowserParameterizedRunner;
-import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.After;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -42,7 +38,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserParameterizedRunner.class)
 public class ElementClosesElementTest extends WebDriverTestCase {
 
     private static int ServerRestartCount_;
@@ -75,21 +70,26 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @return the parameterized data
      * @throws Exception if an error occurs
      */
-    @Parameters
-    public static Collection<Object[]> data() throws Exception {
-        final List<Object[]> list = new ArrayList<>();
+    public static Collection<Arguments> data() throws Exception {
+        final List<Arguments> list = new ArrayList<>();
         final List<String> strings = new ArrayList<>(DefaultElementFactory.SUPPORTED_TAGS_);
         strings.add("unknown");
 
         for (final String parent : strings) {
             for (final String child : strings) {
-                list.add(new Object[] {parent, child});
+                list.add(Arguments.of(parent, child));
             }
         }
         return list;
     }
 
-    private void test(final String parent, final String child) throws Exception {
+    /**
+     * The default test.
+     * @throws Exception if an error occurs
+     */
+    @ParameterizedTest(name = "_{0}_{1}")
+    @MethodSource("data")
+    void test(final String parent, final String child) throws Exception {
         String bodyStart = "<body>\n";
         String bodyEnd = "</body>\n";
 
@@ -216,27 +216,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     }
 
     /**
-     * The parent element name.
-     */
-    @Parameter
-    public String parent_;
-
-    /**
-     * The child element name.
-     */
-    @Parameter(1)
-    public String child_;
-
-    /**
-     * Cleanup.
-     */
-    @After
-    public void after() {
-        parent_ = null;
-        child_ = null;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -244,1743 +223,969 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         return true;
     }
 
-    /**
-     * The default test.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Default
-    public void closes() throws Exception {
-        test(parent_, child_);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _a_a() throws Exception {
+    void _a_a() throws Exception {
         test("a", "a");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _button_button() throws Exception {
+    void _button_button() throws Exception {
         test("button", "button");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _colgroup_col() throws Exception {
+    void _colgroup_col() throws Exception {
         test("colgroup", "col");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _colgroup_template() throws Exception {
+    void _colgroup_template() throws Exception {
         test("colgroup", "template");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_body() throws Exception {
+    void _command_body() throws Exception {
         test("command", "body");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_caption() throws Exception {
+    void _command_caption() throws Exception {
         test("command", "caption");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_col() throws Exception {
+    void _command_col() throws Exception {
         test("command", "col");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_colgroup() throws Exception {
+    void _command_colgroup() throws Exception {
         test("command", "colgroup");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_frame() throws Exception {
+    void _command_frame() throws Exception {
         test("command", "frame");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_frameset() throws Exception {
+    void _command_frameset() throws Exception {
         test("command", "frameset");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_head() throws Exception {
+    void _command_head() throws Exception {
         test("command", "head");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_html() throws Exception {
+    void _command_html() throws Exception {
         test("command", "html");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_tbody() throws Exception {
+    void _command_tbody() throws Exception {
         test("command", "tbody");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_td() throws Exception {
+    void _command_td() throws Exception {
         test("command", "td");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_tfoot() throws Exception {
+    void _command_tfoot() throws Exception {
         test("command", "tfoot");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_th() throws Exception {
+    void _command_th() throws Exception {
         test("command", "th");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_thead() throws Exception {
+    void _command_thead() throws Exception {
         test("command", "thead");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _command_tr() throws Exception {
+    void _command_tr() throws Exception {
         test("command", "tr");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _dd_dd() throws Exception {
+    void _dd_dd() throws Exception {
         test("dd", "dd");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _dd_dt() throws Exception {
+    void _dd_dt() throws Exception {
         test("dd", "dt");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _dt_dd() throws Exception {
+    void _dt_dd() throws Exception {
         test("dt", "dd");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _dt_dt() throws Exception {
+    void _dt_dt() throws Exception {
         test("dt", "dt");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _form_form() throws Exception {
+    void _form_form() throws Exception {
         test("form", "form");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _form_isindex() throws Exception {
+    void _form_isindex() throws Exception {
         test("form", "isindex");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _frameset_frame() throws Exception {
+    void _frameset_frame() throws Exception {
         test("frameset", "frame");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _frameset_frameset() throws Exception {
+    void _frameset_frameset() throws Exception {
         test("frameset", "frameset");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _frameset_noframes() throws Exception {
+    void _frameset_noframes() throws Exception {
         test("frameset", "noframes");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h1_h1() throws Exception {
+    void _h1_h1() throws Exception {
         test("h1", "h1");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h1_h2() throws Exception {
+    void _h1_h2() throws Exception {
         test("h1", "h2");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h1_h3() throws Exception {
+    void _h1_h3() throws Exception {
         test("h1", "h3");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h1_h4() throws Exception {
+    void _h1_h4() throws Exception {
         test("h1", "h4");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h1_h5() throws Exception {
+    void _h1_h5() throws Exception {
         test("h1", "h5");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h1_h6() throws Exception {
+    void _h1_h6() throws Exception {
         test("h1", "h6");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h2_h1() throws Exception {
+    void _h2_h1() throws Exception {
         test("h2", "h1");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h2_h2() throws Exception {
+    void _h2_h2() throws Exception {
         test("h2", "h2");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h2_h3() throws Exception {
+    void _h2_h3() throws Exception {
         test("h2", "h3");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h2_h4() throws Exception {
+    void _h2_h4() throws Exception {
         test("h2", "h4");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h2_h5() throws Exception {
+    void _h2_h5() throws Exception {
         test("h2", "h5");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h2_h6() throws Exception {
+    void _h2_h6() throws Exception {
         test("h2", "h6");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h3_h1() throws Exception {
+    void _h3_h1() throws Exception {
         test("h3", "h1");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h3_h2() throws Exception {
+    void _h3_h2() throws Exception {
         test("h3", "h2");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h3_h3() throws Exception {
+    void _h3_h3() throws Exception {
         test("h3", "h3");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h3_h4() throws Exception {
+    void _h3_h4() throws Exception {
         test("h3", "h4");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h3_h5() throws Exception {
+    void _h3_h5() throws Exception {
         test("h3", "h5");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h3_h6() throws Exception {
+    void _h3_h6() throws Exception {
         test("h3", "h6");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h4_h1() throws Exception {
+    void _h4_h1() throws Exception {
         test("h4", "h1");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h4_h2() throws Exception {
+    void _h4_h2() throws Exception {
         test("h4", "h2");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h4_h3() throws Exception {
+    void _h4_h3() throws Exception {
         test("h4", "h3");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h4_h4() throws Exception {
+    void _h4_h4() throws Exception {
         test("h4", "h4");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h4_h5() throws Exception {
+    void _h4_h5() throws Exception {
         test("h4", "h5");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h4_h6() throws Exception {
+    void _h4_h6() throws Exception {
         test("h4", "h6");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h5_h1() throws Exception {
+    void _h5_h1() throws Exception {
         test("h5", "h1");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h5_h2() throws Exception {
+    void _h5_h2() throws Exception {
         test("h5", "h2");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h5_h3() throws Exception {
+    void _h5_h3() throws Exception {
         test("h5", "h3");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h5_h4() throws Exception {
+    void _h5_h4() throws Exception {
         test("h5", "h4");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h5_h5() throws Exception {
+    void _h5_h5() throws Exception {
         test("h5", "h5");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h5_h6() throws Exception {
+    void _h5_h6() throws Exception {
         test("h5", "h6");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h6_h1() throws Exception {
+    void _h6_h1() throws Exception {
         test("h6", "h1");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h6_h2() throws Exception {
+    void _h6_h2() throws Exception {
         test("h6", "h2");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h6_h3() throws Exception {
+    void _h6_h3() throws Exception {
         test("h6", "h3");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h6_h4() throws Exception {
+    void _h6_h4() throws Exception {
         test("h6", "h4");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h6_h5() throws Exception {
+    void _h6_h5() throws Exception {
         test("h6", "h5");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _h6_h6() throws Exception {
+    void _h6_h6() throws Exception {
         test("h6", "h6");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _head_base() throws Exception {
+    void _head_base() throws Exception {
         test("head", "base");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _head_basefont() throws Exception {
+    void _head_basefont() throws Exception {
         test("head", "basefont");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _head_bgsound() throws Exception {
+    void _head_bgsound() throws Exception {
         test("head", "bgsound");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "1",
             FF = "0",
             FF_ESR = "0")
-    public void _head_command() throws Exception {
+    void _head_command() throws Exception {
         test("head", "command");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _head_link() throws Exception {
+    void _head_link() throws Exception {
         test("head", "link");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _head_meta() throws Exception {
+    void _head_meta() throws Exception {
         test("head", "meta");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _head_noframes() throws Exception {
+    void _head_noframes() throws Exception {
         test("head", "noframes");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _head_noscript() throws Exception {
+    void _head_noscript() throws Exception {
         test("head", "noscript");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _head_script() throws Exception {
+    void _head_script() throws Exception {
         test("head", "script");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _head_style() throws Exception {
+    void _head_style() throws Exception {
         test("head", "style");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _head_template() throws Exception {
+    void _head_template() throws Exception {
         test("head", "template");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _head_title() throws Exception {
+    void _head_title() throws Exception {
         test("head", "title");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_body() throws Exception {
+    void _html_body() throws Exception {
         test("html", "body");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_caption() throws Exception {
+    void _html_caption() throws Exception {
         test("html", "caption");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_col() throws Exception {
+    void _html_col() throws Exception {
         test("html", "col");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_colgroup() throws Exception {
+    void _html_colgroup() throws Exception {
         test("html", "colgroup");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_frame() throws Exception {
+    void _html_frame() throws Exception {
         test("html", "frame");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_frameset() throws Exception {
+    void _html_frameset() throws Exception {
         test("html", "frameset");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_head() throws Exception {
+    void _html_head() throws Exception {
         test("html", "head");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_html() throws Exception {
+    void _html_html() throws Exception {
         test("html", "html");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_tbody() throws Exception {
+    void _html_tbody() throws Exception {
         test("html", "tbody");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_td() throws Exception {
+    void _html_td() throws Exception {
         test("html", "td");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_tfoot() throws Exception {
+    void _html_tfoot() throws Exception {
         test("html", "tfoot");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_th() throws Exception {
+    void _html_th() throws Exception {
         test("html", "th");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_thead() throws Exception {
+    void _html_thead() throws Exception {
         test("html", "thead");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
-    public void _html_tr() throws Exception {
+    void _html_tr() throws Exception {
         test("html", "tr");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("null")
     @HtmlUnitNYI(
             CHROME = "0",
             EDGE = "0",
             FF = "0",
             FF_ESR = "0")
-    public void _isindex_frameset() throws Exception {
+    void _isindex_frameset() throws Exception {
         test("isindex", "frameset");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _isindex_isindex() throws Exception {
+    void _isindex_isindex() throws Exception {
         test("isindex", "isindex");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _li_caption() throws Exception {
+    void _li_caption() throws Exception {
         test("li", "caption");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _li_li() throws Exception {
+    void _li_li() throws Exception {
         test("li", "li");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _nobr_nobr() throws Exception {
+    void _nobr_nobr() throws Exception {
         test("nobr", "nobr");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _option_optgroup() throws Exception {
+    void _option_optgroup() throws Exception {
         test("option", "optgroup");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _option_option() throws Exception {
+    void _option_option() throws Exception {
         test("option", "option");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_address() throws Exception {
+    void _p_address() throws Exception {
         test("p", "address");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_article() throws Exception {
+    void _p_article() throws Exception {
         test("p", "article");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_aside() throws Exception {
+    void _p_aside() throws Exception {
         test("p", "aside");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_blockquote() throws Exception {
+    void _p_blockquote() throws Exception {
         test("p", "blockquote");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_center() throws Exception {
+    void _p_center() throws Exception {
         test("p", "center");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_dd() throws Exception {
+    void _p_dd() throws Exception {
         test("p", "dd");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_details() throws Exception {
+    void _p_details() throws Exception {
         test("p", "details");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_dialog() throws Exception {
+    void _p_dialog() throws Exception {
         test("p", "dialog");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_dir() throws Exception {
+    void _p_dir() throws Exception {
         test("p", "dir");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_div() throws Exception {
+    void _p_div() throws Exception {
         test("p", "div");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_dl() throws Exception {
+    void _p_dl() throws Exception {
         test("p", "dl");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_dt() throws Exception {
+    void _p_dt() throws Exception {
         test("p", "dt");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_fieldset() throws Exception {
+    void _p_fieldset() throws Exception {
         test("p", "fieldset");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_figcaption() throws Exception {
+    void _p_figcaption() throws Exception {
         test("p", "figcaption");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_figure() throws Exception {
+    void _p_figure() throws Exception {
         test("p", "figure");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_footer() throws Exception {
+    void _p_footer() throws Exception {
         test("p", "footer");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_form() throws Exception {
+    void _p_form() throws Exception {
         test("p", "form");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_h1() throws Exception {
+    void _p_h1() throws Exception {
         test("p", "h1");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_h2() throws Exception {
+    void _p_h2() throws Exception {
         test("p", "h2");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_h3() throws Exception {
+    void _p_h3() throws Exception {
         test("p", "h3");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_h4() throws Exception {
+    void _p_h4() throws Exception {
         test("p", "h4");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_h5() throws Exception {
+    void _p_h5() throws Exception {
         test("p", "h5");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_h6() throws Exception {
+    void _p_h6() throws Exception {
         test("p", "h6");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_header() throws Exception {
+    void _p_header() throws Exception {
         test("p", "header");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_hr() throws Exception {
+    void _p_hr() throws Exception {
         test("p", "hr");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _p_isindex() throws Exception {
+    void _p_isindex() throws Exception {
         test("p", "isindex");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_li() throws Exception {
+    void _p_li() throws Exception {
         test("p", "li");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_listing() throws Exception {
+    void _p_listing() throws Exception {
         test("p", "listing");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_main() throws Exception {
+    void _p_main() throws Exception {
         test("p", "main");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_menu() throws Exception {
+    void _p_menu() throws Exception {
         test("p", "menu");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_nav() throws Exception {
+    void _p_nav() throws Exception {
         test("p", "nav");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_ol() throws Exception {
+    void _p_ol() throws Exception {
         test("p", "ol");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_p() throws Exception {
+    void _p_p() throws Exception {
         test("p", "p");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_plaintext() throws Exception {
+    void _p_plaintext() throws Exception {
         test("p", "plaintext");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_pre() throws Exception {
+    void _p_pre() throws Exception {
         test("p", "pre");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_section() throws Exception {
+    void _p_section() throws Exception {
         test("p", "section");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_summary() throws Exception {
+    void _p_summary() throws Exception {
         test("p", "summary");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_ul() throws Exception {
+    void _p_ul() throws Exception {
         test("p", "ul");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _p_xmp() throws Exception {
+    void _p_xmp() throws Exception {
         test("p", "xmp");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _ruby_blink() throws Exception {
+    void _ruby_blink() throws Exception {
         test("ruby", "blink");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "1",
             FF = "0",
             FF_ESR = "0")
     @HtmlUnitNYI(FF = "1",
             FF_ESR = "1")
-    public void _select_hr() throws Exception {
+    void _select_hr() throws Exception {
         test("select", "hr");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _select_optgroup() throws Exception {
+    void _select_optgroup() throws Exception {
         test("select", "optgroup");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _select_option() throws Exception {
+    void _select_option() throws Exception {
         test("select", "option");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _select_script() throws Exception {
+    void _select_script() throws Exception {
         test("select", "script");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _select_template() throws Exception {
+    void _select_template() throws Exception {
         test("select", "template");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_caption() throws Exception {
+    void _table_caption() throws Exception {
         test("table", "caption");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_col() throws Exception {
+    void _table_col() throws Exception {
         test("table", "col");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_colgroup() throws Exception {
+    void _table_colgroup() throws Exception {
         test("table", "colgroup");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_form() throws Exception {
+    void _table_form() throws Exception {
         test("table", "form");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_script() throws Exception {
+    void _table_script() throws Exception {
         test("table", "script");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_style() throws Exception {
+    void _table_style() throws Exception {
         test("table", "style");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_tbody() throws Exception {
+    void _table_tbody() throws Exception {
         test("table", "tbody");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_td() throws Exception {
+    void _table_td() throws Exception {
         test("table", "td");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_template() throws Exception {
+    void _table_template() throws Exception {
         test("table", "template");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_tfoot() throws Exception {
+    void _table_tfoot() throws Exception {
         test("table", "tfoot");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_th() throws Exception {
+    void _table_th() throws Exception {
         test("table", "th");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_thead() throws Exception {
+    void _table_thead() throws Exception {
         test("table", "thead");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _table_tr() throws Exception {
+    void _table_tr() throws Exception {
         test("table", "tr");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tbody_form() throws Exception {
+    void _tbody_form() throws Exception {
         test("tbody", "form");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tbody_script() throws Exception {
+    void _tbody_script() throws Exception {
         test("tbody", "script");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tbody_style() throws Exception {
+    void _tbody_style() throws Exception {
         test("tbody", "style");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tbody_td() throws Exception {
+    void _tbody_td() throws Exception {
         test("tbody", "td");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tbody_template() throws Exception {
+    void _tbody_template() throws Exception {
         test("tbody", "template");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tbody_th() throws Exception {
+    void _tbody_th() throws Exception {
         test("tbody", "th");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tbody_tr() throws Exception {
+    void _tbody_tr() throws Exception {
         test("tbody", "tr");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tfoot_form() throws Exception {
+    void _tfoot_form() throws Exception {
         test("tfoot", "form");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tfoot_script() throws Exception {
+    void _tfoot_script() throws Exception {
         test("tfoot", "script");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tfoot_style() throws Exception {
+    void _tfoot_style() throws Exception {
         test("tfoot", "style");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tfoot_td() throws Exception {
+    void _tfoot_td() throws Exception {
         test("tfoot", "td");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tfoot_template() throws Exception {
+    void _tfoot_template() throws Exception {
         test("tfoot", "template");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tfoot_th() throws Exception {
+    void _tfoot_th() throws Exception {
         test("tfoot", "th");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tfoot_tr() throws Exception {
+    void _tfoot_tr() throws Exception {
         test("tfoot", "tr");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _thead_form() throws Exception {
+    void _thead_form() throws Exception {
         test("thead", "form");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _thead_script() throws Exception {
+    void _thead_script() throws Exception {
         test("thead", "script");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _thead_style() throws Exception {
+    void _thead_style() throws Exception {
         test("thead", "style");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _thead_td() throws Exception {
+    void _thead_td() throws Exception {
         test("thead", "td");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _thead_template() throws Exception {
+    void _thead_template() throws Exception {
         test("thead", "template");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _thead_th() throws Exception {
+    void _thead_th() throws Exception {
         test("thead", "th");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _thead_tr() throws Exception {
+    void _thead_tr() throws Exception {
         test("thead", "tr");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tr_form() throws Exception {
+    void _tr_form() throws Exception {
         test("tr", "form");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tr_script() throws Exception {
+    void _tr_script() throws Exception {
         test("tr", "script");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tr_style() throws Exception {
+    void _tr_style() throws Exception {
         test("tr", "style");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tr_td() throws Exception {
+    void _tr_td() throws Exception {
         test("tr", "td");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tr_template() throws Exception {
+    void _tr_template() throws Exception {
         test("tr", "template");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("1")
-    public void _tr_th() throws Exception {
+    void _tr_th() throws Exception {
         test("tr", "th");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _template_caption() throws Exception {
+    void _template_caption() throws Exception {
         test("template", "tr");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _template_col() throws Exception {
+    void _template_col() throws Exception {
         test("template", "col");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _template_colgroup() throws Exception {
+    void _template_colgroup() throws Exception {
         test("template", "colgroup");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _template_frame() throws Exception {
+    void _template_frame() throws Exception {
         test("template", "frame");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _template_tbody() throws Exception {
+    void _template_tbody() throws Exception {
         test("template", "tbody");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _template_td() throws Exception {
+    void _template_td() throws Exception {
         test("template", "td");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _template_tfoot() throws Exception {
+    void _template_tfoot() throws Exception {
         test("template", "tfoot");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _template_th() throws Exception {
+    void _template_th() throws Exception {
         test("template", "th");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _template_thead() throws Exception {
+    void _template_thead() throws Exception {
         test("template", "thead");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("0")
-    public void _template_tr() throws Exception {
+    void _template_tr() throws Exception {
         test("template", "tr");
     }
 }
