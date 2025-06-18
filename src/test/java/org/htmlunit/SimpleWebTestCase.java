@@ -23,8 +23,8 @@ import java.util.Map;
 
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * A simple WebTestCase which doesn't require server to run, and doens't use WebDriver.
@@ -229,11 +229,15 @@ public abstract class SimpleWebTestCase extends WebTestCase {
     /**
      * Reads the number of JS threads remaining from unit tests run before.
      * This should be always 0.
+     * @throws Exception in case of error
      */
-    @Before
-    public void before() {
+    @BeforeEach
+    public void before() throws Exception {
         if (webClient_ != null && webClient_.getJavaScriptEngine() instanceof JavaScriptEngine) {
-            assertTrue(getJavaScriptThreads().isEmpty());
+            if (!getJavaScriptThreads().isEmpty()) {
+                Thread.sleep(200);
+            }
+            assertTrue("There are already JS threads running before the test", getJavaScriptThreads().isEmpty());
         }
     }
 
@@ -241,7 +245,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      * Cleanup after a test.
      */
     @Override
-    @After
+    @AfterEach
     public void releaseResources() {
         super.releaseResources();
         boolean rhino = false;
