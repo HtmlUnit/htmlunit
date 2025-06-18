@@ -42,6 +42,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 /**
  * Test of coding style for issues which cannot be detected by Checkstyle.
@@ -928,6 +929,7 @@ public class CodeStyleTest {
                                             && method.getAnnotation(AfterAll.class) == null
                                             && method.getAnnotation(Test.class) == null
                                             && method.getAnnotation(RepeatedTest.class) == null
+                                            && method.getAnnotation(RetryingTest.class) == null
                                             && method.getReturnType() == Void.TYPE
                                             && method.getParameterTypes().length == 0) {
                                         final List<String> lines = FileUtils.readLines(file, SOURCE_ENCODING);

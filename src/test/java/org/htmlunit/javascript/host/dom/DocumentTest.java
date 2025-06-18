@@ -24,6 +24,8 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnJre;
+import org.junit.jupiter.api.condition.JRE;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -802,7 +804,7 @@ public class DocumentTest extends WebDriverTestCase {
                       "[1488-1514]", "[1519-1522]", "[1568-1599]", "[1601-1610]", "[1646-1647]",
                       "[1649-1747]", "[1749]", "[1774-1775]", "[1786-1788]", "[1791]", "[1808]",
                       "[1810-1839]", "[1869-1957]", "[1969]", "[1994-1999]"})
-    // requires jdk17 to pass
+    @EnabledOnJre(JRE.JAVA_17)
     public void documentCreateElementValidTagNames2000() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -921,7 +923,7 @@ public class DocumentTest extends WebDriverTestCase {
                       "[2908-2909]", "[2911-2913]", "[2929]", "[2947]", "[2949-2954]", "[2958-2960]",
                       "[2962-2965]", "[2969-2970]", "[2972]", "[2974-2975]", "[2979-2980]",
                       "[2984-2986]", "[2990-2999]"})
-    // requires jdk17 to pass
+    @EnabledOnJre(JRE.JAVA_17)
     public void documentCreateElementValidTagNames3000() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1028,7 +1030,7 @@ public class DocumentTest extends WebDriverTestCase {
                       "[3585-3632]", "[3634-3635]", "[3648-3653]", "[3713-3714]", "[3716]",
                       "[3718-3722]", "[3724-3747]", "[3749]", "[3751-3760]", "[3762-3763]", "[3773]",
                       "[3776-3780]", "[3804-3807]", "[3840]", "[3904-3911]", "[3913-3948]", "[3976-3980]"})
-    // requires jdk17 to pass
+    @EnabledOnJre(JRE.JAVA_17)
     public void documentCreateElementValidTagNames4000() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

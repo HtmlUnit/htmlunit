@@ -178,7 +178,7 @@ public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
             EDGE = {"AT_TARGET:2", "BUBBLING_PHASE:3", "CAPTURING_PHASE:1", "NONE:0"},
             FF = "-",
             FF_ESR = "-")
-    public void _SecurityPolicyViolationEvent() throws Exception {
+    void _SecurityPolicyViolationEvent() throws Exception {
         test("SecurityPolicyViolationEvent", getExpectedString("SecurityPolicyViolationEvent"));
     }
 }

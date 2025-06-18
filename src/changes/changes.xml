@@ -26,10 +26,11 @@
                 jQuery 1.8.2, 1.11.3, and 3.3.1 test suite refreshed.
             </action>
             <action type="remove" dev="rbri">
-                FF139: SVGDiscardElement is gone.
+                FF139: SVGDiscardElement is gone (again).
             </action>
             <action type="fix" dev="rbri">
-                getClientRects() returns an empty list for hidden inputs.
+                getClientRects() returns an empty list for hidden inputs. This fixes also a problem with
+                the :hidden jQuery selector.
             </action>
         </release>
 
