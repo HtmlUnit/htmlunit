@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -29,7 +29,6 @@ import org.junit.jupiter.api.Test;
  * @author Ronald Brill
  */
 public class WorkerJavaScriptConfigurationTest {
-
 
     /**
      * Test of order.
@@ -83,6 +82,6 @@ public class WorkerJavaScriptConfigurationTest {
             System.out.println();
             */
         }
-        Assert.assertEquals(all, defined);
+        Assertions.assertEquals(all, defined);
     }
 }

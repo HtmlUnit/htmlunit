@@ -15,8 +15,8 @@
 package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,9 +76,9 @@ public class BrowserVersionFeaturesTest {
                     useCount++;
                 }
             }
-            assertTrue("BrowserVersionFeatures.java: '" + feature.name() + "' in no longer in use.", useCount > 0);
-            assertTrue("BrowserVersionFeatures.java: '" + feature.name() + "' is enabled for all supported browsers.",
-                    useCount < browsers.size());
+            assertTrue(useCount > 0, "BrowserVersionFeatures.java: '" + feature.name() + "' in no longer in use.");
+            assertTrue(useCount < browsers.size(),
+                    "BrowserVersionFeatures.java: '" + feature.name() + "' is enabled for all supported browsers.");
         }
 
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
@@ -95,9 +95,10 @@ public class BrowserVersionFeaturesTest {
                             continue;
                         }
                     }
-                    assertTrue("BrowserVersionFeatures.java: Annotation '"
+                    assertTrue(inUse,
+                            "BrowserVersionFeatures.java: Annotation '"
                             + annotatedBrowser + "' of feature '"
-                            + feature.name() + "' in no longer in use.", inUse);
+                            + feature.name() + "' in no longer in use.");
                 }
             }
         }

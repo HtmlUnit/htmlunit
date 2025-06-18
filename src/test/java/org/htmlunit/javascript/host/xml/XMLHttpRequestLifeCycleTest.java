@@ -41,11 +41,11 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.Retry;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -69,7 +69,6 @@ import org.openqa.selenium.WebDriverException;
  * @author Ronald Brill
  *
  */
-@RunWith(Enclosed.class)
 public final class XMLHttpRequestLifeCycleTest {
     private static final String SUCCESS_URL = "/xmlhttprequest/success.html";
     private static final String SUCCESS_WITHOUT_ORIGIN_URL = "/xmlhttprequest/success_without_origin.html";
@@ -270,6 +269,7 @@ public final class XMLHttpRequestLifeCycleTest {
         /**
          * Helper servlet.
          */
+        @Nested
         public static class XmlTimeoutServlet extends HttpServlet {
 
             @Override
@@ -299,7 +299,7 @@ public final class XMLHttpRequestLifeCycleTest {
         /**
          * Setup our servlets.
          */
-        @Before
+        @BeforeEach
         public void prepareTestingServlets() {
             servlets_.put(SUCCESS_URL, Xml200Servlet.class);
             servlets_.put(SUCCESS_WITHOUT_ORIGIN_URL, Xml200ServletWithoutOriginHeader.class);
@@ -1221,13 +1221,14 @@ public final class XMLHttpRequestLifeCycleTest {
     /**
      * Test using our MiniServer to be able to simulate special error conditions.
      */
+    @Nested
     public static class MiniServerTest extends WebDriverTestCase {
 
         /**
          * Shoutdown all web browsers and reset the {@link MiniServer}.
          * @throws Exception in case of error
          */
-        @Before
+        @BeforeEach
         public void before() throws Exception {
             // Chrome seems to cache preflight results
             shutDownAll();
@@ -1238,7 +1239,7 @@ public final class XMLHttpRequestLifeCycleTest {
          * Reset the {@link MiniServer}.
          * @throws Exception in case of error.
          */
-        @After
+        @AfterEach
         public void after() throws Exception {
             MiniServer.resetDropRequests();
         }

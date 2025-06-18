@@ -14,17 +14,17 @@
  */
 package org.htmlunit.html;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -43,7 +43,7 @@ public class NamedAttrNodeMapImplTest {
     public void construction() throws Exception {
         try {
             new NamedAttrNodeMapImpl(null, true);
-            fail("IllegalArgumentException expected.");
+            Assertions.fail("IllegalArgumentException expected.");
         }
         catch (final IllegalArgumentException e) {
             // expected
@@ -51,7 +51,7 @@ public class NamedAttrNodeMapImplTest {
 
         try {
             new NamedAttrNodeMapImpl(null, false);
-            fail("IllegalArgumentException expected.");
+            Assertions.fail("IllegalArgumentException expected.");
         }
         catch (final IllegalArgumentException e) {
             // expected

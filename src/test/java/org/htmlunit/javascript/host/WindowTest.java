@@ -14,7 +14,7 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.net.URL;
 import java.util.ArrayList;

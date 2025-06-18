@@ -20,7 +20,6 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 
@@ -44,7 +43,7 @@ public class WebClientTest extends WebServerTestCase {
             webClient.getOptions().setCssEnabled(false);
 
             final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-            Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+            assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
         }
     }
 
@@ -58,7 +57,7 @@ public class WebClientTest extends WebServerTestCase {
             webClient.getOptions().setThrowExceptionOnScriptError(false);
 
             final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-            Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+            assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
         }
     }
 
@@ -77,7 +76,7 @@ public class WebClientTest extends WebServerTestCase {
         final BrowserVersion germanFirefox = builder.build();
         try (WebClient webClient = new WebClient(germanFirefox)) {
             final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-            Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+            assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
         }
     }
 
@@ -95,7 +94,7 @@ public class WebClientTest extends WebServerTestCase {
         final BrowserVersion iosFirefox = builder.build();
         try (WebClient webClient = new WebClient(iosFirefox)) {
             final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-            Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+            assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
         }
     }
 }

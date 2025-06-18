@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.junit.Assert.fail;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +32,7 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -613,7 +612,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute());
         try {
             form.getInputByValue("none-matching");
-            fail("Expected ElementNotFoundException");
+            Assertions.fail("Expected ElementNotFoundException");
         }
         catch (final ElementNotFoundException e) {
             // Expected path.
@@ -703,7 +702,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         try {
             form.getTextAreaByName("ta3");
-            fail("Expected ElementNotFoundException as there is no textarea with name 'ta3'");
+            Assertions.fail("Expected ElementNotFoundException as there is no textarea with name 'ta3'");
         }
         catch (final ElementNotFoundException e) {
             // pass: exception is expected
@@ -736,7 +735,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         try {
             form.getTextAreaByName("b3");
-            fail("Expected ElementNotFoundException as there is no button with name 'b3'");
+            Assertions.fail("Expected ElementNotFoundException as there is no button with name 'b3'");
         }
         catch (final ElementNotFoundException e) {
             // pass: exception is expected

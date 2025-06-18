@@ -14,10 +14,8 @@
  */
 package org.htmlunit.javascript.configuration;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -35,7 +33,7 @@ public class ClassConfigurationTest {
     @Test
     public void forJSFlagTrue() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class, null, true, null, "");
-        assertTrue("JSObject Flag should have been set", config1.isJsObject());
+        Assertions.assertTrue(config1.isJsObject(), "JSObject Flag should have been set");
     }
 
     /**
@@ -44,7 +42,7 @@ public class ClassConfigurationTest {
     @Test
     public void forJSFlagFalse() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class, null, false, null, "");
-        assertFalse("JSObject Flag should not have been set", config1.isJsObject());
+        Assertions.assertFalse(config1.isJsObject(), "JSObject Flag should not have been set");
     }
 
     /**

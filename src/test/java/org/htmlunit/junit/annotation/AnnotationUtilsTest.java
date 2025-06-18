@@ -16,7 +16,7 @@ package org.htmlunit.junit.annotation;
 
 import java.lang.reflect.Method;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -236,10 +236,10 @@ public class AnnotationUtilsTest {
 
         try {
             AnnotationUtils.assertAlerts(method);
-            Assert.fail("AssertionError expected");
+            Assertions.fail("AssertionError expected");
         }
         catch (final AssertionError e) {
-            Assert.assertEquals(expectedMsg, e.getMessage());
+            Assertions.assertEquals(expectedMsg, e.getMessage());
         }
     }
 }

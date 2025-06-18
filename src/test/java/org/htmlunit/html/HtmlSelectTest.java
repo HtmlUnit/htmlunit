@@ -17,6 +17,7 @@ package org.htmlunit.html;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,9 +28,8 @@ import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Tests for {@link HtmlSelect}.
@@ -38,12 +38,12 @@ import org.junit.rules.TemporaryFolder;
  * @author Mike Williams
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlSelectTest extends SimpleWebTestCase {
 
-    /** JUnit rule must be public fields :-(. */
-    @Rule
-    public TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();
+    @TempDir
+    static Path TEMP_DIR_;
 
     /**
      * Test the good path of submitting a select.
@@ -758,7 +758,9 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         assertEquals("option 2", select.getSelectedOptions().get(0).getText());
 
         // save the file and reload it
-        final File file = new File(tmpFolderProvider_.newFolder("tmp"), "test.html");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
+        final File file = new File(tmpFolder, "test.html");
         page.save(file);
         final String html2 = FileUtils.readFileToString(file, UTF_8);
         final HtmlPage page2 = loadPage(html2);

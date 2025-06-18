@@ -28,7 +28,7 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -697,7 +697,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput"})
-    @Ignore
+    @Disabled
     // check expectations
     public void contentWindowAndActiveElement() throws Exception {
         final String firstContent = DOCTYPE_HTML

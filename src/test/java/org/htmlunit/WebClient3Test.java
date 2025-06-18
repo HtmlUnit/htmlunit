@@ -15,7 +15,7 @@
 package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.net.URL;
 import java.nio.charset.Charset;

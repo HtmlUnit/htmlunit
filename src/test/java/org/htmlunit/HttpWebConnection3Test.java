@@ -14,8 +14,6 @@
  */
 package org.htmlunit;
 
-import static org.junit.Assert.fail;
-
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -27,7 +25,7 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.junit.annotation.NotYetImplemented;
 import org.htmlunit.junit.annotation.OS;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -170,7 +168,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     return;
                 }
             }
-            fail("No accept-encoding header found.");
+            Assertions.fail("No accept-encoding header found.");
         }
     }
 
@@ -1497,7 +1495,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             }
 
             if (primitiveWebServer.getRequests().size() < 2) {
-                Assert.fail("Still no request / request count:" + primitiveWebServer.getRequests().size());
+                Assertions.fail("Still no request / request count:" + primitiveWebServer.getRequests().size());
             }
 
             final String request = primitiveWebServer.getRequests().get(1);

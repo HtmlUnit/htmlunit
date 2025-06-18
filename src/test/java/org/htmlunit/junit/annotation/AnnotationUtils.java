@@ -15,13 +15,13 @@
 package org.htmlunit.junit.annotation;
 
 import static org.htmlunit.junit.SetExpectedAlertsBeforeTestExecutionCallback.isDefined;
-import static org.junit.Assert.assertFalse;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.junit.SetExpectedAlertsBeforeTestExecutionCallback;
+import org.junit.jupiter.api.Assertions;
 
 /**
  * Utility functions for working with our annotations.
@@ -47,12 +47,13 @@ public final class AnnotationUtils {
         final Alerts alerts = method.getAnnotation(Alerts.class);
         if (alerts != null) {
             if (!isDefined(alerts.value())) {
-                assertFalse("Obsolete DEFAULT because all browser expectations defined individually",
+                Assertions.assertFalse(
                         isDefined(alerts.DEFAULT())
                         && isDefined(alerts.CHROME())
                         && isDefined(alerts.FF())
                         && isDefined(alerts.FF_ESR())
-                        && isDefined(alerts.EDGE()));
+                        && isDefined(alerts.EDGE()),
+                        "Obsolete DEFAULT because all browser expectations defined individually");
 
                 assertNotEquals("@Alerts", method, BrowserVersion.CHROME, alerts.CHROME(), alerts.DEFAULT());
                 assertNotEquals("@Alerts", method, BrowserVersion.FIREFOX, alerts.FF(), alerts.DEFAULT());

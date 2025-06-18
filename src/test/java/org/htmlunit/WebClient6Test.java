@@ -21,7 +21,7 @@ import java.util.List;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -439,7 +439,7 @@ public class WebClient6Test extends WebDriverTestCase {
                 assertEquals("foo", param.getValue());
             }
             else if (!param.getName().startsWith("ignore")) {
-                Assert.fail("unexpected param '" + param.getName() + "'");
+                Assertions.fail("unexpected param '" + param.getName() + "'");
             }
         }
         else {

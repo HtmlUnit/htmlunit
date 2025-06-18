@@ -33,8 +33,8 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlDivision;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -68,7 +68,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
      * Sets up the tests.
      */
     @Override
-    @Before
+    @BeforeEach
     public void before() {
         client_ = new WebClient();
     }
@@ -76,7 +76,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
     /**
      * Tears down the tests.
      */
-    @After
+    @AfterEach
     public void after() {
         client_.close();
     }

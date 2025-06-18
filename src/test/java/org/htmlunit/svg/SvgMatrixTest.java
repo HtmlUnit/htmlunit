@@ -16,7 +16,7 @@ package org.htmlunit.svg;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -348,7 +348,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
         else {
             for (int i = 0; i < expectedAlerts.length; i++) {
                 try {
-                    Assert.assertEquals(
+                    Assertions.assertEquals(
                             Double.parseDouble(expectedAlerts[i]),
                             Double.parseDouble(actualAlerts[i]), 0.000001);
                 }

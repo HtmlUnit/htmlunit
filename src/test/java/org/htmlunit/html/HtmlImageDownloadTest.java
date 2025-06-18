@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.junit.Assert.fail;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +27,8 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.platform.image.ImageData;
 import org.htmlunit.platform.image.ImageIOImageData;
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -101,7 +100,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
         htmlImage.setAttribute("src", url);
         try {
             htmlImage.getImageData();
-            fail("it was not an image!");
+            Assertions.fail("it was not an image!");
         }
         catch (final IOException expected) {
         }
@@ -154,7 +153,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
      * {@inheritDoc}
      */
     @Override
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         Thread.sleep(100);
         super.tearDown();

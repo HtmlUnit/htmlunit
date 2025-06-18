@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,9 +35,8 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Tests for {@link HtmlPage}.
@@ -47,12 +47,8 @@ import org.junit.rules.TemporaryFolder;
  */
 public class HtmlPage2Test extends SimpleWebTestCase {
 
-    /**
-     * Utility for temporary folders.
-     * Has to be public due to JUnit's constraints for @Rule.
-     */
-    @Rule
-    public final TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();
+    @TempDir
+    static Path TEMP_DIR_;
 
     /**
      * @throws Exception if the test fails
@@ -118,7 +114,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final HtmlScript sript = page.getFirstByXPath("//script");
         assertEquals(URL_SECOND.toString(), sript.getSrcAttribute());
 
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save.html");
         page.save(file);
         assertTrue(file.exists());
@@ -149,7 +146,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlImage img = page.getFirstByXPath("//img");
         assertEquals(URL_SECOND.toString(), img.getSrcAttribute());
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save2.html");
         final File imgFile = new File(tmpFolder, "hu_HtmlPageTest_save2/second.jpeg");
         page.save(file);
@@ -175,13 +173,14 @@ public class HtmlPage2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPageWithAlerts(html);
 
-        final File folder = tmpFolderProvider_.newFolder("hu");
-        final File file = new File(folder, "hu_save.html");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
+        final File file = new File(tmpFolder, "hu_save.html");
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
 
-        final File imgFile = new File(folder, "hu_save/foo.txt");
+        final File imgFile = new File(tmpFolder, "hu_save/foo.txt");
         assertEquals("hello", FileUtils.readFileToString(imgFile, UTF_8));
     }
 
@@ -198,7 +197,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         webConnection.setResponse(URL_FIRST, html);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save3.html");
         page.save(file);
         assertTrue(file.exists());
@@ -221,7 +221,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         webConnection.setResponse(URL_FIRST, html);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save3.html");
         page.save(file);
         assertTrue(file.exists());
@@ -272,7 +273,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlFrame leftFrame = page.getElementByName("left");
         assertEquals(URL_SECOND.toString(), leftFrame.getSrcAttribute());
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_saveFrame.html");
         final File expectedLeftFrameFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/second.html");
         final File expectedRightFrameFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/third.html");
@@ -315,7 +317,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final HtmlLink cssLink = page.getFirstByXPath("//link");
         assertEquals(URL_SECOND.toString(), cssLink.getHrefAttribute());
 
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save4.html");
         final File cssFile = new File(tmpFolder, "hu_HtmlPageTest_save4/second.css");
         page.save(file);
@@ -341,7 +344,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         webConnection.setResponse(URL_FIRST, html);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save5.html");
         page.save(file);
         assertTrue(file.exists());
@@ -366,7 +370,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         webConnection.setResponse(URL_FIRST, html);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save5.html");
         page.save(file);
         assertTrue(file.exists());
@@ -396,7 +401,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
 
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save.html");
         page.save(file);
         assertTrue(file.exists());

@@ -15,7 +15,7 @@
 package org.htmlunit.selenium;
 
 import org.htmlunit.WebDriverTestCase;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -29,7 +29,7 @@ public class SeleniumTest extends WebDriverTestCase {
      * Starts the web server.
      */
     @Override
-    @Before
+    @BeforeEach
     public void beforeTest() {
         try {
             startWebServer("src/test/resources/selenium", null, null);

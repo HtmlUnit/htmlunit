@@ -15,7 +15,7 @@
 package org.htmlunit;
 
 import static org.htmlunit.CookieManagerTest.HTML_ALERT_COOKIE;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.net.InetAddress;
 import java.net.URL;

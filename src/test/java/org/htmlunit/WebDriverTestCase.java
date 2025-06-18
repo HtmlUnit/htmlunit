@@ -103,8 +103,6 @@ import org.openqa.selenium.htmlunit.options.HtmlUnitDriverOptions;
 import org.openqa.selenium.htmlunit.options.HtmlUnitOption;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 
-import junit.framework.AssertionFailedError;
-
 /**
  * Base class for tests using WebDriver.
  *
@@ -1580,7 +1578,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 assertEquals(expected, title);
                 return;
             }
-            catch (final AssertionFailedError e) {
+            catch (final org.opentest4j.AssertionFailedError e) {
                 if (expected.length() <= title.length()
                         || System.currentTimeMillis() > maxWait) {
                     throw e;

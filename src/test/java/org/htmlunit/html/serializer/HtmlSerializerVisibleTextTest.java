@@ -14,14 +14,14 @@
  */
 package org.htmlunit.html.serializer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder.Mode;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -235,7 +235,7 @@ public class HtmlSerializerVisibleTextTest {
         serializer.getText();
 
         final long runTime = System.currentTimeMillis() - time;
-        assertTrue("cleanUp() took too much time", runTime < 200);
+        Assertions.assertTrue(runTime < 200, "cleanUp() took too much time");
     }
 
     /**
@@ -257,7 +257,7 @@ public class HtmlSerializerVisibleTextTest {
         assertEquals(expected, serializer.getText());
 
         final long runTime = System.currentTimeMillis() - time;
-        assertTrue("cleanUp() took too much time", runTime < 200);
+        Assertions.assertTrue(runTime < 200, "cleanUp() took too much time");
     }
 
     /**

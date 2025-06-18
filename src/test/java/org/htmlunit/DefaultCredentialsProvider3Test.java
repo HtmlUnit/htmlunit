@@ -14,8 +14,8 @@
  */
 package org.htmlunit;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.http.auth.AuthScope;

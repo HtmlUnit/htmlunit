@@ -15,13 +15,13 @@
 package org.htmlunit.util;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.htmlunit.html.impl.Color;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -76,9 +76,9 @@ public class StringUtilsTest {
 
         assertFalse(StringUtils.startsWithIgnoreCase(null, "x"));
 
-        assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("AB", null));
-        assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("AB", ""));
-        assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("", ""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("AB", null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("AB", ""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("", ""));
     }
 
     /**

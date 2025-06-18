@@ -16,7 +16,7 @@ package org.htmlunit.html;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.SimpleWebTestCase;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -41,6 +41,6 @@ public class HtmlDomTreeWalkerTest extends SimpleWebTestCase {
         final byte[] bytes = SerializationUtils.serialize(new HtmlDomTreeWalker(page.getBody(), 0, null, false));
 
         final HtmlDomTreeWalker deserialized = (HtmlDomTreeWalker) SerializationUtils.deserialize(bytes);
-        Assert.assertEquals(page.getBody().getNodeName(), deserialized.getRoot().getNodeName());
+        Assertions.assertEquals(page.getBody().getNodeName(), deserialized.getRoot().getNodeName());
     }
 }

@@ -22,7 +22,6 @@ import org.apache.commons.io.FileUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -213,7 +212,7 @@ public class URLTest extends WebDriverTestCase {
             driver.findElement(By.id("testBtn")).click();
 
             final String url = getCollectedAlerts(driver, 1).get(0);
-            Assert.assertTrue(url, url.startsWith("blob:"));
+            assertTrue(url, url.startsWith("blob:"));
         }
         finally {
             FileUtils.deleteQuietly(tstFile);

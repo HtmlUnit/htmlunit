@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.htmlunit.util.NameValuePair;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -50,7 +50,7 @@ public class WebRequest2Test extends WebServerTestCase {
      * Performs pre-test construction.
      * @throws Exception if an error occurs
      */
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         // we have to stop all servers running already to free the port
         WebDriverTestCase.stopWebServers();

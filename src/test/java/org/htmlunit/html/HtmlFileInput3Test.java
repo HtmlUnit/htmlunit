@@ -35,7 +35,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -322,7 +322,7 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
     /**
      * Starts the web server.
      */
-    @BeforeClass
+    @BeforeAll
     public static void before() {
         try {
             final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();

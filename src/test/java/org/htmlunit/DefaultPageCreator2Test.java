@@ -14,7 +14,7 @@
  */
 package org.htmlunit;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.htmlunit.DefaultPageCreator.PageType;
 import org.htmlunit.util.MimeType;

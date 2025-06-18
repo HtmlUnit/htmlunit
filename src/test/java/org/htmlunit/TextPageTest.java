@@ -16,11 +16,11 @@ package org.htmlunit;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Tests for text content.
@@ -29,12 +29,8 @@ import org.junit.rules.TemporaryFolder;
  */
 public class TextPageTest extends WebServerTestCase {
 
-    /**
-     * Utility for temporary folders.
-     * Has to be public due to JUnit's constraints for @Rule.
-     */
-    @Rule
-    public final TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();
+    @TempDir
+    static Path TEMP_DIR_;
 
     /**
      * @throws Exception if the test fails
@@ -51,7 +47,8 @@ public class TextPageTest extends WebServerTestCase {
 
             final TextPage page = client.getPage("http://localhost:" + primitiveWebServer.getPort() + "/" + "text");
 
-            final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+            final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+            tmpFolder.mkdir();
             final File file = new File(tmpFolder, "hu_txt.plain");
             page.save(file);
             assertTrue(file.exists());

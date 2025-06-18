@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.junit.Assert.fail;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +26,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.Cookie;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -190,7 +189,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
         catch (final ScriptException ex) {
             return;
         }
-        fail();
+        Assertions.fail();
     }
 
     /**

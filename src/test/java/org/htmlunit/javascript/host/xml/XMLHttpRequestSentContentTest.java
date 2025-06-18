@@ -20,8 +20,8 @@ import org.htmlunit.MiniServer;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -37,7 +37,7 @@ public final class XMLHttpRequestSentContentTest extends WebDriverTestCase {
      * Shuts down all browsers and resets the {@link MiniServer}.
      * @throws Exception in case of error
      */
-    @Before
+    @BeforeEach
     public void before() throws Exception {
         // Chrome seems to cache preflight results
         shutDownAll();
@@ -48,7 +48,7 @@ public final class XMLHttpRequestSentContentTest extends WebDriverTestCase {
      * Resets the {@link MiniServer}.
      * @throws Exception in case of error
      */
-    @After
+    @AfterEach
     public void after() throws Exception {
         MiniServer.resetDropRequests();
     }

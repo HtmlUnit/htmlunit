@@ -19,7 +19,7 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -52,7 +52,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * Constructor.
      * @throws Exception if an exception occurs
      */
-    @Before
+    @BeforeEach
     public void init() throws Exception {
         page_ = loadPage(HTML);
 

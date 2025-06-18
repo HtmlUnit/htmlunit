@@ -14,8 +14,7 @@
  */
 package org.htmlunit.html.serializer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -25,6 +24,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder;
 import org.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder.Mode;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -246,7 +246,7 @@ public class HtmlSerializerNormalizedTextTest {
         serializer.getText();
 
         final long runTime = System.currentTimeMillis() - time;
-        assertTrue("cleanUp() took too much time", runTime < 200);
+        Assertions.assertTrue(runTime < 200, "cleanUp() took too much time");
     }
 
     /**
@@ -268,7 +268,7 @@ public class HtmlSerializerNormalizedTextTest {
         assertEquals(expected, serializer.getText());
 
         final long runTime = System.currentTimeMillis() - time;
-        assertTrue("cleanUp() took too much time", runTime < 200);
+        Assertions.assertTrue(runTime < 200, "cleanUp() took too much time");
     }
 
     /**

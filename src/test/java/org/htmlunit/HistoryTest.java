@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -114,7 +114,7 @@ public class HistoryTest extends WebDriverTestCase {
             }
 
             if (count != Post1Servlet.Count_) {
-                Assert.fail("Server called for " + i);
+                Assertions.fail("Server called for " + i);
                 break;
             }
         }

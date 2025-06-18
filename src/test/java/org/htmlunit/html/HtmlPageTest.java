@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -819,7 +818,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         assertTrue(ImmediateRefreshHandler.class.isInstance(client.getRefreshHandler()));
         try {
             loadPage(firstContent);
-            fail("should have thrown");
+            Assertions.fail("should have thrown");
         }
         catch (final RuntimeException e) {
             assertTrue(e.getMessage().indexOf("could have caused an OutOfMemoryError") > -1);
@@ -1298,7 +1297,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         div1.remove();
         try {
             page.getHtmlElementById("div1"); // throws if not found
-            fail("div1 should have been removed");
+            Assertions.fail("div1 should have been removed");
         }
         catch (final ElementNotFoundException e) {
             // nothing
@@ -1306,7 +1305,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         try {
             page.getHtmlElementById("div2"); // throws if not found
-            fail("div2 should have been removed");
+            Assertions.fail("div2 should have been removed");
         }
         catch (final ElementNotFoundException e) {
             // nothing
@@ -1564,7 +1563,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         page.getHtmlElementById("id2").remove();
         try {
             page.getHtmlElementById("id2");
-            fail("should have thrown ElementNotFoundException");
+            Assertions.fail("should have thrown ElementNotFoundException");
         }
         catch (final ElementNotFoundException expected) {
         }

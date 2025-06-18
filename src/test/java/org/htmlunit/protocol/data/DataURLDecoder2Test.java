@@ -15,13 +15,13 @@
 package org.htmlunit.protocol.data;
 
 import static org.htmlunit.protocol.data.DataUrlDecoder.decodeDataURL;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 
 import javax.imageio.ImageIO;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -58,7 +58,7 @@ public class DataURLDecoder2Test {
         assertEquals("d5 = 'five\\u0027s';", decoder.getDataAsString());
 
         decoder = decodeDataURL("data:application/octet-stream;base64,a+b/cQ==");
-        assertArrayEquals(new byte[]{107, -26, -1, 113}, decoder.getBytes());
+        Assertions.assertArrayEquals(new byte[]{107, -26, -1, 113}, decoder.getBytes());
 
         decoder = decodeDataURL("data:text/html;charset=utf-8,%3C%21DOCTYPE%20html%3E%0D%0A%3Cht"
                     + "ml%20lang%3D%22en%22%3E%0D%0A%3Chead%3E%3Ctitle%3EEmbedded%20Window%3C%2F"

@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +24,7 @@ import org.htmlunit.html.DomNode.DescendantHtmlElementsIterator;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.xml.XmlPage;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -213,7 +212,7 @@ public class DomNodeTest extends SimpleWebTestCase {
                                     .createElement(page, HtmlDivision.TAG_NAME, attributes);
         try {
             page.getHtmlElementById("newElt");
-            fail("Element should not exist yet");
+            Assertions.fail("Element should not exist yet");
         }
         catch (final ElementNotFoundException e) {
             // nothing to do, it's ok
@@ -224,7 +223,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         page.getHtmlElementById("newElt");
         try {
             page.getHtmlElementById("tag");
-            fail("Element should not exist anymore");
+            Assertions.fail("Element should not exist anymore");
         }
         catch (final ElementNotFoundException e) {
             // nothing to do, it's ok

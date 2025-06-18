@@ -14,19 +14,16 @@
  */
 package org.htmlunit;
 
-import static org.junit.Assert.fail;
-
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.After;
-import org.junit.experimental.runners.Enclosed;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -38,7 +35,6 @@ import org.openqa.selenium.WebDriverException;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(Enclosed.class)
 public class NoHttpResponseTest {
     private static final String HTML
         = "<html><body><script>\n"
@@ -57,6 +53,7 @@ public class NoHttpResponseTest {
     /**
      * Test using WebDriver.
      */
+    @Nested
     public static class WithWebDriverTest extends WebDriverTestCase {
 
         /**
@@ -64,7 +61,7 @@ public class NoHttpResponseTest {
          *
          * @throws Exception in case of error
          */
-        @After
+        @AfterEach
         public void after() throws Exception {
             MiniServer.resetDropRequests();
         }
@@ -132,6 +129,7 @@ public class NoHttpResponseTest {
     /**
      * Test using WebClient with default configuration allowing to throw exception.
      */
+    @Nested
     public static class WithWebClientTest extends SimpleWebTestCase {
 
         /**
@@ -139,7 +137,7 @@ public class NoHttpResponseTest {
          *
          * @throws Exception in case of error
          */
-        @After
+        @AfterEach
         public void after() throws Exception {
             MiniServer.resetDropRequests();
         }
@@ -212,7 +210,7 @@ public class NoHttpResponseTest {
 
                 try {
                     getWebClient().getPage(getWebClient().getCurrentWindow().getTopWindow(), request);
-                    fail("FailingHttpStatusCodeException expected");
+                    Assertions.fail("FailingHttpStatusCodeException expected");
                 }
                 catch (final FailingHttpStatusCodeException e) {
                     // expected

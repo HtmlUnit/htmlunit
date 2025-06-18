@@ -19,7 +19,7 @@ import java.security.KeyStore;
 import javax.net.ssl.SSLContext;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -186,6 +186,6 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
         final WebClientOptions deserialized = (WebClientOptions) SerializationUtils.deserialize(bytes);
 
         assertNull(deserialized.getSSLClientCertificateStore());
-        Assert.assertArrayEquals("secret".toCharArray(), deserialized.getSSLClientCertificatePassword());
+        Assertions.assertArrayEquals("secret".toCharArray(), deserialized.getSSLClientCertificatePassword());
     }
 }

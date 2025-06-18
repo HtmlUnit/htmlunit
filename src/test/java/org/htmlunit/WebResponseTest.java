@@ -37,7 +37,7 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -223,7 +223,7 @@ public class WebResponseTest extends WebServerTestCase {
      * Stop the WebServer.
      * @throws Exception if it fails
      */
-    @After
+    @AfterEach
     public void stopServer() throws Exception {
         stopWebServer();
     }

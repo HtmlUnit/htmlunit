@@ -15,9 +15,7 @@
 package org.htmlunit.javascript.configuration;
 
 import static org.htmlunit.BrowserVersion.FIREFOX;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +42,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebTestCase;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -170,7 +168,7 @@ public class JavaScriptConfigurationTest {
         }
         foundJsxClasses.removeAll(definedClasses);
         if (!foundJsxClasses.isEmpty()) {
-            fail("Class " + foundJsxClasses.get(0) + " is not in JavaScriptConfiguration.CLASSES_");
+            Assertions.fail("Class " + foundJsxClasses.get(0) + " is not in JavaScriptConfiguration.CLASSES_");
         }
     }
 
@@ -258,9 +256,8 @@ public class JavaScriptConfigurationTest {
                     break;
                 }
             }
-            assertTrue("Class " + klass
-                    + " is member of JavaScriptConfiguration.CLASSES_ but does not define @JsxClasses/@JsxClass",
-                    found);
+            Assertions.assertTrue(found, "Class " + klass
+                    + " is member of JavaScriptConfiguration.CLASSES_ but does not define @JsxClasses/@JsxClass");
         }
     }
 
@@ -316,7 +313,7 @@ public class JavaScriptConfigurationTest {
             System.out.println();
             */
         }
-        Assert.assertEquals(all, defined);
+        assertEquals(all, defined);
     }
 
     /**

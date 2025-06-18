@@ -15,9 +15,6 @@
 package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.net.UnknownHostException;
@@ -39,8 +36,8 @@ import org.htmlunit.html.DomNodeList;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.xml.XmlPage;
-import org.junit.Assert;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -72,7 +69,7 @@ public class ExternalTest {
      */
     @Test
     public void testEnvironment() throws Exception {
-        assertEquals("en_US", Locale.getDefault().toString());
+        Assertions.assertEquals("en_US", Locale.getDefault().toString());
     }
 
     /**
@@ -114,7 +111,7 @@ public class ExternalTest {
         }
 
         if (wrongVersions.size() > 0) {
-            Assert.fail(String.join("\n ", wrongVersions));
+            Assertions.fail(String.join("\n ", wrongVersions));
         }
 
         assertVersion("org.sonatype.oss", "oss-parent", "9");
@@ -153,7 +150,7 @@ public class ExternalTest {
                     break;
                 }
             }
-            assertEquals("Chrome Driver", version, CHROME_DRIVER_);
+            Assertions.assertEquals(version, CHROME_DRIVER_);
         }
     }
 
@@ -162,7 +159,7 @@ public class ExternalTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Ignore("javascript errors")
+    @Disabled("javascript errors")
     public void assertEdgeDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
             final HtmlPage page = webClient.getPage(EDGE_DRIVER_URL_);
@@ -182,7 +179,7 @@ public class ExternalTest {
                     break;
                 }
             }
-            assertEquals("Edge Driver", version, EDGE_DRIVER_);
+            Assertions.assertEquals(version, EDGE_DRIVER_);
         }
     }
 
@@ -196,7 +193,7 @@ public class ExternalTest {
             try {
                 final HtmlPage page = webClient.getPage(GECKO_DRIVER_URL_);
                 final DomNodeList<DomNode> divs = page.querySelectorAll("li.breadcrumb-item-selected");
-                assertEquals("Gecko Driver", divs.get(0).asNormalizedText(), "v" + GECKO_DRIVER_);
+                Assertions.assertEquals(divs.get(0).asNormalizedText(), "v" + GECKO_DRIVER_);
             }
             catch (final FailingHttpStatusCodeException e) {
                 // ignore
@@ -221,7 +218,7 @@ public class ExternalTest {
                 break;
             }
         }
-        assertNotNull(version);
+        Assertions.assertNotNull(version);
         if (version.contains("SNAPSHOT")) {
             try (WebClient webClient = buildWebClient()) {
                 final XmlPage page = webClient.getPage(SONATYPE_SNAPSHOT_REPO_URL_
@@ -231,7 +228,7 @@ public class ExternalTest {
                 final long snapshotMillis = format.parse(timestamp).getTime();
                 final long nowMillis = System.currentTimeMillis();
                 final long days = TimeUnit.MILLISECONDS.toDays(nowMillis - snapshotMillis);
-                assertTrue("Snapshot not deployed for " + days + " days", days < 14);
+                Assertions.assertTrue(days < 14, "Snapshot not deployed for " + days + " days");
             }
         }
     }
@@ -271,7 +268,7 @@ public class ExternalTest {
 
             // it is ok if the pom uses a more recent version
             if (!isVersionAfter(pomVersion, latestMavenCentralVersion)) {
-                assertEquals(groupId + ":" + artifactId, latestMavenCentralVersion, pomVersion);
+                Assertions.assertEquals(/* groupId + ":" + artifactId, */ latestMavenCentralVersion, pomVersion);
             }
         }
     }

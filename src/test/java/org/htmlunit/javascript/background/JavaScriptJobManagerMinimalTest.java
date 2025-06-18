@@ -14,15 +14,15 @@
  */
 package org.htmlunit.javascript.background;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.htmlunit.Page;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -47,7 +47,7 @@ public class JavaScriptJobManagerMinimalTest {
     /**
      * Initializes variables required by the unit tests.
      */
-    @Before
+    @BeforeEach
     public void before() {
         client_ = new WebClient();
         window_ = client_.getCurrentWindow();
@@ -60,7 +60,7 @@ public class JavaScriptJobManagerMinimalTest {
     /**
      * Shuts down the event loop.
      */
-    @After
+    @AfterEach
     public void after() {
         eventLoop_.shutdown();
         if (client_ != null) {
@@ -84,8 +84,8 @@ public class JavaScriptJobManagerMinimalTest {
         manager_.addJob(job, page_);
         assertEquals(1, manager_.getJobCount());
         final int remainingJobs = manager_.waitForJobs(1090);
-        assertTrue("At least one remaining job expected.", remainingJobs >= 1);
-        assertTrue("Less than 10 jobs (" + count.intValue() + ") processed.", count.intValue() >= 10);
+        assertTrue(remainingJobs >= 1, "At least one remaining job expected.");
+        assertTrue(count.intValue() >= 10, "Less than 10 jobs (" + count.intValue() + ") processed.");
     }
 
     /**

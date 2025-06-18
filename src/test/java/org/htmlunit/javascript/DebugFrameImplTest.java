@@ -30,7 +30,7 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebConnection;
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -61,7 +61,7 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
      * Cleans up the client, and resets the log to its original state.
      * @throws Exception when a problem occurs
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         client_.getJavaScriptEngine().getContextFactory().setDebugger(null);
         client_.close();

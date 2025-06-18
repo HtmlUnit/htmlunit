@@ -17,14 +17,14 @@ package org.htmlunit.html;
 import java.io.File;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.nio.file.Path;
 
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.util.MimeType;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Tests for {@link XmlSerializer}.
@@ -34,12 +34,8 @@ import org.junit.rules.TemporaryFolder;
  */
 public class XmlSerializerTest extends SimpleWebTestCase {
 
-    /**
-     * Utility for temporary folders.
-     * Has to be public due to JUnit's constraints for @Rule.
-     */
-    @Rule
-    public final TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();
+    @TempDir
+    static Path TEMP_DIR_;
 
     /**
      * @throws Exception if the test fails
@@ -61,7 +57,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
 
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_XmlSerializerTest_notExistingLink.html");
         page.save(file);
         assertTrue(file.exists());
@@ -89,7 +86,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
 
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_XmlSerializerTest_unknownHostExceptionLink.html");
         page.save(file);
         assertTrue(file.exists());
@@ -113,7 +111,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
 
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_XmlSerializerTest_unsupportedProtocol.html");
         page.save(file);
         assertTrue(file.exists());
@@ -140,7 +139,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
 
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_XmlSerializerTest_notExistingImage.html");
         page.save(file);
         assertTrue(file.exists());
@@ -168,7 +168,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
 
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_XmlSerializerTest_unknownHostExceptionImage.html");
         page.save(file);
         assertTrue(file.exists());
@@ -194,7 +195,8 @@ public class XmlSerializerTest extends SimpleWebTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
 
-        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
         final File file = new File(tmpFolder, "hu_XmlSerializerTest_unsupportedProtocolImage.html");
         page.save(file);
         assertTrue(file.exists());

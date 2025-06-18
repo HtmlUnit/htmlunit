@@ -15,8 +15,8 @@
 package org.htmlunit;
 
 import static org.htmlunit.WebTestCase.URL_FIRST;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -161,7 +161,7 @@ public class WebRequestTest {
         final URL url = new URL("http://john.smith:secret@localhost");
         final WebRequest request = new WebRequest(url);
         final Credentials credentials = request.getUrlCredentials();
-        assertNotNull("Credentials object is null", credentials);
+        assertNotNull(credentials, "Credentials object is null");
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
         assertEquals("secret", credentials.getPassword());
     }
@@ -174,7 +174,7 @@ public class WebRequestTest {
         final URL url = new URL("http://john.smith:secret@localhost/../foo.html");
         final WebRequest request = new WebRequest(url);
         final Credentials credentials = request.getUrlCredentials();
-        assertNotNull("Credentials object is null", credentials);
+        assertNotNull(credentials, "Credentials object is null");
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
         assertEquals("secret", credentials.getPassword());
     }
@@ -187,7 +187,7 @@ public class WebRequestTest {
         final URL url = new URL("http://john.smith:secret@löcälhöst/");
         final WebRequest request = new WebRequest(url);
         final Credentials credentials = request.getUrlCredentials();
-        assertNotNull("Credentials object is null", credentials);
+        assertNotNull(credentials, "Credentials object is null");
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
         assertEquals("secret", credentials.getPassword());
     }
