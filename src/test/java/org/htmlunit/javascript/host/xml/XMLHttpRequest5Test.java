@@ -26,7 +26,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.NameValuePair;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -98,15 +97,16 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
         setExpectedAlerts();
         loadPageWithAlerts2(html);
 
-        Assertions.assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl(),
-                "Never received a call to URL_SECOND");
+        assertEquals("Never received a call to URL_SECOND", URL_SECOND,
+                getMockWebConnection().getLastWebRequest().getUrl());
 
         final String contentType = getMockWebConnection().getLastWebRequest()
                 .getAdditionalHeader(HttpHeader.CONTENT_TYPE);
 
         final String requestBody = getMockWebConnection().getLastWebRequest().getRequestBody();
 
-        assertEquals(desiredMimeType, contentType == null ? "null" : contentType, "Unexpected Content-Type header");
+        assertEquals("Unexpected Content-Type header", desiredMimeType,
+                contentType == null ? "null" : contentType);
         assertEquals(expectedBody, requestBody == null ? "null" : requestBody);
     }
 
@@ -146,8 +146,8 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
 
         loadPage2(html);
 
-        Assertions.assertEquals(responseUrl, getMockWebConnection().getLastWebRequest().getUrl(),
-                "Never received a call to '" + responseUrl + "'");
+        assertEquals("Never received a call to '" + responseUrl + "'", responseUrl,
+                getMockWebConnection().getLastWebRequest().getUrl());
 
         assertEquals(3, getMockWebConnection().getRequestCount());
         final String contentType = getMockWebConnection().getLastWebRequest()
@@ -155,9 +155,9 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
 
         final String requestBody = getMockWebConnection().getLastWebRequest().getRequestBody();
 
-        assertEquals(getExpectedAlerts()[0], contentType == null ? "null" : contentType,
-                "Unexpected Content-Type header");
-        assertEquals(requestBody == null ? "null" : requestBody, getExpectedAlerts()[1]);
+        assertEquals("Unexpected Content-Type header", getExpectedAlerts()[0],
+                contentType == null ? "null" : contentType);
+        assertEquals(getExpectedAlerts()[1], requestBody == null ? "null" : requestBody);
     }
 
     /**
@@ -538,16 +538,16 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
         setExpectedAlerts();
         loadPageWithAlerts2(html);
 
-        Assertions.assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl(),
-                "Never received a call to URL_SECOND");
+        assertEquals("Never received a call to URL_SECOND", URL_SECOND,
+                getMockWebConnection().getLastWebRequest().getUrl());
 
         final String contentType = getMockWebConnection().getLastWebRequest()
                 .getAdditionalHeader(HttpHeader.CONTENT_TYPE);
 
         final String requestBody = getMockWebConnection().getLastWebRequest().getRequestBody();
 
-        assertEquals(expectedMimeType, contentType == null ? "null" : contentType,
-                "Unexpected Content-Type header");
+        assertEquals("Unexpected Content-Type header", expectedMimeType,
+                contentType == null ? "null" : contentType);
         assertEquals(expectedBody, requestBody == null ? "null" : requestBody);
     }
 }
