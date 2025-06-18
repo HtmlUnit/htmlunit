@@ -130,169 +130,7 @@ public final class XMLHttpRequestLifeCycleTest {
      * Test using our JettyServer.
      */
     @Nested
-    public static class JettyServerTest extends WebDriverTestCase {
-
-        /**
-         * Helper servlet.
-         */
-        public static class Xml200Servlet extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-            }
-
-            @Override
-            protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-                    throws ServletException, IOException {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-
-                response.setContentType(MimeType.TEXT_XML);
-                response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.OK_200);
-                final ServletOutputStream outputStream = response.getOutputStream();
-                try (Writer writer = new OutputStreamWriter(outputStream)) {
-                    writer.write(RETURN_XML);
-                }
-            }
-        }
-
-        /**
-         * Helper servlet.
-         */
-        public static class Xml200ServletWithoutOriginHeader extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-            }
-
-            @Override
-            protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-                    throws ServletException, IOException {
-                response.setContentType(MimeType.TEXT_XML);
-                response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.OK_200);
-                final ServletOutputStream outputStream = response.getOutputStream();
-                try (Writer writer = new OutputStreamWriter(outputStream)) {
-                    writer.write(RETURN_XML);
-                }
-            }
-        }
-
-        /**
-         * Helper servlet.
-         */
-        public static class Xml403Servlet extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-            }
-
-            @Override
-            protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-                    throws ServletException, IOException {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-
-                response.setContentType(MimeType.TEXT_XML);
-                response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.FORBIDDEN_403);
-                final ServletOutputStream outputStream = response.getOutputStream();
-                try (Writer writer = new OutputStreamWriter(outputStream)) {
-                    writer.write(RETURN_XML);
-                }
-            }
-        }
-
-        /**
-         * Helper servlet.
-         */
-        public static class Xml500Servlet extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-            }
-
-            @Override
-            protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-                    throws ServletException, IOException {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-
-                response.setContentType(MimeType.TEXT_XML);
-                response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
-                final ServletOutputStream outputStream = response.getOutputStream();
-                try (Writer writer = new OutputStreamWriter(outputStream)) {
-                    writer.write(RETURN_XML);
-                }
-            }
-        }
-
-        /**
-         * Helper servlet.
-         */
-        public static class Preflight403Servlet extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setStatus(HttpStatus.FORBIDDEN_403);
-            }
-        }
-
-        /**
-         * Helper servlet.
-         */
-        public static class Preflight500Servlet extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
-            }
-        }
-
-        /**
-         * Helper servlet.
-         */
-        @Nested
-        public static class XmlTimeoutServlet extends HttpServlet {
-
-            @Override
-            protected void doGet(final HttpServletRequest req, final HttpServletResponse response)
-                    throws ServletException, IOException {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-
-                response.setContentType(MimeType.TEXT_XML);
-                response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.OK_200);
-                final ServletOutputStream outputStream = response.getOutputStream();
-                try (Writer writer = new OutputStreamWriter(outputStream)) {
-                    writer.flush();
-                    Thread.sleep(500);
-                    writer.write(RETURN_XML);
-                }
-                catch (final Exception ignored) {
-                    // ignore
-                }
-            }
-        }
+    public class JettyServerTest extends WebDriverTestCase {
 
         private final Map<String, Class<? extends Servlet>> servlets_ = new HashMap<>();
 
@@ -1222,7 +1060,7 @@ public final class XMLHttpRequestLifeCycleTest {
      * Test using our MiniServer to be able to simulate special error conditions.
      */
     @Nested
-    public static class MiniServerTest extends WebDriverTestCase {
+    public class MiniServerTest extends WebDriverTestCase {
 
         /**
          * Shoutdown all web browsers and reset the {@link MiniServer}.
@@ -1800,5 +1638,166 @@ public final class XMLHttpRequestLifeCycleTest {
     }
 
     private XMLHttpRequestLifeCycleTest() {
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Xml200Servlet extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws ServletException, IOException {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+            response.setContentType(MimeType.TEXT_XML);
+            response.setContentLength(RETURN_XML.length());
+            response.setStatus(HttpStatus.OK_200);
+            final ServletOutputStream outputStream = response.getOutputStream();
+            try (Writer writer = new OutputStreamWriter(outputStream)) {
+                writer.write(RETURN_XML);
+            }
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Xml200ServletWithoutOriginHeader extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws ServletException, IOException {
+            response.setContentType(MimeType.TEXT_XML);
+            response.setContentLength(RETURN_XML.length());
+            response.setStatus(HttpStatus.OK_200);
+            final ServletOutputStream outputStream = response.getOutputStream();
+            try (Writer writer = new OutputStreamWriter(outputStream)) {
+                writer.write(RETURN_XML);
+            }
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Xml403Servlet extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws ServletException, IOException {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+            response.setContentType(MimeType.TEXT_XML);
+            response.setContentLength(RETURN_XML.length());
+            response.setStatus(HttpStatus.FORBIDDEN_403);
+            final ServletOutputStream outputStream = response.getOutputStream();
+            try (Writer writer = new OutputStreamWriter(outputStream)) {
+                writer.write(RETURN_XML);
+            }
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Xml500Servlet extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws ServletException, IOException {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+            response.setContentType(MimeType.TEXT_XML);
+            response.setContentLength(RETURN_XML.length());
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
+            final ServletOutputStream outputStream = response.getOutputStream();
+            try (Writer writer = new OutputStreamWriter(outputStream)) {
+                writer.write(RETURN_XML);
+            }
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Preflight403Servlet extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setStatus(HttpStatus.FORBIDDEN_403);
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Preflight500Servlet extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class XmlTimeoutServlet extends HttpServlet {
+
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse response)
+                throws ServletException, IOException {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+            response.setContentType(MimeType.TEXT_XML);
+            response.setContentLength(RETURN_XML.length());
+            response.setStatus(HttpStatus.OK_200);
+            final ServletOutputStream outputStream = response.getOutputStream();
+            try (Writer writer = new OutputStreamWriter(outputStream)) {
+                writer.flush();
+                Thread.sleep(500);
+                writer.write(RETURN_XML);
+            }
+            catch (final Exception ignored) {
+                // ignore
+            }
+        }
     }
 }

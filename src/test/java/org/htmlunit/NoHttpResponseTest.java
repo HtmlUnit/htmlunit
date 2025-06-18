@@ -54,7 +54,7 @@ public class NoHttpResponseTest {
      * Test using WebDriver.
      */
     @Nested
-    public static class WithWebDriverTest extends WebDriverTestCase {
+    public class WithWebDriverTest extends WebDriverTestCase {
 
         /**
          * Resets the {@link MiniServer}.
@@ -130,7 +130,7 @@ public class NoHttpResponseTest {
      * Test using WebClient with default configuration allowing to throw exception.
      */
     @Nested
-    public static class WithWebClientTest extends SimpleWebTestCase {
+    public class WithWebClientTest extends SimpleWebTestCase {
 
         /**
          * Resets the {@link MiniServer}.
