@@ -39,7 +39,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebRequest;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.Tries;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;

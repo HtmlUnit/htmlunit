@@ -50,7 +50,6 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlScript;
 import org.htmlunit.html.HtmlTextInput;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.Retry;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 import org.junit.jupiter.api.Test;

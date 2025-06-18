@@ -22,7 +22,6 @@ import java.net.URL;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.junit.annotation.Retry;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;

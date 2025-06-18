@@ -23,7 +23,6 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebRequest;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.Retry;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;

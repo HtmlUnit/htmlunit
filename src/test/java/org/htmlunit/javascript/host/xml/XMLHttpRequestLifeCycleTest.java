@@ -38,7 +38,6 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.Retry;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.AfterEach;
