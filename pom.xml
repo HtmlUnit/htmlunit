@@ -64,7 +64,7 @@
         <pmd.version>7.14.0</pmd.version>
         <archunit.version>1.4.1</archunit.version>
         <dependencycheck.version>10.0.4</dependencycheck.version>
-        
+
         <!-- plugins -->
         <central-publishing.version>0.8.0</central-publishing.version>
     </properties>
