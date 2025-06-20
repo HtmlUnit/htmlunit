@@ -48,7 +48,8 @@ import org.junit.jupiter.api.Test;
  */
 public class ExternalTest {
 
-    static String SONATYPE_SNAPSHOT_REPO_URL_ = "https://s01.oss.sonatype.org/content/repositories/snapshots/";
+    static String SONATYPE_SNAPSHOT_REPO_URL_ =
+                        "https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/";
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
