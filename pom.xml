@@ -1549,8 +1549,8 @@
                 <enabled>false</enabled>
             </releases>
             <snapshots>
-                <enabled>true</enable>
-            </snapsh>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </repositories>
 
