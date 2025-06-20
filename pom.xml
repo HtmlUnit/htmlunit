@@ -30,7 +30,7 @@
         <htmlunitcsp.version>4.13.0</htmlunitcsp.version>
         <htmlunitcssparser.version>4.13.0</htmlunitcssparser.version>
         <htmlunitcorejs.version>4.14.0-SNAPSHOT</htmlunitcorejs.version>
-        <htmlunitneko.version>4.13.0</htmlunitneko.version>
+        <htmlunitneko.version>4.14.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitwebsocketclient.version>4.13.0</htmlunitwebsocketclient.version>
         <htmlunitxpath.version>4.13.0</htmlunitxpath.version>
 
@@ -64,6 +64,9 @@
         <pmd.version>7.14.0</pmd.version>
         <archunit.version>1.4.1</archunit.version>
         <dependencycheck.version>10.0.4</dependencycheck.version>
+        
+        <!-- plugins -->
+        <central-publishing.version>0.8.0</central-publishing.version>
     </properties>
 
     <build>
@@ -239,6 +242,15 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>${central-publishing.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
             </plugin>
             <!--
             <plugin>
@@ -1526,40 +1538,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>s01-sonatype-nexus-snapshots</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>s01-sonatype-nexus-staging</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
-    </distributionManagement>
-
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>OSS Sonatype snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>S01 OSS Sonatype snapshots</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-        </repository>
-    </repositories>
 </project>
