@@ -347,7 +347,7 @@
                                 <exclude>**/huge/*.java</exclude>
                                 <exclude>**/encoding/*.java</exclude>
                             </excludes>
-                            <argLine>-Xms128m -Xmx512m -Dsun.reflect.noInflation=true</argLine>
+                            <argLine>-Xms128m -Xmx1g -Dsun.reflect.noInflation=true</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
