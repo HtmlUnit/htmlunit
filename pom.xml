@@ -42,7 +42,7 @@
 
         <!-- selenium -->
         <htmlunitdriver.version>4.32.0</htmlunitdriver.version>
-        <selenium.version>4.32.0</selenium.version>
+        <selenium.version>4.33.0</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v136</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
