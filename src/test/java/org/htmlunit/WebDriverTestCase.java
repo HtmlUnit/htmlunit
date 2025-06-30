@@ -528,6 +528,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 // options.setCapability("webSocketUrl", true);
 
                 options.addArguments("--lang=" + locale);
+                // https://stackoverflow.com/questions/11289597/webdriver-how-to-specify-preferred-languages-for-chrome
+                options.setExperimentalOption("prefs", Map.of("intl.accept_languages", "en"));
                 options.addArguments("--remote-allow-origins=*");
 
                 // seems to be not required for edge
@@ -564,6 +566,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 // options.setCapability("webSocketUrl", true);
 
                 options.addArguments("--lang=" + locale);
+                // https://stackoverflow.com/questions/11289597/webdriver-how-to-specify-preferred-languages-for-chrome
+                options.setExperimentalOption("prefs", Map.of("intl.accept_languages", "en"));
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--disable-search-engine-choice-screen");
                 // see https://www.selenium.dev/blog/2024/chrome-browser-woes/
