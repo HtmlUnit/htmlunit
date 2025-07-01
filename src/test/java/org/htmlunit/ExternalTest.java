@@ -49,7 +49,7 @@ import org.junit.jupiter.api.Test;
 public class ExternalTest {
 
     static String SONATYPE_SNAPSHOT_REPO_URL_ =
-                        "https://central.sonatype.com/service/rest/repository/browse/maven-snapshots/";
+                        "https://central.sonatype.com/repository/maven-snapshots/";
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
@@ -136,7 +136,6 @@ public class ExternalTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Disabled("blocked")
     public void assertChromeDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
             final Page page = webClient.getPage(CHROME_DRIVER_URL_);
@@ -190,7 +189,6 @@ public class ExternalTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Disabled("blocked")
     public void assertGeckoDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
             try {
@@ -224,8 +222,12 @@ public class ExternalTest {
         Assertions.assertNotNull(version);
         if (version.contains("SNAPSHOT")) {
             try (WebClient webClient = buildWebClient()) {
-                final XmlPage page = webClient.getPage(SONATYPE_SNAPSHOT_REPO_URL_
-                                        + "org/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
+                webClient.getOptions().setJavaScriptEnabled(false);
+
+                final String url = SONATYPE_SNAPSHOT_REPO_URL_
+                        + "org/htmlunit/htmlunit/" + version + "/maven-metadata.xml";
+
+                final XmlPage page = webClient.getPage(url);
                 final String timestamp = page.getElementsByTagName("timestamp").get(0).getTextContent();
                 final DateFormat format = new SimpleDateFormat("yyyyMMdd.HHmmss", Locale.ROOT);
                 final long snapshotMillis = format.parse(timestamp).getTime();
