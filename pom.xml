@@ -41,13 +41,13 @@
         <brotli.version>0.1.2</brotli.version>
 
         <!-- selenium -->
-        <htmlunitdriver.version>4.32.0</htmlunitdriver.version>
-        <selenium.version>4.32.0</selenium.version>
-        <selenium.devtools.artifactId>selenium-devtools-v136</selenium.devtools.artifactId>
+        <htmlunitdriver.version>4.33.0</htmlunitdriver.version>
+        <selenium.version>4.34.0</selenium.version>
+        <selenium.devtools.artifactId>selenium-devtools-v138</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
-        <junit.version>5.13.1</junit.version>
-        <junit-launcher.version>1.13.1</junit-launcher.version>
+        <junit.version>5.13.2</junit.version>
+        <junit-launcher.version>1.13.2</junit-launcher.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <jetty.version>9.4.57.v20241219</jetty.version>
         <quercus.version>4.0.66</quercus.version>
@@ -59,14 +59,16 @@
         <jfreechart.version>1.5.6</jfreechart.version>
 
         <!-- quality -->
-        <checkstyle.version>10.25.0</checkstyle.version>
+        <checkstyle.version>10.26.1</checkstyle.version>
         <spotbugs.version>4.9.3</spotbugs.version>
-        <pmd.version>7.14.0</pmd.version>
+        <pmd.version>7.15.0</pmd.version>
         <archunit.version>1.4.1</archunit.version>
         <dependencycheck.version>10.0.4</dependencycheck.version>
 
         <!-- plugins -->
         <central-publishing.version>0.8.0</central-publishing.version>
+        <pmd-plugin.version>3.27.0</pmd-plugin.version>
+        <spotbugs-plugin.version>4.9.3.2</spotbugs-plugin.version>
     </properties>
 
     <build>
@@ -96,7 +98,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.9.3.0</version>
+                <version>${spotbugs-plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.github.spotbugs</groupId>
@@ -111,7 +113,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.26.0</version>
+                <version>${pmd-plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>net.sourceforge.pmd</groupId>
