@@ -561,7 +561,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlAnchor htmlAnchor = page.getAnchorByName("foo");
-        assertTrue(htmlAnchor.asXml().contains("</a>"));
+        assertEquals("<a name=\"foo\"></a>", htmlAnchor.asXml());
     }
 
     /**

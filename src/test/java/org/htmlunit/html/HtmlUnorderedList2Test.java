@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class HtmlUnorderedList2Test extends SimpleWebTestCase {
 
@@ -65,7 +66,14 @@ public class HtmlUnorderedList2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlElement element = page.getHtmlElementById("myNode");
 
-        assertEquals("<ul id=\"myNode\">\r\n</ul>\r\n", element.asXml());
-        assertTrue(page.asXml().contains("</ul>"));
+        assertEquals("<ul id=\"myNode\"></ul>", element.asXml());
+        assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
+                + "<html>\r\n"
+                + "  <head/>\r\n"
+                + "  <body>\r\n"
+                + "    <ul id=\"myNode\"></ul>\n"
+                + "foo\n"
+                + "</body>\r\n"
+                + "</html>", page.asXml());
     }
 }

@@ -141,19 +141,19 @@ public class HtmlImageTest extends SimpleWebTestCase {
 
         HtmlImage img = page.getHtmlElementById("img1");
         String expected = "<img id=\"img1\" src=\"foo.png\"/>";
-        assertEquals(expected, img.asXml().trim());
+        assertEquals(expected, img.asXml());
 
         img = page.getHtmlElementById("img2");
         expected = "<img id=\"img2\" name=\"testName\" src=\"foo.png\" alt=\"young\"/>";
-        assertEquals(expected, img.asXml().trim());
+        assertEquals(expected, img.asXml());
 
         img = page.getHtmlElementById("img3");
         expected = "<img id=\"img3\" src=\"foo.png\" width=\"11\" height=\"17px\"/>";
-        assertEquals(expected, img.asXml().trim());
+        assertEquals(expected, img.asXml());
 
         img = page.getHtmlElementById("img4");
         expected = "<img id=\"img4\" src=\"foo.png\" width=\"11em\" height=\"17%\"/>";
-        assertEquals(expected, img.asXml().trim());
+        assertEquals(expected, img.asXml());
     }
 
     /**

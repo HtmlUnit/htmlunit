@@ -34,10 +34,8 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts("<body>\r\n"
-                        + "  <noscript>\r\n"
-                        + "    &lt;div&gt;hello\r\n"
-                        + "  </noscript>\r\n"
-                        + "</body>\r\n")
+                + "  <noscript>&lt;div&gt;hello</noscript>\r\n"
+                + "</body>")
     public void asXml_jsEnabled() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -60,11 +58,9 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
 
         final String expected = "<body>\r\n"
             + "  <noscript>\r\n"
-            + "    <div>\r\n"
-            + "      hello\r\n"
-            + "    </div>\r\n"
+            + "    <div>hello</div>\r\n"
             + "  </noscript>\r\n"
-            + "</body>\r\n";
+            + "</body>";
 
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);

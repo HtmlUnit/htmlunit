@@ -109,6 +109,23 @@ public class HtmlScriptTest extends SimpleWebTestCase {
 
         // asXml() should be reusable
         final String xml = page.asXml();
+        assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
+                + "<html>\r\n"
+                + "  <head>\r\n"
+                + "    <title>foo</title>\r\n"
+                + "  </head>\r\n"
+                + "  <body>\r\n"
+                + "    <script id=\"script1\">\r\n"
+                + "//<![CDATA[\r\n"
+                + "\n"
+                + "  alert('hello');\n"
+                + "\r\n"
+                + "//]]>\r\n"
+                + "    </script>\r\n"
+                + "  </body>\r\n"
+                + "</html>",
+                xml);
+
         loadPageWithAlerts(xml);
     }
 
@@ -123,7 +140,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         final String html = DOCTYPE_HTML + "<html><body><script id='s'>" + script + "</script></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlScript scriptElement = page.getHtmlElementById("s");
-        assertEquals("<script id=\"s\">\r\n" + script + "\r\n</script>\r\n",
+        assertEquals("<script id=\"s\">\r\n" + script + "\r\n</script>",
                 scriptElement.asXml());
     }
 

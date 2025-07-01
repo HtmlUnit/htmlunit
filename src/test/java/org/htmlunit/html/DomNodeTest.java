@@ -413,11 +413,11 @@ public class DomNodeTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(htmlContent);
 
         HtmlElement span = page.getFirstByXPath("//div/span");
-        assertEquals("<span style=\"display: none;\">\r\n  bla\r\n</span>\r\n", span.asXml());
+        assertEquals("<span style=\"display: none;\">bla</span>", span.asXml());
         assertFalse(span.isDisplayed());
 
         span = page.getFirstByXPath("//span[text()=\"bla\"]");
-        assertEquals("<span style=\"display: none;\">\r\n  bla\r\n</span>\r\n", span.asXml());
+        assertEquals("<span style=\"display: none;\">bla</span>", span.asXml());
         assertFalse(span.isDisplayed());
     }
 

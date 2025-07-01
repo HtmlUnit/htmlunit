@@ -42,12 +42,11 @@ public class HtmlTemplate2Test extends SimpleWebTestCase {
                 + "</html>";
 
         final HtmlPage htmlPage = loadPage(html);
-        assertEquals(htmlPage.getBody().asXml(), "<body>\r\n"
+        assertEquals("<body>\r\n"
                 + "  <template id=\"template\">\r\n"
-                + "    <div>\r\n"
-                + "    </div>\r\n"
+                + "    <div></div>\r\n"
                 + "  </template>\r\n"
-                + "</body>\r\n");
+                + "</body>", htmlPage.getBody().asXml());
     }
 
     /**
@@ -65,9 +64,8 @@ public class HtmlTemplate2Test extends SimpleWebTestCase {
                 + "</html>";
 
         final HtmlPage htmlPage = loadPage(html);
-        assertEquals(htmlPage.getBody().asXml(), "<body>\r\n"
-                + "  <template id=\"template\">\r\n"
-                + "  </template>\r\n"
-                + "</body>\r\n");
+        assertEquals("<body>\r\n"
+                + "  <template id=\"template\"></template>\r\n"
+                + "</body>", htmlPage.getBody().asXml());
     }
 }

@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link HtmlDefinitionDescription}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class HtmlDefinitionDescriptionTest extends SimpleWebTestCase {
 
@@ -36,6 +37,6 @@ public class HtmlDefinitionDescriptionTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlElement element = page.getHtmlElementById("foo");
-        assertTrue(element.asXml().contains("</dd>"));
+        assertEquals("<dd id=\"foo\"></dd>", element.asXml());
     }
 }

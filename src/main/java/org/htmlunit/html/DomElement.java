@@ -350,28 +350,41 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Recursively write the XML data for the node tree starting at <code>node</code>.
-     *
-     * @param indent white space to indent child nodes
-     * @param printWriter writer where child nodes are written
+     * {@inheritDoc}
      */
     @Override
-    protected void printXml(final String indent, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
         final boolean hasChildren = getFirstChild() != null;
-        printWriter.print(indent + "<");
+
+        if (tagBefore) {
+            printWriter.print("\r\n");
+            printWriter.print(indent);
+        }
+
+        printWriter.print('<');
         printOpeningTagContentAsXml(printWriter);
 
-        if (hasChildren || isEmptyXmlTagExpanded()) {
-            printWriter.print(">\r\n");
-            printChildrenAsXml(indent, printWriter);
-            printWriter.print(indent);
+        if (hasChildren) {
+            printWriter.print(">");
+            final boolean tag = printChildrenAsXml(indent, true, printWriter);
+            if (tag) {
+                printWriter.print("\r\n");
+                printWriter.print(indent);
+            }
             printWriter.print("</");
             printWriter.print(getTagName());
-            printWriter.print(">\r\n");
+            printWriter.print(">");
+        }
+        else if (isEmptyXmlTagExpanded()) {
+            printWriter.print("></");
+            printWriter.print(getTagName());
+            printWriter.print(">");
         }
         else {
-            printWriter.print("/>\r\n");
+            printWriter.print("/>");
         }
+
+        return true;
     }
 
     /**

@@ -61,14 +61,13 @@ public class WebClient8Test extends SimpleWebTestCase {
             final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
             assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n<html>\r\n"
                     + "  <head>\r\n"
-                    + "    <title>\r\n      foo\r\n    </title>\r\n"
+                    + "    <title>foo</title>\r\n"
                     + "  </head>\r\n"
                     + "  <body>\r\n"
-                    + "    <div>\r\n      Hello \r\n"
-                    + "      <b>\r\n        HtmlUnit\r\n      </b>\r\n"
+                    + "    <div>Hello <b>HtmlUnit</b>\r\n"
                     + "    </div>\r\n"
                     + "  </body>\r\n"
-                    + "</html>\r\n",
+                    + "</html>",
                     page.asXml());
         }
     }

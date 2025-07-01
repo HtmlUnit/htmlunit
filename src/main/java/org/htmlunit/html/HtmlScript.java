@@ -245,16 +245,16 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      * {@inheritDoc}
      */
     @Override
-    protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
+    protected boolean printChildrenAsXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
         final DomCharacterData textNode = (DomCharacterData) getFirstChild();
         if (textNode == null) {
-            return;
+            return tagBefore;
         }
 
         final String data = textNode.getData();
+        printWriter.print("\r\n");
         if (data.contains("//<![CDATA[")) {
             printWriter.print(data);
-            printWriter.print("\r\n");
         }
         else {
             printWriter.print("//<![CDATA[");
@@ -262,8 +262,8 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
             printWriter.print(data);
             printWriter.print("\r\n");
             printWriter.print("//]]>");
-            printWriter.print("\r\n");
         }
+        return true;
     }
 
     /**

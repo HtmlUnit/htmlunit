@@ -1128,13 +1128,13 @@ public class HtmlElementTest extends SimpleWebTestCase {
         List<HtmlElement> elements = form.getElementsByAttribute("input", "value", "pushme");
         assertEquals(1, elements.size());
         assertEquals("<input type=\"button\" name=\"buttonName\" value=\"pushme\"/>",
-            elements.get(0).asXml().replaceAll("\\r|\\n", ""));
+            elements.get(0).asXml());
 
         // ignore case
         elements = form.getElementsByAttribute("iNPuT", "value", "pushme");
         assertEquals(1, elements.size());
         assertEquals("<input type=\"button\" name=\"buttonName\" value=\"pushme\"/>",
-                elements.get(0).asXml().replaceAll("\\r|\\n", ""));
+                elements.get(0).asXml());
 
         // attribute value is case sensitive
         elements = form.getElementsByAttribute("input", "value", "pushMe");
@@ -1143,14 +1143,14 @@ public class HtmlElementTest extends SimpleWebTestCase {
         // selected='selected'
         elements = form.getElementsByAttribute("option", "selected", "selected");
         assertEquals(1, elements.size());
-        assertEquals("<option value=\"option2\" id=\"option2\" selected=\"selected\">  Option2</option>",
-                elements.get(0).asXml().replaceAll("\\r|\\n", ""));
+        assertEquals("<option value=\"option2\" id=\"option2\" selected=\"selected\">Option2</option>",
+                elements.get(0).asXml());
 
         // selected
         elements = form.getElementsByAttribute("option", "selected", "");
         assertEquals(1, elements.size());
-        assertEquals("<option value=\"option1\" id=\"option1\" selected=\"\">  Option1</option>",
-                elements.get(0).asXml().replaceAll("\\r|\\n", ""));
+        assertEquals("<option value=\"option1\" id=\"option1\" selected=\"\">Option1</option>",
+                elements.get(0).asXml());
     }
 
     /**
@@ -1184,12 +1184,11 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
 
-        final String htmlDiv1XML = "<div id=\"div1\" onclick=\"alert('hello')\">\r\n  click me"
-                + "\r\n</div>\r\n";
+        final String htmlDiv1XML = "<div id=\"div1\" onclick=\"alert('hello')\">click me</div>";
         assertEquals(htmlDiv1XML, page.getElementById("div1").asXml());
 
-        final String htmlDiv2XML = "<div id=\"div2\" onclick=\"alert(&quot;hello again&quot;)\">\r\n  click me again"
-                + "\r\n</div>\r\n";
+        final String htmlDiv2XML = "<div id=\"div2\" onclick=\"alert(&quot;hello again&quot;)\">click me again"
+                + "</div>";
         assertEquals(htmlDiv2XML, page.getElementById("div2").asXml());
     }
 

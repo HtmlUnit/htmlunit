@@ -789,12 +789,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         final StringWriter stringWriter = new StringWriter();
         try (PrintWriter printWriter = new PrintWriter(stringWriter)) {
+            boolean tag = false;
             if (charsetName != null && this instanceof HtmlHtml) {
                 printWriter.print("<?xml version=\"1.0\" encoding=\"");
                 printWriter.print(charsetName);
-                printWriter.print("\"?>\r\n");
+                printWriter.print("\"?>");
+                tag = true;
             }
-            printXml("", printWriter);
+            printXml("", tag, printWriter);
             return stringWriter.toString();
         }
     }
@@ -803,27 +805,35 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Recursively writes the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
+     * @param tagBefore true if the last thing printed was a tag
      * @param printWriter writer where child nodes are written
+     * @return true if the last thing printed was a tag
      */
-    protected void printXml(final String indent, final PrintWriter printWriter) {
-        printWriter.print(indent);
+    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
+        if (tagBefore) {
+            printWriter.print("\r\n");
+            printWriter.print(indent);
+        }
         printWriter.print(this);
-        printWriter.print("\r\n");
-        printChildrenAsXml(indent, printWriter);
+        return printChildrenAsXml(indent, false, printWriter);
     }
 
     /**
      * Recursively writes the XML data for the node tree starting at <code>node</code>.
      *
      * @param indent white space to indent child nodes
+     * @param tagBefore true if the last thing printed was a tag
      * @param printWriter writer where child nodes are written
+     * @return true if the last thing printed was a tag
      */
-    protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
+    protected boolean printChildrenAsXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
         DomNode child = getFirstChild();
+        boolean tag = tagBefore;
         while (child != null) {
-            child.printXml(indent + "  ", printWriter);
+            tag = child.printXml(indent + "  ", tag, printWriter);
             child = child.getNextSibling();
         }
+        return tag;
     }
 
     /**

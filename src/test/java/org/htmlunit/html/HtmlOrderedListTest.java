@@ -68,7 +68,14 @@ public class HtmlOrderedListTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlElement element = page.getHtmlElementById("myNode");
 
-        assertEquals("<ol id=\"myNode\">\r\n</ol>\r\n", element.asXml());
-        assertTrue(page.asXml().contains("</ol>"));
+        // assertEquals("<ol id=\"myNode\"></ol>", element.asXml());
+        assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
+                + "<html>\r\n"
+                + "  <head/>\r\n"
+                + "  <body>\r\n"
+                + "    <ol id=\"myNode\"></ol>\n"
+                + "foo\n"
+                + "</body>\r\n"
+                + "</html>", page.asXml());
     }
 }

@@ -427,13 +427,14 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    protected void printXml(final String indent, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
 
         printWriter.print(">");
         printWriter.print(org.htmlunit.util.StringUtils.escapeXml(getText()));
         printWriter.print("</textarea>");
+        return true;
     }
 
     /**

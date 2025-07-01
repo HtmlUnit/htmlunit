@@ -24,6 +24,7 @@ import org.w3c.dom.Comment;
  *
  * @author Karel Kolman
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class DomComment extends DomCharacterData implements Comment {
 
@@ -58,18 +59,15 @@ public class DomComment extends DomCharacterData implements Comment {
     }
 
     /**
-     * Recursively write the XML data for the node tree starting at <code>node</code>.
-     *
-     * @param indent white space to indent child nodes
-     * @param printWriter writer where child nodes are written
+     * {@inheritDoc}
      */
     @Override
-    protected void printXml(final String indent, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
         printWriter.print(indent);
         printWriter.print("<!--");
         printWriter.print(getData());
         printWriter.print("-->");
-        printChildrenAsXml(indent, printWriter);
+        return printChildrenAsXml(indent, true, printWriter);
     }
 
     /**

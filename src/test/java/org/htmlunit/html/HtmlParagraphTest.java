@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link HtmlParagraph}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class HtmlParagraphTest extends SimpleWebTestCase {
 
@@ -36,7 +37,7 @@ public class HtmlParagraphTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlElement element = page.getHtmlElementById("foo");
-        assertTrue(element.asXml().contains("</p>"));
+        assertEquals("<p id=\"foo\"></p>", element.asXml());
     }
 
     /**
