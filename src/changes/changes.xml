@@ -8,7 +8,7 @@
 
     <body>
         <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 137, Firefox 139, Bugfixes">
-            <action type="update" dev="rbri">
+            <action type="update" dev="rbri" issue="#982">
                 Major improvements for the asXML() function.
             </action>
             <action type="update" dev="rbri">
