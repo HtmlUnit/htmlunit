@@ -1220,13 +1220,10 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "<html>\r\n"
             + "  <head/>\r\n"
             + "  <body>\r\n"
-            + "    <form>\r\n"
-            + "    </form>\r\n"
-            + "    <div>\r\n"
-            + "      test\r\n"
-            + "    </div>\r\n"
+            + "    <form></form>\r\n"
+            + "    <div>test</div>\r\n"
             + "  </body>\r\n"
-            + "</html>\r\n";
+            + "</html>";
 
         final HtmlPage page = loadPage(html);
         assertEquals(xml, page.asXml());
