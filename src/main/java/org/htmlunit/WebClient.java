@@ -2485,8 +2485,44 @@ public class WebClient implements Serializable, AutoCloseable {
      *         method returns; will be <code>0</code> if there are no jobs left to execute
      */
     public int waitForBackgroundJavaScriptStartingBefore(final long delayMillis) {
+        return waitForBackgroundJavaScriptStartingBefore(delayMillis, -1);
+    }
+
+    /**
+     * <p><span style="color:red">Experimental API: May be changed in next release
+     * and may not yet work perfectly!</span></p>
+     *
+     * <p>This method blocks until all background JavaScript tasks scheduled to start executing before
+     * <code>(now + delayMillis)</code> have finished executing. Background JavaScript tasks are JavaScript
+     * tasks scheduled for execution via <code>window.setTimeout</code>, <code>window.setInterval</code> or
+     * asynchronous <code>XMLHttpRequest</code>.</p>
+     *
+     * <p>If there is no background JavaScript task currently executing, and there is no background JavaScript
+     * task scheduled to start executing within the specified time, this method returns immediately -- even
+     * if there are tasks scheduled to be executed after <code>(now + delayMillis)</code>.</p>
+     *
+     * <p>Note that the total time spent executing a background JavaScript task is never known ahead of
+     * time, so this method makes no guarantees as to how long it will block.</p>
+     *
+     * <p>Use this method instead of {@link #waitForBackgroundJavaScript(long)} if you know roughly when
+     * your background JavaScript is supposed to start executing, but you're not necessarily sure how long
+     * it will take to execute.</p>
+     *
+     * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds)
+     * @param timeoutMillis the maximum amount of time to wait (in milliseconds); this has to be larger than
+     *        the delayMillis parameter, otherwise the timeout is ignored
+     * @return the number of background JavaScript jobs still executing or waiting to be executed when this
+     *         method returns; will be <code>0</code> if there are no jobs left to execute
+     */
+    public int waitForBackgroundJavaScriptStartingBefore(final long delayMillis, final long timeoutMillis) {
         int count = 0;
-        final long endTime = System.currentTimeMillis() + delayMillis;
+        long now = System.currentTimeMillis();
+        final long endTime = now + delayMillis;
+        long endTimeout = now + timeoutMillis;
+        if (timeoutMillis < 0 || timeoutMillis < delayMillis) {
+            endTimeout = -1;
+        }
+
         for (Iterator<WeakReference<JavaScriptJobManager>> i = jobManagers_.iterator(); i.hasNext();) {
             final JavaScriptJobManager jobManager;
             final WeakReference<JavaScriptJobManager> reference;
@@ -2503,12 +2539,16 @@ public class WebClient implements Serializable, AutoCloseable {
                 count = 0;
                 continue;
             }
-            final long newDelay = endTime - System.currentTimeMillis();
-            count += jobManager.waitForJobsStartingBefore(newDelay);
+            now = System.currentTimeMillis();
+            final long newDelay = endTime - now;
+            final long newTimeout = (endTimeout == -1) ? -1 : endTimeout - now;
+            count += jobManager.waitForJobsStartingBefore(newDelay, newTimeout);
         }
         if (count != getAggregateJobCount()) {
-            final long newDelay = endTime - System.currentTimeMillis();
-            return waitForBackgroundJavaScriptStartingBefore(newDelay);
+            now = System.currentTimeMillis();
+            final long newDelay = endTime - now;
+            final long newTimeout = (endTimeout == -1) ? -1 : endTimeout - now;
+            return waitForBackgroundJavaScriptStartingBefore(newDelay, newTimeout);
         }
         return count;
     }

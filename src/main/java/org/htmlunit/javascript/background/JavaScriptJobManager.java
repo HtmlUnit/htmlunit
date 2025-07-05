@@ -85,7 +85,7 @@ public interface JavaScriptJobManager extends Serializable {
     /**
      * Blocks until all active jobs have finished executing. If a job is scheduled to begin executing after
      * <code>(now + timeoutMillis)</code>, this method will wait for <code>timeoutMillis</code> milliseconds and then
-     * return {@code false}.
+     * return the number of background JavaScript jobs still executing.
      * @param timeoutMillis the maximum amount of time to wait (in milliseconds); may be negative, in which
      *        case this method returns immediately
      * @return the number of background JavaScript jobs still executing or waiting to be executed when this
@@ -114,11 +114,42 @@ public interface JavaScriptJobManager extends Serializable {
      * tasks scheduled to be executed after <code>(now + delayMillis)</code>.
      * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds);
      *        may be negative, as it is relative to the current time
+     * @param timeoutMillis the maximum amount of time to wait (in milliseconds); this has to be larger than
+     *        the delayMillis parameter, otherwise the timeout is ignored
+     * @return the number of background JavaScript jobs still executing or waiting to be executed when this
+     *         method returns; will be <code>0</code> if there are no jobs left to execute
+     */
+    int waitForJobsStartingBefore(long delayMillis, long timeoutMillis);
+
+    /**
+     * Blocks until all jobs scheduled to start executing before
+     * <code>(now + delayMillis)</code> have finished executing.
+     * If there is no background JavaScript task currently executing, and there is no background JavaScript task
+     * scheduled to start executing within the specified time, this method returns immediately -- even if there are
+     * tasks scheduled to be executed after <code>(now + delayMillis)</code>.
+     * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds);
+     *        may be negative, as it is relative to the current time
      * @param filter the JavaScriptJobFilter
      * @return the number of background JavaScript jobs still executing or waiting to be executed when this
      *         method returns; will be <code>0</code> if there are no jobs left to execute
      */
     int waitForJobsStartingBefore(long delayMillis, JavaScriptJobFilter filter);
+
+    /**
+     * Blocks until all jobs scheduled to start executing before <code>(now + delayMillis)</code>
+     * have finished executing or the
+     * If there is no background JavaScript task currently executing, and there is no background JavaScript task
+     * scheduled to start executing within the specified time, this method returns immediately -- even if there are
+     * tasks scheduled to be executed after <code>(now + delayMillis)</code>.
+     * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds);
+     *        may be negative, as it is relative to the current time
+     * @param timeoutMillis the maximum amount of time to wait (in milliseconds); this has to be larger than
+     *        the delayMillis parameter, otherwise the timeout is ignored
+     * @param filter the JavaScriptJobFilter
+     * @return the number of background JavaScript jobs still executing or waiting to be executed when this
+     *         method returns; will be <code>0</code> if there are no jobs left to execute
+     */
+    int waitForJobsStartingBefore(long delayMillis, long timeoutMillis, JavaScriptJobFilter filter);
 
     /**
      * Shuts down this job manager and stops all of its jobs.

@@ -97,6 +97,17 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
             }
             /** {@inheritDoc} */
             @Override
+            public int waitForJobsStartingBefore(final long delayMillis, final long timeoutMillis) {
+                return jobCount.intValue();
+            }
+            /** {@inheritDoc} */
+            @Override
+            public int waitForJobsStartingBefore(final long delayMillis, final long timeoutMillis,
+                            final JavaScriptJobFilter filter) {
+                return jobCount.intValue();
+            }
+            /** {@inheritDoc} */
+            @Override
             public int waitForJobsStartingBefore(final long delayMillis, final JavaScriptJobFilter filter) {
                 return jobCount.intValue();
             }

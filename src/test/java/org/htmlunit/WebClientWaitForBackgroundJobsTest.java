@@ -608,6 +608,77 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void timeoutBeforeAllStartedJobsFinished() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    var counter = 0;\n"
+                + "    setTimeout(doWork1, 100);\n"
+                + "    function doWork1() {\n"
+                + "      log('work' + counter++);\n"
+                + "      var start = new Date();\n"
+                + "      while((new Date() - start) < 400) {"
+                + "        Math.sqrt(Math.sqrt(Math.pi));\n"
+                + "      }\n"
+                + "      setTimeout(doWork1, 100);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals("", page.getTitleText());
+
+        startTimedTest();
+        assertEquals(1, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(650, 700));
+        assertMaxTestRunTime(800);
+
+        assertTrue(page.getTitleText(), page.getTitleText().startsWith("work0§work1§"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void timeoutDirectStartedJob() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    var counter = 0;\n"
+                + "    function doWork1() {\n"
+                + "      log('work' + counter++);\n"
+                + "      var start = new Date();\n"
+                + "      while((new Date() - start) < 2000) {"
+                + "        Math.sqrt(Math.sqrt(Math.pi));\n"
+                + "      }\n"
+                + "    }\n"
+                + "    setTimeout(doWork1, 100);\n"
+                + "  </script>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals("", page.getTitleText());
+
+        startTimedTest();
+        assertEquals(1, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(400, 1000));
+        assertMaxTestRunTime(1100);
+
+        assertTrue(page.getTitleText(), page.getTitleText().startsWith("work0§"));
+    }
+
+    /**
      * Helper to ensure some synchronization state between threads
      * to reproduce a particular situation in the tests.
      */
