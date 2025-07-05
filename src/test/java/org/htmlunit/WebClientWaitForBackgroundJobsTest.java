@@ -14,6 +14,9 @@
  */
 package org.htmlunit;
 
+import static org.htmlunit.WebDriverTestCase.LOG_TITLE_FUNCTION;
+import static org.htmlunit.WebDriverTestCase.LOG_WINDOW_NAME_FUNCTION;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,6 +35,7 @@ import org.junitpioneer.jupiter.RetryingTest;
  * {@link WebClient#waitForBackgroundJavaScript(long)}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
 
@@ -61,12 +65,13 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var threadID;\n"
             + "    function test() {\n"
-            + "      threadID = setTimeout(doAlert, 10000);\n"
+            + "      threadID = setTimeout(doLog, 10000);\n"
             + "    }\n"
-            + "    function doAlert() {\n"
-            + "      alert('blah');\n"
+            + "    function doLog() {\n"
+            + "      log('blah');\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -74,8 +79,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content);
+        assertEquals("test", page.getTitleText());
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);
         assertEquals(1, jobManager.getJobCount());
@@ -84,7 +89,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         assertEquals(1, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(7000));
         assertMaxTestRunTime(100);
         assertEquals(1, jobManager.getJobCount());
-        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+        assertEquals("test", page.getTitleText());
     }
 
     /**
@@ -97,19 +102,20 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var longTimeoutID;\n"
             + "    function test() {\n"
-            + "      longTimeoutID = setTimeout(doAlert('late'), 10000);\n"
+            + "      longTimeoutID = setTimeout(doLog('late'), 10000);\n"
             + "      setTimeout(clearLongTimeout, 100);\n"
-            + "      setTimeout(doAlert('hello'), 300);\n"
+            + "      setTimeout(doLog('hello'), 300);\n"
             + "    }\n"
             + "    function clearLongTimeout() {\n"
-            + "      alert('clearLongTimeout');\n"
+            + "      log('clearLongTimeout');\n"
             + "      clearTimeout(longTimeoutID);\n"
             + "    }\n"
-            + "    function doAlert(_text) {\n"
-            + "      return function doAlert() {\n"
-            + "        alert(_text);\n"
+            + "    function doLog(_text) {\n"
+            + "      return function doLog() {\n"
+            + "        log(_text);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -118,8 +124,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        final HtmlPage page = loadPage(content, collectedAlerts);
+        final HtmlPage page = loadPage(content);
+        assertEquals("test", page.getTitleText());
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);
         assertEquals(3, jobManager.getJobCount());
@@ -129,8 +135,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         assertMaxTestRunTime(400);
         assertEquals(0, jobManager.getJobCount());
 
-        final String[] expectedAlerts = {"clearLongTimeout", "hello"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals("testclearLongTimeout§hello§", page.getTitleText());
     }
 
     /**
@@ -145,6 +150,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var intervalId;\n"
             + "    function test() {\n"
             + "      intervalId = setTimeout(doWork, 100);\n"
@@ -155,7 +161,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "      var request = new XMLHttpRequest();\n"
             + "      request.open('GET', 'wait', false);\n"
             + "      request.send('');\n"
-            + "      alert('end work');\n"
+            + "      log('end work');\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -180,10 +186,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
         final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("test", page.getTitleText());
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);
         assertEquals(1, jobManager.getJobCount());
@@ -194,8 +198,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         assertMaxTestRunTime(600);
         assertEquals(0, jobManager.getJobCount());
 
-        final String[] expectedAlerts = {"end work"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals("testend work§", page.getTitleText());
     }
 
     /**
@@ -211,15 +214,16 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      setTimeout(doWork1, 200);\n"
             + "    }\n"
             + "    function doWork1() {\n"
-            + "      alert('work1');\n"
+            + "      log('work1');\n"
             + "      setTimeout(doWork2, 200);\n"
             + "    }\n"
             + "    function doWork2() {\n"
-            + "      alert('work2');\n"
+            + "      log('work2');\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -227,8 +231,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        final HtmlPage page = loadPage(html, collectedAlerts);
+        final HtmlPage page = loadPage(html);
+        assertEquals("test", page.getTitleText());
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);
         assertEquals(1, jobManager.getJobCount());
@@ -238,8 +242,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         assertMaxTestRunTime(1000);
         assertEquals(0, jobManager.getJobCount());
 
-        final String[] expectedAlerts = {"work1", "work2"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals("testwork1§work2§", page.getTitleText());
     }
 
     /**
@@ -264,11 +267,12 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "<head>\n"
             + "  <title>nested</title>\n"
             + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "    function test() {\n"
             + "      setTimeout(doWork1, 200);\n"
             + "    }\n"
             + "    function doWork1() {\n"
-            + "      alert('work1');\n"
+            + "      log('work1');\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -277,8 +281,6 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "</html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
@@ -287,6 +289,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("", page.getEnclosingWindow().getName());
 
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);
@@ -297,8 +300,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         assertMaxTestRunTime(300);
         assertEquals(0, jobManager.getJobCount());
 
-        final String[] expectedAlerts = {"work1"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals("work1§", page.getEnclosingWindow().getName());
     }
 
     /**
@@ -314,10 +316,11 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var request;\n"
             + "    function onReadyStateChange() {\n"
             + "      if (request.readyState == 4) {\n"
-            + "        alert('xhr onchange');\n"
+            + "        log('xhr onchange');\n"
             + "        setTimeout(doWork1, 200);\n"
             + "      }\n"
             + "    }\n"
@@ -329,7 +332,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "      request.send('');\n"
             + "    }\n"
             + "    function doWork1() {\n"
-            + "      alert('work1');\n"
+            + "      log('work1');\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -354,10 +357,8 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
         final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("test", page.getTitleText());
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);
         assertEquals(1, jobManager.getJobCount());
@@ -368,8 +369,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         assertMaxTestRunTime(1000);
         assertEquals(0, jobManager.getJobCount());
 
-        final String[] expectedAlerts = {"xhr onchange", "work1"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals("testxhr onchange§work1§", page.getTitleText());
     }
 
     /**
@@ -385,6 +385,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var counter = 0;\n"
             + "    function test() {\n"
             + "      setTimeout(doWork1, 0);\n"
@@ -393,7 +394,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "      if (counter++ < 50) {\n"
             + "        setTimeout(doWork1, 0);\n"
             + "      }\n"
-            + "      alert('work1');\n"
+            + "      log('work' + counter);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -408,15 +409,13 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        client.getPage(URL_FIRST);
+        final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("", page.getTitleText());
 
         startTimedTest();
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1_000));
         assertMaxTestRunTime(1000);
-        assertEquals(51, collectedAlerts.size());
+        assertTrue(page.getTitleText(), page.getTitleText().endsWith("work48§work49§work50§work51§"));
     }
 
     /**
@@ -468,17 +467,18 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var counter = 0;\n"
             + "    function test() {\n"
             + "      var w = window.open('about:blank');\n"
             + "      w.setTimeout(doWork1, 200);\n"
             + "    }\n"
             + "    function doWork1() {\n"
-            + "      alert('work1');\n"
+            + "      log('work1');\n"
             + "      setTimeout(doWork2, 400);\n"
             + "    }\n"
             + "    function doWork2() {\n"
-            + "      alert('work2');\n"
+            + "      log('work2');\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -486,15 +486,14 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
-        final HtmlPage page = loadPage(html, collectedAlerts);
+        final HtmlPage page = loadPage(html);
+        assertEquals("", page.getTitleText());
 
         startTimedTest();
         assertEquals(0, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(1000));
         assertMaxTestRunTime(1000);
 
-        final String[] expectedAlerts = {"work1", "work2"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals("work1§work2§", page.getTitleText());
     }
 
     /**
@@ -512,6 +511,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var start = new Date().getTime();\n"
             + "    var id = setInterval(doWork1, 35);\n"
             + "    function stopTimer() {\n"
@@ -519,7 +519,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "    }\n"
             + "    function doWork1() {\n"
             + "      if (start + 8000 < new Date().getTime()) {\n"
-            + "        document.title = 'failed';\n"
+            + "        log('failed');\n"
             + "        clearInterval(id);\n"
             + "      }\n"
             + "    }\n"
@@ -537,13 +537,15 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("test", page.getTitleText());
 
         int noOfJobs = client.waitForBackgroundJavaScriptStartingBefore(500);
         assertTrue(noOfJobs == 1 || noOfJobs == 2); // maybe one is running
-
         assertEquals("test", page.getTitleText());
+
         noOfJobs = client.waitForBackgroundJavaScriptStartingBefore(500);
         assertTrue(noOfJobs == 1 || noOfJobs == 2); // maybe one is running
+        assertEquals("test", page.getTitleText());
     }
 
     /**
@@ -604,45 +606,45 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         final HtmlPage page = (HtmlPage) client.getCurrentWindow().getEnclosedPage();
         assertEquals("page 4", page.getTitleText());
     }
-}
-
-/**
- * Helper to ensure some synchronization state between threads to reproduce a particular situation in the tests.
- * @author Marc Guillemot
- */
-class ThreadSynchronizer {
-    private String state_ = "initial";
-    private static final Log LOG = LogFactory.getLog(ThreadSynchronizer.class);
-
-    synchronized void setState(final String newState) {
-        state_ = newState;
-        notifyAll();
-    }
 
     /**
-     * Just like {@link Thread#sleep(long)} but throws a {@link RuntimeException}.
-     * @param millis the time to sleep in milliseconds
+     * Helper to ensure some synchronization state between threads
+     * to reproduce a particular situation in the tests.
      */
-    public void sleep(final long millis) {
-        try {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Sleeping for " + millis + "ms");
-            }
-            Thread.sleep(millis);
-        }
-        catch (final InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    static class ThreadSynchronizer {
+        private String state_ = "initial";
+        private static final Log LOG = LogFactory.getLog(ThreadSynchronizer.class);
 
-    synchronized void waitForState(final String expectedState) {
-        try {
-            while (!state_.equals(expectedState)) {
-                wait();
+        synchronized void setState(final String newState) {
+            state_ = newState;
+            notifyAll();
+        }
+
+        /**
+         * Just like {@link Thread#sleep(long)} but throws a {@link RuntimeException}.
+         * @param millis the time to sleep in milliseconds
+         */
+        public void sleep(final long millis) {
+            try {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Sleeping for " + millis + "ms");
+                }
+                Thread.sleep(millis);
+            }
+            catch (final InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
-        catch (final InterruptedException e) {
-            throw new RuntimeException(e);
+
+        synchronized void waitForState(final String expectedState) {
+            try {
+                while (!state_.equals(expectedState)) {
+                    wait();
+                }
+            }
+            catch (final InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
