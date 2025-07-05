@@ -17,14 +17,32 @@ Version 4.13.0 / June 03, 2025
 
 [HtmlUnit@mastodon](https://fosstodon.org/@HtmlUnit) | [HtmlUnit@bsky](https://bsky.app/profile/htmlunit.bsky.social) | [HtmlUnit@Twitter](https://twitter.com/HtmlUnit)
 
+### Selenium Integration
+
+HtmlUnit can be used as a [Selenium](https://www.selenium.dev/) 
+[WebDriver](https://www.selenium.dev/documentation/webdriver/)-compatible browser through the 
+[htmlunit-driver](https://github.com/SeleniumHQ/htmlunit-driver).
+This integration allows you to use HtmlUnit as a headless browser option within Selenium test suites, 
+providing fast execution without the overhead of launching a full browser instance.
+
+## jsoup Bridge
+
+The [htmlunit-jsoup](https://github.com/HtmlUnit/htmlunit-jsoup) library provides utilities 
+to bridge the gap between [HtmlUnit](https://htmlunit.org) and [jsoup](https://jsoup.org/).
+The `HtmlUnitDOMToJsoupConverter` enables seamless integration between HtmlUnit's comprehensive
+browser simulation capabilities and all the jsoup-based libraries,
+allowing you to leverage the full ecosystem of jsoup tools 
+while maintaining HtmlUnit's JavaScript execution and dynamic content handling.
+
+
 > **Check out HtmlUnit [satellite projects](https://github.com/orgs/HtmlUnit/repositories)**,
 such as:
 > * [HtmlUnit on android](https://github.com/HtmlUnit/htmlunit-android)
-> * [HtmlUnit for .Net](https://github.com/HtmlUnit/NHtmlUnit)
-> * or [our Rhino fork](https://github.com/HtmlUnit/htmlunit-rhino-fork) (the JS engine)
+> * [Htmlunit - NekoHtml Parser](https://github.com/HtmlUnit/htmlunit-neko)
+> * [HtmlUnit - CSSParser](https://github.com/HtmlUnit/htmlunit-cssparser)
+> * [HtmlUnit - CSP](https://github.com/HtmlUnit/htmlunit-csp)
+> * or [core-js](https://github.com/HtmlUnit/htmlunit-core-js) out Rhino fork (the JS engine)
 >
-> Note as well that you can use HtmlUnit with [Selenium](https://www.selenium.dev/) via
-> their [htmlunit-driver](https://github.com/SeleniumHQ/htmlunit-driver)!
 
 
 ## Sponsoring
