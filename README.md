@@ -25,6 +25,10 @@ HtmlUnit can be used as a [Selenium](https://www.selenium.dev/)
 This integration allows you to use HtmlUnit as a headless browser option within Selenium test suites, 
 providing fast execution without the overhead of launching a full browser instance.
 
+Please have a look at the [HtmlUnit Remote](https://github.com/HtmlUnit/htmlunit-remote) project 
+if you like to use this driver from Selenium 4 Grid.
+
+
 ## jsoup Bridge
 
 The [htmlunit-jsoup](https://github.com/HtmlUnit/htmlunit-jsoup) library provides utilities 
@@ -35,14 +39,13 @@ allowing you to leverage the full ecosystem of jsoup tools
 while maintaining HtmlUnit's JavaScript execution and dynamic content handling.
 
 
-> **Check out HtmlUnit [satellite projects](https://github.com/orgs/HtmlUnit/repositories)**,
-such as:
-> * [HtmlUnit on android](https://github.com/HtmlUnit/htmlunit-android)
-> * [Htmlunit - NekoHtml Parser](https://github.com/HtmlUnit/htmlunit-neko)
-> * [HtmlUnit - CSSParser](https://github.com/HtmlUnit/htmlunit-cssparser)
-> * [HtmlUnit - CSP](https://github.com/HtmlUnit/htmlunit-csp)
-> * or [core-js](https://github.com/HtmlUnit/htmlunit-core-js) out Rhino fork (the JS engine)
->
+## HtmlUnit [satellite projects](https://github.com/orgs/HtmlUnit/repositories)
+
+* [HtmlUnit on android](https://github.com/HtmlUnit/htmlunit-android)
+* [Htmlunit - NekoHtml Parser](https://github.com/HtmlUnit/htmlunit-neko)
+* [HtmlUnit - CSSParser](https://github.com/HtmlUnit/htmlunit-cssparser)
+* [HtmlUnit - CSP](https://github.com/HtmlUnit/htmlunit-csp)
+* or [core-js](https://github.com/HtmlUnit/htmlunit-core-js) out [Rhino](https://github.com/mozilla/rhino) fork
 
 
 ## Sponsoring
