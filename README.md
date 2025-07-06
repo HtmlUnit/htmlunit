@@ -17,16 +17,6 @@ Version 4.13.0 / June 03, 2025
 
 [HtmlUnit@mastodon](https://fosstodon.org/@HtmlUnit) | [HtmlUnit@bsky](https://bsky.app/profile/htmlunit.bsky.social) | [HtmlUnit@Twitter](https://twitter.com/HtmlUnit)
 
-### Sponsoring
-
-Constantly updating and maintaining the HtmlUnit code base already takes a lot of time.
-
-I would like to make 2 major extensions in the next few months
-* [Add HTTP/2 support](https://github.com/HtmlUnit/htmlunit/issues/370)
-* [Replace the Rhino based JavaScript engine](https://github.com/HtmlUnit/htmlunit/issues/755)
-
-For doing this I need your [sponsoring](https://github.com/sponsors/rbri).
-
 
 ## Table of Contents
 - [Overview](#overview)
@@ -34,12 +24,13 @@ For doing this I need your [sponsoring](https://github.com/sponsors/rbri).
   - [Maven](#maven)
   - [Gradle](#gradle)
 - [Getting Started](#getting-started)
-- [Vulnerabilities](#vulnerabilities)
 - [Features](#features)
   - [Selenium Integration](#selenium-integration)
   - [jsoup Bridge](#jsoup-bridge)
   - [HtmlUnit satellite projects](#htmlunit-satellite-projects)
-  - [Projects using HtmlUnit](#projects-using-htmlunit)
+  - [Built on HtmlUnit](#built-on-htmlunit)
+- [Vulnerabilities](#vulnerabilities)
+- [Sponsoring](#sponsoring)
 - [Contributing](#contributing)
 - [Last CI build](#last-ci-build)
   - [Maven](#maven-1)
@@ -58,8 +49,8 @@ HtmlUnit is typically used for testing purposes or to retrieve information from 
 
 ## Get it!
 
-* [Download from GitHub][12]
-* [Download from Sourceforge][1]
+* [Download from GitHub](https://github.com/HtmlUnit/htmlunit/releases)
+* [Download from Sourceforge](https://sourceforge.net/projects/htmlunit/files/htmlunit/)
 * [Release History](https://www.htmlunit.org/changes-report.html)
 
 ### Maven
@@ -84,20 +75,13 @@ implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.13.0'
 
 ## Getting Started
 You can start here:
-* [Getting Started][7]
+* [Getting Started](https://www.htmlunit.org/gettingStarted.html)
 * [Introduction to HtmlUnit - Baeldung](https://www.baeldung.com/htmlunit)
-* [The Java Web Scraping Handbook][8] A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
-* [Web Scraping][9] Examples how to implement web scraping using HtmlUnit, Selenium or jaunt and compares them.
-* [The Complete Guide to Web Scraping with Java][10] A small straightforward guide to web scraping with Java.
-* [How to test Jakarta Faces with HtmlUnit and Arquillian][11]
-* [WebScraping.AI HtmlUnit FAQ][13]: 
-
-
-## Vulnerabilities
-
-[List of Vulnerabilities](https://github.com/HtmlUnit/htmlunit/blob/master/CVE.md)
-
-[Security Policy](https://github.com/HtmlUnit/htmlunit/blob/master/SECURITY.md)
+* [The Java Web Scraping Handbook](https://www.scrapingbee.com/java-webscraping-book/) A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
+* [Web Scraping](https://www.innoq.com/en/blog/webscraping/) Examples how to implement web scraping using HtmlUnit, Selenium or jaunt and compares them.
+* [The Complete Guide to Web Scraping with Java](https://www.webscrapingapi.com/java-web-scraping/) A small straightforward guide to web scraping with Java.
+* [How to test Jakarta Faces with HtmlUnit and Arquillian](http://www.mastertheboss.com/java-ee/jsf/how-to-test-jakarta-faces-with-htmlunit-and-arquillian)
+* [WebScraping.AI HtmlUnit FAQ](https://webscraping.ai/faq/htmlunit)
 
 
 ## Features
@@ -143,10 +127,17 @@ while maintaining HtmlUnit's JavaScript execution and dynamic content handling.
 * [Htmlunit - NekoHtml Parser](https://github.com/HtmlUnit/htmlunit-neko)
 * [HtmlUnit - CSSParser](https://github.com/HtmlUnit/htmlunit-cssparser)
 * [HtmlUnit - CSP](https://github.com/HtmlUnit/htmlunit-csp)
-* or [core-js](https://github.com/HtmlUnit/htmlunit-core-js) out [Rhino](https://github.com/mozilla/rhino) fork
+* or [core-js](https://github.com/HtmlUnit/htmlunit-core-js) our [Rhino](https://github.com/mozilla/rhino) fork
 
 
-### Projects using HtmlUnit
+## Vulnerabilities
+
+[List of Vulnerabilities](https://github.com/HtmlUnit/htmlunit/blob/master/CVE.md)
+
+[Security Policy](https://github.com/HtmlUnit/htmlunit/blob/master/SECURITY.md)
+
+
+### Built on HtmlUnit
 
 HtmlUnit is used as the underlying "browser" by different Open Source tools like
  * [WebDriver](https://github.com/SeleniumHQ/selenium)
@@ -182,6 +173,16 @@ HtmlUnit is used by many projects for automated web testing
  * [piranha cloud](https://github.com/piranhacloud/piranha)
  * ...
 
+## Sponsoring
+
+Constantly updating and maintaining the HtmlUnit code base already takes a lot of time.
+
+I would like to make 2 major extensions in the next few months
+* [Add HTTP/2 support](https://github.com/HtmlUnit/htmlunit/issues/370)
+* [Replace the Rhino based JavaScript engine](https://github.com/HtmlUnit/htmlunit/issues/755)
+
+For doing this I need your [sponsoring](https://github.com/sponsors/rbri).
+
 ## Contributing
 Pull Requests and all other Community Contributions are essential for open source software.
 Every contribution - from bug reports to feature requests, typos to full new features - are greatly appreciated.
@@ -190,7 +191,7 @@ Please try to keep your pull requests small (don't bundle unrelated changes) and
 
 ## Last CI build
 The latest builds are available from our
-[Jenkins CI build server][2]
+[Jenkins CI build server](https://jenkins.wetator.org/view/HtmlUnit/)
 
 [![Build Status](https://jenkins.wetator.org/buildStatus/icon?job=HtmlUnit+-+Headless)](https://jenkins.wetator.org/job/HtmlUnit%20-%20Headless/)
 
@@ -233,7 +234,7 @@ Add the snapshot repository and dependency to your `build.gradle`:
 
 ```groovy
 repositories {
-  maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
+  maven { url "https://central.sonatype.com/repository/maven-snapshots/" }
   // ...
 }
 // ...
@@ -272,19 +273,7 @@ mvn dependency-check:check
 
 
 ## Some insights
-[HtmlUnit at openhub][5]
+[HtmlUnit at openhub](https://www.openhub.net/p/HtmlUnit)
 
 ### Stargazers
 [![Stargazers](https://starchart.cc/HtmlUnit/htmlunit.svg)](https://starchart.cc/HtmlUnit/htmlunit)
-
-
-[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/4.1.0/ "HtmlUnit on sourceforge"
-[2]: https://jenkins.wetator.org/view/HtmlUnit/ "HtmlUnit CI"
-[5]: https://www.openhub.net/p/HtmlUnit "https://www.openhub.net/p/HtmlUnit"
-[7]: https://www.htmlunit.org/gettingStarted.html
-[8]: https://www.scrapingbee.com/java-webscraping-book/
-[9]: https://www.innoq.com/en/blog/webscraping/
-[10]: https://www.webscrapingapi.com/java-web-scraping/
-[11]: http://www.mastertheboss.com/java-ee/jsf/how-to-test-jakarta-faces-with-htmlunit-and-arquillian
-[12]: https://github.com/HtmlUnit/htmlunit/releases
-[13]: https://webscraping.ai/faq/htmlunit
