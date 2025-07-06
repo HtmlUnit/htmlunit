@@ -130,13 +130,6 @@ while maintaining HtmlUnit's JavaScript execution and dynamic content handling.
 * or [core-js](https://github.com/HtmlUnit/htmlunit-core-js) our [Rhino](https://github.com/mozilla/rhino) fork
 
 
-## Vulnerabilities
-
-[List of Vulnerabilities](https://github.com/HtmlUnit/htmlunit/blob/master/CVE.md)
-
-[Security Policy](https://github.com/HtmlUnit/htmlunit/blob/master/SECURITY.md)
-
-
 ### Built on HtmlUnit
 
 HtmlUnit is used as the underlying "browser" by different Open Source tools like
@@ -172,6 +165,13 @@ HtmlUnit is used by many projects for automated web testing
  * [Cargo](https://github.com/codehaus-cargo/cargo)
  * [piranha cloud](https://github.com/piranhacloud/piranha)
  * ...
+
+## Vulnerabilities
+
+[List of Vulnerabilities](https://github.com/HtmlUnit/htmlunit/blob/master/CVE.md)
+
+[Security Policy](https://github.com/HtmlUnit/htmlunit/blob/master/SECURITY.md)
+
 
 ## Sponsoring
 
