@@ -9,7 +9,7 @@ Version 4.13.0 / June 03, 2025
 
 ### Homepage
 
-[htmlunit.org][4]
+[htmlunit.org](https://www.htmlunit.org)
 
 ### News
 
@@ -17,38 +17,7 @@ Version 4.13.0 / June 03, 2025
 
 [HtmlUnit@mastodon](https://fosstodon.org/@HtmlUnit) | [HtmlUnit@bsky](https://bsky.app/profile/htmlunit.bsky.social) | [HtmlUnit@Twitter](https://twitter.com/HtmlUnit)
 
-### Selenium Integration
-
-HtmlUnit can be used as a [Selenium](https://www.selenium.dev/) 
-[WebDriver](https://www.selenium.dev/documentation/webdriver/)-compatible browser through the 
-[htmlunit-driver](https://github.com/SeleniumHQ/htmlunit-driver).
-This integration allows you to use HtmlUnit as a headless browser option within Selenium test suites, 
-providing fast execution without the overhead of launching a full browser instance.
-
-Please have a look at the [HtmlUnit Remote](https://github.com/HtmlUnit/htmlunit-remote) project 
-if you like to use this driver from Selenium 4 Grid.
-
-
-## jsoup Bridge
-
-The [htmlunit-jsoup](https://github.com/HtmlUnit/htmlunit-jsoup) library provides utilities 
-to bridge the gap between [HtmlUnit](https://htmlunit.org) and [jsoup](https://jsoup.org/).
-The `HtmlUnitDOMToJsoupConverter` enables seamless integration between HtmlUnit's comprehensive
-browser simulation capabilities and all the jsoup-based libraries,
-allowing you to leverage the full ecosystem of jsoup tools 
-while maintaining HtmlUnit's JavaScript execution and dynamic content handling.
-
-
-## HtmlUnit [satellite projects](https://github.com/orgs/HtmlUnit/repositories)
-
-* [HtmlUnit on android](https://github.com/HtmlUnit/htmlunit-android)
-* [Htmlunit - NekoHtml Parser](https://github.com/HtmlUnit/htmlunit-neko)
-* [HtmlUnit - CSSParser](https://github.com/HtmlUnit/htmlunit-cssparser)
-* [HtmlUnit - CSP](https://github.com/HtmlUnit/htmlunit-csp)
-* or [core-js](https://github.com/HtmlUnit/htmlunit-core-js) out [Rhino](https://github.com/mozilla/rhino) fork
-
-
-## Sponsoring
+### Sponsoring
 
 Constantly updating and maintaining the HtmlUnit code base already takes a lot of time.
 
@@ -57,6 +26,35 @@ I would like to make 2 major extensions in the next few months
 * [Replace the Rhino based JavaScript engine](https://github.com/HtmlUnit/htmlunit/issues/755)
 
 For doing this I need your [sponsoring](https://github.com/sponsors/rbri).
+
+
+## Table of Contents
+- [Overview](#overview)
+- [Get it!](#get-it)
+  - [Maven](#maven)
+  - [Gradle](#gradle)
+- [Getting Started](#getting-started)
+- [Vulnerabilities](#vulnerabilities)
+- [Features](#features)
+  - [Selenium Integration](#selenium-integration)
+  - [jsoup Bridge](#jsoup-bridge)
+  - [HtmlUnit satellite projects](#htmlunit-satellite-projects)
+  - [Projects using HtmlUnit](#projects-using-htmlunit)
+- [Contributing](#contributing)
+- [Last CI build](#last-ci-build)
+  - [Maven](#maven-1)
+  - [Gradle](#gradle-1)
+- [License](#license)
+- [Development](#development)
+- [Some insights](#some-insights)
+
+## Overview
+HtmlUnit is a "GUI-less browser for Java programs". It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc... just like you do in your "normal" browser.
+
+It has fairly good JavaScript support (which is constantly improving) and is able to work even with quite complex AJAX libraries, simulating Chrome, Firefox or Internet Explorer depending on the configuration used.
+
+HtmlUnit is typically used for testing purposes or to retrieve information from web sites.
+
 
 ## Get it!
 
@@ -84,18 +82,23 @@ Add to your `build.gradle`:
 implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.13.0'
 ```
 
+## Getting Started
+You can start here:
+* [Getting Started][7]
+* [Introduction to HtmlUnit - Baeldung](https://www.baeldung.com/htmlunit)
+* [The Java Web Scraping Handbook][8] A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
+* [Web Scraping][9] Examples how to implement web scraping using HtmlUnit, Selenium or jaunt and compares them.
+* [The Complete Guide to Web Scraping with Java][10] A small straightforward guide to web scraping with Java.
+* [How to test Jakarta Faces with HtmlUnit and Arquillian][11]
+* [WebScraping.AI HtmlUnit FAQ][13]: 
+
+
 ## Vulnerabilities
 
 [List of Vulnerabilities](https://github.com/HtmlUnit/htmlunit/blob/master/CVE.md)
 
 [Security Policy](https://github.com/HtmlUnit/htmlunit/blob/master/SECURITY.md)
 
-## Overview
-HtmlUnit is a "GUI-less browser for Java programs". It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc... just like you do in your "normal" browser.
-
-It has fairly good JavaScript support (which is constantly improving) and is able to work even with quite complex AJAX libraries, simulating Chrome, Firefox or Internet Explorer depending on the configuration used.
-
-HtmlUnit is typically used for testing purposes or to retrieve information from web sites.
 
 ## Features
 * Support for the HTTP and HTTPS protocols
@@ -111,6 +114,39 @@ HtmlUnit is typically used for testing purposes or to retrieve information from 
 * Proxy server support
 * Support for basic and NTLM authentication
 * Excellent JavaScript support
+
+### Selenium Integration
+
+HtmlUnit can be used as a [Selenium](https://www.selenium.dev/) 
+[WebDriver](https://www.selenium.dev/documentation/webdriver/)-compatible browser through the 
+[htmlunit-driver](https://github.com/SeleniumHQ/htmlunit-driver).
+This integration allows you to use HtmlUnit as a headless browser option within Selenium test suites, 
+providing fast execution without the overhead of launching a full browser instance.
+
+Please have a look at the [HtmlUnit Remote](https://github.com/HtmlUnit/htmlunit-remote) project 
+if you like to use this driver from Selenium 4 Grid.
+
+
+### jsoup Bridge
+
+The [htmlunit-jsoup](https://github.com/HtmlUnit/htmlunit-jsoup) library provides utilities 
+to bridge the gap between [HtmlUnit](https://htmlunit.org) and [jsoup](https://jsoup.org/).
+The `HtmlUnitDOMToJsoupConverter` enables seamless integration between HtmlUnit's comprehensive
+browser simulation capabilities and all the jsoup-based libraries,
+allowing you to leverage the full ecosystem of jsoup tools 
+while maintaining HtmlUnit's JavaScript execution and dynamic content handling.
+
+
+### HtmlUnit [satellite projects](https://github.com/orgs/HtmlUnit/repositories)
+
+* [HtmlUnit on android](https://github.com/HtmlUnit/htmlunit-android)
+* [Htmlunit - NekoHtml Parser](https://github.com/HtmlUnit/htmlunit-neko)
+* [HtmlUnit - CSSParser](https://github.com/HtmlUnit/htmlunit-cssparser)
+* [HtmlUnit - CSP](https://github.com/HtmlUnit/htmlunit-csp)
+* or [core-js](https://github.com/HtmlUnit/htmlunit-core-js) out [Rhino](https://github.com/mozilla/rhino) fork
+
+
+### Projects using HtmlUnit
 
 HtmlUnit is used as the underlying "browser" by different Open Source tools like
  * [WebDriver](https://github.com/SeleniumHQ/selenium)
@@ -146,16 +182,6 @@ HtmlUnit is used by many projects for automated web testing
  * [piranha cloud](https://github.com/piranhacloud/piranha)
  * ...
 
-## Getting Started
-You can start here:
-* [Getting Started][7]
-* [Introduction to HtmlUnit - Baeldung](https://www.baeldung.com/htmlunit)
-* [The Java Web Scraping Handbook][8] A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
-* [Web Scraping][9] Examples how to implement web scraping using HtmlUnit, Selenium or jaunt and compares them.
-* [The Complete Guide to Web Scraping with Java][10] A small straightforward guide to web scraping with Java.
-* [How to test Jakarta Faces with HtmlUnit and Arquillian][11]
-* [WebScraping.AI HtmlUnit FAQ][13]: 
-
 ## Contributing
 Pull Requests and all other Community Contributions are essential for open source software.
 Every contribution - from bug reports to feature requests, typos to full new features - are greatly appreciated.
@@ -177,15 +203,15 @@ Add the snapshot repository and dependency to your `pom.xml`:
 ```xml
     <!-- ... -->
     <repository>
-      <id>OSS Sonatype snapshots</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
+        <name>Central Portal Snapshots</name>
+        <id>central-portal-snapshots</id>
+        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        <releases>
+            <enabled>false</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
     </repository>
 
     <!-- ... -->
@@ -254,7 +280,6 @@ mvn dependency-check:check
 
 [1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/4.1.0/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/view/HtmlUnit/ "HtmlUnit CI"
-[4]: https://www.htmlunit.org "https://www.htmlunit.org"
 [5]: https://www.openhub.net/p/HtmlUnit "https://www.openhub.net/p/HtmlUnit"
 [7]: https://www.htmlunit.org/gettingStarted.html
 [8]: https://www.scrapingbee.com/java-webscraping-book/
