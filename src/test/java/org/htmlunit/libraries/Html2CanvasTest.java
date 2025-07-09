@@ -97,17 +97,18 @@ public class Html2CanvasTest extends WebDriverTestCase {
     private void verify(final Duration maxWaitTime, final WebElement textArea) throws Exception {
         final long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
 
-        String value = "nyi";
+        String result = "nyi";
         while (System.currentTimeMillis() < maxWait) {
-            value = textArea.getDomProperty("value");
+            final String value = textArea.getDomProperty("value");
             if (value != null && value.startsWith("data:image/png;base64,")) {
+                result = value;
                 break;
             }
 
-            Thread.sleep(50);
+            Thread.sleep(100);
         }
 
-        Assertions.assertTrue(value.startsWith(getExpectedAlerts()[0]),
-                "'" + value + "' does not start with '" + getExpectedAlerts()[0] + "'");
+        Assertions.assertTrue(result.startsWith(getExpectedAlerts()[0]),
+                "'" + result + "' does not start with '" + getExpectedAlerts()[0] + "'");
     }
 }
