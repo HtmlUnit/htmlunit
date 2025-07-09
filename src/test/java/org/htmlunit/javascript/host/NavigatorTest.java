@@ -340,7 +340,9 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("en-US,en")
+    @Alerts(DEFAULT = "en-US",
+            FF = "en-US,en",
+            FF_ESR = "en-US,en")
     public void languages() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

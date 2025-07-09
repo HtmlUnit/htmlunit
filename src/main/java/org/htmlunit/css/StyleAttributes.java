@@ -695,7 +695,7 @@ public final class StyleAttributes implements Serializable {
         BORDER_RIGHT_WIDTH_("border-right-width", "border-right-width", ff("0px")),
 
         /** The style property {@code borderSpacing}. */
-        BORDER_SPACING("borderSpacing", "border-spacing", chromeAndEdge("0px 0px"), ffEsr("0px 0px"), ffLatest("0px")),
+        BORDER_SPACING("borderSpacing", "border-spacing", chromeAndEdge("0px"), ffEsr("0px 0px"), ffLatest("0px")),
 
         /** The style property {@code border-spacing}. */
         BORDER_SPACING_("border-spacing", "border-spacing", ffEsr("0px 0px"), ffLatest("0px")),
@@ -888,7 +888,7 @@ public final class StyleAttributes implements Serializable {
         COLUMN_GAP_("column-gap", "column-gap", ffNormal()),
 
         /** The style property {@code columnRule}. */
-        COLUMN_RULE("columnRule", "column-rule", chromeAndEdge("0px none rgb(0, 0, 0)"),
+        COLUMN_RULE("columnRule", "column-rule", chromeAndEdge("0px rgb(0, 0, 0)"),
                 ff("0px none rgb(0, 0, 0)")),
 
         /** The style property {@code column-rule}. */
@@ -3622,7 +3622,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_COLUMN_GAP("webkitColumnGap", "webkit-column-gap", chromeAndEdgeNormal()),
 
         /** The style property {@code webkitColumnRule}. */
-        WEBKIT_COLUMN_RULE("webkitColumnRule", "webkit-column-rule", chromeAndEdge("0px none rgb(0, 0, 0)")),
+        WEBKIT_COLUMN_RULE("webkitColumnRule", "webkit-column-rule", chromeAndEdge("0px rgb(0, 0, 0)")),
 
         /** The style property {@code webkitColumnRuleColor}. */
         WEBKIT_COLUMN_RULE_COLOR("webkitColumnRuleColor", "webkit-column-rule-color", chromeAndEdge("rgb(0, 0, 0)")),

@@ -5440,7 +5440,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "function MutationEvent() { [native code] }",
             FF_ESR = "function MutationEvent() { [native code] }")
     public void mutationEvent() throws Exception {
         test("MutationEvent");

@@ -611,7 +611,9 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"en-US", "en-US,en"})
+    @Alerts(DEFAULT = {"en-US", "en-US"},
+            FF = {"en-US", "en-US,en"},
+            FF_ESR = {"en-US", "en-US,en"})
     public void language() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -636,8 +638,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"de-DE", "de-DE,de,en-US,en"},
-            EDGE = {"de", "de,de-DE,en,en-GB,en-US"},
+    @Alerts(DEFAULT = {"de-DE", "de-DE"},
             FF = {"de-DE", "de-DE,de"},
             FF_ESR = {"de-DE", "de-DE,de"})
     @HtmlUnitNYI(CHROME = {"de-DE", "de-DE,de"},

@@ -1109,7 +1109,6 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     }
 
     @Alerts(DEFAULT = "exception",
-            FF = "false",
             FF_ESR = "false")
     void _MutationEvent() throws Exception {
         test("MutationEvent");

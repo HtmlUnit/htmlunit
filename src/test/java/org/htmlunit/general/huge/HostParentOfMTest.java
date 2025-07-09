@@ -286,7 +286,6 @@ public class HostParentOfMTest extends HostParentOf {
     }
 
     @Alerts(DEFAULT = "false/false",
-            FF = "true/false",
             FF_ESR = "true/false")
     void _MutationEvent_MutationEvent() throws Exception {
         test("MutationEvent", "MutationEvent");

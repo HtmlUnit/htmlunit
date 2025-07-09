@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.crypto;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -108,7 +109,11 @@ public class CryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("QuotaExceededError/DOMException")
+    @Alerts(DEFAULT = "QuotaExceededError/DOMException",
+            CHROME = "QuotaExceededError/QuotaExceededError",
+            EDGE = "QuotaExceededError/QuotaExceededError")
+    @HtmlUnitNYI(CHROME = "QuotaExceededError/DOMException",
+            EDGE = "QuotaExceededError/DOMException")
     public void getRandomValuesQuotaExceeded() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

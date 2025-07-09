@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 137, Firefox 139, Bugfixes">
+        <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 138, Firefox 140, Bugfixes">
             <action type="add" dev="RhinoTeam">
                 core-js: UnicodeMode support for regexp added.
             </action>

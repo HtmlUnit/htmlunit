@@ -42,7 +42,6 @@ public class MutationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "TypeError",
             FF_ESR = "TypeError")
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
@@ -66,7 +65,6 @@ public class MutationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "TypeError",
             FF_ESR = "TypeError")
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
@@ -90,7 +88,6 @@ public class MutationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "TypeError",
             FF_ESR = "TypeError")
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
@@ -114,7 +111,6 @@ public class MutationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "TypeError",
             FF_ESR = "TypeError")
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
@@ -160,7 +156,6 @@ public class MutationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "TypeError",
             FF_ESR = "TypeError")
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
@@ -184,7 +179,6 @@ public class MutationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "TypeError",
             FF_ESR = "TypeError")
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
@@ -210,7 +204,6 @@ public class MutationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "TypeError",
             FF_ESR = "TypeError")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
@@ -235,7 +228,6 @@ public class MutationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "TypeError",
             FF_ESR = "TypeError")
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = DOCTYPE_HTML
@@ -261,7 +253,6 @@ public class MutationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true",
             FF_ESR = "true")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
