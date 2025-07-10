@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+
+    <properties>
+        <title>HtmlUnit Development</title>
+        <author email="rbri@rbri.de">Ronald Brill</author>
+    </properties>
+
+    <body>
+        <section name="Content" id="content">
+            <macro name="toc">
+                <param name="section" value="2"/>
+                <param name="fromDepth" value="0"/>
+                <param name="toDepth" value="4"/>
+            </macro>
+        </section>
+
+        <section name="HtmlUnit Development">
+        <subsection name="Prerequisites">
+            <p>Before starting, ensure you have the following installed:</p>
+            <ul>
+                <li><strong>Java Development Kit (JDK 11)</strong> HtmlUnit is JDK 8 but for running the untit test JDK 11 is required</li>
+                <li><strong>Eclipse IDE</strong></li>
+                <li><strong>Maven 3</strong></li>
+                <li><strong>Git</strong> use your favorite git client</li>
+                <li><strong>Web Browser</strong>Chrome / Firefox / Edge to check the compatibility</li>
+            </ul>
+        </subsection>
+
+        <subsection name="Repository Setup and first build">
+            <h4>Clone the HtmlUnit repository from GitHub</h4>
+            <source>
+git clone https://github.com/HtmlUnit/htmlunit.git
+cd htmlunit
+</source>
+
+            <h4>Compile the project to ensure everything is working correctly</h4>
+            <source>
+mvn clean compile
+</source>
+
+            <h4>Run some unit tests</h4>
+            <p>do not run the whole test suite because this takes really long</p>
+            <source>
+mvn test -Dtest=org.htmlunit.javascript.host.dom.*Test
+</source>
+        </subsection>
+
+        <subsection name="Eclipse Project Setup">
+            <h4>Generate Eclipse project files</h4>
+            <p>use the Maven Eclipse Plugin generate Eclipse project files with source downloads</p>
+            <source>
+mvn eclipse:eclipse -DdownloadSources=true
+</source>
+            <p>then import the Project in Eclipse</p>
+            <p><code>File → Import → Existing Projects into Workspace</code></p>
+
+            <h4>Running Tests from Eclipse</h4>
+            <p>Usually you would run only some test from Eclipse.</p> 
+            <p>Please have a look at the section 'Running Test with real browsers' below for more options</p> 
+        </subsection>
+
+        <subsection name="IntelliJ IDEA Project">
+            ToDo
+        </subsection>
+
+        <subsection name="Running the Tests from Maven">
+            <p>Run of the full Test Suite requires significant time (several hours) and resources.
+            Therfore some profiles are defined to run different parts of the test suite. These
+            profiels are also used by the various jenkins jobs.</p>
+
+            <h4>Run Core test suite</h4>
+            <p>Run core tests only (faster (~25min), excludes library and huge tests)</p>
+            <source>
+mvn test -P without-library-and-huge-tests -Dgpg.skip -Djava.awt.headless=true
+</source>
+
+            <h4>Run Library test suite</h4>
+            <p>Run the test suites from various js libraries (jQuery, prototype, etc.)</p>
+            <source>
+mvn test -P only-library-tests -Dgpg.skip -Djava.awt.headless=true
+</source>
+
+            <h4>Ports used</h4>
+            <h5>Test Port Configuration</h5>
+            <p>
+              Tests currently assume that port 12345 is free on the machine. If you encounter
+              <code>java.net.BindException: Address already in use: JVM_Bind</code>, set the
+              system property <code>htmlunit.test.port</code>:
+            </p>
+            <source>
+mvn test ... -Dhtmlunit.test.port=10101
+</source>
+        </subsection>
+
+        <subsection name="Running Test with real browsers">
+            <p>The aim of the development of HtmlUnit is to provide as accurate a simulation of the various browsers as possible. 
+            As browsers are constantly evolving, we have to adapt our test assumptions with every update. Therefore (almost) 
+            all tests are implemented in such a way that they can be executed with HtmlUnit as well 
+            as (with the help of Selenium WebDriver) with the supported real browsers.</p>
+
+            <p>This behavior is provided by the superclass org.htmlunit.WebDriverTestCase. The test execution can be 
+            switched accordingly with the help of a configuration file.</p>
+
+            <p>By default, all tests runing with HtmlUnit, but this behavior can be changed by having a property file named
+            "{@code test.properties}" in the HtmlUnit root directory.</p>
+
+            <p>Sample (remove the part not matching your os)</p>
+            <source>
+browsers=hu
+#browsers=hu-ff
+#browsers=hu-ff, hu-chrome
+#browsers=ff, chrome, edge
+
+ff.bin=/usr/bin/firefox                              [Unix]
+ff-esr.bin=/usr/bin/firefox-esr                      [Unix]
+geckodriver.bin=/usr/bin/driver/geckodriver          [Unix]
+chrome.bin=/path/to/chromedriver                     [Unix]
+edge.bin=/path/to/chromedriver                       [Unix]
+
+geckodriver.bin=C:\\path\\to\\geckodriver.exe              [Windows]
+ff.bin=C:\\path\\to\\Mozilla Firefox\\firefox.exe          [Windows]
+ff-esr.bin=C:\\path\\to\\Mozilla Firefox ESR\\firefox.exe  [Windows]
+chrome.bin=C:\\path\\to\\chromedriver.exe                  [Windows]
+edge.bin=C:\\path\\to\\msedgedriver.exe                    [Windows]
+
+autofix=false
+</source>
+            <p>The file could contain some properties</p>
+            <ul>
+              <li>browsers: is a comma separated list contains any combination of
+                <ul>
+                  <li>hu (for HtmlUnit with all browser versions),</li>
+                  <li>hu-ff,</li>
+                  <li>hu-ff-esr,</li>
+                  <li>hu-chrome,</li>
+                  <li>hu-edge,</li>
+                  <li>ff, (running test using real Firefox),</li>
+                  <li>ff-esr, (running test using real Firefox ESR),</li>
+                  <li>chrome (running test using real Chrome),</li>
+                  <li>edge (running test using real Edge),</li>
+                </ul>
+              </li>
+            
+              <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
+                <a href="https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json">Chrome Driver downloads</a>)</li>
+              <li>geckodriver.bin (mandatory if it does not exist in the <i>path</i>): is the location of the GeckoDriver binary
+                (see <a href="https://github.com/mozilla/geckodriver/releases">Gecko Driver Releases</a>)</li>
+              <li>ff.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
+              <li>ff-esr.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
+              <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
+                (see <a href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/">Microsoft Edge WebDriver downloads</a>)</li>
+              <li>autofix (optional): if {@code true}, try to automatically fix the real browser expectations,
+                or add/remove {@code @NotYetImplemented} annotations, use with caution!</li>
+            </ul>
+        </subsection>
+
+        </section>
+    </body>
+</document>
