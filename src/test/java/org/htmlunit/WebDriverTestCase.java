@@ -108,30 +108,49 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
  *
  * By default, this test runs with HtmlUnit, but this behavior can be changed by having a property file named
  * "{@code test.properties}" in the HtmlUnit root directory.
- * Sample:
+ * Sample (remove the part not matching your os):
  * <pre>
-   browsers=hu,ff,ie
-   chrome.bin=/path/to/chromedriver                     [Unix-like]
-   ff-esr.bin=/usr/bin/firefox                          [Unix-like]
-   ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
-   edge.bin=C:\\path\\to\\msedgedriver.exe              [Windows]
-   autofix=true
+   browsers=hu,ff,chrome
+
+   ff.bin=/usr/bin/firefox                              [Unix]
+   ff-esr.bin=/usr/bin/firefox-esr                      [Unix]
+   geckodriver.bin=/usr/bin/driver/geckodriver          [Unix]
+   chrome.bin=/path/to/chromedriver                     [Unix]
+   edge.bin=/path/to/chromedriver                       [Unix]
+
+   geckodriver.bin=C:\\path\\to\\geckodriver.exe              [Windows]
+   ff.bin=C:\\path\\to\\Mozilla Firefox\\firefox.exe          [Windows]
+   ff-esr.bin=C:\\path\\to\\Mozilla Firefox ESR\\firefox.exe  [Windows]
+   chrome.bin=C:\\path\\to\\chromedriver.exe                  [Windows]
+   edge.bin=C:\\path\\to\\msedgedriver.exe                    [Windows]
+
+   autofix=false
    </pre>
+
  * The file could contain some properties:
  * <ul>
- *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ff", "hu-ff-esr", "ff", "chrome", which will be used to drive real browsers</li>
+ *   <li>browsers: is a comma separated list contains any combination of
+ *     <ul>
+ *       <li>hu (for HtmlUnit with all browser versions),</li>
+ *       <li>hu-ff,</li>
+ *       <li>hu-ff-esr,</li>
+ *       <li>hu-chrome,</li>
+ *       <li>hu-edge,</li>
+ *       <li>ff, (running test using real Firefox),</li>
+ *       <li>ff-esr, (running test using real Firefox ESR),</li>
+ *       <li>chrome (running test using real Chrome),</li>
+ *       <li>edge (running test using real Edge),</li>
+ *     </ul>
+ *   </li>
  *
  *   <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
- *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a>)</li>
+ *   <a href="https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json">Chrome Driver downloads</a>)</li>
  *   <li>geckodriver.bin (mandatory if it does not exist in the <i>path</i>): is the location of the GeckoDriver binary
- *   (see <a href="https://firefox-source-docs.mozilla.org/testing/geckodriver/Usage.html">Gecko Driver Usage</a>)</li>
+ *   (see <a href="https://github.com/mozilla/geckodriver/releases">Gecko Driver Releases</a>)</li>
  *   <li>ff.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>ff-esr.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
- *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
- *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
  *   <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
- *   (see <a href="http://go.microsoft.com/fwlink/?LinkId=619687">MicrosoftWebDriver downloads</a>)</li>
+ *   (see <a href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/">Microsoft Edge WebDriver downloads</a>)</li>
  *   <li>autofix (optional): if {@code true}, try to automatically fix the real browser expectations,
  *   or add/remove {@code @NotYetImplemented} annotations, use with caution!</li>
  * </ul>
