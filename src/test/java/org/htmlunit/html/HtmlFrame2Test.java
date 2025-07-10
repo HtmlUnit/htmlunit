@@ -66,8 +66,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            CHROME = {"1", "1"},
-            EDGE = {"1", "1"})
+            CHROME = {"2", "1", "1"},
+            EDGE = {"2", "1", "1"})
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1")
     public void iframeOnloadCalledOnlyOnce() throws Exception {
@@ -87,7 +87,11 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = {"2", "1"},
+            FF = "1",
+            FF_ESR = "1")
+    @HtmlUnitNYI(CHROME = "1",
+            EDGE = "1")
     public void iframeOnloadAboutBlank() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"

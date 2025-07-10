@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -343,6 +344,8 @@ public class NavigatorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "en-US",
             FF = "en-US,en",
             FF_ESR = "en-US,en")
+    @HtmlUnitNYI(CHROME = "en-US,en",
+            EDGE = "en-US,en")
     public void languages() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
