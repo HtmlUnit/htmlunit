@@ -12,14 +12,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit;
+package org.htmlunit.junit;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.WebDriverTestCase;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -58,7 +60,18 @@ public class ErrorOutputChecker implements BeforeEachCallback, AfterEachCallback
     @Override
     public void afterEach(final ExtensionContext context) throws Exception {
         try {
-            verifyNoOutput();
+            final Optional<Object> testInstance = context.getTestInstance();
+
+            if (testInstance.isPresent()
+                    && testInstance.get() instanceof WebDriverTestCase) {
+                final WebDriverTestCase webDriverTestCase = (WebDriverTestCase) testInstance.get();
+                if (!webDriverTestCase.useRealBrowser()) {
+                    verifyNoOutput();
+                }
+            }
+            else {
+                verifyNoOutput();
+            }
         }
         finally {
             restoreSystemErr();
@@ -100,7 +113,6 @@ public class ErrorOutputChecker implements BeforeEachCallback, AfterEachCallback
 /**
  * A {@link PrintStream} spying what is written on the wrapped stream.
  * It prints the content to the wrapped {@link PrintStream} and captures it simultaneously.
- * @author Marc Guillemot
  */
 class NSAPrintStreamWrapper extends PrintStream {
     private PrintStream wrapped_;
