@@ -61,7 +61,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @ParameterizedTest(name = "_{0}")
     @MethodSource("data")
     @Alerts("true")
-    void ctor(String jsClassName) throws Exception {
+    void ctor(final String jsClassName) throws Exception {
         test(jsClassName);
     }
 
