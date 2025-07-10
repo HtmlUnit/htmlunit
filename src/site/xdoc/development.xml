@@ -94,16 +94,17 @@ mvn test ... -Dhtmlunit.test.port=10101
         </subsection>
 
         <subsection name="Running Test with real browsers">
-            <p>The aim of the development of HtmlUnit is to provide as accurate a simulation of the various browsers as possible. 
-            As browsers are constantly evolving, we have to adapt our test assumptions with every update. Therefore (almost) 
+            <p>The primary goal of HtmlUnit development is to provide the most accurate simulation possible 
+            of supported browsers. Since browsers are constantly evolving, we have to adapt our 
+            test assumptions with every browser version update. Therefore almost 
             all tests are implemented in such a way that they can be executed with HtmlUnit as well 
             as (with the help of Selenium WebDriver) with the supported real browsers.</p>
 
-            <p>This behavior is provided by the superclass org.htmlunit.WebDriverTestCase. The test execution can be 
-            switched accordingly with the help of a configuration file.</p>
+            <p>This functionality is provided by the superclass org.htmlunit.WebDriverTestCase. 
+            Test execution can be switched accordingly with the help of a configuration file.</p>
 
-            <p>By default, all tests runing with HtmlUnit, but this behavior can be changed by having a property file named
-            "{@code test.properties}" in the HtmlUnit root directory.</p>
+            <p>By default, all tests runking with HtmlUnit, but this behavior can be changed 
+            by having a property file named "{@code test.properties}" in the HtmlUnit root directory.</p>
 
             <p>Sample (remove the part not matching your os)</p>
             <source>
@@ -112,36 +113,41 @@ browsers=hu
 #browsers=hu-ff, hu-chrome
 #browsers=ff, chrome, edge
 
-ff.bin=/usr/bin/firefox                              [Unix]
-ff-esr.bin=/usr/bin/firefox-esr                      [Unix]
-geckodriver.bin=/usr/bin/driver/geckodriver          [Unix]
-chrome.bin=/path/to/chromedriver                     [Unix]
-edge.bin=/path/to/chromedriver                       [Unix]
+# Unix/Linux paths
+ff.bin=/usr/bin/firefox
+ff-esr.bin=/usr/bin/firefox-esr
+geckodriver.bin=/usr/bin/driver/geckodriver
+chrome.bin=/path/to/chromedriver
+edge.bin=/path/to/chromedriver
 
-geckodriver.bin=C:\\path\\to\\geckodriver.exe              [Windows]
-ff.bin=C:\\path\\to\\Mozilla Firefox\\firefox.exe          [Windows]
-ff-esr.bin=C:\\path\\to\\Mozilla Firefox ESR\\firefox.exe  [Windows]
-chrome.bin=C:\\path\\to\\chromedriver.exe                  [Windows]
-edge.bin=C:\\path\\to\\msedgedriver.exe                    [Windows]
+# Windows paths
+geckodriver.bin=C:\\path\\to\\geckodriver.exe
+ff.bin=C:\\path\\to\\Mozilla Firefox\\firefox.exe
+ff-esr.bin=C:\\path\\to\\Mozilla Firefox ESR\\firefox.exe
+chrome.bin=C:\\path\\to\\chromedriver.exe
+edge.bin=C:\\path\\to\\msedgedriver.exe
 
+# optional
 autofix=false
 </source>
             <p>The file could contain some properties</p>
+            <h4>Configuration Properties</h4>
+            <h5>browsers</h5>
+            <p>a comma separated list contains any combination of:</p>
             <ul>
-              <li>browsers: is a comma separated list contains any combination of
-                <ul>
-                  <li>hu (for HtmlUnit with all browser versions),</li>
-                  <li>hu-ff,</li>
-                  <li>hu-ff-esr,</li>
-                  <li>hu-chrome,</li>
-                  <li>hu-edge,</li>
-                  <li>ff, (running test using real Firefox),</li>
-                  <li>ff-esr, (running test using real Firefox ESR),</li>
-                  <li>chrome (running test using real Chrome),</li>
-                  <li>edge (running test using real Edge),</li>
-                </ul>
-              </li>
+              <li>hu (for HtmlUnit with all browser versions),</li>
+              <li>hu-ff,</li>
+              <li>hu-ff-esr,</li>
+              <li>hu-chrome,</li>
+              <li>hu-edge,</li>
+              <li>ff, (running tests using real Firefox),</li>
+              <li>ff-esr, (running tests using real Firefox ESR),</li>
+              <li>chrome (running tests using real Chrome),</li>
+              <li>edge (running tests using real Edge),</li>
+            </ul>
             
+            <h5>Browser Binary Paths</h5>
+            <ul>
               <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
                 <a href="https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json">Chrome Driver downloads</a>)</li>
               <li>geckodriver.bin (mandatory if it does not exist in the <i>path</i>): is the location of the GeckoDriver binary
@@ -150,6 +156,10 @@ autofix=false
               <li>ff-esr.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
               <li>edge.bin (mandatory if it does not exist in the <i>path</i>): is the location of the MicrosoftWebDriver binary
                 (see <a href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/">Microsoft Edge WebDriver downloads</a>)</li>
+            </ul>
+
+            <h5>Additional Options</h5>
+            <ul>
               <li>autofix (optional): if {@code true}, try to automatically fix the real browser expectations,
                 or add/remove {@code @NotYetImplemented} annotations, use with caution!</li>
             </ul>
