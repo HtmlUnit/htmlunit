@@ -16,6 +16,7 @@ package org.htmlunit.general;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -40,8 +41,11 @@ public class HostConstructorTest extends WebDriverTestCase {
      */
     public static Collection<Arguments> data() throws Exception {
         final List<Arguments> list = new ArrayList<>();
-        final Set<String> strings = TestCaseTest.getAllConfiguredJsClassNames();
-        for (final String className : strings) {
+        final Set<String> classNames = TestCaseTest.getAllConfiguredJsClassNames();
+        final ArrayList<String> classNamesSorted = new ArrayList<>(classNames);
+        Collections.sort(classNamesSorted);
+
+        for (final String className : classNamesSorted) {
             list.add(Arguments.of(className));
         }
         return list;
