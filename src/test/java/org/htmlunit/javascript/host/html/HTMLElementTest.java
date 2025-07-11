@@ -3780,7 +3780,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"undefined", "false", "hello", "true"})
-    public void firefox__proto__() throws Exception {
+    public void access__proto__() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
