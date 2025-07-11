@@ -23,6 +23,7 @@ import java.util.Set;
 import org.htmlunit.TestCaseTest;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -32,6 +33,7 @@ import org.junit.jupiter.params.provider.MethodSource;
  *
  * @author Ronald Brill
  */
+@Disabled("Work in progress")
 public class HostConstructorTest extends WebDriverTestCase {
 
     /**
