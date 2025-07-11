@@ -94,7 +94,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_SCROLL_UIEVENT,
 
-    /** Supports event type 'TextEvent'. */
+    /** Supports event type 'MutationEvent'. */
     @BrowserFeature({FF, FF_ESR})
     EVENT_TYPE_MUTATIONEVENT,
 
