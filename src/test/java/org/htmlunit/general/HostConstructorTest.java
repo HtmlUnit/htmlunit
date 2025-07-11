@@ -15,16 +15,13 @@
 package org.htmlunit.general;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.htmlunit.TestCaseTest;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -34,20 +31,7 @@ import org.junit.jupiter.params.provider.MethodSource;
  *
  * @author Ronald Brill
  */
-@Disabled("Work in progress")
 public class HostConstructorTest extends WebDriverTestCase {
-
-    private static final HashSet<String> PASSING = new HashSet<>(Arrays.asList(
-            "Animation",
-            "Blob",
-            "DOMParser",
-            "FileReader",
-            "FormData",
-            "MediaSource",
-            "MessageChannel",
-            "XMLHttpRequest",
-            "XMLSerializer"
-            ));
 
     /**
      * Returns the parameterized data.
@@ -69,11 +53,10 @@ public class HostConstructorTest extends WebDriverTestCase {
      */
     @ParameterizedTest(name = "_{0}")
     @MethodSource("data")
+    @Alerts("TypeError")
     void test(final String className) throws Exception {
-        setExpectedAlerts(getExpectedString(className));
-
         final String html = DOCTYPE_HTML
-                + "<html><head></head>\n"
+                + "<html>\n"
                 + "<body>"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -87,20 +70,17 @@ public class HostConstructorTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    private String getExpectedString(final String className) throws Exception {
-        if (PASSING.contains(className)) {
-            return "[object " + className + "]";
-        }
-
-        return "ReferenceError";
-    }
-
     /**
      * {@inheritDoc}
      */
     @Override
     protected boolean isWebClientCached() {
         return true;
+    }
+
+    @Alerts("[object AbortController]")
+    void _AbortController() throws Exception {
+        test("AbortController");
     }
 
     @Alerts("[object Animation]")
@@ -118,14 +98,81 @@ public class HostConstructorTest extends WebDriverTestCase {
         test("AudioContext");
     }
 
-    @Alerts("[object CSSStyleSheet]")
-    void _CSSStyleSheet() throws Exception {
-        test("CSSStyleSheet");
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _BatteryManager() throws Exception {
+        test("BatteryManager");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _BeforeInstallPromptEvent() throws Exception {
+        test("BeforeInstallPromptEvent");
+    }
+
+    @Alerts("[object Blob]")
+    void _Blob() throws Exception {
+        test("Blob");
+    }
+
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    void _CanvasCaptureMediaStream() throws Exception {
+        test("CanvasCaptureMediaStream");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _CanvasCaptureMediaStreamTrack() throws Exception {
+        test("CanvasCaptureMediaStreamTrack");
     }
 
     @Alerts("[object Comment]")
     void _Comment() throws Exception {
         test("Comment");
+    }
+
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    void _CSS2Properties() throws Exception {
+        test("CSS2Properties");
+    }
+
+    @Alerts("[object CSSStyleSheet]")
+    void _CSSStyleSheet() throws Exception {
+        test("CSSStyleSheet");
+    }
+
+    @Alerts("[object DataTransfer]")
+    void _DataTransfer() throws Exception {
+        test("DataTransfer");
+    }
+
+    @Alerts("[object Document]")
+    void _Document() throws Exception {
+        test("Document");
+    }
+
+    @Alerts("[object DocumentFragment]")
+    void _DocumentFragment() throws Exception {
+        test("DocumentFragment");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _DOMError() throws Exception {
+        test("DOMError");
+    }
+
+    @Alerts("Error")
+    void _DOMException() throws Exception {
+        test("DOMException");
     }
 
     @Alerts("matrix(1, 0, 0, 1, 0, 0)")
@@ -138,9 +185,9 @@ public class HostConstructorTest extends WebDriverTestCase {
         test("DOMMatrixReadOnly");
     }
 
-    @Alerts("Error")
-    void _DOMException() throws Exception {
-        test("DOMException");
+    @Alerts("[object DOMParser]")
+    void _DOMParser() throws Exception {
+        test("DOMParser");
     }
 
     @Alerts("[object DOMPoint]")
@@ -163,29 +210,75 @@ public class HostConstructorTest extends WebDriverTestCase {
         test("DOMRectReadOnly");
     }
 
-    @Alerts("[object DataTransfer]")
-    void _DataTransfer() throws Exception {
-        test("DataTransfer");
-    }
-
-    @Alerts("[object Document]")
-    void _Document() throws Exception {
-        test("Document");
-    }
-
-    @Alerts("[object DocumentFragment]")
-    void _DocumentFragment() throws Exception {
-        test("DocumentFragment");
-    }
-
-    @Alerts("exception")
-    void _Enumerator() throws Exception {
-        test("Enumerator");
-    }
-
     @Alerts("[object EventTarget]")
     void _EventTarget() throws Exception {
         test("EventTarget");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _External() throws Exception {
+        test("External");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _FederatedCredential() throws Exception {
+        test("FederatedCredential");
+    }
+
+    @Alerts("[object FileReader]")
+    void _FileReader() throws Exception {
+        test("FileReader");
+    }
+
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    void _FileSystem() throws Exception {
+        test("FileSystem");
+    }
+
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    void _FileSystemDirectoryEntry() throws Exception {
+        test("FileSystemDirectoryEntry");
+    }
+
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    void _FileSystemDirectoryReader() throws Exception {
+        test("FileSystemDirectoryReader");
+    }
+
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    void _FileSystemEntry() throws Exception {
+        test("FileSystemEntry");
+    }
+
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    void _FileSystemFileEntry() throws Exception {
+        test("FileSystemFileEntry");
+    }
+
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    void _FontFaceSet() throws Exception {
+        test("FontFaceSet");
+    }
+
+    @Alerts("[object FormData]")
+    void _FormData() throws Exception {
+        test("FormData");
     }
 
     @Alerts("[object Headers]")
@@ -193,16 +286,23 @@ public class HostConstructorTest extends WebDriverTestCase {
         test("Headers");
     }
 
-    @Alerts("[object HTMLImageElement]")
-    void _Image() throws Exception {
-        test("Image");
-    }
-
     @Alerts(DEFAULT = "[object InputDeviceCapabilities]",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     void _InputDeviceCapabilities() throws Exception {
         test("InputDeviceCapabilities");
+    }
+
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    void _MediaKeyError() throws Exception {
+        test("MediaKeyError");
+    }
+
+    @Alerts("[object MediaSource]")
+    void _MediaSource() throws Exception {
+        test("MediaSource");
     }
 
     @Alerts("[object MediaStream]")
@@ -210,21 +310,116 @@ public class HostConstructorTest extends WebDriverTestCase {
         test("MediaStream");
     }
 
-    @Alerts(DEFAULT = "exception",
-            FF = "[object mozRTCPeerConnection]",
-            FF_ESR = "[object mozRTCPeerConnection]")
-    void _mozRTCPeerConnection() throws Exception {
-        test("mozRTCPeerConnection");
+    @Alerts("[object MessageChannel]")
+    void _MessageChannel() throws Exception {
+        test("MessageChannel");
     }
 
-    @Alerts("[object HTMLOptionElement]")
-    void _Option() throws Exception {
-        test("Option");
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    void _MouseScrollEvent() throws Exception {
+        test("MouseScrollEvent");
+    }
+
+    @Alerts(DEFAULT = "ReferenceError",
+            FF_ESR = "TypeError")
+    void _MutationEvent() throws Exception {
+        test("MutationEvent");
+    }
+
+    @Alerts("ReferenceError")
+    void _NativeXPathNSResolver() throws Exception {
+        test("NativeXPathNSResolver");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _NetworkInformation() throws Exception {
+        test("NetworkInformation");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _PasswordCredential() throws Exception {
+        test("PasswordCredential");
     }
 
     @Alerts("[object Path2D]")
     void _Path2D() throws Exception {
         test("Path2D");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _PaymentAddress() throws Exception {
+        test("PaymentAddress");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _PaymentRequest() throws Exception {
+        test("PaymentRequest");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _PaymentResponse() throws Exception {
+        test("PaymentResponse");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _PeriodicSyncManager() throws Exception {
+        test("PeriodicSyncManager");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _Presentation() throws Exception {
+        test("Presentation");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _PresentationAvailability() throws Exception {
+        test("PresentationAvailability");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _PresentationConnection() throws Exception {
+        test("PresentationConnection");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _PresentationConnectionAvailableEvent() throws Exception {
+        test("PresentationConnectionAvailableEvent");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _PresentationConnectionCloseEvent() throws Exception {
+        test("PresentationConnectionCloseEvent");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _PresentationRequest() throws Exception {
+        test("PresentationRequest");
     }
 
     @Alerts("")
@@ -235,6 +430,13 @@ public class HostConstructorTest extends WebDriverTestCase {
     @Alerts("[object ReadableStream]")
     void _ReadableStream() throws Exception {
         test("ReadableStream");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _RemotePlayback() throws Exception {
+        test("RemotePlayback");
     }
 
     @Alerts("[object Response]")
@@ -248,8 +450,8 @@ public class HostConstructorTest extends WebDriverTestCase {
     }
 
     @Alerts(DEFAULT = "[object RTCSessionDescription]",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     void _RTCSessionDescription() throws Exception {
         test("RTCSessionDescription");
     }
@@ -257,6 +459,18 @@ public class HostConstructorTest extends WebDriverTestCase {
     @Alerts("[object SpeechSynthesisUtterance]")
     void _SpeechSynthesisUtterance() throws Exception {
         test("SpeechSynthesisUtterance");
+    }
+
+    @Alerts("ReferenceError")
+    void _StyleMedia() throws Exception {
+        test("StyleMedia");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _SyncManager() throws Exception {
+        test("SyncManager");
     }
 
     @Alerts("[object Text]")
@@ -274,54 +488,88 @@ public class HostConstructorTest extends WebDriverTestCase {
         test("TextEncoder");
     }
 
+    @Alerts(DEFAULT = "TypeError",
+            FF_ESR = "ReferenceError")
+    void _TextEvent() throws Exception {
+        test("TextEvent");
+    }
+
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    void _TimeEvent() throws Exception {
+        test("TimeEvent");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _Touch() throws Exception {
+        test("Touch");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _TouchEvent() throws Exception {
+        test("TouchEvent");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _TouchList() throws Exception {
+        test("TouchList");
+    }
+
     @Alerts("")
     void _URLSearchParams() throws Exception {
         test("URLSearchParams");
     }
 
-    @Alerts("exception")
-    void _WebGLContextEvent() throws Exception {
-        test("WebGLContextEvent");
-    }
-
-    @Alerts("matrix(1, 0, 0, 1, 0, 0)")
-    void _WebKitCSSMatrix() throws Exception {
-        test("WebKitCSSMatrix");
-    }
-
-    @Alerts(DEFAULT = "[object MediaStream]",
-            FF = "exception",
-            FF_ESR = "exception")
-    void _webkitMediaStream() throws Exception {
-        test("webkitMediaStream");
-    }
-
-    @Alerts(DEFAULT = "[object RTCPeerConnection]",
-            FF = "exception",
-            FF_ESR = "exception")
-    void _webkitRTCPeerConnection() throws Exception {
-        test("webkitRTCPeerConnection");
-    }
-
     @Alerts(DEFAULT = "[object SpeechGrammar]",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     void _webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar");
     }
 
     @Alerts(DEFAULT = "[object SpeechGrammarList]",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     void _webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList");
     }
 
     @Alerts(DEFAULT = "[object SpeechRecognition]",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     void _webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _webkitSpeechRecognitionError() throws Exception {
+        test("webkitSpeechRecognitionError");
+    }
+
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    void _webkitSpeechRecognitionEvent() throws Exception {
+        test("WebkitSpeechRecognitionEvent");
+    }
+
+    @Alerts("[object XMLHttpRequest]")
+    void _XMLHttpRequest() throws Exception {
+        test("XMLHttpRequest");
+    }
+
+    @Alerts("[object XMLSerializer]")
+    void _XMLSerializer() throws Exception {
+        test("XMLSerializer");
     }
 
     @Alerts("[object XPathEvaluator]")
@@ -332,15 +580,5 @@ public class HostConstructorTest extends WebDriverTestCase {
     @Alerts("[object XSLTProcessor]")
     void _XSLTProcessor() throws Exception {
         test("XSLTProcessor");
-    }
-
-    @Alerts("[object AbortController]")
-    void abortController() throws Exception {
-        test("AbortController");
-    }
-
-    @Alerts("[object AbortSignal]")
-    void abortSignal() throws Exception {
-        test("AbortSignal");
     }
 }
