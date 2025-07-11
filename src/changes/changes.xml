@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 138, Firefox 140, Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-lang3 to 3.18.0.
+            </action>
             <action type="add" dev="RhinoTeam">
                 core-js: UnicodeMode support for regexp added.
             </action>
