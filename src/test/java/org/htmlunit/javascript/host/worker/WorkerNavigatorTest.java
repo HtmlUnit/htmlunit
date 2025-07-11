@@ -18,6 +18,7 @@ import java.net.URL;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 
@@ -124,6 +125,8 @@ public class WorkerNavigatorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "en-US,en",
             CHROME = "en-US",
             EDGE = "en-US")
+    @HtmlUnitNYI(CHROME = "en-US,en",
+            EDGE = "en-US,en")
     public void languages() throws Exception {
         final String workerJs = "postMessage(navigator.languages);\n";
 
