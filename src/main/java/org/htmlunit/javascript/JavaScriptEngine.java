@@ -312,17 +312,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
             else {
                 final HtmlUnitScriptable classPrototype = configureClass(config, jsScope);
-                if (config.isJsObject()) {
-                    // Place object with prototype property in Window scope
-                    final HtmlUnitScriptable obj = config.getHostClass().getDeclaredConstructor().newInstance();
-                    classPrototype.defineProperty("__proto__", classPrototype, ScriptableObject.DONTENUM);
-                    obj.defineProperty("prototype", classPrototype, ScriptableObject.DONTENUM); // but not setPrototype!
-                    obj.setParentScope(jsScope);
-                    obj.setClassName(jsClassName);
-                    ScriptableObject.defineProperty(jsScope, obj.getClassName(), obj, ScriptableObject.DONTENUM);
-                    // this obj won't have prototype, constants need to be configured on it again
-                    configureConstants(config, obj);
-                }
                 prototypes.put(config.getHostClass(), classPrototype);
                 prototypesPerJSName.put(jsClassName, classPrototype);
                 prototype = classPrototype;
