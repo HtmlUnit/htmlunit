@@ -295,6 +295,7 @@ public class MutationEventTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
