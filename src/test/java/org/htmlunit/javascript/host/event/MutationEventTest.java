@@ -295,5 +295,35 @@ public class MutationEventTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageVerifyTitle2(html);
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
+                       "false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError"},
+            FF_ESR = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
+                      "true", "function MutationEvent() { [native code] }",
+                      "function MutationEvent() { [native code] }",
+                      "[object MutationEvent]", "function Event() { [native code] }"})
+    public void windowScope() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html></body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('mutationEvent' in window);\n"
+            + "  log(window.mutationEvent);\n"
+            + "  try { log(mutationEvent); } catch(e) { logEx(e); };\n"
+            + "  try { log(mutationEvent.prototype); } catch(e) { logEx(e); };\n"
+            + "  try { log(mutationEvent.__proto__); } catch(e) { logEx(e); };\n"
 
+            + "  log('MutationEvent' in window);\n"
+            + "  log(window.MutationEvent);\n"
+            + "  try { log(MutationEvent); } catch(e) { logEx(e); };\n"
+            + "  try { log(MutationEvent.prototype); } catch(e) { logEx(e); };\n"
+            + "  try { log(MutationEvent.__proto__); } catch(e) { logEx(e); };\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

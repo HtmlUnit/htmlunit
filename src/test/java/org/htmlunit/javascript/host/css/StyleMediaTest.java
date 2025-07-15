@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link StyleMedia}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class StyleMediaTest extends WebDriverTestCase {
 
@@ -70,6 +71,38 @@ public class StyleMediaTest extends WebDriverTestCase {
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "[object StyleMedia]", "[object StyleMedia]", "undefined", "[object StyleMedia]",
+                       "false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError"},
+            FF = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
+                  "false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError"},
+            FF_ESR = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
+                      "false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError"})
+    public void windowScope() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html></body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('styleMedia' in window);\n"
+            + "  log(window.styleMedia);\n"
+            + "  try { log(styleMedia); } catch(e) { logEx(e); };\n"
+            + "  try { log(styleMedia.prototype); } catch(e) { logEx(e); };\n"
+            + "  try { log(styleMedia.__proto__); } catch(e) { logEx(e); };\n"
+
+            + "  log('StyleMedia' in window);\n"
+            + "  log(window.StyleMedia);\n"
+            + "  try { log(StyleMedia); } catch(e) { logEx(e); };\n"
+            + "  try { log(StyleMedia.prototype); } catch(e) { logEx(e); };\n"
+            + "  try { log(StyleMedia.__proto__); } catch(e) { logEx(e); };\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

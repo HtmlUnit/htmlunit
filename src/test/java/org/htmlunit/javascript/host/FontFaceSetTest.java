@@ -87,4 +87,38 @@ public class FontFaceSetTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
+                       "false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError"},
+            FF = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
+                  "true", "function FontFaceSet() { [native code] }", "function FontFaceSet() { [native code] }",
+                  "[object FontFaceSet]", "function EventTarget() { [native code] }"},
+            FF_ESR = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
+                      "true", "function FontFaceSet() { [native code] }", "function FontFaceSet() { [native code] }",
+                      "[object FontFaceSet]", "function EventTarget() { [native code] }"})
+    public void windowScope() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html></body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('fontFaceSet' in window);\n"
+            + "  log(window.fontFaceSet);\n"
+            + "  try { log(fontFaceSet); } catch(e) { logEx(e); };\n"
+            + "  try { log(fontFaceSet.prototype); } catch(e) { logEx(e); };\n"
+            + "  try { log(fontFaceSet.__proto__); } catch(e) { logEx(e); };\n"
+
+            + "  log('FontFaceSet' in window);\n"
+            + "  log(window.FontFaceSet);\n"
+            + "  try { log(FontFaceSet); } catch(e) { logEx(e); };\n"
+            + "  try { log(FontFaceSet.prototype); } catch(e) { logEx(e); };\n"
+            + "  try { log(FontFaceSet.__proto__); } catch(e) { logEx(e); };\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
