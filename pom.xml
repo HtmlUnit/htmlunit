@@ -51,7 +51,7 @@
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <jetty.version>9.4.57.v20241219</jetty.version>
         <quercus.version>4.0.66</quercus.version>
-        <log4j.version>2.25.0</log4j.version>
+        <log4j.version>2.25.1</log4j.version>
         <slf4j.version>2.0.17</slf4j.version>
         <commons-text.version>1.13.1</commons-text.version>
         <commons-fileupload.version>1.6.0</commons-fileupload.version>
