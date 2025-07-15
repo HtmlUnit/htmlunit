@@ -100,9 +100,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "    for (i = 0; i < props.length; i++) {\n"
                 + "      var property = props[i];\n"
 
-                // TODO remove if fixed in Rhino
-                + "      if ('__proto__' == property) continue;\n"
-
                 + "      let desc = Object.getOwnPropertyDescriptor(object.constructor.prototype, property);\n"
                 + "      if (desc.get === undefined && typeof object[property] == 'function') {\n"
                 + "        all.push(property + '()');\n"
