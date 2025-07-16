@@ -70,7 +70,7 @@
         <pmd-plugin.version>3.27.0</pmd-plugin.version>
         <spotbugs-plugin.version>4.9.3.2</spotbugs-plugin.version>
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
-        <enforcer-plugin.version>3.6.0</enforcer-plugin.version>
+        <enforcer-plugin.version>3.6.1</enforcer-plugin.version>
 
     </properties>
 
