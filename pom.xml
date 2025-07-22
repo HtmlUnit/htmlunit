@@ -46,7 +46,7 @@
         <selenium.devtools.artifactId>selenium-devtools-v138</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
-        <junit.version>5.13.3</junit.version>
+        <junit.version>5.13.4</junit.version>
         <junit-launcher.version>1.13.3</junit-launcher.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <jetty.version>9.4.57.v20241219</jetty.version>
@@ -71,7 +71,7 @@
         <spotbugs-plugin.version>4.9.3.2</spotbugs-plugin.version>
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
         <enforcer-plugin.version>3.6.1</enforcer-plugin.version>
-
+        <cyclonedx-plugin.version>2.9.1</cyclonedx-plugin.version>
     </properties>
 
     <build>
@@ -257,7 +257,6 @@
                     <publishingServerId>central</publishingServerId>
                 </configuration>
             </plugin>
-            <!--
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
@@ -276,7 +275,6 @@
                     </execution>
                 </executions>
             </plugin>
-            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -299,6 +297,25 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.cyclonedx</groupId>
+                <artifactId>cyclonedx-maven-plugin</artifactId>
+                <version>${cyclonedx-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>makeAggregateBom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <projectType>library</projectType>
+                    <outputFormat>json</outputFormat>
+                    <!-- strange but it helps --> 
+                    <skipNotDeployed>false</skipNotDeployed>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
