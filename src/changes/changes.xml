@@ -8,6 +8,13 @@
 
     <body>
         <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 138, Firefox 140, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: fix how 'this' is handled when calling `Array.from` in some edge cases, 
+                when `null` or 'undefined' were passed as the `this` argument
+            </action>
+            <action type="add" dev="rbri">
+                SBOM (CycloneDX format) added.
+            </action>
             <action type="update" dev="rbri">
                 core-js: minor code optimization.
             </action>
