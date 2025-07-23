@@ -326,15 +326,23 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 // setup constructors
                 if (prototype != null && config.isJsObject()) {
                     final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
-                    final FunctionObject function = new FunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsScope);
-                    ctorPrototypesPerJSName.put(jsClassName, function);
+                    if (jsConstructor == null) {
+                        final ScriptableObject constructor = config.getHostClass().getDeclaredConstructor().newInstance();
+                        ((HtmlUnitScriptable) constructor).setClassName(jsClassName);
+                        defineConstructor(jsScope, prototype, constructor);
+                        configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);
+                    }
+                    else {
+                        final FunctionObject function = new FunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsScope);
+                        ctorPrototypesPerJSName.put(jsClassName, function);
 
-                    addAsConstructorAndAlias(function, jsScope, prototype, config);
-                    configureConstantsStaticPropertiesAndStaticFunctions(config, function);
+                        addAsConstructorAndAlias(function, jsScope, prototype, config);
+                        configureConstantsStaticPropertiesAndStaticFunctions(config, function);
 
-                    // adjust prototype if needed
-                    if (extendedClassName != null) {
-                        function.setPrototype(ctorPrototypesPerJSName.get(extendedClassName));
+                        // adjust prototype if needed
+                        if (extendedClassName != null) {
+                            function.setPrototype(ctorPrototypesPerJSName.get(extendedClassName));
+                        }
                     }
                 }
             }
@@ -456,6 +464,40 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (webClient.getOptions().isFetchPolyfillEnabled()) {
             Polyfill.getFetchPolyfill().apply(context, scriptable);
         }
+    }
+
+    private static void defineConstructor(final HtmlUnitScriptable window,
+            final Scriptable prototype, final ScriptableObject constructor) {
+        constructor.setParentScope(window);
+        try {
+            ScriptableObject.defineProperty(prototype, "constructor", constructor,
+                    ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
+        }
+        catch (final Exception e) {
+            // TODO see issue #1897
+            if (LOG.isWarnEnabled()) {
+                final String newline = System.lineSeparator();
+                LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
+                        + e.getMessage() + newline
+                        + "prototype: " + prototype.getClassName(), e);
+            }
+        }
+
+        try {
+            ScriptableObject.defineProperty(constructor, "prototype", prototype,
+                    ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
+        }
+        catch (final Exception e) {
+            // TODO see issue #1897
+            if (LOG.isWarnEnabled()) {
+                final String newline = System.lineSeparator();
+                LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
+                        + e.getMessage() + newline
+                        + "prototype: " + prototype.getClassName(), e);
+            }
+        }
+
+        window.defineProperty(constructor.getClassName(), constructor, ScriptableObject.DONTENUM);
     }
 
     /**

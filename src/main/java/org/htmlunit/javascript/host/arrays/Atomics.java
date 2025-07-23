@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.arrays;
 
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
  * A JavaScript object for {@code Atomics}.
@@ -25,11 +24,4 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  */
 @JsxClass
 public class Atomics extends HtmlUnitScriptable {
-
-    /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor
-    public void jsConstructor() {
-    }
 }

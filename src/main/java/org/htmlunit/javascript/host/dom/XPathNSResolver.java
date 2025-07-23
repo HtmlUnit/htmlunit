@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.dom;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.util.XmlUtils;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
@@ -33,13 +32,6 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
 public class XPathNSResolver extends HtmlUnitScriptable implements PrefixResolver {
 
     private Node element_;
-
-    /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor
-    public void jsConstructor() {
-    }
 
     /**
      * Sets the element to start lookup from.

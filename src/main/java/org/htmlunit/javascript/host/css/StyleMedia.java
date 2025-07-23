@@ -22,7 +22,6 @@ import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.cssparser.dom.MediaListImpl;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
@@ -34,13 +33,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  */
 @JsxClass(isJSObject = false, value = {CHROME, EDGE})
 public class StyleMedia extends HtmlUnitScriptable {
-
-    /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor
-    public void jsConstructor() {
-    }
 
     /**
      * Returns the {@code type} property.
