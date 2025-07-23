@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.css;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
+import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxStaticFunction;
 
 /**
@@ -27,6 +28,13 @@ import org.htmlunit.javascript.configuration.JsxStaticFunction;
  */
 @JsxClass
 public class CSS extends HtmlUnitScriptable {
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+    }
 
     /**
      * {@inheritDoc}

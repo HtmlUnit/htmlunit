@@ -304,6 +304,48 @@ public class ArchitectureTest {
             .that().areAnnotatedWith(JsxConstructor.class)
             .should().haveName("jsConstructor");
 
+    private static ArchCondition<JavaClass> haveExactlyOneJsxConstructor() {
+        return new ArchCondition<JavaClass>("have exactly one method annotated with @JsxConstructor") {
+            @Override
+            public void check(final JavaClass javaClass, final ConditionEvents events) {
+                final long jsxConstructorCount = javaClass.getMethods().stream()
+                    .filter(method -> method.isAnnotatedWith(JsxConstructor.class))
+                    .count();
+
+                if (jsxConstructorCount == 0) {
+                    final String message = String.format(
+                        "Class %s is annotated with @JsxClass but has no methods annotated with @JsxConstructor",
+                        javaClass.getName()
+                    );
+                    events.add(SimpleConditionEvent.violated(javaClass, message));
+                }
+                else if (jsxConstructorCount > 1) {
+                    final String message = String.format(
+                        "Class %s is annotated with @JsxClass but has %d methods annotated with @JsxConstructor (expected exactly 1)",
+                        javaClass.getName(), jsxConstructorCount
+                    );
+                    events.add(SimpleConditionEvent.violated(javaClass, message));
+                }
+                else {
+                    final String message = String.format(
+                        "Class %s correctly has exactly one method annotated with @JsxConstructor",
+                        javaClass.getName()
+                    );
+                    events.add(SimpleConditionEvent.satisfied(javaClass, message));
+                }
+            }
+        };
+    }
+
+    /**
+     * JsxConstructor should have name jsConstructor.
+     */
+    @ArchTest
+    public static final ArchRule jsxClassJsxConstructor = classes()
+            .that().areAnnotatedWith(JsxClass.class)
+            .or().areAnnotatedWith(JsxClasses.class)
+            .should(haveExactlyOneJsxConstructor());
+
     /**
      * JsxGetter/Setter/Functions should not use a short as parameter.
      */
