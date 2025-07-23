@@ -8,8 +8,19 @@
 
     <body>
         <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 138, Firefox 140, Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: The Builtins and the Regexp initializer migrated from reflection to lambda
+            </action>
+            <action type="update" dev="rbri">
+                core-js: major '__proto__' support update bringing the '__proto__' support in line
+                with the spec and with real browsers. This also includes support for
+                the strange function 'shorthand' case for __proto_.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: refactored CallFrame to keep stack as immutable linked list.
+            </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: fix how 'this' is handled when calling `Array.from` in some edge cases, 
+                core-js: fix how 'this' is handled when calling `Array.from` in some edge cases,
                 when `null` or 'undefined' were passed as the `this` argument
             </action>
             <action type="add" dev="rbri">

@@ -313,7 +313,7 @@
                 <configuration>
                     <projectType>library</projectType>
                     <outputFormat>json</outputFormat>
-                    <!-- strange but it helps --> 
+                    <!-- strange but it helps -->
                     <skipNotDeployed>false</skipNotDeployed>
                 </configuration>
             </plugin>
