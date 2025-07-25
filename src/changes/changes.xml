@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 138, Firefox 140, Bugfixes">
+            <action type="remove" dev="rbri">
+                core-js: '__parent__' property is no longer available
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: refactored exception and stack handling
+            </action>
             <action type="update" dev="RhinoTeam">
                 core-js: The Builtins and the Regexp initializer migrated from reflection to lambda
             </action>
