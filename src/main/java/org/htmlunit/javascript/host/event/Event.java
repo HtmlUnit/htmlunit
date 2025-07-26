@@ -645,7 +645,7 @@ public class Event extends HtmlUnitScriptable {
     public void endFire() {
         final Context context = Context.getCurrentContext();
         final ArrayList<Event> events = (ArrayList<Event>) context.getThreadLocal(KEY_CURRENT_EVENT);
-        if (events != null && events.size() > 0) {
+        if (events != null && !events.isEmpty()) {
             events.remove(events.size() - 1);
         }
     }

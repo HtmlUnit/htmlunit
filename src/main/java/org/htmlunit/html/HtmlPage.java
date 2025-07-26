@@ -2890,7 +2890,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         DomElement first() {
-            if (elements_.size() == 0) {
+            if (elements_.isEmpty()) {
                 return null;
             }
 
@@ -2905,7 +2905,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         List<DomElement> elements() {
-            if (sorted_ || elements_.size() == 0) {
+            if (sorted_ || elements_.isEmpty()) {
                 return elements_;
             }
 
@@ -2916,10 +2916,6 @@ public class HtmlPage extends SgmlPage {
         }
 
         boolean remove(final DomElement element) {
-            if (elements_.size() == 0) {
-                return false;
-            }
-
             return elements_.remove(element);
         }
     }

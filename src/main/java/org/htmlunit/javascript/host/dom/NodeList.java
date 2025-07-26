@@ -152,7 +152,7 @@ public class NodeList extends AbstractList implements Callable {
                     "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
 
-        if (getElements().size() == 0) {
+        if (getElements().isEmpty()) {
             return;
         }
 
