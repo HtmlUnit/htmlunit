@@ -18303,4 +18303,44 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void fontFaceSet() throws Exception {
         testString("", "document.fonts");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.External}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AddSearchProvider(),constructor(),IsSearchProviderInstalled()",
+            EDGE = "AddSearchProvider(),constructor(),IsSearchProviderInstalled()",
+            FF = "__defineGetter__(),__defineSetter__(),__lookupGetter__(),__lookupSetter__(),"
+                + "__proto__[GSC],constructor(),hasOwnProperty(),isPrototypeOf(),propertyIsEnumerable(),"
+                + "toLocaleString(),toString(),valueOf()",
+            FF_ESR = "__defineGetter__(),__defineSetter__(),__lookupGetter__(),__lookupSetter__(),"
+                + "__proto__[GSC],constructor(),hasOwnProperty(),isPrototypeOf(),propertyIsEnumerable(),"
+                + "toLocaleString(),toString(),valueOf()")
+    @HtmlUnitNYI(FF = "AddSearchProvider(),constructor(),IsSearchProviderInstalled()",
+            FF_ESR = "AddSearchProvider(),constructor(),IsSearchProviderInstalled()")
+    public void external() throws Exception {
+        testString("", "window.external");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.StyleMedia}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "__defineGetter__(),__defineSetter__(),__lookupGetter__(),__lookupSetter__(),"
+                + "__proto__[GSC],constructor(),hasOwnProperty(),isPrototypeOf(),propertyIsEnumerable(),"
+                + "toLocaleString(),toString(),valueOf()",
+            EDGE = "__defineGetter__(),__defineSetter__(),__lookupGetter__(),__lookupSetter__(),"
+                + "__proto__[GSC],constructor(),hasOwnProperty(),isPrototypeOf(),propertyIsEnumerable(),"
+                + "toLocaleString(),toString(),valueOf()",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    @HtmlUnitNYI(CHROME = "constructor[],matchMedium(),type[GCE]",
+            EDGE = "constructor[],matchMedium(),type[GCE]")
+    public void styleMedia() throws Exception {
+        testString("", "window.styleMedia");
+    }
 }

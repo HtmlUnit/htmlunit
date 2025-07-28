@@ -3307,4 +3307,36 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     public void fontFaceSet() throws Exception {
         testString("", "document.fonts");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.External}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [External]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [External]",
+            FF = "-",
+            FF_ESR = "-")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [External]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [External]")
+    public void external() throws Exception {
+        testString("", "window.external");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.StyleMedia}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "-",
+            EDGE = "-",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [StyleMedia]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [StyleMedia]")
+    public void styleMedia() throws Exception {
+        testString("", "window.styleMedia");
+    }
 }

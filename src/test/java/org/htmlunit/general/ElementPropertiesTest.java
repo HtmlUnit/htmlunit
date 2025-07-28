@@ -482,8 +482,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
                 + "popover,showPopover(),spellcheck,style,tabIndex,title,togglePopover(),translate,"
-                + "virtualKeyboardPolicy,"
-                + "writingSuggestions",
+                + "virtualKeyboardPolicy,writingSuggestions",
             EDGE = "accessKey,attachInternals(),attributeStyleMap,autocapitalize,autofocus,blur(),click(),"
                 + "contentEditable,dataset,dir,draggable,editContext,enterKeyHint,focus(),hidden,hidePopover(),"
                 + "inert,innerText,inputMode,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -503,8 +502,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
                 + "popover,showPopover(),spellcheck,style,tabIndex,title,togglePopover(),translate,"
-                + "virtualKeyboardPolicy,"
-                + "writingSuggestions",
+                + "virtualKeyboardPolicy,writingSuggestions",
             FF = "accessKey,accessKeyLabel,attachInternals(),autocapitalize,autocorrect,autofocus,blur(),click(),"
                 + "contentEditable,dataset,dir,draggable,enterKeyHint,focus(),hidden,hidePopover(),inert,innerText,"
                 + "inputMode,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,offsetTop,"
@@ -9486,5 +9484,33 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "addEventListener(),dispatchEvent(),load(),removeEventListener()")
     public void fontFaceSet() throws Exception {
         testString("", "document.fonts");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.External}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AddSearchProvider(),IsSearchProviderInstalled()",
+            EDGE = "AddSearchProvider(),IsSearchProviderInstalled()",
+            FF = "AddSearchProvider(),IsSearchProviderInstalled()",
+            FF_ESR = "AddSearchProvider(),IsSearchProviderInstalled()")
+    public void external() throws Exception {
+        testString("", "window.external");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.StyleMedia}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "matchMedium(),type",
+            EDGE = "matchMedium(),type",
+            FF = "-",
+            FF_ESR = "-")
+    public void styleMedia() throws Exception {
+        testString("", "window.styleMedia");
     }
 }
