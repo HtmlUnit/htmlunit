@@ -29,7 +29,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Tests the prototype.
+ * Tests the ctor prototype.
  *
  * @author Ronald Brill
  */
@@ -80,7 +80,6 @@ public class CtorPrototypeTest extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
             + "  function check(c) {\n"
-            + "    detector = function() {};\n"
             + "    return (Object.getPrototypeOf(c) === Function.prototype);\n"
             + "  }\n"
             + "  try {\n"
