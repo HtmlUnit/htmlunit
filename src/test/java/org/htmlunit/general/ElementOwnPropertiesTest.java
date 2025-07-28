@@ -18281,4 +18281,22 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void domException() throws Exception {
         testString("", "new DOMException('message', 'name')");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.FontFaceSet}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "addEventListener(),constructor(),dispatchEvent(),removeEventListener(),when()",
+            EDGE = "addEventListener(),constructor(),dispatchEvent(),removeEventListener(),when()",
+            FF = "add(),check(),clear(),constructor(),delete(),entries(),forEach(),has(),"
+                + "keys(),load(),onloading[GSCE],onloadingdone[GSCE],onloadingerror[GSCE],ready[GCE],"
+                + "size[GCE],status[GCE],values()",
+            FF_ESR = "add(),check(),clear(),constructor(),delete(),entries(),forEach(),has(),"
+                + "keys(),load(),onloading[GSCE],onloadingdone[GSCE],onloadingerror[GSCE],ready[GCE],"
+                + "size[GCE],status[GCE],values()")
+    public void fontFaceSet() throws Exception {
+        testString("", "document.fonts");
+    }
 }

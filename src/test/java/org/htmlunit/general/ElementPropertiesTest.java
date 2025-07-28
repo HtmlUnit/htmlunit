@@ -9461,4 +9461,26 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void domException() throws Exception {
         testString("", "new DOMException('message', 'name')");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.FontFaceSet}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "add(),addEventListener(),check(),clear(),delete(),dispatchEvent(),entries(),forEach(),"
+                + "has(),keys(),load(),onloading,onloadingdone,onloadingerror,ready,removeEventListener(),"
+                + "size,status,values(),when()",
+            EDGE = "add(),addEventListener(),check(),clear(),delete(),dispatchEvent(),entries(),forEach(),"
+                + "has(),keys(),load(),onloading,onloadingdone,onloadingerror,ready,removeEventListener(),"
+                + "size,status,values(),when()",
+            FF = "add(),addEventListener(),check(),clear(),delete(),dispatchEvent(),entries(),forEach(),"
+                + "has(),keys(),load(),onloading,onloadingdone,onloadingerror,ready,removeEventListener(),"
+                + "size,status,values()",
+            FF_ESR = "add(),addEventListener(),check(),clear(),delete(),dispatchEvent(),entries(),forEach(),"
+                + "has(),keys(),load(),onloading,onloadingdone,onloadingerror,ready,removeEventListener(),"
+                + "size,status,values()")
+    public void fontFaceSet() throws Exception {
+        testString("", "document.fonts");
+    }
 }
