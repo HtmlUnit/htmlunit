@@ -324,13 +324,17 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 }
 
                 // setup constructors
-                if (prototype != null && config.isJsObject()) {
+                if (prototype != null) {
                     final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
                     if (jsConstructor == null) {
                         final ScriptableObject constructor = config.getHostClass().getDeclaredConstructor().newInstance();
                         ((HtmlUnitScriptable) constructor).setClassName(jsClassName);
                         defineConstructor(jsScope, prototype, constructor);
                         configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);
+
+                        if (config.isJsObject()) {
+                            jsScope.defineProperty(jsClassName, constructor, ScriptableObject.DONTENUM);
+                        }
                     }
                     else {
                         final FunctionObject function = new FunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), jsScope);
@@ -496,8 +500,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         + "prototype: " + prototype.getClassName(), e);
             }
         }
-
-        window.defineProperty(constructor.getClassName(), constructor, ScriptableObject.DONTENUM);
     }
 
     /**
