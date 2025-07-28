@@ -343,6 +343,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         addAsConstructorAndAlias(function, jsScope, prototype, config);
                         configureConstantsStaticPropertiesAndStaticFunctions(config, function);
 
+                        if (!config.isJsObject()) {
+                            // addAsConstructorAndAlias(..) calls addAsConstructor() from core-js
+                            // addAsConstructor(..) registeres the ctor in the scope already
+                            // therefore we have to remove here
+                            jsScope.delete(prototype.getClassName());
+                        }
+
                         // adjust prototype if needed
                         if (extendedClassName != null) {
                             function.setPrototype(ctorPrototypesPerJSName.get(extendedClassName));
