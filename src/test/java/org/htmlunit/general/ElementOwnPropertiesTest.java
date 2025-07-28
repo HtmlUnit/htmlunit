@@ -18296,6 +18296,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "add(),check(),clear(),constructor(),delete(),entries(),forEach(),has(),"
                 + "keys(),load(),onloading[GSCE],onloadingdone[GSCE],onloadingerror[GSCE],ready[GCE],"
                 + "size[GCE],status[GCE],values()")
+    @HtmlUnitNYI(CHROME = "constructor(),load()",
+            EDGE = "constructor(),load()",
+            FF = "constructor(),load()",
+            FF_ESR = "constructor(),load()")
     public void fontFaceSet() throws Exception {
         testString("", "document.fonts");
     }

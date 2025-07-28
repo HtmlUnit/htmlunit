@@ -3302,6 +3302,8 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             EDGE = "Symbol(Symbol.toStringTag) [C] [FontFaceSet]",
             FF = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [FontFaceSet]",
             FF_ESR = "Symbol(Symbol.iterator) [WC] [function],Symbol(Symbol.toStringTag) [C] [FontFaceSet]")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [C] [FontFaceSet]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [FontFaceSet]")
     public void fontFaceSet() throws Exception {
         testString("", "document.fonts");
     }

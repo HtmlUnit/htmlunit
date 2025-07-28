@@ -9480,6 +9480,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "add(),addEventListener(),check(),clear(),delete(),dispatchEvent(),entries(),forEach(),"
                 + "has(),keys(),load(),onloading,onloadingdone,onloadingerror,ready,removeEventListener(),"
                 + "size,status,values()")
+    @HtmlUnitNYI(CHROME = "addEventListener(),dispatchEvent(),load(),removeEventListener()",
+            EDGE = "addEventListener(),dispatchEvent(),load(),removeEventListener()",
+            FF = "addEventListener(),dispatchEvent(),load(),removeEventListener()",
+            FF_ESR = "addEventListener(),dispatchEvent(),load(),removeEventListener()")
     public void fontFaceSet() throws Exception {
         testString("", "document.fonts");
     }
