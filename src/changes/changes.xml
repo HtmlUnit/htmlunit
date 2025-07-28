@@ -7,7 +7,37 @@
     </properties>
 
     <body>
-        <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 138, Firefox 140, Bugfixes">
+        <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 138, Firefox 140, many, many core-js updates, junit 5, Bugfixes">
+            <action type="add" dev="rbri">
+                Separate developer docu to help peoples to start working on this project
+            </action>
+            <action type="fix" dev="rbri">
+                MutationEvent is still available in FF but not as global
+            </action>
+            <action type="fix" dev="rbri">
+                Some fixes for the ctor prototype setup
+            </action>
+            <action type="update" dev="rbri">
+                code cleanup based on pmd - use isEmpty() at more places
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Infer function name when declared in a var/let statement implemented
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Promise.withResolvers() added
+            </action>
+            <action type="update" dev="rbri">
+                core-js: assigning values to super got some improvements
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: BigInt.asUintN and BigInt.asIntN implementation fixed
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: code simplification regarding support of different jdk's
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: huge refactoring of the interpreter for more speed and easier maintenance
+            </action>
             <action type="remove" dev="rbri">
                 core-js: '__parent__' property is no longer available
             </action>
