@@ -118,7 +118,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
 
             final String result = getResultDetailElementText(webDriver, testNumber);
             final String expected = testName + " (" + getExpectedAlerts()[0] + ")";
-            if (expected.contains(result)) {
+            if (!expected.contains(result)) {
                 System.out.println("--------------------------------------------");
                 System.out.println("URL:      " + url);
                 System.out.println("Test:     " + webDriver.findElement(By.id("qunit-tests")).getText());
