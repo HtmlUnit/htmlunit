@@ -1473,7 +1473,8 @@ public class HtmlPage extends SgmlPage {
      * Deregister frames that are no longer in use.
      */
     public void deregisterFramesIfNeeded() {
-        for (final BaseFrameElement frameElement : frameElements_) {
+        final List<BaseFrameElement> frameElementsCopy = new ArrayList<>(frameElements_);
+        for (final BaseFrameElement frameElement : frameElementsCopy) {
             final WebWindow window = frameElement.getEnclosedWindow();
             getWebClient().deregisterWebWindow(window);
             final Page page = window.getEnclosedPage();
