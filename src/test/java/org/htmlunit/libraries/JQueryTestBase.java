@@ -118,20 +118,19 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
 
             final String result = getResultDetailElementText(webDriver, testNumber);
             final String expected = testName + " (" + getExpectedAlerts()[0] + ")";
-            if (!expected.contains(result)) {
+            if (expected.contains(result)) {
                 System.out.println("--------------------------------------------");
-                System.out.println("URL: " + url);
-                System.out.println("--------------------------------------------");
-                System.out.println("Test: " + webDriver.findElement(By.id("qunit-tests")).getText());
-                System.out.println("--------------------------------------------");
-                System.out.println("Failures:");
+                System.out.println("URL:      " + url);
+                System.out.println("Test:     " + webDriver.findElement(By.id("qunit-tests")).getText());
+                System.out.println("Result:   " + result);
+                System.out.println("Failures: ");
                 final List<WebElement> failures = webDriver.findElements(By.cssSelector(".qunit-assert-list li.fail"));
                 for (final WebElement webElement : failures) {
                     System.out.println("  " + webElement.getText());
                 }
                 System.out.println("--------------------------------------------");
 
-                Assertions.fail("ToDo" /* new ComparisonFailure("", expected, result).getMessage()*/);
+                Assertions.fail("'" + expected + "' does not contain '" + result);
             }
         }
         catch (final Exception e) {
