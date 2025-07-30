@@ -27,12 +27,12 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitcsp.version>4.13.0</htmlunitcsp.version>
-        <htmlunitcssparser.version>4.13.0</htmlunitcssparser.version>
+        <htmlunitcsp.version>4.14.0-SNAPSHOT</htmlunitcsp.version>
+        <htmlunitcssparser.version>4.14.0-SNAPSHOT</htmlunitcssparser.version>
         <htmlunitcorejs.version>4.14.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitneko.version>4.14.0-SNAPSHOT</htmlunitneko.version>
-        <htmlunitwebsocketclient.version>4.13.0</htmlunitwebsocketclient.version>
-        <htmlunitxpath.version>4.13.0</htmlunitxpath.version>
+        <htmlunitwebsocketclient.version>4.14.0-SNAPSHOT</htmlunitwebsocketclient.version>
+        <htmlunitxpath.version>4.14.0-SNAPSHOT</htmlunitxpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <commons-lang3.version>3.18.0</commons-lang3.version>
@@ -66,11 +66,14 @@
         <dependencycheck.version>10.0.4</dependencycheck.version>
 
         <!-- plugins -->
-        <central-publishing.version>0.8.0</central-publishing.version>
+        <central-publishing-plugin.version>0.8.0</central-publishing-plugin.version>
+        <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
         <pmd-plugin.version>3.27.0</pmd-plugin.version>
         <spotbugs-plugin.version>4.9.3.2</spotbugs-plugin.version>
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
         <enforcer-plugin.version>3.6.1</enforcer-plugin.version>
+        <changes-plugin.version>2.12.1</changes-plugin.version>
+        <jar-plugin.version>3.4.2</jar-plugin.version>
         <cyclonedx-plugin.version>2.9.1</cyclonedx-plugin.version>
     </properties>
 
@@ -84,7 +87,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>${checkstyle-plugin.version}</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                     <suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
@@ -149,7 +152,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.2</version>
+                <version>${jar-plugin.version}</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -251,7 +254,7 @@
             <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>${central-publishing.version}</version>
+                <version>${central-publishing-plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <publishingServerId>central</publishingServerId>
@@ -784,7 +787,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
-                <version>2.12.1</version>
+                <version>${changes-plugin.version}</version>
                 <reportSets>
                     <reportSet>
                         <reports>
