@@ -7,9 +7,12 @@
     </properties>
 
     <body>
-        <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 138, Firefox 140, many, many core-js updates, junit 5, Bugfixes">
+        <release version="4.14.0" date="July xx, 2025" description="Chrome/Edge 138, Firefox 140, core-js, junit 5, Bugfixes">
+            <action type="update" dev="rbri">
+                Switched to sonatype central-publishing for snapshots and release builds.
+            </action>
             <action type="fix" dev="rbri">
-                avoid ConcurrentModificationException if HtmlPage.deregisterFramesIfNeeded()
+                Avoid ConcurrentModificationException if HtmlPage.deregisterFramesIfNeeded()
             </action>
             <action type="add" dev="rbri">
                 Separate developer docu to help peoples to start working on this project
@@ -73,6 +76,12 @@
             </action>
             <action type="update" dev="RhinoTeam">
                 core-js: Code cleanup.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: fix ParentNode#getTextContent()
+            </action>
+            <action type="add" dev="rbri">
+                neko: introduce Element.SCRIPT_SUPPORTING flag for HTMLElements
             </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.20.0.
