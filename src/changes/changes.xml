@@ -14,8 +14,12 @@
             <action type="update" dev="rbri">
                 Switched to sonatype central-publishing for snapshots and release builds.
             </action>
+            <action type="add" dev="rbri">
+                New method WebClinet.waitForBackgroundJavaScriptStartingBefore(final long delayMillis, final long timeoutMillis)
+                that combines a overall timeout with witing for js tasks starting before.
+            </action>
             <action type="fix" dev="rbri">
-                Avoid ConcurrentModificationException if HtmlPage.deregisterFramesIfNeeded()
+                Avoid ConcurrentModificationException in HtmlPage.deregisterFramesIfNeeded()
             </action>
             <action type="add" dev="rbri">
                 Separate developer docu to help peoples to start working on this project
