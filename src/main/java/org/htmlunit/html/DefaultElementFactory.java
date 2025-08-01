@@ -28,7 +28,6 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.cyberneko.xerces.util.XMLAttributesImpl;
 import org.htmlunit.cyberneko.xerces.xni.QName;
-import org.htmlunit.source.ElementTestSource;
 import org.htmlunit.util.OrderedFastHashMap;
 import org.xml.sax.Attributes;
 
@@ -57,7 +56,7 @@ public class DefaultElementFactory implements ElementFactory {
 
     /**
      * You can generate your own test cases by looking into
-     * {@link ElementTestSource#generateTestForHtmlElements(String, String)}.
+     * {@link org.htmlunit.source.ElementTestSource#generateTestForHtmlElements(String, String)}.
      */
     public static final List<String> SUPPORTED_TAGS_ = Collections.unmodifiableList(Arrays.asList(
         HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
