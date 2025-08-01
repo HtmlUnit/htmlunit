@@ -678,8 +678,9 @@ public class WebRequest implements Serializable {
     public String toString() {
         final StringBuilder builder = new StringBuilder(100)
                 .append(getClass().getSimpleName())
-                .append("[<url=\"").append(url_).append('"')
-                .append(", ").append(httpMethod_)
+                .append("[<url=\"")
+                .append(url_)
+                .append("\", ").append(httpMethod_)
                 .append(", ").append(encodingType_)
                 .append(", ").append(requestParameters_)
                 .append(", ").append(additionalHeaders_)

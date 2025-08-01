@@ -260,7 +260,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
         }
         final List<String> parts = split(value);
         final int pos = parts.indexOf(oldToken);
-        while (pos == -1) {
+        if (pos == -1) {
             return false;
         }
 
