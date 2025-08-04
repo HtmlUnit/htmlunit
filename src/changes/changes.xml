@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="4.15.0" date="August xx, 2025" description="Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: TypedArray.from and TypedArray.of implemented.
+            </action>
+        </release>
+
+
         <release version="4.14.0" date="July 30, 2025" description="Chrome/Edge 138, Firefox 140, core-js, junit 5, jsoup-bridge, Bugfixes">
             <action type="add" dev="rbri">
                 New sister project 'jsoup-bridge' (https://github.com/HtmlUnit/htmlunit?tab=readme-ov-file#jsoup-bridge).
