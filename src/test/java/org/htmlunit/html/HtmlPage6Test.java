@@ -122,6 +122,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
     @Test
     @Alerts({"first", "3", "§§URL§§"})
     public void refresh_MetaTag_NoUrl() throws Exception {
+        // currently an endless loop
         // todo testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">");
         // todo testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1;\">");
         // todo testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1 \">");
@@ -282,6 +283,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
     @Test
     @Alerts({"first", "3", "§§URL§§"})
     public void refresh_HttpResponseHeader_NoUrl() throws Exception {
+        // currently an endless loop
         // todo testRefresh_HttpResponseHeader("1");
         // todo testRefresh_HttpResponseHeader("1;");
         // todo testRefresh_HttpResponseHeader("1 ");
