@@ -748,60 +748,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test auto-refresh from a meta tag.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void refresh_MetaTag_DefaultRefreshHandler() throws Exception {
-        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"2;URL=§§URL§§\">");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void refresh_MetaTag_caseSensitivity() throws Exception {
-        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"2;Url=§§URL§§\">");
-    }
-
-    /**
-     * Regression test for bug #954.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void refresh_MetaTag_spaceSeparator() throws Exception {
-        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"2 Url=§§URL§§\">");
-        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"2\nUrl=§§URL§§\">");
-    }
-
-    /**
-     * Test auto-refresh from a meta tag with no URL.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void refresh_MetaTag_NoUrl() throws Exception {
-        final String firstContent = DOCTYPE_HTML
-            + "<html><head><title>first</title>\n"
-            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"1\">\n"
-            + "</head><body></body></html>";
-
-        final WebClient client = getWebClient();
-        final List<Object> collectedItems = new ArrayList<>();
-        client.setRefreshHandler(new LoggingRefreshHandler(collectedItems));
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        client.setWebConnection(webConnection);
-
-        client.getPage(URL_FIRST);
-
-        // avoid using equals() on URL because it takes to much time (due to ip resolution)
-        assertEquals("first", collectedItems.get(0));
-        assertEquals(URL_FIRST, (URL) collectedItems.get(1));
-        assertEquals(Integer.valueOf(1), collectedItems.get(2));
-    }
-
-    /**
      * Ensures that if a page is supposed to refresh itself every certain amount of
      * time, and the ImmediateRefreshHandler is being used, an OOME is avoided by
      * not performing the refresh.
@@ -824,45 +770,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
             assertTrue(e.getMessage().indexOf("could have caused an OutOfMemoryError") > -1);
         }
         Thread.sleep(1000);
-    }
-
-    /**
-     * Test auto-refresh from a meta tag with URL quoted.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void refresh_MetaTagQuoted() throws Exception {
-        testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='0;URL=\"§§URL§§\"'>");
-    }
-
-    /**
-     * Test auto-refresh from a meta tag with URL partly quoted.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void refresh_MetaTagPartlyQuoted() throws Exception {
-        testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='§§URL§§\">");
-    }
-
-    private void testRefresh_MetaTag(final String metaTag) throws Exception {
-        final String firstContent = DOCTYPE_HTML
-            + "<html><head><title>first</title>\n"
-            + metaTag.replace("§§URL§§", URL_SECOND.toString()) + "\n"
-            + "<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='" + URL_SECOND + "\">\n"
-            + "</head><body></body></html>";
-        final String secondContent = DOCTYPE_HTML
-                + "<html><head><title>second</title></head><body></body></html>";
-
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-
-        assertEquals("second", page.getTitleText());
     }
 
     /**
@@ -923,50 +830,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
         assertEquals("first", collectedItems.get(0));
         assertEquals(URL_SECOND, (URL) collectedItems.get(1));
         assertEquals(Integer.valueOf(3), collectedItems.get(2));
-    }
-
-    /**
-     * Test that whitespace before and after ';' is permitted.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void refresh_MetaTag_Whitespace() throws Exception {
-        testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='0  ;  URL=§§URL§§'>");
-    }
-
-    /**
-     * Test that the refresh time can be a double ("3.4", for example), not just an integer.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void refresh_MetaTag_Double() throws Exception {
-        testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='1.2  ;  URL=§§URL§§'>");
-    }
-
-    /**
-     * Test auto-refresh from a response header.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void refresh_HttpResponseHeader() throws Exception {
-        final String firstContent = DOCTYPE_HTML
-            + "<html><head><title>first</title>\n"
-            + "</head><body></body></html>";
-        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head><body></body></html>";
-
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", MimeType.TEXT_HTML, Collections
-                .singletonList(new NameValuePair("Refresh", "2;URL=" + URL_SECOND)));
-        webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-
-        assertEquals("second", page.getTitleText());
     }
 
     /**

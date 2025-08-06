@@ -1354,10 +1354,9 @@ public class HtmlPage extends SgmlPage {
         final double time;
         final URL url;
 
-        int index = StringUtils.indexOfAnyBut(refreshString, "0123456789");
-        final boolean timeOnly = index == -1;
+        final int index = StringUtils.indexOfAnyBut(refreshString, "0123456789.");
 
-        if (timeOnly) {
+        if (index == -1) {
             // Format: <meta http-equiv='refresh' content='10'>
             try {
                 time = Double.parseDouble(refreshString);
@@ -1373,7 +1372,7 @@ public class HtmlPage extends SgmlPage {
         else {
             // Format: <meta http-equiv='refresh' content='10;url=http://www.blah.com'>
             try {
-                time = Double.parseDouble(refreshString.substring(0, index).trim());
+                time = Double.parseDouble(refreshString.substring(0, index));
             }
             catch (final NumberFormatException e) {
                 if (LOG.isErrorEnabled()) {
@@ -1381,35 +1380,48 @@ public class HtmlPage extends SgmlPage {
                 }
                 return;
             }
-            index = refreshString.toLowerCase(Locale.ROOT).indexOf("url=", index);
-            if (index == -1) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
+
+            String urlPart = refreshString.substring(index);
+            final char separator = urlPart.charAt(0);
+            if (";, \r\n\t".indexOf(separator) >= 0) {
+                urlPart = StringUtils.stripStart(urlPart, ";, \r\n\t");
+                if (urlPart.toLowerCase(Locale.ROOT).startsWith("url")) {
+                    urlPart = urlPart.substring(3);
+                    urlPart = urlPart.trim();
+
+                    if (urlPart.toLowerCase().startsWith("=")) {
+                        urlPart = urlPart.substring(1);
+                        urlPart = urlPart.trim();
+                    }
                 }
-                return;
-            }
-            final StringBuilder builder = new StringBuilder(refreshString.substring(index + 4));
-            if (StringUtils.isBlank(builder.toString())) {
-                //content='10; URL=' is treated as content='10'
-                url = getUrl();
+
+                if (StringUtils.isBlank(urlPart)) {
+                    //content='10; URL=' is treated as content='10'
+                    url = getUrl();
+                }
+                else {
+                    if (urlPart.charAt(0) == '"' || urlPart.charAt(0) == 0x27) {
+                        urlPart = urlPart.substring(1);
+                    }
+                    if (urlPart.charAt(urlPart.length() - 1) == '"' || urlPart.charAt(urlPart.length() - 1) == 0x27) {
+                        urlPart = urlPart.substring(0, urlPart.length() - 1);
+                    }
+                    try {
+                        url = getFullyQualifiedUrl(urlPart);
+                    }
+                    catch (final MalformedURLException e) {
+                        if (LOG.isErrorEnabled()) {
+                            LOG.error("Malformed URL in refresh string: " + refreshString, e);
+                        }
+                        return;
+                    }
+                }
             }
             else {
-                if (builder.charAt(0) == '"' || builder.charAt(0) == 0x27) {
-                    builder.deleteCharAt(0);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Malformed refresh string (separator after time missing): " + refreshString);
                 }
-                if (builder.charAt(builder.length() - 1) == '"' || builder.charAt(builder.length() - 1) == 0x27) {
-                    builder.deleteCharAt(builder.length() - 1);
-                }
-                final String urlString = builder.toString();
-                try {
-                    url = getFullyQualifiedUrl(urlString);
-                }
-                catch (final MalformedURLException e) {
-                    if (LOG.isErrorEnabled()) {
-                        LOG.error("Malformed URL in refresh string: " + refreshString, e);
-                    }
-                    throw e;
-                }
+                return;
             }
         }
 
