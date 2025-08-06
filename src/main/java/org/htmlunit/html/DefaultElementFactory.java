@@ -56,7 +56,7 @@ public class DefaultElementFactory implements ElementFactory {
 
     /**
      * You can generate your own test cases by looking into
-     * {@link org.htmlunit.source.ElementTestSource#generateTestForHtmlElements(String, String)}.
+     * org.htmlunit.source.ElementTestSource#generateTestForHtmlElements(String, String).
      */
     public static final List<String> SUPPORTED_TAGS_ = Collections.unmodifiableList(Arrays.asList(
         HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
