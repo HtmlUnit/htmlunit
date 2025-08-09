@@ -1317,10 +1317,10 @@ public final class StyleAttributes implements Serializable {
         FONT_VARIANT_EAST_ASIAN_("font-variant-east-asian", "font-variant-east-asian", ffNormal()),
 
         /** The style property {@code fontVariantEmoji}. */
-        FONT_VARIANT_EMOKJI("fontVariantEmoji", "font-variant-emoji", ffLatest("normal"), chromeAndEdgeNormal()),
+        FONT_VARIANT_EMOJI("fontVariantEmoji", "font-variant-emoji", ffLatest("normal"), chromeAndEdgeNormal()),
 
-        /** The style property {@code fontVariantEmoji}. */
-        FONT_VARIANT_EMOKJI_("font-variant-emoji", "font-variant-emoji", ffLatest("normal")),
+        /** The style property {@code font-variant-emoji}. */
+        FONT_VARIANT_EMOJI_("font-variant-emoji", "font-variant-emoji", ffLatest("normal")),
 
         /** The style property {@code fontVariantLigatures}. */
         FONT_VARIANT_LIGATURES("fontVariantLigatures", "font-variant-ligatures", ffNormal(), chromeAndEdgeNormal()),
@@ -2607,7 +2607,7 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code resize}. */
         RESIZE("resize", "resize", ffNone(), chromeAndEdgeNone()),
 
-        /** The style property {@code resize}. */
+        /** The style property {@code result}. */
         RESULT("result", "result", chromeAndEdge("")),
 
         /** The style property {@code right}. */
