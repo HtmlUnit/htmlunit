@@ -7094,7 +7094,10 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            EDGE = "function")
+    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void speechGrammar() throws Exception {
         test("SpeechGrammar");
     }
@@ -7103,7 +7106,10 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            EDGE = "function")
+    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void speechGrammarList() throws Exception {
         test("SpeechGrammarList");
     }
@@ -7112,7 +7118,10 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            EDGE = "function")
+    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void speechRecognition() throws Exception {
         test("SpeechRecognition");
     }
@@ -7139,7 +7148,10 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            EDGE = "function")
+    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void speechRecognitionErrorEvent() throws Exception {
         test("SpeechRecognitionErrorEvent");
     }
@@ -7148,7 +7160,10 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            EDGE = "function")
+    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void speechRecognitionEvent() throws Exception {
         test("SpeechRecognitionEvent");
     }
