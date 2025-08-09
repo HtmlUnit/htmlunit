@@ -4862,7 +4862,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "showModal()",
             EDGE = "close(),closedBy[GSCE],constructor(),open[GSCE],requestClose(),returnValue[GSCE],show(),"
                 + "showModal()",
-            FF = "close(),constructor(),open[GSCE],requestClose(),returnValue[GSCE],show(),showModal()",
+            FF = "close(),closedBy[GSCE],constructor(),open[GSCE],requestClose(),returnValue[GSCE],show(),showModal()",
             FF_ESR = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()")
     @HtmlUnitNYI(CHROME = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
             EDGE = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
@@ -14936,7 +14936,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "tangentialPressure[GCE],tiltX[GCE],tiltY[GCE],twist[GCE],"
                 + "width[GCE]",
             FF = "altitudeAngle[GCE],azimuthAngle[GCE],constructor(),getCoalescedEvents(),getPredictedEvents(),"
-                + "height[GCE],isPrimary[GCE],pointerId[GCE],pointerType[GCE],pressure[GCE],tangentialPressure[GCE],"
+                + "height[GCE],isPrimary[GCE],persistentDeviceId[GCE],"
+                + "pointerId[GCE],pointerType[GCE],pressure[GCE],tangentialPressure[GCE],"
                 + "tiltX[GCE],tiltY[GCE],twist[GCE],"
                 + "width[GCE]",
             FF_ESR = "constructor(),getCoalescedEvents(),getPredictedEvents(),height[GCE],isPrimary[GCE],"
@@ -14944,11 +14945,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "twist[GCE],"
                 + "width[GCE]")
     @HtmlUnitNYI(CHROME = "altitudeAngle[GCE],azimuthAngle[GCE],constructor(),height[GCE],isPrimary[GCE],"
-                + "pointerId[GCE],pointerType[GCE],pressure[GCE],tiltX[GCE],tiltY[GCE],width[GCE]",
+                + "persistentDeviceId[GCE],pointerId[GCE],pointerType[GCE],pressure[GCE],"
+                + "tiltX[GCE],tiltY[GCE],width[GCE]",
             EDGE = "altitudeAngle[GCE],azimuthAngle[GCE],constructor(),height[GCE],isPrimary[GCE],"
-                + "pointerId[GCE],pointerType[GCE],pressure[GCE],tiltX[GCE],tiltY[GCE],width[GCE]",
+                + "persistentDeviceId[GCE],pointerId[GCE],pointerType[GCE],pressure[GCE],"
+                + "tiltX[GCE],tiltY[GCE],width[GCE]",
             FF = "altitudeAngle[GCE],azimuthAngle[GCE],constructor(),height[GCE],isPrimary[GCE],"
-                + "pointerId[GCE],pointerType[GCE],pressure[GCE],tiltX[GCE],tiltY[GCE],width[GCE]",
+                + "persistentDeviceId[GCE],pointerId[GCE],pointerType[GCE],pressure[GCE],"
+                + "tiltX[GCE],tiltY[GCE],width[GCE]",
             FF_ESR = "constructor(),height[GCE],isPrimary[GCE],pointerId[GCE],pointerType[GCE],"
                 + "pressure[GCE],tiltX[GCE],tiltY[GCE],width[GCE]")
     public void pointerEvent() throws Exception {
@@ -16256,14 +16260,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "font-size-adjust[GSCE],font-size[GSCE],font-stretch[GSCE],font-style[GSCE],"
                 + "font-synthesis-position[GSCE],font-synthesis-small-caps[GSCE],font-synthesis-style[GSCE],"
                 + "font-synthesis-weight[GSCE],font-synthesis[GSCE],font-variant-alternates[GSCE],"
-                + "font-variant-caps[GSCE],font-variant-east-asian[GSCE],font-variant-ligatures[GSCE],"
+                + "font-variant-caps[GSCE],font-variant-east-asian[GSCE],font-variant-emoji[GSCE],"
+                + "font-variant-ligatures[GSCE],"
                 + "font-variant-numeric[GSCE],font-variant-position[GSCE],font-variant[GSCE],"
                 + "font-variation-settings[GSCE],font-weight[GSCE],font[GSCE],fontFamily[GSCE],"
                 + "fontFeatureSettings[GSCE],fontKerning[GSCE],fontLanguageOverride[GSCE],fontOpticalSizing[GSCE],"
                 + "fontPalette[GSCE],fontSize[GSCE],fontSizeAdjust[GSCE],fontStretch[GSCE],fontStyle[GSCE],"
                 + "fontSynthesis[GSCE],fontSynthesisPosition[GSCE],fontSynthesisSmallCaps[GSCE],"
                 + "fontSynthesisStyle[GSCE],fontSynthesisWeight[GSCE],fontVariant[GSCE],fontVariantAlternates[GSCE],"
-                + "fontVariantCaps[GSCE],fontVariantEastAsian[GSCE],fontVariantLigatures[GSCE],"
+                + "fontVariantCaps[GSCE],fontVariantEastAsian[GSCE],fontVariantEmoji[GSCE],"
+                + "fontVariantLigatures[GSCE],"
                 + "fontVariantNumeric[GSCE],fontVariantPosition[GSCE],fontVariationSettings[GSCE],fontWeight[GSCE],"
                 + "forced-color-adjust[GSCE],forcedColorAdjust[GSCE],gap[GSCE],grid-area[GSCE],"
                 + "grid-auto-columns[GSCE],grid-auto-flow[GSCE],grid-auto-rows[GSCE],grid-column-end[GSCE],"
@@ -16895,14 +16901,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "font-size-adjust[GSCE],font-size[GSCE],font-stretch[GSCE],font-style[GSCE],"
                 + "font-synthesis-position[GSCE],font-synthesis-small-caps[GSCE],font-synthesis-style[GSCE],"
                 + "font-synthesis-weight[GSCE],font-synthesis[GSCE],font-variant-alternates[GSCE],"
-                + "font-variant-caps[GSCE],font-variant-east-asian[GSCE],font-variant-ligatures[GSCE],"
+                + "font-variant-caps[GSCE],font-variant-east-asian[GSCE],font-variant-emoji[GSCE],"
+                + "font-variant-ligatures[GSCE],"
                 + "font-variant-numeric[GSCE],font-variant-position[GSCE],font-variant[GSCE],"
                 + "font-variation-settings[GSCE],font-weight[GSCE],font[GSCE],fontFamily[GSCE],"
                 + "fontFeatureSettings[GSCE],fontKerning[GSCE],fontLanguageOverride[GSCE],fontOpticalSizing[GSCE],"
                 + "fontPalette[GSCE],fontSize[GSCE],fontSizeAdjust[GSCE],fontStretch[GSCE],fontStyle[GSCE],"
                 + "fontSynthesis[GSCE],fontSynthesisPosition[GSCE],fontSynthesisSmallCaps[GSCE],"
                 + "fontSynthesisStyle[GSCE],fontSynthesisWeight[GSCE],fontVariant[GSCE],fontVariantAlternates[GSCE],"
-                + "fontVariantCaps[GSCE],fontVariantEastAsian[GSCE],fontVariantLigatures[GSCE],"
+                + "fontVariantCaps[GSCE],fontVariantEastAsian[GSCE],fontVariantEmoji[GSCE],"
+                + "fontVariantLigatures[GSCE],"
                 + "fontVariantNumeric[GSCE],fontVariantPosition[GSCE],fontVariationSettings[GSCE],fontWeight[GSCE],"
                 + "forced-color-adjust[GSCE],forcedColorAdjust[GSCE],gap[GSCE],grid-area[GSCE],"
                 + "grid-auto-columns[GSCE],grid-auto-flow[GSCE],grid-auto-rows[GSCE],grid-column-end[GSCE],"
@@ -18190,7 +18198,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "xr[GCE]",
             FF = "appCodeName[GCE],appName[GCE],appVersion[GCE],buildID[GCE],clipboard[GCE],constructor(),"
                 + "cookieEnabled[GCE],credentials[GCE],doNotTrack[GCE],geolocation[GCE],getAutoplayPolicy(),"
-                + "getGamepads(),globalPrivacyControl[GCE],hardwareConcurrency[GCE],javaEnabled(),language[GCE],"
+                + "getGamepads(),globalPrivacyControl[GCE],gpu[GCE],"
+                + "hardwareConcurrency[GCE],javaEnabled(),language[GCE],"
                 + "languages[GCE],locks[GCE],login[GCE],maxTouchPoints[GCE],mediaCapabilities[GCE],"
                 + "mediaDevices[GCE],mediaSession[GCE],mimeTypes[GCE],mozGetUserMedia(),onLine[GCE],oscpu[GCE],"
                 + "pdfViewerEnabled[GCE],permissions[GCE],platform[GCE],plugins[GCE],product[GCE],productSub[GCE],"
