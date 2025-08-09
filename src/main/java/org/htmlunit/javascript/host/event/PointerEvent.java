@@ -217,4 +217,14 @@ public class PointerEvent extends MouseEvent {
     public double getAzimuthAngle() {
         return 0d;
     }
+
+    /**
+     * @return the persistentDeviceId
+     */
+    @JsxGetter({CHROME, EDGE, FF})
+    public double getPersistentDeviceId() {
+        // dummy but valid regarding to the spec
+        // https://w3c.github.io/pointerevents/#dom-pointerevent-persistentdeviceid
+        return 0d;
+    }
 }

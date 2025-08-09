@@ -7,7 +7,14 @@
     </properties>
 
     <body>
-        <release version="4.15.0" date="August xx, 2025" description="Bugfixes">
+        <release version="4.15.0" date="August xx, 2025" description="Chrome/Edge 139, Firefox 141, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                Dummy impl of PointerEvent#getPersistentDeviceId() returning always 0.
+            </action>
+            <action type="update" dev="rbri" issue="#1002">
+                The parser for the refresh header has been rewritten.
+                Thanks to a series of additional tests, we are now much closer to real browsers.
+            </action>
             <action type="add" dev="RhinoTeam">
                 core-js: TypedArray.from and TypedArray.of implemented.
             </action>
