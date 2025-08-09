@@ -36,9 +36,12 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9"},
+            CHROME = {"5<>1", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"},
+            EDGE = {"5<>1", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"})
+    @HtmlUnitNYI(
             CHROME = {"5<>1", "2<>5", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"},
-            EDGE = {"5<>1", "2<>5", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"})
-    @HtmlUnitNYI(FF = {"5<>1", "2<>5", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"},
+            EDGE = {"5<>1", "2<>5", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"},
+            FF = {"5<>1", "2<>5", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"},
             FF_ESR = {"5<>1", "2<>5", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2", "9<>5"})
     public void sortSteps() throws Exception {
         final String html = DOCTYPE_HTML
@@ -52,7 +55,8 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  var t = [1, 5, 2, 1, 9];\n"
             + "  t.sort(compare);\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
