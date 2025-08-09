@@ -997,6 +997,57 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code content-visibility}. */
         CONTENT_VISISBILITY_("content-visibility", "content-visibility", ff("visible")),
 
+        /** The style property {@code cornerBlockEndShape}. */
+        CORNER_BLOCK_END_SHAPE("cornerBlockEndShape", "corner-block-end-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerBlockStartShape}. */
+        CORNER_BLOCK_START_SHAPE("cornerBlockStartShape", "corner-block-start-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerBottomLeftShape}. */
+        CORNER_BOTTOM_LEFT_SHAPE("cornerBottomLeftShape", "corner-bottom-left-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerBottomRightShape}. */
+        CORNER_BOTTOM_RIGHT_SHAPE("cornerBottomRightShape", "corner-bottom-right-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerBottomShape}. */
+        CORNER_BOTTOM_SHAPE("cornerBottomShape", "corner-bottom-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerEndEndShape}. */
+        CORNER_END_END_SHAPE("cornerEndEndShape", "corner-end-end-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerEndStartShape}. */
+        CORNER_END_START_SHAPE("cornerEndStartShape", "corner-end-start-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerInlineEndShape}. */
+        CORNER_INLINE_END_SHAPE("cornerInlineEndShape", "corner-inline-end-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerInlineStartShape}. */
+        CORNER_INLINE_START_SHAPE("cornerInlineStartShape", "corner-inline-start-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerLeftShape}. */
+        CORNER_LEFT_SHAPE("cornerLeftShape", "corner-left-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerRightShape}. */
+        CORNER_RIGHT_SHAPE("cornerRightShape", "corner-right-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerShape}. */
+        CORNER_SHAPE("cornerShape", "corner-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerStartEndShape}. */
+        CORNER_START_END_SHAPE("cornerStartEndShape", "corner-start-end-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerStartStartShape}. */
+        CORNER_START_START_SHAPE("cornerStartStartShape", "corner-start-start-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerTopLeftShape}. */
+        CORNER_TOP_LEFT_SHAPE("cornerTopLeftShape", "corner-top-left-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerTopRightShape}. */
+        CORNER_TOP_RIGHT_SHAPE("cornerTopRightShape", "corner-top-right-shape", chromeAndEdge("round")),
+
+        /** The style property {@code cornerTopShape}. */
+        CORNER_TOP_SHAPE("cornerTopShape", "corner-top-shape", chromeAndEdge("round")),
+
         /** The style property {@code counterIncrement}. */
         COUNTER_INCREMENT("counterIncrement", "counter-increment", chromeAndEdgeNone(), ffNone()),
 
@@ -1266,7 +1317,10 @@ public final class StyleAttributes implements Serializable {
         FONT_VARIANT_EAST_ASIAN_("font-variant-east-asian", "font-variant-east-asian", ffNormal()),
 
         /** The style property {@code fontVariantEmoji}. */
-        FONT_VARIANT_EMOKJI("fontVariantEmoji", "font-variant-emoji", chromeAndEdgeNormal()),
+        FONT_VARIANT_EMOKJI("fontVariantEmoji", "font-variant-emoji", ffLatest("normal"), chromeAndEdgeNormal()),
+
+        /** The style property {@code fontVariantEmoji}. */
+        FONT_VARIANT_EMOKJI_("font-variant-emoji", "font-variant-emoji", ffLatest("normal")),
 
         /** The style property {@code fontVariantLigatures}. */
         FONT_VARIANT_LIGATURES("fontVariantLigatures", "font-variant-ligatures", ffNormal(), chromeAndEdgeNormal()),
@@ -2552,6 +2606,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code resize}. */
         RESIZE("resize", "resize", ffNone(), chromeAndEdgeNone()),
+
+        /** The style property {@code resize}. */
+        RESULT("result", "result", chromeAndEdge("")),
 
         /** The style property {@code right}. */
         RIGHT("right", "right", chromeAndEdgeAuto(), ff("")),
