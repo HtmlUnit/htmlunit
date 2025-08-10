@@ -33,11 +33,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface HtmlUnitNYI {
-    /**
-     * Alerts that is used for all browsers (if defined, the other values are ignored).
-     * @return the alerts
-     */
-    String[] value() default { EMPTY_DEFAULT };
 
     /**
      * Alerts for latest Edge.

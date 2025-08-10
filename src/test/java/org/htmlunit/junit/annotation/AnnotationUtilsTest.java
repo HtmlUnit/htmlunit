@@ -90,17 +90,6 @@ public class AnnotationUtilsTest {
      */
     @Test
     @Alerts("redundant")
-    @HtmlUnitNYI("redundant")
-    public void redundantHtmlUnitNYI() throws Exception {
-        testFail("Redundant @HtmlUnitNYI for DEFAULT in AnnotationUtilsTest.redundantHtmlUnitNYI()",
-                "redundantHtmlUnitNYI");
-    }
-
-    /**
-     * @throws Exception if something goes wrong
-     */
-    @Test
-    @Alerts("redundant")
     @HtmlUnitNYI(CHROME = "redundant")
     public void redundantHtmlUnitNYIChrome() throws Exception {
         testFail("Redundant @HtmlUnitNYI for Chrome in AnnotationUtilsTest.redundantHtmlUnitNYIChrome()",

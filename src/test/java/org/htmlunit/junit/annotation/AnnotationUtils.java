@@ -63,21 +63,6 @@ public final class AnnotationUtils {
 
             final HtmlUnitNYI nyiAlerts = method.getAnnotation(HtmlUnitNYI.class);
             if (nyiAlerts != null) {
-                if (isDefined(nyiAlerts.value())) {
-                    if (isDefined(alerts.CHROME())) {
-                        assertNotEquals("@HtmlUnitNYI",
-                                method, null, alerts.CHROME(), nyiAlerts.value());
-                    }
-                    else if (isDefined(alerts.DEFAULT())) {
-                        assertNotEquals("@HtmlUnitNYI",
-                                method, null, alerts.DEFAULT(), nyiAlerts.value());
-                    }
-                    else if (isDefined(alerts.value())) {
-                        assertNotEquals("@HtmlUnitNYI",
-                                method, null, alerts.value(), nyiAlerts.value());
-                    }
-                }
-
                 if (isDefined(nyiAlerts.CHROME())) {
                     if (isDefined(alerts.CHROME())) {
                         assertNotEquals("@HtmlUnitNYI",
