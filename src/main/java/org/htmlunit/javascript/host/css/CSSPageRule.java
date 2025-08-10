@@ -18,7 +18,7 @@ import static org.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_FF_STYLE;
 
 import java.util.Locale;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.css.WrappedCssStyleDeclaration;
 import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
@@ -118,7 +118,7 @@ public class CSSPageRule extends CSSRule {
         String cssText = super.getCssText();
         final BrowserVersion browserVersion = getBrowserVersion();
         if (browserVersion.hasFeature(CSS_CSSTEXT_FF_STYLE)) {
-            cssText = StringUtils.replace(cssText, "@page {", "@page  {");
+            cssText = Strings.CS.replace(cssText, "@page {", "@page  {");
         }
 
         return cssText;

@@ -19,6 +19,7 @@ import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import java.nio.charset.Charset;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.FailingHttpStatusCodeException;
@@ -297,7 +298,7 @@ public final class ScriptElementSupport {
         }
 
         if (StringUtils.isNotEmpty(languageAttribute)) {
-            return StringUtils.startsWithIgnoreCase(languageAttribute, "javascript");
+            return Strings.CI.startsWith(languageAttribute, "javascript");
         }
         return true;
     }

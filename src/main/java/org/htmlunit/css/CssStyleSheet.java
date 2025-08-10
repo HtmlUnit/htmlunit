@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -563,7 +564,7 @@ public class CssStyleSheet implements Serializable {
                 final String prefixValue = prefixAttributeCondition.getValue();
                 if (prefixAttributeCondition.isCaseInSensitive()) {
                     return !org.htmlunit.util.StringUtils.isEmptyString(prefixValue)
-                            && StringUtils.startsWithIgnoreCase(
+                            && Strings.CI.startsWith(
                                     element.getAttribute(prefixAttributeCondition.getLocalName()), prefixValue);
                 }
                 return !org.htmlunit.util.StringUtils.isEmptyString(prefixValue)
@@ -574,7 +575,7 @@ public class CssStyleSheet implements Serializable {
                 final String suffixValue = suffixAttributeCondition.getValue();
                 if (suffixAttributeCondition.isCaseInSensitive()) {
                     return !org.htmlunit.util.StringUtils.isEmptyString(suffixValue)
-                            && StringUtils.endsWithIgnoreCase(
+                            && Strings.CI.endsWith(
                                     element.getAttribute(suffixAttributeCondition.getLocalName()), suffixValue);
                 }
                 return !org.htmlunit.util.StringUtils.isEmptyString(suffixValue)
@@ -585,7 +586,7 @@ public class CssStyleSheet implements Serializable {
                 final String substringValue = substringAttributeCondition.getValue();
                 if (substringAttributeCondition.isCaseInSensitive()) {
                     return !org.htmlunit.util.StringUtils.isEmptyString(substringValue)
-                            && StringUtils.containsIgnoreCase(
+                            && Strings.CI.contains(
                                     element.getAttribute(substringAttributeCondition.getLocalName()), substringValue);
                 }
                 return !org.htmlunit.util.StringUtils.isEmptyString(substringValue)

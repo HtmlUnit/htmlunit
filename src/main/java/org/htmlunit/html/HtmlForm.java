@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -158,13 +159,13 @@ public class HtmlForm extends HtmlElement {
             }
 
             final String action = getActionAttribute().trim();
-            if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            if (Strings.CI.startsWith(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 htmlPage.executeJavaScript(action, "Form action", getStartLineNumber());
                 return;
             }
         }
         else {
-            if (StringUtils.startsWithIgnoreCase(getActionAttribute(), JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            if (Strings.CI.startsWith(getActionAttribute(), JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // The action is JavaScript but JavaScript isn't enabled.
                 return;
             }

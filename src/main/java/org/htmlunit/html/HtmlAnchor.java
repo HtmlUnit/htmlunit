@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -116,7 +117,7 @@ public class HtmlAnchor extends HtmlElement {
         }
         final String downloadAttribute = getDownloadAttribute();
         HtmlPage page = (HtmlPage) getPage();
-        if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+        if (Strings.CI.startsWith(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final StringBuilder builder = new StringBuilder(href.length());
             builder.append(JavaScriptURLConnection.JAVASCRIPT_PREFIX);
             for (int i = JavaScriptURLConnection.JAVASCRIPT_PREFIX.length(); i < href.length(); i++) {

@@ -17,7 +17,7 @@ package org.htmlunit.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebResponse;
 
@@ -110,10 +110,10 @@ public final class HeaderUtils {
      */
     public static boolean containsMaxAgeOrSMaxage(final WebResponse response) {
         final String cacheControl = response.getResponseHeaderValue(HttpHeader.CACHE_CONTROL);
-        if (StringUtils.contains(cacheControl, CACHE_CONTROL_MAX_AGE)) {
+        if (Strings.CI.contains(cacheControl, CACHE_CONTROL_MAX_AGE)) {
             return true;
         }
-        return StringUtils.contains(cacheControl, CACHE_CONTROL_S_MAXAGE);
+        return Strings.CI.contains(cacheControl, CACHE_CONTROL_S_MAXAGE);
     }
 
     /**
@@ -153,6 +153,6 @@ public final class HeaderUtils {
 
     private static boolean containsCacheControlValue(final WebResponse response, final String value) {
         final String cacheControl = response.getResponseHeaderValue(HttpHeader.CACHE_CONTROL);
-        return StringUtils.contains(cacheControl, value);
+        return Strings.CI.contains(cacheControl, value);
     }
 }
