@@ -465,7 +465,7 @@ public class WebClientTest extends SimpleWebTestCase {
             getPageWithRedirectionsSameURL(30);
         }
         catch (final Exception e) {
-            assertTrue(e.getMessage(), e.getMessage().contains("Too much redirect"));
+            assertTrue(e.getMessage(), e.getMessage().contains("Too many redirects"));
         }
     }
 

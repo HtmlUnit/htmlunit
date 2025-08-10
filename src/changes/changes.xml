@@ -8,6 +8,10 @@
 
     <body>
         <release version="4.15.0" date="August xx, 2025" description="Chrome/Edge 139, Firefox 141, Bugfixes">
+            <action type="add" dev="rbri">
+                WebClient option pageRefreshLimit added. Refresh handling changed to support a clear limit.
+                The initial value is 72 to be backward compatible.
+            </action>
             <action type="add" dev="RhinoTeam">
                 Dummy impl of PointerEvent#getPersistentDeviceId() returning always 0.
             </action>

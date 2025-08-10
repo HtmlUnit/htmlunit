@@ -95,7 +95,7 @@ public class WebClient4Test extends WebServerTestCase {
             client.getPage("http://localhost:" + PORT + RedirectServlet307.URL);
         }
         catch (final Exception e) {
-            assertTrue(e.getMessage(), e.getMessage().contains("Too much redirect"));
+            assertTrue(e.getMessage(), e.getMessage().contains("Too many redirects"));
         }
     }
 
@@ -433,7 +433,7 @@ public class WebClient4Test extends WebServerTestCase {
             client.getPage(URL_FIRST + "test1");
         }
         catch (final Exception e) {
-            assertTrue(e.getMessage(), e.getMessage().contains("Too much redirect"));
+            assertTrue(e.getMessage(), e.getMessage().contains("Too many redirects"));
         }
     }
 

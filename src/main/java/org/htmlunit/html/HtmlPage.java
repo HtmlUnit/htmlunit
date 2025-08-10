@@ -43,6 +43,7 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.Cache;
@@ -938,7 +939,7 @@ public class HtmlPage extends SgmlPage {
             return new ScriptResult(JavaScriptEngine.UNDEFINED);
         }
 
-        if (StringUtils.startsWithIgnoreCase(sourceCode, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+        if (Strings.CI.startsWith(sourceCode, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             sourceCode = sourceCode.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length()).trim();
             if (sourceCode.startsWith("return ")) {
                 sourceCode = sourceCode.substring("return ".length());
@@ -1425,23 +1426,45 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
-        final int timeRounded = (int) time;
-        checkRecursion();
-        getWebClient().getRefreshHandler().handleRefresh(this, url, timeRounded);
+        processRefresh(url, time);
     }
 
-    private void checkRecursion() {
-        final StackTraceElement[] elements = new Exception().getStackTrace();
-        if (elements.length > 500) {
-            for (int i = 0; i < 500; i++) {
-                if (!elements[i].getClassName().startsWith("org.htmlunit.")) {
-                    return;
-                }
-            }
+    // this is different from what is done in org.htmlunit.WebClient.loadWebResponseFromWebConnection(WebRequest, int)
+    // because there we are directly replacing the response before loading the response into the window
+    // here we are replacing the page in the window (maybe after some time)
+    private void processRefresh(final URL url, final double time) throws IOException {
+        final WebClient webClient = getWebClient();
+
+        final int refreshLimit = webClient.getOptions().getPageRefreshLimit();
+        if (refreshLimit == 0) {
             final WebResponse webResponse = getWebResponse();
-            throw new FailingHttpStatusCodeException("Too much redirect for "
+            throw new FailingHttpStatusCodeException("Too many redirects for "
                     + webResponse.getWebRequest().getUrl(), webResponse);
         }
+
+        if (refreshLimit >= 0) {
+            final StackTraceElement[] elements = new Exception().getStackTrace();
+            int count = 0;
+            final int elementCountLimit = refreshLimit > 50 ? 400 : refreshLimit > 10 ? 80 : 5;
+            final int elementCount = elements.length;
+
+            if (elementCount > elementCountLimit) {
+                for (int i = 0; i < elementCount; i++) {
+                    if ("processRefresh".equals(elements[i].getMethodName())
+                            && "org.htmlunit.html.HtmlPage".equals(elements[i].getClassName())) {
+                        count++;
+                        if (count >= refreshLimit) {
+                            final WebResponse webResponse = getWebResponse();
+                            throw new FailingHttpStatusCodeException(
+                                            "Too many redirects (>= " + count + ") for "
+                                                + webResponse.getWebRequest().getUrl(), webResponse);
+                        }
+                    }
+                }
+            }
+        }
+
+        webClient.getRefreshHandler().handleRefresh(this, url, (int) time);
     }
 
     /**

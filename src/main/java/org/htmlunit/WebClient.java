@@ -1677,7 +1677,7 @@ public class WebClient implements Serializable, AutoCloseable {
             }
 
             if (allowedRedirects == 0) {
-                throw new FailingHttpStatusCodeException("Too much redirect for "
+                throw new FailingHttpStatusCodeException("Too many redirects for "
                     + webResponse.getWebRequest().getUrl(), webResponse);
             }
 

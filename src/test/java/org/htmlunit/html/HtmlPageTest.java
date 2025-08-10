@@ -36,6 +36,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.ElementNotFoundException;
+import org.htmlunit.FailingHttpStatusCodeException;
 import org.htmlunit.HttpMethod;
 import org.htmlunit.ImmediateRefreshHandler;
 import org.htmlunit.IncorrectnessListener;
@@ -44,6 +45,7 @@ import org.htmlunit.OnbeforeunloadHandler;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.StringWebResponse;
+import org.htmlunit.WaitingRefreshHandler;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
@@ -770,6 +772,30 @@ public class HtmlPageTest extends SimpleWebTestCase {
             assertTrue(e.getMessage().indexOf("could have caused an OutOfMemoryError") > -1);
         }
         Thread.sleep(1000);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Too many redirects (>= 72) for §§URL§§")
+    public void refresh_EndlessLoop() throws Exception {
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title>\n"
+            + "<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0\">\n"
+            + "</head><body></body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebClient client = getWebClient();
+        client.setRefreshHandler(new WaitingRefreshHandler());
+        try {
+            loadPage(firstContent);
+            Assertions.fail("should have thrown");
+        }
+        catch (final FailingHttpStatusCodeException e) {
+            assertEquals(getExpectedAlerts()[0], e.getMessage());
+        }
     }
 
     /**

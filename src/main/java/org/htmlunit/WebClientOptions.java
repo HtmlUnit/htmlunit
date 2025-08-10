@@ -52,6 +52,8 @@ public class WebClientOptions implements Serializable {
     private boolean throwExceptionOnScriptError_ = true;
     private boolean popupBlockerEnabled_;
     private boolean isRedirectEnabled_ = true;
+    // strange value 72 used to be backward compatible with 4.14.0
+    private int pageRefreshLimit_ = 72;
     private File tempFileDirectory_;
 
     private transient KeyStore sslClientCertificateStore_;
@@ -141,6 +143,19 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
+     * Sets the limit to be used when a page refreshes itself by using a
+     * http refresh header or meta tag. Set this to -1 to allow endless refresh.
+     * <p>
+     * Please have in mind, the {@link NiceRefreshHandler} and the {@link ImmediateRefreshHandler}
+     * have also some loop protection, that triggers first.
+     *
+     * @param pageRefreshLimit the number of refresh loops before throwing an exception
+     */
+    public void setRedirectEnabled(final int pageRefreshLimit) {
+        pageRefreshLimit_ = pageRefreshLimit;
+    }
+
+    /**
      * Returns the directory to be used for storing the response content in
      * a temporary file see {@link #getMaxInMemory()}.
      * @return the directory to be used for storing temp files or null to use the system default
@@ -178,6 +193,17 @@ public class WebClientOptions implements Serializable {
      */
     public boolean isRedirectEnabled() {
         return isRedirectEnabled_;
+    }
+
+    /**
+     * Returns the limit to be used when a page refreshes itself by using a
+     * http refresh header or meta tag. Negative values are interpreted as
+     * endless refresh support.
+     *
+     * @return pageRefreshLimit the number of refresh loops before throwing an exception
+     */
+    public int getPageRefreshLimit() {
+        return pageRefreshLimit_;
     }
 
     /**
