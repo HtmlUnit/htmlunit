@@ -19,6 +19,7 @@ import java.util.Collections;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
@@ -108,6 +109,10 @@ public class HtmlPage6Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"wrong", "2", "§§URL§§abcd=§§URL§§second/"})
+    @HtmlUnitNYI(CHROME = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
+            EDGE = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
+            FF = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
+            FF_ESR = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"})
     public void refresh_MetaTag_wrong_url_label() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;abcd=§§URL§§\">");
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; abcd=§§URL§§\">");
@@ -170,6 +175,19 @@ public class HtmlPage6Test extends WebDriverTestCase {
         testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='1.2  ;  URL=§§URL§§'>");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"wrong", "2", "§§URL§§2;URL=§§URL§§second/"})
+    @HtmlUnitNYI(CHROME = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            EDGE = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            FF = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            FF_ESR = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"})
+    public void refresh_MetaTag_DoubleComma() throws Exception {
+        testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='1,2;URL=§§URL§§'>");
+    }
+
     private void testRefresh_MetaTag(final String metaTag) throws Exception {
         final String firstContent = DOCTYPE_HTML
             + "<html><head><title>first§</title>\n"
@@ -185,16 +203,21 @@ public class HtmlPage6Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(wrongContent);
 
         expandExpectedAlertsVariables(URL_FIRST);
+        final String[] expectedAlerts = getExpectedAlerts();
+        for (int i = 0; i < expectedAlerts.length; i++) {
+            expectedAlerts[i] = expectedAlerts[i]
+                                .replaceAll("§§URL1§§", URL_FIRST.toExternalForm().replace("http://", "http:/"));
+        }
+
         final int count = getMockWebConnection().getRequestCount();
         final WebDriver driver = loadPage2(firstContent);
         if (useRealBrowser()) {
             Thread.sleep(DEFAULT_WAIT_TIME.multipliedBy(3).toMillis());
         }
-        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0]);
-        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
-        if (getExpectedAlerts().length > 2) {
-            final String exp = getExpectedAlerts()[2].replace("=http://", "=http:/");
-            assertEquals(exp, getMockWebConnection().getLastWebRequest().getUrl().toString());
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, expectedAlerts[0]);
+        assertEquals(Integer.parseInt(expectedAlerts[1]), getMockWebConnection().getRequestCount() - count);
+        if (expectedAlerts.length > 2) {
+            assertEquals(expectedAlerts[2], getMockWebConnection().getLastWebRequest().getUrl().toString());
         }
     }
 
@@ -269,6 +292,10 @@ public class HtmlPage6Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"wrong", "2", "§§URL§§abcd=§§URL§§second/"})
+    @HtmlUnitNYI(CHROME = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
+            EDGE = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
+            FF = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
+            FF_ESR = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"})
     public void refresh_HttpResponseHeader_wrong_url_label() throws Exception {
         testRefresh_HttpResponseHeader("0;abcd=§§URL§§");
         testRefresh_HttpResponseHeader("0; abcd=§§URL§§");
@@ -329,12 +356,15 @@ public class HtmlPage6Test extends WebDriverTestCase {
         testRefresh_HttpResponseHeader("1.2  ;  URL=§§URL§§");
     }
 
-
     /**
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts({"wrong", "2", "§§URL§§2;URL=§§URL§§second/"})
+    @HtmlUnitNYI(CHROME = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            EDGE = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            FF = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            FF_ESR = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"})
     public void refresh_HttpResponseHeader_DoubleComma() throws Exception {
         testRefresh_HttpResponseHeader("1,2;URL=§§URL§§");
     }
@@ -355,16 +385,21 @@ public class HtmlPage6Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(wrongContent);
 
         expandExpectedAlertsVariables(URL_FIRST);
+        final String[] expectedAlerts = getExpectedAlerts();
+        for (int i = 0; i < expectedAlerts.length; i++) {
+            expectedAlerts[i] = expectedAlerts[i]
+                                .replaceAll("§§URL1§§", URL_FIRST.toExternalForm().replace("http://", "http:/"));
+        }
+
         final int count = getMockWebConnection().getRequestCount();
         final WebDriver driver = loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
         if (useRealBrowser()) {
             Thread.sleep(DEFAULT_WAIT_TIME.multipliedBy(3).toMillis());
         }
-        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0]);
-        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount() - count);
-        if (getExpectedAlerts().length > 2) {
-            final String exp = getExpectedAlerts()[2].replace("=http://", "=http:/");
-            assertEquals(exp, getMockWebConnection().getLastWebRequest().getUrl().toString());
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, expectedAlerts[0]);
+        assertEquals(Integer.parseInt(expectedAlerts[1]), getMockWebConnection().getRequestCount() - count);
+        if (expectedAlerts.length > 2) {
+            assertEquals(expectedAlerts[2], getMockWebConnection().getLastWebRequest().getUrl().toString());
         }
     }
 }
