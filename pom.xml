@@ -49,7 +49,7 @@
         <junit.version>5.13.4</junit.version>
         <junit-launcher.version>1.13.4</junit-launcher.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
-        <jetty.version>9.4.57.v20241219</jetty.version>
+        <jetty.version>9.4.58.v20250814</jetty.version>
         <quercus.version>4.0.66</quercus.version>
         <log4j.version>2.25.1</log4j.version>
         <slf4j.version>2.0.17</slf4j.version>
