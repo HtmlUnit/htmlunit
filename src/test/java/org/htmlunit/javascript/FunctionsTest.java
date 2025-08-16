@@ -175,4 +175,110 @@ public class FunctionsTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Hello!")
+    public void applyThisFromBoundArgs() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
+                + "  var f = function(x) { return this.toString(); };\n"
+                + "  var a = f.apply;\n"
+                + "  var b = a.bind(f, 'Hello!');\n"
+                + "  log(b([1,2]));\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Hello!")
+    public void applyToApplyCallsCorrectFunction() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
+                + "  function foo(x) {return x;};\n"
+                + "  var r = Function.prototype.apply.apply(foo, ['b', ['Hello!', 'Goodbye!']]);\n"
+                + "  log(r);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("b")
+    public void applyToApplySetsCorrectFunctionThis() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
+                + "  function foo(x) {return this.toString();};\n"
+                + "  var r = Function.prototype.apply.apply(foo, ['b', ['Hello!', 'Goodbye!']]);\n"
+                + "  log(r);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Hello!")
+    public void applyToCallCallsCorrectFunction() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
+                + "  function foo(x) {return x;};\n"
+                + "  var r = foo.call.apply(foo, ['b', 'Hello!']);\n"
+                + "  log(r);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("b")
+    public void applyToCallSetsCorrectFunctionThis() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
+                + "  function foo(x) {return this.toString();};\n"
+                + "  var r = foo.call.apply(foo, ['b', 'Hello!']);\n"
+                + "  log(r);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
