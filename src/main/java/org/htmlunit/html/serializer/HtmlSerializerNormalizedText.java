@@ -638,7 +638,10 @@ public class HtmlSerializerNormalizedText {
             }
 
             boolean crFound = false;
-            for (final char c : text.toCharArray()) {
+            final int textLenght = text.length();
+            for (int i = 0; i < textLenght; i++) {
+                final char c = text.charAt(i);
+
                 if (mode == Mode.NORMALIZE) {
                     if (isSpace(c)) {
                         switch (state_) {

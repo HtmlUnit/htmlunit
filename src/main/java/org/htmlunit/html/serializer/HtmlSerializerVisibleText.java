@@ -812,9 +812,9 @@ public class HtmlSerializerVisibleText {
             }
 
             length--;
-            int i = -1;
-            for (char c : content.toCharArray()) {
-                i++;
+            final int contentLenght = content.length();
+            for (int i = 0; i < contentLenght; i++) {
+                char c = content.charAt(i);
 
                 // handle \r
                 if (c == '\r') {
