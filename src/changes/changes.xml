@@ -7,18 +7,34 @@
     </properties>
 
     <body>
-        <release version="4.15.0" date="August xx, 2025" description="Chrome/Edge 139, Firefox 141, Bugfixes">
+        <release version="4.15.0" date="August 17, 2025" description="Chrome/Edge 139, Firefox 141, core-js, Bugfixes">
+            <action type="update" dev="rbri">
+                Improve WebClientOptions javadoc.
+            </action>
+            <action type="fix" dev="RhinoTeam" issue="#1001">
+                core-js: Fix two more regession from the Interpreter refactoring. Various combinations
+                of apply/bind/call now working again.
+            </action>
             <action type="update" dev="rbri">
                 websocket-client: jetty updated to 9.4.58.v20250814.
             </action>
-            <action type="add" dev="RhinoTeam">
+            <action type="fix" dev="RhinoTeam">
                 core-js: Fix a regression regarding optional chaining operators.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: Always call detectEncoding() to skip bom in case we got an input stream with bom and an encoding.
+            </action>
+            <action type="update" dev="rbri">
+                neko: increase PlaybackInputStream buffer size
+            </action>
+            <action type="add" dev="rbri">
+                neko: addNekoSAXParser Factory added
             </action>
             <action type="add" dev="rbri">
                 WebClient option pageRefreshLimit added. Refresh handling changed to support a clear limit.
                 The initial value is 72 to be backward compatible.
             </action>
-            <action type="add" dev="RhinoTeam">
+            <action type="add" dev="rbri">
                 Dummy impl of PointerEvent#getPersistentDeviceId() returning always 0.
             </action>
             <action type="update" dev="rbri" issue="#1002">

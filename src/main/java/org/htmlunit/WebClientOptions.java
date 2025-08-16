@@ -30,7 +30,17 @@ import javax.net.ssl.SSLContext;
 import org.apache.commons.io.FileUtils;
 
 /**
- * Represents options of a {@link WebClient}.
+ * Configuration options for {@link WebClient} instances.
+ * This class provides fine-grained control over client behavior including:
+ * <ul>
+ *   <li>JavaScript and CSS processing</li>
+ *   <li>SSL/TLS configuration and certificates</li>
+ *   <li>HTTP timeouts and proxy settings</li>
+ *   <li>Memory management and temporary file handling</li>
+ *   <li>WebSocket and geolocation support</li>
+ * </ul>
+ *
+ * <p>All options have sensible defaults and can be modified independently.</p>
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
@@ -143,15 +153,16 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the limit to be used when a page refreshes itself by using a
-     * http refresh header or meta tag. Set this to -1 to allow endless refresh.
-     * <p>
-     * Please have in mind, the {@link NiceRefreshHandler} and the {@link ImmediateRefreshHandler}
-     * have also some loop protection, that triggers first.
+     * Sets the redirect limit for page refresh operations using HTTP refresh headers or meta tags.
+     * This prevents infinite refresh loops by limiting the number of consecutive refreshes allowed.
+     * Set to -1 to allow unlimited refreshes.
      *
-     * @param pageRefreshLimit the number of refresh loops before throwing an exception
+     * <p>Note: The {@link NiceRefreshHandler} and {@link ImmediateRefreshHandler}
+     * have additional loop protection that may trigger before this limit.</p>
+     *
+     * @param pageRefreshLimit the maximum number of refresh loops, or -1 for unlimited
      */
-    public void setRedirectEnabled(final int pageRefreshLimit) {
+    public void setPageRefreshLimit(final int pageRefreshLimit) {
         pageRefreshLimit_ = pageRefreshLimit;
     }
 
@@ -165,12 +176,13 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the directory to be used for storing the response content in
-     * a temporary file see {@link #setMaxInMemory(int)}.
-     * If the given directory does not exist, this creates it.
+     * Sets the directory to be used for storing response content in temporary files.
+     * See {@link #setMaxInMemory(int)} for when temporary files are created.
+     * If the directory doesn't exist, it will be created automatically.
      *
-     * @param tempFileDirectory the directory to be used or null to use the system default
-     * @throws IOException in case of error
+     * @param tempFileDirectory the directory to use, or {@code null} for system default
+     * @throws IOException if directory creation fails
+     * @throws IllegalArgumentException if the path points to an existing file
      */
     public void setTempFileDirectory(final File tempFileDirectory) throws IOException {
         if (tempFileDirectory != null) {
@@ -316,6 +328,8 @@ public class WebClientOptions implements Serializable {
      * @param sslClientProtocols the protocol versions
      * @see javax.net.ssl.SSLSocket#setEnabledProtocols(String[])
      * @see #getSSLClientProtocols()
+     * @see #setSSLClientCipherSuites(String...)
+     * @see #setUseInsecureSSL(boolean)
      */
     public void setSSLClientProtocols(final String... sslClientProtocols) {
         sslClientProtocols_ = sslClientProtocols;
@@ -516,7 +530,8 @@ public class WebClientOptions implements Serializable {
      * Gets the timeout value for the {@link WebConnection}.
      * The default timeout is 90 seconds.
      * @return the timeout value in milliseconds
-     * @see WebClientOptions#setTimeout(int)
+     * @see #setTimeout(int)
+     * @see #setConnectionTimeToLive(long)
      */
     public int getTimeout() {
         return timeout_;
@@ -544,11 +559,11 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the connTimeToLive of the HttpClient connection pool.
-     * Use this if you are working with web pages behind a DNS based load balancer.
-     * Set to -1 (default) for disabling this timeout.
+     * Sets the connection time-to-live for the HttpClient connection pool.
+     * This is useful when working with web pages behind DNS-based load balancers
+     * where IP addresses may change frequently.
      *
-     * @param connectionTimeToLive the value of the timeout in milliseconds
+     * @param connectionTimeToLive the timeout in milliseconds, or -1 to disable (default)
      */
     public void setConnectionTimeToLive(final long connectionTimeToLive) {
         connectionTimeToLive_ = connectionTimeToLive;
@@ -618,9 +633,13 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns the maximum bytes to have in memory, after which the content is saved to a temporary file.
-     * Default is 500 * 1024.
-     * @return the maximum bytes in memory
+     * Returns the maximum bytes stored in memory before content is saved to temporary files.
+     * When response content exceeds this limit, it will be written to a temporary file
+     * in the directory specified by {@link #getTempFileDirectory()}.
+     *
+     * @return the maximum bytes in memory (default: 500 * 1024)
+     * @see #setMaxInMemory(int)
+     * @see #setTempFileDirectory(File)
      */
     public int getMaxInMemory() {
         return maxInMemory_;
@@ -691,12 +710,10 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the local address to be used for request execution.
-     * <p>
-     * On machines with multiple network interfaces, this parameter can be used to select the network interface
-     * from which the connection originates.
+     * Sets the local network interface address for outgoing HTTP requests.
+     * Useful on multi-homed machines to control which network interface is used.
      *
-     * @param localAddress the local address
+     * @param localAddress the local IP address to bind to, or {@code null} for automatic selection
      */
     public void setLocalAddress(final InetAddress localAddress) {
         localAddress_ = localAddress;
@@ -720,8 +737,9 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Sets the screen width.
+     * This value is used by JavaScript's screen.width property.
      *
-     * @param screenWidth the screen width
+     * @param screenWidth the screen width in pixels (must be positive)
      */
     public void setScreenWidth(final int screenWidth) {
         screenWidth_ = screenWidth;
@@ -755,16 +773,23 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * @return the Neko Html parser reader buffer size
+     * Returns the Neko HTML parser reader buffer size.
+     * This controls the internal buffer size used by the NekoHTML parser
+     * for reading HTML content. Larger buffers can improve performance
+     * for large documents but consume more memory.
+     *
+     * @return the buffer size in bytes, or -1 for parser default
      */
     public int getNekoReaderBufferSize() {
         return nekoReaderBufferSize_;
     }
 
     /**
-     * Sets the Neko Html parser reader buffer size.
+     * Sets the Neko HTML parser reader buffer size.
+     * A larger buffer size can improve parsing performance for large HTML documents
+     * but will consume more memory. Set to -1 to use the parser's default buffer size.
      *
-     * @param nekoReaderBufferSize the new value
+     * @param nekoReaderBufferSize the buffer size in bytes, or -1 for default
      */
     public void setNekoReaderBufferSize(final int nekoReaderBufferSize) {
         nekoReaderBufferSize_ = nekoReaderBufferSize;
@@ -789,64 +814,82 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * @return the WebSocket maxTextMessageSize
+     * Returns the maximum size in bytes for WebSocket text messages.
+     * Set to -1 to use the default.
+     *
+     * @return the maximum text message size in bytes, or -1 for default
      */
     public int getWebSocketMaxTextMessageSize() {
         return webSocketMaxTextMessageSize_;
     }
 
     /**
-     * Sets the WebSocket maxTextMessageSize.
+     * Sets the maximum size in bytes for WebSocket text messages.
+     * This limit applies to individual text frames received by the WebSocket.
      *
-     * @param webSocketMaxTextMessageSize the new value
+     * @param webSocketMaxTextMessageSize the maximum size in bytes, or -1 for default
      */
     public void setWebSocketMaxTextMessageSize(final int webSocketMaxTextMessageSize) {
         webSocketMaxTextMessageSize_ = webSocketMaxTextMessageSize;
     }
 
     /**
-     * @return the WebSocket maxTextMessageBufferSize
+     * Returns the maximum buffer size in bytes for assembling WebSocket text messages.
+     * Set to -1 to use the default.
+     *
+     * @return the maximum text message buffer size in bytes, or -1 for default
      */
     public int getWebSocketMaxTextMessageBufferSize() {
         return webSocketMaxTextMessageBufferSize_;
     }
 
     /**
-     * Sets the WebSocket maxTextMessageBufferSize.
+     * Sets the maximum buffer size in bytes for assembling WebSocket text messages.
+     * This controls the memory used when reconstructing fragmented text messages.
+     * The buffer size should typically be larger than the maximum message size to
+     * accommodate message assembly overhead.
      *
-     * @param webSocketMaxTextMessageBufferSize the new value
+     * @param webSocketMaxTextMessageBufferSize the maximum buffer size in bytes, or -1 for default
      */
     public void setWebSocketMaxTextMessageBufferSize(final int webSocketMaxTextMessageBufferSize) {
         webSocketMaxTextMessageBufferSize_ = webSocketMaxTextMessageBufferSize;
     }
 
     /**
-     * @return the WebSocket maxTextMessageSize
+     * Returns the maximum size in bytes for WebSocket binary messages.
+     * Set to -1 to use the default.
+     *
+     * @return the maximum binary message size in bytes, or -1 for default
      */
     public int getWebSocketMaxBinaryMessageSize() {
         return webSocketMaxBinaryMessageSize_;
     }
 
     /**
-     * Sets the WebSocket maxBinaryMessageSize.
+     * Sets the maximum size in bytes for WebSocket binary messages.
+     * This limit applies to individual binary frames received by the WebSocket.
      *
-     * @param webSocketMaxBinaryMessageSize the new value
+     * @param webSocketMaxBinaryMessageSize the maximum size in bytes, or -1 for default
      */
     public void setWebSocketMaxBinaryMessageSize(final int webSocketMaxBinaryMessageSize) {
         webSocketMaxBinaryMessageSize_ = webSocketMaxBinaryMessageSize;
     }
 
     /**
-     * @return the WebSocket maxBinaryMessageBufferSize
+     * Returns the maximum buffer size in bytes for assembling WebSocket binary messages.
+     * Set to -1 to use the container default.
+     *
+     * @return the maximum binary message buffer size in bytes, or -1 for default
      */
     public int getWebSocketMaxBinaryMessageBufferSize() {
         return webSocketMaxBinaryMessageBufferSize_;
     }
 
     /**
-     * Sets the WebSocket maxBinaryMessageBufferSize.
+     * Sets the maximum buffer size in bytes for assembling WebSocket binary messages.
+     * This controls the memory used when reconstructing fragmented binary messages.
      *
-     * @param webSocketMaxBinaryMessageBufferSize the new value
+     * @param webSocketMaxBinaryMessageBufferSize the maximum buffer size in bytes, or -1 for default
      */
     public void setWebSocketMaxBinaryMessageBufferSize(final int webSocketMaxBinaryMessageBufferSize) {
         webSocketMaxBinaryMessageBufferSize_ = webSocketMaxBinaryMessageBufferSize;
@@ -913,13 +956,13 @@ public class WebClientOptions implements Serializable {
         /**
          * Ctor.
          *
-         * @param accuracy the accuracy
-         * @param latitude the latitude
-         * @param longitude the longitude
-         * @param altitude the altitude or null
-         * @param altitudeAccuracy the altitudeAccuracy or null
-         * @param heading the heading or null
-         * @param speed the speed or null
+         * @param latitude the latitude coordinate in decimal degrees
+         * @param longitude the longitude coordinate in decimal degrees
+         * @param accuracy the accuracy of the position in meters
+         * @param altitude the altitude in meters above sea level, or null if unavailable
+         * @param altitudeAccuracy the accuracy of the altitude in meters, or null if unavailable
+         * @param heading the direction of travel in degrees (0-359), or null if unavailable
+         * @param speed the current speed in meters per second, or null if unavailable
          */
         public Geolocation(
                 final double latitude,
@@ -992,7 +1035,11 @@ public class WebClientOptions implements Serializable {
      * If set to {@code true}, the client will accept XMLHttpRequests to URL's
      * using the 'file' protocol. Allowing this introduces security problems and is
      * therefore not allowed by current browsers. But some browsers have special settings
-     * to open this door; therefore we have this option.
+     * to open this door; therefore we have this option also.
+     *
+     * <p><b>Security Warning:</b> Enabling this feature may expose local files
+     * to web content, which can be a serious security risk.</p>
+     *
      * @param fileProtocolForXMLHttpRequestsAllowed whether or not allow (local) file access
      */
     public void setFileProtocolForXMLHttpRequestsAllowed(final boolean fileProtocolForXMLHttpRequestsAllowed) {
