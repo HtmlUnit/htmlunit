@@ -17,7 +17,7 @@ package org.htmlunit;
 /**
  * An adapter for the WebWindowListener interface.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  */
 public class WebWindowAdapter implements WebWindowListener {
 

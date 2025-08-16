@@ -21,7 +21,7 @@ import org.htmlunit.html.HtmlPage;
  * A script pre processor call back. This interface is called when ScriptEngine.execute()
  * is called. It gives developers the opportunity to modify the script to be executed.
  *
- * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Ben Curren
  */
 public interface ScriptPreProcessor {
 

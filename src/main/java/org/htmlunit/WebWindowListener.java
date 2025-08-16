@@ -30,7 +30,7 @@ package org.htmlunit;
  * called for each and every containing (i)Frame when e.g. closing a {@link TopLevelWindow}.
  * </p>
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ronald Brill
  */
 public interface WebWindowListener {

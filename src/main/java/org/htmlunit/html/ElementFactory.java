@@ -20,7 +20,7 @@ import org.xml.sax.Attributes;
 /**
  * Specification of a factory capable of creating {@link DomElement} objects.
  *
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  */
 public interface ElementFactory {

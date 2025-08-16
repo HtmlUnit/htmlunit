@@ -33,7 +33,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 /**
  * Unit tests for {@link HtmlElement}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Denis N. Antonioli
  * @author Daniel Gredler
  * @author Ahmed Ashour

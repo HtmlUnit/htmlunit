@@ -36,8 +36,8 @@ import org.openqa.selenium.WebDriver;
 /**
  * Tests for {@link Window}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author Mike Bowler
+ * @author Chen Jun
  * @author David K. Taylor
  * @author Darrell DeBoer
  * @author Marc Guillemot

@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link HTMLImageElement}.
  *
- * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author George Murnock
  * @author Marc Guillemot
  * @author Ronald Brill
  */

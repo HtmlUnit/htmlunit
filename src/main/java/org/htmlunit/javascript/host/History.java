@@ -32,7 +32,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 /**
  * A JavaScript object for the client's browsing history.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Chris Erskine
  * @author Daniel Gredler
  * @author Ahmed Ashour

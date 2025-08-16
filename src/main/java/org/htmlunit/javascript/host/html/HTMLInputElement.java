@@ -47,8 +47,8 @@ import org.htmlunit.javascript.host.file.FileList;
 /**
  * The JavaScript object for {@link HtmlInput}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour

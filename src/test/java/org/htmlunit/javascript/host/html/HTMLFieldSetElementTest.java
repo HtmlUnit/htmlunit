@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link HTMLFieldSetElement}.
  *
- * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author George Murnock
  * @author Ronald Brill
  * @author Frank Danek
  */

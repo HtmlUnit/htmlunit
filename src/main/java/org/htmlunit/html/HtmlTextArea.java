@@ -32,10 +32,10 @@ import org.w3c.dom.Node;
 /**
  * Wrapper for the HTML element "textarea".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
+ * @author Mike Bowler
+ * @author Barnaby Court
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Daniel Gredler

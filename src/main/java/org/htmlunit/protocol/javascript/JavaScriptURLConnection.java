@@ -24,7 +24,7 @@ import org.apache.commons.io.IOUtils;
 /**
  * A URLConnection for supporting JavaScript URLs.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  */
 public class JavaScriptURLConnection extends URLConnection {
 

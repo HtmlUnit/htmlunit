@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link DomNodeList}.
  *
- * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Tom Anderson
  * @author Frank Danek
  * @author Ronald Brill
  */

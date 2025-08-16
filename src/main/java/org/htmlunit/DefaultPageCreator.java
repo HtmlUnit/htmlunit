@@ -69,9 +69,9 @@ import org.htmlunit.xml.XmlPage;
  *    </tr>
  *  </table>
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
- * @author <a href="mailto:yourgod@users.sourceforge.net">Brad Clarke</a>
+ * @author Mike Bowler
+ * @author Christian Sell
+ * @author Brad Clarke
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler

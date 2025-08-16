@@ -66,19 +66,19 @@ import org.htmlunit.util.UrlUtils;
 /**
  * A JavaScript object for {@code HTMLDocument}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Chen Jun
+ * @author Christian Sell
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Michael Ottati
- * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author George Murnock
  * @author Ahmed Ashour
  * @author Rob Di Marco
  * @author Sudhan Moghe
- * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
+ * @author Mike Dirolf
  * @author Ronald Brill
  * @author Frank Danek
  * @author Sven Strickroth

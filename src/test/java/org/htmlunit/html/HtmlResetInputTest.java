@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link HtmlResetInput}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  */
 public class HtmlResetInputTest extends SimpleWebTestCase {

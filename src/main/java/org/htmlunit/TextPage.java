@@ -24,7 +24,7 @@ import java.nio.file.Path;
  * A generic page that will be returned for any text related content.
  * Specifically any content types that start with {@code text/}
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Ronald Brill
  * @author Ahmed Ashour

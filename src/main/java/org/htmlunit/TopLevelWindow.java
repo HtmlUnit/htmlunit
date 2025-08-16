@@ -22,7 +22,7 @@ import org.htmlunit.util.UrlUtils;
 /**
  * A window representing a top level browser window.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author David D. Kilzer
  * @author Ahmed Ashour

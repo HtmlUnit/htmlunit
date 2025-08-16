@@ -532,7 +532,7 @@ import org.htmlunit.javascript.host.xml.XSLTProcessor;
 /**
  * A container for all the JavaScript configuration information.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill

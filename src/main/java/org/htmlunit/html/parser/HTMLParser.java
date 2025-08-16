@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 /**
  * <p>Interface for the parser used to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.</p>
  *
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Ahmed Ashour

@@ -27,7 +27,7 @@ import org.htmlunit.javascript.host.dom.NodeList;
 /**
  * The JavaScript object {@code HTMLTextAreaElement}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour

@@ -29,7 +29,7 @@ import org.htmlunit.javascript.host.event.MouseEvent;
 /**
  * The JavaScript object representing a TD or TH.
  *
- * @author <a href="https://sourceforge.net/users/marlee/">Mark van Leeuwen</a>
+ * @author Mark van Leeuwen
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Daniel Gredler

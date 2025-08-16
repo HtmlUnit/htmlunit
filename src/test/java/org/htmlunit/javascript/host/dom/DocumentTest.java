@@ -32,13 +32,13 @@ import org.openqa.selenium.WebDriver;
 /**
  * Tests for {@link Document}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Barnaby Court
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Michael Ottati
- * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author George Murnock
  * @author Ahmed Ashour
  * @author Rob Di Marco
  * @author Sudhan Moghe

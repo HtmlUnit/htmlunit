@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link HTMLAnchorElement}.
  *
- * @author <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
+ * @author Alexei Goussev
  * @author Marc Guillemot
  * @author Sudhan Moghe
  * @author Ahmed Ashour

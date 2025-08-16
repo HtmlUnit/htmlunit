@@ -34,7 +34,7 @@ import org.xml.sax.helpers.AttributesImpl;
 /**
  * The JavaScript object for {@link HtmlOption}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Marc Guillemot

@@ -28,7 +28,7 @@ import org.htmlunit.html.HtmlPage;
  * Utility class which contains standard assertions for HTML pages.
  *
  * @author Daniel Gredler
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  */
 public final class WebAssert {

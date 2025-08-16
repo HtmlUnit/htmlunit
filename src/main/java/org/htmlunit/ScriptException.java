@@ -34,7 +34,7 @@ import org.htmlunit.html.HtmlPage;
  * An exception that will be thrown if an error occurs during the processing of
  * a script.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ronald Brill

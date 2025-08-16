@@ -20,7 +20,7 @@ import java.io.Serializable;
  * A handler for JavaScript window.prompt(). Prompts are triggered when the JavaScript
  * method Window.prompt() is called.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

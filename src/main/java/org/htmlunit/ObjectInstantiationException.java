@@ -17,7 +17,7 @@ package org.htmlunit;
 /**
  * Thrown if an object could not be instantiated for some reason.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  */
 public class ObjectInstantiationException extends RuntimeException {

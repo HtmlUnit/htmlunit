@@ -34,7 +34,7 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * Tests for {@link HtmlSelect}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Mike Williams
  * @author Marc Guillemot
  * @author Ahmed Ashour

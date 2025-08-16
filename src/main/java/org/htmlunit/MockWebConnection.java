@@ -33,7 +33,7 @@ import org.htmlunit.util.NameValuePair;
 /**
  * A fake {@link WebConnection} designed to mock out the actual HTTP connections.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Noboru Sinohara
  * @author Marc Guillemot
  * @author Brad Clarke

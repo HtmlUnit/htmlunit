@@ -28,7 +28,7 @@ import org.w3c.dom.Node;
  * @param <E> The element type
  *
  * @author Daniel Gredler
- * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Tom Anderson
  * @author Ronald Brill
  */
 public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractList<E>

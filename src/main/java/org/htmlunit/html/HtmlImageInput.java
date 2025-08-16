@@ -38,9 +38,9 @@ import org.htmlunit.util.NameValuePair;
  * Wrapper for the HTML element "input".
  * HtmlUnit does not download the associated image for performance reasons.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour

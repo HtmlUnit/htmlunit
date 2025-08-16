@@ -21,7 +21,7 @@ import java.net.URLStreamHandler;
 /**
  * Stream handler for "about:" URLs.
  *
- * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author Chen Jun
  */
 public class Handler extends URLStreamHandler {
 

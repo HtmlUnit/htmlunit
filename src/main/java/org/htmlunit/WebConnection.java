@@ -19,7 +19,7 @@ import java.io.IOException;
 /**
  * An object which handles the actual communication portion of page retrieval/submission.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour

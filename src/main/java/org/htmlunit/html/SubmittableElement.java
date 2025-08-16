@@ -19,7 +19,7 @@ import org.htmlunit.util.NameValuePair;
 /**
  * An element that can have it's values sent to the server during a form submit.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Daniel Gredler
  */
 public interface SubmittableElement {

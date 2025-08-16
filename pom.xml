@@ -934,6 +934,7 @@
         </contributor>
         <contributor>
             <name>Barnaby Court</name>
+            <email>BarnabyCourt@users.sourceforge.net</email>
         </contributor>
         <contributor>
             <name>Andreas Hangler</name>
@@ -961,6 +962,7 @@
         </contributor>
         <contributor>
             <name>Mike Gallaher</name>
+            <email>gallaherm@pragmatics.com</email>
         </contributor>
         <contributor>
             <name>Dierk Koenig</name>
@@ -973,6 +975,7 @@
         </contributor>
         <contributor>
             <name>Chris Eldredge</name>
+            <email>chriseldredge@comcast.net</email>
         </contributor>
         <contributor>
             <name>Hans Donner</name>
@@ -982,6 +985,7 @@
         </contributor>
         <contributor>
             <name>George Murnock</name>
+            <email>george@murnock.com</email>
         </contributor>
         <contributor>
             <name>Kent Tong</name>
@@ -1015,6 +1019,7 @@
         </contributor>
         <contributor>
             <name>Mark van Leeuwen</name>
+            <url>https://sourceforge.net/users/marlee/</url>
         </contributor>
         <contributor>
             <name>Brad Murray</name>
@@ -1078,6 +1083,7 @@
         </contributor>
         <contributor>
             <name>Mike Dirolf</name>
+            <email>mike@10gen.com</email>
         </contributor>
         <contributor>
             <name>Mirko Friedenhagen</name>
@@ -1277,6 +1283,26 @@
         </contributor>
         <contributor>
             <name>Christoph Burgmer</name>
+        </contributor>
+        <contributor>
+            <name>Tom Anderson</name>
+            <email>tom.anderson@univ.oxon.org</email>
+        </contributor>
+        <contributor>
+            <name>Knut Johannes Dahle</name>
+            <email>knut.johannes.dahle@gmail.com</email>
+        </contributor>
+        <contributor>
+            <name>Alexei Goussev</name>
+            <email>gousseff@netscape.net</email>
+        </contributor>
+        <contributor>
+            <name>Nick Kralevich</name>
+            <email>nnk@google.com</email>
+        </contributor>
+        <contributor>
+            <name>Marcos Vinicius B. de Souza</name>
+            <email>marvin.java@gmail.com</email>
         </contributor>
     </contributors>
     <dependencies>

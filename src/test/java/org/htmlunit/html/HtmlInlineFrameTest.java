@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit tests for {@link HtmlInlineFrame}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Daniel Gredler

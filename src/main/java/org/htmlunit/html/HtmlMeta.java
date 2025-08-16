@@ -23,8 +23,8 @@ import org.htmlunit.WebClient;
 /**
  * Wrapper for the HTML element "meta".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill

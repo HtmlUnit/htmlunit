@@ -122,10 +122,10 @@ import org.htmlunit.xml.XmlPage;
 /**
  * A JavaScript object for {@code Window}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author Mike Bowler
+ * @author Chen Jun
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Darrell DeBoer
  * @author Marc Guillemot
  * @author Dierk Koenig

@@ -62,11 +62,11 @@ import org.w3c.dom.NodeList;
 /**
  * Tests for {@link HtmlPage}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Noboru Sinohara
  * @author David K. Taylor
  * @author Andreas Hangler
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

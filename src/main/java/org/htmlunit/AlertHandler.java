@@ -20,7 +20,7 @@ import java.io.Serializable;
  * A handler for JavaScript alerts. Alerts are triggered when the JavaScript method Window.alert()
  * is called.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ronald Brill
  */
 @FunctionalInterface

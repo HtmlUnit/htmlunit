@@ -20,7 +20,7 @@ import java.net.URL;
 /**
  * A handler for page refreshes. A refresh can be triggered by a response header or a meta tag.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Daniel Gredler
  */
 public interface RefreshHandler {

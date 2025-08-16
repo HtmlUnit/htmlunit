@@ -62,7 +62,7 @@ import com.github.romankh3.image.comparison.model.ImageComparisonState;
 /**
  * Common superclass for HtmlUnit tests.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Chris Erskine

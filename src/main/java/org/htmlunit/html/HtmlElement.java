@@ -58,10 +58,10 @@ import org.w3c.dom.Text;
 /**
  * An abstract wrapper for HTML elements.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
+ * @author Mike Bowler
+ * @author Mike J. Bresnahan
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David D. Kilzer
  * @author Mike Gallaher
  * @author Denis N. Antonioli

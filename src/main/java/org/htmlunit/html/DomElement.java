@@ -71,7 +71,7 @@ import org.xml.sax.SAXException;
 /**
  * @author Ahmed Ashour
  * @author Marc Guillemot
- * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Tom Anderson
  * @author Ronald Brill
  * @author Frank Danek
  * @author Sven Strickroth

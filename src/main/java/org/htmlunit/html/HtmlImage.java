@@ -55,11 +55,11 @@ import org.htmlunit.util.UrlUtils;
 /**
  * Wrapper for the HTML element "img".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
- * @author <a href="mailto:knut.johannes.dahle@gmail.com">Knut Johannes Dahle</a>
+ * @author Knut Johannes Dahle
  * @author Ronald Brill
  * @author Frank Danek
  * @author Carsten Steul

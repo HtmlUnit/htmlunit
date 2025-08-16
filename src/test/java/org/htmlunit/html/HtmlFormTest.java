@@ -38,8 +38,8 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link HtmlForm}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
+ * @author Mike Bowler
+ * @author Jun Chen
  * @author George Murnock
  * @author Marc Guillemot
  * @author Ahmed Ashour

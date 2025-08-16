@@ -24,7 +24,7 @@ import org.htmlunit.javascript.background.JavaScriptJobManager;
 /**
  * An interface that represents one window in a browser. It could be a top level window or a frame.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author David D. Kilzer
  */

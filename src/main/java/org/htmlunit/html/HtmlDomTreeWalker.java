@@ -27,7 +27,7 @@ import org.w3c.dom.traversal.NodeFilter;
  *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">
  *     DOM-Level-2-Traversal-Range</a>
- * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
+ * @author Mike Dirolf
  * @author Frank Danek
  * @author Ahmed Ashour
  * @author Ronald Brill

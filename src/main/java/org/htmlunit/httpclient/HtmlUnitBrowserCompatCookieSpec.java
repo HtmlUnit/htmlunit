@@ -56,7 +56,7 @@ import org.htmlunit.BrowserVersion;
 
  * Implementation is based on the HttpClient code.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Noboru Sinohara
  * @author David D. Kilzer
  * @author Marc Guillemot

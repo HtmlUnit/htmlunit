@@ -24,7 +24,7 @@ import org.htmlunit.RefreshHandler;
  * A handler for page refreshes that logs the refreshes but doesn't actually
  * perform any refreshes.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Daniel Gredler
  */
 public class LoggingRefreshHandler implements RefreshHandler {

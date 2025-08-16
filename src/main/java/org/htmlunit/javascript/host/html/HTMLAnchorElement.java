@@ -47,8 +47,8 @@ import org.htmlunit.util.UrlUtils;
 /**
  * The JavaScript object that represents an anchor.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
+ * @author Mike Bowler
+ * @author Alexei Goussev
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Chris Erskine

@@ -23,7 +23,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 /**
  * Tests for {@link HtmlTableCell}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Frank Danek
  */

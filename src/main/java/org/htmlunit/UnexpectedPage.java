@@ -20,7 +20,7 @@ import java.io.InputStream;
 /**
  * A generic page that is returned whenever an unexpected content type is returned by the server.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Ronald Brill
  * @author Ahmed Ashour

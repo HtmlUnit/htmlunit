@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link HtmlSubmitInput}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */

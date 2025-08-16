@@ -33,7 +33,7 @@ import org.openqa.selenium.WebElement;
  * Tests for {@link Node}.
  *
  * @author Brad Clarke
- * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author George Murnock
  * @author Bruce Faulkner
  * @author Marc Guillemot
  * @author Ahmed Ashour

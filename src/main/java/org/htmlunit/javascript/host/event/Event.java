@@ -41,7 +41,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * Level 2 Event Documentation</a> or <a href="http://msdn2.microsoft.com/en-us/library/aa703876.aspx">IE's
  * IHTMLEventObj interface</a>.
  *
- * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
+ * @author Chris Eldredge
  * @author Mike Bowler
  * @author Chris Erskine
  * @author Marc Guillemot

@@ -25,8 +25,8 @@ import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
  * Contains information about a single style element, including its name, its value, and an index which
  * can be compared against other indices in order to determine precedence.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
+ * @author Christian Sell
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Ahmed Ashour

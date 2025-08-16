@@ -23,7 +23,7 @@ import org.xml.sax.helpers.AttributesImpl;
 /**
  * Tests for {@link DefaultElementFactory}.
  *
- * @author <a href="mailto:marvin.java@gmail.com">Marcos Vinicius B. de Souza</a>
+ * @author Marcos Vinicius B. de Souza
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill

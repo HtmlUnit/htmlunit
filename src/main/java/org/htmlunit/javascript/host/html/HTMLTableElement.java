@@ -43,7 +43,7 @@ import org.htmlunit.javascript.host.dom.Node;
  * The JavaScript object {@code HTMLTableElement}.
  *
  * @author David D. Kilzer
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Marc Guillemot

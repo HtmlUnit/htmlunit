@@ -50,11 +50,11 @@ import org.htmlunit.javascript.host.html.HTMLHtmlElement;
  * The JavaScript object {@code Node} which is the base class for all DOM
  * objects. This will typically wrap an instance of {@link DomNode}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Barnaby Court
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
- * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author Christian Sell
+ * @author George Murnock
  * @author Chris Erskine
  * @author Bruce Faulkner
  * @author Ahmed Ashour

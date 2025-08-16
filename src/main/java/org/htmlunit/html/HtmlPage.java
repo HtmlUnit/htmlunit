@@ -117,12 +117,12 @@ import org.w3c.dom.ProcessingInstruction;
  * </code>
  * </p>
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Alex Nikiforoff
  * @author Noboru Sinohara
  * @author David K. Taylor
  * @author Andreas Hangler
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -130,7 +130,7 @@ import org.w3c.dom.ProcessingInstruction;
  * @author Dmitri Zoubkov
  * @author Sudhan Moghe
  * @author Ethan Glasser-Camp
- * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Tom Anderson
  * @author Ronald Brill
  * @author Frank Danek
  * @author Joerg Werner

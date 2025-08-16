@@ -22,15 +22,15 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link HtmlUnitScriptable}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
+ * @author Mike Bowler
+ * @author Barnaby Court
  * @author David K. Taylor
- * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Ben Curren
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Sudhan Moghe
- * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
+ * @author Mike Dirolf
  * @author Frank Danek
  * @author Ronald Brill
  */

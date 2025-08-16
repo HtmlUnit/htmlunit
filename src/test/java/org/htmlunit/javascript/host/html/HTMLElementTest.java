@@ -34,7 +34,7 @@ import org.openqa.selenium.WebElement;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Hans Donner
- * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author George Murnock
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  * @author Sudhan Moghe

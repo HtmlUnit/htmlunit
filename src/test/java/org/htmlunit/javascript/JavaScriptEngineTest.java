@@ -57,10 +57,10 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for the {@link JavaScriptEngine}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Noboru Sinohara
  * @author Darrell DeBoer
- * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Ben Curren
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author David K. Taylor

@@ -53,7 +53,7 @@ import org.htmlunit.util.MimeType;
 /**
  * A JavaScript object {@code HTMLFormElement}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Daniel Gredler
  * @author Kent Tong
  * @author Chris Erskine

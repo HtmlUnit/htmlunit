@@ -23,7 +23,7 @@ import org.w3c.dom.Node;
 /**
  * An implementation of DomNodeList that is much less expensive for iteration.
  *
- * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Tom Anderson
  */
 class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomNodeList<DomNode> {
 

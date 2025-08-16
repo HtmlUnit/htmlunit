@@ -19,7 +19,7 @@ import java.io.Serializable;
 /**
  * A handler for changes to <code>window.status</code>.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ronald Brill
  */
 public interface StatusHandler extends Serializable {

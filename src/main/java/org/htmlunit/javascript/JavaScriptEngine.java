@@ -87,11 +87,11 @@ import org.htmlunit.javascript.polyfill.Polyfill;
  * <p>Like all classes in this package, this class is not intended for direct use
  * and may change without notice.</p>
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author Mike Bowler
+ * @author Chen Jun
  * @author David K. Taylor
  * @author Chris Erskine
- * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Ben Curren
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Daniel Gredler

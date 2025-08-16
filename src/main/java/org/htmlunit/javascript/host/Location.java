@@ -44,7 +44,7 @@ import org.htmlunit.util.UrlUtils;
 /**
  * A JavaScript object for {@code Location}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Michael Ottati
  * @author Marc Guillemot
  * @author Chris Erskine

@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link HtmlTableRow}.
  *
- * @author <a href="mailto:gallaherm@pragmatics.com">Mike Gallaher</a>
+ * @author Mike Gallaher
  * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Marc Guillemot

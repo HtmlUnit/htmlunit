@@ -23,9 +23,9 @@ import org.htmlunit.SgmlPage;
 /**
  * Superclass for the wrappers for the HTML elements "thead", "tbody" and "tfoot".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill

@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link TreeWalker}.
  *
- * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
+ * @author Mike Dirolf
  * @author Marc Guillemot
  * @author Frank Danek
  */

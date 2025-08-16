@@ -53,7 +53,7 @@ import org.htmlunit.util.MimeType;
  * outside is changed. This is more or less the same you can do with real browsers installing
  * plugins like UserAgentSwitcher.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Chris Erskine

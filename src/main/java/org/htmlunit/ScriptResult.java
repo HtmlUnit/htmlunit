@@ -19,7 +19,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
 /**
  * This object contains the result of executing a chunk of script code.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  */
 public final class ScriptResult {

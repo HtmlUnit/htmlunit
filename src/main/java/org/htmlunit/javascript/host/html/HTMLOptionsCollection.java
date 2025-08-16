@@ -36,7 +36,7 @@ import org.htmlunit.javascript.host.dom.DOMException;
  * This is the array returned by the "options" property of Select.
  *
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Bruce Faulkner

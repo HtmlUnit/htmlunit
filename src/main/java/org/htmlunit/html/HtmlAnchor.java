@@ -43,9 +43,9 @@ import org.htmlunit.util.UrlUtils;
 /**
  * Wrapper for the HTML element "a".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Dmitri Zoubkov
  * @author Ronald Brill

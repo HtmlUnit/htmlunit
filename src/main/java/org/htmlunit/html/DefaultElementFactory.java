@@ -41,7 +41,7 @@ import org.xml.sax.Attributes;
  * where the first one is the owning page of the element, the second one is a map
  * holding the initial attributes for the element.
  *
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author David K. Taylor

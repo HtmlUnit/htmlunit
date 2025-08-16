@@ -29,8 +29,8 @@ import org.htmlunit.cssparser.parser.InputSource;
 /**
  * Wrapper for the HTML element "style".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek

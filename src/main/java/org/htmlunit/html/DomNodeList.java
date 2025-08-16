@@ -21,7 +21,7 @@ import org.w3c.dom.NodeList;
 /**
  * A list of {@link DomNode}s which is both a W3C {@link NodeList} and a java {@link List}.
  *
- * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Tom Anderson
  * @param <E> the element type
  */
 public interface DomNodeList<E extends DomNode> extends NodeList, List<E> {

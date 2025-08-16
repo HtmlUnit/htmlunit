@@ -24,7 +24,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Test class for {@link HTMLParser}.
  *
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Sudhan Moghe

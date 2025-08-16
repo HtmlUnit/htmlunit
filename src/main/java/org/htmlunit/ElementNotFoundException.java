@@ -17,7 +17,7 @@ package org.htmlunit;
 /**
  * An exception that is thrown when a specified XML element cannot be found in the DOM model.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  */
 public class ElementNotFoundException extends RuntimeException {
 

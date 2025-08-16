@@ -25,9 +25,9 @@ import org.htmlunit.javascript.host.event.Event;
 /**
  * Wrapper for the HTML element "label".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill

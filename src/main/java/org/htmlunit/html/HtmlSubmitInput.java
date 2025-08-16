@@ -25,9 +25,9 @@ import org.htmlunit.util.StringUtils;
 /**
  * Wrapper for the HTML element "input".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot

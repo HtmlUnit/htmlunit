@@ -28,7 +28,7 @@ import org.htmlunit.util.StringUtils;
 /**
  * A simple WebResponse created from a string. Content is assumed to be of type <code>text/html</code>.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Brad Clarke
  * @author Ahmed Ashour

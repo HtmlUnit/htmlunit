@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link Event}.
  *
- * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
+ * @author Chris Eldredge
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Marc Guillemot

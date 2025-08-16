@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link HTMLSelectElement}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Marc Guillemot
  * @author Bruce Faulkner

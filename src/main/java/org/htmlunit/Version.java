@@ -20,7 +20,7 @@ import org.htmlunit.html.HtmlPage;
  * Class to display version information about HtmlUnit. This is the class
  * that will be executed if the JAR file is run.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Ronald Brill
  */

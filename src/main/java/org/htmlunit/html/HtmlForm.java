@@ -60,10 +60,10 @@ import org.htmlunit.util.UrlUtils;
 /**
  * Wrapper for the HTML element "form".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Brad Clarke
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author George Murnock
  * @author Kent Tong

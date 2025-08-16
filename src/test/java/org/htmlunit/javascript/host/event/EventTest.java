@@ -27,7 +27,7 @@ import org.openqa.selenium.WebElement;
  * Tests that when DOM events such as "onclick" have access
  * to an {@link Event} object with context information.
  *
- * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
+ * @author Chris Eldredge
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Marc Guillemot

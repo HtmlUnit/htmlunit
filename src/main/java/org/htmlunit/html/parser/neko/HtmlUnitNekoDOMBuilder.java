@@ -79,7 +79,7 @@ import org.xml.sax.ext.LexicalHandler;
  * the ContentHandler interface. Thus all parser APIs are kept private. The ContentHandler methods
  * consume SAX events to build the page DOM
  *
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Ahmed Ashour

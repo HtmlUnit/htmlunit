@@ -28,7 +28,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 /**
  * Tests for {@link HtmlButton}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Brad Clarke
  * @author Marc Guillemot

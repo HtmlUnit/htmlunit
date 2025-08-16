@@ -40,9 +40,9 @@ import org.w3c.dom.Attr;
 /**
  * Base class for frame and iframe.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author David D. Kilzer
  * @author Stefan Anzinger

@@ -42,7 +42,7 @@ import org.htmlunit.javascript.host.html.HTMLUnknownElement;
 /**
  * Base class for Rhino host objects in HtmlUnit (not bound to a DOM node).
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Marc Guillemot
  * @author Chris Erskine

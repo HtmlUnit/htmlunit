@@ -32,8 +32,8 @@ import org.htmlunit.javascript.host.dom.Document;
  * (i.e. <code>document.write("&lt;span id='mySpan'/&gt;"); document.getElementById("mySpan").tagName;</code>
  * can't work with a filter).
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author David K. Taylor
  * @author Ahmed Ashour

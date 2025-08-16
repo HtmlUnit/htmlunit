@@ -39,7 +39,7 @@ import org.htmlunit.util.NameValuePair;
 /**
  * A response from a web server.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Brad Clarke
  * @author Noboru Sinohara
  * @author Marc Guillemot

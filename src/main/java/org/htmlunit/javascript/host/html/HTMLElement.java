@@ -115,10 +115,10 @@ import org.htmlunit.javascript.host.event.MouseEvent;
  * The JavaScript object {@code HTMLElement} which is the base class for all HTML
  * objects. This will typically wrap an instance of {@link HtmlElement}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Barnaby Court
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Chris Erskine
  * @author David D. Kilzer
  * @author Daniel Gredler

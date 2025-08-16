@@ -39,8 +39,8 @@ import org.htmlunit.util.StringUtils;
 /**
  * A css StyleDeclaration.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
+ * @author Christian Sell
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Ahmed Ashour

@@ -27,7 +27,7 @@ import org.w3c.dom.Text;
  * Representation of a text node in the HTML DOM.
  *
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Rodney Gitzel
  * @author Ahmed Ashour
  * @author Sudhan Moghe

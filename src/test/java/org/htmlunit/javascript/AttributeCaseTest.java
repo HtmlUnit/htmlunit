@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link HtmlElement} attributes.
  *
  * @author David D. Kilzer
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ronald Brill
  */
 public class AttributeCaseTest extends SimpleWebTestCase {

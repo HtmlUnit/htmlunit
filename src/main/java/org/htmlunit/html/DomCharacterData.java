@@ -21,7 +21,7 @@ import org.w3c.dom.CharacterData;
  * Wrapper for the DOM node CharacterData.
  *
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Philip Graf
  * @author Ronald Brill

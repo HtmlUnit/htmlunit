@@ -27,8 +27,8 @@ import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
 /**
  * A css StyleDeclaration backed by a {@link CSSStyleDeclarationImpl}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
+ * @author Christian Sell
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Ahmed Ashour

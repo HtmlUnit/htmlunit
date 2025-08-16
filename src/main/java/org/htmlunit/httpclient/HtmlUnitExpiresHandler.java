@@ -28,7 +28,7 @@ import org.htmlunit.BrowserVersion;
 /**
  * Customized BasicExpiresHandler for HtmlUnit.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Noboru Sinohara
  * @author David D. Kilzer
  * @author Marc Guillemot

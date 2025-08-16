@@ -34,7 +34,7 @@ import org.junit.jupiter.api.BeforeEach;
  * <b>Note that {@link WebDriverTestCase} should be used unless HtmlUnit-specific feature
  * is needed and Selenium does not support it.</b>
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Chris Erskine

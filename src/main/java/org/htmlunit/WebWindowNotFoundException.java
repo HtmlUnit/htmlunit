@@ -18,7 +18,7 @@ package org.htmlunit;
  * Exception to indicate that no {@link WebWindow} could be found that matched
  * a given name.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  */
 public class WebWindowNotFoundException extends RuntimeException {
     private final String name_;

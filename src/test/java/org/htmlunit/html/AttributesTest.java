@@ -39,7 +39,7 @@ import org.junit.jupiter.api.TestFactory;
  * <p>With the new custom DOM, this test has somewhat lost its significance.
  * We simply set and get the attributes and compare the results.</p>
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Christian Sell
  * @author Marc Guillemot
  * @author Ahmed Ashour

@@ -122,14 +122,14 @@ import org.htmlunit.webstart.WebStartHandler;
  * <p>
  * Note: a {@link WebClient} instance is <b>not thread safe</b>. It is intended to be used from a single thread.
  * </p>
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
+ * @author Mike Bowler
+ * @author Mike J. Bresnahan
  * @author Dominique Broeglin
  * @author Noboru Sinohara
- * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author Chen Jun
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
- * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Christian Sell
+ * @author Ben Curren
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Daniel Gredler

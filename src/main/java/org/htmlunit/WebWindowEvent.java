@@ -19,7 +19,7 @@ import java.util.EventObject;
 /**
  * An event that will be fired when a WebWindow changes.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  */
 public final class WebWindowEvent extends EventObject {

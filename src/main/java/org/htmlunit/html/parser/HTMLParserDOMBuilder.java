@@ -19,7 +19,7 @@ package org.htmlunit.html.parser;
  *
  * <p>Interface for the parser.</p>
  *
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Ahmed Ashour

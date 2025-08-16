@@ -21,8 +21,8 @@ import org.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "title".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
+ * @author Christian Sell
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Ahmed Ashour

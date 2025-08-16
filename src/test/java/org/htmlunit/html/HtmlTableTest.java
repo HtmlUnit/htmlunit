@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for {@link HtmlTable}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill

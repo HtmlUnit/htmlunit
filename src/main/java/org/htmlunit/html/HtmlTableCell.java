@@ -22,9 +22,9 @@ import org.htmlunit.SgmlPage;
 /**
  * An abstract cell that provides the implementation for HtmlTableDataCell and HtmlTableHeaderCell.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Lai Quang Duong

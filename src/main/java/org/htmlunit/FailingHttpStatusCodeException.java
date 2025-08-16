@@ -19,7 +19,7 @@ import java.net.URL;
 /**
  * An exception that is thrown when the server returns a failing status code.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  */
 public class FailingHttpStatusCodeException extends RuntimeException {

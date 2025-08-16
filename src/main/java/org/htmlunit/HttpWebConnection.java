@@ -117,7 +117,7 @@ import org.htmlunit.util.UrlUtils;
 /**
  * Default implementation of {@link WebConnection}, using the HttpClient library to perform HTTP requests.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Noboru Sinohara
  * @author David D. Kilzer
  * @author Marc Guillemot

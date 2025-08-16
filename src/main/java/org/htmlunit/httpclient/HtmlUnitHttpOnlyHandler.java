@@ -24,7 +24,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 /**
  * Customized CookieAttributeHandler for handling of the httponly attribute.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Noboru Sinohara
  * @author David D. Kilzer
  * @author Marc Guillemot
