@@ -27,9 +27,22 @@ import org.htmlunit.html.HtmlPage;
 /**
  * Utility class which contains standard assertions for HTML pages.
  *
+ * <p>This class provides a collection of static assertion methods for testing
+ * HTML page content, structure, and behavior. All assertion methods throw
+ * {@link AssertionError} when the expected condition is not met.</p>
+ *
+ * <p>Common use cases include:</p>
+ * <ul>
+ *   <li>Verifying page titles and content</li>
+ *   <li>Checking for presence/absence of elements</li>
+ *   <li>Validating form inputs and links</li>
+ *   <li>Ensuring accessibility attributes are properly set</li>
+ * </ul>
+ *
  * @author Daniel Gredler
  * @author Mike Bowler
  * @author Ahmed Ashour
+ * @author Ronald Broöö
  */
 public final class WebAssert {
 
@@ -45,6 +58,8 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param title the expected title
+     * @throws AssertionError if the page title does not match the expected title
+     * @throws NullPointerException if page or title is null
      */
     public static void assertTitleEquals(final HtmlPage page, final String title) {
         final String s = page.getTitleText();
@@ -59,6 +74,8 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param titlePortion the substring which the page title is expected to contain
+     * @throws AssertionError if the page title does not contain the substring
+     * @throws NullPointerException if page or titlePortion is null
      */
     public static void assertTitleContains(final HtmlPage page, final String titlePortion) {
         final String s = page.getTitleText();
@@ -73,6 +90,8 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param regex the regular expression that the page title is expected to match
+     * @throws AssertionError if the page title does not match the regular expression
+     * @throws NullPointerException if page or regex is null
      */
     public static void assertTitleMatches(final HtmlPage page, final String regex) {
         final String s = page.getTitleText();
@@ -86,7 +105,9 @@ public final class WebAssert {
      * Verifies that the specified page contains an element with the specified ID.
      *
      * @param page the page to check
-     * @param id the expected ID of an element in the page
+     * @param id the ID of an element expected in the page
+     * @throws AssertionError if no element with the specified ID is found
+     * @throws NullPointerException if page or id is null
      */
     public static void assertElementPresent(final HtmlPage page, final String id) {
         try {
@@ -101,8 +122,16 @@ public final class WebAssert {
     /**
      * Verifies that the specified page contains an element matching the specified XPath expression.
      *
+     * <p><b>Example usage:</b></p>
+     * <pre>{@code
+     * WebAssert.assertElementPresentByXPath(page, "//div[@class='error']");
+     * WebAssert.assertElementPresentByXPath(page, "//input[@type='submit' and @value='Login']");
+     * }</pre>
+     *
      * @param page the page to check
      * @param xpath the XPath expression which is expected to match an element in the page
+     * @throws AssertionError if no elements match the XPath expression
+     * @throws NullPointerException if page or xpath is null
      */
     public static void assertElementPresentByXPath(final HtmlPage page, final String xpath) {
         final List<?> elements = page.getByXPath(xpath);
@@ -118,6 +147,8 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param id the ID of an element which expected to not exist on the page
+     * @throws AssertionError if an element with the specified ID is found
+     * @throws NullPointerException if page or id is null
      */
     public static void assertElementNotPresent(final HtmlPage page, final String id) {
         try {
@@ -136,12 +167,13 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param xpath the XPath expression which is expected to not match an element in the page
+     * @throws AssertionError if any elements match the XPath expression
      */
     public static void assertElementNotPresentByXPath(final HtmlPage page, final String xpath) {
         final List<?> elements = page.getByXPath(xpath);
         if (!elements.isEmpty()) {
-            final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
-                            + "'.";
+            final String msg = "The page contains " + elements.size()
+                                    + " element(s) matching the XPath expression '" + xpath + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -151,6 +183,8 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param text the text to check for
+     * @throws AssertionError if the page does not contain the specified text
+     * @throws NullPointerException if page or text is null
      */
     public static void assertTextPresent(final HtmlPage page, final String text) {
         if (!page.asNormalizedText().contains(text)) {
@@ -166,6 +200,9 @@ public final class WebAssert {
      * @param page the page to check
      * @param text the text to check for
      * @param id the ID of the element which is expected to contain the specified text
+     * @throws AssertionError if the element does not contain the specified text
+     * @throws ElementNotFoundException if no element with the specified ID exists
+     * @throws NullPointerException if any parameter is null
      */
     public static void assertTextPresentInElement(final HtmlPage page, final String text, final String id) {
         try {
@@ -187,6 +224,8 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param text the text to check for
+     * @throws AssertionError if the page contains the specified text
+     * @throws NullPointerException if page or text is null
      */
     public static void assertTextNotPresent(final HtmlPage page, final String text) {
         if (page.asNormalizedText().contains(text)) {
@@ -223,6 +262,9 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param id the ID of the link which the page is expected to contain
+     * @throws AssertionError if no link with the specified ID is found
+     * @see #assertLinkNotPresent(HtmlPage, String)
+     * @see #assertLinkPresentWithText(HtmlPage, String)
      */
     public static void assertLinkPresent(final HtmlPage page, final String id) {
         try {
@@ -239,6 +281,9 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param id the ID of the link which the page is expected to not contain
+     * @throws AssertionError if a link with the specified ID is found
+     * @see #assertLinkPresent(HtmlPage, String)
+     * @see #assertLinkNotPresentWithText(HtmlPage, String)
      */
     public static void assertLinkNotPresent(final HtmlPage page, final String id) {
         try {
@@ -298,6 +343,8 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param name the expected name of a form on the page
+     * @throws AssertionError if no form with the specified name is found
+     * @see #assertFormNotPresent(HtmlPage, String)
      */
     public static void assertFormPresent(final HtmlPage page, final String name) {
         try {
@@ -314,6 +361,8 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param name the name of a form which should not exist on the page
+     * @throws AssertionError if a form with the specified name is found
+     * @see #assertFormPresent(HtmlPage, String)
      */
     public static void assertFormNotPresent(final HtmlPage page, final String name) {
         try {
@@ -331,6 +380,9 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param name the name of the input element to look for
+     * @throws AssertionError if no input element with the specified name is found
+     * @see #assertInputNotPresent(HtmlPage, String)
+     * @see #assertInputContainsValue(HtmlPage, String, String)
      */
     public static void assertInputPresent(final HtmlPage page, final String name) {
         final String xpath = "//input[@name='" + name + "']";
@@ -345,12 +397,14 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param name the name of the input element to look for
+     * @throws AssertionError if an input element with the specified name is found
+     * @throws NullPointerException if page or name is null
      */
     public static void assertInputNotPresent(final HtmlPage page, final String name) {
         final String xpath = "//input[@name='" + name + "']";
         final List<?> list = page.getByXPath(xpath);
         if (!list.isEmpty()) {
-            throw new AssertionError("Unable to find an input element named '" + name + "'.");
+            throw new AssertionError("Found an input element named '" + name + "' when none was expected.");
         }
     }
 
@@ -405,9 +459,13 @@ public final class WebAssert {
      * all tabbable elements should have the <code>tabindex</code> attribute set.</p>
      *
      * <p>This method verifies that all tabbable elements have a valid value set for
-     * the <code>tabindex</code> attribute.</p>
+     * the <code>tabindex</code> attribute. Valid values are positive integers,
+     * 0 (for default tab order), or -1 (to exclude from tab order).</p>
+     *
+     * <p>The following elements are checked: a, area, button, input, object, select, textarea</p>
      *
      * @param page the page to check
+     * @throws AssertionError if any tabbable element has an invalid or missing tabindex attribute
      */
     public static void assertAllTabIndexAttributesSet(final HtmlPage page) {
         final List<String> tags =
@@ -429,7 +487,10 @@ public final class WebAssert {
      * keyboard navigation. This method verifies that all the <code>accesskey</code> attributes on the
      * specified page are unique.
      *
+     * <p>Duplicate access keys can confuse users and make keyboard navigation unpredictable.</p>
+     *
      * @param page the page to check
+     * @throws AssertionError if any access key is used more than once on the page
      */
     public static void assertAllAccessKeyAttributesUnique(final HtmlPage page) {
         final List<String> list = new ArrayList<>();
@@ -448,6 +509,8 @@ public final class WebAssert {
      * Verifies that all element IDs in the specified page are unique.
      *
      * @param page the page to check
+     * @throws AssertionError if any element ID is used more than once on the page
+     * @throws NullPointerException if page is null
      */
     public static void assertAllIdAttributesUnique(final HtmlPage page) {
         final List<String> list = new ArrayList<>();
@@ -465,8 +528,10 @@ public final class WebAssert {
     /**
      * Assert that the specified parameter is not null. Throw a NullPointerException
      * if a null is found.
+     *
      * @param description the description to pass into the NullPointerException
      * @param object the object to check for null
+     * @throws NullPointerException if the object is null
      */
     public static void notNull(final String description, final Object object) {
         if (object == null) {

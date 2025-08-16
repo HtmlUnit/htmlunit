@@ -9,6 +9,9 @@
     <body>
         <release version="4.15.0" date="August 17, 2025" description="Chrome/Edge 139, Firefox 141, core-js, Bugfixes">
             <action type="update" dev="rbri">
+                Improve WebAssert javadoc.
+            </action>
+            <action type="update" dev="rbri">
                 Improve WebClientOptions javadoc.
             </action>
             <action type="fix" dev="RhinoTeam" issue="#1001">
