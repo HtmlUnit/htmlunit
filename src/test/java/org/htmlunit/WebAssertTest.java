@@ -136,7 +136,8 @@ public class WebAssertTest extends SimpleWebTestCase {
         final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertElementNotPresentByXPath(page, "html/body/div");
         });
-        assertEquals("Found 1 unexpected element(s) matching the XPath expression 'html/body/div'.", error.getMessage());
+        assertEquals("Found 1 unexpected element(s) matching the XPath expression 'html/body/div'.",
+                error.getMessage());
     }
 
     /**
