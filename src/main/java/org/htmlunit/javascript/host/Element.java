@@ -42,6 +42,7 @@ import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomAttr;
+import org.htmlunit.html.DomCDataSection;
 import org.htmlunit.html.DomCharacterData;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomElement;
@@ -1007,6 +1008,9 @@ public class Element extends Node {
                 final String s = PRINT_NODE_PATTERN.matcher(node.getNodeValue()).replaceAll(" ");
                 builder.append("<!--").append(s).append("-->");
             }
+        }
+        else if (node instanceof DomCDataSection) {
+            builder.append("<![CDATA[").append(node.getNodeValue()).append("]]>");
         }
         else if (node instanceof DomCharacterData) {
             // Remove whitespace sequences, possibly escape XML characters.

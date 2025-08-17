@@ -24,6 +24,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes.Definition;
+import org.htmlunit.html.DomCDataSection;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -105,7 +106,10 @@ public class HtmlSerializerVisibleText {
      * @param mode the {@link Mode} to use for processing
      */
     protected void appendNode(final HtmlSerializerTextBuilder builder, final DomNode node, final Mode mode) {
-        if (node instanceof DomText) {
+        if (node instanceof DomCDataSection) {
+            // ignore
+        }
+        else if (node instanceof DomText) {
             appendText(builder, (DomText) node, mode);
         }
         else if (node instanceof DomComment) {

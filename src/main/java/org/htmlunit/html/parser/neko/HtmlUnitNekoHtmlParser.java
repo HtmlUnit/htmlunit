@@ -155,6 +155,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
                 domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
                 domBuilder.setFeature(HTMLScanner.SCRIPT_STRIP_CDATA_DELIMS, true);
                 domBuilder.setFeature(HTMLScanner.STYLE_STRIP_CDATA_DELIMS, true);
+                domBuilder.setFeature(HTMLScanner.CDATA_SECTIONS, true);
                 domBuilder.setFeature(HTMLScanner.CDATA_EARLY_CLOSING, false);
             }
 

@@ -40,6 +40,7 @@ import org.htmlunit.cyberneko.xerces.xni.XMLString;
 import org.htmlunit.cyberneko.xerces.xni.XNIException;
 import org.htmlunit.cyberneko.xerces.xni.parser.XMLInputSource;
 import org.htmlunit.cyberneko.xerces.xni.parser.XMLParserConfiguration;
+import org.htmlunit.html.DomCDataSection;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomDocumentType;
 import org.htmlunit.html.DomElement;
@@ -630,7 +631,11 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     /** {@inheritDoc} */
     @Override
     public void endCDATA() {
-        // nothing to do
+        final String data = characters_.toString();
+        characters_.clear();
+
+        final DomCDataSection cdataSection = new DomCDataSection(page_, data);
+        appendChild(currentNode_, cdataSection);
     }
 
     /** {@inheritDoc} */
@@ -648,7 +653,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     /** {@inheritDoc} */
     @Override
     public void startCDATA() {
-        // nothing to do
+        handleCharacters();
     }
 
     /** {@inheritDoc} */
