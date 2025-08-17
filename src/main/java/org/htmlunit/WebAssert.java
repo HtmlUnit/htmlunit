@@ -42,7 +42,7 @@ import org.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Mike Bowler
  * @author Ahmed Ashour
- * @author Ronald Broöö
+ * @author Ronald Brill
  */
 public final class WebAssert {
 
@@ -64,7 +64,7 @@ public final class WebAssert {
     public static void assertTitleEquals(final HtmlPage page, final String title) {
         final String s = page.getTitleText();
         if (!title.equals(s)) {
-            final String msg = "Actual page title '" + s + "' does not match expected page title '" + title + "'.";
+            final String msg = "Page title '" + s + "' does not match expected title '" + title + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -80,7 +80,7 @@ public final class WebAssert {
     public static void assertTitleContains(final HtmlPage page, final String titlePortion) {
         final String s = page.getTitleText();
         if (!s.contains(titlePortion)) {
-            final String msg = "Page title '" + s + "' does not contain the substring '" + titlePortion + "'.";
+            final String msg = "Page title '" + s + "' does not contain the expected substring '" + titlePortion + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -96,7 +96,7 @@ public final class WebAssert {
     public static void assertTitleMatches(final HtmlPage page, final String regex) {
         final String s = page.getTitleText();
         if (!s.matches(regex)) {
-            final String msg = "Page title '" + s + "' does not match the regular expression '" + regex + "'.";
+            final String msg = "Page title '" + s + "' does not match the expected regular expression '" + regex + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -114,7 +114,7 @@ public final class WebAssert {
             page.getHtmlElementById(id);
         }
         catch (final ElementNotFoundException e) {
-            final String msg = "The page does not contain an element with ID '" + id + "'.";
+            final String msg = "Expected element with ID '" + id + "' was not found on the page.";
             throw new AssertionError(msg, e);
         }
     }
@@ -136,8 +136,7 @@ public final class WebAssert {
     public static void assertElementPresentByXPath(final HtmlPage page, final String xpath) {
         final List<?> elements = page.getByXPath(xpath);
         if (elements.isEmpty()) {
-            final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
-                            + "'.";
+            final String msg = "No elements found matching the XPath expression '" + xpath + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -146,7 +145,7 @@ public final class WebAssert {
      * Verifies that the specified page does not contain an element with the specified ID.
      *
      * @param page the page to check
-     * @param id the ID of an element which expected to not exist on the page
+     * @param id the ID of an element which is expected to not exist on the page
      * @throws AssertionError if an element with the specified ID is found
      * @throws NullPointerException if page or id is null
      */
@@ -157,7 +156,7 @@ public final class WebAssert {
         catch (final ElementNotFoundException e) {
             return;
         }
-        final String msg = "The page contains an element with ID '" + id + "' but should not.";
+        final String msg = "Found unexpected element with ID '" + id + "' on the page.";
         throw new AssertionError(msg);
     }
 
@@ -166,15 +165,15 @@ public final class WebAssert {
      * expression.
      *
      * @param page the page to check
-     * @param xpath the XPath expression which is expected to not match an element in the page
+     * @param xpath the XPath expression which is expected to not match any element in the page
      * @throws AssertionError if any elements match the XPath expression
      */
     public static void assertElementNotPresentByXPath(final HtmlPage page, final String xpath) {
         final List<?> elements = page.getByXPath(xpath);
         if (!elements.isEmpty()) {
-            final String msg = "The page contains " + elements.size()
-                                    + " element(s) matching the XPath expression '"
-                                    + xpath + "' but should not contain any.";
+            final String msg = "Found " + elements.size()
+                                    + " unexpected element(s) matching the XPath expression '"
+                                    + xpath + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -189,7 +188,7 @@ public final class WebAssert {
      */
     public static void assertTextPresent(final HtmlPage page, final String text) {
         if (!page.asNormalizedText().contains(text)) {
-            final String msg = "The page does not contain the text '" + text + "'.";
+            final String msg = "Expected text '" + text + "' was not found on the page.";
             throw new AssertionError(msg);
         }
     }
@@ -209,13 +208,12 @@ public final class WebAssert {
         try {
             final HtmlElement element = page.getHtmlElementById(id);
             if (!element.asNormalizedText().contains(text)) {
-                final String msg = "The element with ID '" + id + "' does not contain the text '" + text + "'.";
+                final String msg = "Element with ID '" + id + "' does not contain the expected text '" + text + "'.";
                 throw new AssertionError(msg);
             }
         }
         catch (final ElementNotFoundException e) {
-            final String msg = "Unable to verify that the element with ID '" + id + "' contains the text '" + text
-                            + "' because the specified element does not exist.";
+            final String msg = "Cannot verify text content: element with ID '" + id + "' was not found on the page.";
             throw new AssertionError(msg, e);
         }
     }
@@ -230,7 +228,7 @@ public final class WebAssert {
      */
     public static void assertTextNotPresent(final HtmlPage page, final String text) {
         if (page.asNormalizedText().contains(text)) {
-            final String msg = "The page contains the text '" + text + "' but should not.";
+            final String msg = "Found unexpected text '" + text + "' on the page.";
             throw new AssertionError(msg);
         }
     }
@@ -247,13 +245,12 @@ public final class WebAssert {
         try {
             final HtmlElement element = page.getHtmlElementById(id);
             if (element.asNormalizedText().contains(text)) {
-                final String msg = "The element with ID '" + id + "' contains the text '" + text + "' but should not.";
+                final String msg = "Element with ID '" + id + "' contains unexpected text '" + text + "'.";
                 throw new AssertionError(msg);
             }
         }
         catch (final ElementNotFoundException e) {
-            final String msg = "Unable to verify that the element with ID '" + id + "' does not contain the text '"
-                            + text + "' because the specified element does not exist.";
+            final String msg = "Cannot verify text content: element with ID '" + id + "' was not found on the page.";
             throw new AssertionError(msg);
         }
     }
@@ -272,7 +269,7 @@ public final class WebAssert {
             page.getDocumentElement().getOneHtmlElementByAttribute("a", DomElement.ID_ATTRIBUTE, id);
         }
         catch (final ElementNotFoundException e) {
-            final String msg = "The page does not contain a link with ID '" + id + "'.";
+            final String msg = "Expected link with ID '" + id + "' was not found on the page.";
             throw new AssertionError(msg, e);
         }
     }
@@ -289,11 +286,11 @@ public final class WebAssert {
     public static void assertLinkNotPresent(final HtmlPage page, final String id) {
         try {
             page.getDocumentElement().getOneHtmlElementByAttribute("a", DomElement.ID_ATTRIBUTE, id);
-            // Not expected.
-            final String msg = "The page contains a link with ID '" + id + "' but should not.";
+            final String msg = "Found unexpected link with ID '" + id + "' on the page.";
             throw new AssertionError(msg);
         }
         catch (final ElementNotFoundException expected) {
+            // Expected behavior - link should not be present
         }
     }
 
@@ -313,7 +310,7 @@ public final class WebAssert {
             }
         }
         if (!found) {
-            final String msg = "The page does not contain a link with text '" + text + "'.";
+            final String msg = "Expected link containing text '" + text + "' was not found on the page.";
             throw new AssertionError(msg);
         }
     }
@@ -334,7 +331,7 @@ public final class WebAssert {
             }
         }
         if (found) {
-            final String msg = "The page contains a link with text '" + text + "' but should not.";
+            final String msg = "Found unexpected link containing text '" + text + "' on the page.";
             throw new AssertionError(msg);
         }
     }
@@ -352,7 +349,7 @@ public final class WebAssert {
             page.getFormByName(name);
         }
         catch (final ElementNotFoundException e) {
-            final String msg = "The page does not contain a form named '" + name + "'.";
+            final String msg = "Expected form with name '" + name + "' was not found on the page.";
             throw new AssertionError(msg, e);
         }
     }
@@ -372,7 +369,7 @@ public final class WebAssert {
         catch (final ElementNotFoundException e) {
             return;
         }
-        final String msg = "The page contains a form named '" + name + "' but should not.";
+        final String msg = "Found unexpected form with name '" + name + "' on the page.";
         throw new AssertionError(msg);
     }
 
@@ -389,7 +386,7 @@ public final class WebAssert {
         final String xpath = "//input[@name='" + name + "']";
         final List<?> list = page.getByXPath(xpath);
         if (list.isEmpty()) {
-            throw new AssertionError("Unable to find an input element named '" + name + "'.");
+            throw new AssertionError("Expected input element with name '" + name + "' was not found on the page.");
         }
     }
 
@@ -405,7 +402,7 @@ public final class WebAssert {
         final String xpath = "//input[@name='" + name + "']";
         final List<?> list = page.getByXPath(xpath);
         if (!list.isEmpty()) {
-            throw new AssertionError("Found an input element named '" + name + "' when none was expected.");
+            throw new AssertionError("Found unexpected input element with name '" + name + "' on the page.");
         }
     }
 
@@ -421,13 +418,13 @@ public final class WebAssert {
         final String xpath = "//input[@name='" + name + "']";
         final List<?> list = page.getByXPath(xpath);
         if (list.isEmpty()) {
-            throw new AssertionError("Unable to find an input element named '" + name + "'.");
+            throw new AssertionError("Expected input element with name '" + name + "' was not found on the page.");
         }
         final HtmlInput input = (HtmlInput) list.get(0);
         final String s = input.getValue();
         if (!s.equals(value)) {
-            throw new AssertionError("The input element named '" + name + "' contains the value '" + s
-                            + "', not the expected value '" + value + "'.");
+            throw new AssertionError("Input element '" + name + "' has value '" + s
+                            + "' but expected '" + value + "'.");
         }
     }
 
@@ -443,13 +440,12 @@ public final class WebAssert {
         final String xpath = "//input[@name='" + name + "']";
         final List<?> list = page.getByXPath(xpath);
         if (list.isEmpty()) {
-            throw new AssertionError("Unable to find an input element named '" + name + "'.");
+            throw new AssertionError("Expected input element with name '" + name + "' was not found on the page.");
         }
         final HtmlInput input = (HtmlInput) list.get(0);
         final String s = input.getValue();
         if (s.equals(value)) {
-            throw new AssertionError("The input element named '" + name + "' contains the value '" + s
-                            + "', not the expected value '" + value + "'.");
+            throw new AssertionError("Input element '" + name + "' has unexpected value '" + s + "'.");
         }
     }
 
@@ -477,7 +473,7 @@ public final class WebAssert {
                 final Short tabIndex = element.getTabIndex();
                 if (tabIndex == null || HtmlElement.TAB_INDEX_OUT_OF_BOUNDS.equals(tabIndex)) {
                     final String s = element.getAttributeDirect("tabindex");
-                    throw new AssertionError("Illegal value for tab index: '" + s + "'.");
+                    throw new AssertionError("Invalid tabindex value '" + s + "' found on element.");
                 }
             }
         }
@@ -499,7 +495,7 @@ public final class WebAssert {
             final String key = element.getAttributeDirect("accesskey");
             if (key != null && !key.isEmpty()) {
                 if (list.contains(key)) {
-                    throw new AssertionError("The access key '" + key + "' is not unique.");
+                    throw new AssertionError("Duplicate access key '" + key + "' found on the page.");
                 }
                 list.add(key);
             }
@@ -519,7 +515,7 @@ public final class WebAssert {
             final String id = element.getId();
             if (id != null && !id.isEmpty()) {
                 if (list.contains(id)) {
-                    throw new AssertionError("The element ID '" + id + "' is not unique.");
+                    throw new AssertionError("Duplicate element ID '" + id + "' found on the page.");
                 }
                 list.add(id);
             }
