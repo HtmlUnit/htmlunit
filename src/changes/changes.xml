@@ -20,8 +20,14 @@
             <action type="update" dev="rbri">
                 Improve WebClientOptions javadoc.
             </action>
+            <action type="update" dev="rbri">
+                neko: improved features/properties documentation
+            </action>
+            <action type="fix" dev="rbri">
+                neko: fix missing property/feature handling for HTMLScanner.setFeature() and HTMLScanner.setProperty().
+            </action>
             <action type="fix" dev="RhinoTeam" issue="#1001">
-                core-js: Fix two more regession from the Interpreter refactoring. Various combinations
+                core-js: Fix two more regressions from the Interpreter refactoring. Various combinations
                 of apply/bind/call now working again.
             </action>
             <action type="update" dev="rbri">
@@ -37,7 +43,7 @@
                 neko: increase PlaybackInputStream buffer size
             </action>
             <action type="add" dev="rbri">
-                neko: addNekoSAXParser Factory added
+                neko: NekoSAXParser Factory added
             </action>
             <action type="add" dev="rbri">
                 WebClient option pageRefreshLimit added. Refresh handling changed to support a clear limit.

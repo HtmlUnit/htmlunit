@@ -6,7 +6,7 @@
 
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.15.0-SNAPSHOT</version>
+    <version>4.15.0</version>
     <packaging>jar</packaging>
 
     <name>HtmlUnit</name>
@@ -30,7 +30,7 @@
         <htmlunitcsp.version>4.15.0</htmlunitcsp.version>
         <htmlunitcssparser.version>4.15.0</htmlunitcssparser.version>
         <htmlunitcorejs.version>4.15.0</htmlunitcorejs.version>
-        <htmlunitneko.version>4.15.0-SNAPSHOT</htmlunitneko.version>
+        <htmlunitneko.version>4.15.0</htmlunitneko.version>
         <htmlunitwebsocketclient.version>4.15.0</htmlunitwebsocketclient.version>
         <htmlunitxpath.version>4.15.0</htmlunitxpath.version>
 
@@ -74,6 +74,7 @@
         <enforcer-plugin.version>3.6.1</enforcer-plugin.version>
         <changes-plugin.version>2.12.1</changes-plugin.version>
         <jar-plugin.version>3.4.2</jar-plugin.version>
+        <javadoc-plugin.version>3.11.3</javadoc-plugin.version>
         <cyclonedx-plugin.version>2.9.1</cyclonedx-plugin.version>
     </properties>
 
@@ -221,7 +222,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.11.2</version>
+                <version>${javadoc-plugin.version}</version>
                 <configuration>
                     <quiet>true</quiet>
                     <show>protected</show>
@@ -757,7 +758,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.11.2</version>
+                <version>${javadoc-plugin.version}</version>
                 <configuration>
                     <quiet>true</quiet>
                     <show>protected</show>
