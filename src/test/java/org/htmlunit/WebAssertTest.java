@@ -14,6 +14,8 @@
  */
 package org.htmlunit;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.htmlunit.html.HtmlPage;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +23,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link WebAssert}.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class WebAssertTest extends SimpleWebTestCase {
 
@@ -34,14 +37,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertTitleEquals(page, "foo");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertTitleEquals(page, "bar");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("Actual page title 'foo' does not match expected page title 'bar'.", error.getMessage());
     }
 
     /**
@@ -54,14 +53,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertTitleContains(page, "o");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertTitleContains(page, "a");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("Page title 'foo' does not contain the substring 'a'.", error.getMessage());
     }
 
     /**
@@ -74,14 +69,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertTitleMatches(page, "f..");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertTitleMatches(page, "b..");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("Page title 'foo' does not match the regular expression 'b..'.", error.getMessage());
     }
 
     /**
@@ -94,14 +85,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertElementPresent(page, "a");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertElementPresent(page, "b");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page does not contain an element with ID 'b'.", error.getMessage());
     }
 
     /**
@@ -114,14 +101,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertElementPresentByXPath(page, "html/body/div");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertElementPresentByXPath(page, "ul");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page does not contain any elements matching the XPath expression 'ul'.", error.getMessage());
     }
 
     /**
@@ -134,14 +117,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertElementNotPresent(page, "b");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertElementNotPresent(page, "a");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page contains an element with ID 'a' but should not.", error.getMessage());
     }
 
     /**
@@ -154,14 +133,12 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertElementNotPresentByXPath(page, "ul");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertElementNotPresentByXPath(page, "html/body/div");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page contains 1 element(s) matching the XPath "
+                        + "expression 'html/body/div' but should not contain any.",
+                error.getMessage());
     }
 
     /**
@@ -174,14 +151,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertTextPresent(page, "bar");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertTextPresent(page, "baz");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page does not contain the text 'baz'.", error.getMessage());
     }
 
     /**
@@ -194,23 +167,17 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertTextPresentInElement(page, "bar", "a");
 
-        boolean caught = false;
-        try {
+        AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertTextPresentInElement(page, "baz", "a");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The element with ID 'a' does not contain the text 'baz'.", error.getMessage());
 
-        caught = false;
-        try {
+        error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertTextPresentInElement(page, "bar", "b");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("Unable to verify that the element with ID 'b' contains the "
+                        + "text 'bar' because the specified element does not exist.",
+                    error.getMessage());
     }
 
     /**
@@ -223,14 +190,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertTextNotPresent(page, "baz");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertTextNotPresent(page, "bar");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page contains the text 'bar' but should not.", error.getMessage());
     }
 
     /**
@@ -243,23 +206,17 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertTextNotPresentInElement(page, "baz", "a");
 
-        boolean caught = false;
-        try {
+        AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertTextNotPresentInElement(page, "bar", "a");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The element with ID 'a' contains the text 'bar' but should not.", error.getMessage());
 
-        caught = false;
-        try {
+        error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertTextNotPresentInElement(page, "bar", "b");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("Unable to verify that the element with ID 'b' "
+                        + "does not contain the text 'bar' because the specified element does not exist.",
+                    error.getMessage());
     }
 
     /**
@@ -272,14 +229,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertLinkPresent(page, "x");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertLinkPresent(page, "z");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page does not contain a link with ID 'z'.", error.getMessage());
     }
 
     /**
@@ -292,14 +245,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertLinkNotPresent(page, "z");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertLinkNotPresent(page, "x");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page contains a link with ID 'x' but should not.", error.getMessage());
     }
 
     /**
@@ -312,14 +261,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertLinkPresentWithText(page, "r");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertLinkPresentWithText(page, "x");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page does not contain a link with text 'x'.", error.getMessage());
     }
 
     /**
@@ -332,14 +277,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertLinkNotPresentWithText(page, "x");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertLinkNotPresentWithText(page, "r");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page contains a link with text 'r' but should not.", error.getMessage());
     }
 
     /**
@@ -352,14 +293,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertFormPresent(page, "f");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertFormPresent(page, "x");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page does not contain a form named 'x'.", error.getMessage());
     }
 
     /**
@@ -372,14 +309,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertFormNotPresent(page, "x");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertFormNotPresent(page, "f");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The page contains a form named 'f' but should not.", error.getMessage());
     }
 
     /**
@@ -393,14 +326,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertInputPresent(page, "i");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertInputPresent(page, "q");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("Unable to find an input element named 'q'.", error.getMessage());
     }
 
     /**
@@ -414,14 +343,10 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertInputNotPresent(page, "q");
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertInputNotPresent(page, "i");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("Found an input element named 'i' when none was expected.", error.getMessage());
     }
 
     /**
@@ -435,23 +360,16 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertInputContainsValue(page, "i", "x");
 
-        boolean caught = false;
-        try {
+        AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertInputContainsValue(page, "i", "z");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The input element named 'i' contains the value 'x', not the expected value 'z'.",
+                error.getMessage());
 
-        caught = false;
-        try {
+        error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertInputContainsValue(page, "q", "x");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("Unable to find an input element named 'q'.", error.getMessage());
     }
 
     /**
@@ -465,23 +383,16 @@ public class WebAssertTest extends SimpleWebTestCase {
 
         WebAssert.assertInputDoesNotContainValue(page, "i", "z");
 
-        boolean caught = false;
-        try {
+        AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertInputDoesNotContainValue(page, "i", "x");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The input element named 'i' contains the value 'x', not the expected value 'x'.",
+                error.getMessage());
 
-        caught = false;
-        try {
+        error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertInputDoesNotContainValue(page, "q", "x");
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("Unable to find an input element named 'q'.", error.getMessage());
     }
 
     /**
@@ -497,26 +408,18 @@ public class WebAssertTest extends SimpleWebTestCase {
         final String html2 = DOCTYPE_HTML + "<html><body><a href='#'>foo</a></body></html>";
         final HtmlPage page2 = loadPage(html2);
 
-        boolean caught = false;
-        try {
+        AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertAllTabIndexAttributesSet(page2);
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("Illegal value for tab index: ''.", error.getMessage());
 
         final String html3 = DOCTYPE_HTML + "<html><body><a href='#' tabindex='x'>foo</a></body></html>";
         final HtmlPage page3 = loadPage(html3);
 
-        caught = false;
-        try {
+        error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertAllTabIndexAttributesSet(page3);
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("Illegal value for tab index: 'x'.", error.getMessage());
     }
 
     /**
@@ -533,14 +436,10 @@ public class WebAssertTest extends SimpleWebTestCase {
                 + "<html><body><a accesskey='k'>foo</a><a accesskey='k'>bar</a></body></html>";
         final HtmlPage page2 = loadPage(html2);
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertAllAccessKeyAttributesUnique(page2);
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The access key 'k' is not unique.", error.getMessage());
     }
 
     /**
@@ -556,13 +455,26 @@ public class WebAssertTest extends SimpleWebTestCase {
         final String html2 = DOCTYPE_HTML + "<html><body><a id='k'>foo</a><a id='k'>bar</a></body></html>";
         final HtmlPage page2 = loadPage(html2);
 
-        boolean caught = false;
-        try {
+        final AssertionError error = assertThrows(AssertionError.class, () -> {
             WebAssert.assertAllIdAttributesUnique(page2);
-        }
-        catch (final AssertionError e) {
-            caught = true;
-        }
-        assertTrue(caught);
+        });
+        assertEquals("The element ID 'k' is not unique.", error.getMessage());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void assertTitleEqualsNullHandling() throws Exception {
+        final String html = DOCTYPE_HTML + "<html><head><title>foo</title></head><body>bar</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        assertThrows(NullPointerException.class, () -> {
+            WebAssert.assertTitleEquals(null, "title");
+        }, "Should throw NullPointerException when page is null");
+
+        assertThrows(NullPointerException.class, () -> {
+            WebAssert.assertTitleEquals(page, null);
+        }, "Should throw NullPointerException when title is null");
     }
 }
