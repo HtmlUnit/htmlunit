@@ -59,7 +59,7 @@
         <jfreechart.version>1.5.6</jfreechart.version>
 
         <!-- quality -->
-        <checkstyle.version>10.26.1</checkstyle.version>
+        <checkstyle.version>11.0.0</checkstyle.version>
         <spotbugs.version>4.9.4</spotbugs.version>
         <pmd.version>7.16.0</pmd.version>
         <archunit.version>1.4.1</archunit.version>
