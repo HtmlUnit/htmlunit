@@ -41,9 +41,9 @@
         <brotli.version>0.1.2</brotli.version>
 
         <!-- selenium -->
-        <htmlunitdriver.version>4.34.0</htmlunitdriver.version>
-        <selenium.version>4.34.0</selenium.version>
-        <selenium.devtools.artifactId>selenium-devtools-v138</selenium.devtools.artifactId>
+        <htmlunitdriver.version>4.35.0</htmlunitdriver.version>
+        <selenium.version>4.35.0</selenium.version>
+        <selenium.devtools.artifactId>selenium-devtools-v139</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
         <junit.version>5.13.4</junit.version>
@@ -60,7 +60,7 @@
 
         <!-- quality -->
         <checkstyle.version>10.26.1</checkstyle.version>
-        <spotbugs.version>4.9.3</spotbugs.version>
+        <spotbugs.version>4.9.4</spotbugs.version>
         <pmd.version>7.16.0</pmd.version>
         <archunit.version>1.4.1</archunit.version>
         <dependencycheck.version>10.0.4</dependencycheck.version>
