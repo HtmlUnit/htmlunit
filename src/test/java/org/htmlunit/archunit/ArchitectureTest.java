@@ -88,14 +88,46 @@ public class ArchitectureTest {
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
 
     /**
-     * Do not use org.apache.commons.lang3.StringUtils.
+     * Do not use org.apache.commons.lang3.StringUtils.isEmpty(CharSequence).
      */
     @ArchTest
-    public static final ArchRule apacheStringUtilsPackageRule = noClasses()
-        .that()
-            .doNotHaveFullyQualifiedName("org.htmlunit.HttpWebConnection")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.StringUtils")
-        .should().dependOnClassesThat().haveFullyQualifiedName("org.apache.commons.lang3.StringUtils");
+    public static final ArchRule apacheStringUtilsIsEmptyRule = noClasses()
+        .should().callMethod(org.apache.commons.lang3.StringUtils.class, "isEmpty", CharSequence.class);
+
+    /**
+     * Do not use org.apache.commons.lang3.StringUtils.isBlank(CharSequence).
+     */
+    @ArchTest
+    public static final ArchRule apacheStringUtilsIsBlankRule = noClasses()
+        .should().callMethod(org.apache.commons.lang3.StringUtils.class, "isBlank", CharSequence.class);
+
+    /**
+     * Do not use org.apache.commons.lang3.StringUtils.isNotBlank(CharSequence).
+     */
+    @ArchTest
+    public static final ArchRule apacheStringUtilsIsNotBlankRule = noClasses()
+        .should().callMethod(org.apache.commons.lang3.StringUtils.class, "isNotBlank", CharSequence.class);
+
+    /**
+     * Do not use org.apache.commons.lang3.Strings.startsWith(CharSequence, CharSequence).
+     */
+    @ArchTest
+    public static final ArchRule apacheStringsStartsWithRule = noClasses()
+        .should().callMethod(org.apache.commons.lang3.Strings.class, "startsWith", CharSequence.class, CharSequence.class);
+
+    /**
+     * Do not use org.apache.commons.lang3.Strings.endsWith(CharSequence, CharSequence).
+     */
+    @ArchTest
+    public static final ArchRule apacheStringsEndsWithRule = noClasses()
+        .should().callMethod(org.apache.commons.lang3.Strings.class, "endsWith", CharSequence.class, CharSequence.class);
+
+    /**
+     * Do not use org.apache.commons.lang3.Strings.contains(CharSequence, CharSequence).
+     */
+    @ArchTest
+    public static final ArchRule apacheStringsContainsRule = noClasses()
+        .should().callMethod(org.apache.commons.lang3.Strings.class, "contains", CharSequence.class, CharSequence.class);
 
     /**
      * The jetty websocket stuff is only used by one class.
