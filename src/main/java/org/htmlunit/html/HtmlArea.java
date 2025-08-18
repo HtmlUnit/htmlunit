@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
@@ -81,7 +80,7 @@ public class HtmlArea extends HtmlElement {
         final String href = getHrefAttribute().trim();
         if (!href.isEmpty()) {
             final HtmlPage page = (HtmlPage) getPage();
-            if (Strings.CI.startsWith(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            if (org.htmlunit.util.StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 page.executeJavaScript(
                     href, "javascript url", getStartLineNumber());
                 return false;

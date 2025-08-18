@@ -43,7 +43,6 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.Cache;
@@ -939,7 +938,8 @@ public class HtmlPage extends SgmlPage {
             return new ScriptResult(JavaScriptEngine.UNDEFINED);
         }
 
-        if (Strings.CI.startsWith(sourceCode, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+        if (org.htmlunit.util.StringUtils.startsWithIgnoreCase(sourceCode,
+                                                JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             sourceCode = sourceCode.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length()).trim();
             if (sourceCode.startsWith("return ")) {
                 sourceCode = sourceCode.substring("return ".length());

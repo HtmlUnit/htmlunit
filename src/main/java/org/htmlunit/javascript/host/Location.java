@@ -23,7 +23,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -338,7 +337,7 @@ public class Location extends HtmlUnitScriptable {
             return "";
         }
 
-        if (Strings.CI.startsWith(url.getProtocol(), UrlUtils.ABOUT)
+        if (org.htmlunit.util.StringUtils.startsWithIgnoreCase(url.getProtocol(), UrlUtils.ABOUT)
                 && window_.getWebWindow().getWebClient().getBrowserVersion()
                                 .hasFeature(JS_LOCATION_IGNORE_QUERY_FOR_ABOUT_PROTOCOL)) {
             return "";

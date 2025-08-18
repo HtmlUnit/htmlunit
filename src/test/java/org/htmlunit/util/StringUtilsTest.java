@@ -64,8 +64,10 @@ public class StringUtilsTest {
      */
     @Test
     public void startsWithIgnoreCase() throws Exception {
+        assertTrue(StringUtils.startsWithIgnoreCase("abcd", "a"));
         assertTrue(StringUtils.startsWithIgnoreCase("abcd", "ab"));
         assertTrue(StringUtils.startsWithIgnoreCase("abcd", "abcd"));
+        assertTrue(StringUtils.startsWithIgnoreCase("abcd", "A"));
         assertTrue(StringUtils.startsWithIgnoreCase("abcd", "AB"));
         assertTrue(StringUtils.startsWithIgnoreCase("Abcd", "abCd"));
 
@@ -79,6 +81,74 @@ public class StringUtilsTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("AB", null));
         Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("AB", ""));
         Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.startsWithIgnoreCase("", ""));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void endsWithIgnoreCase() throws Exception {
+        assertTrue(StringUtils.endsWithIgnoreCase("abcd", "d"));
+        assertTrue(StringUtils.endsWithIgnoreCase("abcd", "cd"));
+        assertTrue(StringUtils.endsWithIgnoreCase("abcd", "abcd"));
+        assertTrue(StringUtils.endsWithIgnoreCase("abcd", "D"));
+        assertTrue(StringUtils.endsWithIgnoreCase("abcd", "CD"));
+        assertTrue(StringUtils.endsWithIgnoreCase("Abcd", "abCd"));
+
+        assertFalse(StringUtils.endsWithIgnoreCase("AB", "x"));
+        assertFalse(StringUtils.endsWithIgnoreCase("AB", "xxzOO"));
+        assertFalse(StringUtils.endsWithIgnoreCase("", "x"));
+        assertFalse(StringUtils.endsWithIgnoreCase("abcd", "bc"));
+
+        assertFalse(StringUtils.endsWithIgnoreCase(null, "x"));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.endsWithIgnoreCase("AB", null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.endsWithIgnoreCase("AB", ""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.endsWithIgnoreCase("", ""));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void containsIgnoreCase() throws Exception {
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "a"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "b"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "c"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "d"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "A"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "B"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "C"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "D"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "cd"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "Cd"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "abcd"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "D"));
+        assertTrue(StringUtils.containsIgnoreCase("abcd", "CD"));
+        assertTrue(StringUtils.containsIgnoreCase("Abcd", "abCd"));
+
+        assertFalse(StringUtils.containsIgnoreCase("AB", "x"));
+        assertFalse(StringUtils.containsIgnoreCase("AB", "xxzOO"));
+        assertFalse(StringUtils.containsIgnoreCase("", "x"));
+        assertFalse(StringUtils.containsIgnoreCase("abcd", "bd"));
+
+        assertFalse(StringUtils.containsIgnoreCase(null, "x"));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.containsIgnoreCase("AB", null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.containsIgnoreCase("AB", ""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.containsIgnoreCase("", ""));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void toRootLowerCase() throws Exception {
+        assertEquals("abcd", StringUtils.toRootLowerCase("abcd"));
+        assertEquals("abcd", StringUtils.toRootLowerCase("ABcD"));
+
+        assertEquals("", StringUtils.toRootLowerCase(""));
+        assertNull(StringUtils.toRootLowerCase(null));
     }
 
     /**

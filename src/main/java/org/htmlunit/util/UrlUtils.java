@@ -247,7 +247,7 @@ public final class UrlUtils {
         }
 
         if (ABOUT.equals(protocol)) {
-            if (org.apache.commons.lang3.Strings.CI.equals(ABOUT_BLANK, url)) {
+            if (ABOUT_BLANK.equalsIgnoreCase(url)) {
                 return URL_ABOUT_BLANK;
             }
             return new URL(null, url, ABOUT_HANDLER);

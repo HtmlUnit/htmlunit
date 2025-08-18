@@ -80,8 +80,10 @@ public final class StringUtils {
     }
 
     /**
+     * Tests if a CharSequence starts with a specified prefix.
+     *
      * @param s the string to check
-     * @param expectedStart the string that we expect at the beginning
+     * @param expectedStart the string that we expect at the beginning (has to be not null and not empty)
      * @return true if the provided string has only one char and this matches the expectation
      */
     public static boolean startsWithIgnoreCase(final String s, final String expectedStart) {
@@ -97,6 +99,66 @@ public final class StringUtils {
         }
 
         return s.regionMatches(true, 0, expectedStart, 0, expectedStart.length());
+    }
+
+    /**
+     * Tests if a CharSequence ends with a specified prefix.
+     *
+     * @param s the string to check
+     * @param expectedEnd the string that we expect at the end (has to be not null and not empty)
+     * @return true if the provided string has only one char and this matches the expectation
+     */
+    public static boolean endsWithIgnoreCase(final String s, final String expectedEnd) {
+        if (expectedEnd == null) {
+            throw new IllegalArgumentException("Expected end string can't be null or empty");
+        }
+
+        final int expectedEndLength = expectedEnd.length();
+        if (expectedEndLength == 0) {
+            throw new IllegalArgumentException("Expected end string can't be null or empty");
+        }
+
+        if (s == null) {
+            return false;
+        }
+        if (s == expectedEnd) {
+            return true;
+        }
+
+        return s.regionMatches(true, s.length() - expectedEndLength, expectedEnd, 0, expectedEndLength);
+    }
+
+    /**
+     * Tests if a CharSequence ends with a specified prefix.
+     *
+     * @param s the string to check
+     * @param expected the string that we expect to be a substring (has to be not null and not empty)
+     * @return true if the provided string has only one char and this matches the expectation
+     */
+    public static boolean containsIgnoreCase(final String s, final String expected) {
+        if (expected == null) {
+            throw new IllegalArgumentException("Expected string can't be null or empty");
+        }
+
+        final int expectedLength = expected.length();
+        if (expectedLength == 0) {
+            throw new IllegalArgumentException("Expected string can't be null or empty");
+        }
+
+        if (s == null) {
+            return false;
+        }
+        if (s == expected) {
+            return true;
+        }
+
+        final int max = s.length() - expectedLength;
+        for (int i = 0; i <= max; i++) {
+            if (s.regionMatches(true, i, expected, 0, expectedLength)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
