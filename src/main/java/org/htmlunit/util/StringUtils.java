@@ -71,6 +71,77 @@ public final class StringUtils {
     }
 
     /**
+     * Returns true if the param is null or empty.
+     *
+     * @param s the string to check
+     * @return true if the param is null or empty
+     */
+    public static boolean isEmptyOrNull(final CharSequence s) {
+        return s == null || s.length() == 0;
+    }
+
+    /**
+     * Returns either the passed in CharSequence, or if the CharSequence is
+     * empty or {@code null}, the default value.
+     *
+     * @param <T> the kind of CharSequence
+     * @param s  the CharSequence to check
+     * @param defaultString the default to return if the input is empty or null
+     * @return the passed in CharSequence, or the defaultString
+     */
+    public static <T extends CharSequence> T defaultIfEmptyOrNull(final T s, final T defaultString) {
+        return isEmptyOrNull(s) ? defaultString : s;
+    }
+
+    /**
+     * Tests if a CharSequence is null, empty, or contains only whitespace.
+     *
+     * @param s the CharSequence to check
+     * @return true if a CharSequence is null, empty, or contains only whitespace
+     */
+    public static boolean isBlank(final CharSequence s) {
+        if (s == null) {
+            return true;
+        }
+
+        final int length = s.length();
+        if (length == 0) {
+            return true;
+        }
+
+        for (int i = 0; i < length; i++) {
+            if (!Character.isWhitespace(s.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Tests if a CharSequence is NOT null, empty, or contains only whitespace.
+     *
+     * @param s the CharSequence to check
+     * @return false if a CharSequence is null, empty, or contains only whitespace
+     */
+    public static boolean isNotBlank(final CharSequence s) {
+        if (s == null) {
+            return false;
+        }
+
+        final int length = s.length();
+        if (length == 0) {
+            return false;
+        }
+
+        for (int i = 0; i < length; i++) {
+            if (!Character.isWhitespace(s.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * @param expected the char that we expect
      * @param s the string to check
      * @return true if the provided string has only one char and this matches the expectation
@@ -687,7 +758,7 @@ public final class StringUtils {
      * Splits the provided text into an array, using comma or blank as the
      * separator.
      *
-     * @param str  the String to parse, may be null
+     * @param str the String to parse, may be null
      * @return an array of parsed Strings, an empty array if null String input
      */
     public static String[] splitAtCommaOrBlank(final String str) {

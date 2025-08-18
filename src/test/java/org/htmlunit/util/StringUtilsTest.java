@@ -49,6 +49,67 @@ public class StringUtilsTest {
      * @throws Exception if the test fails
      */
     @Test
+    public void isEmptyOrNull() throws Exception {
+        assertTrue(StringUtils.isEmptyOrNull(null));
+        assertTrue(StringUtils.isEmptyOrNull(""));
+        assertFalse(StringUtils.isEmptyOrNull(" "));
+        assertFalse(StringUtils.isEmptyOrNull("\t"));
+        assertFalse(StringUtils.isEmptyOrNull("\r"));
+        assertFalse(StringUtils.isEmptyOrNull("\n"));
+        assertFalse(StringUtils.isEmptyOrNull("string"));
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void defaultIfEmptyOrNull() throws Exception {
+        assertEquals("X", StringUtils.defaultIfEmptyOrNull(null, "X"));
+        assertEquals("X", StringUtils.defaultIfEmptyOrNull("", "X"));
+
+        assertEquals(" ", StringUtils.defaultIfEmptyOrNull(" ", "X"));
+        assertEquals("a", StringUtils.defaultIfEmptyOrNull("a", "X"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isBlank() throws Exception {
+        assertTrue(StringUtils.isBlank(null));
+        assertTrue(StringUtils.isBlank(""));
+        assertTrue(StringUtils.isBlank(" "));
+        assertTrue(StringUtils.isBlank("\t"));
+        assertTrue(StringUtils.isBlank("\r"));
+        assertTrue(StringUtils.isBlank("\n"));
+
+        assertFalse(StringUtils.isBlank("x"));
+        assertFalse(StringUtils.isBlank("string"));
+        assertFalse(StringUtils.isBlank("    x"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isNotBlank() throws Exception {
+        assertFalse(StringUtils.isNotBlank(null));
+        assertFalse(StringUtils.isNotBlank(""));
+        assertFalse(StringUtils.isNotBlank(" "));
+        assertFalse(StringUtils.isNotBlank("\t"));
+        assertFalse(StringUtils.isNotBlank("\r"));
+        assertFalse(StringUtils.isNotBlank("\n"));
+
+        assertTrue(StringUtils.isNotBlank("x"));
+        assertTrue(StringUtils.isNotBlank("string"));
+        assertTrue(StringUtils.isNotBlank("    x"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void equalsChar() throws Exception {
         assertFalse(StringUtils.equalsChar('#', null));
         assertFalse(StringUtils.equalsChar('#', ""));
