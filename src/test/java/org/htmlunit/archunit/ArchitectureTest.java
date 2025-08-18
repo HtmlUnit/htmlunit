@@ -130,6 +130,14 @@ public class ArchitectureTest {
         .should().callMethod(org.apache.commons.lang3.Strings.class, "contains", CharSequence.class, CharSequence.class);
 
     /**
+     * Do not use org.apache.commons.lang3.StringUtils.toRootLowerCase(String).
+     */
+    @ArchTest
+    public static final ArchRule apacheStringstoRootLowerCaseRule = noClasses()
+        .should().callMethod(org.apache.commons.lang3.StringUtils.class, "toRootLowerCase", String.class);
+
+
+    /**
      * The jetty websocket stuff is only used by one class.
      */
     @ArchTest
