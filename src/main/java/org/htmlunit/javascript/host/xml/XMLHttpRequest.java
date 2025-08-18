@@ -388,7 +388,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             if (webResponse_ != null) {
                 String contentType = webResponse_.getContentType();
-                if (StringUtils.isEmpty(contentType)) {
+                if (org.htmlunit.util.StringUtils.isEmptyOrNull(contentType)) {
                     contentType = MimeType.TEXT_XML;
                 }
                 return buildResponseXML(contentType);
@@ -521,7 +521,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         String contentType = webResponse_.getContentType();
-        if (StringUtils.isEmpty(contentType)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(contentType)) {
             contentType = MimeType.TEXT_XML;
         }
 

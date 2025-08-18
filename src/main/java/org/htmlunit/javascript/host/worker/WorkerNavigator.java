@@ -111,16 +111,16 @@ public class WorkerNavigator extends HtmlUnitScriptable {
     @JsxGetter
     public Scriptable getLanguages() {
         final String acceptLang = getBrowserVersion().getAcceptLanguageHeader();
-        if (StringUtils.isEmpty(acceptLang)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(acceptLang)) {
             return JavaScriptEngine.newArray(this, 0);
         }
 
         final ArrayList<String> res = new ArrayList<>();
         final String[] parts = org.htmlunit.util.StringUtils.splitAtComma(acceptLang);
         for (final String part : parts) {
-            if (!StringUtils.isEmpty(part)) {
+            if (!org.htmlunit.util.StringUtils.isEmptyOrNull(part)) {
                 final String lang = StringUtils.substringBefore(part, ";").trim();
-                if (!StringUtils.isEmpty(part)) {
+                if (!org.htmlunit.util.StringUtils.isEmptyOrNull(part)) {
                     res.add(lang);
                 }
             }

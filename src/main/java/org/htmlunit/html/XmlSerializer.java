@@ -281,7 +281,7 @@ public class XmlSerializer {
     protected Map<String, DomAttr> getAttributesFor(final HtmlLink link) throws IOException {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(link, "href");
         final DomAttr hrefAttr = map.get("href");
-        if (hrefAttr != null && StringUtils.isNotBlank(hrefAttr.getValue())) {
+        if (hrefAttr != null && org.htmlunit.util.StringUtils.isNotBlank(hrefAttr.getValue())) {
             final String protocol = link.getWebRequest().getUrl().getProtocol();
             if ("http".equals(protocol) || "https".equals(protocol)) {
                 try {
@@ -312,7 +312,7 @@ public class XmlSerializer {
     protected Map<String, DomAttr> getAttributesFor(final HtmlImage image) {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(image, DomElement.SRC_ATTRIBUTE);
         final DomAttr srcAttr = map.get(DomElement.SRC_ATTRIBUTE);
-        if (srcAttr != null && StringUtils.isNotBlank(srcAttr.getValue())) {
+        if (srcAttr != null && org.htmlunit.util.StringUtils.isNotBlank(srcAttr.getValue())) {
             try {
                 final WebResponse response = image.getWebResponse(true);
 

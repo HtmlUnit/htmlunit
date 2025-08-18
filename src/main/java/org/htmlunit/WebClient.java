@@ -54,7 +54,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.NoHttpResponseException;
@@ -98,6 +97,7 @@ import org.htmlunit.util.Cookie;
 import org.htmlunit.util.HeaderUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.websocket.JettyWebSocketAdapter.JettyWebSocketAdapterFactory;
 import org.htmlunit.websocket.WebSocketAdapter;
@@ -624,13 +624,13 @@ public class WebClient implements Serializable, AutoCloseable {
                 && (forceAttachmentWithFilename != null || attachmentHandler_.isAttachment(webResponse))) {
 
             // check content disposition header for nothing provided
-            if (StringUtils.isEmpty(forceAttachmentWithFilename)) {
+            if (StringUtils.isEmptyOrNull(forceAttachmentWithFilename)) {
                 final String disp = webResponse.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
                 forceAttachmentWithFilename = Attachment.getSuggestedFilename(disp);
             }
 
             if (attachmentHandler_.handleAttachment(webResponse,
-                        StringUtils.isEmpty(forceAttachmentWithFilename) ? null : forceAttachmentWithFilename)) {
+                        StringUtils.isEmptyOrNull(forceAttachmentWithFilename) ? null : forceAttachmentWithFilename)) {
                 // the handling is done by the attachment handler;
                 // do not open a new window
                 return webWindow.getEnclosedPage();
@@ -639,7 +639,8 @@ public class WebClient implements Serializable, AutoCloseable {
             final WebWindow w = openWindow(null, null, webWindow);
             final Page page = pageCreator_.createPage(webResponse, w);
             attachmentHandler_.handleAttachment(page,
-                                StringUtils.isEmpty(forceAttachmentWithFilename) ? null : forceAttachmentWithFilename);
+                                StringUtils.isEmptyOrNull(forceAttachmentWithFilename)
+                                        ? null : forceAttachmentWithFilename);
             return page;
         }
 
@@ -1383,8 +1384,9 @@ public class WebClient implements Serializable, AutoCloseable {
             return new StringWebResponse("", UrlUtils.URL_ABOUT_BLANK);
         }
 
-        final String urlWithoutQuery = StringUtils.substringBefore(urlString, "?");
-        if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, UrlUtils.ABOUT_SCHEME))) {
+        final String urlWithoutQuery = org.apache.commons.lang3.StringUtils.substringBefore(urlString, "?");
+        if (!"blank".equalsIgnoreCase(org.apache.commons.lang3.StringUtils
+                                        .substringAfter(urlWithoutQuery, UrlUtils.ABOUT_SCHEME))) {
             throw new MalformedURLException(url + " is not supported, only about:blank is supported at the moment.");
         }
         return new StringWebResponse("", url);
@@ -1423,7 +1425,7 @@ public class WebClient implements Serializable, AutoCloseable {
             compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, MimeType.TEXT_HTML));
             final WebResponseData responseData =
                 new WebResponseData(
-                        org.htmlunit.util.StringUtils
+                        StringUtils
                             .toByteArray("File: " + file.getAbsolutePath(), UTF_8),
                     404, "Not Found", compiledHeaders);
             return new WebResponse(responseData, webRequest, 0);
@@ -1451,13 +1453,13 @@ public class WebClient implements Serializable, AutoCloseable {
 
         final List<NameValuePair> headers = new ArrayList<>();
         final String type = fileOrBlob.getType();
-        if (!StringUtils.isEmpty(type)) {
+        if (!StringUtils.isEmptyOrNull(type)) {
             headers.add(new NameValuePair(HttpHeader.CONTENT_TYPE, fileOrBlob.getType()));
         }
         if (fileOrBlob instanceof org.htmlunit.javascript.host.file.File) {
             final org.htmlunit.javascript.host.file.File file = (org.htmlunit.javascript.host.file.File) fileOrBlob;
             final String fileName = file.getName();
-            if (!StringUtils.isEmpty(fileName)) {
+            if (!StringUtils.isEmptyOrNull(fileName)) {
                 // https://datatracker.ietf.org/doc/html/rfc6266#autoid-10
                 headers.add(new NameValuePair(HttpHeader.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\""));
             }

@@ -16,7 +16,6 @@ package org.htmlunit.html.serializer;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
@@ -40,6 +39,7 @@ import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.html.ScriptElement;
 import org.htmlunit.html.serializer.HtmlSerializerInnerOuterText.HtmlSerializerTextBuilder.Mode;
 import org.htmlunit.svg.SvgTitle;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Special serializer to generate the output we need
@@ -261,7 +261,7 @@ public class HtmlSerializerInnerOuterText {
                                         window.getComputedStyle((DomElement) domNode, null);
                                 final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
 
-                                if (StringUtils.isNoneEmpty(value)) {
+                                if (!StringUtils.isEmptyOrNull(value)) {
                                     if ("normal".equalsIgnoreCase(value)) {
                                         return Mode.WHITE_SPACE_NORMAL;
                                     }

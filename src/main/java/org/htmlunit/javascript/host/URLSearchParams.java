@@ -246,7 +246,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
         final List<NameValuePair> splitted = new ArrayList<>();
 
         params = StringUtils.stripStart(params, "?");
-        if (StringUtils.isEmpty(params)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(params)) {
             return splitted;
         }
 

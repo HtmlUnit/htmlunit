@@ -22,7 +22,6 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -38,6 +37,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.HashChangeEvent;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -306,7 +306,7 @@ public class Location extends HtmlUnitScriptable {
 
             URL url = page.getFullyQualifiedUrl(newLocation);
             // fix for empty url
-            if (StringUtils.isEmpty(newLocation)) {
+            if (StringUtils.isEmptyOrNull(newLocation)) {
                 url = UrlUtils.getUrlWithNewRef(url, null);
             }
 
@@ -333,11 +333,11 @@ public class Location extends HtmlUnitScriptable {
     public String getSearch() {
         final URL url = getUrl();
         final String search = url.getQuery();
-        if (StringUtils.isEmpty(search)) {
+        if (StringUtils.isEmptyOrNull(search)) {
             return "";
         }
 
-        if (org.htmlunit.util.StringUtils.startsWithIgnoreCase(url.getProtocol(), UrlUtils.ABOUT)
+        if (StringUtils.startsWithIgnoreCase(url.getProtocol(), UrlUtils.ABOUT)
                 && window_.getWebWindow().getWebClient().getBrowserVersion()
                                 .hasFeature(JS_LOCATION_IGNORE_QUERY_FOR_ABOUT_PROTOCOL)) {
             return "";
@@ -367,7 +367,7 @@ public class Location extends HtmlUnitScriptable {
             hash = decodeHash(hash);
         }
 
-        if (StringUtils.isEmpty(hash)) {
+        if (StringUtils.isEmptyOrNull(hash)) {
             // nothing to do
         }
         else {

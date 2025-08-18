@@ -979,7 +979,7 @@ public class HtmlPage extends SgmlPage {
         throws FailingHttpStatusCodeException {
 
         final WebClient client = getWebClient();
-        if (StringUtils.isBlank(srcAttribute) || !client.isJavaScriptEnabled()) {
+        if (org.htmlunit.util.StringUtils.isBlank(srcAttribute) || !client.isJavaScriptEnabled()) {
             return JavaScriptLoadResult.NOOP;
         }
 
@@ -1396,7 +1396,7 @@ public class HtmlPage extends SgmlPage {
                     }
                 }
 
-                if (StringUtils.isBlank(urlPart)) {
+                if (org.htmlunit.util.StringUtils.isBlank(urlPart)) {
                     //content='10; URL=' is treated as content='10'
                     url = getUrl();
                 }
@@ -2346,7 +2346,7 @@ public class HtmlPage extends SgmlPage {
         }
         else {
             final String href = base_.getHrefAttribute().trim();
-            if (StringUtils.isEmpty(href)) {
+            if (org.htmlunit.util.StringUtils.isEmptyOrNull(href)) {
                 baseUrl = getUrl();
             }
             else {

@@ -66,7 +66,7 @@ public class URL extends HtmlUnitScriptable {
         }
 
         try {
-            if (StringUtils.isBlank(baseStr)) {
+            if (org.htmlunit.util.StringUtils.isBlank(baseStr)) {
                 url_ = UrlUtils.toUrlUnsafe(url);
             }
             else {
@@ -134,7 +134,7 @@ public class URL extends HtmlUnitScriptable {
         if (url_ == null) {
             return;
         }
-        url_ = UrlUtils.getUrlWithNewRef(url_, StringUtils.isEmpty(fragment) ? null : fragment);
+        url_ = UrlUtils.getUrlWithNewRef(url_, org.htmlunit.util.StringUtils.isEmptyOrNull(fragment) ? null : fragment);
     }
 
     /**
@@ -161,7 +161,7 @@ public class URL extends HtmlUnitScriptable {
         }
 
         String newHost = StringUtils.substringBefore(host, ':');
-        if (StringUtils.isEmpty(newHost)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(newHost)) {
             return;
         }
 
@@ -190,7 +190,7 @@ public class URL extends HtmlUnitScriptable {
         url_ = UrlUtils.getUrlWithNewHost(url_, newHost);
 
         final String newPort = StringUtils.substringAfter(host, ':');
-        if (StringUtils.isNotBlank(newHost)) {
+        if (org.htmlunit.util.StringUtils.isNotBlank(newHost)) {
             try {
                 url_ = UrlUtils.getUrlWithNewHostAndPort(url_, newHost, Integer.parseInt(newPort));
             }
@@ -225,11 +225,11 @@ public class URL extends HtmlUnitScriptable {
     @JsxSetter
     public void setHostname(final String hostname) throws MalformedURLException {
         if (getBrowserVersion().hasFeature(JS_ANCHOR_HOSTNAME_IGNORE_BLANK)) {
-            if (!StringUtils.isBlank(hostname)) {
+            if (!org.htmlunit.util.StringUtils.isBlank(hostname)) {
                 url_ = UrlUtils.getUrlWithNewHost(url_, hostname);
             }
         }
-        else if (!StringUtils.isEmpty(hostname)) {
+        else if (!org.htmlunit.util.StringUtils.isEmptyOrNull(hostname)) {
             url_ = UrlUtils.getUrlWithNewHost(url_, hostname);
         }
     }
@@ -513,7 +513,7 @@ public class URL extends HtmlUnitScriptable {
             return super.getDefaultValue(hint);
         }
 
-        if (StringUtils.isEmpty(url_.getPath())) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(url_.getPath())) {
             return url_.toExternalForm() + "/";
         }
         return url_.toExternalForm();
@@ -534,7 +534,7 @@ public class URL extends HtmlUnitScriptable {
      */
     @JsxFunction(functionName = "toString")
     public String jsToString() {
-        if (StringUtils.isEmpty(url_.getPath())) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(url_.getPath())) {
             try {
                 return UrlUtils.getUrlWithNewPath(url_, "/").toExternalForm();
             }

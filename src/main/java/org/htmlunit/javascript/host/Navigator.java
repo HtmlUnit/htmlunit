@@ -22,7 +22,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -34,6 +33,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.geo.Geolocation;
 import org.htmlunit.javascript.host.media.MediaDevices;
 import org.htmlunit.javascript.host.network.NetworkInformation;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for {@code Navigator}.
@@ -106,16 +106,16 @@ public class Navigator extends HtmlUnitScriptable {
     @JsxGetter
     public Scriptable getLanguages() {
         final String acceptLang = getBrowserVersion().getAcceptLanguageHeader();
-        if (StringUtils.isEmpty(acceptLang)) {
+        if (StringUtils.isEmptyOrNull(acceptLang)) {
             return JavaScriptEngine.newArray(this, 0);
         }
 
         final ArrayList<String> res = new ArrayList<>();
         final String[] parts = org.htmlunit.util.StringUtils.splitAtComma(acceptLang);
         for (final String part : parts) {
-            if (!StringUtils.isEmpty(part)) {
-                final String lang = StringUtils.substringBefore(part, ";").trim();
-                if (!StringUtils.isEmpty(part)) {
+            if (!StringUtils.isEmptyOrNull(part)) {
+                final String lang = org.apache.commons.lang3.StringUtils.substringBefore(part, ";").trim();
+                if (!StringUtils.isEmptyOrNull(part)) {
                     res.add(lang);
                 }
             }

@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -79,6 +78,7 @@ import org.htmlunit.javascript.host.html.HTMLOptionElement;
 import org.htmlunit.javascript.host.intl.Intl;
 import org.htmlunit.javascript.host.xml.FormData;
 import org.htmlunit.javascript.polyfill.Polyfill;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino JavaScript engine</a>
@@ -290,7 +290,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final String jsClassName = config.getClassName();
             Scriptable prototype = prototypesPerJSName.get(jsClassName);
             final String extendedClassName =
-                    StringUtils.isEmpty(config.getExtendedClassName()) ? null : config.getExtendedClassName();
+                    StringUtils.isEmptyOrNull(config.getExtendedClassName()) ? null : config.getExtendedClassName();
 
             // setup the prototypes
             if (config == scopeConfig) {

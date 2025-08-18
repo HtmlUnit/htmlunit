@@ -18,7 +18,6 @@ import static org.htmlunit.css.CssStyleSheet.BLOCK;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
@@ -59,6 +58,7 @@ import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.html.HtmlUnorderedList;
 import org.htmlunit.html.TableRowGroup;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder.Mode;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Special serializer to generate the output we need
@@ -687,7 +687,7 @@ public class HtmlSerializerVisibleText {
                     if (node instanceof DomElement) {
                         final ComputedCssStyleDeclaration style = window.getComputedStyle((DomElement) node, null);
                         final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
-                        if (StringUtils.isNoneEmpty(value)) {
+                        if (!StringUtils.isEmptyOrNull(value)) {
                             if ("normal".equalsIgnoreCase(value)) {
                                 return Mode.WHITE_SPACE_NORMAL;
                             }
@@ -720,7 +720,7 @@ public class HtmlSerializerVisibleText {
                 if (domNode instanceof DomElement) {
                     final ComputedCssStyleDeclaration style = window.getComputedStyle((DomElement) domNode, null);
                     final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
-                    if (StringUtils.isNoneEmpty(value)) {
+                    if (!StringUtils.isEmptyOrNull(value)) {
                         if ("normal".equalsIgnoreCase(value)) {
                             return Mode.WHITE_SPACE_NORMAL;
                         }

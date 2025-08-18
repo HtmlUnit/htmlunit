@@ -96,7 +96,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
     public String getValue() {
         final String raw = getRawValue();
 
-        if (StringUtils.isBlank(raw)) {
+        if (org.htmlunit.util.StringUtils.isBlank(raw)) {
             return "";
         }
 
@@ -133,7 +133,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
         }
 
         String rawValue = getRawValue();
-        if (StringUtils.isBlank(rawValue)) {
+        if (org.htmlunit.util.StringUtils.isBlank(rawValue)) {
             return true;
         }
 

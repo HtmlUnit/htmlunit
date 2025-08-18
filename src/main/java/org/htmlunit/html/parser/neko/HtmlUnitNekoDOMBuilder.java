@@ -547,7 +547,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         final String textValue = characters_.toString();
         characters_.clear();
 
-        if (org.apache.commons.lang3.StringUtils.isBlank(textValue)) {
+        if (StringUtils.isBlank(textValue)) {
             appendChild(currentNode_, new DomText(page_, textValue));
             return;
         }

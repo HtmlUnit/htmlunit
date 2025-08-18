@@ -236,7 +236,7 @@ public final class UrlUtils {
         if (protocol.isEmpty() || UrlUtils.isNormalUrlProtocol(protocol)) {
             final URL response = new URL(url);
             if (response.getProtocol().startsWith("http")
-                    && org.apache.commons.lang3.StringUtils.isEmpty(response.getHost())) {
+                    && StringUtils.isEmptyOrNull(response.getHost())) {
                 throw new MalformedURLException("Missing host name in url: " + url);
             }
             return response;
@@ -536,7 +536,7 @@ public final class UrlUtils {
     public static URL getUrlWithNewUserName(final URL u, final String newUserName) throws MalformedURLException {
         String newUserInfo = newUserName == null ? "" : newUserName;
         final String userInfo = u.getUserInfo();
-        if (org.apache.commons.lang3.StringUtils.isNotBlank(userInfo)) {
+        if (StringUtils.isNotBlank(userInfo)) {
             final int colonIdx = userInfo.indexOf(':');
             if (colonIdx > -1) {
                 newUserInfo = newUserInfo + userInfo.substring(colonIdx);
@@ -557,7 +557,7 @@ public final class UrlUtils {
             throws MalformedURLException {
         String newUserInfo = newUserPassword == null ? "" : ':' + newUserPassword;
         final String userInfo = u.getUserInfo();
-        if (org.apache.commons.lang3.StringUtils.isNotBlank(userInfo)) {
+        if (StringUtils.isNotBlank(userInfo)) {
             final int colonIdx = userInfo.indexOf(':');
             if (colonIdx > -1) {
                 newUserInfo = userInfo.substring(0, colonIdx) + newUserInfo;

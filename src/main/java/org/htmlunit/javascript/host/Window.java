@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.AlertHandler;
@@ -116,6 +115,7 @@ import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.performance.Performance;
 import org.htmlunit.javascript.host.speech.SpeechSynthesis;
 import org.htmlunit.javascript.host.xml.XMLDocument;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xml.XmlPage;
 
@@ -445,7 +445,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         }
 
         // if specified name is the name of an existing window, then hold it
-        if (StringUtils.isEmpty(urlString) && !org.htmlunit.util.StringUtils.isEmptyString(windowName)) {
+        if (StringUtils.isEmptyOrNull(urlString) && !StringUtils.isEmptyString(windowName)) {
             try {
                 final WebWindow webWindow = webClient.getWebWindowByName(windowName);
                 return getProxy(webWindow);
@@ -2000,9 +2000,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         final Page page = webWindow.getEnclosedPage();
         final URL senderURL = page.getUrl();
 
-        if (!org.htmlunit.util.StringUtils.equalsChar('*', targetOrigin)) {
+        if (!StringUtils.equalsChar('*', targetOrigin)) {
             final URL targetURL;
-            if (org.htmlunit.util.StringUtils.equalsChar('/', targetOrigin)) {
+            if (StringUtils.equalsChar('/', targetOrigin)) {
                 targetURL = senderURL;
             }
             else {

@@ -20,13 +20,13 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.impl.SelectableTextInput;
 import org.htmlunit.html.impl.SelectableTextSelectionDelegate;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
 import org.w3c.dom.Node;
 
 /**
@@ -432,7 +432,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         printOpeningTagContentAsXml(printWriter);
 
         printWriter.print(">");
-        printWriter.print(org.htmlunit.util.StringUtils.escapeXml(getText()));
+        printWriter.print(StringUtils.escapeXml(getText()));
         printWriter.print("</textarea>");
         return true;
     }
@@ -518,7 +518,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCase(qualifiedName);
+        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
         if (DomElement.NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
@@ -630,7 +630,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public boolean isCustomErrorValidityState() {
-        return !StringUtils.isEmpty(customValidity_);
+        return !StringUtils.isEmptyOrNull(customValidity_);
     }
 
     @Override

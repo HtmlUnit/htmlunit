@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.FormattedHeader;
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
@@ -47,6 +46,7 @@ import org.apache.http.message.ParserCursor;
 import org.apache.http.message.TokenParser;
 import org.apache.http.util.CharArrayBuffer;
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Customized BrowserCompatSpec for HtmlUnit.

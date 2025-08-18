@@ -18,7 +18,6 @@ import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.nio.charset.Charset;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.FailingHttpStatusCodeException;
@@ -36,6 +35,7 @@ import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
 
 /**
@@ -292,11 +292,11 @@ public final class ScriptElementSupport {
     public static boolean isJavaScript(String typeAttribute, final String languageAttribute) {
         typeAttribute = typeAttribute.trim();
 
-        if (StringUtils.isNotEmpty(typeAttribute)) {
+        if (!StringUtils.isEmptyOrNull(typeAttribute)) {
             return MimeType.isJavascriptMimeType(typeAttribute);
         }
 
-        if (StringUtils.isNotEmpty(languageAttribute)) {
+        if (!StringUtils.isEmptyOrNull(languageAttribute)) {
             return org.htmlunit.util.StringUtils.startsWithIgnoreCase(languageAttribute, "javascript");
         }
         return true;
