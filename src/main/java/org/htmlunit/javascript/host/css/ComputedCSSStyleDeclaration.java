@@ -27,6 +27,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.configuration.JsxSymbolConstant;
 import org.htmlunit.javascript.host.Element;
+import org.htmlunit.util.StringUtils;
 
 /**
  * An object for a CSSStyleDeclaration, which is computed.
@@ -540,7 +541,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getPropertyValue(final String name) {
         // need to invoke the getter to take care of the default value
-        final Object property = getProperty(this, org.htmlunit.util.StringUtils.cssCamelize(name));
+        final Object property = getProperty(this, StringUtils.cssCamelize(name));
         if (property == NOT_FOUND) {
             return super.getPropertyValue(name);
         }

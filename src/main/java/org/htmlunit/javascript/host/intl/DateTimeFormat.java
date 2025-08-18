@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
@@ -40,6 +39,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for {@code DateTimeFormat}.
@@ -303,7 +303,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         final Scriptable options = cx.newObject(getParentScope());
         options.put("timeZone", options, cx.getTimeZone().getID());
 
-        if (StringUtils.isEmpty(formatter_.locale_)) {
+        if (StringUtils.isEmptyOrNull(formatter_.locale_)) {
             options.put("locale", options, cx.getLocale().toLanguageTag());
         }
         else {

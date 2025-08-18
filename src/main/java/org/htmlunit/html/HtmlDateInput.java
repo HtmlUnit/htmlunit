@@ -19,8 +19,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "input" where type is "date".
@@ -136,7 +136,7 @@ public class HtmlDateInput extends HtmlSelectableTextInput implements LabelableE
     @Override
     public void setValue(final String newValue) {
         try {
-            if (StringUtils.isNotEmpty(newValue)) {
+            if (!StringUtils.isEmptyOrNull(newValue)) {
                 FORMATTER_.parse(newValue);
             }
             super.setValue(newValue);

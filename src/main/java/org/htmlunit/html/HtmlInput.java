@@ -26,7 +26,6 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -43,6 +42,7 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.javascript.host.html.HTMLInputElement;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 /**
@@ -632,7 +632,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCase(qualifiedName);
+        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
         if (NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
@@ -1000,12 +1000,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         }
 
         final String pattern = getPattern();
-        if (StringUtils.isEmpty(pattern)) {
+        if (StringUtils.isEmptyOrNull(pattern)) {
             return true;
         }
 
         final String value = getValue();
-        if (StringUtils.isEmpty(value)) {
+        if (StringUtils.isEmptyOrNull(value)) {
             return true;
         }
         if (!isBlankPatternValidated() && StringUtils.isBlank(value)) {
@@ -1062,7 +1062,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     @Override
     public boolean isCustomErrorValidityState() {
-        return !StringUtils.isEmpty(customValidity_);
+        return !StringUtils.isEmptyOrNull(customValidity_);
     }
 
     @Override
@@ -1125,7 +1125,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public final String getType() {
         final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
         String type = getTypeAttribute();
-        type = org.htmlunit.util.StringUtils.toRootLowerCase(type);
+        type = StringUtils.toRootLowerCase(type);
         return isSupported(type, browserVersion) ? type : "text";
     }
 
@@ -1148,8 +1148,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         final WebClient webClient = page.getWebClient();
         final BrowserVersion browser = webClient.getBrowserVersion();
         if (!currentType.equalsIgnoreCase(newType)) {
-            if (!isSupported(org.htmlunit.util.StringUtils
-                                    .toRootLowerCase(newType), browser)) {
+            if (!isSupported(StringUtils.toRootLowerCase(newType), browser)) {
                 if (setThroughAttribute) {
                     newType = "text";
                 }

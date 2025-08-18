@@ -265,9 +265,9 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      */
     public String getBackgroundAttachment() {
         String value = getStyleAttribute(Definition.BACKGROUND_ATTACHMENT, false);
-        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+        if (StringUtils.isBlank(value)) {
             final String bg = getStyleAttribute(Definition.BACKGROUND, true);
-            if (org.apache.commons.lang3.StringUtils.isNotBlank(bg)) {
+            if (StringUtils.isNotBlank(bg)) {
                 value = findAttachment(bg);
                 if (value == null) {
                     if (hasFeature(CSS_BACKGROUND_INITIAL) && !isComputed()) {
@@ -289,9 +289,9 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      */
     public String getBackgroundColor() {
         String value = getStyleAttribute(Definition.BACKGROUND_COLOR, false);
-        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+        if (StringUtils.isBlank(value)) {
             final String bg = getStyleAttribute(Definition.BACKGROUND, false);
-            if (org.apache.commons.lang3.StringUtils.isBlank(bg)) {
+            if (StringUtils.isBlank(bg)) {
                 return "";
             }
             value = findColor(bg);
@@ -309,7 +309,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
             }
             return value;
         }
-        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+        if (StringUtils.isBlank(value)) {
             return "";
         }
         return value;
@@ -321,9 +321,9 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      */
     public String getBackgroundImage() {
         String value = getStyleAttribute(Definition.BACKGROUND_IMAGE, false);
-        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+        if (StringUtils.isBlank(value)) {
             final String bg = getStyleAttribute(Definition.BACKGROUND, false);
-            if (org.apache.commons.lang3.StringUtils.isNotBlank(bg)) {
+            if (StringUtils.isNotBlank(bg)) {
                 value = findImageUrl(bg);
                 final boolean backgroundInitial = hasFeature(CSS_BACKGROUND_INITIAL);
                 if (value == null) {
@@ -357,12 +357,12 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
         if (value == null) {
             return null;
         }
-        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+        if (StringUtils.isBlank(value)) {
             final String bg = getStyleAttribute(Definition.BACKGROUND, false);
             if (bg == null) {
                 return null;
             }
-            if (org.apache.commons.lang3.StringUtils.isNotBlank(bg)) {
+            if (StringUtils.isNotBlank(bg)) {
                 value = findPosition(bg);
                 final boolean isInitial = hasFeature(CSS_BACKGROUND_INITIAL);
                 if (value == null) {
@@ -419,9 +419,9 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      */
     public String getBackgroundRepeat() {
         String value = getStyleAttribute(Definition.BACKGROUND_REPEAT, false);
-        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+        if (StringUtils.isBlank(value)) {
             final String bg = getStyleAttribute(Definition.BACKGROUND, false);
-            if (org.apache.commons.lang3.StringUtils.isNotBlank(bg)) {
+            if (StringUtils.isNotBlank(bg)) {
                 value = findRepeat(bg);
                 if (value == null) {
                     if (hasFeature(CSS_BACKGROUND_INITIAL) && !isComputed()) {
@@ -545,7 +545,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
             value = findBorderWidth(getStyleAttribute(borderSide, false));
             if (value == null) {
                 final String borderWidth = getStyleAttribute(Definition.BORDER_WIDTH, false);
-                if (!org.apache.commons.lang3.StringUtils.isEmpty(borderWidth)) {
+                if (!StringUtils.isEmptyOrNull(borderWidth)) {
                     final String[] values = StringUtils.splitAtJavaWhitespace(borderWidth);
                     int index = values.length;
                     if (borderSideWidth.name().contains("TOP")) {

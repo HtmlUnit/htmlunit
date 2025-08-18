@@ -31,7 +31,6 @@ import java.nio.file.Files;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -50,6 +49,7 @@ import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.platform.Platform;
 import org.htmlunit.platform.geom.IntDimension2D;
 import org.htmlunit.platform.image.ImageData;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -134,7 +134,7 @@ public class HtmlImage extends HtmlElement {
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
-        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCase(qualifiedName);
+        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
         if (SRC_ATTRIBUTE.equals(qualifiedNameLC) && value != ATTRIBUTE_NOT_DEFINED && htmlPage != null) {
             final String oldValue = getAttributeNS(namespaceURI, qualifiedNameLC);
             if (!oldValue.equals(value)) {
@@ -349,7 +349,7 @@ public class HtmlImage extends HtmlElement {
      */
     public String getSrc() {
         final String src = getSrcAttribute();
-        if (org.htmlunit.util.StringUtils.isEmptyString(src)) {
+        if (StringUtils.isEmptyString(src)) {
             return src;
         }
         try {
@@ -526,10 +526,11 @@ public class HtmlImage extends HtmlElement {
 
         final WebClient webClient = getPage().getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
-        if (StringUtils.isEmpty(src)) {
+        if (StringUtils.isEmptyOrNull(src)) {
             return 0;
         }
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0) && StringUtils.isBlank(src)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
+                && StringUtils.isBlank(src)) {
             return 0;
         }
 
@@ -587,10 +588,11 @@ public class HtmlImage extends HtmlElement {
 
         final WebClient webClient = getPage().getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
-        if (StringUtils.isEmpty(src)) {
+        if (StringUtils.isEmptyOrNull(src)) {
             return 0;
         }
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0) && StringUtils.isBlank(src)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
+                && StringUtils.isBlank(src)) {
             return 0;
         }
 
@@ -671,7 +673,7 @@ public class HtmlImage extends HtmlElement {
             // HTMLIMAGE_BLANK_SRC_AS_EMPTY
             final String src = getSrcAttribute();
 
-            if (!org.htmlunit.util.StringUtils.isEmptyString(src)) {
+            if (!StringUtils.isEmptyString(src)) {
                 final HtmlPage page = (HtmlPage) getPage();
                 final WebClient webClient = page.getWebClient();
                 final BrowserVersion browser = webClient.getBrowserVersion();
@@ -821,7 +823,7 @@ public class HtmlImage extends HtmlElement {
         if (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src)) {
             return false;
         }
-        if (hasFeature(HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE) && StringUtils.isEmpty(src)) {
+        if (hasFeature(HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE) && StringUtils.isEmptyOrNull(src)) {
             return false;
         }
 

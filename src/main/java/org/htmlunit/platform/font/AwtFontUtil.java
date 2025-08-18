@@ -36,7 +36,7 @@ public class AwtFontUtil implements FontUtil {
         final int fontSizeInt = CssPixelValueConverter.pixelValue(fontSize);
         final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, true);
         for (final String line : lines) {
-            if (StringUtils.isBlank(line)) {
+            if (org.htmlunit.util.StringUtils.isBlank(line)) {
                 lineCount++;
             }
             else {

@@ -22,11 +22,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Implementation of an {@link AttachmentHandler} that mimics how browsers handle attachments, specifically
@@ -98,12 +98,12 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
     private Path determineDestionationFile(final Page page, final String attachmentFilename) {
         String fileName = attachmentFilename;
 
-        if (StringUtils.isAllBlank(fileName)) {
+        if (StringUtils.isBlank(fileName)) {
             final String file = page.getWebResponse().getWebRequest().getUrl().getFile();
             fileName = file.substring(file.lastIndexOf('/') + 1);
         }
 
-        if (StringUtils.isAllBlank(fileName)) {
+        if (StringUtils.isBlank(fileName)) {
             fileName = "download";
         }
 

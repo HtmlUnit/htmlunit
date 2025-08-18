@@ -31,7 +31,6 @@ import java.util.Locale;
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.HttpHeader;
@@ -712,7 +711,7 @@ public final class EncodingSniffer {
      * @return the normalized encoding name or null if not found
      */
     public static String translateEncodingLabel(final String encodingLabel) {
-        if (StringUtils.isEmpty(encodingLabel)) {
+        if (StringUtils.isEmptyOrNull(encodingLabel)) {
             return null;
         }
 

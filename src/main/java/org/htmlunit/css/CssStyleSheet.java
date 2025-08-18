@@ -38,7 +38,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -101,6 +100,7 @@ import org.htmlunit.html.ValidatableElement;
 import org.htmlunit.javascript.host.css.MediaList;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -352,7 +352,7 @@ public class CssStyleSheet implements Serializable {
 
             final CssStyleSheet sheet;
             final String contentType = response.getContentType();
-            if (StringUtils.isEmpty(contentType) || MimeType.TEXT_CSS.equals(contentType)) {
+            if (StringUtils.isEmptyOrNull(contentType) || MimeType.TEXT_CSS.equals(contentType)) {
                 try (InputStream in = response.getContentAsStreamWithBomIfApplicable()) {
                     if (in == null) {
                         if (LOG.isWarnEnabled()) {
@@ -562,33 +562,33 @@ public class CssStyleSheet implements Serializable {
                 final AttributeCondition prefixAttributeCondition = (AttributeCondition) condition;
                 final String prefixValue = prefixAttributeCondition.getValue();
                 if (prefixAttributeCondition.isCaseInSensitive()) {
-                    return !org.htmlunit.util.StringUtils.isEmptyString(prefixValue)
-                            && org.htmlunit.util.StringUtils.startsWithIgnoreCase(
+                    return !StringUtils.isEmptyString(prefixValue)
+                            && StringUtils.startsWithIgnoreCase(
                                     element.getAttribute(prefixAttributeCondition.getLocalName()), prefixValue);
                 }
-                return !org.htmlunit.util.StringUtils.isEmptyString(prefixValue)
+                return !StringUtils.isEmptyString(prefixValue)
                         && element.getAttribute(prefixAttributeCondition.getLocalName()).startsWith(prefixValue);
 
             case SUFFIX_ATTRIBUTE_CONDITION:
                 final AttributeCondition suffixAttributeCondition = (AttributeCondition) condition;
                 final String suffixValue = suffixAttributeCondition.getValue();
                 if (suffixAttributeCondition.isCaseInSensitive()) {
-                    return !org.htmlunit.util.StringUtils.isEmptyString(suffixValue)
-                            && org.htmlunit.util.StringUtils.endsWithIgnoreCase(
+                    return !StringUtils.isEmptyString(suffixValue)
+                            && StringUtils.endsWithIgnoreCase(
                                     element.getAttribute(suffixAttributeCondition.getLocalName()), suffixValue);
                 }
-                return !org.htmlunit.util.StringUtils.isEmptyString(suffixValue)
+                return !StringUtils.isEmptyString(suffixValue)
                         && element.getAttribute(suffixAttributeCondition.getLocalName()).endsWith(suffixValue);
 
             case SUBSTRING_ATTRIBUTE_CONDITION:
                 final AttributeCondition substringAttributeCondition = (AttributeCondition) condition;
                 final String substringValue = substringAttributeCondition.getValue();
                 if (substringAttributeCondition.isCaseInSensitive()) {
-                    return !org.htmlunit.util.StringUtils.isEmptyString(substringValue)
-                            && org.htmlunit.util.StringUtils.containsIgnoreCase(
+                    return !StringUtils.isEmptyString(substringValue)
+                            && StringUtils.containsIgnoreCase(
                                     element.getAttribute(substringAttributeCondition.getLocalName()), substringValue);
                 }
-                return !org.htmlunit.util.StringUtils.isEmptyString(substringValue)
+                return !StringUtils.isEmptyString(substringValue)
                         && element.getAttribute(substringAttributeCondition.getLocalName()).contains(substringValue);
 
             case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
@@ -597,8 +597,8 @@ public class CssStyleSheet implements Serializable {
                 final String a = element.getAttribute(beginHyphenAttributeCondition.getLocalName());
                 if (beginHyphenAttributeCondition.isCaseInSensitive()) {
                     return selectsHyphenSeparated(
-                            org.htmlunit.util.StringUtils.toRootLowerCase(v),
-                            org.htmlunit.util.StringUtils.toRootLowerCase(a));
+                            StringUtils.toRootLowerCase(v),
+                            StringUtils.toRootLowerCase(a));
                 }
                 return selectsHyphenSeparated(v, a);
 
@@ -608,8 +608,8 @@ public class CssStyleSheet implements Serializable {
                 final String a2 = element.getAttribute(oneOfAttributeCondition.getLocalName());
                 if (oneOfAttributeCondition.isCaseInSensitive()) {
                     return selectsOneOf(
-                            org.htmlunit.util.StringUtils.toRootLowerCase(v2),
-                            org.htmlunit.util.StringUtils.toRootLowerCase(a2));
+                            StringUtils.toRootLowerCase(v2),
+                            StringUtils.toRootLowerCase(a2));
                 }
                 return selectsOneOf(v2, a2);
 
@@ -865,8 +865,8 @@ public class CssStyleSheet implements Serializable {
 
             case "placeholder-shown":
                 return element instanceof HtmlInput
-                        && StringUtils.isEmpty(((HtmlInput) element).getValue())
-                        && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
+                        && StringUtils.isEmptyOrNull(((HtmlInput) element).getValue())
+                        && !StringUtils.isEmptyOrNull(((HtmlInput) element).getPlaceholder());
 
             default:
                 if (value.startsWith("nth-child(")) {
@@ -938,7 +938,7 @@ public class CssStyleSheet implements Serializable {
         int denominator = 0;
         if (nIndex != -1) {
             String value = nth.substring(0, nIndex).trim();
-            if (org.htmlunit.util.StringUtils.equalsChar('-', value)) {
+            if (StringUtils.equalsChar('-', value)) {
                 denominator = -1;
             }
             else {
@@ -1135,7 +1135,8 @@ public class CssStyleSheet implements Serializable {
                 }
 
                 if ("nth-child()".equals(value)) {
-                    final String arg = StringUtils.substringBetween(condition.getValue(), "(", ")").trim();
+                    final String arg = org.apache.commons.lang3.StringUtils
+                                        .substringBetween(condition.getValue(), "(", ")").trim();
                     return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg)
                             || NTH_NUMERIC.matcher(arg).matches()
                             || NTH_COMPLEX.matcher(arg).matches();
@@ -1546,7 +1547,7 @@ public class CssStyleSheet implements Serializable {
 
         if (isActive(index.getMediaList(), element.getPage().getEnclosingWindow())) {
             final String elementName = element.getLowercaseName();
-            final String[] classes = org.htmlunit.util.StringUtils.splitAtJavaWhitespace(
+            final String[] classes = StringUtils.splitAtJavaWhitespace(
                                                             element.getAttributeDirect("class"));
             final Iterator<CSSStyleSheetImpl.SelectorEntry> iter =
                     index.getSelectorEntriesIteratorFor(elementName, classes);

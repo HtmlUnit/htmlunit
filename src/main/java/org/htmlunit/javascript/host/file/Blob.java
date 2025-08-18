@@ -22,7 +22,6 @@ import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebRequest;
@@ -41,6 +40,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.ReadableStream;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for {@code Blob}.
@@ -451,7 +451,7 @@ public class Blob extends HtmlUnitScriptable {
      */
     public KeyDataPair getKeyDataPair(final String name, final String fileName) {
         String contentType = getType();
-        if (StringUtils.isEmpty(contentType)) {
+        if (StringUtils.isEmptyOrNull(contentType)) {
             contentType = MimeType.APPLICATION_OCTET_STREAM;
         }
 

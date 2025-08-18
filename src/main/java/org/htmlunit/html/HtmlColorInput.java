@@ -16,9 +16,9 @@ package org.htmlunit.html;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.impl.Color;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "input" where type is "color".
@@ -57,7 +57,7 @@ public class HtmlColorInput extends HtmlInput implements LabelableElement {
      */
     @Override
     public void setValue(final String newValue) {
-        if (StringUtils.isEmpty(newValue)) {
+        if (StringUtils.isEmptyOrNull(newValue)) {
             super.setValue("#000000");
             return;
         }
@@ -73,7 +73,7 @@ public class HtmlColorInput extends HtmlInput implements LabelableElement {
             return;
         }
 
-        if (StringUtils.isEmpty(attributeValue)) {
+        if (StringUtils.isEmptyOrNull(attributeValue)) {
             setRawValue("#000000");
             return;
         }

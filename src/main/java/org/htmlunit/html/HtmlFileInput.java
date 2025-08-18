@@ -24,13 +24,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "input".
@@ -110,7 +110,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
             String contentType;
             if (contentType_ == null) {
                 contentType = getPage().getWebClient().getBrowserVersion().getUploadMimeType(file);
-                if (StringUtils.isEmpty(contentType)) {
+                if (StringUtils.isEmptyOrNull(contentType)) {
                     contentType = MimeType.APPLICATION_OCTET_STREAM;
                 }
             }
@@ -181,7 +181,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
      */
     @Override
     public void setValue(final String newValue) {
-        if (StringUtils.isEmpty(newValue)) {
+        if (StringUtils.isEmptyOrNull(newValue)) {
             setFiles();
             return;
         }

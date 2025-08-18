@@ -273,7 +273,8 @@ public class HtmlForm extends HtmlElement {
             method = HttpMethod.POST;
         }
         else {
-            if (!"get".equalsIgnoreCase(methodAttribute) && StringUtils.isNotBlank(methodAttribute)) {
+            if (!"get".equalsIgnoreCase(methodAttribute)
+                    && org.htmlunit.util.StringUtils.isNotBlank(methodAttribute)) {
                 notifyIncorrectness("Incorrect submit method >" + getMethodAttribute() + "<. Using >GET<.");
             }
             method = HttpMethod.GET;

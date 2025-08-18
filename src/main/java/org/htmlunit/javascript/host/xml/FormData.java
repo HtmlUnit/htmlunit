@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.FormEncodingType;
 import org.htmlunit.WebRequest;
 import org.htmlunit.corejs.javascript.Context;
@@ -37,6 +36,7 @@ import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.file.File;
 import org.htmlunit.javascript.host.html.HTMLFormElement;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for {@code FormData}.
@@ -186,7 +186,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction(functionName = "delete")
     public void delete_js(final String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmptyOrNull(name)) {
             return;
         }
 
@@ -199,7 +199,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public String get(final String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmptyOrNull(name)) {
             return null;
         }
 
@@ -217,7 +217,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Scriptable getAll(final String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmptyOrNull(name)) {
             return JavaScriptEngine.newArray(this, 0);
         }
 
@@ -238,7 +238,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public boolean has(final String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmptyOrNull(name)) {
             return false;
         }
 
@@ -259,7 +259,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void set(final String name, final Object value, final Object filename) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmptyOrNull(name)) {
             return;
         }
 

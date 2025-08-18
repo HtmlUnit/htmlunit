@@ -23,7 +23,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -37,6 +36,7 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -116,7 +116,7 @@ public class HtmlAnchor extends HtmlElement {
         }
         final String downloadAttribute = getDownloadAttribute();
         HtmlPage page = (HtmlPage) getPage();
-        if (org.htmlunit.util.StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+        if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final StringBuilder builder = new StringBuilder(href.length());
             builder.append(JavaScriptURLConnection.JAVASCRIPT_PREFIX);
             for (int i = JavaScriptURLConnection.JAVASCRIPT_PREFIX.length(); i < href.length(); i++) {
@@ -202,7 +202,7 @@ public class HtmlAnchor extends HtmlElement {
         String rel = getRelAttribute();
         if (rel != null) {
             rel = rel.toLowerCase(Locale.ROOT);
-            return ArrayUtils.contains(org.htmlunit.util.StringUtils.splitAtBlank(rel), "noreferrer");
+            return ArrayUtils.contains(StringUtils.splitAtBlank(rel), "noreferrer");
         }
         return false;
     }
@@ -218,7 +218,7 @@ public class HtmlAnchor extends HtmlElement {
     public static URL getTargetUrl(final String href, final HtmlPage page) throws MalformedURLException {
         URL url = page.getFullyQualifiedUrl(href);
         // fix for empty url
-        if (StringUtils.isEmpty(href)) {
+        if (StringUtils.isEmptyOrNull(href)) {
             url = UrlUtils.getUrlWithNewRef(url, null);
         }
         return url;

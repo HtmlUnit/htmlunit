@@ -213,7 +213,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param priority the new priority of the property; <code>"important"</code>or the empty string if none.
      */
     public void replaceStyleAttribute(final String name, final String value, final String priority) {
-        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+        if (StringUtils.isBlank(value)) {
             removeStyleAttribute(name);
             return;
         }
@@ -635,7 +635,7 @@ public class DomElement extends DomNamespaceNode implements Element {
                 .append(e.getValue());
 
             final String prio = e.getPriority();
-            if (org.apache.commons.lang3.StringUtils.isNotBlank(prio)) {
+            if (StringUtils.isNotBlank(prio)) {
                 builder.append(" !").append(prio);
             }
             builder.append(';');

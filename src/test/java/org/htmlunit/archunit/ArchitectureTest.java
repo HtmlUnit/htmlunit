@@ -88,6 +88,16 @@ public class ArchitectureTest {
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
 
     /**
+     * Do not use org.apache.commons.lang3.StringUtils.
+     */
+    @ArchTest
+    public static final ArchRule apacheStringUtilsPackageRule = noClasses()
+        .that()
+            .doNotHaveFullyQualifiedName("org.htmlunit.HttpWebConnection")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.StringUtils")
+        .should().dependOnClassesThat().haveFullyQualifiedName("org.apache.commons.lang3.StringUtils");
+
+    /**
      * The jetty websocket stuff is only used by one class.
      */
     @ArchTest

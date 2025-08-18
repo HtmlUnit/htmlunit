@@ -44,7 +44,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.HttpHeader;
@@ -127,6 +126,7 @@ import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLFrameSetElement;
 import org.htmlunit.util.Cookie;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.CDATASection;
@@ -723,7 +723,7 @@ public class Document extends Node {
     public HTMLCollection getElementsByTagName(final String tagName) {
         final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false);
 
-        if (org.htmlunit.util.StringUtils.equalsChar('*', tagName)) {
+        if (StringUtils.equalsChar('*', tagName)) {
             collection.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> true);
         }
         else {

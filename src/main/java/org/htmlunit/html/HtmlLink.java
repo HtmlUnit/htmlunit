@@ -214,13 +214,13 @@ public class HtmlLink extends HtmlElement {
                             && webclient.getBrowserVersion()
                                  .hasFeature(HTMLLINK_CHECK_RESPONSE_TYPE_FOR_STYLESHEET)) {
 
-                        if (org.apache.commons.lang3.StringUtils.isNotBlank(type)
+                        if (StringUtils.isNotBlank(type)
                                 && !MimeType.TEXT_CSS.equals(type)) {
                             return null;
                         }
 
                         final String respType = response.getContentType();
-                        if (org.apache.commons.lang3.StringUtils.isNotBlank(respType)
+                        if (StringUtils.isNotBlank(respType)
                                 && !MimeType.TEXT_CSS.equals(respType)) {
                             executeEvent(Event.TYPE_ERROR);
                             return response;
@@ -393,7 +393,7 @@ public class HtmlLink extends HtmlElement {
     public boolean isActiveStyleSheetLink() {
         if (isStyleSheetLink()) {
             final String media = getMediaAttribute();
-            if (org.apache.commons.lang3.StringUtils.isBlank(media)) {
+            if (StringUtils.isBlank(media)) {
                 return true;
             }
 

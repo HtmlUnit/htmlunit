@@ -21,7 +21,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlPage;
@@ -29,6 +28,7 @@ import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.neko.HtmlUnitNekoHtmlParser;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
 
 /**
@@ -156,7 +156,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     public static PageType determinePageType(final WebResponse webResponse) throws IOException {
         final String contentType = webResponse.getContentType();
-        if (!StringUtils.isEmpty(contentType)) {
+        if (!StringUtils.isEmptyOrNull(contentType)) {
             return determinePageType(contentType);
         }
 

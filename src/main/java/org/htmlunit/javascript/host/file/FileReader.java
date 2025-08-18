@@ -22,7 +22,6 @@ import java.util.Base64;
 import java.util.Locale;
 
 import org.apache.commons.io.Charsets;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.corejs.javascript.Function;
@@ -39,6 +38,7 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.protocol.data.DataURLConnection;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for {@code FileReader}.
@@ -109,7 +109,7 @@ public class FileReader extends EventTarget {
         final String value = new String(Base64.getEncoder().encode(bytes), StandardCharsets.US_ASCII);
 
         String contentType = ((Blob) object).getType();
-        if (StringUtils.isEmpty(contentType)) {
+        if (StringUtils.isEmptyOrNull(contentType)) {
             contentType = MimeType.APPLICATION_OCTET_STREAM;
         }
 

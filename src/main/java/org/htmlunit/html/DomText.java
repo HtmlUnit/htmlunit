@@ -134,7 +134,7 @@ public class DomText extends DomCharacterData implements Text {
     protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
         String data = getData();
         boolean tag = tagBefore;
-        if (org.apache.commons.lang3.StringUtils.isNotBlank(data)) {
+        if (StringUtils.isNotBlank(data)) {
             if (!(getParentNode() instanceof HtmlStyle) || !data.startsWith("<!--") || !data.endsWith("-->")) {
                 data = StringUtils.escapeXmlChars(data);
             }

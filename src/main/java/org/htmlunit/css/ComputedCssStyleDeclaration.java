@@ -43,7 +43,6 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.BrowserVersionFeatures;
 import org.htmlunit.Page;
@@ -148,6 +147,7 @@ import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.html.HtmlVariable;
 import org.htmlunit.html.HtmlWordBreak;
 import org.htmlunit.platform.Platform;
+import org.htmlunit.util.StringUtils;
 
 /**
  * An object for a CSSStyleDeclaration, which is computed.
@@ -274,7 +274,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             final String value = element.getValue();
             if (!"content".equals(name)
                     && !value.contains("url")) {
-                return org.htmlunit.util.StringUtils.toRootLowerCase(value);
+                return StringUtils.toRootLowerCase(value);
             }
             return value;
         }
@@ -411,7 +411,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
                 final String value = style.getStyleAttribute(Definition.WIDTH, true);
-                if (StringUtils.isEmpty(value)) {
+                if (StringUtils.isEmptyOrNull(value)) {
                     final String position = getStyleAttribute(Definition.POSITION, true);
                     if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
                         final String content = domElem.getVisibleText();
@@ -534,7 +534,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final String value = super.getBackgroundColor();
-        if (StringUtils.isEmpty(value)) {
+        if (StringUtils.isEmptyOrNull(value)) {
             return Definition.BACKGROUND_COLOR.getDefaultComputedValue(getBrowserVersion());
         }
         return CssColors.toRGBColor(value);
@@ -583,7 +583,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
                 final String value = style.getStyleAttribute(Definition.HEIGHT, true);
-                if (StringUtils.isEmpty(value)) {
+                if (StringUtils.isEmptyOrNull(value)) {
                     final String content = domElem.getVisibleText();
                     // do this only for small content
                     // at least for empty div's this is more correct
@@ -737,7 +737,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
         final String value = getStyleAttribute(Definition.DISPLAY.getAttributeName());
-        if (StringUtils.isEmpty(value)) {
+        if (StringUtils.isEmptyOrNull(value)) {
             if (domElem instanceof HtmlElement) {
                 return ((HtmlElement) domElem).getDefaultStyleDisplay().value();
             }
@@ -1570,7 +1570,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final DomNode parent = element.getParentNode();
 
         // width is ignored for inline elements
-        if ((INLINE.equals(display) || StringUtils.isEmpty(styleWidth)) && parent instanceof HtmlElement) {
+        if ((INLINE.equals(display) || StringUtils.isEmptyOrNull(styleWidth))
+                && parent instanceof HtmlElement) {
             // hack: TODO find a way to specify default values for different tags
             if (element instanceof HtmlCanvas) {
                 return 300;
@@ -1962,11 +1963,11 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     defaultHeight *= lineCount;
                 }
                 else {
-                    if (element instanceof HtmlSpan && StringUtils.isEmpty(content)) {
+                    if (element instanceof HtmlSpan && StringUtils.isEmptyOrNull(content)) {
                         defaultHeight = 0;
                     }
                     else {
-                        defaultHeight *= StringUtils.countMatches(content, '\n') + 1;
+                        defaultHeight *= org.apache.commons.lang3.StringUtils.countMatches(content, '\n') + 1;
                     }
                 }
 
@@ -2082,11 +2083,11 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         String overflow;
         if (horizontal) {
             overflow = getStyleAttribute(Definition.OVERFLOW_X_, false);
-            if (StringUtils.isEmpty(overflow)) {
+            if (StringUtils.isEmptyOrNull(overflow)) {
                 overflow = getStyleAttribute(Definition.OVERFLOW_X, false);
             }
             // fall back to default
-            if (StringUtils.isEmpty(overflow)) {
+            if (StringUtils.isEmptyOrNull(overflow)) {
                 overflow = getStyleAttribute(Definition.OVERFLOW, true);
             }
             scrollable = (element instanceof HtmlBody || SCROLL.equals(overflow) || AUTO.equals(overflow))
@@ -2094,11 +2095,11 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
         else {
             overflow = getStyleAttribute(Definition.OVERFLOW_Y_, false);
-            if (StringUtils.isEmpty(overflow)) {
+            if (StringUtils.isEmptyOrNull(overflow)) {
                 overflow = getStyleAttribute(Definition.OVERFLOW_Y, false);
             }
             // fall back to default
-            if (StringUtils.isEmpty(overflow)) {
+            if (StringUtils.isEmptyOrNull(overflow)) {
                 overflow = getStyleAttribute(Definition.OVERFLOW, true);
             }
 

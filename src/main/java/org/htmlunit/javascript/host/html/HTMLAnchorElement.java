@@ -213,7 +213,7 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter
     public String getReferrerPolicy() {
         String attrib = getDomNodeOrDie().getAttribute("referrerPolicy");
-        if (StringUtils.isEmpty(attrib)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(attrib)) {
             return "";
         }
         attrib = attrib.toLowerCase(Locale.ROOT);
@@ -376,11 +376,11 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxSetter
     public void setHostname(final String hostname) throws Exception {
         if (getBrowserVersion().hasFeature(JS_ANCHOR_HOSTNAME_IGNORE_BLANK)) {
-            if (!StringUtils.isBlank(hostname)) {
+            if (!org.htmlunit.util.StringUtils.isBlank(hostname)) {
                 setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
             }
         }
-        else if (!StringUtils.isEmpty(hostname)) {
+        else if (!org.htmlunit.util.StringUtils.isEmptyOrNull(hostname)) {
             setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
         }
     }

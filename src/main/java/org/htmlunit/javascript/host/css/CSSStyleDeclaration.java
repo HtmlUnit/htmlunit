@@ -38,7 +38,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -58,6 +57,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.host.Element;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for {@code CSSStyleDeclaration}.
@@ -1180,7 +1180,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                 return value;
             }
 
-            final String camel = org.htmlunit.util.StringUtils.cssCamelize(name);
+            final String camel = StringUtils.cssCamelize(name);
             if (!name.equals(camel)) {
                 value = prototype.get(camel, start);
                 if (value != Scriptable.NOT_FOUND) {
@@ -1249,7 +1249,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                 prototype.put(name, start, value);
                 return;
             }
-            final String camel = org.htmlunit.util.StringUtils.cssCamelize(name);
+            final String camel = StringUtils.cssCamelize(name);
             if (!name.equals(camel) && prototype.get(camel, start) != Scriptable.NOT_FOUND) {
                 prototype.put(camel, start, value);
                 return;
@@ -1800,7 +1800,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setZIndex(final Object zIndex) {
         // empty
-        if (zIndex == null || StringUtils.isEmpty(zIndex.toString())) {
+        if (zIndex == null || StringUtils.isEmptyOrNull(zIndex.toString())) {
             setStyleAttribute(Definition.Z_INDEX_.getAttributeName(), "");
             return;
         }
@@ -1834,7 +1834,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxFunction
     public String getPropertyValue(final String name) {
         if (name != null && name.contains("-")) {
-            final Object value = getProperty(this, org.htmlunit.util.StringUtils.cssCamelize(name));
+            final Object value = getProperty(this, StringUtils.cssCamelize(name));
             if (value instanceof String) {
                 return (String) value;
             }
@@ -1863,7 +1863,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxFunction
     public void setProperty(final String name, final Object value, final String important) {
         String imp = "";
-        if (!StringUtils.isEmpty(important) && !"null".equals(important)) {
+        if (!StringUtils.isEmptyOrNull(important) && !"null".equals(important)) {
             if (!StyleElement.PRIORITY_IMPORTANT.equalsIgnoreCase(important)) {
                 return;
             }
@@ -1973,7 +1973,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             valueString = "";
         }
 
-        if (StringUtils.isEmpty(valueString)) {
+        if (StringUtils.isEmptyOrNull(valueString)) {
             setStyleAttribute(name, valueString, important);
             return;
         }

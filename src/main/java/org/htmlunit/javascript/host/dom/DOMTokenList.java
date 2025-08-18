@@ -112,7 +112,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
     @JsxGetter
     public int getLength() {
         final String value = getValue();
-        if (StringUtils.isBlank(value)) {
+        if (org.htmlunit.util.StringUtils.isBlank(value)) {
             return 0;
         }
 
@@ -154,7 +154,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
             for (final Object arg : args) {
                 final String token = JavaScriptEngine.toString(arg);
 
-                if (StringUtils.isEmpty(token)) {
+                if (org.htmlunit.util.StringUtils.isEmptyOrNull(token)) {
                     throw JavaScriptEngine.asJavaScriptException(
                             (HtmlUnitScriptable) getTopLevelScope(thisObj),
                             "DOMTokenList: add() does not support empty tokens",
@@ -200,7 +200,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
             for (final Object arg : args) {
                 final String token = JavaScriptEngine.toString(arg);
 
-                if (StringUtils.isEmpty(token)) {
+                if (org.htmlunit.util.StringUtils.isEmptyOrNull(token)) {
                     throw JavaScriptEngine.asJavaScriptException(
                             (HtmlUnitScriptable) getTopLevelScope(thisObj),
                             "DOMTokenList: remove() does not support empty tokens",
@@ -228,7 +228,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public boolean replace(final String oldToken, final String newToken) {
-        if (StringUtils.isEmpty(oldToken)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(oldToken)) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
                     "Empty oldToken not allowed",
@@ -241,7 +241,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
                     DOMException.INVALID_CHARACTER_ERR);
         }
 
-        if (StringUtils.isEmpty(newToken)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(newToken)) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
                     "Empty newToken not allowed",
@@ -276,7 +276,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public boolean toggle(final String token) {
-        if (StringUtils.isEmpty(token)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(token)) {
             throw JavaScriptEngine.asJavaScriptException(
                     getWindow(),
                     "DOMTokenList: toggle() does not support empty tokens",
@@ -308,11 +308,11 @@ public class DOMTokenList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public boolean contains(final String token) {
-        if (StringUtils.isBlank(token)) {
+        if (org.htmlunit.util.StringUtils.isBlank(token)) {
             return false;
         }
 
-        if (StringUtils.isEmpty(token)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(token)) {
             throw JavaScriptEngine.reportRuntimeError("DOMTokenList: contains() does not support empty tokens");
         }
         if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
@@ -336,7 +336,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
         }
 
         final String value = getValue();
-        if (StringUtils.isEmpty(value)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(value)) {
             return null;
         }
 
@@ -365,7 +365,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
         final Object[] normalIds = super.getIds();
 
         final String value = getValue();
-        if (StringUtils.isEmpty(value)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(value)) {
             return normalIds;
         }
 
@@ -411,7 +411,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
         }
 
         final String value = getValue();
-        if (StringUtils.isEmpty(value)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(value)) {
             return;
         }
 
@@ -460,7 +460,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
     }
 
     private static List<String> split(final String value) {
-        if (StringUtils.isEmpty(value)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(value)) {
             return new ArrayList<>();
         }
 
