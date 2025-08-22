@@ -105,8 +105,9 @@ public class MessagePort extends EventTarget {
             final Window w = getWindow();
             final WebWindow webWindow = w.getWebWindow();
             final Page page = webWindow.getEnclosedPage();
-            final URL currentURL = page.getUrl();
+
             final MessageEvent event = new MessageEvent();
+            final URL currentURL = page.getUrl();
             final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
             event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", w, transfer);
             event.setParentScope(port_);
