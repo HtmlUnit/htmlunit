@@ -38,7 +38,7 @@
         <commons-lang3.version>3.18.0</commons-lang3.version>
         <commons-io.version>2.20.0</commons-io.version>
         <commons-logging.version>1.3.5</commons-logging.version>
-        <brotli.version>0.1.2</brotli.version>
+        <!--brotli.version>0.1.2</brotli.version-->
 
         <!-- selenium -->
         <htmlunitdriver.version>4.35.0</htmlunitdriver.version>
@@ -1372,11 +1372,11 @@
             <artifactId>commons-logging</artifactId>
             <version>${commons-logging.version}</version>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.brotli</groupId>
             <artifactId>dec</artifactId>
             <version>${brotli.version}</version>
-        </dependency>
+        </dependency-->
 
         <!-- Test dependencies. -->
         <dependency>

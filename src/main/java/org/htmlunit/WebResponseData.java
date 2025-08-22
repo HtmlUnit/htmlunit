@@ -31,10 +31,10 @@ import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.brotli.dec.BrotliInputStream;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
+import org.htmlunit.util.brotli.BrotliInputStream;
 
 /**
  * Simple data object to simplify WebResponse creation.

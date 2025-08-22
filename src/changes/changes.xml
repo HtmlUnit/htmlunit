@@ -7,6 +7,19 @@
     </properties>
 
     <body>
+        <release version="4.16.0" date="August 17, 2025" description="StringUtils, Brotli, Bugfixes">
+            <action type="update" dev="rbri" issue="#1009">
+                Use our own 'fork' of the current brotli source code.
+            </action>
+            <action type="update" dev="rbri">
+                Use our own StringUtils at more places to be comptible with older commons lang versions.
+            </action>
+            <action type="update" dev="rbri">
+                Handling of CData sections in XHTML documents improved/fixed.
+            </action>
+        </release>
+
+
         <release version="4.15.0" date="August 17, 2025" description="Chrome/Edge 139, Firefox 141, core-js, Bugfixes">
             <action type="update" dev="rbri">
                 WebAssert messages reviewed and improved.
