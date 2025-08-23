@@ -128,6 +128,7 @@ public class CodeStyleTest {
             for (final File child : children) {
                 if (child.isDirectory()
                         && !".git".equals(child.getName())
+                        && !"brotli".equals(child.getName())
                         && !("test".equals(dir.getName()) && "resources".equals(child.getName()))) {
                     addAll(child, files);
                 }
