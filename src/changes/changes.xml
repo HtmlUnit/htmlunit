@@ -8,6 +8,21 @@
 
     <body>
         <release version="4.16.0" date="August 17, 2025" description="StringUtils, Brotli, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js:  make Object.assign copy over Symbol properties
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js:  some methods should not have a prototype property
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: ES2025 Promise.try implemented
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: spread for object literals implemented
+            </action>
+            <action type="update" dev="rbri">
+                neko: do not check for bom headers on compressed streams
+            </action>
             <action type="update" dev="rbri">
                 WebClient waitForBackgroundJavaScript(long), waitForBackgroundJavaScriptStartingBefore(long), and
                 waitForBackgroundJavaScriptStartingBefore(long, long) no longer marked as experimental.
