@@ -29,8 +29,8 @@
 
         <htmlunitcsp.version>4.15.0</htmlunitcsp.version>
         <htmlunitcssparser.version>4.15.0</htmlunitcssparser.version>
-        <htmlunitcorejs.version>4.15.0</htmlunitcorejs.version>
-        <htmlunitneko.version>4.15.0</htmlunitneko.version>
+        <htmlunitcorejs.version>4.16.0-SNAPSHOT</htmlunitcorejs.version>
+        <htmlunitneko.version>4.16.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitwebsocketclient.version>4.15.0</htmlunitwebsocketclient.version>
         <htmlunitxpath.version>4.15.0</htmlunitxpath.version>
 
