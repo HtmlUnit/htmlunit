@@ -17,8 +17,8 @@ package org.htmlunit.html;
 import java.net.MalformedURLException;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.StringUtils;
 
 /**
  * HTML Media element, e.g. {@link HtmlAudio} or {@link HtmlVideo}.
@@ -47,7 +47,7 @@ public class HtmlMedia extends HtmlElement {
      * @return "probably", "maybe", or "". The current implementation returns ""
      */
     public String canPlayType(final String type) {
-        if (StringUtils.isAllBlank(type)) {
+        if (StringUtils.isBlank(type)) {
             return "";
         }
 
