@@ -14020,7 +14020,7 @@
                 Upgraded commons-collections to version 3.1
             </action>
             <action type="update" dev="mbowler">
-                Upgraded commons-beanutil to version 1.7.0
+                Upgraded commons-beanutils to version 1.7.0
             </action>
             <action type="update" dev="mbowler">
                 Upgraded commons-httpclient to version 2.0.1
