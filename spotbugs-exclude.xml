@@ -7,4 +7,9 @@
     <Bug pattern="EI_EXPOSE_REP2"/>
 
     <Bug pattern="CT_CONSTRUCTOR_THROW"/>
+
+    <!-- Exclude org.htmlunit.util.brotli package -->
+    <Match>
+        <Package name="org.htmlunit.util.brotli"/>
+    </Match>
 </FindBugsFilter>
