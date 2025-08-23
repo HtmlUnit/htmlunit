@@ -86,8 +86,27 @@ public class ExternalTest {
         final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
 
         final List<String> wrongVersions = new LinkedList<>();
+        boolean inComment = false;
         for (int i = 0; i < lines.size(); i++) {
-            final String line = lines.get(i);
+            String line = lines.get(i);
+
+            String cleaned = "";
+            if (!inComment) {
+                final int startIdx = line.indexOf("<!--");
+                if (startIdx != -1) {
+                    cleaned += line.substring(0, startIdx);
+                    inComment = true;
+                }
+            }
+            if (inComment) {
+                final int endIdx = line.indexOf("-->");
+                if (endIdx != -1) {
+                    cleaned += line.substring(endIdx + 3, line.length());
+                    inComment = false;
+                }
+                line = cleaned;
+            }
+
             if (line.trim().equals("<properties>")) {
                 processProperties(lines, i + 1, properties);
             }
