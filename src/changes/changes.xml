@@ -8,8 +8,13 @@
 
     <body>
         <release version="4.16.0" date="August 17, 2025" description="StringUtils, Brotli, Bugfixes">
+            <action type="update" dev="rbri">
+                WebClient waitForBackgroundJavaScript(long), waitForBackgroundJavaScriptStartingBefore(long), and
+                waitForBackgroundJavaScriptStartingBefore(long, long) no longer marked as experimental.
+            </action>
             <action type="update" dev="rbri" issue="#1009">
-                Use our own 'fork' of the current brotli source code.
+                Use our own 'fork' of the current brotli source code. This makes some fixes available that are
+                done in the code base but not release so far.
             </action>
             <action type="update" dev="rbri">
                 Use our own StringUtils at more places to be comptible with older commons lang versions.

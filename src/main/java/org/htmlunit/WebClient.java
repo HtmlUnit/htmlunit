@@ -2413,24 +2413,46 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <p><span style="color:red">Experimental API: May be changed in next release
-     * and may not yet work perfectly!</span></p>
+     * <p>Blocks until all background JavaScript tasks have finished executing or until the specified
+     * timeout is reached, whichever occurs first. Background JavaScript tasks include:</p>
+     * <ul>
+     *   <li>JavaScript scheduled via <code>window.setTimeout()</code></li>
+     *   <li>JavaScript scheduled via <code>window.setInterval()</code></li>
+     *   <li>Asynchronous <code>XMLHttpRequest</code> operations</li>
+     *   <li>Other asynchronous JavaScript operations across all windows managed by this WebClient</li>
+     * </ul>
      *
-     * <p>This method blocks until all background JavaScript tasks have finished executing. Background
-     * JavaScript tasks are JavaScript tasks scheduled for execution via <code>window.setTimeout</code>,
-     * <code>window.setInterval</code> or asynchronous <code>XMLHttpRequest</code>.</p>
+     * <p><strong>Timeout Behavior:</strong> If background tasks are scheduled to execute after
+     * <code>(now + timeoutMillis)</code>, this method will wait for the full timeout duration
+     * and then return the number of remaining jobs. The method guarantees it will never block
+     * longer than the specified timeout.</p>
      *
-     * <p>If a job is scheduled to begin executing after <code>(now + timeoutMillis)</code>, this method will
-     * wait for <code>timeoutMillis</code> milliseconds and then return a value greater than <code>0</code>. This
-     * method will never block longer than <code>timeoutMillis</code> milliseconds.</p>
+     * <p><strong>Use Case:</strong> Use this method when you don't know the exact timing of when
+     * background JavaScript will start, but you have a reasonable estimate of how long all
+     * tasks should take to complete. For scenarios where you know when tasks should start
+     * executing, consider using {@link #waitForBackgroundJavaScriptStartingBefore(long)} instead.</p>
      *
-     * <p>Use this method instead of {@link #waitForBackgroundJavaScriptStartingBefore(long)} if you
-     * don't know when your background JavaScript is supposed to start executing, but you're fairly sure
-     * that you know how long it should take to finish executing.</p>
+     * <p><strong>Thread Safety:</strong> This method is thread-safe and handles concurrent
+     * modifications to the internal job manager list gracefully.</p>
      *
-     * @param timeoutMillis the maximum amount of time to wait (in milliseconds)
-     * @return the number of background JavaScript jobs still executing or waiting to be executed when this
-     *         method returns; will be <code>0</code> if there are no jobs left to execute
+     * <p><strong>Example Usage:</strong></p>
+     * <pre><code>
+     * // Wait up to 5 seconds for all background JavaScript to complete
+     * int remainingJobs = webClient.waitForBackgroundJavaScript(5000);
+     * if (remainingJobs == 0) {
+     *     log("All background JavaScript completed");
+     * } else {
+     *     log("Timeout reached, " + remainingJobs + " jobs still pending");
+     * }
+     * </code></pre>
+     *
+     * @param timeoutMillis the maximum amount of time to wait in milliseconds; must be positive
+     * @return the number of background JavaScript jobs still executing or waiting to be executed
+     *         when this method returns; returns <code>0</code> if all jobs completed successfully
+     *         within the timeout period
+     * @throws IllegalArgumentException if timeoutMillis is negative
+     * @see #waitForBackgroundJavaScriptStartingBefore(long)
+     * @see #waitForBackgroundJavaScriptStartingBefore(long, long)
      */
     public int waitForBackgroundJavaScript(final long timeoutMillis) {
         int count = 0;
@@ -2463,58 +2485,123 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * <p><span style="color:red">Experimental API: May be changed in next release
-     * and may not yet work perfectly!</span></p>
+     * <p>Blocks until all background JavaScript tasks scheduled to start executing before
+     * <code>(now + delayMillis)</code> have finished executing. Background JavaScript tasks include:</p>
+     * <ul>
+     *   <li>JavaScript scheduled via <code>window.setTimeout()</code></li>
+     *   <li>JavaScript scheduled via <code>window.setInterval()</code></li>
+     *   <li>Asynchronous <code>XMLHttpRequest</code> operations</li>
+     *   <li>Other asynchronous JavaScript operations across all windows managed by this WebClient</li>
+     * </ul>
      *
-     * <p>This method blocks until all background JavaScript tasks scheduled to start executing before
-     * <code>(now + delayMillis)</code> have finished executing. Background JavaScript tasks are JavaScript
-     * tasks scheduled for execution via <code>window.setTimeout</code>, <code>window.setInterval</code> or
-     * asynchronous <code>XMLHttpRequest</code>.</p>
+     * <p><strong>Method Behavior:</strong></p>
+     * <ul>
+     *   <li>If no background JavaScript tasks are currently executing and none are scheduled
+     *       to start within <code>delayMillis</code>, this method returns immediately</li>
+     *   <li>Tasks scheduled to execute after <code>(now + delayMillis)</code> are ignored
+     *       and do not affect the waiting behavior</li>
+     *   <li>The method waits for tasks to complete execution, not just to start</li>
+     *   <li>This method waits indefinitely for qualifying tasks to complete (no timeout)</li>
+     * </ul>
      *
-     * <p>If there is no background JavaScript task currently executing, and there is no background JavaScript
-     * task scheduled to start executing within the specified time, this method returns immediately -- even
-     * if there are tasks scheduled to be executed after <code>(now + delayMillis)</code>.</p>
+     * <p><strong>Use Case:</strong> This method is ideal when you know approximately when
+     * background JavaScript should start executing but are uncertain about execution duration.
+     * Use this when you don't need a timeout and want to ensure all relevant tasks complete.
+     * For scenarios where you need to wait for all background tasks regardless of timing,
+     * use {@link #waitForBackgroundJavaScript(long)} instead. For timeout control, use
+     * {@link #waitForBackgroundJavaScriptStartingBefore(long, long)} instead.</p>
      *
-     * <p>Note that the total time spent executing a background JavaScript task is never known ahead of
-     * time, so this method makes no guarantees as to how long it will block.</p>
+     * <p><strong>Thread Safety:</strong> This method is thread-safe and handles concurrent
+     * modifications to the internal job manager list gracefully.</p>
      *
-     * <p>Use this method instead of {@link #waitForBackgroundJavaScript(long)} if you know roughly when
-     * your background JavaScript is supposed to start executing, but you're not necessarily sure how long
-     * it will take to execute.</p>
+     * <p><strong>Example Usage:</strong></p>
+     * <pre><code>
+     * // Wait indefinitely for JavaScript tasks starting within 1 second
+     * int remainingJobs = webClient.waitForBackgroundJavaScriptStartingBefore(1000);
+     * if (remainingJobs == 0) {
+     *     log("All relevant background JavaScript completed");
+     * } else {
+     *     log("Some tasks may still be pending: " + remainingJobs + " jobs");
+     * }
      *
-     * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds)
-     * @return the number of background JavaScript jobs still executing or waiting to be executed when this
-     *         method returns; will be <code>0</code> if there are no jobs left to execute
+     * // Common pattern: wait for tasks that should start soon
+     * // (useful after triggering an action that schedules JavaScript)
+     * webClient.waitForBackgroundJavaScriptStartingBefore(500);
+     * </code></pre>
+     *
+     * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds);
+     *                   must be non-negative
+     * @return the number of background JavaScript jobs still executing or waiting to be executed
+     *         when this method returns; returns <code>0</code> if all qualifying jobs completed
+     *         successfully
+     * @see #waitForBackgroundJavaScript(long)
+     * @see #waitForBackgroundJavaScriptStartingBefore(long, long)
      */
     public int waitForBackgroundJavaScriptStartingBefore(final long delayMillis) {
         return waitForBackgroundJavaScriptStartingBefore(delayMillis, -1);
     }
 
     /**
-     * <p><span style="color:red">Experimental API: May be changed in next release
-     * and may not yet work perfectly!</span></p>
+     * <p>Blocks until all background JavaScript tasks scheduled to start executing before
+     * <code>(now + delayMillis)</code> have finished executing, or until the specified timeout
+     * is reached, whichever occurs first. Background JavaScript tasks include:</p>
+     * <ul>
+     *   <li>JavaScript scheduled via <code>window.setTimeout()</code></li>
+     *   <li>JavaScript scheduled via <code>window.setInterval()</code></li>
+     *   <li>Asynchronous <code>XMLHttpRequest</code> operations</li>
+     *   <li>Other asynchronous JavaScript operations across all windows managed by this WebClient</li>
+     * </ul>
      *
-     * <p>This method blocks until all background JavaScript tasks scheduled to start executing before
-     * <code>(now + delayMillis)</code> have finished executing. Background JavaScript tasks are JavaScript
-     * tasks scheduled for execution via <code>window.setTimeout</code>, <code>window.setInterval</code> or
-     * asynchronous <code>XMLHttpRequest</code>.</p>
+     * <p><strong>Method Behavior:</strong></p>
+     * <ul>
+     *   <li>If no background JavaScript tasks are currently executing and none are scheduled
+     *       to start within <code>delayMillis</code>, this method returns immediately</li>
+     *   <li>Tasks scheduled to execute after <code>(now + delayMillis)</code> are ignored
+     *       and do not affect the waiting behavior</li>
+     *   <li>The method waits for tasks to complete execution, not just to start</li>
+     * </ul>
      *
-     * <p>If there is no background JavaScript task currently executing, and there is no background JavaScript
-     * task scheduled to start executing within the specified time, this method returns immediately -- even
-     * if there are tasks scheduled to be executed after <code>(now + delayMillis)</code>.</p>
+     * <p><strong>Timeout Behavior:</strong></p>
+     * <ul>
+     *   <li>If <code>timeoutMillis</code> is negative or less than <code>delayMillis</code>,
+     *       the timeout is ignored and the method waits indefinitely</li>
+     *   <li>When a valid timeout is specified, the method will never block longer than
+     *       <code>timeoutMillis</code> milliseconds</li>
+     *   <li>The timeout applies to the total waiting time, not per task</li>
+     * </ul>
      *
-     * <p>Note that the total time spent executing a background JavaScript task is never known ahead of
-     * time, so this method makes no guarantees as to how long it will block.</p>
+     * <p><strong>Use Case:</strong> This method is ideal when you know approximately when
+     * background JavaScript should start executing but are uncertain about execution duration.
+     * For scenarios where you need to wait for all background tasks regardless of timing,
+     * use {@link #waitForBackgroundJavaScript(long)} instead.</p>
      *
-     * <p>Use this method instead of {@link #waitForBackgroundJavaScript(long)} if you know roughly when
-     * your background JavaScript is supposed to start executing, but you're not necessarily sure how long
-     * it will take to execute.</p>
+     * <p><strong>Thread Safety:</strong> This method is thread-safe and handles concurrent
+     * modifications to the internal job manager list gracefully.</p>
      *
-     * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds)
-     * @param timeoutMillis the maximum amount of time to wait (in milliseconds); this has to be larger than
-     *        the delayMillis parameter, otherwise the timeout is ignored
-     * @return the number of background JavaScript jobs still executing or waiting to be executed when this
-     *         method returns; will be <code>0</code> if there are no jobs left to execute
+     * <p><strong>Example Usage:</strong></p>
+     * <pre><code>
+     * // Wait for JavaScript tasks starting within 1 second, with 10 second max timeout
+     * int remainingJobs = webClient.waitForBackgroundJavaScriptStartingBefore(1000, 10000);
+     * if (remainingJobs == 0) {
+     *     log("All relevant background JavaScript completed");
+     * } else {
+     *     log("Timeout reached or tasks still pending: " + remainingJobs + " jobs");
+     * }
+     *
+     * // Wait indefinitely for tasks starting within 500ms (timeout ignored)
+     * webClient.waitForBackgroundJavaScriptStartingBefore(500, 100); // timeout < delay
+     * </code></pre>
+     *
+     * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds);
+     *                   must be non-negative
+     * @param timeoutMillis the maximum amount of time to wait (in milliseconds); if negative or
+     *                     less than <code>delayMillis</code>, the timeout is ignored and the method
+     *                     waits indefinitely for qualifying tasks to complete
+     * @return the number of background JavaScript jobs still executing or waiting to be executed
+     *         when this method returns; returns <code>0</code> if all qualifying jobs completed
+     *         successfully within the specified constraints
+     * @see #waitForBackgroundJavaScript(long)
+     * @see #waitForBackgroundJavaScriptStartingBefore(long)
      */
     public int waitForBackgroundJavaScriptStartingBefore(final long delayMillis, final long timeoutMillis) {
         int count = 0;
