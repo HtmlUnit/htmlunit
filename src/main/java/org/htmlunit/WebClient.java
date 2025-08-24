@@ -2589,7 +2589,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * }
      *
      * // Wait indefinitely for tasks starting within 500ms (timeout ignored)
-     * webClient.waitForBackgroundJavaScriptStartingBefore(500, 100); // timeout < delay
+     * webClient.waitForBackgroundJavaScriptStartingBefore(500, 100); // timeout &lt; delay
      * </code></pre>
      *
      * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds);
