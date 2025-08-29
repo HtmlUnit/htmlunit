@@ -281,4 +281,71 @@ public class FunctionsTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abcd / undefined")
+    public void boundWithoutArgs() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function foo(x) { return this.toString() + ' / ' + x; };\n"
+                + "  var boundThis = 'abcd';\n"
+                + "  var boundFoo = Function.prototype.bind.call(foo, boundThis);\n"
+                + "  var r = boundFoo.call('Hello!');\n"
+                + "  log(r);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abcd / world")
+    public void boundWithArg() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function foo(x) { return this.toString() + ' / ' + x; };\n"
+                + "  var boundThis = 'abcd';\n"
+                + "  var boundFoo = Function.prototype.bind.call(foo, boundThis, 'world');\n"
+                + "  var r = boundFoo.call('Hello!');\n"
+                + "  log(r);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("world")
+    public void bound() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function foo() { return 'world'; };\n"
+                + "  var boundThis = 'abcd';\n"
+                + "  var boundFoo = Function.prototype.bind.call(foo, boundThis);\n"
+                + "  var r = boundFoo.call(' dd');\n"
+                + "  log(r);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
