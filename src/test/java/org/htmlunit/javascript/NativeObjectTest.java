@@ -471,4 +471,27 @@ public class NativeObjectTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("val1-val2")
+    public void objectAssignCopiesSymbols() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var s1 = Symbol('foo');\n"
+            + "var s2 = Symbol('bar');\n"
+            + "var source = { [s1]: 'val1', [Object(s2)]: 'val2' };\n"
+            + "var target = {};\n"
+            + "Object.assign(target, source);\n"
+            + "log(target[s1] + '-' + target[s2]);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
