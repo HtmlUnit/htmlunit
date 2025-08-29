@@ -50,6 +50,9 @@ public class ErrorOutputChecker implements BeforeEachCallback, AfterEachCallback
             Pattern.compile(".*com.caucho.quercus.servlet.QuercusServlet initImpl\r?\n"),
             Pattern.compile(".*QuercusServlet starting as QuercusServletImpl\r?\n"),
             Pattern.compile(".*Quercus finished initialization in \\d*ms\r?\n"),
+
+            // XSLT
+            Pattern.compile("ERROR:  'Use of the extension function .*\r?\n"),
     };
 
     @Override
