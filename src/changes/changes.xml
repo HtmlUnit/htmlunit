@@ -8,6 +8,10 @@
 
     <body>
         <release version="4.16.0" date="August 17, 2025" description="StringUtils, Brotli, spread for object literals, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: ES2025 Set methods intersection(), union(), difference(), symmetricDifference(), isSubsetOf(),
+                isSupersetOf(), and isDisjointFrom() implemented
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: make Object.assign copy over Symbol properties
             </action>
