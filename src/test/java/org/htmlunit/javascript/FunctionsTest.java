@@ -326,7 +326,6 @@ public class FunctionsTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -343,6 +342,37 @@ public class FunctionsTest extends WebDriverTestCase {
                 + "  var boundFoo = Function.prototype.bind.call(foo, boundThis);\n"
                 + "  var r = boundFoo.call(' dd');\n"
                 + "  log(r);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"f1", "f2", "f3", "f4", "f5",
+             "f6", "g", "3", "[foo]", ""})
+    public void name() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+
+                + "let f1 = function() {}; log(f1.name);\n"
+                + "let f2= () => {}; log(f2.name);\n"
+                + "let f3 = function() {}; log(f3.name);\n"
+                + "let f4 = () => {}; log(f4.name);\n"
+                + "let f5 = function() {}; log(f5.name);\n"
+
+                + "let f6 = () => {}; log(f6.name);\n"
+                + "let f7 = function g() {}; log(f7.name);\n"
+                + "let f8 = { [1 + 2]() {} }; log(f8['3'].name);\n"
+                + "let s = Symbol('foo'); let f9 = { [s]() {} }; log(f9[s].name);\n"
+                + "let s2 = Symbol(); f10 = { [s2]() {} }; log(f10[s2].name);\n"
+
                 + "</script>\n"
                 + "</body></html>";
 
