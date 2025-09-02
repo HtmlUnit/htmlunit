@@ -86,6 +86,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptErrorListener;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
+import org.htmlunit.javascript.host.BroadcastChannel;
 import org.htmlunit.javascript.host.Location;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.Node;
@@ -259,6 +260,8 @@ public class WebClient implements Serializable, AutoCloseable {
     private final WebClientOptions options_ = new WebClientOptions();
     private final boolean javaScriptEngineEnabled_;
     private final StorageHolder storageHolder_ = new StorageHolder();
+
+    private transient Set<BroadcastChannel> broadcastChannel_ = new HashSet<>();
 
     /**
      * Creates a web client instance using the browser version returned by
@@ -2684,6 +2687,7 @@ public class WebClient implements Serializable, AutoCloseable {
         jobManagers_ = Collections.synchronizedList(new ArrayList<>());
         loadQueue_ = new ArrayList<>();
         css3ParserPool_ = new CSS3ParserPool();
+        broadcastChannel_ = new HashSet<>();
     }
 
     private static class LoadJob {
@@ -3056,6 +3060,15 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public PooledCSS3Parser getCSS3Parser() {
         return this.css3ParserPool_.get();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @return the set of known {@link BroadcastChannel}s
+     */
+    public Set<BroadcastChannel> getBroadcastChannels() {
+        return broadcastChannel_;
     }
 
     /**

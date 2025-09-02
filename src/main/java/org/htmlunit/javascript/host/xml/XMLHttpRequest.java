@@ -90,6 +90,7 @@ import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.UrlUtils;
 import org.htmlunit.util.WebResponseWrapper;
 import org.htmlunit.util.XUserDefinedCharset;
 import org.htmlunit.xml.XmlPage;
@@ -693,7 +694,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 return;
             }
 
-            isSameOrigin_ = isSameOrigin(pageUrl, fullUrl);
+            isSameOrigin_ = UrlUtils.isSameOrigin(pageUrl, fullUrl);
             final boolean alwaysAddOrigin = HttpMethod.GET != request.getHttpMethod()
                                             && HttpMethod.PATCH != request.getHttpMethod()
                                             && HttpMethod.HEAD != request.getHttpMethod();
@@ -732,22 +733,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         // Change the state!
         setState(OPENED);
         fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-    }
-
-    private static boolean isSameOrigin(final URL originUrl, final URL newUrl) {
-        if (!originUrl.getHost().equals(newUrl.getHost())) {
-            return false;
-        }
-
-        int originPort = originUrl.getPort();
-        if (originPort == -1) {
-            originPort = originUrl.getDefaultPort();
-        }
-        int newPort = newUrl.getPort();
-        if (newPort == -1) {
-            newPort = newUrl.getDefaultPort();
-        }
-        return originPort == newPort;
     }
 
     /**

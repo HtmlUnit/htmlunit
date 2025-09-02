@@ -1510,4 +1510,36 @@ public final class UrlUtils {
     private static char hexDigit(final int b) {
         return Character.toUpperCase(Character.forDigit(b & 0xF, 16));
     }
+
+    /**
+     * Determines whether two URLs share the same origin according to the Same-Origin Policy.
+     * Two URLs are considered to have the same origin if they have the same protocol (scheme),
+     * host, and port.
+     *
+     * <p>The method handles default ports correctly by using the URL's default port when
+     * the explicit port is -1 (indicating no port was specified).
+     *
+     * @param originUrl the first URL to compare (must not be null)
+     * @param newUrl the second URL to compare (must not be null)
+     * @return {@code true} if both URLs have the same host and effective port; {@code false} otherwise
+     */
+    public static boolean isSameOrigin(final URL originUrl, final URL newUrl) {
+        if (!originUrl.getProtocol().equals(newUrl.getProtocol())) {
+            return false;
+        }
+
+        if (!originUrl.getHost().equalsIgnoreCase(newUrl.getHost())) {
+            return false;
+        }
+
+        int originPort = originUrl.getPort();
+        if (originPort == -1) {
+            originPort = originUrl.getDefaultPort();
+        }
+        int newPort = newUrl.getPort();
+        if (newPort == -1) {
+            newPort = newUrl.getDefaultPort();
+        }
+        return originPort == newPort;
+    }
 }
