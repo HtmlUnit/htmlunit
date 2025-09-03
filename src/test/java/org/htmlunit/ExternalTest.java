@@ -156,7 +156,7 @@ public class ExternalTest {
      */
     @Test
     public void assertChromeDriver() throws Exception {
-        try (WebClient webClient = buildWebClient()) {
+        try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX, false, null, -1)) {
             final Page page = webClient.getPage(CHROME_DRIVER_URL_);
             final String content = page.getWebResponse().getContentAsString();
 
@@ -181,7 +181,9 @@ public class ExternalTest {
     @Test
     @Disabled("javascript errors")
     public void assertEdgeDriver() throws Exception {
-        try (WebClient webClient = buildWebClient()) {
+        try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+            webClient.getOptions().setThrowExceptionOnScriptError(false);
+
             final HtmlPage page = webClient.getPage(EDGE_DRIVER_URL_);
             String content = page.asNormalizedText();
             content = content.substring(content.indexOf("Current general public release channel."));
@@ -209,7 +211,7 @@ public class ExternalTest {
      */
     @Test
     public void assertGeckoDriver() throws Exception {
-        try (WebClient webClient = buildWebClient()) {
+        try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX, false, null, -1)) {
             try {
                 final HtmlPage page = webClient.getPage(GECKO_DRIVER_URL_);
                 final DomNodeList<DomNode> divs = page.querySelectorAll("li.breadcrumb-item-selected");
@@ -240,9 +242,7 @@ public class ExternalTest {
         }
         Assertions.assertNotNull(version);
         if (version.contains("SNAPSHOT")) {
-            try (WebClient webClient = buildWebClient()) {
-                webClient.getOptions().setJavaScriptEnabled(false);
-
+            try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX, false, null, -1)) {
                 final String url = SONATYPE_SNAPSHOT_REPO_URL_
                         + "org/htmlunit/htmlunit/" + version + "/maven-metadata.xml";
 
@@ -266,7 +266,7 @@ public class ExternalTest {
         if (!url.endsWith("/")) {
             url += "/";
         }
-        try (WebClient webClient = buildWebClient()) {
+        try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX, false, null, -1)) {
             webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 
             try {
@@ -379,11 +379,5 @@ public class ExternalTest {
 
     private static String getValue(final String line) {
         return line.substring(line.indexOf('>') + 1, line.lastIndexOf('<'));
-    }
-
-    private static WebClient buildWebClient() {
-        final WebClient webClient = new WebClient();
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-        return webClient;
     }
 }
