@@ -201,17 +201,17 @@ public class HtmlLink extends HtmlElement {
      */
     public WebResponse getWebResponse(final boolean downloadIfNeeded, WebRequest request,
             final boolean isStylesheetRequest, final String type) throws IOException {
-        final WebClient webclient = getPage().getWebClient();
+        final WebClient webClient = getPage().getWebClient();
         if (null == request) {
             request = getWebRequest();
         }
 
         if (downloadIfNeeded) {
             try {
-                final WebResponse response = webclient.loadWebResponse(request);
+                final WebResponse response = webClient.loadWebResponse(request);
                 if (response.isSuccess()) {
                     if (isStylesheetRequest
-                            && webclient.getBrowserVersion()
+                            && webClient.getBrowserVersion()
                                  .hasFeature(HTMLLINK_CHECK_RESPONSE_TYPE_FOR_STYLESHEET)) {
 
                         if (StringUtils.isNotBlank(type)
@@ -222,24 +222,24 @@ public class HtmlLink extends HtmlElement {
                         final String respType = response.getContentType();
                         if (StringUtils.isNotBlank(respType)
                                 && !MimeType.TEXT_CSS.equals(respType)) {
-                            executeEvent(Event.TYPE_ERROR);
+                            executeEvent(webClient, Event.TYPE_ERROR);
                             return response;
                         }
                     }
-                    executeEvent(Event.TYPE_LOAD);
+                    executeEvent(webClient, Event.TYPE_LOAD);
                     return response;
                 }
-                executeEvent(Event.TYPE_ERROR);
+                executeEvent(webClient, Event.TYPE_ERROR);
                 return response;
             }
             catch (final IOException e) {
-                executeEvent(Event.TYPE_ERROR);
+                executeEvent(webClient, Event.TYPE_ERROR);
                 throw e;
             }
         }
 
         // retrieve the response, from the cache if available
-        return webclient.getCache().getCachedResponse(request);
+        return webClient.getCache().getCachedResponse(request);
     }
 
     /**
@@ -276,7 +276,11 @@ public class HtmlLink extends HtmlElement {
         return false;
     }
 
-    private void executeEvent(final String type) {
+    private void executeEvent(final WebClient webClient, final String type) {
+        if (!webClient.isJavaScriptEngineEnabled()) {
+            return;
+        }
+
         final HTMLLinkElement link = getScriptableObject();
         final Event event = new Event(this, type);
         link.executeEventLocally(event);
@@ -294,9 +298,7 @@ public class HtmlLink extends HtmlElement {
             LOG.debug("Link node added: " + asXml());
         }
 
-        final boolean isStyleSheetLink = isStyleSheetLink();
-
-        if (isStyleSheetLink) {
+        if (isStyleSheetLink()) {
             final WebClient webClient = getPage().getWebClient();
             if (!webClient.getOptions().isCssEnabled()) {
                 if (LOG.isDebugEnabled()) {
