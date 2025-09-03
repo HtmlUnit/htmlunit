@@ -82,7 +82,6 @@ public class BroadcastChannel extends EventTarget {
         }
 
         return broadcastChannel;
-
     }
 
     /**

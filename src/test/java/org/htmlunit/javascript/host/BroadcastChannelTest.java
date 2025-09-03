@@ -447,6 +447,7 @@ public class BroadcastChannelTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception if an error occurs
      */
