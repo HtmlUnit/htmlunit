@@ -8,6 +8,22 @@
 
     <body>
         <release version="4.17.0" date="September xx, 2025" description=", Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: fix erro stack generation in interpreted mode and report the correct line number
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: don't propagate strict flag when compiling scripts and we already
+                havean active context in strict mode
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: a problem with toString() on arrow functions fixed
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: ES2025 Error.isError static method implemented
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: ES2025 Math.f16round method implemented
+            </action>
             <action type="fix" dev="rbri">
                 HtmlLink.getWebResponse(...) now also works when the JavaScript engine is disabled.
             </action>
