@@ -14471,7 +14471,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "constructor(),defaultChecked[GSCE],defaultValue[GSCE],dirName[GSCE],disabled[GSCE],files[GSCE],"
                 + "form[GCE],formAction[GSCE],formEnctype[GSCE],formMethod[GSCE],formNoValidate[GSCE],"
                 + "formTarget[GSCE],height[GSCE],indeterminate[GSCE],labels[GCE],list[GCE],max[GSCE],"
-                + "maxLength[GSCE],min[GSCE],minLength[GSCE],mozIsTextField(),multiple[GSCE],name[GSCE],"
+                + "maxLength[GSCE],min[GSCE],minLength[GSCE],multiple[GSCE],name[GSCE],"
                 + "pattern[GSCE],placeholder[GSCE],popoverTargetAction[GSCE],popoverTargetElement[GSCE],"
                 + "readOnly[GSCE],reportValidity(),required[GSCE],select(),selectionDirection[GSCE],"
                 + "selectionEnd[GSCE],selectionStart[GSCE],setCustomValidity(),setRangeText(),setSelectionRange(),"
@@ -18334,7 +18334,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.StyleMedia}.
+     * Test {@link org.htmlunit.javascript.host.css.StyleMedia}.
      *
      * @throws Exception if the test fails
      */
@@ -18351,5 +18351,73 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor[],matchMedium(),type[GCE]")
     public void styleMedia() throws Exception {
         testString("", "window.styleMedia");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMMatrixReadOnly}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "a[GCE],b[GCE],c[GCE],constructor(),d[GCE],e[GCE],f[GCE],flipX(),flipY(),"
+                + "inverse(),is2D[GCE],isIdentity[GCE],m11[GCE],m12[GCE],m13[GCE],m14[GCE],"
+                + "m21[GCE],m22[GCE],m23[GCE],m24[GCE],m31[GCE],m32[GCE],m33[GCE],m34[GCE],"
+                + "m41[GCE],m42[GCE],m43[GCE],m44[GCE],multiply(),rotate(),rotateAxisAngle(),"
+                + "rotateFromVector(),scale(),scale3d(),scaleNonUniform(),skewX(),skewY(),"
+                + "toFloat32Array(),toFloat64Array(),toJSON(),toString(),transformPoint(),translate()",
+            EDGE = "a[GCE],b[GCE],c[GCE],constructor(),d[GCE],e[GCE],f[GCE],flipX(),flipY(),"
+                + "inverse(),is2D[GCE],isIdentity[GCE],m11[GCE],m12[GCE],m13[GCE],m14[GCE],"
+                + "m21[GCE],m22[GCE],m23[GCE],m24[GCE],m31[GCE],m32[GCE],m33[GCE],m34[GCE],"
+                + "m41[GCE],m42[GCE],m43[GCE],m44[GCE],multiply(),rotate(),rotateAxisAngle(),"
+                + "rotateFromVector(),scale(),scale3d(),scaleNonUniform(),skewX(),skewY(),"
+                + "toFloat32Array(),toFloat64Array(),toJSON(),toString(),transformPoint(),translate()",
+            FF = "a[GCE],b[GCE],c[GCE],constructor(),d[GCE],e[GCE],f[GCE],flipX(),flipY(),"
+                + "inverse(),is2D[GCE],isIdentity[GCE],m11[GCE],m12[GCE],m13[GCE],m14[GCE],"
+                + "m21[GCE],m22[GCE],m23[GCE],m24[GCE],m31[GCE],m32[GCE],m33[GCE],m34[GCE],"
+                + "m41[GCE],m42[GCE],m43[GCE],m44[GCE],multiply(),rotate(),rotateAxisAngle(),"
+                + "rotateFromVector(),scale(),scale3d(),scaleNonUniform(),skewX(),skewY(),"
+                + "toFloat32Array(),toFloat64Array(),toJSON(),toString(),transformPoint(),translate()",
+            FF_ESR = "a[GCE],b[GCE],c[GCE],constructor(),d[GCE],e[GCE],f[GCE],flipX(),flipY(),"
+                + "inverse(),is2D[GCE],isIdentity[GCE],m11[GCE],m12[GCE],m13[GCE],m14[GCE],"
+                + "m21[GCE],m22[GCE],m23[GCE],m24[GCE],m31[GCE],m32[GCE],m33[GCE],m34[GCE],"
+                + "m41[GCE],m42[GCE],m43[GCE],m44[GCE],multiply(),rotate(),rotateAxisAngle(),"
+                + "rotateFromVector(),scale(),scale3d(),scaleNonUniform(),skewX(),skewY(),"
+                + "toFloat32Array(),toFloat64Array(),toJSON(),toString(),transformPoint(),translate()")
+    public void domMatrixReadOnly() throws Exception {
+        testString("", "new DOMMatrixReadOnly()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMMatrix}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "a[GSCE],b[GSCE],c[GSCE],constructor(),d[GSCE],e[GSCE],f[GSCE],invertSelf(),"
+                + "m11[GSCE],m12[GSCE],m13[GSCE],m14[GSCE],m21[GSCE],m22[GSCE],m23[GSCE],"
+                + "m24[GSCE],m31[GSCE],m32[GSCE],m33[GSCE],m34[GSCE],m41[GSCE],m42[GSCE],"
+                + "m43[GSCE],m44[GSCE],multiplySelf(),preMultiplySelf(),rotateAxisAngleSelf(),"
+                + "rotateFromVectorSelf(),rotateSelf(),scale3dSelf(),scaleSelf(),"
+                + "setMatrixValue(),skewXSelf(),skewYSelf(),translateSelf()",
+            EDGE = "a[GSCE],b[GSCE],c[GSCE],constructor(),d[GSCE],e[GSCE],f[GSCE],invertSelf(),"
+                + "m11[GSCE],m12[GSCE],m13[GSCE],m14[GSCE],m21[GSCE],m22[GSCE],m23[GSCE],"
+                + "m24[GSCE],m31[GSCE],m32[GSCE],m33[GSCE],m34[GSCE],m41[GSCE],m42[GSCE],"
+                + "m43[GSCE],m44[GSCE],multiplySelf(),preMultiplySelf(),rotateAxisAngleSelf(),"
+                + "rotateFromVectorSelf(),rotateSelf(),scale3dSelf(),scaleSelf(),"
+                + "setMatrixValue(),skewXSelf(),skewYSelf(),translateSelf()",
+            FF = "a[GSCE],b[GSCE],c[GSCE],constructor(),d[GSCE],e[GSCE],f[GSCE],invertSelf(),"
+                + "m11[GSCE],m12[GSCE],m13[GSCE],m14[GSCE],m21[GSCE],m22[GSCE],m23[GSCE],"
+                + "m24[GSCE],m31[GSCE],m32[GSCE],m33[GSCE],m34[GSCE],m41[GSCE],m42[GSCE],"
+                + "m43[GSCE],m44[GSCE],multiplySelf(),preMultiplySelf(),rotateAxisAngleSelf(),"
+                + "rotateFromVectorSelf(),rotateSelf(),scale3dSelf(),scaleSelf(),"
+                + "setMatrixValue(),skewXSelf(),skewYSelf(),translateSelf()",
+            FF_ESR = "a[GSCE],b[GSCE],c[GSCE],constructor(),d[GSCE],e[GSCE],f[GSCE],invertSelf(),"
+                + "m11[GSCE],m12[GSCE],m13[GSCE],m14[GSCE],m21[GSCE],m22[GSCE],m23[GSCE],"
+                + "m24[GSCE],m31[GSCE],m32[GSCE],m33[GSCE],m34[GSCE],m41[GSCE],m42[GSCE],"
+                + "m43[GSCE],m44[GSCE],multiplySelf(),preMultiplySelf(),rotateAxisAngleSelf(),"
+                + "rotateFromVectorSelf(),rotateSelf(),scale3dSelf(),scaleSelf(),"
+                + "setMatrixValue(),skewXSelf(),skewYSelf(),translateSelf()")
+    public void domMatrix() throws Exception {
+        testString("", "new DOMMatrix()");
     }
 }

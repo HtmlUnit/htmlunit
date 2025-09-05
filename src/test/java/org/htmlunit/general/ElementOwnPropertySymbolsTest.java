@@ -3325,7 +3325,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.StyleMedia}.
+     * Test {@link org.htmlunit.javascript.host.css.StyleMedia}.
      *
      * @throws Exception if the test fails
      */
@@ -3338,5 +3338,33 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             EDGE = "Symbol(Symbol.toStringTag) [C] [StyleMedia]")
     public void styleMedia() throws Exception {
         testString("", "window.styleMedia");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMMatrixReadOnly}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [DOMMatrixReadOnly]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [DOMMatrixReadOnly]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DOMMatrixReadOnly]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DOMMatrixReadOnly]")
+    public void domMatrixReadOnly() throws Exception {
+        testString("", "new DOMMatrixReadOnly()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMMatrix}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [DOMMatrix]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [DOMMatrix]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DOMMatrix]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DOMMatrix]")
+    public void domMatrix() throws Exception {
+        testString("", "new DOMMatrix()");
     }
 }

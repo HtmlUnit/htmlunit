@@ -1111,7 +1111,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "origin,originAgentCluster,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,performance,"
                 + "personalbar,postMessage(),print(),process(),prompt(),queueMicrotask(),releaseEvents(),"
                 + "removeEventListener(),reportError(),requestAnimationFrame(),requestIdleCallback(),resizeBy(),"
-                + "resizeTo(),screen,screenLeft,screenTop,screenX,screenY,scroll(),scrollbars,scrollBy(),"
+                + "resizeTo(),scheduler,"
+                + "screen,screenLeft,screenTop,screenX,screenY,scroll(),scrollbars,scrollBy(),"
                 + "scrollByLines(),scrollByPages(),scrollMaxX,scrollMaxY,scrollTo(),scrollX,scrollY,self,"
                 + "sessionStorage,setInterval(),setResizable(),setTimeout(),sortFunction(),speechSynthesis,status,"
                 + "statusbar,stop(),structuredClone(),test(),toolbar,top,updateCommands(),visualViewport,"
@@ -3325,7 +3326,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "willValidate",
             FF = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,dirName,"
                 + "disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
-                + "indeterminate,labels,list,max,maxLength,min,minLength,mozIsTextField(),multiple,name,pattern,"
+                + "indeterminate,labels,list,max,maxLength,min,minLength,multiple,name,pattern,"
                 + "placeholder,popoverTargetAction,popoverTargetElement,readOnly,reportValidity(),required,select(),"
                 + "selectionDirection,selectionEnd,selectionStart,setCustomValidity(),setRangeText(),"
                 + "setSelectionRange(),showPicker(),size,src,step,stepDown(),stepUp(),textLength,type,useMap,"
@@ -9533,7 +9534,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.StyleMedia}.
+     * Test {@link org.htmlunit.javascript.host.css.StyleMedia}.
      *
      * @throws Exception if the test fails
      */
@@ -9544,5 +9545,73 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "-")
     public void styleMedia() throws Exception {
         testString("", "window.styleMedia");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMMatrixReadOnly}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "a,b,c,d,e,f,flipX(),flipY(),inverse(),is2D,isIdentity,m11,m12,m13,m14,"
+                + "m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),rotate(),"
+                + "rotateAxisAngle(),rotateFromVector(),scale(),scale3d(),scaleNonUniform(),"
+                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
+                + "transformPoint(),translate()",
+            EDGE = "a,b,c,d,e,f,flipX(),flipY(),inverse(),is2D,isIdentity,m11,m12,m13,m14,"
+                + "m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),rotate(),"
+                + "rotateAxisAngle(),rotateFromVector(),scale(),scale3d(),scaleNonUniform(),"
+                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
+                + "transformPoint(),translate()",
+            FF = "a,b,c,d,e,f,flipX(),flipY(),inverse(),is2D,isIdentity,m11,m12,m13,m14,"
+                + "m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),rotate(),"
+                + "rotateAxisAngle(),rotateFromVector(),scale(),scale3d(),scaleNonUniform(),"
+                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
+                + "transformPoint(),translate()",
+            FF_ESR = "a,b,c,d,e,f,flipX(),flipY(),inverse(),is2D,isIdentity,m11,m12,m13,m14,"
+                + "m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),rotate(),"
+                + "rotateAxisAngle(),rotateFromVector(),scale(),scale3d(),scaleNonUniform(),"
+                + "skewX(),skewY(),toFloat32Array(),toFloat64Array(),toJSON(),toString(),"
+                + "transformPoint(),translate()")
+    public void domMatrixReadOnly() throws Exception {
+        testString("", "new DOMMatrixReadOnly()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMMatrix}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "a,b,c,d,e,f,flipX(),flipY(),inverse(),invertSelf(),is2D,isIdentity,"
+                + "m11,m12,m13,m14,m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),"
+                + "multiplySelf(),preMultiplySelf(),rotate(),rotateAxisAngle(),"
+                + "rotateAxisAngleSelf(),rotateFromVector(),rotateFromVectorSelf(),rotateSelf(),"
+                + "scale(),scale3d(),scale3dSelf(),scaleNonUniform(),scaleSelf(),setMatrixValue(),"
+                + "skewX(),skewXSelf(),skewY(),skewYSelf(),toFloat32Array(),toFloat64Array(),"
+                + "toJSON(),toString(),transformPoint(),translate(),translateSelf()",
+            EDGE = "a,b,c,d,e,f,flipX(),flipY(),inverse(),invertSelf(),is2D,isIdentity,"
+                + "m11,m12,m13,m14,m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),"
+                + "multiplySelf(),preMultiplySelf(),rotate(),rotateAxisAngle(),"
+                + "rotateAxisAngleSelf(),rotateFromVector(),rotateFromVectorSelf(),rotateSelf(),"
+                + "scale(),scale3d(),scale3dSelf(),scaleNonUniform(),scaleSelf(),setMatrixValue(),"
+                + "skewX(),skewXSelf(),skewY(),skewYSelf(),toFloat32Array(),toFloat64Array(),"
+                + "toJSON(),toString(),transformPoint(),translate(),translateSelf()",
+            FF = "a,b,c,d,e,f,flipX(),flipY(),inverse(),invertSelf(),is2D,isIdentity,"
+                + "m11,m12,m13,m14,m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),"
+                + "multiplySelf(),preMultiplySelf(),rotate(),rotateAxisAngle(),"
+                + "rotateAxisAngleSelf(),rotateFromVector(),rotateFromVectorSelf(),rotateSelf(),"
+                + "scale(),scale3d(),scale3dSelf(),scaleNonUniform(),scaleSelf(),setMatrixValue(),"
+                + "skewX(),skewXSelf(),skewY(),skewYSelf(),toFloat32Array(),toFloat64Array(),"
+                + "toJSON(),toString(),transformPoint(),translate(),translateSelf()",
+            FF_ESR = "a,b,c,d,e,f,flipX(),flipY(),inverse(),invertSelf(),is2D,isIdentity,"
+                + "m11,m12,m13,m14,m21,m22,m23,m24,m31,m32,m33,m34,m41,m42,m43,m44,multiply(),"
+                + "multiplySelf(),preMultiplySelf(),rotate(),rotateAxisAngle(),"
+                + "rotateAxisAngleSelf(),rotateFromVector(),rotateFromVectorSelf(),rotateSelf(),"
+                + "scale(),scale3d(),scale3dSelf(),scaleNonUniform(),scaleSelf(),setMatrixValue(),"
+                + "skewX(),skewXSelf(),skewY(),skewYSelf(),toFloat32Array(),toFloat64Array(),"
+                + "toJSON(),toString(),transformPoint(),translate(),translateSelf()")
+    public void domMatrix() throws Exception {
+        testString("", "new DOMMatrix()");
     }
 }
