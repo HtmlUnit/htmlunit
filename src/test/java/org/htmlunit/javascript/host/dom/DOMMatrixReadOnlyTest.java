@@ -20,57 +20,25 @@ import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for {@link DOMMatrix}.
+ * Tests for {@link DOMMatrixReadOnly}.
  *
  * @author Ronald Brill
  */
-public class DOMMatrixTest extends WebDriverTestCase {
+public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
 
-    /**
-     * @throws Exception on test failure
-     */
-    @Test
-    @Alerts({"true", "function DOMMatrix() { [native code] }", "function DOMMatrix() { [native code] }"})
-    public void webKitCSSMatrixIsAlias() throws Exception {
-        final String html = DOCTYPE_HTML
-                + "<html><head>\n"
-                + "<script>\n"
-                + LOG_TITLE_FUNCTION
-                + "function doTest() {\n"
-                + "  log(WebKitCSSMatrix === DOMMatrix);\n"
-                + "  log(WebKitCSSMatrix);\n"
-                + "  log(DOMMatrix);\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<body onload='doTest()'>\n"
-                + "</body></html>";
+    public static final String DUMP_FUNCTION = "function dump(m) {\n"
+            + "  log('[' + m.a + ', ' + m.b + ', ' + m.c + ', ' + m.d + ', ' + m.e + ', ' + m.f + ']');\n"
+            + "  log('1[' + m.m11 + ', ' + m.m12 + ', ' + m.m13 + ', ' + m.m14 + ']');\n"
+            + "  log('2[' + m.m21 + ', ' + m.m22 + ', ' + m.m23 + ', ' + m.m24 + ']');\n"
+            + "  log('3[' + m.m31 + ', ' + m.m32 + ', ' + m.m33 + ', ' + m.m34 + ']');\n"
+            + "  log('4[' + m.m41 + ', ' + m.m42 + ', ' + m.m43 + ', ' + m.m44 + ']');\n"
+            + "  log(m.is2D);\n"
+            + "}\n";
 
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception on test failure
-     */
-    @Test
-    @Alerts({"false", "function SVGMatrix() { [native code] }", "function DOMMatrix() { [native code] }"})
-    public void svgMatrixIsNotAlias() throws Exception {
-        final String html = DOCTYPE_HTML
-                + "<html><head>\n"
-                + "<script>\n"
-                + LOG_TITLE_FUNCTION
-                + "function doTest() {\n"
-                + "  log(SVGMatrix === DOMMatrix);\n"
-                + "  log(SVGMatrix);\n"
-                + "  log(DOMMatrix);\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<body onload='doTest()'>\n"
-                + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
+    public static final String DUMP_2D_FUNCTION = "function dump(m) {\n"
+            + "  log('[' + m.a + ', ' + m.b + ', ' + m.c + ', ' + m.d + ', ' + m.e + ', ' + m.f + ']');\n"
+            + "  log(m.is2D);\n"
+            + "}\n";
 
     /**
      * @throws Exception on test failure
@@ -88,8 +56,8 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_FUNCTION
-                + "let m = new DOMMatrix();\n"
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
                 + "dump(m);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -113,8 +81,8 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_FUNCTION
-                + "let m = new DOMMatrix([6, 5, 4, 3, 2, 1]);\n"
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([6, 5, 4, 3, 2, 1]);\n"
                 + "dump(m);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -138,8 +106,8 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_2D_FUNCTION
-                + "let m = new DOMMatrix([6, true, null, undefined, '2', 'eins']);\n"
+                + DUMP_2D_FUNCTION
+                + "let m = new DOMMatrixReadOnly([6, true, null, undefined, '2', 'eins']);\n"
                 + "dump(m);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -158,9 +126,9 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_FUNCTION
+                + DUMP_FUNCTION
                 + "try {"
-                + "  let m = new DOMMatrix([5, 4, 3, 2, 1]);\n"
+                + "  let m = new DOMMatrixReadOnly([5, 4, 3, 2, 1]);\n"
                 + "  dump(m);\n"
                 + "} catch(e) { logEx(e); }"
                 + "</script>\n"
@@ -180,9 +148,9 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_FUNCTION
+                + DUMP_FUNCTION
                 + "try {"
-                + "  let m = new DOMMatrix([7, 6, 5, 4, 3, 2, 1]);\n"
+                + "  let m = new DOMMatrixReadOnly([7, 6, 5, 4, 3, 2, 1]);\n"
                 + "  dump(m);\n"
                 + "} catch(e) { logEx(e); }"
                 + "</script>\n"
@@ -207,8 +175,8 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_FUNCTION
-                + "let m = new DOMMatrix([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
                 + "dump(m);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -227,9 +195,9 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_FUNCTION
+                + DUMP_FUNCTION
                 + "try {"
-                + "  let m = new DOMMatrix([15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "  let m = new DOMMatrixReadOnly([15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
                 + "  dump(m);\n"
                 + "} catch(e) { logEx(e); }"
                 + "</script>\n"
@@ -249,9 +217,9 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_FUNCTION
+                + DUMP_FUNCTION
                 + "try {"
-                + "  let m = new DOMMatrix([17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "  let m = new DOMMatrixReadOnly([17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
                 + "  dump(m);\n"
                 + "} catch(e) { logEx(e); }"
                 + "</script>\n"
@@ -271,9 +239,9 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_FUNCTION
+                + DUMP_FUNCTION
                 + "try {"
-                + "  let m = new DOMMatrix(7);\n"
+                + "  let m = new DOMMatrixReadOnly(7);\n"
                 + "  dump(m);\n"
                 + "} catch(e) { logEx(e); }"
                 + "</script>\n"
@@ -293,9 +261,9 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_FUNCTION
+                + DUMP_FUNCTION
                 + "try {"
-                + "  let m = new DOMMatrix(null);\n"
+                + "  let m = new DOMMatrixReadOnly(null);\n"
                 + "  dump(m);\n"
                 + "} catch(e) { logEx(e); }"
                 + "</script>\n"
@@ -320,9 +288,9 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_FUNCTION
+                + DUMP_FUNCTION
                 + "try {"
-                + "  let m = new DOMMatrix(undefined);\n"
+                + "  let m = new DOMMatrixReadOnly(undefined);\n"
                 + "  dump(m);\n"
                 + "} catch(e) { logEx(e); }"
                 + "</script>\n"
@@ -342,9 +310,9 @@ public class DOMMatrixTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DOMMatrixReadOnlyTest.DUMP_FUNCTION
+                + DUMP_FUNCTION
                 + "try {"
-                + "  let m = new DOMMatrix([]);\n"
+                + "  let m = new DOMMatrixReadOnly([]);\n"
                 + "  dump(m);\n"
                 + "} catch(e) { logEx(e); }"
                 + "</script>\n"

@@ -14,6 +14,9 @@
  */
 package org.htmlunit.javascript.host.dom;
 
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxConstructorAlias;
@@ -29,11 +32,20 @@ public class DOMMatrix extends DOMMatrixReadOnly {
 
     /**
      * JavaScript constructor.
+     * @param cx the current context
+     * @param scope the scope
+     * @param args the arguments to the WebSocket constructor
+     * @param ctorObj the function object
+     * @param inNewExpr Is new or not
+     * @return the java object to allow JavaScript to access
      */
-    @Override
     @JsxConstructor
     @JsxConstructorAlias(alias = "WebKitCSSMatrix")
-    public void jsConstructor() {
-        super.jsConstructor();
+    public static DOMMatrix jsConstructor(final Context cx, final Scriptable scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
+
+        final DOMMatrix matrix = new DOMMatrix();
+        matrix.init(args, ctorObj);
+        return matrix;
     }
 }
