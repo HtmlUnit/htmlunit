@@ -37,7 +37,6 @@ import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.xml.XmlPage;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -53,11 +52,11 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "139.0.7258";
+    static String CHROME_DRIVER_ = "140.0.7339";
     static String CHROME_DRIVER_URL_ =
             "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json";
 
-    static String EDGE_DRIVER_ = "139.0.3405";
+    static String EDGE_DRIVER_ = "140.0.3485";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -179,7 +178,7 @@ public class ExternalTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Disabled("javascript errors")
+    // @Disabled("javascript errors")
     public void assertEdgeDriver() throws Exception {
         try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
             webClient.getOptions().setThrowExceptionOnScriptError(false);
