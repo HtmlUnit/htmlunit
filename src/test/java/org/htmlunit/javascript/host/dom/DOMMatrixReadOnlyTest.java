@@ -320,6 +320,7 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception on test failure
      */
@@ -368,16 +369,11 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"[NaN, 0, 0, 1, 0, 0]",
-                       "true"},
-            FF = {"[NaN, 0, NaN, 1, NaN, 0]",
-                  "true"},
-            FF_ESR = {"[NaN, 0, NaN, 1, NaN, 0]",
-                      "true"})
-    @HtmlUnitNYI(FF = {"[NaN, 0, 0, 1, 0, 0]",
-                       "true"},
-            FF_ESR = {"[NaN, 0, 0, 1, 0, 0]",
-                      "true"})
+    @Alerts(DEFAULT = {"[NaN, 0, 0, 1, 0, 0]", "true"},
+            FF = {"[NaN, 0, NaN, 1, NaN, 0]", "true"},
+            FF_ESR = {"[NaN, 0, NaN, 1, NaN, 0]", "true"})
+    @HtmlUnitNYI(FF = {"[NaN, 0, 0, 1, 0, 0]", "true"},
+            FF_ESR = {"[NaN, 0, 0, 1, 0, 0]", "true"})
     public void flipX_NaN() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -398,16 +394,11 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"[1, 0, 0, -Infinity, 0, 0]",
-                       "true"},
-        FF = {"[1, NaN, 0, -Infinity, 0, NaN]",
-              "true"},
-        FF_ESR = {"[1, NaN, 0, -Infinity, 0, NaN]",
-                  "true"})
-    @HtmlUnitNYI(FF = {"[1, 0, 0, -Infinity, 0, 0]",
-                       "true"},
-        FF_ESR = {"[1, 0, 0, -Infinity, 0, 0]",
-                  "true"})
+    @Alerts(DEFAULT = {"[1, 0, 0, -Infinity, 0, 0]", "true"},
+            FF = {"[1, NaN, 0, -Infinity, 0, NaN]", "true"},
+            FF_ESR = {"[1, NaN, 0, -Infinity, 0, NaN]", "true"})
+    @HtmlUnitNYI(FF = {"[1, 0, 0, -Infinity, 0, 0]", "true"},
+            FF_ESR = {"[1, 0, 0, -Infinity, 0, 0]", "true"})
     public void flipY_Infinity() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -423,6 +414,7 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception on test failure
      */
@@ -472,6 +464,7 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception on test failure
      */
@@ -523,6 +516,7 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception on test failure
      */
