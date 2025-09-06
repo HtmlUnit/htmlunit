@@ -73,10 +73,10 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
 
     /** Latest Edge. */
-    public static final BrowserVersion EDGE = new BrowserVersion(139, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(140, "Edge");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(139, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(140, "Chrome");
 
     /**
      * Array with all supported browsers.
@@ -197,42 +197,8 @@ public final class BrowserVersion implements Serializable {
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
 
-        /*
-        CHROME.secClientHintUserAgentHeader_ = "\"Not(A:Brand\";v=\"99\", \"Google Chrome\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\"";
         CHROME.secClientHintUserAgentHeader_ = "\"Chromium\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Not:A-Brand\";v=\"24\", \"Google Chrome\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\"";
-        */
-        // 135
-        /*
-        CHROME.secClientHintUserAgentHeader_ = "\"Google Chrome\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\"";
-        */
-        // 136
-        /*
-        CHROME.secClientHintUserAgentHeader_ = "\"Chromium\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Google Chrome\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Not.A/Brand\";v=\"99\"";
-        */
-        // 137
-        /*
-        CHROME.secClientHintUserAgentHeader_ = "\"Google Chrome\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Not/A)Brand\";v=\"24\"";
-        */
-        // 138
-        /*
-        CHROME.secClientHintUserAgentHeader_ = "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Google Chrome\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\"";
-        */
-
-        // 139
-        CHROME.secClientHintUserAgentHeader_ = "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\""
-                + CHROME.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
+                + CHROME.getBrowserVersionNumeric() + "\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\""
                 + CHROME.getBrowserVersionNumeric() + "\"";
 
         CHROME.fontHeights_ = new int[] {
@@ -278,42 +244,8 @@ public final class BrowserVersion implements Serializable {
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
 
-        /*
         EDGE.secClientHintUserAgentHeader_ = "\"Chromium\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Not:A-Brand\";v=\"24\", \"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\"";
-        EDGE.secClientHintUserAgentHeader_ = "\"Not(A:Brand\";v=\"99\", \"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\"";
-        */
-        // 135
-        /*
-        EDGE.secClientHintUserAgentHeader_ = "\"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\"";
-        */
-        // 136
-        /*
-        EDGE.secClientHintUserAgentHeader_ = "\"Chromium\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Not.A/Brand\";v=\"99\"";
-        */
-        // 137
-        /*
-        EDGE.secClientHintUserAgentHeader_ = "\"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Not/A)Brand\";v=\"24\"";
-        */
-
-        // 138
-        /*
-        EDGE.secClientHintUserAgentHeader_ = "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\"";
-        */
-        // 139
-        EDGE.secClientHintUserAgentHeader_ = "\"Not;A=Brand\";v=\"99\", \"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
+                + EDGE.getBrowserVersionNumeric() + "\", \"Not=A?Brand\";v=\"24\", \"Microsoft Edge\";v=\""
                 + EDGE.getBrowserVersionNumeric() + "\"";
 
         EDGE.fontHeights_ = new int[] {
