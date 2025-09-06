@@ -42,7 +42,7 @@ Version 4.16.0 / August 29, 2025
 ## Overview
 HtmlUnit is a "GUI-less browser for Java programs". It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc... just like you do in your "normal" browser.
 
-It has fairly good JavaScript support (which is constantly improving) and is able to work even with quite complex AJAX libraries, simulating Chrome, Firefox or Internet Explorer depending on the configuration used.
+It has fairly good JavaScript support (which is constantly improving) and is able to work even with quite complex AJAX libraries, simulating Chrome, Firefox or Edge depending on the configuration used.
 
 HtmlUnit is typically used for testing purposes or to retrieve information from web sites.
 
