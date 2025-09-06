@@ -437,4 +437,234 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         matrix.is2D_ = this.is2D_;
         return matrix;
     }
+
+    /**
+     * @return new matrix which is the inverse of the original matrix.
+     *     If the matrix cannot be inverted, the new matrix's components are all set to NaN
+     *     and its is2D property is set to false. The original matrix is not changed.
+     */
+    @JsxFunction
+    public DOMMatrixReadOnly inverse() {
+        final DOMMatrixReadOnly matrix = new DOMMatrixReadOnly();
+        final Window window = getWindow();
+        matrix.setParentScope(window);
+        matrix.setPrototype(window.getPrototype(DOMMatrixReadOnly.class));
+
+        if (is2D_) {
+            final double det = m11_ * m22_ - m12_ * m21_;
+            if (det == 0) {
+                // Not invertible: set all to NaN, is2D_ = false
+                matrix.m11_ = Double.NaN;
+                matrix.m12_ = Double.NaN;
+                matrix.m13_ = Double.NaN;
+                matrix.m14_ = Double.NaN;
+                matrix.m21_ = Double.NaN;
+                matrix.m22_ = Double.NaN;
+                matrix.m23_ = Double.NaN;
+                matrix.m24_ = Double.NaN;
+                matrix.m31_ = Double.NaN;
+                matrix.m32_ = Double.NaN;
+                matrix.m33_ = Double.NaN;
+                matrix.m34_ = Double.NaN;
+                matrix.m41_ = Double.NaN;
+                matrix.m42_ = Double.NaN;
+                matrix.m43_ = Double.NaN;
+                matrix.m44_ = Double.NaN;
+                matrix.is2D_ = false;
+                return matrix;
+            }
+
+            matrix.m11_ = m22_ / det;
+            matrix.m12_ = -m12_ / det;
+            matrix.m13_ = 0;
+            matrix.m14_ = 0;
+
+            matrix.m21_ = -m21_ / det;
+            matrix.m22_ = m11_ / det;
+            matrix.m23_ = 0;
+            matrix.m24_ = 0;
+
+            matrix.m31_ = 0;
+            matrix.m32_ = 0;
+            matrix.m33_ = 1;
+            matrix.m34_ = 0;
+
+            matrix.m41_ = (m21_ * m42_ - m22_ * m41_) / det;
+            matrix.m42_ = (m12_ * m41_ - m11_ * m42_) / det;
+            matrix.m43_ = 0;
+            matrix.m44_ = 1;
+
+            matrix.is2D_ = true;
+            return matrix;
+        }
+
+        // 3D/4x4 matrix inversion
+        final double[] m = {
+            m11_, m12_, m13_, m14_,
+            m21_, m22_, m23_, m24_,
+            m31_, m32_, m33_, m34_,
+            m41_, m42_, m43_, m44_
+        };
+
+        final double[] inv = new double[16];
+        inv[0] = m[5] * m[10] * m[15]
+                - m[5] * m[11] * m[14]
+                - m[9] * m[6] * m[15]
+                + m[9] * m[7] * m[14]
+                + m[13] * m[6] * m[11]
+                - m[13] * m[7] * m[10];
+
+        inv[4] = -m[4] * m[10] * m[15]
+                + m[4] * m[11] * m[14]
+                + m[8] * m[6] * m[15]
+                - m[8] * m[7] * m[14]
+                - m[12] * m[6] * m[11]
+                + m[12] * m[7] * m[10];
+
+        inv[8] = m[4] * m[9] * m[15]
+                - m[4] * m[11] * m[13]
+                - m[8] * m[5] * m[15]
+                + m[8] * m[7] * m[13]
+                + m[12] * m[5] * m[11]
+                - m[12] * m[7] * m[9];
+
+        inv[12] = -m[4] * m[9] * m[14]
+                + m[4] * m[10] * m[13]
+                + m[8] * m[5] * m[14]
+                - m[8] * m[6] * m[13]
+                - m[12] * m[5] * m[10]
+                + m[12] * m[6] * m[9];
+
+        inv[1] = -m[1] * m[10] * m[15]
+                + m[1] * m[11] * m[14]
+                + m[9] * m[2] * m[15]
+                - m[9] * m[3] * m[14]
+                - m[13] * m[2] * m[11]
+                + m[13] * m[3] * m[10];
+
+        inv[5] = m[0] * m[10] * m[15]
+                - m[0] * m[11] * m[14]
+                - m[8] * m[2] * m[15]
+                + m[8] * m[3] * m[14]
+                + m[12] * m[2] * m[11]
+                - m[12] * m[3] * m[10];
+
+        inv[9] = -m[0] * m[9] * m[15]
+                + m[0] * m[11] * m[13]
+                + m[8] * m[1] * m[15]
+                - m[8] * m[3] * m[13]
+                - m[12] * m[1] * m[11]
+                + m[12] * m[3] * m[9];
+
+        inv[13] = m[0] * m[9] * m[14]
+                - m[0] * m[10] * m[13]
+                - m[8] * m[1] * m[14]
+                + m[8] * m[2] * m[13]
+                + m[12] * m[1] * m[10]
+                - m[12] * m[2] * m[9];
+
+        inv[2] = m[1] * m[6] * m[15]
+                - m[1] * m[7] * m[14]
+                - m[5] * m[2] * m[15]
+                + m[5] * m[3] * m[14]
+                + m[13] * m[2] * m[7]
+                - m[13] * m[3] * m[6];
+
+        inv[6] = -m[0] * m[6] * m[15]
+                + m[0] * m[7] * m[14]
+                + m[4] * m[2] * m[15]
+                - m[4] * m[3] * m[14]
+                - m[12] * m[2] * m[7]
+                + m[12] * m[3] * m[6];
+
+        inv[10] = m[0] * m[5] * m[15]
+                - m[0] * m[7] * m[13]
+                - m[4] * m[1] * m[15]
+                + m[4] * m[3] * m[13]
+                + m[12] * m[1] * m[7]
+                - m[12] * m[3] * m[5];
+
+        inv[14] = -m[0] * m[5] * m[14]
+                + m[0] * m[6] * m[13]
+                + m[4] * m[1] * m[14]
+                - m[4] * m[2] * m[13]
+                - m[12] * m[1] * m[6]
+                + m[12] * m[2] * m[5];
+
+        inv[3] = -m[1] * m[6] * m[11]
+                + m[1] * m[7] * m[10]
+                + m[5] * m[2] * m[11]
+                - m[5] * m[3] * m[10]
+                - m[9] * m[2] * m[7]
+                + m[9] * m[3] * m[6];
+
+        inv[7] = m[0] * m[6] * m[11]
+                - m[0] * m[7] * m[10]
+                - m[4] * m[2] * m[11]
+                + m[4] * m[3] * m[10]
+                + m[8] * m[2] * m[7]
+                - m[8] * m[3] * m[6];
+
+        inv[11] = -m[0] * m[5] * m[11]
+                + m[0] * m[7] * m[9]
+                + m[4] * m[1] * m[11]
+                - m[4] * m[3] * m[9]
+                - m[8] * m[1] * m[7]
+                + m[8] * m[3] * m[5];
+
+        inv[15] = m[0] * m[5] * m[10]
+                - m[0] * m[6] * m[9]
+                - m[4] * m[1] * m[10]
+                + m[4] * m[2] * m[9]
+                + m[8] * m[1] * m[6]
+                - m[8] * m[2] * m[5];
+
+        double det = m[0] * inv[0] + m[1] * inv[4] + m[2] * inv[8] + m[3] * inv[12];
+
+        if (det == 0) {
+            // Not invertible: set all to NaN, is2D_ = false
+            matrix.m11_ = Double.NaN;
+            matrix.m12_ = Double.NaN;
+            matrix.m13_ = Double.NaN;
+            matrix.m14_ = Double.NaN;
+            matrix.m21_ = Double.NaN;
+            matrix.m22_ = Double.NaN;
+            matrix.m23_ = Double.NaN;
+            matrix.m24_ = Double.NaN;
+            matrix.m31_ = Double.NaN;
+            matrix.m32_ = Double.NaN;
+            matrix.m33_ = Double.NaN;
+            matrix.m34_ = Double.NaN;
+            matrix.m41_ = Double.NaN;
+            matrix.m42_ = Double.NaN;
+            matrix.m43_ = Double.NaN;
+            matrix.m44_ = Double.NaN;
+            matrix.is2D_ = false;
+            return matrix;
+        }
+
+        det = 1.0 / det;
+
+        matrix.m11_ = inv[0] * det;
+        matrix.m12_ = inv[1] * det;
+        matrix.m13_ = inv[2] * det;
+        matrix.m14_ = inv[3] * det;
+
+        matrix.m21_ = inv[4] * det;
+        matrix.m22_ = inv[5] * det;
+        matrix.m23_ = inv[6] * det;
+        matrix.m24_ = inv[7] * det;
+
+        matrix.m31_ = inv[8] * det;
+        matrix.m32_ = inv[9] * det;
+        matrix.m33_ = inv[10] * det;
+        matrix.m34_ = inv[11] * det;
+
+        matrix.m41_ = inv[12] * det;
+        matrix.m42_ = inv[13] * det;
+        matrix.m43_ = inv[14] * det;
+        matrix.m44_ = inv[15] * det;
+
+        return matrix;
+    }
 }

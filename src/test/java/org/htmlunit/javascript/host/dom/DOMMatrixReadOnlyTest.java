@@ -523,4 +523,133 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]", "true"})
+    public void inverse_identity2D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body><script>"
+                + LOG_TITLE_FUNCTION
+                + DUMP_2D_FUNCTION
+                + "let m = new DOMMatrixReadOnly();"
+                + "let inv = m.inverse();"
+                + "dump(inv);"
+                + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[0.25, 0, 0, 0.2, -2.5, -2.6]", "true",
+             "[4, 0, 0, 5, 10, 13]", "true"})
+    public void inverse_general2D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body><script>"
+                + LOG_TITLE_FUNCTION
+                + DUMP_2D_FUNCTION
+                + "let m = new DOMMatrixReadOnly([4, 0, 0, 5, 10, 13]);"
+                + "let inv = m.inverse();"
+                + "dump(inv);"
+                + "dump(m);"
+                + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[NaN, NaN, NaN, NaN, NaN, NaN]", "false"})
+    public void inverse_singular2D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body><script>"
+                + LOG_TITLE_FUNCTION
+                + DUMP_2D_FUNCTION
+                + "try {"
+                + "  let m = new DOMMatrixReadOnly([0, 0, 0, 0, 0, 0]);"
+                + "  let inv = m.inverse();"
+                + "  dump(inv);"
+                + "} catch(e) { logEx(e); }"
+                + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "false"})
+    public void inverse_identity3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body><script>"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);"
+                + "let inv = m.inverse();"
+                + "dump(inv);"
+                + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[NaN, NaN, NaN, NaN, NaN, NaN]",
+             "1[NaN, NaN, NaN, NaN]",
+             "2[NaN, NaN, NaN, NaN]",
+             "3[NaN, NaN, NaN, NaN]",
+             "4[NaN, NaN, NaN, NaN]",
+             "false"})
+    public void inverse_singular3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body><script>"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {"
+                + "  let m = new DOMMatrixReadOnly([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);"
+                + "  let inv = m.inverse();"
+                + "  dump(inv);"
+                + "} catch(e) { logEx(e); }"
+                + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 0.5, 0, 0]",
+             "1[2, 0, 0, 0]",
+             "2[0, 0.5, 0, 0]",
+             "3[0, 0, 0.25, 0]",
+             "4[0, 0, 0, 1]",
+             "false",
+             "[0.5, 0, 0, 2, 0, 0]",
+             "1[0.5, 0, 0, 0]",
+             "2[0, 2, 0, 0]",
+             "3[0, 0, 4, 0]",
+             "4[0, 0, 0, 1]",
+             "false"})
+    public void inverse_general3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body><script>"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([0.5,0,0,0,0,2,0,0,0,0,4,0,0,0,0,1]);"
+                + "let inv = m.inverse();"
+                + "dump(inv);"
+                + "dump(m);"
+                + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
 }
