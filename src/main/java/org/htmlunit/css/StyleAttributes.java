@@ -814,6 +814,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code caption-side}. */
         CAPTION_SIDE_("caption-side", "caption-side", ff("top")),
 
+        /** The style property {@code caretAnimation}. */
+        CARET_ANIMATION("caretAnimation", "caret-animation", chromeAndEdgeAuto()),
+
         /** The style property {@code caretColor}. */
         CARET_COLOR("caretColor", "caret-color", chromeAndEdge("rgb(0, 0, 0)"), ff("rgb(0, 0, 0)")),
 
@@ -2818,6 +2821,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code scroll-snap-type}. */
         SCROLL_SNAP_TYPE_("scroll-snap-type", "scroll-snap-type", ffNone()),
 
+        /** The style property {@code scrollTargetGroup}. */
+        SCROLL_TARGET_GROUP("scrollTargetGroup", "scroll-target-group", chromeAndEdgeNone()),
+
         /** The style property {@code scrollTimeline}. */
         SCROLL_TIMELINE("scrollTimeline", "scroll-timeline", chromeAndEdgeNone()),
 
@@ -2983,6 +2989,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code text-anchor}. */
         TEXT_ANCHOR_("text-anchor", "text-anchor", ff("start")),
 
+        /** The style property {@code textAutospace}. */
+        TEXT_AUTOSPACE("textAutospace", "text-Autospace", chromeAndEdge("no-autospace")),
+
         /** The style property {@code textBox}. */
         TEXT_BOX("textBox", "text-box", chromeAndEdgeNormal()),
 
@@ -2999,7 +3008,7 @@ public final class StyleAttributes implements Serializable {
         TEXT_COMBINE_UPRIGHT_("text-combine-upright", "text-combine-upright", ffNone()),
 
         /** The style property {@code textDecoration}. */
-        TEXT_DECORATION("textDecoration", "text-decoration", chromeAndEdge("none solid rgb(0, 0, 0)"),
+        TEXT_DECORATION("textDecoration", "text-decoration", chromeAndEdge("rgb(0, 0, 0)"),
                 ff("rgb(0, 0, 0)")),
 
         /** The style property {@code text-decoration}. */
@@ -3267,6 +3276,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code viewTransitionClass}. */
         VIEW_TRANSITION_CLASS("viewTransitionClass", "view-transition-class", chromeAndEdgeNone()),
+
+        /** The style property {@code viewTransitionGroup}. */
+        VIEW_TRANSITION_GROUP("viewTransitionGroup", "view-transition-group", chromeAndEdgeNormal()),
 
         /** The style property {@code viewTransitionName}. */
         VIEW_TRANSITION_NAME("viewTransitionName", "view-transition-name", chromeAndEdgeNone()),
