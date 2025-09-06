@@ -320,4 +320,207 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[-1, 0, 0, 1, 0, 0]",
+             "true"})
+    public void flipX_identity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_2D_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let flipped = m.flipX();\n"
+                + "dump(flipped);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, -1, 0, 0]",
+             "true"})
+    public void flipY_identity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_2D_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let flipped = m.flipY();\n"
+                + "dump(flipped);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"[NaN, 0, 0, 1, 0, 0]",
+                       "true"},
+            FF = {"[NaN, 0, NaN, 1, NaN, 0]",
+                  "true"},
+            FF_ESR = {"[NaN, 0, NaN, 1, NaN, 0]",
+                      "true"})
+    @HtmlUnitNYI(FF = {"[NaN, 0, 0, 1, 0, 0]",
+                       "true"},
+            FF_ESR = {"[NaN, 0, 0, 1, 0, 0]",
+                      "true"})
+    public void flipX_NaN() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_2D_FUNCTION
+                + "let m = new DOMMatrixReadOnly([NaN, 0, 0, 1, 0, 0]);\n"
+                + "let flipped = m.flipX();\n"
+                + "dump(flipped);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"[1, 0, 0, -Infinity, 0, 0]",
+                       "true"},
+        FF = {"[1, NaN, 0, -Infinity, 0, NaN]",
+              "true"},
+        FF_ESR = {"[1, NaN, 0, -Infinity, 0, NaN]",
+                  "true"})
+    @HtmlUnitNYI(FF = {"[1, 0, 0, -Infinity, 0, 0]",
+                       "true"},
+        FF_ESR = {"[1, 0, 0, -Infinity, 0, 0]",
+                  "true"})
+    public void flipY_Infinity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_2D_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 0, 0, Infinity, 0, 0]);\n"
+                + "let flipped = m.flipY();\n"
+                + "dump(flipped);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[-2, -3, 4, 5, 6, 7]",
+             "true",
+             "[2, 3, 4, 5, 6, 7]",
+             "true"})
+    public void flipX_general() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_2D_FUNCTION
+                + "let m = new DOMMatrixReadOnly([2, 3, 4, 5, 6, 7]);\n"
+                + "let flipped = m.flipX();\n"
+                + "dump(flipped);\n"
+                + "dump(m);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[2, 3, -4, -5, 6, 7]",
+             "true",
+             "[2, 3, 4, 5, 6, 7]",
+             "true"})
+    public void flipY_general() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_2D_FUNCTION
+                + "let m = new DOMMatrixReadOnly([2, 3, 4, 5, 6, 7]);\n"
+                + "let flipped = m.flipY();\n"
+                + "dump(flipped);\n"
+                + "dump(m);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[-16, -15, 12, 11, 4, 3]",
+             "1[-16, -15, -14, -13]",
+             "2[12, 11, 10, 9]",
+             "3[8, 7, 6, 5]",
+             "4[4, 3, 2, 1]",
+             "false"})
+    public void flipX_3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "let flipped = m.flipX();\n"
+                + "dump(flipped);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[16, 15, -12, -11, 4, 3]",
+             "1[16, 15, 14, 13]",
+             "2[-12, -11, -10, -9]",
+             "3[8, 7, 6, 5]",
+             "4[4, 3, 2, 1]",
+             "false"})
+    public void flipY_3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "let flipped = m.flipY();\n"
+                + "dump(flipped);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

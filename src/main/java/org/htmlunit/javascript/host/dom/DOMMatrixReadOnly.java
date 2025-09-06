@@ -23,6 +23,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.Window;
 
@@ -363,5 +364,77 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     @JsxGetter
     public boolean getIs2D() {
         return is2D_;
+    }
+
+    /**
+     * @return a new matrix being the result of the original matrix flipped about the x-axis.
+     *     This is equivalent to multiplying the matrix by DOMMatrix(-1, 0, 0, 1, 0, 0).
+     *     The original matrix is not modified.
+     */
+    @JsxFunction
+    public DOMMatrixReadOnly flipX() {
+        final DOMMatrixReadOnly matrix = new DOMMatrixReadOnly();
+        final Window window = getWindow();
+        matrix.setParentScope(window);
+        matrix.setPrototype(window.getPrototype(DOMMatrixReadOnly.class));
+
+        matrix.m11_ = -this.m11_;
+        matrix.m12_ = -this.m12_;
+        matrix.m13_ = -this.m13_;
+        matrix.m14_ = -this.m14_;
+
+        matrix.m21_ = this.m21_;
+        matrix.m22_ = this.m22_;
+        matrix.m23_ = this.m23_;
+        matrix.m24_ = this.m24_;
+
+        matrix.m31_ = this.m31_;
+        matrix.m32_ = this.m32_;
+        matrix.m33_ = this.m33_;
+        matrix.m34_ = this.m34_;
+
+        matrix.m41_ = this.m41_;
+        matrix.m42_ = this.m42_;
+        matrix.m43_ = this.m43_;
+        matrix.m44_ = this.m44_;
+
+        matrix.is2D_ = this.is2D_;
+        return matrix;
+    }
+
+    /**
+     * @return a new matrix being the result of the original matrix flipped about the x-axis.
+     *     This is equivalent to multiplying the matrix by DOMMatrix(1, 0, 0, -1, 0, 0).
+     *     The original matrix is not modified.
+     */
+    @JsxFunction
+    public DOMMatrixReadOnly flipY() {
+        final DOMMatrixReadOnly matrix = new DOMMatrixReadOnly();
+        final Window window = getWindow();
+        matrix.setParentScope(window);
+        matrix.setPrototype(window.getPrototype(DOMMatrixReadOnly.class));
+
+        matrix.m11_ = this.m11_;
+        matrix.m12_ = this.m12_;
+        matrix.m13_ = this.m13_;
+        matrix.m14_ = this.m14_;
+
+        matrix.m21_ = -this.m21_;
+        matrix.m22_ = -this.m22_;
+        matrix.m23_ = -this.m23_;
+        matrix.m24_ = -this.m24_;
+
+        matrix.m31_ = this.m31_;
+        matrix.m32_ = this.m32_;
+        matrix.m33_ = this.m33_;
+        matrix.m34_ = this.m34_;
+
+        matrix.m41_ = this.m41_;
+        matrix.m42_ = this.m42_;
+        matrix.m43_ = this.m43_;
+        matrix.m44_ = this.m44_;
+
+        matrix.is2D_ = this.is2D_;
+        return matrix;
     }
 }
