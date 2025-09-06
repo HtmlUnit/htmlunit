@@ -646,4 +646,404 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void multiplyIdentity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m1 = new DOMMatrixReadOnly();\n"
+                + "let m2 = new DOMMatrixReadOnly();\n"
+                + "let result = m1.multiply(m2);\n"
+                + "dump(result);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[21, 32, 13, 20, 10, 14]",
+             "1[21, 32, 0, 0]",
+             "2[13, 20, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[10, 14, 0, 1]",
+             "true"})
+    public void multiply2D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m1 = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "let m2 = new DOMMatrixReadOnly([6, 5, 4, 3, 2, 1]);\n"
+                + "let result = m1.multiply(m2);\n"
+                + "dump(result);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[386, 444, 274, 316, 50, 60]",
+             "1[386, 444, 502, 560]",
+             "2[274, 316, 358, 400]",
+             "3[162, 188, 214, 240]",
+             "4[50, 60, 70, 80]",
+             "false"})
+    public void multiply3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m1 = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
+                + "let m2 = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "let result = m1.multiply(m2);\n"
+                + "dump(result);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 5, 6]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void multiplyTranslation() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m1 = new DOMMatrixReadOnly();\n"
+                + "let m2 = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6]);\n"
+                + "let result = m1.multiply(m2);\n"
+                + "dump(result);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[2, 0, 0, 2, 0, 0]",
+             "1[2, 0, 0, 0]",
+             "2[0, 2, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void multiplyScale() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m1 = new DOMMatrixReadOnly([2, 0, 0, 2, 0, 0]);\n"
+                + "let m2 = new DOMMatrixReadOnly();\n"
+                + "let result = m1.multiply(m2);\n"
+                + "dump(result);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[0, 0, 0, 0, 0, 0]",
+             "1[0, 0, 0, 0]",
+             "2[0, 0, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void multiplyZero() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m1 = new DOMMatrixReadOnly([0, 0, 0, 0, 0, 0]);\n"
+                + "let m2 = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "let result = m1.multiply(m2);\n"
+                + "dump(result);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[21, 32, 13, 20, 10, 14]",
+             "1[21, 32, 0, 0]",
+             "2[13, 20, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[10, 14, 0, 1]",
+             "false"})
+    public void multiply2DWith3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m1 = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "let m2 = new DOMMatrixReadOnly([6, 5, 0, 0, 4, 3, 0, 0, 0, 0, 1, 0, 2, 1, 0, 1]);\n"
+                + "let result = m1.multiply(m2);\n"
+                + "dump(result);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void multiplyNullArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m1 = new DOMMatrixReadOnly();\n"
+                + "  let result = m1.multiply(null);\n"
+                + "  dump(result);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void multiplyUndefinedArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m1 = new DOMMatrixReadOnly();\n"
+                + "  let result = m1.multiply(undefined);\n"
+                + "  dump(result);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("TypeError")
+    public void multiplyStringArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m1 = new DOMMatrixReadOnly();\n"
+                + "  let result = m1.multiply('invalid');\n"
+                + "  dump(result);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("TypeError")
+    public void multiplyNumberArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m1 = new DOMMatrixReadOnly();\n"
+                + "  let result = m1.multiply(42);\n"
+                + "  dump(result);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void multiplyNoArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "try {\n"
+                + "  let m1 = new DOMMatrixReadOnly();\n"
+                + "  let result = m1.multiply();\n"
+                + "  dump(result);\n"
+                + "} catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[NaN, 2, NaN, 4, NaN, 6]",
+             "1[NaN, 2, 0, 0]",
+             "2[NaN, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[NaN, 6, 0, 1]",
+             "true"})
+    public void multiplyWithNaN() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m1 = new DOMMatrixReadOnly([NaN, 0, 0, 1, 0, 0]);\n"
+                + "let m2 = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "let result = m1.multiply(m2);\n"
+                + "dump(result);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[Infinity, 2, Infinity, 4, Infinity, 6]",
+             "1[Infinity, 2, 0, 0]",
+             "2[Infinity, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[Infinity, 6, 0, 1]",
+             "true"})
+    public void multiplyWithInfinity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m1 = new DOMMatrixReadOnly([Infinity, 0, 0, 1, 0, 0]);\n"
+                + "let m2 = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "let result = m1.multiply(m2);\n"
+                + "dump(result);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void multiplyAssociativity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m1 = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "let identity = new DOMMatrixReadOnly();\n"
+                + "let result = m1.multiply(identity);\n"
+                + "dump(result);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

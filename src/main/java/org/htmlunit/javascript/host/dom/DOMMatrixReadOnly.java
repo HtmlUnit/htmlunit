@@ -59,6 +59,33 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     private boolean is2D_;
 
     /**
+     * Ctor.
+     */
+    public DOMMatrixReadOnly() {
+        m11_ = 1;
+        m12_ = 0;
+        m13_ = 0;
+        m14_ = 0;
+
+        m21_ = 0;
+        m22_ = 1;
+        m23_ = 0;
+        m24_ = 0;
+
+        m31_ = 0;
+        m32_ = 0;
+        m33_ = 1;
+        m34_ = 0;
+
+        m41_ = 0;
+        m42_ = 0;
+        m43_ = 0;
+        m44_ = 1;
+
+        is2D_ = true;
+    }
+
+    /**
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope
@@ -78,33 +105,10 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
 
     protected void init(final Object[] args, final Function ctorObj) {
         final Window window = getWindow(ctorObj);
+        setParentScope(window);
+        setPrototype(((FunctionObject) ctorObj).getClassPrototype());
 
         if (args.length == 0 || JavaScriptEngine.isUndefined(args[0])) {
-            setParentScope(window);
-            setPrototype(((FunctionObject) ctorObj).getClassPrototype());
-
-            m11_ = 1;
-            m12_ = 0;
-            m13_ = 0;
-            m14_ = 0;
-
-            m21_ = 0;
-            m22_ = 1;
-            m23_ = 0;
-            m24_ = 0;
-
-            m31_ = 0;
-            m32_ = 0;
-            m33_ = 1;
-            m34_ = 0;
-
-            m41_ = 0;
-            m42_ = 0;
-            m43_ = 0;
-            m44_ = 1;
-
-            is2D_ = true;
-
             return;
         }
 
@@ -112,40 +116,20 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
             if (args[0] instanceof NativeArray) {
                 final NativeArray arrayArgs = (NativeArray) args[0];
                 if (arrayArgs.getLength() == 6) {
-                    final DOMMatrixReadOnly matrix = new DOMMatrixReadOnly();
-                    setParentScope(window);
-                    setPrototype(((FunctionObject) ctorObj).getClassPrototype());
-
                     m11_ = JavaScriptEngine.toNumber(arrayArgs.get(0));
                     m12_ = JavaScriptEngine.toNumber(arrayArgs.get(1));
-                    m13_ = 0;
-                    m14_ = 0;
 
                     m21_ = JavaScriptEngine.toNumber(arrayArgs.get(2));
                     m22_ = JavaScriptEngine.toNumber(arrayArgs.get(3));
-                    m23_ = 0;
-                    m24_ = 0;
-
-                    m31_ = 0;
-                    m32_ = 0;
-                    m33_ = 1;
-                    m34_ = 0;
 
                     m41_ = JavaScriptEngine.toNumber(arrayArgs.get(4));
                     m42_ = JavaScriptEngine.toNumber(arrayArgs.get(5));
-                    m43_ = 0;
-                    m44_ = 1;
 
                     is2D_ = true;
-
                     return;
                 }
 
                 if (arrayArgs.getLength() == 16) {
-                    final DOMMatrixReadOnly matrix = new DOMMatrixReadOnly();
-                    setParentScope(window);
-                    setPrototype(((FunctionObject) ctorObj).getClassPrototype());
-
                     m11_ = JavaScriptEngine.toNumber(arrayArgs.get(0));
                     m12_ = JavaScriptEngine.toNumber(arrayArgs.get(1));
                     m13_ = JavaScriptEngine.toNumber(arrayArgs.get(2));
@@ -167,7 +151,6 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
                     m44_ = JavaScriptEngine.toNumber(arrayArgs.get(15));
 
                     is2D_ = false;
-
                     return;
                 }
 
@@ -378,27 +361,27 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         matrix.setParentScope(window);
         matrix.setPrototype(window.getPrototype(DOMMatrixReadOnly.class));
 
-        matrix.m11_ = -this.m11_;
-        matrix.m12_ = -this.m12_;
-        matrix.m13_ = -this.m13_;
-        matrix.m14_ = -this.m14_;
+        matrix.m11_ = -m11_;
+        matrix.m12_ = -m12_;
+        matrix.m13_ = -m13_;
+        matrix.m14_ = -m14_;
 
-        matrix.m21_ = this.m21_;
-        matrix.m22_ = this.m22_;
-        matrix.m23_ = this.m23_;
-        matrix.m24_ = this.m24_;
+        matrix.m21_ = m21_;
+        matrix.m22_ = m22_;
+        matrix.m23_ = m23_;
+        matrix.m24_ = m24_;
 
-        matrix.m31_ = this.m31_;
-        matrix.m32_ = this.m32_;
-        matrix.m33_ = this.m33_;
-        matrix.m34_ = this.m34_;
+        matrix.m31_ = m31_;
+        matrix.m32_ = m32_;
+        matrix.m33_ = m33_;
+        matrix.m34_ = m34_;
 
-        matrix.m41_ = this.m41_;
-        matrix.m42_ = this.m42_;
-        matrix.m43_ = this.m43_;
-        matrix.m44_ = this.m44_;
+        matrix.m41_ = m41_;
+        matrix.m42_ = m42_;
+        matrix.m43_ = m43_;
+        matrix.m44_ = m44_;
 
-        matrix.is2D_ = this.is2D_;
+        matrix.is2D_ = is2D_;
         return matrix;
     }
 
@@ -414,27 +397,27 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         matrix.setParentScope(window);
         matrix.setPrototype(window.getPrototype(DOMMatrixReadOnly.class));
 
-        matrix.m11_ = this.m11_;
-        matrix.m12_ = this.m12_;
-        matrix.m13_ = this.m13_;
-        matrix.m14_ = this.m14_;
+        matrix.m11_ = m11_;
+        matrix.m12_ = m12_;
+        matrix.m13_ = m13_;
+        matrix.m14_ = m14_;
 
-        matrix.m21_ = -this.m21_;
-        matrix.m22_ = -this.m22_;
-        matrix.m23_ = -this.m23_;
-        matrix.m24_ = -this.m24_;
+        matrix.m21_ = -m21_;
+        matrix.m22_ = -m22_;
+        matrix.m23_ = -m23_;
+        matrix.m24_ = -m24_;
 
-        matrix.m31_ = this.m31_;
-        matrix.m32_ = this.m32_;
-        matrix.m33_ = this.m33_;
-        matrix.m34_ = this.m34_;
+        matrix.m31_ = m31_;
+        matrix.m32_ = m32_;
+        matrix.m33_ = m33_;
+        matrix.m34_ = m34_;
 
-        matrix.m41_ = this.m41_;
-        matrix.m42_ = this.m42_;
-        matrix.m43_ = this.m43_;
-        matrix.m44_ = this.m44_;
+        matrix.m41_ = m41_;
+        matrix.m42_ = m42_;
+        matrix.m43_ = m43_;
+        matrix.m44_ = m44_;
 
-        matrix.is2D_ = this.is2D_;
+        matrix.is2D_ = is2D_;
         return matrix;
     }
 
@@ -454,45 +437,18 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
             final double det = m11_ * m22_ - m12_ * m21_;
             if (det == 0) {
                 // Not invertible: set all to NaN, is2D_ = false
-                matrix.m11_ = Double.NaN;
-                matrix.m12_ = Double.NaN;
-                matrix.m13_ = Double.NaN;
-                matrix.m14_ = Double.NaN;
-                matrix.m21_ = Double.NaN;
-                matrix.m22_ = Double.NaN;
-                matrix.m23_ = Double.NaN;
-                matrix.m24_ = Double.NaN;
-                matrix.m31_ = Double.NaN;
-                matrix.m32_ = Double.NaN;
-                matrix.m33_ = Double.NaN;
-                matrix.m34_ = Double.NaN;
-                matrix.m41_ = Double.NaN;
-                matrix.m42_ = Double.NaN;
-                matrix.m43_ = Double.NaN;
-                matrix.m44_ = Double.NaN;
-                matrix.is2D_ = false;
+                initWithNan(matrix);
                 return matrix;
             }
 
             matrix.m11_ = m22_ / det;
             matrix.m12_ = -m12_ / det;
-            matrix.m13_ = 0;
-            matrix.m14_ = 0;
 
             matrix.m21_ = -m21_ / det;
             matrix.m22_ = m11_ / det;
-            matrix.m23_ = 0;
-            matrix.m24_ = 0;
-
-            matrix.m31_ = 0;
-            matrix.m32_ = 0;
-            matrix.m33_ = 1;
-            matrix.m34_ = 0;
 
             matrix.m41_ = (m21_ * m42_ - m22_ * m41_) / det;
             matrix.m42_ = (m12_ * m41_ - m11_ * m42_) / det;
-            matrix.m43_ = 0;
-            matrix.m44_ = 1;
 
             matrix.is2D_ = true;
             return matrix;
@@ -623,23 +579,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
 
         if (det == 0) {
             // Not invertible: set all to NaN, is2D_ = false
-            matrix.m11_ = Double.NaN;
-            matrix.m12_ = Double.NaN;
-            matrix.m13_ = Double.NaN;
-            matrix.m14_ = Double.NaN;
-            matrix.m21_ = Double.NaN;
-            matrix.m22_ = Double.NaN;
-            matrix.m23_ = Double.NaN;
-            matrix.m24_ = Double.NaN;
-            matrix.m31_ = Double.NaN;
-            matrix.m32_ = Double.NaN;
-            matrix.m33_ = Double.NaN;
-            matrix.m34_ = Double.NaN;
-            matrix.m41_ = Double.NaN;
-            matrix.m42_ = Double.NaN;
-            matrix.m43_ = Double.NaN;
-            matrix.m44_ = Double.NaN;
-            matrix.is2D_ = false;
+            initWithNan(matrix);
             return matrix;
         }
 
@@ -665,6 +605,137 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         matrix.m43_ = inv[14] * det;
         matrix.m44_ = inv[15] * det;
 
+        matrix.is2D_ = false;
         return matrix;
+    }
+
+    private static void initWithNan(final DOMMatrixReadOnly matrix) {
+        matrix.m11_ = Double.NaN;
+        matrix.m12_ = Double.NaN;
+        matrix.m13_ = Double.NaN;
+        matrix.m14_ = Double.NaN;
+        matrix.m21_ = Double.NaN;
+        matrix.m22_ = Double.NaN;
+        matrix.m23_ = Double.NaN;
+        matrix.m24_ = Double.NaN;
+        matrix.m31_ = Double.NaN;
+        matrix.m32_ = Double.NaN;
+        matrix.m33_ = Double.NaN;
+        matrix.m34_ = Double.NaN;
+        matrix.m41_ = Double.NaN;
+        matrix.m42_ = Double.NaN;
+        matrix.m43_ = Double.NaN;
+        matrix.m44_ = Double.NaN;
+        matrix.is2D_ = false;
+    }
+
+    /**
+     * @param other the matrix to multiply with this matrix
+     * @return a new matrix which is the dot product of the matrix and the otherMatrix parameter.
+     *     If otherMatrix is omitted, the matrix is multiplied by a matrix in which every element
+     *     is 0 except the bottom-right corner and the element immediately above
+     *     and to its left: m33 and m34. These have the default value of 1.
+     *     The original matrix is not modified.
+     */
+    @JsxFunction
+    public DOMMatrixReadOnly multiply(final Object other) {
+        final DOMMatrixReadOnly result = new DOMMatrixReadOnly();
+        final Window window = getWindow();
+        result.setParentScope(window);
+        result.setPrototype(window.getPrototype(DOMMatrixReadOnly.class));
+
+        // Handle null/undefined by treating as identity matrix
+        if (other == null || JavaScriptEngine.isUndefined(other)) {
+            return result;
+        }
+
+        if (!(other instanceof DOMMatrixReadOnly)) {
+            throw JavaScriptEngine.typeError("Failed to execute 'multiply' on 'DOMMatrixReadOnly': "
+                    + "parameter 1 is not of type 'DOMMatrixReadOnly'.");
+        }
+
+        final DOMMatrixReadOnly otherMatrix = (DOMMatrixReadOnly) other;
+
+        // Matrix multiplication: result = this * otherMatrix
+        // Standard matrix multiplication formula: C[i][j] = sum(A[i][k] * B[k][j])
+        result.is2D_ = is2D_ && otherMatrix.is2D_;
+
+        result.m11_ = m11_ * otherMatrix.m11_
+                + m21_ * otherMatrix.m12_
+                + m31_ * otherMatrix.m13_
+                + m41_ * otherMatrix.m14_;
+        result.m12_ = m12_ * otherMatrix.m11_
+                + m22_ * otherMatrix.m12_
+                + m32_ * otherMatrix.m13_
+                + m42_ * otherMatrix.m14_;
+        if (!result.is2D_) {
+            result.m13_ = m13_ * otherMatrix.m11_
+                    + m23_ * otherMatrix.m12_
+                    + m33_ * otherMatrix.m13_
+                    + m43_ * otherMatrix.m14_;
+            result.m14_ = m14_ * otherMatrix.m11_
+                    + m24_ * otherMatrix.m12_
+                    + m34_ * otherMatrix.m13_
+                    + m44_ * otherMatrix.m14_;
+        }
+
+        result.m21_ = m11_ * otherMatrix.m21_
+                + m21_ * otherMatrix.m22_
+                + m31_ * otherMatrix.m23_
+                + m41_ * otherMatrix.m24_;
+        result.m22_ = m12_ * otherMatrix.m21_
+                + m22_ * otherMatrix.m22_
+                + m32_ * otherMatrix.m23_
+                + m42_ * otherMatrix.m24_;
+        if (!result.is2D_) {
+            result.m23_ = m13_ * otherMatrix.m21_
+                    + m23_ * otherMatrix.m22_
+                    + m33_ * otherMatrix.m23_
+                    + m43_ * otherMatrix.m24_;
+            result.m24_ = m14_ * otherMatrix.m21_
+                    + m24_ * otherMatrix.m22_
+                    + m34_ * otherMatrix.m23_
+                    + m44_ * otherMatrix.m24_;
+        }
+
+        if (!result.is2D_) {
+            result.m31_ = m11_ * otherMatrix.m31_
+                    + m21_ * otherMatrix.m32_
+                    + m31_ * otherMatrix.m33_
+                    + m41_ * otherMatrix.m34_;
+            result.m32_ = m12_ * otherMatrix.m31_
+                    + m22_ * otherMatrix.m32_
+                    + m32_ * otherMatrix.m33_
+                    + m42_ * otherMatrix.m34_;
+            result.m33_ = m13_ * otherMatrix.m31_
+                    + m23_ * otherMatrix.m32_
+                    + m33_ * otherMatrix.m33_
+                    + m43_ * otherMatrix.m34_;
+            result.m34_ = m14_ * otherMatrix.m31_
+                    + m24_ * otherMatrix.m32_
+                    + m34_ * otherMatrix.m33_
+                    + m44_ * otherMatrix.m34_;
+        }
+
+        result.m41_ = m11_ * otherMatrix.m41_
+                + m21_ * otherMatrix.m42_
+                + m31_ * otherMatrix.m43_
+                + m41_ * otherMatrix.m44_;
+        result.m42_ = m12_ * otherMatrix.m41_
+                + m22_ * otherMatrix.m42_
+                + m32_ * otherMatrix.m43_
+                + m42_ * otherMatrix.m44_;
+        if (!result.is2D_) {
+            result.m43_ = m13_ * otherMatrix.m41_
+                    + m23_ * otherMatrix.m42_
+                    + m33_ * otherMatrix.m43_
+                    + m43_ * otherMatrix.m44_;
+            result.m44_ = m14_ * otherMatrix.m41_
+                    + m24_ * otherMatrix.m42_
+                    + m34_ * otherMatrix.m43_
+                    + m44_ * otherMatrix.m44_;
+        }
+
+        return result;
     }
 }
