@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.17.0" date="September xx, 2025" description=", Bugfixes">
+        <release version="4.17.0" date="September xx, 2025" description="Firefox 142, Bugfixes">
             <action type="fix" dev="RhinoTeam">
                 core-js: fix erro stack generation in interpreted mode and report the correct line number
             </action>
