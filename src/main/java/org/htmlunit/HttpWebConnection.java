@@ -137,7 +137,7 @@ public class HttpWebConnection implements WebConnection {
     private static final String HACKED_COOKIE_POLICY = "mine";
 
     // have one per thread because this is (re)configured for every call (see configureHttpProcessorBuilder)
-    // do not use a ThreadLocal because this in only accessed form this class
+    // do not use a ThreadLocal because this in only accessed form this class, but we still need it synchronized
     private final Map<Thread, HttpClientBuilder> httpClientBuilder_ = new WeakHashMap<>();
     private final WebClient webClient_;
 
@@ -211,7 +211,9 @@ public class HttpWebConnection implements WebConnection {
                 // Calling code may catch the StackOverflowError, but due to the leak, the httpClient_ may
                 // come out of connections and throw a ConnectionPoolTimeoutException.
                 // => best solution, discard the HttpClient instance.
-                httpClientBuilder_.remove(Thread.currentThread());
+                synchronized (httpClientBuilder_) {
+                    httpClientBuilder_.remove(Thread.currentThread());
+                }
                 throw e;
             }
         }
@@ -531,24 +533,27 @@ public class HttpWebConnection implements WebConnection {
      * @return the initialized HTTP client
      */
     protected HttpClientBuilder getHttpClientBuilder() {
-        final Thread currentThread = Thread.currentThread();
-        HttpClientBuilder builder = httpClientBuilder_.get(currentThread);
-        if (builder == null) {
-            builder = createHttpClientBuilder();
-
-            // this factory is required later
-            // to be sure this is done, we do it outside the createHttpClient() call
-            final RegistryBuilder<CookieSpecProvider> registeryBuilder
-                = RegistryBuilder.<CookieSpecProvider>create()
-                            .register(HACKED_COOKIE_POLICY, htmlUnitCookieSpecProvider_);
-            builder.setDefaultCookieSpecRegistry(registeryBuilder.build());
-
-            builder.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
-            builder.setUserAgent(webClient_.getBrowserVersion().getUserAgent());
-            httpClientBuilder_.put(currentThread, builder);
+        synchronized (httpClientBuilder_)
+        {
+            final Thread currentThread = Thread.currentThread();
+            HttpClientBuilder builder = httpClientBuilder_.get(currentThread);
+            if (builder == null) {
+                builder = createHttpClientBuilder();
+    
+                // this factory is required later
+                // to be sure this is done, we do it outside the createHttpClient() call
+                final RegistryBuilder<CookieSpecProvider> registeryBuilder
+                    = RegistryBuilder.<CookieSpecProvider>create()
+                                .register(HACKED_COOKIE_POLICY, htmlUnitCookieSpecProvider_);
+                builder.setDefaultCookieSpecRegistry(registeryBuilder.build());
+    
+                builder.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
+                builder.setUserAgent(webClient_.getBrowserVersion().getUserAgent());
+                httpClientBuilder_.put(currentThread, builder);
+            }
+    
+            return builder;
         }
-
-        return builder;
     }
 
     /**
@@ -1288,7 +1293,9 @@ public class HttpWebConnection implements WebConnection {
      */
     @Override
     public void close() {
-        httpClientBuilder_.clear();
+        synchronized (httpClientBuilder_) {
+            httpClientBuilder_.clear();
+        }
         sharedAuthCache_.clear();
         httpClientContextByThread_.clear();
 
