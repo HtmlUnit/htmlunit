@@ -26,12 +26,14 @@ import org.junit.jupiter.api.Test;
  */
 public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
 
-    public static final String DUMP_FUNCTION = "function dump(m) {\n"
-            + "  log('[' + m.a + ', ' + m.b + ', ' + m.c + ', ' + m.d + ', ' + m.e + ', ' + m.f + ']');\n"
-            + "  log('1[' + m.m11 + ', ' + m.m12 + ', ' + m.m13 + ', ' + m.m14 + ']');\n"
-            + "  log('2[' + m.m21 + ', ' + m.m22 + ', ' + m.m23 + ', ' + m.m24 + ']');\n"
-            + "  log('3[' + m.m31 + ', ' + m.m32 + ', ' + m.m33 + ', ' + m.m34 + ']');\n"
-            + "  log('4[' + m.m41 + ', ' + m.m42 + ', ' + m.m43 + ', ' + m.m44 + ']');\n"
+    public static final String DUMP_FUNCTION = "function r(num) { return Math.round(num * 1000) / 1000 }\n"
+            + "function dump(m) {\n"
+            + "  log('[' + r(m.a) + ', ' + r(m.b) + ', ' + r(m.c)"
+                        + " + ', ' + r(m.d) + ', ' + r(m.e) + ', ' + r(m.f) + ']');\n"
+            + "  log('1[' + r(m.m11) + ', ' + r(m.m12) + ', ' + r(m.m13) + ', ' + r(m.m14) + ']');\n"
+            + "  log('2[' + r(m.m21) + ', ' + r(m.m22) + ', ' + r(m.m23) + ', ' + r(m.m24) + ']');\n"
+            + "  log('3[' + r(m.m31) + ', ' + r(m.m32) + ', ' + r(m.m33) + ', ' + r(m.m34) + ']');\n"
+            + "  log('4[' + r(m.m41) + ', ' + r(m.m42) + ', ' + r(m.m43) + ', ' + r(m.m44) + ']');\n"
             + "  log(m.is2D);\n"
             + "}\n";
 
@@ -1041,6 +1043,606 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + "let identity = new DOMMatrixReadOnly();\n"
                 + "let result = m1.multiply(identity);\n"
                 + "dump(result);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void rotate_identity_zero() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let rotated = m.rotate(0);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[0, 1, -1, 0, 0, 0]",
+             "1[0, 1, 0, 0]",
+             "2[-1, 0, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void rotate_identity_90degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let rotated = m.rotate(90);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[-1, 0, 0, -1, 0, 0]",
+             "1[-1, 0, 0, 0]",
+             "2[0, -1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void rotate_identity_180degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let rotated = m.rotate(180);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[0, -1, 1, 0, 0, 0]",
+             "1[0, -1, 0, 0]",
+             "2[1, 0, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void rotate_identity_270degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let rotated = m.rotate(270);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void rotate_identity_360degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let rotated = m.rotate(360);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[0.707, 0.707, -0.707, 0.707, 0, 0]",
+             "1[0.707, 0.707, 0, 0]",
+             "2[-0.707, 0.707, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void rotate_identity_45degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let rotated = m.rotate(45);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[0, 1, -1, 0, 0, 0]",
+             "1[0, 1, 0, 0]",
+             "2[-1, 0, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void rotate_identity_negative_270degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let rotated = m.rotate(-270);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[3, 4, -1, -2, 5, 6]",
+             "1[3, 4, 0, 0]",
+             "2[-1, -2, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true",
+             "[1, 2, 3, 4, 5, 6]",
+             "1[1, 2, 0, 0]",
+             "2[3, 4, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void rotate_general_90degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "let rotated = m.rotate(90);\n"
+                + "dump(rotated);\n"
+                + "dump(m);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"[NaN, NaN, NaN, NaN, 5, 6]",
+                       "1[NaN, NaN, NaN, NaN]",
+                       "2[NaN, NaN, NaN, NaN]",
+                       "3[0, 0, 1, 0]",
+                       "4[5, 6, 0, 1]",
+                       "true"},
+            FF = {"[NaN, NaN, NaN, NaN, 5, 6]",
+                  "1[NaN, NaN, 0, 0]",
+                  "2[NaN, NaN, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[5, 6, 0, 1]",
+                  "true"},
+            FF_ESR = {"[NaN, NaN, NaN, NaN, 5, 6]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[NaN, NaN, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[5, 6, 0, 1]",
+                      "true"})
+    @HtmlUnitNYI(
+            CHROME = {"[NaN, NaN, NaN, NaN, 5, 6]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[NaN, NaN, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[5, 6, 0, 1]",
+                      "true"},
+            EDGE = {"[NaN, NaN, NaN, NaN, 5, 6]",
+                    "1[NaN, NaN, 0, 0]",
+                    "2[NaN, NaN, 0, 0]",
+                    "3[0, 0, 1, 0]",
+                    "4[5, 6, 0, 1]",
+                    "true"})
+    public void rotate_with_NaN_angle() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "let rotated = m.rotate(NaN);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"[NaN, NaN, NaN, NaN, 5, 6]",
+                       "1[NaN, NaN, NaN, NaN]",
+                       "2[NaN, NaN, NaN, NaN]",
+                       "3[0, 0, 1, 0]",
+                       "4[5, 6, 0, 1]",
+                       "true"},
+            FF = {"[NaN, NaN, NaN, NaN, 5, 6]",
+                  "1[NaN, NaN, 0, 0]",
+                  "2[NaN, NaN, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[5, 6, 0, 1]",
+                  "true"},
+            FF_ESR = {"[NaN, NaN, NaN, NaN, 5, 6]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[NaN, NaN, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[5, 6, 0, 1]",
+                      "true"})
+    @HtmlUnitNYI(
+            CHROME = {"[NaN, NaN, NaN, NaN, 5, 6]",
+                      "1[NaN, NaN, 0, 0]",
+                      "2[NaN, NaN, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[5, 6, 0, 1]",
+                      "true"},
+            EDGE = {"[NaN, NaN, NaN, NaN, 5, 6]",
+                    "1[NaN, NaN, 0, 0]",
+                    "2[NaN, NaN, 0, 0]",
+                    "3[0, 0, 1, 0]",
+                    "4[5, 6, 0, 1]",
+                    "true"})
+    public void rotate_with_Infinity_angle() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "let rotated = m.rotate(Infinity);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"[NaN, 4.243, NaN, 1.414, 5, 6]",
+                       "1[NaN, 4.243, 0, 0]",
+                       "2[NaN, 1.414, 0, 0]",
+                       "3[0, 0, 1, 0]",
+                       "4[5, 6, 0, 1]",
+                       "true"},
+            FF = {"[NaN, 4.243, NaN, 1.414, NaN, 6]",
+                  "1[NaN, 4.243, 0, 0]",
+                  "2[NaN, 1.414, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[NaN, 6, 0, 1]",
+                  "true"},
+            FF_ESR = {"[NaN, 4.243, NaN, 1.414, NaN, 6]",
+                      "1[NaN, 4.243, 0, 0]",
+                      "2[NaN, 1.414, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[NaN, 6, 0, 1]",
+                      "true"})
+    @HtmlUnitNYI(
+            FF = {"[NaN, 4.243, NaN, 1.414, 5, 6]",
+                  "1[NaN, 4.243, 0, 0]",
+                  "2[NaN, 1.414, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[5, 6, 0, 1]",
+                  "true"},
+            FF_ESR = {"[NaN, 4.243, NaN, 1.414, 5, 6]",
+                      "1[NaN, 4.243, 0, 0]",
+                      "2[NaN, 1.414, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[5, 6, 0, 1]",
+                      "true"})
+    public void rotate_matrix_with_NaN_values() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([NaN, 2, 3, 4, 5, 6]);\n"
+                + "let rotated = m.rotate(45);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"[Infinity, 4.243, -Infinity, 1.414, 5, 6]",
+                       "1[Infinity, 4.243, 0, 0]",
+                       "2[-Infinity, 1.414, 0, 0]",
+                       "3[0, 0, 1, 0]",
+                       "4[5, 6, 0, 1]",
+                       "true"},
+            FF = {"[Infinity, 4.243, -Infinity, 1.414, NaN, 6]",
+                  "1[Infinity, 4.243, 0, 0]",
+                  "2[-Infinity, 1.414, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[NaN, 6, 0, 1]",
+                  "true"},
+            FF_ESR = {"[Infinity, 4.243, -Infinity, 1.414, NaN, 6]",
+                      "1[Infinity, 4.243, 0, 0]",
+                      "2[-Infinity, 1.414, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[NaN, 6, 0, 1]",
+                      "true"})
+    @HtmlUnitNYI(
+            FF = {"[Infinity, 4.243, -Infinity, 1.414, 5, 6]",
+                  "1[Infinity, 4.243, 0, 0]",
+                  "2[-Infinity, 1.414, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[5, 6, 0, 1]",
+                  "true"},
+            FF_ESR = {"[Infinity, 4.243, -Infinity, 1.414, 5, 6]",
+                      "1[Infinity, 4.243, 0, 0]",
+                      "2[-Infinity, 1.414, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[5, 6, 0, 1]",
+                      "true"})
+    public void rotate_matrix_with_Infinity_values() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([Infinity, 2, 3, 4, 5, 6]);\n"
+                + "let rotated = m.rotate(45);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[16, 15, 12, 11, 4, 3]",
+             "1[16, 15, 14, 13]",
+             "2[12, 11, 10, 9]",
+             "3[8, 7, 6, 5]",
+             "4[4, 3, 2, 1]",
+             "false"})
+    public void rotate_3D_zero_degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "let rotated = m.rotate(0);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[12, 11, -16, -15, 4, 3]",
+             "1[12, 11, 10, 9]",
+             "2[-16, -15, -14, -13]",
+             "3[8, 7, 6, 5]",
+             "4[4, 3, 2, 1]",
+             "false"})
+    public void rotate_3D_90_degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "let rotated = m.rotate(90);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[-16, -15, -12, -11, 4, 3]",
+             "1[-16, -15, -14, -13]",
+             "2[-12, -11, -10, -9]",
+             "3[8, 7, 6, 5]",
+             "4[4, 3, 2, 1]",
+             "false"})
+    public void rotate_3D_180_degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "let rotated = m.rotate(180);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[-12, -11, 16, 15, 4, 3]",
+             "1[-12, -11, -10, -9]",
+             "2[16, 15, 14, 13]",
+             "3[8, 7, 6, 5]",
+             "4[4, 3, 2, 1]",
+             "false"})
+    public void rotate_3D_270_degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "let rotated = m.rotate(270);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[19.799, 18.385, -2.828, -2.828, 4, 3]",
+             "1[19.799, 18.385, 16.971, 15.556]",
+             "2[-2.828, -2.828, -2.828, -2.828]",
+             "3[8, 7, 6, 5]",
+             "4[4, 3, 2, 1]",
+             "false"})
+    public void rotate_3D_45_degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "let rotated = m.rotate(45);\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void rotate_no_argument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let rotated = m.rotate();\n"
+                + "dump(rotated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void rotate_null_argument() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let rotated = m.rotate(null);\n"
+                + "dump(rotated);\n"
                 + "</script>\n"
                 + "</body></html>";
 

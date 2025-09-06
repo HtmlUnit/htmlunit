@@ -730,4 +730,76 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
 
         return result;
     }
+
+    /**
+     * @param rotZ the rotation angle in degrees. If omitted, defaults to 0.
+     * @return a new matrix which is the result of the original matrix rotated by the specified angle.
+     *     The rotation is applied around the origin (0, 0) in the 2D plane.
+     *     The original matrix is not modified.
+     */
+    @JsxFunction
+    public DOMMatrixReadOnly rotate(final Object rotZ) {
+        final DOMMatrixReadOnly result = new DOMMatrixReadOnly();
+        final Window window = getWindow();
+        result.setParentScope(window);
+        result.setPrototype(window.getPrototype(DOMMatrixReadOnly.class));
+
+        // Handle undefined/null/missing parameter - default to 0
+        double angleInDegrees = 0;
+        if (rotZ != null && !JavaScriptEngine.isUndefined(rotZ)) {
+            angleInDegrees = JavaScriptEngine.toNumber(rotZ);
+        }
+
+        // Convert degrees to radians
+        final double angleInRadians = Math.toRadians(angleInDegrees);
+        final double cos = Math.cos(angleInRadians);
+        final double sin = Math.sin(angleInRadians);
+
+        // Create rotation matrix:
+        // [cos  -sin  0  0]
+        // [sin   cos  0  0]
+        // [ 0     0   1  0]
+        // [ 0     0   0  1]
+
+        // For 2D matrices, only apply to the 2x2 part
+        if (is2D_) {
+            // Matrix multiplication: result = this * rotation
+            result.m11_ = m11_ * cos + m21_ * sin;
+            result.m12_ = m12_ * cos + m22_ * sin;
+
+            result.m21_ = m11_ * (-sin) + m21_ * cos;
+            result.m22_ = m12_ * (-sin) + m22_ * cos;
+
+            result.m41_ = m41_;
+            result.m42_ = m42_;
+
+            result.is2D_ = true;
+        }
+        else {
+            // For 3D matrices, apply rotation to all relevant components
+            result.m11_ = m11_ * cos + m21_ * sin;
+            result.m12_ = m12_ * cos + m22_ * sin;
+            result.m13_ = m13_ * cos + m23_ * sin;
+            result.m14_ = m14_ * cos + m24_ * sin;
+
+            result.m21_ = m11_ * (-sin) + m21_ * cos;
+            result.m22_ = m12_ * (-sin) + m22_ * cos;
+            result.m23_ = m13_ * (-sin) + m23_ * cos;
+            result.m24_ = m14_ * (-sin) + m24_ * cos;
+
+            result.m31_ = m31_;
+            result.m32_ = m32_;
+            result.m33_ = m33_;
+            result.m34_ = m34_;
+
+            result.m41_ = m41_;
+            result.m42_ = m42_;
+            result.m43_ = m43_;
+            result.m44_ = m44_;
+
+            result.is2D_ = false;
+        }
+
+        return result;
+    }
 }
