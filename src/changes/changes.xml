@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.17.0" date="September xx, 2025" description="Chrome/Edge 140, Firefox 142, Bugfixes">
+            <action type="fix" dev="René Schwietzke" issue="#1014">
+                Properly synchronize access to httpClientBuilder_ in class HttpWebConnection.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: fix erro stack generation in interpreted mode and report the correct line number
             </action>

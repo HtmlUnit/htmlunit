@@ -533,25 +533,25 @@ public class HttpWebConnection implements WebConnection {
      * @return the initialized HTTP client
      */
     protected HttpClientBuilder getHttpClientBuilder() {
-        synchronized (httpClientBuilder_)
-        {
-            final Thread currentThread = Thread.currentThread();
+        final Thread currentThread = Thread.currentThread();
+
+        synchronized (httpClientBuilder_) {
             HttpClientBuilder builder = httpClientBuilder_.get(currentThread);
             if (builder == null) {
                 builder = createHttpClientBuilder();
-    
+
                 // this factory is required later
                 // to be sure this is done, we do it outside the createHttpClient() call
                 final RegistryBuilder<CookieSpecProvider> registeryBuilder
                     = RegistryBuilder.<CookieSpecProvider>create()
                                 .register(HACKED_COOKIE_POLICY, htmlUnitCookieSpecProvider_);
                 builder.setDefaultCookieSpecRegistry(registeryBuilder.build());
-    
+
                 builder.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
                 builder.setUserAgent(webClient_.getBrowserVersion().getUserAgent());
                 httpClientBuilder_.put(currentThread, builder);
             }
-    
+
             return builder;
         }
     }
