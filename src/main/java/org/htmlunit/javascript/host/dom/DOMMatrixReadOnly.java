@@ -19,6 +19,8 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.typedarrays.NativeFloat32Array;
+import org.htmlunit.corejs.javascript.typedarrays.NativeFloat64Array;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -888,5 +890,75 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         final DOMMatrixReadOnly multiplied = multiply(rot);
         multiplied.is2D_ = is2D_ && x == 0 && y == 0;
         return multiplied;
+    }
+
+    /**
+     * @return a new Float32Array containing all 16 elements
+     *     (m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44)
+     *     which comprise the matrix. The elements are stored into the array
+     *     as single-precision floating-point numbers in column-major (colexographical access, or "colex") order.
+     *     (In other words, down the first column from top to bottom, then the second column, and so forth.)
+     */
+    @JsxFunction
+    public NativeFloat32Array toFloat32Array() {
+        final NativeFloat32Array result =
+                (NativeFloat32Array) JavaScriptEngine.newObject(getParentScope(), "Float32Array", new Object[] {16});
+
+        result.setArrayElement(0, m11_);
+        result.setArrayElement(1, m12_);
+        result.setArrayElement(2, m13_);
+        result.setArrayElement(3, m14_);
+
+        result.setArrayElement(4, m21_);
+        result.setArrayElement(5, m22_);
+        result.setArrayElement(6, m23_);
+        result.setArrayElement(7, m24_);
+
+        result.setArrayElement(8, m31_);
+        result.setArrayElement(9, m32_);
+        result.setArrayElement(10, m33_);
+        result.setArrayElement(11, m34_);
+
+        result.setArrayElement(12, m41_);
+        result.setArrayElement(13, m42_);
+        result.setArrayElement(14, m43_);
+        result.setArrayElement(15, m44_);
+
+        return result;
+    }
+
+    /**
+     * @return a new Float64Array containing all 16 elements
+     *     (m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44)
+     *     which comprise the matrix. The elements are stored into the array
+     *     as single-precision floating-point numbers in column-major (colexographical access, or "colex") order.
+     *     (In other words, down the first column from top to bottom, then the second column, and so forth.)
+     */
+    @JsxFunction
+    public NativeFloat64Array toFloat64Array() {
+        final NativeFloat64Array result =
+                (NativeFloat64Array) JavaScriptEngine.newObject(getParentScope(), "Float64Array", new Object[] {16});
+
+        result.setArrayElement(0, m11_);
+        result.setArrayElement(1, m12_);
+        result.setArrayElement(2, m13_);
+        result.setArrayElement(3, m14_);
+
+        result.setArrayElement(4, m21_);
+        result.setArrayElement(5, m22_);
+        result.setArrayElement(6, m23_);
+        result.setArrayElement(7, m24_);
+
+        result.setArrayElement(8, m31_);
+        result.setArrayElement(9, m32_);
+        result.setArrayElement(10, m33_);
+        result.setArrayElement(11, m34_);
+
+        result.setArrayElement(12, m41_);
+        result.setArrayElement(13, m42_);
+        result.setArrayElement(14, m43_);
+        result.setArrayElement(15, m44_);
+
+        return result;
     }
 }

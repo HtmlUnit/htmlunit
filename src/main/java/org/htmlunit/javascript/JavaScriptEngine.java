@@ -1271,6 +1271,18 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Create a new javascript object by calling the ctor with the provided args.
+     *
+     * @param scope the scope to create the object in
+     * @param constructorName the name of the ctor function to call
+     * @param args the args
+     * @return the new object
+     */
+    public static Scriptable newObject(final Scriptable scope, final String constructorName, final Object[] args) {
+        return ScriptRuntime.newObject(Context.getCurrentContext(), scope, constructorName, args);
+    }
+
+    /**
      * Create an array with a specified initial length.
      *
      * @param scope the scope to create the object in

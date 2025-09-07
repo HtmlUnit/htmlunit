@@ -2233,4 +2233,204 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1")
+    public void toFloat32Array_identity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let array = m.toFloat32Array();\n"
+                + "log(array);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("1,2,0,0,3,4,0,0,0,0,1,0,5,6,0,1")
+    public void toFloat32Array_customValues6() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "let array = m.toFloat32Array();\n"
+                + "log(array.join());\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16")
+    public void toFloat32Array_customValues16() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6,7 ,8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
+                + "let array = m.toFloat32Array();\n"
+                + "log(array);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("NaN,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1")
+    public void toFloat32Array_withNaN() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "let m = new DOMMatrixReadOnly([NaN, 0, 0, 1, 0, 0]);\n"
+                + "let array = m.toFloat32Array();\n"
+                + "log(array);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("Infinity,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1")
+    public void toFloat32Array_withInfinity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "let m = new DOMMatrixReadOnly([Infinity, 0, 0, 1, 0, 0]);\n"
+                + "let array = m.toFloat32Array();\n"
+                + "log(array);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1")
+    public void toFloat64Array_identity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let array = m.toFloat64Array();\n"
+                + "log(array);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("1,2,0,0,3,4,0,0,0,0,1,0,5,6,0,1")
+    public void toFloat64Array_customValues6() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
+                + "let array = m.toFloat64Array();\n"
+                + "log(array);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16")
+    public void toFloat64Array_customValues16() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ,13, 14, 15, 16]);\n"
+                + "let array = m.toFloat64Array();\n"
+                + "log(array);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("NaN,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1")
+    public void toFloat64Array_withNaN() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "let m = new DOMMatrixReadOnly([NaN, 0, 0, 1, 0, 0]);\n"
+                + "let array = m.toFloat64Array();\n"
+                + "log(array);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("Infinity,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1")
+    public void toFloat64Array_withInfinity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "let m = new DOMMatrixReadOnly([Infinity, 0, 0, 1, 0, 0]);\n"
+                + "let array = m.toFloat64Array();\n"
+                + "log(array);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
