@@ -802,4 +802,91 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
 
         return result;
     }
+
+    /**
+     * Rotates the matrix by a given angle around the specified axis.
+     *
+     * @param xObj the x component of the axis
+     * @param yObj the y component of the axis
+     * @param zObj the z component of the axis
+     * @param alphaObj the rotation angle in degrees
+     * @return a new matrix which is the result of the original matrix rotated by the specified axis and angle.
+     */
+    @JsxFunction
+    public DOMMatrixReadOnly rotateAxisAngle(
+                final Object xObj, final Object yObj, final Object zObj, final Object alphaObj) {
+        // Default values
+        double x = 0;
+        double y = 0;
+        double z = 1;
+        double alpha = 0;
+        if (xObj != null && !JavaScriptEngine.isUndefined(xObj)) {
+            x = JavaScriptEngine.toNumber(xObj);
+        }
+        if (yObj != null && !JavaScriptEngine.isUndefined(yObj)) {
+            y = JavaScriptEngine.toNumber(yObj);
+        }
+        if (zObj != null && !JavaScriptEngine.isUndefined(zObj)) {
+            z = JavaScriptEngine.toNumber(zObj);
+        }
+        if (alphaObj != null && !JavaScriptEngine.isUndefined(alphaObj)) {
+            alpha = JavaScriptEngine.toNumber(alphaObj);
+        }
+
+        // If axis is (0,0,0), throw TypeError per spec
+        if (x == 0 && y == 0 && z == 0) {
+            final DOMMatrixReadOnly result = new DOMMatrixReadOnly();
+            final Window window = getWindow();
+            result.setParentScope(window);
+            result.setPrototype(window.getPrototype(DOMMatrixReadOnly.class));
+            return result;
+        }
+
+        // Normalize the axis
+        final double length = Math.sqrt(x * x + y * y + z * z);
+        x /= length;
+        y /= length;
+        z /= length;
+
+        // Convert angle to radians
+        final double angle2 = Math.toRadians(alpha) / 2;
+        final double angle1 = alpha * (Math.PI / 360);
+
+        // Compute rotation matrix
+        final double sc = Math.sin(angle2) * Math.cos(angle2);
+        final double sq = Math.pow(Math.sin(angle2), 2);
+
+        final double x2 = x * x;
+        final double y2 = y * y;
+        final double z2 = z * z;
+
+        final DOMMatrixReadOnly rot = new DOMMatrixReadOnly();
+
+        rot.m11_ = 1 - 2 * (y2 + z2) * sq;
+        rot.m12_ = 2 * (x * y * sq + z * sc);
+        rot.m13_ = 2 * (x * z * sq - y * sc);
+        rot.m14_ = 0;
+
+        rot.m21_ = 2 * (x * y * sq - z * sc);
+        rot.m22_ = 1 - 2 * (x2 + z2) * sq;
+        rot.m23_ = 2 * (y * z * sq + x * sc);
+        rot.m24_ = 0;
+
+        rot.m31_ = 2 * (x * z * sq + y * sc);
+        rot.m32_ = 2 * (y * z * sq - x * sc);
+        rot.m33_ = 1 - 2 * (x2 + y2) * sq;
+        rot.m34_ = 0;
+
+        rot.m41_ = 0;
+        rot.m42_ = 0;
+        rot.m43_ = 0;
+        rot.m44_ = 1;
+
+        rot.is2D_ = false;
+
+        // Multiply this * rot
+        final DOMMatrixReadOnly multiplied = multiply(rot);
+        multiplied.is2D_ = is2D_ && x == 0 && y == 0;
+        return multiplied;
+    }
 }
