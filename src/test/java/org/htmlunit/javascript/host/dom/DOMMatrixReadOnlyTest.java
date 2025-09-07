@@ -2267,7 +2267,7 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + LOG_TITLE_FUNCTION
                 + "let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
                 + "let array = m.toFloat32Array();\n"
-                + "log(array.join());\n"
+                + "log(array);\n"
                 + "</script>\n"
                 + "</body></html>";
 
@@ -2428,6 +2428,266 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + "let m = new DOMMatrixReadOnly([Infinity, 0, 0, 1, 0, 0]);\n"
                 + "let array = m.toFloat64Array();\n"
                 + "log(array);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0.577, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0.577, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void skewX_30degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let skewed = m.skewX(30);\n"
+                + "dump(skewed);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void skewX_0degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let skewed = m.skewX(0);\n"
+                + "dump(skewed);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void skewX_noParam() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let skewed = m.skewX();\n"
+                + "dump(skewed);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0.577, 0, 1, 0, 0]",
+             "1[1, 0.577, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void skewY_30degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let skewed = m.skewY(30);\n"
+                + "dump(skewed);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void skewY_0degrees() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let skewed = m.skewY(0);\n"
+                + "dump(skewed);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void skewY_noParam() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let skewed = m.skewY();\n"
+                + "dump(skewed);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0.9, 1, 5, 6]",
+             "1[1, 0, 0, 0]",
+             "2[0.9, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void skewX_6elements() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6]);\n"
+                + "let skewed = m.skewX(42);\n"
+                + "dump(skewed);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0.9, 0, 1, 5, 6]",
+             "1[1, 0.9, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[5, 6, 0, 1]",
+             "true"})
+    public void skewY_6elements() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6]);\n"
+                + "let skewed = m.skewY(42);\n"
+                + "dump(skewed);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 5.9, 6, 13, 14]",
+             "1[1, 0, 0, 1]",
+             "2[5.9, 6, 7, 8.9]",
+             "3[9, 10, 11, 12]",
+             "4[13, 14, 15, 16]",
+             "false"})
+    public void skewX_16elements() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
+                + "let skewed = m.skewX(42);\n"
+                + "dump(skewed);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[5.502, 5.402, 5, 6, 13, 14]",
+             "1[5.502, 5.402, 6.303, 8.203]",
+             "2[5, 6, 7, 8]",
+             "3[9, 10, 11, 12]",
+             "4[13, 14, 15, 16]",
+             "false"})
+    public void skewY_16elements() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
+                + "let skewed = m.skewY(42);\n"
+                + "dump(skewed);\n"
                 + "</script>\n"
                 + "</body></html>";
 

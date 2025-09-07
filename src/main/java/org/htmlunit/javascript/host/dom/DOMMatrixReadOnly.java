@@ -852,7 +852,6 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
 
         // Convert angle to radians
         final double angle2 = Math.toRadians(alpha) / 2;
-        final double angle1 = alpha * (Math.PI / 360);
 
         // Compute rotation matrix
         final double sc = Math.sin(angle2) * Math.cos(angle2);
@@ -889,6 +888,60 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         // Multiply this * rot
         final DOMMatrixReadOnly multiplied = multiply(rot);
         multiplied.is2D_ = is2D_ && x == 0 && y == 0;
+        return multiplied;
+    }
+
+    /**
+     * @param alphaObj the angle, in degrees, by which to skew the matrix along the x-axis
+     * @return returns a new DOMMatrix created by applying the specified skew transformation
+     *     to the source matrix along its x-axis. The original matrix is not modified.
+     */
+    @JsxFunction
+    public DOMMatrixReadOnly skewX(final Object alphaObj) {
+
+        // Default values
+        double alpha = 0;
+        if (alphaObj != null && !JavaScriptEngine.isUndefined(alphaObj)) {
+            alpha = JavaScriptEngine.toNumber(alphaObj);
+        }
+
+        // Convert angle to radians
+        final double angle = Math.toRadians(alpha);
+
+        // Compute rotation matrix
+        final DOMMatrixReadOnly rot = new DOMMatrixReadOnly();
+
+        rot.m21_ = Math.tan(angle);
+
+        // Multiply this * rot
+        final DOMMatrixReadOnly multiplied = multiply(rot);
+        return multiplied;
+    }
+
+    /**
+     * @param alphaObj the angle, in degrees, by which to skew the matrix along the y-axis
+     * @return returns a new DOMMatrix created by applying the specified skew transformation
+     *     to the source matrix along its x-axis. The original matrix is not modified.
+     */
+    @JsxFunction
+    public DOMMatrixReadOnly skewY(final Object alphaObj) {
+
+        // Default values
+        double alpha = 0;
+        if (alphaObj != null && !JavaScriptEngine.isUndefined(alphaObj)) {
+            alpha = JavaScriptEngine.toNumber(alphaObj);
+        }
+
+        // Convert angle to radians
+        final double angle = Math.toRadians(alpha);
+
+        // Compute rotation matrix
+        final DOMMatrixReadOnly rot = new DOMMatrixReadOnly();
+
+        rot.m12_ = Math.tan(angle);
+
+        // Multiply this * rot
+        final DOMMatrixReadOnly multiplied = multiply(rot);
         return multiplied;
     }
 
