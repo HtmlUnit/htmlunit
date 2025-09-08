@@ -421,11 +421,12 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[-2, -3, 4, 5, 6, 7]",
+    @Alerts({"true", "true",
+             "[-2, -3, 4, 5, 6, 7]",
              "true",
              "[2, 3, 4, 5, 6, 7]",
              "true"})
-    public void flipX_general() throws Exception {
+    public void flipX_6element2_general() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<body>\n"
@@ -434,6 +435,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + DUMP_2D_FUNCTION
                 + "let m = new DOMMatrixReadOnly([2, 3, 4, 5, 6, 7]);\n"
                 + "let flipped = m.flipX();\n"
+                + "log(flipped instanceof DOMMatrixReadOnly);\n"
+                + "log(flipped instanceof DOMMatrix);\n"
                 + "dump(flipped);\n"
                 + "dump(m);\n"
                 + "</script>\n"
@@ -446,19 +449,102 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[2, 3, -4, -5, 6, 7]",
-             "true",
-             "[2, 3, 4, 5, 6, 7]",
-             "true"})
-    public void flipY_general() throws Exception {
+    @Alerts({"true", "true",
+             "[-16, -15, 12, 11, 4, 3]",
+             "1[-16, -15, -14, -13]",
+             "2[12, 11, 10, 9]",
+             "3[8, 7, 6, 5]",
+             "4[4, 3, 2, 1]",
+             "false",
+             "[16, 15, 12, 11, 4, 3]",
+             "1[16, 15, 14, 13]",
+             "2[12, 11, 10, 9]",
+             "3[8, 7, 6, 5]",
+             "4[4, 3, 2, 1]",
+             "false"})
+    public void flipX_16elements_general() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + DUMP_2D_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "let flipped = m.flipX();\n"
+                + "log(flipped instanceof DOMMatrixReadOnly);\n"
+                + "log(flipped instanceof DOMMatrix);\n"
+                + "dump(flipped);\n"
+                + "dump(m);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"true", "true",
+             "[2, 3, -4, -5, 6, 7]",
+             "1[2, 3, 0, 0]",
+             "2[-4, -5, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[6, 7, 0, 1]",
+             "true",
+             "[2, 3, 4, 5, 6, 7]",
+             "1[2, 3, 0, 0]",
+             "2[4, 5, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[6, 7, 0, 1]",
+             "true"})
+    public void flipY_6elements_general() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([2, 3, 4, 5, 6, 7]);\n"
                 + "let flipped = m.flipY();\n"
+                + "log(flipped instanceof DOMMatrixReadOnly);\n"
+                + "log(flipped instanceof DOMMatrix);\n"
+                + "dump(flipped);\n"
+                + "dump(m);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"true", "true",
+             "[16, 15, -12, -11, 4, 3]",
+             "1[16, 15, 14, 13]",
+             "2[-12, -11, -10, -9]",
+             "3[8, 7, 6, 5]",
+             "4[4, 3, 2, 1]",
+             "false",
+             "[16, 15, 12, 11, 4, 3]",
+             "1[16, 15, 14, 13]",
+             "2[12, 11, 10, 9]",
+             "3[8, 7, 6, 5]",
+             "4[4, 3, 2, 1]",
+             "false"})
+    public void flipY_16elements_general() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
+                + "let flipped = m.flipY();\n"
+                + "log(flipped instanceof DOMMatrixReadOnly);\n"
+                + "log(flipped instanceof DOMMatrix);\n"
                 + "dump(flipped);\n"
                 + "dump(m);\n"
                 + "</script>\n"
@@ -540,15 +626,28 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[0.25, 0, 0, 0.2, -2.5, -2.6]", "true",
-             "[4, 0, 0, 5, 10, 13]", "true"})
+    @Alerts({"true", "true",
+             "[0.25, 0, 0, 0.2, -2.5, -2.6]",
+             "1[0.25, 0, 0, 0]",
+             "2[0, 0.2, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[-2.5, -2.6, 0, 1]",
+             "true",
+             "[4, 0, 0, 5, 10, 13]",
+             "1[4, 0, 0, 0]",
+             "2[0, 5, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[10, 13, 0, 1]",
+             "true"})
     public void inverse_general2D() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body><script>"
                 + LOG_TITLE_FUNCTION
-                + DUMP_2D_FUNCTION
+                + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([4, 0, 0, 5, 10, 13]);"
                 + "let inv = m.inverse();"
+                + "log(inv instanceof DOMMatrixReadOnly);\n"
+                + "log(inv instanceof DOMMatrix);\n"
                 + "dump(inv);"
                 + "dump(m);"
                 + "</script></body></html>";
@@ -624,16 +723,17 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[2, 0, 0, 0.5, 0, 0]",
-             "1[2, 0, 0, 0]",
-             "2[0, 0.5, 0, 0]",
-             "3[0, 0, 0.25, 0]",
+    @Alerts({"true", "true",
+             "[-0.066, 0.115, 0.295, -0.016, 0, 0]",
+             "1[-0.066, 0.115, 0.115, -0.459]",
+             "2[0.295, -0.016, -0.516, 0.066]",
+             "3[0.148, -0.008, -0.008, 0.033]",
              "4[0, 0, 0, 1]",
              "false",
-             "[0.5, 0, 0, 2, 0, 0]",
-             "1[0.5, 0, 0, 0]",
-             "2[0, 2, 0, 0]",
-             "3[0, 0, 4, 0]",
+             "[0.5, 0, 9, 2, 0, 0]",
+             "1[0.5, 0, 7, 0]",
+             "2[9, 2, 0, 4]",
+             "3[0, -2, 4, 0]",
              "4[0, 0, 0, 1]",
              "false"})
     public void inverse_general3D() throws Exception {
@@ -641,8 +741,10 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + "<html><body><script>"
                 + LOG_TITLE_FUNCTION
                 + DUMP_FUNCTION
-                + "let m = new DOMMatrixReadOnly([0.5,0,0,0,0,2,0,0,0,0,4,0,0,0,0,1]);"
+                + "let m = new DOMMatrixReadOnly([0.5,0,7,0,9,2,0,4,0,-2,4,0,0,0,0,1]);"
                 + "let inv = m.inverse();"
+                + "log(inv instanceof DOMMatrixReadOnly);\n"
+                + "log(inv instanceof DOMMatrix);\n"
                 + "dump(inv);"
                 + "dump(m);"
                 + "</script></body></html>";
@@ -680,7 +782,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[21, 32, 13, 20, 10, 14]",
+    @Alerts({"true", "true",
+             "[21, 32, 13, 20, 10, 14]",
              "1[21, 32, 0, 0]",
              "2[13, 20, 0, 0]",
              "3[0, 0, 1, 0]",
@@ -696,6 +799,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + "let m1 = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
                 + "let m2 = new DOMMatrixReadOnly([6, 5, 4, 3, 2, 1]);\n"
                 + "let result = m1.multiply(m2);\n"
+                + "log(result instanceof DOMMatrixReadOnly);\n"
+                + "log(result instanceof DOMMatrix);\n"
                 + "dump(result);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -707,7 +812,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[386, 444, 274, 316, 50, 60]",
+    @Alerts({"true", "true",
+             "[386, 444, 274, 316, 50, 60]",
              "1[386, 444, 502, 560]",
              "2[274, 316, 358, 400]",
              "3[162, 188, 214, 240]",
@@ -723,6 +829,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + "let m1 = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
                 + "let m2 = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
                 + "let result = m1.multiply(m2);\n"
+                + "log(result instanceof DOMMatrixReadOnly);\n"
+                + "log(result instanceof DOMMatrix);\n"
                 + "dump(result);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -1261,7 +1369,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[3, 4, -1, -2, 5, 6]",
+    @Alerts({"true", "true",
+             "[3, 4, -1, -2, 5, 6]",
              "1[3, 4, 0, 0]",
              "2[-1, -2, 0, 0]",
              "3[0, 0, 1, 0]",
@@ -1282,6 +1391,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([1, 2, 3, 4, 5, 6]);\n"
                 + "let rotated = m.rotate(90);\n"
+                + "log(rotated instanceof DOMMatrixReadOnly);\n"
+                + "log(rotated instanceof DOMMatrix);\n"
                 + "dump(rotated);\n"
                 + "dump(m);\n"
                 + "</script>\n"
@@ -1524,7 +1635,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[12, 11, -16, -15, 4, 3]",
+    @Alerts({"true", "true",
+             "[12, 11, -16, -15, 4, 3]",
              "1[12, 11, 10, 9]",
              "2[-16, -15, -14, -13]",
              "3[8, 7, 6, 5]",
@@ -1539,6 +1651,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);\n"
                 + "let rotated = m.rotate(90);\n"
+                + "log(rotated instanceof DOMMatrixReadOnly);\n"
+                + "log(rotated instanceof DOMMatrix);\n"
                 + "dump(rotated);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -1881,7 +1995,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[7, 6, 0, 0, 3, 2]",
+    @Alerts({"true", "true",
+             "[7, 6, 0, 0, 3, 2]",
              "1[7, 6, 0, 0]",
              "2[0, 0, 1, 0]",
              "3[-5, -4, 0, 0]",
@@ -1894,6 +2009,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([7, 6, 5, 4, 3, 2]);"
                 + "let rotated = m.rotateAxisAngle(1, 0, 0, 90);"
+                + "log(rotated instanceof DOMMatrixReadOnly);\n"
+                + "log(rotated instanceof DOMMatrix);\n"
                 + "dump(rotated);"
                 + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -1991,7 +2108,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[2, 3, 10, 11, 14, 15]",
+    @Alerts({"true", "true",
+             "[2, 3, 10, 11, 14, 15]",
              "1[2, 3, 4, 5]",
              "2[10, 11, 12, 13]",
              "3[-6, -7, -8, -9]",
@@ -2004,6 +2122,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]);"
                 + "let rotated = m.rotateAxisAngle(1, 0, 0, 90);"
+                + "log(rotated instanceof DOMMatrixReadOnly);\n"
+                + "log(rotated instanceof DOMMatrix);\n"
                 + "dump(rotated);"
                 + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -2594,7 +2714,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[1, 0, 0.9, 1, 5, 6]",
+    @Alerts({"true", "true",
+             "[1, 0, 0.9, 1, 5, 6]",
              "1[1, 0, 0, 0]",
              "2[0.9, 1, 0, 0]",
              "3[0, 0, 1, 0]",
@@ -2609,6 +2730,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6]);\n"
                 + "let skewed = m.skewX(42);\n"
+                + "log(skewed instanceof DOMMatrixReadOnly);\n"
+                + "log(skewed instanceof DOMMatrix);\n"
                 + "dump(skewed);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -2620,7 +2743,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[1, 0.9, 0, 1, 5, 6]",
+    @Alerts({"true", "true",
+             "[1, 0.9, 0, 1, 5, 6]",
              "1[1, 0.9, 0, 0]",
              "2[0, 1, 0, 0]",
              "3[0, 0, 1, 0]",
@@ -2635,6 +2759,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6]);\n"
                 + "let skewed = m.skewY(42);\n"
+                + "log(skewed instanceof DOMMatrixReadOnly);\n"
+                + "log(skewed instanceof DOMMatrix);\n"
                 + "dump(skewed);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -2646,7 +2772,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[1, 0, 5.9, 6, 13, 14]",
+    @Alerts({"true", "true",
+             "[1, 0, 5.9, 6, 13, 14]",
              "1[1, 0, 0, 1]",
              "2[5.9, 6, 7, 8.9]",
              "3[9, 10, 11, 12]",
@@ -2661,6 +2788,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
                 + "let skewed = m.skewX(42);\n"
+                + "log(skewed instanceof DOMMatrixReadOnly);\n"
+                + "log(skewed instanceof DOMMatrix);\n"
                 + "dump(skewed);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -2672,7 +2801,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[5.502, 5.402, 5, 6, 13, 14]",
+    @Alerts({"true", "true",
+             "[5.502, 5.402, 5, 6, 13, 14]",
              "1[5.502, 5.402, 6.303, 8.203]",
              "2[5, 6, 7, 8]",
              "3[9, 10, 11, 12]",
@@ -2687,6 +2817,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
                 + "let skewed = m.skewY(42);\n"
+                + "log(skewed instanceof DOMMatrixReadOnly);\n"
+                + "log(skewed instanceof DOMMatrix);\n"
                 + "dump(skewed);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -2698,7 +2830,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[1, 0, 5, 6, 123, 134]",
+    @Alerts({"true", "true",
+             "[1, 0, 5, 6, 123, 134]",
              "1[1, 0, 0, 1]",
              "2[5, 6, 7, 8]",
              "3[9, 10, 11, 12]",
@@ -2713,6 +2846,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
                 + "let translated = m.translate(10, 20);\n"
+                + "log(translated instanceof DOMMatrixReadOnly);\n"
+                + "log(translated instanceof DOMMatrix);\n"
                 + "dump(translated);\n"
                 + "</script>\n"
                 + "</body></html>";
@@ -2724,7 +2859,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"[1, 0, 0, 1, 15, 26]",
+    @Alerts({"true", "true",
+             "[1, 0, 0, 1, 15, 26]",
              "1[1, 0, 0, 0]",
              "2[0, 1, 0, 0]",
              "3[0, 0, 1, 0]",
@@ -2739,6 +2875,8 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
                 + DUMP_FUNCTION
                 + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6]);\n"
                 + "let translated = m.translate(10, 20);\n"
+                + "log(translated instanceof DOMMatrixReadOnly);\n"
+                + "log(translated instanceof DOMMatrix);\n"
                 + "dump(translated);\n"
                 + "</script>\n"
                 + "</body></html>";
