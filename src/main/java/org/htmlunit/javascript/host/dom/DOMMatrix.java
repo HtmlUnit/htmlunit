@@ -441,6 +441,7 @@ public class DOMMatrix extends DOMMatrixReadOnly {
     public void setF(final double f) {
         super.setM42(f);
     }
+
     /**
      * @return inverts the original matrix. If the matrix cannot be inverted,
      *     the new matrix's components are all set to NaN and its is2D property is set to false.

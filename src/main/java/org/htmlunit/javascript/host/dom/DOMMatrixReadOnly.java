@@ -853,7 +853,6 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
      */
     @JsxFunction
     public DOMMatrixReadOnly skewX(final Object alphaObj) {
-
         // Default values
         double alpha = 0;
         if (alphaObj != null && !JavaScriptEngine.isUndefined(alphaObj)) {
@@ -880,7 +879,6 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
      */
     @JsxFunction
     public DOMMatrixReadOnly skewY(final Object alphaObj) {
-
         // Default values
         double alpha = 0;
         if (alphaObj != null && !JavaScriptEngine.isUndefined(alphaObj)) {
