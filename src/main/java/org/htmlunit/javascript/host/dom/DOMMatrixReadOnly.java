@@ -946,6 +946,48 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * Creates a new matrix being the result of the original matrix with a translation applied.
+     *
+     * @param xObj a number representing the abscissa (x-coordinate) of the translating vector
+     * @param yObj a number representing the ordinate (y-coordinate) of the translating vector
+     * @param zObj A number representing the z component of the translating vector. If not supplied,
+     *        this defaults to 0. If this is anything other than 0, the resulting matrix will be 3D
+     * @return a DOMMatrix containing a new matrix being the result of the matrix being translated
+     *         by the given vector. The original matrix is not modified.
+     *         If a translation is applied about the z-axis, the resulting matrix will be a 4x4 3D matrix.
+     */
+    @JsxFunction
+    public DOMMatrixReadOnly translate(
+                final Object xObj, final Object yObj, final Object zObj) {
+        // Default values
+        double x = 0;
+        double y = 0;
+        double z = 0;
+        if (xObj != null && !JavaScriptEngine.isUndefined(xObj)) {
+            x = JavaScriptEngine.toNumber(xObj);
+        }
+        if (yObj != null && !JavaScriptEngine.isUndefined(yObj)) {
+            y = JavaScriptEngine.toNumber(yObj);
+        }
+        if (zObj != null && !JavaScriptEngine.isUndefined(zObj)) {
+            z = JavaScriptEngine.toNumber(zObj);
+        }
+
+        final DOMMatrixReadOnly translate = new DOMMatrixReadOnly();
+
+        translate.m41_ = x;
+        translate.m42_ = y;
+        translate.m43_ = z;
+
+        translate.is2D_ = false;
+
+        // Multiply this * rot
+        final DOMMatrixReadOnly multiplied = multiply(translate);
+        multiplied.is2D_ = is2D_ && (zObj == null || JavaScriptEngine.isUndefined(zObj) || z == 0);
+        return multiplied;
+    }
+
+    /**
      * @return a new Float32Array containing all 16 elements
      *     (m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44)
      *     which comprise the matrix. The elements are stored into the array

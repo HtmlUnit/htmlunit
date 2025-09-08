@@ -2693,4 +2693,300 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 5, 6, 123, 134]",
+             "1[1, 0, 0, 1]",
+             "2[5, 6, 7, 8]",
+             "3[9, 10, 11, 12]",
+             "4[123, 134, 155, 186]",
+             "false"})
+    public void translate_16elements_positiveValues() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
+                + "let translated = m.translate(10, 20);\n"
+                + "dump(translated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 15, 26]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[15, 26, 0, 1]",
+             "true"})
+    public void translate_6elements_positiveValues() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6]);\n"
+                + "let translated = m.translate(10, 20);\n"
+                + "dump(translated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 5, 6, -97, -106]",
+             "1[1, 0, 0, 1]",
+             "2[5, 6, 7, 8]",
+             "3[9, 10, 11, 12]",
+             "4[-97, -106, -125, -154]",
+             "false"})
+    public void translate_16elements_negativeValues() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([1, 0, 0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);\n"
+                + "let translated = m.translate(-10, -20);\n"
+                + "dump(translated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[10, 11, 1, -5, -120, -3]",
+             "1[10, 11, 0, 0]",
+             "2[1, -5, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[-120, -3, 0, 1]",
+             "true"})
+    public void translate_6elements_negativeValues() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly([10, 11, 1, -5, 0, 7]);\n"
+                + "let translated = m.translate(-10, -20);\n"
+                + "dump(translated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 0, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[0, 0, 0, 1]",
+             "true"})
+    public void translate_zeroValues() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let translated = m.translate(0, 0);\n"
+                + "dump(translated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, NaN, NaN]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[NaN, NaN, 0, 1]",
+             "true"})
+    @HtmlUnitNYI(
+            CHROME = {"[1, 0, 0, 1, NaN, NaN]",
+                      "1[1, 0, 0, 0]",
+                      "2[0, 1, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[NaN, NaN, NaN, NaN]",
+                      "true"},
+            EDGE = {"[1, 0, 0, 1, NaN, NaN]",
+                    "1[1, 0, 0, 0]",
+                    "2[0, 1, 0, 0]",
+                    "3[0, 0, 1, 0]",
+                    "4[NaN, NaN, NaN, NaN]",
+                    "true"},
+            FF = {"[1, 0, 0, 1, NaN, NaN]",
+                  "1[1, 0, 0, 0]",
+                  "2[0, 1, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[NaN, NaN, NaN, NaN]",
+                  "true"},
+            FF_ESR = {"[1, 0, 0, 1, NaN, NaN]",
+                      "1[1, 0, 0, 0]",
+                      "2[0, 1, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[NaN, NaN, NaN, NaN]",
+                      "true"})
+    public void translate_withNaN() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let translated = m.translate(NaN, NaN);\n"
+                + "dump(translated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"[1, 0, 0, 1, Infinity, Infinity]",
+                       "1[1, 0, 0, 0]",
+                       "2[0, 1, 0, 0]",
+                       "3[0, 0, 1, 0]",
+                       "4[Infinity, Infinity, 0, 1]",
+                       "true"},
+            FF = {"[1, 0, 0, 1, NaN, NaN]",
+                  "1[1, 0, 0, 0]",
+                  "2[0, 1, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[NaN, NaN, 0, 1]",
+                  "true"},
+            FF_ESR = {"[1, 0, 0, 1, NaN, NaN]",
+                      "1[1, 0, 0, 0]",
+                      "2[0, 1, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[NaN, NaN, 0, 1]",
+                      "true"})
+    @HtmlUnitNYI(
+            CHROME = {"[1, 0, 0, 1, NaN, NaN]",
+                      "1[1, 0, 0, 0]",
+                      "2[0, 1, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[NaN, NaN, NaN, NaN]",
+                      "true"},
+            EDGE = {"[1, 0, 0, 1, NaN, NaN]",
+                    "1[1, 0, 0, 0]",
+                    "2[0, 1, 0, 0]",
+                    "3[0, 0, 1, 0]",
+                    "4[NaN, NaN, NaN, NaN]",
+                    "true"},
+            FF = {"[1, 0, 0, 1, NaN, NaN]",
+                  "1[1, 0, 0, 0]",
+                  "2[0, 1, 0, 0]",
+                  "3[0, 0, 1, 0]",
+                  "4[NaN, NaN, NaN, NaN]",
+                  "true"},
+            FF_ESR = {"[1, 0, 0, 1, NaN, NaN]",
+                      "1[1, 0, 0, 0]",
+                      "2[0, 1, 0, 0]",
+                      "3[0, 0, 1, 0]",
+                      "4[NaN, NaN, NaN, NaN]",
+                      "true"})
+    public void translate_withInfinity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let translated = m.translate(Infinity, Infinity);\n"
+                + "dump(translated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 10, 0]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[10, 0, 0, 1]",
+             "true"})
+    public void translate_onlyX() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let translated = m.translate(10);\n"
+                + "dump(translated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"[1, 0, 0, 1, 10, 20]",
+             "1[1, 0, 0, 0]",
+             "2[0, 1, 0, 0]",
+             "3[0, 0, 1, 0]",
+             "4[10, 20, 30, 1]",
+             "false"})
+    public void translate_withZ() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + DUMP_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "let translated = m.translate(10, 20, 30);\n"
+                + "dump(translated);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
