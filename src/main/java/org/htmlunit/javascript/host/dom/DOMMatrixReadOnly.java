@@ -554,192 +554,28 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         matrix.setParentScope(window);
         matrix.setPrototype(window.getPrototype(DOMMatrix.class));
 
-        if (is2D_) {
-            final double det = m11_ * m22_ - m12_ * m21_;
-            if (det == 0) {
-                // Not invertible: set all to NaN, is2D_ = false
-                initWithNan(matrix);
-                return matrix;
-            }
+        matrix.setM11(m11_);
+        matrix.setM12(m12_);
+        matrix.setM13(m13_);
+        matrix.setM14(m14_);
 
-            matrix.setM11(m22_ / det);
-            matrix.setM12(-m12_ / det);
+        matrix.setM21(m21_);
+        matrix.setM22(m22_);
+        matrix.setM23(m23_);
+        matrix.setM24(m24_);
 
-            matrix.setM21(-m21_ / det);
-            matrix.setM22(m11_ / det);
+        matrix.setM31(m31_);
+        matrix.setM32(m32_);
+        matrix.setM33(m33_);
+        matrix.setM34(m34_);
 
-            matrix.setM41((m21_ * m42_ - m22_ * m41_) / det);
-            matrix.setM42((m12_ * m41_ - m11_ * m42_) / det);
+        matrix.setM41(m41_);
+        matrix.setM42(m42_);
+        matrix.setM43(m43_);
+        matrix.setM44(m44_);
 
-            matrix.setIs2D(true);
-            return matrix;
-        }
-
-        final double[] inv = new double[16];
-        inv[0] = m22_ * m33_ * m44_
-                - m22_ * m34_ * m43_
-                - m32_ * m23_ * m44_
-                + m32_ * m24_ * m43_
-                + m42_ * m23_ * m34_
-                - m42_ * m24_ * m33_;
-
-        inv[4] = -m21_ * m33_ * m44_
-                + m21_ * m34_ * m43_
-                + m31_ * m23_ * m44_
-                - m31_ * m24_ * m43_
-                - m41_ * m23_ * m34_
-                + m41_ * m24_ * m33_;
-
-        inv[8] = m21_ * m32_ * m44_
-                - m21_ * m34_ * m42_
-                - m31_ * m22_ * m44_
-                + m31_ * m24_ * m42_
-                + m41_ * m22_ * m34_
-                - m41_ * m24_ * m32_;
-
-        inv[12] = -m21_ * m32_ * m43_
-                + m21_ * m33_ * m42_
-                + m31_ * m22_ * m43_
-                - m31_ * m23_ * m42_
-                - m41_ * m22_ * m33_
-                + m41_ * m23_ * m32_;
-
-        inv[1] = -m12_ * m33_ * m44_
-                + m12_ * m34_ * m43_
-                + m32_ * m13_ * m44_
-                - m32_ * m14_ * m43_
-                - m42_ * m13_ * m34_
-                + m42_ * m14_ * m33_;
-
-        inv[5] = m11_ * m33_ * m44_
-                - m11_ * m34_ * m43_
-                - m31_ * m13_ * m44_
-                + m31_ * m14_ * m43_
-                + m41_ * m13_ * m34_
-                - m41_ * m14_ * m33_;
-
-        inv[9] = -m11_ * m32_ * m44_
-                + m11_ * m34_ * m42_
-                + m31_ * m12_ * m44_
-                - m31_ * m14_ * m42_
-                - m41_ * m12_ * m34_
-                + m41_ * m14_ * m32_;
-
-        inv[13] = m11_ * m32_ * m43_
-                - m11_ * m33_ * m42_
-                - m31_ * m12_ * m43_
-                + m31_ * m13_ * m42_
-                + m41_ * m12_ * m33_
-                - m41_ * m13_ * m32_;
-
-        inv[2] = m12_ * m23_ * m44_
-                - m12_ * m24_ * m43_
-                - m22_ * m13_ * m44_
-                + m22_ * m14_ * m43_
-                + m42_ * m13_ * m24_
-                - m42_ * m14_ * m23_;
-
-        inv[6] = -m11_ * m23_ * m44_
-                + m11_ * m24_ * m43_
-                + m21_ * m13_ * m44_
-                - m21_ * m14_ * m43_
-                - m41_ * m13_ * m24_
-                + m41_ * m14_ * m23_;
-
-        inv[10] = m11_ * m22_ * m44_
-                - m11_ * m24_ * m42_
-                - m21_ * m12_ * m44_
-                + m21_ * m14_ * m42_
-                + m41_ * m12_ * m24_
-                - m41_ * m14_ * m22_;
-
-        inv[14] = -m11_ * m22_ * m43_
-                + m11_ * m23_ * m42_
-                + m21_ * m12_ * m43_
-                - m21_ * m13_ * m42_
-                - m41_ * m12_ * m23_
-                + m41_ * m13_ * m22_;
-
-        inv[3] = -m12_ * m23_ * m34_
-                + m12_ * m24_ * m33_
-                + m22_ * m13_ * m34_
-                - m22_ * m14_ * m33_
-                - m32_ * m13_ * m24_
-                + m32_ * m14_ * m23_;
-
-        inv[7] = m11_ * m23_ * m34_
-                - m11_ * m24_ * m33_
-                - m21_ * m13_ * m34_
-                + m21_ * m14_ * m33_
-                + m31_ * m13_ * m24_
-                - m31_ * m14_ * m23_;
-
-        inv[11] = -m11_ * m22_ * m34_
-                + m11_ * m24_ * m32_
-                + m21_ * m12_ * m34_
-                - m21_ * m14_ * m32_
-                - m31_ * m12_ * m24_
-                + m31_ * m14_ * m22_;
-
-        inv[15] = m11_ * m22_ * m33_
-                - m11_ * m23_ * m32_
-                - m21_ * m12_ * m33_
-                + m21_ * m13_ * m32_
-                + m31_ * m12_ * m23_
-                - m31_ * m13_ * m22_;
-
-        double det = m11_ * inv[0] + m12_ * inv[4] + m13_ * inv[8] + m14_ * inv[12];
-
-        if (det == 0) {
-            // Not invertible: set all to NaN, is2D_ = false
-            initWithNan(matrix);
-            return matrix;
-        }
-
-        det = 1.0 / det;
-
-        matrix.setM11(inv[0] * det);
-        matrix.setM12(inv[1] * det);
-        matrix.setM13(inv[2] * det);
-        matrix.setM14(inv[3] * det);
-
-        matrix.setM21(inv[4] * det);
-        matrix.setM22(inv[5] * det);
-        matrix.setM23(inv[6] * det);
-        matrix.setM24(inv[7] * det);
-
-        matrix.setM31(inv[8] * det);
-        matrix.setM32(inv[9] * det);
-        matrix.setM33(inv[10] * det);
-        matrix.setM34(inv[11] * det);
-
-        matrix.setM41(inv[12] * det);
-        matrix.setM42(inv[13] * det);
-        matrix.setM43(inv[14] * det);
-        matrix.setM44(inv[15] * det);
-
-        matrix.setIs2D(false);
-        return matrix;
-    }
-
-    private static void initWithNan(final DOMMatrix matrix) {
-        matrix.setM11(Double.NaN);
-        matrix.setM12(Double.NaN);
-        matrix.setM13(Double.NaN);
-        matrix.setM14(Double.NaN);
-        matrix.setM21(Double.NaN);
-        matrix.setM22(Double.NaN);
-        matrix.setM23(Double.NaN);
-        matrix.setM24(Double.NaN);
-        matrix.setM31(Double.NaN);
-        matrix.setM32(Double.NaN);
-        matrix.setM33(Double.NaN);
-        matrix.setM34(Double.NaN);
-        matrix.setM41(Double.NaN);
-        matrix.setM42(Double.NaN);
-        matrix.setM43(Double.NaN);
-        matrix.setM44(Double.NaN);
-        matrix.setIs2D(false);
+        matrix.setIs2D(is2D_);
+        return matrix.invertSelf();
     }
 
     /**
