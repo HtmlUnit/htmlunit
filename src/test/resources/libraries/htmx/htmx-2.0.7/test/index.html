@@ -48,6 +48,7 @@
 <script class="mocha-init">
     mocha.setup({
         ui: "bdd",
+        timeout: 4000,
         rootHooks: {
             beforeEach(done) {
                 console.log(`${this?.currentTest?.parent?.title} - ${this?.currentTest?.title}`)
