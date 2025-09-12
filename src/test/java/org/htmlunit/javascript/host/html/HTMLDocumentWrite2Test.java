@@ -916,6 +916,10 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0", "foo1", "1", "2", "3", "4", "5", "A", "B", "foo3"})
+    @HtmlUnitNYI(CHROME = {"0", "foo1", "1", "2", "3", "4", "foo3", "A", "B", "5"},
+            EDGE = {"0", "foo1", "1", "2", "3", "4", "foo3", "A", "B", "5"},
+            FF = {"0", "foo1", "1", "2", "3", "4", "foo3", "A", "B", "5"},
+            FF_ESR = {"0", "foo1", "1", "2", "3", "4", "foo3", "A", "B", "5"})
     public void writeScriptInManyTimes() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -955,6 +959,10 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0", "foo1", "1", "foo2", "2", "3", "4", "A", "foo3"})
+    @HtmlUnitNYI(CHROME = {"0", "foo1", "1", "foo2", "2", "3", "foo3", "A", "4"},
+            EDGE = {"0", "foo1", "1", "foo2", "2", "3", "foo3", "A", "4"},
+            FF = {"0", "foo1", "1", "foo2", "2", "3", "foo3", "A", "4"},
+            FF_ESR = {"0", "foo1", "1", "foo2", "2", "3", "foo3", "A", "4"})
     public void writeScriptPostponed() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -993,6 +1001,10 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0", "A", "1", "foo2", "2", "3", "4", "B", "foo3"})
+    @HtmlUnitNYI(CHROME = {"0", "A", "1", "foo2", "2", "3", "foo3", "B", "4"},
+            EDGE = {"0", "A", "1", "foo2", "2", "3", "foo3", "B", "4"},
+            FF = {"0", "A", "1", "foo2", "2", "3", "foo3", "B", "4"},
+            FF_ESR = {"0", "A", "1", "foo2", "2", "3", "foo3", "B", "4"})
     public void writeScriptPostponedBeforeWrite() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
