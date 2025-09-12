@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 
@@ -61,6 +62,15 @@ public class EventTargetTest extends WebDriverTestCase {
     @Test
     @Alerts({"before dispatchEvent()", "dispatchEvent() listener",
              "insertBefore start", "insertBefore done", "after dispatchEvent()", "external script"})
+    @HtmlUnitNYI(
+            CHROME = {"before dispatchEvent()", "dispatchEvent() listener",
+                      "insertBefore start", "insertBefore done", "external script", "after dispatchEvent()"},
+            EDGE = {"before dispatchEvent()", "dispatchEvent() listener",
+                    "insertBefore start", "insertBefore done", "external script", "after dispatchEvent()"},
+            FF = {"before dispatchEvent()", "dispatchEvent() listener",
+                  "insertBefore start", "insertBefore done", "external script", "after dispatchEvent()"},
+            FF_ESR = {"before dispatchEvent()", "dispatchEvent() listener",
+                      "insertBefore start", "insertBefore done", "external script", "after dispatchEvent()"})
     public void dispatchEventPostponed() throws Exception {
         getMockWebConnection().setDefaultResponse("log('external script');", MimeType.TEXT_JAVASCRIPT);
 
