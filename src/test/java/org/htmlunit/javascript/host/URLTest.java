@@ -62,7 +62,7 @@ public class URLTest extends WebDriverTestCase {
     @Alerts({"https://developer.mozilla.org/", "https://developer.mozilla.org/",
              "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
              "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
-             "http://www.example.com/", "type error", "type error" })
+             "http://www.example.com/"})
     public void ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -80,12 +80,62 @@ public class URLTest extends WebDriverTestCase {
             + "        log(new URL('/en-US/docs', d));\n"
             + "        log(new URL('/en-US/docs', 'https://developer.mozilla.org/fr-FR/toto'));\n"
             + "        log(new URL('http://www.example.com', 'https://developers.mozilla.com'));\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"data:,foo", "data:,foo"})
+    public void ctorDataUrl() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (typeof window.URL === 'function') {\n"
+            + "        log(new URL('data:,foo'));\n"
+            + "        log(new URL('data:,foo', 'http://localhost:22222/test/index.html'));\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError"})
+    public void ctorInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (typeof window.URL === 'function') {\n"
             + "        try {\n"
             + "          new URL('/en-US/docs', '');\n"
-            + "        } catch(e) { log('type error'); }\n"
+            + "        } catch(e) { logEx(e); }\n"
             + "        try {\n"
             + "          new URL('/en-US/docs');\n"
-            + "        } catch(e) { log('type error'); }\n"
+            + "        } catch(e) { logEx(e); }\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"

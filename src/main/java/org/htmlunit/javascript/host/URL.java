@@ -71,7 +71,7 @@ public class URL extends HtmlUnitScriptable {
             }
             else {
                 final java.net.URL baseUrl = UrlUtils.toUrlUnsafe(baseStr);
-                url_ = new java.net.URL(baseUrl, url);
+                url_ = UrlUtils.toUrlUnsafe(UrlUtils.resolveUrl(baseUrl, url));
             }
             url_ = UrlUtils.removeRedundantPort(url_);
         }
