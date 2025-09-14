@@ -30,6 +30,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.cyberneko.HTMLConfiguration;
 import org.htmlunit.cyberneko.HTMLElements;
+import org.htmlunit.cyberneko.HTMLElementsCollection;
 import org.htmlunit.cyberneko.HTMLScanner;
 import org.htmlunit.cyberneko.HTMLTagBalancingListener;
 import org.htmlunit.cyberneko.xerces.parsers.AbstractSAXParser;
@@ -97,8 +98,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         implements ContentHandler, LexicalHandler, HTMLTagBalancingListener, HTMLParserDOMBuilder {
 
     // cache Neko Elements for performance and memory efficiency
-    private static final HTMLElements HTMLELEMENTS;
-    private static final HTMLElements HTMLELEMENTS_WITH_CMD;
+    private static final HTMLElementsCollection HTMLELEMENTSCOLLECTION_WITH_CMD;
 
     static {
         // continue short code enumeration
@@ -107,11 +107,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         final HTMLElements.Element command = new HTMLElements.Element(commandShortCode, "COMMAND",
                 HTMLElements.Element.EMPTY, new short[] {HTMLElements.BODY, HTMLElements.HEAD}, null);
 
-        HTMLELEMENTS = new HTMLElements();
-
-        final HTMLElements value = new HTMLElements();
-        value.setElement(command);
-        HTMLELEMENTS_WITH_CMD = value;
+        HTMLELEMENTSCOLLECTION_WITH_CMD = new HTMLElementsCollection(command);
     }
 
     private enum HeadParsed { YES, SYNTHESIZED, NO }
@@ -207,10 +203,15 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      * @return the configuration
      */
     private static XMLParserConfiguration createConfiguration(final BrowserVersion browserVersion) {
+        // it is important to use a new instance of HTMLElements every time to 
+        // avoid concurrency issues due to the internal state of HTMLElements which allows
+        // caching of results, especially lookup misses
         if (browserVersion.hasFeature(HTML_COMMAND_TAG)) {
-            return new HTMLConfiguration(HTMLELEMENTS_WITH_CMD);
+            return new HTMLConfiguration(new HTMLElements(HTMLELEMENTSCOLLECTION_WITH_CMD));
         }
-        return new HTMLConfiguration(HTMLELEMENTS);
+        else {
+            return new HTMLConfiguration(new HTMLElements(HTMLElementsCollection.DEFAULT));
+        }
     }
 
     /**
