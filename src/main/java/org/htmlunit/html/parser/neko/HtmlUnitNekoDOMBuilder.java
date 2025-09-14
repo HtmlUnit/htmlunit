@@ -208,9 +208,9 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      */
     private static XMLParserConfiguration createConfiguration(final BrowserVersion browserVersion) {
         if (browserVersion.hasFeature(HTML_COMMAND_TAG)) {
-            return new HTMLConfiguration(HTMLELEMENTS_WITH_CMD);
+            return new HTMLConfiguration(new HTMLElements.HTMLElementsWithCache(HTMLELEMENTS_WITH_CMD));
         }
-        return new HTMLConfiguration(HTMLELEMENTS);
+        return new HTMLConfiguration(new HTMLElements.HTMLElementsWithCache(HTMLELEMENTS));
     }
 
     /**
