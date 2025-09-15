@@ -1154,4 +1154,77 @@ public class FocusableElement2Test extends WebDriverTestCase {
             + "onfocusout=\"log('onfocusout" + aSuffix + "', event)\" "
             + "onfocus=\"log('onfocus" + aSuffix + "', event)\"";
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onfocus2:focusId2", "active: focusId2",
+             "onfocusin2:focusId2", "active: focusId2",
+             "onfocusin1:focusId2", "active: focusId2"})
+    public void bubblesDiv() throws Exception {
+        String snippet =
+                "<div id='focusId1'>\n"
+                + "<input type='text' readonly id='focusId2'>\n"
+                + "</div>";
+
+        snippet = snippet.replaceFirst("id='focusId1'( /)?>", "id='focusId1' " + logEvents("1") + "$1>");
+        snippet = snippet.replaceFirst("id='focusId2'( /)?>", "id='focusId2' " + logEvents("2") + "$1>");
+
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body'>\n"
+            + snippet
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+
+        driver.findElement(By.id("focusId2")).click();
+
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onfocus2:focusId2", "active: focusId2",
+             "onfocusin2:focusId2", "active: focusId2",
+             "onfocusin1:focusId2", "active: focusId2"})
+    public void bubblesDivDiv() throws Exception {
+        String snippet =
+                "<div id='focusId1'>\n"
+                + "<div>"
+                + "<input type='text' readonly id='focusId2'>\n"
+                + "</div>"
+                + "</div>";
+
+        snippet = snippet.replaceFirst("id='focusId1'( /)?>", "id='focusId1' " + logEvents("1") + "$1>");
+        snippet = snippet.replaceFirst("id='focusId2'( /)?>", "id='focusId2' " + logEvents("2") + "$1>");
+
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body'>\n"
+            + snippet
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+
+        driver.findElement(By.id("focusId2")).click();
+
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
+    }
 }
