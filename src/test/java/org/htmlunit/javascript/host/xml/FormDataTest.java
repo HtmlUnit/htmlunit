@@ -597,7 +597,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  try {\n"
             + "    var formData = new FormData();\n"
-            + "    if (!formData.get) { log('no getAll'); return; }\n"
+            + "    if (!formData.getAll) { log('no getAll'); return; }\n"
 
             + "    formData.append('myKey', 'myValue');\n"
             + "    formData.append('myKey', 'myValue2');\n"
