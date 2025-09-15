@@ -60,7 +60,7 @@
 
         <!-- quality -->
         <checkstyle.version>11.0.1</checkstyle.version>
-        <spotbugs.version>4.9.4</spotbugs.version>
+        <spotbugs.version>4.9.5</spotbugs.version>
         <pmd.version>7.17.0</pmd.version>
         <archunit.version>1.4.1</archunit.version>
         <dependencycheck.version>10.0.4</dependencycheck.version>
@@ -69,12 +69,13 @@
         <central-publishing-plugin.version>0.8.0</central-publishing-plugin.version>
         <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
         <pmd-plugin.version>3.27.0</pmd-plugin.version>
-        <spotbugs-plugin.version>4.9.4.2</spotbugs-plugin.version>
+        <spotbugs-plugin.version>4.9.5.0</spotbugs-plugin.version>
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
         <enforcer-plugin.version>3.6.1</enforcer-plugin.version>
         <changes-plugin.version>2.12.1</changes-plugin.version>
         <jar-plugin.version>3.4.2</jar-plugin.version>
         <javadoc-plugin.version>3.11.3</javadoc-plugin.version>
+        <surefire-plugin.version>3.5.4</surefire-plugin.version>
         <cyclonedx-plugin.version>2.9.1</cyclonedx-plugin.version>
     </properties>
 
@@ -217,7 +218,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.3</version>
+                <version>${surefire-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -364,7 +365,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -418,7 +419,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -449,7 +450,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -477,7 +478,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -506,7 +507,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -536,7 +537,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -565,7 +566,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -594,7 +595,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -623,7 +624,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -651,7 +652,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -679,7 +680,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -707,7 +708,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -736,7 +737,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.5.3</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
