@@ -14,6 +14,7 @@
  */
 package org.htmlunit.libraries;
 
+import org.htmlunit.WebClient;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
@@ -33,8 +34,10 @@ public class HtmxTest2x0x0 extends HtmxTest {
             FF = "passes:570failures:0",
             FF_ESR = "passes:570failures:0")
     @HtmlUnitNYI(
-            CHROME = "passes:570failures:0",
-            EDGE = "passes:570failures:0")
+            CHROME = "passes:569failures:1",
+            EDGE = "passes:569failures:1",
+            FF = "passes:569failures:1",
+            FF_ESR = "passes:569failures:1")
     public void htmx() throws Exception {
         htmx("htmx-2.0.0", false);
     }
@@ -43,13 +46,24 @@ public class HtmxTest2x0x0 extends HtmxTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "passes:570failures:1",
-            FF = "passes:570failures:0",
-            FF_ESR = "passes:570failures:0")
+    @Alerts(DEFAULT = "passes:506failures:65",
+            FF = "passes:506failures:64",
+            FF_ESR = "passes:506failures:64")
     @HtmlUnitNYI(
-            CHROME = "passes:570failures:0",
-            EDGE = "passes:570failures:0")
+            CHROME = "passes:505failures:65",
+            EDGE = "passes:505failures:65",
+            FF = "passes:505failures:65",
+            FF_ESR = "passes:505failures:65")
     public void htmxMin() throws Exception {
         htmx("htmx-2.0.0", true);
+    }
+
+    @Override
+    protected void setupWebClient(final WebClient webClient) {
+        super.setupWebClient(webClient);
+
+        // min
+        // ReferenceError: "getInputValues" is not defined.
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
     }
 }
