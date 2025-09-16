@@ -53,8 +53,8 @@ public class HtmxTest2x0x7 extends HtmxTest {
     @HtmlUnitNYI(
             CHROME = "passes:620failures:119",
             EDGE = "passes:620failures:119",
-            FF = "passes:620failures:119",
-            FF_ESR = "passes:620failures:119")
+            FF = "passes:625failures:111",
+            FF_ESR = "passes:625failures:111")
     public void htmxMin() throws Exception {
         htmx("htmx-2.0.7", true);
     }
