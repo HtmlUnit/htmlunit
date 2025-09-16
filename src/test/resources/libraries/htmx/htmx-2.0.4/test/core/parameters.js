@@ -250,6 +250,7 @@ describe('Core htmx Parameter Handling', function() {
     should.equal(vals.do, undefined)
   })
 
+/* HtmlUnit class syntax not supported so far
   it('formdata works along web components', function() {
     // See https://web.dev/articles/more-capable-form-controls
     class TestElement extends HTMLElement {
@@ -279,6 +280,7 @@ describe('Core htmx Parameter Handling', function() {
     var vals = htmx._('getInputValues')(form, 'get').values
     vals.foo.should.equal('bar')
   })
+*/
 
   it('formdata works with null values', function() {
     var form = make('<form hx-post="/test"><input name="foo" value="bar"/></form>')
