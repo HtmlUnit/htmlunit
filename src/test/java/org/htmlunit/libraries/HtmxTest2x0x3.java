@@ -40,7 +40,23 @@ public class HtmxTest2x0x3 extends HtmxTest {
             FF = "passes:599failures:8",
             FF_ESR = "passes:599failures:8")
     public void htmx() throws Exception {
-        htmx("htmx-2.0.3");
+        htmx("htmx-2.0.3", false);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "passes:539failures:67",
+            FF = "passes:539failures:66",
+            FF_ESR = "passes:539failures:66")
+    @HtmlUnitNYI(
+            CHROME = "passes:535failures:70",
+            EDGE = "passes:535failures:70",
+            FF = "passes:535failures:70",
+            FF_ESR = "passes:535failures:70")
+    public void htmxMin() throws Exception {
+        htmx("htmx-2.0.3", true);
     }
 
     @Override
