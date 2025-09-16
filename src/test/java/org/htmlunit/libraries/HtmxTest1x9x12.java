@@ -32,6 +32,6 @@ public class HtmxTest1x9x12 extends HtmxTest {
     @Alerts("passes:707failures:0")
     @BuggyWebDriver(CHROME = "passes:707failures:1", EDGE = "passes:707failures:1")
     public void htmx() throws Exception {
-        htmx("htmx-1.9.12");
+        htmx("htmx-1.9.12", false);
     }
 }
