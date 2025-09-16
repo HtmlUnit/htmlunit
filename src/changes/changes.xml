@@ -8,8 +8,14 @@
 
     <body>
         <release version="4.17.0" date="September xx, 2025" description="Chrome/Edge 140, Firefox 142, Bugfixes">
+            <action type="add" dev="rbri">
+                HtmxTwoZeroSevenScriptPreProcessor added; this is required for htmx 2.0.3-2.0.7.
+            </action>
+            <action type="add" dev="rbri">
+                Tests for htmx 2.0.4-2.0.7 added.
+            </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: fix template literal string vonversion for ECMAScript Compliance
+                core-js: fix template literal string conversion for ECMAScript compliance
             </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: fix Array.from to prioritize iterable over array-like objects
@@ -21,17 +27,17 @@
                 Fix URL constructor to support also the data scheme.
             </action>
             <action type="add" dev="rbri" issue="#371">
-                DOMMatrix and DOMMatrixReadOnly stubs replaced by a real impl (incomplete).
+                DOMMatrix and DOMMatrixReadOnly stubs replaced by a real implementation (incomplete).
             </action>
             <action type="fix" dev="René Schwietzke" issue="#1014">
                 Properly synchronize access to httpClientBuilder_ in class HttpWebConnection.
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: fix erro stack generation in interpreted mode and report the correct line number
+                core-js: fix error stack generation in interpreted mode and report the correct line number
             </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: don't propagate strict flag when compiling scripts and we already
-                havean active context in strict mode
+                have an active context in strict mode
             </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: a problem with toString() on arrow functions fixed
@@ -46,7 +52,7 @@
                 HtmlLink.getWebResponse(...) now also works when the JavaScript engine is disabled.
             </action>
             <action type="add" dev="rbri" issue="#978">
-                BroadcastChannel stub replaced by an real impl.
+                BroadcastChannel stub replaced by a real implementation.
             </action>
             <action type="add" dev="rbri">
                 UrlUtils.isSameOrigin(URL, URL) added and used by XMLHttpRequest
@@ -98,7 +104,7 @@
                 done in the code base but not release so far.
             </action>
             <action type="update" dev="rbri">
-                Use our own StringUtils at more places to be comptible with older commons lang versions.
+                Use our own StringUtils at more places to be compatible with older commons lang versions.
             </action>
             <action type="update" dev="rbri">
                 Handling of CData sections in XHTML documents improved/fixed.
@@ -149,7 +155,7 @@
                 The initial value is 72 to be backward compatible.
             </action>
             <action type="add" dev="rbri">
-                Dummy impl of PointerEvent#getPersistentDeviceId() returning always 0.
+                Dummy implementation of PointerEvent#getPersistentDeviceId() returning always 0.
             </action>
             <action type="update" dev="rbri" issue="#1002">
                 The parser for the refresh header has been rewritten.
@@ -170,13 +176,13 @@
             </action>
             <action type="add" dev="rbri">
                 New method WebClinet.waitForBackgroundJavaScriptStartingBefore(final long delayMillis, final long timeoutMillis)
-                that combines a overall timeout with witing for js tasks starting before.
+                that combines a overall timeout with waiting for js tasks starting before.
             </action>
             <action type="fix" dev="rbri">
                 Avoid ConcurrentModificationException in HtmlPage.deregisterFramesIfNeeded()
             </action>
             <action type="add" dev="rbri">
-                Separate developer docu to help peoples to start working on this project
+                Separate developer documentation to help people start working on this project
             </action>
             <action type="fix" dev="rbri">
                 MutationEvent is still available in FF but not as global
@@ -185,7 +191,7 @@
                 Some fixes for the ctor prototype setup
             </action>
             <action type="update" dev="rbri">
-                code cleanup based on pmd - use isEmpty() at more places
+                code cleanup based on PMD - use isEmpty() in more places
             </action>
             <action type="add" dev="RhinoTeam">
                 core-js: Infer function name when declared in a var/let statement implemented
@@ -200,7 +206,7 @@
                 core-js: BigInt.asUintN and BigInt.asIntN implementation fixed
             </action>
             <action type="update" dev="RhinoTeam">
-                core-js: code simplification regarding support of different jdk's
+                core-js: code simplification for support of different JDKs
             </action>
             <action type="update" dev="RhinoTeam">
                 core-js: huge refactoring of the interpreter for more speed and easier maintenance
@@ -267,7 +273,7 @@
             </action>
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: To add support for the 'until-found' hidden attribute value, the parameter
-                handing of method HtmlElement.setHidden(String) was changed. Please have a look at the javadoc for
+                handling of method HtmlElement.setHidden(String) was changed. Please have a look at the javadoc for
                 details about the current implementation.
             </action>
             <action type="add" dev="rbri">
@@ -491,7 +497,7 @@
                 Chrome/Edge 135: Improved &lt;br&gt; handling in options tags.
             </action>
             <action type="update" dev="rbri">
-                Chrome/Edge 135, FF137: Fixed font sizes for smaller/larger css prooerty value.
+                Chrome/Edge 135, FF137: Fixed font sizes for smaller/larger CSS property value.
             </action>
             <action type="update" dev="rbri">
                 FF137: Set span for table cells to zero if provided value is invalid.
@@ -535,7 +541,7 @@
 
         <release version="4.11.0" date="March 25, 2025" description="Chrome/Edge 134, Firefox 136, Rhino RegExp, less dependencies, Bugfixes">
             <action type="fix" dev="rbri">
-                Event 'onload' is trigger by FF ESR also if the frame content was not shown because of csp.
+                Event 'onload' is triggered by FF ESR also if the frame content was not shown because of csp.
             </action>
             <action type="add" dev="rbri">
                 Initial support for font sizes 'xx-small', 'x-small', 'small', 'medium', 'large',
@@ -561,8 +567,8 @@
                 For example, in /(?:(\2)(\d)){2}/, during the second iteration, \2 incorrectly retained the first iteration's value instead of being reset.
             </action>
             <action type="remove" dev="rbri">
-                Switched back from our RegExp translation into java regular expressions to use the core Rhino stuff. Rhino mades significant
-                progress in this arae. This simplifies out impl and supports more features in the future.
+                Switched back from our RegExp translation into Java regular expressions to use the core Rhino stuff. Rhino made significant
+                progress in this area. This simplifies our implementation and supports more features in the future.
             </action>
             <action type="add" dev="RhinoTeam">
                 core-js: RegExp lookbehind implemented.
@@ -583,7 +589,7 @@
                 core-js: String.prototype.match. As per the spec, it is simply supposed to invoke the Symbol.match of the regexp.
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: Fix the behaviour of Regexp sticky flag.
+                core-js: Fix the behavior of Regexp sticky flag.
             </action>
             <action type="remove" dev="rbri">
                 Deprecated methods removed from EncodingSniffer, HttpClientConverter, WebResponse, and WebResponseWrapper.
@@ -607,7 +613,7 @@
                 Many more checkstyle jdoc rules enabled and all violations fixed.
             </action>
             <action type="fix" dev="rbri">
-                HtmlImage onerror event is triggerd for 204 responses.
+                HtmlImage onerror event is triggered for 204 responses.
             </action>
             <action type="update" dev="rbri">
                 Some minor code improvements found by spotbugs.
@@ -712,7 +718,7 @@
                 Window.atob()/btoa() throws an InvalidCharacterError.
             </action>
             <action type="fix" dev="rbri">
-                DomNode.appendChild() throws a HierarchyRequstError.
+                DomNode.appendChild() throws a HierarchyRequestError.
             </action>
             <action type="fix" dev="rbri">
                 AbstractRange.ctor() throws a TypeError.
@@ -760,7 +766,7 @@
                 Node.replaceChild()/removeChild()/insertBefore() several fixes to throw the correct error.
             </action>
             <action type="fix" dev="rbri">
-                HTMLDocument.appendChild() throws HierarchyRequstError.
+                HTMLDocument.appendChild() throws HierarchyRequestError.
             </action>
             <action type="fix" dev="rbri">
                 Document.createElement() throws InvalidCharacterError.
@@ -889,7 +895,7 @@
                 Upgrade Apache commons-text to 1.13.0.
             </action>
             <action type="add" dev="RhinoTeam">
-                core-js: Some improvments for the interpreter by generating smaller interpreter bytecode.
+                core-js: Some improvements for the interpreter by generating smaller interpreter bytecode.
             </action>
         </release>
 
@@ -989,11 +995,11 @@
                 The DOMTree might include cycles in some border cases; fixed.
             </action>
             <action type="fix" dev="rbri">
-                No longer use getElementsByTagName() in cases we do not need the live update capabilites of the result.
+                No longer use getElementsByTagName() in cases we do not need the live update capabilities of the result.
                 This reduces the internal workload and should make some cases faster.
             </action>
             <action type="fix" dev="rbri" issue="#837">
-                DomElement.click() now returns the correct page if the page contans a js based form auto submit.
+                DomElement.click() now returns the correct page if the page contains a JS-based form auto submit.
                 This was a regression from version 4.4.0.
             </action>
             <action type="add" dev="RhinoTeam">
