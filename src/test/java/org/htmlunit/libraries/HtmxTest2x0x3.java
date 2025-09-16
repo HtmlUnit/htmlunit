@@ -15,7 +15,7 @@
 package org.htmlunit.libraries;
 
 import org.htmlunit.WebClient;
-import org.htmlunit.javascript.preprocessor.HtmxTwoZeroThreeScriptPreProcessor;
+import org.htmlunit.javascript.preprocessor.HtmxTwoZeroSevenScriptPreProcessor;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
@@ -35,10 +35,10 @@ public class HtmxTest2x0x3 extends HtmxTest {
             FF = "passes:605failures:0",
             FF_ESR = "passes:605failures:0")
     @HtmlUnitNYI(
-            CHROME = "passes:597failures:10",
-            EDGE = "passes:597failures:10",
-            FF = "passes:597failures:10",
-            FF_ESR = "passes:597failures:10")
+            CHROME = "passes:599failures:8",
+            EDGE = "passes:599failures:8",
+            FF = "passes:599failures:8",
+            FF_ESR = "passes:599failures:8")
     public void htmx() throws Exception {
         htmx("htmx-2.0.3");
     }
@@ -47,7 +47,7 @@ public class HtmxTest2x0x3 extends HtmxTest {
     protected void setupWebClient(final WebClient webClient) {
         super.setupWebClient(webClient);
 
-        webClient.setScriptPreProcessor(new HtmxTwoZeroThreeScriptPreProcessor());
+        webClient.setScriptPreProcessor(new HtmxTwoZeroSevenScriptPreProcessor());
         webClient.getOptions().setThrowExceptionOnScriptError(false);
     }
 }
