@@ -39,7 +39,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.TestedBrowser;
-import org.htmlunit.libraries.JQuery3x3x1Test;
+import org.htmlunit.libraries.jquery.JQuery3x3x1Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish

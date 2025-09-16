@@ -159,7 +159,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
     /**
      * Some libraries like MochiKit looks after the number of attributes of a freshly created node.
-     * When this is fixed for IE, all {@link org.htmlunit.libraries.MochiKitTest}
+     * When this is fixed for IE, all {@link org.htmlunit.libraries.mochikit.MochiKitTest}
      * working for FF will work for IE too.
      * @throws Exception on test failure
      */
