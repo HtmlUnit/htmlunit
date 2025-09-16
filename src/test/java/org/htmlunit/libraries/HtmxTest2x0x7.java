@@ -31,14 +31,32 @@ public class HtmxTest2x0x7 extends HtmxTest {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "passes:814failures:1",
-            FF = "passes:810failures:1",
-            FF_ESR = "passes:809failures:2")
+    @Alerts(DEFAULT = "passes:739failures:1",
+            FF = "passes:734failures:2",
+            FF_ESR = "passes:734failures:2")
     @HtmlUnitNYI(
-            CHROME = "passes:822failures:0",
-            EDGE = "passes:822failures:0")
+            CHROME = "passes:721failures:20",
+            EDGE = "passes:721failures:20",
+            FF = "passes:720failures:18",
+            FF_ESR = "passes:720failures:18")
     public void htmx() throws Exception {
-        htmx("htmx-2.0.7");
+        htmx("htmx-2.0.7", false);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "passes:636failures:104",
+            FF = "passes:637failures:99",
+            FF_ESR = "passes:637failures:99")
+    @HtmlUnitNYI(
+            CHROME = "passes:620failures:119",
+            EDGE = "passes:620failures:119",
+            FF = "passes:620failures:119",
+            FF_ESR = "passes:620failures:119")
+    public void htmxMin() throws Exception {
+        htmx("htmx-2.0.7", true);
     }
 
     @Override

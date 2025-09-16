@@ -260,6 +260,7 @@ describe('hx-swap-oob attribute', function() {
       byId('td1').innerHTML.should.equal('hey')
     })
   }
+
 /* HtmlUnit class syntax not supported so far
   for (const config of [{ allowNestedOobSwaps: true }, { allowNestedOobSwaps: false }]) {
     it('handles oob target in web components with both inside shadow root and config ' + JSON.stringify(config), function() {
