@@ -69,8 +69,15 @@ public class HtmxTwoZeroSevenScriptPreProcessor implements ScriptPreProcessor {
                     "for (const preservedElt of Array.from(pantry.children)) {");
         }
         else if (sourceName.contains("/htmx.min.js") && !sourceName.contains("/htmx.min.js#")) {
+            // 2.0.4
             patchedSourceCode = StringUtils.replace(
                     sourceCode,
+                    "i.push(...M(c.querySelectorAll(e)))",
+                    "i.push.apply(i,M(c.querySelectorAll(e)))");
+
+            // 2.0.7
+            patchedSourceCode = StringUtils.replace(
+                    patchedSourceCode,
                     "i.push(...F(c.querySelectorAll(e)))",
                     "i.push.apply(i,F(c.querySelectorAll(e)))");
 

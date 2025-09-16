@@ -43,7 +43,7 @@ public abstract class HtmxTest extends WebDriverTestCase {
         startWebServer("src/test/resources/libraries/htmx/" + subDir, null, null);
 
         try {
-            final String url = URL_FIRST + "test/index" + (min ? "min.html" : ".html");
+            final String url = URL_FIRST + "test/index" + (min ? ".min.html" : ".html");
             final WebDriver webDriver = getWebDriver();
 
             if (webDriver instanceof HtmlUnitDriver) {
@@ -57,10 +57,14 @@ public abstract class HtmxTest extends WebDriverTestCase {
 
             while (true) {
                 lastStats = getResultElementText(webDriver);
+                if (BUG_HUNTING && getWebDriver() instanceof HtmlUnitDriver) {
+                    System.out.println("-> " + lastStats);
+                }
+
                 if (lastStats.startsWith(getExpectedAlerts()[0])) {
                     break;
                 }
-                Thread.sleep(100);
+                Thread.sleep(400);
 
                 if (System.currentTimeMillis() > endTime) {
                     tries++;
