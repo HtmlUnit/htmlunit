@@ -694,29 +694,36 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 return;
             }
 
-            isSameOrigin_ = UrlUtils.isSameOrigin(pageUrl, fullUrl);
-            final boolean alwaysAddOrigin = HttpMethod.GET != request.getHttpMethod()
-                                            && HttpMethod.PATCH != request.getHttpMethod()
-                                            && HttpMethod.HEAD != request.getHttpMethod();
-            if (alwaysAddOrigin || !isSameOrigin_) {
-                final StringBuilder origin = new StringBuilder().append(pageUrl.getProtocol()).append("://")
-                        .append(pageUrl.getHost());
-                if (pageUrl.getPort() != -1) {
-                    origin.append(':').append(pageUrl.getPort());
-                }
-                request.setAdditionalHeader(HttpHeader.ORIGIN, origin.toString());
+            final boolean isDataUrl = "data".equals(fullUrl.getProtocol());
+            if (isDataUrl) {
+                isSameOrigin_ = true;
             }
-
-            // password is ignored if no user defined
-            if (user != null && !JavaScriptEngine.isUndefined(user)) {
-                final String userCred = user.toString();
-
-                String passwordCred = "";
-                if (password != null && !JavaScriptEngine.isUndefined(password)) {
-                    passwordCred = password.toString();
+            else {
+                isSameOrigin_ = UrlUtils.isSameOrigin(pageUrl, fullUrl);
+                final boolean alwaysAddOrigin = HttpMethod.GET != request.getHttpMethod()
+                                                && HttpMethod.PATCH != request.getHttpMethod()
+                                                && HttpMethod.HEAD != request.getHttpMethod();
+                if (alwaysAddOrigin || !isSameOrigin_) {
+                    final StringBuilder origin = new StringBuilder().append(pageUrl.getProtocol()).append("://")
+                            .append(pageUrl.getHost());
+                    if (pageUrl.getPort() != -1) {
+                        origin.append(':').append(pageUrl.getPort());
+                    }
+                    request.setAdditionalHeader(HttpHeader.ORIGIN, origin.toString());
                 }
 
-                request.setCredentials(new HtmlUnitUsernamePasswordCredentials(userCred, passwordCred.toCharArray()));
+                // password is ignored if no user defined
+                if (user != null && !JavaScriptEngine.isUndefined(user)) {
+                    final String userCred = user.toString();
+
+                    String passwordCred = "";
+                    if (password != null && !JavaScriptEngine.isUndefined(password)) {
+                        passwordCred = password.toString();
+                    }
+
+                    request.setCredentials(
+                                new HtmlUnitUsernamePasswordCredentials(userCred, passwordCred.toCharArray()));
+                }
             }
             webRequest_ = request;
         }
