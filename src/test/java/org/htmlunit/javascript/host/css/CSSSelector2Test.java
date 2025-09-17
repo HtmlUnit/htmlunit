@@ -35,9 +35,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "    try {\n"
             + "      log(document.querySelector(':placeholder-shown'));\n"
-            + "    } catch (exception) {\n"
-            + "      log(exception.name);\n"
-            + "    }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n";
@@ -50,9 +48,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "    try {\n"
             + "      log(document.querySelector(':-ms-input-placeholder'));\n"
-            + "    } catch (exception) {\n"
-            + "      log(exception.name);\n"
-            + "    }\n"
+            + "    } catch (e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n";
@@ -133,7 +129,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void msPlaceholder() throws Exception {
         final String html = MS_PLACEHOLDER_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -148,7 +144,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void msPlaceholder_number() throws Exception {
         final String html = MS_PLACEHOLDER_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -163,7 +159,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void msPlaceholder_displayNone() throws Exception {
         final String html = MS_PLACEHOLDER_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -177,7 +173,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void msPlaceholder_hasValue() throws Exception {
         final String html = MS_PLACEHOLDER_HTML_HEAD
                 + "<body onload='test();'>\n"
@@ -191,7 +187,7 @@ public class CSSSelector2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SyntaxError")
+    @Alerts("SyntaxError/DOMException")
     public void msPlaceholder_noInput() throws Exception {
         final String html = MS_PLACEHOLDER_HTML_HEAD
                 + "<body onload='test();'>\n"
