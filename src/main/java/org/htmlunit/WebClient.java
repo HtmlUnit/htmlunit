@@ -1363,12 +1363,17 @@ public class WebClient implements Serializable, AutoCloseable {
 
     private WebResponse makeWebResponseForDataUrl(final WebRequest webRequest) throws IOException {
         final URL url = webRequest.getUrl();
-        final DataURLConnection connection;
-        connection = new DataURLConnection(url);
+
+        final DataURLConnection connection = new DataURLConnection(url);
 
         final List<NameValuePair> responseHeaders = new ArrayList<>();
         responseHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE_LC,
             connection.getMediaType() + ";charset=" + connection.getCharset()));
+
+        if (HttpMethod.HEAD.equals(webRequest.getHttpMethod())) {
+            final WebResponseData data = new WebResponseData(200, "OK", responseHeaders);
+            return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
+        }
 
         try (InputStream is = connection.getInputStream()) {
             final DownloadedContent downloadedContent =

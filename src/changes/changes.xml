@@ -9,6 +9,12 @@
     <body>
         <release version="4.17.0" date="September xx, 2025" description="Chrome/Edge 140, Firefox 142, Bugfixes">
             <action type="add" dev="rbri">
+                XMLHttpRequest now supports data url's.
+            </action>
+            <action type="fix" dev="rbri">
+                Head request for a data url now returning an empty response.
+            </action>
+            <action type="add" dev="rbri">
                 HtmxTwoZeroSevenScriptPreProcessor added; this is required for htmx 2.0.3-2.0.7.
             </action>
             <action type="add" dev="rbri">
