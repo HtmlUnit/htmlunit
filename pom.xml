@@ -371,6 +371,7 @@
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <excludes>
                                 <exclude>**/libraries/*.java</exclude>
+                                <exclude>**/libraries/**/*.java</exclude>
                                 <exclude>**/huge/*.java</exclude>
                                 <exclude>**/encoding/*.java</exclude>
                             </excludes>
@@ -425,9 +426,10 @@
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/libraries/*.java</include>
+                                <include>**/libraries/**/*.java</include>
                             </includes>
                             <excludes>
-                                <exclude>**/libraries/JQuery3x3x1Test.java</exclude>
+                                <exclude>**/libraries/jquery/JQuery3x3x1Test.java</exclude>
                             </excludes>
                             <argLine>-Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
