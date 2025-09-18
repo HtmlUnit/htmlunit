@@ -69,7 +69,7 @@
         <central-publishing-plugin.version>0.8.0</central-publishing-plugin.version>
         <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
         <pmd-plugin.version>3.27.0</pmd-plugin.version>
-        <spotbugs-plugin.version>4.9.5.0</spotbugs-plugin.version>
+        <spotbugs-plugin.version>4.9.6.0</spotbugs-plugin.version>
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
         <enforcer-plugin.version>3.6.1</enforcer-plugin.version>
         <changes-plugin.version>2.12.1</changes-plugin.version>
