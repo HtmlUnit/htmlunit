@@ -19,7 +19,7 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for css pseudo selectors :is and :has.
+ * Tests for css pseudo selectors :is(), :where() and :has().
  *
  * @author Ronald Brill
  *
@@ -123,6 +123,116 @@ public class CSSSelector3Test extends WebDriverTestCase {
                 + LOG_TITLE_FUNCTION
                 + "  try {\n"
                 + "    let items = document.querySelectorAll(\":is(ul, [name='i1'], [name='i2'])\");"
+                + "    log(items.length);\n"
+                + "    log(items[0].innerText);\n"
+                + "    log(items[1].innerText);\n"
+                + "    log(items[2].innerText);\n"
+                + "    log(items[3].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "[object HTMLUListElement]",
+             "2", "[object HTMLUListElement]", "[object HTMLOListElement]"})
+    public void whereElement() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<ul>\n"
+                + "  <li>ul - item 0</li>\n"
+                + "  <li>ul - item 1</li>\n"
+                + "</ul>\n"
+                + "<ol>\n"
+                + "  <li>ol - item 0</li>\n"
+                + "  <li>ol - item 1</li>\n"
+                + "</ol>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(':where(ul)');"
+                + "    log(items.length);\n"
+                + "    log(items[0]);\n"
+
+                + "    items = document.querySelectorAll(':where(ul, ol)');"
+                + "    log(items.length);\n"
+                + "    log(items[0]);\n"
+                + "    log(items[1]);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "ul - item 1", "ol - item 1"})
+    public void whereAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<ul>\n"
+                + "  <li name='i0'>ul - item 0</li>\n"
+                + "  <li name='i1'>ul - item 1</li>\n"
+                + "</ul>\n"
+                + "<ol>\n"
+                + "  <li name='i7'>ol - item 0</li>\n"
+                + "  <li name='i2'>ol - item 1</li>\n"
+                + "</ol>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(\":where([name='i1'], [name='i2'])\");"
+                + "    log(items.length);\n"
+                + "    log(items[0].innerText);\n"
+                + "    log(items[1].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"4", "ul - item 0 ul - item 1", "ul - item 1",
+             "ol - item 0 ol - item 1", "ol - item 1"})
+    public void whereDuplicates() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<ul>\n"
+                + "  <li name='i0'>ul - item 0</li>\n"
+                + "  <li name='i1'>ul - item 1</li>\n"
+                + "</ul>\n"
+                + "<ol name='i1'>\n"
+                + "  <li name='i7'>ol - item 0</li>\n"
+                + "  <li name='i2'>ol - item 1</li>\n"
+                + "</ol>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(\":where(ul, [name='i1'], [name='i2'])\");"
                 + "    log(items.length);\n"
                 + "    log(items[0].innerText);\n"
                 + "    log(items[1].innerText);\n"

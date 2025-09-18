@@ -72,6 +72,7 @@ import org.htmlunit.cssparser.parser.condition.Condition;
 import org.htmlunit.cssparser.parser.condition.Condition.ConditionType;
 import org.htmlunit.cssparser.parser.condition.IsPseudoClassCondition;
 import org.htmlunit.cssparser.parser.condition.NotPseudoClassCondition;
+import org.htmlunit.cssparser.parser.condition.WherePseudoClassCondition;
 import org.htmlunit.cssparser.parser.media.MediaQuery;
 import org.htmlunit.cssparser.parser.selector.ChildSelector;
 import org.htmlunit.cssparser.parser.selector.DescendantSelector;
@@ -641,6 +642,17 @@ public class CssStyleSheet implements Serializable {
                 final IsPseudoClassCondition isPseudoCondition = (IsPseudoClassCondition) condition;
                 final SelectorList isSelectorList = isPseudoCondition.getSelectors();
                 for (final Selector selector : isSelectorList) {
+                    if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
+                        return true;
+                    }
+                }
+                return false;
+
+            case WHERE_PSEUDO_CLASS_CONDITION:
+                // same as is
+                final WherePseudoClassCondition wherePseudoCondition = (WherePseudoClassCondition) condition;
+                final SelectorList whereSelectorList = wherePseudoCondition.getSelectors();
+                for (final Selector selector : whereSelectorList) {
                     if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
                         return true;
                     }
