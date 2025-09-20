@@ -25,7 +25,7 @@ jobs:
         java-version: 21
         distribution: 'temurin'
         cache: maven
-    - uses: reviewdog/action-setup@e04ffabe3898a0af8d0fb1af00c188831c4b5893 # v0.20.1
+    - uses: reviewdog/action-setup@d8edfce3dd5e1ec6978745e801f9c50b5ef80252 # v0.20.1
       name: Set up reviewdog
       with:
         reviewdog_version: latest
