@@ -70,6 +70,7 @@ import org.htmlunit.cssparser.parser.LexicalUnit;
 import org.htmlunit.cssparser.parser.condition.AttributeCondition;
 import org.htmlunit.cssparser.parser.condition.Condition;
 import org.htmlunit.cssparser.parser.condition.Condition.ConditionType;
+import org.htmlunit.cssparser.parser.condition.HasPseudoClassCondition;
 import org.htmlunit.cssparser.parser.condition.IsPseudoClassCondition;
 import org.htmlunit.cssparser.parser.condition.NotPseudoClassCondition;
 import org.htmlunit.cssparser.parser.condition.WherePseudoClassCondition;
@@ -80,6 +81,7 @@ import org.htmlunit.cssparser.parser.selector.DirectAdjacentSelector;
 import org.htmlunit.cssparser.parser.selector.ElementSelector;
 import org.htmlunit.cssparser.parser.selector.GeneralAdjacentSelector;
 import org.htmlunit.cssparser.parser.selector.PseudoElementSelector;
+import org.htmlunit.cssparser.parser.selector.RelativeSelector;
 import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.Selector.SelectorType;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
@@ -100,7 +102,6 @@ import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.html.ValidatableElement;
 import org.htmlunit.javascript.host.css.MediaList;
-import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
@@ -509,6 +510,53 @@ public class CssStyleSheet implements Serializable {
                 }
                 return false;
 
+            case RELATIVE_SELECTOR:
+                final RelativeSelector rs = (RelativeSelector) selector;
+
+                switch (rs.getCombinator()) {
+                    case DESCENDANT_COMBINATOR:
+                        for (final DomElement descendant : element.getDomElementDescendants()) {
+                            if (selects(browserVersion, rs.getSelector(), descendant, pseudoElement,
+                                            fromQuerySelectorAll, throwOnSyntax)) {
+                                return true;
+                            }
+                        }
+                        return false;
+
+                    case CHILD_COMBINATOR:
+                        for (final DomElement child : element.getChildElements()) {
+                            if (selects(browserVersion, rs.getSelector(), child, pseudoElement,
+                                            fromQuerySelectorAll, throwOnSyntax)) {
+                                return true;
+                            }
+                        }
+                        return false;
+
+                    case NEXT_SIBLING_COMBINATOR:
+                        final DomElement nextSibling = element.getNextElementSibling();
+                        if (selects(browserVersion, rs.getSelector(), nextSibling, pseudoElement,
+                                            fromQuerySelectorAll, throwOnSyntax)) {
+                            return true;
+                        }
+                        return false;
+
+                    case SUBSEQUENT_SIBLING_COMBINATOR:
+                        for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+                            if (n instanceof DomElement
+                                    && selects(browserVersion, rs.getSelector(), (DomElement) n, pseudoElement,
+                                                fromQuerySelectorAll, throwOnSyntax)) {
+                                return true;
+                            }
+                        }
+                        return false;
+
+                    default:
+                        if (LOG.isErrorEnabled()) {
+                            LOG.error("Unknown CSS combinator '" + rs.getCombinator() + "'.");
+                        }
+                        return false;
+                }
+
             default:
                 if (LOG.isErrorEnabled()) {
                     LOG.error("Unknown CSS selector type '" + selector.getSelectorType() + "'.");
@@ -653,6 +701,16 @@ public class CssStyleSheet implements Serializable {
                 final WherePseudoClassCondition wherePseudoCondition = (WherePseudoClassCondition) condition;
                 final SelectorList whereSelectorList = wherePseudoCondition.getSelectors();
                 for (final Selector selector : whereSelectorList) {
+                    if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
+                        return true;
+                    }
+                }
+                return false;
+
+            case HAS_PSEUDO_CLASS_CONDITION:
+                final HasPseudoClassCondition hasPseudoCondition = (HasPseudoClassCondition) condition;
+                final SelectorList hasSelectorList = hasPseudoCondition.getSelectors();
+                for (final Selector selector : hasSelectorList) {
                     if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
                         return true;
                     }
@@ -1074,6 +1132,7 @@ public class CssStyleSheet implements Serializable {
      * Validates the list of selectors.
      * @param selectorList the selectors
      * @param domNode the dom node the query should work on
+     *
      * @throws CSSException if a selector is invalid
      */
     public static void validateSelectors(final SelectorList selectorList, final DomNode domNode) throws CSSException {
@@ -1084,9 +1143,6 @@ public class CssStyleSheet implements Serializable {
         }
     }
 
-    /**
-     * @param documentMode see {@link Document#getDocumentMode()}
-     */
     private static boolean isValidSelector(final Selector selector, final DomNode domNode) {
         switch (selector.getSelectorType()) {
             case ELEMENT_NODE_SELECTOR:
@@ -1124,9 +1180,6 @@ public class CssStyleSheet implements Serializable {
         }
     }
 
-    /**
-     * @param documentMode see {@link Document#getDocumentMode()}
-     */
     private static boolean isValidCondition(final Condition condition, final DomNode domNode) {
         switch (condition.getConditionType()) {
             case ATTRIBUTE_CONDITION:
@@ -1141,8 +1194,35 @@ public class CssStyleSheet implements Serializable {
                 return true;
             case NOT_PSEUDO_CLASS_CONDITION:
                 final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
-                final SelectorList selectorList = notPseudoCondition.getSelectors();
-                for (final Selector selector : selectorList) {
+                final SelectorList notSelectorList = notPseudoCondition.getSelectors();
+                for (final Selector selector : notSelectorList) {
+                    if (!isValidSelector(selector, domNode)) {
+                        return false;
+                    }
+                }
+                return true;
+            case IS_PSEUDO_CLASS_CONDITION:
+                final IsPseudoClassCondition isPseudoCondition = (IsPseudoClassCondition) condition;
+                final SelectorList isSelectorList = isPseudoCondition.getSelectors();
+                for (final Selector selector : isSelectorList) {
+                    if (!isValidSelector(selector, domNode)) {
+                        return false;
+                    }
+                }
+                return true;
+            case WHERE_PSEUDO_CLASS_CONDITION:
+                final WherePseudoClassCondition wherePseudoCondition = (WherePseudoClassCondition) condition;
+                final SelectorList whereSelectorList = wherePseudoCondition.getSelectors();
+                for (final Selector selector : whereSelectorList) {
+                    if (!isValidSelector(selector, domNode)) {
+                        return false;
+                    }
+                }
+                return true;
+            case HAS_PSEUDO_CLASS_CONDITION:
+                final HasPseudoClassCondition hasPseudoCondition = (HasPseudoClassCondition) condition;
+                final SelectorList hasSelectorList = hasPseudoCondition.getSelectors();
+                for (final Selector selector : hasSelectorList) {
                     if (!isValidSelector(selector, domNode)) {
                         return false;
                     }

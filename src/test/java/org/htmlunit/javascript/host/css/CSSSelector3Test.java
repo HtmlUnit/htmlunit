@@ -245,4 +245,342 @@ public class CSSSelector3Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "SECTION / a0 a1"})
+    public void hasDescandant() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <article class='featured'>a0</article>\n"
+                + "  <article>a1</article>\n"
+                + "</section>\n"
+                + "<section>\n"
+                + "  <article>a2</article>\r\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(\"section:has(.featured)\");"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName + ' / ' + items[0].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "SECTION / a0 a1"})
+    public void hasDescandantDeep() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <div>\n"
+                + "    <article class='featured'>a0</article>\n"
+                + "    <article>a1</article>\n"
+                + "  </div>\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(\"section:has(.featured)\");"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName + ' / ' + items[0].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "SECTION / a0 a1"})
+    public void hasChild() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <article class='featured'>a0</article>\n"
+                + "  <article>a1</article>\n"
+                + "</section>\n"
+                + "<section>\n"
+                + "  <article>a2</article>\r\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(\"section:has(> .featured)\");"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName + ' / ' + items[0].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void hasChildDeep() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <div>\n"
+                + "    <article class='featured'>a0</article>\n"
+                + "    <article>a1</article>\n"
+                + "  </div>\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(\"section:has(> .featured)\");"
+                + "    log(items.length);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "H1 / h1 1"})
+    public void hasNextSiblingCombinator() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <article>\n"
+                + "    <h1>h1 0</h1>\n"
+                + "    <p>p0</p>\n"
+                + "  </article>\n"
+                + "  <article>\n"
+                + "    <h1>h1 1</h1>\n"
+                + "    <h2>h2 0</h2>\n"
+                + "    <p>p1</p>\n"
+                + "  </article>\n"
+                + "  <article>\n"
+                + "    <h1>h1 2</h1>\n"
+                + "    <p>p2</p>\n"
+                + "    <h2>h2 1</h2>\n"
+                + "  </article>\n"
+                + "</section>\n"
+                + "<section>\n"
+                + "  <article>a2</article>\r\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(\"h1:has(+ h2)\");"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName + ' / ' + items[0].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "H1 / h1 1", "H1 / h1 2"})
+    public void hasSubsequentSiblingCombinator() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <article>\n"
+                + "    <h1>h1 0</h1>\n"
+                + "    <p>p0</p>\n"
+                + "  </article>\n"
+                + "  <article>\n"
+                + "    <h1>h1 1</h1>\n"
+                + "    <h2>h2 0</h2>\n"
+                + "    <p>p1</p>\n"
+                + "  </article>\n"
+                + "  <article>\n"
+                + "    <h1>h1 2</h1>\n"
+                + "    <p>p2</p>\n"
+                + "    <h2>h2 1</h2>\n"
+                + "  </article>\n"
+                + "</section>\n"
+                + "<section>\n"
+                + "  <article>a2</article>\r\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(\"h1:has(~ h2)\");"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName + ' / ' + items[0].innerText);\n"
+                + "    log(items[1].tagName + ' / ' + items[1].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "H1 / h1 1", "H2 / h2 0",
+             "2", "H1 / h1 1", "H2 / h2 0"})
+    public void hasIs() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <article>\n"
+                + "    <h1>h1 0</h1>\n"
+                + "    <p>p0</p>\n"
+                + "  </article>\n"
+                + "  <article>\n"
+                + "    <h1>h1 1</h1>\n"
+                + "    <h2>h2 0</h2>\n"
+                + "    <h3>h3 0</h3>\n"
+                + "    <p>p1</p>\n"
+                + "  </article>\n"
+                + "</section>\n"
+                + "<section>\n"
+                + "  <article>a2</article>\r\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(\":is(h1, h2, h3):has(+ :is(h2, h3, h4))\");"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName + ' / ' + items[0].innerText);\n"
+                + "    log(items[1].tagName + ' / ' + items[1].innerText);\n"
+
+                + "    items = document.querySelectorAll(\":is(h1, h2, h3):has(+ h2, + h3, + h4)\");"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName + ' / ' + items[0].innerText);\n"
+                + "    log(items[1].tagName + ' / ' + items[1].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "ARTICLE / h1 0", "ARTICLE / p0"})
+    public void hasOr() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <article>\n"
+                + "    <h1>h1 0</h1>\n"
+                + "  </article>\n"
+                + "  <article>\n"
+                + "    <p>p0</p>\n"
+                + "  </article>\n"
+                + "  <article>\n"
+                + "    <div>div0</div>\n"
+                + "  </article>\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(\"article:has(h1, p)\");"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName + ' / ' + items[0].innerText);\n"
+                + "    log(items[1].tagName + ' / ' + items[1].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "ARTICLE / h1 1 p1"})
+    public void hasAnd() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<section>\n"
+                + "  <article>\n"
+                + "    <h1>h1 0</h1>\n"
+                + "  </article>\n"
+                + "  <article>\n"
+                + "    <p>p0</p>\n"
+                + "  </article>\n"
+                + "  <article>\n"
+                + "    <h1>h1 1</h1>\n"
+                + "    <p>p1</p>\n"
+                + "  </article>\n"
+                + "  <article>\n"
+                + "    <div>div0</div>\n"
+                + "  </article>\n"
+                + "</section>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(\"article:has(h1):has(p)\");"
+                + "    log(items.length);\n"
+                + "    log(items[0].tagName + ' / ' + items[0].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

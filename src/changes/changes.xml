@@ -12,6 +12,9 @@
                 Upgrade Apache commons-lang3 to 3.19.0.
             </action>
             <action type="add" dev="rbri">
+                Initial support for the :has() pseudo selector added.
+            </action>
+            <action type="add" dev="rbri">
                 Initial support for the :where() pseudo selector added.
             </action>
             <action type="add" dev="rbri">
