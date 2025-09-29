@@ -72,6 +72,92 @@ public class CSSSelector3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("0")
+    public void notStar() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head><title></title></head>\n"
+                + "<body>\n"
+                + "<ul>\n"
+                + "  <li>ul - item 0</li>\n"
+                + "</ul>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(':not(*)');"
+                + "    log(items.length);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "[object HTMLUListElement]"})
+    public void notId() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head><title></title></head>\n"
+                + "<body>\n"
+                + "<ul id='foo'>\n"
+                + "  <li>ul - item 0</li>\n"
+                + "</ul>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('#foo:not(#bar)');"
+                + "    log(items.length);\n"
+                + "    log(items[0]);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "<a>my</a>", "0"})
+    public void notTable() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head><title></title></head>\n"
+                + "<body>\n"
+                + "<table>\n"
+                + "  <tr><td><a>my</a></td></tr>\n"
+                + "</table>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('body :not(table) a');"
+                + "    log(items.length);\n"
+                + "    log(items[0].outerHTML);\n"
+
+                + "    items = document.querySelectorAll('body a:not(table a)');"
+                + "    log(items.length);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("SyntaxError/DOMException")
     public void notDoubleColon() throws Exception {
         final String html = DOCTYPE_HTML
