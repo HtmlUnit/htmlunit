@@ -207,6 +207,10 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      * @return the configuration
      */
     private static XMLParserConfiguration createConfiguration(final BrowserVersion browserVersion) {
+        // HTMLElements.HTMLElementsWithCache are not thread safe
+        // because the cache is not synchronized
+        // we have to create a new one for each parser run
+
         if (browserVersion.hasFeature(HTML_COMMAND_TAG)) {
             return new HTMLConfiguration(new HTMLElements.HTMLElementsWithCache(HTMLELEMENTS_WITH_CMD));
         }
