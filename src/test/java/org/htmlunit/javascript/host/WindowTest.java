@@ -1350,42 +1350,6 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts({"true", "[object Window]", "[object Window]"})
-    public void overwriteProperty_top() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><body><script>\n"
-            + "  alert(window.top == this);\n"
-            + "  var top = 123;\n"
-            + "  alert(top);\n"
-            + "  alert(window.top);\n"
-            + "</script></body></html>";
-        // this can't be tested using WebDriver currently (i.e. using loadPageWithAlerts2)
-        // because the hack currently used to capture alerts needs reference to property "top".
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts({"true", "[object Window]", "[object Window]"})
-    public void overwriteProperty_top2() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><body><script>\n"
-            + "  alert(window.top == this);\n"
-            + "  window.top = 123;\n"
-            + "  alert(top);\n"
-            + "  alert(window.top);\n"
-            + "</script></body></html>";
-        // this can't be tested using WebDriver currently (i.e. using loadPageWithAlerts2)
-        // because the hack currently used to capture alerts needs reference to property "top".
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * Download of next page is done first after onbeforeunload is done.
      * @throws Exception if an error occurs
      */

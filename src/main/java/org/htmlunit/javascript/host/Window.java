@@ -204,7 +204,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
     private Object controllers_;
     private Object opener_;
-    private final Object top_ = NOT_FOUND; // top can be set from JS to any value!
     private Crypto crypto_;
     private Scriptable performance_;
 
@@ -838,21 +837,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter
     public Object getTop() {
-        if (top_ != NOT_FOUND) {
-            return top_;
-        }
-
         final WebWindow top = getWebWindow().getTopWindow();
         return top.getScriptableObject();
-    }
-
-    /**
-     * Sets the value of the {@code top} property.
-     * @param o the new value
-     */
-    @JsxSetter
-    public void setTop(final Object o) {
-        // ignore
     }
 
     /**

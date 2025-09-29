@@ -3398,4 +3398,104 @@ public class Window2Test extends WebDriverTestCase {
         loadPage2(content);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "function get opener() { [native code] }",
+                       "function set opener() { [native code] }",
+                       "undefined", "true", "true"},
+            FF = {"true",
+                  "function opener() { [native code] }",
+                  "function opener() { [native code] }",
+                  "undefined", "true", "true"},
+            FF_ESR = {"true",
+                      "function opener() { [native code] }",
+                      "function opener() { [native code] }",
+                      "undefined", "true", "true"})
+    @HtmlUnitNYI(
+            CHROME = {"false",
+                      "function opener() { [native code] }", "function opener() { [native code] }",
+                      "undefined", "true", "true"},
+            EDGE = {"false",
+                    "function opener() { [native code] }", "function opener() { [native code] }",
+                    "undefined", "true", "true"},
+            FF = {"false",
+                  "function opener() { [native code] }", "function opener() { [native code] }",
+                  "undefined", "true", "true"},
+            FF_ESR = {"false",
+                      "function opener() { [native code] }", "function opener() { [native code] }",
+                      "undefined", "true", "true"})
+    public void openerProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let desc = Object.getOwnPropertyDescriptor(Window.prototype, 'opener');\n"
+            + "  log(desc === undefined);\n"
+
+            + "  desc = Object.getOwnPropertyDescriptor(window, 'opener');\n"
+            + "  log(desc.get);\n"
+            + "  log(desc.set);\n"
+            + "  log(desc.writable);\n"
+            + "  log(desc.configurable);\n"
+            + "  log(desc.enumerable);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "function get top() { [native code] }", "undefined", "undefined", "false", "true"},
+            FF = {"true", "function top() { [native code] }", "undefined", "undefined", "false", "true"},
+            FF_ESR = {"true", "function top() { [native code] }", "undefined", "undefined", "false", "true"})
+    @HtmlUnitNYI(
+            CHROME = {"false", "function top() { [native code] }", "undefined", "undefined", "true", "true"},
+            EDGE = {"false", "function top() { [native code] }", "undefined", "undefined", "true", "true"},
+            FF = {"false", "function top() { [native code] }", "undefined", "undefined", "true", "true"},
+            FF_ESR = {"false", "function top() { [native code] }", "undefined", "undefined", "true", "true"})
+    public void topProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let desc = Object.getOwnPropertyDescriptor(Window.prototype, 'top');\n"
+            + "  log(desc === undefined);\n"
+
+            + "  desc = Object.getOwnPropertyDescriptor(window, 'top');\n"
+            + "  log(desc.get);\n"
+            + "  log(desc.set);\n"
+            + "  log(desc.writable);\n"
+            + "  log(desc.configurable);\n"
+            + "  log(desc.enumerable);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "[object Window]", "[object Window]", "[object Window]", "[object Window]"})
+    public void overwriteProperty_top() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + LOG_SESSION_STORAGE_FUNCTION
+            + "  log(window.top === this);\n"
+            + "  var top = 123;\n"
+            + "  log(top);\n"
+            + "  log(window.top);\n"
+
+            + "  window.top = 123;\n"
+            + "  log(top);\n"
+            + "  log(window.top);\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifySessionStorage2(driver, getExpectedAlerts());
+    }
 }

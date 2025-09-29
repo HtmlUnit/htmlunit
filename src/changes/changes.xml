@@ -8,6 +8,15 @@
 
     <body>
         <release version="4.17.0" date="September xx, 2025" description="Chrome/Edge 140, Firefox 142, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: 'eval'of a function is now undefined
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: duplicate properties in object literal now allowed
+            </action>
+            <action type="fix" dev="rbri">
+                Window.top has no setter.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-lang3 to 3.19.0.
             </action>
