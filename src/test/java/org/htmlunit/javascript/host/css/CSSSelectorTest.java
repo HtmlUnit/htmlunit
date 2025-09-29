@@ -18,7 +18,6 @@ import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.UrlUtils;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -2056,10 +2055,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "[object HTMLHeadingElement]"})
-    @HtmlUnitNYI(CHROME = "SyntaxError/DOMException",
-            EDGE = "SyntaxError/DOMException",
-            FF = "SyntaxError/DOMException",
-            FF_ESR = "SyntaxError/DOMException")
     public void has() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
