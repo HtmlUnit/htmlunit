@@ -19,12 +19,80 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for css pseudo selectors :is(), :where() and :has().
+ * Tests for css pseudo selectors :not(), :is(), :where() and :has().
  *
  * @author Ronald Brill
  *
  */
 public class CSSSelector3Test extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"6", "[object HTMLBodyElement]", "[object HTMLLIElement]", "[object HTMLScriptElement]",
+             "5", "[object HTMLBodyElement]", "[object HTMLScriptElement]",
+             "5", "[object HTMLBodyElement]", "[object HTMLScriptElement]"})
+    public void notElement() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head><title></title></head>\n"
+                + "<body>\n"
+                + "<ul>\n"
+                + "  <li>ul - item 0</li>\n"
+                + "</ul>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll(':not(ul)');"
+                + "    log(items.length);\n"
+                + "    log(items[3]);\n"
+                + "    log(items[4]);\n"
+                + "    log(items[5]);\n"
+
+                + "    items = document.querySelectorAll(':not(ul, li)');"
+                + "    log(items.length);\n"
+                + "    log(items[3]);\n"
+                + "    log(items[4]);\n"
+
+                + "    items = document.querySelectorAll(':not(ul):not(li)');"
+                + "    log(items.length);\n"
+                + "    log(items[3]);\n"
+                + "    log(items[4]);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void notDoubleColon() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head><title></title></head>\n"
+                + "<body>\n"
+                + "<ul>\n"
+                + "  <li>ul - item 0</li>\n"
+                + "</ul>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('::not(ul)');"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 
     /**
      * @throws Exception if the test fails
@@ -140,6 +208,32 @@ public class CSSSelector3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("SyntaxError/DOMException")
+    public void isDoubleColon() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head><title></title></head>\n"
+                + "<body>\n"
+                + "<ul>\n"
+                + "  <li>ul - item 0</li>\n"
+                + "</ul>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('::is(ul)');"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"1", "[object HTMLUListElement]",
              "2", "[object HTMLUListElement]", "[object HTMLOListElement]"})
     public void whereElement() throws Exception {
@@ -238,6 +332,32 @@ public class CSSSelector3Test extends WebDriverTestCase {
                 + "    log(items[1].innerText);\n"
                 + "    log(items[2].innerText);\n"
                 + "    log(items[3].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void whereDoubleColon() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head><title></title></head>\n"
+                + "<body>\n"
+                + "<ul>\n"
+                + "  <li>ul - item 0</li>\n"
+                + "</ul>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('::where(ul)');"
                 + "  } catch (e) { logEx(e); }\n"
                 + "</script>\n"
 
@@ -576,6 +696,32 @@ public class CSSSelector3Test extends WebDriverTestCase {
                 + "    let items = document.querySelectorAll(\"article:has(h1):has(p)\");"
                 + "    log(items.length);\n"
                 + "    log(items[0].tagName + ' / ' + items[0].innerText);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void hasDoubleColon() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head><title></title></head>\n"
+                + "<body>\n"
+                + "<ul>\n"
+                + "  <li>ul - item 0</li>\n"
+                + "</ul>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    let items = document.querySelectorAll('::has(ul)');"
                 + "  } catch (e) { logEx(e); }\n"
                 + "</script>\n"
 
