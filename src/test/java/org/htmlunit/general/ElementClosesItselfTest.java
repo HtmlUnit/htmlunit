@@ -30,23 +30,26 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
 
     private void test(final String tagName) throws Exception {
         if ("basefont".equals(tagName) || "isindex".equals(tagName)) {
-            loadPageWithAlerts2(headElementClosesItself(tagName));
+            loadPage2(headElementClosesItself(tagName));
+            verifyWindowName2(getWebDriver(), getExpectedAlerts());
             return;
         }
 
         if ("title".equals(tagName)) {
             // title is a bit special, we have to provide at least
             // one closing tab otherwise title spans to the end of the file
-            loadPageWithAlerts2(DOCTYPE_HTML + "<html><head>\n"
+            loadPage2(DOCTYPE_HTML + "<html><head>\n"
                     + "<script>\n"
+                    + LOG_WINDOW_NAME_FUNCTION
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert(e == null ? e : e.children.length);\n"
+                    + "  log(e == null ? e : e.children.length);\n"
                     + "}\n"
                     + "</script>\n"
                     + "<title id='outer'><title></title>\n"
                     + "</head><body onload='test()'>\n"
                     + "</body></html>");
+            verifyWindowName2(getWebDriver(), getExpectedAlerts());
             return;
         }
 
@@ -84,18 +87,20 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
         }
 
         if ("frameset".equals(tagName)) {
-            loadPageWithAlerts2(DOCTYPE_HTML
+            loadPage2(DOCTYPE_HTML
                     + "<html><head>\n"
                     + "<script>\n"
+                    + LOG_WINDOW_NAME_FUNCTION
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert(e == null ? e : e.children.length);\n"
+                    + "  log(e == null ? e : e.children.length);\n"
                     + "}\n"
                     + "</script>\n"
                     + "</head>\n"
                     + "<frameset onload='test()' id='outer'>\n"
                     + "<frameset>\n"
                     + "</frameset></html>");
+            verifyWindowName2(getWebDriver(), getExpectedAlerts());
             return;
         }
 
@@ -120,9 +125,10 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
                 + "<html><head>\n"
                 + "<" + tagName + " id='outer'><" + tagName + ">\n"
                 + "<script>\n"
+                + LOG_WINDOW_NAME_FUNCTION
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + "  alert(e == null ? e : e.children.length);\n"
+                + "  log(e == null ? e : e.children.length);\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"

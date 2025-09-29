@@ -29,15 +29,17 @@ public class ElementCreationTest extends WebDriverTestCase {
     private void test(final String tagName) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(document.createElement('" + tagName + "'));\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(document.createElement('" + tagName + "'));\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
