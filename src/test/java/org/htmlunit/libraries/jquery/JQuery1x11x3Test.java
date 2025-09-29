@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
  * version 1.11.3 of the <a href="http://jquery.com/">jQuery</a> JavaScript library.
  *
  * All test method inside this class are generated. Please have a look
- * at {@link org.htmlunit.source.JQueryExtractor}.
+ * at {@link org.htmlunit.libraries.jquery.JQueryExtractor}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

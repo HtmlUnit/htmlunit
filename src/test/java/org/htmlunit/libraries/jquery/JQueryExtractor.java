@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.source;
+package org.htmlunit.libraries.jquery;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -39,7 +39,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.TestedBrowser;
-import org.htmlunit.libraries.jquery.JQuery3x3x1Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish

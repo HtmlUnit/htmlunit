@@ -29,7 +29,7 @@ import org.openqa.selenium.WebElement;
  * version 1.12.4 of the <a href="http://jquery.com/">jQuery</a> JavaScript library.
  *
  * All test method inside this class are generated. Please have a look
- * at {@link org.htmlunit.source.JQueryExtractor}.
+ * at {@link org.htmlunit.libraries.jquery.JQueryExtractor}.
  *
  * @author Ronald Brill
  */
