@@ -76,7 +76,7 @@
         <compiler-plugin.version>3.14.1</compiler-plugin.version>
         <jar-plugin.version>3.4.2</jar-plugin.version>
         <javadoc-plugin.version>3.12.0</javadoc-plugin.version>
-        <surefire-plugin.version>3.5.3</surefire-plugin.version>
+        <surefire-plugin.version>3.5.4</surefire-plugin.version>
         <cyclonedx-plugin.version>2.9.1</cyclonedx-plugin.version>
     </properties>
 
@@ -431,6 +431,7 @@
                             </includes>
                             <excludes>
                                 <exclude>**/libraries/jquery/JQuery3x3x1Test.java</exclude>
+                                <exclude>**/libraries/**/*.jar</exclude>
                             </excludes>
                             <argLine>-Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
