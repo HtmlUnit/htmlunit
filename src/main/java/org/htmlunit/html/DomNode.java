@@ -1408,7 +1408,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
          * Creates a new instance which iterates over the specified node type.
          */
         public DescendantDomNodesIterator() {
-            nextNode_ = getFirstChildElement(DomNode.this);
+            nextNode_ = DomNode.this.getFirstChild();
         }
 
         /** {@inheritDoc} */
@@ -1439,13 +1439,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         /**
          * @return the next node, if there is one
          */
-        @SuppressWarnings("unchecked")
         public DomNode nextNode() {
             currentNode_ = nextNode_;
 
-            DomNode next = getFirstChildElement(nextNode_);
+            DomNode next = nextNode_.getFirstChild();
             if (next == null) {
-                next = getNextDomSibling(nextNode_);
+                next = nextNode_.getNextSibling();
             }
             if (next == null) {
                 next = getNextElementUpwards(nextNode_);
@@ -1463,40 +1462,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             DomNode parent = startingNode.getParentNode();
             while (parent != null && parent != DomNode.this) {
                 DomNode next = parent.getNextSibling();
-                while (next != null && !isAccepted(next)) {
-                    next = next.getNextSibling();
-                }
                 if (next != null) {
                     return next;
                 }
                 parent = parent.getParentNode();
             }
             return null;
-        }
-
-        private DomNode getFirstChildElement(final DomNode parent) {
-            DomNode node = parent.getFirstChild();
-            while (node != null && !isAccepted(node)) {
-                node = node.getNextSibling();
-            }
-            return node;
-        }
-
-        /**
-         * Indicates if the node is accepted. If not it won't be explored at all.
-         * @param node the node to test
-         * @return {@code true} if accepted
-         */
-        private boolean isAccepted(final DomNode node) {
-            return DomNode.class.isAssignableFrom(node.getClass());
-        }
-
-        private DomNode getNextDomSibling(final DomNode element) {
-            DomNode node = element.getNextSibling();
-            while (node != null && !isAccepted(node)) {
-                node = node.getNextSibling();
-            }
-            return node;
         }
     }
 
@@ -1542,7 +1513,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         /**
          * @return the next node, if there is one
          */
-        @SuppressWarnings("unchecked")
         public DomElement nextNode() {
             currentNode_ = nextNode_;
 
@@ -1645,7 +1615,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         /**
          * @return the next node, if there is one
          */
-        @SuppressWarnings("unchecked")
         public HtmlElement nextNode() {
             currentNode_ = nextNode_;
 

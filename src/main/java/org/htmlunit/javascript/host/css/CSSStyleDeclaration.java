@@ -834,12 +834,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
             if (!lineHeight.equals(defaultLineHeight)) {
                 newFont.append('/');
-                if (lineHeight.equals(defaultLineHeight)) {
-                    newFont.append(Definition.LINE_HEIGHT.getDefaultComputedValue(browserVersion));
-                }
-                else {
-                    newFont.append(lineHeight);
-                }
+                newFont.append(lineHeight);
             }
 
             newFont.append(' ').append(getFontFamily());

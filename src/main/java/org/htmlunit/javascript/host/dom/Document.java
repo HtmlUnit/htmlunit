@@ -1267,10 +1267,8 @@ public class Document extends Node {
         // this strange conversation preserves NodeFilter.SHOW_ALL
         final int whatToShowI = (int) Double.valueOf(whatToShow).longValue();
 
-        expandEntityReferences = false;
-
         final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter, false);
-        final TreeWalker t = new TreeWalker(root, whatToShowI, filterWrapper, expandEntityReferences);
+        final TreeWalker t = new TreeWalker(root, whatToShowI, filterWrapper, false);
         t.setParentScope(getWindow(this));
         t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
         return t;

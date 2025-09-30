@@ -41,7 +41,7 @@ public class DataTransferItem extends HtmlUnitScriptable {
 
     private final String kind_;
     private final String type_;
-    private Object data_;
+    private final Object data_;
 
     /**
      * Ctor.

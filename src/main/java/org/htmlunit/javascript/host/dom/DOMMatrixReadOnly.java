@@ -114,51 +114,49 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
             return;
         }
 
-        if (args.length > 0) {
-            if (args[0] instanceof NativeArray) {
-                final NativeArray arrayArgs = (NativeArray) args[0];
-                if (arrayArgs.getLength() == 6) {
-                    m11_ = JavaScriptEngine.toNumber(arrayArgs.get(0));
-                    m12_ = JavaScriptEngine.toNumber(arrayArgs.get(1));
+        if (args[0] instanceof NativeArray) {
+            final NativeArray arrayArgs = (NativeArray) args[0];
+            if (arrayArgs.getLength() == 6) {
+                m11_ = JavaScriptEngine.toNumber(arrayArgs.get(0));
+                m12_ = JavaScriptEngine.toNumber(arrayArgs.get(1));
 
-                    m21_ = JavaScriptEngine.toNumber(arrayArgs.get(2));
-                    m22_ = JavaScriptEngine.toNumber(arrayArgs.get(3));
+                m21_ = JavaScriptEngine.toNumber(arrayArgs.get(2));
+                m22_ = JavaScriptEngine.toNumber(arrayArgs.get(3));
 
-                    m41_ = JavaScriptEngine.toNumber(arrayArgs.get(4));
-                    m42_ = JavaScriptEngine.toNumber(arrayArgs.get(5));
+                m41_ = JavaScriptEngine.toNumber(arrayArgs.get(4));
+                m42_ = JavaScriptEngine.toNumber(arrayArgs.get(5));
 
-                    is2D_ = true;
-                    return;
-                }
-
-                if (arrayArgs.getLength() == 16) {
-                    m11_ = JavaScriptEngine.toNumber(arrayArgs.get(0));
-                    m12_ = JavaScriptEngine.toNumber(arrayArgs.get(1));
-                    m13_ = JavaScriptEngine.toNumber(arrayArgs.get(2));
-                    m14_ = JavaScriptEngine.toNumber(arrayArgs.get(3));
-
-                    m21_ = JavaScriptEngine.toNumber(arrayArgs.get(4));
-                    m22_ = JavaScriptEngine.toNumber(arrayArgs.get(5));
-                    m23_ = JavaScriptEngine.toNumber(arrayArgs.get(6));
-                    m24_ = JavaScriptEngine.toNumber(arrayArgs.get(7));
-
-                    m31_ = JavaScriptEngine.toNumber(arrayArgs.get(8));
-                    m32_ = JavaScriptEngine.toNumber(arrayArgs.get(9));
-                    m33_ = JavaScriptEngine.toNumber(arrayArgs.get(10));
-                    m34_ = JavaScriptEngine.toNumber(arrayArgs.get(11));
-
-                    m41_ = JavaScriptEngine.toNumber(arrayArgs.get(12));
-                    m42_ = JavaScriptEngine.toNumber(arrayArgs.get(13));
-                    m43_ = JavaScriptEngine.toNumber(arrayArgs.get(14));
-                    m44_ = JavaScriptEngine.toNumber(arrayArgs.get(15));
-
-                    is2D_ = false;
-                    return;
-                }
-
-                throw JavaScriptEngine.typeError("DOMMatrixReadOnly constructor: Matrix init sequence must have "
-                        + "a length of 6 or 16 (actual value: " + arrayArgs.getLength() + ")");
+                is2D_ = true;
+                return;
             }
+
+            if (arrayArgs.getLength() == 16) {
+                m11_ = JavaScriptEngine.toNumber(arrayArgs.get(0));
+                m12_ = JavaScriptEngine.toNumber(arrayArgs.get(1));
+                m13_ = JavaScriptEngine.toNumber(arrayArgs.get(2));
+                m14_ = JavaScriptEngine.toNumber(arrayArgs.get(3));
+
+                m21_ = JavaScriptEngine.toNumber(arrayArgs.get(4));
+                m22_ = JavaScriptEngine.toNumber(arrayArgs.get(5));
+                m23_ = JavaScriptEngine.toNumber(arrayArgs.get(6));
+                m24_ = JavaScriptEngine.toNumber(arrayArgs.get(7));
+
+                m31_ = JavaScriptEngine.toNumber(arrayArgs.get(8));
+                m32_ = JavaScriptEngine.toNumber(arrayArgs.get(9));
+                m33_ = JavaScriptEngine.toNumber(arrayArgs.get(10));
+                m34_ = JavaScriptEngine.toNumber(arrayArgs.get(11));
+
+                m41_ = JavaScriptEngine.toNumber(arrayArgs.get(12));
+                m42_ = JavaScriptEngine.toNumber(arrayArgs.get(13));
+                m43_ = JavaScriptEngine.toNumber(arrayArgs.get(14));
+                m44_ = JavaScriptEngine.toNumber(arrayArgs.get(15));
+
+                is2D_ = false;
+                return;
+            }
+
+            throw JavaScriptEngine.typeError("DOMMatrixReadOnly constructor: Matrix init sequence must have "
+                    + "a length of 6 or 16 (actual value: " + arrayArgs.getLength() + ")");
         }
 
         throw JavaScriptEngine.asJavaScriptException(

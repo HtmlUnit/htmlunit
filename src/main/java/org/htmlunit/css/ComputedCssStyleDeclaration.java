@@ -464,29 +464,27 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public StyleElement getStyleElement(final String name) {
         final StyleElement existent = elementStyleDeclaration_.getStyleElement(name);
 
-        if (localModifications_ != null) {
-            final StyleElement localStyleMod = localModifications_.get(name);
-            if (localStyleMod == null) {
-                return existent;
-            }
+        final StyleElement localStyleMod = localModifications_.get(name);
+        if (localStyleMod == null) {
+            return existent;
+        }
 
-            if (existent == null) {
-                // Local modifications represent either default style elements or style elements
-                // defined in stylesheets; either way, they shouldn't overwrite any style
-                // elements derived directly from the HTML element's "style" attribute.
-                return localStyleMod;
-            }
+        if (existent == null) {
+            // Local modifications represent either default style elements or style elements
+            // defined in stylesheets; either way, they shouldn't overwrite any style
+            // elements derived directly from the HTML element's "style" attribute.
+            return localStyleMod;
+        }
 
-            // replace if !IMPORTANT
-            if (StyleElement.PRIORITY_IMPORTANT.equals(localStyleMod.getPriority())) {
-                if (existent.isImportant()) {
-                    if (existent.getSpecificity().compareTo(localStyleMod.getSpecificity()) < 0) {
-                        return localStyleMod;
-                    }
-                }
-                else {
+        // replace if !IMPORTANT
+        if (StyleElement.PRIORITY_IMPORTANT.equals(localStyleMod.getPriority())) {
+            if (existent.isImportant()) {
+                if (existent.getSpecificity().compareTo(localStyleMod.getSpecificity()) < 0) {
                     return localStyleMod;
                 }
+            }
+            else {
+                return localStyleMod;
             }
         }
         return existent;

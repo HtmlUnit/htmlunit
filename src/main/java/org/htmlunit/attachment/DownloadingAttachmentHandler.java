@@ -44,7 +44,7 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
 
     private static final Log LOG = LogFactory.getLog(DownloadingAttachmentHandler.class);
 
-    private Path downloadFolder_;
+    private final Path downloadFolder_;
 
     /**
      * Creates a new DownloadingAttachmentHandler that stores all downloaded files in the

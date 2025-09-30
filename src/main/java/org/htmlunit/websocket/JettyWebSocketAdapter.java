@@ -51,7 +51,7 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
 
     private final Object clientLock_ = new Object();
     private WebSocketClient client_;
-    private WebSocketListener listener_;
+    private final WebSocketListener listener_;
 
     private volatile Session incomingSession_;
     private Session outgoingSession_;

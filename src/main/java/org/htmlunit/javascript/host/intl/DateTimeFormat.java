@@ -318,7 +318,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     static final class DateTimeFormatHelper {
 
         private final DateTimeFormatter formatter_;
-        private Chronology chronology_;
+        private final Chronology chronology_;
         private final String locale_;
 
         DateTimeFormatHelper(final String locale, final Chronology chronology, final String pattern) {
