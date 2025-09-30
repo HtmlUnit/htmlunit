@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'mvn clean test -U -P only-library-tests -Dgpg.skip -Djava.awt.headless=true'
+        sh 'mvn clean test -U -P only-library-tests --show-version -Dgpg.skip -Djava.awt.headless=true'
       }
     }
   }
