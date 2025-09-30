@@ -373,19 +373,6 @@ public abstract class AbstractJavaScriptConfiguration {
     }
 
     /**
-     * Returns whether the two {@link SupportedBrowser} are compatible or not.
-     * @param browser1 the first {@link SupportedBrowser}
-     * @param browser2 the second {@link SupportedBrowser}
-     * @return whether the two {@link SupportedBrowser} are compatible or not
-     *
-     * @deprecated as of version 4.8.0; will be removed without replacement
-     */
-    @Deprecated
-    public static boolean isCompatible(final SupportedBrowser browser1, final SupportedBrowser browser2) {
-        return browser1 == browser2;
-    }
-
-    /**
      * Returns an immutable map containing the DOM to JavaScript mappings. Keys are
      * java classes for the various DOM classes (e.g. HtmlInput.class) and the values
      * are the JavaScript class names (e.g. "HTMLAnchorElement").

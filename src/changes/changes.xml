@@ -7,7 +7,21 @@
     </properties>
 
     <body>
-        <release version="4.17.0" date="September xx, 2025" description="Chrome/Edge 140, Firefox 142, css :has(), :is(), :where(), BroadcastChannel, Bugfixes">
+        <release version="4.17.0" date="October xx, 2025" description="Chrome/Edge 140, Firefox 142, css :has(), :is(), :where(), BroadcastChannel, Bugfixes">
+            <action type="remove" dev="rbri">
+                Deprecated methods HTMLParser.parse(WebResponse, HtmlPage, boolean, boolean),
+                HTMLParser.parseFragment(DomNode, DomNode, String, boolean),
+                and HTMLParser.parseFragment(DomNode, String) removed.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated method UrlUtils.decodeDataUrl(byte[]) removed.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated method AbstractJavaScriptConfiguration.isCompatible(SupportedBrowser, SupportedBrowser) removed.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated class org.htmlunit.html.DomNode.DescendantElementsIterator removed.
+            </action>
             <action type="update" dev="Rene Schwietzke">
                 Use a new HTMLElementsWithCache object for each neko parser run to avoid race conditions under load.
             </action>

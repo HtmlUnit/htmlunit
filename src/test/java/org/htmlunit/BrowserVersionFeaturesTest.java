@@ -27,10 +27,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.BrowserFeature;
 import org.htmlunit.javascript.configuration.SupportedBrowser;
 import org.junit.jupiter.api.Test;
+
+import com.tngtech.archunit.thirdparty.com.google.common.base.Objects;
 
 /**
  * Tests for {@link BrowserVersionFeatures}.
@@ -88,9 +89,8 @@ public class BrowserVersionFeaturesTest {
             if (browserFeature != null) {
                 for (final SupportedBrowser annotatedBrowser : browserFeature.value()) {
                     boolean inUse = false;
-                    for (final BrowserVersion supportedBrowser : browsers) {
-                        if (AbstractJavaScriptConfiguration.isCompatible(expectedBrowserName(supportedBrowser),
-                                annotatedBrowser)) {
+                    for (final BrowserVersion supportedBrowserVersion : browsers) {
+                        if (Objects.equal(supportedBrowser(supportedBrowserVersion), annotatedBrowser)) {
                             inUse = true;
                             continue;
                         }
@@ -104,7 +104,7 @@ public class BrowserVersionFeaturesTest {
         }
     }
 
-    private static SupportedBrowser expectedBrowserName(final BrowserVersion browser) {
+    private static SupportedBrowser supportedBrowser(final BrowserVersion browser) {
         if (browser == BrowserVersion.EDGE) {
             return SupportedBrowser.EDGE;
         }

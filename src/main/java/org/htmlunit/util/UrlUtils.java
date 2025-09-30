@@ -1382,20 +1382,6 @@ public final class UrlUtils {
      * Decodes an array of URL safe 7-bit characters into an array of original bytes.
      * Escaped characters are converted back to their original representation.
      * @param bytes array of URL safe characters
-     * @return array of original bytes
-     * @throws IllegalArgumentException in case of error
-     *
-     * @deprecated as of version 4.11.0; use {@link #decodeDataUrl(byte[], boolean)} instead
-     */
-    @Deprecated
-    public static byte[] decodeDataUrl(final byte[] bytes) throws IllegalArgumentException  {
-        return decodeDataUrl(bytes, false);
-    }
-
-    /**
-     * Decodes an array of URL safe 7-bit characters into an array of original bytes.
-     * Escaped characters are converted back to their original representation.
-     * @param bytes array of URL safe characters
      * @param removeWhitespace if true don't add whitespace chars to the output
      * @return array of original bytes
      * @throws IllegalArgumentException in case of error

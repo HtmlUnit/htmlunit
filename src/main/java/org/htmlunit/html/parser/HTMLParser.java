@@ -72,22 +72,6 @@ public interface HTMLParser {
     /**
      * Parses the HTML content from the given string into an object tree representation.
      *
-     * @param parent the parent for the new nodes
-     * @param source the (X)HTML to be parsed
-     * @throws SAXException if a SAX error occurs
-     * @throws IOException if an IO error occurs
-     *
-     * @deprecated as of version 4.12.0; use
-     *     {@link #parseFragment(WebClient, DomNode, DomNode, String, boolean)} instead.
-     */
-    @Deprecated
-    default void parseFragment(final DomNode parent, final String source) throws SAXException, IOException {
-        parseFragment(null, parent, parent, source, false);
-    }
-
-    /**
-     * Parses the HTML content from the given string into an object tree representation.
-     *
      * @param webClient the {@link WebClient}
      * @param parent where the new parsed nodes will be added to
      * @param context the context to build the fragment context stack
@@ -98,25 +82,6 @@ public interface HTMLParser {
      */
     void parseFragment(WebClient webClient, DomNode parent, DomNode context, String source,
             boolean createdByJavascript) throws SAXException, IOException;
-
-    /**
-     * Parses the HTML content from the given string into an object tree representation.
-     *
-     * @param parent where the new parsed nodes will be added to
-     * @param context the context to build the fragment context stack
-     * @param source the (X)HTML to be parsed
-     * @param createdByJavascript if true the (script) tag was created by javascript
-     * @throws SAXException if a SAX error occurs
-     * @throws IOException if an IO error occurs
-     *
-     * @deprecated as of version 4.12.0; use
-     *     {@link #parseFragment(WebClient, DomNode, DomNode, String, boolean)} instead.
-     */
-    @Deprecated
-    default void parseFragment(final DomNode parent, final DomNode context, final String source,
-            final boolean createdByJavascript) throws SAXException, IOException {
-        parseFragment(null, parent, context, source, createdByJavascript);
-    }
 
     /**
      * Parses the WebResponse into an object tree representation.
@@ -130,22 +95,4 @@ public interface HTMLParser {
      */
     void parse(WebClient webClient, WebResponse webResponse, HtmlPage page,
             boolean xhtml, boolean createdByJavascript) throws IOException;
-
-    /**
-     * Parses the WebResponse into an object tree representation.
-     *
-     * @param webResponse the response data
-     * @param page the HtmlPage to add the nodes
-     * @param xhtml if true use the XHtml parser
-     * @param createdByJavascript if true the (script) tag was created by javascript
-     * @throws IOException if there is an IO error
-     *
-     * @deprecated as of version 4.12.0; use
-     *     {@link #parse(WebClient, WebResponse, HtmlPage, boolean, boolean)} instead.
-     */
-    @Deprecated
-    default void parse(final WebResponse webResponse, final HtmlPage page, final boolean xhtml,
-            final boolean createdByJavascript) throws IOException {
-        parse(null, webResponse, page, xhtml, createdByJavascript);
-    }
 }
