@@ -40,7 +40,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void querySelectorAll_nullUndefined() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -67,7 +66,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void querySelectorAll_emptyString() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -100,7 +98,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void nth_child() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -135,7 +132,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void nth_child_even_odd() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -165,7 +161,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void childSelector_html_body() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -276,7 +271,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void directAdjacentSelector() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -303,7 +297,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void prefixAttribute() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -359,7 +352,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void prefixAttributeEmpty() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -388,7 +380,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void suffixAttribute() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -444,7 +435,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void suffixAttributeEmpty() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -473,7 +463,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void substringAttribute() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -528,7 +517,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void substringAttributeEmpty() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -557,7 +545,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void oneOfAttribute() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -585,7 +572,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void oneOfAttributeInSensitive() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -613,7 +599,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void oneOfAttributeEmpty() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -639,7 +624,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void hasAttribute() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -668,7 +652,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void hyphenSeparatedAttributeValue() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -705,7 +688,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void hyphenSeparatedAttributeValueInSensitive() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -742,7 +724,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void hyphenSeparatedAttributeValueHyphenInSelector() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -772,7 +753,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void hyphenSeparatedAttributeValueEmpty() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -805,7 +785,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void emptyAttributeValue() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -834,7 +813,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void generalAdjacentSelector() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -863,7 +841,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void nth_last_child() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -892,7 +869,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void nth_last_child2() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -935,7 +911,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void nth_of_type() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -961,7 +936,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void nth_last_of_type() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1013,7 +987,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void pseudoCheckboxChecked() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1044,7 +1017,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void pseudoRadioChecked() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1143,7 +1115,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void first_child() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1169,7 +1140,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void last_child() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1195,7 +1165,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void first_of_type() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1226,7 +1195,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void invalid_not() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1259,7 +1227,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void last_of_type() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1287,7 +1254,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void only_child() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1315,7 +1281,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void only_of_type() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1343,7 +1308,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void empty() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1369,7 +1333,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void not() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1536,7 +1499,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void childNot() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1565,7 +1527,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void childNotNot() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1593,7 +1554,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void focus() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1631,7 +1591,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void focusWithin() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1670,7 +1629,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void focusVisible() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1705,7 +1663,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void checked() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1744,7 +1701,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void checkedChanged() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1779,7 +1735,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void checkedAttribute() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1814,7 +1769,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void selectedChecked() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1851,7 +1805,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void enabled() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1877,7 +1830,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void disabled() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1985,7 +1937,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void targetNoHash() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2009,7 +1960,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void targetUnknown() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2035,7 +1985,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void root() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2058,7 +2007,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void has() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2085,7 +2033,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void escapedAttributeValue() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "</head><body>\n"
             + "  <input id='first' name='foo[bar]'>\n"
             + "  <input id='second' name='foo.bar'>\n"
@@ -2112,7 +2059,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void differentWhitespaceClassName() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "</head><body>\n"
             + "  <input id='first' class='foo'>\n"
             + "  <input id='first' class='\tfoo\n'>\n"
@@ -2143,7 +2089,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void escapedClassName() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "</head><body>\n"
             + "  <input id='first' class='foo[bar]'>\n"
             + "  <input id='second' class='foo.bar'>\n"
@@ -2168,7 +2113,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void escapedId() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "</head><body>\n"
             + "  <input id='silly:id::with:colons'>\n"
             + "  <input id='silly~id'>\n"
@@ -2436,7 +2380,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     private void emptyAndDetached(final String selector) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2476,7 +2419,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void xmlTagName() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "</head><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2526,7 +2468,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void xmlAttribute() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "</head><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

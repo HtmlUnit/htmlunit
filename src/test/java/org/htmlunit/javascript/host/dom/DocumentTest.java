@@ -1816,7 +1816,6 @@ public class DocumentTest extends WebDriverTestCase {
     public void getElementsByTagNameXml() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "</head><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

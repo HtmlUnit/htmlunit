@@ -92,7 +92,6 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     public void querySelector() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
