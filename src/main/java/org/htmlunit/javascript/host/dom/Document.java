@@ -1261,7 +1261,7 @@ public class Document extends Node {
      */
     @JsxFunction
     public TreeWalker createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
-            boolean expandEntityReferences) throws DOMException {
+            final boolean expandEntityReferences) throws DOMException {
 
         // seems that Rhino doesn't like long as parameter type
         // this strange conversation preserves NodeFilter.SHOW_ALL

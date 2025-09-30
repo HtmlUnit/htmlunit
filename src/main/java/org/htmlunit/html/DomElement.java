@@ -814,7 +814,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     public int getChildElementCount() {
         int counter = 0;
 
-        for (DomElement domElement : getChildElements()) {
+        for (final DomElement domElement : getChildElements()) {
             counter++;
         }
         return counter;

@@ -1461,7 +1461,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
             DomNode parent = startingNode.getParentNode();
             while (parent != null && parent != DomNode.this) {
-                DomNode next = parent.getNextSibling();
+                final DomNode next = parent.getNextSibling();
                 if (next != null) {
                     return next;
                 }
