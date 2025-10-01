@@ -46,8 +46,8 @@
         <selenium.devtools.artifactId>selenium-devtools-v139</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
-        <junit.version>5.13.4</junit.version>
-        <junit-launcher.version>1.13.4</junit-launcher.version>
+        <junit.version>5.14.0</junit.version>
+        <junit-launcher.version>1.14.0</junit-launcher.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <jetty.version>9.4.58.v20250814</jetty.version>
         <quercus.version>4.0.66</quercus.version>
