@@ -366,9 +366,8 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final AbstractJavaScriptEngine<?> javaScriptEngine = webClient.getJavaScriptEngine();
 
         final DedicatedWorkerGlobalScope thisScope = this;
-        final ContextAction<Object> action = cx -> {
-            return javaScriptEngine.execute(page, thisScope, scriptCode, fullUrl.toExternalForm(), 1);
-        };
+        final ContextAction<Object> action =
+                cx -> javaScriptEngine.execute(page, thisScope, scriptCode, fullUrl.toExternalForm(), 1);
 
         final HtmlUnitContextFactory cf = javaScriptEngine.getContextFactory();
 

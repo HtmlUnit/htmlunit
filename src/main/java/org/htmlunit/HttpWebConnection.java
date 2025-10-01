@@ -299,12 +299,11 @@ public class HttpWebConnection implements WebConnection {
         // this has to be in sync with org.htmlunit.WebRequest.getRequestParameters()
 
         // POST, PUT, PATCH, DELETE, OPTIONS
-        if ((httpMethod instanceof HttpEntityEnclosingRequest)
-                && (httpMethod instanceof HttpPost
-                        || httpMethod instanceof HttpPut
-                        || httpMethod instanceof HttpPatch
-                        || httpMethod instanceof org.htmlunit.httpclient.HttpDelete
-                        || httpMethod instanceof org.htmlunit.httpclient.HttpOptions)) {
+        if (httpMethod instanceof HttpPost
+                || httpMethod instanceof HttpPut
+                || httpMethod instanceof HttpPatch
+                || httpMethod instanceof org.htmlunit.httpclient.HttpDelete
+                || httpMethod instanceof org.htmlunit.httpclient.HttpOptions) {
 
             final HttpEntityEnclosingRequest method = (HttpEntityEnclosingRequest) httpMethod;
 

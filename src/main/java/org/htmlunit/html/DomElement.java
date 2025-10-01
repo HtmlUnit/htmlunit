@@ -24,7 +24,6 @@ import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -111,12 +110,8 @@ public class DomElement extends DomNamespaceNode implements Element {
     private String styleString_;
     private LinkedHashMap<String, StyleElement> styleMap_;
 
-    private static final Comparator<StyleElement> STYLE_ELEMENT_COMPARATOR = new Comparator<StyleElement>() {
-        @Override
-        public int compare(final StyleElement first, final StyleElement second) {
-            return StyleElement.compareToByImportanceAndSpecificity(first, second);
-        }
-    };
+    private static final Comparator<StyleElement> STYLE_ELEMENT_COMPARATOR =
+            (first, second) -> StyleElement.compareToByImportanceAndSpecificity(first, second);
 
     /**
      * Whether the Mouse is currently over this element or not.
@@ -625,7 +620,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         final StringBuilder builder = new StringBuilder();
         final List<StyleElement> styleElements = new ArrayList<>(styleMap.values());
-        Collections.sort(styleElements, STYLE_ELEMENT_COMPARATOR);
+        styleElements.sort(STYLE_ELEMENT_COMPARATOR);
         for (final StyleElement e : styleElements) {
             if (builder.length() != 0) {
                 builder.append(' ');

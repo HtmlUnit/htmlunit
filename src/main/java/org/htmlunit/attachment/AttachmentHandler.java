@@ -88,8 +88,7 @@ public interface AttachmentHandler extends Serializable {
             // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#applicationoctet-stream
             // They treat it as if the Content-Disposition header was set to attachment, and propose a "Save As" dialog.
             final String contentType = response.getResponseHeaderValue(HttpHeader.CONTENT_TYPE);
-            return contentType != null
-                    && MimeType.APPLICATION_OCTET_STREAM.equalsIgnoreCase(contentType);
+            return MimeType.APPLICATION_OCTET_STREAM.equalsIgnoreCase(contentType);
         }
         return StringUtils.startsWithIgnoreCase(disp, "attachment");
     }

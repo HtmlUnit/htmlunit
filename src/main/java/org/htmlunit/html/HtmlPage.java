@@ -1528,7 +1528,7 @@ public class HtmlPage extends SgmlPage {
      */
     public List<FrameWindow> getFrames() {
         final List<BaseFrameElement> frameElements = new ArrayList<>(frameElements_);
-        Collections.sort(frameElements, DOCUMENT_POSITION_COMPERATOR);
+        frameElements.sort(DOCUMENT_POSITION_COMPERATOR);
 
         final List<FrameWindow> list = new ArrayList<>(frameElements.size());
         for (final BaseFrameElement frameElement : frameElements) {
@@ -2934,7 +2934,7 @@ public class HtmlPage extends SgmlPage {
                 return elements_.get(0);
             }
 
-            Collections.sort(elements_, DOCUMENT_POSITION_COMPERATOR);
+            elements_.sort(DOCUMENT_POSITION_COMPERATOR);
             sorted_ = true;
 
             return elements_.get(0);
@@ -2945,7 +2945,7 @@ public class HtmlPage extends SgmlPage {
                 return elements_;
             }
 
-            Collections.sort(elements_, DOCUMENT_POSITION_COMPERATOR);
+            elements_.sort(DOCUMENT_POSITION_COMPERATOR);
             sorted_ = true;
 
             return elements_;

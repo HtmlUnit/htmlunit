@@ -186,14 +186,8 @@ public class Event extends HtmlUnitScriptable {
     /** The auxclick event type, triggered by {@code auxclick} event handlers. */
     public static final String TYPE_AUXCLICK = "auxclick";
 
-//    /** The mspointerleave event type, triggered by {@code mspointerleave} event handlers. */
-//    public static final String TYPE_MSPOINTERLEAVE = "mspointerleave";
-//
     /** The webkitanimationstart event type, triggered by {@code webkitanimationstart} event handlers. */
     public static final String TYPE_WEBANIMATIONSTART = "webkitanimationstart";
-
-//    /** The msgesturestart event type, triggered by {@code msgesturestart} event handlers. */
-//    public static final String TYPE_MSGESTURESTART = "msgesturestart";
 
     /** The drag event type, triggered by {@code drag} event handlers. */
     public static final String TYPE_DRAG = "drag";
@@ -254,9 +248,6 @@ public class Event extends HtmlUnitScriptable {
 
     /** The pageshow event type, triggered by {@code pageshow} event handlers. */
     public static final String TYPE_PAGESHOW = "pageshow";
-
-//    /** The mspointerenter event type, triggered by {@code mspointerenter} event handlers. */
-//    public static final String TYPE_MSPOINTENTER = "mspointerenter";
 
     /** The mozfullscreenchange event type, triggered by {@code mozfullscreenchange} event handlers. */
     public static final String TYPE_MOZFULLSCREENCHANGE = "mozfullscreenchange";
@@ -372,9 +363,6 @@ public class Event extends HtmlUnitScriptable {
     /** The transitionend event type, triggered by {@code transitionend} event handlers. */
     public static final String TYPE_TRANSITIONEND = "transitionend";
 
-//    /** The msgesturehold event type, triggered by {@code msgesturehold} event handlers. */
-//    public static final String TYPE_MSGESTUREHOLD = "msgesturehold";
-
     /** The deviceorientationabsolute event type, triggered by {@code deviceorientationabsolute} event handlers. */
     public static final String TYPE_DEVICEORIENTATIONABSOLUTE = "deviceorientationabsolute";
 
@@ -440,12 +428,6 @@ public class Event extends HtmlUnitScriptable {
 
     /** The ongamepaddisconnected event type, triggered by {@code ongamepaddisconnected} event handlers. */
     public static final String TYPE_GAMEPAD_DISCONNECTED = "ongamepaddisconnected";
-
-    /**
-     * The mssitemodejumplistitemremoved event type, triggered
-     * by {@code mssitemodejumplistitemremoved} event handlers.
-     */
-    public static final String TYPE_MSSITEMODEJUMPLISTITEMREMOVED = "mssitemodejumplistitemremoved";
 
     /** No event phase. */
     @JsxConstant
