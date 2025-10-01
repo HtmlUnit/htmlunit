@@ -18,7 +18,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
@@ -29,6 +28,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJob;
+import org.htmlunit.util.StringUtils;
 
 /**
  * The implementation of {@code WindowOrWorkerGlobalScope}

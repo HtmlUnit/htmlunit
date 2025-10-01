@@ -16,8 +16,8 @@ package org.htmlunit.html;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.StringUtils;
 
 /**
  * An abstract cell that provides the implementation for HtmlTableDataCell and HtmlTableHeaderCell.

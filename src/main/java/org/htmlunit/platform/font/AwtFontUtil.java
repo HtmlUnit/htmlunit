@@ -48,7 +48,8 @@ public class AwtFontUtil implements FontUtil {
                 do {
                     lineBreakMeasurer.nextLayout(pixelWidth);
                     lineCount++;
-                } while (lineBreakMeasurer.getPosition() < line.length() && lineCount < 1000);
+                }
+                while (lineBreakMeasurer.getPosition() < line.length() && lineCount < 1000);
             }
         }
         return lineCount;

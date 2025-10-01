@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.Page;
@@ -45,6 +44,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.javascript.host.html.HTMLElement;
+import org.htmlunit.util.StringUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -1313,9 +1313,6 @@ public abstract class HtmlElement extends DomElement {
      *         or an empty string if that attribute isn't defined.
      */
     protected final String getSrcAttributeNormalized() {
-        // at the moment StringUtils.replaceChars returns the org string
-        // if nothing to replace was found but the doc implies, that we
-        // can't trust on this in the future
         final String attrib = getAttributeDirect(SRC_ATTRIBUTE);
         if (ATTRIBUTE_NOT_DEFINED == attrib) {
             return attrib;

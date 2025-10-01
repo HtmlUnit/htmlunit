@@ -72,7 +72,7 @@ public class Polyfill {
         }
 
         if (script_ != null) {
-            script_.exec(context, scriptable);
+            script_.exec(context, scriptable, scriptable);
         }
     }
 }

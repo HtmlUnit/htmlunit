@@ -782,7 +782,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final HtmlUnitContextAction action = new HtmlUnitContextAction(page) {
             @Override
             public Object doRun(final Context cx) {
-                return script.exec(cx, scope);
+                return script.exec(cx, scope, scope);
             }
 
             @Override

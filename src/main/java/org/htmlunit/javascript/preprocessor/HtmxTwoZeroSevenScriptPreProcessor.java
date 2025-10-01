@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.preprocessor;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.ScriptPreProcessor;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
@@ -78,41 +77,34 @@ public class HtmxTwoZeroSevenScriptPreProcessor implements ScriptPreProcessor {
         String patchedSourceCode = sourceCode;
 
         if (sourceName.contains("/htmx.js") && !sourceName.contains("/htmx.js#")) {
-            patchedSourceCode = StringUtils.replace(
-                    sourceCode,
+            patchedSourceCode = sourceCode.replace(
                     "result.push(...toArray(rootNode.querySelectorAll(standardSelector)))",
                     "result.push.apply(result, toArray(rootNode.querySelectorAll(standardSelector)))");
 
-            patchedSourceCode = StringUtils.replace(
-                    patchedSourceCode,
+            patchedSourceCode = patchedSourceCode.replace(
                     "result.push(...findAttributeTargets(eltToInheritFrom, attrName))",
                     "result.push.apply(result, findAttributeTargets(eltToInheritFrom, attrName))");
 
-            patchedSourceCode = StringUtils.replace(
-                    patchedSourceCode,
+            patchedSourceCode = patchedSourceCode.replace(
                     "for (const preservedElt of [...pantry.children]) {",
                     "for (const preservedElt of Array.from(pantry.children)) {");
         }
         else if (sourceName.contains("/htmx.min.js") && !sourceName.contains("/htmx.min.js#")) {
             // 2.0.4
-            patchedSourceCode = StringUtils.replace(
-                    sourceCode,
+            patchedSourceCode = sourceCode.replace(
                     "i.push(...M(c.querySelectorAll(e)))",
                     "i.push.apply(i,M(c.querySelectorAll(e)))");
 
             // 2.0.7
-            patchedSourceCode = StringUtils.replace(
-                    patchedSourceCode,
+            patchedSourceCode = patchedSourceCode.replace(
                     "i.push(...F(c.querySelectorAll(e)))",
                     "i.push.apply(i,F(c.querySelectorAll(e)))");
 
-            patchedSourceCode = StringUtils.replace(
-                    patchedSourceCode,
+            patchedSourceCode = patchedSourceCode.replace(
                     "r.push(...we(i,n))",
                     "r.push.apply(r,we(i,n))");
 
-            patchedSourceCode = StringUtils.replace(
-                    patchedSourceCode,
+            patchedSourceCode = patchedSourceCode.replace(
                     "for(const t of[...e.children]){",
                     "for(const t of Array.from(e.children)){");
         }

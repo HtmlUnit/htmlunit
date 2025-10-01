@@ -415,7 +415,9 @@ public final class EncodingSniffer {
             if (i == bytes.length) {
                 return null;
             }
-        } while (bytes[i] == 0x09 || bytes[i] == 0x0A || bytes[i] == 0x0C || bytes[i] == 0x0D || bytes[i] == 0x20);
+        }
+        while (bytes[i] == 0x09 || bytes[i] == 0x0A || bytes[i] == 0x0C || bytes[i] == 0x0D || bytes[i] == 0x20);
+
         if (bytes[i] == '"') {
             if (bytes.length <= i + 1) {
                 return null;

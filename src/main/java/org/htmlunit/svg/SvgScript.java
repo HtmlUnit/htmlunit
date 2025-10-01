@@ -16,11 +16,11 @@ package org.htmlunit.svg;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.ScriptElement;
 import org.htmlunit.html.ScriptElementSupport;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the SVG element {@code script}.
@@ -90,9 +90,6 @@ public class SvgScript extends SvgElement implements ScriptElement {
      *         or an empty string if that attribute isn't defined.
      */
     protected final String getSrcAttributeNormalized() {
-        // at the moment StringUtils.replaceChars returns the org string
-        // if nothing to replace was found but the doc implies, that we
-        // can't trust on this in the future
         final String attrib = getAttributeDirect(SRC_ATTRIBUTE);
         if (ATTRIBUTE_NOT_DEFINED == attrib) {
             return attrib;
