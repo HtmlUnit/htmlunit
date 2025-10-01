@@ -335,6 +335,31 @@ public class StringUtilsTest {
     }
 
     /**
+     * Test for method {@link StringUtils#replaceChars(String, String, String)}.
+     */
+    @Test
+    public void replaceChars() {
+        assertEquals(null, StringUtils.replaceChars(null, "", ""));
+        assertEquals("", StringUtils.replaceChars("", "", null));
+        assertEquals("abc", StringUtils.replaceChars("abc", null, null));
+        assertEquals("abc", StringUtils.replaceChars("abc", "", ""));
+        assertEquals("ac", StringUtils.replaceChars("abc", "b", null));
+        assertEquals("ac", StringUtils.replaceChars("abc", "b", ""));
+        assertEquals("ayzya", StringUtils.replaceChars("abcba", "bc", "yz"));
+        assertEquals("ayya", StringUtils.replaceChars("abcba", "bc", "y"));
+        assertEquals("ayzya", StringUtils.replaceChars("abcba", "bc", "yzx"));
+
+        assertEquals("abc", StringUtils.replaceChars("abc", "d", "e"));
+
+        assertEquals("ebc", StringUtils.replaceChars("abc", "a", "e"));
+        assertEquals("bc", StringUtils.replaceChars("abc", "a", ""));
+
+        assertEquals("abe", StringUtils.replaceChars("abc", "c", "e"));
+        assertEquals("ab", StringUtils.replaceChars("abc", "c", null));
+    }
+
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

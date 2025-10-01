@@ -233,6 +233,60 @@ public final class StringUtils {
     }
 
     /**
+     * Replaces multiple characters in a String in one go.
+     * This method can also be used to delete characters.
+     *
+     * @param str          String to replace characters in, may be null.
+     * @param searchChars  a set of characters to search for, may be null.
+     * @param replaceChars a set of characters to replace, may be null.
+     * @return modified String, or the input string if no replace was done.
+     */
+    public static String replaceChars(final String str, final String searchChars, String replaceChars) {
+        if (isEmptyOrNull(str) || isEmptyOrNull(searchChars)) {
+            return str;
+        }
+
+        replaceChars = replaceChars == null ? "" : replaceChars;
+        final int replaceCharsLength = replaceChars.length();
+        final int strLength = str.length();
+
+        StringBuilder buf = null;
+        int i = 0;
+        for ( ; i < strLength; i++) {
+            final char ch = str.charAt(i);
+            final int index = searchChars.indexOf(ch);
+            if (index >= 0) {
+                buf = new StringBuilder(strLength);
+                buf.append(str, 0, i);
+                if (index < replaceCharsLength) {
+                    buf.append(replaceChars.charAt(index));
+                }
+                break;
+            }
+        }
+
+        if (buf == null) {
+            return str;
+        }
+
+        i++;
+        for ( ; i < strLength; i++) {
+            final char ch = str.charAt(i);
+            final int index = searchChars.indexOf(ch);
+            if (index >= 0) {
+                if (index < replaceCharsLength) {
+                    buf.append(replaceChars.charAt(index));
+                }
+            }
+            else {
+                buf.append(ch);
+            }
+        }
+
+        return buf.toString();
+    }
+
+    /**
      * Escapes the characters '&lt;', '&gt;' and '&amp;' into their XML entity equivalents.
      *
      * @param s the string to escape
