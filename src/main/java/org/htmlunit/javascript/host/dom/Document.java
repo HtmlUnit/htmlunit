@@ -164,7 +164,7 @@ public class Document extends Node {
     private static final Log LOG = LogFactory.getLog(Document.class);
 
     /**
-     * see <a href="https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands">
+     * See <a href="https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands">
      *     Executing Commands</a>
      */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
