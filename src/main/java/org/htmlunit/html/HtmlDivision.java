@@ -35,7 +35,7 @@ public class HtmlDivision extends HtmlElement {
     /**
      * Creates an instance of HtmlDivision.
      *
-     * <p><b>Don't directly construct, it is public as an implementation side-effect.</b>
+     * <p><b>Don't directly construct, it is public as an implementation side effect.</b>
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

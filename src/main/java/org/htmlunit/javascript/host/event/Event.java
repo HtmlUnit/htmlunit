@@ -933,7 +933,7 @@ public class Event extends HtmlUnitScriptable {
      * Initializes this event.
      * @param type the event type
      * @param bubbles whether or not the event should bubble
-     * @param cancelable whether or not the event the event should be cancelable
+     * @param cancelable whether or not the event should be cancelable
      */
     @JsxFunction
     public void initEvent(final String type, final boolean bubbles, final boolean cancelable) {

@@ -45,12 +45,10 @@ public class AwtFontUtil implements FontUtil {
                 attributedString.addAttribute(TextAttribute.SIZE, fontSizeInt / 1.1);
                 final LineBreakMeasurer lineBreakMeasurer =
                         new LineBreakMeasurer(attributedString.getIterator(), fontRenderCtx);
-                lineBreakMeasurer.nextLayout(pixelWidth);
-                lineCount++;
-                while (lineBreakMeasurer.getPosition() < line.length() && lineCount < 1000) {
+                do {
                     lineBreakMeasurer.nextLayout(pixelWidth);
                     lineCount++;
-                }
+                } while (lineBreakMeasurer.getPosition() < line.length() && lineCount < 1000);
             }
         }
         return lineCount;

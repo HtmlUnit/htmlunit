@@ -34,7 +34,7 @@ import org.htmlunit.util.StringUtils;
  * <li>download file into a default folder when attachment response is detected</li>
  * <li>infer filename from octet stream response and use that when saving file</li>
  * <li>if a file already exists, append number to it.
- * Keep incrementing numbers until you find a slot that is free (thats how Chrome handles duplicate filenames).</li>
+ * Keep incrementing numbers until you find a slot that is free (that's how Chrome handles duplicate filenames).</li>
  * </ul>
  *
  * @author Marek Andreansky

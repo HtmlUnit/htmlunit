@@ -417,10 +417,10 @@ public class HtmlForm extends HtmlElement {
      * @return the page contained by this form's window after the reset
      */
     public Page reset() {
-        final SgmlPage htmlPage = getPage();
+        final SgmlPage sgmlPage = getPage();
         final ScriptResult scriptResult = fireEvent(Event.TYPE_RESET);
         if (ScriptResult.isFalse(scriptResult)) {
-            return htmlPage.getWebClient().getCurrentWindow().getEnclosedPage();
+            return sgmlPage.getWebClient().getCurrentWindow().getEnclosedPage();
         }
 
         for (final HtmlElement next : getHtmlElementDescendants()) {
@@ -429,7 +429,7 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
-        return htmlPage;
+        return sgmlPage;
     }
 
     /**
@@ -490,7 +490,7 @@ public class HtmlForm extends HtmlElement {
                 return ((HtmlInput) element).isChecked();
             }
         }
-        if (HtmlSelect.TAG_NAME.equals(tagName)) {
+        if (element instanceof HtmlSelect) {
             return ((HtmlSelect) element).isValidForSubmission();
         }
         return true;

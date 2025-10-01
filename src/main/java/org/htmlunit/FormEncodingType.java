@@ -30,7 +30,7 @@ public final class FormEncodingType implements Serializable {
     /** URL-encoded form encoding. */
     public static final FormEncodingType URL_ENCODED = new FormEncodingType("application/x-www-form-urlencoded");
 
-    /** Multipart form encoding (used to be a constant in HttpClient but it was deprecated with no alternative). */
+    /** Multipart form encoding (used to be a constant in HttpClient, but it was deprecated with no alternative). */
     public static final FormEncodingType MULTIPART = new FormEncodingType("multipart/form-data");
 
     /** text/plain. */

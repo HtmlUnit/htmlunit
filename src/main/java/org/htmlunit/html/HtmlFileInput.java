@@ -68,7 +68,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
 
     /**
      * Returns the in-memory data assigned to this file input element, if any.
-     * @return {@code null} if {@link #setData(byte[])} hasn't be used
+     * @return {@code null} if {@link #setData(byte[])} hasn't been used
      */
     public final byte[] getData() {
         return data_;

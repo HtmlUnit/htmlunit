@@ -410,16 +410,12 @@ public final class EncodingSniffer {
         if (bytes[i] != '=') {
             return null;
         }
-        i++;
-        if (i == bytes.length) {
-            return null;
-        }
-        while (bytes[i] == 0x09 || bytes[i] == 0x0A || bytes[i] == 0x0C || bytes[i] == 0x0D || bytes[i] == 0x20) {
+        do {
             i++;
             if (i == bytes.length) {
                 return null;
             }
-        }
+        } while (bytes[i] == 0x09 || bytes[i] == 0x0A || bytes[i] == 0x0C || bytes[i] == 0x0D || bytes[i] == 0x20);
         if (bytes[i] == '"') {
             if (bytes.length <= i + 1) {
                 return null;
@@ -580,7 +576,7 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Skips ahead to the first occurrence of any of the specified targets within the specified array,
+     * Skips ahead to the first occurrence of the specified targets within the specified array,
      * starting at the specified index. This method returns <code>-1</code> if none of the targets are found.
      *
      * @param bytes the array to search through

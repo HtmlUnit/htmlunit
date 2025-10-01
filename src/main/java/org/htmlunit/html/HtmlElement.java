@@ -209,7 +209,7 @@ public abstract class HtmlElement extends DomElement {
         final boolean mappedElement = isAttachedToPage()
                 && (DomElement.NAME_ATTRIBUTE.equals(qualifiedName) || DomElement.ID_ATTRIBUTE.equals(qualifiedName));
         if (mappedElement) {
-            // cast is save here because isMappedElement checks for HtmlPage
+            // cast is safe here because isMappedElement checks for HtmlPage
             htmlPage.removeMappedElement(this, false, false);
         }
 
@@ -363,7 +363,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Support for reporting HTML attribute changes. This method can be called when an attribute
-     * has been added and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
+     * has been added, and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
      * registered {@link HtmlAttributeChangeListener}s.
      * <p>
      * Note that this method recursively calls this element's parent's
@@ -381,7 +381,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Support for reporting HTML attribute changes. This method can be called when an attribute
-     * has been replaced and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
+     * has been replaced, and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
      * registered {@link HtmlAttributeChangeListener}s.
      * <p>
      * Note that this method recursively calls this element's parent's
@@ -399,7 +399,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Support for reporting HTML attribute changes. This method can be called when an attribute
-     * has been removed and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
+     * has been removed, and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
      * registered {@link HtmlAttributeChangeListener}s.
      * <p>
      * Note that this method recursively calls this element's parent's
@@ -864,7 +864,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Indicates if the provided character can by "typed" in the element.
+     * Indicates if the provided character can be "typed" in the element.
      * @param c the character
      * @return {@code true} if it is accepted
      */

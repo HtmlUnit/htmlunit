@@ -175,7 +175,7 @@ public class Element extends Node {
     }
 
     /**
-     * Creates the JS object for the property attributes. This object will the be cached.
+     * Creates the JS object for the property attributes. This object will be cached.
      * @return the JS object
      */
     protected NamedNodeMap createAttributesObject() {
@@ -636,7 +636,7 @@ public class Element extends Node {
                     }
                     String classAttribute = ((HtmlElement) node).getAttributeDirect("class");
                     if (ATTRIBUTE_NOT_DEFINED == classAttribute) {
-                        return false; // probably better performance as most of elements won't have a class attribute
+                        return false; // probably better performance as most elements won't have a class attribute
                     }
 
                     classAttribute = " " + classAttribute + " ";
@@ -760,7 +760,7 @@ public class Element extends Node {
         // compute the where and how the new nodes should be added
         if (POSITION_AFTER_BEGIN.equalsIgnoreCase(where)) {
             if (currentNode.getFirstChild() == null) {
-                // new nodes should appended to the children of current node
+                // new nodes should append to the children of current node
                 node = currentNode;
                 append = true;
             }
@@ -776,13 +776,13 @@ public class Element extends Node {
             append = false;
         }
         else if (POSITION_BEFORE_END.equalsIgnoreCase(where)) {
-            // new nodes should appended to the children of current node
+            // new nodes should append to the children of current node
             node = currentNode;
             append = true;
         }
         else if (POSITION_AFTER_END.equalsIgnoreCase(where)) {
             if (currentNode.getNextSibling() == null) {
-                // new nodes should appended to the children of parent node
+                // new nodes should append to the children of parent node
                 node = currentNode.getParentNode();
                 append = true;
             }

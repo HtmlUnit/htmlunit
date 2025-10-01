@@ -179,7 +179,7 @@ public class HTMLDocument extends Document {
 
     /**
      * Returns the current document instance, using <code>thisObj</code> as a hint.
-     * @param thisObj a hint as to the current document (may be the prototype when function is used without "this")
+     * @param thisObj a hint as to the current document (maybe the prototype when function is used without "this")
      * @return the current document instance
      */
     private static HTMLDocument getDocument(final Scriptable thisObj) {
@@ -199,7 +199,7 @@ public class HTMLDocument extends Document {
 
     /**
      * This a hack!!! A cleaner way is welcome.
-     * Handle a case where document.write is simply ignored.
+     * Handle a case where document.write() is simply ignored.
      * See HTMLDocumentWrite2Test.write_fromScriptAddedWithAppendChild_external.
      * @param executing indicates if executing or not
      */
@@ -602,7 +602,7 @@ public class HTMLDocument extends Document {
 
         final boolean alsoFrames = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_ALSO_FRAMES);
 
-        // for performance
+        // for performance,
         // we will calculate the elements to decide if we really have
         // to really create a HTMLCollection or not
         final List<DomNode> matchingElements = getItComputeElements(page, name, alsoFrames);
