@@ -2467,7 +2467,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /**
      * Returns the specified length value as a pixel length value.
      * This method does <b>NOT</b> handle percentages correctly;
-     * use {@link CssPixelValueConverter#pixelValue(DomElement, CssValue)} if you need percentage support).
+     * use {@link CssPixelValueConverter#pixelValue(DomElement, CssValue)} if you need percentage support.
      * @param value the length value to convert to a pixel length value
      * @return the specified length value as a pixel length value
      * @see CssPixelValueConverter#pixelString(DomElement, CssValue)

@@ -250,7 +250,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Method imageCtor = HTMLImageElement.class.getDeclaredMethod("jsConstructorImage");
         additionalCtor(jsWindowScope, prototypesPerJSName.get("HTMLImageElement"), imageCtor, "Image", "HTMLImageElement");
         final Method optionCtor = HTMLOptionElement.class.getDeclaredMethod("jsConstructorOption",
-                new Class[] {Object.class, String.class, boolean.class, boolean.class});
+                Object.class, String.class, boolean.class, boolean.class);
         additionalCtor(jsWindowScope, prototypesPerJSName.get("HTMLOptionElement"), optionCtor, "Option", "HTMLOptionElement");
 
         if (!webClient.getOptions().isWebSocketEnabled()) {
@@ -327,8 +327,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 if (prototype != null) {
                     final Map.Entry<String, Member> jsConstructor = config.getJsConstructor();
                     if (jsConstructor == null) {
-                        final ScriptableObject constructor = config.getHostClass().getDeclaredConstructor().newInstance();
-                        ((HtmlUnitScriptable) constructor).setClassName(jsClassName);
+                        final HtmlUnitScriptable constructor = config.getHostClass().getDeclaredConstructor().newInstance();
+                        constructor.setClassName(jsClassName);
                         defineConstructor(jsScope, prototype, constructor);
                         configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);
 

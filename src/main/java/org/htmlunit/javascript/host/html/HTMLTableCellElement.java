@@ -215,7 +215,7 @@ public class HTMLTableCellElement extends HTMLElement {
                 getDomNodeOrDie().setAttribute("rowSpan", "1");
                 return;
             }
-            if (i <= 0) {
+            if (i == 0) {
                 throw new NumberFormatException(rowSpan);
             }
             getDomNodeOrDie().setAttribute("rowSpan", Integer.toString(i));

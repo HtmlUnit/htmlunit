@@ -58,10 +58,7 @@ public abstract class HtmlTableCell extends HtmlElement {
             if (span < 1) {
                 return 1;
             }
-            if (span > 1_000) {
-                return 1_000;
-            }
-            return span;
+            return Math.min(span, 1_000);
         }
         catch (final NumberFormatException e) {
             return 1;
@@ -85,10 +82,7 @@ public abstract class HtmlTableCell extends HtmlElement {
                 return 0;
             }
 
-            if (span > 65_534) {
-                return 65_534;
-            }
-            return span;
+            return Math.min(span, 65_534);
         }
         catch (final NumberFormatException e) {
             return 1;

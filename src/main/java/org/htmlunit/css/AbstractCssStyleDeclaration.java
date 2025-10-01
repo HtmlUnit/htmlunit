@@ -87,7 +87,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
 
     /**
      * Get the value for the style attribute.
-     * This impl ignores the default getDefaultValueIfEmpty flag, but there is a overload
+     * This impl ignores the default getDefaultValueIfEmpty flag, but there is an overload
      * in {@link ComputedCssStyleDeclaration}.
      * @param definition the definition
      * @param getDefaultValueIfEmpty whether to get the default value if empty or not
@@ -113,7 +113,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * attributes exists, its value is returned. If neither attribute exists, an empty string
      * is returned.</p>
      *
-     * <p>The second named attribute may be shorthand for a the actual desired property.
+     * <p>The second named attribute may be shorthand for the actual desired property.
      * The following formats are possible:</p>
      * <ol>
      *   <li><code>top right bottom left</code>: All values are explicit.</li>
@@ -833,9 +833,9 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
             return "";
         }
 
-        final String trimedOpacity = opacity.trim();
+        final String trimmedOpacity = opacity.trim();
         try {
-            final double value = Double.parseDouble(trimedOpacity);
+            final double value = Double.parseDouble(trimmedOpacity);
             if (value % 1 == 0) {
                 return Integer.toString((int) value);
             }

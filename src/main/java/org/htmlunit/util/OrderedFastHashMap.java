@@ -31,24 +31,24 @@ import java.util.Set;
 /**
  * Simple and efficient linked map or better ordered map implementation to
  * replace the default linked list which is heavy.
- *
+ * <p>
  * This map does not support null and it is not thread-safe. It implements the
  * map interface but only for compatibility reason in the sense of replacing a
  * regular map. Iterator and streaming methods are either not implemented or
  * less efficient.
- *
+ * <p>
  * It goes the extra mile to avoid the overhead of wrapper objects.
- *
+ * <p>
  * Because you typically know what you do, we run minimal index checks only and
  * rely on the default exceptions by Java. Why should we do things twice?
- *
+ * <p>
  * Important Note: This is meant for small maps because to save on memory
  * allocation and churn, we are not keeping a wrapper for a reference from the
  * map to the list, only from the list to the map. Hence when you remove a key,
  * we have to iterate the entire list. Mostly, half of it most likely, but still
  * expensive enough. When you have something small like 10 to 20 entries, this
  * won't matter that much especially when a remove might be a rare event.
- *
+ * <p>
  * This is based on FashHashMap from XLT which is based on a version from:
  * https://github.com/mikvor/hashmapTest/blob/master/src/main/java/map/objobj/ObjObjMap.java
  * No concrete license specified at the source. The project is public domain.

@@ -108,8 +108,8 @@ public class SubnetUtils {
     }
 
     /**
-     * Tests if the parameter <code>address</code> is in the range of usable endpoint addresses for this subnet. This excludes the network and broadcast
-     * addresses by default. Use {@link SubnetUtils#setInclusiveHostCount(boolean)} to change this.
+     * Tests if the parameter <code>address</code> is in the range of usable endpoint addresses for this subnet.
+     * This excludes the network and broadcast addresses by default.
      *
      * @param address the address to check
      * @return true if it is in range

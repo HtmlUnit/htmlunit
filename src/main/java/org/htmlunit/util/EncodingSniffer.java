@@ -644,7 +644,7 @@ public final class EncodingSniffer {
     static byte[] read(final InputStream content, final int size) throws IOException {
         byte[] bytes = new byte[size];
         // using IOUtils guarantees that it will read as many bytes as possible before giving up;
-        // this may not always be the case for subclasses of InputStream} - eg. GZIPInputStream
+        // this may not always be the case for subclasses of InputStream - e.g. GZIPInputStream
         final int count = IOUtils.read(content, bytes);
         if (count < size) {
             final byte[] smaller = new byte[count];
@@ -671,7 +671,7 @@ public final class EncodingSniffer {
         final byte[] joined = new byte[prefixLength + size];
 
         // using IOUtils guarantees that it will read as many bytes as possible before giving up;
-        // this may not always be the case for subclasses of InputStream} - eg. GZIPInputStream
+        // this may not always be the case for subclasses of InputStream - e.g. GZIPInputStream
         final int count = IOUtils.read(content, joined, prefixLength, joined.length - prefixLength);
         if (count < size) {
             final byte[] smaller = new byte[prefixLength + count];

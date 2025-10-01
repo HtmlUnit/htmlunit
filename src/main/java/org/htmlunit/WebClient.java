@@ -3080,16 +3080,16 @@ public class WebClient implements Serializable, AutoCloseable {
      * Our pool of CSS3Parsers. If you need a parser, get it from here and use the AutoCloseable
      * functionality with a try-with-resource block. If you don't want to do that at all, continue
      * to build CSS3Parsers the old fashioned way.
-     *
+     * <p>
      * Fetching a parser is thread safe. This API is built to minimize synchronization overhead,
      * hence it is possible to miss a returned parser from another thread under heavy pressure,
      * but because that is unlikely, we keep it simple and efficient. Caches are not supposed
      * to give cutting-edge guarantees.
-     *
+     * <p>
      * This concept avoids a resource leak when someone does not close the fetched
      * parser because the pool does not know anything about the parser unless
      * it returns. We are not running a checkout-checkin concept.
-     *
+     * <p>
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      */
     static class CSS3ParserPool {
@@ -3130,7 +3130,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * This is a poolable CSS3Parser which can be reused automatically when closed.
      * A regular CSS3Parser is not thread-safe, hence also our pooled parser
      * is not thread-safe.
-     *
+     * <p>
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      */
     public static class PooledCSS3Parser extends CSS3Parser implements AutoCloseable {

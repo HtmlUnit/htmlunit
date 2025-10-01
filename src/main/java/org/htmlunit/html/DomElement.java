@@ -425,7 +425,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Returns the value of the attribute specified by name or an empty string. If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
-     * attribute was specified but it was empty.
+     * attribute was specified, but it was empty.
      *
      * @param attributeName the name of the attribute
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
@@ -577,7 +577,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Returns the value of the attribute specified by namespace and local name or an empty
      * string. If the result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
-     * attribute was specified but it was empty.
+     * attribute was specified, but it was empty.
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param localName the name within the namespace

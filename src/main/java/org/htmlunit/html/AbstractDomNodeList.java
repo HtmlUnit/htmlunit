@@ -77,7 +77,7 @@ public abstract class AbstractDomNodeList<E extends DomNode> extends AbstractLis
      * @return the nodes in this node list
      */
     private List<E> getNodes() {
-        // a bit of a hack but i like to avoid synchronization
+        // a bit of a hack but I like to avoid synchronization
         // see https://github.com/HtmlUnit/htmlunit/issues/882
         //
         // there is a small chance that the cachedElements_ are

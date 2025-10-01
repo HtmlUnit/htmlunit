@@ -286,8 +286,8 @@ public class CssStyleSheet implements Serializable {
     /**
      * Loads the stylesheet at the specified link or href.
      * @param element the parent DOM element
-     * @param link the stylesheet's link (may be {@code null} if a <code>url</code> is specified)
-     * @param url the stylesheet's url (may be {@code null} if a <code>link</code> is specified)
+     * @param link the stylesheet's link (maybe {@code null} if a <code>url</code> is specified)
+     * @param url the stylesheet's url (maybe {@code null} if a <code>link</code> is specified)
      * @return the loaded stylesheet
      */
     public static CssStyleSheet loadStylesheet(final HtmlElement element, final HtmlLink link, final String url) {
@@ -1553,7 +1553,7 @@ public class CssStyleSheet implements Serializable {
      * @param style the style to modify
      * @param element the element to which style rules must apply in order for them to be added to
      *        the specified style
-     * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
+     * @param pseudoElement a string specifying the pseudo-element to match (maybe {@code null})
      */
     public void modifyIfNecessary(final ComputedCssStyleDeclaration style, final DomElement element,
             final String pseudoElement) {

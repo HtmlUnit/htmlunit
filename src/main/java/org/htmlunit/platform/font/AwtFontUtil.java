@@ -40,7 +40,7 @@ public class AwtFontUtil implements FontUtil {
                 lineCount++;
             }
             else {
-                // width is specified, we have to to some line breaking
+                // width is specified, we have to do some line breaking
                 final AttributedString attributedString = new AttributedString(line);
                 attributedString.addAttribute(TextAttribute.SIZE, fontSizeInt / 1.1);
                 final LineBreakMeasurer lineBreakMeasurer =

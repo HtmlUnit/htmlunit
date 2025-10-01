@@ -1218,7 +1218,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
     /**
      * Get the value for the style attribute.
-     * This impl ignores the default getDefaultValueIfEmpty flag, but there is a overload
+     * This impl ignores the default getDefaultValueIfEmpty flag, but there is an overload
      * in {@link ComputedCSSStyleDeclaration}.
      * @param definition the definition
      * @param getDefaultValueIfEmpty whether to get the default value if empty or not
@@ -1950,7 +1950,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param important important value
      * @param auto true if auto is supported
      * @param percent true if percent is supported
-     * @param unitRequired unit is required
      * @param validValues valid values
      */
     private void setStyleLengthAttribute(final String name, final Object value, final String important,

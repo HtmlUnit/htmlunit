@@ -35,7 +35,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      * Instantiate a new attribute.
      *
      * @param page the page that the attribute belongs to
-     * @param namespaceURI the namespace that defines the attribute name (may be {@code null})
+     * @param namespaceURI the namespace that defines the attribute name (maybe {@code null})
      * @param qualifiedName the name of the attribute
      * @param value the value of the attribute
      * @param specified {@code true} if this attribute was explicitly given a value in the source document,

@@ -324,21 +324,15 @@ public class HtmlUnitContextFactory extends ContextFactory {
     protected boolean hasFeature(final Context cx, final int featureIndex) {
         switch (featureIndex) {
             case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER:
-                return true;
-            case Context.FEATURE_E4X:
-                return false;
             case Context.FEATURE_OLD_UNDEF_NULL_THIS:
-                return true;
-            case Context.FEATURE_NON_ECMA_GET_YEAR:
-                return false;
             case Context.FEATURE_LITTLE_ENDIAN:
-                return true;
             case Context.FEATURE_LOCATION_INFORMATION_IN_ERROR:
-                return true;
             case Context.FEATURE_INTL_402:
-                return true;
             case Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW:
                 return true;
+            case Context.FEATURE_E4X:
+            case Context.FEATURE_NON_ECMA_GET_YEAR:
+                return false;
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME:
                 return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
             case Context.FEATURE_HTMLUNIT_ARRAY_SORT_COMPERATOR_ACCEPTS_BOOL:

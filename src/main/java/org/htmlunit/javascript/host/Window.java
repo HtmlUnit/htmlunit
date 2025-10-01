@@ -1205,8 +1205,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public void scrollTo(final Scriptable x, final Scriptable y) {
         final HTMLElement body = document_.getBody();
         if (body != null) {
-            int xOff = 0;
-            int yOff = 0;
+            int xOff;
+            int yOff;
             if (y != null) {
                 xOff = JavaScriptEngine.toInt32(x);
                 yOff = JavaScriptEngine.toInt32(y);
@@ -2015,7 +2015,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             }
         }
 
-        String origin = "";
+        final String origin;
         try {
             final URL originUrl = UrlUtils.getUrlWithoutPathRefQuery(senderURL);
             origin = UrlUtils.removeRedundantPort(originUrl).toExternalForm();
@@ -2079,7 +2079,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * The performance attribute is defined as replacable
      * (https://w3c.github.io/hr-time/#the-performance-attribute) but not implemented
      * as that.
-     *
+     * <p>
      * Sets the {@code performance} property.
      * @param performance the value to overwrite the defined property value
      */

@@ -279,17 +279,11 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void remove(final int index) {
-        int idx = index;
-        if (idx < 0) {
+        if (index < 0 || index >= getLength()) {
             return;
         }
 
-        idx = Math.max(idx, 0);
-        if (idx >= getLength()) {
-            return;
-        }
-
-        htmlSelect_.removeOption(idx);
+        htmlSelect_.removeOption(index);
     }
 
     /**

@@ -163,7 +163,10 @@ public class Document extends Node {
 
     private static final Log LOG = LogFactory.getLog(Document.class);
 
-    /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
+    /**
+     * see <a href="https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands">
+     *     Executing Commands</a>
+     */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
     private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
     /** The formatter to use for the <code>lastModified</code> attribute. */
@@ -960,7 +963,7 @@ public class Document extends Node {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Called from the HTMLParser if a 'X-UA-Compatible' meta tag found.
+     * Called from the HTMLParser if an 'X-UA-Compatible' meta tag found.
      * @param documentMode the mode forced by the meta tag
      */
     public void forceDocumentMode(final int documentMode) {

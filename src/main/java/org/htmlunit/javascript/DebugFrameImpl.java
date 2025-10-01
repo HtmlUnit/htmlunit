@@ -168,7 +168,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
     }
 
     /**
-     * Returns the name of the function corresponding to this frame, if it is a function and it has
+     * Returns the name of the function corresponding to this frame, if it is a function, and it has
      * a name. If the function does not have a name, this method will try to return the name under
      * which it was referenced. See <a
      * href="http://www.digital-web.com/articles/scope_in_javascript/">this page</a> for a good

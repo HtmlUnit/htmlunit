@@ -72,7 +72,6 @@ public class DOMImplementation extends HtmlUnitScriptable {
                 switch (version) {
                     case "1.0":
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
@@ -82,9 +81,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
             case "Views":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
@@ -92,14 +89,19 @@ public class DOMImplementation extends HtmlUnitScriptable {
                 break;
 
             case "StyleSheets":
+            case "KeyboardEvents":
+            case "MutationNameEvents":
+            case "TextEvents":
+            case "LS":
+            case "LS-Async":
+            case "Validation":
+            case "XPath":
                 return true;
 
             case "CSS":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
@@ -109,9 +111,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
             case "CSS2":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
@@ -121,9 +121,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
             case "CSS3":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
@@ -136,7 +134,6 @@ public class DOMImplementation extends HtmlUnitScriptable {
             case "MutationEvents":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
                     case "3.0":
                         return true;
@@ -148,51 +145,28 @@ public class DOMImplementation extends HtmlUnitScriptable {
                 switch (version) {
                     case "1.0":
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
                 }
                 break;
-
-            case "KeyboardEvents":
-                return true;
-
-            case "MutationNameEvents":
-                return true;
-
-            case "TextEvents":
-                return true;
-
-            case "LS":
-            case "LS-Async":
-                return true;
 
             case "Range":
             case "Traversal":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
                 }
                 break;
-
-            case "Validation":
-                return true;
-
-            case "XPath":
-                return true;
 
             case "http://www.w3.org/TR/SVG11/feature#BasicStructure":
             case "http://www.w3.org/TR/SVG11/feature#Shape":
                 switch (version) {
                     case "1.0":
                     case "1.1":
-                        return true;
                     case "1.2":
                         return true;
                     default:

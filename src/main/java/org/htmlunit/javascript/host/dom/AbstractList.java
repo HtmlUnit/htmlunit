@@ -62,7 +62,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     private boolean attributeChangeSensitive_;
 
     /**
-     * Cache collection elements when possible, so as to avoid expensive XPath expression evaluations.
+     * Cache collection elements when possible, to avoid expensive XPath expression evaluations.
      */
     private List<DomNode> cachedElements_;
 

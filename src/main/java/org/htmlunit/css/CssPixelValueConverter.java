@@ -57,7 +57,7 @@ public final class CssPixelValueConverter {
     }
 
     /**
-     * Returns the specified length CSS attribute value value as a pixel length value.
+     * Returns the specified length CSS attribute value as a pixel length value.
      * If the specified CSS attribute value is a percentage, this method
      * uses the specified value object to recursively retrieve the base (parent) CSS attribute value.
      * @param element the element for which the CSS attribute value is to be retrieved
@@ -78,7 +78,7 @@ public final class CssPixelValueConverter {
     /**
      * Converts the specified length string value into an integer number of pixels. This method does
      * <b>NOT</b> handle percentages correctly; use {@link #pixelString(DomElement, CssValue)} if you
-     * need percentage support).
+     * need percentage support.
      * @param value the length string value to convert to an integer number of pixels
      * @return the integer number of pixels corresponding to the specified length string value
      * @see <a href="http://htmlhelp.com/reference/css/units.html">CSS Units</a>
