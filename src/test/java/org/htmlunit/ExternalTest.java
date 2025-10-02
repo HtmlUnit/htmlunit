@@ -370,6 +370,10 @@ public class ExternalTest {
                 && version.startsWith("6.")) {
             return true;
         }
+        if ("org.junit.platform".equals(groupId)
+                && version.startsWith("6.")) {
+            return true;
+        }
 
         // really old common versions
         if ("commons-io".equals(artifactId) && (version.startsWith("2003"))) {
