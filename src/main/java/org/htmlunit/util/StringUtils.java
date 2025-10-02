@@ -241,13 +241,13 @@ public final class StringUtils {
      * @param replaceChars a set of characters to replace, may be null.
      * @return modified String, or the input string if no replace was done.
      */
-    public static String replaceChars(final String str, final String searchChars, String replaceChars) {
+    @SuppressWarnings("null")
+    public static String replaceChars(final String str, final String searchChars, final String replaceChars) {
         if (isEmptyOrNull(str) || isEmptyOrNull(searchChars)) {
             return str;
         }
 
-        replaceChars = replaceChars == null ? "" : replaceChars;
-        final int replaceCharsLength = replaceChars.length();
+        final int replaceCharsLength = replaceChars == null ? 0 : replaceChars.length();
         final int strLength = str.length();
 
         StringBuilder buf = null;
@@ -255,7 +255,7 @@ public final class StringUtils {
         for ( ; i < strLength; i++) {
             final char ch = str.charAt(i);
             final int index = searchChars.indexOf(ch);
-            if (index >= 0) {
+            if (index != -1) {
                 buf = new StringBuilder(strLength);
                 buf.append(str, 0, i);
                 if (index < replaceCharsLength) {
@@ -273,7 +273,7 @@ public final class StringUtils {
         for ( ; i < strLength; i++) {
             final char ch = str.charAt(i);
             final int index = searchChars.indexOf(ch);
-            if (index >= 0) {
+            if (index != -1) {
                 if (index < replaceCharsLength) {
                     buf.append(replaceChars.charAt(index));
                 }
