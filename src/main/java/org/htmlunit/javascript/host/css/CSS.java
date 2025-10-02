@@ -73,32 +73,25 @@ public class CSS extends HtmlUnitScriptable {
             // If the character is in the range [\1-\1f] (U+0001 to U+001F) or is U+007F,
             // then the character escaped as code point.
             else if (('\u0001' <= c && c <= '\u001f') || c == '\u007f') {
-                escaped.append('\\');
-                escaped.append(Integer.toHexString(c));
-                escaped.append(' ');
+                escaped.append('\\').append(Integer.toHexString(c)).append(' ');
             }
 
             // If the character is the first character and is in the range [0-9] (U+0030 to U+0039),
             // then the character escaped as code point.
             else if (i == 0 && ('\u0030' <= c && c <= '\u0039')) {
-                escaped.append('\\');
-                escaped.append(Integer.toHexString(c));
-                escaped.append(' ');
+                escaped.append('\\').append(Integer.toHexString(c)).append(' ');
             }
 
             // If the character is the second character and is in the range [0-9] (U+0030 to U+0039)
             // and the first character is a "-" (U+002D), then the character escaped as code point.
             else if (i == 1 && ('\u0030' <= c && c <= '\u0039') && ident.charAt(0) == '-') {
-                escaped.append('\\');
-                escaped.append(Integer.toHexString(c));
-                escaped.append(' ');
+                escaped.append('\\').append(Integer.toHexString(c)).append(' ');
             }
 
             // If the character is the first character and is a "-" (U+002D),
             // and there is no second character, then the escaped character.
             else if (i == 0 && c == '-' && length == 1) {
-                escaped.append('\\');
-                escaped.append(c);
+                escaped.append('\\').append(c);
             }
 
             // If the character is not handled by one of the above rules
@@ -117,8 +110,7 @@ public class CSS extends HtmlUnitScriptable {
 
             // Otherwise, the escaped character
             else {
-                escaped.append('\\');
-                escaped.append(c);
+                escaped.append('\\').append(c);
             }
         }
 
