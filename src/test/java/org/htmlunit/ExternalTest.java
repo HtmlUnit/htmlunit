@@ -365,6 +365,12 @@ public class ExternalTest {
             return true;
         }
 
+        // 6.x requires java17
+        if ("org.junit.jupiter".equals(groupId)
+                && version.startsWith("6.")) {
+            return true;
+        }
+
         // really old common versions
         if ("commons-io".equals(artifactId) && (version.startsWith("2003"))) {
             return true;
