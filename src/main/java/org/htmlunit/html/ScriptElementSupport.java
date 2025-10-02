@@ -297,7 +297,7 @@ public final class ScriptElementSupport {
         }
 
         if (!StringUtils.isEmptyOrNull(languageAttribute)) {
-            return org.htmlunit.util.StringUtils.startsWithIgnoreCase(languageAttribute, "javascript");
+            return StringUtils.startsWithIgnoreCase(languageAttribute, "javascript");
         }
         return true;
     }

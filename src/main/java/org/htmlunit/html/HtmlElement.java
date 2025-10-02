@@ -1262,7 +1262,7 @@ public abstract class HtmlElement extends DomElement {
             return;
         }
 
-        if (org.htmlunit.util.StringUtils.isEmptyString(hidden)) {
+        if (StringUtils.isEmptyString(hidden)) {
             removeAttribute(ATTRIBUTE_HIDDEN);
             return;
         }

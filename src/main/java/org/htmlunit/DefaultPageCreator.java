@@ -119,8 +119,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             return PageType.UNKNOWN;
         }
 
-        final String contentTypeLC = org.htmlunit.util.StringUtils
-                                            .toRootLowerCase(contentType);
+        final String contentTypeLC = StringUtils.toRootLowerCase(contentType);
 
         if (MimeType.isJavascriptMimeType(contentTypeLC)) {
             return PageType.JAVASCRIPT;

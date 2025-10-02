@@ -87,7 +87,7 @@ public class HtmlOutput extends HtmlElement implements LabelableElement, Validat
      */
     @Override
     public boolean isCustomErrorValidityState() {
-        return !org.htmlunit.util.StringUtils.isEmptyOrNull(customValidity_);
+        return !StringUtils.isEmptyOrNull(customValidity_);
     }
 
     @Override

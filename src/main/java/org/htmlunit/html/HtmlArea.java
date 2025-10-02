@@ -80,7 +80,7 @@ public class HtmlArea extends HtmlElement {
         final String href = getHrefAttribute().trim();
         if (!href.isEmpty()) {
             final HtmlPage page = (HtmlPage) getPage();
-            if (org.htmlunit.util.StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 page.executeJavaScript(
                     href, "javascript url", getStartLineNumber());
                 return false;
@@ -267,7 +267,7 @@ public class HtmlArea extends HtmlElement {
 
     private Rectangle2D parseRect() {
         // browsers seem to support comma and blank
-        final String[] coords = org.htmlunit.util.StringUtils.splitAtCommaOrBlank(getCoordsAttribute());
+        final String[] coords = StringUtils.splitAtCommaOrBlank(getCoordsAttribute());
 
         double leftX = 0;
         double topY = 0;
@@ -299,7 +299,7 @@ public class HtmlArea extends HtmlElement {
 
     private Circle2D parseCircle() {
         // browsers seem to support comma and blank
-        final String[] coords = org.htmlunit.util.StringUtils.splitAtCommaOrBlank(getCoordsAttribute());
+        final String[] coords = StringUtils.splitAtCommaOrBlank(getCoordsAttribute());
 
         double centerX = 0;
         double centerY = 0;
@@ -328,7 +328,7 @@ public class HtmlArea extends HtmlElement {
 
     private Shape2D parsePoly() {
         // browsers seem to support comma and blank
-        final String[] coords = org.htmlunit.util.StringUtils.splitAtCommaOrBlank(getCoordsAttribute());
+        final String[] coords = StringUtils.splitAtCommaOrBlank(getCoordsAttribute());
 
         try {
             if (coords.length > 1) {

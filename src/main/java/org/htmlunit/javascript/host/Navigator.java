@@ -111,7 +111,7 @@ public class Navigator extends HtmlUnitScriptable {
         }
 
         final ArrayList<String> res = new ArrayList<>();
-        final String[] parts = org.htmlunit.util.StringUtils.splitAtComma(acceptLang);
+        final String[] parts = StringUtils.splitAtComma(acceptLang);
         for (final String part : parts) {
             if (!StringUtils.isEmptyOrNull(part)) {
                 final String lang = org.apache.commons.lang3.StringUtils.substringBefore(part, ";").trim();
