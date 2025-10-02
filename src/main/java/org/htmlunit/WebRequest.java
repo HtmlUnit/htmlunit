@@ -29,7 +29,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -645,7 +644,8 @@ public class WebRequest implements Serializable {
      * @param defaultResponseContentCharset the default character set of the response
      */
     public void setDefaultResponseContentCharset(final Charset defaultResponseContentCharset) {
-        this.defaultResponseContentCharset_ = Objects.requireNonNull(defaultResponseContentCharset);
+        WebAssert.notNull("defaultResponseContentCharset", defaultResponseContentCharset);
+        defaultResponseContentCharset_ = defaultResponseContentCharset;
     }
 
     /**

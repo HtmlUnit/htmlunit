@@ -21,6 +21,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
 import java.lang.reflect.Executable;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
@@ -628,4 +629,16 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule jettyPackageRule = noClasses()
         .should().dependOnClassesThat().resideInAnyPackage("org.eclipse.jetty..");
+
+
+    /**
+     * Some methods should not be used.
+     */
+    @ArchTest
+    public static final ArchRule forbidObjectsRequireNonNull = noClasses()
+        .that()
+            .resideOutsideOfPackage("org.htmlunit.corejs..")
+            .and().resideOutsideOfPackage("org.htmlunit.jetty..")
+
+        .should().callMethod(Objects.class, "requireNonNull", Object.class); // Objects.requireNonNull(Object) is forbidden, always add a message
 }
