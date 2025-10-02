@@ -201,7 +201,11 @@ public class XMLSerializer extends HtmlUnitScriptable {
                     break;
             }
         }
-        if (!startTagClosed) {
+
+        if (startTagClosed) {
+            builder.append("</").append(nodeName).append('>');
+        }
+        else {
             final String tagName = StringUtils.toRootLowerCase(nodeName);
             if (NON_EMPTY_TAGS.contains(tagName)) {
                 builder.append("></").append(nodeName).append('>');
@@ -209,9 +213,6 @@ public class XMLSerializer extends HtmlUnitScriptable {
             else {
                 builder.append(optionalPrefix).append("/>");
             }
-        }
-        else {
-            builder.append("</").append(nodeName).append('>');
         }
     }
 

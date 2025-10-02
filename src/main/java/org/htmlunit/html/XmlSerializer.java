@@ -125,10 +125,7 @@ public class XmlSerializer {
             builder_.append(indent_).append('<');
             printOpeningTag(node);
 
-            if (!hasChildren && !node.isEmptyXmlTagExpanded()) {
-                builder_.append("/>\n");
-            }
-            else {
+            if (hasChildren || node.isEmptyXmlTagExpanded()) {
                 builder_.append(">\n");
                 for (DomNode child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
                     indent_.append("  ");
@@ -141,6 +138,9 @@ public class XmlSerializer {
                     indent_.setLength(indent_.length() - 2);
                 }
                 builder_.append(indent_).append("</").append(node.getTagName()).append(">\n");
+            }
+            else {
+                builder_.append("/>\n");
             }
         }
     }
@@ -397,12 +397,12 @@ public class XmlSerializer {
         int counter = 0;
         while (true) {
             final String fileName;
-            if (counter != 0) {
-                fileName = StringUtils.substringBeforeLast(name, ".")
-                    + "_" + counter + "." + StringUtils.substringAfterLast(name, ".");
+            if (counter == 0) {
+                fileName = name;
             }
             else {
-                fileName = name;
+                fileName = StringUtils.substringBeforeLast(name, ".")
+                        + "_" + counter + "." + StringUtils.substringAfterLast(name, ".");
             }
             FileUtils.forceMkdir(outputDir_);
             final File f = new File(outputDir_, fileName);

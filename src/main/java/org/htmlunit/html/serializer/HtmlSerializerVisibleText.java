@@ -378,11 +378,11 @@ public class HtmlSerializerVisibleText {
             final HtmlTableRow htmlTableRow, final Mode mode) {
         boolean first = true;
         for (final HtmlTableCell cell : htmlTableRow.getCells()) {
-            if (!first) {
-                builder.appendBlank();
+            if (first) {
+                first = false;
             }
             else {
-                first = false;
+                builder.appendBlank();
             }
             appendChildren(builder, cell, mode); // trim?
         }

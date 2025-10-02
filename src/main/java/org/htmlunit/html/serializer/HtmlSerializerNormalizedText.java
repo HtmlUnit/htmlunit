@@ -341,11 +341,11 @@ public class HtmlSerializerNormalizedText {
     protected void appendTableRow(final HtmlSerializerTextBuilder builder, final HtmlTableRow htmlTableRow) {
         boolean first = true;
         for (final HtmlTableCell cell : htmlTableRow.getCells()) {
-            if (!first) {
-                builder.appendTab();
+            if (first) {
+                first = false;
             }
             else {
-                first = false;
+                builder.appendTab();
             }
             appendChildren(builder, cell); // trim?
         }

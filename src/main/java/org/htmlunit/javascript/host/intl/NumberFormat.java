@@ -171,7 +171,10 @@ public class NumberFormat extends HtmlUnitScriptable {
     public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         final String[] locales;
-        if (args.length != 0) {
+        if (args.length == 0) {
+            locales = new String[] {""};
+        }
+        else {
             if (args[0] instanceof NativeArray) {
                 final NativeArray array = (NativeArray) args[0];
                 locales = new String[(int) array.getLength()];
@@ -182,9 +185,6 @@ public class NumberFormat extends HtmlUnitScriptable {
             else {
                 locales = new String[] {JavaScriptEngine.toString(args[0])};
             }
-        }
-        else {
-            locales = new String[] {""};
         }
         final Window window = getWindow(ctorObj);
         final NumberFormat format = new NumberFormat(locales, window.getBrowserVersion());
