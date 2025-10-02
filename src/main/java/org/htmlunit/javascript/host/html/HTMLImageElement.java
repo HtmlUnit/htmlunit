@@ -224,7 +224,7 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     /**
-     * Support for the image.complete property.
+     * Support for the image.complete() property.
      * @return the value of the {@code complete} property
      */
     @JsxGetter

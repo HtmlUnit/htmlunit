@@ -825,7 +825,7 @@ public class HttpWebConnection implements WebConnection {
     /**
      * Constructs an appropriate WebResponse.
      * May be overridden by subclasses to return a specialized WebResponse.
-     * @param responseData Data that was send back
+     * @param responseData Data that was sent back
      * @param webRequest the request used to get this response
      * @param loadTime How long the response took to be sent
      * @return the new WebResponse

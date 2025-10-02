@@ -55,7 +55,7 @@ public final class MimeType {
     private static final FastHashMap<String, String> TYPE2EXTENSION = buildMap();
 
     /**
-     * A map to avoid lowercase conversion and a check check if this is one of
+     * A map to avoid lowercase conversion and a check if this is one of
      * our mimetype we know. The value is not used.
      */
     private static final FastHashMap<String, Boolean> LOOKUP_MAP = new FastHashMap<>(2 * 16 + 1, 0.7f);

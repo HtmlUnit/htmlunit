@@ -27,7 +27,7 @@ import org.htmlunit.util.StringUtils;
  * {@code Content-Disposition=attachment} headers. Normally pages are loaded inline: clicking on
  * a link, for example, loads the linked page in the current window. Attached pages are different
  * in that they are intended to be loaded outside of this flow: clicking on a link prompts the
- * user to either save the linked page, or open it outside of the current window, but does not
+ * user to either save the linked page, or open it outside the current window, but does not
  * load the page in the current window.</p>
  *
  * <p>HtmlUnit complies with the semantics described above when an <code>AttachmentHandler</code> has

@@ -170,7 +170,7 @@ public class HTMLTableSectionElement extends HTMLElement {
      * is -1 or there is no index specified, then the row is appended at the end of the
      * element's row collection.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536457.aspx">MSDN Documentation</a>
-     * @param index specifies where to insert the row in the rows collection.
+     * @param index specifies where to insert the row in the row's collection.
      *        The default value is -1, which appends the new row to the end of the rows collection
      * @return the newly-created row
      */

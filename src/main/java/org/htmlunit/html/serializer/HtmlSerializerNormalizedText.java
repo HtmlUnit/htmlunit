@@ -711,7 +711,7 @@ public class HtmlSerializerNormalizedText {
             }
 
             if (mode != Mode.NORMALIZE) {
-                // reset state to empty to restart whitespace normalization afterwards
+                // reset state to empty to restart whitespace normalization afterward
                 state_ = State.TRIM;
             }
         }

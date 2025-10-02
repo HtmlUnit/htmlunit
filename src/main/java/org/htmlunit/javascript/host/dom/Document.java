@@ -470,7 +470,7 @@ public class Document extends Node {
 
     /**
      * Adopts a node from an external document.
-     * The node and its subtree is removed from the document it's in (if any),
+     * The node and its subtree are removed from the document it's in (if any),
      * and its ownerDocument is changed to the current document.
      * The node can then be inserted into the current document.
      *
@@ -611,7 +611,7 @@ public class Document extends Node {
         // NameChar      ::= NameStartChar | "-" | "." | [0-9] | #xB7 | [#x0300-#x036F] | [#x203F-#x2040]
         // Name          ::= NameStartChar (NameChar)*
 
-        // but i have no idea what the browsers are doing
+        // but I have no idea what the browsers are doing
         // the following code is a wild guess that might be good enough for the moment
         final String tagNameString = JavaScriptEngine.toString(tagName);
         if (tagNameString.length() > 0) {
@@ -1115,7 +1115,7 @@ public class Document extends Node {
     /**
      * Adds a cookie, as long as cookies are enabled.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533693.aspx">MSDN documentation</a>
-     * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
+     * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]"
      */
     @JsxSetter
     public void setCookie(final String newCookie) {
@@ -1330,7 +1330,7 @@ public class Document extends Node {
      * Sets the domain of this document.
      *
      * <p>Domains can only be set to suffixes of the existing domain
-     * with the exception of setting the domain to itself.</p>
+     * with the except of setting the domain to itself.</p>
      * <p>
      * The domain will be set according to the following rules:
      * <ol>

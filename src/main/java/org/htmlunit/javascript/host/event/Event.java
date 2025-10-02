@@ -836,7 +836,7 @@ public class Event extends HtmlUnitScriptable {
 
     /**
      * Returns {@code true} if both <code>cancelable</code> is {@code true} and <code>preventDefault()</code> has been
-     * called for this event. Otherwise this attribute must return {@code false}.
+     * called for this event, otherwise this attribute must return {@code false}.
      * @return {@code true} if this event has been cancelled or not
      */
     @JsxGetter

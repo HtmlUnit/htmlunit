@@ -117,7 +117,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * <p>Returns all of the currently selected options. The following special
+     * <p>Returns all the currently selected options. The following special
      * conditions can occur if the element is in single select mode:</p>
      * <ul>
      *   <li>if multiple options are erroneously selected, the last one is returned</li>
@@ -157,8 +157,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Returns all of the options in this select element.
-     * @return all of the options in this select element
+     * Returns all the options in this select element.
+     * @return all the options in this select element
      */
     public List<HtmlOption> getOptions() {
         return Collections.unmodifiableList(getStaticElementsByTagName("option"));

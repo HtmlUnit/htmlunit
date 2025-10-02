@@ -45,7 +45,7 @@ public interface JavaScriptErrorListener {
     void timeoutError(HtmlPage page, long allowedTime, long executionTime);
 
     /**
-     * Informs about a malformed url referencing to to script.
+     * Informs about a malformed url referencing to script.
      *
      * @param page the page that causes the problem
      * @param url the malformed url

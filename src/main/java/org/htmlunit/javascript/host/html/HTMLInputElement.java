@@ -83,7 +83,7 @@ public class HTMLInputElement extends HTMLElement {
 
     /**
      * Sets the value of the attribute {@code type}.
-     * Note: this replace the DOM node with a new one.
+     * Note: this replaces the DOM node with a new one.
      * @param newType the new type to set
      */
     @JsxSetter

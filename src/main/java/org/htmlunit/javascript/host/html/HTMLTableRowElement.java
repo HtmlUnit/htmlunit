@@ -135,7 +135,7 @@ public class HTMLTableRowElement extends HTMLElement {
      * is -1 or there is no index specified, then the cell is appended at the end of the
      * element's cells collection.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536455.aspx">MSDN Documentation</a>
-     * @param index specifies where to insert the cell in the tr.
+     * @param index specifies where to insert the cell in the 'tr'.
      *        The default value is -1, which appends the new cell to the end of the cells collection
      * @return the newly-created cell
      */

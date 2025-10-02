@@ -59,7 +59,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     private static SocksProxyAuthenticator SocksAuthenticator_;
     private final Map<AuthScopeProxy, Credentials> credentialsMap_ = new HashMap<>();
 
-    // Because this is used for the whole JVM i try to make it as less invasive as possible.
+    // Because this is used for the whole JVM I try to make it as less invasive as possible.
     // But in general this might disturb other application running on the same JVM.
     private static final class SocksProxyAuthenticator extends Authenticator {
         private CredentialsProvider credentialsProvider_;

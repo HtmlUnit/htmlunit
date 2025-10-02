@@ -415,7 +415,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final ScriptableObject console = (ScriptableObject) ScriptableObject.getProperty(scope, "console");
         console.defineFunctionProperties(new String[] {"timeStamp"}, ConsoleCustom.class, ScriptableObject.DONTENUM);
 
-        // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
+        // Rhino defines too many methods for us, particularly since implementation of ECMAScript5
         final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, "String");
         deleteProperties(stringPrototype, "equals", "equalsIgnoreCase", "toSource");
 
@@ -856,7 +856,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     /**
      * Indicates if JavaScript is running in current thread.
-     * <p>This allows code to know if there own evaluation is has been triggered by some JS code.
+     * <p>This allows code to know if their own evaluation has been triggered by some JS code.
      * @return {@code true} if JavaScript is running
      */
     @Override

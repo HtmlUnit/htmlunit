@@ -437,7 +437,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Returns this element's tab index, if it has one. If the tab index is outside of the
+     * Returns this element's tab index, if it has one. If the tab index is outside the
      * valid range (less than <code>0</code> or greater than <code>32767</code>), this method
      * returns {@link #TAB_INDEX_OUT_OF_BOUNDS}. If this element does not have
      * a tab index, or its tab index is otherwise invalid, this method returns {@code null}.
@@ -480,7 +480,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the form which contains this element, or {@code null} if this element is not inside
-     * of a form.
+     * a form.
      * @return the form which contains this element
      */
     public HtmlForm getEnclosingForm() {

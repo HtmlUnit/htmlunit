@@ -769,7 +769,7 @@ public class HtmlSerializerVisibleText {
 
             /**
              * Sequences of white space are collapsed. Lines are broken
-             * at newline characters, at <br>, and as necessary
+             * at newline characters, at <br> and as necessary
              * to fill line boxes.
              */
             WHITE_SPACE_PRE_LINE

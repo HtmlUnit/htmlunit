@@ -94,7 +94,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * The HtmlUnit default implementation ({@link DebuggerImpl}, {@link DebugFrameImpl}) may be
      * used, or a custom debugger may be used instead. By default, no debugger is used.
      *
-     * @param debugger the JavaScript debugger to use (may be {@code null})
+     * @param debugger the JavaScript debugger to use (maybe {@code null})
      */
     public void setDebugger(final Debugger debugger) {
         debugger_ = debugger;
@@ -384,7 +384,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         public void error(final String message, final String sourceName, final int line,
                 final String lineSource, final int lineOffset) {
             // no need to log here, this is only used to create the exception
-            // the exception gets logged if not catched later on
+            // gets logged if not catched later on
             throw new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
         }
 
@@ -403,7 +403,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 final String message, final String sourceName, final int line,
                 final String lineSource, final int lineOffset) {
             // no need to log here, this is only used to create the exception
-            // the exception gets logged if not catched later on
+            // gets logged if not catched later on
             return new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
         }
     }

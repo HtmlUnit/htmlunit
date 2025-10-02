@@ -1254,9 +1254,9 @@ public class DomElement extends DomNamespaceNode implements Element {
      * action listeners, etc. Note also that {@link #click(boolean, boolean, boolean)} is automatically
      * called first.
      *
-     * @param shiftKey {@code true} if SHIFT is pressed during the double-click
-     * @param ctrlKey {@code true} if CTRL is pressed during the double-click
-     * @param altKey {@code true} if ALT is pressed during the double-click
+     * @param shiftKey {@code true} if SHIFT is pressed during the double click
+     * @param ctrlKey {@code true} if CTRL is pressed during the double click
+     * @param altKey {@code true} if ALT is pressed during the double click
      * @param <P> the page type
      * @return the page that occupies this element's window after the element has been double-clicked
      * @exception IOException if an IO error occurs
@@ -1736,12 +1736,12 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
 
         if (attributes instanceof OrderedFastHashMapWithLowercaseKeys) {
             // no need to rework the map at all, we are case sensitive, so
-            // we keep all attributes and we got the right map from outside too
+            // we keep all attributes, and we got the right map from outside too
             map_ = (OrderedFastHashMap) attributes;
         }
         else if (caseSensitive && attributes instanceof OrderedFastHashMap) {
             // no need to rework the map at all, we are case sensitive, so
-            // we keep all attributes and we got the right map from outside too
+            // we keep all attributes, and we got the right map from outside too
             map_ = (OrderedFastHashMap) attributes;
         }
         else {

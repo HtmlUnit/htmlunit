@@ -536,7 +536,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the page that occupies this input's window after setting the attribute
      */
     public Page setChecked(final boolean isChecked) {
-        // By default this returns the current page. Derived classes will override.
+        // By default, this returns the current page. Derived classes will override.
         return getPage();
     }
 

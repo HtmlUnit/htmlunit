@@ -126,7 +126,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     private HtmlUnitScriptable scriptObject_;
 
-    /** The ready state is an value that is available to a large number of elements. */
+    /** The ready state is a value that is available to a large number of elements. */
     private String readyState_;
 
     /**
@@ -879,7 +879,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * <p>Returns the JavaScript object that corresponds to this node, lazily initializing a new one if necessary.</p>
      *
-     * <p>The logic of when and where the JavaScript object is created needs a clean up: functions using
+     * <p>The logic of when and where the JavaScript object is created needs a cleanup: functions using
      * a DOM node's JavaScript object should not have to check if they should create it first.</p>
      *
      * @param <T> the object type

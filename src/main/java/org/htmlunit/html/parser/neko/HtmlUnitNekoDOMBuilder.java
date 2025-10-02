@@ -328,7 +328,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             }
         }
 
-        // If we had an old synthetic body and we just added a real body element, quietly
+        // If we had an old synthetic body, and we just added a real body element, quietly
         // remove the old body and move its children to the real body element we just added.
         if (oldBody != null) {
             oldBody.quietlyRemoveAndMoveChildrenTo(newElement);

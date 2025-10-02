@@ -104,7 +104,7 @@ public class DOMException extends HtmlUnitScriptable {
     @JsxConstant
     public static final int VALIDATION_ERR = org.w3c.dom.DOMException.VALIDATION_ERR;
 
-    /** If the type of an object is incompatible with the expected type of the parameter. */
+    /** If the type of object is incompatible with the expected type of the parameter. */
     @JsxConstant
     public static final int TYPE_MISMATCH_ERR = org.w3c.dom.DOMException.TYPE_MISMATCH_ERR;
 

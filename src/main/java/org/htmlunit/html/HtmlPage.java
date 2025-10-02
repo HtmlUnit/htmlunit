@@ -904,9 +904,9 @@ public class HtmlPage extends SgmlPage {
      * be achieved to execute JavaScript in the current page by entering "javascript:...some JS code..."
      * in the URL field of a native browser.</p>
      * <p><b>Note:</b> the provided code won't be executed if JavaScript has been disabled on the WebClient
-     * (see {@link org.htmlunit.WebClient#isJavaScriptEnabled()}.</p>
+     * (see {@link org.htmlunit.WebClient#isJavaScriptEnabled()}).</p>
      * @param sourceCode the JavaScript code to execute
-     * @return a ScriptResult which will contain both the current page (which may be different than
+     * @return a ScriptResult which will contain both the current page (which may be different from
      *         the previous page) and a JavaScript result object
      */
     public ScriptResult executeJavaScript(final String sourceCode) {
@@ -918,7 +918,7 @@ public class HtmlPage extends SgmlPage {
      * <p>
      * Execute the specified JavaScript if a JavaScript engine was successfully
      * instantiated. If this JavaScript causes the current page to be reloaded
-     * (through location="" or form.submit()) then return the new page. Otherwise
+     * (through location="" or form.submit()) then return the new page, otherwise
      * return the current page.
      * </p>
      * <p><b>Please note:</b> Although this method is public, it is not intended for
@@ -930,8 +930,8 @@ public class HtmlPage extends SgmlPage {
      * @param sourceCode the JavaScript code to execute
      * @param sourceName the name for this chunk of code (will be displayed in error messages)
      * @param startLine the line at which the script source starts
-     * @return a ScriptResult which will contain both the current page (which may be different than
-     *         the previous page and a JavaScript result object.
+     * @return a ScriptResult which will contain both the current page (which may be different from
+     *         the previous page) and a JavaScript result object.
      */
     public ScriptResult executeJavaScript(String sourceCode, final String sourceName, final int startLine) {
         if (!getWebClient().isJavaScriptEnabled()) {
@@ -2563,8 +2563,8 @@ public class HtmlPage extends SgmlPage {
      * @param htmlElementScope the HTML element for which this script is being executed
      *        This element will be the context during the JavaScript execution. If null,
      *        the context will default to the page.
-     * @return a ScriptResult which will contain both the current page (which may be different than
-     *        the previous page and a JavaScript result object.
+     * @return a ScriptResult which will contain both the current page (which may be different from
+     *        the previous page) and a JavaScript result object.
      */
     public ScriptResult executeJavaScriptFunction(final Object function, final Object thisObject,
             final Object[] args, final DomNode htmlElementScope) {
@@ -2731,7 +2731,7 @@ public class HtmlPage extends SgmlPage {
      *   <li><em>Child</em> (i.e. "div &gt; span"): Affected by changes to SN or to its parent.</li>
      *   <li><em>Adjacent Sibling</em> (i.e. "table + p"): Affected by changes to SN or its previous sibling.</li>
      *   <li><em>Attribute</em> (i.e. "div.up, div[class~=up]"): Affected by changes to an attribute of SN.</li>
-     *   <li><em>ID</em> (i.e. "#header): Affected by changes to the <code>id</code> attribute of SN.</li>
+     *   <li><em>ID</em> (i.e. "#header"): Affected by changes to the <code>id</code> attribute of SN.</li>
      *   <li><em>Pseudo-Elements and Pseudo-Classes</em> (i.e. "p:first-child"): Affected by changes to parent.</li>
      * </ol>
      *
@@ -2866,7 +2866,7 @@ public class HtmlPage extends SgmlPage {
                 }
             }
 
-            // maybe this is a better solution but i have to think a bit more about this
+            // maybe this is a better solution but I have to think a bit more about this
             //
             //            if (computedStyles_.isEmpty()) {
             //                return;

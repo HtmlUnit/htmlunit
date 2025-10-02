@@ -207,8 +207,8 @@ public class Navigator extends HtmlUnitScriptable {
 
         // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mimeTypes
         // Recent versions of the specification hard-code the returned set of MIME types.
-        // If PDF files can be displayed inline then application/pdf and text/pdf are listed.
-        // Otherwise an empty list is returned.
+        // If PDF files can be displayed inline then application/pdf and text/pdf are listed,
+        // otherwise an empty list is returned.
         mimeTypes_ = new MimeTypeArray();
         mimeTypes_.setParentScope(this);
         mimeTypes_.setPrototype(getPrototype(MimeTypeArray.class));

@@ -485,9 +485,9 @@ public class MockWebConnection implements WebConnection {
     }
 
     /**
-     * Returns the additional headers that were used in the in the last call
+     * Returns the additional headers that were used in the last call
      * to {@link #getResponse(WebRequest)}.
-     * @return the additional headers that were used in the in the last call
+     * @return the additional headers that were used in the last call
      *         to {@link #getResponse(WebRequest)}
      */
     public Map<String, String> getLastAdditionalHeaders() {
@@ -495,9 +495,9 @@ public class MockWebConnection implements WebConnection {
     }
 
     /**
-     * Returns the {@link WebRequest} that was used in the in the last call
+     * Returns the {@link WebRequest} that was used in the last call
      * to {@link #getResponse(WebRequest)}.
-     * @return the {@link WebRequest} that was used in the in the last call
+     * @return the {@link WebRequest} that was used in the last call
      *         to {@link #getResponse(WebRequest)}
      */
     public WebRequest getLastWebRequest() {

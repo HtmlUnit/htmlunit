@@ -631,7 +631,7 @@ public class HtmlForm extends HtmlElement {
      * @param name the input name to search for
      * @param <I> the input type
      * @return the first input element which is a member of this form and has the specified name
-     * @throws ElementNotFoundException if there is not input in this form with the specified name
+     * @throws ElementNotFoundException if there is no input in this form with the specified name
      */
     @SuppressWarnings("unchecked")
     public final <I extends HtmlInput> I getInputByName(final String name) throws ElementNotFoundException {

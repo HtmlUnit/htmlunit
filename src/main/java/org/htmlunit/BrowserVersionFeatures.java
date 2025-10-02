@@ -106,7 +106,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     EVENT_TYPE_WHEELEVENT,
 
-    /** Form elements are able to refer to the for by using the from attribute. */
+    /** Form elements are able to refer to the for by using the form attribute. */
     @BrowserFeature({CHROME, EDGE})
     FORM_IGNORE_REL_NOREFERRER,
 
@@ -302,7 +302,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
 
-    /** Javascript document.evaluate creates a new result object even if provided as param. */
+    /** Javascript document.evaluate() creates a new result object even if provided as param. */
     @BrowserFeature({CHROME, EDGE})
     JS_DOCUMENT_EVALUATE_RECREATES_RESULT,
 
@@ -330,7 +330,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_FORM_DISPATCHEVENT_SUBMITS,
 
-    /** Executes the {@code onload} handler, regardless of the whether the element was already attached to the page. */
+    /** Executes the {@code onload} handler, regardless of the element was already attached to the page. */
     @BrowserFeature({FF, FF_ESR})
     JS_IFRAME_ALWAYS_EXECUTE_ONLOAD,
 
@@ -352,7 +352,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_INNER_TEXT_SVG_NL,
 
-    /** The value is ignored when the type of an week/month input is changed. */
+    /** The value is ignored when the type of the week/month input is changed. */
     @BrowserFeature({CHROME, EDGE})
     JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH,
 
@@ -408,7 +408,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_PROPERTY_DESCRIPTOR_NAME,
 
-    /** script tags created from js as child of templates are processed if added to the dom. */
+    /** script tags created from js as child of templates is processed if added to the dom. */
     @BrowserFeature({CHROME, EDGE})
     JS_SCRIPT_IN_TEMPLATE_EXECUTED_ON_ATTACH,
 
