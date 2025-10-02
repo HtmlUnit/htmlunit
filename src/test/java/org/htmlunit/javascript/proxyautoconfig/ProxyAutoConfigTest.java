@@ -48,6 +48,29 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
      * Test case.
      */
     @Test
+    public void dnsLevelDomains() {
+        assertEquals(0, ProxyAutoConfig.dnsDomainLevels("localhost"));
+        assertEquals(1, ProxyAutoConfig.dnsDomainLevels("example.com"));
+        assertEquals(2, ProxyAutoConfig.dnsDomainLevels("www.example.com"));
+        assertEquals(3, ProxyAutoConfig.dnsDomainLevels("api.sub.example.com"));
+        assertEquals(4, ProxyAutoConfig.dnsDomainLevels("deep.api.sub.example.com"));
+
+        assertEquals(2, ProxyAutoConfig.dnsDomainLevels(".example.com"));
+        assertEquals(2, ProxyAutoConfig.dnsDomainLevels("example.com."));
+        assertEquals(2, ProxyAutoConfig.dnsDomainLevels("example..com"));
+        assertEquals(3, ProxyAutoConfig.dnsDomainLevels("example...com"));
+
+        assertEquals(0, ProxyAutoConfig.dnsDomainLevels(""));
+        assertEquals(1, ProxyAutoConfig.dnsDomainLevels("."));
+        assertEquals(3, ProxyAutoConfig.dnsDomainLevels("..."));
+
+        assertEquals(3, ProxyAutoConfig.dnsDomainLevels("192.168.1.1"));
+    }
+
+    /**
+     * Test case.
+     */
+    @Test
     public void weekdayRange() {
         final Calendar calendar = Calendar.getInstance(Locale.ROOT);
         final DateFormat dateFormat = new SimpleDateFormat("EEE", Locale.ROOT);
@@ -56,11 +79,18 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
         final String tomorrow = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
         calendar.add(Calendar.DAY_OF_MONTH, -2);
         final String yesterday = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
+
         assertTrue(ProxyAutoConfig.weekdayRange(today, Undefined.instance, Undefined.instance));
         assertTrue(ProxyAutoConfig.weekdayRange(today, tomorrow, Undefined.instance));
         assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, Undefined.instance));
         assertTrue(ProxyAutoConfig.weekdayRange(yesterday, tomorrow, Undefined.instance));
         assertFalse(ProxyAutoConfig.weekdayRange(tomorrow, yesterday, Undefined.instance));
+
+        assertTrue(ProxyAutoConfig.weekdayRange(today, Undefined.instance, "GMT"));
+        assertTrue(ProxyAutoConfig.weekdayRange(today, tomorrow, "GMT"));
+        assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, "GMT"));
+        assertTrue(ProxyAutoConfig.weekdayRange(yesterday, tomorrow, "GMT"));
+        assertFalse(ProxyAutoConfig.weekdayRange(tomorrow, yesterday, "GMT"));
     }
 
     /**
@@ -75,6 +105,7 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
         final int tomorrow = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.add(Calendar.DAY_OF_MONTH, -2);
         final int yesterday = calendar.get(Calendar.DAY_OF_MONTH);
+
         assertTrue(ProxyAutoConfig.dateRange(String.valueOf(today),
                 undefined, undefined, undefined, undefined, undefined, undefined));
         assertFalse(ProxyAutoConfig.dateRange(String.valueOf(yesterday),
