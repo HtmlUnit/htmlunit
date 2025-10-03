@@ -125,4 +125,22 @@ public class MessagePort extends EventTarget {
         }
     }
 
+    /**
+     * Starts the sending of messages queued on the port
+     * (only needed when using EventTarget.addEventListener; it is implied when using onmessage).
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/start">MDN documentation</a>
+     */
+    @JsxFunction
+    public void start() {
+        // dummy for the moment
+    }
+
+    /**
+     * Disconnects the port, so it is no longer active.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/close">MDN documentation</a>
+     */
+    @JsxFunction
+    public void close() {
+        // dummy for the moment
+    }
 }
