@@ -1660,10 +1660,19 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("SyntaxError/DOMException")
-    public void querySelector_badSelector() throws Exception {
+    public void querySelector_badSelectorJQueryCustomSelectors() throws Exception {
         for (final String selector : HTMLDocumentTest.JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelector_badSelector(selector);
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void querySelector_badSelectorJQueryBrowserTest() throws Exception {
+        doTestQuerySelector_badSelector("[s!='']:x");
     }
 
     private void doTestQuerySelector_badSelector(final String selector) throws Exception {
@@ -1671,8 +1680,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "<html><body><div id='it'></div><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  document.getElementById('it').querySelector('" + selector + "');\n"
-            + "  log('working " + selector + "');\n"
+            + "  document.getElementById('it').querySelector(\"" + selector + "\");\n"
+            + "  log(\"working " + selector + "\");\n"
             + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
