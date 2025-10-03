@@ -42,8 +42,8 @@
 
         <!-- selenium -->
         <htmlunitdriver.version>4.36.0-SNAPSHOT</htmlunitdriver.version>
-        <selenium.version>4.35.0</selenium.version>
-        <selenium.devtools.artifactId>selenium-devtools-v139</selenium.devtools.artifactId>
+        <selenium.version>4.36.0</selenium.version>
+        <selenium.devtools.artifactId>selenium-devtools-v140</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
         <junit.version>5.14.0</junit.version>
