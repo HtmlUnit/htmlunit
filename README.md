@@ -6,8 +6,8 @@ Version 4.16.0 / August 29, 2025
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/HtmlUnit/htmlunit/badge)](https://securityscorecards.dev/viewer/?uri=github.com/HtmlUnit/htmlunit)
-[![SCARF](https://about.scarf.sh/)](https://api.scarf.sh/v2/packages/HTML-Unit/e4454d4c-c1a0-44d6-8af9-ab9ee18b428c/downloads-badge)
-[![SCARF](https://about.scarf.sh/)](https://api.scarf.sh/v2/packages/HTML-Unit/e4454d4c-c1a0-44d6-8af9-ab9ee18b428c/commercial-users-badge)
+[![SCARF](https://api.scarf.sh/v2/packages/HTML-Unit/e4454d4c-c1a0-44d6-8af9-ab9ee18b428c/downloads-badge)](https://about.scarf.sh/)
+[![SCARF](https://api.scarf.sh/v2/packages/HTML-Unit/e4454d4c-c1a0-44d6-8af9-ab9ee18b428c/commercial-users-badge)](https://about.scarf.sh/)
 
 ### Homepage
 
