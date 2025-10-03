@@ -15,13 +15,10 @@
 package org.htmlunit.javascript.proxyautoconfig;
 
 import java.net.InetAddress;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -44,9 +41,6 @@ import org.htmlunit.util.SubnetUtils;
 public final class ProxyAutoConfig extends HtmlUnitScriptable {
 
     private static final String TIMEZONE_GMT = "GMT";
-    private static final ZoneId GMT_ZONE = ZoneId.of(TIMEZONE_GMT);
-    private static final DateTimeFormatter WEEKDAY_FORMATTER = DateTimeFormatter.ofPattern("EEE", Locale.ROOT);
-    private static final DateTimeFormatter MONTH_FORMATTER = DateTimeFormatter.ofPattern("MMM", Locale.ROOT);
 
     private ProxyAutoConfig() {
         super();
@@ -182,25 +176,25 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
      */
     @JsxFunction
     public static boolean weekdayRange(final String wd1, Object wd2, final Object gmt) {
-        ZoneId zoneId = ZoneId.systemDefault();
+        TimeZone timezone = TimeZone.getDefault();
         if (TIMEZONE_GMT.equals(JavaScriptEngine.toString(gmt))
                 || TIMEZONE_GMT.equals(JavaScriptEngine.toString(wd2))) {
-            zoneId = GMT_ZONE;
+            timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
         }
         if (JavaScriptEngine.isUndefined(wd2) || TIMEZONE_GMT.equals(JavaScriptEngine.toString(wd2))) {
             wd2 = wd1;
         }
-
-        LocalDate today = LocalDate.now(zoneId);
+        final Calendar calendar = Calendar.getInstance(timezone);
         for (int i = 0; i < 7; i++) {
-            final String day = today.format(WEEKDAY_FORMATTER).toUpperCase(Locale.ROOT);
+            final String day = new SimpleDateFormat("EEE", Locale.ROOT)
+                    .format(calendar.getTime()).toUpperCase(Locale.ROOT);
             if (day.equals(wd2)) {
                 return true;
             }
             if (day.equals(wd1)) {
                 return i == 0;
             }
-            today = today.plusDays(1);
+            calendar.add(Calendar.DAY_OF_WEEK, 1);
         }
         return false;
     }
@@ -220,13 +214,13 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
     public static boolean dateRange(final String value1, final Object value2, final Object value3,
             final Object value4, final Object value5, final Object value6, final Object value7) {
         final Object[] values = {value1, value2, value3, value4, value5, value6, value7};
-        ZoneId zoneId = ZoneId.systemDefault();
+        TimeZone timezone = TimeZone.getDefault();
 
-        // actual values length
+        //actual values length
         int length;
         for (length = values.length - 1; length >= 0; length--) {
             if (TIMEZONE_GMT.equals(JavaScriptEngine.toString(values[length]))) {
-                zoneId = GMT_ZONE;
+                timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
                 break;
             }
             else if (!JavaScriptEngine.isUndefined(values[length])) {
@@ -241,45 +235,47 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
         final int month2;
         final int year1;
         final int year2;
-        final ZonedDateTime dateTime1;
-        final ZonedDateTime dateTime2;
-
+        final Calendar cal1;
+        final Calendar cal2;
         switch (length) {
             case 1:
                 final int day = getSmallInt(value1);
                 final int month = dateRange_getMonth(value1);
                 final int year = dateRange_getYear(value1);
-                dateTime1 = dateRange_createDateTime(zoneId, day, month, year);
-                dateTime2 = dateTime1;
+                cal1 = dateRange_createCalendar(timezone, day, month, year);
+                cal2 = (Calendar) cal1.clone();
                 break;
+
             case 2:
                 day1 = getSmallInt(value1);
                 month1 = dateRange_getMonth(value1);
                 year1 = dateRange_getYear(value1);
-                dateTime1 = dateRange_createDateTime(zoneId, day1, month1, year1);
+                cal1 = dateRange_createCalendar(timezone, day1, month1, year1);
                 day2 = getSmallInt(value2);
                 month2 = dateRange_getMonth(value2);
                 year2 = dateRange_getYear(value2);
-                dateTime2 = dateRange_createDateTime(zoneId, day2, month2, year2);
+                cal2 = dateRange_createCalendar(timezone, day2, month2, year2);
                 break;
+
             case 4:
                 day1 = getSmallInt(value1);
                 if (day1 != -1) {
                     month1 = dateRange_getMonth(value2);
                     day2 = getSmallInt(value3);
                     month2 = dateRange_getMonth(value4);
-                    dateTime1 = dateRange_createDateTime(zoneId, day1, month1, -1);
-                    dateTime2 = dateRange_createDateTime(zoneId, day2, month2, -1);
+                    cal1 = dateRange_createCalendar(timezone, day1, month1, -1);
+                    cal2 = dateRange_createCalendar(timezone, day2, month2, -1);
                 }
                 else {
                     month1 = dateRange_getMonth(value1);
-                    year1 = getSmallInt(value2);
-                    month2 = dateRange_getMonth(value3);
-                    year2 = getSmallInt(value4);
-                    dateTime1 = dateRange_createDateTime(zoneId, -1, month1, year1);
-                    dateTime2 = dateRange_createDateTime(zoneId, -1, month2, year2);
+                    year1 = dateRange_getMonth(value2);
+                    month2 = getSmallInt(value3);
+                    year2 = dateRange_getMonth(value4);
+                    cal1 = dateRange_createCalendar(timezone, -1, month1, year1);
+                    cal2 = dateRange_createCalendar(timezone, -1, month2, year2);
                 }
                 break;
+
             default:
                 day1 = getSmallInt(value1);
                 month1 = dateRange_getMonth(value2);
@@ -287,32 +283,33 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
                 day2 = getSmallInt(value4);
                 month2 = dateRange_getMonth(value5);
                 year2 = dateRange_getYear(value6);
-                dateTime1 = dateRange_createDateTime(zoneId, day1, month1, year1);
-                dateTime2 = dateRange_createDateTime(zoneId, day2, month2, year2);
+                cal1 = dateRange_createCalendar(timezone, day1, month1, year1);
+                cal2 = dateRange_createCalendar(timezone, day2, month2, year2);
         }
 
-        final ZonedDateTime now = ZonedDateTime.now(zoneId)
-                .withSecond(0)
-                .withNano(0);
-        final ZonedDateTime dt1 = dateTime1.withSecond(0).withNano(0);
-        final ZonedDateTime dt2 = dateTime2.withSecond(0).withNano(0);
-
-        return now.isEqual(dt1) || (now.isAfter(dt1) && now.isBefore(dt2)) || now.isEqual(dt2);
+        final Calendar today = Calendar.getInstance(timezone);
+        today.set(Calendar.MILLISECOND, 0);
+        today.set(Calendar.SECOND, 0);
+        cal1.set(Calendar.MILLISECOND, 0);
+        cal1.set(Calendar.SECOND, 0);
+        cal2.set(Calendar.MILLISECOND, 0);
+        cal2.set(Calendar.SECOND, 0);
+        return today.equals(cal1) || (today.after(cal1) && today.before(cal2)) || today.equals(cal2);
     }
 
-    private static ZonedDateTime dateRange_createDateTime(final ZoneId zoneId,
+    private static Calendar dateRange_createCalendar(final TimeZone timezone,
             final int day, final int month, final int year) {
-        ZonedDateTime dateTime = ZonedDateTime.now(zoneId);
+        final Calendar calendar = Calendar.getInstance(timezone);
         if (day != -1) {
-            dateTime = dateTime.withDayOfMonth(day);
+            calendar.set(Calendar.DAY_OF_MONTH, day);
         }
         if (month != -1) {
-            dateTime = dateTime.withMonth(month + 1); // Calendar months are 0-based, java.time is 1-based
+            calendar.set(Calendar.MONTH, month);
         }
         if (year != -1) {
-            dateTime = dateTime.withYear(year);
+            calendar.set(Calendar.YEAR, year);
         }
-        return dateTime;
+        return calendar;
     }
 
     private static int getSmallInt(final Object object) {
@@ -330,11 +327,12 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
         final String s = JavaScriptEngine.toString(object);
         if (Character.isLetter(s.charAt(0))) {
             try {
-                final LocalDate date = LocalDate.parse(s + " 1",
-                        DateTimeFormatter.ofPattern("MMM d", Locale.ROOT));
-                return date.getMonthValue() - 1; // Return 0-based month for compatibility
+                final Calendar cal = Calendar.getInstance(Locale.ROOT);
+                cal.clear();
+                cal.setTime(new SimpleDateFormat("MMM", Locale.ROOT).parse(s));
+                return cal.get(Calendar.MONTH);
             }
-            catch (final DateTimeParseException ignored) {
+            catch (final Exception ignored) {
                 // empty
             }
         }
@@ -367,13 +365,13 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
     public static boolean timeRange(final String value1, final Object value2, final Object value3,
             final Object value4, final Object value5, final Object value6, final Object value7) {
         final Object[] values = {value1, value2, value3, value4, value5, value6, value7};
-        ZoneId zoneId = ZoneId.systemDefault();
+        TimeZone timezone = TimeZone.getDefault();
 
-        // actual values length
+        //actual values length
         int length;
         for (length = values.length - 1; length >= 0; length--) {
             if (TIMEZONE_GMT.equals(JavaScriptEngine.toString(values[length]))) {
-                zoneId = GMT_ZONE;
+                timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
                 break;
             }
             else if (!JavaScriptEngine.isUndefined(values[length])) {
@@ -388,29 +386,32 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
         final int min2;
         final int second1;
         final int second2;
-        final LocalTime time1;
-        final LocalTime time2;
-
+        final Calendar cal1;
+        final Calendar cal2;
         switch (length) {
             case 1:
                 hour1 = getSmallInt(value1);
-                time1 = timeRange_createTime(hour1, -1, -1);
-                time2 = time1.plusHours(1);
+                cal1 = timeRange_createCalendar(timezone, hour1, -1, -1);
+                cal2 = (Calendar) cal1.clone();
+                cal2.add(Calendar.HOUR_OF_DAY, 1);
                 break;
+
             case 2:
                 hour1 = getSmallInt(value1);
-                time1 = timeRange_createTime(hour1, -1, -1);
+                cal1 = timeRange_createCalendar(timezone, hour1, -1, -1);
                 hour2 = getSmallInt(value2);
-                time2 = timeRange_createTime(hour2, -1, -1);
+                cal2 = timeRange_createCalendar(timezone, hour2, -1, -1);
                 break;
+
             case 4:
                 hour1 = getSmallInt(value1);
                 min1 = getSmallInt(value2);
                 hour2 = getSmallInt(value3);
                 min2 = getSmallInt(value4);
-                time1 = timeRange_createTime(hour1, min1, -1);
-                time2 = timeRange_createTime(hour2, min2, -1);
+                cal1 = dateRange_createCalendar(timezone, hour1, min1, -1);
+                cal2 = dateRange_createCalendar(timezone, hour2, min2, -1);
                 break;
+
             default:
                 hour1 = getSmallInt(value1);
                 min1 = getSmallInt(value2);
@@ -418,26 +419,27 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
                 hour2 = getSmallInt(value4);
                 min2 = getSmallInt(value5);
                 second2 = getSmallInt(value6);
-                time1 = timeRange_createTime(hour1, min1, second1);
-                time2 = timeRange_createTime(hour2, min2, second2);
+                cal1 = dateRange_createCalendar(timezone, hour1, min1, second1);
+                cal2 = dateRange_createCalendar(timezone, hour2, min2, second2);
         }
 
-        final LocalTime now = LocalTime.now(zoneId);
-        return now.equals(time1) || (now.isAfter(time1) && now.isBefore(time2)) || now.equals(time2);
+        final Calendar now = Calendar.getInstance(timezone);
+        return now.equals(cal1) || now.after(cal1) && now.before(cal2) || now.equals(cal2);
     }
 
-    private static LocalTime timeRange_createTime(final int hour, final int minute, final int second) {
-        LocalTime time = LocalTime.now();
+    private static Calendar timeRange_createCalendar(final TimeZone timezone,
+            final int hour, final int minute, final int second) {
+        final Calendar calendar = Calendar.getInstance(timezone);
         if (hour != -1) {
-            time = time.withHour(hour);
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
         }
         if (minute != -1) {
-            time = time.withMinute(minute);
+            calendar.set(Calendar.MINUTE, minute);
         }
         if (second != -1) {
-            time = time.withSecond(second);
+            calendar.set(Calendar.SECOND, second);
         }
-        return time;
+        return calendar;
     }
 
     /**
@@ -448,7 +450,9 @@ public final class ProxyAutoConfig extends HtmlUnitScriptable {
     @JsxFunction(functionName = "convert_addr")
     public static long convertAddr(final String ip) {
         final String[] parts = StringUtils.split(ip, '.');
-        return ((Integer.parseInt(parts[0]) & 0xff) << 24)
+
+        return
+            ((Integer.parseInt(parts[0]) & 0xff) << 24)
                 | ((Integer.parseInt(parts[1]) & 0xff) << 16)
                 | ((Integer.parseInt(parts[2]) & 0xff) << 8)
                 | (Integer.parseInt(parts[3]) & 0xff);

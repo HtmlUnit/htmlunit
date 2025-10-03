@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SimpleWebTestCase;
@@ -72,25 +73,57 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
      */
     @Test
     public void weekdayRange() {
-        final Calendar calendar = Calendar.getInstance(Locale.ROOT);
-        final DateFormat dateFormat = new SimpleDateFormat("EEE", Locale.ROOT);
-        final String today = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        final String tomorrow = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
-        calendar.add(Calendar.DAY_OF_MONTH, -2);
-        final String yesterday = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
+        final Object undefined = Undefined.instance;
 
-        assertTrue(ProxyAutoConfig.weekdayRange(today, Undefined.instance, Undefined.instance));
-        assertTrue(ProxyAutoConfig.weekdayRange(today, tomorrow, Undefined.instance));
-        assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, Undefined.instance));
-        assertTrue(ProxyAutoConfig.weekdayRange(yesterday, tomorrow, Undefined.instance));
-        assertFalse(ProxyAutoConfig.weekdayRange(tomorrow, yesterday, Undefined.instance));
+        final TimeZone timeZone = TimeZone.getDefault();
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
 
-        assertTrue(ProxyAutoConfig.weekdayRange(today, Undefined.instance, "GMT"));
-        assertTrue(ProxyAutoConfig.weekdayRange(today, tomorrow, "GMT"));
-        assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, "GMT"));
-        assertTrue(ProxyAutoConfig.weekdayRange(yesterday, tomorrow, "GMT"));
-        assertFalse(ProxyAutoConfig.weekdayRange(tomorrow, yesterday, "GMT"));
+            Calendar calendar = Calendar.getInstance(Locale.ROOT);
+            DateFormat dateFormat = new SimpleDateFormat("EEE", Locale.ROOT);
+            String today = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            String tomorrow = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
+            calendar.add(Calendar.DAY_OF_MONTH, -2);
+            String yesterday = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
+
+            assertTrue(ProxyAutoConfig.weekdayRange(today, undefined, undefined));
+            assertTrue(ProxyAutoConfig.weekdayRange(today, tomorrow, undefined));
+            assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, undefined));
+            assertTrue(ProxyAutoConfig.weekdayRange(yesterday, tomorrow, undefined));
+            assertFalse(ProxyAutoConfig.weekdayRange(tomorrow, yesterday, undefined));
+
+            assertTrue(ProxyAutoConfig.weekdayRange(today, undefined, "GMT"));
+            assertTrue(ProxyAutoConfig.weekdayRange(today, tomorrow, "GMT"));
+            assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, "GMT"));
+            assertTrue(ProxyAutoConfig.weekdayRange(yesterday, tomorrow, "GMT"));
+            assertFalse(ProxyAutoConfig.weekdayRange(tomorrow, yesterday, "GMT"));
+
+            TimeZone.setDefault(TimeZone.getTimeZone("PST"));
+
+            calendar = Calendar.getInstance(Locale.ROOT);
+            dateFormat = new SimpleDateFormat("EEE", Locale.ROOT);
+            today = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            tomorrow = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
+            calendar.add(Calendar.DAY_OF_MONTH, -2);
+            yesterday = dateFormat.format(calendar.getTime()).toUpperCase(Locale.ROOT);
+
+            assertTrue(ProxyAutoConfig.weekdayRange(today, undefined, undefined));
+            assertTrue(ProxyAutoConfig.weekdayRange(today, tomorrow, undefined));
+            assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, undefined));
+            assertTrue(ProxyAutoConfig.weekdayRange(yesterday, tomorrow, undefined));
+            assertFalse(ProxyAutoConfig.weekdayRange(tomorrow, yesterday, undefined));
+
+            assertTrue(ProxyAutoConfig.weekdayRange(today, undefined, "GMT"));
+            assertTrue(ProxyAutoConfig.weekdayRange(today, tomorrow, "GMT"));
+            assertTrue(ProxyAutoConfig.weekdayRange(yesterday, today, "GMT"));
+            assertTrue(ProxyAutoConfig.weekdayRange(yesterday, tomorrow, "GMT"));
+            assertFalse(ProxyAutoConfig.weekdayRange(tomorrow, yesterday, "GMT"));
+        }
+        finally {
+            TimeZone.setDefault(timeZone);
+        }
     }
 
     /**
@@ -99,19 +132,44 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void dateRange() {
         final Object undefined = Undefined.instance;
-        final Calendar calendar = Calendar.getInstance(Locale.ROOT);
-        final int today = calendar.get(Calendar.DAY_OF_MONTH);
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        final int tomorrow = calendar.get(Calendar.DAY_OF_MONTH);
-        calendar.add(Calendar.DAY_OF_MONTH, -2);
-        final int yesterday = calendar.get(Calendar.DAY_OF_MONTH);
 
-        assertTrue(ProxyAutoConfig.dateRange(String.valueOf(today),
-                undefined, undefined, undefined, undefined, undefined, undefined));
-        assertFalse(ProxyAutoConfig.dateRange(String.valueOf(yesterday),
-                undefined, undefined, undefined, undefined, undefined, undefined));
-        assertFalse(ProxyAutoConfig.dateRange(String.valueOf(tomorrow),
-                undefined, undefined, undefined, undefined, undefined, undefined));
+        final TimeZone timeZone = TimeZone.getDefault();
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+
+            Calendar calendar = Calendar.getInstance(Locale.ROOT);
+            int today = calendar.get(Calendar.DAY_OF_MONTH);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            int tomorrow = calendar.get(Calendar.DAY_OF_MONTH);
+            calendar.add(Calendar.DAY_OF_MONTH, -2);
+            int yesterday = calendar.get(Calendar.DAY_OF_MONTH);
+
+            assertTrue(ProxyAutoConfig.dateRange(String.valueOf(today),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+            assertFalse(ProxyAutoConfig.dateRange(String.valueOf(yesterday),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+            assertFalse(ProxyAutoConfig.dateRange(String.valueOf(tomorrow),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+
+            TimeZone.setDefault(TimeZone.getTimeZone("PST"));
+
+            calendar = Calendar.getInstance(Locale.ROOT);
+            today = calendar.get(Calendar.DAY_OF_MONTH);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            tomorrow = calendar.get(Calendar.DAY_OF_MONTH);
+            calendar.add(Calendar.DAY_OF_MONTH, -2);
+            yesterday = calendar.get(Calendar.DAY_OF_MONTH);
+
+            assertTrue(ProxyAutoConfig.dateRange(String.valueOf(today),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+            assertFalse(ProxyAutoConfig.dateRange(String.valueOf(yesterday),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+            assertFalse(ProxyAutoConfig.dateRange(String.valueOf(tomorrow),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+        }
+        finally {
+            TimeZone.setDefault(timeZone);
+        }
     }
 
     /**
@@ -120,18 +178,44 @@ public class ProxyAutoConfigTest extends SimpleWebTestCase {
     @Test
     public void timeRange() {
         final Object undefined = Undefined.instance;
-        final Calendar calendar = Calendar.getInstance(Locale.ROOT);
-        final int now = calendar.get(Calendar.HOUR_OF_DAY);
-        calendar.add(Calendar.HOUR_OF_DAY, 2);
-        final int after = calendar.get(Calendar.HOUR_OF_DAY);
-        calendar.add(Calendar.HOUR_OF_DAY, -4);
-        final int before = calendar.get(Calendar.HOUR_OF_DAY);
-        assertTrue(ProxyAutoConfig.timeRange(String.valueOf(now),
-                undefined, undefined, undefined, undefined, undefined, undefined));
-        assertFalse(ProxyAutoConfig.timeRange(String.valueOf(before),
-                undefined, undefined, undefined, undefined, undefined, undefined));
-        assertFalse(ProxyAutoConfig.timeRange(String.valueOf(after),
-                undefined, undefined, undefined, undefined, undefined, undefined));
+
+        final TimeZone timeZone = TimeZone.getDefault();
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+
+            Calendar calendar = Calendar.getInstance(Locale.ROOT);
+            int now = calendar.get(Calendar.HOUR_OF_DAY);
+            calendar.add(Calendar.HOUR_OF_DAY, 2);
+            int after = calendar.get(Calendar.HOUR_OF_DAY);
+            calendar.add(Calendar.HOUR_OF_DAY, -4);
+            int before = calendar.get(Calendar.HOUR_OF_DAY);
+
+            assertTrue(ProxyAutoConfig.timeRange(String.valueOf(now),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+            assertFalse(ProxyAutoConfig.timeRange(String.valueOf(before),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+            assertFalse(ProxyAutoConfig.timeRange(String.valueOf(after),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+
+            TimeZone.setDefault(TimeZone.getTimeZone("PST"));
+
+            calendar = Calendar.getInstance(Locale.ROOT);
+            now = calendar.get(Calendar.HOUR_OF_DAY);
+            calendar.add(Calendar.HOUR_OF_DAY, 2);
+            after = calendar.get(Calendar.HOUR_OF_DAY);
+            calendar.add(Calendar.HOUR_OF_DAY, -4);
+            before = calendar.get(Calendar.HOUR_OF_DAY);
+
+            assertTrue(ProxyAutoConfig.timeRange(String.valueOf(now),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+            assertFalse(ProxyAutoConfig.timeRange(String.valueOf(before),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+            assertFalse(ProxyAutoConfig.timeRange(String.valueOf(after),
+                    undefined, undefined, undefined, undefined, undefined, undefined));
+        }
+        finally {
+            TimeZone.setDefault(timeZone);
+        }
     }
 
     /**
