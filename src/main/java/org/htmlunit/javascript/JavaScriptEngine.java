@@ -1395,6 +1395,15 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * @param obj the value to check
+     * @return whether obj is an Array
+     */
+    public static boolean isArray(final Object obj) {
+        return (obj instanceof Scriptable)
+                    && "Array".equals(((Scriptable) obj).getClassName());
+    }
+
+    /**
      * @return the top call scope
      */
     public static Scriptable getTopCallScope() {

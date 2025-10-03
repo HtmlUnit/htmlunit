@@ -183,6 +183,51 @@ public class WindowPostMessageTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"type: message", "bubbles: false", "cancelable: false", "data: hello",
+             "origin: ", "source: false true", "lastEventId: "})
+    public void postMessageWithTransferableOnly() throws Exception {
+        final String[] expectedAlerts = getExpectedAlerts();
+        expectedAlerts[4] += "http://localhost:" + PORT;
+        setExpectedAlerts(expectedAlerts);
+
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <iframe id='myFrame' src='" + URL_THIRD + "'></iframe>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var win = document.getElementById('myFrame').contentWindow;\n"
+
+            + "  function receiveMessage(event) {\n"
+            + "    log('type: ' + event.type);\n"
+            + "    log('bubbles: ' + event.bubbles);\n"
+            + "    log('cancelable: ' + event.cancelable);\n"
+            + "    log('data: ' + event.data);\n"
+            + "    log('origin: ' + event.origin);\n"
+            + "    log('source: ' + (event.source === win) + ' ' + (event.source === window));\n"
+            + "    log('lastEventId: ' + event.lastEventId);\n"
+            + "  }\n"
+
+            + "  win.addEventListener('message', receiveMessage, false);\n"
+
+            + "  uInt8Array = new Uint8Array(1);\n"
+            + "  win.postMessage('hello', [uInt8Array.buffer]);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final String iframe = DOCTYPE_HTML
+                + "<html><body><p>inside frame</p></body></html>";
+
+        getMockWebConnection().setResponse(URL_THIRD, iframe);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Test for #1589 NullPointerException because of missing context.
      *
      * @throws Exception if the test fails

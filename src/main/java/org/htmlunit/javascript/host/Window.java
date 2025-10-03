@@ -1969,13 +1969,21 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         final Object message = args[0];
 
         String targetOrigin = "*";
+        Object transfer = JavaScriptEngine.UNDEFINED;
+
         if (args.length > 1) {
-            targetOrigin = JavaScriptEngine.toString(args[1]);
+            if (JavaScriptEngine.isArray(args[1])) {
+                transfer = args[1];
+            }
+            else {
+                targetOrigin = JavaScriptEngine.toString(args[1]);
+            }
         }
 
-        Object transfer = JavaScriptEngine.UNDEFINED;
         if (args.length > 2) {
-            transfer = args[2];
+            if (JavaScriptEngine.isArray(args[2])) {
+                transfer = args[2];
+            }
         }
 
         final Window sender = (Window) scope;
