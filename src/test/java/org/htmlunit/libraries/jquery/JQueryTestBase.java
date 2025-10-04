@@ -101,7 +101,6 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
                 new OnlyLocalConnectionWrapper(webClient);
             }
 
-
             final String url = buildUrl(testNumber);
             webDriver.get(url);
 
@@ -130,7 +129,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
                 }
                 System.out.println("--------------------------------------------");
 
-                Assertions.fail("'" + expected + "' does not contain '" + result);
+                Assertions.fail("'" + expected + "' does not contain teh current result '" + result);
             }
         }
         catch (final Exception e) {
