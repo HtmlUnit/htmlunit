@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.libraries;
+package org.htmlunit.libraries.gwt;
 
 import java.util.List;
 

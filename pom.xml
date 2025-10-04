@@ -428,14 +428,11 @@
                             <includes>
                                 <include>**/libraries/*.java</include>
                                 <!--
-                                    we have to list the different folders here using '**' seems to confuse surefile
-                                    placing some gwt classe in the path and then failing when trying to instantiate
+                                    we have to restrict to one subfolder level;
+                                    using '**' seems to confuse surefile byplacing some gwt classes
+                                    in the path and then failing when trying to instantiate
                                  -->
-                                <include>**/libraries/dojo/*.java</include>
-                                <include>**/libraries/htmx/*.java</include>
-                                <include>**/libraries/jquery/*.java</include>
-                                <include>**/libraries/mochikit/*.java</include>
-                                <include>**/libraries/prototype/*.java</include>
+                                <include>**/libraries/*/*.java</include>
                             </includes>
                             <excludes>
                                 <exclude>**/libraries/jquery/JQuery3x3x1Test.java</exclude>
