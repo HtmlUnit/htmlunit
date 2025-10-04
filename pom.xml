@@ -431,7 +431,7 @@
                                     we have to restrict to one subfolder level;
                                     using '**' seems to confuse surefile byplacing some gwt classes
                                     in the path and then failing when trying to instantiate
-                                 -->
+                                -->
                                 <include>**/libraries/*/*.java</include>
                             </includes>
                             <excludes>
