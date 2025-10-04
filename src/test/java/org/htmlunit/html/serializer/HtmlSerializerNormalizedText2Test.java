@@ -1761,11 +1761,10 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Tests getTableCell(int,int).
      * @exception Exception If the test fails
      */
     @Test
-    public void getCellAt() throws Exception {
+    public void tableCell() throws Exception {
         final String htmlContent = DOCTYPE_HTML
             + "<html>"
             + "<body>\n"
@@ -1784,7 +1783,6 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
         final HtmlTable table = page.getHtmlElementById("table1");
 
         final HtmlTableCell cell1 = table.getCellAt(0, 0);
-        // assertEquals("cell1 contents", "cell1acell1b", cell1.asNormalizedText());
         assertEquals("cell1 contents", "cell1a\ncell1b", cell1.asNormalizedText());
 
         final HtmlTableCell cell2 = table.getCellAt(0, 1);
@@ -1800,11 +1798,10 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Tests getTableCell(int,int).
      * @exception Exception If the test fails
      */
     @Test
-    public void getCellAtWithBreaks() throws Exception {
+    public void tableCellWithLineBreaks() throws Exception {
         final String htmlContent = DOCTYPE_HTML
             + "<html>"
             + "<body>\n"
@@ -1823,7 +1820,6 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
         final HtmlTable table = page.getHtmlElementById("table1");
 
         final HtmlTableCell cell1 = table.getCellAt(0, 0);
-        // assertEquals("cell1 contents", "cell1a\ncell1b", cell1.asNormalizedText());
         assertEquals("cell1 contents", "cell1a\n\ncell1b", cell1.asNormalizedText());
 
         final HtmlTableCell cell2 = table.getCellAt(0, 1);
