@@ -1171,6 +1171,19 @@ public class CssStyleSheet implements Serializable {
                 final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
                 return isValidSelector(gas.getSelector(), domNode)
                         && isValidSelector(gas.getSimpleSelector(), domNode);
+            case PSEUDO_ELEMENT_SELECTOR:
+                // as of now (4.17) the htmlunit-cssparser accepts only supported selectors
+                // if ("first-line".equals(s)
+                //         || "first-letter".equals(s)
+                //         || "before".equals(s)
+                //         || "after".equals(s))
+                //     {
+                //         return new PseudoElementSelector(s, locator, doubleColon);
+                //     }
+                return true;
+            case RELATIVE_SELECTOR:
+                final RelativeSelector rs = (RelativeSelector) selector;
+                return isValidSelector(rs.getSelector(), domNode);
             default:
                 if (LOG.isWarnEnabled()) {
                     LOG.warn("Unhandled CSS selector type '"

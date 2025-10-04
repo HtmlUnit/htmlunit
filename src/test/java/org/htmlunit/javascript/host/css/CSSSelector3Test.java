@@ -790,6 +790,34 @@ public class CSSSelector3Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "SyntaxError/DOMException"})
+    public void hasSizzleJQuery182InvalidContains() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  try {\n"
+                + "    items = document.querySelectorAll(\"#form select:has(option:first-child)\");"
+                + "    log(items.length);\n"
+
+                + "    items = document.querySelectorAll(\"#form select:has(option:first-child:contains('o'))\");"
+                + "    log(items.length);\n"
+                + "  } catch (e) { logEx(e); }\n"
+                + "</script>\n"
+
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
     /**
      * @throws Exception if the test fails
      */
