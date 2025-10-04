@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.17.0" date="October xx, 2025" description="Chrome/Edge 140, Firefox 142, css :has(), :is(), :where(), BroadcastChannel, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: duplicate function keys in object literal now allowed.
+            </action>
             <action type="add" dev="rbri">
                 Empty implementation of MessagePort.start() and MessagePort.close() added.
             </action>
