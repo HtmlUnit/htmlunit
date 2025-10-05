@@ -6,7 +6,7 @@
 
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.17.0-SNAPSHOT</version>
+    <version>4.17.0</version>
     <packaging>jar</packaging>
 
     <name>HtmlUnit</name>
@@ -30,7 +30,7 @@
         <htmlunitcsp.version>4.17.0</htmlunitcsp.version>
         <htmlunitcssparser.version>4.17.0</htmlunitcssparser.version>
         <htmlunitcorejs.version>4.17.0</htmlunitcorejs.version>
-        <htmlunitneko.version>4.17.0-SNAPSHOT</htmlunitneko.version>
+        <htmlunitneko.version>4.17.0</htmlunitneko.version>
         <htmlunitwebsocketclient.version>4.17.0</htmlunitwebsocketclient.version>
         <htmlunitxpath.version>4.17.0</htmlunitxpath.version>
 
@@ -41,7 +41,7 @@
         <!--brotli.version>0.1.2</brotli.version-->
 
         <!-- selenium -->
-        <htmlunitdriver.version>4.36.0-SNAPSHOT</htmlunitdriver.version>
+        <htmlunitdriver.version>4.36.0</htmlunitdriver.version>
         <selenium.version>4.36.0</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v140</selenium.devtools.artifactId>
 
