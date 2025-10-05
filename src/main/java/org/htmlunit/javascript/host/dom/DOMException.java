@@ -177,6 +177,18 @@ public class DOMException extends HtmlUnitScriptable {
      * Default constructor used to build the prototype.
      */
     public DOMException() {
+        super();
+    }
+
+    /**
+     * Constructor.
+     * @param message the exception message
+     * @param error the error code (on of the constants from the class)
+     */
+    public DOMException(final String message, final int error) {
+        message_ = message;
+        code_ = error;
+        name_ = COMMON_ERROR_NAMES.get(error - 1);
     }
 
     /**
@@ -212,17 +224,6 @@ public class DOMException extends HtmlUnitScriptable {
         }
 
         code_ = 0;
-    }
-
-    /**
-     * Constructor.
-     * @param message the exception message
-     * @param error the error code (on of the constants from the class)
-     */
-    public DOMException(final String message, final int error) {
-        message_ = message;
-        code_ = error;
-        name_ = COMMON_ERROR_NAMES.get(error - 1);
     }
 
     /**

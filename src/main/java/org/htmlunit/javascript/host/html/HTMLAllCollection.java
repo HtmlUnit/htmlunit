@@ -53,6 +53,7 @@ public class HTMLAllCollection extends AbstractList implements Callable {
      */
     @JsxConstructor
     public void jsConstructor() {
+        // nothing to do
     }
 
     /**

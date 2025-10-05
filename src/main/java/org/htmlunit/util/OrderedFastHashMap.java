@@ -200,7 +200,7 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
             final Object ret = mapData_[ptr + 1];
             mapData_[ptr + 1] = value;
 
-            /// existing entry, no need to update the position
+            // existing entry, no need to update the position
 
             return (V) ret;
         }
