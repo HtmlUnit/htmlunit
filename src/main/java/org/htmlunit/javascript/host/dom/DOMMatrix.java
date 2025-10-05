@@ -448,7 +448,7 @@ public class DOMMatrix extends DOMMatrixReadOnly {
      */
     @JsxFunction
     public DOMMatrix invertSelf() {
-        if (getIs2D()) {
+        if (isIs2D()) {
             final double det = getM11() * getM22() - getM12() * getM21();
             if (det == 0) {
                 // Not invertible: set all to NaN, is2D_ = false

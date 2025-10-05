@@ -997,7 +997,7 @@ public class Event extends HtmlUnitScriptable {
      * @return the return composed property
      */
     @JsxGetter
-    public boolean getComposed() {
+    public boolean isComposed() {
         return false;
     }
 

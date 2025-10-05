@@ -2166,7 +2166,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the {@code offscreenBuffering} property
      */
     @JsxGetter({CHROME, EDGE})
-    public boolean getOffscreenBuffering() {
+    public boolean isOffscreenBuffering() {
         return true;
     }
 
@@ -3827,7 +3827,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return a boolean indicating whether the current context is secure (true) or not (false).
      */
     @JsxGetter
-    public boolean getIsSecureContext() {
+    public boolean isIsSecureContext() {
         final Page page = getWebWindow().getEnclosedPage();
         if (page != null) {
             final String protocol = page.getUrl().getProtocol();

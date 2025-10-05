@@ -1670,7 +1670,7 @@ public class Document extends Node {
      * @return the {@code hidden} property
      */
     @JsxGetter
-    public boolean getHidden() {
+    public boolean isHidden() {
         return false;
     }
 

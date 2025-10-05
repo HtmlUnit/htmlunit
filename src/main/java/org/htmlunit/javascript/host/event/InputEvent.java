@@ -80,7 +80,7 @@ public class InputEvent extends UIEvent {
      * @return whether or not the event is fired while composing
      */
     @JsxGetter
-    public boolean getIsComposing() {
+    public boolean isIsComposing() {
         return isComposing_;
     }
 

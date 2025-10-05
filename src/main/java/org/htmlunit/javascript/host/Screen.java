@@ -187,7 +187,7 @@ public class Screen extends EventTarget {
      * @return the {@code orientation} property
      */
     @JsxGetter({CHROME, EDGE})
-    public boolean getIsExtended() {
+    public boolean isIsExtended() {
         return false;
     }
 

@@ -302,7 +302,7 @@ public class Navigator extends HtmlUnitScriptable {
      *         of PDF files when navigating to them
      */
     @JsxGetter
-    public boolean getPdfViewerEnabled() {
+    public boolean isPdfViewerEnabled() {
         return true;
     }
 

@@ -95,6 +95,7 @@ public class HtmlDomTreeWalker implements Serializable {
      * @see org.w3c.dom.traversal.TreeWalker#getExpandEntityReferences()
      * @return the ExpandEntityReferences setting
      */
+    @SuppressWarnings("PMD.BooleanGetMethodName")
     public boolean getExpandEntityReferences() {
         return expandEntityReferences_;
     }

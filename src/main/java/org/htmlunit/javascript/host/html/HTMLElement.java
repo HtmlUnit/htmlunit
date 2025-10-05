@@ -272,7 +272,7 @@ public class HTMLElement extends Element {
      * @return the autofocus of this element
      */
     @JsxGetter
-    public boolean getAutofocus() {
+    public boolean isAutofocus() {
         return getDomNodeOrDie().hasAttribute("autofocus");
     }
 

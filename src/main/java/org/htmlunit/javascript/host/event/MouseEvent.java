@@ -469,7 +469,7 @@ public class MouseEvent extends UIEvent {
      * @return whether or not the "meta" key was pressed during the event firing
      */
     @JsxGetter
-    public boolean getMetaKey() {
+    public boolean isMetaKey() {
         return metaKey_;
     }
 

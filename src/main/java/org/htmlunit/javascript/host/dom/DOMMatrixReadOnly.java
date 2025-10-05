@@ -457,7 +457,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
      * @return is2d
      */
     @JsxGetter
-    public boolean getIs2D() {
+    public boolean isIs2D() {
         return is2D_;
     }
 
@@ -615,7 +615,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
                 + m22_ * otherMatrix.m12_
                 + m32_ * otherMatrix.m13_
                 + m42_ * otherMatrix.m14_);
-        if (!result.getIs2D()) {
+        if (!result.isIs2D()) {
             result.setM13(m13_ * otherMatrix.m11_
                     + m23_ * otherMatrix.m12_
                     + m33_ * otherMatrix.m13_
@@ -634,7 +634,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
                 + m22_ * otherMatrix.m22_
                 + m32_ * otherMatrix.m23_
                 + m42_ * otherMatrix.m24_);
-        if (!result.getIs2D()) {
+        if (!result.isIs2D()) {
             result.setM23(m13_ * otherMatrix.m21_
                     + m23_ * otherMatrix.m22_
                     + m33_ * otherMatrix.m23_
@@ -645,7 +645,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
                     + m44_ * otherMatrix.m24_);
         }
 
-        if (!result.getIs2D()) {
+        if (!result.isIs2D()) {
             result.setM31(m11_ * otherMatrix.m31_
                     + m21_ * otherMatrix.m32_
                     + m31_ * otherMatrix.m33_
@@ -672,7 +672,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
                 + m22_ * otherMatrix.m42_
                 + m32_ * otherMatrix.m43_
                 + m42_ * otherMatrix.m44_);
-        if (!result.getIs2D()) {
+        if (!result.isIs2D()) {
             result.setM43(m13_ * otherMatrix.m41_
                     + m23_ * otherMatrix.m42_
                     + m33_ * otherMatrix.m43_

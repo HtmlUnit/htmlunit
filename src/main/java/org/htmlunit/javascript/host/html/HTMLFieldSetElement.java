@@ -119,7 +119,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      * @return whether the element is a candidate for constraint validation
      */
     @JsxGetter
-    public boolean getWillValidate() {
+    public boolean isWillValidate() {
         return ((HtmlFieldSet) getDomNodeOrDie()).willValidate();
     }
 

@@ -167,7 +167,7 @@ public class HTMLButtonElement extends HTMLElement {
      * @return always false
      */
     @JsxGetter
-    public boolean getWillValidate() {
+    public boolean isWillValidate() {
         return ((HtmlButton) getDomNodeOrDie()).willValidate();
     }
 
