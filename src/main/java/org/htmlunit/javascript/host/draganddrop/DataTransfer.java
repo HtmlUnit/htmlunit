@@ -32,13 +32,6 @@ public class DataTransfer extends HtmlUnitScriptable {
     private DataTransferItemList items_;
 
     /**
-     * Ctor.
-     */
-    public DataTransfer() {
-        super();
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor

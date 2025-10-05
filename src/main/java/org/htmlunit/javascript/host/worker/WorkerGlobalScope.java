@@ -29,13 +29,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
  */
 @JsxClass
 public class WorkerGlobalScope extends EventTarget implements WindowOrWorkerGlobalScope {
-    /**
-     * For prototype instantiation.
-     */
-    public WorkerGlobalScope() {
-        // prototype constructor
-        super();
-    }
 
     /**
      * JavaScript constructor.

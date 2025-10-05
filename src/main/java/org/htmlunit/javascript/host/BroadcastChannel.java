@@ -47,13 +47,6 @@ public class BroadcastChannel extends EventTarget {
     private String name_;
 
     /**
-     * Default constructor.
-     */
-    public BroadcastChannel() {
-        super();
-    }
-
-    /**
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope

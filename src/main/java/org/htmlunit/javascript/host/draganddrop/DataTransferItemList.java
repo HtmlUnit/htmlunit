@@ -42,13 +42,6 @@ public class DataTransferItemList extends HtmlUnitScriptable {
     private FileList fileList_;
 
     /**
-     * Creates an instance.
-     */
-    public DataTransferItemList() {
-        super();
-    }
-
-    /**
      * JavaScript constructor.
      */
     @JsxConstructor
