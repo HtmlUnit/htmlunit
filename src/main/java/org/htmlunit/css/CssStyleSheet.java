@@ -687,9 +687,8 @@ public class CssStyleSheet implements Serializable {
                 return true;
 
             case IS_PSEUDO_CLASS_CONDITION:
-                final IsPseudoClassCondition isPseudoCondition = (IsPseudoClassCondition) condition;
-                final SelectorList isSelectorList = isPseudoCondition.getSelectors();
-                for (final Selector selector : isSelectorList) {
+                final IsPseudoClassCondition conditionIsPseudo = (IsPseudoClassCondition) condition;
+                for (final Selector selector : conditionIsPseudo.getSelectors()) {
                     if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
                         return true;
                     }
@@ -698,9 +697,8 @@ public class CssStyleSheet implements Serializable {
 
             case WHERE_PSEUDO_CLASS_CONDITION:
                 // same as is
-                final WherePseudoClassCondition wherePseudoCondition = (WherePseudoClassCondition) condition;
-                final SelectorList whereSelectorList = wherePseudoCondition.getSelectors();
-                for (final Selector selector : whereSelectorList) {
+                final WherePseudoClassCondition conditionWherePseudo = (WherePseudoClassCondition) condition;
+                for (final Selector selector : conditionWherePseudo.getSelectors()) {
                     if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
                         return true;
                     }
@@ -708,9 +706,8 @@ public class CssStyleSheet implements Serializable {
                 return false;
 
             case HAS_PSEUDO_CLASS_CONDITION:
-                final HasPseudoClassCondition hasPseudoCondition = (HasPseudoClassCondition) condition;
-                final SelectorList hasSelectorList = hasPseudoCondition.getSelectors();
-                for (final Selector selector : hasSelectorList) {
+                final HasPseudoClassCondition conditionHasPseudo = (HasPseudoClassCondition) condition;
+                for (final Selector selector : conditionHasPseudo.getSelectors()) {
                     if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
                         return true;
                     }
@@ -1215,27 +1212,24 @@ public class CssStyleSheet implements Serializable {
                 }
                 return true;
             case IS_PSEUDO_CLASS_CONDITION:
-                final IsPseudoClassCondition isPseudoCondition = (IsPseudoClassCondition) condition;
-                final SelectorList isSelectorList = isPseudoCondition.getSelectors();
-                for (final Selector selector : isSelectorList) {
+                final IsPseudoClassCondition conditionIsPseudo = (IsPseudoClassCondition) condition;
+                for (final Selector selector : conditionIsPseudo.getSelectors()) {
                     if (!isValidSelector(selector, domNode)) {
                         return false;
                     }
                 }
                 return true;
             case WHERE_PSEUDO_CLASS_CONDITION:
-                final WherePseudoClassCondition wherePseudoCondition = (WherePseudoClassCondition) condition;
-                final SelectorList whereSelectorList = wherePseudoCondition.getSelectors();
-                for (final Selector selector : whereSelectorList) {
+                final WherePseudoClassCondition conditionWherePseudo = (WherePseudoClassCondition) condition;
+                for (final Selector selector : conditionWherePseudo.getSelectors()) {
                     if (!isValidSelector(selector, domNode)) {
                         return false;
                     }
                 }
                 return true;
             case HAS_PSEUDO_CLASS_CONDITION:
-                final HasPseudoClassCondition hasPseudoCondition = (HasPseudoClassCondition) condition;
-                final SelectorList hasSelectorList = hasPseudoCondition.getSelectors();
-                for (final Selector selector : hasSelectorList) {
+                final HasPseudoClassCondition conditionHasPseudo = (HasPseudoClassCondition) condition;
+                for (final Selector selector : conditionHasPseudo.getSelectors()) {
                     if (!isValidSelector(selector, domNode)) {
                         return false;
                     }
