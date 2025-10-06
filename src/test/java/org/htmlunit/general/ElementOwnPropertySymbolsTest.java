@@ -3367,4 +3367,18 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     public void domMatrix() throws Exception {
         testString("", "new DOMMatrix()");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.Notification}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [Notification]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [Notification]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Notification]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Notification]")
+    public void notification() throws Exception {
+        testString("", "new Notification('not')");
+    }
 }

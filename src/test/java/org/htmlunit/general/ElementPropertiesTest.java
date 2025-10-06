@@ -9670,4 +9670,28 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void domMatrix() throws Exception {
         testString("", "new DOMMatrix()");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.Notification}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "actions,addEventListener(),badge,body,close(),data,dir,dispatchEvent(),icon,image,"
+                + "lang,onclick,onclose,onerror,onshow,removeEventListener(),renotify,requireInteraction,"
+                + "silent,tag,timestamp,title,vibrate,when()",
+            EDGE = "actions,addEventListener(),badge,body,close(),data,dir,dispatchEvent(),icon,image,"
+                + "lang,onclick,onclose,onerror,onshow,removeEventListener(),renotify,requireInteraction,"
+                + "scenario,silent,tag,timestamp,title,vibrate,when()",
+            FF = "addEventListener(),body,close(),data,dir,dispatchEvent(),icon,lang,onclick,onclose,onerror,"
+                + "onshow,removeEventListener(),requireInteraction,silent,tag,title",
+            FF_ESR = "addEventListener(),body,close(),data,dir,dispatchEvent(),icon,lang,onclick,onclose,"
+                + "onerror,onshow,removeEventListener(),requireInteraction,tag,title")
+    @HtmlUnitNYI(CHROME = "addEventListener(),dispatchEvent(),maxActions,removeEventListener()",
+            EDGE = "addEventListener(),dispatchEvent(),maxActions,removeEventListener()",
+            FF = "addEventListener(),dispatchEvent(),removeEventListener()",
+            FF_ESR = "addEventListener(),dispatchEvent(),removeEventListener()")
+    public void notification() throws Exception {
+        testString("", "new Notification('not')");
+    }
 }

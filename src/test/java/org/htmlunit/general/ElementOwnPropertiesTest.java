@@ -18460,4 +18460,31 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void domMatrix() throws Exception {
         testString("", "new DOMMatrix()");
     }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.Notification}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "actions[GCE],badge[GCE],body[GCE],close(),constructor(),data[GCE],dir[GCE],"
+                + "icon[GCE],image[GCE],lang[GCE],onclick[GSCE],onclose[GSCE],onerror[GSCE],"
+                + "onshow[GSCE],renotify[GCE],requireInteraction[GCE],silent[GCE],tag[GCE],"
+                + "timestamp[GCE],title[GCE],vibrate[GCE]",
+            EDGE = "actions[GCE],badge[GCE],body[GCE],close(),constructor(),data[GCE],dir[GCE],"
+                + "icon[GCE],image[GCE],lang[GCE],onclick[GSCE],onclose[GSCE],onerror[GSCE],"
+                + "onshow[GSCE],renotify[GCE],requireInteraction[GCE],scenario[GCE],silent[GCE],"
+                + "tag[GCE],timestamp[GCE],title[GCE],vibrate[GCE]",
+            FF = "body[GCE],close(),constructor(),data[GCE],dir[GCE],icon[GCE],lang[GCE],onclick[GSCE],"
+                + "onclose[GSCE],onerror[GSCE],onshow[GSCE],requireInteraction[GCE],silent[GCE],"
+                + "tag[GCE],title[GCE]",
+            FF_ESR = "body[GCE],close(),constructor(),data[GCE],dir[GCE],icon[GCE],lang[GCE],onclick[GSCE],"
+                + "onclose[GSCE],onerror[GSCE],onshow[GSCE],requireInteraction[GCE],tag[GCE],title[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor(),maxActions[E]",
+            EDGE = "constructor(),maxActions[E]",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void notification() throws Exception {
+        testString("", "new Notification('not')");
+    }
 }
