@@ -22,8 +22,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.htmlunit.corejs.javascript.MemberBox;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Symbol;
+import org.htmlunit.corejs.javascript.lc.type.TypeInfoFactory;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 
 /**
@@ -313,8 +315,8 @@ public final class ClassConfiguration {
      * methods that implement the get and set functions.
      */
     public static class PropertyInfo {
-        private final Method readMethod_;
-        private final Method writeMethod_;
+        private final MemberBox readMethod_;
+        private final MemberBox writeMethod_;
 
         /**
          * Constructor.
@@ -323,21 +325,30 @@ public final class ClassConfiguration {
          * @param writeMethod the writeMethod
          */
         public PropertyInfo(final Method readMethod, final Method writeMethod) {
-            readMethod_ = readMethod;
-            writeMethod_ = writeMethod;
+            MemberBox getterBox = null;
+            if (readMethod != null) {
+                getterBox = new MemberBox(readMethod, TypeInfoFactory.GLOBAL);
+            }
+            readMethod_ = getterBox;
+
+            MemberBox setterBox = null;
+            if (writeMethod != null) {
+                setterBox = new MemberBox(writeMethod, TypeInfoFactory.GLOBAL);
+            }
+            writeMethod_ = setterBox;
         }
 
         /**
          * @return the readMethod
          */
-        public Method getReadMethod() {
+        public MemberBox getReadMethod() {
             return readMethod_;
         }
 
         /**
          * @return the writeMethod
          */
-        public Method getWriteMethod() {
+        public MemberBox getWriteMethod() {
             return writeMethod_;
         }
     }

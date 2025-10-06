@@ -46,6 +46,7 @@ import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.JavaScriptException;
+import org.htmlunit.corejs.javascript.MemberBox;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.NativeConsole;
@@ -608,9 +609,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (propertyMap != null) {
             for (final Entry<String, PropertyInfo> propertyEntry : propertyMap.entrySet()) {
                 final PropertyInfo info = propertyEntry.getValue();
-                final Method readMethod = info.getReadMethod();
-                final Method writeMethod = info.getWriteMethod();
-                scriptable.defineProperty(propertyEntry.getKey(), null, readMethod, writeMethod, ScriptableObject.EMPTY);
+                final MemberBox readMethod = info.getReadMethod();
+                final MemberBox writeMethod = info.getWriteMethod();
+                scriptable.defineProperty(propertyEntry.getKey(), readMethod, writeMethod, ScriptableObject.EMPTY);
             }
         }
     }
@@ -618,14 +619,14 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private static void configureStaticProperties(final ClassConfiguration config, final ScriptableObject scriptable) {
         final Map<String, PropertyInfo> staticPropertyMap = config.getStaticPropertyMap();
         if (staticPropertyMap != null) {
-            for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : staticPropertyMap.entrySet()) {
-                final String propertyName = propertyEntry.getKey();
-                final Method readMethod = propertyEntry.getValue().getReadMethod();
-                final Method writeMethod = propertyEntry.getValue().getWriteMethod();
-                final int flag = ScriptableObject.EMPTY;
-
-                scriptable.defineProperty(propertyName, null, readMethod, writeMethod, flag);
-            }
+//            for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : staticPropertyMap.entrySet()) {
+//                final String propertyName = propertyEntry.getKey();
+//                final Method readMethod = propertyEntry.getValue().getReadMethod();
+//                final Method writeMethod = propertyEntry.getValue().getWriteMethod();
+//                final int flag = ScriptableObject.EMPTY;
+//
+//                scriptable.defineProperty(propertyName, null, readMethod, writeMethod, flag);
+//            }
         }
     }
 
