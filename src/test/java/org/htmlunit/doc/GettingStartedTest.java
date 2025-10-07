@@ -95,7 +95,7 @@ public class GettingStartedTest extends WebServerTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    public void submittingForm() throws Exception {
+    private void submittingForm() throws Exception {
         try (WebClient webClient = new WebClient()) {
 
             // Get the first page
@@ -153,7 +153,7 @@ public class GettingStartedTest extends WebServerTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    public void getElements() throws Exception {
+    private void getElements() throws Exception {
         try (WebClient webClient = new WebClient()) {
             final HtmlPage page = webClient.getPage("http://some_url");
 
@@ -165,7 +165,7 @@ public class GettingStartedTest extends WebServerTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    public void getElements2() throws Exception {
+    private void getElements2() throws Exception {
         try (WebClient webClient = new WebClient()) {
             final HtmlPage page = webClient.getPage("http://some_url");
 
