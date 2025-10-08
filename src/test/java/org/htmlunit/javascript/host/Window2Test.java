@@ -951,11 +951,11 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = {"true", "621", "147", "true", "16", "16"},
             EDGE = {"true", "630", "138", "true", "16", "24"},
             FF = {"true", "675", "93", "true", "16", "16"},
-            FF_ESR = {"true", "677", "91", "true", "16", "12"})
+            FF_ESR = {"true", "675", "93", "true", "16", "16"})
     @HtmlUnitNYI(CHROME = {"true", "605", "147", "true", "0", "16"},
             EDGE = {"true", "605", "138", "true", "0", "24"},
             FF = {"true", "605", "93", "true", "0", "16"},
-            FF_ESR = {"true", "605", "91", "true", "0", "12"})
+            FF_ESR = {"true", "605", "93", "true", "0", "16"})
     public void heightsAndWidths() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body onload='test()'><script>\n"
@@ -981,7 +981,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = {"true", "0", "147", "true", "true", "16"},
             EDGE = {"true", "0", "138", "true", "true", "24"},
             FF = {"true", "0", "93", "true", "true", "16"},
-            FF_ESR = {"true", "0", "91", "true", "true", "12"})
+            FF_ESR = {"true", "0", "93", "true", "true", "16"})
     public void heightsAndWidthsQuirks() throws Exception {
         final String html =
             "<html><body onload='test()'><script>\n"
@@ -1083,7 +1083,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = {"0", "1240", "100", "1240"},
             EDGE = {"0", "1232", "100", "1232"},
             FF = {"0", "1240", "100", "1240"},
-            FF_ESR = {"0", "1244", "100", "1244"})
+            FF_ESR = {"0", "1240", "100", "1240"})
     @HtmlUnitNYI(CHROME = {"0", "1256", "100", "1256"},
             EDGE = {"0", "1256", "100", "1256"},
             FF = {"0", "1256", "100", "1256"},
@@ -1122,7 +1122,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = {"621", "1256", "606", "1241"},
             EDGE = {"630", "1248", "615", "1233"},
             FF = {"675", "1256", "658", "1239"},
-            FF_ESR = {"677", "1260", "660", "1243"})
+            FF_ESR = {"675", "1256", "658", "1239"})
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple
     @HtmlUnitNYI(CHROME = {"605", "1256", "705", "1256"},
@@ -1318,7 +1318,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
             FF = {"12", "89"},
-            FF_ESR = {"10", "89"})
+            FF_ESR = {"12", "89"})
     public void mozInnerScreen() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body onload='test()'><script>\n"
@@ -3237,8 +3237,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"clientInformation[GSCE]", "undefined"},
-            FF_ESR = {"clientInformation[GCE]", "undefined"})
+    @Alerts({"clientInformation[GSCE]", "undefined"})
     public void clientInformationProperty() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
@@ -3273,12 +3272,11 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object Navigator]", "two", "undefined"},
-            FF_ESR = {"[object Navigator]", "[object Navigator]", "undefined"})
+    @Alerts({"[object Navigator]", "two", "undefined"})
     @HtmlUnitNYI(CHROME = {"[object Navigator]", "two", "two"},
             EDGE = {"[object Navigator]", "two", "two"},
             FF = {"[object Navigator]", "two", "two"},
-            FF_ESR = {"[object Navigator]", "[object Navigator]", "[object Navigator]"})
+            FF_ESR = {"[object Navigator]", "two", "two"})
     public void clientInformationPropertyEdit() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

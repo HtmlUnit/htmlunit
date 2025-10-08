@@ -84,7 +84,6 @@ public class BrowserVersionClassTemplateInvocationContextProvider implements Cla
             invocationContexts.add(invocationContext(BrowserVersion.EDGE, false));
         }
 
-
         return invocationContexts.stream();
     }
 

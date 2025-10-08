@@ -594,7 +594,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -647,7 +648,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -859,7 +861,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**

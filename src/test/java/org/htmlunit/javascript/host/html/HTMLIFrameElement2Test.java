@@ -300,7 +300,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("test")).click();
 
-        verifyTitle2(driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
 
@@ -902,7 +902,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("d1")).click();
         verifyTitle2(driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
         driver.findElement(By.id("d2")).click();
-        verifyTitle2(driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**

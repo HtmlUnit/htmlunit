@@ -59,6 +59,9 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
 
         assertTitle(driver, "foo");
 
+        if (useRealBrowser()) {
+            Thread.sleep(200);
+        }
         assertEquals(Collections.singletonList(new NameValuePair("button", "foo")),
             getMockWebConnection().getLastParameters());
     }
@@ -191,6 +194,9 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
         final WebElement input = webDriver.findElement(By.name("submitBtn"));
         input.click();
 
+        if (useRealBrowser()) {
+            Thread.sleep(200);
+        }
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
     }
 

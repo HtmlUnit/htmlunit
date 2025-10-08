@@ -32,8 +32,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(FF_ESR)
-@JsxClass(value = FF, isJSObject = false)
+@JsxClass(value = {FF, FF_ESR}, isJSObject = false)
 public class MutationEvent extends Event {
 
     /** Modification. */

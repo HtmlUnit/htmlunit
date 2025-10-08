@@ -165,8 +165,8 @@ public class UIEventTest extends WebDriverTestCase {
                     "[object MouseEvent]", "2", "[object PointerEvent]", "0"},
             FF = {"[object Event]", "undefined", "[object PointerEvent]", "1",
                   "[object MouseEvent]", "2", "[object PointerEvent]", "1"},
-            FF_ESR = {"[object Event]", "undefined", "[object MouseEvent]", "1",
-                      "[object MouseEvent]", "2", "[object MouseEvent]", "1"})
+            FF_ESR = {"[object Event]", "undefined", "[object PointerEvent]", "1",
+                      "[object MouseEvent]", "2", "[object PointerEvent]", "1"})
     public void detail() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -214,8 +214,8 @@ public class UIEventTest extends WebDriverTestCase {
                     "[object MouseEvent]", "2", "[object PointerEvent]", "0"},
             FF = {"[object Event]", "undefined", "[object PointerEvent]", "1",
                   "[object MouseEvent]", "2", "[object PointerEvent]", "1"},
-            FF_ESR = {"[object Event]", "undefined", "[object MouseEvent]", "1",
-                      "[object MouseEvent]", "2", "[object MouseEvent]", "1"})
+            FF_ESR = {"[object Event]", "undefined", "[object PointerEvent]", "1",
+                      "[object MouseEvent]", "2", "[object PointerEvent]", "1"})
     public void detailInputText() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -264,8 +264,8 @@ public class UIEventTest extends WebDriverTestCase {
                     "[object MouseEvent]", "2", "[object PointerEvent]", "0"},
             FF = {"[object Event]", "undefined", "[object PointerEvent]", "1",
                   "[object MouseEvent]", "2", "[object PointerEvent]", "1"},
-            FF_ESR = {"[object Event]", "undefined", "[object MouseEvent]", "1",
-                      "[object MouseEvent]", "2", "[object MouseEvent]", "1"})
+            FF_ESR = {"[object Event]", "undefined", "[object PointerEvent]", "1",
+                      "[object MouseEvent]", "2", "[object PointerEvent]", "1"})
     public void detailInputRadio() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -308,8 +308,7 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"},
-            FF_ESR = {"[object Event]", "undefined", "[object MouseEvent]", "[object Window]"})
+    @Alerts({"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"})
     public void view() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body onload='alertView(event)'><script>\n"

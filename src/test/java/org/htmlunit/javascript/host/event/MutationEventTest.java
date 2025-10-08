@@ -41,8 +41,7 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF_ESR = "TypeError")
+    @Alerts("ReferenceError")
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -64,8 +63,7 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF_ESR = "TypeError")
+    @Alerts("ReferenceError")
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -87,8 +85,7 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF_ESR = "TypeError")
+    @Alerts("ReferenceError")
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -110,8 +107,7 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF_ESR = "TypeError")
+    @Alerts("ReferenceError")
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -155,8 +151,7 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF_ESR = "TypeError")
+    @Alerts("ReferenceError")
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -178,8 +173,7 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF_ESR = "TypeError")
+    @Alerts("ReferenceError")
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -203,8 +197,7 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF_ESR = "TypeError")
+    @Alerts("ReferenceError")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -227,8 +220,7 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF_ESR = "TypeError")
+    @Alerts("ReferenceError")
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -252,8 +244,7 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF_ESR = "true")
+    @Alerts("false")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -300,12 +291,8 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
-                       "false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError"},
-            FF_ESR = {"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
-                      "true", "function MutationEvent() { [native code] }",
-                      "function MutationEvent() { [native code] }",
-                      "[object MutationEvent]", "function Event() { [native code] }"})
+    @Alerts({"false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError",
+             "false", "undefined", "ReferenceError", "ReferenceError", "ReferenceError"})
     public void windowScope() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html></body>\n"

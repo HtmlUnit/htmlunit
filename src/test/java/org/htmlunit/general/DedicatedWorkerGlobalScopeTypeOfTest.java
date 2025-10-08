@@ -4304,8 +4304,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF_ESR = "undefined")
+    @Alerts("function")
     public void iterator() throws Exception {
         test("Iterator");
     }
@@ -6029,8 +6028,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF_ESR = "undefined")
+    @Alerts("function")
     public void permissions() throws Exception {
         test("Permissions");
     }
@@ -6048,8 +6046,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF_ESR = "undefined")
+    @Alerts("function")
     public void permissionStatus() throws Exception {
         test("PermissionStatus");
     }
@@ -6329,8 +6326,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF_ESR = "undefined")
+    @Alerts("function")
     public void pushManager() throws Exception {
         test("PushManager");
     }
@@ -6357,8 +6353,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF_ESR = "undefined")
+    @Alerts("function")
     public void pushSubscription() throws Exception {
         test("PushSubscription");
     }
@@ -6367,8 +6362,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF_ESR = "undefined")
+    @Alerts("function")
     public void pushSubscriptionOptions() throws Exception {
         test("PushSubscriptionOptions");
     }
@@ -6697,7 +6691,8 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function")
+            FF = "function",
+            FF_ESR = "function")
     @HtmlUnitNYI(FF = "undefined")
     public void serviceWorker() throws Exception {
         test("ServiceWorker");
@@ -6708,7 +6703,8 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function")
+            FF = "function",
+            FF_ESR = "function")
     @HtmlUnitNYI(FF = "undefined")
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
@@ -6736,8 +6732,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF_ESR = "undefined")
+    @Alerts("function")
     public void serviceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration");
     }

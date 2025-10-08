@@ -4307,8 +4307,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function Iterator() { [native code] }",
-            FF_ESR = "ReferenceError")
+    @Alerts("function Iterator() { [native code] }")
     public void iterator() throws Exception {
         test("Iterator");
     }
@@ -6032,8 +6031,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function Permissions() { [native code] }",
-            FF_ESR = "ReferenceError")
+    @Alerts("function Permissions() { [native code] }")
     public void permissions() throws Exception {
         test("Permissions");
     }
@@ -6051,8 +6049,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function PermissionStatus() { [native code] }",
-            FF_ESR = "ReferenceError")
+    @Alerts("function PermissionStatus() { [native code] }")
     public void permissionStatus() throws Exception {
         test("PermissionStatus");
     }
@@ -6332,8 +6329,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function PushManager() { [native code] }",
-            FF_ESR = "ReferenceError")
+    @Alerts("function PushManager() { [native code] }")
     public void pushManager() throws Exception {
         test("PushManager");
     }
@@ -6360,8 +6356,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function PushSubscription() { [native code] }",
-            FF_ESR = "ReferenceError")
+    @Alerts("function PushSubscription() { [native code] }")
     public void pushSubscription() throws Exception {
         test("PushSubscription");
     }
@@ -6370,8 +6365,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function PushSubscriptionOptions() { [native code] }",
-            FF_ESR = "ReferenceError")
+    @Alerts("function PushSubscriptionOptions() { [native code] }")
     public void pushSubscriptionOptions() throws Exception {
         test("PushSubscriptionOptions");
     }
@@ -6700,7 +6694,8 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "function ServiceWorker() { [native code] }")
+            FF = "function ServiceWorker() { [native code] }",
+            FF_ESR = "function ServiceWorker() { [native code] }")
     @HtmlUnitNYI(FF = "ReferenceError")
     public void serviceWorker() throws Exception {
         test("ServiceWorker");
@@ -6711,7 +6706,8 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "function ServiceWorkerContainer() { [native code] }")
+            FF = "function ServiceWorkerContainer() { [native code] }",
+            FF_ESR = "function ServiceWorkerContainer() { [native code] }")
     @HtmlUnitNYI(FF = "ReferenceError")
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
@@ -6739,8 +6735,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function ServiceWorkerRegistration() { [native code] }",
-            FF_ESR = "ReferenceError")
+    @Alerts("function ServiceWorkerRegistration() { [native code] }")
     public void serviceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration");
     }

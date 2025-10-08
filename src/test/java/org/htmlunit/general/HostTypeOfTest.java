@@ -1156,7 +1156,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function")
+            FF = "function",
+            FF_ESR = "function")
     @HtmlUnitNYI(FF = "undefined")
     public void cssPageDescriptors() throws Exception {
         test("CSSPageDescriptors");
@@ -4342,8 +4343,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF_ESR = "undefined")
+    @Alerts("function")
     public void iterator() throws Exception {
         test("Iterator");
     }
@@ -5417,8 +5417,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF_ESR = "function")
+    @Alerts("undefined")
     public void mutationEvent() throws Exception {
         test("MutationEvent");
     }
@@ -8898,8 +8897,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF_ESR = "undefined")
+    @Alerts("function")
     public void textEvent() throws Exception {
         test("TextEvent");
     }

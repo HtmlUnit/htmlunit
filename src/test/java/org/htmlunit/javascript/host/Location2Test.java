@@ -1199,6 +1199,9 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals(1, getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("link")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(200);
+        }
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
@@ -1304,6 +1307,7 @@ public class Location2Test extends WebDriverTestCase {
 
         assertEquals(URL_FIRST + "a.html#1", driver.getCurrentUrl());
         driver.findElement(By.id("log")).click();
+
         verifySessionStorage2(driver, new String[] {"load", "1 http://localhost:22222/a.html",
             "2 http://localhost:22222/a.html#1", "3 http://localhost:22222/a.html#1",
             "load", "4 http://localhost:22222/a.html#1"});
@@ -1428,8 +1432,11 @@ public class Location2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(form, URL_FIRST);
         assertEquals(1, getMockWebConnection().getRequestCount());
-        driver.findElement(By.id("enter")).click();
 
+        driver.findElement(By.id("enter")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(200);
+        }
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("link")).click();

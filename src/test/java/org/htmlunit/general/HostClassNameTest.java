@@ -1176,7 +1176,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ReferenceError",
-            FF = "function CSSPageDescriptors() { [native code] }")
+            FF = "function CSSPageDescriptors() { [native code] }",
+            FF_ESR = "function CSSPageDescriptors() { [native code] }")
     @HtmlUnitNYI(FF = "ReferenceError")
     public void cssPageDescriptors() throws Exception {
         test("CSSPageDescriptors");
@@ -4368,8 +4369,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function Iterator() { [native code] }",
-            FF_ESR = "ReferenceError")
+    @Alerts("function Iterator() { [native code] }")
     public void iterator() throws Exception {
         test("Iterator");
     }
@@ -5439,8 +5439,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF_ESR = "function MutationEvent() { [native code] }")
+    @Alerts("ReferenceError")
     public void mutationEvent() throws Exception {
         test("MutationEvent");
     }
@@ -8916,8 +8915,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function TextEvent() { [native code] }",
-            FF_ESR = "ReferenceError")
+    @Alerts("function TextEvent() { [native code] }")
     public void textEvent() throws Exception {
         test("TextEvent");
     }

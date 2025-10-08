@@ -37,8 +37,7 @@ public class TextEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "ReferenceError")
+    @Alerts("TypeError")
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -60,8 +59,7 @@ public class TextEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "ReferenceError")
+    @Alerts("TypeError")
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -83,8 +81,7 @@ public class TextEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "ReferenceError")
+    @Alerts("TypeError")
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -106,8 +103,7 @@ public class TextEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "ReferenceError")
+    @Alerts("TypeError")
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -151,8 +147,7 @@ public class TextEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "ReferenceError")
+    @Alerts("TypeError")
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -174,8 +169,7 @@ public class TextEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "ReferenceError")
+    @Alerts("TypeError")
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -200,8 +194,7 @@ public class TextEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "ReferenceError")
+    @Alerts("TypeError")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -224,8 +217,7 @@ public class TextEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "TypeError",
-            FF_ESR = "ReferenceError")
+    @Alerts("TypeError")
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -249,8 +241,7 @@ public class TextEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF_ESR = "false")
+    @Alerts("true")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

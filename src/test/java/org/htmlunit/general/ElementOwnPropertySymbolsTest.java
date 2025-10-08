@@ -2344,8 +2344,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TextEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]")
+    @Alerts("Symbol(Symbol.toStringTag) [C] [TextEvent]")
     public void textEvent() throws Exception {
         testString("", "document.createEvent('TextEvent')");
     }

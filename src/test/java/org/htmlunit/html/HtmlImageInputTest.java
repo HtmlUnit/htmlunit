@@ -358,6 +358,9 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("submit")).click();
 
+        if (useRealBrowser()) {
+            Thread.sleep(200);
+        }
         expandExpectedAlertsVariables(URL_FIRST);
         assertEquals(getExpectedAlerts()[0], webDriver.getCurrentUrl());
     }
