@@ -1590,7 +1590,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Alerts(CHROME = "166",
             EDGE = "166",
             FF = "164",
-            FF_ESR = "161")
+            FF_ESR = "164")
     @HtmlUnitNYI(CHROME = "100",
             EDGE = "100",
             FF = "100",
@@ -1746,7 +1746,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "173",
             FF = "161",
-            FF_ESR = "154")
+            FF_ESR = "161")
     public void input() throws Exception {
         loadPageVerifyTitle2(test("input"));
     }
@@ -1776,7 +1776,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "13",
             FF = "14",
-            FF_ESR = "10")
+            FF_ESR = "14")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
     }
@@ -1789,7 +1789,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "253",
             FF = "231",
-            FF_ESR = "230")
+            FF_ESR = "231")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
             FF = "10",
@@ -1817,7 +1817,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "173",
             FF = "161",
-            FF_ESR = "154")
+            FF_ESR = "161")
     public void inputPassword() throws Exception {
         loadPageVerifyTitle2(testInput("password"));
     }
@@ -1830,7 +1830,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "13",
             FF = "14",
-            FF_ESR = "10")
+            FF_ESR = "14")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));
     }
@@ -1861,7 +1861,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Alerts(CHROME = "173",
             EDGE = "173",
             FF = "161",
-            FF_ESR = "154")
+            FF_ESR = "161")
     public void inputSelect() throws Exception {
         loadPageVerifyTitle2(testInput("select"));
     }
@@ -1874,7 +1874,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "54",
             FF = "88",
-            FF_ESR = "86")
+            FF_ESR = "88")
     @HtmlUnitNYI(CHROME = "118",
             EDGE = "118",
             FF = "118",
@@ -1891,7 +1891,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "173",
             FF = "161",
-            FF_ESR = "154")
+            FF_ESR = "161")
     public void inputText() throws Exception {
         loadPageVerifyTitle2(testInput("text"));
     }

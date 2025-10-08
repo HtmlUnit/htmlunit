@@ -262,12 +262,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_CLIENTHEIGHT_INPUT_18,
 
-    /** ClientHeight for radio button and checkbox is 10. */
-    @BrowserFeature(FF_ESR)
-    JS_CLIENTHEIGHT_RADIO_CHECKBOX_10,
-
     /** ClientHeight for radio button and checkbox is 14. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     JS_CLIENTHEIGHT_RADIO_CHECKBOX_14,
 
     /** ClientHeight for rb is 17. */
@@ -282,20 +278,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_CLIENTHEIGHT_RUBY_17,
 
-    /** ClientWidth for text/password input is 154. */
-    @BrowserFeature(FF_ESR)
-    JS_CLIENTWIDTH_INPUT_TEXT_154,
-
     /** ClientWidth for text/password input is 173. */
     @BrowserFeature({CHROME, EDGE})
     JS_CLIENTWIDTH_INPUT_TEXT_173,
 
-    /** ClientWidth for radio button and checkbox is 10. */
-    @BrowserFeature(FF_ESR)
-    JS_CLIENTWIDTH_RADIO_CHECKBOX_10,
-
     /** ClientWidth for radio button and checkbox is 14. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     JS_CLIENTWIDTH_RADIO_CHECKBOX_14,
 
     /** item is enumerated before length property of CSSRuleList. */

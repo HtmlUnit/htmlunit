@@ -149,9 +149,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void abbr() throws Exception {
         test("abbr");
     }
@@ -162,9 +160,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void acronym() throws Exception {
         test("acronym");
     }
@@ -175,9 +171,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void a() throws Exception {
         test("a");
     }
@@ -199,9 +193,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void applet() throws Exception {
         test("applet");
     }
@@ -256,9 +248,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void bgsound() throws Exception {
         test("bgsound");
     }
@@ -291,9 +281,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void bdi() throws Exception {
         test("bdi");
     }
@@ -304,9 +292,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void bdo() throws Exception {
         test("bdo");
     }
@@ -317,9 +303,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "21")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void big() throws Exception {
         test("big");
     }
@@ -330,9 +314,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void blink() throws Exception {
         test("blink");
     }
@@ -369,9 +351,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void b() throws Exception {
         test("b");
     }
@@ -445,9 +425,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void cite() throws Exception {
         test("cite");
     }
@@ -458,9 +436,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "15")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void code() throws Exception {
         test("code");
     }
@@ -471,9 +447,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void command() throws Exception {
         test("command");
     }
@@ -510,9 +484,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void dfn() throws Exception {
         test("dfn");
     }
@@ -534,8 +506,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
+    @Alerts("0")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -613,9 +584,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void embed() throws Exception {
         test("embed");
     }
@@ -626,9 +595,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void em() throws Exception {
         test("em");
     }
@@ -676,8 +643,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
+    @Alerts("0")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -715,9 +681,9 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "621",
+            EDGE = "630",
             FF = "675",
-            FF_ESR = "677",
-            EDGE = "630")
+            FF_ESR = "675")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
@@ -735,7 +701,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "621",
             EDGE = "630",
             FF = "675",
-            FF_ESR = "677")
+            FF_ESR = "675")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -916,8 +882,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
+    @Alerts("0")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -932,8 +897,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
+    @Alerts("0")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -948,9 +912,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void i() throws Exception {
         test("i");
     }
@@ -961,9 +923,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "15")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void kbd() throws Exception {
         test("kbd");
     }
@@ -972,9 +932,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void keygen() throws Exception {
         test("keygen");
     }
@@ -985,8 +943,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
+    @Alerts("0")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -1001,9 +958,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void layer() throws Exception {
         test("layer");
     }
@@ -1079,8 +1034,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
+    @Alerts("0")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -1106,9 +1060,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void mark() throws Exception {
         test("mark");
     }
@@ -1134,9 +1086,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void menuitem() throws Exception {
         test("menuitem");
     }
@@ -1173,9 +1123,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void multicol() throws Exception {
         test("multicol");
     }
@@ -1186,9 +1134,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void nobr() throws Exception {
         test("nobr");
     }
@@ -1210,9 +1156,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void nextid() throws Exception {
         test("nextid");
     }
@@ -1245,9 +1189,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void nolayer() throws Exception {
         test("nolayer");
     }
@@ -1272,7 +1214,8 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "17",
-            FF = "0")
+            FF = "0",
+            FF_ESR = "0")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -1332,9 +1275,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void output() throws Exception {
         test("output");
     }
@@ -1398,7 +1339,8 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "16",
-            FF = "18")
+            FF = "18",
+            FF_ESR = "18")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF_ESR = "18")
@@ -1477,9 +1419,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void s() throws Exception {
         test("s");
     }
@@ -1490,9 +1430,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "15")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void samp() throws Exception {
         test("samp");
     }
@@ -1542,9 +1480,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "15")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void small() throws Exception {
         test("small");
     }
@@ -1555,9 +1491,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void source() throws Exception {
         test("source");
     }
@@ -1566,9 +1500,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void spacer() throws Exception {
         test("spacer");
     }
@@ -1579,9 +1511,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void span() throws Exception {
         test("span");
     }
@@ -1592,9 +1522,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void strike() throws Exception {
         test("strike");
     }
@@ -1605,9 +1533,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void strong() throws Exception {
         test("strong");
     }
@@ -1629,9 +1555,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "15")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void sub() throws Exception {
         test("sub");
     }
@@ -1653,9 +1577,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "15")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void sup() throws Exception {
         test("sup");
     }
@@ -1754,9 +1676,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void track() throws Exception {
         test("track");
     }
@@ -1806,9 +1726,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "15")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void tt() throws Exception {
         test("tt");
     }
@@ -1819,9 +1737,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void time() throws Exception {
         test("time");
     }
@@ -1857,9 +1773,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void u() throws Exception {
         test("u");
     }
@@ -1885,9 +1799,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void var() throws Exception {
         test("var");
     }
@@ -1976,7 +1888,6 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "13",
             FF = "14",
             FF_ESR = "14")
-    @HtmlUnitNYI(FF_ESR = "10")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
     }
@@ -2035,7 +1946,6 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "13",
             FF = "14",
             FF_ESR = "14")
-    @HtmlUnitNYI(FF_ESR = "10")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));
     }
@@ -2114,9 +2024,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void data() throws Exception {
         test("data");
     }
@@ -2127,9 +2035,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
-    @HtmlUnitNYI(FF_ESR = "0")
+    @Alerts("0")
     public void content() throws Exception {
         test("content");
     }
@@ -2140,8 +2046,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF_ESR = "17")
+    @Alerts("0")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",

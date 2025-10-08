@@ -667,7 +667,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Alerts(CHROME = "621",
             EDGE = "630",
             FF = "675",
-            FF_ESR = "677")
+            FF_ESR = "675")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
@@ -685,7 +685,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Alerts(CHROME = "621",
             EDGE = "630",
             FF = "675",
-            FF_ESR = "677")
+            FF_ESR = "675")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -802,7 +802,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Alerts(CHROME = "621",
             EDGE = "630",
             FF = "675",
-            FF_ESR = "677")
+            FF_ESR = "675")
     @HtmlUnitNYI(CHROME = "605",
             EDGE = "605",
             FF = "605",
@@ -1865,7 +1865,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "13",
             FF = "14",
-            FF_ESR = "10")
+            FF_ESR = "14")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
     }
@@ -1919,7 +1919,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "13",
             FF = "14",
-            FF_ESR = "10")
+            FF_ESR = "14")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));
     }

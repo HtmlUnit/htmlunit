@@ -16,14 +16,11 @@ package org.htmlunit.css;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_17;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_18;
-import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_10;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_14;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RB_17;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RT_9;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RUBY_17;
-import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_154;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
-import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_10;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_14;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static org.htmlunit.css.CssStyleSheet.AUTO;
@@ -1616,17 +1613,11 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_173)) {
                     return 173;
                 }
-                if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_154)) {
-                    return 154;
-                }
                 width = 161; // FF
             }
             else if (element instanceof HtmlRadioButtonInput || element instanceof HtmlCheckBoxInput) {
                 final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
-                if (browserVersion.hasFeature(JS_CLIENTWIDTH_RADIO_CHECKBOX_10)) {
-                    width = 10;
-                }
-                else if (browserVersion.hasFeature(JS_CLIENTWIDTH_RADIO_CHECKBOX_14)) {
+                if (browserVersion.hasFeature(JS_CLIENTWIDTH_RADIO_CHECKBOX_14)) {
                     width = 14;
                 }
                 else {
@@ -1798,10 +1789,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         else if (element.getFirstChild() == null) {
             if (element instanceof HtmlRadioButtonInput || element instanceof HtmlCheckBoxInput) {
                 final BrowserVersion browser = webWindow.getWebClient().getBrowserVersion();
-                if (browser.hasFeature(JS_CLIENTHEIGHT_RADIO_CHECKBOX_10)) {
-                    defaultHeight = 10;
-                }
-                else if (browser.hasFeature(JS_CLIENTHEIGHT_RADIO_CHECKBOX_14)) {
+                if (browser.hasFeature(JS_CLIENTHEIGHT_RADIO_CHECKBOX_14)) {
                     defaultHeight = 14;
                 }
                 else {
