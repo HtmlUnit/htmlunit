@@ -1200,7 +1200,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(CHROME = "7.536px",
             EDGE = "7.488px",
             FF = "7.53333px",
-            FF_ESR = "7.55px")
+            FF_ESR = "7.53333px")
     @HtmlUnitNYI(CHROME = "1px",
             EDGE =  "1px",
             FF = "1px",
@@ -1287,9 +1287,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = { "underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"},
-            EDGE = { "underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"},
-            FF = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"},
+    @Alerts(DEFAULT = { "underline", "none", "underline"},
+            EDGE = { "underline", "none", "underline"},
             FF_ESR = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"})
     @HtmlUnitNYI(CHROME = { "underline", "rgb(0, 0, 0)", "underline"},
             EDGE = { "underline", "rgb(0, 0, 0)", "underline"},
@@ -1506,9 +1505,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "0", "0", "0", "0"},
-            FF_ESR = {"0", "0", "0", "0", "0", "17"})
-    @HtmlUnitNYI(FF_ESR = {"0", "0", "0", "0", "0", "0"})
+    @Alerts({"0", "0", "0", "0", "0", "0"})
     public void widthAndHeightScriptElement() throws Exception {
         final String content = DOCTYPE_HTML
             + "<html><head><script id='headScript'>\n"
@@ -1568,9 +1565,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0"},
-            FF_ESR = {"0", "17"})
-    @HtmlUnitNYI(FF_ESR = {"0", "0"})
+    @Alerts({"0", "0"})
     public void widthAndHeightChildDisplayNoneWidth() throws Exception {
         final String content = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1591,9 +1586,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0"},
-            FF_ESR = {"0", "17"})
-    @HtmlUnitNYI(FF_ESR = {"0", "0"})
+    @Alerts({"0", "0"})
     public void widthAndHeightChildDisplayNoneWidthLineBreak() throws Exception {
         //see https://github.com/HtmlUnit/htmlunit/pull/356
         final String content = DOCTYPE_HTML

@@ -7,7 +7,6 @@ MozAnimationIterationCount
 MozAnimationName
 MozAnimationPlayState
 MozAnimationTimingFunction
-MozAppearance
 MozBackfaceVisibility
 MozBorderEnd
 MozBorderEndColor
@@ -48,7 +47,6 @@ MozTransitionDuration
 MozTransitionProperty
 MozTransitionTimingFunction
 MozUserSelect
-MozWindowDragging
 WebkitAlignContent
 WebkitAlignItems
 WebkitAlignSelf
