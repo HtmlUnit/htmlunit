@@ -74,8 +74,6 @@ public class NumberFormat extends HtmlUnitScriptable {
         commonFormats.put("fr", "\u202f,");
         commonFormats.put("fr-CA", "\u00a0,");
 
-        FF_ESR_FORMATS_.putAll(commonFormats);
-
         commonFormats.put("ar", ",.0");
         commonFormats.put("ar-BH", "\u066c\u066b\u0660");
         commonFormats.put("ar-EG", "\u066c\u066b\u0660");
@@ -91,6 +89,7 @@ public class NumberFormat extends HtmlUnitScriptable {
         commonFormats.put("ar-YE", "\u066c\u066b\u0660");
 
         FF_FORMATS_.putAll(commonFormats);
+        FF_ESR_FORMATS_.putAll(commonFormats);
 
         commonFormats.put("be", ",.");
         commonFormats.put("en-ZA", ",.");

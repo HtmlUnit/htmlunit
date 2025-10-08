@@ -572,7 +572,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     /**
      * @param clientInformation the new value
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter
     public void setClientInformation(final Object clientInformation) {
         clientInformation_ = clientInformation;
     }
@@ -1788,18 +1788,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the value of {@code mozInnerScreenX} property.
      * @return the value of {@code mozInnerScreenX} property
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF, FF_ESR})
     public int getMozInnerScreenX() {
         return 12;
-    }
-
-    /**
-     * Returns the value of {@code mozInnerScreenX} property.
-     * @return the value of {@code mozInnerScreenX} property
-     */
-    @JsxGetter(value = FF_ESR, propertyName = "mozInnerScreenX")
-    public int getMozInnerScreenXffesr_js() {
-        return 10;
     }
 
     /**

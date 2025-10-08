@@ -14,9 +14,7 @@
  */
 package org.htmlunit.javascript;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
-import static org.htmlunit.BrowserVersionFeatures.JS_ITERATOR_VISIBLE_IN_WINDOW;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_INSTALL_TRIGGER_NULL;
 
 import java.io.IOException;
@@ -438,9 +436,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         // remove some objects, that Rhino defines in top scope but that we don't want
         deleteProperties(scope, "Continuation", "StopIteration");
-        if (!browserVersion.hasFeature(JS_ITERATOR_VISIBLE_IN_WINDOW)) {
-            deleteProperties(scope, "Iterator");
-        }
 
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(scope, "Error");
         if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
@@ -448,9 +443,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
         else {
             ScriptableObject.deleteProperty(errorObject, "stackTraceLimit");
-        }
-        if (!browserVersion.hasFeature(JS_ERROR_CAPTURE_STACK_TRACE)) {
-            ScriptableObject.deleteProperty(errorObject, "captureStackTrace");
         }
 
         // add Intl

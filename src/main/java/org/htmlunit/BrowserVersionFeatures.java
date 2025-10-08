@@ -298,10 +298,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_DOCUMENT_SELECTION_RANGE_COUNT,
 
-    /** Javascript {@code Error.captureStackTrace}. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    JS_ERROR_CAPTURE_STACK_TRACE,
-
     /** Javascript {@code Error.stackTraceLimit}. */
     @BrowserFeature({CHROME, EDGE})
     JS_ERROR_STACK_TRACE_LIMIT,
@@ -355,10 +351,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that Intl.v8BreakIterator is supported. */
     @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,
-
-    /** Indicates that window.Iterator is supported. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    JS_ITERATOR_VISIBLE_IN_WINDOW,
 
     /** For the 'about' protocol the location always returns an empty query. */
     @BrowserFeature({FF, FF_ESR})
@@ -441,15 +433,9 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_147,
 
     /**
-     * Difference of window.outer/inner height is 91.
-     */
-    @BrowserFeature(FF_ESR)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91,
-
-    /**
      * Difference of window.outer/inner height is 93.
      */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_93,
 
     /** Window.getSelection returns null, if the window is not visible. */

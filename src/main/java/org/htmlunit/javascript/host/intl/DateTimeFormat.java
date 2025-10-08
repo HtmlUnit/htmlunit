@@ -121,7 +121,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("ko", yyyyDotBlankDot);
         commonFormats.put("lt", yyyyDash);
         commonFormats.put("lv", ddDotDot);
-        commonFormats.put("mk", ddDot);
+        commonFormats.put("mk", ddDot + "\u200E \u0433.");
         commonFormats.put("ms", ddSlash);
         commonFormats.put("mt", mmSlash);
         commonFormats.put("nl", ddDash);
@@ -145,15 +145,13 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("fr-CH", ddDot);
 
         FF_FORMATS_.putAll(commonFormats);
-        FF_FORMATS_.put("mk", ddDot + "\u200E \u0433.");
-
-        commonFormats.put("ar-SA", "d\u200F/M\u200F/YYYY هـ");
         FF_ESR_FORMATS_.putAll(commonFormats);
 
         commonFormats.put("be", mmSlash);
         commonFormats.put("ga", mmSlash);
         commonFormats.put("is", mmSlash);
         commonFormats.put("mk", mmSlash);
+        commonFormats.put("ar-SA", "d\u200F/M\u200F/YYYY هـ");
 
         EDGE_FORMATS_.putAll(commonFormats);
 
@@ -166,11 +164,11 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonChronologies.put("th-TH", ThaiBuddhistChronology.INSTANCE);
 
         FF_CHRONOLOGIES_.putAll(commonChronologies);
+        FF_ESR_CHRONOLOGIES_.putAll(commonChronologies);
 
         commonChronologies.put("ar-SA", HijrahChronology.INSTANCE);
         CHROME_CHRONOLOGIES_.putAll(commonChronologies);
         EDGE_CHRONOLOGIES_.putAll(commonChronologies);
-        FF_ESR_CHRONOLOGIES_.putAll(commonChronologies);
     }
 
     /**

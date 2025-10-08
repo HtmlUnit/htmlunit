@@ -155,8 +155,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31,415.927",
-            FF_ESR = "\u0663\u0661\u066c\u0664\u0661\u0665\u066b\u0669\u0662\u0667")
+    @Alerts("31,415.927")
     public void format_ar() throws Exception {
         test("new Intl.NumberFormat('ar').format(number)");
     }
