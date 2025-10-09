@@ -1290,10 +1290,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "underline", "none", "underline"},
             EDGE = { "underline", "none", "underline"},
             FF_ESR = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"})
-    @HtmlUnitNYI(CHROME = { "underline", "rgb(0, 0, 0)", "underline"},
-            EDGE = { "underline", "rgb(0, 0, 0)", "underline"},
-            FF = { "underline", "rgb(0, 0, 0)", "underline"},
-            FF_ESR = { "underline", "rgb(0, 0, 0)", "underline"})
+    @HtmlUnitNYI(FF_ESR = { "underline", "rgb(0, 0, 0)", "underline"})
     public void changeInParentClassNodeReferencedByRule() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
