@@ -3768,10 +3768,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "8", "1256"},
-            EDGE = {"0", "0", "8", "1248"})
-    @HtmlUnitNYI(EDGE = {"0", "0", "8", "1256"},
-            FF_ESR = {"0", "0", "8", "1256"})
+    @Alerts({"0", "0", "8", "1256"})
     public void documentElementBoundingClientRect() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>"
@@ -3823,10 +3820,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "8", "1256"},
-            EDGE = {"0", "0", "8", "1248"})
-    @HtmlUnitNYI(EDGE = {"0", "0", "8", "1256"},
-            FF_ESR = {"0", "0", "8", "1256"})
+    @Alerts({"0", "0", "8", "1256"})
     public void documentElementOffset() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>"
