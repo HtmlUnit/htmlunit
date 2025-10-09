@@ -590,10 +590,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "1240", "", "34", "34", "0", "0", "0", "0"},
-            EDGE = {"", "1232", "", "34", "34", "0", "0", "0", "0"},
-            FF_ESR = {"", "1244", "", "34", "34", "0", "0", "0", "0"})
-    @HtmlUnitNYI(EDGE = {"", "1240", "", "34", "34", "0", "0", "0", "0"},
-            FF_ESR = {"", "1240", "", "34", "34", "0", "0", "0", "0"})
+            EDGE = {"", "1232", "", "34", "34", "0", "0", "0", "0"})
+    @HtmlUnitNYI(EDGE = {"", "1240", "", "34", "34", "0", "0", "0", "0"})
     public void offsetWidthAndHeight() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
