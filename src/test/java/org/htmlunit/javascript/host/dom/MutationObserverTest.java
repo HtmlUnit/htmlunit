@@ -397,7 +397,7 @@ public class MutationObserverTest extends WebDriverTestCase {
                   "[object HTMLInputElement]-attributes",
                   "[object HTMLInputElement]-attributes",
                   "[object HTMLHeadingElement]-attributes"},
-            FF_ESR = {"[object HTMLInputElement]-attributes",
+            FF_ESR = {"[object HTMLInputElement]-attributesn",
                       "[object HTMLInputElement]-attributes",
                       "[object HTMLInputElement]-attributes",
                       "[object HTMLInputElement]-attributes",
