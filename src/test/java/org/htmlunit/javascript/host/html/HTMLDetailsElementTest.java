@@ -130,8 +130,7 @@ public class HTMLDetailsElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "null", "", "", "abc", "abc", "blah", "blah", "", "null"},
-            FF_ESR = {"undefined", "null", "", "null", "abc", "null", "abc", "blah", "abc", "null"})
+    @Alerts({"", "null", "", "", "abc", "abc", "blah", "blah", "", "null"})
     public void name() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

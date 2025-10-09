@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.html;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-
 import org.htmlunit.html.HtmlDetails;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -67,7 +63,7 @@ public class HTMLDetailsElement extends HTMLElement {
      * Returns the {@code name} property.
      * @return the {@code name} property
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter
     @Override
     public String getName() {
         return super.getName();
