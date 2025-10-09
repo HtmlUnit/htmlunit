@@ -14,10 +14,6 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeObject;
@@ -204,7 +200,7 @@ public class PointerEvent extends MouseEvent {
     /**
      * @return the pointerType
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter
     @SuppressWarnings("PMD.UseUnderscoresInNumericLiterals")
     public double getAltitudeAngle() {
         return 1.5707963267948966;
@@ -213,7 +209,7 @@ public class PointerEvent extends MouseEvent {
     /**
      * @return the pointerType
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter
     public double getAzimuthAngle() {
         return 0d;
     }
@@ -221,7 +217,7 @@ public class PointerEvent extends MouseEvent {
     /**
      * @return the persistentDeviceId
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter
     public double getPersistentDeviceId() {
         // dummy but valid regarding to the spec
         // https://w3c.github.io/pointerevents/#dom-pointerevent-persistentdeviceid

@@ -94,10 +94,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_TYPE_MUTATIONEVENT,
 
-    /** Supports event type 'TextEvent'. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    EVENT_TYPE_TEXTEVENT,
-
     /** Supports event type 'WheelEvent'. */
     @BrowserFeature({CHROME, EDGE})
     EVENT_TYPE_WHEELEVENT,

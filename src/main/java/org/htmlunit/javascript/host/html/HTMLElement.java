@@ -2226,7 +2226,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onscrollend} event handler for this element.
      * @return the {@code onscrollend} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter
     public Function getOnscrollend() {
         return getEventHandler(Event.TYPE_SCROLLEND);
     }
@@ -2235,7 +2235,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onscrollend} event handler for this element.
      * @param onscrollend the {@code onscrollend} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter
     public void setOnscrollend(final Object onscrollend) {
         setEventHandler(Event.TYPE_SCROLLEND, onscrollend);
     }

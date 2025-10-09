@@ -18,7 +18,6 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_ONANIMATION_DOCUMENT_CRE
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MUTATIONEVENT;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
@@ -1144,10 +1143,6 @@ public class Document extends Node {
             if (CloseEvent.class == clazz
                     && getBrowserVersion().hasFeature(EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED)) {
                 clazz = null;
-            }
-            else if (TextEvent.class == clazz
-                    && !getBrowserVersion().hasFeature(EVENT_TYPE_TEXTEVENT)) {
-                clazz = CompositionEvent.class;
             }
         }
 

@@ -424,7 +424,7 @@ public class SVGElement extends Element {
      * Returns the {@code onscrollend} event handler.
      * @return the {@code onscrollend} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter
     public Function getOnscrollend() {
         return getEventHandler(Event.TYPE_SCROLLEND);
     }
@@ -433,7 +433,7 @@ public class SVGElement extends Element {
      * Sets the {@code onscrollend} event handler.
      * @param scrollend the {@code onscrollend} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter
     public void setOnscrollend(final Object scrollend) {
         setEventHandler(Event.TYPE_SCROLLEND, scrollend);
     }
