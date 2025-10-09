@@ -216,10 +216,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_ANCHOR_HOSTNAME_IGNORE_BLANK,
 
-    /** The anchor pathname detects url's starting with one letter as file url's. */
-    @BrowserFeature(FF_ESR)
-    JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
-
     /**
      * The anchor pathname detects url's starting with one letter as file url's
      * and replaces them with the file protocol. */
