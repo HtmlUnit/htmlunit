@@ -77,8 +77,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@page { margin: 1cm; }",
-            FF_ESR = "@page  { margin: 1cm; }")
+    @Alerts("@page { margin: 1cm; }")
     public void cssText() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -105,8 +104,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@page { }",
-            FF_ESR = "@page  { }")
+    @Alerts("@page { }")
     public void cssTextEmpty() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -133,8 +131,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@page { margin-left: 4cm; margin-right: 3cm; }",
-            FF_ESR = "@page  { margin-left: 4cm; margin-right: 3cm; }")
+    @Alerts("@page { margin-left: 4cm; margin-right: 3cm; }")
     public void cssTextMultipleRules() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -161,8 +158,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "@page { margin: 1cm; }",
-            FF_ESR = "@page  { margin: 1cm; }")
+    @Alerts("@page { margin: 1cm; }")
     public void cssTextSet() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -558,7 +554,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
                   "string margin-right",
                   "string margin-bottom",
                   "string margin-left"},
-            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "4", "[object CSSPageRule]",
+            FF_ESR = {"[object CSSPageDescriptors]", "[object CSSPageDescriptors]", "4", "[object CSSPageRule]",
                       "margin: 1cm;",
                       "string margin-top",
                       "string margin-right",
@@ -607,7 +603,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""},
             FF = {"[object CSSPageDescriptors]", "[object CSSPageDescriptors]", "0", "[object CSSPageRule]", ""},
-            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "0", "[object CSSPageRule]", ""})
+            FF_ESR = {"[object CSSPageDescriptors]", "[object CSSPageDescriptors]", "0", "[object CSSPageRule]", ""})
     @HtmlUnitNYI(FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""},
             FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""})
     public void styleEmpty() throws Exception {
