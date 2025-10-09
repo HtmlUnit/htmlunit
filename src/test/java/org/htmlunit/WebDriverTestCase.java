@@ -68,11 +68,13 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.htmlunit.MockWebConnection.RawResponseData;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.junit.TestCaseCorrector;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -160,6 +162,7 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
  * @author Ronald Brill
  * @author Frank Danek
  */
+@ExtendWith(TestCaseCorrector.class)
 public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final String LOG_EX_FUNCTION =
