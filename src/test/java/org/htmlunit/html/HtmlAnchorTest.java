@@ -598,7 +598,6 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"click", "href", "click", "doubleClick", "href"})
-    @BuggyWebDriver(FF_ESR = {"click", "click", "doubleClick", "href", "href"})
     @HtmlUnitNYI(CHROME = {"click", "href", "click", "href", "doubleClick"},
             EDGE = {"click", "href", "click", "href", "doubleClick"},
             FF = {"click", "href", "click", "href", "doubleClick"},

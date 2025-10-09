@@ -3795,6 +3795,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "0", "621", "1256"},
             EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "8", "1256"},
             FF_ESR = {"0", "0", "8", "1256"})
     @HtmlUnitNYI(CHROME = {"0", "0", "613", "1256"},
             EDGE = {"0", "0", "613", "1256"},
@@ -3849,6 +3850,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "0", "621", "1256"},
             EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "8", "1256"},
             FF_ESR = {"0", "0", "8", "1256"})
     @HtmlUnitNYI(CHROME = {"0", "0", "613", "1256"},
             EDGE = {"0", "0", "613", "1256"},
@@ -3877,6 +3879,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "0", "621", "1256"},
             EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "675", "1256"},
             FF_ESR = {"0", "0", "675", "1256"})
     @HtmlUnitNYI(CHROME = {"0", "0", "605", "1256"},
             EDGE = {"0", "0", "605", "1256"},
@@ -3904,6 +3907,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "0", "621", "1256"},
             EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "8", "1256"},
             FF_ESR = {"0", "0", "8", "1256"})
     @HtmlUnitNYI(CHROME = {"0", "0", "605", "1256"},
             EDGE = {"0", "0", "605", "1256"},
