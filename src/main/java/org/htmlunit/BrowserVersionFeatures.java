@@ -401,7 +401,7 @@ public enum BrowserVersionFeatures {
     JS_STORAGE_PRESERVED_INCLUDED,
 
     /** Indicates letterSpacing support percent values. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT,
 
     /** Indicates wordSpacing support percent values. */
