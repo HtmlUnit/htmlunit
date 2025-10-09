@@ -6696,7 +6696,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             FF = "function ServiceWorker() { [native code] }",
             FF_ESR = "function ServiceWorker() { [native code] }")
-    @HtmlUnitNYI(FF = "ReferenceError")
+    @HtmlUnitNYI(FF = "ReferenceError", FF_ESR = "ReferenceError")
     public void serviceWorker() throws Exception {
         test("ServiceWorker");
     }
@@ -6708,7 +6708,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             FF = "function ServiceWorkerContainer() { [native code] }",
             FF_ESR = "function ServiceWorkerContainer() { [native code] }")
-    @HtmlUnitNYI(FF = "ReferenceError")
+    @HtmlUnitNYI(FF = "ReferenceError", FF_ESR = "ReferenceError")
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
     }

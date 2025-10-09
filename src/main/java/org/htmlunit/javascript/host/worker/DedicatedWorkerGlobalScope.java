@@ -48,11 +48,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.WorkerJavaScriptConfiguration;
-import org.htmlunit.javascript.host.PermissionStatus;
-import org.htmlunit.javascript.host.Permissions;
-import org.htmlunit.javascript.host.PushManager;
-import org.htmlunit.javascript.host.PushSubscription;
-import org.htmlunit.javascript.host.PushSubscriptionOptions;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScopeMixin;
 import org.htmlunit.javascript.host.event.Event;
@@ -162,15 +157,6 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
             delete(SecurityPolicyViolationEvent.class.getSimpleName());
             delete(SourceBuffer.class.getSimpleName());
             delete(SourceBufferList.class.getSimpleName());
-        }
-
-        if (browserVersion.isFirefoxESR()) {
-            delete(Permissions.class.getSimpleName());
-            delete(PermissionStatus.class.getSimpleName());
-            delete(PushManager.class.getSimpleName());
-            delete(PushSubscription.class.getSimpleName());
-            delete(PushSubscriptionOptions.class.getSimpleName());
-            delete(ServiceWorkerRegistration.class.getSimpleName());
         }
 
         if (!webClient.getOptions().isWebSocketEnabled()) {
