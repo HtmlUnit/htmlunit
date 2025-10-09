@@ -122,19 +122,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLCOLLECTION_NAMED_ITEM_ID_FIRST,
 
-    /** Calling cookies setter with blank string does not reset the cookies. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    HTMLDOCUMENT_COOKIES_IGNORE_BLANK,
-
     /**
     /** {@code document.getElementsByName} returns an empty list if called with the empty string.
      */
     @BrowserFeature({FF, FF_ESR})
     HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY,
-
-    /** Calls to <code>document.XYZ</code> also looks at frames. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    HTMLDOCUMENT_GET_ALSO_FRAMES,
 
     /** Removing the active element from the dom tree triggers the onblur event. */
     @BrowserFeature({CHROME, EDGE})

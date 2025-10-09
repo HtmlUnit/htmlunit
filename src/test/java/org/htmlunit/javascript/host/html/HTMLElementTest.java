@@ -6392,12 +6392,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
-                       "7 until-found/until-found", "8 show/true", "9 Until-Found/until-found", "10 HIDDEN/true"},
-            FF_ESR = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
-                      "7 until-found/true", "8 show/true", "9 Until-Found/true", "10 HIDDEN/true"})
-    @HtmlUnitNYI(FF_ESR = {"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
-                           "7 until-found/until-found", "8 show/true", "9 Until-Found/until-found", "10 HIDDEN/true"})
+    @Alerts({"1 null/false", "2 /true", "3 /true", "4 hidden/true", "5 true/true", "6 false/true",
+             "7 until-found/until-found", "8 show/true", "9 Until-Found/until-found", "10 HIDDEN/true"})
     public void hiddenGet() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -6446,24 +6442,12 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
-                       "6 null/false", "7 /true", "8 /true",
-                       "9 null/false", "10 /true", "11 /true",
-                       "12 null/false", "13 until-found/until-found", "14 null/false",
-                       "15 null/false", "16 until-found/until-found",
-                       "17 null/false", "18 /true"},
-            FF_ESR = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
-                      "6 null/false", "7 /true", "8 /true",
-                      "9 null/false", "10 /true", "11 /true",
-                      "12 null/false", "13 /true", "14 null/false",
-                      "15 null/false", "16 /true",
-                      "17 null/false", "18 /true"})
-    @HtmlUnitNYI(FF_ESR = {"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
-                           "6 null/false", "7 /true", "8 /true",
-                           "9 null/false", "10 /true", "11 /true",
-                           "12 null/false", "13 until-found/until-found", "14 null/false",
-                           "15 null/false", "16 until-found/until-found",
-                           "17 null/false", "18 /true"})
+    @Alerts({"1 null/false", "2 null/false", "3 /true", "4 /true", "5 null/false",
+             "6 null/false", "7 /true", "8 /true",
+             "9 null/false", "10 /true", "11 /true",
+             "12 null/false", "13 until-found/until-found", "14 null/false",
+             "15 null/false", "16 until-found/until-found",
+             "17 null/false", "18 /true"})
     public void hiddenSet() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"

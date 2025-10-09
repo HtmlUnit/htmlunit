@@ -796,8 +796,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Window]", "true"},
-            FF_ESR = {"undefined", "false"})
+    @Alerts({"[object Window]", "true"})
     public void frameAccessByName() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1593,8 +1592,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "a", "a", "b", "b"},
-            FF_ESR = {"", "a", "", "b", ""})
+    @Alerts({"", "a", "a", "b", "b"})
     public void cookie_write2() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

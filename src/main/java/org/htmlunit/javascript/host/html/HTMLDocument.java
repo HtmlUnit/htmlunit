@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY;
-import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
@@ -600,19 +599,17 @@ public class HTMLDocument extends Document {
             return NOT_FOUND;
         }
 
-        final boolean alsoFrames = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_ALSO_FRAMES);
-
         // for performance,
         // we will calculate the elements to decide if we really have
         // to really create a HTMLCollection or not
-        final List<DomNode> matchingElements = getItComputeElements(page, name, alsoFrames);
+        final List<DomNode> matchingElements = getItComputeElements(page, name);
         final int size = matchingElements.size();
         if (size == 0) {
             return NOT_FOUND;
         }
         if (size == 1) {
             final DomNode object = matchingElements.get(0);
-            if (alsoFrames && object instanceof BaseFrameElement) {
+            if (object instanceof BaseFrameElement) {
                 return ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
             }
             return super.getScriptableFor(object);
@@ -621,7 +618,7 @@ public class HTMLDocument extends Document {
         final HTMLCollection coll = new HTMLCollection(page, matchingElements) {
             @Override
             protected HtmlUnitScriptable getScriptableFor(final Object object) {
-                if (alsoFrames && object instanceof BaseFrameElement) {
+                if (object instanceof BaseFrameElement) {
                     return ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
                 }
                 return super.getScriptableFor(object);
@@ -630,7 +627,7 @@ public class HTMLDocument extends Document {
 
         coll.setElementsSupplier(
                 (Supplier<List<DomNode>> & Serializable)
-                () -> getItComputeElements(page, name, alsoFrames));
+                () -> getItComputeElements(page, name));
 
         coll.setEffectOnCacheFunction(
                 (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
@@ -646,13 +643,11 @@ public class HTMLDocument extends Document {
         return coll;
     }
 
-    static List<DomNode> getItComputeElements(final HtmlPage page, final String name,
-            final boolean alsoFrames) {
+    static List<DomNode> getItComputeElements(final HtmlPage page, final String name) {
         final List<DomElement> elements = page.getElementsByName(name);
         final List<DomNode> matchingElements = new ArrayList<>();
         for (final DomElement elt : elements) {
-            if (elt instanceof HtmlForm || elt instanceof HtmlImage
-                    || (alsoFrames && elt instanceof BaseFrameElement)) {
+            if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof BaseFrameElement) {
                 matchingElements.add(elt);
             }
         }

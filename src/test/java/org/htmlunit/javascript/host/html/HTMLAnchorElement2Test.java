@@ -720,7 +720,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             FF = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
                   "foo:||||||blabla", "p:||||||", "p:||||||/", "p:||||||/TeMp"},
             FF_ESR = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                      "foo:||||||blabla", "p:||||||//", "p:||||||/", "p:||||||/TeMp"})
+                      "foo:||||||blabla", "p:||||||", "p:||||||/", "p:||||||/TeMp"})
     public void propertiesNonStandardHref() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

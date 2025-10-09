@@ -20,7 +20,6 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_ONPOPSTATE_DOCUMENT_CREA
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MUTATIONEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
-import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COOKIES_IGNORE_BLANK;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -49,7 +48,6 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
-import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Callable;
@@ -1119,14 +1117,12 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setCookie(final String newCookie) {
-        final SgmlPage sgmlPage = getPage();
-        final WebClient client = sgmlPage.getWebClient();
-
-        if (StringUtils.isBlank(newCookie)
-                && client.getBrowserVersion().hasFeature(HTMLDOCUMENT_COOKIES_IGNORE_BLANK)) {
+        if (StringUtils.isBlank(newCookie)) {
             return;
         }
-        client.addCookie(newCookie, sgmlPage.getUrl(), this);
+
+        final SgmlPage sgmlPage = getPage();
+        sgmlPage.getWebClient().addCookie(newCookie, sgmlPage.getUrl(), this);
     }
 
     /**
