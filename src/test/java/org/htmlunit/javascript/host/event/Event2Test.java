@@ -36,20 +36,18 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Event] change b:true c:false [select] [-]"
-                + " [object PointerEvent] click b:true c:true [select] [1]",
-            FF = "[object Event] change b:true c:false [select] [-]"
-                + " [object PointerEvent] click b:true c:true [clickMe] [1]",
-            FF_ESR = "[object Event] change b:true c:false [select] [-]"
-                + " [object MouseEvent] click b:true c:true [clickMe] [1]")
-    @BuggyWebDriver(CHROME = "[object Event] change b:true c:false [select] [-]"
-                + " [object MouseEvent] click b:true c:true [select] [1]",
-            EDGE = "[object Event] change b:true c:false [select] [-]"
-                + " [object MouseEvent] click b:true c:true [select] [1]",
-            FF = "[object Event] change b:true c:true [select] [-]"
-                + " [object Event] click b:true c:true [select] [-]",
-            FF_ESR = "[object Event] change b:true c:true [select] [-]"
-                + " [object Event] click b:true c:true [select] [-]")
+    @Alerts(DEFAULT = "[object Event] change b:true c:false [select] [-] "
+                + "[object PointerEvent] click b:true c:true [select] [1]",
+            FF = "[object Event] change b:true c:false [select] [-] "
+                + "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            FF_ESR = "[object Event] change b:true c:false [select] [-] "
+                + "[object PointerEvent] click b:true c:true [clickMe] [1]")
+    @BuggyWebDriver(DEFAULT = "[object Event] change b:true c:false [select] [-] "
+                + "[object MouseEvent] click b:true c:true [select] [1]",
+            FF = "[object Event] change b:true c:true [select] [-] "
+                + "[object Event] click b:true c:true [select] [-]",
+            FF_ESR = "[object Event] change b:true c:true [select] [-] "
+                + "[object Event] click b:true c:true [select] [-]")
     @HtmlUnitNYI(CHROME = "[object Event] change b:true c:false [select] [-]"
                 + " [object PointerEvent] click b:true c:true [clickMe] [1]",
             EDGE = "[object Event] change b:true c:false [select] [-]"
@@ -70,8 +68,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object PointerEvent] click b:true c:true [clickMe] [1]",
-            FF_ESR = "[object MouseEvent] click b:true c:true [clickMe] [1]")
+    @Alerts(DEFAULT = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     @BuggyWebDriver(CHROME = "",
                     EDGE = "",
                     FF = "",
