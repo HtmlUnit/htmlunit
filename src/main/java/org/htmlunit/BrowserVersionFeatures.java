@@ -63,7 +63,7 @@ public enum BrowserVersionFeatures {
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
     /** The context menu MouseEvent has a detail of 1. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     EVENT_CONTEXT_MENU_HAS_DETAIL_1,
 
     /** Triggers the onfocus event when focusing the body on load. */
