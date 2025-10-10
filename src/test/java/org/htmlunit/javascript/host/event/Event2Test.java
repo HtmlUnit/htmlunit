@@ -68,7 +68,7 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object PointerEvent] click b:true c:true [clickMe] [1]")
+    @Alerts("[object PointerEvent] click b:true c:true [clickMe] [1]")
     @BuggyWebDriver(CHROME = "",
                     EDGE = "",
                     FF = "",
