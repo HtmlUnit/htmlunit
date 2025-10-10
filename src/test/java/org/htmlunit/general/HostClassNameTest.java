@@ -1178,7 +1178,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             FF = "function CSSPageDescriptors() { [native code] }",
             FF_ESR = "function CSSPageDescriptors() { [native code] }")
-    @HtmlUnitNYI(FF = "ReferenceError")
+    @HtmlUnitNYI(FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void cssPageDescriptors() throws Exception {
         test("CSSPageDescriptors");
     }

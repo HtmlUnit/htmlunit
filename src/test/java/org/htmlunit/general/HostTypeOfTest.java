@@ -1158,7 +1158,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             FF = "function",
             FF_ESR = "function")
-    @HtmlUnitNYI(FF = "undefined")
+    @HtmlUnitNYI(FF = "undefined",
+            FF_ESR = "undefined")
     public void cssPageDescriptors() throws Exception {
         test("CSSPageDescriptors");
     }

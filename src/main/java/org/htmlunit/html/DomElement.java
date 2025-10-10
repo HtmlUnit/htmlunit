@@ -15,7 +15,6 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_CONTEXT_MENU_HAS_DETAIL_1;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 
 import java.io.IOException;
@@ -1086,14 +1085,8 @@ public class DomElement extends DomNamespaceNode implements Element {
                 MouseEvent event = null;
                 if (webClient.isJavaScriptEnabled()) {
                     final BrowserVersion browser = webClient.getBrowserVersion();
-                    if (browser.hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                        event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                                ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
-                    }
-                    else {
-                        event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                                ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
-                    }
+                    event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
 
                     if (disableProcessLabelAfterBubbling) {
                         event.disableProcessLabelAfterBubbling();
@@ -1489,16 +1482,11 @@ public class DomElement extends DomNamespaceNode implements Element {
         final Event event;
         if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)) {
             final BrowserVersion browserVersion = webClient.getBrowserVersion();
-            if (browserVersion.hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                if (browserVersion.hasFeature(EVENT_CONTEXT_MENU_HAS_DETAIL_1)) {
-                    event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 1);
-                }
-                else {
-                    event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 0);
-                }
+            if (browserVersion.hasFeature(EVENT_CONTEXT_MENU_HAS_DETAIL_1)) {
+                event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 1);
             }
             else {
-                event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 1);
+                event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 0);
             }
         }
         else if (MouseEvent.TYPE_DBL_CLICK.equals(eventType)) {

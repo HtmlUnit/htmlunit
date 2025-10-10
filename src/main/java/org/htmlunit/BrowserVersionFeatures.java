@@ -74,10 +74,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED,
 
-    /** Triggers 'onclick' event handler using <code>PointerEvent</code>. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    EVENT_ONCLICK_USES_POINTEREVENT,
-
     /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,
