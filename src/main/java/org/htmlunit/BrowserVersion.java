@@ -328,7 +328,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_ESR.registerUploadMimeType("mp3", "audio/mpeg");
         FIREFOX_ESR.registerUploadMimeType("ogv", "video/ogg");
         FIREFOX_ESR.registerUploadMimeType("ogm", "video/ogg");
-        FIREFOX_ESR.registerUploadMimeType("ogg", "video/ogg");
+        FIREFOX_ESR.registerUploadMimeType("ogg", "application/ogg");
         FIREFOX_ESR.registerUploadMimeType("oga", "audio/ogg");
         FIREFOX_ESR.registerUploadMimeType("opus", "audio/ogg");
         FIREFOX_ESR.registerUploadMimeType("webm", "video/webm");
