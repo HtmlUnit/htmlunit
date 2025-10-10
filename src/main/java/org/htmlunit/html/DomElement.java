@@ -1084,7 +1084,6 @@ public class DomElement extends DomNamespaceNode implements Element {
 
                 MouseEvent event = null;
                 if (webClient.isJavaScriptEnabled()) {
-                    final BrowserVersion browser = webClient.getBrowserVersion();
                     event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
                             ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
 
