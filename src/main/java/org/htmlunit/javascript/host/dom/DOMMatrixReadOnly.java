@@ -469,6 +469,21 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     /**
+     * @return true if m12 element, m13 element, m14 element, m21 element, m23 element, m24 element,
+     *     m31 element, m32 element, m34 element, m41 element, m42 element, m43 element are 0 or -0
+     *     and m11 element, m22 element, m33 element, m44 element are 1. Otherwise it returns false.
+     */
+    @JsxGetter
+    public boolean getIsIdentity() {
+        return m11_ == 1 && m22_ == 1 && m33_ == 1 && m44_ == 1
+                && m12_ == 0 && m13_ == 0 && m14_ == 0
+                && m21_ == 0 && m23_ == 0 && m24_ == 0
+                && m31_ == 0 && m32_ == 0 && m34_ == 0
+                && m41_ == 0 && m42_ == 0 && m43_ == 0;
+    }
+
+
+    /**
      * @return a new matrix being the result of the original matrix flipped about the x-axis.
      *     This is equivalent to multiplying the matrix by DOMMatrix(-1, 0, 0, 1, 0, 0).
      *     The original matrix is not modified.

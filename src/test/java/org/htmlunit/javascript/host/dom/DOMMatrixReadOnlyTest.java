@@ -3128,4 +3128,61 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"true",
+            "false",
+            "false",
+            "false",
+            "false",
+            "false",
+            "false",
+            "false",
+            "true",
+            "true",
+            "false",
+            "true"})
+    public void isIdentity() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "log(m.isIdentity);\n"
+
+                + "m = new DOMMatrixReadOnly([0, 0, 0, 0, 0, 0]);"
+                + "log(m.isIdentity);\n"
+
+                + "m = new DOMMatrixReadOnly([1, 0, 0, 0, 0, 0]);"
+                + "log(m.isIdentity);\n"
+                + "m = new DOMMatrixReadOnly([0, 1, 0, 0, 0, 0]);"
+                + "log(m.isIdentity);\n"
+                + "m = new DOMMatrixReadOnly([0, 0, 1, 0, 0, 0]);"
+                + "log(m.isIdentity);\n"
+                + "m = new DOMMatrixReadOnly([0, 0, 0, 1, 0, 0]);"
+                + "log(m.isIdentity);\n"
+                + "m = new DOMMatrixReadOnly([0, 0, 0, 0, 1, 0]);"
+                + "log(m.isIdentity);\n"
+                + "m = new DOMMatrixReadOnly([0, 0, 0, 0, 0, 1]);"
+                + "log(m.isIdentity);\n"
+
+                + "m = new DOMMatrixReadOnly([1, 0, 0, 1, 0, 0]);"
+                + "log(m.isIdentity);\n"
+                + "m = new DOMMatrixReadOnly([1, -0, -0, 1, -0, -0]);"
+                + "log(m.isIdentity);\n"
+
+                + "m = new DOMMatrixReadOnly([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);\n"
+                + "log(m.isIdentity);\n"
+                + "m = new DOMMatrixReadOnly([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);\n"
+                + "log(m.isIdentity);\n"
+
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
