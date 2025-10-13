@@ -9,7 +9,7 @@
     <body>
         <release version="4.18.0" date="November xx, 2025" description="Chrome/Edge 141, Firefox 143, FirefoxESR 140, Bugfixes">
             <action type="add" dev="rbri">
-                DOMMatrixReadOnly isIdentity property implemented.
+                DOMMatrixReadOnly  isIdentity property implemented.
             </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: improve global symbol registry handling.
