@@ -188,4 +188,31 @@ public class RhinoTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Test for issues #1040.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void forSwitchLet() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+
+                + "  var sum = 0;\n"
+                + "  for (let i = 0; i < 1; i++)\n"
+                + "    switch (i) {\n"
+                + "      case 0:\n"
+                + "        let test = 7;\n"
+                + "        sum += 4;\n"
+                + "        break;\n"
+                + "      }"
+
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
