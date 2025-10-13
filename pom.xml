@@ -63,7 +63,7 @@
         <spotbugs.version>4.9.6</spotbugs.version>
         <pmd.version>7.17.0</pmd.version>
         <archunit.version>1.4.1</archunit.version>
-        <dependencycheck.version>10.0.4</dependencycheck.version>
+        <dependencycheck.version>12.1.7</dependencycheck.version>
 
         <!-- plugins -->
         <central-publishing-plugin.version>0.9.0</central-publishing-plugin.version>
