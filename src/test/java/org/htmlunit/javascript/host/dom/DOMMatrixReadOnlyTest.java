@@ -3134,17 +3134,17 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true",
-            "false",
-            "false",
-            "false",
-            "false",
-            "false",
-            "false",
-            "false",
-            "true",
-            "true",
-            "false",
-            "true"})
+             "false",
+             "false",
+             "false",
+             "false",
+             "false",
+             "false",
+             "false",
+             "true",
+             "true",
+             "false",
+             "true"})
     public void isIdentity() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"

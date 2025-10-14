@@ -482,7 +482,6 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
                 && m41_ == 0 && m42_ == 0 && m43_ == 0;
     }
 
-
     /**
      * @return a new matrix being the result of the original matrix flipped about the x-axis.
      *     This is equivalent to multiplying the matrix by DOMMatrix(-1, 0, 0, 1, 0, 0).
