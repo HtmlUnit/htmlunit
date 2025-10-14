@@ -1337,8 +1337,7 @@ public class HostParentOfDTest extends HostParentOf {
         test("Event", "SVGZoomEvent");
     }
 
-    @Alerts(DEFAULT = "true/false",
-            FF_ESR = "false/false")
+    @Alerts("true/false")
     void _Event_TextEvent() throws Exception {
         test("Event", "TextEvent");
     }
