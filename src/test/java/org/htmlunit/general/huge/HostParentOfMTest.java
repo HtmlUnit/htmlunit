@@ -285,8 +285,7 @@ public class HostParentOfMTest extends HostParentOf {
         test("MouseScrollEvent", "MouseScrollEvent");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            FF_ESR = "true/false")
+    @Alerts("false/false")
     void _MutationEvent_MutationEvent() throws Exception {
         test("MutationEvent", "MutationEvent");
     }

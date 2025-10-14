@@ -1253,8 +1253,7 @@ public class HostParentOfDTest extends HostParentOf {
         test("Event", "MSGestureEvent");
     }
 
-    @Alerts(DEFAULT = "false/false",
-            FF_ESR = "true/true")
+    @Alerts("false/false")
     void _Event_MutationEvent() throws Exception {
         test("Event", "MutationEvent");
     }

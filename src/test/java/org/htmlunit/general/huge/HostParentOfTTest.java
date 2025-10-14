@@ -61,8 +61,7 @@ public class HostParentOfTTest extends HostParentOf {
         test("TextEncoder", "TextEncoder");
     }
 
-    @Alerts(DEFAULT = "true/false",
-            FF_ESR = "false/false")
+    @Alerts("true/false")
     void _TextEvent_TextEvent() throws Exception {
         test("TextEvent", "TextEvent");
     }
@@ -207,8 +206,7 @@ public class HostParentOfTTest extends HostParentOf {
         test("UIEvent", "SVGZoomEvent");
     }
 
-    @Alerts(DEFAULT = "true/true",
-            FF_ESR = "false/false")
+    @Alerts("true/true")
     void _UIEvent_TextEvent() throws Exception {
         test("UIEvent", "TextEvent");
     }
