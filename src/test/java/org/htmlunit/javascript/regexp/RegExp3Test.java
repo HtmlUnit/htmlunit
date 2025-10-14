@@ -1242,6 +1242,25 @@ public class RegExp3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("f")
+    public void properties() throws Exception {
+        testEvaluate("'f'.match(/(\\p{Hex_Digit})/u)[0]");
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A")
+    public void properties2() throws Exception {
+        testEvaluate("'A'.match(/(\\p{Lu})/u)[0]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("https://www.youtube.com/watch?v=1234567,https,1234567")
     public void realWorld1() throws Exception {
         testEvaluate("'https://www.youtube.com/watch?v=1234567'.match(/^(?:(https?):\\/\\/)?(?:(?:www|m)\\.)?youtube\\.com\\/watch.*v=([a-zA-Z0-9_-]+)/)");
