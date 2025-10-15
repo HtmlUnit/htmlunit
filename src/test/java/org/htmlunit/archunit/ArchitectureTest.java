@@ -322,6 +322,7 @@ public class ArchitectureTest {
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.Window.setTimeout(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.Scriptable, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.css.CSSRuleList.item(int)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.css.StyleSheetList.item(int)")
+                .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.DOMMatrixReadOnly.toJSON()")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.dom.NodeList.item(java.lang.Object)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLAllCollection.item(java.lang.Object)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.html.HTMLCollection.item(java.lang.Object)")
