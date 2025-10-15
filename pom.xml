@@ -41,7 +41,7 @@
         <!--brotli.version>0.1.2</brotli.version-->
 
         <!-- selenium -->
-        <htmlunitdriver.version>4.36.0</htmlunitdriver.version>
+        <htmlunitdriver.version>4.36.1</htmlunitdriver.version>
         <selenium.version>4.36.0</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v140</selenium.devtools.artifactId>
 
@@ -59,8 +59,8 @@
         <jfreechart.version>1.5.6</jfreechart.version>
 
         <!-- quality -->
-        <checkstyle.version>12.0.0</checkstyle.version>
-        <spotbugs.version>4.9.6</spotbugs.version>
+        <checkstyle.version>12.0.1</checkstyle.version>
+        <spotbugs.version>4.9.7</spotbugs.version>
         <pmd.version>7.17.0</pmd.version>
         <archunit.version>1.4.1</archunit.version>
         <dependencycheck.version>10.0.4</dependencycheck.version>
@@ -68,8 +68,8 @@
         <!-- plugins -->
         <central-publishing-plugin.version>0.9.0</central-publishing-plugin.version>
         <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
-        <pmd-plugin.version>3.27.0</pmd-plugin.version>
-        <spotbugs-plugin.version>4.9.6.0</spotbugs-plugin.version>
+        <pmd-plugin.version>3.28.0</pmd-plugin.version>
+        <spotbugs-plugin.version>4.9.7.0</spotbugs-plugin.version>
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
         <enforcer-plugin.version>3.6.2</enforcer-plugin.version>
         <changes-plugin.version>2.12.1</changes-plugin.version>
@@ -77,6 +77,7 @@
         <jar-plugin.version>3.4.2</jar-plugin.version>
         <javadoc-plugin.version>3.12.0</javadoc-plugin.version>
         <surefire-plugin.version>3.5.4</surefire-plugin.version>
+        <jacoco-plugin.version>0.8.14</jacoco-plugin.version>
         <cyclonedx-plugin.version>2.9.1</cyclonedx-plugin.version>
     </properties>
 
@@ -385,7 +386,7 @@
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>0.8.13</version>
+                        <version>${jacoco-plugin.version}</version>
                         <executions>
                             <execution>
                                 <goals>
