@@ -3185,4 +3185,120 @@ public class DOMMatrixReadOnlyTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("matrix(1, 0, 0, 1, 20, 30)")
+    public void toString2D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "m = m.translate(20, 30);"
+                + "log(m.toString());\n"
+
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 30, 40, 50, 1)")
+    public void toString3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "m = m.translate(30, 40, 50);"
+                + "log(m.toString());\n"
+
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"{\"a\":1,\"b\":0,\"c\":0,\"d\":1,\"e\":20,\"f\":30,"
+                + "\"m11\":1,\"m12\":0,\"m13\":0,\"m14\":0,"
+                + "\"m21\":0,\"m22\":1,\"m23\":0,\"m24\":0,"
+                + "\"m31\":0,\"m32\":0,\"m33\":1,\"m34\":0,"
+                + "\"m41\":20,\"m42\":30,\"m43\":0,\"m44\":1,"
+                + "\"is2D\":true,\"isIdentity\":false}",
+             "{\"a\":1,\"b\":0,\"c\":0,\"d\":1,\"e\":20,\"f\":30,"
+                + "\"m11\":1,\"m12\":0,\"m13\":0,\"m14\":0,"
+                + "\"m21\":0,\"m22\":1,\"m23\":0,\"m24\":0,"
+                + "\"m31\":0,\"m32\":0,\"m33\":1,\"m34\":0,"
+                + "\"m41\":20,\"m42\":30,\"m43\":0,\"m44\":1,"
+                + "\"is2D\":true,\"isIdentity\":false}",
+             "false"})
+    public void toJSON2D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION_NORMALIZE
+
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "m = m.translate(20, 30);"
+                + "log(JSON.stringify(m));\n"
+                + "log(JSON.stringify(m.toJSON()));\n"
+                + "log(m === m.toJSON());\n"
+
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"{\"a\":1,\"b\":0,\"c\":0,\"d\":1,\"e\":30,\"f\":40,"
+                + "\"m11\":1,\"m12\":0,\"m13\":0,\"m14\":0,"
+                + "\"m21\":0,\"m22\":1,\"m23\":0,\"m24\":0,"
+                + "\"m31\":0,\"m32\":0,\"m33\":1,\"m34\":0,"
+                + "\"m41\":30,\"m42\":40,\"m43\":50,\"m44\":1,"
+                + "\"is2D\":false,\"isIdentity\":false}",
+             "{\"a\":1,\"b\":0,\"c\":0,\"d\":1,\"e\":30,\"f\":40,"
+                + "\"m11\":1,\"m12\":0,\"m13\":0,\"m14\":0,"
+                + "\"m21\":0,\"m22\":1,\"m23\":0,\"m24\":0,"
+                + "\"m31\":0,\"m32\":0,\"m33\":1,\"m34\":0,"
+                + "\"m41\":30,\"m42\":40,\"m43\":50,\"m44\":1,"
+                + "\"is2D\":false,\"isIdentity\":false}",
+             "false"})
+    public void toJSON3D() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION_NORMALIZE
+
+                + "let m = new DOMMatrixReadOnly();\n"
+                + "m = m.translate(30, 40, 50);"
+                + "log(JSON.stringify(m));\n"
+                + "log(JSON.stringify(m.toJSON()));\n"
+                + "log(m === m.toJSON());\n"
+
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

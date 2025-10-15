@@ -14,11 +14,15 @@
  */
 package org.htmlunit.javascript.host.dom;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.json.JsonParser;
+import org.htmlunit.corejs.javascript.json.JsonParser.ParseException;
 import org.htmlunit.corejs.javascript.typedarrays.NativeFloat32Array;
 import org.htmlunit.corejs.javascript.typedarrays.NativeFloat64Array;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -37,6 +41,8 @@ import org.htmlunit.javascript.host.Window;
  */
 @JsxClass
 public class DOMMatrixReadOnly extends HtmlUnitScriptable {
+
+    private static final Log LOG = LogFactory.getLog(DOMMatrixReadOnly.class);
 
     private double m11_;
     private double m12_;
@@ -1019,5 +1025,107 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         result.setArrayElement(15, m44_);
 
         return result;
+    }
+
+    /**
+     * @return the values of the list separated by commas,
+     *     within matrix() or matrix3d() function syntax.
+     */
+    @JsxFunction(functionName = "toString")
+    public String js_toString() {
+        final StringBuilder result = new StringBuilder();
+
+        result.append(is2D_ ? "matrix(" : "matrix3d(");
+        appendDouble(result, m11_).append(", ");
+        appendDouble(result, m12_).append(", ");
+        if (!is2D_) {
+            appendDouble(result, m13_).append(", ");
+            appendDouble(result, m14_).append(", ");
+        }
+
+        appendDouble(result, m21_).append(", ");
+        appendDouble(result, m22_).append(", ");
+        if (!is2D_) {
+            appendDouble(result, m23_).append(", ");
+            appendDouble(result, m24_).append(", ");
+
+            appendDouble(result, m31_).append(", ");
+            appendDouble(result, m32_).append(", ");
+            appendDouble(result, m33_).append(", ");
+            appendDouble(result, m34_).append(", ");
+        }
+
+        appendDouble(result, m41_).append(", ");
+        appendDouble(result, m42_);
+        if (!is2D_) {
+            result.append(", ");
+            appendDouble(result, m43_).append(", ");
+            appendDouble(result, m44_);
+        }
+
+        result.append(')');
+
+        return result.toString();
+    }
+
+    private static StringBuilder appendDouble(final StringBuilder builder, final double d) {
+        if (Double.isNaN(d) || Double.isInfinite(d)) {
+            return builder.append(d);
+        }
+
+        if (d % 1 == 0) {
+            return builder.append((int) d);
+        }
+
+        return builder.append(d);
+    }
+
+    /**
+     * @return the values of the list separated by commas,
+     *     within matrix() or matrix3d() function syntax.
+     */
+    @JsxFunction
+    public Object toJSON() {
+        final String jsonString = new StringBuilder()
+                .append("{\"a\":").append(m11_)
+                .append(", \"b\":").append(m12_)
+                .append(", \"c\":").append(m21_)
+                .append(", \"d\":").append(m22_)
+                .append(", \"e\":").append(m41_)
+                .append(", \"f\":").append(m42_)
+
+                .append(", \"m11\":").append(m11_)
+                .append(", \"m12\":").append(m12_)
+                .append(", \"m13\":").append(m13_)
+                .append(", \"m14\":").append(m14_)
+
+                .append(", \"m21\":").append(m21_)
+                .append(", \"m22\":").append(m22_)
+                .append(", \"m23\":").append(m23_)
+                .append(", \"m24\":").append(m24_)
+
+                .append(", \"m31\":").append(m31_)
+                .append(", \"m32\":").append(m32_)
+                .append(", \"m33\":").append(m33_)
+                .append(", \"m34\":").append(m34_)
+
+                .append(", \"m41\":").append(m41_)
+                .append(", \"m42\":").append(m42_)
+                .append(", \"m43\":").append(m43_)
+                .append(", \"m44\":").append(m44_)
+
+                .append(", \"is2D\":").append(is2D_)
+                .append(", \"isIdentity\":").append(getIsIdentity())
+
+                .append('}').toString();
+        try {
+            return new JsonParser(Context.getCurrentContext(), getParentScope()).parseValue(jsonString);
+        }
+        catch (final ParseException e) {
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Failed parsingJSON '" + jsonString + "'", e);
+            }
+        }
+        return null;
     }
 }

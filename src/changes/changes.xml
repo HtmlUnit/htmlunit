@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.18.0" date="November xx, 2025" description="Chrome/Edge 141, Firefox 143, FirefoxESR 140, Bugfixes">
+            <action type="add" dev="rbri">
+                DOMMatrixReadOnly toString() and toJSON() implemented.
+            </action>
             <action type="fix" dev="rbri" issue="#1046">
                 core-js: regular expressions with property escapes throwing a NPE (regression from 4.14.0).
             </action>

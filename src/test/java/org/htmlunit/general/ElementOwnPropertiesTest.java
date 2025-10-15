@@ -18527,25 +18527,25 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "m21[GCE],m22[GCE],m23[GCE],m24[GCE],m31[GCE],m32[GCE],m33[GCE],m34[GCE],"
                 + "m41[GCE],m42[GCE],m43[GCE],m44[GCE],multiply(),rotate(),rotateAxisAngle(),"
                 + "skewX(),skewY(),"
-                + "toFloat32Array(),toFloat64Array(),translate()",
+                + "toFloat32Array(),toFloat64Array(),toJSON(),toString(),translate()",
             EDGE = "a[GCE],b[GCE],c[GCE],constructor(),d[GCE],e[GCE],f[GCE],flipX(),flipY(),"
                 + "inverse(),is2D[GCE],isIdentity[GCE],m11[GCE],m12[GCE],m13[GCE],m14[GCE],"
                 + "m21[GCE],m22[GCE],m23[GCE],m24[GCE],m31[GCE],m32[GCE],m33[GCE],m34[GCE],"
                 + "m41[GCE],m42[GCE],m43[GCE],m44[GCE],multiply(),rotate(),rotateAxisAngle(),"
                 + "skewX(),skewY(),"
-                + "toFloat32Array(),toFloat64Array(),translate()",
+                + "toFloat32Array(),toFloat64Array(),toJSON(),toString(),translate()",
             FF = "a[GCE],b[GCE],c[GCE],constructor(),d[GCE],e[GCE],f[GCE],flipX(),flipY(),"
                 + "inverse(),is2D[GCE],isIdentity[GCE],m11[GCE],m12[GCE],m13[GCE],m14[GCE],"
                 + "m21[GCE],m22[GCE],m23[GCE],m24[GCE],m31[GCE],m32[GCE],m33[GCE],m34[GCE],"
                 + "m41[GCE],m42[GCE],m43[GCE],m44[GCE],multiply(),rotate(),rotateAxisAngle(),"
                 + "skewX(),skewY(),"
-                + "toFloat32Array(),toFloat64Array(),translate()",
+                + "toFloat32Array(),toFloat64Array(),toJSON(),toString(),translate()",
             FF_ESR = "a[GCE],b[GCE],c[GCE],constructor(),d[GCE],e[GCE],f[GCE],flipX(),flipY(),"
                 + "inverse(),is2D[GCE],isIdentity[GCE],m11[GCE],m12[GCE],m13[GCE],m14[GCE],"
                 + "m21[GCE],m22[GCE],m23[GCE],m24[GCE],m31[GCE],m32[GCE],m33[GCE],m34[GCE],"
                 + "m41[GCE],m42[GCE],m43[GCE],m44[GCE],multiply(),rotate(),rotateAxisAngle(),"
                 + "skewX(),skewY(),"
-                + "toFloat32Array(),toFloat64Array(),translate()")
+                + "toFloat32Array(),toFloat64Array(),toJSON(),toString(),translate()")
     public void domMatrixReadOnly() throws Exception {
         testString("", "new DOMMatrixReadOnly()");
     }
