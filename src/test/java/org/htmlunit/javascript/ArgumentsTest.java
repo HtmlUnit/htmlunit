@@ -34,19 +34,24 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Alerts({"0", "0", "1", "0"})
     public void arguments() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head>\n"
+            + "<html>\n"
+            + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "function test() {\n"
-            + "  log(test.arguments.length);\n"
-            + "  test1('hi');\n"
-            + "}\n"
-            + "function test1(hello) {\n"
-            + "  log(test.arguments.length);\n"
-            + "  log(test1.arguments.length);\n"
-            + "  log(arguments.callee.caller.arguments.length);\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
+
+            + "  function test() {\n"
+            + "    log(test.arguments.length);\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(hello) {\n"
+            + "    log(test.arguments.length);\n"
+            + "    log(test1.arguments.length);\n"
+            + "    log(arguments.callee.caller.arguments.length);\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -56,18 +61,61 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"null", "null"})
+    @Alerts({"null", "[object Arguments]", "[object Arguments]", "null"})
     public void argumentsShouldBeNullOutsideFunction() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><body>"
+            + "<html>\n"
+            + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "function test() {\n"
-            + "}\n"
-            + "log(test.arguments);\n"
-            + "test();\n"
-            + "log(test.arguments);\n"
-            + "</script></body></html>";
+            + "  function test() {\n"
+            + "    log(arguments);\n"
+            + "    log(test.arguments);\n"
+            + "  }\n"
+            + "  log(test.arguments);\n"
+            + "  test();\n"
+            + "  log(test.arguments);\n"
+            + "</script>"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "[object Arguments]", "TypeError", "TypeError"})
+    public void argumentsShouldBeNullOutsideFunctionStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    log(arguments);\n"
+            + "    try {\n"
+            + "      log(test.arguments);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  try {\n"
+            + "    log(test.arguments);\n"
+            + "  } catch(e) {\n"
+            + "    logEx(e);\n"
+            + "  }\n"
+            + "  test();\n"
+            + "  try {\n"
+            + "    log(test.arguments);\n"
+            + "  } catch(e) {\n"
+            + "    logEx(e);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -79,16 +127,18 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Alerts("callee,length")
     public void argumentsPropertyNames() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><body>"
+            + "<html>\n"
+            + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  let p = Object.getOwnPropertyNames(arguments);\n"
             + "  p.sort();\n"
-            + "  log(p);"
+            + "  log(p);\n"
             + "}\n"
-            + "test();"
-            + "</script></body></html>";
+            + "test();\n"
+            + "</script>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -101,17 +151,19 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Alerts("callee,length")
     public void argumentsPropertyNamesStrict() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><body>"
+            + "<html>\n"
+            + "<body>\n"
             + "<script>\n"
-            + "'use strict';"
+            + "'use strict';\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  let p = Object.getOwnPropertyNames(arguments);\n"
             + "  p.sort();\n"
-            + "  log(p);"
+            + "  log(p);\n"
             + "}\n"
-            + "test();"
-            + "</script></body></html>";
+            + "test();\n"
+            + "</script>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -123,16 +175,15 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Alerts("2")
     public void passedCountDifferentFromDeclared() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head>\n"
+            + "<html>\n"
+            + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  test1('hi', 'there');\n"
+            + "  log(test.arguments.length);\n"
             + "}\n"
-            + "function test1() {\n"
-            + "  log(test1.arguments.length);\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "test('hi', 'there');\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -145,21 +196,20 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Alerts({"2", "world", "undefined", "undefined"})
     public void readOnlyWhenAccessedThroughFunction() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head>\n"
+            + "<html>"
+            + "<body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  test1('hello', 'world');\n"
+            + "  test.arguments[1] = 'hi';\n"
+            + "  test.arguments[3] = 'you';\n"
+            + "  log(test.arguments.length);\n"
+            + "  log(test.arguments[1]);\n"
+            + "  log(test.arguments[2]);\n"
+            + "  log(test.arguments[3]);\n"
             + "}\n"
-            + "function test1() {\n"
-            + "  test1.arguments[1] = 'hi';\n"
-            + "  test1.arguments[3] = 'you';\n"
-            + "  log(test1.arguments.length);\n"
-            + "  log(test1.arguments[1]);\n"
-            + "  log(test1.arguments[2]);\n"
-            + "  log(test1.arguments[3]);\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "test('hello', 'world');\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -172,10 +222,11 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Alerts({"2", "hi", "undefined", "you"})
     public void writableWithinFunction() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><body>\n"
+            + "<html>"
+            + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "function test1() {\n"
+            + "function test() {\n"
             + "  arguments[1] = 'hi';\n"
             + "  arguments[3] = 'you';\n"
             + "  log(arguments.length);\n"
@@ -183,7 +234,269 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "  log(arguments[2]);\n"
             + "  log(arguments[3]);\n"
             + "}\n"
-            + "test1('hello', 'world');\n"
+            + "test('hello', 'world');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "hi", "undefined", "you"})
+    public void writableWithinFunctionStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  arguments[1] = 'hi';\n"
+            + "  arguments[3] = 'you';\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "  log(arguments[3]);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "hello", "hi", "undefined", "you",
+             "hello", "hi", "undefined"})
+    public void writableWithinFunctionAdjustsArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(a, b, c) {\n"
+            + "  arguments[1] = 'hi';\n"
+            + "  arguments[3] = 'you';\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "  log(arguments[3]);\n"
+
+            + "  log(a);\n"
+            + "  log(b);\n"
+            + "  log(c);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "hello", "hi", "undefined", "you",
+             "hello", "world", "undefined"})
+    public void writableWithinFunctionAdjustsArgumentStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(a, b, c) {\n"
+            + "  arguments[1] = 'hi';\n"
+            + "  arguments[3] = 'you';\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "  log(arguments[3]);\n"
+
+            + "  log(a);\n"
+            + "  log(b);\n"
+            + "  log(c);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "hello", "hi", "world", "you", "hello", "whole,world"})
+    public void writableWithinFunctionRestAdjustsArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(a, ...b) {\n"
+            + "  arguments[1] = 'hi';\n"
+            + "  arguments[3] = 'you';\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "  log(arguments[3]);\n"
+
+            + "  log(a);\n"
+            + "  log(b);\n"
+            + "}\n"
+            + "test('hello', 'whole', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "hello", "hi", "world", "you", "hello", "whole,world"})
+    public void writableWithinFunctionRestAdjustsArgumentStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(a, ...b) {\n"
+            + "  arguments[1] = 'hi';\n"
+            + "  arguments[3] = 'you';\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "  log(arguments[3]);\n"
+
+            + "  log(a);\n"
+            + "  log(b);\n"
+            + "}\n"
+            + "test('hello', 'whole', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "hello", "hi", "undefined", "you", "hello", "default",
+             "2", "hello", "hi", "undefined", "you", "hello", "world"})
+    public void writableWithinFunctionDefaultAdjustsArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(a, b='default') {\n"
+            + "  arguments[1] = 'hi';\n"
+            + "  arguments[3] = 'you';\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "  log(arguments[3]);\n"
+
+            + "  log(a);\n"
+            + "  log(b);\n"
+            + "}\n"
+            + "test('hello');\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "hello", "hi", "undefined", "you", "hello", "default",
+        "2", "hello", "hi", "undefined", "you", "hello", "world"})
+    public void writableWithinFunctionDefaultAdjustsArgumentStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(a, b='default') {\n"
+            + "  arguments[1] = 'hi';\n"
+            + "  arguments[3] = 'you';\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "  log(arguments[3]);\n"
+
+            + "  log(a);\n"
+            + "  log(b);\n"
+            + "}\n"
+            + "test('hello');\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "[object Object]", "hi", "undefined", "you", "hello", "world"})
+    public void writableWithinFunctionDestructAdjustsArgument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test({a, b}) {\n"
+            + "  arguments[1] = 'hi';\n"
+            + "  arguments[3] = 'you';\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "  log(arguments[3]);\n"
+
+            + "  log(a);\n"
+            + "  log(b);\n"
+            + "}\n"
+            + "test({ a: 'hello', b: 'world'});\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "[object Object]", "hi", "undefined", "you", "hello", "world"})
+    public void writableWithinFunctionDestructAdjustsArgumentStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test({a, b}) {\n"
+            + "  arguments[1] = 'hi';\n"
+            + "  arguments[3] = 'you';\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "  log(arguments[3]);\n"
+
+            + "  log(a);\n"
+            + "  log(b);\n"
+            + "}\n"
+            + "test({ a: 'hello', b: 'world'});\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -199,10 +512,10 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "function test1() {\n"
-            + "  log(arguments == test1.arguments);\n"
+            + "function test() {\n"
+            + "  log(arguments == test.arguments);\n"
             + "}\n"
-            + "test1('hello', 'world');\n"
+            + "test('hello', 'world');\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -218,10 +531,10 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "function test1(arguments) {\n"
+            + "function test(arguments) {\n"
             + "  log(arguments);\n"
             + "}\n"
-            + "test1('hi');\n"
+            + "test('hi');\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -231,20 +544,57 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function/", "function/", "true"})
+    @Alerts({"function", "true", "undefined/undefined", "undefined/undefined", "true"})
     public void argumentsCallee() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+
+                + "function calleeFoo() { foo(); }\n"
+
+                + "function foo() {\n"
+                + "  log(typeof arguments.callee);\n"
+                + "  log(foo === arguments.callee);\n"
+
+                + "  let desc = Object.getOwnPropertyDescriptor(arguments, 'callee');\n"
+                + "  log(typeof desc.get + '/' + desc.get);\n"
+                + "  log(typeof desc.set + '/' + desc.set);\n"
+                + "  log(desc.get === desc.set);\n"
+                + "}\n"
+
+                + "calleeFoo();\n"
+                + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "function/", "function/", "true"})
+    public void argumentsCalleeStrict() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>"
                 + "<script>\n"
                 + "  'use strict';\n"
                 + LOG_TITLE_FUNCTION
+
+                + "function calleeFoo() { foo(); }\n"
+
                 + "function foo() {\n"
+                + "  try {\n"
+                + "    log(arguments.callee);\n"
+                + "  } catch(e) {\n"
+                + "    logEx(e);\n"
+                + "  }\n"
                 + "  let desc = Object.getOwnPropertyDescriptor(arguments, 'callee');\n"
                 + "  log(typeof desc.get + '/' + desc.get.name);\n"
                 + "  log(typeof desc.set + '/' + desc.set.name);\n"
                 + "  log(desc.get === desc.set);\n"
                 + "}\n"
-                + "foo();\n"
+                + "calleeFoo();\n"
                 + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -272,6 +622,533 @@ public class ArgumentsTest extends WebDriverTestCase {
                 + "log(desc1.get === desc2.get);\n"
                 + "log(desc1.set === desc2.set);\n"
                 + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void argumentsCaller() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments.caller);\n"
+            + "}\n"
+            + "test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void argumentsCallerStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments.caller);\n"
+            + "}\n"
+            + "test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * Test arguments with zero parameters.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void length() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments.length);\n"
+            + "}\n"
+            + "test();\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments with undefined parameter.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "undefined"})
+    public void argumentsWithUndefined() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "}\n"
+            + "test(undefined);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments with null parameter.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "null"})
+    public void argumentsWithNull() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "}\n"
+            + "test(null);\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test deleting arguments element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "true", "undefined", "world"})
+    public void deleteArgumentsElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments.length);\n"
+            + "  log(delete arguments[0]);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test deleting arguments element in strict mode.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "true", "undefined", "world"})
+    public void deleteArgumentsElementStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments.length);\n"
+            + "  log(delete arguments[0]);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments.length is writable.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "5", "hello", "world", "undefined"})
+    public void argumentsLengthWritable() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments.length);\n"
+            + "  arguments.length = 5;\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments.length is writable in strict mode.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "5", "hello", "world", "undefined"})
+    public void argumentsLengthWritableStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments.length);\n"
+            + "  arguments.length = 5;\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments in arrow function (should not exist).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ReferenceError")
+    public void argumentsInArrowFunction() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "const test = () => {\n"
+            + "  try {\n"
+            + "    log(arguments.length);\n"
+            + "  } catch(e) {\n"
+            + "    logEx(e);\n"
+            + "  }\n"
+            + "};\n"
+            + "test('hello');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments in nested arrow function inherits from parent.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void argumentsInNestedArrowFunction() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  const inner = () => {\n"
+            + "    log(arguments.length);\n"
+            + "  };\n"
+            + "  inner();\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test Array methods on arguments object.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hello,world", "HELLO,WORLD"})
+    public void argumentsArrayMethods() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(Array.prototype.join.call(arguments, ','));\n"
+            + "  let result = Array.prototype.map.call(arguments, x => x.toUpperCase());\n"
+            + "  log(result);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments is not an Array instance.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void argumentsNotArrayInstance() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments instanceof Array);\n"
+            + "  log(arguments instanceof Object);\n"
+            + "}\n"
+            + "test();\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments Symbol.iterator.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello,world")
+    public void argumentsIterator() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  let arr = [];\n"
+            + "  for (let arg of arguments) {\n"
+            + "    arr.push(arg);\n"
+            + "  }\n"
+            + "  log(arr);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test spread operator on arguments.
+     * @throws Exception if the test fails
+     */
+    // @Test
+    @Alerts("hello,world")
+    public void argumentsSpreadOperator() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  let arr = [...arguments];\n"
+            + "  log(arr);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments with rest parameters.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hello", "3", "world,!"})
+    public void argumentsWithRestParameters() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(first, ...rest) {\n"
+            + "  log(first);\n"
+            + "  log(arguments.length);\n"
+            + "  log(rest);\n"
+            + "}\n"
+            + "test('hello', 'world', '!');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments with default parameters.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "hello", "default"})
+    public void argumentsWithDefaultParameters() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(x, y = 'default') {\n"
+            + "  log(arguments.length);\n"
+            + "  log(x);\n"
+            + "  log(y);\n"
+            + "}\n"
+            + "test('hello');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test that default parameters don't affect arguments.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "undefined", "default"})
+    public void argumentsDefaultParametersNotInArguments() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(x, y = 'default') {\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(y);\n"
+            + "}\n"
+            + "test('hello');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments in eval.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void argumentsInEval() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  eval('log(arguments.length)');\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test Object.keys on arguments.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0,1")
+    public void argumentsObjectKeys() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(Object.keys(arguments));\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test JSON.stringify on arguments.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("{\"0\":\"hello\",\"1\":\"world\"}")
+    public void argumentsJSONStringify() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(JSON.stringify(arguments));\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments in constructor function.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void argumentsInConstructor() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function MyClass() {\n"
+            + "  log(arguments.length);\n"
+            + "}\n"
+            + "new MyClass('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments in class method.
+     * @throws Exception if the test fails
+     */
+    // @Test
+    @Alerts("2")
+    public void argumentsInClassMethod() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "class MyClass {\n"
+            + "  method() {\n"
+            + "    log(arguments.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "new MyClass().method('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments toString.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object Arguments]")
+    public void argumentsToString() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(Object.prototype.toString.call(arguments));\n"
+            + "}\n"
+            + "test();\n"
+            + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
     }
