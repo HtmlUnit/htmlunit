@@ -1107,8 +1107,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
         test("MouseScrollEvent");
     }
 
-    @Alerts(DEFAULT = "exception",
-            FF_ESR = "false")
+    @Alerts("exception")
     void _MutationEvent() throws Exception {
         test("MutationEvent");
     }
@@ -1826,8 +1825,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
         test("Text");
     }
 
-    @Alerts(DEFAULT = "false",
-            FF_ESR = "exception")
+    @Alerts("false")
     void _TextEvent() throws Exception {
         test("TextEvent");
     }
