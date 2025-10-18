@@ -44,7 +44,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "    test1('hi');\n"
             + "  }\n"
 
-            + "  function test1(hello) {\n"
+            + "  function test1(a) {\n"
             + "    log(test.arguments.length);\n"
             + "    log(test1.arguments.length);\n"
             + "    log(arguments.callee.caller.arguments.length);\n"
@@ -172,7 +172,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts({"2", "2"})
     public void passedCountDifferentFromDeclared() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -180,6 +180,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
+            + "  log(arguments.length);\n"
             + "  log(test.arguments.length);\n"
             + "}\n"
             + "test('hi', 'there');\n"
@@ -193,7 +194,34 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "world", "undefined", "undefined"})
+    @Alerts({"2", "TypeError"})
+    public void passedCountDifferentFromDeclaredStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments.length);\n"
+            + "  try {\n"
+            + "    log(test.arguments);\n"
+            + "  } catch(e) {\n"
+            + "    logEx(e);\n"
+            + "  }\n"
+            + "}\n"
+            + "test('hi', 'there');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "hello", "world", "undefined", "undefined"})
     public void readOnlyWhenAccessedThroughFunction() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>"
@@ -204,6 +232,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "  test.arguments[1] = 'hi';\n"
             + "  test.arguments[3] = 'you';\n"
             + "  log(test.arguments.length);\n"
+            + "  log(test.arguments[0]);\n"
             + "  log(test.arguments[1]);\n"
             + "  log(test.arguments[2]);\n"
             + "  log(test.arguments[3]);\n"
@@ -219,7 +248,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "hi", "undefined", "you"})
+    @Alerts({"2", "hello", "hi", "undefined", "you"})
     public void writableWithinFunction() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>"
@@ -230,6 +259,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "  arguments[1] = 'hi';\n"
             + "  arguments[3] = 'you';\n"
             + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
             + "  log(arguments[1]);\n"
             + "  log(arguments[2]);\n"
             + "  log(arguments[3]);\n"
@@ -245,7 +275,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "hi", "undefined", "you"})
+    @Alerts({"2", "hello", "hi", "undefined", "you"})
     public void writableWithinFunctionStrict() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -256,6 +286,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "  arguments[1] = 'hi';\n"
             + "  arguments[3] = 'you';\n"
             + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
             + "  log(arguments[1]);\n"
             + "  log(arguments[2]);\n"
             + "  log(arguments[3]);\n"
@@ -419,7 +450,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "hello", "hi", "undefined", "you", "hello", "default",
-        "2", "hello", "hi", "undefined", "you", "hello", "world"})
+             "2", "hello", "hi", "undefined", "you", "hello", "world"})
     public void writableWithinFunctionDefaultAdjustsArgumentStrict() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -544,6 +575,26 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({})
+    public void argumentsAsParameterStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(arguments) {\n"
+            + "  log(arguments);\n"
+            + "}\n"
+            + "test('hi');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"function", "true", "undefined/undefined", "undefined/undefined", "true"})
     public void argumentsCallee() throws Exception {
         final String html = DOCTYPE_HTML
@@ -609,6 +660,31 @@ public class ArgumentsTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
                 + "<html><body>"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function foo1() {\n"
+                + "  return Object.getOwnPropertyDescriptor(arguments, 'callee');\n"
+                + "}\n"
+                + "function foo2() {\n"
+                + "  return Object.getOwnPropertyDescriptor(arguments, 'callee');\n"
+                + "}\n"
+                + "let desc1 = foo1();\n"
+                + "let desc2 = foo2();\n"
+                + "log(desc1.get === desc2.get);\n"
+                + "log(desc1.set === desc2.set);\n"
+                + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void argumentsCalleeDifferentFunctionsStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
+                + "<script>\n"
                 + "  'use strict';\n"
                 + LOG_TITLE_FUNCTION
                 + "function foo1() {\n"
@@ -669,7 +745,6 @@ public class ArgumentsTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-
     /**
      * Test arguments with zero parameters.
      * @throws Exception if the test fails
@@ -680,6 +755,27 @@ public class ArgumentsTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html><body>"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments.length);\n"
+            + "}\n"
+            + "test();\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments with zero parameters.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void lengthStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(arguments.length);\n"
@@ -737,7 +833,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "true", "undefined", "world"})
+    @Alerts({"2", "true", "2", "undefined", "world"})
     public void deleteArgumentsElement() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>"
@@ -746,6 +842,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  log(arguments.length);\n"
             + "  log(delete arguments[0]);\n"
+            + "  log(arguments.length);\n"
             + "  log(arguments[0]);\n"
             + "  log(arguments[1]);\n"
             + "}\n"
@@ -760,7 +857,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "true", "undefined", "world"})
+    @Alerts({"2", "true", "2", "undefined", "world"})
     public void deleteArgumentsElementStrict() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>"
@@ -770,6 +867,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  log(arguments.length);\n"
             + "  log(delete arguments[0]);\n"
+            + "  log(arguments.length);\n"
             + "  log(arguments[0]);\n"
             + "  log(arguments[1]);\n"
             + "}\n"
@@ -855,6 +953,31 @@ public class ArgumentsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test arguments in arrow function (should not exist).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ReferenceError")
+    public void argumentsInArrowFunctionStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "const test = () => {\n"
+            + "  try {\n"
+            + "    log(arguments.length);\n"
+            + "  } catch(e) {\n"
+            + "    logEx(e);\n"
+            + "  }\n"
+            + "};\n"
+            + "test('hello');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Test arguments in nested arrow function inherits from parent.
      * @throws Exception if the test fails
      */
@@ -900,6 +1023,29 @@ public class ArgumentsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test Array methods on arguments object.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hello,world", "HELLO,WORLD"})
+    public void argumentsArrayMethodsStric() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(Array.prototype.join.call(arguments, ','));\n"
+            + "  let result = Array.prototype.map.call(arguments, x => x.toUpperCase());\n"
+            + "  log(result);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Test arguments is not an Array instance.
      * @throws Exception if the test fails
      */
@@ -909,6 +1055,28 @@ public class ArgumentsTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html><body>"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(arguments instanceof Array);\n"
+            + "  log(arguments instanceof Object);\n"
+            + "}\n"
+            + "test();\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments is not an Array instance.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true"})
+    public void argumentsNotArrayInstanceStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(arguments instanceof Array);\n"
@@ -945,6 +1113,31 @@ public class ArgumentsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test arguments Symbol.iterator.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello,world")
+    public void argumentsIteratorStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  let arr = [];\n"
+            + "  for (let arg of arguments) {\n"
+            + "    arr.push(arg);\n"
+            + "  }\n"
+            + "  log(arr);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Test spread operator on arguments.
      * @throws Exception if the test fails
      */
@@ -966,20 +1159,67 @@ public class ArgumentsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test spread operator on arguments.
+     * @throws Exception if the test fails
+     */
+    // @Test
+    @Alerts("hello,world")
+    public void argumentsSpreadOperatorStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  let arr = [...arguments];\n"
+            + "  log(arr);\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Test arguments with rest parameters.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"hello", "3", "world,!"})
+    @Alerts({"3", "hello", "world", "!"})
     public void argumentsWithRestParameters() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test(first, ...rest) {\n"
-            + "  log(first);\n"
             + "  log(arguments.length);\n"
-            + "  log(rest);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "}\n"
+            + "test('hello', 'world', '!');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments with rest parameters.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "hello", "world", "!"})
+    public void argumentsWithRestParametersStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test(first, ...rest) {\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
             + "}\n"
             + "test('hello', 'world', '!');\n"
             + "</script></body></html>";
@@ -992,7 +1232,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"1", "hello", "default"})
+    @Alerts({"1", "hello", "undefined"})
     public void argumentsWithDefaultParameters() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>"
@@ -1000,8 +1240,8 @@ public class ArgumentsTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "function test(x, y = 'default') {\n"
             + "  log(arguments.length);\n"
-            + "  log(x);\n"
-            + "  log(y);\n"
+            + "  log(arguments[0]);\n"
+            + "  log(arguments[1]);\n"
             + "}\n"
             + "test('hello');\n"
             + "</script></body></html>";
@@ -1010,20 +1250,21 @@ public class ArgumentsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that default parameters don't affect arguments.
+     * Test arguments with default parameters.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"1", "undefined", "default"})
-    public void argumentsDefaultParametersNotInArguments() throws Exception {
+    @Alerts({"1", "hello", "undefined"})
+    public void argumentsWithDefaultParametersStrict() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>"
             + "<script>\n"
+            + "'use strict';\n"
             + LOG_TITLE_FUNCTION
             + "function test(x, y = 'default') {\n"
             + "  log(arguments.length);\n"
+            + "  log(arguments[0]);\n"
             + "  log(arguments[1]);\n"
-            + "  log(y);\n"
             + "}\n"
             + "test('hello');\n"
             + "</script></body></html>";
@@ -1041,6 +1282,27 @@ public class ArgumentsTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html><body>"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  eval('log(arguments.length)');\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments in eval.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void argumentsInEvalStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  eval('log(arguments.length)');\n"
@@ -1072,6 +1334,27 @@ public class ArgumentsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test Object.keys on arguments.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0,1")
+    public void argumentsObjectKeysStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(Object.keys(arguments));\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Test JSON.stringify on arguments.
      * @throws Exception if the test fails
      */
@@ -1092,6 +1375,27 @@ public class ArgumentsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test JSON.stringify on arguments.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("{\"0\":\"hello\",\"1\":\"world\"}")
+    public void argumentsJSONStringifyStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(JSON.stringify(arguments));\n"
+            + "}\n"
+            + "test('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Test arguments in constructor function.
      * @throws Exception if the test fails
      */
@@ -1101,6 +1405,27 @@ public class ArgumentsTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html><body>"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function MyClass() {\n"
+            + "  log(arguments.length);\n"
+            + "}\n"
+            + "new MyClass('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments in constructor function.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void argumentsInConstructorStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
             + LOG_TITLE_FUNCTION
             + "function MyClass() {\n"
             + "  log(arguments.length);\n"
@@ -1143,6 +1468,27 @@ public class ArgumentsTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html><body>"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(Object.prototype.toString.call(arguments));\n"
+            + "}\n"
+            + "test();\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test arguments toString.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object Arguments]")
+    public void argumentsToStringStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + "'use strict';\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(Object.prototype.toString.call(arguments));\n"
