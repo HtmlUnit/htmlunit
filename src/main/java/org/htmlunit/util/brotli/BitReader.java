@@ -161,9 +161,8 @@ final class BitReader {
   static int readBits(State s, int n) {
     if (HALF_BITNESS >= 24) {
       return readFewBits(s, n);
-    } else {
-      return (n <= 16) ? readFewBits(s, n) : readManyBits(s, n);
     }
+    return (n <= 16) ? readFewBits(s, n) : readManyBits(s, n);
   }
 
   private static int readManyBits(State s, int n) {
