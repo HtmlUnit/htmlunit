@@ -6520,9 +6520,8 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF = "undefined",
             FF_ESR = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
+    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined")
     public void rtcDataChannel() throws Exception {
         test("RTCDataChannel");
     }
