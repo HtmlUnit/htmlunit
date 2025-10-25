@@ -583,7 +583,7 @@ public class FetchTest extends WebDriverTestCase {
 
         assertEquals("{\"hello\":\"world\"}", lastRequest.getRequestBody());
     }
-//
+
 //    /**
 //     * Tests fetch with credentials.
 //     * @throws Exception if the test fails

@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -32,7 +31,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(value = {FF, FF_ESR}, isJSObject = false)
+@JsxClass(value = FF_ESR, isJSObject = false)
 public class MutationEvent extends Event {
 
     /** Modification. */

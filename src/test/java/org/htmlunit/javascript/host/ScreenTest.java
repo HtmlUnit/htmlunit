@@ -33,7 +33,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"1040", "1040"})
+    @Alerts({"1032", "1032"})
     public void availHeight() throws Exception {
         testNumericProperty("availHeight");
     }

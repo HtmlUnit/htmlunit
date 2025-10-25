@@ -87,7 +87,7 @@ public enum BrowserVersionFeatures {
     EVENT_SCROLL_UIEVENT,
 
     /** Supports event type 'MutationEvent'. */
-    @BrowserFeature({FF, FF_ESR})
+    @BrowserFeature(FF_ESR)
     EVENT_TYPE_MUTATIONEVENT,
 
     /** Supports event type 'WheelEvent'. */

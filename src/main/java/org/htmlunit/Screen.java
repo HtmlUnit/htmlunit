@@ -45,7 +45,7 @@ public class Screen implements Serializable {
      * @return the {@code availHeight} property
      */
     public int getAvailHeight() {
-        return 1040;
+        return 1032;
     }
 
     /**

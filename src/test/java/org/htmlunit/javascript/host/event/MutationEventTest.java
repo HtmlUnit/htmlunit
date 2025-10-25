@@ -268,7 +268,6 @@ public class MutationEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"DOM2: exception", "DOM3: exception"},
-            FF = {"DOM2: [object MutationEvent]", "DOM3: [object MutationEvent]"},
             FF_ESR = {"DOM2: [object MutationEvent]", "DOM3: [object MutationEvent]"})
     public void createEvent() throws Exception {
         final String html = DOCTYPE_HTML
