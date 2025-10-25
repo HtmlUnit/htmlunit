@@ -57,8 +57,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                        "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
-            FF = {"[object CSS2Properties]", "[object CSS2Properties]",
-                  "[object CSS2Properties]", "[object CSS2Properties]"},
+            FF = {"[object CSSStyleProperties]", "[object CSSStyleProperties]",
+                  "[object CSSStyleProperties]", "[object CSSStyleProperties]"},
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]",
                       "[object CSS2Properties]", "[object CSS2Properties]"})
     @HtmlUnitNYI(FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
@@ -3472,7 +3472,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
-            FF = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
+            FF = {"[object CSSStyleProperties]", "[object CSSStyleProperties]", "green", "abc"},
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"})
     @HtmlUnitNYI(FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
             FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"})

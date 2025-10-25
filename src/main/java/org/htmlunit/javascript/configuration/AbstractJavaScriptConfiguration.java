@@ -35,6 +35,7 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.util.StringUtils;
 
 /**
  * An abstract container for all the JavaScript configuration information.
@@ -342,7 +343,7 @@ public abstract class AbstractJavaScriptConfiguration {
                         final JsxSymbolConstant jsxSymbolConstant = (JsxSymbolConstant) annotation;
                         if (isSupported(jsxSymbolConstant.value(), expectedBrowser)) {
                             final SymbolKey symbolKey;
-                            if ("TO_STRING_TAG".equalsIgnoreCase(field.getName())) {
+                            if (StringUtils.startsWithIgnoreCase(field.getName(), "TO_STRING_TAG")) {
                                 symbolKey = SymbolKey.TO_STRING_TAG;
                             }
                             else {

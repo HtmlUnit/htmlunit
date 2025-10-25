@@ -3265,13 +3265,19 @@ public final class StyleAttributes implements Serializable {
         VIEW_TIMELINE_NAME("viewTimelineName", "view-timeline-name", chromeAndEdgeNone()),
 
         /** The style property {@code viewTransitionClass}. */
-        VIEW_TRANSITION_CLASS("viewTransitionClass", "view-transition-class", chromeAndEdgeNone()),
+        VIEW_TRANSITION_CLASS("viewTransitionClass", "view-transition-class", chromeAndEdgeNone(), ffLatest("none")),
+
+        /** The style property {@code view-transition-class}. */
+        VIEW_TRANSITION_CLASS_("view-transition-class", "view-transition-class", ffLatest("none")),
 
         /** The style property {@code viewTransitionGroup}. */
         VIEW_TRANSITION_GROUP("viewTransitionGroup", "view-transition-group", chromeAndEdgeNormal()),
 
         /** The style property {@code viewTransitionName}. */
-        VIEW_TRANSITION_NAME("viewTransitionName", "view-transition-name", chromeAndEdgeNone()),
+        VIEW_TRANSITION_NAME("viewTransitionName", "view-transition-name", chromeAndEdgeNone(), ffLatest("none")),
+
+        /** The style property {@code view-transition-name}. */
+        VIEW_TRANSITION_NAME_("view-transition-name", "view-transition-name", ffLatest("none")),
 
         /** The style property {@code visibility}. */
         VISIBILITY("visibility", "visibility", chromeAndEdge("visible"), ff("visible")),

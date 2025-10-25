@@ -541,6 +541,8 @@ unicodeBidi
 userSelect
 vectorEffect
 verticalAlign
+viewTransitionClass
+viewTransitionName
 visibility
 webkitAlignContent
 webkitAlignItems

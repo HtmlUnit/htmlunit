@@ -2654,7 +2654,7 @@ public class HtmlPage extends SgmlPage {
      *
      * @param element the element to clear its cache
      * @param normalizedPseudo the pseudo attribute
-     * @return the cached CSS2Properties object or null
+     * @return the cached ComputedCssStyleDeclaration object or null
      */
     public ComputedCssStyleDeclaration getStyleFromCache(final DomElement element,
             final String normalizedPseudo) {
@@ -2664,10 +2664,10 @@ public class HtmlPage extends SgmlPage {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Caches a CSS2Properties object.
+     * Caches a ComputedCssStyleDeclaration object.
      * @param element the element to clear its cache
      * @param normalizedPseudo the pseudo attribute
-     * @param style the CSS2Properties to cache
+     * @param style the ComputedCssStyleDeclaration to cache
      */
     public void putStyleIntoCache(final DomElement element, final String normalizedPseudo,
             final ComputedCssStyleDeclaration style) {

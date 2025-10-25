@@ -44,8 +44,12 @@ import org.htmlunit.util.StringUtils;
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** Symbol.toStringTag support. */
-    @JsxSymbolConstant({FF, FF_ESR})
-    public static final String TO_STRING_TAG = "CSS2Properties";
+    @JsxSymbolConstant(FF)
+    public static final String TO_STRING_TAG_FF = "CSSStyleProperties";
+
+    /** Symbol.toStringTag support. */
+    @JsxSymbolConstant(FF_ESR)
+    public static final String TO_STRING_TAG_FF_ESR = "CSS2Properties";
 
     /**
      * Creates an instance.

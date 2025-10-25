@@ -43,7 +43,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
-            FF = {"[object CSS2Properties]", "[object CSS2Properties]"},
+            FF = {"[object CSSStyleProperties]", "[object CSSStyleProperties]"},
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]"})
     public void scriptableToString() throws Exception {
         final String html = DOCTYPE_HTML
