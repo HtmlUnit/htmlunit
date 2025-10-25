@@ -61,6 +61,136 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
+    public void argumentsPrototype() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    log(arguments.prototype === {}.prototype);\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined/undefined", "undefined/undefined", "W-true", "C-true", "E-false"})
+    public void argumentsLengthProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+
+                + "function test() {\n"
+                + "  let desc = Object.getOwnPropertyDescriptor(arguments, 'length');\n"
+                + "  log(typeof desc.get + '/' + desc.get);\n"
+                + "  log(typeof desc.set + '/' + desc.set);\n"
+                + "  log('W-' + desc.writable);\n"
+                + "  log('C-' + desc.configurable);\n"
+                + "  log('E-' + desc.enumerable);\n"
+                + "}\n"
+
+                + "test();\n"
+                + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined/undefined", "undefined/undefined", "W-true", "C-true", "E-false"})
+    public void argumentsLengthPropertyStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
+                + "<script>\n"
+                + "'use strict';\n"
+                + LOG_TITLE_FUNCTION
+
+                + "function test() {\n"
+                + "  let desc = Object.getOwnPropertyDescriptor(arguments, 'length');\n"
+                + "  log(typeof desc.get + '/' + desc.get);\n"
+                + "  log(typeof desc.set + '/' + desc.set);\n"
+                + "  log('W-' + desc.writable);\n"
+                + "  log('C-' + desc.configurable);\n"
+                + "  log('E-' + desc.enumerable);\n"
+                + "}\n"
+
+                + "test();\n"
+                + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined/undefined", "undefined/undefined", "W-true", "C-true", "E-false"})
+    public void argumentsCalleeProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+
+                + "function test() {\n"
+                + "  let desc = Object.getOwnPropertyDescriptor(arguments, 'callee');\n"
+                + "  log(typeof desc.get + '/' + desc.get);\n"
+                + "  log(typeof desc.set + '/' + desc.set);\n"
+                + "  log('W-' + desc.writable);\n"
+                + "  log('C-' + desc.configurable);\n"
+                + "  log('E-' + desc.enumerable);\n"
+                + "}\n"
+
+                + "test();\n"
+                + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function/function () { [native code] }", "function/function () { [native code] }",
+             "W-undefined", "C-false", "E-false"})
+    public void argumentsCalleePropertyStrict() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
+                + "<script>\n"
+                + "'use strict';\n"
+                + LOG_TITLE_FUNCTION
+
+                + "function test() {\n"
+                + "  let desc = Object.getOwnPropertyDescriptor(arguments, 'callee');\n"
+                + "  log(typeof desc.get + '/' + desc.get);\n"
+                + "  log(typeof desc.set + '/' + desc.set);\n"
+                + "  log('W-' + desc.writable);\n"
+                + "  log('C-' + desc.configurable);\n"
+                + "  log('E-' + desc.enumerable);\n"
+                + "}\n"
+
+                + "test();\n"
+                + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"null", "[object Arguments]", "[object Arguments]", "null"})
     public void argumentsShouldBeNullOutsideFunction() throws Exception {
         final String html = DOCTYPE_HTML
