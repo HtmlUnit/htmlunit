@@ -1697,8 +1697,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "168",
             EDGE = "168",
-            FF = "168",
-            FF_ESR = "168")
+            FF = "151",
+            FF_ESR = "151")
     @HtmlUnitNYI(CHROME = "100",
             EDGE = "100",
             FF = "100",

@@ -682,8 +682,8 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "621",
             EDGE = "630",
-            FF = "675",
-            FF_ESR = "675")
+            FF = "674",
+            FF_ESR = "674")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
@@ -700,8 +700,8 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "621",
             EDGE = "630",
-            FF = "675",
-            FF_ESR = "675")
+            FF = "674",
+            FF_ESR = "674")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
