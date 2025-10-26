@@ -353,7 +353,7 @@ public enum BrowserVersionFeatures {
     JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED,
 
     /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     JS_OFFSET_PARENT_NULL_IF_FIXED,
 
     /** element.outerHTML removes all children from detached node. */
