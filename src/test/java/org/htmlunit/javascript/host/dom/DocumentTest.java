@@ -2927,21 +2927,23 @@ public class DocumentTest extends WebDriverTestCase {
         final String html2 = DOCTYPE_HTML
             + "<html><body onload='test()'>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  var selection = document.selection;\n"
             + "  if(!selection) selection = window.getSelection();\n"
             + "  function test() {\n"
-            + "    alert(selection.rangeCount);\n"
+            + "    log(selection.rangeCount);\n"
             + "    document.designMode = 'on';\n"
-            + "    alert(selection.rangeCount);\n"
+            + "    log(selection.rangeCount);\n"
             + "    document.designMode = 'off';\n"
-            + "    alert(selection.rangeCount);\n"
+            + "    log(selection.rangeCount);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
-        loadPageWithAlerts2(html1);
+        loadPage2(html1);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**

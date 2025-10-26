@@ -112,7 +112,7 @@ public class WindowPostMessageTest extends WebDriverTestCase {
         final String iframe = DOCTYPE_HTML
                 + "<html><body><p>inside frame</p></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, iframe);
+        getMockWebConnection().setResponse(URL_THIRD, iframe);
         loadPageVerifyTitle2(html);
     }
 
