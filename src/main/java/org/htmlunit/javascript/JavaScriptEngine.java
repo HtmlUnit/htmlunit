@@ -47,7 +47,6 @@ import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.NativeConsole;
-import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.RhinoException;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
@@ -1437,11 +1436,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 configureFunctions(config, scope);
             }
 
-            cx.evaluateString(scope, "var ProxyConfig = function() {}; ProxyConfig.bindings = {}", "<init>", 1, null);
+            cx.evaluateString(scope, "var ProxyConfig = function() {}; ProxyConfig.bindings = {}; ProxyConfig", "<init>", 1, null);
             cx.evaluateString(scope, content, "<Proxy Auto-Config>", 1, null);
 
             final Object[] functionArgs = {url.toExternalForm(), url.getHost()};
-            final NativeFunction f = (NativeFunction) scope.get("FindProxyForURL", scope);
+            final Function f = (Function) scope.get("FindProxyForURL", scope);
             final Object result = f.call(cx, scope, scope, functionArgs);
             return toString(result);
         }
