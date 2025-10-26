@@ -950,12 +950,12 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"true", "621", "147", "true", "16", "16"},
             EDGE = {"true", "630", "138", "true", "16", "24"},
-            FF = {"true", "675", "93", "true", "16", "16"},
-            FF_ESR = {"true", "675", "93", "true", "16", "16"})
+            FF = {"true", "674", "94", "true", "16", "16"},
+            FF_ESR = {"true", "674", "94", "true", "16", "16"})
     @HtmlUnitNYI(CHROME = {"true", "605", "147", "true", "0", "16"},
             EDGE = {"true", "605", "138", "true", "0", "24"},
-            FF = {"true", "605", "93", "true", "0", "16"},
-            FF_ESR = {"true", "605", "93", "true", "0", "16"})
+            FF = {"true", "605", "94", "true", "0", "16"},
+            FF_ESR = {"true", "605", "94", "true", "0", "16"})
     public void heightsAndWidths() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body onload='test()'><script>\n"
@@ -980,8 +980,8 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"true", "0", "147", "true", "true", "16"},
             EDGE = {"true", "0", "138", "true", "true", "24"},
-            FF = {"true", "0", "93", "true", "true", "16"},
-            FF_ESR = {"true", "0", "93", "true", "true", "16"})
+            FF = {"true", "0", "94", "true", "true", "16"},
+            FF_ESR = {"true", "0", "94", "true", "true", "16"})
     public void heightsAndWidthsQuirks() throws Exception {
         final String html =
             "<html><body onload='test()'><script>\n"
@@ -1121,8 +1121,8 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"621", "1256", "606", "1241"},
             EDGE = {"630", "1248", "615", "1233"},
-            FF = {"675", "1256", "658", "1239"},
-            FF_ESR = {"675", "1256", "658", "1239"})
+            FF = {"674", "1256", "674", "1256"},
+            FF_ESR = {"674", "1256", "674", "1256"})
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple
     @HtmlUnitNYI(CHROME = {"605", "1256", "705", "1256"},
@@ -1317,8 +1317,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
-            FF = {"12", "89"},
-            FF_ESR = {"12", "89"})
+            FF = {"12", "90"},
+            FF_ESR = {"12", "90"})
     public void mozInnerScreen() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body onload='test()'><script>\n"

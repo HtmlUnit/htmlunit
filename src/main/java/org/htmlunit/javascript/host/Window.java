@@ -1799,7 +1799,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter({FF, FF_ESR})
     public int getMozInnerScreenY() {
-        return 89;
+        return 90;
     }
 
     private static final class Filter {
