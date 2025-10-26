@@ -163,8 +163,15 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function/function () { [native code] }", "function/function () { [native code] }",
-             "W-undefined", "C-false", "E-false"})
+    @Alerts(DEFAULT = {"function/function () { [native code] }",
+                       "function/function () { [native code] }",
+                       "W-undefined", "C-false", "E-false"},
+            FF = {"function/function() { [native code] }",
+                  "function/function() { [native code] }",
+                  "W-undefined", "C-false", "E-false"},
+            FF_ESR = {"function/function() { [native code] }",
+                      "function/function() { [native code] }",
+                      "W-undefined", "C-false", "E-false"})
     public void argumentsCalleePropertyStrict() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>"
