@@ -414,8 +414,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"58", "29", "58", "29"},
-            FF = {"58", "29", "70", "118"},
-            FF_ESR = {"58", "29", "70", "118"})
+            FF = {"58", "29", "70", "119"},
+            FF_ESR = {"58", "29", "70", "119"})
     @HtmlUnitNYI(CHROME = {"18", "18", "18", "18"},
             EDGE = {"18", "18", "18", "18"},
             FF = {"18", "18", "18", "18"},

@@ -2347,7 +2347,9 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0,0", "10,30", "22,64", "5,0", "type error", "5,0", "onscroll 5,0"})
+    @Alerts(DEFAULT = {"0,0", "10,30", "22,64", "5,0", "5,0", "onscroll 5,0"},
+            FF = {"0,0", "10,30", "22,64", "5,0", "type error", "5,0", "onscroll 5,0"},
+            FF_ESR = {"0,0", "10,30", "22,64", "5,0", "type error", "5,0", "onscroll 5,0"})
     @HtmlUnitNYI(CHROME = {"0,0", "onscroll 10,30", "10,30", "onscroll 22,64", "22,64",
                            "onscroll 5,0", "5,0", "type error", "5,0"},
             EDGE = {"0,0", "onscroll 10,30", "10,30", "onscroll 22,64", "22,64",
@@ -2436,7 +2438,9 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0,0", "10,30", "12,34", "0,0", "type error", "0,0", "onscroll 0,0"})
+    @Alerts(DEFAULT = {"0,0", "10,30", "12,34", "0,0", "0,0", "onscroll 0,0"},
+            FF = {"0,0", "10,30", "12,34", "0,0", "type error", "0,0", "onscroll 0,0"},
+            FF_ESR = {"0,0", "10,30", "12,34", "0,0", "type error", "0,0", "onscroll 0,0"})
     @HtmlUnitNYI(CHROME = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
                            "onscroll 0,0", "0,0", "type error", "0,0"},
             EDGE = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
@@ -2525,7 +2529,9 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0,0", "10,30", "12,34", "0,0", "type error", "0,0", "onscroll 0,0"})
+    @Alerts(DEFAULT = {"0,0", "10,30", "12,34", "0,0", "0,0", "onscroll 0,0"},
+            FF = {"0,0", "10,30", "12,34", "0,0", "type error", "0,0"},
+            FF_ESR = {"0,0", "10,30", "12,34", "0,0", "type error", "0,0"})
     @HtmlUnitNYI(CHROME = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",
                            "onscroll 0,0", "0,0", "type error", "0,0"},
             EDGE = {"0,0", "onscroll 10,30", "10,30", "onscroll 12,34", "12,34",

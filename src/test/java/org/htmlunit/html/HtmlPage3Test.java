@@ -27,6 +27,7 @@ import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -497,6 +498,9 @@ public class HtmlPage3Test extends WebDriverTestCase {
             actual = element.getText();
         }
         catch (final NoSuchElementException e) {
+            actual = "error";
+        }
+        catch (final InvalidSelectorException e) {
             actual = "error";
         }
         assertEquals(getExpectedAlerts()[0], actual);
