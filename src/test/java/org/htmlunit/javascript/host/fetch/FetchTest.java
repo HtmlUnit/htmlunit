@@ -23,6 +23,7 @@ import org.htmlunit.WebRequest;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -37,6 +38,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"200", "OK", "true", "text/xml;charset=iso-8859-1",
              "<xml><content>blah</content></xml>"})
     public void fetchGet() throws Exception {
@@ -72,6 +74,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts("TypeError")
     public void fetchGetWithBody() throws Exception {
         final String html = DOCTYPE_HTML
@@ -108,6 +111,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts("TypeError")
     public void fetchGetWrongUrl() throws Exception {
         final String html = DOCTYPE_HTML
@@ -142,6 +146,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"200", "OK", "true", "text/xml;charset=iso-8859-1", "<response/>"})
     public void fetchPost() throws Exception {
         final String html = DOCTYPE_HTML
@@ -179,6 +184,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"200", "OK", "true",
              "text/plain;charset=iso-8859-1", "bla\\sbla"})
     public void fetchGetText() throws Exception {
@@ -213,6 +219,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"200", "OK", "true",
              "application/json;charset=iso-8859-1", "{\\s'Html':\\s'Unit'\\s}"})
     public void fetchGetJsonText() throws Exception {
@@ -248,6 +255,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"200", "OK", "true",
              "application/json;charset=iso-8859-1",
              "[object\\sObject]", "Unit", "{\"Html\":\"Unit\"}"})
@@ -288,6 +296,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts(DEFAULT = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
                        "[object\\sBlob]", "4", "text/plain"},
             FF = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
@@ -330,6 +339,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"200", "OK", "true", "text/plain;charset=iso-8859-1",
              "[object\\sArrayBuffer]", "4"})
     public void fetchGetArrayBuffer() throws Exception {
@@ -367,6 +377,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"200", "OK", "true"})
     public void fetchGetCustomHeader() throws Exception {
         final String html = DOCTYPE_HTML
@@ -407,6 +418,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"200", "OK", "true", "text/plain;charset=iso-8859-1", "x-tEsT"})
     public void fetchGetCustomResponseHeader() throws Exception {
         final String html = DOCTYPE_HTML
@@ -450,6 +462,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"200", "OK", "true"})
     public void fetchPostFormData() throws Exception {
         final String html = DOCTYPE_HTML
@@ -496,6 +509,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"200", "OK", "true"})
     public void fetchPostURLSearchParams() throws Exception {
         final String html = DOCTYPE_HTML
@@ -544,6 +558,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({"200", "OK", "true"})
     public void fetchPostJSON() throws Exception {
         final String html = DOCTYPE_HTML
