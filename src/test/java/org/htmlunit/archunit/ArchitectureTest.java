@@ -76,6 +76,8 @@ public class ArchitectureTest {
         .and().doNotHaveFullyQualifiedName("org.htmlunit.jetty.websocket.common.util.ReflectUtils")
         .and().doNotHaveFullyQualifiedName("org.htmlunit.jetty.websocket.common.util.TextUtil")
 
+        .and().resideOutsideOfPackage("org.htmlunit.corejs..")
+
         .should().resideInAPackage("org.htmlunit.util");
 
     /**

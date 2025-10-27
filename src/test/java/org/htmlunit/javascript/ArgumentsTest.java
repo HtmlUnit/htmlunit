@@ -16,6 +16,7 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -1278,7 +1279,8 @@ public class ArgumentsTest extends WebDriverTestCase {
      * Test spread operator on arguments.
      * @throws Exception if the test fails
      */
-    // @Test
+    @Test
+    @Disabled
     @Alerts("hello,world")
     public void argumentsSpreadOperator() throws Exception {
         final String html = DOCTYPE_HTML
@@ -1299,7 +1301,8 @@ public class ArgumentsTest extends WebDriverTestCase {
      * Test spread operator on arguments.
      * @throws Exception if the test fails
      */
-    // @Test
+    @Test
+    @Disabled
     @Alerts("hello,world")
     public void argumentsSpreadOperatorStrict() throws Exception {
         final String html = DOCTYPE_HTML
@@ -1577,7 +1580,8 @@ public class ArgumentsTest extends WebDriverTestCase {
      * Test arguments in class method.
      * @throws Exception if the test fails
      */
-    // @Test
+    @Test
+    @Disabled
     @Alerts("2")
     public void argumentsInClassMethod() throws Exception {
         final String html = DOCTYPE_HTML
