@@ -1166,7 +1166,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "4.05px",
+    @Alerts(DEFAULT = "4.03333px",
             CHROME = "3.726px",
             EDGE = "3.78px")
     @HtmlUnitNYI(CHROME = "1px",
@@ -1930,7 +1930,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "false"})
+    @Alerts(DEFAULT = {"true", "false"},
+            FF = {"true", "true"},
+            FF_ESR = {"true", "true"})
+    @HtmlUnitNYI(FF = {"true", "false"}, FF_ESR = {"true", "false"})
     public void scrollbarWidth() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1955,7 +1958,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "false"})
+    @Alerts(DEFAULT = {"true", "false"},
+            FF = {"true", "true"},
+            FF_ESR = {"true", "true"})
+    @HtmlUnitNYI(FF = {"true", "false"}, FF_ESR = {"true", "false"})
     public void scrollbarWidthOverflowY() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1980,7 +1986,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "false"})
+    @Alerts(DEFAULT = {"true", "false"},
+            FF = {"true", "true"},
+            FF_ESR = {"true", "true"})
+    @HtmlUnitNYI(FF = {"true", "false"}, FF_ESR = {"true", "false"})
     public void scrollbarHeight() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -2005,7 +2014,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "false"})
+    @Alerts(DEFAULT = {"true", "false"},
+            FF = {"true", "true"},
+            FF_ESR = {"true", "true"})
+    @HtmlUnitNYI(FF = {"true", "false"}, FF_ESR = {"true", "false"})
     public void scrollbarHeightOverflowX() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -2661,13 +2673,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0 17",
+    @Alerts(DEFAULT = "0 0",
             CHROME = "0 15",
             EDGE = "0 15")
     @HtmlUnitNYI(CHROME = "0 0",
-            EDGE = "0 0",
-            FF = "0 0",
-            FF_ESR = "0 0")
+            EDGE = "0 0")
     public void iFrameInnerWidth() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
