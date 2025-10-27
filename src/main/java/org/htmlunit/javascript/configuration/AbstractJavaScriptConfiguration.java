@@ -153,12 +153,14 @@ public abstract class AbstractJavaScriptConfiguration {
                     }
                 }
 
-                final ClassConfiguration classConfiguration =
-                        new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject,
-                                className, extendedClassName);
+                if (domClasses.size() > 0) {
+                    final ClassConfiguration classConfiguration =
+                            new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject,
+                                    className, extendedClassName);
 
-                process(classConfiguration, expectedBrowser);
-                return classConfiguration;
+                    process(classConfiguration, expectedBrowser);
+                    return classConfiguration;
+                }
             }
 
             final JsxClass jsxClass = klass.getAnnotation(JsxClass.class);
