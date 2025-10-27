@@ -40,7 +40,8 @@ import org.htmlunit.util.StringUtils;
  * @author Frank Danek
  * @author Alex Gorbatovsky
  */
-@JsxClass(value = {FF, FF_ESR}, className = "CSS2Properties")
+@JsxClass(value = FF, className = "CSSStyleProperties")
+@JsxClass(value = FF_ESR, className = "CSS2Properties")
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** Symbol.toStringTag support. */

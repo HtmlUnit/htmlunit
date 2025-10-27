@@ -35,7 +35,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object CSSStyleDeclaration]",
-            FF = "[object CSS2Properties]",
+            FF = "[object CSSStyleProperties]",
             FF_ESR = "[object CSS2Properties]")
     public void getComputedStyleOnChild() throws Exception {
         final String html = DOCTYPE_HTML
