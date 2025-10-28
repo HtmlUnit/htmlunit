@@ -8,6 +8,48 @@
 
     <body>
         <release version="4.18.0" date="November xx, 2025" description="Chrome/Edge 141, Firefox 144, FirefoxESR 140, Bugfixes">
+            <action type="fix" dev="rbri">
+                evaluation of the proxy autoconf javascript code fixed (regression)
+            </action>
+            <action type="remove" dev="rbri">
+                MutationEvent support removed Firefox 144 
+            </action>
+            <action type="update" dev="rbri">
+                CSS2Properties now named CSSStyleProperties in Firefox 144 
+            </action>
+            <action type="fix" dev="rbri">
+                Javascript configuration was broken if more than one JsxClass annotation defined for a single class
+            </action>
+            <action type="update" dev="rbri">
+                core-js: resync with the latest brotli code
+            </action>
+            <action type="update" dev="RhinoTeam" issue="#1040">
+                core-js: improve/fix support for let statements inside switch statements
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: fix a bunch of issues with ThrowTypeError
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: fix interpreter bytecode printing
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: fixed exception in the interpreter when using many literal bigint
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: fix function.length with default arguments and length calculation with rest params
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: make 'Symbol()' comply with the spec. Specifically, it's handling of the second argument to the constructor.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: support for yield* improved
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: builtin methods should have no 'prototype' property
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: many, many internal refactorings to open the door for futher improvements
+            </action>
             <action type="add" dev="rbri">
                 DOMMatrixReadOnly toString() and toJSON() implemented.
             </action>
