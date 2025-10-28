@@ -12,10 +12,10 @@
                 evaluation of the proxy autoconf javascript code fixed (regression)
             </action>
             <action type="remove" dev="rbri">
-                MutationEvent support removed Firefox 144 
+                MutationEvent support removed for Firefox 144
             </action>
             <action type="update" dev="rbri">
-                CSS2Properties now named CSSStyleProperties in Firefox 144 
+                CSS2Properties now named CSSStyleProperties in Firefox 144
             </action>
             <action type="fix" dev="rbri">
                 Javascript configuration was broken if more than one JsxClass annotation defined for a single class
