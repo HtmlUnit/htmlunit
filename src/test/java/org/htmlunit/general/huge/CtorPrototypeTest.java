@@ -230,10 +230,15 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     }
 
     @Alerts(DEFAULT = "exception",
-            FF = "false",
             FF_ESR = "false")
     void _CSS2Properties() throws Exception {
         test("CSS2Properties");
+    }
+
+    @Alerts(DEFAULT = "exception",
+            FF = "false")
+    void _CSSStyleProperties() throws Exception {
+        test("CSSStyleProperties");
     }
 
     @Alerts("false")
@@ -1748,27 +1753,42 @@ public class CtorPrototypeTest extends WebDriverTestCase {
         test("SourceBufferList");
     }
 
-    @Alerts("exception")
+    @Alerts(DEFAULT = "true",
+            FF = "exception",
+            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
     void _SpeechGrammar() throws Exception {
         test("SpeechGrammar");
     }
 
-    @Alerts("exception")
+    @Alerts(DEFAULT = "true",
+            FF = "exception",
+            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
     void _SpeechGrammarList() throws Exception {
         test("SpeechGrammarList");
     }
 
-    @Alerts("exception")
+    @Alerts(DEFAULT = "false",
+            FF = "exception",
+            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
     void _SpeechRecognition() throws Exception {
         test("SpeechRecognition");
     }
 
-    @Alerts("exception")
+    @Alerts(DEFAULT = "false",
+            FF = "exception",
+            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
     void _SpeechRecognitionErrorEvent() throws Exception {
         test("SpeechRecognitionErrorEvent");
     }
 
-    @Alerts("exception")
+    @Alerts(DEFAULT = "false",
+            FF = "exception",
+            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
     void _SpeechRecognitionEvent() throws Exception {
         test("SpeechRecognitionEvent");
     }
