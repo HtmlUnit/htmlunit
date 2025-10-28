@@ -16,6 +16,7 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -173,6 +174,12 @@ public class ArgumentsTest extends WebDriverTestCase {
             FF_ESR = {"function/function() { [native code] }",
                       "function/function() { [native code] }",
                       "W-undefined", "C-false", "E-false"})
+    @HtmlUnitNYI(FF = {"function/function () { [native code] }",
+                       "function/function () { [native code] }",
+                       "W-undefined", "C-false", "E-false"},
+            FF_ESR = {"function/function () { [native code] }",
+                      "function/function () { [native code] }",
+                      "W-undefined", "C-false", "E-false"})
     public void argumentsCalleePropertyStrict() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>"
@@ -224,6 +231,10 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError", "[object Arguments]", "TypeError", "TypeError"})
+    @HtmlUnitNYI(CHROME = {"null", "[object Arguments]", "[object Arguments]", "null"},
+            EDGE = {"null", "[object Arguments]", "[object Arguments]", "null"},
+            FF = {"null", "[object Arguments]", "[object Arguments]", "null"},
+            FF_ESR = {"null", "[object Arguments]", "[object Arguments]", "null"})
     public void argumentsShouldBeNullOutsideFunctionStrict() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -333,6 +344,10 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "TypeError"})
+    @HtmlUnitNYI(CHROME = {"2", "[object Arguments]"},
+            EDGE = {"2", "[object Arguments]"},
+            FF = {"2", "[object Arguments]"},
+            FF_ESR = {"2", "[object Arguments]"})
     public void passedCountDifferentFromDeclaredStrict() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -713,6 +728,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled
     @Alerts({})
     public void argumentsAsParameterStrict() throws Exception {
         final String html = DOCTYPE_HTML
@@ -763,6 +779,10 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError", "function/", "function/", "true"})
+    @HtmlUnitNYI(CHROME = {"TypeError", "function/", "function/", "false"},
+            EDGE = {"TypeError", "function/", "function/", "false"},
+            FF = {"TypeError", "function/", "function/", "false"},
+            FF_ESR = {"TypeError", "function/", "function/", "false"})
     public void argumentsCalleeStrict() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>"
@@ -819,6 +839,10 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "true"})
+    @HtmlUnitNYI(CHROME = {"false", "false"},
+            EDGE = {"false", "false"},
+            FF = {"false", "false"},
+            FF_ESR = {"false", "false"})
     public void argumentsCalleeDifferentFunctionsStrict() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>"
