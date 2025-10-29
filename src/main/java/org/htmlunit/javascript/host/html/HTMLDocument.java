@@ -736,7 +736,7 @@ public class HTMLDocument extends Document {
     @Override
     public Attr createAttribute(final String attributeName) {
         String name = attributeName;
-        if (StringUtils.isNotEmpty(name)) {
+        if (!org.htmlunit.util.StringUtils.isEmptyOrNull(name)) {
             name = org.htmlunit.util.StringUtils.toRootLowerCase(name);
         }
 

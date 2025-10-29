@@ -120,11 +120,18 @@ public class ArchitectureTest {
         .should().callMethod(org.apache.commons.lang3.StringUtils.class, "toRootLowerCase", String.class);
 
     /**
-     * Do not use org.apache.commons.lang3.StringUtils.toRootLowerCase(String).
+     * Do not use org.apache.commons.lang3.StringUtils.substringBefore(String, string).
      */
     @ArchTest
     public static final ArchRule apacheStringUtilsSubstringBeforeRule = noClasses()
         .should().callMethod(org.apache.commons.lang3.StringUtils.class, "substringBefore", String.class, String.class);
+
+    /**
+     * Do not use org.apache.commons.lang3.StringUtils.isNotEmpty(String).
+     */
+    @ArchTest
+    public static final ArchRule apacheStringUtilsIsNotEmptyRule = noClasses()
+        .should().callMethod(org.apache.commons.lang3.StringUtils.class, "isNotEmpty", CharSequence.class);
 
     /**
      * Do not use org.apache.commons.lang3.Strings.startsWith(CharSequence, CharSequence).

@@ -31,7 +31,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -110,6 +109,7 @@ import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventHandler;
 import org.htmlunit.javascript.host.event.MouseEvent;
+import org.htmlunit.util.StringUtils;
 
 /**
  * The JavaScript object {@code HTMLElement} which is the base class for all HTML
@@ -322,14 +322,12 @@ public class HTMLElement extends Element {
             final String prefix = domNode.getPrefix();
             if (prefix != null) {
                 // create string builder only if needed (performance)
-                final StringBuilder localName = new StringBuilder(
-                                org.htmlunit.util.StringUtils.toRootLowerCase(prefix))
+                final StringBuilder localName = new StringBuilder(StringUtils.toRootLowerCase(prefix))
                     .append(':')
-                    .append(org.htmlunit.util.StringUtils
-                                .toRootLowerCase(domNode.getLocalName()));
+                    .append(StringUtils.toRootLowerCase(domNode.getLocalName()));
                 return localName.toString();
             }
-            return org.htmlunit.util.StringUtils.toRootLowerCase(domNode.getLocalName());
+            return StringUtils.toRootLowerCase(domNode.getLocalName());
         }
         return domNode.getLocalName();
     }
@@ -407,7 +405,7 @@ public class HTMLElement extends Element {
         final SgmlPage page = domNode.getPage();
         domNode.removeAllChildren();
 
-        if (StringUtils.isNotEmpty(valueString)) {
+        if (!StringUtils.isEmptyOrNull(valueString)) {
             final String[] parts = valueString.split("\\r?\\n");
             for (int i = 0; i < parts.length; i++) {
                 if (i != 0) {
@@ -446,7 +444,7 @@ public class HTMLElement extends Element {
         final DomNode domNode = getDomNodeOrDie();
         final SgmlPage page = domNode.getPage();
 
-        if (org.htmlunit.util.StringUtils.isEmptyOrNull(valueString)) {
+        if (!StringUtils.isEmptyOrNull(valueString)) {
             domNode.getParentNode().insertBefore(new DomText(page, ""), domNode);
         }
         else {
@@ -473,7 +471,7 @@ public class HTMLElement extends Element {
 
         if (value != null) {
             final String textValue = JavaScriptEngine.toString(value);
-            if (StringUtils.isNotEmpty(textValue)) {
+            if (!StringUtils.isEmptyOrNull(textValue)) {
                 domNode.appendChild(new DomText(domNode.getPage(), textValue));
             }
         }

@@ -20,7 +20,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.io.IOException;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -43,6 +42,7 @@ import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.file.FileList;
+import org.htmlunit.util.StringUtils;
 
 /**
  * The JavaScript object for {@link HtmlInput}.
@@ -107,7 +107,7 @@ public class HTMLInputElement extends HTMLElement {
 
         final String val = JavaScriptEngine.toString(newValue);
         if ("file".equals(getType())) {
-            if (StringUtils.isNotEmpty(val)) {
+            if (!StringUtils.isEmptyOrNull(val)) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
                         "Failed to set the 'value' property on 'HTMLInputElement'.",

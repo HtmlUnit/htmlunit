@@ -16,8 +16,8 @@ package org.htmlunit.html;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "input" where type is "range".
@@ -122,7 +122,7 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
     @Override
     public void setValue(final String newValue) {
         try {
-            if (StringUtils.isNotEmpty(newValue)) {
+            if (!StringUtils.isEmptyOrNull(newValue)) {
                 setValue(Double.parseDouble(newValue));
             }
             else {
@@ -177,7 +177,7 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
         }
 
         try {
-            if (StringUtils.isNotEmpty(attributeValue)) {
+            if (!org.htmlunit.util.StringUtils.isEmptyOrNull(attributeValue)) {
                 setRawValue(Double.parseDouble(attributeValue));
             }
             else {

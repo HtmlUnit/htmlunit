@@ -43,7 +43,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.AjaxController;
@@ -90,6 +89,7 @@ import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.util.WebResponseWrapper;
 import org.htmlunit.util.XUserDefinedCharset;
@@ -821,7 +821,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 final Element docElement = ((Document) content).getDocumentElement();
                 final SgmlPage page = docElement.getDomNodeOrDie().getPage();
                 final DocumentType doctype = page.getDoctype();
-                if (doctype != null && StringUtils.isNotEmpty(doctype.getName())) {
+                if (doctype != null && !StringUtils.isEmptyOrNull(doctype.getName())) {
                     body = "<!DOCTYPE " + doctype.getName() + ">" + body;
                 }
 
@@ -1125,7 +1125,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     final String[] values = org.htmlunit.util.StringUtils.splitAtComma(value);
                     for (String part : values) {
                         part = part.trim();
-                        if (StringUtils.isNotEmpty(part)) {
+                        if (!org.htmlunit.util.StringUtils.isEmptyOrNull(part)) {
                             accessControlValues.add(part);
                         }
                     }

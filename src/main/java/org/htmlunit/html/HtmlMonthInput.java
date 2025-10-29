@@ -22,9 +22,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "input" where type is "month".
@@ -63,7 +63,7 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
     @Override
     public void setValue(final String newValue) {
         try {
-            if (hasFeature(HTMLINPUT_TYPE_MONTH_SUPPORTED) && StringUtils.isNotEmpty(newValue)) {
+            if (hasFeature(HTMLINPUT_TYPE_MONTH_SUPPORTED) && !StringUtils.isEmptyOrNull(newValue)) {
                 FORMATTER_.parse(newValue);
             }
             super.setValue(newValue);

@@ -21,7 +21,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
@@ -34,6 +33,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for {@code NumberFormat}.
@@ -220,7 +220,7 @@ public class NumberFormat extends HtmlUnitScriptable {
 
         NumberFormatHelper(final String localeName, final BrowserVersion browserVersion, final String pattern) {
             Locale locale = browserVersion.getBrowserLocale();
-            if (StringUtils.isNotEmpty(localeName)) {
+            if (!StringUtils.isEmptyOrNull(localeName)) {
                 locale = Locale.forLanguageTag(localeName);
             }
 
