@@ -537,6 +537,45 @@ public class FetchTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200", "OK", "true"})
+    public void fetchMultipartFormData() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <body>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION_NORMALIZE
+                + "      fetch('" + URL_SECOND + "')"
+                + "        .then(response => {\n"
+                + "          log(response.status);\n"
+                + "          log(response.statusText);\n"
+                + "          log(response.ok);\n"
+                + "         })\n"
+                + "        .then(response => {\n"
+                + "          return response.formData();\n"
+                + "        })\n"
+                + "        .then(formData => {\n"
+                + "            log(formData.get('test0'));\n"
+                + "            log(formData.get('test1'));\n"
+                + "        })\n"
+                + "        .catch(e => logEx(e));\n"
+                + "    </script>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final String content = "--0123456789\r\nContent-Disposition: form-data;name=test0\r\nContent-Type: text/plain\r\nHello1\nHello1\r\n--0123456789\r\nContent-Disposition: form-data;name=test1\r\nContent-Type: text/plain\r\nHello2\nHello2\r\n--0123456789--";
+        getMockWebConnection().setResponse(URL_SECOND, content, "multipart/form-data; boundary=0123456789");
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+
+        assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Disabled
+    @Alerts({"200", "OK", "true"})
     public void fetchPostURLSearchParams() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

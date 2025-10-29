@@ -322,7 +322,14 @@
 
     if (support.formData) {
       this.formData = function() {
-        return this.text().then(decode)
+        var body = this;
+        return this.text().then(function (text) {
+          var contentType = body.headers.get('content-type') || '';
+          if (contentType.indexOf('multipart/form-data') === 0) {
+            return parseMultipart(contentType, text);
+          }
+          return decode(text)
+        })
       };
     }
 
@@ -417,6 +424,56 @@
         }
       });
     return form
+  }
+
+  /**
+   * @param header
+   * @param parameter
+   * @returns {string | undefined}
+   */
+  function parseHeaderParameter(header, parameter) {
+      var value
+      header.split(';').forEach(function (param) {
+          var keyVal = param.trim().split('=');
+          if (keyVal.length > 1 && keyVal[0] === parameter) {
+              value = keyVal[1];
+              if (value.length > 1 && value[0] === '"' && value[value.length - 1] === '"') {
+                  value = value.slice(1, value.length - 1);
+              }
+          }
+      })
+      return value
+  }
+
+  /**
+   * @param {string} contentType
+   * @param {string} text
+   * @returns {FormData}
+   */
+  function parseMultipart(contentType, text) {
+      var boundary = parseHeaderParameter(contentType, "boundary");
+      if (!boundary) {
+          throw new Error('missing multipart/form-data boundary parameter')
+      }
+      var prefix = '--' + boundary + '\r\n'
+      if (text.indexOf(prefix) !== 0) {
+          throw new Error('multipart/form-data body must start with --boundary')
+      }
+      var suffix = '\r\n--' + boundary + '--'
+      if (text.length < prefix.length + suffix.length || text.slice(text.length - suffix.length) !== suffix) {
+          throw new Error('multipart/form-data body must end with --boundary--')
+      }
+      var formData = new FormData();
+      text.slice(prefix.length, text.length - suffix.length).split('\r\n--' + boundary + '\r\n').forEach(function (part) {
+          var headersEnd = part.indexOf('\r\n\r\n');
+          if (headersEnd === -1) {
+              throw new Error('multipart/form-data part is missing headers')
+          }
+          var headers = parseHeaders(part.slice(0, headersEnd));
+          var name = parseHeaderParameter(headers.get('content-disposition'), 'name');
+          formData.append(name, part.slice(headersEnd + 4))
+      })
+      return formData
   }
 
   function parseHeaders(rawHeaders) {
