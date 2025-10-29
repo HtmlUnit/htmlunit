@@ -124,7 +124,7 @@ public class DataUrlDecoder {
     private static String extractMediaType(final String beforeData) {
         if (beforeData.contains("/")) {
             if (beforeData.contains(";")) {
-                return StringUtils.substringBefore(beforeData, ";");
+                return org.htmlunit.util.StringUtils.substringBefore(beforeData, ";");
             }
             return beforeData;
         }

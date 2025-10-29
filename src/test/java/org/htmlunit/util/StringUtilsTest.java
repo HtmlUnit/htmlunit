@@ -18,6 +18,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.htmlunit.html.impl.Color;
@@ -479,5 +480,20 @@ public class StringUtilsTest {
         assertEquals("", StringUtils.escapeXml("\uFFFE"));
 
         // [#x10000-#x10FFFF]
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void substringBefore() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.substringBefore(null, null));
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.substringBefore(null, ""));
+
+        assertEquals("", StringUtils.substringBefore("", "a"));
+        assertEquals("xyz", StringUtils.substringBefore("xyz", "a"));
+        assertEquals("", StringUtils.substringBefore("a", "a"));
+        assertEquals("x", StringUtils.substringBefore("xaba", "a"));
+        assertEquals(" ", StringUtils.substringBefore(" a", "a"));
     }
 }

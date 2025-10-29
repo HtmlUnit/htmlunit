@@ -822,4 +822,30 @@ public final class StringUtils {
         }
         return parts;
     }
+
+    /**
+     * Gets the substring before the first occurrence of a separator. The separator is not returned.
+     * A {@code null} string input will return {@code null}.
+     * An empty ("") string input will return the empty string.
+     * A {@code null} or empty separator is not allowed (will throw).
+     *
+     * @param str the String to get a substring from, may be null.
+     * @param find the String to find, not null and not empty
+     * @return the substring before the first occurrence of the specified string, {@code null} if null String input.
+     */
+    public static String substringBefore(final String str, final String find) {
+        if (isEmptyOrNull(find)) {
+            throw new IllegalArgumentException("'find' string parameter has to be not empty and not null");
+        }
+
+        if (isEmptyString(str)) {
+            return str;
+        }
+
+        final int pos = str.indexOf(find);
+        if (pos == -1) {
+            return str;
+        }
+        return str.substring(0, pos);
+    }
 }

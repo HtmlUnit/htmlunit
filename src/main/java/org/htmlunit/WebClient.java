@@ -1392,7 +1392,7 @@ public class WebClient implements Serializable, AutoCloseable {
             return new StringWebResponse("", UrlUtils.URL_ABOUT_BLANK);
         }
 
-        final String urlWithoutQuery = org.apache.commons.lang3.StringUtils.substringBefore(urlString, "?");
+        final String urlWithoutQuery = StringUtils.substringBefore(urlString, "?");
         if (!"blank".equalsIgnoreCase(org.apache.commons.lang3.StringUtils
                                         .substringAfter(urlWithoutQuery, UrlUtils.ABOUT_SCHEME))) {
             throw new MalformedURLException(url + " is not supported, only about:blank is supported at the moment.");

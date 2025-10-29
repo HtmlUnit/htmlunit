@@ -340,7 +340,8 @@ public class XmlSerializer {
     private static String getSuffix(final WebResponse response) {
         // first try to take the one from the requested file
         final String url = response.getWebRequest().getUrl().toString();
-        final String fileName = StringUtils.substringAfterLast(StringUtils.substringBefore(url, "?"), "/");
+        final String fileName =
+                StringUtils.substringAfterLast(org.htmlunit.util.StringUtils.substringBefore(url, "?"), "/");
         // if there is a suffix with 2-4 letters, the take it
         final String suffix = StringUtils.substringAfterLast(fileName, ".");
         if (suffix.length() > 1 && suffix.length() < 5) {
@@ -387,8 +388,8 @@ public class XmlSerializer {
     private File createFile(final String url, final String extension) throws IOException {
         String name = url.replaceFirst("/$", "");
         name = CREATE_FILE_PATTERN.matcher(name).replaceAll("");
-        name = StringUtils.substringBefore(name, "?"); // remove query
-        name = StringUtils.substringBefore(name, ";"); // remove additional info
+        name = org.htmlunit.util.StringUtils.substringBefore(name, "?"); // remove query
+        name = org.htmlunit.util.StringUtils.substringBefore(name, ";"); // remove additional info
         name = StringUtils.substring(name, 0, 30); // many file systems have a limit at 255, let's limit it
         name = org.htmlunit.util.StringUtils.sanitizeForFileName(name);
         if (!name.endsWith(extension)) {

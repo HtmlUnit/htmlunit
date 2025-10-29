@@ -298,8 +298,8 @@ public class HtmlForm extends HtmlElement {
             queryFormFields = HttpUtils.toQueryFormFields(parameters, enc);
 
             // action may already contain some query parameters: they have to be removed
-            actionUrl = StringUtils.substringBefore(actionUrl, "#");
-            actionUrl = StringUtils.substringBefore(actionUrl, "?");
+            actionUrl = org.htmlunit.util.StringUtils.substringBefore(actionUrl, "#");
+            actionUrl = org.htmlunit.util.StringUtils.substringBefore(actionUrl, "?");
             parameters.clear(); // parameters have been added to query
         }
 

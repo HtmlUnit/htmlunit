@@ -394,7 +394,7 @@ public class URL extends HtmlUnitScriptable {
             return;
         }
 
-        final String bareProtocol = StringUtils.substringBefore(protocol, ":").trim();
+        final String bareProtocol = org.htmlunit.util.StringUtils.substringBefore(protocol, ":").trim();
         if (!UrlUtils.isValidScheme(bareProtocol)) {
             return;
         }

@@ -482,7 +482,7 @@ public class HTMLAnchorElement extends HTMLElement {
             if (anchor.getHrefAttribute().startsWith("http")) {
                 return ":";
             }
-            return StringUtils.substringBefore(anchor.getHrefAttribute(), "/");
+            return org.htmlunit.util.StringUtils.substringBefore(anchor.getHrefAttribute(), "/");
         }
     }
 
@@ -498,7 +498,7 @@ public class HTMLAnchorElement extends HTMLElement {
             return;
         }
 
-        final String bareProtocol = StringUtils.substringBefore(protocol, ":").trim();
+        final String bareProtocol = org.htmlunit.util.StringUtils.substringBefore(protocol, ":").trim();
         if (!UrlUtils.isValidScheme(bareProtocol)) {
             return;
         }

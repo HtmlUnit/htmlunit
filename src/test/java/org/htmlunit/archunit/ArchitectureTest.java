@@ -113,6 +113,20 @@ public class ArchitectureTest {
         .should().callMethod(org.apache.commons.lang3.StringUtils.class, "isNotBlank", CharSequence.class);
 
     /**
+     * Do not use org.apache.commons.lang3.StringUtils.toRootLowerCase(String).
+     */
+    @ArchTest
+    public static final ArchRule apacheStringUtilstoRootLowerCaseRule = noClasses()
+        .should().callMethod(org.apache.commons.lang3.StringUtils.class, "toRootLowerCase", String.class);
+
+    /**
+     * Do not use org.apache.commons.lang3.StringUtils.toRootLowerCase(String).
+     */
+    @ArchTest
+    public static final ArchRule apacheStringUtilsSubstringBeforeRule = noClasses()
+        .should().callMethod(org.apache.commons.lang3.StringUtils.class, "substringBefore", String.class, String.class);
+
+    /**
      * Do not use org.apache.commons.lang3.Strings.startsWith(CharSequence, CharSequence).
      */
     @ArchTest
@@ -132,13 +146,6 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule apacheStringsContainsRule = noClasses()
         .should().callMethod(org.apache.commons.lang3.Strings.class, "contains", CharSequence.class, CharSequence.class);
-
-    /**
-     * Do not use org.apache.commons.lang3.StringUtils.toRootLowerCase(String).
-     */
-    @ArchTest
-    public static final ArchRule apacheStringstoRootLowerCaseRule = noClasses()
-        .should().callMethod(org.apache.commons.lang3.StringUtils.class, "toRootLowerCase", String.class);
 
 
     /**

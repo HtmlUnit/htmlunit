@@ -114,7 +114,7 @@ public class Navigator extends HtmlUnitScriptable {
         final String[] parts = StringUtils.splitAtComma(acceptLang);
         for (final String part : parts) {
             if (!StringUtils.isEmptyOrNull(part)) {
-                final String lang = org.apache.commons.lang3.StringUtils.substringBefore(part, ";").trim();
+                final String lang = StringUtils.substringBefore(part, ";").trim();
                 if (!StringUtils.isEmptyOrNull(part)) {
                     res.add(lang);
                 }

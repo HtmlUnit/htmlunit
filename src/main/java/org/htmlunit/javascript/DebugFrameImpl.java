@@ -263,7 +263,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
         // only the file name is interesting the rest of the url is mostly noise
         source = StringUtils.substringAfterLast(source, "/");
         // embedded scripts have something like "foo.html from (3, 10) to (10, 13)"
-        source = StringUtils.substringBefore(source, " ");
+        source = org.htmlunit.util.StringUtils.substringBefore(source, " ");
         return source;
     }
 

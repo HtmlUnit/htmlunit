@@ -231,7 +231,7 @@ public final class UrlUtils {
     public static URL toUrlUnsafe(final String url) throws MalformedURLException {
         WebAssert.notNull("url", url);
 
-        final String protocol = org.apache.commons.lang3.StringUtils.substringBefore(url, ":").toLowerCase(Locale.ROOT);
+        final String protocol = StringUtils.substringBefore(url, ":").toLowerCase(Locale.ROOT);
 
         if (protocol.isEmpty() || UrlUtils.isNormalUrlProtocol(protocol)) {
             final URL response = new URL(url);
