@@ -28,7 +28,7 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <htmlunitcsp.version>4.18.0</htmlunitcsp.version>
-        <htmlunitcssparser.version>4.19.0</htmlunitcssparser.version>
+        <htmlunitcssparser.version>4.18.0</htmlunitcssparser.version>
         <htmlunitcorejs.version>4.18.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitneko.version>4.17.0</htmlunitneko.version>
         <htmlunitwebsocketclient.version>4.18.0</htmlunitwebsocketclient.version>
