@@ -27,12 +27,12 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitcsp.version>4.17.0</htmlunitcsp.version>
-        <htmlunitcssparser.version>4.17.0</htmlunitcssparser.version>
+        <htmlunitcsp.version>4.18.0</htmlunitcsp.version>
+        <htmlunitcssparser.version>4.19.0</htmlunitcssparser.version>
         <htmlunitcorejs.version>4.18.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitneko.version>4.17.0</htmlunitneko.version>
-        <htmlunitwebsocketclient.version>4.17.0</htmlunitwebsocketclient.version>
-        <htmlunitxpath.version>4.17.0</htmlunitxpath.version>
+        <htmlunitwebsocketclient.version>4.18.0</htmlunitwebsocketclient.version>
+        <htmlunitxpath.version>4.18.0</htmlunitxpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <commons-lang3.version>3.19.0</commons-lang3.version>
