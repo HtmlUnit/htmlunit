@@ -21,11 +21,12 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebRequest;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * Tests for Fetch API.
@@ -38,9 +39,11 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true", "text/xml;charset=iso-8859-1",
              "<xml><content>blah</content></xml>"})
+    @HtmlUnitNYI(
+            FF = {"200", "OK", "true", "text/xml", "<xml><content>blah</content></xml>"},
+            FF_ESR = {"200", "OK", "true", "text/xml", "<xml><content>blah</content></xml>"})
     public void fetchGet() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -64,7 +67,8 @@ public class FetchTest extends WebDriverTestCase {
         final String xml = "<xml><content>blah</content></xml>";
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -74,7 +78,6 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts("TypeError")
     public void fetchGetWithBody() throws Exception {
         final String html = DOCTYPE_HTML
@@ -101,7 +104,8 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "<response/>", MimeType.TEXT_XML);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_FIRST, getMockWebConnection().getLastWebRequest().getUrl());
@@ -111,7 +115,6 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts("TypeError")
     public void fetchGetWrongUrl() throws Exception {
         final String html = DOCTYPE_HTML
@@ -135,7 +138,8 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "<response/>", MimeType.TEXT_XML);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(1, getMockWebConnection().getRequestCount());
@@ -146,8 +150,10 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true", "text/xml;charset=iso-8859-1", "<response/>"})
+    @HtmlUnitNYI(
+            FF = {"200", "OK", "true", "text/xml", "<response/>"},
+            FF_ESR = {"200", "OK", "true", "text/xml", "<response/>"})
     public void fetchPost() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -173,7 +179,8 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "<response/>", MimeType.TEXT_XML);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -184,9 +191,11 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true",
              "text/plain;charset=iso-8859-1", "bla\\sbla"})
+    @HtmlUnitNYI(
+            FF = {"200", "OK", "true", "text/plain", "bla\\sbla"},
+            FF_ESR = {"200", "OK", "true", "text/plain", "bla\\sbla"})
     public void fetchGetText() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -209,7 +218,8 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "bla bla", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -219,9 +229,11 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true",
              "application/json;charset=iso-8859-1", "{\\s'Html':\\s'Unit'\\s}"})
+    @HtmlUnitNYI(
+            FF = {"200", "OK", "true", "application/json", "{\\s'Html':\\s'Unit'\\s}"},
+            FF_ESR = {"200", "OK", "true", "application/json", "{\\s'Html':\\s'Unit'\\s}"})
     public void fetchGetJsonText() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -245,7 +257,8 @@ public class FetchTest extends WebDriverTestCase {
         final String json = "{ 'Html': 'Unit' }";
         getMockWebConnection().setResponse(URL_SECOND, json, MimeType.APPLICATION_JSON);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -255,10 +268,14 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true",
              "application/json;charset=iso-8859-1",
              "[object\\sObject]", "Unit", "{\"Html\":\"Unit\"}"})
+    @HtmlUnitNYI(
+            FF = {"200", "OK", "true", "application/json",
+                  "[object\\sObject]", "Unit", "{\"Html\":\"Unit\"}"},
+            FF_ESR = {"200", "OK", "true", "application/json",
+                      "[object\\sObject]", "Unit", "{\"Html\":\"Unit\"}"})
     public void fetchGetJson() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -286,7 +303,8 @@ public class FetchTest extends WebDriverTestCase {
         final String json = "{ \"Html\": \"Unit\" }";
         getMockWebConnection().setResponse(URL_SECOND, json, MimeType.APPLICATION_JSON);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -296,13 +314,15 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts(DEFAULT = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
                        "[object\\sBlob]", "4", "text/plain"},
             FF = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
                   "[object\\sBlob]", "4", "text/plain;charset=iso-8859-1"},
             FF_ESR = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
                       "[object\\sBlob]", "4", "text/plain;charset=iso-8859-1"})
+    @HtmlUnitNYI(
+            FF = {"200", "OK", "true", "text/plain", "[object\\sBlob]", "4", "text/plain"},
+            FF_ESR = {"200", "OK", "true", "text/plain", "[object\\sBlob]", "4", "text/plain"})
     public void fetchGetBlob() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -329,7 +349,8 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "ABCD", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -339,9 +360,11 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true", "text/plain;charset=iso-8859-1",
              "[object\\sArrayBuffer]", "4"})
+    @HtmlUnitNYI(
+            FF = {"200", "OK", "true", "text/plain", "[object\\sArrayBuffer]", "4"},
+            FF_ESR = {"200", "OK", "true", "text/plain", "[object\\sArrayBuffer]", "4"})
     public void fetchGetArrayBuffer() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -367,7 +390,8 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "ABCD", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -377,7 +401,6 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true"})
     public void fetchGetCustomHeader() throws Exception {
         final String html = DOCTYPE_HTML
@@ -405,7 +428,8 @@ public class FetchTest extends WebDriverTestCase {
         final String json = "{ \"Html\": \"Unit\" }";
         getMockWebConnection().setResponse(URL_SECOND, json, MimeType.APPLICATION_JSON);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
@@ -418,8 +442,10 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true", "text/plain;charset=iso-8859-1", "x-tEsT"})
+    @HtmlUnitNYI(
+            FF = {"200", "OK", "true", "text/plain", "null"},
+            FF_ESR = {"200", "OK", "true", "text/plain", "null"})
     public void fetchGetCustomResponseHeader() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -449,7 +475,8 @@ public class FetchTest extends WebDriverTestCase {
         headers.add(new NameValuePair("X-Custom-Header", "x-tEsT"));
         getMockWebConnection().setResponse(URL_SECOND, "HtmlUnit", 200, "ok", MimeType.TEXT_PLAIN, headers);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
@@ -462,7 +489,6 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true"})
     public void fetchPostFormData() throws Exception {
         final String html = DOCTYPE_HTML
@@ -493,7 +519,8 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "HtmlUnit", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
@@ -509,7 +536,6 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true"})
     public void fetchPostURLSearchParams() throws Exception {
         final String html = DOCTYPE_HTML
@@ -536,7 +562,8 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "HtmlUnit", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
@@ -558,7 +585,6 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true"})
     public void fetchPostJSON() throws Exception {
         final String html = DOCTYPE_HTML
@@ -586,7 +612,8 @@ public class FetchTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "HtmlUnit", MimeType.TEXT_PLAIN);
 
-        final WebDriver driver = loadPage2(html);
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
@@ -751,4 +778,12 @@ public class FetchTest extends WebDriverTestCase {
 //        final WebDriver driver = loadPage2(html);
 //        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 //    }
+
+    private WebDriver enableFetchPolyfill() {
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).getWebClient().getOptions().setFetchPolyfillEnabled(true);
+        }
+        return driver;
+    }
 }
