@@ -426,10 +426,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     KEYBOARD_EVENT_SPECIAL_KEYPRESS,
 
-    /** XMLHttpRequest.getAllResponseHeaders() uses only Lf as separator. */
-    @BrowserFeature({FF, FF_ESR})
-    XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF,
-
     /**
      * Indicates that the Browser handles async and sync network errors the same way.
      */

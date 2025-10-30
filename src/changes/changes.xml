@@ -9,6 +9,9 @@
     <body>
         <release version="4.18.0" date="November xx, 2025" description="Chrome/Edge 141, Firefox 144, FirefoxESR 140, Bugfixes">
             <action type="fix" dev="rbri">
+                XMLHttpRequest.getAllResponseHeaders() uses \r\n as delimiter in FF/FF_ESR also
+            </action>
+            <action type="fix" dev="rbri">
                 evaluation of the proxy autoconf javascript code fixed (regression)
             </action>
             <action type="remove" dev="rbri">

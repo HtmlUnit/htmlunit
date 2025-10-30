@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.xml;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF;
 import static org.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
 import static org.htmlunit.BrowserVersionFeatures.XHR_LOAD_ALWAYS_AFTER_DONE;
 import static org.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_TEXT_EMPTY_UNSENT;
@@ -613,12 +612,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (webResponse_ != null) {
             final StringBuilder builder = new StringBuilder();
             for (final NameValuePair header : webResponse_.getResponseHeaders()) {
-                builder.append(header.getName()).append(": ").append(header.getValue());
-
-                if (!getBrowserVersion().hasFeature(XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF)) {
-                    builder.append('\r');
-                }
-                builder.append('\n');
+                builder
+                    .append(header.getName())
+                    .append(": ")
+                    .append(header.getValue())
+                    .append("\r\n");
             }
             return builder.toString();
         }

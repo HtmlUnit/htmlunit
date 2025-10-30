@@ -1090,32 +1090,32 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "", "content-type: text/xml;charset=iso-8859-1\\n"
-                        + "date XYZ GMT\\n"
-                        + "server: Jetty(XXX)\\n"
-                        + "transfer-encoding: chunked\\n"})
-    @HtmlUnitNYI(CHROME = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
-                                        + "Transfer-Encoding: chunked\\n"
-                                        + "Server: Jetty(XXX)\\n"},
-            EDGE = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
-                                + "Transfer-Encoding: chunked\\n"
-                                + "Server: Jetty(XXX)\\n"},
-            FF = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
-                                + "Transfer-Encoding: chunked\\n"
-                                + "Server: Jetty(XXX)\\n"},
-            FF_ESR = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
-                                + "Transfer-Encoding: chunked\\n"
-                                + "Server: Jetty(XXX)\\n"})
+    @Alerts({"", "", "content-type:\\stext/xml;charset=iso-8859-1\\r\\n"
+                        + "date\\sXYZ\\sGMT\\r\\n"
+                        + "server:\\sJetty(XXX)\\r\\n"
+                        + "transfer-encoding:\\schunked\\r\\n"})
+    @HtmlUnitNYI(CHROME = {"", "", "Date\\sXYZ\\sGMT\\r\\n"
+                                    + "Content-Type:\\stext/xml;charset=iso-8859-1\\r\\n"
+                                    + "Transfer-Encoding:\\schunked\\r\\n"
+                                    + "Server:\\sJetty(XXX)\\r\\n"},
+            EDGE = {"", "", "Date\\sXYZ\\sGMT\\r\\n"
+                                    + "Content-Type:\\stext/xml;charset=iso-8859-1\\r\\n"
+                                    + "Transfer-Encoding:\\schunked\\r\\n"
+                                    + "Server:\\sJetty(XXX)\\r\\n"},
+            FF = {"", "", "Date\\sXYZ\\sGMT\\r\\n"
+                                    + "Content-Type:\\stext/xml;charset=iso-8859-1\\r\\n"
+                                    + "Transfer-Encoding:\\schunked\\r\\n"
+                                    + "Server:\\sJetty(XXX)\\r\\n"},
+            FF_ESR = {"", "", "Date\\sXYZ\\sGMT\\r\\n"
+                                    + "Content-Type:\\stext/xml;charset=iso-8859-1\\r\\n"
+                                    + "Transfer-Encoding:\\schunked\\r\\n"
+                                    + "Server:\\sJetty(XXX)\\r\\n"})
     public void getAllResponseHeaders() throws Exception {
         final String html = DOCTYPE_HTML
                         + "<html>\n"
                         + "  <head>\n"
                         + "    <script>\n"
-                        + "      function log(msg) {\n"
-                        + "        msg = ('' + msg).replace(/\\r\\n/g, '\\\\n');"
-                        + "        msg = msg.replace(/\\n/g, '\\\\n');"
-                        + "        window.document.title += msg + '§';"
-                        + "      }\n"
+                        + LOG_TITLE_FUNCTION_NORMALIZE
                         + "      var request;\n"
                         + "      function testBasicAuth() {\n"
                         + "        var request = new XMLHttpRequest();\n"
