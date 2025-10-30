@@ -303,8 +303,9 @@ public class FetchTest extends WebDriverTestCase {
                   "[object\\sBlob]", "4", "text/plain;charset=iso-8859-1"},
             FF_ESR = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
                       "[object\\sBlob]", "4", "text/plain;charset=iso-8859-1"})
-    @HtmlUnitNYI(FF = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
-                       "[object\\sBlob]", "4", "text/plain"},
+    @HtmlUnitNYI(
+            FF = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
+                  "[object\\sBlob]", "4", "text/plain"},
             FF_ESR = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
                       "[object\\sBlob]", "4", "text/plain"})
     public void fetchGetBlob() throws Exception {
@@ -514,7 +515,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"200", "OK", "true"})
+    @Alerts({"200", "OK", "true", "[object\\sPromise]§Hello1\\nHello1", "Hello2\\nHello2"})
     public void fetchMultipartFormData() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -526,23 +527,37 @@ public class FetchTest extends WebDriverTestCase {
                 + "          log(response.status);\n"
                 + "          log(response.statusText);\n"
                 + "          log(response.ok);\n"
-                + "         })\n"
-                + "        .then(response => {\n"
-                + "          return response.formData();\n"
+
+                + "          let fd = response.formData();"
+                + "          log(fd);\n"
+                + "          return fd;\n"
                 + "        })\n"
                 + "        .then(formData => {\n"
                 + "            log(formData.get('test0'));\n"
                 + "            log(formData.get('test1'));\n"
                 + "        })\n"
-                + "        .catch(e => logEx(e));\n"
+                + "        .catch(e => log(e.message));\n"
                 + "    </script>\n"
                 + "  </body>\n"
                 + "</html>";
 
-        final String content = "--0123456789\r\nContent-Disposition: form-data;name=test0\r\nContent-Type: text/plain\r\nHello1\nHello1\r\n--0123456789\r\nContent-Disposition: form-data;name=test1\r\nContent-Type: text/plain\r\nHello2\nHello2\r\n--0123456789--";
-        getMockWebConnection().setResponse(URL_SECOND, content, "multipart/form-data; boundary=0123456789");
+        final String boundary = "0123456789";
+        final String content = "--" + boundary + "\r\n"
+                + "Content-Disposition: form-data; name=\"test0\"\r\n"
+                + "Content-Type: text/plain\r\n"
+                + "\r\n"
+                + "Hello1\nHello1\r\n"
+                + "--" + boundary + "\r\n"
+                + "Content-Disposition: form-data; name=\"test1\"\r\n"
+                + "Content-Type: text/plain\r\n"
+                + "\r\n"
+                + "Hello2\nHello2\r\n"
+                + "--" + boundary + "--";
 
-        final WebDriver driver = loadPage2(html);
+        getMockWebConnection().setResponse(URL_SECOND, content, "multipart/form-data; boundary=" + boundary);
+
+        final WebDriver driver = enableFetchPolyfill();
+        loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
 
         assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
@@ -552,7 +567,6 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts({"200", "OK", "true"})
     public void fetchPostURLSearchParams() throws Exception {
         final String html = DOCTYPE_HTML
