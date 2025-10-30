@@ -515,7 +515,7 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"200", "OK", "true", "[object\\sPromise]§Hello1\\nHello1", "Hello2\\nHello2"})
+    @Alerts({"200", "OK", "true", "test0,Hello1\\nHello1,test1,Hello2\\nHello2"})
     public void fetchMultipartFormData() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -528,13 +528,10 @@ public class FetchTest extends WebDriverTestCase {
                 + "          log(response.statusText);\n"
                 + "          log(response.ok);\n"
 
-                + "          let fd = response.formData();"
-                + "          log(fd);\n"
-                + "          return fd;\n"
+                + "          return response.formData();\n"
                 + "        })\n"
                 + "        .then(formData => {\n"
-                + "            log(formData.get('test0'));\n"
-                + "            log(formData.get('test1'));\n"
+                + "            log(Array.from(formData.entries()));\n"
                 + "        })\n"
                 + "        .catch(e => log(e.message));\n"
                 + "    </script>\n"
