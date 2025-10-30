@@ -41,9 +41,6 @@ public class FetchTest extends WebDriverTestCase {
     @Test
     @Alerts({"200", "OK", "true", "text/xml;charset=iso-8859-1",
              "<xml><content>blah</content></xml>"})
-    @HtmlUnitNYI(
-            FF = {"200", "OK", "true", "text/xml", "<xml><content>blah</content></xml>"},
-            FF_ESR = {"200", "OK", "true", "text/xml", "<xml><content>blah</content></xml>"})
     public void fetchGet() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -151,9 +148,6 @@ public class FetchTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200", "OK", "true", "text/xml;charset=iso-8859-1", "<response/>"})
-    @HtmlUnitNYI(
-            FF = {"200", "OK", "true", "text/xml", "<response/>"},
-            FF_ESR = {"200", "OK", "true", "text/xml", "<response/>"})
     public void fetchPost() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -193,9 +187,6 @@ public class FetchTest extends WebDriverTestCase {
     @Test
     @Alerts({"200", "OK", "true",
              "text/plain;charset=iso-8859-1", "bla\\sbla"})
-    @HtmlUnitNYI(
-            FF = {"200", "OK", "true", "text/plain", "bla\\sbla"},
-            FF_ESR = {"200", "OK", "true", "text/plain", "bla\\sbla"})
     public void fetchGetText() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -231,9 +222,6 @@ public class FetchTest extends WebDriverTestCase {
     @Test
     @Alerts({"200", "OK", "true",
              "application/json;charset=iso-8859-1", "{\\s'Html':\\s'Unit'\\s}"})
-    @HtmlUnitNYI(
-            FF = {"200", "OK", "true", "application/json", "{\\s'Html':\\s'Unit'\\s}"},
-            FF_ESR = {"200", "OK", "true", "application/json", "{\\s'Html':\\s'Unit'\\s}"})
     public void fetchGetJsonText() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -271,11 +259,6 @@ public class FetchTest extends WebDriverTestCase {
     @Alerts({"200", "OK", "true",
              "application/json;charset=iso-8859-1",
              "[object\\sObject]", "Unit", "{\"Html\":\"Unit\"}"})
-    @HtmlUnitNYI(
-            FF = {"200", "OK", "true", "application/json",
-                  "[object\\sObject]", "Unit", "{\"Html\":\"Unit\"}"},
-            FF_ESR = {"200", "OK", "true", "application/json",
-                      "[object\\sObject]", "Unit", "{\"Html\":\"Unit\"}"})
     public void fetchGetJson() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -320,9 +303,10 @@ public class FetchTest extends WebDriverTestCase {
                   "[object\\sBlob]", "4", "text/plain;charset=iso-8859-1"},
             FF_ESR = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
                       "[object\\sBlob]", "4", "text/plain;charset=iso-8859-1"})
-    @HtmlUnitNYI(
-            FF = {"200", "OK", "true", "text/plain", "[object\\sBlob]", "4", "text/plain"},
-            FF_ESR = {"200", "OK", "true", "text/plain", "[object\\sBlob]", "4", "text/plain"})
+    @HtmlUnitNYI(FF = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
+                       "[object\\sBlob]", "4", "text/plain"},
+            FF_ESR = {"200", "OK", "true", "text/plain;charset=iso-8859-1",
+                      "[object\\sBlob]", "4", "text/plain"})
     public void fetchGetBlob() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -362,9 +346,6 @@ public class FetchTest extends WebDriverTestCase {
     @Test
     @Alerts({"200", "OK", "true", "text/plain;charset=iso-8859-1",
              "[object\\sArrayBuffer]", "4"})
-    @HtmlUnitNYI(
-            FF = {"200", "OK", "true", "text/plain", "[object\\sArrayBuffer]", "4"},
-            FF_ESR = {"200", "OK", "true", "text/plain", "[object\\sArrayBuffer]", "4"})
     public void fetchGetArrayBuffer() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -443,9 +424,6 @@ public class FetchTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"200", "OK", "true", "text/plain;charset=iso-8859-1", "x-tEsT"})
-    @HtmlUnitNYI(
-            FF = {"200", "OK", "true", "text/plain", "null"},
-            FF_ESR = {"200", "OK", "true", "text/plain", "null"})
     public void fetchGetCustomResponseHeader() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
