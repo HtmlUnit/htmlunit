@@ -444,7 +444,7 @@ public class HTMLElement extends Element {
         final DomNode domNode = getDomNodeOrDie();
         final SgmlPage page = domNode.getPage();
 
-        if (!StringUtils.isEmptyOrNull(valueString)) {
+        if (StringUtils.isEmptyOrNull(valueString)) {
             domNode.getParentNode().insertBefore(new DomText(page, ""), domNode);
         }
         else {
