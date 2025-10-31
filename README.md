@@ -4,7 +4,7 @@ Version 4.18.0 / October 30, 2025
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit)
+![Maven Central Version](https://img.shields.io/maven-central/v/org.htmlunit/htmlunit)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/HtmlUnit/htmlunit/badge)](https://securityscorecards.dev/viewer/?uri=github.com/HtmlUnit/htmlunit)
 
 
