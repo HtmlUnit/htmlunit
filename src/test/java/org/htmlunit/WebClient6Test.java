@@ -380,14 +380,15 @@ public class WebClient6Test extends WebDriverTestCase {
     private void redirectGet(final int code, final HttpMethod httpMethod, final String redirectUrl) throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body><a href='redirect.html'>redirect</a></body></html>";
-        final int reqCount = getMockWebConnection().getRequestCount();
+        final MockWebConnection webConn = getMockWebConnection();
+        final int reqCount = webConn.getRequestCount();
 
         final URL url = new URL(URL_FIRST, "page2.html");
-        getMockWebConnection().setResponse(url, html);
+        webConn.setResponse(url, html);
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Location", redirectUrl));
-        getMockWebConnection().setDefaultResponse("", code, "Found", null, headers);
+        webConn.setDefaultResponse("", code, "Found", null, headers);
 
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
@@ -396,9 +397,9 @@ public class WebClient6Test extends WebDriverTestCase {
             Thread.sleep(400);
         }
 
-        assertEquals(getExpectedAlerts()[0], getMockWebConnection().getLastWebRequest().getUrl().toString());
-        assertEquals(reqCount + Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount());
-        assertEquals(httpMethod, getMockWebConnection().getLastWebRequest().getHttpMethod());
+        assertEquals(getExpectedAlerts()[0], webConn.getLastWebRequest().getUrl().toString());
+        assertEquals(reqCount + Integer.parseInt(getExpectedAlerts()[1]), webConn.getRequestCount());
+        assertEquals(httpMethod, webConn.getLastWebRequest().getHttpMethod());
         assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
     }
 
@@ -409,14 +410,15 @@ public class WebClient6Test extends WebDriverTestCase {
                 + "  <input type='hidden' name='param1' value='paramValue'>\n"
                 + "  <input type='submit' id='postBtn' value='Submit'>\n"
                 + "</form></body></html>";
-        final int reqCount = getMockWebConnection().getRequestCount();
+        final MockWebConnection webConn = getMockWebConnection();
+        final int reqCount = webConn.getRequestCount();
 
         final URL url = new URL(URL_FIRST, "page2.html");
-        getMockWebConnection().setResponse(url, html);
+        webConn.setResponse(url, html);
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Location", redirectUrl));
-        getMockWebConnection().setDefaultResponse("", code, "Found", null, headers);
+        webConn.setDefaultResponse("", code, "Found", null, headers);
 
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
@@ -425,13 +427,13 @@ public class WebClient6Test extends WebDriverTestCase {
             Thread.sleep(400);
         }
 
-        assertEquals(reqCount + Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount());
-        assertEquals(httpMethod, getMockWebConnection().getLastWebRequest().getHttpMethod());
+        assertEquals(reqCount + Integer.parseInt(getExpectedAlerts()[1]), webConn.getRequestCount());
+        assertEquals(httpMethod, webConn.getLastWebRequest().getHttpMethod());
 
         if (resendParams) {
-            assertTrue(getMockWebConnection().getLastWebRequest().getRequestParameters().size() > 0);
+            assertTrue(webConn.getLastWebRequest().getRequestParameters().size() > 0);
 
-            final NameValuePair param = getMockWebConnection().getLastWebRequest().getRequestParameters().get(0);
+            final NameValuePair param = webConn.getLastWebRequest().getRequestParameters().get(0);
             if ("param1".equals(param.getName())) {
                 assertEquals("paramValue", param.getValue());
             }
@@ -443,10 +445,10 @@ public class WebClient6Test extends WebDriverTestCase {
             }
         }
         else {
-            assertEquals(0, getMockWebConnection().getLastWebRequest().getRequestParameters().size());
+            assertEquals(0, webConn.getLastWebRequest().getRequestParameters().size());
         }
 
-        assertEquals(getExpectedAlerts()[0], getMockWebConnection().getLastWebRequest().getUrl().toString());
+        assertEquals(getExpectedAlerts()[0], webConn.getLastWebRequest().getUrl().toString());
         assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
     }
 
