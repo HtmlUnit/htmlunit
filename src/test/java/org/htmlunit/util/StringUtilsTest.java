@@ -496,4 +496,38 @@ public class StringUtilsTest {
         assertEquals("x", StringUtils.substringBefore("xaba", "a"));
         assertEquals(" ", StringUtils.substringBefore(" a", "a"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void toInt() throws Exception {
+        assertEquals(17, StringUtils.toInt(null, 17));
+        assertEquals(17, StringUtils.toInt("", 17));
+        assertEquals(17, StringUtils.toInt(" ", 17));
+        assertEquals(4, StringUtils.toInt("\t", 4));
+        assertEquals(4, StringUtils.toInt("two", 4));
+
+        assertEquals(21, StringUtils.toInt("21", 4));
+        assertEquals(-21, StringUtils.toInt("-21", 4));
+        assertEquals(0, StringUtils.toInt(" 21 ", 0));
+        assertEquals(0, StringUtils.toInt(" -  21  \t", 0));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void toFloat() throws Exception {
+        assertEquals(17.2f, StringUtils.toFloat(null, 17.2f));
+        assertEquals(17.2f, StringUtils.toFloat("", 17.2f));
+        assertEquals(17.2f, StringUtils.toFloat(" ", 17.2f));
+        assertEquals(4f, StringUtils.toFloat("\t", 4f));
+        assertEquals(4f, StringUtils.toFloat("two", 4));
+
+        assertEquals(21f, StringUtils.toFloat("21", 4.1f));
+        assertEquals(-21f, StringUtils.toFloat("-21", 4.1f));
+        assertEquals(21f, StringUtils.toFloat(" 21 ", 0));
+        assertEquals(0, StringUtils.toFloat(" -  21  \t", 0f));
+    }
 }

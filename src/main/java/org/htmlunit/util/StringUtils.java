@@ -848,4 +848,38 @@ public final class StringUtils {
         }
         return str.substring(0, pos);
     }
+
+    /**
+     * Tries to converts a {@link String} into an {@code int}, returning a default value if the conversion fails.
+     * If the string is {@code null}, the default value is returned.
+     *
+     * @param str the string to convert, may be null.
+     * @param defaultValue the default value.
+     * @return the int represented by the string, or the default if conversion fails or the provides str is {@code null}
+     */
+    public static int toInt(final String str, final int defaultValue) {
+        try {
+            return Integer.parseInt(str);
+        }
+        catch (final RuntimeException e) {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Tries to converts a {@link String} into an {@code float}, returning a default value if the conversion fails.
+     * If the string is {@code null}, the default value is returned.
+     *
+     * @param str the string to convert, may be null.
+     * @param defaultValue the default value.
+     * @return the float represented by the string, or the default if conversion fails or the provides str is {@code null}
+     */
+    public static float toFloat(final String str, final float defaultValue) {
+        try {
+            return Float.parseFloat(str);
+        }
+        catch (final RuntimeException e) {
+            return defaultValue;
+        }
+    }
 }

@@ -131,7 +131,7 @@ public class ArchitectureTest {
      */
     @ArchTest
     public static final ArchRule apacheStringUtilsIsNotEmptyRule = noClasses()
-        .should().callMethod(org.apache.commons.lang3.StringUtils.class, "isNotEmpty", CharSequence.class);
+        .should().callMethod(org.apache.commons.lang3.math.NumberUtils.class, "toInt", String.class, Integer.class);
 
     /**
      * Do not use org.apache.commons.lang3.Strings.startsWith(CharSequence, CharSequence).
@@ -154,6 +154,13 @@ public class ArchitectureTest {
     public static final ArchRule apacheStringsContainsRule = noClasses()
         .should().callMethod(org.apache.commons.lang3.Strings.class, "contains", CharSequence.class, CharSequence.class);
 
+
+    /**
+     * Do not use org.apache.commons.lang3.math.NumberUtils.
+     */
+    @ArchTest
+    public static final ArchRule apacheNumberUtilsRule = noClasses()
+        .should().dependOnClassesThat().haveFullyQualifiedName("org.apache.commons.lang3.math.NumberUtils");
 
     /**
      * The jetty websocket stuff is only used by one class.

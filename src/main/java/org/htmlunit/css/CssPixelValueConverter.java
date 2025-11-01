@@ -18,11 +18,11 @@ import static org.htmlunit.css.CssStyleSheet.AUTO;
 
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.math.NumberUtils;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlCanvas;
 import org.htmlunit.html.HtmlHtml;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Utilities for css value handling.
@@ -85,7 +85,7 @@ public final class CssPixelValueConverter {
      * @see #pixelString(DomElement, CssValue)
      */
     public static int pixelValue(final String value) {
-        float i = NumberUtils.toFloat(TO_FLOAT_PATTERN.matcher(value).replaceAll("$1"), 0);
+        float i = StringUtils.toFloat(TO_FLOAT_PATTERN.matcher(value).replaceAll("$1"), 0);
         if (value.length() < 2) {
             return Math.round(i);
         }
@@ -123,7 +123,7 @@ public final class CssPixelValueConverter {
     private static int pixelValue(final DomElement element,
             final String styleValue, final CssValue value, final boolean percentMode) {
         if (styleValue.endsWith("%") || (styleValue.isEmpty() && element instanceof HtmlHtml)) {
-            final float i = NumberUtils.toFloat(TO_FLOAT_PATTERN.matcher(styleValue).replaceAll("$1"), 100);
+            final float i = StringUtils.toFloat(TO_FLOAT_PATTERN.matcher(styleValue).replaceAll("$1"), 100);
 
             final DomNode parent = element.getParentNode();
             final int absoluteValue;

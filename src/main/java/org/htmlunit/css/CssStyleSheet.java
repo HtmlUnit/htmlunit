@@ -38,7 +38,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -1023,7 +1022,7 @@ public class CssStyleSheet implements Serializable {
                 if (value.length() > 0 && value.charAt(0) == '+') {
                     value = value.substring(1);
                 }
-                denominator = NumberUtils.toInt(value, 1);
+                denominator = StringUtils.toInt(value, 1);
             }
         }
 
@@ -1031,7 +1030,7 @@ public class CssStyleSheet implements Serializable {
         if (value.length() > 0 && value.charAt(0) == '+') {
             value = value.substring(1);
         }
-        final int numerator = NumberUtils.toInt(value, 0);
+        final int numerator = StringUtils.toInt(value, 0);
         if (denominator == 0) {
             return index == numerator && numerator > 0;
         }

@@ -20,7 +20,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.io.IOException;
 
-import org.apache.commons.lang3.math.NumberUtils;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlCheckBoxInput;
@@ -314,7 +313,7 @@ public class HTMLInputElement extends HTMLElement {
     @JsxGetter
     public int getMaxLength() {
         final String attrValue = getDomNodeOrDie().getAttribute("maxLength");
-        return NumberUtils.toInt(attrValue, -1);
+        return StringUtils.toInt(attrValue, -1);
     }
 
     /**
@@ -333,7 +332,7 @@ public class HTMLInputElement extends HTMLElement {
     @JsxGetter
     public int getMinLength() {
         final String attrValue = getDomNodeOrDie().getAttribute("minLength");
-        return NumberUtils.toInt(attrValue, -1);
+        return StringUtils.toInt(attrValue, -1);
     }
 
     /**

@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="4.19.0" date="November xx, 2025" description="Bugfixes">
+            <action type="update" dev="rbri">
+                No longer use org.apache.commons.lang3.math.NumberUtils.
+            </action>
+        </release>
+
+
         <release version="4.18.0" date="October 30, 2025" description="Chrome/Edge 141, Firefox 144, FirefoxESR 140, javascript, Bugfixes">
             <action type="update" dev="RhinoTeam">
                 core-js: replace the NumberToString implementation with the Schubfach algorithm
