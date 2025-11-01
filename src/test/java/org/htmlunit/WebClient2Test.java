@@ -15,6 +15,7 @@
 package org.htmlunit;
 
 import static org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
@@ -358,6 +359,52 @@ public class WebClient2Test extends SimpleWebTestCase {
 
         // Fails: return 98 (about) instead of 1
         // assertEquals(1, page.querySelectorAll("p").size());
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @Alerts({"loadExtraContent started at Page 1", " loadExtraContent finished at Page 1"})
+    public void buttonClickReachesPageWithJScompileError() throws Exception {
+        final String htmlStartPage = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>"
+            + "  <title>Page 1</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form method='post' action='" + URL_SECOND + "'>\n"
+            + "    <input id='btnNext' type='submit' value='Next'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String htmlSecondPage = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>"
+            + "  <title>Page 2</title>\n"
+            + "  <script>\n"
+            + "    this script does not compile!"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <h1>Page2</h1>\n"
+            + "  <p>This is page 2</p>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        client.setWebConnection(webConnection);
+
+        webConnection.setDefaultResponse(htmlStartPage);
+        webConnection.setResponse(URL_SECOND, htmlSecondPage);
+
+        final HtmlPage page1 = client.getPage(URL_FIRST);
+        assertEquals("Page 1", page1.getTitleText());
+
+        assertThrows(ScriptException.class, () -> page1.getElementById("btnNext").click());
     }
 
     /**
