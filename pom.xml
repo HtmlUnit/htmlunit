@@ -47,7 +47,7 @@
 
         <!-- test dependencies -->
         <junit.version>5.14.1</junit.version>
-        <junit-launcher.version>1.14.1</junit-launcher.version>
+        <junit-launcher.version>6.0.1</junit-launcher.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <jetty.version>9.4.58.v20250814</jetty.version>
         <quercus.version>4.0.66</quercus.version>
