@@ -30,7 +30,7 @@
         <htmlunitcsp.version>4.18.0</htmlunitcsp.version>
         <htmlunitcssparser.version>4.18.0</htmlunitcssparser.version>
         <htmlunitcorejs.version>4.18.0</htmlunitcorejs.version>
-        <htmlunitneko.version>4.18.0</htmlunitneko.version>
+        <htmlunitneko.version>4.19.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitwebsocketclient.version>4.18.0</htmlunitwebsocketclient.version>
         <htmlunitxpath.version>4.18.0</htmlunitxpath.version>
 
@@ -46,8 +46,8 @@
         <selenium.devtools.artifactId>selenium-devtools-v141</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
-        <junit.version>5.14.0</junit.version>
-        <junit-launcher.version>1.14.0</junit-launcher.version>
+        <junit.version>5.14.1</junit.version>
+        <junit-launcher.version>1.14.1</junit-launcher.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <jetty.version>9.4.58.v20250814</jetty.version>
         <quercus.version>4.0.66</quercus.version>
