@@ -930,7 +930,7 @@ public final class StyleAttributes implements Serializable {
         COLUMN_WIDTH_("column-width", "column-width", ff("auto")),
 
         /** The style property {@code columns}. */
-        COLUMNS("columns", "columns", chromeAndEdge("auto"), ff("auto")),
+        COLUMNS("columns", "columns", chromeAndEdgeAuto(), ff("auto")),
 
         /** The style property {@code contain}. */
         CONTAIN("contain", "contain", chromeAndEdgeNone(), ffNone()),
@@ -1372,7 +1372,7 @@ public final class StyleAttributes implements Serializable {
                 ffNone()),
 
         /** The style property {@code gridArea}. */
-        GRID_AREA("gridArea", "grid-area", chromeAndEdge("auto"), ff("auto")),
+        GRID_AREA("gridArea", "grid-area", chromeAndEdgeAuto(), ff("auto")),
 
         /** The style property {@code grid-area}. */
         GRID_AREA_("grid-area", "grid-area", ff("auto")),
@@ -1396,7 +1396,7 @@ public final class StyleAttributes implements Serializable {
         GRID_AUTO_ROWS_("grid-auto-rows", "grid-auto-rows", ff("auto")),
 
         /** The style property {@code gridColumn}. */
-        GRID_COLUMN("gridColumn", "grid-column", chromeAndEdge("auto"), ff("auto")),
+        GRID_COLUMN("gridColumn", "grid-column", chromeAndEdgeAuto(), ff("auto")),
 
         /** The style property {@code grid-column}. */
         GRID_COLUMN_("grid-column", "grid-column", ff("auto")),
@@ -1426,7 +1426,7 @@ public final class StyleAttributes implements Serializable {
         GRID_GAP_("grid-gap", "grid-gap", ffNormal()),
 
         /** The style property {@code gridRow}. */
-        GRID_ROW("gridRow", "grid-row", chromeAndEdge("auto"), ff("auto")),
+        GRID_ROW("gridRow", "grid-row", chromeAndEdgeAuto(), ff("auto")),
 
         /** The style property {@code grid-row}. */
         GRID_ROW_("grid-row", "grid-row", ff("auto")),
@@ -1570,7 +1570,16 @@ public final class StyleAttributes implements Serializable {
         INSET_INLINE_START_("inset-inline-start", "inset-inline-start", ff("auto")),
 
         /** The style property {@code interactivity}. */
-        INTERACTIVITY("interactivity", "interpolate-size", chromeAndEdge("auto")),
+        INTERACTIVITY("interactivity", "interactivity", chromeAndEdgeAuto()),
+
+        /** The style property {@code interestDelay}. */
+        INTEREST_DELAY("interestDelay", "interest-delay", chromeAndEdgeNormal()),
+
+        /** The style property {@code interestDelayEnd}. */
+        INTEREST_DELAY_END("interestDelayEnd", "interest-delay-end", chromeAndEdgeNormal()),
+
+        /** The style property {@code interestDelayStart}. */
+        INTEREST_DELAY_START("interestDelayStart", "interest-delay-start", chromeAndEdgeNormal()),
 
         /** The style property {@code interpolateSize}. */
         INTERPOLATE_SIZE("interpolateSize", "interpolate-size", chromeAndEdge("numeric-only")),
@@ -2569,7 +2578,7 @@ public final class StyleAttributes implements Serializable {
         POSITION_TRY_ORDER("positionTryOrder", "position-try-order", chromeAndEdgeNormal()),
 
         /** The style property {@code positionVisibility}. */
-        POSITION_VISIBILITY("positionVisibility", "position-visibility", chromeAndEdge("always")),
+        POSITION_VISIBILITY("positionVisibility", "position-visibility", chromeAndEdge("anchors-visible")),
 
         /** The style property {@code prefix}. */
         PREFIX("prefix", "prefix", chromeAndEdgeEmpty()),
@@ -3705,7 +3714,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_COLUMN_WIDTH("webkitColumnWidth", "webkit-column-width", chromeAndEdgeAuto()),
 
         /** The style property {@code webkitColumns}. */
-        WEBKIT_COLUMNS("webkitColumns", "webkit-columns", chromeAndEdge("auto")),
+        WEBKIT_COLUMNS("webkitColumns", "webkit-columns", chromeAndEdgeAuto()),
 
         /** The style property {@code webkitFilter}. */
         WEBKIT_FILTER("webkitFilter", "webkit-filter", chromeAndEdgeNone(), ffNone()),
