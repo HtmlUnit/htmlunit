@@ -53,7 +53,8 @@ public final class AnnotationUtils {
                         && isDefined(alerts.FF())
                         && isDefined(alerts.FF_ESR())
                         && isDefined(alerts.EDGE()),
-                        "Obsolete DEFAULT because all browser expectations defined individually");
+                        "Obsolete DEFAULT because all browser expectations defined individually ("
+                                + method.getDeclaringClass().getName() + "." + method.getName());
 
                 assertNotEquals("@Alerts", method, BrowserVersion.CHROME, alerts.CHROME(), alerts.DEFAULT());
                 assertNotEquals("@Alerts", method, BrowserVersion.FIREFOX, alerts.FF(), alerts.DEFAULT());

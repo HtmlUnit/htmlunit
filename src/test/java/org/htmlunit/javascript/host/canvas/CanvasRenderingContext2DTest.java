@@ -999,13 +999,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAARUlEQVR4AczQwQoAIAgD0NWX9+flwRV41AVGQZe9lhPiRXCZ"
-                + "qzggaJ5mE9zOZVt6HP8ajvtE8cIvF5kXj2DfGWabxRwOAAAA//94K/bLAAAABklEQVQDALcXIRXO7FmwAAAAAElFTkSuQmCC",
-            CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAATklEQVR4AcSRQQ4AEAwEl5fzcnroqkgcaIWQ9GDHaDOCF4FF"
-                + "uBEHBAovZhPYFHdrqXG8M0zjCWfBLzsxFl+BX3rIAZrWVNHwxKxKfncfHQAA//82wWCHAAAABklEQVQDACTVIhXYHwYXAAAA"
-                + "AElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAATklEQVR4AcSRQQ4AEAwEl5fzcnroqkgcaIWQ9GDHaDOCF4FF"
                 + "uBEHBAovZhPYFHdrqXG8M0zjCWfBLzsxFl+BX3rIAZrWVNHwxKxKfncfHQAA//82wWCHAAAABklEQVQDACTVIhXYHwYXAAAA"
                 + "AElFTkSuQmCC",
@@ -1313,18 +1306,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABB0lEQVR4AbSTrYoCYRSGZ/cOdtuG/UmbNi0sLIKYBEXvwCaC"
-                + "dyBqMlkMYhEULIrZYrQZNIjBYhZsJouY1OcNn4wiIp5xeJ9zZoY5z3zDzDx7AW8PE5ZYqKDZ4lb4geYdzHFCifYqVpxwiWgB"
-                + "5jih+s5sQyARzXuiBPrIeim/SM1xK6xi+ocw/MAL3BUnnDJdgTw0YQZz0I1i9JvjhBqoURIQAn2TKfoKCrCFDsThavzC8wu1"
-                + "6jInI/AKI9BN+/QoXMw1oX9gw0EdvqEHbWjAF5zkVqF/qMXBG6xhDBk45h6hG86xk4QsdOETPItQ8xPKH+i3HdLNQjlEkZKG"
-                + "wIRyDVSsjyzHCQcAAAD//yNQAOEAAAAGSURBVAMAnuoiKaqIdsMAAAAASUVORK5CYII=",
-            CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABBUlEQVR4AbTTP29BYRTH8du+g3br0D9Tp05NmjRNGpOE8A5s"
-                + "IvEOBJPJYsAiIbEQs8VoMzCIwWKW2EwWMeH7Gx65REScS87nHFecn+cSj17Aj7sFFjioMGzlTvhGzCvM5QIVtFOzcoELguYw"
-                + "lwvU3JrTCFAQw3ugBXrL+kG+CTWXO2GFpF/84wtPuKlc4ITtErJoYIoZyojg6nKBWqjSYviDvoIEc4kcNmgjiovlDzx9o05d"
-                + "5MUQnjGEPrTHDONsXQr0L6y5qOETXbRQxweO6tpA/1KTixesMEIKh7ol0C1neBJHGh28w7MEan9M+4H+tgOmOVAZkqclEVig"
-                + "svpq1ltWxpE9AAAA//8k+PvOAAAABklEQVQDAJ6ZIin8P6DKAAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABBUlEQVR4AbTTP29BYRTH8du+g3br0D9Tp05NmjRNGpOE8A5s"
                 + "IvEOBJPJYsAiIbEQs8VoMzCIwWKW2EwWMeH7Gx65REScS87nHFecn+cSj17Aj7sFFjioMGzlTvhGzCvM5QIVtFOzcoELguYw"
                 + "lwvU3JrTCFAQw3ugBXrL+kG+CTWXO2GFpF/84wtPuKlc4ITtErJoYIoZyojg6nKBWqjSYviDvoIEc4kcNmgjiovlDzx9o05d"
@@ -1483,13 +1464,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAPklEQVR4AeyRwQ0AMAgCSSfv6LWscPLDRH4gOY+Wp4EcaBnu"
-                + "MrwTR3bsUvQppN335hv6ApUoQ1rO/jY0BiQPAAD//0ygKtcAAAAGSURBVAMAjggQKb2HceMAAAAASUVORK5CYII=",
-            CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAVUlEQVR4AexRQQoAIAgbvbxeXiYlUhdJDx0MbCpsjFkQ/FLQ"
-                + "H2hmGJthJTlPER04j9J5C2xcox204HTXiKpx9tYi6u2Ql55PO/ToCDcFJYrn5v8MBwAAAP//H/lLYwAAAAZJREFUAwC5wBIp"
-                + "ffEUgQAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAVUlEQVR4AexRQQoAIAgbvbxeXiYlUhdJDx0MbCpsjFkQ/FLQ"
                 + "H2hmGJthJTlPER04j9J5C2xcox204HTXiKpx9tYi6u2Ql55PO/ToCDcFJYrn5v8MBwAAAP//H/lLYwAAAAZJREFUAwC5wBIp"
                 + "ffEUgQAAAABJRU5ErkJggg==",
@@ -1551,18 +1525,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABG0lEQVR4AdTSsStFURwH8Ms/YBJ/g8iglIFiMBjEYJBSlLKI"
-                + "Una7gSwWBiWDRAaDMhmUMsgi+QPIZDf4/AbDPTnPu7e3vNf3c8+7953z7d53bmfR4k97Fq77FzZ44oxVumkq6SNH2YSVj0xy"
-                + "whT3RLGhcdLCDtN3uOODS6aZZZljeskmLVwy85U0zy4M88Up2aSFUTaSnV0Ua34bJ5u08NbMeDRDvaSF52r6GKBW0sJPLbEp"
-                + "h8ZaSQuj5MDhhX0q56/CKNly6GebSskVvmtZYYxKd5or1FO8OczTxQNNbVSjQh1F3OmiL0dccMUMPYyySSn/Ff5Ojo2KF/7a"
-                + "hQVuGOKbUpotjEXxSkXxnJNBdtmjlCqFpYW5k5YX/gAAAP//sifpEAAAAAZJREFUAwDzBigpOdOYUwAAAABJRU5ErkJggg==",
-            CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABG0lEQVR4AdTSsStFURwH8Jt/wCT+BpFBKQMlZTCIwSBlUMoi"
-                + "MtjNDGSxMCgZJDIYlMmglEEWyR9AJn+A8vkNhnt653n39pb3+n7Offe+c76dd+/tKtr86czCdXdhg2fOWaWHlpL+5SibtPKJ"
-                + "KU6Z5oEodmietDBm7xju+eSKGeZY5oQ+skkLY9Fbg9kvro3wzRnZpIVRNpqdXRRrfpsgm7TwzszYpUO9pIUXavoZpFbSwi8t"
-                + "uxxRK2lhlBwaXjmgchoVRsmWYYBtKiVX+KFlhXEq7TRXqKd4NyzQzSMtPahmhTqK2OmSL8dccs0svYyxSSn/Ff5NjgcVL/yN"
-                + "C4vcMswPpbRaGIvilYrieSdD7LFPKVUKSwtzJ20v/AUAAP//tDEvlAAAAAZJREFUAwDytSgpRne/fwAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABG0lEQVR4AdTSsStFURwH8Jt/wCT+BpFBKQMlZTCIwSBlUMoi"
                 + "MtjNDGSxMCgZJDIYlMmglEEWyR9AJn+A8vkNhnt653n39pb3+n7Offe+c76dd+/tKtr86czCdXdhg2fOWaWHlpL+5SibtPKJ"
                 + "KU6Z5oEodmietDBm7xju+eSKGeZY5oQ+skkLY9Fbg9kvro3wzRnZpIVRNpqdXRRrfpsgm7TwzszYpUO9pIUXavoZpFbSwi8t"
@@ -1644,17 +1606,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA0UlEQVR4AeSULQ7CQBCFBwSOEDyOG2DQCDQJlwEHSATHwCKw"
-                + "CAwGT4LCkaA5AXwvXQR/zU6zpmnyXjv7duZLd0XrZja3Yp79mhOQ3IpAF/b9IfYCspdG5QA+0hw2o+jItaxM8xQwDSlQKg4c"
-                + "cA3TYNWUfukOG4xt8Qq3g1Ura7J2ScAxE2fcw5Ng1crWrF0SsMWEQLzepKxD4jq+gBeG/mnHRh9HS8Do5phGAbs5jUP2jjha"
-                + "At7pXuJPKbsS7nG0BNzQPcI3fAhWrezE2vM3tycAAAD//+zgow8AAAAGSURBVAMAwIUvO4TGjUoAAAAASUVORK5CYII=",
-            CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA10lEQVR4AcyUPQ5BQRRGh0JHotfZgUat0Esshg6lwjKUGq1C"
-                + "o9FLVDqJ3gY4J5nCk5CZZCSS72Tu3J/PHcWrhxDmIZ8ZM+Js5dTwQdFCDgtmxJnXM2hYo1hMGrphUcP/37DYczXyPyz+ZI2L"
-                + "4YbFzDT6qeGAX5hGjAnz5YYNxrawgnbE2FyTe5Y0HDNxhh5MIsbm1tyzpGGLCY04KjLXIZP1fA0vDH3SjkIfkqVhcnNKo4bd"
-                + "L41DakdIloZ3upfwLnNXkntIloYbukdwg0PE2NyJu1/lVMITAAD//2CzrtYAAAAGSURBVAMAHHMxPWQvHuMAAAAASUVORK5C"
-                + "YII=",
-            EDGE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA10lEQVR4AcyUPQ5BQRRGh0JHotfZgUat0Esshg6lwjKUGq1C"
                 + "o9FLVDqJ3gY4J5nCk5CZZCSS72Tu3J/PHcWrhxDmIZ8ZM+Js5dTwQdFCDgtmxJnXM2hYo1hMGrphUcP/37DYczXyPyz+ZI2L"
                 + "4YbFzDT6qeGAX5hGjAnz5YYNxrawgnbE2FyTe5Y0HDNxhh5MIsbm1tyzpGGLCY04KjLXIZP1fA0vDH3SjkIfkqVhcnNKo4bd"
@@ -1779,18 +1730,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA5UlEQVR4AdSQyxHCMBBDPbRAQxRBHRyogApogisN0Acd0Ah6"
-                + "wyjYjj97yCWZVbKz0spyDmnjZ5+GD/2FWxBoJf1XfeWzqJMQLbTsLPra8CnmI7yFWUo0aNmR/Fe1IdO7XldhVmjQFrqWoU8s"
-                + "rlJspWTO2oVuGUJyMgnoW4BDs+J6hj7ZSfJFz6zJudQzREQCktDnYAaXz5Z+ZOgETsSSe3PMCowMEZKERPSAnhl9EzNDJyEZ"
-                + "wMQz+hVmhiyQiGSAnlkXEUMSHeUA6NX2K2LI9kUvoM+4ooYv2QB9xhU1HLtk7OaGXwAAAP//3VWVfAAAAAZJREFUAwBZ+yYp"
-                + "OJqsPwAAAABJRU5ErkJggg==",
-            CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA60lEQVR4AdSQyxHCMBBDPbRAQVAEdXCgAiqgCa40QB9QAfQB"
-                + "epNRsB3/DrmQWcWaXa2sZBNWfv7T8Kq/cB4EWkl/lX/yQaO9MFIfiXYCOzqmyg1var+Eh9BL+ZTmLbCjY6rckO5Fr5PQKzRo"
-                + "E13J0Dcmn5JsheCZtfO4ZMiQm0kAL4EZmsWsZuibnSRedM+aeBZqhohIQBJ4DHrM4t7MW4ZO4EQsmXtGL0HLECFJSAQHcHrw"
-                + "InqGTkIygIl78AV6hiyQiGQATq+KEUMSbeUA4KL1GjFk+6gX0NGuUcO7bICOdo0atl2i6eqGXwAAAP//15WmRAAAAAZJREFU"
-                + "AwAtpCcpojzDOAAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA60lEQVR4AdSQyxHCMBBDPbRAQVAEdXCgAiqgCa40QB9QAfQB"
                 + "epNRsB3/DrmQWcWaXa2sZBNWfv7T8Kq/cB4EWkl/lX/yQaO9MFIfiXYCOzqmyg1var+Eh9BL+ZTmLbCjY6rckO5Fr5PQKzRo"
                 + "E13J0Dcmn5JsheCZtfO4ZMiQm0kAL4EZmsWsZuibnSRedM+aeBZqhohIQBJ4DHrM4t7MW4ZO4EQsmXtGL0HLECFJSAQHcHrw"
@@ -1871,16 +1810,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA0UlEQVR4AeyQ0Q3CQAxDK1ZgIf5YgDn4YAGYgCX4ZQH2YAMW"
-                + "we9OVtMole6jn63inmNHvlMO08ZfDDwX2VF7yX8koEmay4EXSXchFxoeOGVTPRqeaC8Hvns7RdMcD/w08xX8SjganuReDqR7"
-                + "6ncTXHA093A093A09+2Mgb6JlwEGrEWOB6IGb4iBCNzIzQCOFoGGB+DRazwH8qKjHAAXXRQaHoAvTJociHbVD+goCw+UZhX4"
-                + "0STQURYeKM0qsBwcFffA0U2tz+07XN/NqLP5Dv8AAAD//6/XRzQAAAAGSURBVAMAxh0iKRS6NNsAAAAASUVORK5CYII=",
-            CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA1ElEQVR4AeyQ0Q3CMBBDK1ZgIPhjAebggwVgApbglwXYgw3o"
-                + "IPVLZPUaXaV89LPVueezT06Uw7DxFwMvSXbU3vKfDdAkzeXAq6SH0BYaHji3puaTgKdWy4GfOg7RNMcDf+38BN8SPmrGU6vl"
-                + "QKaXfnfBBUfzDEfzDEfzXHoM9EncDLBgLXI8EDV4QQxE4EROBnC0CDQ8AI9e4W0gNzrKAXDRRaHhAfjCZGgD0W76AbW08EBq"
-                + "ZoFfbQK1tPBAamaB6WKvuAf2vtT63v6G62/T62z+hhMAAAD//yTOSwYAAAAGSURBVAMAxcwiKYpExDIAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA1ElEQVR4AeyQ0Q3CMBBDK1ZgIPhjAebggwVgApbglwXYgw3o"
                 + "IPVLZPUaXaV89LPVueezT06Uw7DxFwMvSXbU3vKfDdAkzeXAq6SH0BYaHji3puaTgKdWy4GfOg7RNMcDf+38BN8SPmrGU6vl"
                 + "QKaXfnfBBUfzDEfzDEfzXHoM9EncDLBgLXI8EDV4QQxE4EROBnC0CDQ8AI9e4W0gNzrKAXDRRaHhAfjCZGgD0W76AbW08EBq"
@@ -2007,22 +1936,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABnElEQVR4AayUyyttYRiH1zmjMzinMzh/wmFGRkaMJFJmLhMj"
-                + "DGRAkanIRCKXEpmYuIwMlUvGKCIZKDEzIqWEGOB52Ovb9rbI3tn9nvVevu/9tS7t72f0zb+3htUJ3vZqE/oftmLDenb0QbbG"
-                + "aSxCAXxJseFSarfGpiVcpuE3bMMK2CN8rtjQXaNcBmAdVqEOtmATlNG1GouPeGtYxCYf7YjYASfQCP1QCHtwAbNgj/BesaEb"
-                + "qlhuhVLoBu+YENRM5p7OVHSGNFMa+ghttP2ic8R/KeL3Svki71jTKap2cMZZ0rQ07KLsgWtQ3oGYZ7NMYwgmwRlnSdPSsJhy"
-                + "AWL5QeSJRhLD9MthHsog4+truEEzX/1g0HdOeJWGp69pXtdfTFVAkIahyCO5Z+YYgjT8H6rck0tGziBIw8pQ5Z78ZWQHgjQ8"
-                + "pGqCXPXAwD4cQJCGY1Qj8Adyke9vMHtAQ0+SGRbW4Kum/gm8EWcZS0tDK/+XniQZX8yFLB6pb2ACks7PKDZkPdK0JYoiz79b"
-                + "4hX4WHfEc7C3S2yAXkjUMwAAAP//vvA2KgAAAAZJREFUAwBGz0v7qwwAqAAAAABJRU5ErkJggg==",
-            CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABnElEQVR4AayUyyttYRiH1zmjMzinMzh/wmFGRkaM5JIyc5kY"
-                + "YSADikxFJhK5lMjExGVkqFwyRiHJQImZkSglxADPg/Vte1tk7+x+z3ov3/f+Wpf29zP65t9bw6oEb3s1Cf0PW7FhHTt6IVNj"
-                + "NBYgD76k2HDxdbfGpkVcpuA3bMEy2CN8rtjQXSNc+mENVqAWNmEDlLlr1RYf8dawgE0+2iGxHY6hAfogH3bhHGbAHuG9YkM3"
-                + "VLLcAsXQBd4xIaiJrAI6wL3OkKZLQx+hlbZfdJb475X4vVI+yzvWdJKqDZxxljQlDTspu+EKlHcg5pks0RiECXDGWdKUNCyk"
-                + "nIdYfhB5pJHEEP1SmIMSSPv6Gq7TzFU/GPSdE16k4clLmtP1F1NlEKRhKHJI7pg5giAN/4cq++SCkVMI0rA8VNknfxnZhiAN"
-                + "D6gaIVvdM7AH+xCk4SjVMPyBbOT7G8gc0NCTZJqFVfiqqX8Cb8RZxlLS0Mr/pSdJ2hdzIYMH6msYh6TzM4oNWY80bY6iyPPv"
-                + "hngJPtYt8Qzs7RDroQcS9QQAAP//GDiSeAAAAAZJREFUAwBHcUv73HC01wAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABnElEQVR4AayUyyttYRiH1zmjMzinMzh/wmFGRkaM5JIyc5kY"
                 + "YSADikxFJhK5lMjExGVkqFwyRiHJQImZkSglxADPg/Vte1tk7+x+z3ov3/f+Wpf29zP65t9bw6oEb3s1Cf0PW7FhHTt6IVNj"
                 + "NBYgD76k2HDxdbfGpkVcpuA3bMEy2CN8rtjQXSNc+mENVqAWNmEDlLlr1RYf8dawgE0+2iGxHY6hAfogH3bhHGbAHuG9YkM3"
@@ -2086,20 +1999,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABIklEQVR4AeyTMUoDQRRA31pYKdiZeAArRQsLC8HKwsIDWIil"
-                + "BxASsIqNYI7hCdKJIIiFpYXRKq1gsBGR2Gixvi9Zk0wlWQsFl//4f2f/vJkddieABnDRJ+pSFMJLhUEpmY5GCM0/F39KWJuH"
-                + "vCWvkks9PQgHt+Ra8j61tCd95RkbZmVONpVWzWk8OzAtK7KqeMr8FanwFLKedIFbCbFpJM4ysIcHR19kJFJh7MoV89jZop0x"
-                + "yfT9CGF8e+vQXYCbCrw/OV1RXbI963j+iYe6fQIbMbYE+1ewXIGDuC8IoXUR7XuYPILsEJodkqsJnV3QA23orUHrEd6G20IY"
-                + "q/uXVO9g59yHcT82IdQRETvKjqMqw5CwjGYw9184OItxq99/hh8AAAD//6px7r0AAAAGSURBVAMAZkBbKcNIUoIAAAAASUVO"
-                + "RK5CYII=",
-            CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABKElEQVR4AeyTsS4EURRAz1OoSHR2fYBOKBQKhUah8AEKUfoA"
-                + "yW6iQSOxn+ELthOJBIVSYXXbSmw0IrIainGuWLv7KplVkJjck/vem/vOvLmZGQP2gXO5kD2JeWl6wktFITwwl5bF3hCafy7+"
-                + "lLA2C0VTXqSQet4IF9flWopPanlN/spTFkzLjKwprZrzeHJhUhZlSfGE+Sty4QmkrnSAWwmxaShOE1jDvavPMhS5ME7lE4s4"
-                + "2ZyVscn0/QhhfHcr0FFwU4G3R7crqkvadhz3P7CpG8ewGmvzsHMFCxXYjXmPEDrGVkRq3cH4ISQ/8Eab7GpAewv0QAu6y9B8"
-                + "gNfBshDG0/1TqvZs88ybMS9NCHVExInSUYxGYUA4iqa/91/Y70XZ0e/v4TsAAAD//xxf2nEAAAAGSURBVAMAiWBcKTpY08sA"
-                + "AAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABKElEQVR4AeyTsS4EURRAz1OoSHR2fYBOKBQKhUah8AEKUfoA"
                 + "yW6iQSOxn+ELthOJBIVSYXXbSmw0IrIainGuWLv7KplVkJjck/vem/vOvLmZGQP2gXO5kD2JeWl6wktFITwwl5bF3hCafy7+"
                 + "lLA2C0VTXqSQet4IF9flWopPanlN/spTFkzLjKwprZrzeHJhUhZlSfGE+Sty4QmkrnSAWwmxaShOE1jDvavPMhS5ME7lE4s4"
