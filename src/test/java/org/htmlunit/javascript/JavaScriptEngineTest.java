@@ -52,6 +52,7 @@ import org.htmlunit.html.HtmlTextInput;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -799,8 +800,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         client.setJavaScriptTimeout(timeout);
 
         try {
-            client.getOptions().setThrowExceptionOnScriptError(false);
-
             final String content = DOCTYPE_HTML + "<html><body><script>while(1) {}</script></body></html>";
             final MockWebConnection webConnection = new MockWebConnection();
             webConnection.setDefaultResponse(content);
@@ -826,7 +825,19 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 runner.interrupt();
                 fail("Script was still running after timeout");
             }
-            assertNull(exceptions[0]);
+
+            Assertions.assertTrue(exceptions[0] instanceof RuntimeException, exceptions[0].getMessage());
+            final Throwable cause = exceptions[0].getCause();
+            String msg = cause.getMessage();
+            Assertions.assertTrue(cause.getMessage().startsWith(
+                    "Javascript execution takes too long (allowed: 2000ms, already elapsed: "), cause.getMessage());
+
+            msg = msg.substring(msg.indexOf("already elapsed: ") + 17);
+            msg = msg.substring(0, msg.indexOf("ms"));
+            final long execTime = Long.parseLong(msg);
+
+            Assertions.assertTrue(execTime >= timeout, "execTime: " + execTime);
+            Assertions.assertTrue(execTime < (timeout + 2), "execTime: " + execTime);
         }
         finally {
             client.setJavaScriptTimeout(oldTimeout);

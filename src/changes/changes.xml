@@ -9,6 +9,12 @@
     <body>
         <release version="4.19.0" date="November xx, 2025" description="Chrome/Edge 142, Bugfixes">
             <action type="update" dev="rbri">
+                JavaScript timeout messages slightly improved.
+            </action>
+            <action type="fix" dev="rbri" issue="#1057">
+                WebClient.setJavaScriptTimeout(timeout) stops most JavaScript immediately. This is a regression compared to version 4.18.0.
+            </action>
+            <action type="update" dev="rbri">
                 neko: improve spec conformance of comment end detection
             </action>
             <action type="update" dev="rbri">
@@ -2846,7 +2852,7 @@
         <release version="3.0.0" date="March 19, 2023" description="htmlunit.org, Chrome/Edge 110, Firefox 110, HTML parser improved, Bugfixes">
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: Value processing for input controls changed; typing now ONLY changes the value
-                but not the value attribute. As consequence all calls to setValueAttribute(..) hve to be replaced by setValue() or type().
+                but not the value attribute. As consequence all calls to setValueAttribute(..) have to be replaced by setValue() or type().
             </action>
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: HtmlButton.getAttribute() now returns the plain attribute value also for 'type' attribute

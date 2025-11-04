@@ -299,6 +299,19 @@ public class HtmlUnitContextFactory extends ContextFactory {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object doTopCall(final Script script,
+            final Context cx, final Scriptable scope,
+            final Scriptable thisObj) {
+
+        final TimeoutContext tcx = (TimeoutContext) cx;
+        tcx.startClock();
+        return super.doTopCall(script, cx, scope, thisObj);
+    }
+
+    /**
      * Same as {@link ContextFactory}{@link #call(ContextAction)} but with handling
      * of some exceptions.
      *

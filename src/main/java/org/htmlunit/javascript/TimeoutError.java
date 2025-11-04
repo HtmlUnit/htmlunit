@@ -26,7 +26,7 @@ public class TimeoutError extends Error {
 
     TimeoutError(final long allowedTime, final long executionTime) {
         super("Javascript execution takes too long (allowed: " + allowedTime
-                + ", already elapsed: " + executionTime + ")");
+                + "ms, already elapsed: " + executionTime + "ms)");
         allowedTime_ = allowedTime;
         executionTime_ = executionTime;
     }
