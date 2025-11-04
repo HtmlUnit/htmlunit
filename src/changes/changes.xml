@@ -9,6 +9,15 @@
     <body>
         <release version="4.19.0" date="November xx, 2025" description="Chrome/Edge 142, Bugfixes">
             <action type="update" dev="rbri">
+                neko: improve spec conformance of comment end detection
+            </action>
+            <action type="update" dev="rbri">
+                neko: use a separate flag to mark formatting elements (in sync with the spec)
+            </action>
+            <action type="update" dev="rbri">
+                neko: reopening of dangling formatting elements refactored, make it lazy to be able to supress the repopen in case of empty elements
+            </action>
+            <action type="update" dev="rbri">
                 No longer use org.apache.commons.lang3.math.NumberUtils.
             </action>
         </release>
