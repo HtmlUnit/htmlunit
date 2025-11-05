@@ -54,7 +54,6 @@ public class NumberFormat extends HtmlUnitScriptable {
     static {
         final Map<String, String> commonFormats = new HashMap<>();
         commonFormats.put("", "");
-        commonFormats.put("ar", "\u066c\u066b\u0660");
         commonFormats.put("ar-DZ", ".,");
         commonFormats.put("ar-LY", ".,");
         commonFormats.put("ar-MA", ".,");
