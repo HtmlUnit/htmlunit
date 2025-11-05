@@ -18,6 +18,7 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.net.URI;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -2448,7 +2449,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        final URL url = new URL(URL_FIRST.toString() + "details/abc");
+        final URL url = URI.create(URL_FIRST.toString() + "details/abc").toURL();
         final WebDriver driver = loadPage2(html, url);
         verifyTitle2(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
@@ -2473,7 +2474,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        final URL url = new URL(URL_FIRST.toString() + "?x=y&z=zz");
+        final URL url = URI.create(URL_FIRST.toString() + "?x=y&z=zz").toURL();
         final WebDriver driver = loadPage2(html, url);
         verifyTitle2(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
@@ -2497,7 +2498,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
-        final URL url = new URL(URL_FIRST.toString() + "details/abc;jsessionid=42?x=y&z=zz");
+        final URL url = URI.create(URL_FIRST.toString() + "details/abc;jsessionid=42?x=y&z=zz").toURL();
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html, url);
         verifyTitle2(driver, getExpectedAlerts());
@@ -2565,7 +2566,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPage2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        loadPage2(html, URI.create("http://localhost:" + PORT + "/path/to/page.html").toURL());
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -2588,7 +2589,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPage2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        loadPage2(html, URI.create("http://localhost:" + PORT + "/path/to/page.html").toURL());
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -2611,7 +2612,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPage2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        loadPage2(html, URI.create("http://localhost:" + PORT + "/path/to/page.html").toURL());
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -2634,7 +2635,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPage2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        loadPage2(html, URI.create("http://localhost:" + PORT + "/path/to/page.html").toURL());
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -2657,7 +2658,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPage2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        loadPage2(html, URI.create("http://localhost:" + PORT + "/path/to/page.html").toURL());
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 

@@ -15,6 +15,7 @@
 package org.htmlunit.doc;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class DetailsTest extends WebServerTestCase {
      */
     @Test
     public void contentBlockingRequest() throws Exception {
-        final URL url = new URL("http://localhost/");
+        final URL url = URI.create("http://localhost/").toURL();
 
         try (WebClient webClient = new WebClient()) {
             webClient.getOptions().setThrowExceptionOnScriptError(false);
@@ -154,7 +155,7 @@ public class DetailsTest extends WebServerTestCase {
      */
     @Test
     public void contentBlockingFrames() throws Exception {
-        final URL url = new URL("https://www.htmlunit.org/");
+        final URL url = URI.create("https://www.htmlunit.org/").toURL();
 
         try (WebClient webClient = new WebClient()) {
             // use our own FrameContentHandler

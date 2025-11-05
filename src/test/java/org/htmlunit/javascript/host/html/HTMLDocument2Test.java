@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), null);
+        loadPageWithAlerts(html, URI.create("http://www.gargoylesoftware.com/").toURL(), null);
     }
 
     /**
@@ -76,7 +77,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts(html, new URL("http://localhost"), null);
+        loadPageWithAlerts(html, URI.create("http://localhost").toURL(), null);
     }
 
     /**
@@ -85,7 +86,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"www.gargoylesoftware.com", "gargoylesoftware.com"})
     public void domainMixedCaseNetscape() throws Exception {
-        final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM/");
+        final URL urlGargoyleUpperCase = URI.create("http://WWW.GARGOYLESOFTWARE.COM/").toURL();
 
         final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
@@ -119,7 +120,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), null);
+        loadPageWithAlerts(html, URI.create("http://www.gargoylesoftware.com/").toURL(), null);
     }
 
     /**
@@ -142,7 +143,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts(html, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"), null);
+        loadPageWithAlerts(html, URI.create("http://d4.d3.d2.d1.gargoylesoftware.com").toURL(), null);
     }
 
     /**
@@ -163,7 +164,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts(html, new URL("http://localhost"), null);
+        loadPageWithAlerts(html, URI.create("http://localhost").toURL(), null);
     }
 
     /**
@@ -214,7 +215,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<iframe src='about:blank'></iframe>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), null);
+        loadPageWithAlerts(html, URI.create("http://www.gargoylesoftware.com/").toURL(), null);
     }
 
     /**

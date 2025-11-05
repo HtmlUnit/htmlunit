@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -107,7 +108,7 @@ public class FaqTest {
      */
     @Test
     public void scriptPreProcessor() throws Exception {
-        final URL url = new URL("https://www.htmlunit.org");
+        final URL url = URI.create("https://www.htmlunit.org").toURL();
 
         // create a ScriptPreProcessor
         final ScriptPreProcessor myScriptPreProcessor = new ScriptPreProcessor() {
