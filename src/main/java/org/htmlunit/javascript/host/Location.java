@@ -361,20 +361,14 @@ public class Location extends HtmlUnitScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
     public String getHash() {
-        String hash = hash_;
-
-        if (hash_ != null) {
-            hash = decodeHash(hash);
+        if (StringUtils.isEmptyOrNull(hash_)) {
+            return "";
         }
 
-        if (StringUtils.isEmptyOrNull(hash)) {
-            // nothing to do
+        if (hash_.indexOf('%') == -1) {
+            return "#" + UrlUtils.encodeHash(hash_);
         }
-        else {
-            return "#" + UrlUtils.encodeHash(hash);
-        }
-
-        return "";
+        return "#" + UrlUtils.encodeHash(UrlUtils.decode(hash_));
     }
 
     private String getHash(final boolean encoded) {
@@ -432,13 +426,6 @@ public class Location extends HtmlUnitScriptable {
             final Event event = new HashChangeEvent(w, Event.TYPE_HASH_CHANGE, oldURL, getHref());
             w.executeEventLocally(event);
         }
-    }
-
-    private static String decodeHash(final String hash) {
-        if (hash.indexOf('%') == -1) {
-            return hash;
-        }
-        return UrlUtils.decode(hash);
     }
 
     /**
