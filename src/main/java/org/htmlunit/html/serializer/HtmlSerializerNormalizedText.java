@@ -638,8 +638,8 @@ public class HtmlSerializerNormalizedText {
             }
 
             boolean crFound = false;
-            final int textLenght = text.length();
-            for (int i = 0; i < textLenght; i++) {
+            final int textLength = text.length();
+            for (int i = 0; i < textLength; i++) {
                 final char c = text.charAt(i);
 
                 if (mode == Mode.NORMALIZE) {

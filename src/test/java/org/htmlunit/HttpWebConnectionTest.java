@@ -632,10 +632,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                     final WebRequest webRequest, final HttpResponse httpResponse,
                     final long startTime) throws IOException {
 
-                final int contentLenght = Integer.parseInt(
+                final int contentLength = Integer.parseInt(
                         httpResponse.getFirstHeader(HttpHeader.CONTENT_LENGTH).getValue());
 
-                if (contentLenght < 1_000) {
+                if (contentLength < 1_000) {
                     return super.downloadResponse(httpMethod, webRequest, httpResponse, startTime);
                 }
 
@@ -644,7 +644,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 final DownloadedContent downloaded = new DownloadedContent.InMemory(null);
                 final long endTime = System.currentTimeMillis();
                 final WebResponse response = makeWebResponse(httpResponse, webRequest, downloaded, endTime - startTime);
-                response.markAsBlocked("blocking " + contentLenght);
+                response.markAsBlocked("blocking " + contentLength);
                 return response;
             }
         });

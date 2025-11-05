@@ -3340,7 +3340,7 @@
                 Improved implementation of the ValidityState.isTooShort property.
             </action>
             <action type="fix" dev="rbri" issue="496">
-                Fix maxlenght validation if the initial value is longer.
+                Fix maxlength validation if the initial value is longer.
             </action>
             <action type="update" dev="rbri">
                 Upgrade salvation lib to salvation2 3.0.1.

@@ -387,8 +387,8 @@ public class HtmlSerializerInnerOuterText {
             }
 
             length--;
-            final int contentLenght = content.length();
-            for (int i = 0; i < contentLenght; i++) {
+            final int contentLength = content.length();
+            for (int i = 0; i < contentLength; i++) {
                 char c = content.charAt(i);
 
                 // handle \r

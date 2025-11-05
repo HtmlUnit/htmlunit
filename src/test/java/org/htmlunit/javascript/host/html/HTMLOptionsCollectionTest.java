@@ -1000,14 +1000,14 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
         setLength("10");
     }
 
-    private void setLength(final String lenght) throws Exception {
+    private void setLength(final String length) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var sel = document.form1.select0;\n"
             + "  try {\n"
-            + "    sel.options.length = " + lenght + ";\n"
+            + "    sel.options.length = " + length + ";\n"
             + "    log(sel.options.length);\n"
             + "    for (var i = 0; i < sel.options.length; i++) {\n"
             + "      log(sel.options[i].text);\n"
@@ -1016,7 +1016,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
 
             + "  var sel = document.form1.select1;\n"
             + "  try {\n"
-            + "    sel.options.length = " + lenght + ";\n"
+            + "    sel.options.length = " + length + ";\n"
             + "    log(sel.options.length);\n"
             + "    for (var i = 0; i < sel.options.length; i++) {\n"
             + "      log(sel.options[i].text);\n"
@@ -1025,7 +1025,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
 
             + "  var sel = document.form1.select3;\n"
             + "  try {\n"
-            + "    sel.options.length = " + lenght + ";\n"
+            + "    sel.options.length = " + length + ";\n"
             + "    log(sel.options.length);\n"
             + "    for (var i = 0; i < sel.options.length; i++) {\n"
             + "      log(sel.options[i].text);\n"

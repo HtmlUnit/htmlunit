@@ -208,8 +208,8 @@ public final class EncodingSniffer {
                 for (Attribute att = getAttribute(bytes, i); att != null; att = getAttribute(bytes, i)) {
                     i = att.getUpdatedIndex();
                     final String name = att.getName().toLowerCase(Locale.ROOT);
-                    final String value = att.getValue().toLowerCase(Locale.ROOT);
                     if ("charset".equals(name) || "content".equals(name)) {
+                        final String value = att.getValue().toLowerCase(Locale.ROOT);
                         Charset charset = null;
                         if ("charset".equals(name)) {
                             charset = toCharset(value);

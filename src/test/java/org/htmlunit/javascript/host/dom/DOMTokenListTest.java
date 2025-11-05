@@ -222,7 +222,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
                 + "  list.forEach((i) => {\n"
                 + "    log(i);\n"
-                + "    if (list.lenght < 7) { list.add('new ' + i); }\n"
+                + "    if (list.length < 7) { list.add('new ' + i); }\n"
                 + "  });\n"
 
                 + "  log(list.length);\n"

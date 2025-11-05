@@ -85,8 +85,8 @@ public class Crypto extends HtmlUnitScriptable {
                     DOMException.QUOTA_EXCEEDED_ERR);
         }
 
-        final int lenght = array.getByteLength() / array.getBytesPerElement();
-        for (int i = 0; i < lenght; i++) {
+        final int length = array.getByteLength() / array.getBytesPerElement();
+        for (int i = 0; i < length; i++) {
             array.put(i, array, RANDOM.nextInt());
         }
         return array;
