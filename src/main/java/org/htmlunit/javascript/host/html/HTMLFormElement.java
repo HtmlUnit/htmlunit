@@ -417,16 +417,16 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return {@inheritDoc}
      */
     @Override
-    protected ScriptableObject getOwnPropertyDescriptor(final Context cx, final Object id) {
-        final ScriptableObject desc = super.getOwnPropertyDescriptor(cx, id);
-        if (desc != null) {
-            return desc;
+    protected DescriptorInfo getOwnPropertyDescriptor(final Context cx, final Object id) {
+        final DescriptorInfo descInfo = super.getOwnPropertyDescriptor(cx, id);
+        if (descInfo != null) {
+            return descInfo;
         }
 
         if (id instanceof CharSequence) {
             final HtmlElement element = findFirstElement(id.toString());
             if (element != null) {
-                return ScriptableObject.buildDataDescriptor(this, element.getScriptableObject(),
+                return ScriptableObject.buildDataDescriptor(element.getScriptableObject(),
                                             ScriptableObject.READONLY | ScriptableObject.DONTENUM);
             }
         }
