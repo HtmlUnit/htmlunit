@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import java.net.URI;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -396,7 +395,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPage2(html, URI.create(url).toURL());
+        loadPage2(html, new URL(url));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -511,7 +510,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPage2(html, URI.create(url).toURL());
+        loadPage2(html, new URL(url));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -1196,7 +1195,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        final WebDriver driver = loadPage2(html, URI.create(URL_FIRST + "a.html?p1=sieben&p2").toURL());
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST + "a.html?p1=sieben&p2"));
         assertEquals(1, getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("link")).click();
@@ -1241,7 +1240,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        final WebDriver driver = loadPage2(html, URI.create(URL_FIRST + "a.html").toURL());
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST + "a.html"));
         assertEquals(1, getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("reload")).click();
@@ -1290,7 +1289,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        final WebDriver driver = loadPage2(html, URI.create(URL_FIRST + "a.html").toURL());
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST + "a.html"));
         assertEquals(1, getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("reload")).click();
@@ -1333,7 +1332,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        final WebDriver driver = loadPage2(html, URI.create(URL_FIRST + "a.html").toURL());
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST + "a.html"));
         assertEquals(1, getMockWebConnection().getRequestCount());
 
         // make sure changing the hash itself does not trigger the reload
@@ -1376,7 +1375,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        final WebDriver driver = loadPage2(html, URI.create(URL_FIRST + "a.html#abc").toURL());
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST + "a.html#abc"));
         assertEquals(1, getMockWebConnection().getRequestCount());
 
         // make sure changing the hash itself does not trigger the reload

@@ -14,7 +14,7 @@
  */
 package org.htmlunit.attachment;
 
-import java.net.URI;
+import java.net.URL;
 import java.util.Collections;
 
 import org.htmlunit.HttpMethod;
@@ -39,7 +39,7 @@ public class AttachmentHandlerTest {
     public void noHeaders() throws Exception {
         final WebResponseData data = new WebResponseData("HtmlUnit".getBytes(),
                 HttpStatus.OK_200, HttpStatus.OK_200_MSG, Collections.emptyList());
-        final WebResponse response = new WebResponse(data, URI.create("http://test.com").toURL(), HttpMethod.GET, 1000);
+        final WebResponse response = new WebResponse(data, new URL("http://test.com"), HttpMethod.GET, 1000);
         final AttachmentHandler attachmentHandler = new AttachmentHandler() {
 
             @Override
