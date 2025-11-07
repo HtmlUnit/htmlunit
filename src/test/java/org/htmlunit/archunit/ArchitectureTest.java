@@ -662,6 +662,10 @@ public class ArchitectureTest {
     public static final ArchRule forbidObjectsRequireNonNull = noClasses()
         .that()
             .resideOutsideOfPackage("org.htmlunit.corejs..")
+
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomNode") // strange but reports method fireAddition() on jenkins
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage") // strange but reports method notifyNodeAdded() on jenkins
+
             .and().resideOutsideOfPackage("org.htmlunit.jetty..")
 
         .should().callMethod(Objects.class, "requireNonNull", Object.class); // Objects.requireNonNull(Object) is forbidden, always add a message
