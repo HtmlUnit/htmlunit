@@ -211,7 +211,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "a", "b", "c", "d", "4"})
+    @Alerts({"4", "a", "b", "c", "d",
+             "7", "a", "b", "c", "d", "new-a", "new-b", "new-c"})
     public void forEachAdd() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
@@ -222,10 +223,13 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
                 + "  list.forEach((i) => {\n"
                 + "    log(i);\n"
-                + "    if (list.length < 7) { list.add('new ' + i); }\n"
+                + "    if (list.length < 7) { list.add('new-' + i); }\n"
                 + "  });\n"
 
                 + "  log(list.length);\n"
+                + "  list.forEach((i) => {\n"
+                + "    log(i);\n"
+                + "  });\n"
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
                 + "  <div id='d1' class='a b c d'></div>\n"
