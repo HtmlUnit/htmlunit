@@ -779,10 +779,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError", "function/", "function/", "true"})
-    @HtmlUnitNYI(CHROME = {"TypeError", "function/", "function/", "false"},
-            EDGE = {"TypeError", "function/", "function/", "false"},
-            FF = {"TypeError", "function/", "function/", "false"},
-            FF_ESR = {"TypeError", "function/", "function/", "false"})
     public void argumentsCalleeStrict() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>"
@@ -839,10 +835,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "true"})
-    @HtmlUnitNYI(CHROME = {"false", "false"},
-            EDGE = {"false", "false"},
-            FF = {"false", "false"},
-            FF_ESR = {"false", "false"})
     public void argumentsCalleeDifferentFunctionsStrict() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>"
