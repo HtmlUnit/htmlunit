@@ -8,6 +8,21 @@
 
     <body>
         <release version="4.19.0" date="November xx, 2025" description="Chrome/Edge 142, Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: Refactor internal property descriptors to not be 'ScriptableObjects'
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: some fixes for arguments support in strict mode
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Replace number formatting operations on Number (toExponential, toFixed, and toPrecision)
+            </action>
+            <action type="update" dev="rbri">
+                core-js: fix/improve our enhanced arguments support
+            </action>
+            <action type="update" dev="rbri">
+                core-js: fix/improve our enhanced arguments support
+            </action>
             <action type="update" dev="rbri">
                 JavaScript timeout messages slightly improved.
             </action>
