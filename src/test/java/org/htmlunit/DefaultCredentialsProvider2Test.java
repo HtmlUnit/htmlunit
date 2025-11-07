@@ -17,7 +17,6 @@ package org.htmlunit;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.StringWriter;
-import java.net.URI;
 import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
@@ -150,7 +149,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             //  now a url with credentials
-            final URL url = URI.create("http://jetty:jetty@localhost:" + PORT + "/").toURL();
+            final URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
             loadPageWithAlerts(html, url);
             if (!urlWithCredentials) {
                 fail("Should not be authorized");
@@ -200,7 +199,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             // now a url with credentials
-            final URL url = URI.create("http://jetty:jetty@localhost:" + PORT + "/").toURL();
+            final URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
             loadPageWithAlerts(url);
             if (!urlWithCredentials) {
                 fail("Should not be authorized");
@@ -264,7 +263,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             // now a url with credentials
-            final URL url = URI.create("http://jetty:jetty@localhost:" + PORT + "/").toURL();
+            final URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
             loadPageWithAlerts(url);
             if (!urlWithCredentials) {
                 fail("Should not be authorized");
@@ -290,7 +289,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         }
 
         try {
-            final URL url = URI.create("http://jetty:wrong@localhost:" + PORT + "/").toURL();
+            final URL url = new URL("http://jetty:wrong@localhost:" + PORT + "/");
             loadPage(html, url);
             fail("Should not be authorized");
         }
@@ -316,7 +315,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         loadPageWithAlerts(URL_FIRST);
 
         try {
-            final URL url = URI.create("http://joe:jetty@localhost:" + PORT + "/").toURL();
+            final URL url = new URL("http://joe:jetty@localhost:" + PORT + "/");
             final HtmlPage page = loadPage(html, url);
             fail("Should not be authorized");
         }
@@ -351,7 +350,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         try {
             // now a url with correct credentials
-            final URL url = URI.create("http://jetty:jetty@localhost:" + PORT + "/").toURL();
+            final URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
             loadPageWithAlerts(url);
             if (!urlWithCredentials) {
                 fail("Should not be authorized");

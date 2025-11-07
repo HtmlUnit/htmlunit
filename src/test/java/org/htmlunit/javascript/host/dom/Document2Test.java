@@ -14,7 +14,7 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import java.net.URI;
+import java.net.URL;
 
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
@@ -375,7 +375,7 @@ public class Document2Test extends WebDriverTestCase {
                 + "</html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        getMockWebConnection().setResponse(URI.create("http://example.com/frame1.html").toURL(), "");
+        getMockWebConnection().setResponse(new URL("http://example.com/frame1.html"), "");
 
         final WebDriver driver = loadPage2(html);
 
