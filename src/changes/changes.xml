@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.19.0" date="November xx, 2025" description="Chrome/Edge 142, Bugfixes">
+            <action type="update" dev="rbri">
+                HTMLFormControlsCollection getOwnPropertyDescriptor() has to support fields by name and id.
+            </action>
             <action type="update" dev="RhinoTeam">
                 core-js: Refactor internal property descriptors to not be 'ScriptableObjects'
             </action>

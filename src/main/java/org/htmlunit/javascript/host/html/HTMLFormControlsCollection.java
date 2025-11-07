@@ -14,7 +14,12 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -23,9 +28,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.host.dom.RadioNodeList;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A JavaScript object for {@code HTMLFormControlsCollection}.
@@ -113,6 +115,30 @@ public class HTMLFormControlsCollection extends HTMLCollection {
         final RadioNodeList nodeList = new RadioNodeList(getDomNodeOrDie(), elements);
         nodeList.setElementsSupplier(getElementSupplier());
         return nodeList;
+    }
+
+    /**
+     * Overridden to allow the retrieval of certain form elements by ID or name.
+     *
+     * @param cx {@inheritDoc}
+     * @param id {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    protected DescriptorInfo getOwnPropertyDescriptor(final Context cx, final Object id) {
+        final DescriptorInfo descInfo = super.getOwnPropertyDescriptor(cx, id);
+        if (descInfo != null) {
+            return descInfo;
+        }
+
+        if (id instanceof CharSequence) {
+            final Scriptable element = namedItem(id.toString());
+            if (element != null) {
+                return ScriptableObject.buildDataDescriptor(element, ScriptableObject.READONLY);
+            }
+        }
+
+        return null;
     }
 
     @JsxSymbol

@@ -67,7 +67,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "  for (var i = 0; i < document.form1.length; i++) {\n"
             + "    var element = document.form1.elements[i];\n"
             + "    if (element.type != 'radio' && element != document.form1[element.name]) {\n"
-            + "      log('name index not working for '+element.name);\n"
+            + "      log('name index not working for ' + element.name);\n"
             + "    }\n"
             + "    log(element.name);\n"
             + "  }\n"
@@ -152,6 +152,87 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
             + "<input type='text' name='textInput3' form='myForm'/>\n"
             + "<input type='text' name='textInput4' form='form1'/>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-false",
+             "undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-false"})
+    public void formAccessorOwnPropertyDescriptor() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  let desc = Object.getOwnPropertyDescriptor(document.form1, 'buttonId');\n"
+            + "  log(desc.get + '/' + desc.set);\n"
+            + "  log(typeof desc.value + '/' + desc.value);\n"
+            + "  log('W-' + desc.writable);\n"
+            + "  log('C-' + desc.configurable);\n"
+            + "  log('E-' + desc.enumerable);\n"
+
+            + "  desc = Object.getOwnPropertyDescriptor(document.form1, 'buttonName');\n"
+            + "  log(desc.get + '/' + desc.set);\n"
+            + "  log(typeof desc.value + '/' + desc.value);\n"
+            + "  log('W-' + desc.writable);\n"
+            + "  log('C-' + desc.configurable);\n"
+            + "  log('E-' + desc.enumerable);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+
+            + "<form id='myForm' name='form1'>\n"
+            + "  <input type='button' name='buttonName' id='buttonId' />\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-true",
+                       "undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-true"},
+            FF = {"undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-false",
+                  "undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-false"},
+            FF_ESR = {"undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-false",
+                      "undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-false"})
+    @HtmlUnitNYI(
+            FF = {"undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-true",
+                  "undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-true"},
+            FF_ESR = {"undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-true",
+                      "undefined/undefined", "object/[object HTMLInputElement]", "W-false", "C-true", "E-true"})
+    public void elementsAccessorOwnPropertyDescriptor() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  let desc = Object.getOwnPropertyDescriptor(document.form1.elements, 'buttonId');\n"
+            + "  log(desc.get + '/' + desc.set);\n"
+            + "  log(typeof desc.value + '/' + desc.value);\n"
+            + "  log('W-' + desc.writable);\n"
+            + "  log('C-' + desc.configurable);\n"
+            + "  log('E-' + desc.enumerable);\n"
+
+            + "  desc = Object.getOwnPropertyDescriptor(document.form1.elements, 'buttonName');\n"
+            + "  log(desc.get + '/' + desc.set);\n"
+            + "  log(typeof desc.value + '/' + desc.value);\n"
+            + "  log('W-' + desc.writable);\n"
+            + "  log('C-' + desc.configurable);\n"
+            + "  log('E-' + desc.enumerable);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+
+            + "<form id='myForm' name='form1'>\n"
+            + "  <input type='button' name='buttonName' id='buttonId' />\n"
+            + "</form>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
