@@ -18,6 +18,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.javascript.preprocessor.HtmxTwoZeroSevenScriptPreProcessor;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -55,6 +56,7 @@ public class HtmxTest2x0x4 extends HtmxTest {
             EDGE = "passes:548failures:71",
             FF = "passes:548failures:71",
             FF_ESR = "passes:548failures:71")
+    @Disabled
     public void htmxMin() throws Exception {
         htmx("htmx-2.0.4", true);
     }

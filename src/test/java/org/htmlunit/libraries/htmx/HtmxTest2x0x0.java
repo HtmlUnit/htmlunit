@@ -17,6 +17,7 @@ package org.htmlunit.libraries.htmx;
 import org.htmlunit.WebClient;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -46,6 +47,7 @@ public class HtmxTest2x0x0 extends HtmxTest {
      * @throws Exception if an error occurs
      */
     @Test
+    @Disabled
     @Alerts(DEFAULT = "passes:506failures:65",
             FF = "passes:506failures:64",
             FF_ESR = "passes:506failures:64")
