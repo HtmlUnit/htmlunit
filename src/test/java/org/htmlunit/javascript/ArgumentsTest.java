@@ -1296,7 +1296,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts("hello,world")
     public void argumentsSpreadOperator() throws Exception {
         final String html = DOCTYPE_HTML
@@ -1318,7 +1317,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Disabled
     @Alerts("hello,world")
     public void argumentsSpreadOperatorStrict() throws Exception {
         final String html = DOCTYPE_HTML
