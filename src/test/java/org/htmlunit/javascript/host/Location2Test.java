@@ -1038,6 +1038,10 @@ public class Location2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
 
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME);
+        }
+
         verifySessionStorage2(driver, getExpectedAlerts()[0], getExpectedAlerts()[1], getExpectedAlerts()[2]);
         assertEquals(getExpectedAlerts()[3], driver.getCurrentUrl());
     }
