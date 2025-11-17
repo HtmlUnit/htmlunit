@@ -2090,7 +2090,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"173", "17", "173", "17", "13", "13", "13", "13"},
-            FF = {"161", "18", "161", "18", "14", "14", "14", "14"},
+            FF = {"157", "18", "157", "18", "14", "14", "14", "14"},
             FF_ESR = {"161", "18", "161", "18", "14", "14", "14", "14"})
     public void defaultClientWidthHeight() throws Exception {
         final String html = DOCTYPE_HTML

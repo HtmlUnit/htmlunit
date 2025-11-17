@@ -501,6 +501,7 @@ tableLayout
 textAlign
 textAlignLast
 textAnchor
+textAutospace
 textCombineUpright
 textDecoration
 textDecorationColor

@@ -2988,7 +2988,10 @@ public final class StyleAttributes implements Serializable {
         TEXT_ANCHOR_("text-anchor", "text-anchor", ff("start")),
 
         /** The style property {@code textAutospace}. */
-        TEXT_AUTOSPACE("textAutospace", "text-Autospace", chromeAndEdge("no-autospace")),
+        TEXT_AUTOSPACE("textAutospace", "text-Autospace", chromeAndEdge("no-autospace"), ffLatest("no-autospace")),
+
+        /** The style property {@code text-autospace}. */
+        TEXT_AUTOSPACE_("text-autospace", "text-Autospace", ffLatest("no-autospace")),
 
         /** The style property {@code textBox}. */
         TEXT_BOX("textBox", "text-box", chromeAndEdgeNormal()),
