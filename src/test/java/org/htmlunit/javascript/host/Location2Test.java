@@ -1039,7 +1039,7 @@ public class Location2Test extends WebDriverTestCase {
         driver.findElement(By.id("click")).click();
 
         if (useRealBrowser()) {
-            Thread.sleep(DEFAULT_WAIT_TIME);
+            Thread.sleep(400);
         }
 
         verifySessionStorage2(driver, getExpectedAlerts()[0], getExpectedAlerts()[1], getExpectedAlerts()[2]);
