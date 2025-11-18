@@ -38,6 +38,7 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -1139,7 +1140,7 @@ public class FormDataTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(driver, new String[] {});
+        verifyTitle2(driver, ArrayUtils.EMPTY_STRING_ARRAY);
 
         driver.findElement(By.id("testBtn")).click();
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
