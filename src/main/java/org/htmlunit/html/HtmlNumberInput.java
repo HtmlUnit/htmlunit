@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.ArrayUtils;
 
 /**
  * Wrapper for the HTML element "input" with type is "number".
@@ -38,8 +39,8 @@ import org.htmlunit.SgmlPage;
  */
 public class HtmlNumberInput extends HtmlSelectableTextInput implements LabelableElement {
 
-    private static final char[] VALID_INT_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'};
-    private static final String VALID_CHARS = "0123456789-+.eE";
+    private static final char[] VALID_INT_CHARS = "0123456789-".toCharArray();
+    private static final char[] VALID_CHARS = "0123456789-+.eE".toCharArray();
 
     /**
      * Creates an instance.
@@ -82,10 +83,11 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
     @Override
     protected void doType(final char c, final boolean lastType) {
         if (!hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
-            if (VALID_CHARS.indexOf(c) == -1) {
+            if (!ArrayUtils.contains(VALID_CHARS, c)) {
                 return;
             }
         }
+
         super.doType(c, lastType);
     }
 

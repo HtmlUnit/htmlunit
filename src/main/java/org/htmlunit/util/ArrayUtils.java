@@ -20,10 +20,16 @@ package org.htmlunit.util;
  * @author Ronald Brill
  */
 public final class ArrayUtils {
+
     /**
      * An empty immutable {@code byte} array.
      */
     public static final byte[] EMPTY_BYTE_ARRAY = {};
+
+    /**
+     * An empty immutable {@code char} array.
+     */
+    public static final char[] EMPTY_CHAR_ARRAY = {};
 
     /**
      * An empty immutable {@link String} array.
@@ -53,6 +59,25 @@ public final class ArrayUtils {
 
         for (final String s : strings) {
             if (expected.equals(s)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param chars the char[] to check
+     * @param expected the char that we expect
+     * @return true if at least one element of the array equals to the expected char
+     */
+    public static boolean contains(final char[] chars, final char expected) {
+        if (chars == null) {
+            return false;
+        }
+
+        for (final char c : chars) {
+            if (expected == c) {
                 return true;
             }
         }

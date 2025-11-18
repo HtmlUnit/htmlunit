@@ -72,6 +72,21 @@ public class ArrayUtilsTest {
      * @throws Exception if the test fails
      */
     @Test
+    public void containsChar() throws Exception {
+        assertTrue(ArrayUtils.contains(new char[] {1}, (char) 1));
+        assertTrue(ArrayUtils.contains(new char[] {7, 1, 9}, (char) 1));
+        assertTrue(ArrayUtils.contains(new char[] {5, 2}, (char) 2));
+
+        assertFalse(ArrayUtils.contains(null, (char) 7));
+        assertFalse(ArrayUtils.contains(new char[] {}, (char) 1));
+        assertFalse(ArrayUtils.contains(ArrayUtils.EMPTY_CHAR_ARRAY, (char) 1));
+        assertFalse(ArrayUtils.contains(new char[] {7, 9}, (char) 4));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void containsByte() throws Exception {
         assertTrue(ArrayUtils.contains(new byte[] {1}, (byte) 1));
         assertTrue(ArrayUtils.contains(new byte[] {7, 1, 9}, (byte) 1));
