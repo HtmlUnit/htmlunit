@@ -26,6 +26,7 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.neko.HtmlUnitNekoHtmlParser;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
@@ -277,6 +278,9 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     private static byte[] read(final InputStream stream, final int maxNb) throws IOException {
         final byte[] buffer = new byte[maxNb];
         final int nbRead = stream.read(buffer);
+        if (nbRead == -1) {
+            return ArrayUtils.EMPTY_BYTE_ARRAY;
+        }
         if (nbRead == buffer.length) {
             return buffer;
         }
