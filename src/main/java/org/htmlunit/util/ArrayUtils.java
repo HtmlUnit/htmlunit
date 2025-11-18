@@ -31,6 +31,48 @@ public final class ArrayUtils {
     /**
      * @param strings the string[] to check
      * @param expected the string that we expect
+     * @return true if at least one element of the array equals to the expected string
+     */
+    public static boolean contains(final String[] strings, final String expected) {
+        if (expected == null) {
+            throw new IllegalArgumentException("Expected string can't be null");
+        }
+
+        if (strings == null) {
+            return false;
+        }
+
+        for (final String s : strings) {
+            if (expected.equals(s)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param bytes the byte[] to check
+     * @param expected the byte that we expect
+     * @return true if at least one element of the array equals to the expected byte
+     */
+    public static boolean contains(final byte[] bytes, final byte expected) {
+        if (bytes == null) {
+            return false;
+        }
+
+        for (final byte b : bytes) {
+            if (expected == b) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param strings the string[] to check
+     * @param expected the string that we expect
      * @return true if at least one element of the array equalsIgnoreCase to the expected string
      */
     public static boolean containsIgnoreCase(final String[] strings, final String expected) {

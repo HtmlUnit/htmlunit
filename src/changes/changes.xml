@@ -9,6 +9,9 @@
     <body>
         <release version="4.19.0" date="November xx, 2025" description="Chrome/Edge 142, Firefox 145, Bugfixes">
             <action type="update" dev="rbri">
+                Use our own ArrayUtils at more places.
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Apache commons-lang3 to 3.20.0.
             </action>
             <action type="add" dev="RhinoTeam">

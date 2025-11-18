@@ -32,7 +32,6 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -52,6 +51,7 @@ import org.htmlunit.http.HttpUtils;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.SubmitEvent;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;

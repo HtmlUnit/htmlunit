@@ -22,7 +22,6 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -36,6 +35,7 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 

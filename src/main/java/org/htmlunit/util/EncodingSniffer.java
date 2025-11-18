@@ -589,7 +589,7 @@ public final class EncodingSniffer {
     static int skipToAnyOf(final byte[] bytes, final int startFrom, final byte[] targets) {
         int i = startFrom;
         for ( ; i < bytes.length; i++) {
-            if (ArrayUtils.contains(targets, bytes[i])) {
+            if (org.htmlunit.util.ArrayUtils.contains(targets, bytes[i])) {
                 break;
             }
         }

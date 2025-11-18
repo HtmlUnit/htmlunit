@@ -30,7 +30,6 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -109,6 +108,7 @@ import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventHandler;
 import org.htmlunit.javascript.host.event.MouseEvent;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.StringUtils;
 
 /**
