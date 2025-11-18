@@ -941,4 +941,36 @@ public final class StringUtils {
 
         return str.substring(0, end);
     }
+
+    /**
+     * @param cs the String to check, may be null.
+     * @param valid an array of valid chars, may be null.
+     * @return true if it only contains valid chars and is non-null.
+     */
+    public static boolean containsOnly(final CharSequence cs, final char... valid) {
+        if (valid == null || valid.length == 0) {
+            throw new IllegalArgumentException("Expected valid char[] can't be null or empty");
+        }
+        if (isEmptyOrNull(cs)) {
+            return false;
+        }
+
+        final int csLength = cs.length();
+        final int validLength = valid.length;
+        for (int i = 0; i < csLength; i++) {
+            final char testChar = cs.charAt(i);
+            int j = 0;
+            for ( ; j < validLength; j++) {
+                final char validChar = valid[j];
+                if (validChar == testChar) {
+                    break;
+                }
+            }
+            if (j == validLength) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

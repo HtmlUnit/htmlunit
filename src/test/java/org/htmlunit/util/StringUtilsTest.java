@@ -201,6 +201,30 @@ public class StringUtilsTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.containsIgnoreCase("", ""));
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void containsOnly() {
+        assertFalse(StringUtils.containsOnly(null, "x".toCharArray()));
+        assertFalse(StringUtils.containsOnly("", "x".toCharArray()));
+        assertFalse(StringUtils.containsOnly("a", "x".toCharArray()));
+        assertFalse(StringUtils.containsOnly("ax", "x".toCharArray()));
+        assertFalse(StringUtils.containsOnly("xa", "x".toCharArray()));
+
+        assertTrue(StringUtils.containsOnly("x", "ax".toCharArray()));
+        assertTrue(StringUtils.containsOnly("aa", "ax".toCharArray()));
+        assertTrue(StringUtils.containsOnly("ax", "ax".toCharArray()));
+        assertTrue(StringUtils.containsOnly("axaaa", "ax".toCharArray()));
+        assertTrue(StringUtils.containsOnly("xaaxxxaa", "xa".toCharArray()));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> StringUtils.containsOnly("AB", null));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> StringUtils.containsOnly("AB", ArrayUtils.EMPTY_CHAR_ARRAY));
+    }
+
+
     /**
      * @throws Exception if the test fails
      */
