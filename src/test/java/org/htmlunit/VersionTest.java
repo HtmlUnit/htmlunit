@@ -14,6 +14,7 @@
  */
 package org.htmlunit;
 
+import org.htmlunit.util.ArrayUtils;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -28,7 +29,7 @@ public class VersionTest {
      */
     @Test
     public void main() throws Exception {
-        Version.main(new String[] {});
+        Version.main(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**

@@ -27,6 +27,7 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 
@@ -98,7 +99,7 @@ public class MockWebConnection implements WebConnection {
                 content = byteContent_;
             }
             else if (stringContent_ == null) {
-                content = new byte[] {};
+                content = ArrayUtils.EMPTY_BYTE_ARRAY;
             }
             else {
                 content = stringContent_.getBytes(charset_);

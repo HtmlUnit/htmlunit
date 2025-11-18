@@ -38,9 +38,11 @@ public class ArrayUtilsTest {
 
         assertFalse(ArrayUtils.contains(null, "ab"));
         assertFalse(ArrayUtils.contains(new String[] {}, "ab"));
+        assertFalse(ArrayUtils.contains(ArrayUtils.EMPTY_STRING_ARRAY, "ab"));
         assertFalse(ArrayUtils.contains(new String[] {"cd", "ab"}, "x"));
 
         assertThrows(IllegalArgumentException.class, () -> ArrayUtils.contains(new String[] {}, null));
+        assertThrows(IllegalArgumentException.class, () -> ArrayUtils.contains(ArrayUtils.EMPTY_STRING_ARRAY, null));
     }
 
     /**
@@ -58,9 +60,12 @@ public class ArrayUtilsTest {
 
         assertFalse(ArrayUtils.containsIgnoreCase(null, "ab"));
         assertFalse(ArrayUtils.containsIgnoreCase(new String[] {}, "ab"));
+        assertFalse(ArrayUtils.containsIgnoreCase(ArrayUtils.EMPTY_STRING_ARRAY, "ab"));
         assertFalse(ArrayUtils.containsIgnoreCase(new String[] {"cd", "ab"}, "x"));
 
         assertThrows(IllegalArgumentException.class, () -> ArrayUtils.containsIgnoreCase(new String[] {}, null));
+        assertThrows(IllegalArgumentException.class,
+                () -> ArrayUtils.containsIgnoreCase(ArrayUtils.EMPTY_STRING_ARRAY, null));
     }
 
     /**
@@ -74,6 +79,7 @@ public class ArrayUtilsTest {
 
         assertFalse(ArrayUtils.contains(null, (byte) 7));
         assertFalse(ArrayUtils.contains(new byte[] {}, (byte) 1));
+        assertFalse(ArrayUtils.contains(ArrayUtils.EMPTY_BYTE_ARRAY, (byte) 1));
         assertFalse(ArrayUtils.contains(new byte[] {7, 9}, (byte) 4));
     }
 }

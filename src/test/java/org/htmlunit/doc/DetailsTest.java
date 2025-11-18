@@ -36,6 +36,7 @@ import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.HttpStatus;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.WebConnectionWrapper;
@@ -98,7 +99,7 @@ public class DetailsTest extends WebServerTestCase {
      */
     @Test
     public void contentBlockingResponse() throws Exception {
-        final byte[] content = new byte[] {};
+        final byte[] content = ArrayUtils.EMPTY_BYTE_ARRAY;
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair(HttpHeader.CONTENT_LENGTH, String.valueOf(content.length)));
 

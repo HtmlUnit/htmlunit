@@ -25,6 +25,7 @@ import org.htmlunit.Page;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
+import org.htmlunit.util.ArrayUtils;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -253,7 +254,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         final String[] expected = getExpectedAlerts();
 
-        setExpectedAlerts(new String[] {});
+        setExpectedAlerts(ArrayUtils.EMPTY_STRING_ARRAY);
         final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myArea1")).isDisplayed();
@@ -296,7 +297,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         final String[] expected = getExpectedAlerts();
 
-        setExpectedAlerts(new String[] {});
+        setExpectedAlerts(ArrayUtils.EMPTY_STRING_ARRAY);
         final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myArea1")).isDisplayed();
@@ -332,7 +333,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         final String[] expected = getExpectedAlerts();
 
-        setExpectedAlerts(new String[] {});
+        setExpectedAlerts(ArrayUtils.EMPTY_STRING_ARRAY);
         final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myArea1")).isDisplayed();

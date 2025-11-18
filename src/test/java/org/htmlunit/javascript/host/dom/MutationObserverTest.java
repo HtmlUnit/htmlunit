@@ -20,6 +20,7 @@ import java.util.Arrays;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.BuggyWebDriver;
+import org.htmlunit.util.ArrayUtils;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -314,7 +315,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "</body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("tester")).sendKeys("abc");
-        verifyTitle2(driver, new String[] {});
+        verifyTitle2(driver, ArrayUtils.EMPTY_STRING_ARRAY);
 
         driver.findElement(By.id("doAlert")).click();
         verifyTitle2(driver, new String[] {"heho"});
@@ -370,7 +371,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "</body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("tester")).sendKeys("abc");
-        verifyTitle2(driver, new String[] {});
+        verifyTitle2(driver, ArrayUtils.EMPTY_STRING_ARRAY);
 
         driver.findElement(By.id("doAlert")).click();
         verifyTitle2(driver, new String[] {"heho"});

@@ -24,6 +24,7 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
@@ -871,7 +872,7 @@ public class Location2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
 
-        assertEquals(new String[] {}, getMockWebConnection().getRequestedUrls(URL_FIRST));
+        assertEquals(ArrayUtils.EMPTY_STRING_ARRAY, getMockWebConnection().getRequestedUrls(URL_FIRST));
         driver.findElement(By.tagName("a")).click();
 
         assertEquals(getExpectedAlerts(), getMockWebConnection().getRequestedUrls(URL_FIRST));

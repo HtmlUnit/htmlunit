@@ -20,6 +20,15 @@ package org.htmlunit.util;
  * @author Ronald Brill
  */
 public final class ArrayUtils {
+    /**
+     * An empty immutable {@code byte} array.
+     */
+    public static final byte[] EMPTY_BYTE_ARRAY = {};
+
+    /**
+     * An empty immutable {@link String} array.
+     */
+    public static final String[] EMPTY_STRING_ARRAY = {};
 
     /**
      * Disallow instantiation of this class.
