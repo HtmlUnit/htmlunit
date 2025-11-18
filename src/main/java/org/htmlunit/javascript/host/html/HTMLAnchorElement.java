@@ -26,7 +26,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.SgmlPage;
@@ -41,6 +40,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.DOMTokenList;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -212,7 +212,7 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter
     public String getReferrerPolicy() {
         String attrib = getDomNodeOrDie().getAttribute("referrerPolicy");
-        if (org.htmlunit.util.StringUtils.isEmptyOrNull(attrib)) {
+        if (StringUtils.isEmptyOrNull(attrib)) {
             return "";
         }
         attrib = attrib.toLowerCase(Locale.ROOT);
@@ -262,8 +262,8 @@ public class HTMLAnchorElement extends HTMLElement {
     public void setSearch(final String search) throws Exception {
         final String query;
         if (search == null
-                || org.htmlunit.util.StringUtils.isEmptyString(search)
-                || org.htmlunit.util.StringUtils.equalsChar('?', search)) {
+                || StringUtils.isEmptyString(search)
+                || StringUtils.equalsChar('?', search)) {
             query = null;
         }
         else if (search.charAt(0) == '?') {
@@ -375,11 +375,11 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxSetter
     public void setHostname(final String hostname) throws Exception {
         if (getBrowserVersion().hasFeature(JS_ANCHOR_HOSTNAME_IGNORE_BLANK)) {
-            if (!org.htmlunit.util.StringUtils.isBlank(hostname)) {
+            if (!StringUtils.isBlank(hostname)) {
                 setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
             }
         }
-        else if (!org.htmlunit.util.StringUtils.isEmptyOrNull(hostname)) {
+        else if (!StringUtils.isEmptyOrNull(hostname)) {
             setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
         }
     }
@@ -398,7 +398,7 @@ public class HTMLAnchorElement extends HTMLElement {
                 String href = anchor.getHrefAttribute();
                 if (href.length() > 1 && Character.isLetter(href.charAt(0)) && ':' == href.charAt(1)) {
                     if (browser.hasFeature(JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS)) {
-                        href = StringUtils.capitalize(href);
+                        href = org.apache.commons.lang3.StringUtils.capitalize(href);
                     }
                     if (browser.hasFeature(JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL)) {
                         href = "/" + href;
@@ -482,7 +482,7 @@ public class HTMLAnchorElement extends HTMLElement {
             if (anchor.getHrefAttribute().startsWith("http")) {
                 return ":";
             }
-            return org.htmlunit.util.StringUtils.substringBefore(anchor.getHrefAttribute(), "/");
+            return StringUtils.substringBefore(anchor.getHrefAttribute(), "/");
         }
     }
 
@@ -498,7 +498,7 @@ public class HTMLAnchorElement extends HTMLElement {
             return;
         }
 
-        final String bareProtocol = org.htmlunit.util.StringUtils.substringBefore(protocol, ":").trim();
+        final String bareProtocol = StringUtils.substringBefore(protocol, ":").trim();
         if (!UrlUtils.isValidScheme(bareProtocol)) {
             return;
         }
@@ -656,7 +656,7 @@ public class HTMLAnchorElement extends HTMLElement {
             if (userInfo == null) {
                 return "";
             }
-            return StringUtils.substringBefore(userInfo, ':');
+            return org.apache.commons.lang3.StringUtils.substringBefore(userInfo, ':');
         }
         catch (final MalformedURLException e) {
             return "";

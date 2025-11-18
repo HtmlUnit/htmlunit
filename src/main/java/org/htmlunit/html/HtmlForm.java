@@ -32,7 +32,6 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -54,6 +53,7 @@ import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -158,15 +158,13 @@ public class HtmlForm extends HtmlElement {
             }
 
             final String action = getActionAttribute().trim();
-            if (org.htmlunit.util.StringUtils.startsWithIgnoreCase(action,
-                                                JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 htmlPage.executeJavaScript(action, "Form action", getStartLineNumber());
                 return;
             }
         }
         else {
-            if (org.htmlunit.util.StringUtils.startsWithIgnoreCase(getActionAttribute(),
-                                                JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            if (StringUtils.startsWithIgnoreCase(getActionAttribute(), JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // The action is JavaScript but JavaScript isn't enabled.
                 return;
             }
@@ -273,8 +271,7 @@ public class HtmlForm extends HtmlElement {
             method = HttpMethod.POST;
         }
         else {
-            if (!"get".equalsIgnoreCase(methodAttribute)
-                    && org.htmlunit.util.StringUtils.isNotBlank(methodAttribute)) {
+            if (!"get".equalsIgnoreCase(methodAttribute) && StringUtils.isNotBlank(methodAttribute)) {
                 notifyIncorrectness("Incorrect submit method >" + getMethodAttribute() + "<. Using >GET<.");
             }
             method = HttpMethod.GET;
@@ -298,8 +295,8 @@ public class HtmlForm extends HtmlElement {
             queryFormFields = HttpUtils.toQueryFormFields(parameters, enc);
 
             // action may already contain some query parameters: they have to be removed
-            actionUrl = org.htmlunit.util.StringUtils.substringBefore(actionUrl, "#");
-            actionUrl = org.htmlunit.util.StringUtils.substringBefore(actionUrl, "?");
+            actionUrl = StringUtils.substringBefore(actionUrl, "#");
+            actionUrl = StringUtils.substringBefore(actionUrl, "?");
             parameters.clear(); // parameters have been added to query
         }
 
@@ -365,7 +362,7 @@ public class HtmlForm extends HtmlElement {
         String rel = getRelAttribute();
         if (rel != null) {
             rel = rel.toLowerCase(Locale.ROOT);
-            return ArrayUtils.contains(org.htmlunit.util.StringUtils.splitAtBlank(rel), "noreferrer");
+            return ArrayUtils.contains(StringUtils.splitAtBlank(rel), "noreferrer");
         }
         return false;
     }
@@ -480,7 +477,7 @@ public class HtmlForm extends HtmlElement {
             return false;
         }
 
-        if (org.htmlunit.util.StringUtils.isEmptyString(element.getAttributeDirect(NAME_ATTRIBUTE))) {
+        if (StringUtils.isEmptyString(element.getAttributeDirect(NAME_ATTRIBUTE))) {
             return false;
         }
 

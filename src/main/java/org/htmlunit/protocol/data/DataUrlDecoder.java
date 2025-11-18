@@ -24,8 +24,8 @@ import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Base64;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -124,7 +124,7 @@ public class DataUrlDecoder {
     private static String extractMediaType(final String beforeData) {
         if (beforeData.contains("/")) {
             if (beforeData.contains(";")) {
-                return org.htmlunit.util.StringUtils.substringBefore(beforeData, ";");
+                return StringUtils.substringBefore(beforeData, ";");
             }
             return beforeData;
         }

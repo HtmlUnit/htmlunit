@@ -530,4 +530,30 @@ public class StringUtilsTest {
         assertEquals(21f, StringUtils.toFloat(" 21 ", 0));
         assertEquals(0, StringUtils.toFloat(" -  21  \t", 0f));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void substringAfter() throws Exception {
+        assertNull(StringUtils.substringAfter(null, null));
+        assertNull(StringUtils.substringAfter(null, ""));
+        assertNull(StringUtils.substringAfter(null, "abc"));
+
+        assertEquals(StringUtils.EMPTY_STRING, StringUtils.substringAfter("", null));
+        assertEquals(StringUtils.EMPTY_STRING, StringUtils.substringAfter("", ""));
+        assertEquals(StringUtils.EMPTY_STRING, StringUtils.substringAfter("", "abc"));
+
+        assertEquals(StringUtils.EMPTY_STRING, StringUtils.substringAfter(StringUtils.EMPTY_STRING, null));
+        assertEquals(StringUtils.EMPTY_STRING, StringUtils.substringAfter(StringUtils.EMPTY_STRING, ""));
+        assertEquals(StringUtils.EMPTY_STRING, StringUtils.substringAfter(StringUtils.EMPTY_STRING, "abc"));
+
+        assertEquals(StringUtils.EMPTY_STRING, StringUtils.substringAfter("abc", null));
+        assertEquals("abc", StringUtils.substringAfter("abc", ""));
+
+        assertEquals("bc", StringUtils.substringAfter("abc", "a"));
+        assertEquals("cba", StringUtils.substringAfter("abcba", "b"));
+        assertEquals("", StringUtils.substringAfter("abc", "c"));
+        assertEquals("", StringUtils.substringAfter("abc", "d"));
+    }
 }

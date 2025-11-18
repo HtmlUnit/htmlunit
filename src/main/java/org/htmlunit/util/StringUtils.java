@@ -33,6 +33,11 @@ import org.htmlunit.html.impl.Color;
  */
 public final class StringUtils {
 
+    /**
+     * The empty String {@code ""}.
+     */
+    public static final String EMPTY_STRING = "";
+
     private static final Pattern HEX_COLOR = Pattern.compile("#([\\da-fA-F]{3}|[\\da-fA-F]{6})");
     private static final Pattern RGB_COLOR =
         Pattern.compile("rgb\\(\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,"
@@ -284,6 +289,34 @@ public final class StringUtils {
         }
 
         return buf.toString();
+    }
+
+    /**
+     * Gets the substring after the first occurrence of a separator. The separator is not returned.
+     * <p>
+     * A {@code null} string input will return {@code null}.
+     * An empty ("") string input will return the empty string.
+     * A {@code null} separator will return the empty string if the input string is not {@code null}.
+     * <p>
+     * If nothing is found, the empty string is returned.
+     * <p>
+     *
+     * @param str the String to get a substring from, may be null.
+     * @param find the String to find, may be null.
+     * @return the substring after the first occurrence of the specified string, {@code null} if null String input.
+     */
+    public static String substringAfter(final String str, final String find) {
+        if (isEmptyOrNull(str)) {
+            return str;
+        }
+        if (find == null) {
+            return EMPTY_STRING;
+        }
+        final int pos = str.indexOf(find);
+        if (pos == -1) {
+            return EMPTY_STRING;
+        }
+        return str.substring(pos + find.length());
     }
 
     /**
