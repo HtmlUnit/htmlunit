@@ -915,4 +915,30 @@ public final class StringUtils {
             return defaultValue;
         }
     }
+
+    /**
+     * Strips any whitespace from the end of a String.
+     * <p>
+     * A {@code null} input String returns {@code null}. An empty string ("") input returns the empty string.
+     * </p>
+     *
+     * @param str the String to remove characters from, may be null.
+     * @return the stripped String, {@code null} if null String input.
+     */
+    public static String trimRight(final String str) {
+        if (isEmptyOrNull(str)) {
+            return str;
+        }
+
+        int end = str.length();
+        while (end != 0 && Character.isWhitespace(str.charAt(end - 1))) {
+            end--;
+        }
+
+        if (end == str.length()) {
+            return str;
+        }
+
+        return str.substring(0, end);
+    }
 }

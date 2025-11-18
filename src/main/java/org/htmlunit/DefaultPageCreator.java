@@ -20,7 +20,6 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlPage;
@@ -281,7 +280,10 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         if (nbRead == buffer.length) {
             return buffer;
         }
-        return ArrayUtils.subarray(buffer, 0, nbRead);
+
+        final byte[] result = new byte[nbRead];
+        System.arraycopy(buffer, 0, result, 0, nbRead);
+        return result;
     }
 
     /**

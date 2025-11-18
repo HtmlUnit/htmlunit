@@ -20,7 +20,6 @@ import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
@@ -61,6 +60,7 @@ import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.html.HtmlUnorderedList;
 import org.htmlunit.html.TableRowGroup;
 import org.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder.Mode;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Utility to handle conversion from HTML code to string.
@@ -634,7 +634,7 @@ public class HtmlSerializerNormalizedText {
 
             String text = content;
             if (mode == Mode.PRESERVE_BLANK_NEWLINE) {
-                text = StringUtils.stripEnd(text, null);
+                text = StringUtils.trimRight(text);
             }
 
             boolean crFound = false;

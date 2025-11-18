@@ -556,4 +556,19 @@ public class StringUtilsTest {
         assertEquals("", StringUtils.substringAfter("abc", "c"));
         assertEquals("", StringUtils.substringAfter("abc", "d"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void trimRight() throws Exception {
+        assertNull(StringUtils.trimRight(null));
+        assertEquals(StringUtils.EMPTY_STRING, StringUtils.trimRight(""));
+        assertEquals("", StringUtils.trimRight(StringUtils.EMPTY_STRING));
+
+        assertEquals("abc", StringUtils.trimRight("abc"));
+        assertEquals("  abc", StringUtils.trimRight("  abc"));
+        assertEquals("abc", StringUtils.trimRight("abc  "));
+        assertEquals(" a b c", StringUtils.trimRight(" a b c "));
+    }
 }
