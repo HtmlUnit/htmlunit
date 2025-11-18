@@ -22,7 +22,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.ArrayUtils;
+import org.htmlunit.util.ArrayUtils;
 
 /**
  * Wrapper for content downloaded from a remote server.
