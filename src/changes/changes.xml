@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.19.0" date="November xx, 2025" description="Chrome/Edge 142, Firefox 145, Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: fix wrapper symbol handling in setPrototypeOf.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Rewrite Symbol.prototype.keyFor to avoid ConcurrentModificationException.
+            </action>
             <action type="update" dev="rbri">
                 Use our own ArrayUtils at more places.
             </action>
