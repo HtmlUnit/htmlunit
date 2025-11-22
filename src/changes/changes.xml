@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.19.0" date="November xx, 2025" description="Chrome/Edge 142, Firefox 145, Bugfixes">
+        <release version="4.19.0" date="November 23, 2025" description="Chrome/Edge 142, Firefox 145, support spread in arrays, Bugfixes">
             <action type="fix" dev="rbri">
                 core-js: fix wrapper symbol handling in setPrototypeOf.
             </action>
@@ -42,13 +42,13 @@
                 core-js: fix/improve our enhanced arguments support
             </action>
             <action type="update" dev="rbri">
-                core-js: fix/improve our enhanced arguments support
-            </action>
-            <action type="update" dev="rbri">
                 JavaScript timeout messages slightly improved.
             </action>
             <action type="fix" dev="rbri" issue="#1057">
                 WebClient.setJavaScriptTimeout(timeout) stops most JavaScript immediately. This is a regression compared to version 4.18.0.
+            </action>
+            <action type="update" dev="rbri">
+                neko: code quality and minor performance improvements.
             </action>
             <action type="update" dev="rbri">
                 neko: improve spec conformance of comment end detection
