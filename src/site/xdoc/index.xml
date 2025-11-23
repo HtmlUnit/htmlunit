@@ -92,9 +92,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>October 30, 2025</date></dt>
+                    <dt>Latest release <date>November 23, 2025</date></dt>
                     <dd>
-                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/4.18.0">version 4.18.0</a></p>
+                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/4.19.0">version 4.19.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>
@@ -220,14 +220,14 @@
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.18.0</version>
+    <version>4.19.0</version>
 </dependency>]]></source>
             </p>
 
             <p>
                 For gradle, you would add:
             <source><![CDATA[
-implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.18.0']]></source>
+implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.19.0']]></source>
             </p>
 
             <p>
