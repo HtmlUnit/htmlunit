@@ -6778,4 +6778,825 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         loadPageVerifyTextArea2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "P", "SPAN"},
+            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    public void moveBefore_basic() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+            + "    var p = document.getElementById('p1');\n"
+
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(p, span);\n"
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <div id='div1'>1</div>\n"
+            + "    <span id='span1'>2</span>\n"
+            + "    <p id='p1'>3</p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "P", "DIV", "SPAN"},
+            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    public void moveBefore_moveToFirst() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+            + "    var p = document.getElementById('p1');\n"
+
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(p, div);\n"
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <div id='div1'>1</div>\n"
+            + "    <span id='span1'>2</span>\n"
+            + "    <p id='p1'>3</p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
+            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    public void moveBefore_samePosition() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+            + "    var p = document.getElementById('p1');\n"
+
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(span, p);\n"
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <div id='div1'>1</div>\n"
+            + "    <span id='span1'>2</span>\n"
+            + "    <p id='p1'>3</p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
+            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    public void moveBefore_samePositionFirst() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+            + "    var p = document.getElementById('p1');\n"
+
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(div, span);\n"
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <div id='div1'>1</div>\n"
+            + "    <span id='span1'>2</span>\n"
+            + "    <p id='p1'>3</p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
+            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    public void moveBefore_itself() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+            + "    var p = document.getElementById('p1');\n"
+
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(span, span);\n"
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <div id='div1'>1</div>\n"
+            + "    <span id='span1'>2</span>\n"
+            + "    <p id='p1'>3</p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "HierarchyRequestError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_ancestor() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+            + "    var p = document.getElementById('p1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      span.moveBefore(div, null);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <div id='div1'>1\n"
+            + "      <span id='span1'>2</span>\n"
+            + "    </div>\n"
+            + "    <p id='p1'>3</p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "NotFoundError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_differentParents() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var p = document.getElementById('p1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      parent.moveBefore(div, p);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <div id='div1'>1</div>\n"
+            + "  </div>\n"
+            + "  <div id='parent2'>\n"
+            + "    <p id='p1'>2</p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "NotFoundError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_descendant() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var child = document.getElementById('child');\n"
+            + "    var span = document.getElementById('span1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      child.moveBefore(span, parent);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <div id='child'>\n"
+            + "      <span id='span1'>text</span>\n"
+            + "    </div>\n"
+            + "    <p id='p1'>2</p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "P", "SPAN", "0"},
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_movedNotChild() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var span = document.getElementById('span1');\n"
+            + "    var p = document.getElementById('p1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(p, span);\n"
+            + "    log(parent.children.length);\n"
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+
+            + "    var parent2 = document.getElementById('parent2');\n"
+            + "    log(parent2.children.length);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "  </div>\n"
+            + "  <div id='parent2'>\n"
+            + "    <p id='p1'>2</p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "NotFoundError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_referenceNotChild() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var span = document.getElementById('span1');\n"
+            + "    var p = document.getElementById('p1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      parent.moveBefore(span, p);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "  </div>\n"
+            + "  <div id='parent2'>\n"
+            + "    <p id='p1'>2</p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"SPAN", "DIV", "P", "3", "A"},
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_preservesChildren() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+            + "    var p = document.getElementById('p1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(div, p);\n"
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+            + "    log(div.children.length);\n"
+            + "    log(div.children[0].textContent);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <p id='p1'>2</p>\n"
+            + "    <div id='div1'>\n"
+            + "      <span>A</span>\n"
+            + "      <span>B</span>\n"
+            + "      <span>C</span>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"text1", "myClass"},
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_preservesAttributes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(div, span);\n"
+            + "    log(div.getAttribute('data-test'));\n"
+            + "    log(div.className);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div1' data-test='text1' class='myClass'>2</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_returnValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    var result = parent.moveBefore(div, span);\n"
+            + "    log(result === undefined);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div1'>2</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "P", "SPAN", "SECTION"},
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_multipleOperations() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+            + "    var p = document.getElementById('p1');\n"
+            + "    var section = document.getElementById('section1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(section, span);\n"
+            + "    parent.moveBefore(p, section);\n"
+            + "    parent.moveBefore(span, section);\n"
+
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+            + "    log(parent.children[3].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <div id='div1'>1</div>\n"
+            + "    <span id='span1'>2</span>\n"
+            + "    <p id='p1'>3</p>\n"
+            + "    <section id='section1'>4</section>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_staysInDocument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(div, span);\n"
+            + "    log(document.contains(div));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div1'>2</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "DIV", "SPAN"},
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_nullReferenceNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var span = document.getElementById('span1');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(span, null);\n"
+
+            + "    log(parent.children.length);\n"
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div1'>2</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"SPAN", "DIV", "DIV", "0", "1", "A"},
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_nullLevelUp() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div1 = document.getElementById('div1');\n"
+            + "    var div2 = document.getElementById('div2');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    parent.moveBefore(div2, null);\n"
+
+            + "    log(parent.children[0].tagName);\n"
+            + "    log(parent.children[1].tagName);\n"
+            + "    log(parent.children[2].tagName);\n"
+
+            + "    log(div1.children.length);\n"
+            + "    log(div2.children.length);\n"
+            + "    log(div2.children[0].textContent);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div1'>\n"
+            + "      <div id='div2'>\n"
+            + "        <span>A</span>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "NotFoundError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_detachedReferenceNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div');\n"
+            + "    var divDetached = document.createElement('div');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      parent.moveBefore(div, divDetached);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div'>x</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "HierarchyRequestError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_detachedMovedNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div');\n"
+            + "    var divDetached = document.createElement('div');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      parent.moveBefore(divDetached, div);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div'>x</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "TypeError",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_missingArgs() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div');\n"
+            + "    var divDetached = document.createElement('div');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      parent.moveBefore();\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div'>x</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "TypeError",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_missingReferenceNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div');\n"
+            + "    var divDetached = document.createElement('div');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      parent.moveBefore();\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div'>x</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "TypeError",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_wrongMovedNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div');\n"
+            + "    var divDetached = document.createElement('div');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      parent.moveBefore('HtmlUnit', null);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div'>x</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "TypeError",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_wrongReferenceNodeNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div');\n"
+            + "    var divDetached = document.createElement('div');\n"
+
+            + "    if (!parent.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      parent.moveBefore(div, 'HtmlUnit');\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'>\n"
+            + "    <span id='span1'>1</span>\n"
+            + "    <div id='div'>x</div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
 }

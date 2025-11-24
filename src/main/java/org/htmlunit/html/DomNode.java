@@ -1319,6 +1319,52 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Add a DOM node as a child to this node before the referenced node.
+     * If the referenced node is null, append to the end.
+     * @param movedDomNode the node to move
+     * @param referenceDomNode the node to move before
+     * @throws DOMException in case of problems
+     */
+    public void moveBefore(final DomNode movedDomNode, final DomNode referenceDomNode) {
+        if (movedDomNode == referenceDomNode) {
+            return;
+        }
+
+        // If moving to the same position (node is already right before referenceNode), no operation needed
+        if (movedDomNode.getNextSibling() == referenceDomNode) {
+            return;
+        }
+
+        if (movedDomNode.isAncestorOf(this)) {
+            throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+                    "The new child element contains the parent.");
+        }
+
+        if (referenceDomNode != null && !this.isAncestorOf(referenceDomNode)) {
+            throw new DOMException(DOMException.NOT_FOUND_ERR,
+                    "The node before which the new node is to be inserted is not a child of this node.");
+        }
+
+        if (referenceDomNode != null && referenceDomNode.isAttachedToPage() && !movedDomNode.isAttachedToPage()) {
+            throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
+                    "State-preserving atomic move cannot be performed on nodes participating in an invalid hierarchy.");
+        }
+
+        // Remove the node from its current position
+        movedDomNode.basicRemove();
+
+        // Insert at the new position
+        if (referenceDomNode == null) {
+            // Move to the end
+            basicAppend(movedDomNode);
+        }
+        else {
+            // Insert before the reference node
+            referenceDomNode.basicInsertBefore(movedDomNode);
+        }
+    }
+
+    /**
      * @return an {@link Iterable} over the children of this node
      */
     public final Iterable<DomNode> getChildren() {

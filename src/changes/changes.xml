@@ -7,6 +7,16 @@
     </properties>
 
     <body>
+        <release version="4.20.0" date="December xx, 2025" description="Bugfixes">
+            <action type="add" dev="rbri" issue="#1053">
+                HTMLElement#moveBefore() implemented.
+            </action>
+            <action type="update" dev="rbri">
+                neko: code cleanup and warning fixes.
+            </action>
+        </release>
+
+
         <release version="4.19.0" date="November 23, 2025" description="Chrome/Edge 142, Firefox 145, support spread in arrays, neko improvements, Bugfixes">
             <action type="update" dev="rbri">
                 neko: code quality and minor performance improvements.
