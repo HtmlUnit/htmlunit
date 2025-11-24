@@ -299,7 +299,6 @@ public final class StringUtils {
      * A {@code null} separator will return the empty string if the input string is not {@code null}.
      * <p>
      * If nothing is found, the empty string is returned.
-     * <p>
      *
      * @param str the String to get a substring from, may be null.
      * @param find the String to find, may be null.
