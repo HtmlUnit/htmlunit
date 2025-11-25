@@ -1161,6 +1161,21 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Cuts off all relationships this node has with siblings and parents.
      */
     protected void basicRemove() {
+        basicDetach();
+
+        nextSibling_ = null;
+        previousSibling_ = null;
+        parent_ = null;
+        attachedToPage_ = false;
+        for (final DomNode descendant : getDescendants()) {
+            descendant.attachedToPage_ = false;
+        }
+    }
+
+    /**
+     * Cuts off all relationships this node has with siblings and parents.
+     */
+    private void basicDetach() {
         if (parent_ != null && parent_.firstChild_ == this) {
             parent_.firstChild_ = nextSibling_;
         }
@@ -1172,14 +1187,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
         if (parent_ != null && parent_.getLastChild() == this) {
             parent_.firstChild_.previousSibling_ = previousSibling_;
-        }
-
-        nextSibling_ = null;
-        previousSibling_ = null;
-        parent_ = null;
-        attachedToPage_ = false;
-        for (final DomNode descendant : getDescendants()) {
-            descendant.attachedToPage_ = false;
         }
     }
 
@@ -1381,20 +1388,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             return;
         }
 
-        // remove movedDomNode from tree (detach() does too mutch)
-        if (movedDomNode.parent_ != null && movedDomNode.parent_.firstChild_ == movedDomNode) {
-            movedDomNode.parent_.firstChild_ = movedDomNode.nextSibling_;
-        }
-        else if (movedDomNode.previousSibling_ != null && movedDomNode.previousSibling_.nextSibling_ == movedDomNode) {
-            movedDomNode.previousSibling_.nextSibling_ = movedDomNode.nextSibling_;
-        }
-        if (movedDomNode.nextSibling_ != null && movedDomNode.nextSibling_.previousSibling_ == movedDomNode) {
-            movedDomNode.nextSibling_.previousSibling_ = movedDomNode.previousSibling_;
-        }
-        if (movedDomNode.parent_ != null && movedDomNode.parent_.getLastChild() == movedDomNode) {
-            movedDomNode.parent_.firstChild_.previousSibling_ = movedDomNode.previousSibling_;
-        }
-
+        movedDomNode.basicDetach();
         basicInsertBefore(movedDomNode);
 
         fireAddition(movedDomNode);
