@@ -15,6 +15,8 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
@@ -158,6 +160,21 @@ public class HTMLDocument extends Document {
             builder.append(JavaScriptEngine.toString(arg));
         }
         return builder.toString();
+    }
+
+    /**
+     * Moves a given Node inside the invoking node as a direct child, before a given reference node.
+     *
+     * @param context the JavaScript context
+     * @param scope the scope
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     */
+    @JsxFunction({CHROME, EDGE, FF})
+    public static void moveBefore(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        Node.moveBefore(context, scope, thisObj, args, function);
     }
 
     /**

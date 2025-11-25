@@ -14,6 +14,10 @@
  */
 package org.htmlunit.javascript.host.dom;
 
+import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
+
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -99,6 +103,21 @@ public class DocumentFragment extends Node {
     public static void replaceChildren(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.replaceChildren(context, thisObj, args, function);
+    }
+
+    /**
+     * Moves a given Node inside the invoking node as a direct child, before a given reference node.
+     *
+     * @param context the JavaScript context
+     * @param scope the scope
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     */
+    @JsxFunction({CHROME, EDGE, FF})
+    public static void moveBefore(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        Node.moveBefore(context, scope, thisObj, args, function);
     }
 
     /**

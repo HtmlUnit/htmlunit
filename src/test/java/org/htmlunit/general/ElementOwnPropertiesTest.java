@@ -629,7 +629,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),getHTML(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),"
-                + "insertAdjacentHTML(),insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),"
+                + "insertAdjacentHTML(),insertAdjacentText(),lastElementChild[GCE],localName[GCE],"
+                + "matches(),moveBefore(),"
                 + "namespaceURI[GCE],nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],"
                 + "onsearch[GSCE],onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],"
                 + "prefix[GCE],prepend(),previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),"
@@ -644,7 +645,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),getHTML(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),"
-                + "insertAdjacentHTML(),insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),"
+                + "insertAdjacentHTML(),insertAdjacentText(),lastElementChild[GCE],localName[GCE],"
+                + "matches(),moveBefore(),"
                 + "namespaceURI[GCE],nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],"
                 + "onsearch[GSCE],onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],"
                 + "prefix[GCE],prepend(),previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),"
@@ -660,7 +662,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getElementsByTagName(),getElementsByTagNameNS(),"
                 + "getHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
                 + "id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
-                + "lastElementChild[GCE],localName[GCE],matches(),mozMatchesSelector(),namespaceURI[GCE],"
+                + "lastElementChild[GCE],localName[GCE],matches(),moveBefore(),"
+                + "mozMatchesSelector(),namespaceURI[GCE],"
                 + "nextElementSibling[GCE],outerHTML[GSCE],prefix[GCE],prepend(),previousElementSibling[GCE],"
                 + "querySelector(),querySelectorAll(),releaseCapture(),remove(),removeAttribute(),"
                 + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
@@ -827,7 +830,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getElementsByTagName(),getElementsByTagNameNS(),getHTML(),"
                 + "hasAttribute(),hasAttributeNS(),"
                 + "hasAttributes(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
-                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),namespaceURI[GCE],"
+                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),moveBefore(),namespaceURI[GCE],"
                 + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],onsearch[GSCE],"
                 + "onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],prefix[GCE],prepend(),"
                 + "previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),removeAttribute(),"
@@ -845,7 +848,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getElementsByTagName(),getElementsByTagNameNS(),getHTML(),"
                 + "hasAttribute(),hasAttributeNS(),"
                 + "hasAttributes(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
-                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),namespaceURI[GCE],"
+                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),moveBefore(),namespaceURI[GCE],"
                 + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],onsearch[GSCE],"
                 + "onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],prefix[GCE],prepend(),"
                 + "previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),removeAttribute(),"
@@ -863,7 +866,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getElementsByTagName(),getElementsByTagNameNS(),getHTML(),hasAttribute(),hasAttributeNS(),"
                 + "hasAttributes(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
                 + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],"
-                + "matches(),mozMatchesSelector(),namespaceURI[GCE],"
+                + "matches(),moveBefore(),"
+                + "mozMatchesSelector(),namespaceURI[GCE],"
                 + "nextElementSibling[GCE],outerHTML[GSCE],prefix[GCE],prepend(),"
                 + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releaseCapture(),"
                 + "remove(),removeAttribute(),"
@@ -15494,12 +15498,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF_ESR = "constructor()")
     @HtmlUnitNYI(CHROME = "constructor(),dispatchEvent(),documentElement[GCE],getElementById(),"
-                + "open(),write(),writeln()",
+                + "moveBefore(),open(),write(),writeln()",
             EDGE = "constructor(),dispatchEvent(),documentElement[GCE],getElementById(),"
-                + "open(),write(),writeln()",
-            FF_ESR = "close(),constructor(),dispatchEvent(),documentElement[GCE],getElementById(),"
-                + "open(),write(),writeln()",
+                + "moveBefore(),open(),write(),writeln()",
             FF = "close(),constructor(),dispatchEvent(),documentElement[GCE],getElementById(),"
+                + "moveBefore(),open(),write(),writeln()",
+            FF_ESR = "close(),constructor(),dispatchEvent(),documentElement[GCE],getElementById(),"
                 + "open(),write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("", "document");
@@ -15786,13 +15790,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getElementById(),lastElementChild[GCE],prepend(),querySelector(),querySelectorAll(),"
                 + "replaceChildren()")
     @HtmlUnitNYI(CHROME = "append(),childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
-                + "getElementById(),lastElementChild[GCE],prepend(),querySelector(),querySelectorAll(),"
+                + "getElementById(),lastElementChild[GCE],moveBefore(),prepend(),querySelector(),querySelectorAll(),"
                 + "replaceChildren()",
             EDGE = "append(),childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
-                + "getElementById(),lastElementChild[GCE],prepend(),querySelector(),querySelectorAll(),"
+                + "getElementById(),lastElementChild[GCE],moveBefore(),prepend(),querySelector(),querySelectorAll(),"
                 + "replaceChildren()",
             FF = "append(),childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
-                + "getElementById(),lastElementChild[GCE],prepend(),querySelector(),querySelectorAll(),"
+                + "getElementById(),lastElementChild[GCE],moveBefore(),prepend(),querySelector(),querySelectorAll(),"
                 + "replaceChildren()")
     public void documentFragment() throws Exception {
         testString("", "document.createDocumentFragment()");

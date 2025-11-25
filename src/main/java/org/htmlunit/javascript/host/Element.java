@@ -838,47 +838,7 @@ public class Element extends Node {
     @JsxFunction({CHROME, EDGE, FF})
     public static void moveBefore(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
-        ((HTMLElement) thisObj).moveBeforeImpl(args);
-    }
-
-    /**
-     * Add a DOM node as a child to this node before the referenced node.
-     * If the referenced node is null, append to the end.
-     * @param args the arguments
-     * @throws DOMException in case of problems
-     */
-    protected void moveBeforeImpl(final Object[] args) throws org.w3c.dom.DOMException {
-        if (args.length < 2) {
-            throw JavaScriptEngine.typeError(
-                    "Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 0 present.");
-        }
-
-        final Object movedNodeObject = args[0];
-        if (!(movedNodeObject instanceof Node)) {
-            throw JavaScriptEngine.typeError(
-                    "Failed to execute 'moveBefore' on 'Element': parameter 1 is not of type 'Node'.");
-        }
-        final Object referenceNodeObject = args[1];
-        if (referenceNodeObject != null && !(referenceNodeObject instanceof Node)) {
-            throw JavaScriptEngine.typeError(
-                    "Failed to execute 'moveBefore' on 'Element': parameter 2 is not of type 'Node'.");
-        }
-
-        try {
-            if (referenceNodeObject == null) {
-                getDomNodeOrDie().moveBefore(((Node) movedNodeObject).getDomNodeOrDie(), null);
-                return;
-            }
-
-            getDomNodeOrDie().moveBefore(
-                    ((Node) movedNodeObject).getDomNodeOrDie(), ((Node) referenceNodeObject).getDomNodeOrDie());
-        }
-        catch (final org.w3c.dom.DOMException e) {
-            throw JavaScriptEngine.asJavaScriptException(
-                    getWindow(),
-                    "Failed to execute 'moveChild' on '" + this + ": " + e.getMessage(),
-                    e.code);
-        }
+        Node.moveBefore(context, scope, thisObj, args, function);
     }
 
     /**

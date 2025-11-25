@@ -472,6 +472,51 @@ public class Node extends EventTarget {
     }
 
     /**
+     * Moves a given Node inside the invoking node as a direct child, before a given reference node.
+     *
+     * @param context the JavaScript context
+     * @param scope the scope
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     */
+    public static void moveBefore(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (args.length < 2) {
+            throw JavaScriptEngine.typeError(
+                    "Failed to execute 'moveBefore' on 'Element': 2 arguments required, but only 0 present.");
+        }
+
+        final Object movedNodeObject = args[0];
+        if (!(movedNodeObject instanceof Node)) {
+            throw JavaScriptEngine.typeError(
+                    "Failed to execute 'moveBefore' on 'Element': parameter 1 is not of type 'Node'.");
+        }
+        final Object referenceNodeObject = args[1];
+        if (referenceNodeObject != null && !(referenceNodeObject instanceof Node)) {
+            throw JavaScriptEngine.typeError(
+                    "Failed to execute 'moveBefore' on 'Element': parameter 2 is not of type 'Node'.");
+        }
+
+        final Node node = (Node) thisObj;
+        try {
+            if (referenceNodeObject == null) {
+                node.getDomNodeOrDie().moveBefore(((Node) movedNodeObject).getDomNodeOrDie(), null);
+                return;
+            }
+
+            node.getDomNodeOrDie().moveBefore(
+                    ((Node) movedNodeObject).getDomNodeOrDie(), ((Node) referenceNodeObject).getDomNodeOrDie());
+        }
+        catch (final org.w3c.dom.DOMException e) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    node.getWindow(),
+                    "Failed to execute 'moveChild' on '" + node + ": " + e.getMessage(),
+                    e.code);
+        }
+    }
+
+    /**
      * Clones this node.
      * @param deep if {@code true}, recursively clones all descendants
      * @return the newly cloned node
