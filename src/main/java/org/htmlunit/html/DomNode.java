@@ -1170,7 +1170,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (nextSibling_ != null && nextSibling_.previousSibling_ == this) {
             nextSibling_.previousSibling_ = previousSibling_;
         }
-        if (parent_ != null && this == parent_.getLastChild()) {
+        if (parent_ != null && parent_.getLastChild() == this) {
             parent_.firstChild_.previousSibling_ = previousSibling_;
         }
 
@@ -1330,8 +1330,16 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             return;
         }
 
+        if (movedDomNode instanceof DomDocumentFragment) {
+            final DomDocumentFragment fragment = (DomDocumentFragment) movedDomNode;
+            for (final DomNode child : fragment.getChildren()) {
+                moveBefore(child, referenceDomNode);
+            }
+            return;
+        }
+
         // If moving to the same position (node is already right before referenceNode), no operation needed
-        if (movedDomNode.getNextSibling() == referenceDomNode) {
+        if (referenceDomNode != null && movedDomNode.getNextSibling() == referenceDomNode) {
             return;
         }
 
@@ -1350,18 +1358,46 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     "State-preserving atomic move cannot be performed on nodes participating in an invalid hierarchy.");
         }
 
-        // Remove the node from its current position
-        movedDomNode.basicRemove();
-
-        // Insert at the new position
         if (referenceDomNode == null) {
-            // Move to the end
-            basicAppend(movedDomNode);
+            appendChild(movedDomNode);
+            return;
         }
-        else {
-            // Insert before the reference node
-            referenceDomNode.basicInsertBefore(movedDomNode);
+
+        referenceDomNode.moveBefore(movedDomNode);
+    }
+
+    /**
+     * Inserts the specified node as a new child node before this node into the child relationship this node is a
+     * part of. If the specified node is this node, this method is a no-op.
+     *
+     * @param movedDomNode the node to move before the current node
+     */
+    public void moveBefore(final DomNode movedDomNode) {
+        if (previousSibling_ == null) {
+            throw new IllegalStateException("Previous sibling for " + this + " is null.");
         }
+
+        if (movedDomNode == this) {
+            return;
+        }
+
+        // remove movedDomNode from tree (detach() does too mutch)
+        if (movedDomNode.parent_ != null && movedDomNode.parent_.firstChild_ == movedDomNode) {
+            movedDomNode.parent_.firstChild_ = movedDomNode.nextSibling_;
+        }
+        else if (movedDomNode.previousSibling_ != null && movedDomNode.previousSibling_.nextSibling_ == movedDomNode) {
+            movedDomNode.previousSibling_.nextSibling_ = movedDomNode.nextSibling_;
+        }
+        if (movedDomNode.nextSibling_ != null && movedDomNode.nextSibling_.previousSibling_ == movedDomNode) {
+            movedDomNode.nextSibling_.previousSibling_ = movedDomNode.previousSibling_;
+        }
+        if (movedDomNode.parent_ != null && movedDomNode.parent_.getLastChild() == movedDomNode) {
+            movedDomNode.parent_.firstChild_.previousSibling_ = movedDomNode.previousSibling_;
+        }
+
+        basicInsertBefore(movedDomNode);
+
+        fireAddition(movedDomNode);
     }
 
     /**

@@ -782,4 +782,826 @@ public class DocumentFragmentTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(content);
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "P", "SPAN"},
+            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    public void moveBefore_basic() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    var p = document.createElement('p');\n"
+            + "    p.id = 'p1';\n"
+            + "    fragment.appendChild(div);\n"
+            + "    fragment.appendChild(span);\n"
+            + "    fragment.appendChild(p);\n"
+
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    fragment.moveBefore(p, span);\n"
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "P", "DIV", "SPAN"},
+            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    public void moveBefore_moveToFirst() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    var p = document.createElement('p');\n"
+            + "    p.id = 'p1';\n"
+            + "    fragment.appendChild(div);\n"
+            + "    fragment.appendChild(span);\n"
+            + "    fragment.appendChild(p);\n"
+
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    fragment.moveBefore(p, div);\n"
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
+            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    public void moveBefore_samePosition() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    var p = document.createElement('p');\n"
+            + "    p.id = 'p1';\n"
+            + "    fragment.appendChild(div);\n"
+            + "    fragment.appendChild(span);\n"
+            + "    fragment.appendChild(p);\n"
+
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    fragment.moveBefore(span, p);\n"
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
+            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    public void moveBefore_samePositionFirst() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    var p = document.createElement('p');\n"
+            + "    p.id = 'p1';\n"
+            + "    fragment.appendChild(div);\n"
+            + "    fragment.appendChild(span);\n"
+            + "    fragment.appendChild(p);\n"
+
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    fragment.moveBefore(div, span);\n"
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "SPAN", "P", "DIV", "SPAN", "P"},
+            FF_ESR = {"DIV", "SPAN", "P", "no moveBefore()"})
+    public void moveBefore_itself() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    var p = document.createElement('p');\n"
+            + "    p.id = 'p1';\n"
+            + "    fragment.appendChild(div);\n"
+            + "    fragment.appendChild(span);\n"
+            + "    fragment.appendChild(p);\n"
+
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    fragment.moveBefore(span, span);\n"
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "HierarchyRequestError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_ancestor() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    fragment.appendChild(div);\n"
+            + "    div.appendChild(span);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      span.moveBefore(div, null);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "NotFoundError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_differentParents() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment1 = document.createDocumentFragment();\n"
+            + "    var fragment2 = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var p = document.createElement('p');\n"
+            + "    p.id = 'p1';\n"
+            + "    fragment1.appendChild(div);\n"
+            + "    fragment2.appendChild(p);\n"
+
+            + "    if (!fragment1.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      fragment1.moveBefore(div, p);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "NotFoundError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_descendant() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    var p = document.createElement('p');\n"
+            + "    p.id = 'p1';\n"
+            + "    fragment.appendChild(div);\n"
+            + "    div.appendChild(span);\n"
+            + "    fragment.appendChild(p);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      div.moveBefore(span, fragment);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "NotFoundError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_movedNotChild() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment1 = document.createDocumentFragment();\n"
+            + "    var fragment2 = document.createDocumentFragment();\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    var p = document.createElement('p');\n"
+            + "    p.id = 'p1';\n"
+            + "    fragment1.appendChild(span);\n"
+            + "    fragment2.appendChild(p);\n"
+
+            + "    if (!fragment1.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      fragment1.moveBefore(span, p);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "NotFoundError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_referenceNotChild() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment1 = document.createDocumentFragment();\n"
+            + "    var fragment2 = document.createDocumentFragment();\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    var p = document.createElement('p');\n"
+            + "    p.id = 'p1';\n"
+            + "    fragment1.appendChild(span);\n"
+            + "    fragment2.appendChild(p);\n"
+
+            + "    if (!fragment1.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      fragment1.moveBefore(span, p);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"SPAN", "DIV", "P", "3", "A"},
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_preservesChildren() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var spanA = document.createElement('span');\n"
+            + "    spanA.textContent = 'A';\n"
+            + "    var spanB = document.createElement('span');\n"
+            + "    spanB.textContent = 'B';\n"
+            + "    var spanC = document.createElement('span');\n"
+            + "    spanC.textContent = 'C';\n"
+            + "    div.appendChild(spanA);\n"
+            + "    div.appendChild(spanB);\n"
+            + "    div.appendChild(spanC);\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    var p = document.createElement('p');\n"
+            + "    p.id = 'p1';\n"
+            + "    fragment.appendChild(span);\n"
+            + "    fragment.appendChild(p);\n"
+            + "    fragment.appendChild(div);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    fragment.moveBefore(div, p);\n"
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+            + "    log(div.children.length);\n"
+            + "    log(div.children[0].textContent);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"text1", "myClass"},
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_preservesAttributes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    div.setAttribute('data-test', 'text1');\n"
+            + "    div.className = 'myClass';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    fragment.appendChild(span);\n"
+            + "    fragment.appendChild(div);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    fragment.moveBefore(div, span);\n"
+            + "    log(div.getAttribute('data-test'));\n"
+            + "    log(div.className);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_returnValue() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    fragment.appendChild(span);\n"
+            + "    fragment.appendChild(div);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    var result = fragment.moveBefore(div, span);\n"
+            + "    log(result === undefined);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"DIV", "P", "SPAN", "SECTION"},
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_multipleOperations() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    var p = document.createElement('p');\n"
+            + "    p.id = 'p1';\n"
+            + "    var section = document.createElement('section');\n"
+            + "    section.id = 'section1';\n"
+            + "    fragment.appendChild(div);\n"
+            + "    fragment.appendChild(span);\n"
+            + "    fragment.appendChild(p);\n"
+            + "    fragment.appendChild(section);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    fragment.moveBefore(section, span);\n"
+            + "    fragment.moveBefore(p, section);\n"
+            + "    fragment.moveBefore(span, section);\n"
+
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "    log(fragment.childNodes[2].tagName);\n"
+            + "    log(fragment.childNodes[3].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "DIV", "SPAN"},
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_nullReferenceNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    fragment.appendChild(span);\n"
+            + "    fragment.appendChild(div);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    fragment.moveBefore(span, null);\n"
+
+            + "    log(fragment.childNodes.length);\n"
+            + "    log(fragment.childNodes[0].tagName);\n"
+            + "    log(fragment.childNodes[1].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "NotFoundError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_detachedReferenceNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var divDetached = document.createElement('div');\n"
+            + "    fragment.appendChild(div);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      fragment.moveBefore(div, divDetached);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "HierarchyRequestError/DOMException",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_detachedMovedNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var divDetached = document.createElement('div');\n"
+            + "    fragment.appendChild(div);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      fragment.moveBefore(divDetached, div);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "TypeError",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_missingArgs() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      fragment.moveBefore();\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "TypeError",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_missingReferenceNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    fragment.appendChild(div);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      fragment.moveBefore(div);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_staysInDocument() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.id = 'div1';\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    fragment.appendChild(span);\n"
+            + "    fragment.appendChild(div);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    fragment.moveBefore(div, span);\n"
+            + "    log(fragment.contains(div));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "SPAN", "DIV", "1", "SPAN", "3", "SPAN", "DIV", "DIV", "0", "1", "SPAN"},
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_nullLevelUp() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    fragment.appendChild(span);\n"
+            + "    var div1 = document.createElement('div');\n"
+            + "    div1.id = 'div1';\n"
+            + "    fragment.appendChild(div1);\n"
+            + "    var div2 = document.createElement('div');\n"
+            + "    div2.id = 'div2';\n"
+            + "    div1.appendChild(div2);\n"
+            + "    span = document.createElement('span');\n"
+            + "    div2.appendChild(span);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    log(fragment.children.length);\n"
+            + "    log(fragment.children[0].tagName);\n"
+            + "    log(fragment.children[1].tagName);\n"
+
+            + "    log(div2.children.length);\n"
+            + "    log(div2.children[0].tagName);\n"
+
+            + "    fragment.moveBefore(div2, null);\n"
+
+            + "    log(fragment.children.length);\n"
+            + "    log(fragment.children[0].tagName);\n"
+            + "    log(fragment.children[1].tagName);\n"
+            + "    log(fragment.children[2].tagName);\n"
+
+            + "    log(div1.children.length);\n"
+            + "    log(div2.children.length);\n"
+            + "    log(div2.children[0].tagName);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "TypeError",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_wrongMovedNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    fragment.appendChild(span);\n"
+
+            + "    var parent = document.getElementById('parent');\n"
+            + "    var div = document.getElementById('div');\n"
+            + "    var divDetached = document.createElement('div');\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      fragment.moveBefore('HtmlUnit', null);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "TypeError",
+            FF_ESR = "no moveBefore()")
+    public void moveBefore_wrongReferenceNodeNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var span = document.createElement('span');\n"
+            + "    span.id = 'span1';\n"
+            + "    fragment.appendChild(span);\n"
+
+            + "    if (!fragment.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      fragment.moveBefore(span, 'HtmlUnit');\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
 }

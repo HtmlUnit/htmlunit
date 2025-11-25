@@ -3237,4 +3237,34 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             fail(e.getMessage());
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "HierarchyRequestError/DOMException",
+            FF_ESR = "no moveBefore()")
+    @HtmlUnitNYI(CHROME = "success", EDGE = "success", FF = "success")
+    public void moveBefore_basic() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var div = document.getElementById('div1');\n"
+
+            + "    if (!document.moveBefore) { log('no moveBefore()'); return; }\n"
+
+            + "    try {\n"
+            + "      document.moveBefore(div, null);\n"
+            + "      log('success');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'>1</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
 }
