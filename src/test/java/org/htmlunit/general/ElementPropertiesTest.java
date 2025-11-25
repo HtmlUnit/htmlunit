@@ -724,7 +724,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitMatchesSelector()")
     @HtmlUnitNYI(CHROME = "append(),attributes,"
                 + "childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "clientWidth,closest(),firstElementChild,getAttribute(),"
+                + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),"
                 + "getHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
@@ -740,7 +741,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             EDGE = "append(),attributes,"
                 + "childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "clientWidth,closest(),firstElementChild,getAttribute(),"
+                + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),"
                 + "getHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
@@ -756,7 +758,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF = "append(),attributes,"
                 + "childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "clientWidth,closest(),firstElementChild,getAttribute(),"
+                + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),getHTML(),hasAttribute(),hasAttributeNS(),"
                 + "hasAttributes(),id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
@@ -771,7 +774,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF_ESR = "append(),attributes,"
                 + "childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "clientWidth,closest(),firstElementChild,getAttribute(),"
+                + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),getHTML(),hasAttribute(),hasAttributeNS(),"
                 + "hasAttributes(),id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
@@ -890,7 +894,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "toggleAttribute(),"
                 + "webkitMatchesSelector()")
     @HtmlUnitNYI(CHROME = "after(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
+                + "clientWidth,closest(),getAttribute(),"
+                + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
                 + "getElementsByTagNameNS(),getHTML(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id,innerHTML,"
@@ -903,7 +908,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollWidth,setAttribute(),setAttributeNode(),setAttributeNS(),"
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             EDGE = "after(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
+                + "clientWidth,closest(),getAttribute(),"
+                + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
                 + "getElementsByTagNameNS(),getHTML(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id,innerHTML,"
@@ -917,7 +923,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF = "after(),attributes,before(),"
                 + "classList,className,clientHeight,clientLeft,clientTop,clientWidth,"
-                + "closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
+                + "closest(),getAttribute(),"
+                + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),getHTML(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id,innerHTML,insertAdjacentElement(),"
@@ -930,7 +937,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF_ESR = "after(),attributes,before(),"
                 + "classList,className,clientHeight,clientLeft,clientTop,clientWidth,"
-                + "closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
+                + "closest(),getAttribute(),"
+                + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),getHTML(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id,innerHTML,insertAdjacentElement(),"

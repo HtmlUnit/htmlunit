@@ -8,8 +8,11 @@
 
     <body>
         <release version="4.20.0" date="December xx, 2025" description="Bugfixes">
+            <action type="add" dev="rbri">
+                HTMLElement#getAttributeNames() implemented.
+            </action>
             <action type="add" dev="rbri" issue="#1053">
-                HTMLElement#moveBefore() implemented.
+                HTMLElement#moveBefore() implemented (also for Document and DocumentFragment).
             </action>
             <action type="update" dev="rbri">
                 neko: code cleanup and warning fixes.

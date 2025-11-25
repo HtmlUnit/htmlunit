@@ -7599,4 +7599,374 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "true"})
+    public void getAttributeNames_noAttributes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('testDiv');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    log(Array.isArray(names));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='testDiv'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "id", "class", "title"})
+    public void getAttributeNames_multipleAttributes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('testDiv');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='testDiv' class='myClass' title='Test Title'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "id", "data-foo", "data-bar"})
+    public void getAttributeNames_dataAttributes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('testDiv');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='testDiv' data-foo='value1' data-bar='value2'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "id", "custom-attr"})
+    public void getAttributeNames_customAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('testDiv');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='testDiv' custom-attr='customValue'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "id", "2", "id", "new-attr"})
+    public void getAttributeNames_afterSetAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('testDiv');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "    elem.setAttribute('new-attr', 'newValue');\n"
+            + "    names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='testDiv'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "id", "title", "1", "id"})
+    public void getAttributeNames_afterRemoveAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('testDiv');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "    elem.removeAttribute('title');\n"
+            + "    names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='testDiv' title='Test'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "id", "class"})
+    public void getAttributeNames_caseInsensitive() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('testDiv');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='testDiv' CLASS='myClass'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"4", "id", "type", "name", "value"})
+    public void getAttributeNames_inputElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('myInput');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' type='text' name='username' value='test'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void getAttributeNames_createdElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.createElement('div');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "xmlns", "id"})
+    public void getAttributeNames_svgElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('mySvg');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <svg xmlns='http://www.w3.org/2000/svg' id='mySvg'></svg>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "id", "foo", "bar"})
+    public void getAttributeNames_attributeOrder() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('testDiv');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='testDiv' foo='1' bar='2'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "id", "onclick"})
+    public void getAttributeNames_eventAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('testDiv');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='testDiv' onclick='alert(\"clicked\")'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "id", "style"})
+    public void getAttributeNames_styleAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('testDiv');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='testDiv' style='color: red;'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "id", "disabled"})
+    public void getAttributeNames_booleanAttribute() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('testBtn');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <button id='testBtn' disabled></button>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "href", "xlink:href", "show"})
+    public void getAttributeNames_namespace() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var elem = document.createElement('a');\n"
+            + "    elem.setAttribute('href', 'https://example.com');\n"
+            + "    elem.setAttributeNS('http://www.w3.org/1999/xlink',"
+            + "                         'xlink:href', 'https://example.com');\n"
+            + "    elem.setAttributeNS('http://www.w3.org/1999/xlink', 'show', 'new');\n"
+            + "    var names = elem.getAttributeNames();\n"
+            + "    log(names.length);\n"
+            + "    for (var i = 0; i < names.length; i++) {\n"
+            + "      log(names[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <button id='testBtn' disabled></button>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
 }

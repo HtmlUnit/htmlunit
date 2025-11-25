@@ -24,6 +24,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -671,6 +672,26 @@ public class Element extends Node {
         }
 
         return rectList;
+    }
+
+    /**
+     * @return the attribute names of the element as an Array of strings.
+     *     If the element has no attributes it returns an empty array.
+     */
+    @JsxFunction
+    public Scriptable getAttributeNames() {
+        final org.w3c.dom.NamedNodeMap attributes = getDomNodeOrDie().getAttributes();
+
+        if (attributes.getLength() == 0) {
+            return JavaScriptEngine.newArray(this, 0);
+        }
+
+        final ArrayList<String> res = new ArrayList<>();
+        for (int i = 0; i < attributes.getLength(); i++) {
+            res.add(attributes.item(i).getNodeName());
+        }
+
+        return JavaScriptEngine.newArray(this, res.toArray());
     }
 
     /**
