@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -1375,6 +1376,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "HierarchyRequestError/DOMException",
             FF_ESR = "no moveBefore()")
+    @HtmlUnitNYI(CHROME = "success", EDGE = "success", FF = "success")
     public void moveBefore_detachedMovedNode() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -1465,6 +1467,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             FF_ESR = "no moveBefore()")
+    @HtmlUnitNYI(CHROME = "false", EDGE = "false", FF = "false")
     public void moveBefore_staysInDocument() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
