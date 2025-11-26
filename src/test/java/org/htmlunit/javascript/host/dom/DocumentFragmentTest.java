@@ -783,6 +783,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(content);
     }
+
     /**
      * @throws Exception if the test fails
      */
