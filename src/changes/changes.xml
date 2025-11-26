@@ -8,6 +8,12 @@
 
     <body>
         <release version="4.20.0" date="December xx, 2025" description="Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: 'ES6Generator' migrated to lambda based ScriptableObject.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: 'NativeIterator' migrated to lambda based ScriptableObject.
+            </action>
             <action type="add" dev="rbri">
                 HTMLElement#getAttributeNames() implemented.
             </action>
