@@ -910,11 +910,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         test("ruby", "blink");
     }
 
-    @Alerts(DEFAULT = "1",
-            FF = "0",
-            FF_ESR = "0")
-    @HtmlUnitNYI(FF = "1",
-            FF_ESR = "1")
+    @Alerts("1")
     void _select_hr() throws Exception {
         test("select", "hr");
     }

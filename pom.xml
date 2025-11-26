@@ -496,6 +496,7 @@
                             <includes>
                                 <include>**/huge/CtorPrototypeTest.java</include>
                                 <include>**/huge/ElementClosesElementTest.java</include>
+                                <include>**/huge/ElementClosesElement2Test.java</include>
                             </includes>
                             <argLine>-Xms256m -Xmx512m</argLine>
                             <systemPropertyVariables>
