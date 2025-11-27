@@ -169,6 +169,7 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.css.BrowserConfiguration$ChromeAndEdgeAndFirefox")
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.general.huge.ElementClosesElementTest")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.general.huge.ElementClosesElement2Test")
         .should().callMethod(BrowserVersion.class, "isFirefox", new Class[] {});
 
     /**

@@ -77,6 +77,7 @@
 
     <suppress checks="MethodName" files="CtorPrototypeTest.java"/>
     <suppress checks="MethodName" files="ElementClosesElementTest.java"/>
+    <suppress checks="MethodName" files="ElementClosesElement2Test.java"/>
     <suppress checks="MethodName" files="HostConstructorTest.java"/>
     <suppress checks="MethodName" files="DedicatedWorkerGlobalScopeConstantsTest.java"/>
     <suppress checks="MethodName" files="HostParentOf.+Test.java"/>
