@@ -17,7 +17,6 @@ package org.htmlunit.html.parser.neko;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -190,27 +189,26 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
     }
 
     /**
-     * Extract nested exception within an XNIException (Nekohtml uses reflection and generated
-     * exceptions are wrapped many times within XNIException and InvocationTargetException)
+     * Extract nested exception within an XNIException.
      *
      * @param e the original XNIException
      * @return the cause exception
      */
     static Throwable extractNestedException(final Throwable e) {
-        Throwable originalException = e;
-        Throwable cause = ((XNIException) e).getException();
-        while (cause != null) {
+        Throwable originalException;
+        Throwable cause = e;
+        do {
             originalException = cause;
+
             if (cause instanceof XNIException) {
-                cause = ((XNIException) cause).getException();
-            }
-            else if (cause instanceof InvocationTargetException) {
                 cause = cause.getCause();
             }
             else {
                 cause = null;
             }
         }
+        while (cause != null);
+
         return originalException;
     }
 
