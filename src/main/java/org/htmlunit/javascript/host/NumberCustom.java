@@ -18,7 +18,6 @@ import java.text.NumberFormat;
 import java.util.IllformedLocaleException;
 import java.util.Locale;
 
-import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -58,8 +57,6 @@ public final class NumberCustom {
             }
         }
 
-        final BrowserVersion browserVersion = ((Window) thisObj.getParentScope()).getBrowserVersion();
-        final Locale locale = Locale.forLanguageTag(browserVersion.getBrowserLanguage());
-        return NumberFormat.getInstance(locale).format(Double.parseDouble(thisObj.toString()));
+        return NumberFormat.getInstance(context.getLocale()).format(Double.parseDouble(thisObj.toString()));
     }
 }
