@@ -9,6 +9,18 @@
     <body>
         <release version="4.20.0" date="December xx, 2025" description="Bugfixes">
             <action type="update" dev="RhinoTeam">
+                core-js: Destructuring support improved.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: 'ES6Iterator' migrated to lambda based ScriptableObject.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: 'DestructuringIterator' migrated to lambda based ScriptableObject.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: 'NativeConsole' migrated to lambda based ScriptableObject.
+            </action>
+            <action type="update" dev="RhinoTeam">
                 core-js: 'ES6Generator' migrated to lambda based ScriptableObject.
             </action>
             <action type="update" dev="RhinoTeam">
