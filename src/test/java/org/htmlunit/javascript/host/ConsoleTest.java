@@ -104,7 +104,9 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function", "function", "function", "function", "function", "function"})
+    @Alerts({"function", "function", "function", "function", "function", "function",
+             "function", "function", "function", "function", "function", "function",
+             "function"})
     public void methods() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -112,11 +114,22 @@ public class ConsoleTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  log(typeof console.log);\n"
+            + "  log(typeof console.trace);\n"
             + "  log(typeof console.info);\n"
             + "  log(typeof console.warn);\n"
             + "  log(typeof console.error);\n"
             + "  log(typeof console.debug);\n"
+
+            + "  log(typeof console.assert);\n"
+
+            + "  log(typeof console.time);\n"
+            + "  log(typeof console.timeLog);\n"
+            + "  log(typeof console.timeEnd);\n"
             + "  log(typeof console.timeStamp);\n"
+
+            + "  log(typeof console.count);\n"
+            + "  log(typeof console.countReset);\n"
+
             + "</script>\n"
             + "</body></html>";
 
@@ -149,15 +162,112 @@ public class ConsoleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("success")
-    public void fromWindow() throws Exception {
+    public void logFromWindow() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    var x = console.error;\n"
+            + "    let x = console.log;\n"
             + "    x('hello');\n"
+
+            + "    x = console.trace;\n"
+            + "    x('hello');\n"
+
+            + "    x = console.info;\n"
+            + "    x('hello');\n"
+
+            + "    x = console.warn;\n"
+            + "    x('hello');\n"
+
+            + "    x = console.error;\n"
+            + "    x('hello');\n"
+
+            + "    x = console.debug;\n"
+            + "    x('hello');\n"
+
+            + "    log('success');\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void timeFromWindow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    let x = console.time;\n"
+            + "    x('hello');\n"
+
+            + "    x = console.timeLog;\n"
+            + "    x('hello');\n"
+
+            + "    x = console.timeEnd;\n"
+            + "    x('hello');\n"
+
+            + "    x = console.timeStamp;\n"
+            + "    x('hello');\n"
+
+            + "    log('success');\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void assertFromWindow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    let x = console.assert;\n"
+            + "    x(true, 'hello');\n"
+
+            + "    log('success');\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void countFromWindow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    let x = console.count;\n"
+            + "    x('hello');\n"
+
+            + "    x = console.countReset;\n"
+            + "    x('hello');\n"
+
             + "    log('success');\n"
             + "  } catch(e) { logEx(e) }\n"
             + "</script>\n"
