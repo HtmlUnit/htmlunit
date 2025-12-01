@@ -73,7 +73,17 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
         testString("", "document.createElement('" + tagName + "')");
     }
 
+
     private void testString(final String preparation, final String string) throws Exception {
+        testString(preparation, string, true);
+    }
+
+    private void testInstanceString(final String preparation, final String string) throws Exception {
+        testString(preparation, string, false);
+    }
+
+    private void testString(final String preparation,
+                    final String string, final boolean fromCtor) throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -96,11 +106,13 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
                 + "   */\n"
                 + "  function process(object) {\n"
                 + "    var all = [];\n"
-                + "    var props = Object.getOwnPropertySymbols(object.constructor.prototype);\n"
+                + "    var props = Object.getOwnPropertySymbols(object"
+                                            + (fromCtor ? ".constructor.prototype" : "") + ");\n"
                 + "    for (i = 0; i < props.length; i++) {\n"
                 + "      var str = props[i].toString();\n"
 
-                + "      let desc = Object.getOwnPropertyDescriptor(object.constructor.prototype, props[i]);\n"
+                + "      let desc = Object.getOwnPropertyDescriptor(object"
+                                            + (fromCtor ? ".constructor.prototype" : "") + ", props[i]);\n"
                 + "      str += ' [';\n"
                 + "      if (desc.get != undefined) str += 'G';\n"
                 + "      if (desc.set != undefined) str += 'S';\n"
@@ -3378,5 +3390,20 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [Notification]")
     public void notification() throws Exception {
         testString("", "new Notification('not')");
+    }
+
+    /**
+     * Test console.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [console]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [console]",
+            FF = "Symbol(Symbol.toStringTag) [C] [console]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [console]")
+    @HtmlUnitNYI(CHROME = "-", EDGE = "-", FF = "-", FF_ESR = "-")
+    public void console() throws Exception {
+        testInstanceString("", "console");
     }
 }

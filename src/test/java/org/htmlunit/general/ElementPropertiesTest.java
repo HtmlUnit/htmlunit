@@ -9671,4 +9671,38 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void notification() throws Exception {
         testString("", "new Notification('not')");
     }
+
+    /**
+     * Test console.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "assert(),clear(),context(),count(),countReset(),createTask(),debug(),dir(),dirxml(),error(),"
+                + "group(),groupCollapsed(),groupEnd(),info(),log(),memory,profile(),profileEnd(),table(),time(),"
+                + "timeEnd(),timeLog(),timeStamp(),trace(),"
+                + "warn()",
+            EDGE = "assert(),clear(),context(),count(),countReset(),createTask(),debug(),dir(),dirxml(),error(),"
+                + "group(),groupCollapsed(),groupEnd(),info(),log(),memory,profile(),profileEnd(),table(),time(),"
+                + "timeEnd(),timeLog(),timeStamp(),trace(),"
+                + "warn()",
+            FF = "assert(),clear(),count(),countReset(),debug(),dir(),dirxml(),error(),exception(),group(),"
+                + "groupCollapsed(),groupEnd(),info(),log(),profile(),profileEnd(),table(),time(),timeEnd(),"
+                + "timeLog(),timeStamp(),trace(),"
+                + "warn()",
+            FF_ESR = "assert(),clear(),count(),countReset(),debug(),dir(),dirxml(),error(),exception(),group(),"
+                + "groupCollapsed(),groupEnd(),info(),log(),profile(),profileEnd(),table(),time(),timeEnd(),"
+                + "timeLog(),timeStamp(),trace(),"
+                + "warn()")
+    @HtmlUnitNYI(CHROME = "assert(),count(),countReset(),debug(),error(),info(),log(),"
+                + "time(),timeEnd(),timeLog(),toSource(),trace(),warn()",
+            EDGE = "assert(),count(),countReset(),debug(),error(),info(),log(),"
+                + "time(),timeEnd(),timeLog(),toSource(),trace(),warn()",
+            FF = "assert(),count(),countReset(),debug(),error(),info(),log(),"
+                + "time(),timeEnd(),timeLog(),toSource(),trace(),warn()",
+            FF_ESR = "assert(),count(),countReset(),debug(),error(),info(),log(),"
+                + "time(),timeEnd(),timeLog(),toSource(),trace(),warn()")
+    public void console() throws Exception {
+        testString("", "console");
+    }
 }

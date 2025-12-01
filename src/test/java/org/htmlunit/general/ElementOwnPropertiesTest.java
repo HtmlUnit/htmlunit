@@ -74,6 +74,15 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     private void testString(final String preparation, final String string) throws Exception {
+        testString(preparation, string, true);
+    }
+
+    private void testInstanceString(final String preparation, final String string) throws Exception {
+        testString(preparation, string, false);
+    }
+
+    private void testString(final String preparation,
+                    final String string, final boolean fromCtor) throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -96,11 +105,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "   */\n"
                 + "  function process(object) {\n"
                 + "    var all = [];\n"
-                + "    var props = Object.getOwnPropertyNames(object.constructor.prototype);\n"
+                + "    var props = Object.getOwnPropertyNames(object"
+                                            + (fromCtor ? ".constructor.prototype" : "") + ");\n"
                 + "    for (i = 0; i < props.length; i++) {\n"
                 + "      var property = props[i];\n"
 
-                + "      let desc = Object.getOwnPropertyDescriptor(object.constructor.prototype, property);\n"
+                + "      let desc = Object.getOwnPropertyDescriptor(object"
+                                            + (fromCtor ? ".constructor.prototype" : "") + ", property);\n"
                 + "      if (desc.get === undefined && typeof object[property] == 'function') {\n"
                 + "        all.push(property + '()');\n"
                 + "      } else {\n"
@@ -18587,5 +18598,40 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "constructor()")
     public void notification() throws Exception {
         testString("", "new Notification('not')");
+    }
+
+    /**
+     * Test console.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "assert(),clear(),context(),count(),countReset(),createTask(),debug(),dir(),dirxml(),error(),"
+                + "group(),groupCollapsed(),groupEnd(),info(),log(),memory[GSCE],profile(),profileEnd(),table(),"
+                + "time(),timeEnd(),timeLog(),timeStamp(),trace(),"
+                + "warn()",
+            EDGE = "assert(),clear(),context(),count(),countReset(),createTask(),debug(),dir(),dirxml(),error(),"
+                + "group(),groupCollapsed(),groupEnd(),info(),log(),memory[GSCE],profile(),profileEnd(),table(),"
+                + "time(),timeEnd(),timeLog(),timeStamp(),trace(),"
+                + "warn()",
+            FF = "assert(),clear(),count(),countReset(),debug(),dir(),dirxml(),error(),exception(),group(),"
+                + "groupCollapsed(),groupEnd(),info(),log(),profile(),profileEnd(),table(),time(),timeEnd(),"
+                + "timeLog(),timeStamp(),trace(),"
+                + "warn()",
+            FF_ESR = "assert(),clear(),count(),countReset(),debug(),dir(),dirxml(),error(),exception(),group(),"
+                + "groupCollapsed(),groupEnd(),info(),log(),profile(),profileEnd(),table(),time(),timeEnd(),"
+                + "timeLog(),timeStamp(),trace(),"
+                + "warn()")
+    @HtmlUnitNYI(
+            CHROME = "assert(),count(),countReset(),debug(),error(),info(),log(),"
+                + "time(),timeEnd(),timeLog(),timeStamp(),toSource(),trace(),warn()",
+            EDGE = "assert(),count(),countReset(),debug(),error(),info(),log(),"
+                + "time(),timeEnd(),timeLog(),timeStamp(),toSource(),trace(),warn()",
+            FF = "assert(),count(),countReset(),debug(),error(),info(),log(),"
+                + "time(),timeEnd(),timeLog(),timeStamp(),toSource(),trace(),warn()",
+            FF_ESR = "assert(),count(),countReset(),debug(),error(),info(),log(),"
+                + "time(),timeEnd(),timeLog(),timeStamp(),toSource(),trace(),warn()")
+    public void console() throws Exception {
+        testInstanceString("", "console");
     }
 }
