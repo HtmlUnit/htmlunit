@@ -433,9 +433,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0661\u0667\u200f/\u0662\u200f/\u0661\u0664\u0663\u0665 \u0647\u0640",
-            FF = "\u0662\u0660\u200f/\u0661\u0662\u200f/\u0662\u0660\u0661\u0663",
-            FF_ESR = "\u0662\u0660\u200f/\u0661\u0662\u200f/\u0662\u0660\u0661\u0663")
+    @Alerts("\u0662\u0660\u200f/\u0661\u0662\u200f/\u0662\u0660\u0661\u0663")
     public void format_ar_sa() throws Exception {
         test("new Intl.DateTimeFormat('ar-SA').format(date)");
     }

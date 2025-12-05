@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.intl;
 
 import java.time.ZoneId;
 import java.time.chrono.Chronology;
-import java.time.chrono.HijrahChronology;
 import java.time.chrono.JapaneseChronology;
 import java.time.chrono.ThaiBuddhistChronology;
 import java.time.format.DateTimeFormatter;
@@ -151,7 +150,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("ga", mmSlash);
         commonFormats.put("is", mmSlash);
         commonFormats.put("mk", mmSlash);
-        commonFormats.put("ar-SA", "d\u200F/M\u200F/YYYY هـ");
 
         EDGE_FORMATS_.putAll(commonFormats);
 
@@ -165,8 +163,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
         FF_CHRONOLOGIES_.putAll(commonChronologies);
         FF_ESR_CHRONOLOGIES_.putAll(commonChronologies);
-
-        commonChronologies.put("ar-SA", HijrahChronology.INSTANCE);
         CHROME_CHRONOLOGIES_.putAll(commonChronologies);
         EDGE_CHRONOLOGIES_.putAll(commonChronologies);
     }

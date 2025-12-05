@@ -91,7 +91,6 @@ public class NumberFormat extends HtmlUnitScriptable {
         FF_ESR_FORMATS_.putAll(commonFormats);
 
         commonFormats.put("be", ",.");
-        commonFormats.put("en-ZA", ",.");
         commonFormats.put("mk", ",.");
         commonFormats.put("is", ",.");
 
