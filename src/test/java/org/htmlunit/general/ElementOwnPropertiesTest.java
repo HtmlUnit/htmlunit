@@ -3350,17 +3350,17 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "aLink[GSCE],background[GSCE],bgColor[GSCE],constructor(),link[GSCE],onafterprint[GSCE],"
                 + "onbeforeprint[GSCE],onbeforeunload[GSCE],onblur[GSCE],onerror[GSCE],onfocus[GSCE],"
-                + "onhashchange[GSCE],onlanguagechange[GSCE],onload[GSCE],onmessage[GSCE],onmessageerror[GSCE],"
-                + "onoffline[GSCE],ononline[GSCE],onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],"
-                + "onrejectionhandled[GSCE],onresize[GSCE],onscroll[GSCE],onstorage[GSCE],"
-                + "onunhandledrejection[GSCE],onunload[GSCE],text[GSCE],"
+                + "ongamepadconnected[GSCE],ongamepaddisconnected[GSCE],onhashchange[GSCE],onlanguagechange[GSCE],"
+                + "onload[GSCE],onmessage[GSCE],onmessageerror[GSCE],onoffline[GSCE],ononline[GSCE],"
+                + "onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],onrejectionhandled[GSCE],onresize[GSCE],"
+                + "onscroll[GSCE],onstorage[GSCE],onunhandledrejection[GSCE],onunload[GSCE],text[GSCE],"
                 + "vLink[GSCE]",
             EDGE = "aLink[GSCE],background[GSCE],bgColor[GSCE],constructor(),link[GSCE],onafterprint[GSCE],"
                 + "onbeforeprint[GSCE],onbeforeunload[GSCE],onblur[GSCE],onerror[GSCE],onfocus[GSCE],"
-                + "onhashchange[GSCE],onlanguagechange[GSCE],onload[GSCE],onmessage[GSCE],onmessageerror[GSCE],"
-                + "onoffline[GSCE],ononline[GSCE],onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],"
-                + "onrejectionhandled[GSCE],onresize[GSCE],onscroll[GSCE],onstorage[GSCE],"
-                + "onunhandledrejection[GSCE],onunload[GSCE],text[GSCE],"
+                + "ongamepadconnected[GSCE],ongamepaddisconnected[GSCE],onhashchange[GSCE],onlanguagechange[GSCE],"
+                + "onload[GSCE],onmessage[GSCE],onmessageerror[GSCE],onoffline[GSCE],ononline[GSCE],"
+                + "onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],onrejectionhandled[GSCE],onresize[GSCE],"
+                + "onscroll[GSCE],onstorage[GSCE],onunhandledrejection[GSCE],onunload[GSCE],text[GSCE],"
                 + "vLink[GSCE]",
             FF = "aLink[GSCE],background[GSCE],bgColor[GSCE],constructor(),link[GSCE],onafterprint[GSCE],"
                 + "onbeforeprint[GSCE],onbeforeunload[GSCE],ongamepadconnected[GSCE],ongamepaddisconnected[GSCE],"
@@ -6271,16 +6271,18 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "cols[GSCE],constructor(),onafterprint[GSCE],onbeforeprint[GSCE],onbeforeunload[GSCE],"
-                + "onblur[GSCE],onerror[GSCE],onfocus[GSCE],onhashchange[GSCE],onlanguagechange[GSCE],onload[GSCE],"
-                + "onmessage[GSCE],onmessageerror[GSCE],onoffline[GSCE],ononline[GSCE],onpagehide[GSCE],"
-                + "onpageshow[GSCE],onpopstate[GSCE],onrejectionhandled[GSCE],onresize[GSCE],onscroll[GSCE],"
-                + "onstorage[GSCE],onunhandledrejection[GSCE],onunload[GSCE],"
+                + "onblur[GSCE],onerror[GSCE],onfocus[GSCE],ongamepadconnected[GSCE],ongamepaddisconnected[GSCE],"
+                + "onhashchange[GSCE],onlanguagechange[GSCE],onload[GSCE],onmessage[GSCE],onmessageerror[GSCE],"
+                + "onoffline[GSCE],ononline[GSCE],onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],"
+                + "onrejectionhandled[GSCE],onresize[GSCE],onscroll[GSCE],onstorage[GSCE],"
+                + "onunhandledrejection[GSCE],onunload[GSCE],"
                 + "rows[GSCE]",
             EDGE = "cols[GSCE],constructor(),onafterprint[GSCE],onbeforeprint[GSCE],onbeforeunload[GSCE],"
-                + "onblur[GSCE],onerror[GSCE],onfocus[GSCE],onhashchange[GSCE],onlanguagechange[GSCE],onload[GSCE],"
-                + "onmessage[GSCE],onmessageerror[GSCE],onoffline[GSCE],ononline[GSCE],onpagehide[GSCE],"
-                + "onpageshow[GSCE],onpopstate[GSCE],onrejectionhandled[GSCE],onresize[GSCE],onscroll[GSCE],"
-                + "onstorage[GSCE],onunhandledrejection[GSCE],onunload[GSCE],"
+                + "onblur[GSCE],onerror[GSCE],onfocus[GSCE],ongamepadconnected[GSCE],ongamepaddisconnected[GSCE],"
+                + "onhashchange[GSCE],onlanguagechange[GSCE],onload[GSCE],onmessage[GSCE],onmessageerror[GSCE],"
+                + "onoffline[GSCE],ononline[GSCE],onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],"
+                + "onrejectionhandled[GSCE],onresize[GSCE],onscroll[GSCE],onstorage[GSCE],"
+                + "onunhandledrejection[GSCE],onunload[GSCE],"
                 + "rows[GSCE]",
             FF = "cols[GSCE],constructor(),onafterprint[GSCE],onbeforeprint[GSCE],onbeforeunload[GSCE],"
                 + "ongamepadconnected[GSCE],ongamepaddisconnected[GSCE],onhashchange[GSCE],onlanguagechange[GSCE],"
@@ -6295,10 +6297,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onunhandledrejection[GSCE],onunload[GSCE],"
                 + "rows[GSCE]")
     @HtmlUnitNYI(CHROME = "cols[GSCE],constructor(),onafterprint[GSCE],onbeforeprint[GSCE],onbeforeunload[GSCE],"
+                + "ongamepadconnected[GSCE],ongamepaddisconnected[GSCE],"
                 + "onhashchange[GSCE],onlanguagechange[GSCE],onmessage[GSCE],onmessageerror[GSCE],onoffline[GSCE],"
                 + "ononline[GSCE],onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],onrejectionhandled[GSCE],"
                 + "onstorage[GSCE],onunhandledrejection[GSCE],onunload[GSCE],rows[GSCE]",
             EDGE = "cols[GSCE],constructor(),onafterprint[GSCE],onbeforeprint[GSCE],onbeforeunload[GSCE],"
+                + "ongamepadconnected[GSCE],ongamepaddisconnected[GSCE],"
                 + "onhashchange[GSCE],onlanguagechange[GSCE],onmessage[GSCE],onmessageerror[GSCE],onoffline[GSCE],"
                 + "ononline[GSCE],onpagehide[GSCE],onpageshow[GSCE],onpopstate[GSCE],onrejectionhandled[GSCE],"
                 + "onstorage[GSCE],onunhandledrejection[GSCE],onunload[GSCE],rows[GSCE]")
@@ -18004,11 +18008,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "isHistoryNavigation[GCE],json(),keepalive[GCE],method[GCE],mode[GCE],redirect[GCE],referrer[GCE],"
                 + "referrerPolicy[GCE],signal[GCE],targetAddressSpace[GCE],text(),"
                 + "url[GCE]",
-            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),"
-                + "cache[GCE],clone(),constructor(),credentials[GCE],"
-                + "destination[GCE],duplex[GCE],formData(),headers[GCE],integrity[GCE],isHistoryNavigation[GCE],json(),"
-                + "keepalive[GCE],method[GCE],mode[GCE],redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],"
-                + "text(),url[GCE]",
+            EDGE = "arrayBuffer(),blob(),body[GCE],bodyUsed[GCE],bytes(),cache[GCE],clone(),constructor(),"
+                + "credentials[GCE],destination[GCE],duplex[GCE],formData(),headers[GCE],integrity[GCE],"
+                + "isHistoryNavigation[GCE],json(),keepalive[GCE],method[GCE],mode[GCE],redirect[GCE],referrer[GCE],"
+                + "referrerPolicy[GCE],signal[GCE],targetAddressSpace[GCE],text(),"
+                + "url[GCE]",
             FF = "arrayBuffer(),blob(),bodyUsed[GCE],bytes(),cache[GCE],clone(),constructor(),credentials[GCE],"
                 + "destination[GCE],formData(),headers[GCE],integrity[GCE],json(),keepalive[GCE],method[GCE],"
                 + "mode[GCE],redirect[GCE],referrer[GCE],referrerPolicy[GCE],signal[GCE],text(),"
