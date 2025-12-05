@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="4.20.0" date="December xx, 2025" description="Bugfixes">
+        <release version="4.20.0" date="December xx, 2025" description="Chrome/Edge 143, core-js, Bugfixes">
             <action type="update" dev="RhinoTeam">
                 core-js: Disambiguate local variable names to fix debugger issues.
             </action>
