@@ -210,7 +210,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Window jsWindowScope = new Window();
         jsWindowScope.setClassName("Window");
 
-        context.initSafeStandardObjects(jsWindowScope);
+        final Scriptable scope = context.initSafeStandardObjects(jsWindowScope);
         configureRhino(webClient, browserVersion, jsWindowScope);
 
         final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();

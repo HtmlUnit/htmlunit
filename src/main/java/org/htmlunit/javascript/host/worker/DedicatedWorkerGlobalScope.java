@@ -125,7 +125,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
 
-        context.initSafeStandardObjects(this);
+        final Scriptable scope = context.initSafeStandardObjects(this);
         JavaScriptEngine.configureRhino(webClient, browserVersion, this);
 
         final WorkerJavaScriptConfiguration jsConfig = WorkerJavaScriptConfiguration.getInstance(browserVersion);
