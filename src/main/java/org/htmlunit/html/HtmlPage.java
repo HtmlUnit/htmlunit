@@ -2917,12 +2917,12 @@ public class HtmlPage extends SgmlPage {
         MappedElementIndexEntry() {
             // we do not expect to many elements having the same id/name
             elements_ = new ArrayList<>(2);
-            sorted_ = false;
+            sorted_ = true;
         }
 
         void add(final DomElement element) {
             elements_.add(element);
-            sorted_ = false;
+            sorted_ = elements_.size() < 2;
         }
 
         DomElement first() {
@@ -2941,7 +2941,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         List<DomElement> elements() {
-            if (sorted_ || elements_.isEmpty()) {
+            if (sorted_) {
                 return elements_;
             }
 
@@ -2951,8 +2951,9 @@ public class HtmlPage extends SgmlPage {
             return elements_;
         }
 
-        boolean remove(final DomElement element) {
-            return elements_.remove(element);
+        void remove(final DomElement element) {
+            elements_.remove(element);
+            sorted_ = elements_.size() < 2;
         }
     }
 }
