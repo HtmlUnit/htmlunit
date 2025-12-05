@@ -245,8 +245,8 @@ public final class BrowserVersion implements Serializable {
         EDGE.scriptAcceptHeader_ = "*/*";
 
         EDGE.secClientHintUserAgentHeader_ = "\"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\"";
+                + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
+                + EDGE.getBrowserVersionNumeric() + "\", \"Not A(Brand\";v=\"24\"";
 
         EDGE.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
