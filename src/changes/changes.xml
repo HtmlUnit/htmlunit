@@ -9,6 +9,18 @@
     <body>
         <release version="4.20.0" date="December xx, 2025" description="Bugfixes">
             <action type="update" dev="RhinoTeam">
+                core-js: Disambiguate local variable names to fix debugger issues.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix variable resolution in switch statements with let declarations (regression from 4.18.0)
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: default parameter evaluation ordering for generators fixed.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Symbol.toStringTag implemented for generators.
+            </action>
+            <action type="update" dev="RhinoTeam">
                 core-js: Destructuring support improved.
             </action>
             <action type="update" dev="RhinoTeam">
