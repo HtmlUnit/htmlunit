@@ -634,9 +634,20 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",",
-             "/", ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
-             "{", "|", "}", "~"})
+    @Alerts(DEFAULT = {"", "/", ">"},
+            FF = {"", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",",
+                  "/", ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
+                  "{", "|", "}", "~"},
+            FF_ESR = {"", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",",
+                      "/", ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
+                      "{", "|", "}", "~"})
+    @HtmlUnitNYI(
+            CHROME = {"", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",",
+                      "/", ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
+                      "{", "|", "}", "~"},
+            EDGE = {"", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",",
+                    "/", ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
+                    "{", "|", "}", "~"})
     public void documentCreateElementValidTagNames() throws Exception {
         expandExpectedAlertsVariables("\\\\");
 
@@ -704,10 +715,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[170]", "[186]", "[192-214]", "[216-246]", "[248-305]", "[308-318]", "[321-328]",
-                       "[330-382]", "[384-451]", "[461-496]", "[500-687]", "[699-705]", "[880-883]",
-                       "[886-887]", "[891-893]", "[895]", "[902]", "[904-906]", "[908]", "[910-929]",
-                       "[931-975]", "[979-980]", "[983-999]"},
+    @Alerts(DEFAULT = "[128-999]",
             FF = {"[170]", "[181]", "[186]", "[192-214]", "[216-246]", "[248-305]", "[308-318]", "[321-328]",
                   "[330-382]", "[384-451]", "[461-496]", "[500-501]", "[506-535]", "[592-680]",
                   "[699-705]", "[902]", "[904-906]", "[908]", "[910-929]",
@@ -3770,7 +3778,9 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "0", "8", "1256"})
+    @Alerts(DEFAULT = {"0", "0", "8", "1256"},
+            EDGE = {"0", "0", "8", "1248"})
+    @HtmlUnitNYI(EDGE = {"0", "0", "8", "1256"})
     public void documentElementBoundingClientRect() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>"
@@ -3822,7 +3832,9 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "0", "8", "1256"})
+    @Alerts(DEFAULT = {"0", "0", "8", "1256"},
+            EDGE = {"0", "0", "8", "1248"})
+    @HtmlUnitNYI(EDGE = {"0", "0", "8", "1256"})
     public void documentElementOffset() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>"
