@@ -1220,7 +1220,8 @@ public final class StyleAttributes implements Serializable {
         FONT_KERNING_("font-kerning", "font-kerning", ff("auto")),
 
         /** The style property {@code fontLanguageOverride}. */
-        FONT_LANGUAGE_OVERRIDE("fontLanguageOverride", "font-language-override", ffNormal()),
+        FONT_LANGUAGE_OVERRIDE("fontLanguageOverride", "font-language-override",
+                chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code font-language-override}. */
         FONT_LANGUAGE_OVERRIDE_("font-language-override", "font-language-override", ffNormal()),

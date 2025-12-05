@@ -199,6 +199,7 @@ fontDisplay=:
 fontFamily=:"Times New Roman"
 fontFeatureSettings=:normal
 fontKerning=:auto
+fontLanguageOverride=:normal
 fontOpticalSizing=:auto
 fontPalette=:normal
 fontSize=:16px
