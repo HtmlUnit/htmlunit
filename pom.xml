@@ -27,12 +27,12 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitcsp.version>4.19.0</htmlunitcsp.version>
-        <htmlunitcssparser.version>4.19.0</htmlunitcssparser.version>
-        <htmlunitcorejs.version>4.20.0-SNAPSHOT</htmlunitcorejs.version>
-        <htmlunitneko.version>4.20.0-SNAPSHOT</htmlunitneko.version>
-        <htmlunitwebsocketclient.version>4.19.0</htmlunitwebsocketclient.version>
-        <htmlunitxpath.version>4.19.0</htmlunitxpath.version>
+        <htmlunitcsp.version>4.20.0</htmlunitcsp.version>
+        <htmlunitcssparser.version>4.20.0</htmlunitcssparser.version>
+        <htmlunitcorejs.version>4.20.0</htmlunitcorejs.version>
+        <htmlunitneko.version>4.20.0</htmlunitneko.version>
+        <htmlunitwebsocketclient.version>4.20.0</htmlunitwebsocketclient.version>
+        <htmlunitxpath.version>4.20.0</htmlunitxpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
@@ -41,9 +41,9 @@
         <!--brotli.version>0.1.2</brotli.version-->
 
         <!-- selenium -->
-        <htmlunitdriver.version>4.38.0</htmlunitdriver.version>
-        <selenium.version>4.38.0</selenium.version>
-        <selenium.devtools.artifactId>selenium-devtools-v141</selenium.devtools.artifactId>
+        <htmlunitdriver.version>4.39.0-SNAPSHOT</htmlunitdriver.version>
+        <selenium.version>4.39.0</selenium.version>
+        <selenium.devtools.artifactId>selenium-devtools-v143</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
         <junit.version>5.14.1</junit.version>
