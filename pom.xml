@@ -6,7 +6,7 @@
 
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.20.0-SNAPSHOT</version>
+    <version>4.20.0</version>
     <packaging>jar</packaging>
 
     <name>HtmlUnit</name>
@@ -41,7 +41,7 @@
         <!--brotli.version>0.1.2</brotli.version-->
 
         <!-- selenium -->
-        <htmlunitdriver.version>4.39.0-SNAPSHOT</htmlunitdriver.version>
+        <htmlunitdriver.version>4.39.0</htmlunitdriver.version>
         <selenium.version>4.39.0</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v143</selenium.devtools.artifactId>
 
