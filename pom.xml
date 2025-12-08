@@ -6,7 +6,7 @@
 
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.20.0</version>
+    <version>4.21.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>HtmlUnit</name>
@@ -29,7 +29,7 @@
 
         <htmlunitcsp.version>4.20.0</htmlunitcsp.version>
         <htmlunitcssparser.version>4.20.0</htmlunitcssparser.version>
-        <htmlunitcorejs.version>4.20.0</htmlunitcorejs.version>
+        <htmlunitcorejs.version>4.21.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitneko.version>4.20.0</htmlunitneko.version>
         <htmlunitwebsocketclient.version>4.20.0</htmlunitwebsocketclient.version>
         <htmlunitxpath.version>4.20.0</htmlunitxpath.version>
