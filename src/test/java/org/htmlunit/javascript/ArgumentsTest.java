@@ -63,6 +63,165 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"TypeError", "TypeError", "TypeError", "TypeError"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "1", "TypeError"},
+            EDGE = {"0", "0", "1", "TypeError"},
+            FF = {"0", "0", "1", "TypeError"},
+            FF_ESR = {"0", "0", "1", "TypeError"})
+    public void argumentsStrictScript() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(test.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(a) {\n"
+            + "    try {\n"
+            + "      log(test.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(test1.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(arguments.callee.caller.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError", "1", "TypeError"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "1", "TypeError"},
+            EDGE = {"0", "0", "1", "TypeError"},
+            FF = {"0", "0", "1", "TypeError"},
+            FF_ESR = {"0", "0", "1", "TypeError"})
+    public void argumentsStrictParentFoo() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    'use strict';\n"
+            + "    try {\n"
+            + "      log(test.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(a) {\n"
+            + "    try {\n"
+            + "      log(test.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(test1.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(arguments.callee.caller.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0", "TypeError", "TypeError"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "1", "TypeError"},
+            EDGE = {"0", "0", "1", "TypeError"},
+            FF = {"0", "0", "1", "TypeError"},
+            FF_ESR = {"0", "0", "1", "TypeError"})
+    public void argumentsStrictChildFoo() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(test.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(a) {\n"
+            + "    'use strict';\n"
+            + "    try {\n"
+            + "      log(test.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(test1.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(arguments.callee.caller.arguments.length);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void argumentsPrototype() throws Exception {
         final String html = DOCTYPE_HTML
@@ -857,49 +1016,6 @@ public class ArgumentsTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void argumentsCaller() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html>\n"
-            + "<body>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "function test() {\n"
-            + "  log(arguments.caller);\n"
-            + "}\n"
-            + "test();\n"
-            + "</script>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void argumentsCallerStrict() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html>\n"
-            + "<body>\n"
-            + "<script>\n"
-            + "'use strict';\n"
-            + LOG_TITLE_FUNCTION
-            + "function test() {\n"
-            + "  log(arguments.caller);\n"
-            + "}\n"
-            + "test();\n"
-            + "</script>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
      * Test arguments with zero parameters.
      * @throws Exception if the test fails
      */
@@ -1650,6 +1766,392 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "}\n"
             + "test();\n"
             + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "undefined", "test"})
+    public void argumentsCaller() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(arguments.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(a) {\n"
+            + "    try {\n"
+            + "      log(arguments.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(arguments.callee.caller.name);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "undefined", "TypeError"})
+    public void argumentsCallerStrictScript() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(arguments.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(a) {\n"
+            + "    try {\n"
+            + "      log(arguments.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(arguments.callee.caller.name);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "undefined", "null"})
+    @HtmlUnitNYI(CHROME = {"undefined", "undefined", "undefined"},
+            EDGE = {"undefined", "undefined", "undefined"},
+            FF = {"undefined", "undefined", "undefined"},
+            FF_ESR = {"undefined", "undefined", "undefined"})
+    public void argumentsCallerStrictParentFoo() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    'use strict';\n"
+            + "    try {\n"
+            + "      log(arguments.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(a) {\n"
+            + "    try {\n"
+            + "      log(arguments.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(arguments.callee.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "undefined", "TypeError"})
+    public void argumentsCallerStrictChildFoo() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(arguments.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(a) {\n"
+            + "    'use strict';\n"
+            + "    try {\n"
+            + "      log(arguments.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(arguments.callee.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null", "test", "test"})
+    @HtmlUnitNYI(CHROME = {"undefined", "undefined", "test", "test"},
+            EDGE = {"undefined", "undefined", "test", "test"},
+            FF = {"undefined", "undefined", "test", "test"},
+            FF_ESR = {"undefined", "undefined", "test", "test"})
+    public void caller() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(test.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(a) {\n"
+            + "    try {\n"
+            + "      log(test.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(test1.caller.name);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(arguments.callee.caller.name);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError", "TypeError", "TypeError"})
+    @HtmlUnitNYI(CHROME = {"undefined", "undefined", "TypeError", "TypeError"},
+            EDGE = {"undefined", "undefined", "TypeError", "TypeError"},
+            FF = {"undefined", "undefined", "TypeError", "TypeError"},
+            FF_ESR = {"undefined", "undefined", "TypeError", "TypeError"})
+    public void callerStrictScript() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(test.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(a) {\n"
+            + "    try {\n"
+            + "      log(test.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(test1.caller.name);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(arguments.callee.caller.name);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError", "null", "null"})
+    @HtmlUnitNYI(CHROME = {"undefined", "undefined", "undefined", "undefined"},
+            EDGE = {"undefined", "undefined", "undefined", "undefined"},
+            FF = {"undefined", "undefined", "undefined", "undefined"},
+            FF_ESR = {"undefined", "undefined", "undefined", "undefined"})
+    public void callerStrictParentFoo() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    'use strict';\n"
+            + "    try {\n"
+            + "      log(test.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(a) {\n"
+            + "    try {\n"
+            + "      log(test.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(test1.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(arguments.callee.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null", "TypeError", "TypeError"})
+    @HtmlUnitNYI(CHROME = {"undefined", "undefined", "TypeError", "TypeError"},
+            EDGE = {"undefined", "undefined", "TypeError", "TypeError"},
+            FF = {"undefined", "undefined", "TypeError", "TypeError"},
+            FF_ESR = {"undefined", "undefined", "TypeError", "TypeError"})
+    public void callerStrictChildFoo() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(test.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "    test1('hi');\n"
+            + "  }\n"
+
+            + "  function test1(a) {\n"
+            + "    'use strict';\n"
+            + "    try {\n"
+            + "      log(test.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(test1.caller.name);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+
+            + "    try {\n"
+            + "      log(arguments.callee.caller);\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  test();\n"
+            + "</script>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
