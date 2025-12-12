@@ -30,7 +30,7 @@
         <htmlunitcsp.version>4.20.0</htmlunitcsp.version>
         <htmlunitcssparser.version>4.20.0</htmlunitcssparser.version>
         <htmlunitcorejs.version>4.21.0-SNAPSHOT</htmlunitcorejs.version>
-        <htmlunitneko.version>4.20.0</htmlunitneko.version>
+        <htmlunitneko.version>4.20.1-SNAPSHOT</htmlunitneko.version>
         <htmlunitwebsocketclient.version>4.20.0</htmlunitwebsocketclient.version>
         <htmlunitxpath.version>4.20.0</htmlunitxpath.version>
 
