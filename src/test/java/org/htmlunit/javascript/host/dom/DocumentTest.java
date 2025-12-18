@@ -2768,10 +2768,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @HtmlUnitNYI(CHROME = "undefined",
-            EDGE = "undefined",
-            FF = "undefined",
-            FF_ESR = "undefined")
     public void caller() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"

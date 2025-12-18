@@ -2134,6 +2134,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "      function someLoad(event) {\n"
             + "        var caller = arguments.callee.caller;\n"
+            + "        log(caller);\n"
             + "        log(typeof caller == 'function' ? 'function' : caller);\n"
             + "      }\n"
             + "      function test() {\n"

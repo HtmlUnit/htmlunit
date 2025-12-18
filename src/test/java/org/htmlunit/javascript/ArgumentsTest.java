@@ -1854,11 +1854,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"undefined", "false", "false", "undefined", "false", "false", "null"})
-    @HtmlUnitNYI(
-            CHROME = {"undefined", "false", "false", "undefined", "false", "false", "undefined"},
-            EDGE = {"undefined", "false", "false", "undefined", "false", "false", "undefined"},
-            FF = {"undefined", "false", "false", "undefined", "false", "false", "undefined"},
-            FF_ESR = {"undefined", "false", "false", "undefined", "false", "false", "undefined"})
     public void argumentsCallerStrictParentFoo() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1956,15 +1951,6 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "false", "false", "null", "false", "false",
              "test", "false", "false", "test", "false", "false"})
-    @HtmlUnitNYI(
-            CHROME = {"undefined", "false", "false", "undefined", "false", "false",
-                      "test", "false", "true", "test", "false", "true"},
-            EDGE = {"undefined", "false", "false", "undefined", "false", "false",
-                    "test", "false", "true", "test", "false", "true"},
-            FF = {"undefined", "false", "false", "undefined", "false", "false",
-                  "test", "false", "true", "test", "false", "true"},
-            FF_ESR = {"undefined", "false", "false", "undefined", "false", "false",
-                      "test", "false", "true", "test", "false", "true"})
     public void caller() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -2022,15 +2008,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError", "false", "false", "TypeError", "false", "false", "TypeError", "false", "false", "TypeError"})
-    @HtmlUnitNYI(
-            CHROME = {"undefined", "false", "false", "undefined", "false", "false",
-                      "TypeError", "false", "false", "TypeError"},
-            EDGE = {"undefined", "false", "false", "undefined", "false", "false",
-                    "TypeError", "false", "false", "TypeError"},
-            FF = {"undefined", "false", "false", "undefined", "false", "false",
-                  "TypeError", "false", "false", "TypeError"},
-            FF_ESR = {"undefined", "false", "false", "undefined", "false", "false",
-                      "TypeError", "false", "false", "TypeError"})
     public void callerStrictScript() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -2087,15 +2064,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError", "false", "false", "TypeError", "false", "false", "null", "false", "false", "null"})
-    @HtmlUnitNYI(
-            CHROME = {"undefined", "false", "false", "undefined", "false", "false",
-                      "undefined", "false", "false", "undefined"},
-            EDGE = {"undefined", "false", "false", "undefined", "false", "false",
-                    "undefined", "false", "false", "undefined"},
-            FF = {"undefined", "false", "false", "undefined", "false", "false",
-                  "undefined", "false", "false", "undefined"},
-            FF_ESR = {"undefined", "false", "false", "undefined", "false", "false",
-                      "undefined", "false", "false", "undefined"})
     public void callerStrictParentFoo() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -2152,15 +2120,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"null", "false", "false", "null", "false", "false", "TypeError", "false", "false", "TypeError"})
-    @HtmlUnitNYI(
-            CHROME = {"undefined", "false", "false", "undefined", "false", "false",
-                      "TypeError", "false", "false", "TypeError"},
-            EDGE = {"undefined", "false", "false", "undefined", "false", "false",
-                    "TypeError", "false", "false", "TypeError"},
-            FF = {"undefined", "false", "false", "undefined", "false", "false",
-                  "TypeError", "false", "false", "TypeError"},
-            FF_ESR = {"undefined", "false", "false", "undefined", "false", "false",
-                      "TypeError", "false", "false", "TypeError"})
     public void callerStrictChildFoo() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
