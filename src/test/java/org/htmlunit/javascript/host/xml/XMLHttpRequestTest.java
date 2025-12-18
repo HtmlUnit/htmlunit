@@ -2122,10 +2122,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined",
-            EDGE = "undefined",
-            FF = "undefined",
-            FF_ESR = "undefined")
+    @HtmlUnitNYI(CHROME = "null",
+            EDGE = "null",
+            FF = "null",
+            FF_ESR = "null")
     public void addEventListenerCaller() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
