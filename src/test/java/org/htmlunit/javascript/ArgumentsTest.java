@@ -113,10 +113,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError", "TypeError", "1", "TypeError"})
-    @HtmlUnitNYI(CHROME = {"0", "0", "1", "TypeError"},
-            EDGE = {"0", "0", "1", "TypeError"},
-            FF = {"0", "0", "1", "TypeError"},
-            FF_ESR = {"0", "0", "1", "TypeError"})
     public void argumentsStrictParentFoo() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -166,10 +162,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0", "0", "TypeError", "TypeError"})
-    @HtmlUnitNYI(CHROME = {"0", "0", "1", "TypeError"},
-            EDGE = {"0", "0", "1", "TypeError"},
-            FF = {"0", "0", "1", "TypeError"},
-            FF_ESR = {"0", "0", "1", "TypeError"})
     public void argumentsStrictChildFoo() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -386,10 +378,10 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError", "[object Arguments]", "TypeError", "TypeError"})
-    @HtmlUnitNYI(CHROME = {"null", "[object Arguments]", "null", "null"},
-            EDGE = {"null", "[object Arguments]", "null", "null"},
-            FF = {"null", "[object Arguments]", "null", "null"},
-            FF_ESR = {"null", "[object Arguments]", "null", "null"})
+    @HtmlUnitNYI(CHROME = {"null", "[object Arguments]", "TypeError", "null"},
+            EDGE = {"null", "[object Arguments]", "TypeError", "null"},
+            FF = {"null", "[object Arguments]", "TypeError", "null"},
+            FF_ESR = {"null", "[object Arguments]", "TypeError", "null"})
     public void argumentsShouldBeNullOutsideFunctionStrict() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -499,10 +491,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "TypeError"})
-    @HtmlUnitNYI(CHROME = {"2", "null"},
-            EDGE = {"2", "null"},
-            FF = {"2", "null"},
-            FF_ESR = {"2", "null"})
     public void passedCountDifferentFromDeclaredStrict() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
