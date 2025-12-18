@@ -64,10 +64,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError", "TypeError", "TypeError", "TypeError"})
-    @HtmlUnitNYI(CHROME = {"0", "0", "1", "TypeError"},
-            EDGE = {"0", "0", "1", "TypeError"},
-            FF = {"0", "0", "1", "TypeError"},
-            FF_ESR = {"0", "0", "1", "TypeError"})
     public void argumentsStrictScript() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -390,10 +386,10 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"TypeError", "[object Arguments]", "TypeError", "TypeError"})
-    @HtmlUnitNYI(CHROME = {"null", "[object Arguments]", "[object Arguments]", "null"},
-            EDGE = {"null", "[object Arguments]", "[object Arguments]", "null"},
-            FF = {"null", "[object Arguments]", "[object Arguments]", "null"},
-            FF_ESR = {"null", "[object Arguments]", "[object Arguments]", "null"})
+    @HtmlUnitNYI(CHROME = {"null", "[object Arguments]", "null", "null"},
+            EDGE = {"null", "[object Arguments]", "null", "null"},
+            FF = {"null", "[object Arguments]", "null", "null"},
+            FF_ESR = {"null", "[object Arguments]", "null", "null"})
     public void argumentsShouldBeNullOutsideFunctionStrict() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -503,10 +499,10 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "TypeError"})
-    @HtmlUnitNYI(CHROME = {"2", "[object Arguments]"},
-            EDGE = {"2", "[object Arguments]"},
-            FF = {"2", "[object Arguments]"},
-            FF_ESR = {"2", "[object Arguments]"})
+    @HtmlUnitNYI(CHROME = {"2", "null"},
+            EDGE = {"2", "null"},
+            FF = {"2", "null"},
+            FF_ESR = {"2", "null"})
     public void passedCountDifferentFromDeclaredStrict() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1774,7 +1770,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"undefined", "false", "undefined", "false", "test"})
+    @Alerts({"undefined", "false", "false", "undefined", "false", "false", "test"})
     public void argumentsCaller() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1789,6 +1785,8 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(arguments).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(arguments, 'caller'));\n"
+
             + "    test1('hi');\n"
             + "  }\n"
 
@@ -1799,6 +1797,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(arguments).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(arguments, 'caller'));\n"
 
             + "    try {\n"
             + "      log(arguments.callee.caller.name);\n"
@@ -1818,7 +1817,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"undefined", "false", "undefined", "false", "TypeError"})
+    @Alerts({"undefined", "false", "false", "undefined", "false", "false", "TypeError"})
     public void argumentsCallerStrictScript() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1834,6 +1833,8 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(arguments).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(arguments, 'caller'));\n"
+
             + "    test1('hi');\n"
             + "  }\n"
 
@@ -1844,6 +1845,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(arguments).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(arguments, 'caller'));\n"
 
             + "    try {\n"
             + "      log(arguments.callee.caller.name);\n"
@@ -1863,11 +1865,12 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"undefined", "false", "undefined", "false", "null"})
-    @HtmlUnitNYI(CHROME = {"undefined", "false", "undefined", "false", "undefined"},
-            EDGE = {"undefined", "false", "undefined", "false", "undefined"},
-            FF = {"undefined", "false", "undefined", "false", "undefined"},
-            FF_ESR = {"undefined", "false", "undefined", "false", "undefined"})
+    @Alerts({"undefined", "false", "false", "undefined", "false", "false", "null"})
+    @HtmlUnitNYI(
+            CHROME = {"undefined", "false", "false", "undefined", "false", "false", "undefined"},
+            EDGE = {"undefined", "false", "false", "undefined", "false", "false", "undefined"},
+            FF = {"undefined", "false", "false", "undefined", "false", "false", "undefined"},
+            FF_ESR = {"undefined", "false", "false", "undefined", "false", "false", "undefined"})
     public void argumentsCallerStrictParentFoo() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1883,6 +1886,8 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(arguments).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(arguments, 'caller'));\n"
+
             + "    test1('hi');\n"
             + "  }\n"
 
@@ -1893,6 +1898,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(arguments).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(arguments, 'caller'));\n"
 
             + "    try {\n"
             + "      log(arguments.callee.caller);\n"
@@ -1912,7 +1918,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"undefined", "false", "undefined", "false", "TypeError"})
+    @Alerts({"undefined", "false", "false", "undefined", "false", "false", "TypeError"})
     public void argumentsCallerStrictChildFoo() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1927,6 +1933,8 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(arguments).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(arguments, 'caller'));\n"
+
             + "    test1('hi');\n"
             + "  }\n"
 
@@ -1938,6 +1946,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(arguments).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(arguments, 'caller'));\n"
 
             + "    try {\n"
             + "      log(arguments.callee.caller);\n"
@@ -1957,11 +1966,17 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"null", "false", "null", "false", "test", "false", "test", "false"})
-    @HtmlUnitNYI(CHROME = {"undefined", "false", "undefined", "false", "test", "false", "test", "false"},
-            EDGE = {"undefined", "false", "undefined", "false", "test", "false", "test", "false"},
-            FF = {"undefined", "false", "undefined", "false", "test", "false", "test", "false"},
-            FF_ESR = {"undefined", "false", "undefined", "false", "test", "false", "test", "false"})
+    @Alerts({"null", "false", "false", "null", "false", "false",
+             "test", "false", "false", "test", "false", "false"})
+    @HtmlUnitNYI(
+            CHROME = {"undefined", "false", "false", "undefined", "false", "false",
+                      "test", "false", "true", "test", "false", "true"},
+            EDGE = {"undefined", "false", "false", "undefined", "false", "false",
+                    "test", "false", "true", "test", "false", "true"},
+            FF = {"undefined", "false", "false", "undefined", "false", "false",
+                  "test", "false", "true", "test", "false", "true"},
+            FF_ESR = {"undefined", "false", "false", "undefined", "false", "false",
+                      "test", "false", "true", "test", "false", "true"})
     public void caller() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1976,6 +1991,8 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test, 'caller'));\n"
+
             + "    test1('hi');\n"
             + "  }\n"
 
@@ -1986,6 +2003,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test, 'caller'));\n"
 
             + "    try {\n"
             + "      log(test1.caller.name);\n"
@@ -1993,6 +2011,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test1).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test1, 'caller'));\n"
 
             + "    try {\n"
             + "      log(arguments.callee.caller.name);\n"
@@ -2000,6 +2019,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(arguments.callee).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(arguments.callee, 'caller'));\n"
             + "  }\n"
 
             + "  test();\n"
@@ -2013,11 +2033,16 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"TypeError", "false", "TypeError", "false", "TypeError", "false", "TypeError"})
-    @HtmlUnitNYI(CHROME = {"undefined", "false", "undefined", "false", "TypeError", "false", "TypeError"},
-            EDGE = {"undefined", "false", "undefined", "false", "TypeError", "false", "TypeError"},
-            FF = {"undefined", "false", "undefined", "false", "TypeError", "false", "TypeError"},
-            FF_ESR = {"undefined", "false", "undefined", "false", "TypeError", "false", "TypeError"})
+    @Alerts({"TypeError", "false", "false", "TypeError", "false", "false", "TypeError", "false", "false", "TypeError"})
+    @HtmlUnitNYI(
+            CHROME = {"undefined", "false", "false", "undefined", "false", "false",
+                      "TypeError", "false", "false", "TypeError"},
+            EDGE = {"undefined", "false", "false", "undefined", "false", "false",
+                    "TypeError", "false", "false", "TypeError"},
+            FF = {"undefined", "false", "false", "undefined", "false", "false",
+                  "TypeError", "false", "false", "TypeError"},
+            FF_ESR = {"undefined", "false", "false", "undefined", "false", "false",
+                      "TypeError", "false", "false", "TypeError"})
     public void callerStrictScript() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -2033,6 +2058,8 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test, 'caller'));\n"
+
             + "    test1('hi');\n"
             + "  }\n"
 
@@ -2043,6 +2070,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test, 'caller'));\n"
 
             + "    try {\n"
             + "      log(test1.caller.name);\n"
@@ -2050,6 +2078,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test1).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test1, 'caller'));\n"
 
             + "    try {\n"
             + "      log(arguments.callee.caller.name);\n"
@@ -2069,11 +2098,16 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"TypeError", "false", "TypeError", "false", "null", "false", "null"})
-    @HtmlUnitNYI(CHROME = {"undefined", "false", "undefined", "false", "undefined", "false", "undefined"},
-            EDGE = {"undefined", "false", "undefined", "false", "undefined", "false", "undefined"},
-            FF = {"undefined", "false", "undefined", "false", "undefined", "false", "undefined"},
-            FF_ESR = {"undefined", "false", "undefined", "false", "undefined", "false", "undefined"})
+    @Alerts({"TypeError", "false", "false", "TypeError", "false", "false", "null", "false", "false", "null"})
+    @HtmlUnitNYI(
+            CHROME = {"undefined", "false", "false", "undefined", "false", "false",
+                      "undefined", "false", "false", "undefined"},
+            EDGE = {"undefined", "false", "false", "undefined", "false", "false",
+                    "undefined", "false", "false", "undefined"},
+            FF = {"undefined", "false", "false", "undefined", "false", "false",
+                  "undefined", "false", "false", "undefined"},
+            FF_ESR = {"undefined", "false", "false", "undefined", "false", "false",
+                      "undefined", "false", "false", "undefined"})
     public void callerStrictParentFoo() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -2089,6 +2123,8 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test, 'caller'));\n"
+
             + "    test1('hi');\n"
             + "  }\n"
 
@@ -2099,6 +2135,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test, 'caller'));\n"
 
             + "    try {\n"
             + "      log(test1.caller);\n"
@@ -2106,6 +2143,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test1).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test1, 'caller'));\n"
 
             + "    try {\n"
             + "      log(arguments.callee.caller);\n"
@@ -2125,11 +2163,16 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"null", "false", "null", "false", "TypeError", "false", "TypeError"})
-    @HtmlUnitNYI(CHROME = {"undefined", "false", "undefined", "false", "TypeError", "false", "TypeError"},
-            EDGE = {"undefined", "false", "undefined", "false", "TypeError", "false", "TypeError"},
-            FF = {"undefined", "false", "undefined", "false", "TypeError", "false", "TypeError"},
-            FF_ESR = {"undefined", "false", "undefined", "false", "TypeError", "false", "TypeError"})
+    @Alerts({"null", "false", "false", "null", "false", "false", "TypeError", "false", "false", "TypeError"})
+    @HtmlUnitNYI(
+            CHROME = {"undefined", "false", "false", "undefined", "false", "false",
+                      "TypeError", "false", "false", "TypeError"},
+            EDGE = {"undefined", "false", "false", "undefined", "false", "false",
+                    "TypeError", "false", "false", "TypeError"},
+            FF = {"undefined", "false", "false", "undefined", "false", "false",
+                  "TypeError", "false", "false", "TypeError"},
+            FF_ESR = {"undefined", "false", "false", "undefined", "false", "false",
+                      "TypeError", "false", "false", "TypeError"})
     public void callerStrictChildFoo() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -2144,6 +2187,8 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test, 'caller'));\n"
+
             + "    test1('hi');\n"
             + "  }\n"
 
@@ -2155,6 +2200,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test, 'caller'));\n"
 
             + "    try {\n"
             + "      log(test1.caller.name);\n"
@@ -2162,6 +2208,7 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "      logEx(e);\n"
             + "    }\n"
             + "    log(Object.keys(test1).includes('caller'));\n"
+            + "    log(Object.prototype.hasOwnProperty.call(test1, 'caller'));\n"
 
             + "    try {\n"
             + "      log(arguments.callee.caller);\n"
