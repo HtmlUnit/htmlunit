@@ -133,30 +133,28 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      * @throws Exception on failure
      */
     @Test
-    @Alerts({"TypeError", "true", "true"})
-    @HtmlUnitNYI(CHROME = "org.htmlunit.ScriptException: TypeError: Cannot set property \"constructor\" of abc",
-            EDGE = "org.htmlunit.ScriptException: TypeError: Cannot set property \"constructor\" of abc",
-            FF = "org.htmlunit.ScriptException: TypeError: Cannot set property \"constructor\" of abc",
-            FF_ESR = "org.htmlunit.ScriptException: TypeError: Cannot set property \"constructor\" of abc")
+    @Alerts({"TypeError", "TypeError", "true", "TypeError", "true"})
     public void ctorNotChangeableForPrimitivesStrict() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>\n"
                 + "<script>\n"
-                + LOG_TITLE_FUNCTION
-
                 + "  'use strict';\n"
-
+                + LOG_TITLE_FUNCTION
                 + "  let val = null;\n"
                 + "  try {\n"
                 + "    val.constructor = 1;\n"
                 + "  } catch(e) { logEx(e); }\n"
 
                 + "  val = 'abc';\n"
-                + "  val.constructor = Number;"
+                + "  try {\n"
+                + "    val.constructor = Number;"
+                + "  } catch(e) { logEx(e); }\n"
                 + "  log(val.constructor === String)\n"
 
                 // An implicit instance of String('abc') was created and assigned the prop foo
-                + "  val.foo = 'bar';\n"
+                + "  try {\n"
+                + "    val.foo = 'bar';\n"
+                + "  } catch(e) { logEx(e); }\n"
                 // true, since a new instance of String('abc') was created for this comparison,
                 // which doesn't have the foo property
                 + "  log (val.foo === undefined);\n"
@@ -215,7 +213,6 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "<script>\n"
                 + "  'use strict';\n"
                 + LOG_TITLE_FUNCTION
-
                 + "  let a = [];\n"
                 + "  a.constructor = String\n"
                 + "  log(a.constructor === String);\n"
@@ -262,7 +259,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      * @throws Exception on failure
      */
     @Test
-    @Alerts("true")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = "TypeError",
             EDGE = "TypeError",
             FF = "TypeError",
@@ -271,9 +268,8 @@ public class ScriptableObjectTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
                 + "<html><body>\n"
                 + "<script>\n"
-                + LOG_TITLE_FUNCTION
-
                 + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
 
                 + "  let a = Object.seal({});\n"
                 + "  try {\n"
