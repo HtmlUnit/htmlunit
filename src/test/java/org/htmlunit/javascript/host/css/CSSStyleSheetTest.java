@@ -2070,7 +2070,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "break at: 10 664.25 / 621",
             EDGE = "break at: 10 664.25 / 630",
-            FF = "break at: 10 675.2000122070312 / 675",
+            FF = "break at: 10 675.2000122070312 / 674",
             FF_ESR = "break at: 10 675.2000122070312 / 675")
     @HtmlUnitNYI(CHROME = "break at: 16 637 / 605",
             EDGE = "break at: 16 637 / 605",

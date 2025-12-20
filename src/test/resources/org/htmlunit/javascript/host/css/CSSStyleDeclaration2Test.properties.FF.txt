@@ -383,6 +383,7 @@ maskRepeat
 maskSize
 maskType
 mathDepth
+mathShift
 mathStyle
 maxBlockSize
 maxHeight
@@ -508,6 +509,7 @@ textAutospace
 textCombineUpright
 textDecoration
 textDecorationColor
+textDecorationInset
 textDecorationLine
 textDecorationSkipInk
 textDecorationStyle
