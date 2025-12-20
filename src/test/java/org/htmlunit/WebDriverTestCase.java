@@ -167,24 +167,24 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final String LOG_EX_FUNCTION =
             "  function logEx(e) {\n"
-            + "  let toStr = null;\n"
-            + "  if (toStr === null && e instanceof EvalError) { toStr = ''; }\n"
-            + "  if (toStr === null && e instanceof RangeError) { toStr = ''; }\n"
-            + "  if (toStr === null && e instanceof ReferenceError) { toStr = ''; }\n"
-            + "  if (toStr === null && e instanceof SyntaxError) { toStr = ''; }\n"
-            + "  if (toStr === null && e instanceof TypeError) { toStr = ''; }\n"
-            + "  if (toStr === null && e instanceof URIError) { toStr = ''; }\n"
-            + "  if (toStr === null && e instanceof AggregateError) { toStr = '/AggregateError'; }\n"
-            + "  if (toStr === null && typeof InternalError == 'function' "
-                        + "&& e instanceof InternalError) { toStr = '/InternalError'; }\n"
-            + "  if (toStr === null) {\n"
-            + "    let rx = /\\[object (.*)\\]/;\n"
-            + "    toStr = Object.prototype.toString.call(e);\n"
-            + "    let match = rx.exec(toStr);\n"
-            + "    if (match != null) { toStr = '/' + match[1]; }\n"
-            + "  }"
-            + "  log(e.name + toStr);\n"
-            + "}\n";
+            + "    let toStr = null;\n"
+            + "    if (toStr === null && e instanceof EvalError) { toStr = ''; }\n"
+            + "    if (toStr === null && e instanceof RangeError) { toStr = ''; }\n"
+            + "    if (toStr === null && e instanceof ReferenceError) { toStr = ''; }\n"
+            + "    if (toStr === null && e instanceof SyntaxError) { toStr = ''; }\n"
+            + "    if (toStr === null && e instanceof TypeError) { toStr = ''; }\n"
+            + "    if (toStr === null && e instanceof URIError) { toStr = ''; }\n"
+            + "    if (toStr === null && e instanceof AggregateError) { toStr = '/AggregateError'; }\n"
+            + "    if (toStr === null && typeof InternalError == 'function' "
+                          + "&& e instanceof InternalError) { toStr = '/InternalError'; }\n"
+            + "    if (toStr === null) {\n"
+            + "      let rx = /\\[object (.*)\\]/;\n"
+            + "      toStr = Object.prototype.toString.call(e);\n"
+            + "      let match = rx.exec(toStr);\n"
+            + "      if (match != null) { toStr = '/' + match[1]; }\n"
+            + "    }"
+            + "    log(e.name + toStr);\n"
+            + "  }\n";
 
     /**
      * Function used in many tests.
