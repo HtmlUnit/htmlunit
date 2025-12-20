@@ -16,7 +16,6 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriverException;
 
@@ -260,10 +259,6 @@ public class ScriptableObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("TypeError")
-    @HtmlUnitNYI(CHROME = "TypeError",
-            EDGE = "TypeError",
-            FF = "TypeError",
-            FF_ESR = "TypeError")
     public void ctorChangeableHasNoEffectForSealedStrict() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>\n"
