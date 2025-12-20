@@ -1826,7 +1826,10 @@ public final class StyleAttributes implements Serializable {
         MATH_DEPTH_("math-depth", "math-depth", ff("0")),
 
         /** The style property {@code mathShift}. */
-        MATH_SHIFT("mathShift", "math-shift", chromeAndEdgeNormal()),
+        MATH_SHIFT("mathShift", "math-shift", chromeAndEdgeNormal(), ffLatest("normal")),
+
+        /** The style property {@code math-shift}. */
+        MATH_SHIFT_("math-shift", "math-shift", ffLatest("normal")),
 
         /** The style property {@code mathStyle}. */
         MATH_STYLE("mathStyle", "math-style", chromeAndEdgeNormal(), ffNormal()),
@@ -3023,6 +3026,12 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code text-decoration-color}. */
         TEXT_DECORATION_COLOR_("text-decoration-color", "text-decoration-color", ff("rgb(0, 0, 0)")),
+
+        /** The style property {@code textDecorationInset}. */
+        TEXT_DECORATION_INSET("textDecorationInset", "text-decoration-inset", ffLatest("0px")),
+
+        /** The style property {@code text-decoration-inset}. */
+        TEXT_DECORATION_INSET_("text-decoration-inset", "text-decoration-inset", ffLatest("0px")),
 
         /** The style property {@code textDecorationLine}. */
         TEXT_DECORATION_LINE("textDecorationLine", "text-decoration-line", chromeAndEdgeNone(), ffNone()),
