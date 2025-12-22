@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.21.0" date="December xx, 2025" description="Firefox 145, core-js, Bugfixes">
+            <action type="update" dev="rbri">
+                neko: minor improvements by replacing some equalsIgnoreCase() calls by simple equals().
+            </action>
             <action type="update" dev="RhinoTeam">
                 core-js: improved handling of unimplemented rest parameters in destructuring
             </action>
@@ -48,7 +51,7 @@
                 core-js: incorrect destructuring in for loops handled at parse time
             </action>
             <action type="update" dev="rbri">
-                neko: inserted tags are in lower case (at least if the option for uppercase tag names is not set)
+                neko: inserted tags are in lowercase (at least if the option for uppercase tag names is not set)
             </action>
         </release>
 
