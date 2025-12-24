@@ -100,22 +100,41 @@ public final class CssPixelValueConverter {
             i = i * 16 / 100;
         }
         else if (value.endsWith("ex")) {
-            i = i * 10;
-        }
-        else if (value.endsWith("in")) {
-            i = i * 150;
+            i = i * 8;
         }
         else if (value.endsWith("cm")) {
-            i = i * 50;
+            i = i * 38;
         }
         else if (value.endsWith("mm")) {
-            i = i * 5;
+            i = i * 4;
         }
         else if (value.endsWith("pt")) {
             i = i * 2;
         }
         else if (value.endsWith("pc")) {
             i = i * 24;
+        }
+        else if (value.endsWith("ch")) {
+            i = i * 8;
+        }
+        else if (value.endsWith("ch")) {
+            i = i * 8;
+        }
+        else if (value.endsWith("vh")
+                || value.endsWith("vmin")) {
+            // this matches also
+            // "dvh" "dvmin" "lvh" "lvmin" "svh" "svmin"
+            i = i * 6;
+        }
+        else if (value.endsWith("vw")
+                || value.endsWith("vmax")) {
+            // this matches also
+            // "dvw" "dvmax" "lvw" "lvmax" "svw" "svmax"
+            i = i * 12;
+        }
+        // placed at the end to handle min before
+        else if (value.endsWith("in")) {
+            i = i * 150;
         }
         return Math.round(i);
     }
