@@ -2008,6 +2008,24 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             unit = valueString.substring(valueString.length() - 3);
             valueString = valueString.substring(0, valueString.length() - 3);
         }
+        else if (valueString.endsWith("dvw")
+            || valueString.endsWith("dvh")
+            || valueString.endsWith("lvw")
+            || valueString.endsWith("lvh")
+            || valueString.endsWith("svw")
+            || valueString.endsWith("svh")) {
+            unit = valueString.substring(valueString.length() - 3);
+            valueString = valueString.substring(0, valueString.length() - 3);
+        }
+        else if (valueString.endsWith("dvmin")
+            || valueString.endsWith("dvmax")
+            || valueString.endsWith("lvmin")
+            || valueString.endsWith("lvmax")
+            || valueString.endsWith("svmin")
+            || valueString.endsWith("svmax")) {
+            unit = valueString.substring(valueString.length() - 5);
+            valueString = valueString.substring(0, valueString.length() - 5);
+        }
         else {
             return;
         }

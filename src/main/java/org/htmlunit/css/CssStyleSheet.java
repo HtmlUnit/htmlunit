@@ -1464,7 +1464,9 @@ public class CssStyleSheet implements Serializable {
     private static double pixelValue(final CSSValueImpl cssValue, final WebWindow webWindow) {
         if (cssValue == null) {
             LOG.warn("CSSValue is null but has to be a 'px', 'em', '%', 'ex', 'ch', "
-                    + "'vw', 'vh', 'vmin', 'vmax', 'rem', 'mm', 'cm', 'Q', or 'pt' value.");
+                    + "'vw', 'vh', 'vmin', 'vmax', 'dvw', 'dvh', 'dvmin', 'dvmax', "
+                    + "'lvw', 'lvh', 'lvmin', 'lvmax', 'svw', 'svh', 'svmin', 'svmax', "
+                    + "'rem', 'mm', 'cm', 'Q', or 'pt' value.");
             return -1;
         }
 
@@ -1499,6 +1501,42 @@ public class CssStyleSheet implements Serializable {
                 case VMAX:
                     // hard coded default for the moment 16px = 100%
                     return 0.16f * cssValue.getDoubleValue();
+                case DVW:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case DVH:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case DVMIN:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case DVMAX:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case LVW:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case LVH:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case LVMIN:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case LVMAX:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case SVW:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case SVH:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case SVMIN:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case SVMAX:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
                 case REM:
                     // hard coded default for the moment 16px = 100%
                     return 0.16f * cssValue.getDoubleValue();
@@ -1522,7 +1560,9 @@ public class CssStyleSheet implements Serializable {
         if (LOG.isWarnEnabled()) {
             LOG.warn("CSSValue '" + cssValue.getCssText()
                         + "' has to be a 'px', 'em', '%', 'ex', 'ch', "
-                        + "'vw', 'vh', 'vmin', 'vmax', 'rem', 'mm', 'cm', 'Q', or 'pt' value.");
+                        + "'vw', 'vh', 'vmin', 'vmax', 'dvw', 'dvh', 'dvmin', 'dvmax', "
+                        + "'lvw', 'lvh', 'lvmin', 'lvmax', 'svw', 'svh', 'svmin', 'svmax', "
+                        + "'rem', 'mm', 'cm', 'Q', or 'pt' value.");
         }
         return -1;
     }

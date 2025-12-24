@@ -1226,6 +1226,447 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "4.03333px",
+            CHROME = "3.726px",
+            EDGE = "3.78px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeVMin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6vmin;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "7.536px",
+            EDGE = "7.488px",
+            FF = "7.53333px",
+            FF_ESR = "7.53333px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeVMax() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6vmax;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "7.536px",
+            EDGE = "7.488px",
+            FF = "7.53333px",
+            FF_ESR = "7.53333px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeDVW() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6dvw;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "4.03333px",
+            CHROME = "3.726px",
+            EDGE = "3.78px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeDVH() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6dvh;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "4.03333px",
+            CHROME = "3.726px",
+            EDGE = "3.78px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeDVMin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6dvmin;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "7.536px",
+            EDGE = "7.488px",
+            FF = "7.53333px",
+            FF_ESR = "7.53333px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeDVMax() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6dvmax;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "7.536px",
+            EDGE = "7.488px",
+            FF = "7.53333px",
+            FF_ESR = "7.53333px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeLVW() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6lvw;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "4.03333px",
+            CHROME = "3.726px",
+            EDGE = "3.78px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeLVH() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6lvh;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "4.03333px",
+            CHROME = "3.726px",
+            EDGE = "3.78px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeLVMin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6lvmin;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "7.536px",
+            EDGE = "7.488px",
+            FF = "7.53333px",
+            FF_ESR = "7.53333px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeLVMax() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6lvmax;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "7.536px",
+            EDGE = "7.488px",
+            FF = "7.53333px",
+            FF_ESR = "7.53333px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeSVW() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6svw;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "4.03333px",
+            CHROME = "3.726px",
+            EDGE = "3.78px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeSVH() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6svh;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "4.03333px",
+            CHROME = "3.726px",
+            EDGE = "3.78px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeSVMin() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6svmin;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "7.536px",
+            EDGE = "7.488px",
+            FF = "7.53333px",
+            FF_ESR = "7.53333px")
+    @HtmlUnitNYI(CHROME = "1px",
+            EDGE =  "1px",
+            FF = "1px",
+            FF_ESR = "1px")
+    public void fontSizeSVMax() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<div id='d0' style='font-size: 0.6svmax;'>\n"
+            + "<div id='d1'>inside</div>\n"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function getStyle(x) {\n"
+            + "    var d = document.getElementById(x);\n"
+            + "    var cs = window.getComputedStyle(d, null);\n"
+            + "    return cs;\n"
+            + "  }\n"
+            + "  var cs1 = getStyle('d1');\n"
+            + "  log(cs1.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
