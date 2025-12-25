@@ -133,9 +133,9 @@ testRemoveClassName passed 3 assertions, 0 failures, 0 errors
 testToggleClassName passed 4 assertions, 0 failures, 0 errors
 testElementScrollTo failed 0 assertions, 2 failures, 0 errors
 Failure: assertEqual
-expected: <2044>, actual: <0>
+expected: <2040>, actual: <0>
 Failure: assertEqual
-expected: <2044>, actual: <0>
+expected: <2040>, actual: <0>
 testCustomElementMethods passed 4 assertions, 0 failures, 0 errors
 testSpecificCustomElementMethods passed 14 assertions, 0 failures, 0 errors
 testScriptFragment passed 4 assertions, 0 failures, 0 errors
