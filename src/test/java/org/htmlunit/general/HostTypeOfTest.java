@@ -10246,4 +10246,13 @@ public class HostTypeOfTest extends WebDriverTestCase {
     public void abortSignal() throws Exception {
         test("AbortSignal");
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void global() throws Exception {
+        test("global");
+    }
 }
