@@ -14,9 +14,21 @@
  */
 package org.htmlunit.javascript.host.dom;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.json.JsonParser;
+import org.htmlunit.corejs.javascript.json.JsonParser.ParseException;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxFunction;
+import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.host.Window;
 
 /**
  * A JavaScript object for {@code DOMRectReadOnly}.
@@ -27,11 +39,196 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 @JsxClass
 public class DOMRectReadOnly extends HtmlUnitScriptable {
 
+    private static final Log LOG = LogFactory.getLog(DOMRectReadOnly.class);
+
+    private double xVal_;
+    private double yVal_;
+    private double width_;
+    private double height_;
+
+    /**
+     * Creates an instance.
+     */
+    public DOMRectReadOnly() {
+        // default ctor.
+    }
+
+    /**
+     * Creates an instance, with the given coordinates.
+     *
+     * @param x the x coordinate of the rectangle surrounding the object content
+     * @param y the y coordinate of the rectangle surrounding the object content
+     * @param width the width coordinate of the rectangle surrounding the object content
+     * @param height the height of the rectangle surrounding the object content
+     */
+    public DOMRectReadOnly(final int x, final int y, final int width, final int height) {
+        xVal_ = x;
+        yVal_ = y;
+        width_ = width;
+        height_ = height;
+    }
+
     /**
      * JavaScript constructor.
+     * @param cx the current context
+     * @param scope the scope
+     * @param args the arguments to the WebSocket constructor
+     * @param ctorObj the function object
+     * @param inNewExpr Is new or not
+     * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public void jsConstructor() {
-        // nothing to do
+    public static DOMRectReadOnly jsConstructor(final Context cx, final Scriptable scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
+
+        final DOMRectReadOnly rect = new DOMRectReadOnly(0, 0, 0, 0);
+        rect.init(args, ctorObj);
+        return rect;
+    }
+
+    protected void init(final Object[] args, final Function ctorObj) {
+        final Window window = getWindow(ctorObj);
+        setParentScope(window);
+        setPrototype(((FunctionObject) ctorObj).getClassPrototype());
+
+        if (args.length == 0 || JavaScriptEngine.isUndefined(args[0])) {
+            return;
+        }
+
+        if (args.length > 0) {
+            xVal_ = JavaScriptEngine.toNumber(args[0]);
+        }
+
+        if (args.length > 1) {
+            yVal_ = JavaScriptEngine.toNumber(args[1]);
+        }
+
+        if (args.length > 2) {
+            width_ = JavaScriptEngine.toNumber(args[2]);
+        }
+
+        if (args.length > 3) {
+            height_ = JavaScriptEngine.toNumber(args[3]);
+        }
+    }
+
+    /**
+     * @return x
+     */
+    @JsxGetter
+    public double getX() {
+        return xVal_;
+    }
+
+    /**
+     * @param x the new value
+     */
+    public void setX(final double x) {
+        xVal_ = x;
+    }
+
+    /**
+     * @return y
+     */
+    @JsxGetter
+    public double getY() {
+        return yVal_;
+    }
+
+    /**
+     * @param y the new value
+     */
+    public void setY(final double y) {
+        yVal_ = y;
+    }
+
+    /**
+     * @return width
+     */
+    @JsxGetter
+    public double getWidth() {
+        return width_;
+    }
+
+    /**
+     * @param width the new value
+     */
+    public void setWidth(final double width) {
+        width_ = width;
+    }
+
+    /**
+     * @return height
+     */
+    @JsxGetter
+    public double getHeight() {
+        return height_;
+    }
+
+    /**
+     * @param height the new value
+     */
+    public void setHeight(final double height) {
+        height_ = height;
+    }
+
+    /**
+     * @return top
+     */
+    @JsxGetter
+    public double getTop() {
+        return Math.min(getY(), getY() + getHeight());
+    }
+
+    /**
+     * @return right
+     */
+    @JsxGetter
+    public double getRight() {
+        return Math.max(getX(), getX() + getWidth());
+    }
+
+    /**
+     * @return right
+     */
+    @JsxGetter
+    public double getBottom() {
+        return Math.max(getY(), getY() + getHeight());
+    }
+
+    /**
+     * @return left
+     */
+    @JsxGetter
+    public double getLeft() {
+        return Math.min(getX(), getX() + getWidth());
+    }
+
+    /**
+     * @return a JSON representation of the DOMRectReadOnly object.
+     */
+    @JsxFunction
+    public Object toJSON() {
+        final String jsonString = new StringBuilder()
+                .append("{\"x\":").append(xVal_)
+                .append(", \"y\":").append(yVal_)
+                .append(", \"width\":").append(width_)
+                .append(", \"height\":").append(height_)
+
+                .append(", \"top\":").append(getTop())
+                .append(", \"right\":").append(getRight())
+                .append(", \"bottom\":").append(getBottom())
+                .append(", \"left\":").append(getLeft())
+
+                .append('}').toString();
+        try {
+            return new JsonParser(Context.getCurrentContext(), getParentScope()).parseValue(jsonString);
+        }
+        catch (final ParseException e) {
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Failed parsingJSON '" + jsonString + "'", e);
+            }
+        }
+        return null;
     }
 }

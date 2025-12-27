@@ -9651,6 +9651,34 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMRectReadOnly}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "bottom,height,left,right,toJSON(),top,width,x,y",
+            EDGE = "bottom,height,left,right,toJSON(),top,width,x,y",
+            FF = "bottom,height,left,right,toJSON(),top,width,x,y",
+            FF_ESR = "bottom,height,left,right,toJSON(),top,width,x,y")
+    public void domRectReadOnly() throws Exception {
+        testString("", "new DOMRectReadOnly()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMRect}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "bottom,height,left,right,toJSON(),top,width,x,y",
+            EDGE = "bottom,height,left,right,toJSON(),top,width,x,y",
+            FF = "bottom,height,left,right,toJSON(),top,width,x,y",
+            FF_ESR = "bottom,height,left,right,toJSON(),top,width,x,y")
+    public void domRect() throws Exception {
+        testString("", "new DOMRect()");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.Notification}.
      *
      * @throws Exception if the test fails

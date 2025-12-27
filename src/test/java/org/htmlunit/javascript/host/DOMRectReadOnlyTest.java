@@ -15,16 +15,16 @@
 package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.javascript.host.dom.DOMRectReadOnly;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for {@link DOMRect}.
+ * Tests for {@link DOMRectReadOnly}.
  *
- * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public class DOMRectTest extends WebDriverTestCase {
+public class DOMRectReadOnlyTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -38,7 +38,7 @@ public class DOMRectTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    let rect = new DOMRect();\n"
+            + "    let rect = new DOMRectReadOnly();\n"
             + "    log(rect.x);\n"
             + "    log(rect.y);\n"
             + "    log(rect.width);\n"
@@ -66,7 +66,7 @@ public class DOMRectTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    let rect = new DOMRect(4);\n"
+            + "    let rect = new DOMRectReadOnly(4);\n"
             + "    log(rect.x);\n"
             + "    log(rect.y);\n"
             + "    log(rect.width);\n"
@@ -94,7 +94,7 @@ public class DOMRectTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    let rect = new DOMRect(4, 7);\n"
+            + "    let rect = new DOMRectReadOnly(4, 7);\n"
             + "    log(rect.x);\n"
             + "    log(rect.y);\n"
             + "    log(rect.width);\n"
@@ -122,7 +122,7 @@ public class DOMRectTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    let rect = new DOMRect(4, 7, 11);\n"
+            + "    let rect = new DOMRectReadOnly(4, 7, 11);\n"
             + "    log(rect.x);\n"
             + "    log(rect.y);\n"
             + "    log(rect.width);\n"
@@ -150,7 +150,7 @@ public class DOMRectTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    let rect = new DOMRect(4, 7, 11, 42);\n"
+            + "    let rect = new DOMRectReadOnly(4, 7, 11, 42);\n"
             + "    log(rect.x);\n"
             + "    log(rect.y);\n"
             + "    log(rect.width);\n"
@@ -178,7 +178,7 @@ public class DOMRectTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    let rect = new DOMRect(4, 7, 11, 42, 13);\n"
+            + "    let rect = new DOMRectReadOnly(4, 7, 11, 42, 13);\n"
             + "    log(rect.x);\n"
             + "    log(rect.y);\n"
             + "    log(rect.width);\n"
@@ -206,7 +206,7 @@ public class DOMRectTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    let rect = new DOMRect(-4, -7, -11, -42, -13);\n"
+            + "    let rect = new DOMRectReadOnly(-4, -7, -11, -42, -13);\n"
             + "    log(rect.x);\n"
             + "    log(rect.y);\n"
             + "    log(rect.width);\n"
@@ -234,15 +234,15 @@ public class DOMRectTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    let rect = new DOMRect(undefind);\n"
+            + "    let rect = new DOMRectReadOnly(undefind);\n"
             + "    log(rect.x);\n"
             + "  } catch(e) { logEx(e);}\n"
             + "  try {\n"
-            + "    let rect = new DOMRect(null);\n"
+            + "    let rect = new DOMRectReadOnly(null);\n"
             + "    log(rect.x);\n"
             + "  } catch(e) { logEx(e);}\n"
             + "  try {\n"
-            + "    let rect = new DOMRect('42');\n"
+            + "    let rect = new DOMRectReadOnly('42');\n"
             + "    log(rect.x);\n"
             + "  } catch(e) { logEx(e);}\n"
             + "</script>\n"
@@ -250,49 +250,6 @@ public class DOMRectTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"4", "7", "11", "42", "7", "4", "49", "15",
-             "2", "5", "100", "42", "5", "2", "47", "102"})
-    public void setter() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head></head>\n"
-            + "<body>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  try {\n"
-            + "    let rect = new DOMRect(4, 7, 11, 42, 13);\n"
-            + "    log(rect.x);\n"
-            + "    log(rect.y);\n"
-            + "    log(rect.width);\n"
-            + "    log(rect.height);\n"
-
-            + "    log(rect.top);\n"
-            + "    log(rect.left);\n"
-            + "    log(rect.bottom);\n"
-            + "    log(rect.right);\n"
-
-            + "    rect.x = 2;\n"
-            + "    rect.y = 5;\n"
-            + "    rect.width = 100;\n"
-            + "    rect.height -8;\n"
-
-            + "    log(rect.x);\n"
-            + "    log(rect.y);\n"
-            + "    log(rect.width);\n"
-            + "    log(rect.height);\n"
-
-            + "    log(rect.top);\n"
-            + "    log(rect.left);\n"
-            + "    log(rect.bottom);\n"
-            + "    log(rect.right);\n"
-            + "  } catch(e) { logEx(e);}\n"
-            + "</script>\n"
-            + "</body></html>";
-        loadPageVerifyTitle2(html);
-    }
 
     /**
      * @throws Exception if the test fails
@@ -311,14 +268,14 @@ public class DOMRectTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    let rect = new DOMRect();\n"
+            + "    let rect = new DOMRectReadOnly();\n"
             + "    log(JSON.stringify(rect));\n"
             + "    log(JSON.stringify(rect.toJSON()));\n"
             + "    log(rect === rect.toJSON());\n"
             + "  } catch(e) { logEx(e);}\n"
 
             + "  try {\n"
-            + "    let rect = new DOMRect(4, 7, 11, 42);\n"
+            + "    let rect = new DOMRectReadOnly(4, 7, 11, 42);\n"
             + "    log(JSON.stringify(rect));\n"
             + "    log(JSON.stringify(rect.toJSON()));\n"
             + "    log(rect === rect.toJSON());\n"

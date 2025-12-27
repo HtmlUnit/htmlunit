@@ -342,7 +342,7 @@ public class Element extends Node {
      */
     @JsxFunction
     public DOMRect getBoundingClientRect() {
-        final DOMRect textRectangle = new DOMRect(1, 1, 1, 1);
+        final DOMRect textRectangle = new DOMRect(1, 1, 0, 0);
         textRectangle.setParentScope(getWindow());
         textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
         return textRectangle;

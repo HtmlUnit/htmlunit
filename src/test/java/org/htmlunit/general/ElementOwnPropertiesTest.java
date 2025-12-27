@@ -18581,6 +18581,38 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMRectReadOnly}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "bottom[GCE],constructor(),height[GCE],left[GCE],right[GCE],toJSON(),top[GCE],width[GCE],x[GCE],"
+                + "y[GCE]",
+            EDGE = "bottom[GCE],constructor(),height[GCE],left[GCE],right[GCE],toJSON(),top[GCE],width[GCE],x[GCE],"
+                + "y[GCE]",
+            FF = "bottom[GCE],constructor(),height[GCE],left[GCE],right[GCE],toJSON(),top[GCE],width[GCE],x[GCE],"
+                + "y[GCE]",
+            FF_ESR = "bottom[GCE],constructor(),height[GCE],left[GCE],right[GCE],toJSON(),top[GCE],width[GCE],x[GCE],"
+                + "y[GCE]")
+    public void domRectReadOnly() throws Exception {
+        testString("", "new DOMRectReadOnly()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMRect}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),height[GSCE],width[GSCE],x[GSCE],y[GSCE]",
+            EDGE = "constructor(),height[GSCE],width[GSCE],x[GSCE],y[GSCE]",
+            FF = "constructor(),height[GSCE],width[GSCE],x[GSCE],y[GSCE]",
+            FF_ESR = "constructor(),height[GSCE],width[GSCE],x[GSCE],y[GSCE]")
+    public void domRect() throws Exception {
+        testString("", "new DOMRect()");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.Notification}.
      *
      * @throws Exception if the test fails

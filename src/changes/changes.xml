@@ -8,6 +8,9 @@
 
     <body>
         <release version="4.21.0" date="December xx, 2025" description="Firefox 145, core-js, Bugfixes">
+            <action type="add" dev="rbri">
+                DOMRectReadOnly and DOMRect implementation improved, now we implement the whole interface.
+            </action>
             <action type="update" dev="rbri">
                 neko: minor improvements by replacing some equalsIgnoreCase() calls by simple equals().
             </action>

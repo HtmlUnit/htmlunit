@@ -14,8 +14,12 @@
  */
 package org.htmlunit.javascript.host;
 
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.DOMRectReadOnly;
@@ -30,10 +34,24 @@ import org.htmlunit.javascript.host.dom.DOMRectReadOnly;
 @JsxClass
 public class DOMRect extends DOMRectReadOnly {
 
-    private int bottom_;
-    private int left_;
-    private int right_;
-    private int top_;
+    /**
+     * JavaScript constructor.
+     * @param cx the current context
+     * @param scope the scope
+     * @param args the arguments to the WebSocket constructor
+     * @param ctorObj the function object
+     * @param inNewExpr Is new or not
+     * @return the java object to allow JavaScript to access
+     */
+    @JsxConstructor
+    @JsxConstructorAlias(alias = "WebKitCSSMatrix")
+    public static DOMRect jsConstructor(final Context cx, final Scriptable scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
+
+        final DOMRect rect = new DOMRect();
+        rect.init(args, ctorObj);
+        return rect;
+    }
 
     /**
      * Creates an instance.
@@ -43,117 +61,86 @@ public class DOMRect extends DOMRectReadOnly {
     }
 
     /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor
-    @Override
-    public void jsConstructor() {
-        super.jsConstructor();
-    }
-
-    /**
      * Creates an instance, with the given coordinates.
      *
-     * @param bottom the bottom coordinate of the rectangle surrounding the object content
-     * @param left the left coordinate of the rectangle surrounding the object content
-     * @param right the right coordinate of the rectangle surrounding the object content
-     * @param top the top coordinate of the rectangle surrounding the object content
+     * @param x the x coordinate of the rectangle surrounding the object content
+     * @param y the y coordinate of the rectangle surrounding the object content
+     * @param width the width coordinate of the rectangle surrounding the object content
+     * @param height the height of the rectangle surrounding the object content
      */
-    public DOMRect(final int bottom, final int left, final int right, final int top) {
-        this();
-        bottom_ = bottom;
-        left_ = left;
-        right_ = right;
-        top_ = top;
+    public DOMRect(final int x, final int y, final int width, final int height) {
+        super(x, y, width, height);
     }
 
     /**
-     * Sets the bottom coordinate of the rectangle surrounding the object content.
-     * @param bottom the bottom coordinate of the rectangle surrounding the object content
+     * {@inheritDoc}
      */
+    @Override
+    @JsxGetter
+    public double getX() {
+        return super.getX();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     @JsxSetter
-    public void setBottom(final int bottom) {
-        bottom_ = bottom;
+    public void setX(final double x) {
+        super.setX(x);
     }
 
     /**
-     * Returns the bottom coordinate of the rectangle surrounding the object content.
-     * @return the bottom coordinate of the rectangle surrounding the object content
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter
-    public int getBottom() {
-        return bottom_;
+    public double getY() {
+        return super.getY();
     }
 
     /**
-     * Sets the left coordinate of the rectangle surrounding the object content.
-     * @param left the left coordinate of the rectangle surrounding the object content
+     * {@inheritDoc}
      */
+    @Override
     @JsxSetter
-    public void setLeft(final int left) {
-        left_ = left;
+    public void setY(final double y) {
+        super.setY(y);
     }
 
     /**
-     * Returns the left coordinate of the rectangle surrounding the object content.
-     * @return the left coordinate of the rectangle surrounding the object content
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter
-    public int getLeft() {
-        return left_;
+    public double getWidth() {
+        return super.getWidth();
     }
 
     /**
-     * Sets the right coordinate of the rectangle surrounding the object content.
-     * @param right the right coordinate of the rectangle surrounding the object content
+     * {@inheritDoc}
      */
+    @Override
     @JsxSetter
-    public void setRight(final int right) {
-        right_ = right;
+    public void setWidth(final double width) {
+        super.setWidth(width);
     }
 
     /**
-     * Returns the right coordinate of the rectangle surrounding the object content.
-     * @return the right coordinate of the rectangle surrounding the object content
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter
-    public int getRight() {
-        return right_;
+    public double getHeight() {
+        return super.getHeight();
     }
 
     /**
-     * Sets the top coordinate of the rectangle surrounding the object content.
-     * @param top the top coordinate of the rectangle surrounding the object content
+     * {@inheritDoc}
      */
+    @Override
     @JsxSetter
-    public void setTop(final int top) {
-        top_ = top;
-    }
-
-    /**
-     * Returns the top coordinate of the rectangle surrounding the object content.
-     * @return the top coordinate of the rectangle surrounding the object content
-     */
-    @JsxGetter
-    public int getTop() {
-        return top_;
-    }
-
-    /**
-     * Returns the {@code width} property.
-     * @return the {@code width} property
-     */
-    @JsxGetter
-    public int getWidth() {
-        return getRight() - getLeft();
-    }
-
-    /**
-     * Returns the {@code height} property.
-     * @return the {@code height} property
-     */
-    @JsxGetter
-    public int getHeight() {
-        return getBottom() - getTop();
+    public void setHeight(final double height) {
+        super.setHeight(height);
     }
 }

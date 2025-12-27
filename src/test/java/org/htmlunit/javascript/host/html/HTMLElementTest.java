@@ -2732,15 +2732,17 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object DOMRect]")
+    @Alerts({"[object DOMRect]", "true", "true"})
     public void getBoundingClientRect() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<div id='div1'>hello</div><script>\n"
             + LOG_TITLE_FUNCTION
             + "  var d1 = document.getElementById('div1');\n"
-            + "  var pos = d1.getBoundingClientRect();\n"
-            + "  log(pos);\n"
+            + "  var rect = d1.getBoundingClientRect();\n"
+            + "  log(rect);\n"
+            + "  log(rect instanceof DOMRect);\n"
+            + "  log(rect instanceof DOMRectReadOnly);\n"
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
@@ -2825,6 +2827,37 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void getBoundingClientRect_WidthPercent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var input = document.getElementById('myInput');\n"
+            + "      log(input.getBoundingClientRect().height > 10);\n"
+            + "      log(input.getBoundingClientRect().width > 100);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<style>.full { width:100%; }</style>\n"
+            + "<div class='foo bar'>\n"
+            + "  <form action='javascript:void(0)' method='post'>\n"
+            + "    <div class='full'>\n"
+            + "      <input class='full' type='text' id='myInput'>\n"
+            + "    </div>\n"
+            + "  </form>\n"
+            + "</div>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);
     }

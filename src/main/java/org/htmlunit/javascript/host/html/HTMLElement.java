@@ -986,10 +986,10 @@ public class HTMLElement extends Element {
             parentNode = elem.getParent();
         }
 
-        textRectangle.setBottom(top + getOffsetHeight());
-        textRectangle.setLeft(left);
-        textRectangle.setRight(left + getOffsetWidth());
-        textRectangle.setTop(top);
+        textRectangle.setY(top);
+        textRectangle.setX(left);
+        textRectangle.setWidth(getOffsetWidth());
+        textRectangle.setHeight(getOffsetHeight());
 
         return textRectangle;
     }
