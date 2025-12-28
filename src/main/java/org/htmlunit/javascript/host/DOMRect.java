@@ -19,7 +19,6 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
-import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.DOMRectReadOnly;
@@ -44,7 +43,6 @@ public class DOMRect extends DOMRectReadOnly {
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    @JsxConstructorAlias(alias = "WebKitCSSMatrix")
     public static DOMRect jsConstructor(final Context cx, final Scriptable scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
