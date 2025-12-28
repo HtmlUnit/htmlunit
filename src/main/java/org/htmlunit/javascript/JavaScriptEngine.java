@@ -47,6 +47,7 @@ import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
 import org.htmlunit.corejs.javascript.NativeConsole;
+import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.RhinoException;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
@@ -1271,6 +1272,20 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static Scriptable newObject(final Scriptable scope, final String constructorName, final Object[] args) {
         return ScriptRuntime.newObject(Context.getCurrentContext(), scope, constructorName, args);
+    }
+
+    /**
+     * Create a new JavaScript object.
+     *
+     * <p>Equivalent to evaluating "new Object()".
+     *
+     * @param scope the scope to search for the constructor and to evaluate against
+     * @return the new object
+     */
+    public static Scriptable newObject(final Scriptable scope) {
+        final NativeObject result = new NativeObject();
+        ScriptRuntime.setBuiltinProtoAndParent(result, scope, TopLevel.Builtins.Object);
+        return result;
     }
 
     /**

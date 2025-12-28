@@ -1196,7 +1196,7 @@ public class URLTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("https://developer.mozilla.org/")
-    public void testToJSON() throws Exception {
+    public void toJSON() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><body>\n"
                 + "<script>\n"

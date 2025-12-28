@@ -207,7 +207,7 @@ public class NumberFormat extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Scriptable resolvedOptions() {
-        return Context.getCurrentContext().newObject(getParentScope());
+        return JavaScriptEngine.newObject(getParentScope());
     }
 
     /**

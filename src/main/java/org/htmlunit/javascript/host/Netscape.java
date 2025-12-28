@@ -14,13 +14,14 @@
  */
 package org.htmlunit.javascript.host;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * A JavaScript object for {@code Netscape}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class Netscape extends HtmlUnitScriptable {
 
@@ -29,7 +30,7 @@ public class Netscape extends HtmlUnitScriptable {
         setParentScope(window);
 
         // simply put "new Object()" for property "security"
-        put("security", this, Context.getCurrentContext().newObject(window));
+        put("security", this, JavaScriptEngine.newObject(window));
     }
 
     @Override

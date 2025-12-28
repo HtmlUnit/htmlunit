@@ -21,8 +21,6 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.json.JsonParser;
-import org.htmlunit.corejs.javascript.json.JsonParser.ParseException;
 import org.htmlunit.corejs.javascript.typedarrays.NativeFloat32Array;
 import org.htmlunit.corejs.javascript.typedarrays.NativeFloat64Array;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -1085,47 +1083,38 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
      *     within matrix() or matrix3d() function syntax.
      */
     @JsxFunction
-    public Object toJSON() {
-        final String jsonString = new StringBuilder()
-                .append("{\"a\":").append(m11_)
-                .append(", \"b\":").append(m12_)
-                .append(", \"c\":").append(m21_)
-                .append(", \"d\":").append(m22_)
-                .append(", \"e\":").append(m41_)
-                .append(", \"f\":").append(m42_)
+    public Scriptable toJSON() {
+        final Scriptable json = JavaScriptEngine.newObject(getParentScope());
+        json.put("a", json, m11_);
+        json.put("b", json, m12_);
+        json.put("c", json, m21_);
+        json.put("d", json, m22_);
+        json.put("e", json, m41_);
+        json.put("f", json, m42_);
 
-                .append(", \"m11\":").append(m11_)
-                .append(", \"m12\":").append(m12_)
-                .append(", \"m13\":").append(m13_)
-                .append(", \"m14\":").append(m14_)
+        json.put("m11", json, m11_);
+        json.put("m12", json, m12_);
+        json.put("m13", json, m13_);
+        json.put("m14", json, m14_);
 
-                .append(", \"m21\":").append(m21_)
-                .append(", \"m22\":").append(m22_)
-                .append(", \"m23\":").append(m23_)
-                .append(", \"m24\":").append(m24_)
+        json.put("m21", json, m21_);
+        json.put("m22", json, m22_);
+        json.put("m23", json, m23_);
+        json.put("m24", json, m24_);
 
-                .append(", \"m31\":").append(m31_)
-                .append(", \"m32\":").append(m32_)
-                .append(", \"m33\":").append(m33_)
-                .append(", \"m34\":").append(m34_)
+        json.put("m31", json, m31_);
+        json.put("m32", json, m32_);
+        json.put("m33", json, m33_);
+        json.put("m34", json, m34_);
 
-                .append(", \"m41\":").append(m41_)
-                .append(", \"m42\":").append(m42_)
-                .append(", \"m43\":").append(m43_)
-                .append(", \"m44\":").append(m44_)
+        json.put("m41", json, m41_);
+        json.put("m42", json, m42_);
+        json.put("m43", json, m43_);
+        json.put("m44", json, m44_);
 
-                .append(", \"is2D\":").append(is2D_)
-                .append(", \"isIdentity\":").append(getIsIdentity())
+        json.put("is2D", json, is2D_);
+        json.put("isIdentity", json, getIsIdentity());
 
-                .append('}').toString();
-        try {
-            return new JsonParser(Context.getCurrentContext(), getParentScope()).parseValue(jsonString);
-        }
-        catch (final ParseException e) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Failed parsingJSON '" + jsonString + "'", e);
-            }
-        }
-        return null;
+        return json;
     }
 }

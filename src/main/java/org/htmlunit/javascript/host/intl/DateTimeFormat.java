@@ -294,7 +294,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     @JsxFunction
     public Scriptable resolvedOptions() {
         final Context cx = Context.getCurrentContext();
-        final Scriptable options = cx.newObject(getParentScope());
+        final Scriptable options = JavaScriptEngine.newObject(getParentScope());
         options.put("timeZone", options, cx.getTimeZone().getID());
 
         if (StringUtils.isEmptyOrNull(formatter_.locale_)) {

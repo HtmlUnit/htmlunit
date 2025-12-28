@@ -16,10 +16,9 @@ package org.htmlunit.javascript.host.performance;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.json.JsonParser;
-import org.htmlunit.corejs.javascript.json.JsonParser.ParseException;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -85,21 +84,11 @@ public class PerformanceNavigation extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object toJSON() {
-        final String jsonString = new StringBuilder()
-                .append("{\"type\":")
-                .append(getType())
-                .append(", \"redirectCount\":")
-                .append(getRedirectCount())
-                .append('}').toString();
-        try {
-            return new JsonParser(Context.getCurrentContext(), getParentScope()).parseValue(jsonString);
-        }
-        catch (final ParseException e) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Failed parsingJSON '" + jsonString + "'", e);
-            }
-        }
-        return null;
+        final Scriptable json = JavaScriptEngine.newObject(getParentScope());
+        json.put("type", json, getType());
+        json.put("redirectCount", json, getRedirectCount());
+
+        return json;
     }
 
 }

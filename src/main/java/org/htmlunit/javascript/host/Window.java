@@ -794,8 +794,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         location_.initialize(this, pageToEnclose);
 
         // like a JS new Object()
-        final Context ctx = Context.getCurrentContext();
-        controllers_ = ctx.newObject(this);
+        controllers_ = JavaScriptEngine.newObject(this);
 
         if (webWindow_ instanceof TopLevelWindow) {
             final WebWindow opener = ((TopLevelWindow) webWindow_).getOpener();
