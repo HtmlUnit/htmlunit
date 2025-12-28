@@ -9,6 +9,9 @@
     <body>
         <release version="4.21.0" date="December xx, 2025" description="Firefox 145, core-js, Bugfixes">
             <action type="update" dev="rbri">
+                DOMPointReadOnly, DOMRectReadOnly, DOMMatrixReadOnly, and PerformanceNavigation toJSON() implementation improved.
+            </action>
+            <action type="update" dev="rbri">
                 DOMPointReadOnly and DOMPoint implementation improved.
             </action>
             <action type="add" dev="rbri">

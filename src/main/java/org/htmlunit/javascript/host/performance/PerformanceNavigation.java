@@ -83,7 +83,7 @@ public class PerformanceNavigation extends HtmlUnitScriptable {
      * @return the {@code toJSON} object
      */
     @JsxFunction
-    public Object toJSON() {
+    public Scriptable toJSON() {
         final Scriptable json = JavaScriptEngine.newObject(getParentScope());
         json.put("type", json, getType());
         json.put("redirectCount", json, getRedirectCount());

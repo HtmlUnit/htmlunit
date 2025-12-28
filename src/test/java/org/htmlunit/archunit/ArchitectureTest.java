@@ -355,8 +355,6 @@ public class ArchitectureTest {
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope.setTimeout(org.htmlunit.corejs.javascript.Context, org.htmlunit.corejs.javascript.Scriptable, org.htmlunit.corejs.javascript.Scriptable, [Ljava.lang.Object;, org.htmlunit.corejs.javascript.Function)")
                 .and().doNotHaveFullName("org.htmlunit.javascript.host.xml.XSLTProcessor.getParameter(java.lang.String, java.lang.String)")
 
-                .and().doNotHaveFullName("org.htmlunit.javascript.host.performance.PerformanceNavigation.toJSON()")
-
             .should().haveRawReturnType(String.class)
             .orShould().haveRawReturnType("int")
             .orShould().haveRawReturnType("long")
