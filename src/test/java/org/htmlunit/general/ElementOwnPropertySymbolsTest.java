@@ -3398,6 +3398,34 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [DOMPoint]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [DOMPoint]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DOMPoint]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DOMPoint]")
+    public void domPoint() throws Exception {
+        testString("", "new DOMPoint()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMRectReadOnly}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [DOMPointReadOnly]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [DOMPointReadOnly]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DOMPointReadOnly]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DOMPointReadOnly]")
+    public void domPointReadOnly() throws Exception {
+        testString("", "new DOMPointReadOnly()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMRect}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [DOMRect]",
             EDGE = "Symbol(Symbol.toStringTag) [C] [DOMRect]",
             FF = "Symbol(Symbol.toStringTag) [C] [DOMRect]",

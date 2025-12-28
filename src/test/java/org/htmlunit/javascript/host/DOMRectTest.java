@@ -30,27 +30,44 @@ public class DOMRectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("function")
+    public void type() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(typeof DOMRect);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"0", "0", "0", "0", "0", "0", "0", "0"})
-    public void ctor() throws Exception {
+    public void constructorNoArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  try {\n"
-            + "    let rect = new DOMRect();\n"
-            + "    log(rect.x);\n"
-            + "    log(rect.y);\n"
-            + "    log(rect.width);\n"
-            + "    log(rect.height);\n"
+            + "  let rect = new DOMRect();\n"
+            + "  log(rect.x);\n"
+            + "  log(rect.y);\n"
+            + "  log(rect.width);\n"
+            + "  log(rect.height);\n"
 
-            + "    log(rect.top);\n"
-            + "    log(rect.left);\n"
-            + "    log(rect.bottom);\n"
-            + "    log(rect.right);\n"
-            + "  } catch(e) { logEx(e);}\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
             + "</script>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -59,26 +76,25 @@ public class DOMRectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"4", "0", "0", "0", "0", "4", "0", "4"})
-    public void ctor1Param() throws Exception {
+    public void constructorOneArg() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  try {\n"
-            + "    let rect = new DOMRect(4);\n"
-            + "    log(rect.x);\n"
-            + "    log(rect.y);\n"
-            + "    log(rect.width);\n"
-            + "    log(rect.height);\n"
+            + "  let rect = new DOMRect(4);\n"
+            + "  log(rect.x);\n"
+            + "  log(rect.y);\n"
+            + "  log(rect.width);\n"
+            + "  log(rect.height);\n"
 
-            + "    log(rect.top);\n"
-            + "    log(rect.left);\n"
-            + "    log(rect.bottom);\n"
-            + "    log(rect.right);\n"
-            + "  } catch(e) { logEx(e);}\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
             + "</script>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -87,26 +103,25 @@ public class DOMRectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"4", "7", "0", "0", "7", "4", "7", "4"})
-    public void ctor2Param() throws Exception {
+    public void constructorTwoArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  try {\n"
-            + "    let rect = new DOMRect(4, 7);\n"
-            + "    log(rect.x);\n"
-            + "    log(rect.y);\n"
-            + "    log(rect.width);\n"
-            + "    log(rect.height);\n"
+            + "  let rect = new DOMRect(4, 7);\n"
+            + "  log(rect.x);\n"
+            + "  log(rect.y);\n"
+            + "  log(rect.width);\n"
+            + "  log(rect.height);\n"
 
-            + "    log(rect.top);\n"
-            + "    log(rect.left);\n"
-            + "    log(rect.bottom);\n"
-            + "    log(rect.right);\n"
-            + "  } catch(e) { logEx(e);}\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
             + "</script>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -115,26 +130,25 @@ public class DOMRectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"4", "7", "11", "0", "7", "4", "7", "15"})
-    public void ctor3Params() throws Exception {
+    public void constructorThreeArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  try {\n"
-            + "    let rect = new DOMRect(4, 7, 11);\n"
-            + "    log(rect.x);\n"
-            + "    log(rect.y);\n"
-            + "    log(rect.width);\n"
-            + "    log(rect.height);\n"
+            + "  let rect = new DOMRect(4, 7, 11);\n"
+            + "  log(rect.x);\n"
+            + "  log(rect.y);\n"
+            + "  log(rect.width);\n"
+            + "  log(rect.height);\n"
 
-            + "    log(rect.top);\n"
-            + "    log(rect.left);\n"
-            + "    log(rect.bottom);\n"
-            + "    log(rect.right);\n"
-            + "  } catch(e) { logEx(e);}\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
             + "</script>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -143,26 +157,25 @@ public class DOMRectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"4", "7", "11", "42", "7", "4", "49", "15"})
-    public void ctor4Param() throws Exception {
+    public void constructorFourArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  try {\n"
-            + "    let rect = new DOMRect(4, 7, 11, 42);\n"
-            + "    log(rect.x);\n"
-            + "    log(rect.y);\n"
-            + "    log(rect.width);\n"
-            + "    log(rect.height);\n"
+            + "  let rect = new DOMRect(4, 7, 11, 42);\n"
+            + "  log(rect.x);\n"
+            + "  log(rect.y);\n"
+            + "  log(rect.width);\n"
+            + "  log(rect.height);\n"
 
-            + "    log(rect.top);\n"
-            + "    log(rect.left);\n"
-            + "    log(rect.bottom);\n"
-            + "    log(rect.right);\n"
-            + "  } catch(e) { logEx(e);}\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
             + "</script>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -171,26 +184,25 @@ public class DOMRectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"4", "7", "11", "42", "7", "4", "49", "15"})
-    public void ctor5Params() throws Exception {
+    public void constructorFiveArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  try {\n"
-            + "    let rect = new DOMRect(4, 7, 11, 42, 13);\n"
-            + "    log(rect.x);\n"
-            + "    log(rect.y);\n"
-            + "    log(rect.width);\n"
-            + "    log(rect.height);\n"
+            + "  let rect = new DOMRect(4, 7, 11, 42, 13);\n"
+            + "  log(rect.x);\n"
+            + "  log(rect.y);\n"
+            + "  log(rect.width);\n"
+            + "  log(rect.height);\n"
 
-            + "    log(rect.top);\n"
-            + "    log(rect.left);\n"
-            + "    log(rect.bottom);\n"
-            + "    log(rect.right);\n"
-            + "  } catch(e) { logEx(e);}\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
             + "</script>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -198,27 +210,26 @@ public class DOMRectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"-4", "-7", "-11", "-42", "-49", "-15", "-7", "-4"})
-    public void ctorNegative() throws Exception {
+    @Alerts({"-4", "7.2", "-11", "-42", "-34.8", "-15", "7.2", "-4"})
+    public void negativeAndFloatingPointValues() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  try {\n"
-            + "    let rect = new DOMRect(-4, -7, -11, -42, -13);\n"
-            + "    log(rect.x);\n"
-            + "    log(rect.y);\n"
-            + "    log(rect.width);\n"
-            + "    log(rect.height);\n"
+            + "  let rect = new DOMRect(-4, 7.2, -11, -42, -13);\n"
+            + "  log(rect.x);\n"
+            + "  log(rect.y);\n"
+            + "  log(rect.width);\n"
+            + "  log(rect.height);\n"
 
-            + "    log(rect.top);\n"
-            + "    log(rect.left);\n"
-            + "    log(rect.bottom);\n"
-            + "    log(rect.right);\n"
-            + "  } catch(e) { logEx(e);}\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
             + "</script>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -247,6 +258,7 @@ public class DOMRectTest extends WebDriverTestCase {
             + "  } catch(e) { logEx(e);}\n"
             + "</script>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -262,35 +274,34 @@ public class DOMRectTest extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  try {\n"
-            + "    let rect = new DOMRect(4, 7, 11, 42, 13);\n"
-            + "    log(rect.x);\n"
-            + "    log(rect.y);\n"
-            + "    log(rect.width);\n"
-            + "    log(rect.height);\n"
+            + "  let rect = new DOMRect(4, 7, 11, 42, 13);\n"
+            + "  log(rect.x);\n"
+            + "  log(rect.y);\n"
+            + "  log(rect.width);\n"
+            + "  log(rect.height);\n"
 
-            + "    log(rect.top);\n"
-            + "    log(rect.left);\n"
-            + "    log(rect.bottom);\n"
-            + "    log(rect.right);\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
 
-            + "    rect.x = 2;\n"
-            + "    rect.y = 5;\n"
-            + "    rect.width = 100;\n"
-            + "    rect.height -8;\n"
+            + "  rect.x = 2;\n"
+            + "  rect.y = 5;\n"
+            + "  rect.width = 100;\n"
+            + "  rect.height = -8;\n"
 
-            + "    log(rect.x);\n"
-            + "    log(rect.y);\n"
-            + "    log(rect.width);\n"
-            + "    log(rect.height);\n"
+            + "  log(rect.x);\n"
+            + "  log(rect.y);\n"
+            + "  log(rect.width);\n"
+            + "  log(rect.height);\n"
 
-            + "    log(rect.top);\n"
-            + "    log(rect.left);\n"
-            + "    log(rect.bottom);\n"
-            + "    log(rect.right);\n"
-            + "  } catch(e) { logEx(e);}\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
             + "</script>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -310,21 +321,18 @@ public class DOMRectTest extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  try {\n"
-            + "    let rect = new DOMRect();\n"
-            + "    log(JSON.stringify(rect));\n"
-            + "    log(JSON.stringify(rect.toJSON()));\n"
-            + "    log(rect === rect.toJSON());\n"
-            + "  } catch(e) { logEx(e);}\n"
+            + "  let rect = new DOMRect();\n"
+            + "  log(JSON.stringify(rect));\n"
+            + "  log(JSON.stringify(rect.toJSON()));\n"
+            + "  log(rect === rect.toJSON());\n"
 
-            + "  try {\n"
-            + "    let rect = new DOMRect(4, 7, 11, 42);\n"
-            + "    log(JSON.stringify(rect));\n"
-            + "    log(JSON.stringify(rect.toJSON()));\n"
-            + "    log(rect === rect.toJSON());\n"
-            + "  } catch(e) { logEx(e);}\n"
+            + "  rect = new DOMRect(4, 7, 11, 42);\n"
+            + "  log(JSON.stringify(rect));\n"
+            + "  log(JSON.stringify(rect.toJSON()));\n"
+            + "  log(rect === rect.toJSON());\n"
             + "</script>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 }

@@ -18613,6 +18613,34 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMRectReadOnly}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),matrixTransform(),toJSON(),w[GCE],x[GCE],y[GCE],z[GCE]",
+            EDGE = "constructor(),matrixTransform(),toJSON(),w[GCE],x[GCE],y[GCE],z[GCE]",
+            FF = "constructor(),matrixTransform(),toJSON(),w[GCE],x[GCE],y[GCE],z[GCE]",
+            FF_ESR = "constructor(),matrixTransform(),toJSON(),w[GCE],x[GCE],y[GCE],z[GCE]")
+    public void domPointReadOnly() throws Exception {
+        testString("", "new DOMPointReadOnly()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMRect}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),w[GSCE],x[GSCE],y[GSCE],z[GSCE]",
+            EDGE = "constructor(),w[GSCE],x[GSCE],y[GSCE],z[GSCE]",
+            FF = "constructor(),w[GSCE],x[GSCE],y[GSCE],z[GSCE]",
+            FF_ESR = "constructor(),w[GSCE],x[GSCE],y[GSCE],z[GSCE]")
+    public void domPoint() throws Exception {
+        testString("", "new DOMPoint()");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.Notification}.
      *
      * @throws Exception if the test fails

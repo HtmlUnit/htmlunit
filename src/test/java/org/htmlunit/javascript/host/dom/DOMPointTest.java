@@ -12,19 +12,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host;
+package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.javascript.host.dom.DOMRectReadOnly;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for {@link DOMRectReadOnly}.
+ * Tests for {@link DOMPoint}.
  *
  * @author Ronald Brill
  */
-public class DOMRectReadOnlyTest extends WebDriverTestCase {
+public class DOMPointTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -37,7 +36,7 @@ public class DOMRectReadOnlyTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + "  log(typeof DOMRectReadOnly);\n"
+                + "  log(typeof DOMPoint);\n"
                 + "</script>\n"
                 + "</body></html>";
 
@@ -48,23 +47,18 @@ public class DOMRectReadOnlyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "0", "0", "0", "0", "0", "0", "0"})
+    @Alerts({"0", "0", "0", "1"})
     public void constructorNoArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  let rect = new DOMRectReadOnly();\n"
-            + "  log(rect.x);\n"
-            + "  log(rect.y);\n"
-            + "  log(rect.width);\n"
-            + "  log(rect.height);\n"
-
-            + "  log(rect.top);\n"
-            + "  log(rect.left);\n"
-            + "  log(rect.bottom);\n"
-            + "  log(rect.right);\n"
+            + "  let point = new DOMPoint();\n"
+            + "  log(point.x);\n"
+            + "  log(point.y);\n"
+            + "  log(point.z);\n"
+            + "  log(point.w);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -75,23 +69,18 @@ public class DOMRectReadOnlyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "0", "0", "0", "0", "4", "0", "4"})
+    @Alerts({"4", "0", "0", "1"})
     public void constructorOneArg() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  let rect = new DOMRectReadOnly(4);\n"
-            + "  log(rect.x);\n"
-            + "  log(rect.y);\n"
-            + "  log(rect.width);\n"
-            + "  log(rect.height);\n"
-
-            + "  log(rect.top);\n"
-            + "  log(rect.left);\n"
-            + "  log(rect.bottom);\n"
-            + "  log(rect.right);\n"
+            + "  let point = new DOMPoint(4);\n"
+            + "  log(point.x);\n"
+            + "  log(point.y);\n"
+            + "  log(point.z);\n"
+            + "  log(point.w);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -102,23 +91,18 @@ public class DOMRectReadOnlyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "7", "0", "0", "7", "4", "7", "4"})
+    @Alerts({"4", "7", "0", "1"})
     public void constructorTwoArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  let rect = new DOMRectReadOnly(4, 7);\n"
-            + "  log(rect.x);\n"
-            + "  log(rect.y);\n"
-            + "  log(rect.width);\n"
-            + "  log(rect.height);\n"
-
-            + "  log(rect.top);\n"
-            + "  log(rect.left);\n"
-            + "  log(rect.bottom);\n"
-            + "  log(rect.right);\n"
+            + "  let point = new DOMPoint(4, 7);\n"
+            + "  log(point.x);\n"
+            + "  log(point.y);\n"
+            + "  log(point.z);\n"
+            + "  log(point.w);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -129,23 +113,18 @@ public class DOMRectReadOnlyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "7", "11", "0", "7", "4", "7", "15"})
+    @Alerts({"4", "7", "11", "1"})
     public void constructorThreeArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  let rect = new DOMRectReadOnly(4, 7, 11);\n"
-            + "  log(rect.x);\n"
-            + "  log(rect.y);\n"
-            + "  log(rect.width);\n"
-            + "  log(rect.height);\n"
-
-            + "  log(rect.top);\n"
-            + "  log(rect.left);\n"
-            + "  log(rect.bottom);\n"
-            + "  log(rect.right);\n"
+            + "  let point = new DOMPoint(4, 7, 11);\n"
+            + "  log(point.x);\n"
+            + "  log(point.y);\n"
+            + "  log(point.z);\n"
+            + "  log(point.w);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -156,23 +135,18 @@ public class DOMRectReadOnlyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "7", "11", "42", "7", "4", "49", "15"})
+    @Alerts({"4", "7", "11", "42"})
     public void constructorFourArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  let rect = new DOMRectReadOnly(4, 7, 11, 42);\n"
-            + "  log(rect.x);\n"
-            + "  log(rect.y);\n"
-            + "  log(rect.width);\n"
-            + "  log(rect.height);\n"
-
-            + "  log(rect.top);\n"
-            + "  log(rect.left);\n"
-            + "  log(rect.bottom);\n"
-            + "  log(rect.right);\n"
+            + "  let point = new DOMPoint(4, 7, 11, 42);\n"
+            + "  log(point.x);\n"
+            + "  log(point.y);\n"
+            + "  log(point.z);\n"
+            + "  log(point.w);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -183,23 +157,18 @@ public class DOMRectReadOnlyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "7", "11", "42", "7", "4", "49", "15"})
+    @Alerts({"4", "7", "11", "42"})
     public void constructorFiveArgs() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  let rect = new DOMRectReadOnly(4, 7, 11, 42, 13);\n"
-            + "  log(rect.x);\n"
-            + "  log(rect.y);\n"
-            + "  log(rect.width);\n"
-            + "  log(rect.height);\n"
-
-            + "  log(rect.top);\n"
-            + "  log(rect.left);\n"
-            + "  log(rect.bottom);\n"
-            + "  log(rect.right);\n"
+            + "  let point = new DOMPoint(4, 7, 11, 42, 13);\n"
+            + "  log(point.x);\n"
+            + "  log(point.y);\n"
+            + "  log(point.z);\n"
+            + "  log(point.w);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -210,23 +179,18 @@ public class DOMRectReadOnlyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"-4", "7.2", "-11", "-42", "-34.8", "-15", "7.2", "-4"})
+    @Alerts({"-4", "7.2", "-11", "-42"})
     public void negativeAndFloatingPointValues() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  let rect = new DOMRectReadOnly(-4, 7.2, -11, -42, -13);\n"
-            + "  log(rect.x);\n"
-            + "  log(rect.y);\n"
-            + "  log(rect.width);\n"
-            + "  log(rect.height);\n"
-
-            + "  log(rect.top);\n"
-            + "  log(rect.left);\n"
-            + "  log(rect.bottom);\n"
-            + "  log(rect.right);\n"
+            + "  let point = new DOMPoint(-4, 7.2, -11, -42);\n"
+            + "  log(point.x);\n"
+            + "  log(point.y);\n"
+            + "  log(point.z);\n"
+            + "  log(point.w);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -245,19 +209,20 @@ public class DOMRectReadOnlyTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    let rect = new DOMRectReadOnly(undefind);\n"
-            + "    log(rect.x);\n"
+            + "    let point = new DOMPoint(undefind);\n"
+            + "    log(point.x);\n"
             + "  } catch(e) { logEx(e);}\n"
             + "  try {\n"
-            + "    let rect = new DOMRectReadOnly(null);\n"
-            + "    log(rect.x);\n"
+            + "    let point = new DOMPoint(null);\n"
+            + "    log(point.x);\n"
             + "  } catch(e) { logEx(e);}\n"
             + "  try {\n"
-            + "    let rect = new DOMRectReadOnly('42');\n"
-            + "    log(rect.x);\n"
+            + "    let point = new DOMPoint('42');\n"
+            + "    log(point.x);\n"
             + "  } catch(e) { logEx(e);}\n"
             + "</script>\n"
             + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -265,11 +230,43 @@ public class DOMRectReadOnlyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"{\"x\":0,\"y\":0,\"width\":0,\"height\":0,\"top\":0,\"right\":0,\"bottom\":0,\"left\":0}",
-             "{\"x\":0,\"y\":0,\"width\":0,\"height\":0,\"top\":0,\"right\":0,\"bottom\":0,\"left\":0}",
+    @Alerts({"4", "7", "11", "42", "2", "5", "100", "-8"})
+    public void setter() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let point = new DOMPoint(4, 7, 11, 42, 13);\n"
+            + "  log(point.x);\n"
+            + "  log(point.y);\n"
+            + "  log(point.z);\n"
+            + "  log(point.w);\n"
+
+            + "  point.x = 2;\n"
+            + "  point.y = 5;\n"
+            + "  point.z = 100;\n"
+            + "  point.w = -8;\n"
+
+            + "  log(point.x);\n"
+            + "  log(point.y);\n"
+            + "  log(point.z);\n"
+            + "  log(point.w);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"{\"x\":0,\"y\":0,\"z\":0,\"w\":1}",
+             "{\"x\":0,\"y\":0,\"z\":0,\"w\":1}",
              "false",
-             "{\"x\":4,\"y\":7,\"width\":11,\"height\":42,\"top\":7,\"right\":15,\"bottom\":49,\"left\":4}",
-             "{\"x\":4,\"y\":7,\"width\":11,\"height\":42,\"top\":7,\"right\":15,\"bottom\":49,\"left\":4}",
+             "{\"x\":4,\"y\":7,\"z\":11,\"w\":42}",
+             "{\"x\":4,\"y\":7,\"z\":11,\"w\":42}",
              "false"})
     public void toJson() throws Exception {
         final String html = DOCTYPE_HTML
@@ -277,15 +274,15 @@ public class DOMRectReadOnlyTest extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "  let rect = new DOMRectReadOnly();\n"
-            + "  log(JSON.stringify(rect));\n"
-            + "  log(JSON.stringify(rect.toJSON()));\n"
-            + "  log(rect === rect.toJSON());\n"
+            + "  let point = new DOMPoint();\n"
+            + "  log(JSON.stringify(point));\n"
+            + "  log(JSON.stringify(point.toJSON()));\n"
+            + "  log(point === point.toJSON());\n"
 
-            + "  rect = new DOMRectReadOnly(4, 7, 11, 42);\n"
-            + "  log(JSON.stringify(rect));\n"
-            + "  log(JSON.stringify(rect.toJSON()));\n"
-            + "  log(rect === rect.toJSON());\n"
+            + "  point = new DOMPoint(4, 7, 11, 42);\n"
+            + "  log(JSON.stringify(point));\n"
+            + "  log(JSON.stringify(point.toJSON()));\n"
+            + "  log(point === point.toJSON());\n"
             + "</script>\n"
             + "</body></html>";
 

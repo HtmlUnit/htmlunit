@@ -9679,6 +9679,34 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMRectReadOnly}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "matrixTransform(),toJSON(),w,x,y,z",
+            EDGE = "matrixTransform(),toJSON(),w,x,y,z",
+            FF = "matrixTransform(),toJSON(),w,x,y,z",
+            FF_ESR = "matrixTransform(),toJSON(),w,x,y,z")
+    public void domPointReadOnly() throws Exception {
+        testString("", "new DOMPointReadOnly()");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.dom.DOMRect}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "matrixTransform(),toJSON(),w,x,y,z",
+            EDGE = "matrixTransform(),toJSON(),w,x,y,z",
+            FF = "matrixTransform(),toJSON(),w,x,y,z",
+            FF_ESR = "matrixTransform(),toJSON(),w,x,y,z")
+    public void domPoint() throws Exception {
+        testString("", "new DOMPoint()");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.Notification}.
      *
      * @throws Exception if the test fails

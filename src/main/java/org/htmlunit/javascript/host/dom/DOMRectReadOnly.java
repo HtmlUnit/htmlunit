@@ -20,8 +20,6 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.json.JsonParser;
-import org.htmlunit.corejs.javascript.json.JsonParser.ParseException;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -208,27 +206,18 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
      * @return a JSON representation of the DOMRectReadOnly object.
      */
     @JsxFunction
-    public Object toJSON() {
-        final String jsonString = new StringBuilder()
-                .append("{\"x\":").append(xVal_)
-                .append(", \"y\":").append(yVal_)
-                .append(", \"width\":").append(width_)
-                .append(", \"height\":").append(height_)
+    public Scriptable toJSON() {
+        final Scriptable json = JavaScriptEngine.newObject(getParentScope());
+        json.put("x", json, xVal_);
+        json.put("y", json, yVal_);
+        json.put("width", json, width_);
+        json.put("height", json, height_);
 
-                .append(", \"top\":").append(getTop())
-                .append(", \"right\":").append(getRight())
-                .append(", \"bottom\":").append(getBottom())
-                .append(", \"left\":").append(getLeft())
+        json.put("top", json, getTop());
+        json.put("right", json, getRight());
+        json.put("bottom", json, getBottom());
+        json.put("left", json, getLeft());
 
-                .append('}').toString();
-        try {
-            return new JsonParser(Context.getCurrentContext(), getParentScope()).parseValue(jsonString);
-        }
-        catch (final ParseException e) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Failed parsingJSON '" + jsonString + "'", e);
-            }
-        }
-        return null;
+        return json;
     }
 }
