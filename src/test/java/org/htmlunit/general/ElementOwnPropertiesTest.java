@@ -18622,6 +18622,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),matrixTransform(),toJSON(),w[GCE],x[GCE],y[GCE],z[GCE]",
             FF = "constructor(),matrixTransform(),toJSON(),w[GCE],x[GCE],y[GCE],z[GCE]",
             FF_ESR = "constructor(),matrixTransform(),toJSON(),w[GCE],x[GCE],y[GCE],z[GCE]")
+    @HtmlUnitNYI(
+            CHROME = "constructor(),toJSON(),w[GCE],x[GCE],y[GCE],z[GCE]",
+            EDGE = "constructor(),toJSON(),w[GCE],x[GCE],y[GCE],z[GCE]",
+            FF = "constructor(),toJSON(),w[GCE],x[GCE],y[GCE],z[GCE]",
+            FF_ESR = "constructor(),toJSON(),w[GCE],x[GCE],y[GCE],z[GCE]")
     public void domPointReadOnly() throws Exception {
         testString("", "new DOMPointReadOnly()");
     }

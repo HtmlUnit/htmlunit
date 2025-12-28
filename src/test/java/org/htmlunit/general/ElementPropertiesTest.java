@@ -9688,6 +9688,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "matrixTransform(),toJSON(),w,x,y,z",
             FF = "matrixTransform(),toJSON(),w,x,y,z",
             FF_ESR = "matrixTransform(),toJSON(),w,x,y,z")
+    @HtmlUnitNYI(CHROME = "toJSON(),w,x,y,z",
+            EDGE = "toJSON(),w,x,y,z",
+            FF = "toJSON(),w,x,y,z",
+            FF_ESR = "toJSON(),w,x,y,z")
     public void domPointReadOnly() throws Exception {
         testString("", "new DOMPointReadOnly()");
     }
@@ -9702,6 +9706,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "matrixTransform(),toJSON(),w,x,y,z",
             FF = "matrixTransform(),toJSON(),w,x,y,z",
             FF_ESR = "matrixTransform(),toJSON(),w,x,y,z")
+    @HtmlUnitNYI(CHROME = "toJSON(),w,x,y,z",
+            EDGE = "toJSON(),w,x,y,z",
+            FF = "toJSON(),w,x,y,z",
+            FF_ESR = "toJSON(),w,x,y,z")
     public void domPoint() throws Exception {
         testString("", "new DOMPoint()");
     }
