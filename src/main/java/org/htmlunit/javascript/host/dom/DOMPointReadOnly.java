@@ -44,7 +44,7 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
      * Creates an instance.
      */
     public DOMPointReadOnly() {
-        // default ctor.
+        wVal_ = 1;
     }
 
     /**

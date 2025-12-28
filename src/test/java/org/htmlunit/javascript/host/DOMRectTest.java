@@ -267,7 +267,7 @@ public class DOMRectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"4", "7", "11", "42", "7", "4", "49", "15",
-             "2", "5", "100", "42", "5", "2", "47", "102"})
+             "2", "5", "100", "-8", "-3", "2", "5", "102"})
     public void setter() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"
