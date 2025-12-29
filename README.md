@@ -74,6 +74,10 @@ Add to your `build.gradle`:
 implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.21.0'
 ```
 
+## Requirements
+
+HtmlUnit requires **Java 17** or higher.
+
 ## Getting Started
 You can start here:
 * [Getting Started](https://www.htmlunit.org/gettingStarted.html)

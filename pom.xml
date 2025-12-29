@@ -24,8 +24,8 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
 
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 
         <htmlunitcsp.version>4.21.0</htmlunitcsp.version>
         <htmlunitcssparser.version>4.21.0</htmlunitcssparser.version>
@@ -90,6 +90,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${compiler-plugin.version}</version>
+                <configuration>
+                    <compilerArgs>
+                        <arg>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED</arg>
+                    </compilerArgs>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -224,6 +229,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire-plugin.version}</version>
+                <configuration>
+                    <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED</argLine>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -299,7 +307,7 @@
                                     <version>3.6.3</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <version>1.8.0</version>
+                                    <version>17</version>
                                 </requireJavaVersion>
                                 <dependencyConvergence />
                             </rules>
@@ -382,7 +390,7 @@
                                 <exclude>**/huge/*.java</exclude>
                                 <exclude>**/encoding/*.java</exclude>
                             </excludes>
-                            <argLine>-Xms128m -Xmx1g -Dsun.reflect.noInflation=true</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms128m -Xmx1g -Dsun.reflect.noInflation=true</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -443,7 +451,7 @@
                             <excludes>
                                 <exclude>**/libraries/jquery/JQuery3x3x1Test.java</exclude>
                             </excludes>
-                            <argLine>-Xms128m -Xmx512m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -471,7 +479,7 @@
                             <includes>
                                 <include>**/libraries/JQuery3x3x1Test.java</include>
                             </includes>
-                            <argLine>-Xms128m -Xmx512m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -501,7 +509,7 @@
                                 <include>**/huge/ElementClosesElementTest.java</include>
                                 <include>**/huge/ElementClosesElement2Test.java</include>
                             </includes>
-                            <argLine>-Xms256m -Xmx512m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms256m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -531,7 +539,7 @@
                                 <include>**/huge/HostParentOfBTest.java</include>
                                 <include>**/huge/HostParentOfCTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -560,7 +568,7 @@
                                 <include>**/huge/HostParentOfDTest.java</include>
                                 <include>**/huge/HostParentOfFTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -589,7 +597,7 @@
                                 <include>**/huge/HostParentOfHTest.java</include>
                                 <include>**/huge/HostParentOfITest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -618,7 +626,7 @@
                                 <include>**/huge/HostParentOfMTest.java</include>
                                 <include>**/huge/HostParentOfNTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -646,7 +654,7 @@
                             <includes>
                                 <include>**/huge/HostParentOfPTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -674,7 +682,7 @@
                             <includes>
                                 <include>**/huge/HostParentOfSTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -702,7 +710,7 @@
                             <includes>
                                 <include>**/huge/HostParentOfS2Test.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -731,7 +739,7 @@
                                 <include>**/huge/HostParentOfTTest.java</include>
                                 <include>**/huge/HostParentOfWTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -759,7 +767,7 @@
                             <includes>
                                 <include>**/encoding/**</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>--add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
