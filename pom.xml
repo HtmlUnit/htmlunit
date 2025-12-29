@@ -6,7 +6,7 @@
 
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.21.0-SNAPSHOT</version>
+    <version>4.21.0</version>
     <packaging>jar</packaging>
 
     <name>HtmlUnit</name>

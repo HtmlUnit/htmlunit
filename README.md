@@ -1,6 +1,6 @@
 # ![HtmlUnit Logo](https://github.com/HtmlUnit/htmlunit/blob/master/src/site/resources/images/htmlunit.png)
 
-Version 4.20.0 / December 07, 2025
+Version 4.21.0 / December 28, 2025
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
@@ -62,7 +62,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.20.0</version>
+    <version>4.21.0</version>
 </dependency>
 ```
 
@@ -71,7 +71,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.20.0'
+implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.21.0'
 ```
 
 ## Getting Started
@@ -221,7 +221,7 @@ Add the snapshot repository and dependency to your `pom.xml`:
       <dependency>
           <groupId>org.htmlunit</groupId>
           <artifactId>htmlunit</artifactId>
-          <version>4.21.0-SNAPSHOT</version>
+          <version>4.22.0-SNAPSHOT</version>
       </dependency>
       <!-- ... -->
     </dependencies>
