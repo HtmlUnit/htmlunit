@@ -58,7 +58,7 @@ public class CodeStyleTest {
     private static final Pattern LEADING_WHITESPACE = Pattern.compile("^\\s+");
     private static final Pattern LOG_STATIC_STRING =
                                     Pattern.compile("^\\s*LOG\\.[a-z]+\\(\"[^\"]*\"(, [a-zA-Z_]+)?\\);");
-    private List<String> failures_ = new ArrayList<>();
+    private final List<String> failures_ = new ArrayList<>();
     private String title_ = "unknown";
 
     /**
@@ -684,7 +684,7 @@ public class CodeStyleTest {
         final StringBuilder alerts = new StringBuilder();
         for (int i = alertsIndex;; i++) {
             final String line = lines.get(i);
-            if (alerts.length() != 0) {
+            if (!alerts.isEmpty()) {
                 alerts.append('\n');
             }
             if (line.startsWith("    @Alerts(")) {
@@ -757,7 +757,7 @@ public class CodeStyleTest {
             boolean startsWithBraces = false;
             for (final String token : string.split("(?<!\\\\)\"")) {
                 insideString = !insideString;
-                if (currentToken.length() != 0) {
+                if (!currentToken.isEmpty()) {
                     currentToken.append('"');
                 }
                 else {
@@ -781,7 +781,7 @@ public class CodeStyleTest {
                     if (!insideString && token.contains(",") && !startsWithBraces) {
                         final String[] expressions = token.split(",");
                         currentToken.append(expressions[0]);
-                        if (currentToken.length() != 0) {
+                        if (!currentToken.isEmpty()) {
                             list.add(currentToken.toString());
                         }
                         for (int i = 1; i < expressions.length - 1; i++) {
@@ -795,7 +795,7 @@ public class CodeStyleTest {
                     }
                 }
             }
-            if (currentToken.length() != 0) {
+            if (!currentToken.isEmpty()) {
                 if (!currentToken.toString().contains("\"")) {
                     currentToken.insert(0, '"');
                 }

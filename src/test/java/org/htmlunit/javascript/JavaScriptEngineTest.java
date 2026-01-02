@@ -20,6 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -321,7 +322,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final String jsContent = "function doTest() { alert('gZip'); }";
         final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         try (GZIPOutputStream gzipper = new GZIPOutputStream(bytes)) {
-            gzipper.write(jsContent.getBytes("ASCII"));
+            gzipper.write(jsContent.getBytes(StandardCharsets.US_ASCII));
         }
 
         final List<NameValuePair> headers = new ArrayList<>();
@@ -349,7 +350,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = getMockWebConnection();
 
         try (ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
-            bytes.write("".getBytes("ASCII"));
+            bytes.write("".getBytes(StandardCharsets.US_ASCII));
 
             final List<NameValuePair> headers = new ArrayList<>();
             headers.add(new NameValuePair(HttpHeader.CONTENT_LENGTH, "0"));
@@ -378,7 +379,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         try (ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
             final String jsContent = "function doTest() { alert('gZip'); }";
-            bytes.write(jsContent.getBytes("ASCII"));
+            bytes.write(jsContent.getBytes(StandardCharsets.US_ASCII));
 
             final List<NameValuePair> headers = new ArrayList<>();
             headers.add(new NameValuePair("Content-Encoding", "gzip"));

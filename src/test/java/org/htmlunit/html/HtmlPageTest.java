@@ -1963,15 +1963,15 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         // see also org.htmlunit.javascript.host.html.HTMLDocumentTest.baseURI_noBaseTag()
         String path = "details/abc";
-        page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST.toString() + path));
+        page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST + path));
         assertEquals(URL_FIRST.toExternalForm() + path, page.getBaseURL().toExternalForm());
 
         path = "details/abc?x=y&z=z";
-        page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST.toString() + path));
+        page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST + path));
         assertEquals(URL_FIRST.toExternalForm() + path, page.getBaseURL().toExternalForm());
 
         path = "details/abc;jsessionid=42?x=y&z=z";
-        page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST.toString() + path));
+        page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST + path));
         assertEquals(URL_FIRST.toExternalForm() + path, page.getBaseURL().toExternalForm());
     }
 }

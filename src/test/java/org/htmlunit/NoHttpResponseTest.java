@@ -215,7 +215,7 @@ public class NoHttpResponseTest {
                 catch (final FailingHttpStatusCodeException e) {
                     // expected
                     assertEquals(0, e.getStatusCode());
-                    assertEquals("0 No HTTP Response for " + URL_FIRST.toString(), e.getMessage());
+                    assertEquals("0 No HTTP Response for " + URL_FIRST, e.getMessage());
                 }
             }
         }

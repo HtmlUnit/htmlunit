@@ -244,12 +244,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * All browsers supported.
      */
-    private static List<BrowserVersion> ALL_BROWSERS_ = List.of(BrowserVersion.CHROME, BrowserVersion.EDGE, BrowserVersion.FIREFOX, BrowserVersion.FIREFOX_ESR);
+    private static final List<BrowserVersion> ALL_BROWSERS_ = List.of(BrowserVersion.CHROME, BrowserVersion.EDGE, BrowserVersion.FIREFOX, BrowserVersion.FIREFOX_ESR);
 
     /**
      * Browsers which run by default.
      */
-    private static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ =
+    private static final BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ =
         {BrowserVersion.CHROME,
             BrowserVersion.EDGE,
             BrowserVersion.FIREFOX,
@@ -1666,7 +1666,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         // close all windows except the current one
                         handles.remove(currentWindow);
 
-                        if (handles.size() > 0) {
+                        if (!handles.isEmpty()) {
                             for (final String handle : handles) {
                                 try {
                                     driver.switchTo().window(handle);

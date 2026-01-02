@@ -357,7 +357,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
         final List<NameValuePair> params = getMockWebConnection().getLastParameters();
         assertEquals(getExpectedAlerts()[1], "" + params.size());
 
-        if (params.size() > 0) {
+        if (!params.isEmpty()) {
             assertEquals(getExpectedAlerts()[2], params.get(0).getName() + "-" + params.get(0).getValue());
         }
         assertTitle(driver, getExpectedAlerts()[3]);
@@ -423,7 +423,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
         }
 
         assertEquals(2, getMockWebConnection().getRequestCount());
-        assertEquals(URL_SECOND.toString() + "?text=", getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(URL_SECOND + "?text=", getMockWebConnection().getLastWebRequest().getUrl());
     }
 
     /**

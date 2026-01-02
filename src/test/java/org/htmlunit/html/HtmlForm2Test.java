@@ -1580,12 +1580,12 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
 
-        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+        final URL indexUrl = new URL(URL_FIRST + "index.html");
 
         getMockWebConnection().setResponse(indexUrl, firstHtml);
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST + "index.html?test#ref"));
         driver.findElement(By.id("button")).click();
         if (useRealBrowser()) {
             Thread.sleep(400);
@@ -1615,12 +1615,12 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
 
-        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+        final URL indexUrl = new URL(URL_FIRST + "index.html");
 
         getMockWebConnection().setResponse(indexUrl, firstHtml);
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST + "index.html?test#ref"));
         driver.findElement(By.id("button")).click();
         if (useRealBrowser()) {
             Thread.sleep(400);
@@ -1650,12 +1650,12 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
 
-        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+        final URL indexUrl = new URL(URL_FIRST + "index.html");
 
         getMockWebConnection().setResponse(indexUrl, firstHtml);
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST + "index.html?test#ref"));
         driver.findElement(By.id("button")).click();
         if (useRealBrowser()) {
             Thread.sleep(400);
@@ -1685,12 +1685,12 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
 
-        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+        final URL indexUrl = new URL(URL_FIRST + "index.html");
 
         getMockWebConnection().setResponse(indexUrl, firstHtml);
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST + "index.html?test#ref"));
         driver.findElement(By.id("button")).click();
         if (useRealBrowser()) {
             Thread.sleep(400);

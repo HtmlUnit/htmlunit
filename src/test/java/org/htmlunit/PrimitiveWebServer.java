@@ -46,7 +46,7 @@ public class PrimitiveWebServer implements Closeable {
     private final String otherResponse_;
     private ServerSocket server_;
     private Charset charset_ = StandardCharsets.ISO_8859_1;
-    private List<String> requests_ = new ArrayList<>();
+    private final List<String> requests_ = new ArrayList<>();
 
     /**
      * Constructs a new SimpleWebServer.
@@ -125,7 +125,7 @@ public class PrimitiveWebServer implements Closeable {
                     }
 
                     final String response;
-                    if (requestString.length() < 1
+                    if (requestString.isEmpty()
                             || requestString.contains("/favicon.ico")) {
                         response = "HTTP/1.1 404 Not Found\r\n"
                                 + "Content-Length: 0\r\n"

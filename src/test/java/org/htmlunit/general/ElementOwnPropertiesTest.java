@@ -386,7 +386,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 && realProperties.contains("exception")
                 && implementedProperties.size() == 1
                 && implementedProperties.contains("exception")
-                && erroredProperties.size() == 0) {
+                && erroredProperties.isEmpty()) {
             html.append("&nbsp;");
         }
         else {

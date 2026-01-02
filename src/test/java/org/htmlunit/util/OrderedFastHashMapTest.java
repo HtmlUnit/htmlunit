@@ -199,7 +199,7 @@ public class OrderedFastHashMapTest {
     public void growSmall() {
         final OrderedFastHashMap<String, String> m = new OrderedFastHashMap<>(3);
         for (int i = 0; i < 10; i++) {
-            m.add(String.valueOf(i), "V" + String.valueOf(i));
+            m.add(String.valueOf(i), "V" + i);
         }
 
         final BiConsumer<String, Integer> t = (k, index) -> {
@@ -451,7 +451,7 @@ public class OrderedFastHashMapTest {
         final OrderedFastHashMap<String, String> m = new OrderedFastHashMap<>();
         for (int i = 0; i < 200; i++) {
             // we add two, but immediately remove the last again
-            m.put(String.valueOf(i), "V" + String.valueOf(i));
+            m.put(String.valueOf(i), "V" + i);
             m.put(String.valueOf(i + 1), "any");
             assertEquals("any", m.remove(String.valueOf(i + 1)));
         }
@@ -476,7 +476,7 @@ public class OrderedFastHashMapTest {
         final OrderedFastHashMap<String, String> m = new OrderedFastHashMap<>();
         for (int i = 0; i < 4000; i = i + 2) {
             m.put(String.valueOf(i), "any");
-            m.put(String.valueOf(i + 1), "V" + String.valueOf(i + 1));
+            m.put(String.valueOf(i + 1), "V" + (i + 1));
             assertEquals("any", m.remove(String.valueOf(i)));
         }
 
@@ -499,9 +499,9 @@ public class OrderedFastHashMapTest {
     public void removeTryingToCoverEdges_Middle() {
         final OrderedFastHashMap<String, String> m = new OrderedFastHashMap<>();
         for (int i = 0; i < 3 * 1972; i = i + 3) {
-            m.put(String.valueOf(i), "V" + String.valueOf(i));
+            m.put(String.valueOf(i), "V" + i);
             m.put(String.valueOf(i + 1), "any");
-            m.put(String.valueOf(i + 2), "V" + String.valueOf(i + 2));
+            m.put(String.valueOf(i + 2), "V" + (i + 2));
             assertEquals("any", m.remove(String.valueOf(i + 1)));
         }
 

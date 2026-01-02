@@ -31,9 +31,9 @@ import org.htmlunit.util.NameValuePair;
  * @author Ronald Brill
  */
 public class WebResponseMock extends WebResponse {
-    private Map<String, String> headers_;
+    private final Map<String, String> headers_;
 
-    private Map<String, Integer> callCounts_ = new HashMap<>();
+    private final Map<String, Integer> callCounts_ = new HashMap<>();
 
     /**
      * Ctor.

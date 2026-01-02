@@ -186,7 +186,7 @@ public final class MozillaTestGenerator {
                     i = p1 - 1;
                     p1 = p0;
                 }
-                if (builder.length() != 0) {
+                if (!builder.isEmpty()) {
                     builder.append(',');
                 }
                 builder.append(line, p0, p1);

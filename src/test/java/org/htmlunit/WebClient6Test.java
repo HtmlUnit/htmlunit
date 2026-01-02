@@ -431,7 +431,7 @@ public class WebClient6Test extends WebDriverTestCase {
         assertEquals(httpMethod, webConn.getLastWebRequest().getHttpMethod());
 
         if (resendParams) {
-            assertTrue(webConn.getLastWebRequest().getRequestParameters().size() > 0);
+            assertTrue(!webConn.getLastWebRequest().getRequestParameters().isEmpty());
 
             final NameValuePair param = webConn.getLastWebRequest().getRequestParameters().get(0);
             if ("param1".equals(param.getName())) {

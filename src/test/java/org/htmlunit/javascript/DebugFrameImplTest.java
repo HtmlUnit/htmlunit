@@ -42,8 +42,8 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
 
     private final Logger loggerDebugFrameImpl_ = (Logger) LogManager.getLogger(DebugFrameImpl.class);
 
-    private Level originalLogLevel_;
-    private WebClient client_;
+    private final Level originalLogLevel_;
+    private final WebClient client_;
 
     /**
      * Constructor.

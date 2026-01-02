@@ -94,12 +94,12 @@ public class Architecture2Test {
         oneTests.removeAll(anotherTests);
 
         if (tmp.size() + oneTests.size() > 0) {
-            if (tmp.size() == 0) {
+            if (tmp.isEmpty()) {
                 Assertions.fail("The " + oneTests.size() + " method(s) "
                     + oneTests.stream().sorted().collect(Collectors.toList())
                     + " are available in " + oneName + " but missing in " + anotherName + ".");
             }
-            else if (oneTests.size() == 0) {
+            else if (oneTests.isEmpty()) {
                 anotherTests.removeAll(oneTests);
                 Assertions.fail("The " + tmp.size() + " method(s) "
                     + tmp.stream().sorted().collect(Collectors.toList())

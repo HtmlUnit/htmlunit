@@ -129,7 +129,7 @@ public class ExternalTest {
             }
         }
 
-        if (wrongVersions.size() > 0) {
+        if (!wrongVersions.isEmpty()) {
             Assertions.fail(String.join("\n ", wrongVersions));
         }
 

@@ -23,6 +23,7 @@ import static org.htmlunit.HttpHeader.IF_NONE_MATCH;
 import static org.htmlunit.HttpHeader.LAST_MODIFIED;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -558,7 +559,7 @@ public class CacheTest extends SimpleWebTestCase {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair(LAST_MODIFIED, "Sun, 15 Jul 2007 20:46:27 GMT"));
         final WebRequest request = new WebRequest(cssUrl);
-        final WebResponseData data = new WebResponseData(css.getBytes("UTF-8"),
+        final WebResponseData data = new WebResponseData(css.getBytes(StandardCharsets.UTF_8),
                 HttpStatus.OK_200, HttpStatus.OK_200_MSG, headers);
         final WebResponse response = new WebResponse(data, request, 100);
         client.getCache().cacheIfPossible(new WebRequest(cssUrl), response, headers);

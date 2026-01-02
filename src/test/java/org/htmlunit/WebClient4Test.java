@@ -104,8 +104,8 @@ public class WebClient4Test extends WebServerTestCase {
      */
     public static class RedirectServlet extends HttpServlet {
         private int count_;
-        private int status_;
-        private String location_;
+        private final int status_;
+        private final String location_;
 
         /**
          * Creates a new instance.

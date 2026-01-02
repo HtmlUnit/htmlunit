@@ -263,7 +263,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
             // collect stack traces
             // caution: the threads may terminate after the threads have been returned by getJavaScriptThreads()
             // and before stack traces are retrieved
-            if (jsThreads.size() > 0) {
+            if (!jsThreads.isEmpty()) {
                 final Map<String, StackTraceElement[]> stackTraces = new HashMap<>();
                 for (final Thread t : jsThreads) {
                     final StackTraceElement[] elts = t.getStackTrace();

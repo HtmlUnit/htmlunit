@@ -200,7 +200,7 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
                 if (length == 0 && !actual.isEmpty()) {
                     length = Math.min(lineLength, actual.length());
                 }
-                if (builder.length() != 0) {
+                if (!builder.isEmpty()) {
                     builder.append(System.lineSeparator()).append("                + ");
                 }
                 builder.append('"').append(actual.substring(0, length)).append('"');

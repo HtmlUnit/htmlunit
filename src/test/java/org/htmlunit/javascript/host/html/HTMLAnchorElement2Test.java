@@ -1012,7 +1012,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     public static class PingServlet extends HttpServlet {
 
-        private static Map<String, String> HEADERS_ = new HashMap<>();
+        private static final Map<String, String> HEADERS_ = new HashMap<>();
         private static String BODY_;
 
         /**

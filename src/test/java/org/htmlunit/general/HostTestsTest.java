@@ -40,7 +40,7 @@ import org.junit.jupiter.api.Test;
  */
 public class HostTestsTest {
 
-    private Pattern pattern_ = Pattern.compile("\"\\[object (\\w+)\\]\"");
+    private final Pattern pattern_ = Pattern.compile("\"\\[object (\\w+)\\]\"");
 
     /**
      * @throws Exception if an error occurs

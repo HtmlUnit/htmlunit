@@ -709,7 +709,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
         final File tstFile = File.createTempFile("HtmlUnitReadAsTextTest", ".txt");
         try {
-            FileUtils.write(tstFile, "Html \u00dcnit", Charset.forName("ISO-8859-1"));
+            FileUtils.write(tstFile, "Html \u00dcnit", StandardCharsets.ISO_8859_1);
 
             final String path = tstFile.getCanonicalPath();
             driver.findElement(By.name("fileupload")).sendKeys(path);

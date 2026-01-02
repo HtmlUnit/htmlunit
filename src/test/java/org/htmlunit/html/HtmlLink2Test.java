@@ -570,12 +570,12 @@ public class HtmlLink2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
 
-        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+        final URL indexUrl = new URL(URL_FIRST + "index.html");
 
         getMockWebConnection().setResponse(indexUrl, html);
         getMockWebConnection().setResponse(URL_SECOND, "");
 
-        loadPage2(html, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        loadPage2(html, new URL(URL_FIRST + "index.html?test#ref"));
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 

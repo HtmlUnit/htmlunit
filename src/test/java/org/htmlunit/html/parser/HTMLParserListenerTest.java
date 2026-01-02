@@ -37,12 +37,12 @@ import org.junit.jupiter.api.Test;
  */
 public class HTMLParserListenerTest extends SimpleWebTestCase {
     static class MessageInfo {
-        private boolean error_; // versus warning
-        private String message_;
-        private URL url_;
-        private String html_;
-        private int line_;
-        private int column_;
+        private final boolean error_; // versus warning
+        private final String message_;
+        private final URL url_;
+        private final String html_;
+        private final int line_;
+        private final int column_;
 
         /**
          * Utility class to hold data.

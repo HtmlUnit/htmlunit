@@ -298,13 +298,13 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
 
-        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
-        final URL iFrameUrl = new URL(URL_FIRST.toString() + "iframe.html");
+        final URL indexUrl = new URL(URL_FIRST + "index.html");
+        final URL iFrameUrl = new URL(URL_FIRST + "iframe.html");
 
         getMockWebConnection().setResponse(indexUrl, framesContent);
         getMockWebConnection().setResponse(iFrameUrl, iFrame);
 
-        loadPage2(framesContent, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        loadPage2(framesContent, new URL(URL_FIRST + "index.html?test#ref"));
         Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 10);
         assertEquals(2, getMockWebConnection().getRequestCount());
 

@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -427,7 +428,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
             output.write('\u00fe');
             output.write('\u00ff');
             output.flush();
-            final Writer writer = new OutputStreamWriter(output, "UTF16");
+            final Writer writer = new OutputStreamWriter(output, StandardCharsets.UTF_16);
             writer.write(DOCTYPE_HTML + "<html><head></head><body></body></html>");
             writer.flush();
         }

@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
  */
 public class NotYetImplementedTest {
 
-    private Set<String> entries_ = new TreeSet<>();
+    private final Set<String> entries_ = new TreeSet<>();
 
     /**
      * @throws Exception if the test fails
@@ -121,13 +121,13 @@ public class NotYetImplementedTest {
                         browser += "EDGE";
                     }
                     if (nyiString.contains("FF_ESR = ")) {
-                        if (browser.length() > 0) {
+                        if (!browser.isEmpty()) {
                             browser += ", ";
                         }
                         browser += "FF_ESR";
                     }
                     if (nyiString.contains("FF = ")) {
-                        if (browser.length() > 0) {
+                        if (!browser.isEmpty()) {
                             browser += ", ";
                         }
                         browser += "FF";
@@ -163,7 +163,7 @@ public class NotYetImplementedTest {
                 break;
             }
             if (start != -1) {
-                if (builder.length() != 0) {
+                if (!builder.isEmpty()) {
                     builder.append(' ');
                 }
                 builder.append(line, start, line.length() - (end ? 2 : 0));
@@ -232,7 +232,7 @@ public class NotYetImplementedTest {
                 builder.append("</td>\n");
                 lastFile = file;
             }
-            builder.append("    <td>").append(Integer.toString(count++)).append("</td>\n");
+            builder.append("    <td>").append(count++).append("</td>\n");
 
             builder.append("    <td><a target='_blank' href='https://github.com/HtmlUnit/htmlunit/blob/master/")
                     .append(file)
@@ -268,7 +268,7 @@ public class NotYetImplementedTest {
         final StringBuilder overview = new StringBuilder();
         overview.append("<table class='bottomBorder'>\n");
         overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(Integer.toString(count)).append("</td>\n");
+        overview.append("    <td class='numeric'>").append(count).append("</td>\n");
         overview.append("    <td>methods marked as NotYetImplemented</td>\n");
         overview.append("  </tr>\n");
 
@@ -283,7 +283,7 @@ public class NotYetImplementedTest {
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(Integer.toString(countChrome)).append("</td>\n");
+        overview.append("    <td class='numeric'>").append(countChrome).append("</td>\n");
         overview.append("    <td>for Chrome</td>\n");
         overview.append("  </tr>\n");
 

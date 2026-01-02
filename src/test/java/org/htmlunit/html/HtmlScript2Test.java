@@ -1153,13 +1153,13 @@ public class HtmlScript2Test extends WebDriverTestCase {
         int i = 0;
         for ( ; i < 20; i++) {
             html.append("  <script type='text/javascript'>document.title += ' ")
-                .append(Integer.toString(i))
+                .append(i)
                 .append("'</script>\n");
         }
         html.append("</head>\n<body>\n");
         for ( ; i < 40; i++) {
             html.append("  <script type='text/javascript'>document.title += ' ")
-                .append(Integer.toString(i))
+                .append(i)
                 .append("'</script>\n");
         }
         html.append("</body>\n</html>");
@@ -1184,12 +1184,12 @@ public class HtmlScript2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
 
-        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+        final URL indexUrl = new URL(URL_FIRST + "index.html");
 
         getMockWebConnection().setResponse(indexUrl, firstContent);
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
-        loadPage2(firstContent, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        loadPage2(firstContent, new URL(URL_FIRST + "index.html?test#ref"));
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 

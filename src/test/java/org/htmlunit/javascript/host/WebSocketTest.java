@@ -584,7 +584,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
                 text = logElement.getDomProperty("value").trim().replaceAll("\r", "");
             }
-            while (text.length() > 0 && counter++ < 10);
+            while (!text.isEmpty() && counter++ < 10);
 
             assertEquals(String.join("\n", getExpectedAlerts()), text);
         }

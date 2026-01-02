@@ -64,7 +64,7 @@ public class XMLDocument3Test extends WebDriverTestCase {
         final String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<something>\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u064A\u064A\u0644</something>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml.getBytes("UTF-8"), 200, "OK",
+        getMockWebConnection().setResponse(URL_SECOND, xml.getBytes(UTF_8), 200, "OK",
                 MimeType.TEXT_XML, Collections.emptyList());
 
         loadPageVerifyTitle2(html);

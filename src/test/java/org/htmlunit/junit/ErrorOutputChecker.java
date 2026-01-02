@@ -117,7 +117,7 @@ public class ErrorOutputChecker implements BeforeEachCallback, AfterEachCallback
  * It prints the content to the wrapped {@link PrintStream} and captures it simultaneously.
  */
 class NSAPrintStreamWrapper extends PrintStream {
-    private PrintStream wrapped_;
+    private final PrintStream wrapped_;
 
     NSAPrintStreamWrapper(final PrintStream original, final OutputStream spyOut) {
         super(spyOut, true);
