@@ -211,8 +211,7 @@ public abstract class AbstractJavaScriptConfiguration {
 
             for (final Method method : classConfiguration.getHostClass().getDeclaredMethods()) {
                 for (final Annotation annotation : method.getAnnotations()) {
-                    if (annotation instanceof JsxGetter) {
-                        final JsxGetter jsxGetter = (JsxGetter) annotation;
+                    if (annotation instanceof JsxGetter jsxGetter) {
                         if (isSupported(jsxGetter.value(), expectedBrowser)) {
                             String property;
                             if (jsxGetter.propertyName().isEmpty()) {
@@ -226,8 +225,7 @@ public abstract class AbstractJavaScriptConfiguration {
                             allGetters.put(property, method);
                         }
                     }
-                    else if (annotation instanceof JsxSetter) {
-                        final JsxSetter jsxSetter = (JsxSetter) annotation;
+                    else if (annotation instanceof JsxSetter jsxSetter) {
                         if (isSupported(jsxSetter.value(), expectedBrowser)) {
                             String property;
                             if (jsxSetter.propertyName().isEmpty()) {
@@ -240,8 +238,7 @@ public abstract class AbstractJavaScriptConfiguration {
                             allSetters.put(property, method);
                         }
                     }
-                    if (annotation instanceof JsxSymbol) {
-                        final JsxSymbol jsxSymbol = (JsxSymbol) annotation;
+                    if (annotation instanceof JsxSymbol jsxSymbol) {
                         if (isSupported(jsxSymbol.value(), expectedBrowser)) {
                             final String symbolKeyName;
                             if (jsxSymbol.symbolName().isEmpty()) {
@@ -262,8 +259,7 @@ public abstract class AbstractJavaScriptConfiguration {
                             classConfiguration.addSymbol(symbolKey, method);
                         }
                     }
-                    else if (annotation instanceof JsxFunction) {
-                        final JsxFunction jsxFunction = (JsxFunction) annotation;
+                    else if (annotation instanceof JsxFunction jsxFunction) {
                         if (isSupported(jsxFunction.value(), expectedBrowser)) {
                             final String name;
                             if (jsxFunction.functionName().isEmpty()) {
@@ -275,8 +271,7 @@ public abstract class AbstractJavaScriptConfiguration {
                             classConfiguration.addFunction(name, method);
                         }
                     }
-                    else if (annotation instanceof JsxStaticGetter) {
-                        final JsxStaticGetter jsxStaticGetter = (JsxStaticGetter) annotation;
+                    else if (annotation instanceof JsxStaticGetter jsxStaticGetter) {
                         if (isSupported(jsxStaticGetter.value(), expectedBrowser)) {
                             final int prefix = method.getName().startsWith("is") ? 2 : 3;
                             String property = method.getName().substring(prefix);
@@ -284,8 +279,7 @@ public abstract class AbstractJavaScriptConfiguration {
                             classConfiguration.addStaticProperty(property, method, null);
                         }
                     }
-                    else if (annotation instanceof JsxStaticFunction) {
-                        final JsxStaticFunction jsxStaticFunction = (JsxStaticFunction) annotation;
+                    else if (annotation instanceof JsxStaticFunction jsxStaticFunction) {
                         if (isSupported(jsxStaticFunction.value(), expectedBrowser)) {
                             final String name;
                             if (jsxStaticFunction.functionName().isEmpty()) {
@@ -297,8 +291,7 @@ public abstract class AbstractJavaScriptConfiguration {
                             classConfiguration.addStaticFunction(name, method);
                         }
                     }
-                    else if (annotation instanceof JsxConstructor) {
-                        final JsxConstructor jsxConstructor = (JsxConstructor) annotation;
+                    else if (annotation instanceof JsxConstructor jsxConstructor) {
                         if (isSupported(jsxConstructor.value(), expectedBrowser)) {
                             final String name;
                             if (jsxConstructor.functionName().isEmpty()) {
@@ -310,8 +303,7 @@ public abstract class AbstractJavaScriptConfiguration {
                             classConfiguration.setJSConstructor(name, method);
                         }
                     }
-                    else if (annotation instanceof JsxConstructorAlias) {
-                        final JsxConstructorAlias jsxConstructorAlias = (JsxConstructorAlias) annotation;
+                    else if (annotation instanceof JsxConstructorAlias jsxConstructorAlias) {
                         if (isSupported(jsxConstructorAlias.value(), expectedBrowser)) {
                             classConfiguration.setJSConstructorAlias(jsxConstructorAlias.alias());
                         }
@@ -327,8 +319,7 @@ public abstract class AbstractJavaScriptConfiguration {
             // JsxConstant/JsxSymbolConstant
             for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
                 for (final Annotation annotation : field.getAnnotations()) {
-                    if (annotation instanceof JsxConstant) {
-                        final JsxConstant jsxConstant = (JsxConstant) annotation;
+                    if (annotation instanceof JsxConstant jsxConstant) {
                         if (isSupported(jsxConstant.value(), expectedBrowser)) {
                             try {
                                 classConfiguration.addConstant(field.getName(), field.get(null));
@@ -341,8 +332,7 @@ public abstract class AbstractJavaScriptConfiguration {
                             }
                         }
                     }
-                    if (annotation instanceof JsxSymbolConstant) {
-                        final JsxSymbolConstant jsxSymbolConstant = (JsxSymbolConstant) annotation;
+                    if (annotation instanceof JsxSymbolConstant jsxSymbolConstant) {
                         if (isSupported(jsxSymbolConstant.value(), expectedBrowser)) {
                             final SymbolKey symbolKey;
                             if (StringUtils.startsWithIgnoreCase(field.getName(), "TO_STRING_TAG")) {

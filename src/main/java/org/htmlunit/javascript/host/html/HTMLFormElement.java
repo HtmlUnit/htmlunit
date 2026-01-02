@@ -328,15 +328,14 @@ public class HTMLFormElement extends HTMLElement implements Function {
         }
 
         SubmittableElement submittable = null;
-        if (submitter instanceof HTMLElement) {
-            final HTMLElement subHtmlElement = (HTMLElement) submitter;
-            if (subHtmlElement instanceof HTMLButtonElement) {
-                if ("submit".equals(((HTMLButtonElement) subHtmlElement).getType())) {
+        if (submitter instanceof HTMLElement subHtmlElement) {
+            if (subHtmlElement instanceof HTMLButtonElement element1) {
+                if ("submit".equals(element1.getType())) {
                     submittable = (SubmittableElement) subHtmlElement.getDomNodeOrDie();
                 }
             }
-            else if (subHtmlElement instanceof HTMLInputElement) {
-                if ("submit".equals(((HTMLInputElement) subHtmlElement).getType())) {
+            else if (subHtmlElement instanceof HTMLInputElement element) {
+                if ("submit".equals(element.getType())) {
                     submittable = (SubmittableElement) subHtmlElement.getDomNodeOrDie();
                 }
             }
@@ -450,8 +449,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         // If no form fields are found, browsers are able to find img elements by ID or name.
         if (elements.isEmpty()) {
             for (final DomNode node : form.getHtmlElementDescendants()) {
-                if (node instanceof HtmlImage) {
-                    final HtmlImage img = (HtmlImage) node;
+                if (node instanceof HtmlImage img) {
                     if (name.equals(img.getId()) || name.equals(img.getNameAttribute())) {
                         elements.add(img);
                     }
@@ -476,8 +474,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
 
         // If no form fields are found, browsers are able to find img elements by ID or name.
         for (final DomNode node : form.getHtmlElementDescendants()) {
-            if (node instanceof HtmlImage) {
-                final HtmlImage img = (HtmlImage) node;
+            if (node instanceof HtmlImage img) {
                 if (name.equals(img.getId()) || name.equals(img.getNameAttribute())) {
                     return img;
                 }
@@ -502,8 +499,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
             return true;
         }
 
-        if (element instanceof FormFieldWithNameHistory) {
-            final FormFieldWithNameHistory elementWithNames = (FormFieldWithNameHistory) element;
+        if (element instanceof FormFieldWithNameHistory elementWithNames) {
 
             if (name.equals(elementWithNames.getOriginalName())) {
                 return true;

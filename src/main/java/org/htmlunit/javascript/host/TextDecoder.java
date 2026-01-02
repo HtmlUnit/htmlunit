@@ -80,12 +80,11 @@ public class TextDecoder extends HtmlUnitScriptable {
             return "";
         }
 
-        if (buffer instanceof NativeArrayBuffer) {
-            return new String(((NativeArrayBuffer) buffer).getBuffer(), getEncoding(whatwgEncoding_));
+        if (buffer instanceof NativeArrayBuffer arrayBuffer) {
+            return new String(arrayBuffer.getBuffer(), getEncoding(whatwgEncoding_));
         }
 
-        if (buffer instanceof NativeArrayBufferView) {
-            final NativeArrayBufferView arrayBufferView = (NativeArrayBufferView) buffer;
+        if (buffer instanceof NativeArrayBufferView arrayBufferView) {
             final NativeArrayBuffer arrayBuffer = arrayBufferView.getBuffer();
             if (arrayBuffer != null) {
                 final int byteLength = arrayBufferView.getByteLength();

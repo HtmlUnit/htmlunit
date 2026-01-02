@@ -159,8 +159,8 @@ public class HTMLInputElement extends HTMLElement {
     @JsxFunction
     public void select() {
         final HtmlInput input = getDomNodeOrDie();
-        if (input instanceof HtmlTextInput) {
-            ((HtmlTextInput) input).select();
+        if (input instanceof HtmlTextInput textInput) {
+            textInput.select();
         }
         // currently nothing for other input types
     }
@@ -221,12 +221,12 @@ public class HTMLInputElement extends HTMLElement {
     @JsxGetter
     public Integer getSelectionStart() {
         final DomNode dom = getDomNodeOrDie();
-        if (dom instanceof SelectableTextInput) {
+        if (dom instanceof SelectableTextInput input) {
             if ("number".equals(getType())) {
                 return null;
             }
 
-            return ((SelectableTextInput) dom).getSelectionStart();
+            return input.getSelectionStart();
         }
 
         return null;
@@ -239,7 +239,7 @@ public class HTMLInputElement extends HTMLElement {
     @JsxSetter
     public void setSelectionStart(final int start) {
         final DomNode dom = getDomNodeOrDie();
-        if (dom instanceof SelectableTextInput) {
+        if (dom instanceof SelectableTextInput input) {
             if ("number".equals(getType())) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
@@ -249,7 +249,7 @@ public class HTMLInputElement extends HTMLElement {
                         DOMException.INVALID_STATE_ERR);
             }
 
-            ((SelectableTextInput) dom).setSelectionStart(start);
+            input.setSelectionStart(start);
             return;
         }
 
@@ -267,12 +267,12 @@ public class HTMLInputElement extends HTMLElement {
     @JsxGetter
     public Integer getSelectionEnd() {
         final DomNode dom = getDomNodeOrDie();
-        if (dom instanceof SelectableTextInput) {
+        if (dom instanceof SelectableTextInput input) {
             if ("number".equals(getType())) {
                 return null;
             }
 
-            return ((SelectableTextInput) dom).getSelectionEnd();
+            return input.getSelectionEnd();
         }
 
         return null;
@@ -285,7 +285,7 @@ public class HTMLInputElement extends HTMLElement {
     @JsxSetter
     public void setSelectionEnd(final int end) {
         final DomNode dom = getDomNodeOrDie();
-        if (dom instanceof SelectableTextInput) {
+        if (dom instanceof SelectableTextInput input) {
             if ("number".equals(getType())) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),
@@ -295,7 +295,7 @@ public class HTMLInputElement extends HTMLElement {
                         DOMException.INVALID_STATE_ERR);
             }
 
-            ((SelectableTextInput) dom).setSelectionEnd(end);
+            input.setSelectionEnd(end);
             return;
         }
 
@@ -640,8 +640,8 @@ public class HTMLInputElement extends HTMLElement {
     @JsxGetter
     public FileList getFiles() {
         final HtmlInput htmlInput = getDomNodeOrDie();
-        if (htmlInput instanceof HtmlFileInput) {
-            final FileList list = new FileList(((HtmlFileInput) htmlInput).getFiles());
+        if (htmlInput instanceof HtmlFileInput input) {
+            final FileList list = new FileList(input.getFiles());
             list.setParentScope(getParentScope());
             list.setPrototype(getPrototype(list.getClass()));
             return list;

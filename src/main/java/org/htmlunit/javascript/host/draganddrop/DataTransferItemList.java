@@ -78,8 +78,8 @@ public class DataTransferItemList extends HtmlUnitScriptable {
             final Scriptable thisObj, final Object[] args, final Function function) {
         final DataTransferItemList itemList = (DataTransferItemList) thisObj;
         if (args.length == 1) {
-            if (args[0] instanceof File) {
-                final DataTransferItem item = DataTransferItem.buildFileItem((File) args[0]);
+            if (args[0] instanceof File file) {
+                final DataTransferItem item = DataTransferItem.buildFileItem(file);
                 item.setParentScope(itemList.getParentScope());
                 item.setPrototype(itemList.getPrototype(item.getClass()));
 

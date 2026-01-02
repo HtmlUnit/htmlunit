@@ -63,8 +63,8 @@ public class SubmitEvent extends Event {
 
         if (details != null && !JavaScriptEngine.isUndefined(details)) {
             final Object submitter = details.get("submitter");
-            if (submitter instanceof HTMLElement) {
-                submitter_ = (HTMLElement) submitter;
+            if (submitter instanceof HTMLElement element) {
+                submitter_ = element;
             }
         }
     }

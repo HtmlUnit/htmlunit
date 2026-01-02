@@ -91,13 +91,11 @@ public class URL extends HtmlUnitScriptable {
      */
     @JsxStaticFunction
     public static String createObjectURL(final Object fileOrBlob) {
-        if (fileOrBlob instanceof File) {
-            final File file = (File) fileOrBlob;
+        if (fileOrBlob instanceof File file) {
             return getWindow(file).getDocument().generateBlobUrl(file);
         }
 
-        if (fileOrBlob instanceof Blob) {
-            final Blob blob = (Blob) fileOrBlob;
+        if (fileOrBlob instanceof Blob blob) {
             return getWindow(blob).getDocument().generateBlobUrl(blob);
         }
 

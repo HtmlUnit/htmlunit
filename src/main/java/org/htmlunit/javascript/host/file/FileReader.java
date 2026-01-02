@@ -128,8 +128,8 @@ public class FileReader extends EventTarget {
     public void readAsArrayBuffer(final Object object) {
         readyState_ = LOADING;
 
-        if (object instanceof Blob) {
-            final byte[] bytes = ((Blob) object).getBytes();
+        if (object instanceof Blob blob) {
+            final byte[] bytes = blob.getBytes();
 
             final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
             System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
@@ -173,8 +173,8 @@ public class FileReader extends EventTarget {
             }
         }
 
-        if (object instanceof Blob) {
-            result_ = new String(((Blob) object).getBytes(), charset);
+        if (object instanceof Blob blob) {
+            result_ = new String(blob.getBytes(), charset);
         }
 
         readyState_ = DONE;

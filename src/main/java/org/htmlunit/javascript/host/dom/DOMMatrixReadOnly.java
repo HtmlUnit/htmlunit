@@ -118,8 +118,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
             return;
         }
 
-        if (args[0] instanceof NativeArray) {
-            final NativeArray arrayArgs = (NativeArray) args[0];
+        if (args[0] instanceof NativeArray arrayArgs) {
             if (arrayArgs.getLength() == 6) {
                 m11_ = JavaScriptEngine.toNumber(arrayArgs.get(0));
                 m12_ = JavaScriptEngine.toNumber(arrayArgs.get(1));

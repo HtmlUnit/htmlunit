@@ -744,8 +744,8 @@ public class DefaultElementFactory implements ElementFactory {
         final Map<String, DomAttr> attributeMap = new OrderedFastHashMapWithLowercaseKeys<>(length);
 
         // small performance optimization if we know the attributes we can avoid some index lookups
-        if (attributes instanceof XMLAttributesImpl) {
-            final ArrayList<XMLAttributesImpl.Attribute> attribs = ((XMLAttributesImpl) attributes).getAttributes();
+        if (attributes instanceof XMLAttributesImpl impl) {
+            final ArrayList<XMLAttributesImpl.Attribute> attribs = impl.getAttributes();
             for (final XMLAttributesImpl.Attribute attribute : attribs) {
                 final QName qName = attribute.getQName();
                 final String name = qName.getRawname();

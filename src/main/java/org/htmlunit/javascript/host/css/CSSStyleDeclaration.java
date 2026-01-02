@@ -1317,8 +1317,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         }
 
         final double doubleValue;
-        if (opacity instanceof Number) {
-            doubleValue = ((Number) opacity).doubleValue();
+        if (opacity instanceof Number number) {
+            doubleValue = number.doubleValue();
         }
         else {
             String valueString = JavaScriptEngine.toString(opacity);
@@ -1804,8 +1804,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         }
 
         // string
-        if (zIndex instanceof Number) {
-            final Number number = (Number) zIndex;
+        if (zIndex instanceof Number number) {
             if (number.doubleValue() % 1 == 0) {
                 setStyleAttribute(Definition.Z_INDEX_.getAttributeName(), Integer.toString(number.intValue()));
             }
@@ -1829,8 +1828,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     public String getPropertyValue(final String name) {
         if (name != null && name.contains("-")) {
             final Object value = getProperty(this, StringUtils.cssCamelize(name));
-            if (value instanceof String) {
-                return (String) value;
+            if (value instanceof String string) {
+                return string;
             }
         }
 

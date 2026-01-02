@@ -313,10 +313,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return null;
         }
 
-        if (webResponse_ instanceof NetworkErrorWebResponse) {
+        if (webResponse_ instanceof NetworkErrorWebResponse response) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("XMLHttpRequest.responseXML returns of a network error ("
-                        + ((NetworkErrorWebResponse) webResponse_).getError() + ")");
+                        + response.getError() + ")");
             }
             return null;
         }
@@ -468,13 +468,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return "";
         }
 
-        if (webResponse_ instanceof NetworkErrorWebResponse) {
+        if (webResponse_ instanceof NetworkErrorWebResponse resp) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("XMLHttpRequest.responseXML returns of a network error ("
-                        + ((NetworkErrorWebResponse) webResponse_).getError() + ")");
+                        + resp.getError() + ")");
             }
-
-            final NetworkErrorWebResponse resp = (NetworkErrorWebResponse) webResponse_;
             if (resp.getError() instanceof NoPermittedHeaderException) {
                 return "";
             }
@@ -512,10 +510,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return null;
         }
 
-        if (webResponse_ instanceof NetworkErrorWebResponse) {
+        if (webResponse_ instanceof NetworkErrorWebResponse response) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("XMLHttpRequest.responseXML returns of a network error ("
-                        + ((NetworkErrorWebResponse) webResponse_).getError() + ")");
+                        + response.getError() + ")");
             }
             return null;
         }
@@ -809,9 +807,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             final boolean setEncodingType = webRequest_.getAdditionalHeader(HttpHeader.CONTENT_TYPE) == null;
 
-            if (content instanceof HTMLDocument) {
+            if (content instanceof HTMLDocument document) {
                 // final String body = ((HTMLDocument) content).getDomNodeOrDie().asXml();
-                String body = new XMLSerializer().serializeToString((HTMLDocument) content);
+                String body = new XMLSerializer().serializeToString(document);
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Setting request body to: " + body);
                 }
@@ -828,10 +826,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     webRequest_.setAdditionalHeader(HttpHeader.CONTENT_TYPE, "text/html;charset=UTF-8");
                 }
             }
-            else if (content instanceof XMLDocument) {
+            else if (content instanceof XMLDocument xmlDocument) {
                 // this output differs from real browsers but it seems to be a good starting point
                 try (StringWriter writer = new StringWriter()) {
-                    final XMLDocument xmlDocument = (XMLDocument) content;
 
                     final Transformer transformer = TransformerFactory.newInstance().newTransformer();
                     transformer.setOutputProperty(OutputKeys.METHOD, "xml");
@@ -854,22 +851,21 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
                 }
             }
-            else if (content instanceof FormData) {
-                ((FormData) content).fillRequest(webRequest_);
+            else if (content instanceof FormData data) {
+                data.fillRequest(webRequest_);
             }
-            else if (content instanceof NativeArrayBufferView) {
-                final NativeArrayBufferView view = (NativeArrayBufferView) content;
+            else if (content instanceof NativeArrayBufferView view) {
                 webRequest_.setRequestBody(new String(view.getBuffer().getBuffer(), UTF_8));
                 if (setEncodingType) {
                     webRequest_.setEncodingType(null);
                 }
             }
-            else if (content instanceof URLSearchParams) {
-                ((URLSearchParams) content).fillRequest(webRequest_);
+            else if (content instanceof URLSearchParams params) {
+                params.fillRequest(webRequest_);
                 webRequest_.addHint(HttpHint.IncludeCharsetInContentTypeHeader);
             }
-            else if (content instanceof Blob) {
-                ((Blob) content).fillRequest(webRequest_);
+            else if (content instanceof Blob blob) {
+                blob.fillRequest(webRequest_);
             }
             else {
                 final String body = JavaScriptEngine.toString(content);

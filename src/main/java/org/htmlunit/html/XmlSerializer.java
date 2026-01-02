@@ -129,8 +129,8 @@ public class XmlSerializer {
                 builder_.append(">\n");
                 for (DomNode child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
                     indent_.append("  ");
-                    if (child instanceof DomElement) {
-                        printXml((DomElement) child);
+                    if (child instanceof DomElement element) {
+                        printXml(element);
                     }
                     else {
                         builder_.append(child);
@@ -152,8 +152,8 @@ public class XmlSerializer {
     public String asText(final DomNode node) {
         builder_.setLength(0);
 
-        if (node instanceof DomText) {
-            builder_.append(((DomText) node).getData());
+        if (node instanceof DomText text) {
+            builder_.append(text.getData());
         }
         else {
             printText(node);
@@ -170,8 +170,8 @@ public class XmlSerializer {
      */
     protected void printText(final DomNode node) {
         for (DomNode child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
-            if (child instanceof DomText) {
-                builder_.append(((DomText) child).getData());
+            if (child instanceof DomText text) {
+                builder_.append(text.getData());
             }
             else {
                 printText(child);
@@ -200,20 +200,19 @@ public class XmlSerializer {
     }
 
     private Map<String, DomAttr> readAttributes(final DomElement node) throws IOException {
-        if (node instanceof HtmlImage) {
-            return getAttributesFor((HtmlImage) node);
+        if (node instanceof HtmlImage image) {
+            return getAttributesFor(image);
         }
-        else if (node instanceof HtmlLink) {
-            return getAttributesFor((HtmlLink) node);
+        else if (node instanceof HtmlLink link) {
+            return getAttributesFor(link);
         }
-        else if (node instanceof BaseFrameElement) {
-            return getAttributesFor((BaseFrameElement) node);
+        else if (node instanceof BaseFrameElement element) {
+            return getAttributesFor(element);
         }
 
         Map<String, DomAttr> attributes = node.getAttributesMap();
-        if (node instanceof HtmlOption) {
+        if (node instanceof HtmlOption option) {
             attributes = new HashMap<>(attributes);
-            final HtmlOption option = (HtmlOption) node;
             if (option.isSelected()) {
                 if (!attributes.containsKey("selected")) {
                     attributes.put("selected", new DomAttr(node.getPage(), null, "selected", "selected", false));

@@ -481,8 +481,8 @@ public class Range extends AbstractRange {
             // simple impl for now
             for (final DomNode node : getSimpleRange().containedNodes()) {
                 final HtmlUnitScriptable scriptable = node.getScriptableObject();
-                if (scriptable instanceof HTMLElement) {
-                    final DOMRect childRect = ((HTMLElement) scriptable).getBoundingClientRect();
+                if (scriptable instanceof HTMLElement element) {
+                    final DOMRect childRect = element.getBoundingClientRect();
                     rect.setY(Math.min(rect.getX(), childRect.getX()));
                     rect.setY(Math.min(rect.getY(), childRect.getY()));
                     rect.setWidth(Math.max(rect.getWidth(), childRect.getWidth()));

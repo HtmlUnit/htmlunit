@@ -203,11 +203,11 @@ public class HTMLDocument extends Document {
         // cf unit test DocumentTest#testDocumentWrite_AssignedToVar
         // may be the prototype too
         // cf DocumentTest#testDocumentWrite_AssignedToVar2
-        if (thisObj instanceof HTMLDocument && thisObj.getPrototype() instanceof HTMLDocument) {
-            return (HTMLDocument) thisObj;
+        if (thisObj instanceof HTMLDocument document && thisObj.getPrototype() instanceof HTMLDocument) {
+            return document;
         }
-        if (thisObj instanceof DocumentProxy && thisObj.getPrototype() instanceof HTMLDocument) {
-            return (HTMLDocument) ((DocumentProxy) thisObj).getDelegee();
+        if (thisObj instanceof DocumentProxy proxy && thisObj.getPrototype() instanceof HTMLDocument) {
+            return (HTMLDocument) proxy.getDelegee();
         }
 
         throw JavaScriptEngine.reportRuntimeError("Function can't be used detached from document");
@@ -449,9 +449,9 @@ public class HTMLDocument extends Document {
         }
         writeInCurrentDocument_ = false;
         final WebWindow ww = getWindow().getWebWindow();
-        if (ww instanceof FrameWindow
+        if (ww instanceof FrameWindow window
                 && UrlUtils.ABOUT_BLANK.equals(getPage().getUrl().toExternalForm())) {
-            final URL enclosingUrl = ((FrameWindow) ww).getEnclosingPage().getUrl();
+            final URL enclosingUrl = window.getEnclosingPage().getUrl();
             getPage().getWebResponse().getWebRequest().setUrl(enclosingUrl);
         }
         return this;
@@ -477,11 +477,11 @@ public class HTMLDocument extends Document {
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
             // reset isAttachedToPageDuringOnload_ to trigger the onload event for chrome also
-            if (window instanceof FrameWindow) {
-                final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
+            if (window instanceof FrameWindow frameWindow) {
+                final BaseFrameElement frame = frameWindow.getFrameElement();
                 final HtmlUnitScriptable scriptable = frame.getScriptableObject();
-                if (scriptable instanceof HTMLIFrameElement) {
-                    ((HTMLIFrameElement) scriptable).onRefresh();
+                if (scriptable instanceof HTMLIFrameElement element) {
+                    element.onRefresh();
                 }
             }
             webClient.loadWebResponseInto(webResponse, window);
@@ -626,8 +626,8 @@ public class HTMLDocument extends Document {
         }
         if (size == 1) {
             final DomNode object = matchingElements.get(0);
-            if (object instanceof BaseFrameElement) {
-                return ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
+            if (object instanceof BaseFrameElement element) {
+                return element.getEnclosedWindow().getScriptableObject();
             }
             return super.getScriptableFor(object);
         }
@@ -635,8 +635,8 @@ public class HTMLDocument extends Document {
         final HTMLCollection coll = new HTMLCollection(page, matchingElements) {
             @Override
             protected HtmlUnitScriptable getScriptableFor(final Object object) {
-                if (object instanceof BaseFrameElement) {
-                    return ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
+                if (object instanceof BaseFrameElement element) {
+                    return element.getEnclosedWindow().getScriptableObject();
                 }
                 return super.getScriptableFor(object);
             }

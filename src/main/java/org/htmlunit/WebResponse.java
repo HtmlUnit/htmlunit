@@ -188,8 +188,8 @@ public class WebResponse implements Serializable {
         wasContentCharsetTentative_ = false;
 
         try (InputStream is = getContentAsStreamWithBomIfApplicable()) {
-            if (is instanceof BOMInputStream) {
-                final String bomCharsetName = ((BOMInputStream) is).getBOMCharsetName();
+            if (is instanceof BOMInputStream stream) {
+                final String bomCharsetName = stream.getBOMCharsetName();
                 if (bomCharsetName != null) {
                     return Charset.forName(bomCharsetName);
                 }
@@ -265,8 +265,8 @@ public class WebResponse implements Serializable {
     public String getContentAsString(final Charset encoding) {
         if (responseData_ != null) {
             try (InputStream in = responseData_.getInputStreamWithBomIfApplicable(BOM_HEADERS)) {
-                if (in instanceof BOMInputStream) {
-                    try (BOMInputStream bomIn = (BOMInputStream) in) {
+                if (in instanceof BOMInputStream bomIn) {
+                    try () {
                         // there seems to be a bug in BOMInputStream
                         // we have to call this before hasBOM(ByteOrderMark)
                         if (bomIn.hasBOM()) {

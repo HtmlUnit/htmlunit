@@ -108,8 +108,8 @@ public class XPathExpression extends HtmlUnitScriptable {
             final XPathExpression expression = (XPathExpression) thisObj;
 
             final XPathResult xPathResult;
-            if (result instanceof XPathResult) {
-                xPathResult = (XPathResult) result;
+            if (result instanceof XPathResult pathResult) {
+                xPathResult = pathResult;
             }
             else {
                 xPathResult = new XPathResult();

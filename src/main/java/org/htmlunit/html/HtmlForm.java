@@ -126,12 +126,11 @@ public class HtmlForm extends HtmlElement {
                 isPreventDefault_ = false;
 
                 boolean validate = true;
-                if (submitElement instanceof HtmlSubmitInput
-                        && ((HtmlSubmitInput) submitElement).isFormNoValidate()) {
+                if (submitElement instanceof HtmlSubmitInput input
+                        && input.isFormNoValidate()) {
                     validate = false;
                 }
-                else if (submitElement instanceof HtmlButton) {
-                    final HtmlButton htmlButton = (HtmlButton) submitElement;
+                else if (submitElement instanceof HtmlButton htmlButton) {
                     if ("submit".equalsIgnoreCase(htmlButton.getType())
                             && htmlButton.isFormNoValidate()) {
                         validate = false;
@@ -201,8 +200,7 @@ public class HtmlForm extends HtmlElement {
      * @param submitElement the element to update
      */
     private void updateHtml5Attributes(final SubmittableElement submitElement) {
-        if (submitElement instanceof HtmlElement) {
-            final HtmlElement element = (HtmlElement) submitElement;
+        if (submitElement instanceof HtmlElement element) {
 
             final String type = element.getAttributeDirect(TYPE_ATTRIBUTE);
             boolean typeImage = false;
@@ -421,8 +419,8 @@ public class HtmlForm extends HtmlElement {
         }
 
         for (final HtmlElement next : getHtmlElementDescendants()) {
-            if (next instanceof SubmittableElement) {
-                ((SubmittableElement) next).reset();
+            if (next instanceof SubmittableElement element) {
+                element.reset();
             }
         }
 
@@ -481,14 +479,13 @@ public class HtmlForm extends HtmlElement {
             return false;
         }
 
-        if (element instanceof HtmlInput) {
-            final HtmlInput input = (HtmlInput) element;
+        if (element instanceof HtmlInput input) {
             if (input.isCheckable()) {
-                return ((HtmlInput) element).isChecked();
+                return input.isChecked();
             }
         }
-        if (element instanceof HtmlSelect) {
-            return ((HtmlSelect) element).isValidForSubmission();
+        if (element instanceof HtmlSelect select) {
+            return select.isValidForSubmission();
         }
         return true;
     }
@@ -511,8 +508,7 @@ public class HtmlForm extends HtmlElement {
         if (element == submitElement) {
             return true;
         }
-        if (element instanceof HtmlInput) {
-            final HtmlInput input = (HtmlInput) element;
+        if (element instanceof HtmlInput input) {
             if (!input.isSubmitable()) {
                 return false;
             }
@@ -730,8 +726,8 @@ public class HtmlForm extends HtmlElement {
         final List<HtmlRadioButtonInput> results = new ArrayList<>();
 
         for (final HtmlElement element : getInputsByName(name)) {
-            if (element instanceof HtmlRadioButtonInput) {
-                results.add((HtmlRadioButtonInput) element);
+            if (element instanceof HtmlRadioButtonInput input) {
+                results.add(input);
             }
         }
 

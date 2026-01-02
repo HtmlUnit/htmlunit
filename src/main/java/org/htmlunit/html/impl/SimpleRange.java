@@ -380,8 +380,7 @@ public class SimpleRange implements Serializable {
     }
 
     private static void insertNodeOrDocFragment(final DomNode parent, final DomNode newNode, final DomNode refNode) {
-        if (newNode instanceof DocumentFragment) {
-            final DocumentFragment fragment = (DocumentFragment) newNode;
+        if (newNode instanceof DocumentFragment fragment) {
 
             final NodeList childNodes = fragment.getChildNodes();
             while (childNodes.getLength() > 0) {
@@ -493,15 +492,15 @@ public class SimpleRange implements Serializable {
     }
 
     private static String getText(final DomNode node) {
-        if (node instanceof SelectableTextInput) {
-            return ((SelectableTextInput) node).getText();
+        if (node instanceof SelectableTextInput input) {
+            return input.getText();
         }
         return node.getTextContent();
     }
 
     private static void setText(final DomNode node, final String text) {
-        if (node instanceof SelectableTextInput) {
-            ((SelectableTextInput) node).setText(text);
+        if (node instanceof SelectableTextInput input) {
+            input.setText(text);
         }
         else {
             node.setTextContent(text);

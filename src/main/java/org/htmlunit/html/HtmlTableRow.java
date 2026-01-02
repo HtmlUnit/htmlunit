@@ -218,13 +218,13 @@ public class HtmlTableRow extends HtmlElement {
         private void setNextCell(final DomNode node) {
             nextCell_ = null;
             for (DomNode next = node; next != null; next = next.getNextSibling()) {
-                if (next instanceof HtmlTableCell) {
-                    nextCell_ = (HtmlTableCell) next;
+                if (next instanceof HtmlTableCell cell) {
+                    nextCell_ = cell;
                     return;
                 }
-                else if (currentForm_ == null && next instanceof HtmlForm) {
+                else if (currentForm_ == null && next instanceof HtmlForm form) {
                     // Completely illegal HTML but some of the big sites (ie amazon) do this
-                    currentForm_ = (HtmlForm) next;
+                    currentForm_ = form;
                     setNextCell(next.getFirstChild());
                     return;
                 }

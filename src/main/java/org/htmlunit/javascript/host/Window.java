@@ -685,9 +685,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxFunction
     public int requestAnimationFrame(final Object callback) {
-        if (callback instanceof Function) {
+        if (callback instanceof Function function) {
             final int id = animationFrames_.size();
-            final AnimationFrame animationFrame = new AnimationFrame(id, (Function) callback);
+            final AnimationFrame animationFrame = new AnimationFrame(id, function);
             animationFrames_.add(animationFrame);
             return id;
         }
@@ -762,8 +762,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         document_.setPrototype(getPrototype(document_.getClass()));
         document_.setWindow(this);
 
-        if (pageToEnclose instanceof SgmlPage) {
-            final SgmlPage page = (SgmlPage) pageToEnclose;
+        if (pageToEnclose instanceof SgmlPage page) {
             document_.setDomNode(page);
 
             if (page.isHtmlPage()) {
@@ -796,8 +795,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         // like a JS new Object()
         controllers_ = JavaScriptEngine.newObject(this);
 
-        if (webWindow_ instanceof TopLevelWindow) {
-            final WebWindow opener = ((TopLevelWindow) webWindow_).getOpener();
+        if (webWindow_ instanceof TopLevelWindow window) {
+            final WebWindow opener = window.getOpener();
             if (opener != null) {
                 opener_ = opener.getScriptableObject();
             }
@@ -847,8 +846,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxGetter
     public Object getOpener() {
         Object opener = opener_;
-        if (opener instanceof Window) {
-            opener = ((Window) opener).windowProxy_;
+        if (opener instanceof Window window) {
+            opener = window.windowProxy_;
         }
         return opener;
     }
@@ -869,8 +868,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxGetter
     public HtmlUnitScriptable getFrameElement() {
         final WebWindow window = getWebWindow();
-        if (window instanceof FrameWindow) {
-            return ((FrameWindow) window).getFrameElement().getScriptableObject();
+        if (window instanceof FrameWindow frameWindow) {
+            return frameWindow.getFrameElement().getScriptableObject();
         }
         return null;
     }
@@ -1010,8 +1009,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     private HTMLCollection getFrames() {
         final Page page = getWebWindow().getEnclosedPage();
-        if (page instanceof HtmlPage) {
-            return new HTMLCollectionFrames((HtmlPage) page);
+        if (page instanceof HtmlPage htmlPage) {
+            return new HTMLCollectionFrames(htmlPage);
         }
         return null;
     }
@@ -1047,8 +1046,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxFunction(functionName = "close")
     public void close_js() {
         final WebWindow webWindow = getWebWindow();
-        if (webWindow instanceof TopLevelWindow) {
-            ((TopLevelWindow) webWindow).close();
+        if (webWindow instanceof TopLevelWindow window) {
+            window.close();
         }
         else {
             webWindow.getWebClient().deregisterWebWindow(webWindow);
@@ -1463,8 +1462,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             }
         }
 
-        if (result instanceof Window) {
-            final WebWindow webWindow = ((Window) result).getWebWindow();
+        if (result instanceof Window window) {
+            final WebWindow webWindow = window.getWebWindow();
             result = getProxy(webWindow);
         }
 
@@ -1740,8 +1739,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public Selection getSelection() {
         final WebWindow webWindow = getWebWindow();
         // return null if the window is in a frame that is not displayed
-        if (webWindow instanceof FrameWindow) {
-            final FrameWindow frameWindow = (FrameWindow) webWindow;
+        if (webWindow instanceof FrameWindow frameWindow) {
             if (getBrowserVersion().hasFeature(JS_WINDOW_SELECTION_NULL_IF_INVISIBLE)
                     && !frameWindow.getFrameElement().isDisplayed()) {
                 return null;
@@ -3851,8 +3849,8 @@ class HTMLCollectionFrames extends HTMLCollection {
     @Override
     protected Scriptable getScriptableForElement(final Object obj) {
         final WebWindow window;
-        if (obj instanceof BaseFrameElement) {
-            window = ((BaseFrameElement) obj).getEnclosedWindow();
+        if (obj instanceof BaseFrameElement element) {
+            window = element.getEnclosedWindow();
         }
         else {
             window = ((FrameWindow) obj).getFrameElement().getEnclosedWindow();

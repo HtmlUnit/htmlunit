@@ -254,8 +254,8 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
 
             beforeOption = (HtmlOption) ((HTMLOptionElement) item(index)).getDomNodeOrDie();
         }
-        else if (beforeOptionObject instanceof HTMLOptionElement) {
-            beforeOption = (HtmlOption) ((HTMLOptionElement) beforeOptionObject).getDomNodeOrDie();
+        else if (beforeOptionObject instanceof HTMLOptionElement element) {
+            beforeOption = (HtmlOption) element.getDomNodeOrDie();
             if (beforeOption.getParentNode() != htmlSelect_) {
                 throw JavaScriptEngine.asJavaScriptException(
                         getWindow(),

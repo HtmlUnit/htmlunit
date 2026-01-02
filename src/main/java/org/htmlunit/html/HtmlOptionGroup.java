@@ -59,8 +59,8 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
 
         Node node = getParentNode();
         while (node != null) {
-            if (node instanceof DisabledElement
-                    && ((DisabledElement) node).isDisabled()) {
+            if (node instanceof DisabledElement element
+                    && element.isDisabled()) {
                 return true;
             }
             node = node.getParentNode();

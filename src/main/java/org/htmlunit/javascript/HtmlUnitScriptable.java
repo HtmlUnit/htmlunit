@@ -209,8 +209,8 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      * @return the JavaScript object or NOT_FOUND
      */
     protected HtmlUnitScriptable getScriptableFor(final Object object) {
-        if (object instanceof WebWindow) {
-            return ((WebWindow) object).getScriptableObject();
+        if (object instanceof WebWindow window) {
+            return window.getScriptableObject();
         }
 
         final DomNode domNode = (DomNode) object;
@@ -231,8 +231,8 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
         // Get the JS class name for the specified DOM node.
         // Walk up the inheritance chain if necessary.
         Class<? extends HtmlUnitScriptable> javaScriptClass = null;
-        if (domNode instanceof HtmlImage && "image".equals(((HtmlImage) domNode).getOriginalQualifiedName())
-                && ((HtmlImage) domNode).wasCreatedByJavascript()) {
+        if (domNode instanceof HtmlImage image && "image".equals(image.getOriginalQualifiedName())
+                && image.wasCreatedByJavascript()) {
             if (domNode.hasFeature(HTMLIMAGE_HTMLELEMENT)) {
                 javaScriptClass = HTMLElement.class;
             }
@@ -333,8 +333,8 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      */
     protected static Window getWindow(final Scriptable s) throws RuntimeException {
         final Scriptable top = ScriptableObject.getTopLevelScope(s);
-        if (top instanceof Window) {
-            return (Window) top;
+        if (top instanceof Window window) {
+            return window;
         }
         throw new RuntimeException("Unable to find window associated with " + s);
     }
@@ -346,8 +346,8 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      */
     protected static Window getWindowFromTopCallScope() throws RuntimeException {
         final Scriptable top = JavaScriptEngine.getTopCallScope();
-        if (top instanceof Window) {
-            return (Window) top;
+        if (top instanceof Window window) {
+            return window;
         }
         throw new RuntimeException("Unable to find window in scope");
     }
@@ -396,8 +396,8 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      */
     @Override
     protected Object equivalentValues(Object value) {
-        if (value instanceof HtmlUnitScriptableProxy<?>) {
-            value = ((HtmlUnitScriptableProxy<?>) value).getDelegee();
+        if (value instanceof HtmlUnitScriptableProxy<?> proxy) {
+            value = proxy.getDelegee();
         }
         return super.equivalentValues(value);
     }

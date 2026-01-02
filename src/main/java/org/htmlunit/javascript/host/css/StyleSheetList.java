@@ -107,8 +107,8 @@ public class StyleSheetList extends HtmlUnitScriptable {
                         if (node instanceof HtmlStyle) {
                             return true;
                         }
-                        if (node instanceof HtmlLink) {
-                            return ((HtmlLink) node).isActiveStyleSheetLink();
+                        if (node instanceof HtmlLink link) {
+                            return link.isActiveStyleSheetLink();
                         }
                         return false;
                     });
@@ -156,8 +156,8 @@ public class StyleSheetList extends HtmlUnitScriptable {
             final HTMLElement element = (HTMLElement) nodes_.item(Integer.valueOf(index));
 
             // <style type="text/css"> ... </style>
-            if (element instanceof HTMLStyleElement) {
-                return ((HTMLStyleElement) element).getSheet();
+            if (element instanceof HTMLStyleElement styleElement) {
+                return styleElement.getSheet();
             }
             // <link rel="stylesheet" type="text/css" href="..." />
             return ((HTMLLinkElement) element).getSheet();

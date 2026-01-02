@@ -135,9 +135,9 @@ public class HTMLCollection extends AbstractList {
         final List<DomNode> matchingElements = new ArrayList<>();
         final boolean searchName = isGetWithPreemptionSearchName();
         for (final DomNode next : elements) {
-            if (next instanceof DomElement
+            if (next instanceof DomElement element
                     && (searchName || next instanceof HtmlInput || next instanceof HtmlForm)) {
-                final String nodeName = ((DomElement) next).getAttributeDirect(DomElement.NAME_ATTRIBUTE);
+                final String nodeName = element.getAttributeDirect(DomElement.NAME_ATTRIBUTE);
                 if (name.equals(nodeName)) {
                     matchingElements.add(next);
                 }
@@ -201,8 +201,7 @@ public class HTMLCollection extends AbstractList {
         final BrowserVersion browserVersion = getBrowserVersion();
         if (browserVersion.hasFeature(HTMLCOLLECTION_NAMED_ITEM_ID_FIRST)) {
             for (final Object next : elements) {
-                if (next instanceof DomElement) {
-                    final DomElement elem = (DomElement) next;
+                if (next instanceof DomElement elem) {
                     final String id = elem.getId();
                     if (name.equals(id)) {
                         return getScriptableForElement(elem);
@@ -211,8 +210,7 @@ public class HTMLCollection extends AbstractList {
             }
         }
         for (final Object next : elements) {
-            if (next instanceof DomElement) {
-                final DomElement elem = (DomElement) next;
+            if (next instanceof DomElement elem) {
                 final String nodeName = elem.getAttributeDirect(DomElement.NAME_ATTRIBUTE);
                 if (name.equals(nodeName)) {
                     return getScriptableForElement(elem);

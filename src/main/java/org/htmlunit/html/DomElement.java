@@ -855,8 +855,8 @@ public class DomElement extends DomNamespaceNode implements Element {
         protected ChildElementsIterator(final DomNode domNode) {
             final DomNode child = domNode.getFirstChild();
             if (child != null) {
-                if (child instanceof DomElement) {
-                    nextElement_ = (DomElement) child;
+                if (child instanceof DomElement element) {
+                    nextElement_ = element;
                 }
                 else {
                     setNextElement(child);
@@ -991,7 +991,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return true if this is an {@link DisabledElement} and disabled
      */
     protected boolean isDisabledElementAndDisabled() {
-        return this instanceof DisabledElement && ((DisabledElement) this).isDisabled();
+        return this instanceof DisabledElement de && de.isDisabled();
     }
 
     /**
@@ -1058,16 +1058,16 @@ public class DomElement extends DomNamespaceNode implements Element {
                     // give focus to current element (if possible) or only remove it from previous one
                     DomElement elementToFocus = null;
                     if (this instanceof SubmittableElement
-                        || this instanceof HtmlAnchor
-                            && ATTRIBUTE_NOT_DEFINED != ((HtmlAnchor) this).getHrefAttribute()
-                        || this instanceof HtmlArea
-                            && (ATTRIBUTE_NOT_DEFINED != ((HtmlArea) this).getHrefAttribute()
+                        || this instanceof HtmlAnchor anchor
+                            && ATTRIBUTE_NOT_DEFINED != anchor.getHrefAttribute()
+                        || this instanceof HtmlArea area
+                            && (ATTRIBUTE_NOT_DEFINED != area.getHrefAttribute()
                                 || webClient.getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
                         || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null) {
                         elementToFocus = this;
                     }
-                    else if (this instanceof HtmlOption) {
-                        elementToFocus = ((HtmlOption) this).getEnclosingSelect();
+                    else if (this instanceof HtmlOption option) {
+                        elementToFocus = option.getEnclosingSelect();
                     }
 
                     if (elementToFocus == null) {
@@ -1192,8 +1192,8 @@ public class DomElement extends DomNamespaceNode implements Element {
             // it should probably be changed to do this at the event level but currently
             // this wouldn't work with JS disabled as events are propagated in the host object tree.
             final DomNode parent = getParentNode();
-            if (parent instanceof DomElement) {
-                return ((DomElement) parent).doClickStateUpdate(false, false);
+            if (parent instanceof DomElement element) {
+                return element.doClickStateUpdate(false, false);
             }
         }
 
@@ -1572,9 +1572,9 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public void focus() {
         if (!(this instanceof SubmittableElement
-            || this instanceof HtmlAnchor && ATTRIBUTE_NOT_DEFINED != ((HtmlAnchor) this).getHrefAttribute()
-            || this instanceof HtmlArea
-                && (ATTRIBUTE_NOT_DEFINED != ((HtmlArea) this).getHrefAttribute()
+            || this instanceof HtmlAnchor anchor && ATTRIBUTE_NOT_DEFINED != anchor.getHrefAttribute()
+            || this instanceof HtmlArea area
+                && (ATTRIBUTE_NOT_DEFINED != area.getHrefAttribute()
                     || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
             || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null)) {
             return;
@@ -1726,10 +1726,10 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
             // we keep all attributes, and we got the right map from outside too
             map_ = (OrderedFastHashMap) attributes;
         }
-        else if (caseSensitive && attributes instanceof OrderedFastHashMap) {
+        else if (caseSensitive && attributes instanceof OrderedFastHashMap map) {
             // no need to rework the map at all, we are case sensitive, so
             // we keep all attributes, and we got the right map from outside too
-            map_ = (OrderedFastHashMap) attributes;
+            map_ = map;
         }
         else {
             // this is more expensive but atypical, so we don't have to care that much
@@ -1833,8 +1833,8 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      */
     @Override
     public DomAttr remove(final Object key) {
-        if (key instanceof String) {
-            final String name = fixName((String) key);
+        if (key instanceof String string) {
+            final String name = fixName(string);
             return map_.remove(name);
         }
         return null;
@@ -1864,8 +1864,8 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      */
     @Override
     public boolean containsKey(final Object key) {
-        if (key instanceof String) {
-            final String name = fixName((String) key);
+        if (key instanceof String string) {
+            final String name = fixName(string);
             return map_.containsKey(name);
         }
         return false;
@@ -1876,8 +1876,8 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      */
     @Override
     public DomAttr get(final Object key) {
-        if (key instanceof String) {
-            final String name = fixName((String) key);
+        if (key instanceof String string) {
+            final String name = fixName(string);
             return map_.get(name);
         }
         return null;

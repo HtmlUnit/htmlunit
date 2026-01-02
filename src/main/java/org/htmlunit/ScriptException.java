@@ -144,8 +144,8 @@ public class ScriptException extends RuntimeException {
             final Object value = ((JavaScriptException) getCause()).getValue();
 
             printWriter.print("JavaScriptException value = ");
-            if (value instanceof Throwable) {
-                ((Throwable) value).printStackTrace(printWriter);
+            if (value instanceof Throwable throwable) {
+                throwable.printStackTrace(printWriter);
             }
             else {
                 printWriter.println(value);

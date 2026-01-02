@@ -342,9 +342,9 @@ public class CssStyleSheet implements Serializable {
             // a cached style sheet
             final Cache cache = client.getCache();
             final Object fromCache = cache.getCachedObject(request);
-            if (fromCache instanceof CSSStyleSheetImpl) {
+            if (fromCache instanceof CSSStyleSheetImpl impl) {
                 uri = request.getUrl().toExternalForm();
-                return new CssStyleSheet(element, (CSSStyleSheetImpl) fromCache, uri);
+                return new CssStyleSheet(element, impl, uri);
             }
 
             uri = response.getWebRequest().getUrl().toExternalForm();
@@ -494,8 +494,8 @@ public class CssStyleSheet implements Serializable {
                             fromQuerySelectorAll, throwOnSyntax)) {
                     for (DomNode prev1 = element.getPreviousSibling(); prev1 != null;
                                                         prev1 = prev1.getPreviousSibling()) {
-                        if (prev1 instanceof DomElement
-                            && selects(browserVersion, gas.getSelector(), (DomElement) prev1,
+                        if (prev1 instanceof DomElement domElement
+                            && selects(browserVersion, gas.getSelector(), domElement,
                                     pseudoElement, fromQuerySelectorAll, throwOnSyntax)) {
                             return true;
                         }
@@ -541,8 +541,8 @@ public class CssStyleSheet implements Serializable {
 
                     case SUBSEQUENT_SIBLING_COMBINATOR:
                         for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                            if (n instanceof DomElement
-                                    && selects(browserVersion, rs.getSelector(), (DomElement) n, pseudoElement,
+                            if (n instanceof DomElement domElement
+                                    && selects(browserVersion, rs.getSelector(), domElement, pseudoElement,
                                                 fromQuerySelectorAll, throwOnSyntax)) {
                                 return true;
                             }
@@ -815,10 +815,10 @@ public class CssStyleSheet implements Serializable {
                 return element == element.getPage().getDocumentElement();
 
             case "enabled":
-                return element instanceof DisabledElement && !((DisabledElement) element).isDisabled();
+                return element instanceof DisabledElement de && !de.isDisabled();
 
             case "disabled":
-                return element instanceof DisabledElement && ((DisabledElement) element).isDisabled();
+                return element instanceof DisabledElement de && de.isDisabled();
 
             case "focus":
                 final HtmlPage htmlPage = element.getHtmlPageOrNull();
@@ -841,21 +841,21 @@ public class CssStyleSheet implements Serializable {
                 if (htmlPage3 != null) {
                     final DomElement focus = htmlPage3.getFocusedElement();
                     return element == focus
-                            && ((element instanceof HtmlInput && !((HtmlInput) element).isReadOnly())
-                                || (element instanceof HtmlTextArea && !((HtmlTextArea) element).isReadOnly()));
+                            && ((element instanceof HtmlInput hi && !hi.isReadOnly())
+                                || (element instanceof HtmlTextArea hta && !hta.isReadOnly()));
                 }
                 return false;
 
             case "checked":
-                return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
-                        || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked()
-                                || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
+                return (element instanceof HtmlCheckBoxInput hcbi && hcbi.isChecked())
+                        || (element instanceof HtmlRadioButtonInput hrbi && hrbi.isChecked()
+                                || (element instanceof HtmlOption ho && ho.isSelected()));
 
             case "required":
-                return element instanceof HtmlElement && ((HtmlElement) element).isRequired();
+                return element instanceof HtmlElement he && he.isRequired();
 
             case "optional":
-                return element instanceof HtmlElement && ((HtmlElement) element).isOptional();
+                return element instanceof HtmlElement he && he.isOptional();
 
             case "first-child":
                 for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
@@ -941,9 +941,9 @@ public class CssStyleSheet implements Serializable {
                 return element.isMouseOver();
 
             case "placeholder-shown":
-                return element instanceof HtmlInput
-                        && StringUtils.isEmptyOrNull(((HtmlInput) element).getValue())
-                        && !StringUtils.isEmptyOrNull(((HtmlInput) element).getPlaceholder());
+                return element instanceof HtmlInput hi
+                        && StringUtils.isEmptyOrNull(hi.getValue())
+                        && !StringUtils.isEmptyOrNull(hi.getPlaceholder());
 
             default:
                 if (value.startsWith("nth-child(")) {
@@ -1110,8 +1110,7 @@ public class CssStyleSheet implements Serializable {
             final Reader reader = source.getReader();
             if (null != reader) {
                 // try to reset to produce some output
-                if (reader instanceof StringReader) {
-                    final StringReader sr = (StringReader) reader;
+                if (reader instanceof StringReader sr) {
                     sr.reset();
                 }
                 return IOUtils.toString(reader);
@@ -1286,12 +1285,10 @@ public class CssStyleSheet implements Serializable {
      */
     public boolean isActive() {
         final String media;
-        if (owner_ instanceof HtmlStyle) {
-            final HtmlStyle style = (HtmlStyle) owner_;
+        if (owner_ instanceof HtmlStyle style) {
             media = style.getMediaAttribute();
         }
-        else if (owner_ instanceof HtmlLink) {
-            final HtmlLink link = (HtmlLink) owner_;
+        else if (owner_ instanceof HtmlLink link) {
             media = link.getMediaAttribute();
         }
         else {
@@ -1453,8 +1450,8 @@ public class CssStyleSheet implements Serializable {
         }
         else if ("print".equalsIgnoreCase(mediaType)) {
             final Page page = webWindow.getEnclosedPage();
-            if (page instanceof SgmlPage) {
-                return ((SgmlPage) page).isPrinting();
+            if (page instanceof SgmlPage sgmlPage) {
+                return sgmlPage.isPrinting();
             }
         }
         return false;
@@ -1631,8 +1628,7 @@ public class CssStyleSheet implements Serializable {
             final Set<String> alreadyProcessing) {
 
         for (final AbstractCSSRuleImpl rule : ruleList.getRules()) {
-            if (rule instanceof CSSStyleRuleImpl) {
-                final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
+            if (rule instanceof CSSStyleRuleImpl styleRule) {
                 final SelectorList selectors = styleRule.getSelectors();
                 for (final Selector selector : selectors) {
                     final SimpleSelector simpleSel = selector.getSimpleSelector();
@@ -1656,8 +1652,7 @@ public class CssStyleSheet implements Serializable {
                     }
                 }
             }
-            else if (rule instanceof CSSImportRuleImpl) {
-                final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
+            else if (rule instanceof CSSImportRuleImpl importRule) {
 
                 final CssStyleSheet sheet = getImportedStyleSheet(importRule);
 
@@ -1674,8 +1669,7 @@ public class CssStyleSheet implements Serializable {
                     }
                 }
             }
-            else if (rule instanceof CSSMediaRuleImpl) {
-                final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
+            else if (rule instanceof CSSMediaRuleImpl mediaRule) {
                 final MediaListImpl mediaList = mediaRule.getMediaList();
                 if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
                     index(index, mediaRule.getCssRules(), alreadyProcessing);

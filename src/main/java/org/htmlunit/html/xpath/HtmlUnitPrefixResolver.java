@@ -46,14 +46,14 @@ public final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
     public String getNamespaceForPrefix(final String prefix, final Node namespaceContext) {
         String namespace = super.getNamespaceForPrefix(prefix, namespaceContext);
         if (namespace == null) {
-            if (namespaceContext instanceof XmlPage) {
-                final DomElement documentElement = ((XmlPage) namespaceContext).getDocumentElement();
+            if (namespaceContext instanceof XmlPage page) {
+                final DomElement documentElement = page.getDocumentElement();
                 if (documentElement != null) {
                     namespace = getNamespace(documentElement, prefix);
                 }
             }
-            else if (namespaceContext instanceof DomElement) {
-                namespace = getNamespace((DomElement) namespaceContext, prefix);
+            else if (namespaceContext instanceof DomElement element) {
+                namespace = getNamespace(element, prefix);
             }
         }
         return namespace;
@@ -71,8 +71,8 @@ public final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
             }
         }
         for (final DomNode child : element.getChildren()) {
-            if (child instanceof DomElement) {
-                final String namespace = getNamespace((DomElement) child, prefix);
+            if (child instanceof DomElement domElement) {
+                final String namespace = getNamespace(domElement, prefix);
                 if (namespace != null) {
                     return namespace;
                 }

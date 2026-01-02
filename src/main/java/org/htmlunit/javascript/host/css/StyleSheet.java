@@ -88,9 +88,7 @@ public class StyleSheet extends HtmlUnitScriptable {
             if (node instanceof HtmlStyle) {
                 return null;
             }
-            if (node instanceof HtmlLink) {
-                // <link rel="stylesheet" type="text/css" href="..." />
-                final HtmlLink link = (HtmlLink) node;
+            if (node instanceof HtmlLink link) {
                 final String href = link.getHrefAttribute();
                 // Expand relative URLs.
                 try {

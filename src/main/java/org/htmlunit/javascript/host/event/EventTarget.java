@@ -197,8 +197,8 @@ public class EventTarget extends HtmlUnitScriptable {
             HtmlLabel label = null;
             if (event.processLabelAfterBubbling()) {
                 for (DomNode parent = ourParentNode; parent != null; parent = parent.getParentNode()) {
-                    if (parent instanceof HtmlLabel) {
-                        label = (HtmlLabel) parent;
+                    if (parent instanceof HtmlLabel htmlLabel) {
+                        label = htmlLabel;
                         break;
                     }
                 }
@@ -264,9 +264,9 @@ public class EventTarget extends HtmlUnitScriptable {
 
         ScriptResult result = null;
         final DomNode domNode = getDomNodeOrNull();
-        if (MouseEvent.TYPE_CLICK.equals(event.getType()) && (domNode instanceof DomElement)) {
+        if (MouseEvent.TYPE_CLICK.equals(event.getType()) && (domNode instanceof DomElement element)) {
             try {
-                ((DomElement) domNode).click(event, event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), true);
+                element.click(event, event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), true);
             }
             catch (final IOException e) {
                 throw JavaScriptEngine.reportRuntimeError("Error calling click(): " + e.getMessage());

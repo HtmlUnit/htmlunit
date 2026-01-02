@@ -293,8 +293,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         if (handlers != null) {
             final Object[] args = {event};
             for (final Scriptable scriptable : handlers) {
-                if (scriptable instanceof Function) {
-                    final Function handlerFunction = (Function) scriptable;
+                if (scriptable instanceof Function handlerFunction) {
                     handlerFunction.call(cx, this, this, args);
                 }
             }

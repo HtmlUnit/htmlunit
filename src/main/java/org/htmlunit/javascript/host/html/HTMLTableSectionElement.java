@@ -133,7 +133,7 @@ public class HTMLTableSectionElement extends HTMLElement {
         final HTMLCollection rows = new HTMLCollection(getDomNodeOrDie(), false);
         rows.setIsMatchingPredicate(
                 (Predicate<DomNode> & Serializable)
-                node -> node instanceof HtmlTableRow && isContainedRow((HtmlTableRow) node));
+                node -> node instanceof HtmlTableRow htr && isContainedRow(htr));
         return rows;
     }
 

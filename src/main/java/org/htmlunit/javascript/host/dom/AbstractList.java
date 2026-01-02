@@ -193,8 +193,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      * @return the element or elements corresponding to the specified index or key
      */
     protected Object getIt(final Object o) {
-        if (o instanceof Number) {
-            final Number n = (Number) o;
+        if (o instanceof Number n) {
             final int i = n.intValue();
             return get(i, this);
         }
@@ -244,11 +243,11 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
                 final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(this);
                 domNode.addDomChangeListener(listener);
                 if (attributeChangeSensitive_) {
-                    if (domNode instanceof HtmlElement) {
-                        ((HtmlElement) domNode).addHtmlAttributeChangeListener(listener);
+                    if (domNode instanceof HtmlElement element) {
+                        element.addHtmlAttributeChangeListener(listener);
                     }
-                    else if (domNode instanceof HtmlPage) {
-                        ((HtmlPage) domNode).addHtmlAttributeChangeListener(listener);
+                    else if (domNode instanceof HtmlPage page) {
+                        page.addHtmlAttributeChangeListener(listener);
                     }
                 }
                 listenerRegistered_ = true;
@@ -278,8 +277,8 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
         final List<DomNode> matchingElements = new ArrayList<>();
 
         for (final DomNode next : elements) {
-            if (next instanceof DomElement) {
-                final String id = ((DomElement) next).getId();
+            if (next instanceof DomElement element) {
+                final String id = element.getId();
                 if (name.equals(id)) {
                     matchingElements.add(next);
                 }
@@ -318,8 +317,8 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     protected Object getWithPreemptionByName(final String name, final List<DomNode> elements) {
         final List<DomNode> matchingElements = new ArrayList<>();
         for (final DomNode next : elements) {
-            if (next instanceof DomElement) {
-                final String nodeName = ((DomElement) next).getAttributeDirect(DomElement.NAME_ATTRIBUTE);
+            if (next instanceof DomElement element) {
+                final String nodeName = element.getAttributeDirect(DomElement.NAME_ATTRIBUTE);
                 if (name.equals(nodeName)) {
                     matchingElements.add(next);
                 }
@@ -365,8 +364,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
         if (other == this) {
             return Boolean.TRUE;
         }
-        else if (other instanceof AbstractList) {
-            final AbstractList otherArray = (AbstractList) other;
+        else if (other instanceof AbstractList otherArray) {
             final DomNode domNode = getDomNodeOrNull();
             final DomNode domNodeOther = otherArray.getDomNodeOrNull();
             if (getClass() == other.getClass()
@@ -466,8 +464,8 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      * @return the scriptable
      */
     protected Scriptable getScriptableForElement(final Object object) {
-        if (object instanceof Scriptable) {
-            return (Scriptable) object;
+        if (object instanceof Scriptable scriptable) {
+            return scriptable;
         }
         return getScriptableFor(object);
     }

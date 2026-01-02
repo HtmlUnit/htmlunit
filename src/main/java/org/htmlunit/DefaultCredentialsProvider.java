@@ -292,7 +292,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
         @Override
         public boolean equals(final Object obj) {
-            return obj instanceof AuthScopeProxy && authScope_.equals(((AuthScopeProxy) obj).getAuthScope());
+            return obj instanceof AuthScopeProxy asp && authScope_.equals(asp.getAuthScope());
         }
     }
 }

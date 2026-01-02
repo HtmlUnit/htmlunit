@@ -254,8 +254,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         final String[] locales;
         if (args.length != 0) {
-            if (args[0] instanceof NativeArray) {
-                final NativeArray array = (NativeArray) args[0];
+            if (args[0] instanceof NativeArray array) {
                 locales = new String[(int) array.getLength()];
                 for (int i = 0; i < locales.length; i++) {
                     locales[i] = JavaScriptEngine.toString(array.get(i));

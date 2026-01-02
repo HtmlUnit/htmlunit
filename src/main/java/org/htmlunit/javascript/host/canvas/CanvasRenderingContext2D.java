@@ -304,8 +304,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         }
         final CanvasRenderingContext2D canvas = (CanvasRenderingContext2D) thisObj;
 
-        if (args.length > 0 && args[0] instanceof ImageData) {
-            final ImageData imageDataParameter = (ImageData) args[0];
+        if (args.length > 0 && args[0] instanceof ImageData imageDataParameter) {
             final ImageData imageData = new ImageData(null,
                     0, 0, imageDataParameter.getWidth(), imageDataParameter.getHeight());
             imageData.setParentScope(canvas.getParentScope());
@@ -393,8 +392,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     public void drawImage(final Object image, final int sx, final int sy, final Object sWidth, final Object sHeight,
             final Object dx, final Object dy, final Object dWidth, final Object dHeight) {
 
-        if (image instanceof HTMLImageElement) {
-            final HTMLImageElement imageElem = (HTMLImageElement) image;
+        if (image instanceof HTMLImageElement imageElem) {
             try {
                 final org.htmlunit.platform.image.ImageData imageData
                             = ((HtmlImage) imageElem.getDomNodeOrDie()).getImageData();

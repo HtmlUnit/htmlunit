@@ -194,8 +194,8 @@ public class HtmlTable extends HtmlElement {
      */
     public HtmlTableHeader getHeader() {
         for (final DomElement element : getChildElements()) {
-            if (element instanceof HtmlTableHeader) {
-                return (HtmlTableHeader) element;
+            if (element instanceof HtmlTableHeader header) {
+                return header;
             }
         }
         return null;
@@ -208,8 +208,8 @@ public class HtmlTable extends HtmlElement {
      */
     public HtmlTableFooter getFooter() {
         for (final DomElement element : getChildElements()) {
-            if (element instanceof HtmlTableFooter) {
-                return (HtmlTableFooter) element;
+            if (element instanceof HtmlTableFooter footer) {
+                return footer;
             }
         }
         return null;
@@ -224,8 +224,8 @@ public class HtmlTable extends HtmlElement {
     public List<HtmlTableBody> getBodies() {
         final List<HtmlTableBody> bodies = new ArrayList<>();
         for (final DomElement element : getChildElements()) {
-            if (element instanceof HtmlTableBody) {
-                bodies.add((HtmlTableBody) element);
+            if (element instanceof HtmlTableBody body) {
+                bodies.add(body);
             }
         }
         return bodies;
@@ -404,12 +404,12 @@ public class HtmlTable extends HtmlElement {
         private void setNextRow(final DomNode node) {
             nextRow_ = null;
             for (DomNode next = node; next != null; next = next.getNextSibling()) {
-                if (next instanceof HtmlTableRow) {
-                    nextRow_ = (HtmlTableRow) next;
+                if (next instanceof HtmlTableRow row) {
+                    nextRow_ = row;
                     return;
                 }
-                else if (currentGroup_ == null && next instanceof TableRowGroup) {
-                    currentGroup_ = (TableRowGroup) next;
+                else if (currentGroup_ == null && next instanceof TableRowGroup group) {
+                    currentGroup_ = group;
                     setNextRow(next.getFirstChild());
                     return;
                 }

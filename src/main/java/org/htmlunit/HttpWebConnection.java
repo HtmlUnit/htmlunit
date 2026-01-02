@@ -357,8 +357,8 @@ public class HttpWebConnection implements WebConnection {
                 builder.setCharset(c);
 
                 for (final NameValuePair pair : webRequest.getRequestParameters()) {
-                    if (pair instanceof KeyDataPair) {
-                        buildFilePart((KeyDataPair) pair, builder);
+                    if (pair instanceof KeyDataPair dataPair) {
+                        buildFilePart(dataPair, builder);
                     }
                     else {
                         builder.addTextBody(pair.getName(), pair.getValue(),
@@ -423,8 +423,7 @@ public class HttpWebConnection implements WebConnection {
 
     private static Charset getCharset(final Charset charset, final List<NameValuePair> pairs) {
         for (final NameValuePair pair : pairs) {
-            if (pair instanceof KeyDataPair) {
-                final KeyDataPair pairWithFile = (KeyDataPair) pair;
+            if (pair instanceof KeyDataPair pairWithFile) {
                 if (pairWithFile.getData() == null && pairWithFile.getFile() != null) {
                     final String fileName = pairWithFile.getFile().getName();
                     final int length = fileName.length();

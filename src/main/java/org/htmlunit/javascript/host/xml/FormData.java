@@ -150,8 +150,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor(final Object formObj) {
-        if (formObj instanceof HTMLFormElement) {
-            final HTMLFormElement form = (HTMLFormElement) formObj;
+        if (formObj instanceof HTMLFormElement form) {
             requestParameters_.addAll(form.getHtmlForm().getParameterListForSubmit(null));
         }
     }
@@ -165,14 +164,13 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void append(final String name, final Object value, final Object filename) {
-        if (value instanceof Blob) {
-            final Blob blob = (Blob) value;
+        if (value instanceof Blob blob) {
             String fileName = "blob";
             if (value instanceof File) {
                 fileName = null;
             }
-            if (filename instanceof String) {
-                fileName = (String) filename;
+            if (filename instanceof String string) {
+                fileName = string;
             }
             requestParameters_.add(blob.getKeyDataPair(name, fileName));
             return;
@@ -282,14 +280,13 @@ public class FormData extends HtmlUnitScriptable {
             pos = requestParameters_.size();
         }
 
-        if (value instanceof Blob) {
-            final Blob blob = (Blob) value;
+        if (value instanceof Blob blob) {
             String fileName = "blob";
             if (value instanceof File) {
                 fileName = null;
             }
-            if (filename instanceof String) {
-                fileName = (String) filename;
+            if (filename instanceof String string) {
+                fileName = string;
             }
             requestParameters_.add(pos, blob.getKeyDataPair(name, fileName));
         }

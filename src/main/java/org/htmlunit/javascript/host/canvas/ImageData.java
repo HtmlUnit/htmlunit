@@ -68,8 +68,8 @@ public class ImageData extends HtmlUnitScriptable {
         NativeUint8ClampedArray data = null;
         final int width;
         final int height;
-        if (args[0] instanceof NativeUint8ClampedArray) {
-            data = (NativeUint8ClampedArray) args[0];
+        if (args[0] instanceof NativeUint8ClampedArray array) {
+            data = array;
             if (data.getArrayLength() % 4 != 0) {
                 throw JavaScriptEngine.asJavaScriptException(
                         (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope(),

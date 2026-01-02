@@ -112,20 +112,20 @@ public class HtmlSerializerInnerOuterText {
      */
     protected void appendNode(final HtmlSerializerTextBuilder builder, final DomNode node,
             final Mode mode, final boolean insideHead) {
-        if (node instanceof DomText) {
-            appendText(builder, (DomText) node, mode);
+        if (node instanceof DomText text) {
+            appendText(builder, text, mode);
         }
-        else if (node instanceof HtmlBreak) {
-            appendBreak(builder, (HtmlBreak) node);
+        else if (node instanceof HtmlBreak break1) {
+            appendBreak(builder, break1);
         }
-        else if (node instanceof HtmlParagraph) {
-            appendParagraph(builder, (HtmlParagraph) node, mode, insideHead);
+        else if (node instanceof HtmlParagraph paragraph) {
+            appendParagraph(builder, paragraph, mode, insideHead);
         }
-        else if (node instanceof HtmlListItem) {
-            appendListItem(builder, (HtmlListItem) node, mode, insideHead);
+        else if (node instanceof HtmlListItem item) {
+            appendListItem(builder, item, mode, insideHead);
         }
-        else if (node instanceof HtmlDetails) {
-            appendDetails(builder, (HtmlDetails) node, mode, insideHead);
+        else if (node instanceof HtmlDetails details) {
+            appendDetails(builder, details, mode, insideHead);
         }
         else if (node instanceof HtmlHead) {
             appendChildren(builder, node, mode, true);

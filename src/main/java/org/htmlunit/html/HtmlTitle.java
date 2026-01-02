@@ -56,8 +56,8 @@ public class HtmlTitle extends HtmlElement {
             final DomNode textNode = new DomText(getPage(), message);
             appendChild(textNode);
         }
-        else if (child instanceof DomText) {
-            ((DomText) child).setData(message);
+        else if (child instanceof DomText text) {
+            text.setData(message);
         }
         else {
             throw new IllegalStateException("For title tag, this should be a text node");

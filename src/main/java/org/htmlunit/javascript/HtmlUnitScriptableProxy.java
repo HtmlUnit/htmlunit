@@ -35,8 +35,8 @@ public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> exte
      */
     @Override
     public Object get(final int index, Scriptable start) {
-        if (start instanceof HtmlUnitScriptableProxy<?>) {
-            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
+            start = proxy.getDelegee();
         }
         return getDelegee().get(index, start);
     }
@@ -46,8 +46,8 @@ public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> exte
      */
     @Override
     public Object get(final String name, Scriptable start) {
-        if (start instanceof HtmlUnitScriptableProxy<?>) {
-            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
+            start = proxy.getDelegee();
         }
         return getDelegee().get(name, start);
     }
@@ -57,8 +57,8 @@ public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> exte
      */
     @Override
     public boolean has(final int index, Scriptable start) {
-        if (start instanceof HtmlUnitScriptableProxy<?>) {
-            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
+            start = proxy.getDelegee();
         }
         return getDelegee().has(index, start);
     }
@@ -68,8 +68,8 @@ public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> exte
      */
     @Override
     public boolean has(final String name, Scriptable start) {
-        if (start instanceof HtmlUnitScriptableProxy<?>) {
-            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
+            start = proxy.getDelegee();
         }
         return getDelegee().has(name, start);
     }
@@ -79,8 +79,8 @@ public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> exte
      */
     @Override
     public boolean hasInstance(Scriptable instance) {
-        if (instance instanceof HtmlUnitScriptableProxy<?>) {
-            instance = ((HtmlUnitScriptableProxy<?>) instance).getDelegee();
+        if (instance instanceof HtmlUnitScriptableProxy<?> proxy) {
+            instance = proxy.getDelegee();
         }
         return getDelegee().hasInstance(instance);
     }
@@ -90,8 +90,8 @@ public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> exte
      */
     @Override
     public void put(final int index, Scriptable start, final Object value) {
-        if (start instanceof HtmlUnitScriptableProxy<?>) {
-            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
+            start = proxy.getDelegee();
         }
         getDelegee().put(index, start, value);
     }
@@ -101,8 +101,8 @@ public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> exte
      */
     @Override
     public void put(final String name, Scriptable start, final Object value) {
-        if (start instanceof HtmlUnitScriptableProxy<?>) {
-            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?> proxy) {
+            start = proxy.getDelegee();
         }
         getDelegee().put(name, start, value);
     }

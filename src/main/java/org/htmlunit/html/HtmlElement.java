@@ -260,8 +260,8 @@ public abstract class HtmlElement extends DomElement {
             }
         }
         final DomNode parentNode = element.getParentNode();
-        if (parentNode instanceof HtmlElement) {
-            notifyAttributeChangeListeners(event, (HtmlElement) parentNode, oldAttributeValue, notifyMutationObservers);
+        if (parentNode instanceof HtmlElement htmlElement) {
+            notifyAttributeChangeListeners(event, htmlElement, oldAttributeValue, notifyMutationObservers);
         }
     }
 
@@ -374,8 +374,8 @@ public abstract class HtmlElement extends DomElement {
      */
     protected void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
         final DomNode parentNode = getParentNode();
-        if (parentNode instanceof HtmlElement) {
-            ((HtmlElement) parentNode).fireHtmlAttributeAdded(event);
+        if (parentNode instanceof HtmlElement element) {
+            element.fireHtmlAttributeAdded(event);
         }
     }
 
@@ -392,8 +392,8 @@ public abstract class HtmlElement extends DomElement {
      */
     protected void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
         final DomNode parentNode = getParentNode();
-        if (parentNode instanceof HtmlElement) {
-            ((HtmlElement) parentNode).fireHtmlAttributeReplaced(event);
+        if (parentNode instanceof HtmlElement element) {
+            element.fireHtmlAttributeReplaced(event);
         }
     }
 
@@ -415,8 +415,8 @@ public abstract class HtmlElement extends DomElement {
             }
         }
         final DomNode parentNode = getParentNode();
-        if (parentNode instanceof HtmlElement) {
-            ((HtmlElement) parentNode).fireHtmlAttributeRemoved(event);
+        if (parentNode instanceof HtmlElement element) {
+            element.fireHtmlAttributeRemoved(event);
         }
     }
 
@@ -471,8 +471,8 @@ public abstract class HtmlElement extends DomElement {
         final String tagNameLC = tagName.toLowerCase(Locale.ROOT);
 
         for (DomNode currentNode = getParentNode(); currentNode != null; currentNode = currentNode.getParentNode()) {
-            if (currentNode instanceof HtmlElement && currentNode.getNodeName().equals(tagNameLC)) {
-                return (HtmlElement) currentNode;
+            if (currentNode instanceof HtmlElement element && currentNode.getNodeName().equals(tagNameLC)) {
+                return element;
             }
         }
         return null;
@@ -487,8 +487,8 @@ public abstract class HtmlElement extends DomElement {
         final String formId = getAttribute("form");
         if (ATTRIBUTE_NOT_DEFINED != formId) {
             final Element formById = getPage().getElementById(formId);
-            if (formById instanceof HtmlForm) {
-                return (HtmlForm) formById;
+            if (formById instanceof HtmlForm form) {
+                return form;
             }
             return null;
         }
@@ -667,8 +667,7 @@ public abstract class HtmlElement extends DomElement {
         final List<Object[]> keys = keyboard.getKeys();
 
         if (keyboard.isStartAtEnd()) {
-            if (this instanceof SelectableTextInput) {
-                final SelectableTextInput textInput = (SelectableTextInput) this;
+            if (this instanceof SelectableTextInput textInput) {
                 textInput.setSelectionStart(textInput.getText().length());
             }
             else {
@@ -841,8 +840,8 @@ public abstract class HtmlElement extends DomElement {
             DomNodeList<DomNode> children = getChildNodes();
             while (!children.isEmpty()) {
                 final DomNode lastChild = children.get(children.size() - 1);
-                if (lastChild instanceof DomText) {
-                    return (DomText) lastChild;
+                if (lastChild instanceof DomText text) {
+                    return text;
                 }
                 children = lastChild.getChildNodes();
             }
@@ -987,8 +986,8 @@ public abstract class HtmlElement extends DomElement {
     public final boolean hasEventHandlers(final String eventName) {
         if (getPage().getWebClient().isJavaScriptEngineEnabled()) {
             final HtmlUnitScriptable jsObj = getScriptableObject();
-            if (jsObj instanceof EventTarget) {
-                return ((EventTarget) jsObj).hasEventHandlers(eventName);
+            if (jsObj instanceof EventTarget target) {
+                return target.hasEventHandlers(eventName);
             }
         }
         return false;
@@ -1337,8 +1336,7 @@ public abstract class HtmlElement extends DomElement {
 
         final HtmlUnitScriptable document = page.getScriptableObject();
 
-        if (document instanceof HTMLDocument) {
-            final HTMLDocument doc = (HTMLDocument) document;
+        if (document instanceof HTMLDocument doc) {
             final Object activeElement = doc.getActiveElement();
 
             if (activeElement == getScriptableObject()) {
@@ -1484,12 +1482,12 @@ public abstract class HtmlElement extends DomElement {
                 return (HtmlElement) parentNode;
             }
 
-            if (parentNode instanceof HtmlElement) {
+            if (parentNode instanceof HtmlElement element) {
                 final ComputedCssStyleDeclaration parentStyle =
-                        webWindow.getComputedStyle((HtmlElement) parentNode, null);
+                        webWindow.getComputedStyle(element, null);
                 final String parentPosition = parentStyle.getPositionWithInheritance();
                 if (!STATIC.equals(parentPosition)) {
-                    return (HtmlElement) parentNode;
+                    return element;
                 }
             }
 
@@ -1526,8 +1524,8 @@ public abstract class HtmlElement extends DomElement {
         // Add the offset for the ancestor nodes.
         DomNode parentNode = getParentNode();
         while (parentNode != null && parentNode != offsetParent) {
-            if (parentNode instanceof HtmlElement) {
-                style = webWindow.getComputedStyle((HtmlElement) parentNode, null);
+            if (parentNode instanceof HtmlElement element) {
+                style = webWindow.getComputedStyle(element, null);
                 top += style.getTop(false, true, true);
             }
             parentNode = parentNode.getParentNode();
@@ -1573,8 +1571,8 @@ public abstract class HtmlElement extends DomElement {
 
         DomNode parentNode = getParentNode();
         while (parentNode != null && parentNode != offsetParent) {
-            if (parentNode instanceof HtmlElement) {
-                style = webWindow.getComputedStyle((HtmlElement) parentNode, null);
+            if (parentNode instanceof HtmlElement element) {
+                style = webWindow.getComputedStyle(element, null);
                 left += style.getLeft(true, true, true);
             }
             parentNode = parentNode.getParentNode();

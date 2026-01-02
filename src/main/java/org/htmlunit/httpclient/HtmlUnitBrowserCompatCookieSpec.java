@@ -161,10 +161,10 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             // support multiple header elements (comma cannot be treated as an element separator)
             final CharArrayBuffer buffer;
             final ParserCursor cursor;
-            if (header instanceof FormattedHeader) {
-                buffer = ((FormattedHeader) header).getBuffer();
+            if (header instanceof FormattedHeader formattedHeader) {
+                buffer = formattedHeader.getBuffer();
                 cursor = new ParserCursor(
-                        ((FormattedHeader) header).getValuePos(),
+                        formattedHeader.getValuePos(),
                         buffer.length());
             }
             else {

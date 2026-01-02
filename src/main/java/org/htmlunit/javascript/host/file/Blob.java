@@ -160,16 +160,15 @@ public class Blob extends HtmlUnitScriptable {
             final long length = fileBits.getLength();
             for (long i = 0; i < length; i++) {
                 final Object fileBit = fileBits.get(i);
-                if (fileBit instanceof NativeArrayBuffer) {
-                    final byte[] bytes = ((NativeArrayBuffer) fileBit).getBuffer();
+                if (fileBit instanceof NativeArrayBuffer buffer) {
+                    final byte[] bytes = buffer.getBuffer();
                     out.write(bytes, 0, bytes.length);
                 }
-                else if (fileBit instanceof NativeArrayBufferView) {
-                    final byte[] bytes = ((NativeArrayBufferView) fileBit).getBuffer().getBuffer();
+                else if (fileBit instanceof NativeArrayBufferView view) {
+                    final byte[] bytes = view.getBuffer().getBuffer();
                     out.write(bytes, 0, bytes.length);
                 }
-                else if (fileBit instanceof Blob) {
-                    final Blob blob = (Blob) fileBit;
+                else if (fileBit instanceof Blob blob) {
                     final byte[] bytes = blob.getBackend().getBytes(0, (int) blob.getSize());
                     out.write(bytes, 0, bytes.length);
                 }

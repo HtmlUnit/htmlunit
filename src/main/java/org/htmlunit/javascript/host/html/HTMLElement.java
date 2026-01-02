@@ -1114,8 +1114,8 @@ public class HTMLElement extends Element {
             final DomNode parent = getDomNodeOrDie().getParentNode();
             if (parent != null) {
                 final HtmlUnitScriptable parentScriptable = parent.getScriptableObject();
-                if (parentScriptable instanceof HTMLElement) {
-                    return ((HTMLElement) parentScriptable).isIsContentEditable();
+                if (parentScriptable instanceof HTMLElement element) {
+                    return element.isIsContentEditable();
                 }
             }
         }
@@ -1448,8 +1448,8 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setHidden(final Object hidden) {
-        if (hidden instanceof Boolean) {
-            getDomNodeOrDie().setHidden((Boolean) hidden);
+        if (hidden instanceof Boolean boolean1) {
+            getDomNodeOrDie().setHidden(boolean1);
             return;
         }
         getDomNodeOrDie().setHidden(JavaScriptEngine.toString(hidden));

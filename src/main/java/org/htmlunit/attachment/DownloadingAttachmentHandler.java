@@ -19,7 +19,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
@@ -72,7 +71,7 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
      * @throws IOException if the folder does not exist or the folder is not writable
      */
     public DownloadingAttachmentHandler() throws IOException {
-        this(Paths.get(System.getProperty("java.io.tmpdir")));
+        this(Path.of(System.getProperty("java.io.tmpdir")));
     }
 
     /**

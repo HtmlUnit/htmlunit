@@ -314,8 +314,8 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         // Forms own elements simply by enclosing source-wise rather than DOM parent-child relationship
         // Forms without a </form> will keep consuming forever
-        else if (newElement instanceof HtmlForm) {
-            consumingForm_ = (HtmlForm) newElement;
+        else if (newElement instanceof HtmlForm form) {
+            consumingForm_ = form;
             formEndingIsAdjusting_ = false;
         }
         else if (consumingForm_ != null) {
@@ -338,11 +338,10 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             body_ = (HtmlElement) newElement;
         }
         else if (createdByJavascript_
-                && newElement instanceof ScriptElement
+                && newElement instanceof ScriptElement script
                 && (!insideTemplate_
                         || !page_.getWebClient().getBrowserVersion()
                                 .hasFeature(JS_SCRIPT_IN_TEMPLATE_EXECUTED_ON_ATTACH))) {
-            final ScriptElement script = (ScriptElement) newElement;
             script.markAsCreatedByDomParser();
         }
 
@@ -557,8 +556,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         }
 
         // malformed HTML: </td>some text</tr> => text comes before the table
-        if (currentNode_ instanceof HtmlTableRow) {
-            final HtmlTableRow row = (HtmlTableRow) currentNode_;
+        if (currentNode_ instanceof HtmlTableRow row) {
             final HtmlTable enclosingTable = row.getEnclosingTable();
             if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
                 if (enclosingTable.getPreviousSibling() instanceof DomText) {
@@ -570,8 +568,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                 }
             }
         }
-        else if (currentNode_ instanceof HtmlTable) {
-            final HtmlTable enclosingTable = (HtmlTable) currentNode_;
+        else if (currentNode_ instanceof HtmlTable enclosingTable) {
             if (enclosingTable.getPreviousSibling() instanceof DomText) {
                 final DomText domText = (DomText) enclosingTable.getPreviousSibling();
                 domText.setTextContent(domText.getWholeText() + textValue);
@@ -738,8 +735,8 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                 }
                 else if ("html".equalsIgnoreCase(lp)) {
                     final DomNode parent = body_.getParentNode();
-                    if (parent instanceof DomElement) {
-                        copyAttributes((DomElement) parent, attrs);
+                    if (parent instanceof DomElement element) {
+                        copyAttributes(element, attrs);
                     }
                 }
             }
@@ -778,8 +775,8 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     }
 
     private static void appendChild(final DomNode parent, final DomNode child) {
-        if (parent instanceof HtmlTemplate) {
-            ((HtmlTemplate) parent).getContent().appendChild(child);
+        if (parent instanceof HtmlTemplate template) {
+            template.getContent().appendChild(child);
             return;
         }
 

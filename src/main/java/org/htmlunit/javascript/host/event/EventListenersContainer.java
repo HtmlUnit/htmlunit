@@ -304,11 +304,11 @@ public class EventListenersContainer implements Serializable {
             }
             else {
                 final Scriptable parentScope = jsNode_.getParentScope();
-                if (parentScope instanceof Window) {
-                    page = (HtmlPage) ((Window) parentScope).getDomNodeOrDie();
+                if (parentScope instanceof Window window) {
+                    page = (HtmlPage) window.getDomNodeOrDie();
                 }
-                else if (parentScope instanceof HTMLDocument) {
-                    page = ((HTMLDocument) parentScope).getPage();
+                else if (parentScope instanceof HTMLDocument document) {
+                    page = document.getPage();
                 }
                 else {
                     page = ((HTMLElement) parentScope).getDomNodeOrDie().getHtmlPageOrNull();
@@ -324,14 +324,14 @@ public class EventListenersContainer implements Serializable {
                 }
                 Function function = null;
                 Scriptable thisObject = null;
-                if (listener instanceof Function) {
-                    function = (Function) listener;
+                if (listener instanceof Function function2) {
+                    function = function2;
                     thisObject = jsNode_;
                 }
                 else if (listener instanceof NativeObject) {
                     final Object handleEvent = ScriptableObject.getProperty(listener, "handleEvent");
-                    if (handleEvent instanceof Function) {
-                        function = (Function) handleEvent;
+                    if (handleEvent instanceof Function function1) {
+                        function = function1;
                         thisObject = listener;
                     }
                 }

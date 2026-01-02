@@ -132,8 +132,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             // Multiple selections possible.
             result = new ArrayList<>();
             for (final HtmlElement element : getHtmlElementDescendants()) {
-                if (element instanceof HtmlOption && ((HtmlOption) element).isSelected()) {
-                    result.add((HtmlOption) element);
+                if (element instanceof HtmlOption option && option.isSelected()) {
+                    result.add(option);
                 }
             }
         }
@@ -142,8 +142,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             result = new ArrayList<>(1);
             HtmlOption lastSelected = null;
             for (final HtmlElement element : getHtmlElementDescendants()) {
-                if (element instanceof HtmlOption) {
-                    final HtmlOption option = (HtmlOption) element;
+                if (element instanceof HtmlOption option) {
                     if (option.isSelected()) {
                         lastSelected = option;
                     }
@@ -256,8 +255,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     @Override
     public DomNode appendChild(final Node node) {
         final DomNode response = super.appendChild(node);
-        if (node instanceof HtmlOption) {
-            final HtmlOption option = (HtmlOption) node;
+        if (node instanceof HtmlOption option) {
             if (option.isSelected()) {
                 doSelectOption(option, true, false, false, false);
             }
@@ -596,8 +594,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
         Node node = getParentNode();
         while (node != null) {
-            if (node instanceof DisabledElement
-                    && ((DisabledElement) node).isDisabled()) {
+            if (node instanceof DisabledElement element
+                    && element.isDisabled()) {
                 return true;
             }
             node = node.getParentNode();

@@ -240,14 +240,13 @@ public class HtmlPage extends SgmlPage {
         final boolean isAboutBlank = getUrl() == UrlUtils.URL_ABOUT_BLANK;
         if (isAboutBlank) {
             // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
-            if (enclosingWindow instanceof FrameWindow
-                    && !((FrameWindow) enclosingWindow).getFrameElement().isContentLoaded()) {
+            if (enclosingWindow instanceof FrameWindow window
+                    && !window.getFrameElement().isContentLoaded()) {
                 return;
             }
 
             // save the URL that should be used to resolve relative URLs in this page
-            if (enclosingWindow instanceof TopLevelWindow) {
-                final TopLevelWindow topWindow = (TopLevelWindow) enclosingWindow;
+            if (enclosingWindow instanceof TopLevelWindow topWindow) {
                 final WebWindow openerWindow = topWindow.getOpener();
                 if (openerWindow != null && openerWindow.getEnclosedPage() != null) {
                     baseUrl_ = openerWindow.getEnclosedPage().getWebResponse().getWebRequest().getUrl();
@@ -386,8 +385,8 @@ public class HtmlPage extends SgmlPage {
         final DomElement doc = getDocumentElement();
         if (doc != null) {
             for (final DomNode node : doc.getChildren()) {
-                if (node instanceof HtmlBody) {
-                    return (HtmlBody) node;
+                if (node instanceof HtmlBody body) {
+                    return body;
                 }
             }
         }
@@ -1269,8 +1268,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         // If this page was loaded in a frame, execute the version of the event specified on the frame tag.
-        if (window instanceof FrameWindow) {
-            final FrameWindow fw = (FrameWindow) window;
+        if (window instanceof FrameWindow fw) {
             final BaseFrameElement frame = fw.getFrameElement();
 
             // if part of a document fragment, then the load event is not triggered
@@ -1316,8 +1314,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     private boolean isOnbeforeunloadAccepted(final HtmlPage page, final Event event) {
-        if (event instanceof BeforeUnloadEvent) {
-            final BeforeUnloadEvent beforeUnloadEvent = (BeforeUnloadEvent) event;
+        if (event instanceof BeforeUnloadEvent beforeUnloadEvent) {
             if (beforeUnloadEvent.isBeforeUnloadMessageSet()) {
                 final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
                 if (handler == null) {
@@ -1492,8 +1489,7 @@ public class HtmlPage extends SgmlPage {
 
         // don't call getElementsByTagName() here because it creates a live collection
         for (final HtmlElement elem : doc.getHtmlElementDescendants()) {
-            if ("script".equals(elem.getLocalName()) && (elem instanceof HtmlScript)) {
-                final HtmlScript script = (HtmlScript) elem;
+            if ("script".equals(elem.getLocalName()) && (elem instanceof HtmlScript script)) {
                 if (script.isDeferred() && ATTRIBUTE_NOT_DEFINED != script.getSrcAttribute()) {
                     scripts.add(script);
                 }
@@ -1771,19 +1767,19 @@ public class HtmlPage extends SgmlPage {
      * @param node the node that has just been added to the document
      */
     void notifyNodeAdded(final DomNode node) {
-        if (node instanceof DomElement) {
-            addMappedElement((DomElement) node, true);
+        if (node instanceof DomElement element1) {
+            addMappedElement(element1, true);
 
-            if (node instanceof BaseFrameElement) {
-                frameElements_.add((BaseFrameElement) node);
+            if (node instanceof BaseFrameElement element) {
+                frameElements_.add(element);
             }
 
             if (node.getFirstChild() != null) {
                 for (final Iterator<HtmlElement> iterator = node.new DescendantHtmlElementsIterator();
                         iterator.hasNext();) {
                     final HtmlElement child = iterator.next();
-                    if (child instanceof BaseFrameElement) {
-                        frameElements_.add((BaseFrameElement) child);
+                    if (child instanceof BaseFrameElement element) {
+                        frameElements_.add(element);
                     }
                 }
             }
@@ -1801,8 +1797,8 @@ public class HtmlPage extends SgmlPage {
      * @param node the node that has just been removed from the tree
      */
     void notifyNodeRemoved(final DomNode node) {
-        if (node instanceof HtmlElement) {
-            removeMappedElement((HtmlElement) node, true, true);
+        if (node instanceof HtmlElement element) {
+            removeMappedElement(element, true, true);
 
             if (node instanceof BaseFrameElement) {
                 frameElements_.remove(node);
@@ -1851,8 +1847,8 @@ public class HtmlPage extends SgmlPage {
             // to avoid a bunch of object constructions
             DomNode nextChild = element.getFirstChild();
             while (nextChild != null) {
-                if (nextChild instanceof DomElement) {
-                    addElement(map, (DomElement) nextChild, attribute, true);
+                if (nextChild instanceof DomElement domElement) {
+                    addElement(map, domElement, attribute, true);
                 }
                 nextChild = nextChild.getNextSibling();
             }
@@ -1908,12 +1904,12 @@ public class HtmlPage extends SgmlPage {
 
         base_ = null;
         for (final HtmlElement baseElement : baseElements) {
-            if (baseElement instanceof HtmlBase) {
+            if (baseElement instanceof HtmlBase base) {
                 if (base_ != null) {
                     notifyIncorrectness("Multiple 'base' detected, only the first is used.");
                     break;
                 }
-                base_ = (HtmlBase) baseElement;
+                base_ = base;
             }
         }
     }
@@ -2356,14 +2352,14 @@ public class HtmlPage extends SgmlPage {
                         baseUrl = new URL(href);
                     }
                     else if (href.startsWith("//")) {
-                        baseUrl = new URL(String.format("%s:%s", url.getProtocol(), href));
+                        baseUrl = new URL("%s:%s".formatted(url.getProtocol(), href));
                     }
                     else if (href.length() > 0 && href.charAt(0) == '/') {
                         final int port = Window.getPort(url);
-                        baseUrl = new URL(String.format("%s://%s:%d%s", url.getProtocol(), url.getHost(), port, href));
+                        baseUrl = new URL("%s://%s:%d%s".formatted(url.getProtocol(), url.getHost(), port, href));
                     }
                     else if (url.toString().endsWith("/")) {
-                        baseUrl = new URL(String.format("%s%s", url, href));
+                        baseUrl = new URL("%s%s".formatted(url, href));
                     }
                     else {
                         baseUrl = new URL(UrlUtils.resolveUrl(url, href));
@@ -2518,8 +2514,8 @@ public class HtmlPage extends SgmlPage {
      */
     public HtmlElement getActiveElement() {
         final DomElement activeElement = getFocusedElement();
-        if (activeElement instanceof HtmlElement) {
-            return (HtmlElement) activeElement;
+        if (activeElement instanceof HtmlElement element) {
+            return element;
         }
 
         final HtmlElement body = getBody();
@@ -2684,13 +2680,12 @@ public class HtmlPage extends SgmlPage {
         final List<CssStyleSheet> styles = new ArrayList<>();
         if (getWebClient().getOptions().isCssEnabled()) {
             for (final HtmlElement htmlElement : getHtmlElementDescendants()) {
-                if (htmlElement instanceof HtmlStyle) {
-                    styles.add(((HtmlStyle) htmlElement).getSheet());
+                if (htmlElement instanceof HtmlStyle style) {
+                    styles.add(style.getSheet());
                     continue;
                 }
 
-                if (htmlElement instanceof HtmlLink) {
-                    final HtmlLink link = (HtmlLink) htmlElement;
+                if (htmlElement instanceof HtmlLink link) {
                     if (link.isStyleSheetLink()) {
                         styles.add(link.getSheet());
                     }
@@ -2804,8 +2799,8 @@ public class HtmlPage extends SgmlPage {
                 clearComputedStyles();
                 return;
             }
-            if (changedNode instanceof HtmlLink) {
-                if (((HtmlLink) changedNode).isStyleSheetLink()) {
+            if (changedNode instanceof HtmlLink link) {
+                if (link.isStyleSheetLink()) {
                     clearComputedStyles();
                     return;
                 }

@@ -83,17 +83,17 @@ public class XPathEvaluator extends HtmlUnitScriptable {
 
             final Node contextNode = (Node) contextNodeObj;
             PrefixResolver prefixResolver = null;
-            if (resolver instanceof PrefixResolver) {
-                prefixResolver = (PrefixResolver) resolver;
+            if (resolver instanceof PrefixResolver prefixResolver1) {
+                prefixResolver = prefixResolver1;
             }
-            else if (resolver instanceof NativeFunction) {
+            else if (resolver instanceof NativeFunction function) {
                 prefixResolver = new NativeFunctionPrefixResolver(
-                                        (NativeFunction) resolver, contextNode.getParentScope());
+                                        function, contextNode.getParentScope());
             }
 
             final XPathResult xPathResult;
-            if (result instanceof XPathResult) {
-                xPathResult = (XPathResult) result;
+            if (result instanceof XPathResult pathResult) {
+                xPathResult = pathResult;
             }
             else {
                 xPathResult = new XPathResult();
@@ -128,12 +128,12 @@ public class XPathEvaluator extends HtmlUnitScriptable {
         PrefixResolver prefixResolver = null;
         if (args.length > 1) {
             final Object resolver = args[1];
-            if (resolver instanceof PrefixResolver) {
-                prefixResolver = (PrefixResolver) resolver;
+            if (resolver instanceof PrefixResolver prefixResolver1) {
+                prefixResolver = prefixResolver1;
             }
-            else if (resolver instanceof NativeFunction) {
+            else if (resolver instanceof NativeFunction nativeFunction) {
                 prefixResolver = new NativeFunctionPrefixResolver(
-                                        (NativeFunction) resolver, scope.getParentScope());
+                                        nativeFunction, scope.getParentScope());
             }
         }
 

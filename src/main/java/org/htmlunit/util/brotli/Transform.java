@@ -65,10 +65,13 @@ final class Transform {
   private static final int SHIFT_ALL = SHIFT_FIRST + 1;
 
   // Bundle of 0-terminated strings.
-  private static final String PREFIX_SUFFIX_SRC = "# #s #, #e #.# the #.com/#\u00C2\u00A0# of # and"
-      + " # in # to #\"#\">#\n#]# for # a # that #. # with #'# from # by #. The # on # as # is #ing"
-      + " #\n\t#:#ed #(# at #ly #=\"# of the #. This #,# not #er #al #='#ful #ive #less #est #ize #"
-      + "ous #";
+  private static final String PREFIX_SUFFIX_SRC = """
+      # #s #, #e #.# the #.com/#Â # of # and\
+       # in # to #"#">#
+      #]# for # a # that #. # with #'# from # by #. The # on # as # is #ing\
+       #
+      	#:#ed #(# at #ly #="# of the #. This #,# not #er #al #='#ful #ive #less #est #ize #\
+      ous #""";
   private static final String TRANSFORMS_SRC = "     !! ! ,  *!  &!  \" !  ) *   * -  ! # !  #!*!  "
       + "+  ,$ !  -  %  .  / #   0  1 .  \"   2  3!*   4%  ! # /   5  6  7  8 0  1 &   $   9 +   : "
       + " ;  < '  !=  >  ?! 4  @ 4  2  &   A *# (   B  C& ) %  ) !*# *-% A +! *.  D! %'  & E *6  F "

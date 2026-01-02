@@ -131,8 +131,8 @@ public class MutationRecord extends HtmlUnitScriptable {
      */
     @JsxGetter
     public NodeList getAddedNodes() {
-        if (addedNodes_ == null && target_ instanceof HTMLElement) {
-            final NodeList addedNodes = new NodeList(((HTMLElement) target_).getDomNodeOrDie(), new ArrayList<>());
+        if (addedNodes_ == null && target_ instanceof HTMLElement element) {
+            final NodeList addedNodes = new NodeList(element.getDomNodeOrDie(), new ArrayList<>());
             addedNodes.setParentScope(getParentScope());
             addedNodes.setPrototype(getPrototype(addedNodes.getClass()));
 
@@ -154,8 +154,8 @@ public class MutationRecord extends HtmlUnitScriptable {
      */
     @JsxGetter
     public NodeList getRemovedNodes() {
-        if (removedNodes_ == null && target_ instanceof HTMLElement) {
-            final NodeList removedNodes = new NodeList(((HTMLElement) target_).getDomNodeOrDie(), new ArrayList<>());
+        if (removedNodes_ == null && target_ instanceof HTMLElement element) {
+            final NodeList removedNodes = new NodeList(element.getDomNodeOrDie(), new ArrayList<>());
             removedNodes.setParentScope(getParentScope());
             removedNodes.setPrototype(getPrototype(removedNodes.getClass()));
 

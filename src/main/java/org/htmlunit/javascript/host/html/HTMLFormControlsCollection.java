@@ -90,8 +90,7 @@ public class HTMLFormControlsCollection extends HTMLCollection {
 
         final List<DomNode> elements = new ArrayList<>();
         for (final Object next : getElements()) {
-            if (next instanceof DomElement) {
-                final DomElement elem = (DomElement) next;
+            if (next instanceof DomElement elem) {
                 final String nodeName = elem.getAttributeDirect(DomElement.NAME_ATTRIBUTE);
                 if (name.equals(nodeName)) {
                     elements.add(elem);

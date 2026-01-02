@@ -164,8 +164,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
             period = timeout;
         }
 
-        if (code instanceof String) {
-            final String s = (String) code;
+        if (code instanceof String s) {
             final String description = "window.set"
                                         + (isTimeout ? "Timeout" : "Interval")
                                         + "(" + s + ", " + timeout + ")";
@@ -174,11 +173,10 @@ public final class WindowOrWorkerGlobalScopeMixin {
             return webWindow.getJobManager().addJob(job, page);
         }
 
-        if (code instanceof Function) {
-            final Function f = (Function) code;
+        if (code instanceof Function f) {
             final String functionName;
-            if (f instanceof FunctionObject) {
-                functionName = ((FunctionObject) f).getFunctionName();
+            if (f instanceof FunctionObject object) {
+                functionName = object.getFunctionName();
             }
             else {
                 functionName = String.valueOf(f); // can this happen?

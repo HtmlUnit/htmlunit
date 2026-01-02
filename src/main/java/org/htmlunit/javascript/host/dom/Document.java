@@ -547,8 +547,8 @@ public class Document extends Node {
     public XPathResult evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
         XPathResult xPathResult = null;
-        if (result instanceof XPathResult) {
-            xPathResult = (XPathResult) result;
+        if (result instanceof XPathResult pathResult) {
+            xPathResult = pathResult;
 
             if (getBrowserVersion().hasFeature(JS_DOCUMENT_EVALUATE_RECREATES_RESULT)) {
                 xPathResult = new XPathResult();
@@ -569,12 +569,12 @@ public class Document extends Node {
 
         try {
             PrefixResolver prefixResolver = null;
-            if (resolver instanceof NativeFunction) {
+            if (resolver instanceof NativeFunction function) {
                 prefixResolver = new NativeFunctionPrefixResolver(
-                                            (NativeFunction) resolver, contextNode.getParentScope());
+                                            function, contextNode.getParentScope());
             }
-            else if (resolver instanceof PrefixResolver) {
-                prefixResolver = (PrefixResolver) resolver;
+            else if (resolver instanceof PrefixResolver prefixResolver1) {
+                prefixResolver = prefixResolver1;
             }
             xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression, prefixResolver), type);
             return xPathResult;
@@ -647,23 +647,23 @@ public class Document extends Node {
 
         org.w3c.dom.Node element = getPage().createElement(tagNameString);
 
-        if (element instanceof HtmlImage) {
-            ((HtmlImage) element).markAsCreatedByJavascript();
+        if (element instanceof HtmlImage image) {
+            image.markAsCreatedByJavascript();
         }
-        else if (element instanceof HtmlRb) {
-            ((HtmlRb) element).markAsCreatedByJavascript();
+        else if (element instanceof HtmlRb rb) {
+            rb.markAsCreatedByJavascript();
         }
-        else if (element instanceof HtmlRp) {
-            ((HtmlRp) element).markAsCreatedByJavascript();
+        else if (element instanceof HtmlRp rp) {
+            rp.markAsCreatedByJavascript();
         }
-        else if (element instanceof HtmlRt) {
-            ((HtmlRt) element).markAsCreatedByJavascript();
+        else if (element instanceof HtmlRt rt) {
+            rt.markAsCreatedByJavascript();
         }
-        else if (element instanceof HtmlRtc) {
-            ((HtmlRtc) element).markAsCreatedByJavascript();
+        else if (element instanceof HtmlRtc rtc) {
+            rtc.markAsCreatedByJavascript();
         }
-        else if (element instanceof HtmlUnknownElement) {
-            ((HtmlUnknownElement) element).markAsCreatedByJavascript();
+        else if (element instanceof HtmlUnknownElement unknownElement) {
+            unknownElement.markAsCreatedByJavascript();
         }
         else if (element instanceof HtmlSvg) {
             element = UnknownElementFactory.INSTANCE.createElementNS(getPage(), "", "svg", null);
@@ -841,8 +841,7 @@ public class Document extends Node {
     @JsxGetter
     public HTMLElement getBody() {
         final Page page = getPage();
-        if (page instanceof HtmlPage) {
-            final HtmlPage htmlPage = (HtmlPage) page;
+        if (page instanceof HtmlPage htmlPage) {
             final HtmlElement body = htmlPage.getBody();
             if (body != null) {
                 return body.getScriptableObject();
@@ -869,8 +868,8 @@ public class Document extends Node {
     public void setBody(final HTMLElement htmlElement) {
         if (htmlElement instanceof HTMLBodyElement || htmlElement instanceof HTMLFrameSetElement) {
             final Page page = getPage();
-            if (page instanceof HtmlPage) {
-                final HtmlElement body = ((HtmlPage) page).getBody();
+            if (page instanceof HtmlPage htmlPage) {
+                final HtmlElement body = htmlPage.getBody();
                 if (body != null) {
                     body.replace(htmlElement.getDomNodeOrDie());
                 }
@@ -1217,8 +1216,8 @@ public class Document extends Node {
             filterWrapper = n -> {
                 final Object[] args = {((DomNode) n).getScriptableObject()};
                 final Object response;
-                if (filter instanceof Callable) {
-                    response = ((Callable) filter).call(Context.getCurrentContext(), filter, filter, args);
+                if (filter instanceof Callable callable) {
+                    response = callable.call(Context.getCurrentContext(), filter, filter, args);
                 }
                 else {
                     if (filterFunctionOnly) {
@@ -1304,8 +1303,8 @@ public class Document extends Node {
             URL url = getPage().getUrl();
             if (url == UrlUtils.URL_ABOUT_BLANK) {
                 final WebWindow w = getWindow().getWebWindow();
-                if (w instanceof FrameWindow) {
-                    url = ((FrameWindow) w).getEnclosingPage().getUrl();
+                if (w instanceof FrameWindow window) {
+                    url = window.getEnclosingPage().getUrl();
                 }
                 else {
                     return null;
@@ -1978,8 +1977,8 @@ public class Document extends Node {
     @JsxGetter
     public String getAlinkColor() {
         final HTMLElement body = getBody();
-        if (body instanceof HTMLBodyElement) {
-            return ((HTMLBodyElement) body).getALink();
+        if (body instanceof HTMLBodyElement element) {
+            return element.getALink();
         }
         return null;
     }
@@ -1991,8 +1990,8 @@ public class Document extends Node {
     @JsxSetter
     public void setAlinkColor(final String color) {
         final HTMLElement body = getBody();
-        if (body instanceof HTMLBodyElement) {
-            ((HTMLBodyElement) body).setALink(color);
+        if (body instanceof HTMLBodyElement element) {
+            element.setALink(color);
         }
     }
 
@@ -2004,8 +2003,8 @@ public class Document extends Node {
     @JsxGetter
     public String getBgColor() {
         final HTMLElement body = getBody();
-        if (body instanceof HTMLBodyElement) {
-            return ((HTMLBodyElement) body).getBgColor();
+        if (body instanceof HTMLBodyElement element) {
+            return element.getBgColor();
         }
         return null;
     }
@@ -2018,8 +2017,8 @@ public class Document extends Node {
     @JsxSetter
     public void setBgColor(final String color) {
         final HTMLElement body = getBody();
-        if (body instanceof HTMLBodyElement) {
-            ((HTMLBodyElement) body).setBgColor(color);
+        if (body instanceof HTMLBodyElement element) {
+            element.setBgColor(color);
         }
     }
 
@@ -2030,8 +2029,8 @@ public class Document extends Node {
     @JsxGetter
     public String getFgColor() {
         final HTMLElement body = getBody();
-        if (body instanceof HTMLBodyElement) {
-            return ((HTMLBodyElement) body).getText();
+        if (body instanceof HTMLBodyElement element) {
+            return element.getText();
         }
         return null;
     }
@@ -2043,8 +2042,8 @@ public class Document extends Node {
     @JsxSetter
     public void setFgColor(final String color) {
         final HTMLElement body = getBody();
-        if (body instanceof HTMLBodyElement) {
-            ((HTMLBodyElement) body).setText(color);
+        if (body instanceof HTMLBodyElement element) {
+            element.setText(color);
         }
     }
 
@@ -2055,8 +2054,8 @@ public class Document extends Node {
     @JsxGetter
     public String getLinkColor() {
         final HTMLElement body = getBody();
-        if (body instanceof HTMLBodyElement) {
-            return ((HTMLBodyElement) body).getLink();
+        if (body instanceof HTMLBodyElement element) {
+            return element.getLink();
         }
         return null;
     }
@@ -2068,8 +2067,8 @@ public class Document extends Node {
     @JsxSetter
     public void setLinkColor(final String color) {
         final HTMLElement body = getBody();
-        if (body instanceof HTMLBodyElement) {
-            ((HTMLBodyElement) body).setLink(color);
+        if (body instanceof HTMLBodyElement element) {
+            element.setLink(color);
         }
     }
 
@@ -2080,8 +2079,8 @@ public class Document extends Node {
     @JsxGetter
     public String getVlinkColor() {
         final HTMLElement body = getBody();
-        if (body instanceof HTMLBodyElement) {
-            return ((HTMLBodyElement) body).getVLink();
+        if (body instanceof HTMLBodyElement element) {
+            return element.getVLink();
         }
         return null;
     }
@@ -2093,8 +2092,8 @@ public class Document extends Node {
     @JsxSetter
     public void setVlinkColor(final String color) {
         final HTMLElement body = getBody();
-        if (body instanceof HTMLBodyElement) {
-            ((HTMLBodyElement) body).setVLink(color);
+        if (body instanceof HTMLBodyElement element) {
+            element.setVLink(color);
         }
     }
 

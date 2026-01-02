@@ -399,8 +399,8 @@ public class MouseEvent extends UIEvent {
             if (events != null && !events.isEmpty()) {
                 final int lastIdx = events.size() - 1;
                 final Event lastEvent = events.get(lastIdx);
-                if (lastEvent instanceof MouseEvent) {
-                    return (MouseEvent) lastEvent;
+                if (lastEvent instanceof MouseEvent event) {
+                    return event;
                 }
             }
         }

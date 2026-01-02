@@ -133,8 +133,8 @@ public final class XmlUtils {
 
         Charset charset = webResponse.getContentCharset();
         try (InputStream is = webResponse.getContentAsStreamWithBomIfApplicable()) {
-            if (is instanceof BOMInputStream) {
-                final String bomCharsetName = ((BOMInputStream) is).getBOMCharsetName();
+            if (is instanceof BOMInputStream stream) {
+                final String bomCharsetName = stream.getBOMCharsetName();
                 if (bomCharsetName != null) {
                     charset = Charset.forName(bomCharsetName);
                 }
@@ -233,10 +233,10 @@ public final class XmlUtils {
     public static void appendChild(final SgmlPage page, final DomNode parent, final Node child,
         final boolean handleXHTMLAsHTML, final Map<Integer, List<String>> attributesOrderMap) {
         final DocumentType documentType = child.getOwnerDocument().getDoctype();
-        if (documentType != null && page instanceof XmlPage) {
+        if (documentType != null && page instanceof XmlPage xmlPage) {
             final DomDocumentType domDoctype = new DomDocumentType(
                     page, documentType.getName(), documentType.getPublicId(), documentType.getSystemId());
-            ((XmlPage) page).setDocumentType(domDoctype);
+            xmlPage.setDocumentType(domDoctype);
         }
         final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML, attributesOrderMap);
         parent.appendChild(childXml);
@@ -382,8 +382,8 @@ public final class XmlUtils {
         }
         if (ATTRIBUTE_NOT_DEFINED == uri) {
             final DomNode parentNode = element.getParentNode();
-            if (parentNode instanceof DomElement) {
-                uri = lookupNamespaceURI((DomElement) parentNode, prefix);
+            if (parentNode instanceof DomElement domElement) {
+                uri = lookupNamespaceURI(domElement, prefix);
             }
         }
         return uri;
@@ -405,8 +405,8 @@ public final class XmlUtils {
             }
         }
         for (final DomNode child : element.getChildren()) {
-            if (child instanceof DomElement) {
-                final String prefix = lookupPrefix((DomElement) child, namespace);
+            if (child instanceof DomElement domElement) {
+                final String prefix = lookupPrefix(domElement, namespace);
                 if (prefix != null) {
                     return prefix;
                 }

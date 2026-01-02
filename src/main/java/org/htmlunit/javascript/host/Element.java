@@ -722,8 +722,7 @@ public class Element extends Node {
      */
     @JsxFunction
     public Node insertAdjacentElement(final String where, final Object insertedElement) {
-        if (insertedElement instanceof Node) {
-            final Node insertedElementNode = (Node) insertedElement;
+        if (insertedElement instanceof Node insertedElementNode) {
             final DomNode childNode = insertedElementNode.getDomNodeOrDie();
             final Object[] values = getInsertAdjacentLocation(where);
             final DomNode node = (DomNode) values[0];
@@ -1023,8 +1022,7 @@ public class Element extends Node {
      * @param html flag
      */
     protected final void printChildren(final StringBuilder builder, final DomNode node, final boolean html) {
-        if (node instanceof HtmlTemplate) {
-            final HtmlTemplate template = (HtmlTemplate) node;
+        if (node instanceof HtmlTemplate template) {
 
             for (final DomNode child : template.getContent().getChildren()) {
                 printNode(builder, child, html);
@@ -1085,8 +1083,7 @@ public class Element extends Node {
             }
         }
         else {
-            if (node instanceof HtmlElement) {
-                final HtmlElement element = (HtmlElement) node;
+            if (node instanceof HtmlElement element) {
                 if (StringUtils.equalsChar('p', element.getTagName())) {
                     int i = builder.length() - 1;
                     while (i >= 0 && Character.isWhitespace(builder.charAt(i))) {

@@ -108,8 +108,8 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     private String readValue() {
         final StringBuilder builder = new StringBuilder();
         for (final DomNode node : getChildren()) {
-            if (node instanceof DomText) {
-                builder.append(((DomText) node).getData());
+            if (node instanceof DomText text) {
+                builder.append(text.getData());
             }
         }
         // if content starts with new line, it is ignored (=> for the parser?)
@@ -280,8 +280,8 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
         Node node = getParentNode();
         while (node != null) {
-            if (node instanceof DisabledElement
-                    && ((DisabledElement) node).isDisabled()) {
+            if (node instanceof DisabledElement element
+                    && element.isDisabled()) {
                 return true;
             }
             node = node.getParentNode();

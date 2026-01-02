@@ -223,8 +223,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         final Iterable<DomNode> textNodes = getChildren();
         final StringBuilder scriptCode = new StringBuilder();
         for (final DomNode node : textNodes) {
-            if (node instanceof DomText) {
-                final DomText domText = (DomText) node;
+            if (node instanceof DomText domText) {
                 scriptCode.append(domText.getData());
             }
         }

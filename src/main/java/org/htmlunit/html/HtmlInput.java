@@ -207,8 +207,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
         DomNode node = getParentNode();
         while (node != null) {
-            if (node instanceof DisabledElement
-                    && ((DisabledElement) node).isDisabled()) {
+            if (node instanceof DisabledElement element
+                    && element.isDisabled()) {
                 return true;
             }
             node = node.getParentNode();

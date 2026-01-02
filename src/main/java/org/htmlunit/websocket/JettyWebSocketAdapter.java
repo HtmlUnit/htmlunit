@@ -135,11 +135,11 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      */
     @Override
     public void send(final Object content) throws IOException {
-        if (content instanceof String) {
-            outgoingSession_.getRemote().sendString((String) content);
+        if (content instanceof String string) {
+            outgoingSession_.getRemote().sendString(string);
         }
-        else if (content instanceof ByteBuffer) {
-            outgoingSession_.getRemote().sendBytes((ByteBuffer) content);
+        else if (content instanceof ByteBuffer buffer) {
+            outgoingSession_.getRemote().sendBytes(buffer);
         }
         else {
             throw new IllegalStateException(

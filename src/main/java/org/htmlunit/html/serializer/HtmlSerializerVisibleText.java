@@ -109,80 +109,80 @@ public class HtmlSerializerVisibleText {
         if (node instanceof DomCDataSection) {
             // ignore
         }
-        else if (node instanceof DomText) {
-            appendText(builder, (DomText) node, mode);
+        else if (node instanceof DomText text1) {
+            appendText(builder, text1, mode);
         }
-        else if (node instanceof DomComment) {
-            appendComment(builder, (DomComment) node, mode);
+        else if (node instanceof DomComment comment) {
+            appendComment(builder, comment, mode);
         }
-        else if (node instanceof HtmlBreak) {
-            appendBreak(builder, (HtmlBreak) node, mode);
+        else if (node instanceof HtmlBreak break1) {
+            appendBreak(builder, break1, mode);
         }
-        else if (node instanceof HtmlHiddenInput) {
-            appendHiddenInput(builder, (HtmlHiddenInput) node, mode);
+        else if (node instanceof HtmlHiddenInput input4) {
+            appendHiddenInput(builder, input4, mode);
         }
-        else if (node instanceof HtmlScript) {
-            appendScript(builder, (HtmlScript) node, mode);
+        else if (node instanceof HtmlScript script1) {
+            appendScript(builder, script1, mode);
         }
-        else if (node instanceof HtmlStyle) {
-            appendStyle(builder, (HtmlStyle) node, mode);
+        else if (node instanceof HtmlStyle style) {
+            appendStyle(builder, style, mode);
         }
-        else if (node instanceof HtmlNoFrames) {
-            appendNoFrames(builder, (HtmlNoFrames) node, mode);
+        else if (node instanceof HtmlNoFrames frames) {
+            appendNoFrames(builder, frames, mode);
         }
-        else if (node instanceof HtmlTextArea) {
-            appendTextArea(builder, (HtmlTextArea) node, mode);
+        else if (node instanceof HtmlTextArea area) {
+            appendTextArea(builder, area, mode);
         }
-        else if (node instanceof HtmlTitle) {
-            appendTitle(builder, (HtmlTitle) node, mode);
+        else if (node instanceof HtmlTitle title) {
+            appendTitle(builder, title, mode);
         }
-        else if (node instanceof HtmlTableRow) {
-            appendTableRow(builder, (HtmlTableRow) node, mode);
+        else if (node instanceof HtmlTableRow row) {
+            appendTableRow(builder, row, mode);
         }
-        else if (node instanceof HtmlSelect) {
-            appendSelect(builder, (HtmlSelect) node, mode);
+        else if (node instanceof HtmlSelect select) {
+            appendSelect(builder, select, mode);
         }
-        else if (node instanceof HtmlOption) {
-            appendOption(builder, (HtmlOption) node, mode);
+        else if (node instanceof HtmlOption option) {
+            appendOption(builder, option, mode);
         }
-        else if (node instanceof HtmlSubmitInput) {
-            appendSubmitInput(builder, (HtmlSubmitInput) node, mode);
+        else if (node instanceof HtmlSubmitInput input3) {
+            appendSubmitInput(builder, input3, mode);
         }
-        else if (node instanceof HtmlResetInput) {
-            appendResetInput(builder, (HtmlResetInput) node, mode);
+        else if (node instanceof HtmlResetInput input2) {
+            appendResetInput(builder, input2, mode);
         }
-        else if (node instanceof HtmlCheckBoxInput) {
-            appendCheckBoxInput(builder, (HtmlCheckBoxInput) node, mode);
+        else if (node instanceof HtmlCheckBoxInput input1) {
+            appendCheckBoxInput(builder, input1, mode);
         }
-        else if (node instanceof HtmlRadioButtonInput) {
-            appendRadioButtonInput(builder, (HtmlRadioButtonInput) node, mode);
+        else if (node instanceof HtmlRadioButtonInput input) {
+            appendRadioButtonInput(builder, input, mode);
         }
         else if (node instanceof HtmlInput) {
             // nothing
         }
-        else if (node instanceof HtmlTable) {
-            appendTable(builder, (HtmlTable) node, mode);
+        else if (node instanceof HtmlTable table) {
+            appendTable(builder, table, mode);
         }
-        else if (node instanceof HtmlOrderedList) {
-            appendOrderedList(builder, (HtmlOrderedList) node, mode);
+        else if (node instanceof HtmlOrderedList list1) {
+            appendOrderedList(builder, list1, mode);
         }
-        else if (node instanceof HtmlUnorderedList) {
-            appendUnorderedList(builder, (HtmlUnorderedList) node, mode);
+        else if (node instanceof HtmlUnorderedList list) {
+            appendUnorderedList(builder, list, mode);
         }
-        else if (node instanceof HtmlPreformattedText) {
-            appendPreformattedText(builder, (HtmlPreformattedText) node, mode);
+        else if (node instanceof HtmlPreformattedText text) {
+            appendPreformattedText(builder, text, mode);
         }
-        else if (node instanceof HtmlInlineFrame) {
-            appendInlineFrame(builder, (HtmlInlineFrame) node, mode);
+        else if (node instanceof HtmlInlineFrame frame) {
+            appendInlineFrame(builder, frame, mode);
         }
-        else if (node instanceof HtmlMenu) {
-            appendMenu(builder, (HtmlMenu) node, mode);
+        else if (node instanceof HtmlMenu menu) {
+            appendMenu(builder, menu, mode);
         }
-        else if (node instanceof HtmlDetails) {
-            appendDetails(builder, (HtmlDetails) node, mode);
+        else if (node instanceof HtmlDetails details) {
+            appendDetails(builder, details, mode);
         }
-        else if (node instanceof HtmlNoScript && node.getPage().getWebClient().isJavaScriptEnabled()) {
-            appendNoScript(builder, (HtmlNoScript) node, mode);
+        else if (node instanceof HtmlNoScript script && node.getPage().getWebClient().isJavaScriptEnabled()) {
+            appendNoScript(builder, script, mode);
         }
         else {
             appendDomNode(builder, node, mode);
@@ -202,9 +202,9 @@ public class HtmlSerializerVisibleText {
         if (domNode instanceof HtmlBody) {
             block = false;
         }
-        else if (domNode instanceof DomElement) {
+        else if (domNode instanceof DomElement element) {
             final WebWindow window = domNode.getPage().getEnclosingWindow();
-            final String display = window.getComputedStyle((DomElement) domNode, null).getDisplay();
+            final String display = window.getComputedStyle(element, null).getDisplay();
             block = BLOCK.equals(display);
         }
         else {
@@ -600,8 +600,8 @@ public class HtmlSerializerVisibleText {
         if (isDisplayed(htmlInlineFrame)) {
             builder.appendBlockSeparator();
             final Page page = htmlInlineFrame.getEnclosedPage();
-            if (page instanceof SgmlPage) {
-                builder.append(((SgmlPage) page).asNormalizedText(), mode);
+            if (page instanceof SgmlPage sgmlPage) {
+                builder.append(sgmlPage.asNormalizedText(), mode);
             }
             builder.appendBlockSeparator();
         }
@@ -684,8 +684,8 @@ public class HtmlSerializerVisibleText {
             if (window.getWebClient().getOptions().isCssEnabled()) {
                 DomNode node = domNode;
                 while (node != null) {
-                    if (node instanceof DomElement) {
-                        final ComputedCssStyleDeclaration style = window.getComputedStyle((DomElement) node, null);
+                    if (node instanceof DomElement element) {
+                        final ComputedCssStyleDeclaration style = window.getComputedStyle(element, null);
                         final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
                         if (!StringUtils.isEmptyOrNull(value)) {
                             if ("normal".equalsIgnoreCase(value)) {
@@ -717,8 +717,8 @@ public class HtmlSerializerVisibleText {
         if (page != null) {
             final WebWindow window = page.getEnclosingWindow();
             if (window.getWebClient().getOptions().isCssEnabled()) {
-                if (domNode instanceof DomElement) {
-                    final ComputedCssStyleDeclaration style = window.getComputedStyle((DomElement) domNode, null);
+                if (domNode instanceof DomElement element) {
+                    final ComputedCssStyleDeclaration style = window.getComputedStyle(element, null);
                     final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
                     if (!StringUtils.isEmptyOrNull(value)) {
                         if ("normal".equalsIgnoreCase(value)) {

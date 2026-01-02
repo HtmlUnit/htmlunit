@@ -355,8 +355,7 @@ public final class ScriptElementSupport {
         final Iterable<DomNode> textNodes = element.getChildren();
         final StringBuilder scriptCode = new StringBuilder();
         for (final DomNode node : textNodes) {
-            if (node instanceof DomText) {
-                final DomText domText = (DomText) node;
+            if (node instanceof DomText domText) {
                 scriptCode.append(domText.getData());
             }
         }

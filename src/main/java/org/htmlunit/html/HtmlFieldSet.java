@@ -143,8 +143,8 @@ public class HtmlFieldSet extends HtmlElement implements DisabledElement, Valida
 
         DomNode node = getParentNode();
         while (node != null) {
-            if (node instanceof DisabledElement
-                    && ((DisabledElement) node).isDisabled()) {
+            if (node instanceof DisabledElement element
+                    && element.isDisabled()) {
                 return true;
             }
             node = node.getParentNode();

@@ -92,8 +92,8 @@ public class RadioNodeList extends NodeList {
     @JsxGetter
     public String getValue() {
         for (final DomNode node : getElements()) {
-            if (node instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) node).isChecked()) {
-                final String value = ((HtmlRadioButtonInput) node).getValueAttribute();
+            if (node instanceof HtmlRadioButtonInput input && input.isChecked()) {
+                final String value = input.getValueAttribute();
                 return value == ATTRIBUTE_NOT_DEFINED ? "on" : value;
             }
         }
@@ -109,13 +109,13 @@ public class RadioNodeList extends NodeList {
     @JsxSetter
     public void setValue(final String newValue) {
         for (final DomNode node : getElements()) {
-            if (node instanceof HtmlRadioButtonInput) {
-                String value = ((HtmlRadioButtonInput) node).getValueAttribute();
+            if (node instanceof HtmlRadioButtonInput input) {
+                String value = input.getValueAttribute();
                 if (value == ATTRIBUTE_NOT_DEFINED) {
                     value = "on";
                 }
                 if (newValue.equals(value)) {
-                    ((HtmlRadioButtonInput) node).setChecked(true);
+                    input.setChecked(true);
                     break;
                 }
             }

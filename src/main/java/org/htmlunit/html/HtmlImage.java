@@ -759,8 +759,7 @@ public class HtmlImage extends HtmlElement {
             final HtmlElement doc = ((HtmlPage) getPage()).getDocumentElement();
             final HtmlMap map = doc.getOneHtmlElementByAttribute("map", NAME_ATTRIBUTE, mapName);
             for (final DomElement element : map.getChildElements()) {
-                if (element instanceof HtmlArea) {
-                    final HtmlArea area = (HtmlArea) element;
+                if (element instanceof HtmlArea area) {
                     if (area.containsPoint(Math.max(lastClickX_, 0), Math.max(lastClickY_, 0))) {
                         area.doClickStateUpdate(shiftKey, ctrlKey);
                         return false;
@@ -875,8 +874,7 @@ public class HtmlImage extends HtmlElement {
      */
     @Override
     public ScriptResult fireEvent(final Event event) {
-        if (event instanceof MouseEvent) {
-            final MouseEvent mouseEvent = (MouseEvent) event;
+        if (event instanceof MouseEvent mouseEvent) {
             if (lastClickX_ >= 0) {
                 mouseEvent.setClientX(getPosX() + lastClickX_);
             }

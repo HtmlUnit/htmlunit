@@ -61,9 +61,9 @@ public class V8BreakIterator extends HtmlUnitScriptable {
         Locale locale = new Locale("en", "US");
         if (args.length != 0) {
             final Object locales = args[0];
-            if (locales instanceof NativeArray) {
-                if (((NativeArray) locales).getLength() != 0) {
-                    locale = new Locale(((NativeArray) locales).get(0).toString());
+            if (locales instanceof NativeArray array) {
+                if (array.getLength() != 0) {
+                    locale = new Locale(array.get(0).toString());
                 }
             }
             else if (locales instanceof String) {
@@ -78,8 +78,8 @@ public class V8BreakIterator extends HtmlUnitScriptable {
         final V8BreakIterator iterator = new V8BreakIterator();
         if (args.length > 1) {
             final Object types = args[1];
-            if (types instanceof NativeObject) {
-                final Object obj = ((NativeObject) types).get("type", (NativeObject) types);
+            if (types instanceof NativeObject object) {
+                final Object obj = object.get("type", object);
                 if ("character".equals(obj)) {
                     iterator.breakIterator_ = BreakIterator.getCharacterInstance(locale);
                     iterator.typeAlwaysNone_ = true;

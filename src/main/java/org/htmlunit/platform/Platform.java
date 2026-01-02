@@ -171,8 +171,8 @@ public final class Platform {
         }
         catch (final InvocationTargetException ex) {
             final Throwable targetEx = ex.getTargetException();
-            if (targetEx instanceof IOException) {
-                throw (IOException) targetEx;
+            if (targetEx instanceof IOException exception) {
+                throw exception;
             }
 
             return new NoOpImageData();

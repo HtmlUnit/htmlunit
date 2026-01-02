@@ -158,8 +158,8 @@ class DoTypeProcessor implements Serializable {
     }
 
     private void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
-        if (domNode_ instanceof DomText) {
-            ((DomText) domNode_).setData(newValue);
+        if (domNode_ instanceof DomText text) {
+            text.setData(newValue);
         }
         else {
             ((HtmlElement) domNode_).typeDone(newValue, notifyAttributeChangeListeners);
@@ -167,8 +167,8 @@ class DoTypeProcessor implements Serializable {
     }
 
     private boolean acceptChar(final char ch) {
-        if (domNode_ instanceof DomText) {
-            return ((DomText) domNode_).acceptChar(ch);
+        if (domNode_ instanceof DomText text) {
+            return text.acceptChar(ch);
         }
         return ((HtmlElement) domNode_).acceptChar(ch);
     }

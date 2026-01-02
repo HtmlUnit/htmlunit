@@ -46,8 +46,7 @@ public final class NumberCustom {
      */
     public static String toLocaleString(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
-        if (args.length != 0 && args[0] instanceof String) {
-            final String localeStr = (String) args[0];
+        if (args.length != 0 && args[0] instanceof String localeStr) {
             try {
                 final Locale locale = new Locale.Builder().setLanguageTag(localeStr).build();
                 return NumberFormat.getInstance(locale).format(Double.parseDouble(thisObj.toString()));

@@ -49,7 +49,7 @@ public class SubnetUtils {
         netmask_ = toInteger(mask);
 
         if ((netmask_ & -netmask_) - 1 != ~netmask_) {
-            throw new IllegalArgumentException(String.format(PARSE_FAIL, mask));
+            throw new IllegalArgumentException(PARSE_FAIL.formatted(mask));
         }
 
         network_ = address_ & netmask_;
@@ -87,7 +87,7 @@ public class SubnetUtils {
         if (matcher.matches()) {
             return matchAddress(matcher);
         }
-        throw new IllegalArgumentException(String.format(PARSE_FAIL, address));
+        throw new IllegalArgumentException(PARSE_FAIL.formatted(address));
     }
 
     private long broadcastLong() {

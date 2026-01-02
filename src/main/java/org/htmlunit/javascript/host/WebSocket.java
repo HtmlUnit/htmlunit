@@ -243,8 +243,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         String urlString = JavaScriptEngine.toString(args[0]);
         try {
             final Page page = win.getWebWindow().getEnclosedPage();
-            if (page instanceof HtmlPage) {
-                URL url = ((HtmlPage) page).getFullyQualifiedUrl(urlString);
+            if (page instanceof HtmlPage htmlPage) {
+                URL url = htmlPage.getFullyQualifiedUrl(urlString);
                 url = UrlUtils.getUrlWithNewProtocol(url, "ws");
                 urlString = url.toExternalForm();
             }
@@ -449,8 +449,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxFunction
     public void send(final Object content) {
         try {
-            if (content instanceof NativeArrayBuffer) {
-                final byte[] bytes = ((NativeArrayBuffer) content).getBuffer();
+            if (content instanceof NativeArrayBuffer buffer1) {
+                final byte[] bytes = buffer1.getBuffer();
                 final ByteBuffer buffer = ByteBuffer.wrap(bytes);
                 webSocketImpl_.send(buffer);
                 return;

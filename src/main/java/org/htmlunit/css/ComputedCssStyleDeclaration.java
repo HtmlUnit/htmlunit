@@ -313,10 +313,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         String value = decl.getStyleAttribute(definition.getAttributeName());
         if (value.isEmpty()) {
             final DomNode parent = domElem.getParentNode();
-            if (isDefInheritable && parent instanceof DomElement) {
+            if (isDefInheritable && parent instanceof DomElement element) {
                 final WebWindow window = domElem.getPage().getEnclosingWindow();
 
-                queue[0] = window.getComputedStyle((DomElement) parent, null);
+                queue[0] = window.getComputedStyle(element, null);
             }
             else if (getDefaultValueIfEmpty) {
                 value = definition.getDefaultComputedValue(browserVersion);
@@ -724,8 +724,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return "";
         }
 
-        if (domElem instanceof HtmlElement) {
-            if (((HtmlElement) domElem).isHidden()) {
+        if (domElem instanceof HtmlElement element) {
+            if (element.isHidden()) {
                 return DisplayStyle.NONE.value();
             }
         }
@@ -734,8 +734,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         // (no need to calculate the default if not empty)
         final String value = getStyleAttribute(Definition.DISPLAY.getAttributeName());
         if (StringUtils.isEmptyOrNull(value)) {
-            if (domElem instanceof HtmlElement) {
-                return ((HtmlElement) domElem).getDefaultStyleDisplay().value();
+            if (domElem instanceof HtmlElement element) {
+                return element.getDefaultStyleDisplay().value();
             }
             return "";
         }
@@ -1279,8 +1279,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             if (parent == null) {
                 parentWidth = getDomElement().getPage().getEnclosingWindow().getInnerWidth();
             }
-            else if (parent instanceof Page) {
-                parentWidth = ((Page) parent).getEnclosingWindow().getInnerWidth();
+            else if (parent instanceof Page page) {
+                parentWidth = page.getEnclosingWindow().getInnerWidth();
             }
             else {
                 final ComputedCssStyleDeclaration parentStyle =
@@ -1501,8 +1501,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return cachedHeight.intValue();
         }
 
-        if (element instanceof HtmlImage) {
-            return updateCachedHeight(((HtmlImage) element).getHeightOrDefault());
+        if (element instanceof HtmlImage image) {
+            return updateCachedHeight(image.getHeightOrDefault());
         }
 
         final boolean isInline = INLINE.equals(getDisplay()) && !(element instanceof HtmlInlineFrame);
@@ -1631,8 +1631,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             else if (element instanceof HtmlTextArea) {
                 width = 100; // wild guess
             }
-            else if (element instanceof HtmlImage) {
-                width = ((HtmlImage) element).getWidthOrDefault();
+            else if (element instanceof HtmlImage image) {
+                width = image.getWidthOrDefault();
             }
             else {
                 // Inline elements take up however much space is required by their children.
@@ -1663,16 +1663,15 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         int width = 0;
         final DomElement element = getDomElement();
         Iterable<DomNode> children = element.getChildren();
-        if (element instanceof BaseFrameElement) {
-            final Page enclosedPage = ((BaseFrameElement) element).getEnclosedPage();
+        if (element instanceof BaseFrameElement frameElement) {
+            final Page enclosedPage = frameElement.getEnclosedPage();
             if (enclosedPage != null && enclosedPage.isHtmlPage()) {
                 children = ((DomNode) enclosedPage).getChildren();
             }
         }
         final WebWindow webWindow = element.getPage().getEnclosingWindow();
         for (final DomNode child : children) {
-            if (child instanceof HtmlElement) {
-                final HtmlElement e = (HtmlElement) child;
+            if (child instanceof HtmlElement e) {
                 final ComputedCssStyleDeclaration style = webWindow.getComputedStyle(e, null);
                 final int w = style.getCalculatedWidth(true, true);
                 width += w;
@@ -1719,7 +1718,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         final int windowHeight = webWindow.getInnerHeight();
 
         if (element instanceof HtmlBody) {
-            if (page instanceof HtmlPage && ((HtmlPage) page).isQuirksMode()) {
+            if (page instanceof HtmlPage htmlPage && htmlPage.isQuirksMode()) {
                 return updateCachedEmptyHeight(windowHeight);
             }
 
@@ -1934,8 +1933,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 DomNode parent = getDomElement().getParentNode();
                 final WebWindow win = parent.getPage().getEnclosingWindow();
                 while (width.isEmpty() && parent != null) {
-                    if (parent instanceof DomElement) {
-                        final ComputedCssStyleDeclaration computedCss = win.getComputedStyle((DomElement) parent, null);
+                    if (parent instanceof DomElement domElement) {
+                        final ComputedCssStyleDeclaration computedCss = win.getComputedStyle(domElement, null);
                         width = computedCss.getStyleAttribute(Definition.WIDTH, false);
                     }
                     parent = parent.getParentNode();
@@ -1963,7 +1962,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
                 final String styleHeight = getStyleAttribute(Definition.HEIGHT, true);
                 if (styleHeight.endsWith("%")) {
-                    if (page instanceof HtmlPage && !((HtmlPage) page).isQuirksMode()) {
+                    if (page instanceof HtmlPage htmlPage && !htmlPage.isQuirksMode()) {
                         return defaultHeight;
                     }
                 }
@@ -2011,8 +2010,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         ComputedCssStyleDeclaration lastFlowing = null;
         final Set<ComputedCssStyleDeclaration> styles = new HashSet<>();
 
-        if (node instanceof HtmlTableRow) {
-            final HtmlTableRow row = (HtmlTableRow) node;
+        if (node instanceof HtmlTableRow row) {
             for (final HtmlTableCell cell : row.getCellIterator()) {
                 if (cell.mayBeDisplayed()) {
                     final ComputedCssStyleDeclaration style =
@@ -2024,8 +2022,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         else {
             for (final DomNode child : node.getChildren()) {
                 if (child.mayBeDisplayed()) {
-                    if (child instanceof HtmlElement) {
-                        final HtmlElement e = (HtmlElement) child;
+                    if (child instanceof HtmlElement e) {
                         final ComputedCssStyleDeclaration style =
                                 e.getPage().getEnclosingWindow().getComputedStyle(e, null);
                         final String position = style.getPositionWithInheritance();

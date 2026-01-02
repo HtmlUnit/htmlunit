@@ -146,12 +146,11 @@ public final class CssPixelValueConverter {
 
             final DomNode parent = element.getParentNode();
             final int absoluteValue;
-            if (parent instanceof DomElement) {
-                final DomElement parentElem = (DomElement) parent;
+            if (parent instanceof DomElement parentElem) {
                 final ComputedCssStyleDeclaration style =
                         parentElem.getPage().getEnclosingWindow().getComputedStyle(parentElem, null);
                 final String parentStyleValue = value.get(style);
-                absoluteValue = pixelValue((DomElement) parent, parentStyleValue, value, true);
+                absoluteValue = pixelValue(parentElem, parentStyleValue, value, true);
             }
             else {
                 absoluteValue = value.getWindowDefaultValue();

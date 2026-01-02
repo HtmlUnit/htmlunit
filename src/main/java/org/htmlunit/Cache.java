@@ -91,7 +91,7 @@ public class Cache implements Serializable {
          */
         @Override
         public boolean equals(final Object obj) {
-            return obj instanceof Entry && lastAccess_ == ((Entry) obj).lastAccess_;
+            return obj instanceof Entry e && lastAccess_ == e.lastAccess_;
         }
 
         /**

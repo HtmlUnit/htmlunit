@@ -51,9 +51,8 @@ public final class XmlUtilsXercesHelper implements XmlUtilsHelperAPI {
      */
     @Override
     public Map<Integer, List<String>> getAttributesOrderMap(final Document document) {
-        if (document instanceof DeferredDocumentImpl) {
+        if (document instanceof DeferredDocumentImpl deferredDocument) {
             final Map<Integer, List<String>> map = new HashMap<>();
-            final DeferredDocumentImpl deferredDocument = (DeferredDocumentImpl) document;
             final int fNodeCount = getPrivate(deferredDocument, "fNodeCount");
             for (int i = 0; i < fNodeCount; i++) {
                 final int type = deferredDocument.getNodeType(i, false);
@@ -78,8 +77,8 @@ public final class XmlUtilsXercesHelper implements XmlUtilsHelperAPI {
     @Override
     public int getIndex(final NamedNodeMap namedNodeMap, final Map<Integer, List<String>> attributesOrderMap,
             final Node element, final int requiredIndex) {
-        if (attributesOrderMap != null && element instanceof DeferredNode) {
-            final int elementIndex = ((DeferredNode) element).getNodeIndex();
+        if (attributesOrderMap != null && element instanceof DeferredNode node) {
+            final int elementIndex = node.getNodeIndex();
             final List<String> attributesOrderList = attributesOrderMap.get(elementIndex);
             if (attributesOrderList != null) {
                 final String attributeName = attributesOrderList.get(requiredIndex);

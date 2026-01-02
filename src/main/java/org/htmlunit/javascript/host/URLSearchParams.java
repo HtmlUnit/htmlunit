@@ -182,10 +182,9 @@ public class URLSearchParams extends HtmlUnitScriptable {
      */
     private static List<NameValuePair> resolveParams(final Object params) {
         // if params is a sequence
-        if (params instanceof Scriptable && hasProperty((Scriptable) params, SymbolKey.ITERATOR)) {
+        if (params instanceof Scriptable paramsScriptable && hasProperty(paramsScriptable, SymbolKey.ITERATOR)) {
 
             final Context cx = Context.getCurrentContext();
-            final Scriptable paramsScriptable = (Scriptable) params;
 
             final List<NameValuePair> nameValuePairs = new ArrayList<>();
 
@@ -223,9 +222,9 @@ public class URLSearchParams extends HtmlUnitScriptable {
         }
 
         // if params is a record
-        if (params instanceof NativeObject) {
+        if (params instanceof NativeObject object) {
             final List<NameValuePair> nameValuePairs = new ArrayList<>();
-            for (final Map.Entry<Object, Object> keyValuePair : ((NativeObject) params).entrySet()) {
+            for (final Map.Entry<Object, Object> keyValuePair : object.entrySet()) {
                 nameValuePairs.add(
                         new NameValuePair(
                                 JavaScriptEngine.toString(keyValuePair.getKey()),

@@ -147,6 +147,6 @@ public class Crypto extends HtmlUnitScriptable {
     }
 
     private static String toHex(final byte b) {
-        return String.format("%02X ", b).trim().toLowerCase(Locale.ROOT);
+        return "%02X ".formatted(b).trim().toLowerCase(Locale.ROOT);
     }
 }

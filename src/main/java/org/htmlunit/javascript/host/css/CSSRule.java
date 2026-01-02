@@ -164,28 +164,27 @@ public class CSSRule extends HtmlUnitScriptable {
      * @return a CSSRule subclass according to the rule type
      */
     public static CSSRule create(final CSSStyleSheet stylesheet, final AbstractCSSRuleImpl rule) {
-        if (rule instanceof CSSStyleRuleImpl) {
-            return new CSSStyleRule(stylesheet, (CSSStyleRuleImpl) rule);
+        if (rule instanceof CSSStyleRuleImpl impl) {
+            return new CSSStyleRule(stylesheet, impl);
         }
-        if (rule instanceof CSSImportRuleImpl) {
-            return new CSSImportRule(stylesheet, (CSSImportRuleImpl) rule);
+        if (rule instanceof CSSImportRuleImpl impl) {
+            return new CSSImportRule(stylesheet, impl);
         }
 //        if (rule instanceof CSSCharsetRuleImpl) {
 //            return new CSSCharsetRule(stylesheet, (CSSCharsetRuleImpl) rule);
 //        }
-        if (rule instanceof CSSMediaRuleImpl) {
-            return new CSSMediaRule(stylesheet, (CSSMediaRuleImpl) rule);
+        if (rule instanceof CSSMediaRuleImpl impl) {
+            return new CSSMediaRule(stylesheet, impl);
         }
-        if (rule instanceof CSSFontFaceRuleImpl) {
-            return new CSSFontFaceRule(stylesheet, (CSSFontFaceRuleImpl) rule);
+        if (rule instanceof CSSFontFaceRuleImpl impl) {
+            return new CSSFontFaceRule(stylesheet, impl);
         }
-        if (rule instanceof CSSPageRuleImpl) {
-            return new CSSPageRule(stylesheet, (CSSPageRuleImpl) rule);
+        if (rule instanceof CSSPageRuleImpl impl) {
+            return new CSSPageRule(stylesheet, impl);
         }
-        if (rule instanceof CSSUnknownRuleImpl) {
-            final CSSUnknownRuleImpl unknownRule = (CSSUnknownRuleImpl) rule;
+        if (rule instanceof CSSUnknownRuleImpl unknownRule) {
             if (unknownRule.getCssText().startsWith("@keyframes")) {
-                return new CSSKeyframesRule(stylesheet, (CSSUnknownRuleImpl) rule);
+                return new CSSKeyframesRule(stylesheet, unknownRule);
             }
             if (LOG.isWarnEnabled()) {
                 LOG.warn("Unknown CSSRule " + rule.getClass().getName()

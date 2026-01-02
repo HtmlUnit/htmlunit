@@ -92,8 +92,7 @@ public class HTMLScriptElement extends HTMLElement {
     public String getText() {
         final StringBuilder scriptCode = new StringBuilder();
         for (final DomNode node : getDomNodeOrDie().getChildren()) {
-            if (node instanceof DomText) {
-                final DomText domText = (DomText) node;
+            if (node instanceof DomText domText) {
                 scriptCode.append(domText.getData());
             }
         }

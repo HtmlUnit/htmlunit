@@ -172,8 +172,7 @@ public class NumberFormat extends HtmlUnitScriptable {
             locales = new String[] {""};
         }
         else {
-            if (args[0] instanceof NativeArray) {
-                final NativeArray array = (NativeArray) args[0];
+            if (args[0] instanceof NativeArray array) {
                 locales = new String[(int) array.getLength()];
                 for (int i = 0; i < locales.length; i++) {
                     locales[i] = JavaScriptEngine.toString(array.get(i));

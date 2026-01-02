@@ -385,9 +385,9 @@ public abstract class WebWindowImpl implements WebWindow {
         }
 
         final SgmlPage sgmlPage = element.getPage();
-        if (sgmlPage instanceof HtmlPage) {
+        if (sgmlPage instanceof HtmlPage page) {
             final ComputedCssStyleDeclaration styleFromCache =
-                    ((HtmlPage) sgmlPage).getStyleFromCache(element, normalizedPseudo);
+                    page.getStyleFromCache(element, normalizedPseudo);
             if (styleFromCache != null) {
                 return styleFromCache;
             }
@@ -397,8 +397,7 @@ public abstract class WebWindowImpl implements WebWindow {
                 new ComputedCssStyleDeclaration(new ElementCssStyleDeclaration(element));
 
         final Document ownerDocument = element.getOwnerDocument();
-        if (ownerDocument instanceof HtmlPage) {
-            final HtmlPage htmlPage = (HtmlPage) ownerDocument;
+        if (ownerDocument instanceof HtmlPage htmlPage) {
 
             final WebClient webClient = getWebClient();
 

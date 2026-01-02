@@ -101,8 +101,7 @@ public class XSLTProcessor extends HtmlUnitScriptable {
 
         final Object transformResult = transform(source);
         final org.w3c.dom.Node node;
-        if (transformResult instanceof org.w3c.dom.Node) {
-            final org.w3c.dom.Node transformedDoc = (org.w3c.dom.Node) transformResult;
+        if (transformResult instanceof org.w3c.dom.Node transformedDoc) {
             node = transformedDoc.getFirstChild();
         }
         else {
@@ -243,9 +242,9 @@ public class XSLTProcessor extends HtmlUnitScriptable {
         rv.setDomNode(fragment);
 
         final Object result = transform(source);
-        if (result instanceof org.w3c.dom.Node) {
+        if (result instanceof org.w3c.dom.Node node) {
             final SgmlPage parentPage = fragment.getPage();
-            final NodeList children = ((org.w3c.dom.Node) result).getChildNodes();
+            final NodeList children = node.getChildNodes();
             final int length = children.getLength();
             for (int i = 0; i < length; i++) {
                 XmlUtils.appendChild(parentPage, fragment, children.item(i), true);

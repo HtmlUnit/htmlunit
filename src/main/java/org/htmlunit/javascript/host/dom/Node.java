@@ -228,8 +228,7 @@ public class Node extends EventTarget {
      */
     @JsxFunction
     public Node appendChild(final Object childObject) {
-        if (childObject instanceof Node) {
-            final Node childNode = (Node) childObject;
+        if (childObject instanceof Node childNode) {
 
             // is the node allowed here?
             if (!isNodeInsertable(childNode)) {
@@ -268,8 +267,7 @@ public class Node extends EventTarget {
      * 'onload' handler is triggered.
      */
     private static void initInlineFrameIfNeeded(final DomNode childDomNode) {
-        if (childDomNode instanceof HtmlInlineFrame) {
-            final HtmlInlineFrame frame = (HtmlInlineFrame) childDomNode;
+        if (childDomNode instanceof HtmlInlineFrame frame) {
             if (DomElement.ATTRIBUTE_NOT_DEFINED == frame.getSrcAttribute()) {
                 frame.loadInnerPage();
             }
@@ -313,8 +311,7 @@ public class Node extends EventTarget {
             refChildObject = JavaScriptEngine.UNDEFINED;
         }
 
-        if (newChildObject instanceof Node) {
-            final Node newChild = (Node) newChildObject;
+        if (newChildObject instanceof Node newChild) {
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
@@ -325,8 +322,7 @@ public class Node extends EventTarget {
             }
 
             final DomNode newChildNode = newChild.getDomNodeOrDie();
-            if (newChildNode instanceof DomDocumentFragment) {
-                final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
+            if (newChildNode instanceof DomDocumentFragment fragment) {
                 for (final DomNode child : fragment.getChildren()) {
                     if (!isNodeInsertable(child.getScriptableObject())) {
                         throw JavaScriptEngine.asJavaScriptException(
@@ -424,8 +420,7 @@ public class Node extends EventTarget {
      */
     @JsxFunction
     public Node replaceChild(final Object newChildObject, final Object oldChildObject) {
-        if (newChildObject instanceof DocumentFragment) {
-            final DocumentFragment fragment = (DocumentFragment) newChildObject;
+        if (newChildObject instanceof DocumentFragment fragment) {
             Node firstNode = null;
 
             final Node oldChildNode = (Node) oldChildObject;
@@ -446,8 +441,7 @@ public class Node extends EventTarget {
             return oldChildNode;
         }
 
-        if (newChildObject instanceof Node && oldChildObject instanceof Node) {
-            final Node newChild = (Node) newChildObject;
+        if (newChildObject instanceof Node newChild && oldChildObject instanceof Node oldChildNode) {
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
@@ -459,7 +453,6 @@ public class Node extends EventTarget {
 
             // Get XML nodes for the DOM nodes passed in
             final DomNode newChildDomNode = newChild.getDomNodeOrDie();
-            final Node oldChildNode = (Node) oldChildObject;
             final DomNode oldChildDomNode = oldChildNode.getDomNodeOrDie();
 
             // Replace the old child with the new child.
@@ -550,8 +543,7 @@ public class Node extends EventTarget {
             return false;
         }
 
-        if (this instanceof DocumentType) {
-            final DocumentType docType = (DocumentType) this;
+        if (this instanceof DocumentType docType) {
             final DocumentType otherDocType = (DocumentType) other;
             if (!Objects.equals(docType.getName(), otherDocType.getName())
                     || !Objects.equals(docType.getPublicId(), otherDocType.getPublicId())
@@ -560,8 +552,7 @@ public class Node extends EventTarget {
             }
 
         }
-        else if (this instanceof Element) {
-            final Element element = (Element) this;
+        else if (this instanceof Element element) {
             final Element otherElement = (Element) other;
             if (!Objects.equals(element.getNodeName(), otherElement.getNodeName())
                     || !Objects.equals(element.getPrefix(), otherElement.getPrefix())
@@ -600,8 +591,7 @@ public class Node extends EventTarget {
             }
 
         }
-        else if (this instanceof Attr) {
-            final Attr attr = (Attr) this;
+        else if (this instanceof Attr attr) {
             final Attr otherAttr = (Attr) other;
             if (!Objects.equals(attr.getName(), otherAttr.getName())
                     || !Objects.equals(attr.getLocalName(), otherAttr.getLocalName())
@@ -610,8 +600,7 @@ public class Node extends EventTarget {
             }
 
         }
-        else if (this instanceof ProcessingInstruction) {
-            final ProcessingInstruction instruction = (ProcessingInstruction) this;
+        else if (this instanceof ProcessingInstruction instruction) {
             final ProcessingInstruction otherInstruction = (ProcessingInstruction) other;
             if (!Objects.equals(instruction.getTarget(), otherInstruction.getTarget())
                     || !Objects.equals(instruction.getData(), otherInstruction.getData())) {
@@ -948,8 +937,8 @@ public class Node extends EventTarget {
      */
     protected int getChildElementCount() {
         final DomNode domNode = getDomNodeOrDie();
-        if (domNode instanceof DomElement) {
-            return ((DomElement) domNode).getChildElementCount();
+        if (domNode instanceof DomElement element) {
+            return element.getChildElementCount();
         }
 
         int counter = 0;
@@ -970,8 +959,8 @@ public class Node extends EventTarget {
      */
     protected Element getFirstElementChild() {
         final DomNode domNode = getDomNodeOrDie();
-        if (domNode instanceof DomElement) {
-            final DomElement child = ((DomElement) domNode).getFirstElementChild();
+        if (domNode instanceof DomElement element) {
+            final DomElement child = element.getFirstElementChild();
             if (child != null) {
                 return child.getScriptableObject();
             }
@@ -981,8 +970,8 @@ public class Node extends EventTarget {
         for (final DomNode child : domNode.getChildren()) {
             if (child != null) {
                 final HtmlUnitScriptable scriptable = child.getScriptableObject();
-                if (scriptable instanceof Element) {
-                    return (Element) scriptable;
+                if (scriptable instanceof Element element) {
+                    return element;
                 }
             }
         }
@@ -1006,8 +995,8 @@ public class Node extends EventTarget {
         Element result = null;
         for (final DomNode child : domNode.getChildren()) {
             final HtmlUnitScriptable scriptable = child.getScriptableObject();
-            if (scriptable instanceof Element) {
-                result = (Element) scriptable;
+            if (scriptable instanceof Element element) {
+                result = element;
             }
         }
         return result;
@@ -1138,8 +1127,8 @@ public class Node extends EventTarget {
     }
 
     private static Node toNodeOrTextNode(final Node thisObj, final Object obj) {
-        if (obj instanceof Node) {
-            return (Node) obj;
+        if (obj instanceof Node node) {
+            return node;
         }
         return (Node)
                 ((HTMLDocument) thisObj.getOwnerDocument()).createTextNode(JavaScriptEngine.toString(obj));

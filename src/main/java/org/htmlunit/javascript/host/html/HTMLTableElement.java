@@ -114,8 +114,8 @@ public class HTMLTableElement extends HTMLElement {
      */
     @JsxSetter
     public void setTFoot(final Object o) {
-        if (!(o instanceof HTMLTableSectionElement
-            && "TFOOT".equals(((HTMLTableSectionElement) o).getTagName()))) {
+        if (!(o instanceof HTMLTableSectionElement element
+            && "TFOOT".equals(element.getTagName()))) {
             throw JavaScriptEngine.typeError("Not a tFoot");
         }
 
@@ -146,8 +146,8 @@ public class HTMLTableElement extends HTMLElement {
      */
     @JsxSetter
     public void setTHead(final Object o) {
-        if (!(o instanceof HTMLTableSectionElement
-            && "THEAD".equals(((HTMLTableSectionElement) o).getTagName()))) {
+        if (!(o instanceof HTMLTableSectionElement element
+            && "THEAD".equals(element.getTagName()))) {
             throw JavaScriptEngine.typeError("Not a tHead");
         }
 
@@ -523,7 +523,7 @@ public class HTMLTableElement extends HTMLElement {
         final HTMLCollection rows = new HTMLCollection(getDomNodeOrDie(), false);
         rows.setIsMatchingPredicate(
                 (Predicate<DomNode> & Serializable)
-                node -> node instanceof HtmlTableRow && isContainedRow((HtmlTableRow) node));
+                node -> node instanceof HtmlTableRow htr && isContainedRow(htr));
         return rows;
     }
 
