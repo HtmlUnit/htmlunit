@@ -1563,8 +1563,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         final File file = new File(url.toURI());
-        String content = FileUtils.readFileToString(file, UTF_8);
-        content = StringUtils.replace(content, "\r\n", "\n");
+        final String content = FileUtils.readFileToString(file, UTF_8)
+                                        .replace("\r\n", "\n");
         return content;
     }
 

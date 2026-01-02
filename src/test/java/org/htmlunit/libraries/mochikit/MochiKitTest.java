@@ -172,14 +172,15 @@ public abstract class MochiKitTest extends WebDriverTestCase {
         driver.findElement(By.linkText("Toggle failed tests")).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
 
-        String expected = loadExpectation(testName);
-        expected = expected.trim();
-        expected = StringUtils.replace(expected, "\r\n", "\n");
+        final String expected = loadExpectation(testName)
+                                .trim()
+                                .replace("\r\n", "\n");
         final WebElement div = driver.findElement(By.xpath("//div[@class = 'tests_report']"));
 
         assertNotNull(div);
-        String actual = div.getText().trim();
-        actual = StringUtils.replace(actual, "\n\n", "\n");
+        final String actual = div.getText()
+                                    .trim()
+                                    .replace("\n\n", "\n");
         assertEquals(expected.trim(), actual);
     }
 
