@@ -61,7 +61,24 @@ mvn eclipse:eclipse -DdownloadSources=true
         </subsection>
 
         <subsection name="IntelliJ IDEA Project">
-            ToDo
+            <p>
+                IntelliJ IDEA has built-in Maven support and can directly import the HtmlUnit project.
+            </p>
+
+            <subsection name="Import Project into IntelliJ IDEA">
+                <ol>
+                    <li>Open IntelliJ IDEA</li>
+                    <li>Select <code>File → Open</code></li>
+                    <li>Navigate to the cloned HtmlUnit directory</li>
+                    <li>Select the <code>pom.xml</code> file and click <code>Open</code></li>
+                    <li>Choose <code>Open as Project</code> when prompted</li>
+                    <li>IntelliJ will automatically detect the Maven project and import it</li>
+                </ol>
+                <p>
+                    IntelliJ IDEA will automatically download dependencies and set up the project structure.
+                </p>
+            </subsection>
+
         </subsection>
 
         <subsection name="Running the Tests from Maven">
