@@ -1413,10 +1413,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                 msg = "uncaught exception: " + e.getCause().getMessage();
                 jsError = ((JavaScriptException) e.getCause()).getValue();
             }
-            else if (e.getCause() instanceof EcmaError) {
+            else if (e.getCause() instanceof EcmaError ecmaError) {
                 msg = "uncaught " + e.getCause().getMessage();
 
-                final EcmaError ecmaError = (EcmaError) e.getCause();
                 final Scriptable err = Context.getCurrentContext().newObject(this, "Error");
                 ScriptableObject.putProperty(err, "message", ecmaError.getMessage());
                 ScriptableObject.putProperty(err, "fileName", ecmaError.sourceName());
@@ -1670,7 +1669,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         }
 
         final SgmlPage sgmlPage = getDocument().getPage();
-        if (!(sgmlPage instanceof HtmlPage)) {
+        if (!(sgmlPage instanceof HtmlPage page)) {
             LOG.debug("Page is not an HtmlPage - window.print() ignored");
             return;
         }
@@ -1678,7 +1677,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         Event event = new Event(this, Event.TYPE_BEFOREPRINT);
         fireEvent(event);
 
-        final HtmlPage page = (HtmlPage) sgmlPage;
         page.setPrinting(true);
         try {
             handler.handlePrint(page);
@@ -1722,10 +1720,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxFunction
     public ComputedCSSStyleDeclaration getComputedStyle(final Object element, final String pseudoElement) {
-        if (!(element instanceof Element)) {
+        if (!(element instanceof Element e)) {
             throw JavaScriptEngine.typeError("parameter 1 is not of type 'Element'");
         }
-        final Element e = (Element) element;
 
         final ComputedCssStyleDeclaration style = getWebWindow().getComputedStyle(e.getDomNodeOrDie(), pseudoElement);
         return new ComputedCSSStyleDeclaration(e, style);

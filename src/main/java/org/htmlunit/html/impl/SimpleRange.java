@@ -452,10 +452,9 @@ public class SimpleRange implements Serializable {
      */
     @Override
     public boolean equals(final Object obj) {
-        if (!(obj instanceof SimpleRange)) {
+        if (!(obj instanceof SimpleRange other)) {
             return false;
         }
-        final SimpleRange other = (SimpleRange) obj;
         return new EqualsBuilder()
             .append(startContainer_, other.startContainer_)
             .append(endContainer_, other.endContainer_)

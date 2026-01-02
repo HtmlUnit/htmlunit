@@ -90,10 +90,9 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
             final String source, final boolean createdByJavascript)
         throws SAXException, IOException {
         final Page page = parent.getPage();
-        if (!(page instanceof HtmlPage)) {
+        if (!(page instanceof HtmlPage htmlPage)) {
             return;
         }
-        final HtmlPage htmlPage = (HtmlPage) page;
         final URL url = htmlPage.getUrl();
 
         final HtmlUnitNekoDOMBuilder domBuilder =

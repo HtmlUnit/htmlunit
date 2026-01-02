@@ -147,7 +147,7 @@ public class NodeList extends AbstractList implements Callable {
      */
     @JsxFunction
     public void forEach(final Object callback) {
-        if (!(callback instanceof Function)) {
+        if (!(callback instanceof Function function)) {
             throw JavaScriptEngine.typeError(
                     "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
@@ -160,7 +160,6 @@ public class NodeList extends AbstractList implements Callable {
         final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
 
         final ContextAction<Object> contextAction = cx -> {
-            final Function function = (Function) callback;
             final Scriptable scope = getParentScope();
 
             List<DomNode> nodes = getElements();

@@ -235,10 +235,9 @@ public class Cookie implements Serializable {
      */
     @Override
     public boolean equals(final Object o) {
-        if (!(o instanceof Cookie)) {
+        if (!(o instanceof Cookie other)) {
             return false;
         }
-        final Cookie other = (Cookie) o;
         final String path = getPath() == null ? "/" : getPath();
         final String otherPath = other.getPath() == null ? "/" : other.getPath();
         return new EqualsBuilder()

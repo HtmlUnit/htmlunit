@@ -66,10 +66,9 @@ public class NameValuePair implements Serializable {
      */
     @Override
     public boolean equals(final Object object) {
-        if (!(object instanceof NameValuePair)) {
+        if (!(object instanceof NameValuePair other)) {
             return false;
         }
-        final NameValuePair other = (NameValuePair) object;
         return Objects.equals(name_, other.name_) && Objects.equals(value_, other.value_);
     }
 

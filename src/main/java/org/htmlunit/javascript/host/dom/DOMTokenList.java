@@ -405,7 +405,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void forEach(final Object callback) {
-        if (!(callback instanceof Function)) {
+        if (!(callback instanceof Function function)) {
             throw JavaScriptEngine.typeError(
                     "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
@@ -419,7 +419,6 @@ public class DOMTokenList extends HtmlUnitScriptable {
         final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
 
         final ContextAction<Object> contextAction = cx -> {
-            final Function function = (Function) callback;
             final Scriptable scope = getParentScope();
 
             List<String> parts = split(value);

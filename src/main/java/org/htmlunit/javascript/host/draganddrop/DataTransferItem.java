@@ -109,7 +109,7 @@ public class DataTransferItem extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void getAsString(final Object callback) {
-        if (!(callback instanceof Callable)) {
+        if (!(callback instanceof Callable fun)) {
             throw JavaScriptEngine.typeError(
                     "getAsString callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
@@ -118,7 +118,6 @@ public class DataTransferItem extends HtmlUnitScriptable {
             return;
         }
 
-        final Callable fun = (Callable) callback;
         final Object[] args = {data_};
 
         final WebWindow webWindow = getWindow().getWebWindow();

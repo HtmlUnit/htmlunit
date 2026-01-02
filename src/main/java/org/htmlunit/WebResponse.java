@@ -266,22 +266,20 @@ public class WebResponse implements Serializable {
         if (responseData_ != null) {
             try (InputStream in = responseData_.getInputStreamWithBomIfApplicable(BOM_HEADERS)) {
                 if (in instanceof BOMInputStream bomIn) {
-                    try () {
-                        // there seems to be a bug in BOMInputStream
-                        // we have to call this before hasBOM(ByteOrderMark)
-                        if (bomIn.hasBOM()) {
-                            if (bomIn.hasBOM(ByteOrderMark.UTF_8)) {
-                                return IOUtils.toString(bomIn, UTF_8);
-                            }
-                            if (bomIn.hasBOM(ByteOrderMark.UTF_16BE)) {
-                                return IOUtils.toString(bomIn, UTF_16BE);
-                            }
-                            if (bomIn.hasBOM(ByteOrderMark.UTF_16LE)) {
-                                return IOUtils.toString(bomIn, UTF_16LE);
-                            }
+                    // there seems to be a bug in BOMInputStream
+                    // we have to call this before hasBOM(ByteOrderMark)
+                    if (bomIn.hasBOM()) {
+                        if (bomIn.hasBOM(ByteOrderMark.UTF_8)) {
+                            return IOUtils.toString(bomIn, UTF_8);
                         }
-                        return IOUtils.toString(bomIn, encoding);
+                        if (bomIn.hasBOM(ByteOrderMark.UTF_16BE)) {
+                            return IOUtils.toString(bomIn, UTF_16BE);
+                        }
+                        if (bomIn.hasBOM(ByteOrderMark.UTF_16LE)) {
+                            return IOUtils.toString(bomIn, UTF_16LE);
+                        }
                     }
+                    return IOUtils.toString(bomIn, encoding);
                 }
 
                 return IOUtils.toString(in, encoding);

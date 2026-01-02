@@ -392,12 +392,11 @@ public class Node extends EventTarget {
      */
     @JsxFunction
     public Node removeChild(final Object childObject) {
-        if (!(childObject instanceof Node)) {
+        if (!(childObject instanceof Node childObjectNode)) {
             return null;
         }
 
         // Get XML node for the DOM node passed in
-        final Node childObjectNode = (Node) childObject;
         final DomNode childDomNode = childObjectNode.getDomNodeOrDie();
 
         if (!getDomNodeOrDie().isAncestorOf(childDomNode)) {
@@ -878,11 +877,11 @@ public class Node extends EventTarget {
             return false;
         }
 
-        if (!(element instanceof Node)) {
+        if (!(element instanceof Node parent)) {
             throw JavaScriptEngine.reportRuntimeError("Could not convert JavaScript argument arg 0");
         }
 
-        for (Node parent = (Node) element; parent != null; parent = parent.getParentElement()) {
+        for (; parent != null; parent = parent.getParentElement()) {
             if (this == parent) {
                 return true;
             }
@@ -1059,11 +1058,10 @@ public class Node extends EventTarget {
      */
     protected static void append(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        if (!(thisObj instanceof Node)) {
+        if (!(thisObj instanceof Node thisNode)) {
             throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
-        final Node thisNode = (Node) thisObj;
         final DomNode thisDomNode = thisNode.getDomNodeOrDie();
 
         for (final Object arg : args) {
@@ -1082,11 +1080,10 @@ public class Node extends EventTarget {
      */
     protected static void prepend(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        if (!(thisObj instanceof Node)) {
+        if (!(thisObj instanceof Node thisNode)) {
             throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
-        final Node thisNode = (Node) thisObj;
         final DomNode thisDomNode = thisNode.getDomNodeOrDie();
         final DomNode firstChild = thisDomNode.getFirstChild();
 
@@ -1112,11 +1109,10 @@ public class Node extends EventTarget {
      */
     protected static void replaceChildren(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        if (!(thisObj instanceof Node)) {
+        if (!(thisObj instanceof Node thisNode)) {
             throw JavaScriptEngine.typeError("Illegal invocation");
         }
 
-        final Node thisNode = (Node) thisObj;
         final DomNode thisDomNode = thisNode.getDomNodeOrDie();
         thisDomNode.removeAllChildren();
 

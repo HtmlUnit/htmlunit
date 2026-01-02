@@ -1004,7 +1004,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         // when marking an iframe window as current we have no need to move the focus
         final boolean isIFrame = currentWindow_ instanceof FrameWindow fw
-                && ((FrameWindow) currentWindow_).getFrameElement() instanceof HtmlInlineFrame;
+                && fw.getFrameElement() instanceof HtmlInlineFrame;
         if (!isIFrame) {
             //1. activeElement becomes focused element for new current window
             //2. onFocus event is triggered for focusedElement of new current window

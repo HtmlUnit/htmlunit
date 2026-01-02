@@ -52,9 +52,8 @@ public final class XmlUtilsSunXercesHelper implements XmlUtilsHelperAPI {
      */
     @Override
     public Map<Integer, List<String>> getAttributesOrderMap(final Document document) {
-        if (document instanceof DeferredDocumentImpl) {
+        if (document instanceof DeferredDocumentImpl deferredDocument) {
             final Map<Integer, List<String>> map = new HashMap<>();
-            final DeferredDocumentImpl deferredDocument = (DeferredDocumentImpl) document;
             final int fNodeCount = getPrivate(deferredDocument, "fNodeCount");
             for (int i = 0; i < fNodeCount; i++) {
                 final int type = deferredDocument.getNodeType(i, false);

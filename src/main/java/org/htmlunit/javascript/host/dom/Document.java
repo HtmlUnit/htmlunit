@@ -801,10 +801,9 @@ public class Document extends Node {
         anchors.setIsMatchingPredicate(
                 (Predicate<DomNode> & Serializable)
                 node -> {
-                    if (!(node instanceof HtmlAnchor)) {
+                    if (!(node instanceof HtmlAnchor anchor)) {
                         return false;
                     }
-                    final HtmlAnchor anchor = (HtmlAnchor) node;
                     return anchor.hasAttribute(DomElement.NAME_ATTRIBUTE);
                 });
 

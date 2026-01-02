@@ -581,10 +581,9 @@ public class HTMLElement extends Element {
         if (event == null) {
             return false;
         }
-        if (!(event.getSrcElement() instanceof HTMLElement)) {
+        if (!(event.getSrcElement() instanceof HTMLElement srcElement)) {
             return false;
         }
-        final HTMLElement srcElement = (HTMLElement) event.getSrcElement();
         return getDomNodeOrDie().isAncestorOf(srcElement.getDomNodeOrDie());
     }
 
@@ -977,9 +976,8 @@ public class HTMLElement extends Element {
 
         // account for any scrolled ancestors
         Node parentNode = getOffestParentElement(false);
-        while ((parentNode instanceof HTMLElement)
+        while ((parentNode instanceof HTMLElement elem)
                 && !(parentNode instanceof HTMLBodyElement)) {
-            final HTMLElement elem = (HTMLElement) parentNode;
             left -= elem.getScrollLeft();
             top -= elem.getScrollTop();
 

@@ -206,10 +206,9 @@ public class AbstractRange extends HtmlUnitScriptable {
 
     @Override
     protected Object equivalentValues(final Object value) {
-        if (!(value instanceof AbstractRange)) {
+        if (!(value instanceof AbstractRange other)) {
             return false;
         }
-        final AbstractRange other = (AbstractRange) value;
         return startContainer_ == other.startContainer_
                 && endContainer_ == other.endContainer_
                 && startOffset_ == other.startOffset_

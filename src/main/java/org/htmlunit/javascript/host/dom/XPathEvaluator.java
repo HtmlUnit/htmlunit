@@ -77,11 +77,10 @@ public class XPathEvaluator extends HtmlUnitScriptable {
             final Object resolver, final int type, final Object result) {
         try {
             // contextNodeObj can be either a node or an array with the node as the first element.
-            if (!(contextNodeObj instanceof Node)) {
+            if (!(contextNodeObj instanceof Node contextNode)) {
                 throw JavaScriptEngine.typeError("Illegal value for parameter 'context'");
             }
 
-            final Node contextNode = (Node) contextNodeObj;
             PrefixResolver prefixResolver = null;
             if (resolver instanceof PrefixResolver prefixResolver1) {
                 prefixResolver = prefixResolver1;

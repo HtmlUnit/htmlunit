@@ -613,12 +613,10 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
             return result;
         }
 
-        if (!(other instanceof DOMMatrixReadOnly)) {
+        if (!(other instanceof DOMMatrixReadOnly otherMatrix)) {
             throw JavaScriptEngine.typeError("Failed to execute 'multiply' on 'DOMMatrixReadOnly': "
                     + "parameter 1 is not of type 'DOMMatrixReadOnly'.");
         }
-
-        final DOMMatrixReadOnly otherMatrix = (DOMMatrixReadOnly) other;
 
         // Matrix multiplication: result = this * otherMatrix
         // Standard matrix multiplication formula: C[i][j] = sum(A[i][k] * B[k][j])

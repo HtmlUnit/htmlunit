@@ -244,11 +244,10 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     @JsxFunction
     public static void clip(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
-        if (!(thisObj instanceof CanvasRenderingContext2D)) {
+        if (!(thisObj instanceof CanvasRenderingContext2D canvas)) {
             throw JavaScriptEngine.reportRuntimeError(
                     "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");
         }
-        final CanvasRenderingContext2D canvas = (CanvasRenderingContext2D) thisObj;
 
         RenderingBackend.WindingRule windingRule = WindingRule.NON_ZERO;
         if (args.length == 1) {
@@ -298,11 +297,10 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     @JsxFunction
     public static ImageData createImageData(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
-        if (!(thisObj instanceof CanvasRenderingContext2D)) {
+        if (!(thisObj instanceof CanvasRenderingContext2D canvas)) {
             throw JavaScriptEngine.reportRuntimeError(
                     "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");
         }
-        final CanvasRenderingContext2D canvas = (CanvasRenderingContext2D) thisObj;
 
         if (args.length > 0 && args[0] instanceof ImageData imageDataParameter) {
             final ImageData imageData = new ImageData(null,

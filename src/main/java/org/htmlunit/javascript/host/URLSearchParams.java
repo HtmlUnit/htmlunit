@@ -434,12 +434,10 @@ public class URLSearchParams extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void forEach(final Object callback) {
-        if (!(callback instanceof Function)) {
+        if (!(callback instanceof Function fun)) {
             throw JavaScriptEngine.typeError(
                     "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
-
-        final Function fun = (Function) callback;
 
         String currentSearch = null;
         List<NameValuePair> params = null;
