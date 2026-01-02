@@ -48,6 +48,27 @@ It has fairly good JavaScript support (which is constantly improving) and is abl
 HtmlUnit is typically used for testing purposes or to retrieve information from web sites.
 
 
+
+#### Version 5
+
+Work on HtmlUnit 5.0 has started. This new major version will require **JDK 17 or higher**.
+
+
+#### Legacy Support (JDK 8)
+
+If you need to continue using **JDK 8**, please note that versions 4.x will remain available as-is. However,
+**ongoing maintenance and fixes for JDK 8 compatibility are only available through sponsorship**.
+
+Maintaining separate fix versions for JDK 8 requires significant additional effort for __backporting__, testing, and release management.
+
+**To enable continued JDK 8 support**, please contact me via email to discuss sponsorship options. Sponsorship provides:
+
+- __Backporting__ security and bug fixes to the 4.x branch
+- Maintaining compatibility with older Java versions
+- Timely releases for critical issues
+
+Without sponsorship, the 4.x branch will not receive updates. Your support ensures the long-term __sustainability__ of this project across multiple Java versions.
+
 ## Get it!
 
 * [Download from GitHub](https://github.com/HtmlUnit/htmlunit/releases)
