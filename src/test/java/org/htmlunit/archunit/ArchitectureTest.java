@@ -232,7 +232,7 @@ public class ArchitectureTest {
             .orShould().beDeclaredInClassesThat().areAnnotatedWith(JsxClasses.class);
 
     private static final DescribedPredicate<? super JavaClass> isAssignableToScriptable =
-            new DescribedPredicate<JavaClass>("@is not assignable to Scriptable") {
+            new DescribedPredicate<>("@is not assignable to Scriptable") {
                 @Override
                 public boolean test(final JavaClass javaClass) {
                     // we have to build a more complex implemenation because
@@ -399,7 +399,7 @@ public class ArchitectureTest {
             .orShould().haveNameStartingWith("is");
 
     private static final DescribedPredicate<JavaMethod> haveJsxGetterWithNonDefaultPropertyName =
-            new DescribedPredicate<JavaMethod>("@JsxGetter has a non default propertyName") {
+            new DescribedPredicate<>("@JsxGetter has a non default propertyName") {
                 @Override
                 public boolean test(final JavaMethod method) {
                     return StringUtils.isNotEmpty(method.getAnnotationOfType(JsxGetter.class).propertyName());
@@ -424,7 +424,7 @@ public class ArchitectureTest {
             .should().haveNameStartingWith("set");
 
     private static final DescribedPredicate<JavaMethod> haveJsxSetterWithNonDefaultPropertyName =
-            new DescribedPredicate<JavaMethod>("@JsxSetter has a non default propertyName") {
+            new DescribedPredicate<>("@JsxSetter has a non default propertyName") {
                 @Override
                 public boolean test(final JavaMethod method) {
                     return StringUtils.isNotEmpty(method.getAnnotationOfType(JsxSetter.class).propertyName());
@@ -441,7 +441,7 @@ public class ArchitectureTest {
             .should().haveNameEndingWith("_js");
 
     private static final ArchCondition<JavaMethod> hasMatchingGetter =
-            new ArchCondition<JavaMethod>("every @JsxSetter needs a matching @JsxGetter") {
+            new ArchCondition<>("every @JsxSetter needs a matching @JsxGetter") {
                 @Override
                 public void check(final JavaMethod method, final ConditionEvents events) {
                     String getterName = "g" + method.getName().substring(1);

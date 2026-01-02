@@ -194,7 +194,7 @@ public class Architecture2Test {
         .should().dependOnClassesThat().resideInAPackage("org.hamcrest..");
 
     private static final ArchCondition<JavaMethod> haveConsistentTestAnnotations =
-            new ArchCondition<JavaMethod>("have consistent HtmlUnit test annotations") {
+            new ArchCondition<>("have consistent HtmlUnit test annotations") {
                 @Override
                 public void check(final JavaMethod method, final ConditionEvents events) {
                     try {

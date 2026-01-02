@@ -179,7 +179,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @return true when the url matches, false otherwise
      */
     public static ExpectedCondition<Boolean> currentUrlContains(final String url) {
-        return new ExpectedCondition<Boolean>() {
+        return new ExpectedCondition<>() {
             @Override
             public Boolean apply(final WebDriver driver) {
                 final String currentUrl = driver.getCurrentUrl();

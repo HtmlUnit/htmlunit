@@ -103,11 +103,12 @@ public abstract class DojoTestBase extends WebDriverTestCase {
                         }
                     }
 
-                    String expFileName = StringUtils.replace(module, ".", "");
-                    expFileName = StringUtils.replace(expFileName, "_", "");
-                    expFileName = StringUtils.replace(expFileName, "/", "_");
+                    final String expFileName = module
+                                            .replace(".", "")
+                                            .replace("_", "")
+                                            .replace("/", "_");
                     String expected = loadExpectation(expFileName);
-                    expected = StringUtils.replace(expected, "\r\n", "\n");
+                    expected = expected.replace("\r\n", "\n");
 
                     assertEquals(normalize(expected), normalize(result.toString()));
                     // assertEquals(expected, result.toString());
