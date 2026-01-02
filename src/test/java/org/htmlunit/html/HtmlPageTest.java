@@ -527,12 +527,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         final WebClient webClient = getWebClient();
         final List<String> collectedIncorrectness = new ArrayList<>();
-        final IncorrectnessListener listener = new IncorrectnessListener() {
-            @Override
-            public void notify(final String message, final Object origin) {
-                collectedIncorrectness.add(message);
-            }
-        };
+        final IncorrectnessListener listener = (message, origin) -> collectedIncorrectness.add(message);
         webClient.setIncorrectnessListener(listener);
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -769,7 +764,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             Assertions.fail("should have thrown");
         }
         catch (final RuntimeException e) {
-            assertTrue(e.getMessage().indexOf("could have caused an OutOfMemoryError") > -1);
+            assertTrue(e.getMessage().contains("could have caused an OutOfMemoryError"));
         }
         Thread.sleep(1000);
     }
@@ -1685,7 +1680,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "<html><head><title/></head>\n"
             + "<body>Hello World!</body></html>";
         final HtmlPage page = loadPage(content);
-        assertTrue(page.asXml().indexOf("</title>") != -1);
+        assertTrue(page.asXml().contains("</title>"));
     }
 
     /**
@@ -1738,12 +1733,9 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         final List<String> collectedConfirms = new ArrayList<>();
 
-        webClient.setOnbeforeunloadHandler(new OnbeforeunloadHandler() {
-            @Override
-            public boolean handleEvent(final Page page, final String message) {
-                collectedConfirms.add(message);
-                return handlerOk;
-            }
+        webClient.setOnbeforeunloadHandler((OnbeforeunloadHandler) (page, message) -> {
+            collectedConfirms.add(message);
+            return handlerOk;
         });
 
         final String expectedMessage = "Any string value here forces a dialog box to appear before closing the window.";
@@ -1938,17 +1930,9 @@ public class HtmlPageTest extends SimpleWebTestCase {
     public void addAutoCloseable() throws Exception {
         final String html = "";
         final HtmlPage page = loadPage(html);
-        page.addAutoCloseable(new AutoCloseable() {
-            @Override
-            public void close() throws Exception {
-                page.addAutoCloseable(new AutoCloseable() {
-                    @Override
-                    public void close() throws Exception {
-                        throw new NullPointerException("close failed");
-                    }
-                });
-            }
-        });
+        page.addAutoCloseable(() -> page.addAutoCloseable(() -> {
+            throw new NullPointerException("close failed");
+        }));
         page.cleanUp();
     }
 

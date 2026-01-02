@@ -157,12 +157,7 @@ public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
             first = false;
         }
 
-        Collections.sort(constants, new Comparator<String>() {
-            @Override
-            public int compare(final String o1, final String o2) {
-                return o1.substring(0, o1.indexOf(':')).compareTo(o2.substring(0, o2.indexOf(':')));
-            }
-        });
+        constants.sort((o1, o2) -> o1.substring(0, o1.indexOf(':')).compareTo(o2.substring(0, o2.indexOf(':'))));
         return constants.toArray(new String[0]);
     }
 

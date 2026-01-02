@@ -45,7 +45,7 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
         assertEquals(webResponse, e.getResponse());
         assertEquals(webResponse.getStatusMessage(), e.getStatusMessage());
         assertEquals(webResponse.getStatusCode(), e.getStatusCode());
-        assertTrue("message doesn't contain failing url", e.getMessage().indexOf(URL_FIRST.toExternalForm()) > -1);
+        assertTrue("message doesn't contain failing url", e.getMessage().contains(URL_FIRST.toExternalForm()));
     }
 
     /**

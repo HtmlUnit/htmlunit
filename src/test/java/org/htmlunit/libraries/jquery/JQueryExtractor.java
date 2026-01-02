@@ -121,7 +121,7 @@ public final class JQueryExtractor {
                     // the test number is at least for 1.11.3 no longer part of the output
                     // instead a ordered list is used by qunit
                     // if (line.startsWith("" + testNumber + '.') && endPos > -1) {
-                    else if (line.indexOf("Rerun") > -1) {
+                    else if (line.contains("Rerun")) {
                         line = line.substring(0, line.indexOf("Rerun"))
                                 + " [" + testNumber + ']';
                         writer.write(line + System.lineSeparator());
@@ -188,11 +188,7 @@ public final class JQueryExtractor {
             for (final String browserName : availableBrowserNames) {
                 final Expectation expectation = browserExpectations.get(browserName).getExpectation(test);
                 if (expectation != null) {
-                    List<String> browsersForLine = lineToBrowser.get(expectation.getLine());
-                    if (browsersForLine == null) {
-                        browsersForLine = new ArrayList<>();
-                        lineToBrowser.put(expectation.getLine(), browsersForLine);
-                    }
+                    List<String> browsersForLine = lineToBrowser.computeIfAbsent(expectation.getLine(), k -> new ArrayList<>());
                     browsersForLine.add(browserName);
                     final String str = expectation.getTestResult();
                     testExpectation.put(browserName,

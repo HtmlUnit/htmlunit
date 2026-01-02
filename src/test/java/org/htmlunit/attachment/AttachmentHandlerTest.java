@@ -40,12 +40,8 @@ public class AttachmentHandlerTest {
         final WebResponseData data = new WebResponseData("HtmlUnit".getBytes(),
                 HttpStatus.OK_200, HttpStatus.OK_200_MSG, Collections.emptyList());
         final WebResponse response = new WebResponse(data, new URL("http://test.com"), HttpMethod.GET, 1000);
-        final AttachmentHandler attachmentHandler = new AttachmentHandler() {
-
-            @Override
-            public void handleAttachment(final Page page, final String attachmentFilename) {
-                // mock
-            }
+        final AttachmentHandler attachmentHandler = (page, attachmentFilename) -> {
+            // mock
         };
 
         Assertions.assertFalse(attachmentHandler.isAttachment(response));

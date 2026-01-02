@@ -283,7 +283,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             loadPageWithAlerts(content1);
         }
         catch (final Exception e) {
-            assertTrue(e.getMessage().indexOf(URL_FIRST.toString()) > -1);
+            assertTrue(e.getMessage().contains(URL_FIRST.toString()));
         }
 
         // external script
@@ -306,7 +306,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             client.getPage(URL_FIRST);
         }
         catch (final Exception e) {
-            assertTrue(e.getMessage(), e.getMessage().indexOf(urlScript.toString()) > -1);
+            assertTrue(e.getMessage(), e.getMessage().contains(urlScript.toString()));
         }
     }
 
@@ -806,17 +806,14 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             client.setWebConnection(webConnection);
 
             final Exception[] exceptions = {null};
-            final Thread runner = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        client.getPage(URL_FIRST);
-                    }
-                    catch (final Exception e) {
-                        exceptions[0] = e;
-                    }
+            final Thread runner = new Thread(() -> {
+                try {
+                    client.getPage(URL_FIRST);
                 }
-            };
+                catch (final Exception e) {
+                    exceptions[0] = e;
+                }
+            });
 
             runner.start();
 
@@ -1324,33 +1321,25 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
             final int runs = 100;
 
-            final Thread t1 = new Thread(new Runnable() {
-
-                @Override
-                public void run() {
-                    try {
-                        for (int i = 0; i < runs; i++) {
-                            webClient.getPage(window1, new WebRequest(URL_FIRST));
-                        }
+            final Thread t1 = new Thread(() -> {
+                try {
+                    for (int i = 0; i < runs; i++) {
+                        webClient.getPage(window1, new WebRequest(URL_FIRST));
                     }
-                    catch (final FailingHttpStatusCodeException | IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                }
+                catch (final FailingHttpStatusCodeException | IOException e) {
+                    throw new RuntimeException(e);
                 }
             });
 
-            final Thread t2 = new Thread(new Runnable() {
-
-                @Override
-                public void run() {
-                    try {
-                        for (int i = 0; i < runs; i++) {
-                            webClient.getPage(window2, new WebRequest(URL_FIRST));
-                        }
+            final Thread t2 = new Thread(() -> {
+                try {
+                    for (int i = 0; i < runs; i++) {
+                        webClient.getPage(window2, new WebRequest(URL_FIRST));
                     }
-                    catch (final FailingHttpStatusCodeException | IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                }
+                catch (final FailingHttpStatusCodeException | IOException e) {
+                    throw new RuntimeException(e);
                 }
             });
 

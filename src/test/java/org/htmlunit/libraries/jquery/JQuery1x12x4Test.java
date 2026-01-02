@@ -58,8 +58,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
             testResultLines_ = lines;
         }
 
-        for (int i = 0; i < testResultLines_.length; i++) {
-            final String line = testResultLines_[i];
+        for (final String line : testResultLines_) {
             final int pos = line.indexOf(testName);
             if (pos != -1) {
                 final int start = line.lastIndexOf('[') + 1;

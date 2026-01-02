@@ -161,7 +161,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             + "<body onload='test()'></body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection() {
             @Override
@@ -397,7 +397,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         XMLHttpRequest3Test.STATE_ = 0;
         final WebClient client = getWebClient();
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = client.getPage(URL_FIRST + "content.html");
@@ -425,7 +425,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         assertTrue(headers, headers.contains("Html-Unit=is great,;"));
     }
 
-    static final List<String> COLLECTED_HEADERS = Collections.synchronizedList(new ArrayList<String>());
+    static final List<String> COLLECTED_HEADERS = Collections.synchronizedList(new ArrayList<>());
     static int STATE_ = 0;
 
     /**

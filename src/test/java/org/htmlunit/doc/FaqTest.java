@@ -110,16 +110,11 @@ public class FaqTest {
         final URL url = new URL("https://www.htmlunit.org");
 
         // create a ScriptPreProcessor
-        final ScriptPreProcessor myScriptPreProcessor = new ScriptPreProcessor() {
+        final ScriptPreProcessor myScriptPreProcessor = (htmlPage, sourceCode, sourceName, lineNumber, htmlElement) -> {
 
-            @Override
-            public String preProcess(final HtmlPage htmlPage, final String sourceCode, final String sourceName,
-                    final int lineNumber, final HtmlElement htmlElement) {
+            // modify the source code here
 
-                // modify the source code here
-
-                return sourceCode;
-            }
+            return sourceCode;
         };
 
         try (WebClient webClient = new WebClient()) {

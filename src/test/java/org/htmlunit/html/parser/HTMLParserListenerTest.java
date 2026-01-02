@@ -78,10 +78,9 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
          */
         @Override
         public boolean equals(final Object obj) {
-            if (!(obj instanceof MessageInfo)) {
+            if (!(obj instanceof MessageInfo other)) {
                 return false;
             }
-            final MessageInfo other = (MessageInfo) obj;
             final EqualsBuilder builder = new EqualsBuilder();
             builder.append(error_, other.error_);
             builder.append(message_, other.message_);

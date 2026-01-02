@@ -49,8 +49,7 @@ public class SetExpectedAlertsBeforeTestExecutionCallback implements BeforeTestE
     public void beforeTestExecution(final ExtensionContext context) throws Exception {
         final Object testInstance = context.getRequiredTestInstance();
 
-        if (testInstance instanceof WebTestCase) {
-            final WebTestCase webTestCase = (WebTestCase) testInstance;
+        if (testInstance instanceof WebTestCase webTestCase) {
 
             Method testMethod = context.getRequiredTestMethod();
             final Optional<Method> potentialOberwrittenMethod =

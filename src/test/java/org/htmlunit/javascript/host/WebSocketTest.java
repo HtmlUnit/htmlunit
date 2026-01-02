@@ -260,13 +260,7 @@ public class WebSocketTest extends WebDriverTestCase {
         @Override
         public void configure(final WebSocketServletFactory factory) {
             factory.register(ChatWebSocket.class);
-            factory.setCreator(new WebSocketCreator() {
-                @Override
-                public Object createWebSocket(final ServletUpgradeRequest servletUpgradeRequest,
-                        final ServletUpgradeResponse servletUpgradeResponse) {
-                    return new ChatWebSocket();
-                }
-            });
+            factory.setCreator((servletUpgradeRequest, servletUpgradeResponse) -> new ChatWebSocket());
         }
 
         private class ChatWebSocket extends WebSocketAdapter {
@@ -329,8 +323,8 @@ public class WebSocketTest extends WebDriverTestCase {
                 System.err.println();
                 System.err.println("WebSocket thread named '" + lastFailing + "' still running");
                 final StackTraceElement[] traces = entry.getValue();
-                for (int i = 0; i < traces.length; i++) {
-                    System.err.println(traces[i]);
+                for (StackTraceElement trace : traces) {
+                    System.err.println(trace);
                 }
             }
         }
@@ -390,13 +384,7 @@ public class WebSocketTest extends WebDriverTestCase {
         @Override
         public void configure(final WebSocketServletFactory factory) {
             factory.register(CookiesWebSocket.class);
-            factory.setCreator(new WebSocketCreator() {
-                @Override
-                public Object createWebSocket(final ServletUpgradeRequest servletUpgradeRequest,
-                        final ServletUpgradeResponse servletUpgradeResponse) {
-                    return new CookiesWebSocket();
-                }
-            });
+            factory.setCreator((servletUpgradeRequest, servletUpgradeResponse) -> new CookiesWebSocket());
         }
 
         private class CookiesWebSocket extends WebSocketAdapter {
@@ -624,13 +612,7 @@ public class WebSocketTest extends WebDriverTestCase {
         @Override
         public void configure(final WebSocketServletFactory factory) {
             factory.register(EventsWebSocket.class);
-            factory.setCreator(new WebSocketCreator() {
-                @Override
-                public EventsWebSocket createWebSocket(final ServletUpgradeRequest servletUpgradeRequest,
-                        final ServletUpgradeResponse servletUpgradeResponse) {
-                    return new EventsWebSocket();
-                }
-            });
+            factory.setCreator((servletUpgradeRequest, servletUpgradeResponse) -> new EventsWebSocket());
         }
 
         private static class EventsWebSocket extends WebSocketAdapter {

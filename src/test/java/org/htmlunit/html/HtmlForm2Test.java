@@ -1227,7 +1227,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final List<NameValuePair> requestedParams =
                 getMockWebConnection().getLastWebRequest().getRequestParameters();
-        Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
+        requestedParams.sort(Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
 
@@ -1285,7 +1285,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final List<NameValuePair> requestedParams =
                 getMockWebConnection().getLastWebRequest().getRequestParameters();
-        Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
+        requestedParams.sort(Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
 
@@ -1328,7 +1328,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final List<NameValuePair> requestedParams =
                 getMockWebConnection().getLastWebRequest().getRequestParameters();
-        Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
+        requestedParams.sort(Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
 
@@ -1370,7 +1370,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final List<NameValuePair> requestedParams =
                 getMockWebConnection().getLastWebRequest().getRequestParameters();
-        Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
+        requestedParams.sort(Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
 
@@ -1409,7 +1409,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final List<NameValuePair> requestedParams =
                 getMockWebConnection().getLastWebRequest().getRequestParameters();
-        Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
+        requestedParams.sort(Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
 
@@ -1554,7 +1554,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         final List<NameValuePair> requestedParams =
                 getMockWebConnection().getLastWebRequest().getRequestParameters();
-        Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
+        requestedParams.sort(Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
 

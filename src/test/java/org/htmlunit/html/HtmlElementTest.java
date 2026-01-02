@@ -896,7 +896,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "<body><table><tr><td></tr></table>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
-        assertTrue(page.asXml().indexOf("/> ") == -1);
+        assertTrue(!page.asXml().contains("/> "));
     }
 
     /**

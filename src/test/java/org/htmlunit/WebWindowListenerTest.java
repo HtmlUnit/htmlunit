@@ -192,8 +192,7 @@ public class WebWindowListenerTest extends SimpleWebTestCase {
         private void log(final String prefix, final WebWindowEvent event) {
             msg_.append(prefix).append(" '");
             Page page = event.getOldPage();
-            if (page instanceof HtmlPage) {
-                final HtmlPage htmlPage = (HtmlPage) page;
+            if (page instanceof HtmlPage htmlPage) {
                 if (StringUtils.isNotBlank(htmlPage.getTitleText())) {
                     msg_.append(htmlPage.getTitleText());
                 }
@@ -213,8 +212,7 @@ public class WebWindowListenerTest extends SimpleWebTestCase {
 
             msg_.append("' - '");
             page = event.getNewPage();
-            if (page instanceof HtmlPage) {
-                final HtmlPage htmlPage = (HtmlPage) page;
+            if (page instanceof HtmlPage htmlPage) {
                 if (StringUtils.isNotBlank(htmlPage.getTitleText())) {
                     msg_.append(htmlPage.getTitleText());
                 }

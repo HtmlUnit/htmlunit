@@ -148,11 +148,7 @@ public class BrowserVersionFeaturesTest {
                     final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
                     final String browserVersionFeatures = BrowserVersionFeatures.class.getSimpleName();
                     for (final String line : lines) {
-                        for (final Iterator<String> it = unusedFeatures.iterator(); it.hasNext();) {
-                            if (line.contains(browserVersionFeatures + '.' + it.next())) {
-                                it.remove();
-                            }
-                        }
+                        unusedFeatures.removeIf(s -> line.contains(browserVersionFeatures + '.' + s));
                     }
                 }
             }

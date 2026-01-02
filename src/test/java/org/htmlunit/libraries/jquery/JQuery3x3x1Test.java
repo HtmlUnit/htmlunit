@@ -52,8 +52,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
                                         + getVersion() + "/expectations/results", ".txt");
         final String[] lines = testResults.split("\n");
         Arrays.sort(lines, Comparator.comparingInt(String::length));
-        for (int i = 0; i < lines.length; i++) {
-            final String line = lines[i];
+        for (final String line : lines) {
             final int pos = line.indexOf(testName);
             if (pos != -1) {
                 final int start = line.lastIndexOf('[') + 1;

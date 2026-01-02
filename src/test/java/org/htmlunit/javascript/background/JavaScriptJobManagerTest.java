@@ -74,7 +74,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         startTimedTest();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
@@ -115,7 +115,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         // loading the page takes some time (on our slow build machine);
@@ -197,7 +197,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         final HtmlPage page = loadPage(content, collectedAlerts);
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);

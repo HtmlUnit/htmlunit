@@ -66,8 +66,7 @@ public class ErrorOutputChecker implements BeforeEachCallback, AfterEachCallback
             final Optional<Object> testInstance = context.getTestInstance();
 
             if (testInstance.isPresent()
-                    && testInstance.get() instanceof WebDriverTestCase) {
-                final WebDriverTestCase webDriverTestCase = (WebDriverTestCase) testInstance.get();
+                    && testInstance.get() instanceof WebDriverTestCase webDriverTestCase) {
                 if (!webDriverTestCase.useRealBrowser()) {
                     verifyNoOutput();
                 }

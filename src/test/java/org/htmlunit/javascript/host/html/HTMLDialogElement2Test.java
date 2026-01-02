@@ -50,8 +50,7 @@ public class HTMLDialogElement2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final DomElement elem = page.getElementById("tester");
-        if (elem instanceof HtmlDialog) {
-            final HtmlDialog dialog = (HtmlDialog) elem;
+        if (elem instanceof HtmlDialog dialog) {
 
             assertFalse(dialog.isOpen());
             dialog.show();

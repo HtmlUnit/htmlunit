@@ -30,9 +30,7 @@ public class WebResponseData2Test extends SimpleWebTestCase {
     @Test
     public void bigContent() throws Exception {
         final StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < 300; i++) {
-            builder.append(' ');
-        }
+        builder.append(" ".repeat(300));
         builder.append("Hello World!");
         loadPage(builder.toString());
     }

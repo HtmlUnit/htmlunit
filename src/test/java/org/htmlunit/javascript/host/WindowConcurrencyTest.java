@@ -90,7 +90,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "<html><body><script language='JavaScript'>window.setTimeout('alert(\"Yo!\")',1);\n"
             + "</script></body></html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         loadPage(client_, content, collectedAlerts);
         assertEquals(0, client_.waitForBackgroundJavaScript(1000));
         assertEquals(new String[] {"Yo!"}, collectedAlerts);
@@ -107,7 +107,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "window.setTimeout(doTimeout,1);\n"
             + "</script></body></html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         loadPage(client_, content, collectedAlerts);
         assertEquals(0, client_.waitForBackgroundJavaScript(1000));
         assertEquals(new String[] {"Yo!"}, collectedAlerts);
@@ -128,7 +128,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "window.clearInterval(i);\n"
             + "</script></body></html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         loadPage(client_, content, collectedAlerts);
     }
 
@@ -159,7 +159,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         loadPage(client_, content, collectedAlerts);
         assertEquals(0, client_.waitForBackgroundJavaScript(1000));
         assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
@@ -187,7 +187,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "  }\n"
             + "</script></body></html>";
         final String[] expected = {"1"};
-        final List<String> actual = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> actual = Collections.synchronizedList(new ArrayList<>());
         startTimedTest();
         loadPage(client_, html, actual);
         assertEquals(0, client_.waitForBackgroundJavaScript(10_000));
@@ -209,7 +209,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
         final String secondContent = DOCTYPE_HTML
                 + "<html><head><title>Second</title></head><body></body></html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         client_.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -245,7 +245,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         loadPage(client_, content, collectedAlerts);
         client_.waitForBackgroundJavaScript(2000);
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
@@ -272,7 +272,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "  }\n"
             + "</script><div id='a'></div></body></html>";
         final String[] expected = {"true", "completed"};
-        final List<String> actual = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> actual = Collections.synchronizedList(new ArrayList<>());
         loadPage(client_, html, actual);
         client_.waitForBackgroundJavaScript(5000);
         assertEquals(expected, actual);
@@ -300,7 +300,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "addAnother();\n"
             + "</script></body></html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         loadPage(client_, content, collectedAlerts);
         assertEquals(0, client_.waitForBackgroundJavaScript((max + 1) * 1000));
         assertEquals(Collections.nCopies(max, "ping"), collectedAlerts);

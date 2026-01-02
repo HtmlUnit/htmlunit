@@ -1515,34 +1515,22 @@ public class OrderedFastHashMapTest {
     @Test
     public void collision() {
         final OrderedFastHashMap<MockKey<String>, String> f = new OrderedFastHashMap<>(13);
-        IntStream.range(0, 15).forEach(i -> {
-            f.put(new MockKey<>(12, "k" + i), "v" + i);
-        });
+        IntStream.range(0, 15).forEach(i -> f.put(new MockKey<>(12, "k" + i), "v" + i));
 
         assertEquals(15, f.size());
 
-        IntStream.range(0, 15).forEach(i -> {
-            assertEquals("v" + i, f.get(new MockKey<>(12, "k" + i)));
-        });
+        IntStream.range(0, 15).forEach(i -> assertEquals("v" + i, f.get(new MockKey<>(12, "k" + i))));
 
         // round 2
-        IntStream.range(0, 20).forEach(i -> {
-            f.put(new MockKey<>(12, "k" + i), "v" + i);
-        });
+        IntStream.range(0, 20).forEach(i -> f.put(new MockKey<>(12, "k" + i), "v" + i));
 
         assertEquals(20, f.size());
 
-        IntStream.range(0, 20).forEach(i -> {
-            assertEquals("v" + i, f.get(new MockKey<>(12, "k" + i)));
-        });
+        IntStream.range(0, 20).forEach(i -> assertEquals("v" + i, f.get(new MockKey<>(12, "k" + i))));
 
         // round 3
-        IntStream.range(0, 10).forEach(i -> {
-            assertEquals("v" + i, f.remove(new MockKey<>(12, "k" + i)));
-        });
-        IntStream.range(10, 20).forEach(i -> {
-            assertEquals("v" + i, f.get(new MockKey<>(12, "k" + i)));
-        });
+        IntStream.range(0, 10).forEach(i -> assertEquals("v" + i, f.remove(new MockKey<>(12, "k" + i))));
+        IntStream.range(10, 20).forEach(i -> assertEquals("v" + i, f.get(new MockKey<>(12, "k" + i))));
     }
 
     /**

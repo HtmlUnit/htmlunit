@@ -173,7 +173,7 @@ public class WebClient2Test extends SimpleWebTestCase {
         assertEquals(Integer.parseInt(expected[1]), clonedPage.getEnclosingWindow().getJobManager().getJobCount());
 
         // configure a new CollectingAlertHandler (in fact it has surely already one and we could get and cast it)
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         final AlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
         clonedPage.getWebClient().setAlertHandler(alertHandler);
 

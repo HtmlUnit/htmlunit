@@ -1707,17 +1707,14 @@ public class WebClientTest extends SimpleWebTestCase {
             client.setWebConnection(webConnection);
 
             final Exception[] exceptions = {null};
-            final Thread runner = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        client.getPage(URL_FIRST);
-                    }
-                    catch (final Exception e) {
-                        exceptions[0] = e;
-                    }
+            final Thread runner = new Thread(() -> {
+                try {
+                    client.getPage(URL_FIRST);
                 }
-            };
+                catch (final Exception e) {
+                    exceptions[0] = e;
+                }
+            });
 
             runner.start();
 

@@ -446,7 +446,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         final HtmlPage page = loadPage(html, collectedAlerts);
 
         startTimedTest();

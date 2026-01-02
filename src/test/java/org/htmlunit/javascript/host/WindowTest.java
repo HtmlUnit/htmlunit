@@ -581,12 +581,9 @@ public class WindowTest extends SimpleWebTestCase {
         final List<String> collectedConfirms = new ArrayList<>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        webClient.setConfirmHandler(new ConfirmHandler() {
-            @Override
-            public boolean handleConfirm(final Page page, final String message) {
-                collectedConfirms.add(message);
-                return true;
-            }
+        webClient.setConfirmHandler((ConfirmHandler) (page, message) -> {
+            collectedConfirms.add(message);
+            return true;
         });
 
         final String firstContent
@@ -849,12 +846,7 @@ public class WindowTest extends SimpleWebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final List<String> collectedStatus = new ArrayList<>();
-        webClient.setStatusHandler(new StatusHandler() {
-            @Override
-            public void statusMessageChanged(final Page page, final String message) {
-                collectedStatus.add(message);
-            }
-        });
+        webClient.setStatusHandler((StatusHandler) (page, message) -> collectedStatus.add(message));
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
 
@@ -1365,13 +1357,10 @@ public class WindowTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClientWithMockWebConnection();
         getMockWebConnection().setDefaultResponse("");
 
-        final OnbeforeunloadHandler handler = new OnbeforeunloadHandler() {
-            @Override
-            public boolean handleEvent(final Page page, final String returnValue) {
-                final String[] expectedRequests = {""};
-                assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(URL_FIRST));
-                return true;
-            }
+        final OnbeforeunloadHandler handler = (page, returnValue) -> {
+            final String[] expectedRequests = {""};
+            assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(URL_FIRST));
+            return true;
         };
         webClient.setOnbeforeunloadHandler(handler);
         loadPageWithAlerts(html);
@@ -1577,17 +1566,14 @@ public class WindowTest extends SimpleWebTestCase {
 
         assertEquals(getExpectedAlerts()[0], page.getTitleText());
 
-        webClient.setPrintHandler(new PrintHandler() {
-            @Override
-            public void handlePrint(final HtmlPage pageToPrint) {
-                try {
-                    Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
-                }
-                catch (final InterruptedException e) {
-                    pageToPrint.executeJavaScript("log('" + e.getMessage() + "');");
-                }
-                pageToPrint.executeJavaScript("log('print handled');");
+        webClient.setPrintHandler((PrintHandler) pageToPrint -> {
+            try {
+                Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
             }
+            catch (final InterruptedException e) {
+                pageToPrint.executeJavaScript("log('" + e.getMessage() + "');");
+            }
+            pageToPrint.executeJavaScript("log('print handled');");
         });
 
         page = webClient.getPage(URL_FIRST);
@@ -1648,10 +1634,7 @@ public class WindowTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
 
         // without an print handler set the print method is a noop
-        webClient.setPrintHandler(new PrintHandler() {
-            @Override
-            public void handlePrint(final HtmlPage page) {
-            }
+        webClient.setPrintHandler((PrintHandler) page -> {
         });
 
 
@@ -1715,14 +1698,9 @@ public class WindowTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
 
         // without an print handler set the print method is a noop
-        webClient.setPrintHandler(new PrintHandler() {
-            @Override
-            public void handlePrint(final HtmlPage page) {
-                page.executeJavaScript(
-                        "log(window.getComputedStyle(document.getElementById('tester') ,null)"
-                                + ".getPropertyValue('display'))");
-            }
-        });
+        webClient.setPrintHandler((PrintHandler) page -> page.executeJavaScript(
+                "log(window.getComputedStyle(document.getElementById('tester') ,null)"
+                        + ".getPropertyValue('display'))"));
 
 
         final String firstContent = DOCTYPE_HTML

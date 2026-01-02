@@ -279,11 +279,7 @@ public class JavaScriptConfigurationTest {
                 parent = parent.getSuperclass();
             }
 
-            List<String> clsAtLevel = levels.get(level);
-            if (clsAtLevel == null) {
-                clsAtLevel = new ArrayList<>();
-                levels.put(level, clsAtLevel);
-            }
+            List<String> clsAtLevel = levels.computeIfAbsent(level, k -> new ArrayList<>());
             clsAtLevel.add(c.getSimpleName());
         }
 

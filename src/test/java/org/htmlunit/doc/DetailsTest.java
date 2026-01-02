@@ -159,15 +159,10 @@ public class DetailsTest extends WebServerTestCase {
 
         try (WebClient webClient = new WebClient()) {
             // use our own FrameContentHandler
-            webClient.setFrameContentHandler(new FrameContentHandler() {
-
-                @Override
-                public boolean loadFrameDocument(final BaseFrameElement baseFrameElement) {
-                    final String src = baseFrameElement.getSrcAttribute();
-                    // don't load the content from google
-                    return !src.contains("google");
-                }
-
+            webClient.setFrameContentHandler(baseFrameElement -> {
+                final String src = baseFrameElement.getSrcAttribute();
+                // don't load the content from google
+                return !src.contains("google");
             });
 
             // use the client as usual

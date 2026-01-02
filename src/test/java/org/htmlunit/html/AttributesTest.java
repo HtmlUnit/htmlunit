@@ -171,9 +171,7 @@ public class AttributesTest {
                                 methodName.substring(3, methodName.length() - 9).toLowerCase(Locale.ROOT));
 
                 final String testName = createTestName(clazz, method);
-                tests.add(DynamicTest.dynamicTest(testName, () -> {
-                    executeAttributeTest(clazz, method, attributeName);
-                }));
+                tests.add(DynamicTest.dynamicTest(testName, () -> executeAttributeTest(clazz, method, attributeName)));
             }
         }
         return tests;
@@ -183,16 +181,16 @@ public class AttributesTest {
      * Normalizes attribute names for special cases.
      */
     private static String normalizeAttributeName(final String attributeName) {
-        switch (attributeName) {
-            case "xmllang": return "xml:lang";
-            case "columns": return "cols";
-            case "columnspan": return "colspan";
-            case "textdirection": return "dir";
-            case "httpequiv": return "http-equiv";
-            case "acceptcharset": return "accept-charset";
-            case "htmlfor": return "for";
-            default: return attributeName;
-        }
+        return switch (attributeName) {
+            case "xmllang" -> "xml:lang";
+            case "columns" -> "cols";
+            case "columnspan" -> "colspan";
+            case "textdirection" -> "dir";
+            case "httpequiv" -> "http-equiv";
+            case "acceptcharset" -> "accept-charset";
+            case "htmlfor" -> "for";
+            default -> attributeName;
+        };
     }
 
     /**

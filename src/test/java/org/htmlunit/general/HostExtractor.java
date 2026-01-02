@@ -96,11 +96,7 @@ public final class HostExtractor {
         final Set<String> unusedNames = new HashSet<>(set);
         final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
         for (final String line : lines) {
-            for (final Iterator<String> it = unusedNames.iterator(); it.hasNext();) {
-                if (line.contains("(\"" + it.next() + "\")")) {
-                    it.remove();
-                }
-            }
+            unusedNames.removeIf(s -> line.contains("(\"" + s + "\")"));
         }
         unusedNames.remove("this");
         unusedNames.remove("Boolean");

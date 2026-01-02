@@ -244,11 +244,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * All browsers supported.
      */
-    private static List<BrowserVersion> ALL_BROWSERS_ = Collections.unmodifiableList(
-            Arrays.asList(BrowserVersion.CHROME,
-                    BrowserVersion.EDGE,
-                    BrowserVersion.FIREFOX,
-                    BrowserVersion.FIREFOX_ESR));
+    private static List<BrowserVersion> ALL_BROWSERS_ = List.of(BrowserVersion.CHROME, BrowserVersion.EDGE, BrowserVersion.FIREFOX, BrowserVersion.FIREFOX_ESR);
 
     /**
      * Browsers which run by default.
@@ -1125,8 +1121,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final String... expectedAlerts) throws Exception {
 
         final StringBuilder expected = new StringBuilder();
-        for (int i = 0; i < expectedAlerts.length; i++) {
-            expected.append(expectedAlerts[i]).append('\u00A7');
+        for (String expectedAlert : expectedAlerts) {
+            expected.append(expectedAlert).append('\u00A7');
         }
         final String expectedTitle = expected.toString();
 
@@ -1155,8 +1151,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         final StringBuilder expected = new StringBuilder();
-        for (int i = 0; i < expectedAlerts.length; i++) {
-            expected.append(expectedAlerts[i]).append('\u00A7');
+        for (String expectedAlert : expectedAlerts) {
+            expected.append(expectedAlert).append('\u00A7');
         }
 
         final String title = driver.getTitle();
@@ -1204,8 +1200,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         final StringBuilder expected = new StringBuilder();
-        for (int i = 0; i < expectedAlerts.length; i++) {
-            expected.append(expectedAlerts[i]).append('\u00A7');
+        for (String expectedAlert : expectedAlerts) {
+            expected.append(expectedAlert).append('\u00A7');
         }
         verify(() -> textArea.getDomProperty("value"), expected.toString());
 
@@ -1246,8 +1242,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected final WebDriver verifyWindowName2(final WebDriver driver,
             final String... expectedAlerts) throws Exception {
         final StringBuilder expected = new StringBuilder();
-        for (int i = 0; i < expectedAlerts.length; i++) {
-            expected.append(expectedAlerts[i]).append('\u00A7');
+        for (String expectedAlert : expectedAlerts) {
+            expected.append(expectedAlert).append('\u00A7');
         }
 
         return verifyJsVariable(driver, "window.top.name", expected.toString());
@@ -1256,8 +1252,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected final WebDriver verifySessionStorage2(final WebDriver driver,
             final String... expectedAlerts) throws Exception {
         final StringBuilder expected = new StringBuilder();
-        for (int i = 0; i < expectedAlerts.length; i++) {
-            expected.append(expectedAlerts[i]).append('\u00A7');
+        for (String expectedAlert : expectedAlerts) {
+            expected.append(expectedAlert).append('\u00A7');
         }
 
         return verifyJsVariable(driver, "sessionStorage.getItem('Log')", expected.toString());
@@ -1329,14 +1325,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         if (!useRealBrowser()) {
             // check if we have data-image Url
-            for (int i = 0; i < expected.length; i++) {
-                if (expected[i].startsWith("data:image/png;base64,")) {
+            for (String s : expected) {
+                if (s.startsWith("data:image/png;base64,")) {
                     // we have to compare element by element
                     for (int j = 0; j < expected.length; j++) {
                         if (expected[j].startsWith("data:image/png;base64,")) {
                             compareImages(expected[j], actualAlerts.get(j));
-                        }
-                        else {
+                        } else {
                             assertEquals(expected[j], actualAlerts.get(j));
                         }
                     }

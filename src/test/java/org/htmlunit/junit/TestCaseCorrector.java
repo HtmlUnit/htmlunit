@@ -58,8 +58,7 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
         final Object testInstance = context.getRequiredTestInstance();
 
         if (Boolean.parseBoolean(System.getProperty(WebDriverTestCase.AUTOFIX_))
-                && testInstance instanceof WebDriverTestCase) {
-            final WebDriverTestCase webDriverTestCase = (WebDriverTestCase) testInstance;
+                && testInstance instanceof WebDriverTestCase webDriverTestCase) {
             final Method testMethod = context.getRequiredTestMethod();
             final boolean realBrowser = webDriverTestCase.useRealBrowser();
             final BrowserVersion browserVersion = webDriverTestCase.getBrowserVersion();
@@ -145,11 +144,7 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
             i--;
         }
         final List<String> alerts = CodeStyleTest.alertsToList(lines, i);
-        for (final Iterator<String> it = alerts.iterator(); it.hasNext();) {
-            if (it.next().startsWith(browserString + " = ")) {
-                it.remove();
-            }
-        }
+        alerts.removeIf(s -> s.startsWith(browserString + " = "));
         alerts.add(browserString + " = " + getActualString(comparisonFailure));
         lines.remove(i);
         while (lines.get(i).startsWith("        ")) {
@@ -244,11 +239,7 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
             }
             else {
                 final List<String> allBrowsers = new ArrayList<>(Arrays.asList("CHROME", "EDGE", "FF", "FF_ESR"));
-                for (final Iterator<String> it = allBrowsers.iterator(); it.hasNext();) {
-                    if (it.next().equals(browserString)) {
-                        it.remove();
-                    }
-                }
+                allBrowsers.removeIf(s -> s.equals(browserString));
                 lines.set(i - 1, "    @NotYetImplemented({" + String.join(", ", allBrowsers) + "})");
             }
         }

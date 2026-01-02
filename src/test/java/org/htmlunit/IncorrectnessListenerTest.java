@@ -43,12 +43,7 @@ public final class IncorrectnessListenerTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
 
         final List<String> collectedIncorrectness = new ArrayList<>();
-        final IncorrectnessListener listener = new IncorrectnessListener() {
-            @Override
-            public void notify(final String message, final Object origin) {
-                collectedIncorrectness.add(message);
-            }
-        };
+        final IncorrectnessListener listener = (message, origin) -> collectedIncorrectness.add(message);
         webClient.setIncorrectnessListener(listener);
 
         final MockWebConnection webConnection = new MockWebConnection();

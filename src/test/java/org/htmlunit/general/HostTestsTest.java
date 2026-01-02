@@ -53,11 +53,7 @@ public class HostTestsTest {
 
         // Remove all Prototypes, as we plan to have test cases separate for them soon
         // TODO: add Prototype tests (e.g. alert(Element.prototype)
-        for (final Iterator<String> it = set.iterator(); it.hasNext();) {
-            if (it.next().endsWith("Prototype")) {
-                it.remove();
-            }
-        }
+        set.removeIf(s -> s.endsWith("Prototype"));
         if (set.contains("Arguments")) {
             set.remove("Arguments");
             set.add("arguments");
@@ -99,11 +95,7 @@ public class HostTestsTest {
         final Set<String> unusedNames = new HashSet<>(set);
         final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
         for (final String line : lines) {
-            for (final Iterator<String> it = unusedNames.iterator(); it.hasNext();) {
-                if (line.contains("(\"" + it.next() + "\")")) {
-                    it.remove();
-                }
-            }
+            unusedNames.removeIf(s -> line.contains("(\"" + s + "\")"));
         }
         if (!unusedNames.isEmpty()) {
             fail("You must specify the following line"

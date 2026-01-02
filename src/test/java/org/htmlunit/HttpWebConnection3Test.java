@@ -160,8 +160,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             driver.get("http://localhost:" + primitiveWebServer.getPort());
             final String request = primitiveWebServer.getRequests().get(0);
             final String[] headers = request.split("\\r\\n");
-            for (int i = 0; i < headers.length; i++) {
-                final String header = headers[i];
+            for (final String header : headers) {
                 if (StringUtils.startsWithIgnoreCase(header, HttpHeader.ACCEPT_ENCODING_LC)) {
                     final String value = header.substring(header.indexOf(':') + 1);
                     assertEquals(getExpectedAlerts()[0], value.trim());
@@ -179,12 +178,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @return true when the url matches, false otherwise
      */
     public static ExpectedCondition<Boolean> currentUrlContains(final String url) {
-        return new ExpectedCondition<>() {
-            @Override
-            public Boolean apply(final WebDriver driver) {
-                final String currentUrl = driver.getCurrentUrl();
-                return currentUrl != null && currentUrl.contains(url);
-            }
+        return driver -> {
+            final String currentUrl = driver.getCurrentUrl();
+            return currentUrl != null && currentUrl.contains(url);
         };
     }
 

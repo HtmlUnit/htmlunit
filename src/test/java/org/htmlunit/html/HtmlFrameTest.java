@@ -239,12 +239,7 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         HtmlFrame frame1 = page.getHtmlElementById("frame1");
         assertEquals(getExpectedAlerts()[0], ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
-        webClient.setFrameContentHandler(new FrameContentHandler() {
-            @Override
-            public boolean loadFrameDocument(final BaseFrameElement baseFrameElement) {
-                return false;
-            }
-        });
+        webClient.setFrameContentHandler(baseFrameElement -> false);
 
         page = webClient.getPage(URL_FIRST);
         assertEquals("frames", page.getTitleText());

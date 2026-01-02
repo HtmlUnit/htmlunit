@@ -195,12 +195,7 @@ public class HtmlPage4Test extends WebServerTestCase {
 
     private static int getTempFiles() {
         final File file = new File(System.getProperty("java.io.tmpdir"));
-        final String[] list = file.list(new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return name.startsWith("htmlunit");
-            }
-        });
+        final String[] list = file.list((dir, name) -> name.startsWith("htmlunit"));
         if (list == null) {
             return 0;
         }
