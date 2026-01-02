@@ -90,10 +90,8 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
         final HtmlPage secondPage = imageInput.click(100, 200);
         assertNotNull(secondPage);
 
-        final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair[]{
-            new NameValuePair("x", "100"),
-            new NameValuePair("y", "200")
-        });
+        final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair("x", "100"),
+                new NameValuePair("y", "200"));
 
         assertEquals(expectedPairs, webConnection.getLastParameters());
     }

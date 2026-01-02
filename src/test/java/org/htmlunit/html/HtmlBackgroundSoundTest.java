@@ -49,7 +49,7 @@ public class HtmlBackgroundSoundTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver && getExpectedAlerts()[0].contains("Sound")) {
-            assertTrue(HtmlBackgroundSound.class.isInstance(toHtmlElement(driver.findElement(By.id("myId")))));
+            assertTrue(toHtmlElement(driver.findElement(By.id("myId"))) instanceof HtmlBackgroundSound);
         }
     }
 }

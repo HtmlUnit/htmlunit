@@ -18,7 +18,6 @@ import java.net.URL;
 import java.util.Collections;
 
 import org.htmlunit.HttpMethod;
-import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
 import org.htmlunit.http.HttpStatus;

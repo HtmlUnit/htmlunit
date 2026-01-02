@@ -900,7 +900,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         verifyTitle2(driver, getExpectedAlerts()[0]);
         driver.findElement(By.id("d1")).click();
-        verifyTitle2(driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
+        verifyTitle2(driver, getExpectedAlerts()[0], getExpectedAlerts()[1]);
         driver.findElement(By.id("d2")).click();
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }

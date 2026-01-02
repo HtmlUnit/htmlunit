@@ -116,7 +116,7 @@ public class XmlPageTest extends WebServerTestCase {
         client.setWebConnection(webConnection);
         final XmlPage xmlPage = client.getPage(URL_FIRST);
 
-        final DomElement msg = (DomElement) xmlPage.getFirstByXPath("//msg");
+        final DomElement msg = xmlPage.getFirstByXPath("//msg");
         assertNotNull("No element found by XPath '//msg'", msg);
         assertEquals(expected, msg.asNormalizedText());
     }
@@ -181,7 +181,7 @@ public class XmlPageTest extends WebServerTestCase {
         client.setWebConnection(webConnection);
 
         final Page page = client.getPage(URL_FIRST);
-        assertTrue(XmlPage.class.isInstance(page));
+        assertTrue(page instanceof XmlPage);
 
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getWebResponse().getContentAsString());
@@ -207,7 +207,7 @@ public class XmlPageTest extends WebServerTestCase {
         assertEquals("OK", page.getWebResponse().getStatusMessage());
         assertEquals(HttpStatus.OK_200, page.getWebResponse().getStatusCode());
         assertEquals(mimeType, page.getWebResponse().getContentType());
-        assertTrue(XmlPage.class.isInstance(page));
+        assertTrue(page instanceof XmlPage);
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getWebResponse().getContentAsString());
         assertNotNull(xmlPage.getXmlDocument());
@@ -240,7 +240,7 @@ public class XmlPageTest extends WebServerTestCase {
         assertEquals(HttpStatus.OK_200, page.getWebResponse().getStatusCode());
         assertEquals(MimeType.TEXT_XML, page.getWebResponse().getContentType());
 
-        assertTrue(Page.class.isInstance(page));
+        assertTrue(page instanceof Page);
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getWebResponse().getContentAsString());
         assertNull(xmlPage.getXmlDocument());
@@ -266,7 +266,7 @@ public class XmlPageTest extends WebServerTestCase {
         assertEquals(HttpStatus.OK_200, page.getWebResponse().getStatusCode());
         assertEquals(MimeType.TEXT_XML, page.getWebResponse().getContentType());
 
-        assertTrue(Page.class.isInstance(page));
+        assertTrue(page instanceof Page);
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getWebResponse().getContentAsString());
         assertNull(xmlPage.getXmlDocument());
@@ -292,7 +292,7 @@ public class XmlPageTest extends WebServerTestCase {
         assertEquals(HttpStatus.OK_200, page.getWebResponse().getStatusCode());
         assertEquals("text/xml", page.getWebResponse().getContentType());
 
-        assertTrue(Page.class.isInstance(page));
+        assertTrue(page instanceof Page);
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getWebResponse().getContentAsString());
         assertNull(xmlPage.getXmlDocument());
@@ -404,7 +404,7 @@ public class XmlPageTest extends WebServerTestCase {
         client.setWebConnection(webConnection);
         final XmlPage xmlPage = client.getPage(URL_FIRST);
 
-        final DomElement msg = (DomElement) xmlPage.getFirstByXPath("//msg");
+        final DomElement msg = xmlPage.getFirstByXPath("//msg");
         assertNotNull("No element found by XPath '//msg'", msg);
         assertEquals("abc", msg.asNormalizedText());
     }

@@ -87,7 +87,7 @@ public class XHtmlPageTest extends SimpleWebTestCase {
         assertEquals("OK", page.getWebResponse().getStatusMessage());
         assertEquals(HttpStatus.OK_200, page.getWebResponse().getStatusCode());
         assertEquals(MimeType.TEXT_XML, page.getWebResponse().getContentType());
-        assertTrue(XHtmlPage.class.isInstance(page));
+        assertTrue(page instanceof XHtmlPage);
     }
 
     /**

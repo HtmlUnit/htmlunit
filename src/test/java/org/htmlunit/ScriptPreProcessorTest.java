@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.html.HtmlElement;
-import org.htmlunit.html.HtmlPage;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -116,7 +114,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
         client.getPage("http://page");
 
         assertEquals(1, alerts.size());
-        assertEquals("implemented function", alerts.get(0).toString());
+        assertEquals("implemented function", alerts.get(0));
     }
 
     /**

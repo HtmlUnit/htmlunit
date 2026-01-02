@@ -51,7 +51,7 @@ public class HtmlMetaTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlMeta.class.isInstance(page.getHtmlElementById("m")));
+            assertTrue(page.getHtmlElementById("m") instanceof HtmlMeta);
         }
     }
 

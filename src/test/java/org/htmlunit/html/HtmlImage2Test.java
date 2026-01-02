@@ -800,7 +800,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
 
     private void addEventListener(final int statusCode) throws Exception {
         // use always a different url to avoid caching effects
-        final URL scriptUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".png");
+        final URL scriptUrl = new URL(URL_SECOND, System.currentTimeMillis() + ".png");
 
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

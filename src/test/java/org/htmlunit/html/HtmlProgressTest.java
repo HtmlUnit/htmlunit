@@ -50,10 +50,10 @@ public class HtmlProgressTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             if ("[object HTMLProgressElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(HtmlProgress.class.isInstance(page.getHtmlElementById("myId")));
+                assertTrue(page.getHtmlElementById("myId") instanceof HtmlProgress);
             }
             else {
-                assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
+                assertTrue(page.getHtmlElementById("myId") instanceof HtmlUnknownElement);
             }
         }
     }

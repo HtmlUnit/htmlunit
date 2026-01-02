@@ -101,7 +101,7 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
         final String scheme = new BasicScheme().getSchemeName();
 
         final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
-        provider.addCredentials("username", (char[]) null, HttpHeader.HOST_LC, 80, realm);
+        provider.addCredentials("username", null, HttpHeader.HOST_LC, 80, realm);
 
         final Credentials credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertEquals("username", credentials.getUserPrincipal().getName());

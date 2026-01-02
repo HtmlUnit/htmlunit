@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.FailingHttpStatusCodeException;
-import org.htmlunit.FrameContentHandler;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;

@@ -42,7 +42,6 @@ import org.htmlunit.ImmediateRefreshHandler;
 import org.htmlunit.IncorrectnessListener;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.OnbeforeunloadHandler;
-import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.StringWebResponse;
 import org.htmlunit.WaitingRefreshHandler;
@@ -739,8 +738,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final List<HtmlForm> expectedForms = Arrays.asList(new HtmlForm[] {page.getFormByName("one"),
-                page.getFormByName("two")});
+        final List<HtmlForm> expectedForms = Arrays.asList(page.getFormByName("one"),
+                page.getFormByName("two"));
         assertEquals(expectedForms, page.getForms());
     }
 
@@ -758,7 +757,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</head><body></body></html>";
 
         final WebClient client = getWebClient();
-        assertTrue(ImmediateRefreshHandler.class.isInstance(client.getRefreshHandler()));
+        assertTrue(client.getRefreshHandler() instanceof ImmediateRefreshHandler);
         try {
             loadPage(firstContent);
             Assertions.fail("should have thrown");
@@ -1346,7 +1345,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final HtmlPage page1 = loadPage(content, expectedAlerts);
         final byte[] bytes = SerializationUtils.serialize(page1);
 
-        final HtmlPage page2 = (HtmlPage) SerializationUtils.deserialize(bytes);
+        final HtmlPage page2 = SerializationUtils.deserialize(bytes);
 
         final Iterator<HtmlElement> iterator1 = page1.getHtmlElementDescendants().iterator();
         final Iterator<HtmlElement> iterator2 = page2.getHtmlElementDescendants().iterator();
@@ -1376,7 +1375,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final HtmlPage page1 = loadPage(content);
         final byte[] bytes = SerializationUtils.serialize(page1);
 
-        final HtmlPage page2 = (HtmlPage) SerializationUtils.deserialize(bytes);
+        final HtmlPage page2 = SerializationUtils.deserialize(bytes);
 
         final Iterator<HtmlElement> iterator1 = page1.getHtmlElementDescendants().iterator();
         final Iterator<HtmlElement> iterator2 = page2.getHtmlElementDescendants().iterator();
@@ -1405,7 +1404,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final HtmlPage page1 = loadPage(content);
         final byte[] bytes = SerializationUtils.serialize(page1);
 
-        final HtmlPage page2 = (HtmlPage) SerializationUtils.deserialize(bytes);
+        final HtmlPage page2 = SerializationUtils.deserialize(bytes);
 
         final Iterator<HtmlElement> iterator1 = page1.getHtmlElementDescendants().iterator();
         final Iterator<HtmlElement> iterator2 = page2.getHtmlElementDescendants().iterator();

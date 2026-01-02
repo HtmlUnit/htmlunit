@@ -53,7 +53,7 @@ public class SetExpectedAlertsBeforeTestExecutionCallback implements BeforeTestE
 
             Method testMethod = context.getRequiredTestMethod();
             final Optional<Method> potentialOberwrittenMethod =
-                    ReflectionUtils.findMethod(testInstance.getClass(), context.getDisplayName(), new Class[] {});
+                    ReflectionUtils.findMethod(testInstance.getClass(), context.getDisplayName());
             if (potentialOberwrittenMethod.isPresent()) {
                 testMethod = potentialOberwrittenMethod.get();
             }

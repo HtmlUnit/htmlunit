@@ -96,8 +96,7 @@ public class SelectionTest extends WebDriverTestCase {
     @Alerts({"1:null/0/null/0/true/None/0/",
              "2:s2/0/s2/1/false/Range/1/xyz[xyz"})
     public void selectAllChildren() throws Exception {
-        final String jsSnippet = ""
-            + "    alertSelection(selection);\n"
+        final String jsSnippet = "    alertSelection(selection);\n"
             + "    selection.selectAllChildren(s2);\n"
             + "    alertSelection(selection);\n";
 
@@ -113,8 +112,7 @@ public class SelectionTest extends WebDriverTestCase {
              "3:s2/0/s3/2/false/Range/1/xyzfoo---[xyzfoo---",
              "4:s2/0/s3/3/false/Range/1/xyzfoo---foo[xyzfoo---foo"})
     public void extend() throws Exception {
-        final String jsSnippet = ""
-            + "    selection.selectAllChildren(s2);\n"
+        final String jsSnippet = "    selection.selectAllChildren(s2);\n"
             + "    alertSelection(selection);\n"
             + "    if (selection.extend) {\n"
             + "      selection.extend(s3, 1);\n"
@@ -135,8 +133,7 @@ public class SelectionTest extends WebDriverTestCase {
     @Alerts({"1:s2/0/s2/1/false/Range/1/xyz[xyz",
              "2:s2/0/s2/0/true/Caret/1/["})
     public void collapseToStart() throws Exception {
-        final String jsSnippet = ""
-            + "    selection.selectAllChildren(s2);\n"
+        final String jsSnippet = "    selection.selectAllChildren(s2);\n"
             + "    alertSelection(selection);\n"
             + "    selection.collapseToStart();\n"
             + "    alertSelection(selection);\n";
@@ -151,8 +148,7 @@ public class SelectionTest extends WebDriverTestCase {
     @Alerts({"1:s2/0/s2/1/false/Range/1/xyz[xyz",
              "2:s2/1/s2/1/true/Caret/1/["})
     public void collapseToEnd() throws Exception {
-        final String jsSnippet = ""
-            + "    selection.selectAllChildren(s2);\n"
+        final String jsSnippet = "    selection.selectAllChildren(s2);\n"
             + "    alertSelection(selection);\n"
             + "    selection.collapseToEnd();\n"
             + "    alertSelection(selection);\n";
@@ -167,8 +163,7 @@ public class SelectionTest extends WebDriverTestCase {
     @Alerts({"1:s2/0/s2/1/false/Range/1/xyz[xyz",
              "2:null/0/null/0/true/None/0/"})
     public void empty() throws Exception {
-        final String jsSnippet = ""
-            + "    selection.selectAllChildren(s2);\n"
+        final String jsSnippet = "    selection.selectAllChildren(s2);\n"
             + "    alertSelection(selection);\n"
             + "    selection.empty();\n"
             + "    alertSelection(selection);\n";
@@ -184,8 +179,7 @@ public class SelectionTest extends WebDriverTestCase {
              "2:null/0/null/0/true/None/0/",
              "3:s2/1/s3/1/false/Range/1/foo[foo"})
     public void addRange() throws Exception {
-        final String jsSnippet = ""
-            + "      alertSelection(selection);\n"
+        final String jsSnippet = "      alertSelection(selection);\n"
 
             + "      var range = document.createRange();\n"
             + "      range.setStart(s2, 1);\n"
@@ -206,8 +200,7 @@ public class SelectionTest extends WebDriverTestCase {
              "2:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
              "3:null/0/null/0/true/None/0/"})
     public void removeAllRanges() throws Exception {
-        final String jsSnippet = ""
-            + "      alertSelection(selection);\n"
+        final String jsSnippet = "      alertSelection(selection);\n"
 
             + "      var range = document.createRange();\n"
             + "      range.setStart(s1, 1);\n"
@@ -228,8 +221,7 @@ public class SelectionTest extends WebDriverTestCase {
     @Alerts({"1:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
              "2:null/0/null/0/true/None/0/"})
     public void removeAllRanges2() throws Exception {
-        final String jsSnippet = ""
-            + "      var range = document.createRange();\n"
+        final String jsSnippet = "      var range = document.createRange();\n"
             + "      range.setStart(s1, 1);\n"
             + "      range.setEnd(s3, 1);\n"
             + "      selection.addRange(range);\n"
@@ -267,8 +259,7 @@ public class SelectionTest extends WebDriverTestCase {
                       "2:s1/0/s1/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
                       "3:null/0/null/0/true/None/0/"})
     public void selectAllChildrenAddRange() throws Exception {
-        final String jsSnippet = ""
-            + "      alertSelection(selection);\n"
+        final String jsSnippet = "      alertSelection(selection);\n"
 
             + "      selection.selectAllChildren(s1);\n"
             + "      var range = document.createRange();\n"
@@ -291,8 +282,7 @@ public class SelectionTest extends WebDriverTestCase {
              "2:s1/0/s1/1/false/Range/1/abc[abc",
              "3:null/0/null/0/true/None/0/"})
     public void addRangeSelectAllChildren() throws Exception {
-        final String jsSnippet = ""
-            + "      alertSelection(selection);\n"
+        final String jsSnippet = "      alertSelection(selection);\n"
 
             + "      var range = document.createRange();\n"
             + "      range.setStart(s1, 1);\n"
@@ -340,8 +330,7 @@ public class SelectionTest extends WebDriverTestCase {
                       "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
                       "4:null/0/null/0/true/None/0/"})
     public void addRangeAddRange() throws Exception {
-        final String jsSnippet = ""
-            + "      alertSelection(selection);\n"
+        final String jsSnippet = "      alertSelection(selection);\n"
 
             + "      selection.selectAllChildren(s1);\n"
             + "      var range = document.createRange();\n"
@@ -372,8 +361,7 @@ public class SelectionTest extends WebDriverTestCase {
              "2:null/0/null/0/true/None/0/",
              "false", "true"})
     public void aLittleBitOfEverything_removeRange() throws Exception {
-        final String jsSnippet = ""
-            + "    var range = document.createRange();\n"
+        final String jsSnippet = "    var range = document.createRange();\n"
             + "    range.setStart(s2.firstChild, 1);\n"
             + "    range.setEnd(s3.firstChild, 2);\n"
             + "    selection.addRange(range);\n"

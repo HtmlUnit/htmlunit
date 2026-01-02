@@ -77,8 +77,8 @@ public class HtmlModificationTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlInsertedText.class.isInstance(page.getHtmlElementById("myId1")));
-            assertTrue(HtmlDeletedText.class.isInstance(page.getHtmlElementById("myId2")));
+            assertTrue(page.getHtmlElementById("myId1") instanceof HtmlInsertedText);
+            assertTrue(page.getHtmlElementById("myId2") instanceof HtmlDeletedText);
         }
     }
 }

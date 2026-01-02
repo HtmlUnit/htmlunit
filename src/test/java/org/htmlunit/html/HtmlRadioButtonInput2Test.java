@@ -347,8 +347,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "    function test() {\n"
             + "      var existing = document.getElementById('rad1');\n";
         if (fromHtml) {
-            html += ""
-                + "      var builder = document.createElement('div');\n"
+            html += "      var builder = document.createElement('div');\n"
                 + "      builder.innerHTML = '<input type=\"radio\" id=\"rad2\" name=\"radar\"";
             if (checked) {
                 html += " checked";
@@ -357,8 +356,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
                 + "      var input = builder.firstChild;\n";
         }
         else {
-            html += ""
-                + "      var input = document.createElement('input');\n"
+            html += "      var input = document.createElement('input');\n"
                 + "      input.type = 'radio';\n"
                 + "      input.id = 'rad2';\n"
                 + "      input.name = 'radar';\n";
@@ -371,14 +369,12 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             html += "      input = input.cloneNode(true);\n";
             cloneNode = false;
         }
-        html += ""
-            + "      log(input.checked);\n"
+        html += "      log(input.checked);\n"
 
             + "      var parent = document.getElementById('myDiv');\n"
             + "      var after = document.getElementById('divAfter');\n";
         if (useFragment) {
-            html += ""
-                    + "      var appendix = document.createDocumentFragment();\n"
+            html += "      var appendix = document.createDocumentFragment();\n"
                     + "      appendix.appendChild(input);\n"
                     + "      log(input.checked + '-' + existing.checked);\n";
         }
@@ -401,8 +397,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
                 html += "      parent.insertBefore(appendix, after);\n";
             }
         }
-        html += ""
-            + "      input = document.getElementById('rad2');\n"
+        html += "      input = document.getElementById('rad2');\n"
             + "      log(input.checked + '-' + existing.checked);\n"
             + "      parent.removeChild(input);\n"
             + "      log(input.checked + '-' + existing.checked);\n"

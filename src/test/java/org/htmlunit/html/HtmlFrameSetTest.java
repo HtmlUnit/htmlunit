@@ -73,7 +73,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         assertEquals("Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText());
 
         final WebWindow thirdWebWindow = webClient.getWebWindowByName("right");
-        assertTrue(FrameWindow.class.isInstance(thirdWebWindow));
+        assertTrue(thirdWebWindow instanceof FrameWindow);
         assertSame(firstPage, ((FrameWindow) thirdWebWindow).getEnclosingPage());
         assertEquals("Third", ((HtmlPage) thirdWebWindow.getEnclosedPage()).getTitleText());
     }
@@ -101,7 +101,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");
-        assertTrue(FrameWindow.class.isInstance(secondWebWindow));
+        assertTrue(secondWebWindow instanceof FrameWindow);
         assertSame(firstPage, ((FrameWindow) secondWebWindow).getEnclosingPage());
         assertEquals("Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText());
     }

@@ -761,13 +761,13 @@ public class CodeStyleTest {
                     currentToken.append('"');
                 }
                 else {
-                    startsWithBraces = token.toString().contains("{");
+                    startsWithBraces = token.contains("{");
                 }
 
                 if (!insideString && token.startsWith(",") && !startsWithBraces) {
                     list.add(currentToken.toString());
                     currentToken.setLength(0);
-                    startsWithBraces = token.toString().contains("{");
+                    startsWithBraces = token.contains("{");
                 }
 
                 if (!insideString && token.contains("}")) {

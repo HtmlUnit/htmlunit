@@ -53,9 +53,9 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId1")));
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId2")));
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId3")));
+            assertTrue(page.getHtmlElementById("myId1") instanceof HtmlUnknownElement);
+            assertTrue(page.getHtmlElementById("myId2") instanceof HtmlUnknownElement);
+            assertTrue(page.getHtmlElementById("myId3") instanceof HtmlUnknownElement);
         }
     }
 
@@ -85,9 +85,9 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId1")));
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId2")));
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId3")));
+            assertTrue(page.getHtmlElementById("myId1") instanceof HtmlUnknownElement);
+            assertTrue(page.getHtmlElementById("myId2") instanceof HtmlUnknownElement);
+            assertTrue(page.getHtmlElementById("myId3") instanceof HtmlUnknownElement);
         }
     }
 

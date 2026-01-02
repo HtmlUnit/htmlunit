@@ -113,7 +113,7 @@ public class HtmlTable2Test extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlTable.class.isInstance(page.getHtmlElementById("myId")));
+            assertTrue(page.getHtmlElementById("myId") instanceof HtmlTable);
         }
     }
 

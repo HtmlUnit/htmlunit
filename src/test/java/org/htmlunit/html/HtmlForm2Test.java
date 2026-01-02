@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -366,8 +365,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[1], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[1], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
@@ -404,8 +403,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[1], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[1], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
@@ -1629,7 +1628,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
@@ -1664,7 +1663,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
@@ -1699,7 +1698,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**

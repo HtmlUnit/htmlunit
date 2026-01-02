@@ -50,7 +50,7 @@ public class HtmlWordBreakTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlWordBreak.class.isInstance(page.getHtmlElementById("myId")));
+            assertTrue(page.getHtmlElementById("myId") instanceof HtmlWordBreak);
         }
     }
 }

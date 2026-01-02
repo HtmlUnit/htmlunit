@@ -47,21 +47,21 @@ import org.junit.jupiter.api.Test;
  */
 public class ExternalTest {
 
-    static String SONATYPE_SNAPSHOT_REPO_URL_ =
+    static final String SONATYPE_SNAPSHOT_REPO_URL_ =
                         "https://central.sonatype.com/repository/maven-snapshots/";
-    static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
+    static final String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "143.0.7499";
-    static String CHROME_DRIVER_URL_ =
+    static final String CHROME_DRIVER_ = "143.0.7499";
+    static final String CHROME_DRIVER_URL_ =
             "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json";
 
-    static String EDGE_DRIVER_ = "143.0.3650";
-    static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
+    static final String EDGE_DRIVER_ = "143.0.3650";
+    static final String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
-    static String GECKO_DRIVER_ = "0.36.0";
-    static String GECKO_DRIVER_URL_ = "https://github.com/mozilla/geckodriver/releases/latest";
+    static final String GECKO_DRIVER_ = "0.36.0";
+    static final String GECKO_DRIVER_URL_ = "https://github.com/mozilla/geckodriver/releases/latest";
 
     /**
      * Tests the current environment matches the expected setup.
@@ -100,7 +100,7 @@ public class ExternalTest {
             if (inComment) {
                 final int endIdx = line.indexOf("-->");
                 if (endIdx != -1) {
-                    cleaned += line.substring(endIdx + 3, line.length());
+                    cleaned += line.substring(endIdx + 3);
                     inComment = false;
                 }
                 line = cleaned;

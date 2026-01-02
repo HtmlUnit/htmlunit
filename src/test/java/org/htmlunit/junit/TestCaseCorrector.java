@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -203,7 +202,7 @@ public final class TestCaseCorrector implements TestExecutionExceptionHandler {
                 if (!builder.isEmpty()) {
                     builder.append(System.lineSeparator()).append("                + ");
                 }
-                builder.append('"').append(actual.substring(0, length)).append('"');
+                builder.append('"').append(actual, 0, length).append('"');
                 actual = actual.substring(length);
             }
             return builder.toString();

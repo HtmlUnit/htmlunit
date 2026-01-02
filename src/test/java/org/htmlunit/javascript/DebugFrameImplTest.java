@@ -51,7 +51,7 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
      */
     public DebugFrameImplTest() throws Exception {
         client_ = new WebClient(BrowserVersion.FIREFOX);
-        ((JavaScriptEngine) client_.getJavaScriptEngine()).getContextFactory().setDebugger(new DebuggerImpl());
+        client_.getJavaScriptEngine().getContextFactory().setDebugger(new DebuggerImpl());
 
         originalLogLevel_ = loggerDebugFrameImpl_.getLevel();
         loggerDebugFrameImpl_.setLevel(Level.TRACE);

@@ -124,7 +124,7 @@ public class ScriptEncodingTest extends WebDriverTestCase {
             final boolean gzip) throws Exception {
 
         // use always a different url to avoid caching effects
-        final URL scriptUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".js");
+        final URL scriptUrl = new URL(URL_SECOND, System.currentTimeMillis() + ".js");
 
         String html = DOCTYPE_HTML
             + "<html><head>\n"

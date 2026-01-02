@@ -39,7 +39,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @AfterEach
     public void shutDownRealBrowsers() throws Exception {
-        super.shutDownAll();
+        shutDownAll();
     }
 
     /**

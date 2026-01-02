@@ -109,7 +109,7 @@ public final class JQueryExtractor {
                         final String testId = line.substring(start, end);
 
                         line = line.substring(0, line.indexOf(RERUN_ID)).trim();
-                        final String prefix = "" + testNumber + ".";
+                        final String prefix = testNumber + ".";
                         if (line.startsWith(prefix)) {
                             line = line.substring(prefix.length());
                         }

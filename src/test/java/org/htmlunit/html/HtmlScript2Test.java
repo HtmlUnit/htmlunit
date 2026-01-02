@@ -895,7 +895,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
 
     private void addEventListener(final int statusCode) throws Exception {
         // use always a different url to avoid caching effects
-        final URL scriptUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".js");
+        final URL scriptUrl = new URL(URL_SECOND, System.currentTimeMillis() + ".js");
 
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

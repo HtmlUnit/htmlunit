@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
  */
 public class Console2Test extends SimpleWebTestCase {
 
-    private final class LoggerMock implements Logger {
+    private static final class LoggerMock implements Logger {
         private final List<String> messages_;
 
         private LoggerMock(final List<String> messages) {

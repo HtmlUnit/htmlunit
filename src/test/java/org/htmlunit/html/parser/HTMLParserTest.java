@@ -58,7 +58,7 @@ public class HTMLParserTest extends SimpleWebTestCase {
         final String stringVal = page.<HtmlDivision>getFirstByXPath("//div").getFirstChild().getNodeValue();
         assertEquals("TEST", stringVal);
 
-        final HtmlElement node = (HtmlElement) page.getFirstByXPath("//*[./text() = 'TEST']");
+        final HtmlElement node = page.getFirstByXPath("//*[./text() = 'TEST']");
         assertEquals(node.getTagName(), HtmlDivision.TAG_NAME);
     }
 

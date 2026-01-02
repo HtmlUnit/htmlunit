@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -107,7 +106,7 @@ public final class HostExtractor {
                 if (name.contains(" ")) {
                     continue;
                 }
-                System.out.println("");
+                System.out.println();
                 System.out.println("    /**");
                 System.out.println("     * @throws Exception if the test fails");
                 System.out.println("     */");

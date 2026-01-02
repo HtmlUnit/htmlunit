@@ -51,7 +51,7 @@ public class HtmlTableColumnTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlTableColumn.class.isInstance(page.getHtmlElementById("myId")));
+            assertTrue(page.getHtmlElementById("myId") instanceof HtmlTableColumn);
         }
     }
 }

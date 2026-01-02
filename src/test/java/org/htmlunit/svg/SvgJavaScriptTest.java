@@ -34,8 +34,7 @@ public class SvgJavaScriptTest extends WebDriverTestCase {
      */
     @Test
     public void onclick() throws Exception {
-        final String html = ""
-            + "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        final String html = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
             + "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" baseProfile=\"full\" width=\"100px\""
             + " height=\"100px\" viewBox=\"0 0 100 100\">\n"
             + "  <rect id=\"rect\" width=\"50\" height=\"50\" fill=\"blue\" "

@@ -115,7 +115,7 @@ public final class MozillaTestGenerator {
             System.out.println("    private void test(final String script) throws Exception {");
             System.out.println("        test(null, script);");
             System.out.println("    }");
-            System.out.println("");
+            System.out.println();
             System.out.println(
                     "    private void test(final String initialScript, final String script) throws Exception {");
             System.out.println("        String html = \"<html><head><title>foo</title><script>\\n\";");

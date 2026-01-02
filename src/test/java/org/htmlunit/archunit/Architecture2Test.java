@@ -96,21 +96,21 @@ public class Architecture2Test {
         if (tmp.size() + oneTests.size() > 0) {
             if (tmp.isEmpty()) {
                 Assertions.fail("The " + oneTests.size() + " method(s) "
-                    + oneTests.stream().sorted().collect(Collectors.toList())
+                    + oneTests.stream().sorted().toList()
                     + " are available in " + oneName + " but missing in " + anotherName + ".");
             }
             else if (oneTests.isEmpty()) {
                 anotherTests.removeAll(oneTests);
                 Assertions.fail("The " + tmp.size() + " method(s) "
-                    + tmp.stream().sorted().collect(Collectors.toList())
+                    + tmp.stream().sorted().toList()
                     + " are available in " + anotherName + " but missing in " + oneName + ".");
             }
 
             Assertions.fail("The " + tmp.size() + " method(s) "
-                    + tmp.stream().sorted().collect(Collectors.toList())
+                    + tmp.stream().sorted().toList()
                     + " are available in " + anotherName + " but missing in " + oneName
                     + " and the " + oneTests.size() + " method(s) "
-                    + oneTests.stream().sorted().collect(Collectors.toList())
+                    + oneTests.stream().sorted().toList()
                     + " are available in " + oneName + " but missing in " + anotherName + ".");
         }
     }
@@ -131,7 +131,7 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
 
-        .should().callMethod(BrowserVersion.class, "isChrome", new Class[] {});
+        .should().callMethod(BrowserVersion.class, "isChrome");
 
     /**
      * Do not use BrowserVersion.isEdge().
@@ -150,7 +150,7 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
 
-        .should().callMethod(BrowserVersion.class, "isEdge", new Class[] {});
+        .should().callMethod(BrowserVersion.class, "isEdge");
 
     /**
      * Do not use BrowserVersion.isFirefox().
@@ -170,7 +170,7 @@ public class Architecture2Test {
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.general.huge.ElementClosesElementTest")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.general.huge.ElementClosesElement2Test")
-        .should().callMethod(BrowserVersion.class, "isFirefox", new Class[] {});
+        .should().callMethod(BrowserVersion.class, "isFirefox");
 
     /**
      * Do not use BrowserVersion.isFirefoxESR().
@@ -184,7 +184,7 @@ public class Architecture2Test {
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
-        .should().callMethod(BrowserVersion.class, "isFirefoxESR", new Class[] {});
+        .should().callMethod(BrowserVersion.class, "isFirefoxESR");
 
     /**
      * Do not use hamcrest.

@@ -172,7 +172,7 @@ public class WebWindowListenerTest extends SimpleWebTestCase {
         assertEquals(getExpectedAlerts()[0], logger.getMsg());
     }
 
-    private final class LoggingWebWindowListener implements WebWindowListener {
+    private static final class LoggingWebWindowListener implements WebWindowListener {
         private final StringBuilder msg_ = new StringBuilder();
 
         @Override

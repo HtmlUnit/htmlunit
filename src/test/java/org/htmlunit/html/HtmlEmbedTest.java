@@ -55,7 +55,7 @@ public class HtmlEmbedTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlElement element = toHtmlElement(driver.findElement(By.id("myId")));
-            assertTrue(HtmlEmbed.class.isInstance(element));
+            assertTrue(element instanceof HtmlEmbed);
         }
     }
 

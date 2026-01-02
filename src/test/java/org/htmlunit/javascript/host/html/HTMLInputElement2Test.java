@@ -52,7 +52,7 @@ public class HTMLInputElement2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final String[] expected = getExpectedAlerts();
-        setExpectedAlerts(new String[] {expected[0]});
+        setExpectedAlerts(expected[0]);
         final HtmlPage page = loadPageWithAlerts(html);
         final HtmlTextInput input = page.getHtmlElementById("myInput");
 

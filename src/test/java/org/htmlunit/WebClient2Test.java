@@ -169,7 +169,7 @@ public class WebClient2Test extends SimpleWebTestCase {
         page.getWebClient().close();
 
         // deserialize page and verify that 1 background job exists
-        final HtmlPage clonedPage = (HtmlPage) SerializationUtils.deserialize(bytes);
+        final HtmlPage clonedPage = SerializationUtils.deserialize(bytes);
         assertEquals(Integer.parseInt(expected[1]), clonedPage.getEnclosingWindow().getJobManager().getJobCount());
 
         // configure a new CollectingAlertHandler (in fact it has surely already one and we could get and cast it)

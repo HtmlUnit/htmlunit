@@ -360,7 +360,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
 
         assertNotSame("new page not returned", page, secondPage);
         assertTrue("new page in wrong window type",
-                TopLevelWindow.class.isInstance(secondPage.getEnclosingWindow()));
+                secondPage.getEnclosingWindow() instanceof TopLevelWindow);
         assertEquals("new window not created", 2, page.getWebClient().getWebWindows().size());
         assertNotSame("new window not used", page.getEnclosingWindow(), secondPage
                 .getEnclosingWindow());

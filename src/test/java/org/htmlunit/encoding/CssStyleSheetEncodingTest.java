@@ -117,7 +117,7 @@ public class CssStyleSheetEncodingTest extends WebDriverTestCase {
             final String bom) throws Exception {
 
         // use always a different url to avoid caching effects
-        final URL cssUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".js");
+        final URL cssUrl = new URL(URL_SECOND, System.currentTimeMillis() + ".js");
 
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

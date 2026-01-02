@@ -1731,7 +1731,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
         final String text = (String) ((JavascriptExecutor) driver)
                 .executeScript("return document.getElementById('tester').outerText");
-        assertEquals(getExpectedAlerts()[0], "" + text);
+        assertEquals(getExpectedAlerts()[0], text);
     }
 
     /**

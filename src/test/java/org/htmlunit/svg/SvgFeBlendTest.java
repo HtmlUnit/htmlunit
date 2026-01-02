@@ -53,7 +53,7 @@ public class SvgFeBlendTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(SvgFeBlend.class.isInstance(page.getElementById("myId")));
+            assertTrue(page.getElementById("myId") instanceof SvgFeBlend);
         }
     }
 }

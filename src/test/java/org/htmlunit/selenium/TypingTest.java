@@ -325,7 +325,7 @@ public class TypingTest extends SeleniumTest {
         assertNull(element.getDomAttribute("value"));
         assertEquals("done", element.getDomProperty("value"));
 
-        element.sendKeys("" + Keys.SHIFT + "ALL " + Keys.HOME);
+        element.sendKeys(Keys.SHIFT + "ALL " + Keys.HOME);
         assertEquals("ALL done", element.getAttribute("value"));
         assertNull(element.getDomAttribute("value"));
         assertEquals("ALL done", element.getDomProperty("value"));

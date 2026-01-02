@@ -97,7 +97,7 @@ public class StyleAttributesTest {
     public void javaDoc() throws IOException {
         try (Stream<String> stream = Files.lines(Paths.get("src/main/java/"
                 + getClass().getPackage().getName().replace('.', '/') + "/StyleAttributes.java"))) {
-            final List<String> lines = stream.collect(Collectors.toList());
+            final List<String> lines = stream.toList();
             final Pattern pattern = Pattern.compile("\\s+[A-Z_]+\\(\"(.*?)\",");
             for (int i = 1; i < lines.size(); i++) {
                 final Matcher matcher = pattern.matcher(lines.get(i));

@@ -103,9 +103,7 @@ public class HtmlButtonTest extends SimpleWebTestCase {
         assertEquals(expectedAlerts, collectedAlerts);
 
         assertNotSame(page, secondPage);
-        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[]{
-            new NameValuePair("button", "foo")
-        });
+        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair("button", "foo"));
         final List<NameValuePair> collectedParameters = getMockConnection(secondPage).getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);

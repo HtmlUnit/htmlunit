@@ -340,7 +340,7 @@ public class WebRequestTest {
         request.setDefaultResponseContentCharset(StandardCharsets.US_ASCII);
 
         final byte[] bytes = SerializationUtils.serialize(request);
-        final WebRequest deserialized = (WebRequest) SerializationUtils.deserialize(bytes);
+        final WebRequest deserialized = SerializationUtils.deserialize(bytes);
 
         assertEquals(URL_FIRST, deserialized.getUrl());
         assertEquals(StandardCharsets.UTF_8, deserialized.getCharset());

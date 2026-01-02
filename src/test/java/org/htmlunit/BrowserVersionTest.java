@@ -16,6 +16,8 @@ package org.htmlunit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.TimeZone;
@@ -54,10 +56,10 @@ public class BrowserVersionTest {
         final BrowserVersion clone = new BrowserVersion.BrowserVersionBuilder(ff).build();
 
         // Nickname is used as key for dictionaries storing browser setups
-        assertTrue(ff.getNickname().equals(clone.getNickname()));
+        assertEquals(ff.getNickname(), clone.getNickname());
 
-        assertFalse(ff == clone);
-        assertFalse(ff.equals(clone));
+        assertNotSame(ff, clone);
+        assertNotEquals(ff, clone);
     }
 
     /**
@@ -70,10 +72,10 @@ public class BrowserVersionTest {
                                                 .build();
 
         // Nickname is used as key for dictionaries storing browser setups
-        assertTrue(BrowserVersion.FIREFOX.getNickname().equals(ffBerlin.getNickname()));
+        assertEquals(BrowserVersion.FIREFOX.getNickname(), ffBerlin.getNickname());
 
-        assertFalse(BrowserVersion.FIREFOX == ffBerlin);
-        assertFalse(BrowserVersion.FIREFOX.equals(ffBerlin));
+        assertNotSame(BrowserVersion.FIREFOX, ffBerlin);
+        assertNotEquals(BrowserVersion.FIREFOX, ffBerlin);
 
         Assertions.assertNotEquals(BrowserVersion.FIREFOX.getSystemTimezone(), ffBerlin.getSystemTimezone());
     }

@@ -541,7 +541,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0], getExpectedAlerts()[1]);
 
         driver.findElement(By.name("submit1")).click();
         if (useRealBrowser()) {
@@ -586,7 +586,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0], getExpectedAlerts()[1]);
 
         driver.findElement(By.name("submit1")).click();
         if (useRealBrowser()) {
@@ -2798,7 +2798,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         if (getExpectedAlerts().length == 1) {
-            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            verifyAlerts(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0]);
             return;
         }
 
@@ -2840,7 +2840,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         if (getExpectedAlerts().length == 1) {
-            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            verifyAlerts(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0]);
             return;
         }
 
@@ -2884,7 +2884,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         if (getExpectedAlerts().length == 1) {
-            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            verifyAlerts(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0]);
             return;
         }
 
@@ -2931,11 +2931,11 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         if (getExpectedAlerts().length == 1) {
-            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            verifyAlerts(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0]);
             return;
         }
 
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[1]});
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[1]);
         assertTitle(driver, getExpectedAlerts()[0]);
     }
 
@@ -2973,11 +2973,11 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         if (getExpectedAlerts().length == 1) {
-            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            verifyAlerts(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0]);
             return;
         }
 
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[1]});
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[1]);
         assertTitle(driver, getExpectedAlerts()[0]);
     }
 

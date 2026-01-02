@@ -444,7 +444,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final HtmlElement div = page.getFirstByXPath("//div");
         assertSame(div, page.getHtmlElementById("d1"));
-        final HtmlListItem listItem = (HtmlListItem) div.getFirstByXPath("ul/li");
+        final HtmlListItem listItem = div.getFirstByXPath("ul/li");
         assertSame(listItem, page.getFirstByXPath("//ul/li"));
 
         assertEquals(2, ((Number) div.getFirstByXPath("count(//li)")).intValue());
@@ -684,7 +684,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         getMockWebConnection().setResponse(URL_FIRST, xml, MimeType.TEXT_XML);
         final WebClient client = getWebClientWithMockWebConnection();
-        final XmlPage page = (XmlPage) client.getPage(URL_FIRST);
+        final XmlPage page = client.getPage(URL_FIRST);
 
         final List<?> results = page.getByXPath("//title");
         assertEquals(1, results.size());

@@ -824,7 +824,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 fail("Script was still running after timeout");
             }
 
-            Assertions.assertTrue(exceptions[0] instanceof RuntimeException, exceptions[0].getMessage());
+            Assertions.assertInstanceOf(RuntimeException.class, exceptions[0], exceptions[0].getMessage());
             final Throwable cause = exceptions[0].getCause();
             String msg = cause.getMessage();
             Assertions.assertTrue(cause.getMessage().startsWith(

@@ -48,7 +48,7 @@ public class ClassConfigurationTest {
     /**
      * Test class.
      */
-    protected class ConfigTestClass extends HtmlUnitScriptable {
+    protected static class ConfigTestClass extends HtmlUnitScriptable {
         private boolean test_ = false;
 
         /**

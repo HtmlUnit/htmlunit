@@ -809,9 +809,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         secondPage.getHtmlElementById("button").click();
 
-        final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent[]{
-            new WebWindowEvent(secondWindow, WebWindowEvent.CLOSE, secondPage, null)
-        });
+        final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent(secondWindow, WebWindowEvent.CLOSE, secondPage, null));
         assertEquals(expectedEvents, events);
 
         assertEquals(1, webClient.getWebWindows().size());
@@ -1334,7 +1332,7 @@ public class WindowTest extends SimpleWebTestCase {
             final HtmlInput input = dialogPage.getHtmlElementById("name");
             input.setValue("a");
 
-            final HtmlButtonInput button2 = (HtmlButtonInput) dialogPage.getHtmlElementById("b");
+            final HtmlButtonInput button2 = dialogPage.getHtmlElementById("b");
             button2.click();
 
             assertEquals(getExpectedAlerts(), actual);

@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.file;
 
 import java.io.File;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;

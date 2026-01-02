@@ -84,7 +84,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
             path = path.substring(1);
         }
         if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
-            testFileInput(new File(URLDecoder.decode(path.replace('/', '\\'), UTF_8.name())));
+            testFileInput(new File(URLDecoder.decode(path.replace('/', '\\'), UTF_8)));
         }
         testFileInput(new File("file:/" + path));
         testFileInput(new File("file://" + path));
@@ -721,7 +721,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
                 + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        final HtmlFileInput file = page.<HtmlFileInput>getHtmlElementById("fileId");
+        final HtmlFileInput file = page.getHtmlElementById("fileId");
         assertEquals(0, file.getFiles().length);
     }
 
@@ -745,7 +745,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
                 + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        final HtmlFileInput file = page.<HtmlFileInput>getHtmlElementById("fileId");
+        final HtmlFileInput file = page.getHtmlElementById("fileId");
         file.setValue("");
         assertEquals(0, file.getFiles().length);
     }

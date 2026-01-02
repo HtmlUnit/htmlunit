@@ -62,10 +62,10 @@ public class SvgScriptTest extends WebDriverTestCase {
 
     private void assertType(final String expectedAlert, final DomElement element) {
         if ("[object SVGScriptElement]".equals(expectedAlert)) {
-            assertTrue(SvgScript.class.isInstance(element));
+            assertTrue(element instanceof SvgScript);
         }
         else {
-            assertTrue(HtmlScript.class.isInstance(element));
+            assertTrue(element instanceof HtmlScript);
         }
     }
 

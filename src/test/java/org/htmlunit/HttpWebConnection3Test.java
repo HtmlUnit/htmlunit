@@ -17,6 +17,7 @@ package org.htmlunit;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Arrays;
 
@@ -235,7 +236,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 + "Location: "
                     +  url
                     + "test?"
-                    + URLEncoder.encode("\u0623\u0647\u0644\u0627\u064b", "UTF-8")
+                    + URLEncoder.encode("\u0623\u0647\u0644\u0627\u064b", StandardCharsets.UTF_8)
                     + "\r\n"
                 + "\r\n";
 
@@ -273,7 +274,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 + "Content-Length: 0\r\n"
                 + "Location: "
                     +  url
-                    + URLEncoder.encode("\u0623\u0647\u0644\u0627\u064b", "UTF-8")
+                    + URLEncoder.encode("\u0623\u0647\u0644\u0627\u064b", StandardCharsets.UTF_8)
                     + "\r\n"
                 + "\r\n";
 
@@ -1463,8 +1464,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final String hi = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: 0\r\n"
                 + "Content-Type: text/javascript\r\n"
-                + "\r\n"
-                + "";
+                + "\r\n";
 
         shutDownAll();
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(Charset.forName("GB2312"), html, hi)) {
@@ -1485,7 +1485,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
             // let's try some wait on our CI server
             final long endTime = System.currentTimeMillis() + Duration.ofSeconds(4).toMillis();
-            while (primitiveWebServer.getRequests().size() < 1
+            while (primitiveWebServer.getRequests().isEmpty()
                         && System.currentTimeMillis() < endTime) {
                 Thread.sleep(100);
             }

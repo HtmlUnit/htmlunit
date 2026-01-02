@@ -73,7 +73,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final BrowserVersion browserVersion = getBrowserVersion();
 
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
+        final HTMLStyleElement host = node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
 
         Selector selector = parseSelector(sheet, "*.yui-log input");

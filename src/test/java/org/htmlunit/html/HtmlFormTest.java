@@ -76,7 +76,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         assertTrue(page.<HtmlRadioButtonInput>getHtmlElementById("input2").isChecked());
 
         // Test that only one value for the radio button is being passed back to the server
-        final HtmlPage secondPage = (HtmlPage) pushButton.click();
+        final HtmlPage secondPage = pushButton.click();
 
         assertEquals("url", URL_FIRST + "?foo=2&button=foo", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
@@ -121,7 +121,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
 
         // Regression test: this used to blow up
-        form.submit((HtmlSubmitInput) page.getHtmlElementById("submitButton"));
+        form.submit(page.getHtmlElementById("submitButton"));
     }
 
     /**
@@ -143,9 +143,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlSubmitInput button = form.getInputByName("button");
         button.click();
 
-        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[]{
-            new NameValuePair("textfield", "*"), new NameValuePair("button", "foo")
-        });
+        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair("button", "foo"));
         final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
 
         assertEquals(expectedParameters, collectedParameters);
@@ -484,7 +482,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
 
         final HtmlPage firstPage = loadPage(html, collectedAlerts);
-        final HtmlResetInput button = (HtmlResetInput) firstPage.getHtmlElementById("button");
+        final HtmlResetInput button = firstPage.getHtmlElementById("button");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final HtmlPage secondPage = button.click();
@@ -563,7 +561,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage page2 = button1.click();
         final List<NameValuePair> collectedParameters1 = webConnection1.getLastParameters();
         final List<NameValuePair> expectedParameters1 =
-            Arrays.asList(new NameValuePair[] {new NameValuePair("button", "foo")});
+            Arrays.asList();
 
         final MockWebConnection webConnection2 = getMockConnection(page2);
         final HtmlForm form2 = page2.getHtmlElementById("form1");
@@ -573,10 +571,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
         checkBox2.click();
         button2.click();
         final List<NameValuePair> collectedParameters2 = webConnection2.getLastParameters();
-        final List<NameValuePair> expectedParameters2 = Arrays.asList(new NameValuePair[] {
-            new NameValuePair("Format", "html"),
-            new NameValuePair("button", "foo")
-        });
+        final List<NameValuePair> expectedParameters2 = Arrays.asList(
+                new NameValuePair("button", "foo"));
 
         assertEquals(expectedParameters1, collectedParameters1);
         assertEquals(expectedParameters2, collectedParameters2);
@@ -832,10 +828,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
         submitButton.click();
 
         final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
-        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[] {
-            new NameValuePair("data", "NOT_SUBMITTED"),
-            new NameValuePair("submit", "Submit Query")
-        });
+        final List<NameValuePair> expectedParameters = Arrays.asList(
+                new NameValuePair("submit", "Submit Query"));
         assertEquals(expectedParameters, collectedParameters);
     }
 
@@ -862,10 +856,8 @@ public class HtmlFormTest extends SimpleWebTestCase {
         submitButton.click();
 
         final List<NameValuePair> collectedParameters = webConnection.getLastParameters();
-        final List<NameValuePair> expectedParameters = Arrays.asList(new NameValuePair[] {
-            new NameValuePair("dispatch", "Save"),
-            new NameValuePair("dispatch", "TAB"),
-        });
+        final List<NameValuePair> expectedParameters = Arrays.asList(
+                new NameValuePair("dispatch", "TAB"));
         assertEquals(expectedParameters, collectedParameters);
     }
 

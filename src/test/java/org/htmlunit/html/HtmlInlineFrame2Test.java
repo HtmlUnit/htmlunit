@@ -61,7 +61,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
         final WebDriver webDriver = loadPageVerifyTitle2(html);
         if (webDriver instanceof HtmlUnitDriver) {
             final HtmlElement element = toHtmlElement(webDriver.findElement(By.id("myId")));
-            assertTrue(HtmlInlineFrame.class.isInstance(element));
+            assertTrue(element instanceof HtmlInlineFrame);
         }
     }
 

@@ -40,8 +40,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     private static final String LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME = "loadXMLDocumentFromFile";
 
     /** Helper. */
-    public static final String LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION = ""
-            + "  function " + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(file) {\n"
+    public static final String LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION = "  function " + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(file) {\n"
             + "    xhttp = new XMLHttpRequest();\n"
             + "    xhttp.open(\"GET\", file, false);\n"
             + "    xhttp.send();\n"
@@ -49,8 +48,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  }\n";
 
     /** Helper. */
-    public static final String LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION = ""
-            + "  function " + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(file) {\n"
+    public static final String LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION = "  function " + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(file) {\n"
             + "    xhttp = new XMLHttpRequest();\n"
             + "    xhttp.open(\"GET\", file, false);\n"
             + "    xhttp.send();\n"
@@ -69,8 +67,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     private static final String LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME = "loadXMLDocumentFromString";
 
     /** Helper. */
-    public static final String LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION = ""
-            + "  function " + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME + "(xml) {\n"
+    public static final String LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION = "  function " + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME + "(xml) {\n"
             + "    var parser = new DOMParser();\n"
             + "    return parser.parseFromString(xml,\"text/xml\");\n"
             + "  }\n";
@@ -87,14 +84,12 @@ public class XMLDocumentTest extends WebDriverTestCase {
     private static final String SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME = "serializeXMLDocumentToString";
 
     /** Helper. */
-    public static final String SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION = ""
-            + "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
+    public static final String SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION = "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
             + "    return new XMLSerializer().serializeToString(doc);\n"
             + "  }\n";
 
     /** Helper. */
-    public static final String SERIALIZE_NATIVE_XML_DOCUMENT_TO_STRING_FUNCTION = ""
-            + "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
+    public static final String SERIALIZE_NATIVE_XML_DOCUMENT_TO_STRING_FUNCTION = "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
             + "    serializer = new XMLSerializer();\n"
             + "    return serializer.serializeToString(doc);\n"
             + "  }\n";

@@ -179,8 +179,8 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final WebConnection defaultConnection = client.getWebConnection();
         assertTrue(
                 "HttpWebConnection should be the default",
-                HttpWebConnection.class.isInstance(defaultConnection));
-        assertTrue("Response should be valid HTML", HtmlPage.class.isInstance(page));
+                defaultConnection instanceof HttpWebConnection);
+        assertTrue("Response should be valid HTML", page instanceof HtmlPage);
     }
 
     /**

@@ -53,7 +53,7 @@ public class SvgPolygonTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(SvgPolygon.class.isInstance(page.getElementById("myId")));
+            assertTrue(page.getElementById("myId") instanceof SvgPolygon);
         }
     }
 }

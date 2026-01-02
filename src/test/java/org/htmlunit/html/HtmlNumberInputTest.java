@@ -579,11 +579,11 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
-        verifyTitle2(driver, new String[]{});
+        verifyTitle2(driver);
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        verifyTitle2(driver, new String[]{});
+        verifyTitle2(driver);
     }
 
     /**
@@ -608,11 +608,11 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
-        verifyTitle2(driver, new String[]{});
+        verifyTitle2(driver);
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        verifyTitle2(driver, new String[]{});
+        verifyTitle2(driver);
     }
 
     /**
@@ -2148,7 +2148,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         if (sendKeys != null) {
             foo.sendKeys(sendKeys);
         }
-        assertEquals(getExpectedAlerts()[0], "" + foo.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], foo.getDomAttribute("value"));
         assertEquals(getExpectedAlerts()[1], foo.getDomProperty("value"));
 
         driver.findElement(By.id("myTest")).click();

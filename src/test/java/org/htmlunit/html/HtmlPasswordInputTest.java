@@ -666,7 +666,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlPasswordInput.class.isInstance(page.getHtmlElementById("myId")));
+            assertTrue(page.getHtmlElementById("myId") instanceof HtmlPasswordInput);
         }
     }
 
@@ -1077,7 +1077,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             foo.sendKeys(sendKeys);
         }
 
-        assertEquals(getExpectedAlerts()[0], "" + foo.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], foo.getDomAttribute("value"));
         assertEquals(getExpectedAlerts()[1], foo.getDomProperty("value"));
 
         driver.findElement(By.id("myTest")).click();

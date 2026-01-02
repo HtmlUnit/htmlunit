@@ -220,11 +220,11 @@ public class YuiTest extends WebDriverTestCase {
     }
 
     private void doTest(final String fileName, final String buttonToClick) throws Exception {
-        doTest(fileName, Collections.<String>emptyList(), buttonToClick, 0);
+        doTest(fileName, Collections.emptyList(), buttonToClick, 0);
     }
 
     private void doTest(final String fileName) throws Exception {
-        doTest(fileName, Collections.<String>emptyList(), null, 0);
+        doTest(fileName, Collections.emptyList(), null, 0);
     }
 
     private void doTest(final String fileName, final List<String> knownFailingTests) throws Exception {

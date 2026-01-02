@@ -53,7 +53,7 @@ public class SvgFeDisplacementMapTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(SvgFeDisplacementMap.class.isInstance(page.getElementById("myId")));
+            assertTrue(page.getElementById("myId") instanceof SvgFeDisplacementMap);
         }
     }
 }

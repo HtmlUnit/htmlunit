@@ -1348,7 +1348,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
         assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
@@ -1376,7 +1376,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
         assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
@@ -1404,7 +1404,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
         assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
@@ -1432,7 +1432,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
         assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
@@ -1467,9 +1467,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[0], request.getUrl());
         assertEquals(getExpectedAlerts()[1],
-                        "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+                request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
         assertEquals(getExpectedAlerts()[2],
-                        "" + request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+                request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
     /**
@@ -1496,7 +1496,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(URL_FIRST, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
         assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
@@ -1524,7 +1524,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
         assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
@@ -1552,7 +1552,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
         assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
@@ -2339,14 +2339,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(driver, new String[] {"done"});
+        verifyTitle2(driver, "done");
 
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
         // Can't test equality for multipart/form-data as it will have the form:
         // multipart/form-data; boundary=---------------------------42937861433140731107235900
         headerValue = StringUtils.substringBefore(headerValue, ";");
-        assertEquals(getExpectedAlerts()[0], "" + headerValue);
+        assertEquals(getExpectedAlerts()[0], headerValue);
     }
 
     /**
@@ -2382,14 +2382,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(driver, new String[] {"done"});
+        verifyTitle2(driver, "done");
 
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
         // Can't test equality for multipart/form-data as it will have the form:
         // multipart/form-data; boundary=---------------------------42937861433140731107235900
         headerValue = StringUtils.substringBefore(headerValue, ";");
-        assertEquals(getExpectedAlerts()[0], "" + headerValue);
+        assertEquals(getExpectedAlerts()[0], headerValue);
     }
 
     /**
@@ -2429,7 +2429,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        verifyTitle2(driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
+        verifyTitle2(driver, getExpectedAlerts()[0], getExpectedAlerts()[1]);
 
         String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
@@ -2476,7 +2476,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(driver, new String[] {"done"});
+        verifyTitle2(driver, "done");
 
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
@@ -2515,7 +2515,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         // use utf8 here to be able to send all chars
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        verifyTitle2(driver, new String[] {"done"});
+        verifyTitle2(driver, "done");
 
         String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
@@ -2553,7 +2553,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8, null);
-        verifyTitle2(driver, new String[] {"done"});
+        verifyTitle2(driver, "done");
 
         String headerContentType = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
                 .get(HttpHeader.CONTENT_TYPE);

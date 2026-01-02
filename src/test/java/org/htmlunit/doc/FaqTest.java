@@ -26,7 +26,6 @@ import javax.imageio.ImageIO;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ScriptPreProcessor;
 import org.htmlunit.WebClient;
-import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
 import org.junit.jupiter.api.Assertions;

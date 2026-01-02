@@ -398,8 +398,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
     @Test
     @Alerts({"P", "undefined"})
     public void secondFilterReject() throws Exception {
-        final String script = ""
-            + "var noScripts = {\n"
+        final String script = "var noScripts = {\n"
             + "  acceptNode: function(node) {\n"
             + "    if (node.tagName == 'SPAN' || node.tagName == 'DIV') {\n"
             + "      return NodeFilter.FILTER_REJECT;\n"

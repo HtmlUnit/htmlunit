@@ -2390,8 +2390,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"},
             FF_ESR = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"})
     public void type() throws Exception {
-        final String html = ""
-            + "<html><head>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

@@ -118,7 +118,7 @@ public class HtmlPageEncodingTest extends WebDriverTestCase {
             final boolean gzip) throws Exception {
 
         // use always a different url to avoid caching effects
-        final URL htmlUrl = new URL(URL_FIRST, "" + System.currentTimeMillis() + ".html");
+        final URL htmlUrl = new URL(URL_FIRST, System.currentTimeMillis() + ".html");
 
 
         String meta = "";

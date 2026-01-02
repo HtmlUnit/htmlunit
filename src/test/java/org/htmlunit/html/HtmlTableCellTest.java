@@ -56,8 +56,8 @@ public class HtmlTableCellTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlTableCell.class.isInstance(page.getHtmlElementById("myId1")));
-            assertTrue(HtmlTableCell.class.isInstance(page.getHtmlElementById("myId2")));
+            assertTrue(page.getHtmlElementById("myId1") instanceof HtmlTableCell);
+            assertTrue(page.getHtmlElementById("myId2") instanceof HtmlTableCell);
         }
     }
 }
