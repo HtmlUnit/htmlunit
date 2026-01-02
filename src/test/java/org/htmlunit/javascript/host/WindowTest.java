@@ -836,8 +836,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, firstContent);
+        webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<>();
@@ -1554,8 +1553,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "  <button id='click' onclick='doTest()'>Print</button>\n"
             + "</body></html>";
 
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, firstContent);
+        webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
         HtmlPage page = webClient.getPage(URL_FIRST);
@@ -1673,8 +1671,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "  <button id='click' onclick='doTest()'>Print</button>\n"
             + "</body></html>";
 
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, firstContent);
+        webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
@@ -1723,8 +1720,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "  <button id='click' onclick='doTest()'>Print</button>\n"
             + "</body></html>";
 
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, firstContent);
+        webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);

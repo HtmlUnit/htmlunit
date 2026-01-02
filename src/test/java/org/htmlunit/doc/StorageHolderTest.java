@@ -39,7 +39,6 @@ public class StorageHolderTest extends WebServerTestCase {
         conn.setDefaultResponse("<script>sessionStorage.setItem('myNewKey', 'myNewData');</script>");
 
         startWebServer(conn);
-        final URL url = URL_FIRST;
 
         try (WebClient webClient = new WebClient()) {
 
@@ -51,7 +50,7 @@ public class StorageHolderTest extends WebServerTestCase {
             sessionStorage.put("myKey", "myData");
 
             // load the page that consumes the session storage data
-            webClient.getPage(url);
+            webClient.getPage(URL_FIRST);
 
             // make sure the new data are in
             assertEquals("myNewData", sessionStorage.get("myNewKey"));

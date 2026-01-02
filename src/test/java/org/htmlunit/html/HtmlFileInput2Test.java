@@ -355,8 +355,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final HttpClientBuilder builder = (HttpClientBuilder) getHttpClientBuilderMethod.invoke(con);
 
         final HttpPost httpPost = (HttpPost) makeHttpMethod.invoke(con, webConnection.getLastWebRequest(), builder);
-        final HttpEntity httpEntity = httpPost.getEntity();
-        return httpEntity;
+        return httpPost.getEntity();
     }
 
     /**

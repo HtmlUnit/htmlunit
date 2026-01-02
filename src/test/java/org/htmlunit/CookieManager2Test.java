@@ -92,8 +92,7 @@ public class CookieManager2Test extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, CookieManagerTest.HTML_ALERT_COOKIE);
+        webConnection.setResponse(URL_FIRST, CookieManagerTest.HTML_ALERT_COOKIE);
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();
@@ -115,8 +114,7 @@ public class CookieManager2Test extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, CookieManagerTest.HTML_ALERT_COOKIE);
+        webConnection.setResponse(URL_FIRST, CookieManagerTest.HTML_ALERT_COOKIE);
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();

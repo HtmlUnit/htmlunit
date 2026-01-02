@@ -884,9 +884,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final URL url = URL_FIRST;
-
-        final HtmlPage page = webClient.getPage(url);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("Second", page.getTitleText());
     }
 
@@ -1295,9 +1293,8 @@ public class WebClientTest extends SimpleWebTestCase {
         if (url == null) {
             throw new FileNotFoundException(fileName);
         }
-        final File file = new File(new URI(url.toString()));
 
-        return file;
+        return new File(new URI(url.toString()));
     }
 
     /**
