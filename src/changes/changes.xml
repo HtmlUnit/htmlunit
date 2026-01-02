@@ -11,6 +11,9 @@
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: XmlUtilsXercesHelper and XmlUtilsSunXercesHelper removed.
             </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: dependency to xercesImpl removed.
+            </action>
         </release>
 
 

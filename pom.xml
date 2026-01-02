@@ -27,12 +27,12 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 
-        <htmlunitcsp.version>4.21.0</htmlunitcsp.version>
+        <htmlunitcsp.version>5.0.0-SNAPSHOT</htmlunitcsp.version>
         <htmlunitcssparser.version>4.21.0</htmlunitcssparser.version>
         <htmlunitcorejs.version>4.21.0</htmlunitcorejs.version>
-        <htmlunitneko.version>4.21.0</htmlunitneko.version>
+        <htmlunitneko.version>5.0.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitwebsocketclient.version>4.21.0</htmlunitwebsocketclient.version>
-        <htmlunitxpath.version>4.21.0</htmlunitxpath.version>
+        <htmlunitxpath.version>5.0.0-SNAPSHOT</htmlunitxpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
@@ -1349,12 +1349,6 @@
             <groupId>org.htmlunit</groupId>
             <artifactId>neko-htmlunit</artifactId>
             <version>${htmlunitneko.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>xercesImpl</artifactId>
-            <version>2.12.2</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.htmlunit</groupId>
