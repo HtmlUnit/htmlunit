@@ -7,7 +7,11 @@
     </properties>
 
     <body>
-        <release version="4.21.0" date="December 28, 2025" description="Firefox 145, core-js, Bugfixes">
+        <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+        </release>
+
+
+        <release version="4.21.0" date="December 28, 2025" description="Firefox 146, core-js, Bugfixes">
             <action type="update" dev="rbri">
                 DOMPointReadOnly, DOMRectReadOnly, DOMMatrixReadOnly, and PerformanceNavigation toJSON() implementation improved.
             </action>
