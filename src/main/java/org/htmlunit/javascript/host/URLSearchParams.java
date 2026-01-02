@@ -124,16 +124,12 @@ public class URLSearchParams extends HtmlUnitScriptable {
         @Override
         protected Object nextValue(final Context cx, final Scriptable scope) {
             final NameValuePair e = iterator_.next();
-            switch (type_) {
-                case KEYS:
-                    return e.getName();
-                case VALUES:
-                    return e.getValue();
-                case BOTH:
-                    return cx.newArray(scope, new Object[] {e.getName(), e.getValue()});
-                default:
-                    throw new AssertionError();
-            }
+            return switch (type_) {
+                case KEYS -> e.getName();
+                case VALUES -> e.getValue();
+                case BOTH -> cx.newArray(scope, new Object[]{e.getName(), e.getValue()});
+                default -> throw new AssertionError();
+            };
         }
     }
 

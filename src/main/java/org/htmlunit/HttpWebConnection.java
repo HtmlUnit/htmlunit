@@ -485,43 +485,17 @@ public class HttpWebConnection implements WebConnection {
      * @return a new HttpClient HTTP method based on the specified parameters
      */
     private static HttpRequestBase buildHttpMethod(final HttpMethod submitMethod, final URI uri) {
-        final HttpRequestBase method;
-        switch (submitMethod) {
-            case GET:
-                method = new HttpGet(uri);
-                break;
-
-            case POST:
-                method = new HttpPost(uri);
-                break;
-
-            case PUT:
-                method = new HttpPut(uri);
-                break;
-
-            case DELETE:
-                method = new org.htmlunit.httpclient.HttpDelete(uri);
-                break;
-
-            case OPTIONS:
-                method = new org.htmlunit.httpclient.HttpOptions(uri);
-                break;
-
-            case HEAD:
-                method = new HttpHead(uri);
-                break;
-
-            case TRACE:
-                method = new HttpTrace(uri);
-                break;
-
-            case PATCH:
-                method = new HttpPatch(uri);
-                break;
-
-            default:
-                throw new IllegalStateException("Submit method not yet supported: " + submitMethod);
-        }
+        final HttpRequestBase method = switch (submitMethod) {
+            case GET -> new HttpGet(uri);
+            case POST -> new HttpPost(uri);
+            case PUT -> new HttpPut(uri);
+            case DELETE -> new org.htmlunit.httpclient.HttpDelete(uri);
+            case OPTIONS -> new org.htmlunit.httpclient.HttpOptions(uri);
+            case HEAD -> new HttpHead(uri);
+            case TRACE -> new HttpTrace(uri);
+            case PATCH -> new HttpPatch(uri);
+            default -> throw new IllegalStateException("Submit method not yet supported: " + submitMethod);
+        };
         return method;
     }
 

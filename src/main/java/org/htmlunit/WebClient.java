@@ -1555,26 +1555,14 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebResponse loadWebResponse(final WebRequest webRequest) throws IOException {
         final String protocol = webRequest.getUrl().getProtocol();
-        switch (protocol) {
-            case UrlUtils.ABOUT:
-                return makeWebResponseForAboutUrl(webRequest);
-
-            case "file":
-                return makeWebResponseForFileUrl(webRequest);
-
-            case "data":
-                return makeWebResponseForDataUrl(webRequest);
-
-            case "blob":
-                return makeWebResponseForBlobUrl(webRequest);
-
-            case "http":
-            case "https":
-                return loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL);
-
-            default:
-                throw new IOException("Unsupported protocol '" + protocol + "'");
-        }
+        return switch (protocol) {
+            case UrlUtils.ABOUT -> makeWebResponseForAboutUrl(webRequest);
+            case "file" -> makeWebResponseForFileUrl(webRequest);
+            case "data" -> makeWebResponseForDataUrl(webRequest);
+            case "blob" -> makeWebResponseForBlobUrl(webRequest);
+            case "http", "https" -> loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL);
+            default -> throw new IOException("Unsupported protocol '" + protocol + "'");
+        };
     }
 
     /**

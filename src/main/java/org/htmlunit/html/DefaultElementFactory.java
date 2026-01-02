@@ -803,107 +803,39 @@ public class DefaultElementFactory implements ElementFactory {
             }
         }
 
-        final HtmlInput result;
-        switch (type.toLowerCase(Locale.ROOT)) {
-            case "":
-                // This not an illegal value, as it defaults to "text"
-                // cf http://www.w3.org/TR/REC-html40/interact/forms.html#adef-type-INPUT
-                // and the common browsers seem to treat it as a "text" input so we will as well.
-            case "text":
-                result = new HtmlTextInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "submit":
-                result = new HtmlSubmitInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "checkbox":
-                result = new HtmlCheckBoxInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "radio":
-                result = new HtmlRadioButtonInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "hidden":
-                result = new HtmlHiddenInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "password":
-                result = new HtmlPasswordInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "image":
-                result = new HtmlImageInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "reset":
-                result = new HtmlResetInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "button":
-                result = new HtmlButtonInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "file":
-                result = new HtmlFileInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "color":
-                result = new HtmlColorInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "date":
-                result = new HtmlDateInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "datetime-local":
-                result = new HtmlDateTimeLocalInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "email":
-                result = new HtmlEmailInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "month":
-                result = new HtmlMonthInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "number":
-                result = new HtmlNumberInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "range":
-                result = new HtmlRangeInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "search":
-                result = new HtmlSearchInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "tel":
-                result = new HtmlTelInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "time":
-                result = new HtmlTimeInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "url":
-                result = new HtmlUrlInput(qualifiedName, page, attributeMap);
-                break;
-
-            case "week":
-                result = new HtmlWeekInput(qualifiedName, page, attributeMap);
-                break;
-
-            default:
+        final HtmlInput result = switch (type.toLowerCase(Locale.ROOT)) {
+            // This not an illegal value, as it defaults to "text"
+            // cf http://www.w3.org/TR/REC-html40/interact/forms.html#adef-type-INPUT
+            // and the common browsers seem to treat it as a "text" input so we will as well.
+            case "", "text" -> new HtmlTextInput(qualifiedName, page, attributeMap);
+            case "submit" -> new HtmlSubmitInput(qualifiedName, page, attributeMap);
+            case "checkbox" -> new HtmlCheckBoxInput(qualifiedName, page, attributeMap);
+            case "radio" -> new HtmlRadioButtonInput(qualifiedName, page, attributeMap);
+            case "hidden" -> new HtmlHiddenInput(qualifiedName, page, attributeMap);
+            case "password" -> new HtmlPasswordInput(qualifiedName, page, attributeMap);
+            case "image" -> new HtmlImageInput(qualifiedName, page, attributeMap);
+            case "reset" -> new HtmlResetInput(qualifiedName, page, attributeMap);
+            case "button" -> new HtmlButtonInput(qualifiedName, page, attributeMap);
+            case "file" -> new HtmlFileInput(qualifiedName, page, attributeMap);
+            case "color" -> new HtmlColorInput(qualifiedName, page, attributeMap);
+            case "date" -> new HtmlDateInput(qualifiedName, page, attributeMap);
+            case "datetime-local" -> new HtmlDateTimeLocalInput(qualifiedName, page, attributeMap);
+            case "email" -> new HtmlEmailInput(qualifiedName, page, attributeMap);
+            case "month" -> new HtmlMonthInput(qualifiedName, page, attributeMap);
+            case "number" -> new HtmlNumberInput(qualifiedName, page, attributeMap);
+            case "range" -> new HtmlRangeInput(qualifiedName, page, attributeMap);
+            case "search" -> new HtmlSearchInput(qualifiedName, page, attributeMap);
+            case "tel" -> new HtmlTelInput(qualifiedName, page, attributeMap);
+            case "time" -> new HtmlTimeInput(qualifiedName, page, attributeMap);
+            case "url" -> new HtmlUrlInput(qualifiedName, page, attributeMap);
+            case "week" -> new HtmlWeekInput(qualifiedName, page, attributeMap);
+            default -> {
                 if (LOG.isInfoEnabled()) {
                     LOG.info("Bad input type: \"" + type + "\", creating a text input");
                 }
-                result = new HtmlTextInput(qualifiedName, page, attributeMap);
-                break;
-        }
+                yield new HtmlTextInput(qualifiedName, page, attributeMap);
+            }
+        };
         return result;
     }
 }

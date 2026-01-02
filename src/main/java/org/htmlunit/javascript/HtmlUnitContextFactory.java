@@ -335,24 +335,16 @@ public class HtmlUnitContextFactory extends ContextFactory {
      */
     @Override
     protected boolean hasFeature(final Context cx, final int featureIndex) {
-        switch (featureIndex) {
-            case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER:
-            case Context.FEATURE_OLD_UNDEF_NULL_THIS:
-            case Context.FEATURE_LITTLE_ENDIAN:
-            case Context.FEATURE_LOCATION_INFORMATION_IN_ERROR:
-            case Context.FEATURE_INTL_402:
-            case Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW:
-                return true;
-            case Context.FEATURE_E4X:
-            case Context.FEATURE_NON_ECMA_GET_YEAR:
-                return false;
-            case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME:
-                return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
-            case Context.FEATURE_HTMLUNIT_ARRAY_SORT_COMPERATOR_ACCEPTS_BOOL:
-                return browserVersion_.hasFeature(JS_ARRAY_SORT_ACCEPTS_INCONSISTENT_COMPERATOR);
-            default:
-                return super.hasFeature(cx, featureIndex);
-        }
+        return switch (featureIndex) {
+            case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER, Context.FEATURE_OLD_UNDEF_NULL_THIS,
+                 Context.FEATURE_LITTLE_ENDIAN, Context.FEATURE_LOCATION_INFORMATION_IN_ERROR, Context.FEATURE_INTL_402,
+                 Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW -> true;
+            case Context.FEATURE_E4X, Context.FEATURE_NON_ECMA_GET_YEAR -> false;
+            case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME -> browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
+            case Context.FEATURE_HTMLUNIT_ARRAY_SORT_COMPERATOR_ACCEPTS_BOOL ->
+                    browserVersion_.hasFeature(JS_ARRAY_SORT_ACCEPTS_INCONSISTENT_COMPERATOR);
+            default -> super.hasFeature(cx, featureIndex);
+        };
     }
 
     private static final class HtmlUnitErrorReporter implements ErrorReporter, Serializable {

@@ -247,34 +247,21 @@ public class HtmlDomTreeWalker implements Serializable {
      * @return the whatToShow constant for the type of specified node
      */
     public static int getFlagForNode(final Node node) {
-        switch (node.getNodeType()) {
-            case Node.ELEMENT_NODE:
-                return NodeFilter.SHOW_ELEMENT;
-            case Node.ATTRIBUTE_NODE:
-                return NodeFilter.SHOW_ATTRIBUTE;
-            case Node.TEXT_NODE:
-                return NodeFilter.SHOW_TEXT;
-            case Node.CDATA_SECTION_NODE:
-                return NodeFilter.SHOW_CDATA_SECTION;
-            case Node.ENTITY_REFERENCE_NODE:
-                return NodeFilter.SHOW_ENTITY_REFERENCE;
-            case Node.ENTITY_NODE:
-                return NodeFilter.SHOW_ENTITY;
-            case Node.PROCESSING_INSTRUCTION_NODE:
-                return NodeFilter.SHOW_PROCESSING_INSTRUCTION;
-            case Node.COMMENT_NODE:
-                return NodeFilter.SHOW_COMMENT;
-            case Node.DOCUMENT_NODE:
-                return NodeFilter.SHOW_DOCUMENT;
-            case Node.DOCUMENT_TYPE_NODE:
-                return NodeFilter.SHOW_DOCUMENT_TYPE;
-            case Node.DOCUMENT_FRAGMENT_NODE:
-                return NodeFilter.SHOW_DOCUMENT_FRAGMENT;
-            case Node.NOTATION_NODE:
-                return NodeFilter.SHOW_NOTATION;
-            default:
-                return 0;
-        }
+        return switch (node.getNodeType()) {
+            case Node.ELEMENT_NODE -> NodeFilter.SHOW_ELEMENT;
+            case Node.ATTRIBUTE_NODE -> NodeFilter.SHOW_ATTRIBUTE;
+            case Node.TEXT_NODE -> NodeFilter.SHOW_TEXT;
+            case Node.CDATA_SECTION_NODE -> NodeFilter.SHOW_CDATA_SECTION;
+            case Node.ENTITY_REFERENCE_NODE -> NodeFilter.SHOW_ENTITY_REFERENCE;
+            case Node.ENTITY_NODE -> NodeFilter.SHOW_ENTITY;
+            case Node.PROCESSING_INSTRUCTION_NODE -> NodeFilter.SHOW_PROCESSING_INSTRUCTION;
+            case Node.COMMENT_NODE -> NodeFilter.SHOW_COMMENT;
+            case Node.DOCUMENT_NODE -> NodeFilter.SHOW_DOCUMENT;
+            case Node.DOCUMENT_TYPE_NODE -> NodeFilter.SHOW_DOCUMENT_TYPE;
+            case Node.DOCUMENT_FRAGMENT_NODE -> NodeFilter.SHOW_DOCUMENT_FRAGMENT;
+            case Node.NOTATION_NODE -> NodeFilter.SHOW_NOTATION;
+            default -> 0;
+        };
     }
 
     /* Returns whether the node is skipped by the TreeWalker. */

@@ -87,16 +87,12 @@ public class EventListenersContainer implements Serializable {
         }
 
         List<Scriptable> getListeners(final int eventPhase) {
-            switch (eventPhase) {
-                case Event.CAPTURING_PHASE:
-                    return capturingListeners_;
-                case Event.AT_TARGET:
-                    return atTargetListeners_;
-                case Event.BUBBLING_PHASE:
-                    return bubblingListeners_;
-                default:
-                    throw new UnsupportedOperationException("eventPhase: " + eventPhase);
-            }
+            return switch (eventPhase) {
+                case Event.CAPTURING_PHASE -> capturingListeners_;
+                case Event.AT_TARGET -> atTargetListeners_;
+                case Event.BUBBLING_PHASE -> bubblingListeners_;
+                default -> throw new UnsupportedOperationException("eventPhase: " + eventPhase);
+            };
         }
 
         public TypeContainer setPropertyHandler(final Function propertyHandler) {

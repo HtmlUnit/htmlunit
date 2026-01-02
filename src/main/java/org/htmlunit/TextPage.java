@@ -60,6 +60,6 @@ public class TextPage extends AbstractPage {
         final Path savePath = file.toPath();
         final String text = getContent();
         final Charset charset = getWebResponse().getContentCharset();
-        Files.write(savePath, text.getBytes(charset));
+        Files.writeString(savePath, text, charset);
     }
 }
