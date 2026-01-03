@@ -1222,7 +1222,7 @@ public class Location2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         assertNull(additionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[0], additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + additionalHeaders.get(HttpHeader.REFERER));
         assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
     }
 
@@ -1256,7 +1256,7 @@ public class Location2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         assertNull(additionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[0], additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + additionalHeaders.get(HttpHeader.REFERER));
         assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
 
         assertEquals(URL_FIRST + "a.html", driver.getCurrentUrl());
@@ -1307,7 +1307,7 @@ public class Location2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         assertNull(additionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[0], additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + additionalHeaders.get(HttpHeader.REFERER));
         assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
 
         assertEquals(URL_FIRST + "a.html#1", driver.getCurrentUrl());
@@ -1353,7 +1353,7 @@ public class Location2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         assertNull(additionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[0], additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + additionalHeaders.get(HttpHeader.REFERER));
         assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
 
         assertEquals(URL_FIRST + "a.html#1", driver.getCurrentUrl());
@@ -1396,7 +1396,7 @@ public class Location2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         assertNull(additionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[0], additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + additionalHeaders.get(HttpHeader.REFERER));
         assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
 
         assertEquals(URL_FIRST + "a.html#1", driver.getCurrentUrl());
