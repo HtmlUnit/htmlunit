@@ -19,8 +19,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -143,15 +141,8 @@ public class XmlPage extends SgmlPage {
             }
         }
 
-        final Map<Integer, List<String>> attributesOrderMap;
-        if (node_ != null) {
-            attributesOrderMap = XmlUtils.getAttributesOrderMap(node_.getOwnerDocument());
-        }
-        else {
-            attributesOrderMap = null;
-        }
         for (Node node = node_; node != null; node = node.getNextSibling()) {
-            XmlUtils.appendChild(this, this, node, handleXHTMLAsHTML, attributesOrderMap);
+            XmlUtils.appendChild(this, this, node, handleXHTMLAsHTML);
         }
     }
 
