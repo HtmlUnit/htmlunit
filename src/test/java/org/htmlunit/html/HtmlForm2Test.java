@@ -365,8 +365,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[1], lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[1], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
@@ -1628,7 +1628,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
@@ -1663,7 +1663,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
@@ -1698,7 +1698,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
