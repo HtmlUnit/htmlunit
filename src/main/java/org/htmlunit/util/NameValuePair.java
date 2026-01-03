@@ -17,8 +17,6 @@ package org.htmlunit.util;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 /**
  * A name/value pair.
  *
@@ -77,10 +75,7 @@ public class NameValuePair implements Serializable {
      */
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().
-                append(name_).
-                append(value_).
-                toHashCode();
+        return Objects.hash(name_, value_);
     }
 
     /**

@@ -154,6 +154,12 @@ public class ArchitectureTest {
     public static final ArchRule apacheStringsContainsRule = noClasses()
         .should().callMethod(org.apache.commons.lang3.Strings.class, "contains", CharSequence.class, CharSequence.class);
 
+    /**
+     * Do not use org.apache.commons.lang3.builder.HashCodeBuilder.
+     */
+    @ArchTest
+    public static final ArchRule apacheHashCodeBuilderRule = noClasses()
+            .should().dependOnClassesThat().haveFullyQualifiedName("org.apache.commons.lang3.builder.HashCodeBuilder");
 
     /**
      * Do not use org.apache.commons.lang3.math.NumberUtils.

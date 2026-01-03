@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
@@ -462,16 +462,13 @@ public class SimpleRange implements Serializable {
             .append(endOffset_, other.endOffset_).isEquals();
     }
 
+
     /**
      * {@inheritDoc}
      */
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-            .append(startContainer_)
-            .append(endContainer_)
-            .append(startOffset_)
-            .append(endOffset_).toHashCode();
+        return Objects.hash(startContainer_, endContainer_, startOffset_, endOffset_);
     }
 
     /**

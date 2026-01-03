@@ -16,6 +16,7 @@ package org.htmlunit.util;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -252,12 +253,8 @@ public class Cookie implements Serializable {
      */
     @Override
     public int hashCode() {
-        final String path = getPath() == null ? "/" : getPath();
-        return new HashCodeBuilder()
-                    .append(getName())
-                    .append(getDomain())
-                    .append(path)
-                    .toHashCode();
+         final String path = getPath() == null ? "/" : getPath();
+         return Objects.hash(getName(), getDomain(), path);
     }
 
     /**

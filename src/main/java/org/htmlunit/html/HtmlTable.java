@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.SgmlPage;
@@ -454,13 +455,12 @@ public class HtmlTable extends HtmlElement {
             posY_ = y;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public int hashCode() {
-            final int prime = 31;
-            int result = 1;
-            result = prime * result + posX_;
-            result = prime * result + posY_;
-            return result;
+            return Objects.hash(posX_, posY_);
         }
 
         @Override
