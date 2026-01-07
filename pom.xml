@@ -226,8 +226,9 @@
                 <version>${surefire-plugin.version}</version>
                 <configuration>
                     <argLine>
-                        --add-modules org.apache.logging.log4j
                         --add-modules org.slf4j
+                        --add-reads org.htmlunit=org.apache.logging.log4j
+                        --add-reads org.htmlunit=org.apache.logging.log4j.core
                         --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
                         --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
                     </argLine>
