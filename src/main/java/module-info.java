@@ -23,9 +23,9 @@ module org.htmlunit {
     requires jdk.xml.dom;
 
     requires htmlunit.core.js;
-    requires htmlunit.cssparser;
     requires htmlunit.websocket.client;
 
+    requires org.htmlunit.cssparser;
     requires org.htmlunit.csp;
     requires org.htmlunit.cyberneko;
     requires org.htmlunit.xpath;

@@ -27,8 +27,10 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 
+        <maven.version.ignore>(?i).*-(alpha|beta|m|rc)([\.-]?\d+)?</maven.version.ignore>
+
         <htmlunitcsp.version>5.0.0-SNAPSHOT</htmlunitcsp.version>
-        <htmlunitcssparser.version>4.21.0</htmlunitcssparser.version>
+        <htmlunitcssparser.version>5.0.0-SNAPSHOT</htmlunitcssparser.version>
         <htmlunitcorejs.version>4.21.0</htmlunitcorejs.version>
         <htmlunitneko.version>5.0.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitwebsocketclient.version>4.21.0</htmlunitwebsocketclient.version>
@@ -46,8 +48,7 @@
         <selenium.devtools.artifactId>selenium-devtools-v143</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
-        <junit.version>5.14.1</junit.version>
-        <junit-launcher.version>1.14.1</junit-launcher.version>
+        <junit.version>6.0.2</junit.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <jetty.version>9.4.58.v20250814</jetty.version>
         <quercus.version>4.0.66</quercus.version>
@@ -60,7 +61,7 @@
         <jfreechart.version>1.5.6</jfreechart.version>
 
         <!-- quality -->
-        <checkstyle.version>12.3.1</checkstyle.version>
+        <checkstyle.version>13.0.0</checkstyle.version>
         <spotbugs.version>4.9.8</spotbugs.version>
         <pmd.version>7.20.0</pmd.version>
         <archunit.version>1.4.1</archunit.version>
@@ -1417,7 +1418,7 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <version>${junit-launcher.version}</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
