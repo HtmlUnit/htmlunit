@@ -224,6 +224,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire-plugin.version}</version>
+                <configuration>
+                    <argLine>
+                        --add-modules org.apache.logging.log4j
+                        --add-modules org.slf4j
+                        --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
+                        --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
+                    </argLine>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
