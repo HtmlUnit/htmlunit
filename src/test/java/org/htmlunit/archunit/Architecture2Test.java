@@ -214,4 +214,21 @@ public class Architecture2Test {
             .that().areAnnotatedWith(Test.class)
             .and().areNotDeclaredIn("org.htmlunit.junit.annotation.AnnotationUtilsTest")
             .should(haveConsistentTestAnnotations);
+
+    /**
+     * Do not use archunit outside of this.
+     */
+    @ArchTest
+    public static final ArchRule archunitPackageRule = noClasses()
+            .that()
+                .resideOutsideOfPackage("org.htmlunit.archunit..")
+
+            .should().dependOnClassesThat().resideInAnyPackage("com.tngtech.archunit..");
+
+    /**
+     * Do not use google commons.
+     */
+    @ArchTest
+    public static final ArchRule googleCommonPackageRule = noClasses()
+            .should().dependOnClassesThat().resideInAnyPackage("com.google.common..");
 }

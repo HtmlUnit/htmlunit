@@ -24,13 +24,12 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.io.FileUtils;
 import org.htmlunit.javascript.configuration.BrowserFeature;
 import org.htmlunit.javascript.configuration.SupportedBrowser;
 import org.junit.jupiter.api.Test;
-
-import com.tngtech.archunit.thirdparty.com.google.common.base.Objects;
 
 /**
  * Tests for {@link BrowserVersionFeatures}.
@@ -89,7 +88,7 @@ public class BrowserVersionFeaturesTest {
                 for (final SupportedBrowser annotatedBrowser : browserFeature.value()) {
                     boolean inUse = false;
                     for (final BrowserVersion supportedBrowserVersion : browsers) {
-                        if (Objects.equal(supportedBrowser(supportedBrowserVersion), annotatedBrowser)) {
+                        if (Objects.equals(supportedBrowser(supportedBrowserVersion), annotatedBrowser)) {
                             inUse = true;
                             continue;
                         }
