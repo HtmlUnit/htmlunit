@@ -26,11 +26,11 @@
 
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
 
         <surefire.argLine.modules>
             --add-modules org.slf4j
-            --add-reads org.htmlunit=org.apache.logging.log4j
-            --add-reads org.htmlunit=org.apache.logging.log4j.core
+            --add-modules org.apache.logging.log4j
             --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
             --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
         </surefire.argLine.modules>
