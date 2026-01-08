@@ -106,7 +106,7 @@ public class CssStyleSheetEncodingTest extends WebDriverTestCase {
      * The default test.
      * @throws Exception if an error occurs
      */
-    @ParameterizedTest(name = "_{0}_{1}_{2}_{3}_{4}")
+    @ParameterizedTest(name = "_{0}_{1}_{2}_{3}_{4}", quoteTextArguments = false)
     @MethodSource("data")
     @Alerts({"\"a\"", "\"\u00E4\"", "\"\u0623\u0647\u0644\u0627\u064B\"", "\"\u043C\u0438\u0440\"", "\"\u623F\u95F4\""})
     void charset(

@@ -71,7 +71,7 @@ public class XMLHttpRequestResponseAsTextEncodingTest extends AbstractXMLHttpReq
      * The default test.
      * @throws Exception if an error occurs
      */
-    @ParameterizedTest(name = "_{0}_{1}_{2}_{3}_{4}")
+    @ParameterizedTest(name = "_{0}_{1}_{2}_{3}_{4}", quoteTextArguments = false)
     @MethodSource("data")
     void responseText(
            final String xmlEncodingHeader,

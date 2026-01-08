@@ -65,7 +65,7 @@ public class DedicatedWorkerGlobalScopeConstantsTest extends WebDriverTestCase {
      * The default test.
      * @throws Exception if an error occurs
      */
-    @ParameterizedTest(name = "_{0}")
+    @ParameterizedTest(name = "_{0}", quoteTextArguments = false)
     @MethodSource("data")
     void test(final String host) throws Exception {
         test(host, getExpectedString(host));

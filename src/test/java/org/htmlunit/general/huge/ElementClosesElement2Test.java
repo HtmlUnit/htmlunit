@@ -68,7 +68,7 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
      * The default test.
      * @throws Exception if an error occurs
      */
-    @ParameterizedTest(name = "_{0}_{1}")
+    @ParameterizedTest(name = "_{0}_{1}", quoteTextArguments = false)
     @MethodSource("data")
     void test(final String parent, final String child) throws Exception {
         String bodyStart = "<body>\n";

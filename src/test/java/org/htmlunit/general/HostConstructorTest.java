@@ -57,7 +57,7 @@ public class HostConstructorTest extends WebDriverTestCase {
      * The default test.
      * @throws Exception if an error occurs
      */
-    @ParameterizedTest(name = "_{0}")
+    @ParameterizedTest(name = "_{0}", quoteTextArguments = false)
     @MethodSource("data")
     @Alerts("TypeError")
     void test(final String className) throws Exception {

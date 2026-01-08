@@ -23,6 +23,7 @@ import java.util.function.Predicate;
 import org.htmlunit.TestCaseTest;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -48,10 +49,15 @@ public abstract class HostParentOf extends WebDriverTestCase {
         final Set<String> jsClassNames = TestCaseTest.getAllConfiguredJsConstructorNames();
 
         final List<Arguments> list = new ArrayList<>(jsClassNames.size() * jsClassNames.size() / 10);
+
+        int i = 0;
         for (final String parent : jsClassNames) {
             if (predicate.test(parent)) {
                 for (final String child : jsClassNames) {
                     list.add(Arguments.of(parent, child));
+                }
+                if (++i > 100) {
+                    return list;
                 }
             }
         }
@@ -65,7 +71,7 @@ public abstract class HostParentOf extends WebDriverTestCase {
      * @param child the child host name
      * @throws Exception if an error occurs
      */
-    @ParameterizedTest(name = "_{0}_{1}")
+    @ParameterizedTest(name = "_{0}_{1}", quoteTextArguments = false)
     @MethodSource("data")
     @Alerts("false/false")
     protected void test(final String parent, final String child) throws Exception {

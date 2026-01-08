@@ -58,7 +58,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
      * The default test.
      * @throws Exception if an error occurs
      */
-    @ParameterizedTest(name = "_{0}")
+    @ParameterizedTest(name = "_{0}", quoteTextArguments = false)
     @MethodSource("data")
     @Alerts("true")
     void ctor(final String jsClassName) throws Exception {

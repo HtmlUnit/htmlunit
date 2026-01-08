@@ -112,7 +112,7 @@ public class ScriptEncodingTest extends WebDriverTestCase {
      * The default test.
      * @throws Exception if an error occurs
      */
-    @ParameterizedTest(name = "_{0}_{1}_{2}_{3}_{4}_{5}")
+    @ParameterizedTest(name = "_{0}_{1}_{2}_{3}_{4}_{5}", quoteTextArguments = false)
     @MethodSource("data")
     @Alerts({"a", "ä", "أهلاً", "мир", "房间"})
     void charset(
