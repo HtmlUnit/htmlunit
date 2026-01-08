@@ -462,7 +462,6 @@ public class SimpleRange implements Serializable {
             .append(endOffset_, other.endOffset_).isEquals();
     }
 
-
     /**
      * {@inheritDoc}
      */

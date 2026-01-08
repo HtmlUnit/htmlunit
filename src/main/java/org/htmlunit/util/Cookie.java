@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.Objects;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 
@@ -253,8 +252,8 @@ public class Cookie implements Serializable {
      */
     @Override
     public int hashCode() {
-         final String path = getPath() == null ? "/" : getPath();
-         return Objects.hash(getName(), getDomain(), path);
+        final String path = getPath() == null ? "/" : getPath();
+        return Objects.hash(getName(), getDomain(), path);
     }
 
     /**

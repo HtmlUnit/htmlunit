@@ -106,6 +106,10 @@
         <property name="message" value="System.out.print/ln found"/>
     </module>
 
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value="(.*[\\/]test[\\/].*$)|(module\-info\.java$)"/>
+    </module>
+
     <module name="TreeWalker">
 
         <property name="tabWidth" value="4"/>

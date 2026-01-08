@@ -881,7 +881,7 @@ public class Node extends EventTarget {
             throw JavaScriptEngine.reportRuntimeError("Could not convert JavaScript argument arg 0");
         }
 
-        for (; parent != null; parent = parent.getParentElement()) {
+        for ( ; parent != null; parent = parent.getParentElement()) {
             if (this == parent) {
                 return true;
             }

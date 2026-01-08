@@ -342,7 +342,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_E4X, Context.FEATURE_NON_ECMA_GET_YEAR -> false;
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME -> browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
             case Context.FEATURE_HTMLUNIT_ARRAY_SORT_COMPERATOR_ACCEPTS_BOOL ->
-                    browserVersion_.hasFeature(JS_ARRAY_SORT_ACCEPTS_INCONSISTENT_COMPERATOR);
+                browserVersion_.hasFeature(JS_ARRAY_SORT_ACCEPTS_INCONSISTENT_COMPERATOR);
             default -> super.hasFeature(cx, featureIndex);
         };
     }

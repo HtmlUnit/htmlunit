@@ -1000,13 +1000,16 @@ public class OrderedFastHashMap<K, V> implements Map<K, V>, Serializable {
     public String toString() {
         final int maxLen = 10;
 
-        return "mapData=%s, mapFillFactor=%s, mapThreshold=%s, mapSize=%s,%norderedList=%s, orderedListSize=%s".formatted(
-                mapData_ != null ? Arrays.asList(mapData_).subList(0, Math.min(mapData_.length, maxLen)) : null,
-                FILLFACTOR_, mapThreshold_, mapSize_,
-                orderedList_ != null
+        return "mapData=%s, mapFillFactor=%s, mapThreshold=%s, mapSize=%s,%norderedList=%s, orderedListSize=%s"
+                .formatted(
+                    mapData_ != null
+                        ? Arrays.asList(mapData_).subList(0, Math.min(mapData_.length, maxLen))
+                        : null,
+                    FILLFACTOR_, mapThreshold_, mapSize_,
+                    orderedList_ != null
                         ? Arrays.toString(Arrays.copyOf(orderedList_, Math.min(orderedList_.length, maxLen)))
                         : null,
-                orderedListSize_);
+                    orderedListSize_);
     }
 
     /**
