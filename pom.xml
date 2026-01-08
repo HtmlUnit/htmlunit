@@ -27,6 +27,14 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 
+        <surefire.argLine.modules>
+            --add-modules org.slf4j
+            --add-reads org.htmlunit=org.apache.logging.log4j
+            --add-reads org.htmlunit=org.apache.logging.log4j.core
+            --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
+            --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
+        </surefire.argLine.modules>
+
         <maven.version.ignore>(?i).*-(alpha|beta|m|rc)([\.-]?\d+)?</maven.version.ignore>
 
         <htmlunitcsp.version>5.0.0-SNAPSHOT</htmlunitcsp.version>
@@ -81,6 +89,7 @@
         <source-plugin.version>3.4.0</source-plugin.version>
         <javadoc-plugin.version>3.12.0</javadoc-plugin.version>
         <surefire-plugin.version>3.5.4</surefire-plugin.version>
+        <site-plugin.version>3.21.0</site-plugin.version>
         <jacoco-plugin.version>0.8.14</jacoco-plugin.version>
         <cyclonedx-plugin.version>2.9.1</cyclonedx-plugin.version>
     </properties>
@@ -185,7 +194,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.12.0</version>
+                <version>${site-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -226,13 +235,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire-plugin.version}</version>
                 <configuration>
-                    <argLine>
-                        --add-modules org.slf4j
-                        --add-reads org.htmlunit=org.apache.logging.log4j
-                        --add-reads org.htmlunit=org.apache.logging.log4j.core
-                        --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
-                        --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
-                    </argLine>
+                    <argLine>${surefire.argLine.modules}</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -392,7 +395,7 @@
                                 <exclude>**/huge/*.java</exclude>
                                 <exclude>**/encoding/*.java</exclude>
                             </excludes>
-                            <argLine>-Xms128m -Xmx1g -Dsun.reflect.noInflation=true</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms128m -Xmx1g -Dsun.reflect.noInflation=true</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -453,7 +456,7 @@
                             <excludes>
                                 <exclude>**/libraries/jquery/JQuery3x3x1Test.java</exclude>
                             </excludes>
-                            <argLine>-Xms128m -Xmx512m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -481,7 +484,7 @@
                             <includes>
                                 <include>**/libraries/JQuery3x3x1Test.java</include>
                             </includes>
-                            <argLine>-Xms128m -Xmx512m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -511,7 +514,7 @@
                                 <include>**/huge/ElementClosesElementTest.java</include>
                                 <include>**/huge/ElementClosesElement2Test.java</include>
                             </includes>
-                            <argLine>-Xms256m -Xmx512m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms256m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -541,7 +544,7 @@
                                 <include>**/huge/HostParentOfBTest.java</include>
                                 <include>**/huge/HostParentOfCTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -570,7 +573,7 @@
                                 <include>**/huge/HostParentOfDTest.java</include>
                                 <include>**/huge/HostParentOfFTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -599,7 +602,7 @@
                                 <include>**/huge/HostParentOfHTest.java</include>
                                 <include>**/huge/HostParentOfITest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -628,7 +631,7 @@
                                 <include>**/huge/HostParentOfMTest.java</include>
                                 <include>**/huge/HostParentOfNTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -656,7 +659,7 @@
                             <includes>
                                 <include>**/huge/HostParentOfPTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -684,7 +687,7 @@
                             <includes>
                                 <include>**/huge/HostParentOfSTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -712,7 +715,7 @@
                             <includes>
                                 <include>**/huge/HostParentOfS2Test.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -741,7 +744,7 @@
                                 <include>**/huge/HostParentOfTTest.java</include>
                                 <include>**/huge/HostParentOfWTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -769,7 +772,7 @@
                             <includes>
                                 <include>**/encoding/**</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
