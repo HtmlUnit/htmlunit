@@ -76,7 +76,7 @@
         <dependencycheck.version>10.0.4</dependencycheck.version>
 
         <!-- plugins -->
-        <central-publishing-plugin.version>0.9.0</central-publishing-plugin.version>
+        <central-publishing-plugin.version>0.10.0</central-publishing-plugin.version>
         <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
         <pmd-plugin.version>3.28.0</pmd-plugin.version>
         <spotbugs-plugin.version>4.9.8.2</spotbugs-plugin.version>
