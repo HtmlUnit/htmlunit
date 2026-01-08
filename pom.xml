@@ -39,7 +39,7 @@
 
         <htmlunitcsp.version>5.0.0-SNAPSHOT</htmlunitcsp.version>
         <htmlunitcssparser.version>5.0.0-SNAPSHOT</htmlunitcssparser.version>
-        <htmlunitcorejs.version>4.21.0</htmlunitcorejs.version>
+        <htmlunitcorejs.version>5.0.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitneko.version>5.0.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitwebsocketclient.version>4.21.0</htmlunitwebsocketclient.version>
         <htmlunitxpath.version>5.0.0-SNAPSHOT</htmlunitxpath.version>

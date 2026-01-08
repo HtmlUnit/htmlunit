@@ -48,7 +48,6 @@ It has fairly good JavaScript support (which is constantly improving) and is abl
 HtmlUnit is typically used for testing purposes or to retrieve information from web sites.
 
 
-
 #### Version 5
 
 Work on HtmlUnit 5.0 has started. This new major version will require **JDK 17 or higher**.
