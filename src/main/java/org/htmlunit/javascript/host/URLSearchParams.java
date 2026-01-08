@@ -128,7 +128,6 @@ public class URLSearchParams extends HtmlUnitScriptable {
                 case KEYS -> e.getName();
                 case VALUES -> e.getValue();
                 case BOTH -> cx.newArray(scope, new Object[]{e.getName(), e.getValue()});
-                default -> throw new AssertionError();
             };
         }
     }

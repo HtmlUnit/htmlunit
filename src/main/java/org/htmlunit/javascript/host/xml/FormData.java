@@ -136,7 +136,6 @@ public class FormData extends HtmlUnitScriptable {
                 case VALUES -> nextNameValuePair.getValue();
                 case BOTH ->
                     cx.newArray(scope, new Object[]{nextNameValuePair.getName(), nextNameValuePair.getValue()});
-                default -> throw new AssertionError();
             };
         }
     }

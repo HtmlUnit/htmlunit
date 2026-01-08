@@ -180,8 +180,7 @@ public class CssStyleSheet implements Serializable {
     public static final Set<String> CSS4_PSEUDO_CLASSES;
 
     static {
-        CSS2_PSEUDO_CLASSES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-                "link", "visited", "hover", "active", "focus", "lang", "first-child")));
+        CSS2_PSEUDO_CLASSES = Set.of("link", "visited", "hover", "active", "focus", "lang", "first-child");
 
         final Set<String> css3 = new HashSet<>(Arrays.asList(
                 "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",

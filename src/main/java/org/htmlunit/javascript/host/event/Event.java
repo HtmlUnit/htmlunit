@@ -510,7 +510,7 @@ public class Event extends HtmlUnitScriptable {
      * @param type the event type
      */
     public Event(final DomNode domNode, final String type) {
-        this((EventTarget) domNode.getScriptableObject(), type);
+        this(domNode.getScriptableObject(), type);
         setDomNode(domNode, false);
     }
 

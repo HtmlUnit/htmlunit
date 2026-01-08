@@ -211,14 +211,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
     private transient List<AnimationFrame> animationFrames_ = new ArrayList<>();
 
-    private static final class AnimationFrame {
-        private final long id_;
-        private final Function callback_;
-
-        AnimationFrame(final long id, final Function callback) {
-            id_ = id;
-            callback_ = callback;
-        }
+    private record AnimationFrame(long id_, Function callback_) {
     }
 
     /**

@@ -445,45 +445,29 @@ public class HtmlTable extends HtmlElement {
         return DisplayStyle.TABLE;
     }
 
-    private static final class Position {
-
-        private final int posX_;
-        private final int posY_;
-
-        Position(final int x, final int y) {
-            posX_ = x;
-            posY_ = y;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public int hashCode() {
-            return Objects.hash(posX_, posY_);
-        }
+    private record Position(int posX_, int posY_) {
 
         @Override
-        public boolean equals(final Object obj) {
-            if (this == obj) {
+            public boolean equals(final Object obj) {
+                if (this == obj) {
+                    return true;
+                }
+                if (obj == null) {
+                    return false;
+                }
+                if (getClass() != obj.getClass()) {
+                    return false;
+                }
+
+                final Position other = (Position) obj;
+                if (posX_ != other.posX_) {
+                    return false;
+                }
+                if (posY_ != other.posY_) {
+                    return false;
+                }
+
                 return true;
             }
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-
-            final Position other = (Position) obj;
-            if (posX_ != other.posX_) {
-                return false;
-            }
-            if (posY_ != other.posY_) {
-                return false;
-            }
-
-            return true;
         }
-    }
 }

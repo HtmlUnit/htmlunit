@@ -60,9 +60,7 @@ public final class Dictionary {
     }
     final int[] dictionaryOffsets = Dictionary.offsets;
     final int[] dictionarySizeBits = Dictionary.sizeBits;
-    for (int i = 0; i < newSizeBits.length; ++i) {
-      dictionarySizeBits[i] = newSizeBits[i];
-    }
+      System.arraycopy(newSizeBits, 0, dictionarySizeBits, 0, newSizeBits.length);
     int pos = 0;
     for (int i = 0; i < newSizeBits.length; ++i) {
       dictionaryOffsets[i] = pos;

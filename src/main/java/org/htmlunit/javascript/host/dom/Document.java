@@ -186,39 +186,11 @@ public class Document extends Node {
       have a no-arg constructor.
      */
     static {
-        final Map<String, Class<? extends Event>> dom2EventMap = new HashMap<>();
-        dom2EventMap.put("HTMLEvents", Event.class);
-        dom2EventMap.put("MouseEvents", MouseEvent.class);
-        dom2EventMap.put("MutationEvents", MutationEvent.class);
-        dom2EventMap.put("UIEvents", UIEvent.class);
-        SUPPORTED_DOM2_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom2EventMap);
+        SUPPORTED_DOM2_EVENT_TYPE_MAP = Map.of("HTMLEvents", Event.class, "MouseEvents", MouseEvent.class, "MutationEvents", MutationEvent.class, "UIEvents", UIEvent.class);
 
-        final Map<String, Class<? extends Event>> dom3EventMap = new HashMap<>();
-        dom3EventMap.put("Event", Event.class);
-        dom3EventMap.put("KeyboardEvent", KeyboardEvent.class);
-        dom3EventMap.put("MouseEvent", MouseEvent.class);
-        dom3EventMap.put("MessageEvent", MessageEvent.class);
-        dom3EventMap.put("MutationEvent", MutationEvent.class);
-        dom3EventMap.put("UIEvent", UIEvent.class);
-        dom3EventMap.put("CustomEvent", CustomEvent.class);
-        dom3EventMap.put("CloseEvent", CloseEvent.class);
-        dom3EventMap.put("CompositionEvent", CompositionEvent.class);
-        dom3EventMap.put("DragEvent", DragEvent.class);
-        dom3EventMap.put("TextEvent", TextEvent.class);
-        SUPPORTED_DOM3_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom3EventMap);
+        SUPPORTED_DOM3_EVENT_TYPE_MAP = Map.ofEntries(Map.entry("Event", Event.class), Map.entry("KeyboardEvent", KeyboardEvent.class), Map.entry("MouseEvent", MouseEvent.class), Map.entry("MessageEvent", MessageEvent.class), Map.entry("MutationEvent", MutationEvent.class), Map.entry("UIEvent", UIEvent.class), Map.entry("CustomEvent", CustomEvent.class), Map.entry("CloseEvent", CloseEvent.class), Map.entry("CompositionEvent", CompositionEvent.class), Map.entry("DragEvent", DragEvent.class), Map.entry("TextEvent", TextEvent.class));
 
-        final Map<String, Class<? extends Event>> additionalEventMap = new HashMap<>();
-        additionalEventMap.put("BeforeUnloadEvent", BeforeUnloadEvent.class);
-        additionalEventMap.put("Events", Event.class);
-        additionalEventMap.put("HashChangeEvent", HashChangeEvent.class);
-        additionalEventMap.put("KeyEvents", KeyboardEvent.class);
-        additionalEventMap.put("PointerEvent", PointerEvent.class);
-        additionalEventMap.put("PopStateEvent", PopStateEvent.class);
-        additionalEventMap.put("ProgressEvent", ProgressEvent.class);
-        additionalEventMap.put("FocusEvent", FocusEvent.class);
-        additionalEventMap.put("WheelEvent", WheelEvent.class);
-        additionalEventMap.put("AnimationEvent", AnimationEvent.class);
-        SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
+        SUPPORTED_VENDOR_EVENT_TYPE_MAP = Map.of("BeforeUnloadEvent", BeforeUnloadEvent.class, "Events", Event.class, "HashChangeEvent", HashChangeEvent.class, "KeyEvents", KeyboardEvent.class, "PointerEvent", PointerEvent.class, "PopStateEvent", PopStateEvent.class, "ProgressEvent", ProgressEvent.class, "FocusEvent", FocusEvent.class, "WheelEvent", WheelEvent.class, "AnimationEvent", AnimationEvent.class);
     }
 
     private Window window_;

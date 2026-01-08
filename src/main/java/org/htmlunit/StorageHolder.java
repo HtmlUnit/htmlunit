@@ -55,7 +55,6 @@ public class StorageHolder implements Serializable {
         return switch (storageType) {
             case LOCAL_STORAGE -> getLocalStorage(page.getUrl());
             case SESSION_STORAGE -> getSessionStorage(page.getEnclosingWindow());
-            default -> null;
         };
     }
 

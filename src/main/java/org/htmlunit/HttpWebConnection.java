@@ -494,7 +494,6 @@ public class HttpWebConnection implements WebConnection {
             case HEAD -> new HttpHead(uri);
             case TRACE -> new HttpTrace(uri);
             case PATCH -> new HttpPatch(uri);
-            default -> throw new IllegalStateException("Submit method not yet supported: " + submitMethod);
         };
         return method;
     }

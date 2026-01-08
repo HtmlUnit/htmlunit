@@ -1859,7 +1859,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @see #getTopLevelWindows()
      */
     public List<WebWindow> getWebWindows() {
-        return Collections.unmodifiableList(new ArrayList<>(windows_));
+        return List.copyOf(windows_);
     }
 
     /**
@@ -1887,7 +1887,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @see #getWebWindows()
      */
     public List<TopLevelWindow> getTopLevelWindows() {
-        return Collections.unmodifiableList(new ArrayList<>(topLevelWindows_));
+        return List.copyOf(topLevelWindows_);
     }
 
     /**
