@@ -14,25 +14,19 @@
  */
 package org.htmlunit;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.htmlunit.html.DomNode;
@@ -44,7 +38,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests against external web sites, this should be done once every while.
+ * Tests against external websites, this should be done once every while.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -69,17 +63,14 @@ public class ExternalTest {
 
     /**
      * Tests the current environment matches the expected setup.
-     * @throws Exception if an error occurs
      */
     @Test
-    public void testEnvironment() throws Exception {
+    public void testEnvironment() {
         Assertions.assertEquals("en_US", Locale.getDefault().toString());
     }
 
     /**
      * Tests that POM dependencies are the latest.
-     *
-     * Currently, it is configured to check every week.
      *
      * @throws Exception if an error occurs
      */
@@ -135,7 +126,7 @@ public class ExternalTest {
                     break;
                 }
             }
-            Assertions.assertEquals(version, CHROME_DRIVER_);
+            Assertions.assertEquals(CHROME_DRIVER_, version);
         }
     }
 
@@ -166,7 +157,7 @@ public class ExternalTest {
                     break;
                 }
             }
-            Assertions.assertEquals(version, EDGE_DRIVER_);
+            Assertions.assertEquals(EDGE_DRIVER_, version);
         }
     }
 
@@ -180,7 +171,7 @@ public class ExternalTest {
             try {
                 final HtmlPage page = webClient.getPage(GECKO_DRIVER_URL_);
                 final DomNodeList<DomNode> divs = page.querySelectorAll("li.breadcrumb-item-selected");
-                Assertions.assertEquals(divs.get(0).asNormalizedText(), "v" + GECKO_DRIVER_);
+                Assertions.assertEquals("v" + GECKO_DRIVER_, divs.get(0).asNormalizedText());
             }
             catch (final FailingHttpStatusCodeException e) {
                 // ignore
@@ -191,33 +182,35 @@ public class ExternalTest {
     /**
      * Tests that the deployed snapshot is not more than two weeks old.
      *
-     * Currently, it is configured to check every week.
-     *
      * @throws Exception if an error occurs
      */
     @Test
     public void snapshot() throws Exception {
-        final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
-        String version = null;
-        for (int i = 0; i < lines.size(); i++) {
-            if ("<artifactId>htmlunit</artifactId>".equals(lines.get(i).trim())) {
-                version = getValue(lines.get(i + 1));
-                break;
-            }
+        final File pomFile = new File("pom.xml");
+        if (!pomFile.exists()) {
+            throw new IOException("POM file not found: " + pomFile.getAbsolutePath());
         }
-        Assertions.assertNotNull(version);
-        if (version.contains("SNAPSHOT")) {
-            try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX, false, null, -1)) {
-                final String url = SONATYPE_SNAPSHOT_REPO_URL_
-                        + "org/htmlunit/htmlunit/" + version + "/maven-metadata.xml";
 
-                final XmlPage page = webClient.getPage(url);
-                final String timestamp = page.getElementsByTagName("timestamp").get(0).getTextContent();
-                final DateFormat format = new SimpleDateFormat("yyyyMMdd.HHmmss", Locale.ROOT);
-                final long snapshotMillis = format.parse(timestamp).getTime();
-                final long nowMillis = System.currentTimeMillis();
-                final long days = TimeUnit.MILLISECONDS.toDays(nowMillis - snapshotMillis);
-                Assertions.assertTrue(days < 14, "Snapshot not deployed for " + days + " days");
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        try (FileReader fileReader = new FileReader(pomFile)) {
+            final Model model = reader.read(fileReader);
+
+            final String version = model.getVersion();
+            Assertions.assertNotNull(version);
+            if (version.contains("SNAPSHOT")) {
+                try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX, false, null, -1)) {
+                    final String url = SONATYPE_SNAPSHOT_REPO_URL_
+                            + "org/htmlunit/htmlunit/" + version + "/maven-metadata.xml";
+
+                    final XmlPage page = webClient.getPage(url);
+                    final String timestamp = page.getElementsByTagName("timestamp").get(0).getTextContent();
+                    final DateFormat format = new SimpleDateFormat("yyyyMMdd.HHmmss", Locale.ROOT);
+                    final long snapshotMillis = format.parse(timestamp).getTime();
+                    final long nowMillis = System.currentTimeMillis();
+                    final long days = TimeUnit.MILLISECONDS.toDays(nowMillis - snapshotMillis);
+
+                    Assertions.assertTrue(days < 14, "Snapshot not deployed for " + days + " days");
+                }
             }
         }
     }
@@ -341,7 +334,7 @@ public class ExternalTest {
             return true;
         }
 
-        // really old common versions
+        // ancient common versions
         if ("commons-io".equals(artifactId) && (version.startsWith("2003"))) {
             return true;
         }
@@ -350,9 +343,5 @@ public class ExternalTest {
         }
 
         return false;
-    }
-
-    private static String getValue(final String line) {
-        return line.substring(line.indexOf('>') + 1, line.lastIndexOf('<'));
     }
 }
