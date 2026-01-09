@@ -449,7 +449,7 @@
                                 <include>**/libraries/*.java</include>
                                 <!--
                                     we have to restrict to one subfolder level;
-                                    using '**' seems to confuse surefile byplacing some gwt classes
+                                    using '**' seems to confuse surefire by placing some gwt classes
                                     in the path and then failing when trying to instantiate
                                 -->
                                 <include>**/libraries/*/*.java</include>
@@ -1341,7 +1341,7 @@
         </contributor>
     </contributors>
     <dependencies>
-        <!-- this includes httpclient as depencency -->
+        <!-- this includes httpclient as dependency -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
