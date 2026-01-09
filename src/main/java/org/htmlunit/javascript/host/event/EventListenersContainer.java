@@ -60,112 +60,112 @@ public class EventListenersContainer implements Serializable {
 
     private record TypeContainer(List<Scriptable> capturingListeners_, List<Scriptable> bubblingListeners_,
                                  List<Scriptable> atTargetListeners_, Function handler_) implements Serializable {
-            public static final TypeContainer EMPTY = new TypeContainer();
+        public static final TypeContainer EMPTY = new TypeContainer();
 
-            // This sentinel value could be some singleton instance but null
-            // isn't used for anything else so why not.
-            private static final Scriptable EVENT_HANDLER_PLACEHOLDER = null;
+        // This sentinel value could be some singleton instance but null
+        // isn't used for anything else so why not.
+        private static final Scriptable EVENT_HANDLER_PLACEHOLDER = null;
 
-            TypeContainer() {
-                this(Collections.emptyList(), Collections.emptyList(), Collections.emptyList(), null);
-            }
+        TypeContainer() {
+            this(Collections.emptyList(), Collections.emptyList(), Collections.emptyList(), null);
+        }
 
         List<Scriptable> getListeners(final int eventPhase) {
-                return switch (eventPhase) {
-                    case Event.CAPTURING_PHASE -> capturingListeners_;
-                    case Event.AT_TARGET -> atTargetListeners_;
-                    case Event.BUBBLING_PHASE -> bubblingListeners_;
-                    default -> throw new UnsupportedOperationException("eventPhase: " + eventPhase);
-                };
-            }
-
-            public TypeContainer setPropertyHandler(final Function propertyHandler) {
-                if (propertyHandler != null) {
-                    // If we already have a handler then the position of the existing
-                    // placeholder should not be changed so just change the handler
-                    if (handler_ != null) {
-                        if (propertyHandler == handler_) {
-                            return this;
-                        }
-                        return withPropertyHandler(propertyHandler);
-                    }
-
-                    // Insert the placeholder and set the handler
-                    return withPropertyHandler(propertyHandler).addListener(EVENT_HANDLER_PLACEHOLDER, false);
-                }
-                if (handler_ == null) {
-                    return this;
-                }
-                return removeListener(EVENT_HANDLER_PLACEHOLDER, false).withPropertyHandler(null);
-            }
-
-            private TypeContainer withPropertyHandler(final Function propertyHandler) {
-                return new TypeContainer(capturingListeners_, bubblingListeners_, atTargetListeners_, propertyHandler);
-            }
-
-            public TypeContainer addListener(final Scriptable listener, final boolean useCapture) {
-
-                List<Scriptable> capturingListeners = capturingListeners_;
-                List<Scriptable> bubblingListeners = bubblingListeners_;
-                final List<Scriptable> listeners = useCapture ? capturingListeners : bubblingListeners;
-
-                if (listeners.contains(listener)) {
-                    return this;
-                }
-
-                List<Scriptable> newListeners = new ArrayList<>(listeners.size() + 1);
-                newListeners.addAll(listeners);
-                newListeners.add(listener);
-                newListeners = Collections.unmodifiableList(newListeners);
-
-                if (useCapture) {
-                    capturingListeners = newListeners;
-                } else {
-                    bubblingListeners = newListeners;
-                }
-
-                List<Scriptable> atTargetListeners = new ArrayList<>(atTargetListeners_.size() + 1);
-                atTargetListeners.addAll(atTargetListeners_);
-                atTargetListeners.add(listener);
-                atTargetListeners = Collections.unmodifiableList(atTargetListeners);
-
-                return new TypeContainer(capturingListeners, bubblingListeners, atTargetListeners, handler_);
-            }
-
-            public TypeContainer removeListener(final Scriptable listener, final boolean useCapture) {
-
-                List<Scriptable> capturingListeners = capturingListeners_;
-                List<Scriptable> bubblingListeners = bubblingListeners_;
-                final List<Scriptable> listeners = useCapture ? capturingListeners : bubblingListeners;
-
-                final int idx = listeners.indexOf(listener);
-                if (idx < 0) {
-                    return this;
-                }
-
-                List<Scriptable> newListeners = new ArrayList<>(listeners);
-                newListeners.remove(idx);
-                newListeners = Collections.unmodifiableList(newListeners);
-
-                if (useCapture) {
-                    capturingListeners = newListeners;
-                } else {
-                    bubblingListeners = newListeners;
-                }
-
-                List<Scriptable> atTargetListeners = new ArrayList<>(atTargetListeners_);
-                atTargetListeners.remove(listener);
-                atTargetListeners = Collections.unmodifiableList(atTargetListeners);
-
-                return new TypeContainer(capturingListeners, bubblingListeners, atTargetListeners, handler_);
-            }
-
-            // Refactoring note: This method doesn't appear to be used
-            @Override
-            protected TypeContainer clone() {
-                return new TypeContainer(capturingListeners_, bubblingListeners_, atTargetListeners_, handler_);
-            }
+            return switch (eventPhase) {
+                case Event.CAPTURING_PHASE -> capturingListeners_;
+                case Event.AT_TARGET -> atTargetListeners_;
+                case Event.BUBBLING_PHASE -> bubblingListeners_;
+                default -> throw new UnsupportedOperationException("eventPhase: " + eventPhase);
+            };
         }
+
+        public TypeContainer setPropertyHandler(final Function propertyHandler) {
+            if (propertyHandler != null) {
+                // If we already have a handler then the position of the existing
+                // placeholder should not be changed so just change the handler
+                if (handler_ != null) {
+                    if (propertyHandler == handler_) {
+                        return this;
+                    }
+                    return withPropertyHandler(propertyHandler);
+                }
+
+                // Insert the placeholder and set the handler
+                return withPropertyHandler(propertyHandler).addListener(EVENT_HANDLER_PLACEHOLDER, false);
+            }
+            if (handler_ == null) {
+                return this;
+            }
+            return removeListener(EVENT_HANDLER_PLACEHOLDER, false).withPropertyHandler(null);
+        }
+
+        private TypeContainer withPropertyHandler(final Function propertyHandler) {
+            return new TypeContainer(capturingListeners_, bubblingListeners_, atTargetListeners_, propertyHandler);
+        }
+
+        public TypeContainer addListener(final Scriptable listener, final boolean useCapture) {
+            List<Scriptable> capturingListeners = capturingListeners_;
+            List<Scriptable> bubblingListeners = bubblingListeners_;
+            final List<Scriptable> listeners = useCapture ? capturingListeners : bubblingListeners;
+
+            if (listeners.contains(listener)) {
+                return this;
+            }
+
+            List<Scriptable> newListeners = new ArrayList<>(listeners.size() + 1);
+            newListeners.addAll(listeners);
+            newListeners.add(listener);
+            newListeners = Collections.unmodifiableList(newListeners);
+
+            if (useCapture) {
+                capturingListeners = newListeners;
+            }
+            else {
+                bubblingListeners = newListeners;
+            }
+
+            List<Scriptable> atTargetListeners = new ArrayList<>(atTargetListeners_.size() + 1);
+            atTargetListeners.addAll(atTargetListeners_);
+            atTargetListeners.add(listener);
+            atTargetListeners = Collections.unmodifiableList(atTargetListeners);
+
+            return new TypeContainer(capturingListeners, bubblingListeners, atTargetListeners, handler_);
+        }
+
+        public TypeContainer removeListener(final Scriptable listener, final boolean useCapture) {
+            List<Scriptable> capturingListeners = capturingListeners_;
+            List<Scriptable> bubblingListeners = bubblingListeners_;
+            final List<Scriptable> listeners = useCapture ? capturingListeners : bubblingListeners;
+
+            final int idx = listeners.indexOf(listener);
+            if (idx < 0) {
+                return this;
+            }
+
+            List<Scriptable> newListeners = new ArrayList<>(listeners);
+            newListeners.remove(idx);
+            newListeners = Collections.unmodifiableList(newListeners);
+
+            if (useCapture) {
+                capturingListeners = newListeners;
+            }
+            else {
+                bubblingListeners = newListeners;
+            }
+
+            List<Scriptable> atTargetListeners = new ArrayList<>(atTargetListeners_);
+            atTargetListeners.remove(listener);
+            atTargetListeners = Collections.unmodifiableList(atTargetListeners);
+
+            return new TypeContainer(capturingListeners, bubblingListeners, atTargetListeners, handler_);
+        }
+
+        // Refactoring note: This method doesn't appear to be used
+        @Override
+        protected TypeContainer clone() {
+            return new TypeContainer(capturingListeners_, bubblingListeners_, atTargetListeners_, handler_);
+        }
+    }
 
     /**
      * The constructor.

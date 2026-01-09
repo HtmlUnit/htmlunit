@@ -14,6 +14,8 @@
  */
 package org.htmlunit.util.geometry;
 
+import java.util.Objects;
+
 /**
  * Simple 2D point.
  *
@@ -50,5 +52,20 @@ public class Point2D {
     @Override
     public String toString() {
         return "Point2D (" + myX_ + ", " + myY_ + ")";
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final Point2D point2D = (Point2D) o;
+        return Double.compare(myX_, point2D.myX_) == 0 && Double.compare(myY_, point2D.myY_) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(myX_, myY_);
     }
 }

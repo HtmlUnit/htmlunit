@@ -21,10 +21,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.geometry.Point2D;
 
 /**
  * Wrapper for the HTML element "table".
@@ -76,13 +76,13 @@ public class HtmlTable extends HtmlElement {
      */
     public final HtmlTableCell getCellAt(final int rowIndex, final int columnIndex) {
         final RowIterator rowIterator = getRowIterator();
-        final HashSet<Position> occupied = new HashSet<>();
+        final HashSet<Point2D> occupied = new HashSet<>();
         int row = 0;
         for (final HtmlTableRow htmlTableRow : rowIterator) {
             final HtmlTableRow.CellIterator cellIterator = htmlTableRow.getCellIterator();
             int col = 0;
             for (final HtmlTableCell cell : cellIterator) {
-                while (occupied.contains(new Position(row, col))) {
+                while (occupied.contains(new Point2D(row, col))) {
                     col++;
                 }
                 final int nextRow = row + cell.getRowSpan();
@@ -97,7 +97,7 @@ public class HtmlTable extends HtmlElement {
                 if (rowSpan > 1 || columnSpan > 1) {
                     for (int i = 0; i < rowSpan; i++) {
                         for (int j = 0; j < columnSpan; j++) {
-                            occupied.add(new Position(row + i, col + j));
+                            occupied.add(new Point2D(row + i, col + j));
                         }
                     }
                 }
@@ -444,30 +444,4 @@ public class HtmlTable extends HtmlElement {
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.TABLE;
     }
-
-    private record Position(int posX_, int posY_) {
-
-        @Override
-            public boolean equals(final Object obj) {
-                if (this == obj) {
-                    return true;
-                }
-                if (obj == null) {
-                    return false;
-                }
-                if (getClass() != obj.getClass()) {
-                    return false;
-                }
-
-                final Position other = (Position) obj;
-                if (posX_ != other.posX_) {
-                    return false;
-                }
-                if (posY_ != other.posY_) {
-                    return false;
-                }
-
-                return true;
-            }
-        }
 }

@@ -32,7 +32,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -186,11 +185,36 @@ public class Document extends Node {
       have a no-arg constructor.
      */
     static {
-        SUPPORTED_DOM2_EVENT_TYPE_MAP = Map.of("HTMLEvents", Event.class, "MouseEvents", MouseEvent.class, "MutationEvents", MutationEvent.class, "UIEvents", UIEvent.class);
+        SUPPORTED_DOM2_EVENT_TYPE_MAP = Map.of(
+                "HTMLEvents", Event.class,
+                "MouseEvents", MouseEvent.class,
+                "MutationEvents", MutationEvent.class,
+                "UIEvents", UIEvent.class);
 
-        SUPPORTED_DOM3_EVENT_TYPE_MAP = Map.ofEntries(Map.entry("Event", Event.class), Map.entry("KeyboardEvent", KeyboardEvent.class), Map.entry("MouseEvent", MouseEvent.class), Map.entry("MessageEvent", MessageEvent.class), Map.entry("MutationEvent", MutationEvent.class), Map.entry("UIEvent", UIEvent.class), Map.entry("CustomEvent", CustomEvent.class), Map.entry("CloseEvent", CloseEvent.class), Map.entry("CompositionEvent", CompositionEvent.class), Map.entry("DragEvent", DragEvent.class), Map.entry("TextEvent", TextEvent.class));
+        SUPPORTED_DOM3_EVENT_TYPE_MAP = Map.ofEntries(
+                Map.entry("Event", Event.class),
+                Map.entry("KeyboardEvent", KeyboardEvent.class),
+                Map.entry("MouseEvent", MouseEvent.class),
+                Map.entry("MessageEvent", MessageEvent.class),
+                Map.entry("MutationEvent", MutationEvent.class),
+                Map.entry("UIEvent", UIEvent.class),
+                Map.entry("CustomEvent", CustomEvent.class),
+                Map.entry("CloseEvent", CloseEvent.class),
+                Map.entry("CompositionEvent", CompositionEvent.class),
+                Map.entry("DragEvent", DragEvent.class),
+                Map.entry("TextEvent", TextEvent.class));
 
-        SUPPORTED_VENDOR_EVENT_TYPE_MAP = Map.of("BeforeUnloadEvent", BeforeUnloadEvent.class, "Events", Event.class, "HashChangeEvent", HashChangeEvent.class, "KeyEvents", KeyboardEvent.class, "PointerEvent", PointerEvent.class, "PopStateEvent", PopStateEvent.class, "ProgressEvent", ProgressEvent.class, "FocusEvent", FocusEvent.class, "WheelEvent", WheelEvent.class, "AnimationEvent", AnimationEvent.class);
+        SUPPORTED_VENDOR_EVENT_TYPE_MAP = Map.of(
+                "BeforeUnloadEvent", BeforeUnloadEvent.class,
+                "Events", Event.class,
+                "HashChangeEvent", HashChangeEvent.class,
+                "KeyEvents", KeyboardEvent.class,
+                "PointerEvent", PointerEvent.class,
+                "PopStateEvent", PopStateEvent.class,
+                "ProgressEvent", ProgressEvent.class,
+                "FocusEvent", FocusEvent.class,
+                "WheelEvent", WheelEvent.class,
+                "AnimationEvent", AnimationEvent.class);
     }
 
     private Window window_;

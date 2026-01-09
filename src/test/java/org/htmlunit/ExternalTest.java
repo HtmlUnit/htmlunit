@@ -115,19 +115,6 @@ public class ExternalTest {
         assertVersion("org.sonatype.oss", "oss-parent", "9");
     }
 
-    private static void processProperties(final List<String> lines, int i, final Map<String, String> map) {
-        for ( ; i < lines.size(); i++) {
-            final String line = lines.get(i).trim();
-            if (StringUtils.isNotBlank(line) && !line.startsWith("<!--")) {
-                if ("</properties>".equals(line)) {
-                    break;
-                }
-                final String name = line.substring(line.indexOf('<') + 1, line.indexOf('>'));
-                map.put(name, getValue(line));
-            }
-        }
-    }
-
     /**
      * Tests that we use the latest chrome driver.
      * @throws Exception if an error occurs
@@ -204,7 +191,7 @@ public class ExternalTest {
     /**
      * Tests that the deployed snapshot is not more than two weeks old.
      *
-     * Currently it is configured to check every week.
+     * Currently, it is configured to check every week.
      *
      * @throws Exception if an error occurs
      */
