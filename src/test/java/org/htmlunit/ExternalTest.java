@@ -17,6 +17,8 @@ package org.htmlunit;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomNodeList;
 import org.htmlunit.html.HtmlAnchor;
@@ -75,62 +79,37 @@ public class ExternalTest {
     /**
      * Tests that POM dependencies are the latest.
      *
-     * Currently it is configured to check every week.
+     * Currently, it is configured to check every week.
      *
      * @throws Exception if an error occurs
      */
     @Test
     public void pom() throws Exception {
-        final Map<String, String> properties = new HashMap<>();
-        final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
-
-        final List<String> wrongVersions = new LinkedList<>();
-        boolean inComment = false;
-        for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i);
-
-            String cleaned = "";
-            if (!inComment) {
-                final int startIdx = line.indexOf("<!--");
-                if (startIdx != -1) {
-                    cleaned += line.substring(0, startIdx);
-                    inComment = true;
-                }
-            }
-            if (inComment) {
-                final int endIdx = line.indexOf("-->");
-                if (endIdx != -1) {
-                    cleaned += line.substring(endIdx + 3);
-                    inComment = false;
-                }
-                line = cleaned;
-            }
-
-            if (line.trim().equals("<properties>")) {
-                processProperties(lines, i + 1, properties);
-            }
-            if (line.contains("artifactId")
-                    && !line.contains(">htmlunit<")
-                    && !line.contains(">selenium-devtools-v")) {
-                final String artifactId = getValue(line);
-                final String groupId = getValue(lines.get(i - 1));
-                if (!lines.get(i + 1).contains("</exclusion>")) {
-                    String version = getValue(lines.get(i + 1));
-                    if (version.startsWith("${")) {
-                        version = properties.get(version.substring(2, version.length() - 1));
-                    }
-                    try {
-                        assertVersion(groupId, artifactId, version);
-                    }
-                    catch (final AssertionError e) {
-                        wrongVersions.add(e.getMessage());
-                    }
-                }
-            }
+        final File pomFile = new File("pom.xml");
+        if (!pomFile.exists()) {
+            throw new IOException("POM file not found: " + pomFile.getAbsolutePath());
         }
 
-        if (!wrongVersions.isEmpty()) {
-            Assertions.fail(String.join("\n ", wrongVersions));
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        try (FileReader fileReader = new FileReader(pomFile)) {
+            final Model model = reader.read(fileReader);
+
+            final List<String> wrongVersions = new LinkedList<>();
+            for (var dep : model.getDependencies()) {
+                String version = dep.getVersion();
+                if (version.startsWith("${")) {
+                    version = "" + model.getProperties().get(version.substring(2, version.length() - 1));
+                }
+                try {
+                    assertVersion(dep.getGroupId(), dep.getArtifactId(), version);
+                }
+                catch (final AssertionError e) {
+                    wrongVersions.add(e.getMessage());
+                }
+            }
+            if (!wrongVersions.isEmpty()) {
+                Assertions.fail(String.join("\n ", wrongVersions));
+            }
         }
 
         assertVersion("org.sonatype.oss", "oss-parent", "9");
