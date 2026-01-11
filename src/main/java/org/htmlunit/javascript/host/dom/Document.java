@@ -847,7 +847,7 @@ public class Document extends Node {
             if (doc != null) {
                 for (final DomNode node : doc.getChildren()) {
                     if (node instanceof HtmlFrameSet) {
-                        return (HTMLElement) node.getScriptableObject();
+                        return node.getScriptableObject();
                     }
                 }
             }

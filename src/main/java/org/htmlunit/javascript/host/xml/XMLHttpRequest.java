@@ -771,7 +771,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         else {
             // Create and start a thread in which to execute the request.
             final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
-            final ContextAction<Object> action = new ContextAction<Object>() {
+            final ContextAction<Object> action = new ContextAction<>() {
                 @Override
                 public Object run(final Context cx) {
                     doSend();

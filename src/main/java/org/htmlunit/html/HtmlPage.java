@@ -1607,13 +1607,12 @@ public class HtmlPage extends SgmlPage {
                 // The element with focus isn't on this page
                 elementToGiveFocus = elements.get(0);
             }
+            else if (index == elements.size() - 1) {
+                // if at last jump to start
+                elementToGiveFocus = elements.get(0);
+            }
             else {
-                if (index == elements.size() - 1) {
-                    elementToGiveFocus = elements.get(0);
-                }
-                else {
-                    elementToGiveFocus = elements.get(index + 1);
-                }
+                elementToGiveFocus = elements.get(index + 1);
             }
         }
 
@@ -1645,13 +1644,12 @@ public class HtmlPage extends SgmlPage {
                 // The element with focus isn't on this page
                 elementToGiveFocus = elements.get(elements.size() - 1);
             }
+            else if (index == 0) {
+                // first; back to the last
+                elementToGiveFocus = elements.get(elements.size() - 1);
+            }
             else {
-                if (index == 0) {
-                    elementToGiveFocus = elements.get(elements.size() - 1);
-                }
-                else {
-                    elementToGiveFocus = elements.get(index - 1);
-                }
+                elementToGiveFocus = elements.get(index - 1);
             }
         }
 
@@ -2894,8 +2892,7 @@ public class HtmlPage extends SgmlPage {
             computedStyles_.clear();
         }
 
-        public synchronized Map<String, ComputedCssStyleDeclaration> remove(
-                final DomNode element) {
+        public synchronized Map<String, ComputedCssStyleDeclaration> remove(final DomNode element) {
             return computedStyles_.remove(element);
         }
 

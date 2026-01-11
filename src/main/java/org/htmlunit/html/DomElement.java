@@ -651,7 +651,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return A list of matching elements.
      */
     <E extends HtmlElement> DomNodeList<E> getElementsByTagNameImpl(final String tagName) {
-        return new AbstractDomNodeList<E>(this) {
+        return new AbstractDomNodeList<>(this) {
             @Override
             @SuppressWarnings("unchecked")
             protected List<E> provideElements() {

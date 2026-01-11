@@ -1356,12 +1356,7 @@ public final class UrlUtils {
             return "";
         }
 
-        try {
-            return URLEncoder.encode(part, "UTF-8");
-        }
-        catch (final UnsupportedEncodingException e) {
-            return part;
-        }
+        return URLEncoder.encode(part, UTF_8);
     }
 
     /**

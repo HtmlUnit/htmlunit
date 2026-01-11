@@ -549,7 +549,7 @@ public class SimpleRange implements Serializable {
     /**
      * @return a list with all nodes contained in this range
      */
-    public List<DomNode> containedNodes() {
+    public List containedNodes() {
         final DomNode ancestor = getCommonAncestorContainer();
         if (ancestor == null) {
             return Collections.EMPTY_LIST;

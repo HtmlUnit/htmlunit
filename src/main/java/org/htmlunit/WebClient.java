@@ -1423,7 +1423,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         String fileUrl = cleanUrl.toExternalForm();
-        fileUrl = URLDecoder.decode(fileUrl, UTF_8.name());
+        fileUrl = URLDecoder.decode(fileUrl, UTF_8);
         final File file = new File(fileUrl.substring(5));
         if (!file.exists()) {
             // construct 404

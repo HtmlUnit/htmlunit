@@ -83,14 +83,13 @@ public class HTMLTableElement extends HTMLElement {
      */
     @JsxSetter
     public void setCaption(final Object o) {
-        if (!(o instanceof HTMLTableCaptionElement)) {
+        if (!(o instanceof HTMLTableCaptionElement caption)) {
             throw JavaScriptEngine.typeError("Not a caption");
         }
 
         // remove old caption (if any)
         deleteCaption();
 
-        final HTMLTableCaptionElement caption = (HTMLTableCaptionElement) o;
         getDomNodeOrDie().appendChild(caption.getDomNodeOrDie());
     }
 
@@ -122,8 +121,7 @@ public class HTMLTableElement extends HTMLElement {
         // remove old caption (if any)
         deleteTFoot();
 
-        final HTMLTableSectionElement tfoot = (HTMLTableSectionElement) o;
-        getDomNodeOrDie().appendChild(tfoot.getDomNodeOrDie());
+        getDomNodeOrDie().appendChild(element.getDomNodeOrDie());
     }
 
     /**
@@ -154,8 +152,7 @@ public class HTMLTableElement extends HTMLElement {
         // remove old caption (if any)
         deleteTHead();
 
-        final HTMLTableSectionElement thead = (HTMLTableSectionElement) o;
-        getDomNodeOrDie().appendChild(thead.getDomNodeOrDie());
+        getDomNodeOrDie().appendChild(element.getDomNodeOrDie());
     }
 
     /**
