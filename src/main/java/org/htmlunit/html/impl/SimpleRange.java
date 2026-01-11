@@ -253,6 +253,7 @@ public class SimpleRange implements Serializable {
         else {
             end = endContainer_.getNextSibling();
         }
+
         boolean foundStart = false;
         boolean started = false;
         final Iterator<DomNode> i = ancestor.getDescendants().iterator();
@@ -549,10 +550,10 @@ public class SimpleRange implements Serializable {
     /**
      * @return a list with all nodes contained in this range
      */
-    public List containedNodes() {
+    public List<DomNode> containedNodes() {
         final DomNode ancestor = getCommonAncestorContainer();
         if (ancestor == null) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
 
         final DomNode start;
