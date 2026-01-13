@@ -299,7 +299,8 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
 
                 if (hasCaseSensitiveTagNames()) {
                     comparator = Comparator.nullsFirst(String::compareTo);
-                } else {
+                }
+                else {
                     comparator = Comparator.nullsFirst(String::compareToIgnoreCase);
                 }
 
