@@ -67,7 +67,6 @@ import org.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.ProxyAutoConfigJavaScriptConfiguration;
 import org.htmlunit.javascript.host.ConsoleCustom;
-import org.htmlunit.javascript.host.NumberCustom;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.DOMException;
@@ -432,9 +431,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         deleteProperties(scope, "isXMLName");
 
         NativeFunctionToStringFunction.installFix(scope, browserVersion);
-
-        numberPrototype.defineFunctionProperties(new String[] {"toLocaleString"},
-                NumberCustom.class, ScriptableObject.DONTENUM);
 
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(scope, "Error");
         if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
