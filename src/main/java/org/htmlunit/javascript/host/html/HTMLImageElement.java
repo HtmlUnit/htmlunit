@@ -41,20 +41,6 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  */
 @JsxClass(domClass = HtmlImage.class)
 public class HTMLImageElement extends HTMLElement {
-    private static final Map<String, String> NORMALIZED_ALIGN_VALUES;
-    static {
-        NORMALIZED_ALIGN_VALUES = new HashMap<>();
-        NORMALIZED_ALIGN_VALUES.put("center", "center");
-        NORMALIZED_ALIGN_VALUES.put("left", "left");
-        NORMALIZED_ALIGN_VALUES.put("right", "right");
-        NORMALIZED_ALIGN_VALUES.put("bottom", "bottom");
-        NORMALIZED_ALIGN_VALUES.put("middle", "middle");
-        NORMALIZED_ALIGN_VALUES.put("top", "top");
-        NORMALIZED_ALIGN_VALUES.put("absbottom", "absBottom");
-        NORMALIZED_ALIGN_VALUES.put("absmiddle", "absMiddle");
-        NORMALIZED_ALIGN_VALUES.put("baseline", "baseline");
-        NORMALIZED_ALIGN_VALUES.put("texttop", "textTop");
-    }
 
     private boolean endTagForbidden_ = true;
 
