@@ -413,6 +413,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final ScriptableObject console = (ScriptableObject) ScriptableObject.getProperty(scope, "console");
         console.defineFunctionProperties(new String[] {"timeStamp"}, ConsoleCustom.class, ScriptableObject.DONTENUM);
 
+        // remove some objects, that Rhino defines in top scope but that we don't want
+        deleteProperties(scope, "Continuation", "StopIteration", "uneval", "global");
+
         // Rhino defines too many methods for us, particularly since implementation of ECMAScript5
         final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, "String");
         deleteProperties(stringPrototype, "equals", "equalsIgnoreCase", "toSource");
@@ -422,7 +425,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, "Date");
         deleteProperties(datePrototype, "toSource");
 
-        deleteProperties(scope, "uneval");
         removePrototypeProperties(scope, "Object", "toSource");
         removePrototypeProperties(scope, "Array", "toSource");
         removePrototypeProperties(scope, "Function", "toSource");
@@ -433,9 +435,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         numberPrototype.defineFunctionProperties(new String[] {"toLocaleString"},
                 NumberCustom.class, ScriptableObject.DONTENUM);
-
-        // remove some objects, that Rhino defines in top scope but that we don't want
-        deleteProperties(scope, "Continuation", "StopIteration");
 
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(scope, "Error");
         if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
