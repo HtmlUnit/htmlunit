@@ -219,7 +219,7 @@ public class PointerEvent extends MouseEvent {
      */
     @JsxGetter
     public double getPersistentDeviceId() {
-        // dummy but valid regarding to the spec
+        // dummy but valid regarding the spec
         // https://w3c.github.io/pointerevents/#dom-pointerevent-persistentdeviceid
         return 0d;
     }

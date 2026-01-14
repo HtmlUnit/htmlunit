@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: DataView BigInt64 and BigUInt64 support added
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: isConstructor check fixed and improved
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: major performance improvement for RegExp.prototype[Symbol.split] and RegExp.prototype[Symbol.replace]
+            </action>
             <action type="update" dev="rbri">
                 core-js: improve the Number.toLocaleString() implementation; drop our own version
             </action>
