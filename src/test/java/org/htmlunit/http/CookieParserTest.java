@@ -124,13 +124,13 @@ public class CookieParserTest {
      */
     @Test
     public void testCookieWithDomain() throws Exception {
-        final List<Cookie> cookies = parseCookie("name=value; domain=example.com");
+        final List<Cookie> cookies = parseCookie("name=value; domain=.example.com");
 
         assertEquals(1, cookies.size());
         final Cookie cookie = cookies. get(0);
         assertEquals("name", cookie.getName());
         assertEquals("value", cookie.getValue());
-        assertEquals("example.com", cookie.getDomain());
+        assertEquals(".example.com", cookie.getDomain());
     }
 
     /**
@@ -285,7 +285,7 @@ public class CookieParserTest {
      */
     @Test
     public void testCookieWithAllAttributes() throws Exception {
-        final String cookieString = "name=value; domain=example.com; path=/; " +
+        final String cookieString = "name=value; domain=.example.com; path=/; " +
                 "secure; httponly; samesite=Strict; max-age=3600";
 
         final List<Cookie> cookies = parseCookie(cookieString);
@@ -294,7 +294,7 @@ public class CookieParserTest {
         final Cookie cookie = cookies.get(0);
         assertEquals("name", cookie.getName());
         assertEquals("value", cookie.getValue());
-        assertEquals("example.com", cookie.getDomain());
+        assertEquals(".example.com", cookie.getDomain());
         assertEquals("/", cookie.getPath());
         assertTrue(cookie.isSecure());
         assertTrue(cookie.isHttpOnly());
@@ -397,9 +397,20 @@ public class CookieParserTest {
      */
     @Test
     public void testParseFromFileUrl() throws Exception {
-        final URL url = new URL("file:///path/to/file.html");
-        final List<Cookie> cookies = CookieParser.parseCookie(
-                "name=value", url, BrowserVersion.BEST_SUPPORTED);
+        final URL url = new URL("file:///path/to/file. html");
+        final List<Cookie> cookies = CookieParser.parseCookie("name=value", url, BrowserVersion.BEST_SUPPORTED);
+
+        assertEquals(1, cookies.size());
+        assertEquals(CookieParser.LOCAL_FILESYSTEM_DOMAIN, cookies.get(0).getDomain());
+    }
+
+    /**
+     * Test parsing from file URL with spaces.
+     */
+    @Test
+    public void testParseFromFileUrlWithSpaces() throws Exception {
+        final URL url = new URL("file:///path/to/my%20file.html");
+        final List<Cookie> cookies = CookieParser.parseCookie("name=value", url, BrowserVersion.BEST_SUPPORTED);
 
         assertEquals(1, cookies.size());
         assertEquals(CookieParser.LOCAL_FILESYSTEM_DOMAIN, cookies.get(0).getDomain());

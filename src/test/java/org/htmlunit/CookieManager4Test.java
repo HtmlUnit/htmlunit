@@ -64,7 +64,7 @@ public class CookieManager4Test extends WebDriverTestCase {
     public static final String URL_HOST4 = "http://" + "htmlunit-dev" + ":" + PORT + '/';
 
     /**
-     * {@link org.junit.Assume Assumes} that the host configurations are present.
+     * Assumes, the host configurations are present.
      *
      * @throws Exception if the test fails
      */

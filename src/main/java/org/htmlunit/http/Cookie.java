@@ -16,11 +16,10 @@ package org.htmlunit.http;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.impl.cookie.BasicClientCookie;
 
 /**
  * A cookie. This class is immutable.
@@ -32,7 +31,14 @@ import org.apache.http.impl.cookie.BasicClientCookie;
  */
 public class Cookie implements Serializable {
 
-    private final ClientCookie httpClientCookie_;
+    private final String domain_;
+    private final String name_;
+    private final String value_;
+    private final String path_;
+    private final Date expiryDate_;
+    private final boolean isSecure_;
+    private final boolean isHttpOnly_;
+    private final String samesite_;
 
     /**
      * Creates a new cookie with the specified name and value which applies to the specified domain.
@@ -94,34 +100,21 @@ public class Cookie implements Serializable {
             throw new IllegalArgumentException("Cookie domain must be specified");
         }
 
-        final BasicClientCookie cookie = new BasicClientCookie(name, value == null ? "" : value);
-
-        cookie.setDomain(domain);
-        // BasicDomainHandler.match(Cookie, CookieOrigin) checks the attib also (see #333)
-        cookie.setAttribute(ClientCookie.DOMAIN_ATTR, domain);
-
-        cookie.setPath(path);
-        if (expires != null) {
-            cookie.setExpiryDate(expires);
+        domain_ = domain.toLowerCase(Locale.ROOT);
+        name_ = name;
+        if (value == null) {
+            value_ = "";
         }
-        cookie.setSecure(secure);
-        if (httpOnly) {
-            cookie.setAttribute("httponly", "true");
+        else {
+            value_ = value;
         }
+        path_ = path;
+        expiryDate_ = expires;
 
-        if (sameSite != null) {
-            cookie.setAttribute("samesite", sameSite);
-        }
+        isSecure_ = secure;
+        isHttpOnly_ = httpOnly;
 
-        httpClientCookie_ = cookie;
-    }
-
-    /**
-     * Creates a new HtmlUnit cookie from the HttpClient cookie provided.
-     * @param clientCookie the HttpClient cookie
-     */
-    public Cookie(final ClientCookie clientCookie) {
-        httpClientCookie_ = clientCookie;
+        samesite_ = sameSite;
     }
 
     /**
@@ -157,7 +150,7 @@ public class Cookie implements Serializable {
      * @return the cookie name
      */
     public String getName() {
-        return httpClientCookie_.getName();
+        return name_;
     }
 
     /**
@@ -165,7 +158,7 @@ public class Cookie implements Serializable {
      * @return the cookie value
      */
     public String getValue() {
-        return httpClientCookie_.getValue();
+        return value_;
     }
 
     /**
@@ -173,7 +166,7 @@ public class Cookie implements Serializable {
      * @return the domain to which this cookie applies ({@code null} for all domains)
      */
     public String getDomain() {
-        return httpClientCookie_.getDomain();
+        return domain_;
     }
 
     /**
@@ -181,7 +174,7 @@ public class Cookie implements Serializable {
      * @return the path to which this cookie applies ({@code null} for all paths)
      */
     public String getPath() {
-        return httpClientCookie_.getPath();
+        return path_;
     }
 
     /**
@@ -189,7 +182,7 @@ public class Cookie implements Serializable {
      * @return the date on which this cookie expires ({@code null} if it never expires)
      */
     public Date getExpires() {
-        return httpClientCookie_.getExpiryDate();
+        return expiryDate_;
     }
 
     /**
@@ -197,7 +190,7 @@ public class Cookie implements Serializable {
      * @return whether or not this cookie is secure (i.e. HTTPS vs HTTP)
      */
     public boolean isSecure() {
-        return httpClientCookie_.isSecure();
+        return isSecure_;
     }
 
     /**
@@ -206,14 +199,14 @@ public class Cookie implements Serializable {
      * @return whether or not this cookie is HttpOnly (i.e. not available in JS).
      */
     public boolean isHttpOnly() {
-        return httpClientCookie_.getAttribute("httponly") != null;
+        return isHttpOnly_;
     }
 
     /**
      * @return the SameSite value or {@code null} if not set.
      */
     public String getSameSite() {
-        return httpClientCookie_.getAttribute("samesite");
+        return samesite_;
     }
 
     /**
@@ -254,13 +247,5 @@ public class Cookie implements Serializable {
     public int hashCode() {
         final String path = getPath() == null ? "/" : getPath();
         return Objects.hash(getName(), getDomain(), path);
-    }
-
-    /**
-     * Converts this cookie to an HttpClient cookie.
-     * @return an HttpClient version of this cookie
-     */
-    public org.apache.http.cookie.Cookie toHttpClient() {
-        return httpClientCookie_;
     }
 }

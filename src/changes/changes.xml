@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: Cookie moved from package 'org.htmlunit.util' to 'org.htmlunit.http'
+            </action>
             <action type="add" dev="RhinoTeam">
                 core-js: DataView BigInt64 and BigUInt64 support added
             </action>

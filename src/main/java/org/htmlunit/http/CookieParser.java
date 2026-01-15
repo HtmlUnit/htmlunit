@@ -51,7 +51,7 @@ public final class CookieParser {
         "EEE, dd-MMM-yy HH:mm:ss z",        // RFC 1036
         "EEE MMM dd HH:mm:ss yyyy",         // ANSI C asctime()
         "EEE, dd-MMM-yyyy HH:mm:ss z",      // Variant
-        "EEE MMM dd yyyy HH:mm: ss z",       // Variant
+        "EEE MMM dd yyyy HH:mm: ss z",      // Variant
         "EEE, dd MMM yy HH:mm:ss z"         // Variant
     };
 
@@ -137,7 +137,7 @@ public final class CookieParser {
     private static ParsedCookie parseNetscapeCookie(final String cookieString)
             throws MalformedCookieException {
 
-        // Split by semicolon
+        // Split by semicolon, but be careful with the first name=value pair
         final String[] parts = cookieString.split(";");
 
         if (parts.length == 0) {
