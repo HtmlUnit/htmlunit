@@ -58,7 +58,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.cookie.MalformedCookieException;
 import org.htmlunit.attachment.Attachment;
 import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.csp.Policy;
@@ -77,8 +76,10 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserListener;
+import org.htmlunit.http.CookieParser;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.http.HttpUtils;
+import org.htmlunit.http.MalformedCookieException;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.DefaultJavaScriptErrorListener;
@@ -2933,7 +2934,8 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         try {
-            final List<Cookie> cookies = HttpClientConverter.parseCookie(cookieString, pageUrl, getBrowserVersion());
+            // final List<Cookie> cookies = HttpClientConverter.parseCookie(cookieString, pageUrl, getBrowserVersion());
+            final List<Cookie> cookies = CookieParser.parseCookie(cookieString, pageUrl, getBrowserVersion());
 
             for (final Cookie cookie : cookies) {
                 cookieManager.addCookie(cookie);
