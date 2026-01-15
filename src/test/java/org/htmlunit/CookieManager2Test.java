@@ -14,7 +14,6 @@
  */
 package org.htmlunit;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.Set;
 
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.util.Cookie;
+import org.htmlunit.http.Cookie;
 import org.junit.jupiter.api.Test;
 
 /**

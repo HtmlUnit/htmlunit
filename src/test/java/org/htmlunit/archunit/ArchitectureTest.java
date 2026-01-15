@@ -564,7 +564,7 @@ public class ArchitectureTest {
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebClient")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebRequest")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.Cookie")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.http.Cookie")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.DefaultCredentialsProvider")
 
             .and().resideOutsideOfPackage("org.htmlunit.httpclient..")

@@ -15,6 +15,7 @@
 package org.htmlunit.util;
 
 import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.http.Cookie;
 import org.junit.jupiter.api.Test;
 
 /**

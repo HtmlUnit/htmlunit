@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.htmlunit.WebClient;
 import org.htmlunit.javascript.host.WebSocket;
-import org.htmlunit.util.Cookie;
+import org.htmlunit.http.Cookie;
 
 /**
  * A helper class for {@link WebSocket}.

@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Locale;
 
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.util.Cookie;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 

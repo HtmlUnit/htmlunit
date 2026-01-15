@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.util.Cookie;
 import org.junit.jupiter.api.Test;
 
 /**

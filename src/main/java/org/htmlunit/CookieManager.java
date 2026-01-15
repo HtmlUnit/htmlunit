@@ -22,7 +22,7 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import org.htmlunit.util.Cookie;
+import org.htmlunit.http.Cookie;
 
 /**
  * Manages cookies for a {@link WebClient}. This class is thread-safe.
