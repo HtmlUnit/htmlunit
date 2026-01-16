@@ -14,8 +14,6 @@
  */
 package org.htmlunit.httpclient;
 
-import java.util.Date;
-
 import org.apache.http.cookie.ClientCookie;
 import org.htmlunit.http.Cookie;
 
@@ -36,7 +34,9 @@ public class HttpClientCookie extends Cookie {
         // just use this ctor but in fact we will overwrite by setting the httpClient Cookie
         super(clientCookie.getDomain(), clientCookie.getName(),
                 clientCookie.getValue(), clientCookie.getPath(),
-                null, clientCookie.isSecure(), false, "");
+                clientCookie.getExpiryDate(), clientCookie.isSecure(),
+                clientCookie.getAttribute("httponly") != null, clientCookie.getAttribute("samesite"));
+
         httpClientCookie_ = clientCookie;
     }
 
