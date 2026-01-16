@@ -21,18 +21,15 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.http.NoHttpResponseException;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.util.CharArrayBuffer;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -44,27 +41,6 @@ public final class HttpClientConverter {
 
     private HttpClientConverter() {
         // util class
-    }
-
-    /**
-     * Converts the specified name/value pairs into HttpClient name/value pairs.
-     * @param pairs the name/value pairs to convert
-     * @return the converted name/value pairs
-     */
-    public static List<org.apache.http.NameValuePair> nameValuePairsToHttpClient(final List<NameValuePair> pairs) {
-        final List<org.apache.http.NameValuePair> resultingPairs = new ArrayList<>(pairs.size());
-        for (final NameValuePair pair : pairs) {
-            resultingPairs.add(new BasicNameValuePair(pair.getName(), pair.getValue()));
-        }
-        return resultingPairs;
-    }
-
-    /**
-     * @param e the exception to check
-     * @return true if the provided Exception is na {@link NoHttpResponseException}
-     */
-    public static boolean isNoHttpResponseException(final Exception e) {
-        return e instanceof NoHttpResponseException;
     }
 
     /**
@@ -108,6 +84,31 @@ public final class HttpClientConverter {
             }
         }
         return url;
+    }
+
+    /**
+     * @param cookieString the string to parse
+     * @param pageUrl the page url as root
+     * @param browserVersion the {@link BrowserVersion}
+     * @return a list of {@link org.htmlunit.http.Cookie}'s
+     * @throws MalformedCookieException in case the cookie does not conform to the spec
+     */
+    public static List<org.htmlunit.http.Cookie> parseCookie(final String cookieString, final URL pageUrl,
+                                                             final BrowserVersion browserVersion)
+            throws MalformedCookieException {
+        final CharArrayBuffer buffer = new CharArrayBuffer(cookieString.length() + 22);
+        buffer.append("Set-Cookie: ");
+        buffer.append(cookieString);
+
+        final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
+        final List<Cookie> cookies = cookieSpec.parse(new BufferedHeader(buffer), buildCookieOrigin(pageUrl));
+
+        final List<org.htmlunit.http.Cookie> htmlUnitCookies = new ArrayList<>(cookies.size());
+        for (final Cookie cookie : cookies) {
+            final org.htmlunit.http.Cookie htmlUnitCookie = new HttpClientCookie((ClientCookie) cookie);
+            htmlUnitCookies.add(htmlUnitCookie);
+        }
+        return htmlUnitCookies;
     }
 
     /**
