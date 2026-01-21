@@ -106,7 +106,7 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
 
 /**
  * Base class for tests using WebDriver.
- *
+ * <p>
  * By default, this test runs with HtmlUnit, but this behavior can be changed by having a property file named
  * "{@code test.properties}" in the HtmlUnit root directory.
  * Sample (remove the part not matching your os):

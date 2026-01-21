@@ -21,7 +21,6 @@ import java.net.URL;
 import javax.net.ssl.SSLHandshakeException;
 
 import org.eclipse.jetty.server.SslConnectionFactory;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
 import org.htmlunit.util.WebConnectionWrapper;
 import org.junit.jupiter.api.Assertions;
@@ -80,7 +79,7 @@ public class HttpWebConnectionInsecureSSLTest extends WebServerTestCase {
         final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
                 .getClassLoader().getResource("insecureSSL.pfx");
 
-        final SslContextFactory contextFactory = new Server.Server();
+        final Server contextFactory = new Server.Server();
         contextFactory.setKeyStorePath(url.toExternalForm());
         contextFactory.setKeyStorePassword("nopassword");
         return new SslConnectionFactory(contextFactory, HTTP_1_1.toString());

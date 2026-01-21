@@ -59,7 +59,7 @@
         <!-- test dependencies -->
         <junit.version>6.0.2</junit.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
-        <jetty.version>9.4.58.v20250814</jetty.version>
+        <jetty.version>10.0.26</jetty.version>
         <quercus.version>4.0.66</quercus.version>
         <log4j.version>2.25.3</log4j.version>
         <slf4j.version>2.0.17</slf4j.version>
@@ -1568,7 +1568,7 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-server</artifactId>
+            <artifactId>websocket-jetty-server</artifactId>
             <version>${jetty.version}</version>
             <scope>test</scope>
         </dependency>

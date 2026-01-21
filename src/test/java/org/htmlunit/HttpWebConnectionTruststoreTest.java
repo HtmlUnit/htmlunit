@@ -21,7 +21,6 @@ import java.net.URL;
 import javax.net.ssl.SSLHandshakeException;
 
 import org.eclipse.jetty.server.SslConnectionFactory;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -70,7 +69,7 @@ public class HttpWebConnectionTruststoreTest extends WebServerTestCase {
         final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
                 .getClassLoader().getResource("self-signed-cert.keystore");
 
-        final SslContextFactory contextFactory = new Server.Server();
+        final Server contextFactory = new Server.Server();
         contextFactory.setKeyStoreType("jks");
         contextFactory.setKeyStorePath(url.toExternalForm());
         contextFactory.setKeyStorePassword("nopassword");
