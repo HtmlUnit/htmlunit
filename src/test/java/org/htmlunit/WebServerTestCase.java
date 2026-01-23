@@ -91,9 +91,7 @@ public abstract class WebServerTestCase extends WebTestCase {
 
         final ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase(resourceBase);
-        final MimeTypes mimeTypes = new MimeTypes();
-        mimeTypes.addMimeMapping("js", MimeType.TEXT_JAVASCRIPT);
-        resourceHandler.setMimeTypes(mimeTypes);
+        resourceHandler.getMimeTypes().addMimeMapping("js", MimeType.TEXT_JAVASCRIPT);
 
         final HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resourceHandler, context});
@@ -341,9 +339,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             context.setResourceBase("./");
 
             if (isBasicAuthentication()) {
-                final Constraint constraint = new Constraint();
-                constraint.setName(Constraint.__BASIC_AUTH);
-                constraint.setRoles(new String[]{"user"});
+                final Constraint constraint = new Constraint(Constraint.__BASIC_AUTH, "user");
                 constraint.setAuthenticate(true);
 
                 final ConstraintMapping constraintMapping = new ConstraintMapping();
@@ -363,14 +359,19 @@ public abstract class WebServerTestCase extends WebTestCase {
                 final SslConnectionFactory sslConnectionFactory = getSslConnectionFactory();
 
                 final HttpConfiguration sslConfiguration = new HttpConfiguration();
-                sslConfiguration.addCustomizer(new SecureRequestCustomizer());
+                final SecureRequestCustomizer secureRequestCustomizer = new SecureRequestCustomizer();
+
+                // Jetty 10, SecureRequestCustomizer performs SNI (Server Name Indication) host checking by default,
+                // which causes issues with localhost and self-signed certificates.
+                // without this we see 400 Bad Request error's
+                secureRequestCustomizer.setSniHostCheck(false);
+                sslConfiguration.addCustomizer(secureRequestCustomizer);
+
                 final HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(sslConfiguration);
 
-                final ServerConnector connector =
-                        new ServerConnector(server, sslConnectionFactory, httpConnectionFactory);
+                final ServerConnector connector = new ServerConnector(server, sslConnectionFactory, httpConnectionFactory);
                 connector.setPort(PORT2);
-                server.addConnector(connector);
-            }
+                server.addConnector(connector);            }
 
             tryStart(PORT, server);
             STATIC_SERVER_ = server;

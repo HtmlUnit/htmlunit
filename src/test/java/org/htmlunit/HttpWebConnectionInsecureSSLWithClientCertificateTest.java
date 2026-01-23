@@ -108,9 +108,10 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends WebSe
         final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
                 .getClassLoader().getResource("insecureSSL.pfx");
 
-        final Server contextFactory = new Server.Server();
+        final Server contextFactory = new Server();
         contextFactory.setKeyStorePath(url.toExternalForm());
         contextFactory.setKeyStorePassword("nopassword");
+        contextFactory.setEndpointIdentificationAlgorithm(null);
         return new SslConnectionFactory(contextFactory, HTTP_1_1.toString());
     }
 }

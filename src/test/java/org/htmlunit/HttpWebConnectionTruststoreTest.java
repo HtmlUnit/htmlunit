@@ -69,10 +69,11 @@ public class HttpWebConnectionTruststoreTest extends WebServerTestCase {
         final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
                 .getClassLoader().getResource("self-signed-cert.keystore");
 
-        final Server contextFactory = new Server.Server();
+        final Server contextFactory = new Server();
         contextFactory.setKeyStoreType("jks");
         contextFactory.setKeyStorePath(url.toExternalForm());
         contextFactory.setKeyStorePassword("nopassword");
+        contextFactory.setEndpointIdentificationAlgorithm(null);
         return new SslConnectionFactory(contextFactory, HTTP_1_1.toString());
     }
 }
