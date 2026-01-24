@@ -16,7 +16,7 @@ package org.htmlunit.libraries;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -27,6 +27,14 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  */
 public class PolymerWebComponentsTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeAll
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/polymer/0_6_1", null, null);
+    }
 
     /**
      * See https://github.com/HtmlUnit/htmlunit/issues/23.
@@ -42,14 +50,5 @@ public class PolymerWebComponentsTest extends WebDriverTestCase {
         driver.get(url);
 
         verify(() -> driver.findElement(By.tagName("body")).getText(), getExpectedAlerts()[0]);
-    }
-
-    /**
-     * Performs pre-test initialization.
-     * @throws Exception if an error occurs
-     */
-    @BeforeEach
-    public void setUp() throws Exception {
-        startWebServer("src/test/resources/libraries/polymer/0_6_1", null, null);
     }
 }

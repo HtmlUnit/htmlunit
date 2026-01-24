@@ -25,7 +25,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -44,6 +44,14 @@ import org.openqa.selenium.WebElement;
  */
 public class YuiTest extends WebDriverTestCase {
     private static final Log LOG = LogFactory.getLog(YuiTest.class);
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeAll
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/yui/2.3.0", null, null);
+    }
 
     /**
      * @throws Exception if an error occurs
@@ -277,14 +285,5 @@ public class YuiTest extends WebDriverTestCase {
                                 knownFailingTests.contains(testName));
             }
         }
-    }
-
-    /**
-     * Performs pre-test initialization.
-     * @throws Exception if an error occurs
-     */
-    @BeforeEach
-    public void setUp() throws Exception {
-        startWebServer("src/test/resources/libraries/yui/2.3.0", null, null);
     }
 }

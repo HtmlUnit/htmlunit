@@ -16,11 +16,8 @@ package org.htmlunit.libraries;
 
 import java.util.List;
 
-import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.WebServerTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -35,26 +32,12 @@ import org.openqa.selenium.WebElement;
  */
 public class ExtJS22Test extends WebDriverTestCase {
 
-    private static Server SERVER_;
-
     /**
      * @throws Exception if an error occurs
      */
     @BeforeAll
-    public static void startSesrver() throws Exception {
-        SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/ExtJS/" + getVersion(), null);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @AfterAll
-    public static void stopServer() throws Exception {
-        if (SERVER_ != null) {
-            SERVER_.stop();
-            SERVER_.destroy();
-            SERVER_ = null;
-        }
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/ExtJS/" + getVersion(), null, null);
     }
 
     /**

@@ -57,6 +57,7 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.htmlunit.MockWebConnection.RawResponseData;
+import org.htmlunit.WebServerTestCase.SSLVariant;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.junit.TestCaseCorrector;
@@ -668,7 +669,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         if (STATIC_SERVER_ == null) {
 
-            final Server server = JettyServerUtils.startWebServer(PORT, "./", servlets, serverCharset, isBasicAuthentication(), null);
+            final Server server = JettyServerUtils.startWebServer(PORT, "./", servlets, serverCharset, isBasicAuthentication(), SSLVariant.NONE);
             STATIC_SERVER_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServerStarter"));
             STATIC_SERVER_ = server;
         }

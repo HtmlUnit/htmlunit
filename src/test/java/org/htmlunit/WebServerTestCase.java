@@ -123,7 +123,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     public static Server createWebServer(final int port, final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
 
-        return JettyServerUtils.startWebServer(port, resourceBase, servlets, null, false, null);
+        return JettyServerUtils.startWebServer(port, resourceBase, servlets, null, false, SSLVariant.NONE);
     }
 
     /**

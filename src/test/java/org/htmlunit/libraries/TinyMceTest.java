@@ -20,7 +20,7 @@ import java.util.List;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -37,6 +37,14 @@ import org.openqa.selenium.WebElement;
  * @author Ronald Brill
  */
 public class TinyMceTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeAll
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/tinymce/3.2.7", null, null);
+    }
 
     /**
      * @throws Exception if an error occurs
@@ -87,14 +95,5 @@ public class TinyMceTest extends WebDriverTestCase {
         final WebElement failedSpan = result.findElement(By.xpath("./span[@class='bad']"));
         final int failed = Integer.parseInt(failedSpan.getText());
         assertEquals(expectedFailed, failed);
-    }
-
-    /**
-     * Performs pre-test initialization.
-     * @throws Exception if an error occurs
-     */
-    @BeforeEach
-    public void setUp() throws Exception {
-        startWebServer("src/test/resources/libraries/tinymce/3.2.7", null, null);
     }
 }
