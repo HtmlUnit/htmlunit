@@ -70,11 +70,6 @@ public class HttpWebConnectionInsecureSSLTest extends WebServerTestCase {
     }
 
     @Override
-    protected boolean isHttps() {
-        return true;
-    }
-
-    @Override
     public SslConnectionFactory getSslConnectionFactory() {
         final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
                 .getClassLoader().getResource("insecureSSL.pfx");

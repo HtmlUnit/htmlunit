@@ -114,12 +114,6 @@ public class SocksProxyTest extends WebServerTestCase {
         return client;
     }
 
-
-    @Override
-    protected boolean isHttps() {
-        return true;
-    }
-
     @Override
     public SslConnectionFactory getSslConnectionFactory() {
         final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class

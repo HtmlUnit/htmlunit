@@ -16,7 +16,6 @@ package org.htmlunit.libraries.mochikit;
 
 import java.time.Duration;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebDriverTestCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

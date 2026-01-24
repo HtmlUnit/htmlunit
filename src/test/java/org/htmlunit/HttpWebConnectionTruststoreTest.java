@@ -60,11 +60,6 @@ public class HttpWebConnectionTruststoreTest extends WebServerTestCase {
     }
 
     @Override
-    protected boolean isHttps() {
-        return true;
-    }
-
-    @Override
     public SslConnectionFactory getSslConnectionFactory() {
         final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
                 .getClassLoader().getResource("self-signed-cert.keystore");

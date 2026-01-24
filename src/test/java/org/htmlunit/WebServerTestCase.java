@@ -16,37 +16,20 @@ package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
-import java.io.IOException;
-import java.net.BindException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
 
-import org.eclipse.jetty.http.MimeTypes;
-import org.eclipse.jetty.security.ConstraintMapping;
-import org.eclipse.jetty.security.ConstraintSecurityHandler;
-import org.eclipse.jetty.security.HashLoginService;
-import org.eclipse.jetty.server.Connector;
-import org.eclipse.jetty.server.Handler;
-import org.eclipse.jetty.server.HttpConfiguration;
-import org.eclipse.jetty.server.HttpConnectionFactory;
-import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SslConnectionFactory;
-import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.server.handler.ResourceHandler;
-import org.eclipse.jetty.servlet.DefaultServlet;
-import org.eclipse.jetty.util.security.Constraint;
-import org.eclipse.jetty.util.thread.QueuedThreadPool;
-import org.eclipse.jetty.webapp.WebAppClassLoader;
-import org.eclipse.jetty.webapp.WebAppContext;
 import org.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.util.JettyServerUtils;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.AfterEach;
 
@@ -82,25 +65,8 @@ public abstract class WebServerTestCase extends WebTestCase {
         if (server_ != null) {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
-        final Server server = buildServer(PORT);
 
-        final WebAppContext context = new WebAppContext();
-        context.setContextPath("/");
-        context.setResourceBase(resourceBase);
-
-        final ResourceHandler resourceHandler = new ResourceHandler();
-        resourceHandler.setResourceBase(resourceBase);
-        final MimeTypes mimeTypes = new MimeTypes();
-        mimeTypes.addMimeMapping("js", MimeType.TEXT_JAVASCRIPT);
-        resourceHandler.setMimeTypes(mimeTypes);
-
-        final HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[]{resourceHandler, context});
-        server.setHandler(handlers);
-        server.setHandler(resourceHandler);
-
-        tryStart(PORT, server);
-        server_ = server;
+        server_ =  JettyServerUtils.startWebServer(PORT, resourceBase, null, null, isBasicAuthentication(), getSslConnectionFactory());
     }
 
     /**
@@ -152,37 +118,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     public static Server createWebServer(final int port, final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
 
-        final Server server = buildServer(port);
-
-        final WebAppContext context = new WebAppContext();
-        context.setContextPath("/");
-        context.setResourceBase(resourceBase);
-
-        if (servlets != null) {
-            for (final Map.Entry<String, Class<? extends Servlet>> entry : servlets.entrySet()) {
-                final String pathSpec = entry.getKey();
-                final Class<? extends Servlet> servlet = entry.getValue();
-                context.addServlet(servlet, pathSpec);
-
-                // disable defaults if someone likes to register his own root servlet
-                if ("/".equals(pathSpec)) {
-                    context.setDefaultsDescriptor(null);
-                    context.addServlet(DefaultServlet.class, "/favicon.ico");
-                }
-            }
-        }
-
-        final WebAppClassLoader loader = new WebAppClassLoader(context);
-        if (classpath != null) {
-            for (final String path : classpath) {
-                loader.addClassPath(path);
-            }
-        }
-        context.setClassLoader(loader);
-        server.setHandler(context);
-
-        tryStart(port, server);
-        return server;
+        return JettyServerUtils.startWebServer(port, resourceBase, servlets, null, false, null);
     }
 
     /**
@@ -200,28 +136,8 @@ public abstract class WebServerTestCase extends WebTestCase {
         if (server_ != null) {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
-        final Server server = buildServer(PORT);
 
-        final WebAppContext context = new WebAppContext();
-        context.setContextPath("/");
-        context.setResourceBase(resourceBase);
-
-        for (final Map.Entry<String, Class<? extends Servlet>> entry : servlets.entrySet()) {
-            final String pathSpec = entry.getKey();
-            final Class<? extends Servlet> servlet = entry.getValue();
-            context.addServlet(servlet, pathSpec);
-        }
-        final WebAppClassLoader loader = new WebAppClassLoader(context);
-        if (classpath != null) {
-            for (final String path : classpath) {
-                loader.addClassPath(path);
-            }
-        }
-        context.setClassLoader(loader);
-        server.setHandler(context);
-
-        tryStart(PORT, server);
-        server_ = server;
+        server_ = createWebServer(PORT, resourceBase, classpath, servlets);
     }
 
     /**
@@ -326,98 +242,12 @@ public abstract class WebServerTestCase extends WebTestCase {
      */
     protected void startWebServer(final MockWebConnection mockConnection) throws Exception {
         if (STATIC_SERVER_ == null) {
-            final Server server = buildServer(PORT);
+            final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+            servlets.put("/*", MockWebConnectionServlet.class);
 
-            final WebAppContext context = new WebAppContext();
-            context.setContextPath("/");
-            context.setResourceBase("./");
-
-            if (isBasicAuthentication()) {
-                final Constraint constraint = new Constraint(Constraint.__BASIC_AUTH, "user");
-                constraint.setAuthenticate(true);
-
-                final ConstraintMapping constraintMapping = new ConstraintMapping();
-                constraintMapping.setConstraint(constraint);
-                constraintMapping.setPathSpec("/*");
-
-                final ConstraintSecurityHandler handler = (ConstraintSecurityHandler) context.getSecurityHandler();
-                handler.setLoginService(new HashLoginService("MyRealm", "./src/test/resources/realm.properties"));
-                handler.setAuthMethod(Constraint.__BASIC_AUTH);
-                handler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
-            }
-
-            context.addServlet(MockWebConnectionServlet.class, "/*");
-            server.setHandler(context);
-
-            if (isHttps()) {
-                final SslConnectionFactory sslConnectionFactory = getSslConnectionFactory();
-
-                final HttpConfiguration sslConfiguration = new HttpConfiguration();
-                final SecureRequestCustomizer secureRequestCustomizer = new SecureRequestCustomizer();
-
-                // Jetty 10, SecureRequestCustomizer performs SNI (Server Name Indication) host checking by default,
-                // which causes issues with localhost and self-signed certificates.
-                // without this we see 400 Bad Request error's
-                secureRequestCustomizer.setSniHostCheck(false);
-                sslConfiguration.addCustomizer(secureRequestCustomizer);
-
-                final HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(sslConfiguration);
-
-                final ServerConnector connector = new ServerConnector(server, sslConnectionFactory, httpConnectionFactory);
-                connector.setPort(PORT2);
-                server.addConnector(connector);            }
-
-            tryStart(PORT, server);
-            STATIC_SERVER_ = server;
+            STATIC_SERVER_ = JettyServerUtils.startWebServer(PORT, "./", servlets, null, isBasicAuthentication(), getSslConnectionFactory());
         }
         MockWebConnectionServlet.setMockconnection(mockConnection);
-    }
-
-    /**
-     * Starts the server; handles BindExceptions and retries.
-     * @param port the port only used for the error message
-     * @param server the server to start
-     * @throws Exception in case of error
-     */
-    public static void tryStart(final int port, final Server server) throws Exception {
-        final long maxWait = System.currentTimeMillis() + BIND_TIMEOUT;
-
-        while (true) {
-            try {
-                server.start();
-                return;
-            }
-            catch (final BindException e) {
-                if (System.currentTimeMillis() > maxWait) {
-                    // destroy the server to free all associated resources
-                    server.stop();
-                    server.destroy();
-
-                    throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
-                }
-                Thread.sleep(200);
-            }
-            catch (final IOException e) {
-                // looks like newer jetty already catches the bind exception
-                if (e.getCause() instanceof BindException) {
-                    if (System.currentTimeMillis() > maxWait) {
-                        // destroy the server to free all associated resources
-                        server.stop();
-                        server.destroy();
-
-                        throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
-                    }
-                    Thread.sleep(200);
-                }
-                else {
-                    // destroy the server to free all associated resources
-                    server.stop();
-                    server.destroy();
-
-                    throw e;
-                }
-            }
-        }
     }
 
     /**
@@ -471,13 +301,6 @@ public abstract class WebServerTestCase extends WebTestCase {
     }
 
     /**
-     * @return whether to support https also
-     */
-    protected boolean isHttps() {
-        return false;
-    }
-
-    /**
      * @return SslConnectionFactory for https
      */
     protected SslConnectionFactory getSslConnectionFactory() {
@@ -509,17 +332,5 @@ public abstract class WebServerTestCase extends WebTestCase {
         }
         webClient_ = null;
         alertHandler_ = null;
-    }
-
-    private static Server buildServer(final int port) {
-        final QueuedThreadPool threadPool = new QueuedThreadPool(10, 2);
-
-        final Server server = new Server(threadPool);
-
-        final ServerConnector connector = new ServerConnector(server, 1, -1, new HttpConnectionFactory());
-        connector.setPort(port);
-        server.setConnectors(new Connector[] {connector});
-
-        return server;
     }
 }

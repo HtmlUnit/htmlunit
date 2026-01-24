@@ -1,0 +1,219 @@
+/*
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.htmlunit.util;
+
+import java.io.IOException;
+import java.net.BindException;
+import java.nio.charset.Charset;
+import java.util.EnumSet;
+import java.util.Map;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import org.eclipse.jetty.security.ConstraintMapping;
+import org.eclipse.jetty.security.ConstraintSecurityHandler;
+import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.HttpConfiguration;
+import org.eclipse.jetty.server.HttpConnectionFactory;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.SecureRequestCustomizer;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.SslConnectionFactory;
+import org.eclipse.jetty.servlet.DefaultServlet;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.util.security.Constraint;
+import org.eclipse.jetty.util.thread.QueuedThreadPool;
+import org.htmlunit.WebServerTestCase;
+import org.htmlunit.WebTestCase;
+
+/**
+ * Helpers to centralize Jetty access.
+ *
+ * @author Ronald Brill
+ */
+public final class JettyServerUtils {
+
+    public static Server startWebServer(final int port, final String resourceBase,
+            final Map<String, Class<? extends Servlet>> servlets,
+            final Charset serverCharset,
+            final boolean isBasicAuthentication,
+            final SslConnectionFactory sslConnectionFactory) throws Exception {
+        final Server server = buildServer(port);
+
+        final ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        context.setResourceBase(resourceBase);
+
+        // For static resources
+        final ServletHolder defaultHolder = new ServletHolder("default", DefaultServlet.class);
+        defaultHolder.setInitParameter("resourceBase", resourceBase);
+        defaultHolder.setInitParameter("dirAllowed", "true");
+        context.addServlet(defaultHolder, "/");
+
+        if (serverCharset != null) {
+            AsciiEncodingFilter.CHARSET_ = serverCharset;
+            context.addFilter(AsciiEncodingFilter.class, "/*",
+                    EnumSet.of(DispatcherType.INCLUDE, DispatcherType.REQUEST));
+        }
+
+        if (isBasicAuthentication) {
+            final Constraint constraint = new Constraint(Constraint.__BASIC_AUTH, "user");
+            constraint.setAuthenticate(true);
+
+            final ConstraintMapping constraintMapping = new ConstraintMapping();
+            constraintMapping.setConstraint(constraint);
+            constraintMapping.setPathSpec("/*");
+
+            final ConstraintSecurityHandler securityHandler = (ConstraintSecurityHandler) context.getSecurityHandler();
+            securityHandler.setLoginService(new HashLoginService("MyRealm", "./src/test/resources/realm.properties"));
+            securityHandler.setAuthMethod(Constraint.__BASIC_AUTH);
+            securityHandler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
+        }
+
+        if (servlets != null) {
+            for (final Map.Entry<String, Class<? extends Servlet>> entry : servlets.entrySet()) {
+                final String pathSpec = entry.getKey();
+                final Class<? extends Servlet> servlet = entry.getValue();
+                context.addServlet(servlet, pathSpec);
+            }
+        }
+
+        server.setHandler(context);
+
+        if (sslConnectionFactory != null) {
+            final HttpConfiguration sslConfiguration = new HttpConfiguration();
+            final SecureRequestCustomizer secureRequestCustomizer = new SecureRequestCustomizer();
+
+            // Jetty 10, SecureRequestCustomizer performs SNI (Server Name Indication) host checking by default,
+            // which causes issues with localhost and self-signed certificates.
+            // without this we see 400 Bad Request error's
+            secureRequestCustomizer.setSniHostCheck(false);
+            sslConfiguration.addCustomizer(secureRequestCustomizer);
+
+            final HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(sslConfiguration);
+
+            final ServerConnector connector = new ServerConnector(server, sslConnectionFactory, httpConnectionFactory);
+            connector.setPort(WebTestCase.PORT2);
+            server.addConnector(connector);
+        }
+
+        tryStart(port, server);
+
+        return server;
+    }
+
+    private static Server buildServer(final int port) {
+        final QueuedThreadPool threadPool = new QueuedThreadPool(10, 2);
+
+        final Server server = new Server(threadPool);
+
+        final ServerConnector connector = new ServerConnector(server, 1, -1, new HttpConnectionFactory());
+        connector.setPort(port);
+        server.setConnectors(new Connector[] {connector});
+
+        return server;
+    }
+
+    /**
+     * Starts the server; handles BindExceptions and retries.
+     * @param port the port only used for the error message
+     * @param server the server to start
+     * @throws Exception in case of error
+     */
+    private static void tryStart(final int port, final Server server) throws Exception {
+        final long maxWait = System.currentTimeMillis() + WebServerTestCase.BIND_TIMEOUT;
+
+        while (true) {
+            try {
+                server.start();
+                return;
+            }
+            catch (final BindException e) {
+                if (System.currentTimeMillis() > maxWait) {
+                    // destroy the server to free all associated resources
+                    server.stop();
+                    server.destroy();
+
+                    throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
+                }
+                Thread.sleep(200);
+            }
+            catch (final IOException e) {
+                // looks like newer jetty already catches the bind exception
+                if (e.getCause() instanceof BindException) {
+                    if (System.currentTimeMillis() > maxWait) {
+                        // destroy the server to free all associated resources
+                        server.stop();
+                        server.destroy();
+
+                        throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
+                    }
+                    Thread.sleep(200);
+                }
+                else {
+                    // destroy the server to free all associated resources
+                    server.stop();
+                    server.destroy();
+
+                    throw e;
+                }
+            }
+        }
+    }
+
+    /**
+     * Needed as Jetty starting from 9.4.4 expects UTF-8 encoding by default.
+     */
+    public static class AsciiEncodingFilter implements Filter {
+
+        private static Charset CHARSET_;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void init(final FilterConfig filterConfig) throws ServletException {
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
+                throws IOException, ServletException {
+            if (request instanceof Request) {
+                ((Request) request).setQueryEncoding(CHARSET_.name());
+            }
+            chain.doFilter(request, response);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void destroy() {
+        }
+    }
+}

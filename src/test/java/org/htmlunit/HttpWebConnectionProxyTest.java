@@ -44,7 +44,6 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
 
         final Server proxyWebServer = createWebServer(PORT_PROXY_SERVER,
                                             "src/test/resources/testfiles/proxyroot/", null, null);
-        WebServerTestCase.tryStart(PORT_PROXY_SERVER, proxyWebServer);
         proxyWebServer_ = proxyWebServer;
 
         final WebClient webClient = getWebClient();

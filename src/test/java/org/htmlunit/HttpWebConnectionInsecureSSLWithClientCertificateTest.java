@@ -99,11 +99,6 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends WebSe
     }
 
     @Override
-    protected boolean isHttps() {
-        return true;
-    }
-
-    @Override
     public SslConnectionFactory getSslConnectionFactory() {
         final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
                 .getClassLoader().getResource("insecureSSL.pfx");

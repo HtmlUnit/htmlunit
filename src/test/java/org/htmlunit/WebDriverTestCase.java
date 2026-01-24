@@ -26,7 +26,6 @@ import java.nio.charset.Charset;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,7 +37,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -56,18 +54,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.jetty.security.ConstraintMapping;
-import org.eclipse.jetty.security.ConstraintSecurityHandler;
-import org.eclipse.jetty.security.HashLoginService;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.HandlerWrapper;
-import org.eclipse.jetty.util.security.Constraint;
-import org.eclipse.jetty.webapp.WebAppContext;
 import org.htmlunit.MockWebConnection.RawResponseData;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.junit.TestCaseCorrector;
+import org.htmlunit.util.JettyServerUtils;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -666,69 +659,29 @@ public abstract class WebDriverTestCase extends WebTestCase {
             stopWebServers();
         }
 
+        // The mock connection servlet call sit under both servers, so long as tests
+        // keep the URLs distinct.
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/*", MockWebConnectionServlet.class);
+
         LAST_TEST_UsesMockWebConnection_ = Boolean.TRUE;
+
         if (STATIC_SERVER_ == null) {
-            final Server server = new Server(PORT);
 
-            final WebAppContext context = new WebAppContext();
-            context.setContextPath("/");
-            context.setResourceBase("./");
-
-            if (isBasicAuthentication()) {
-                final Constraint constraint = new Constraint();
-                constraint.setName(Constraint.__BASIC_AUTH);
-                constraint.setRoles(new String[]{"user"});
-                constraint.setAuthenticate(true);
-
-                final ConstraintMapping constraintMapping = new ConstraintMapping();
-                constraintMapping.setConstraint(constraint);
-                constraintMapping.setPathSpec("/*");
-
-                final ConstraintSecurityHandler handler = (ConstraintSecurityHandler) context.getSecurityHandler();
-                handler.setLoginService(new HashLoginService("MyRealm", "./src/test/resources/realm.properties"));
-                handler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
-            }
-
-            context.addServlet(MockWebConnectionServlet.class, "/*");
-            if (serverCharset != null) {
-                AsciiEncodingFilter.CHARSET_ = serverCharset;
-                context.addFilter(AsciiEncodingFilter.class, "/*",
-                        EnumSet.of(DispatcherType.INCLUDE, DispatcherType.REQUEST));
-            }
-            server.setHandler(context);
-            WebServerTestCase.tryStart(PORT, server);
-
+            final Server server = JettyServerUtils.startWebServer(PORT, "./", servlets, serverCharset, isBasicAuthentication(), null);
             STATIC_SERVER_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServerStarter"));
             STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.MockConnection_ = mockConnection;
 
         if (STATIC_SERVER2_ == null && needThreeConnections()) {
-            final Server server2 = new Server(PORT2);
-            final WebAppContext context2 = new WebAppContext();
-            context2.setContextPath("/");
-            context2.setResourceBase("./");
-            context2.addServlet(MockWebConnectionServlet.class, "/*");
-            server2.setHandler(context2);
-            WebServerTestCase.tryStart(PORT2, server2);
-
+            final Server server2 = JettyServerUtils.startWebServer(PORT2, "./", servlets, null, false, null);
             STATIC_SERVER2_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer2Starter"));
             STATIC_SERVER2_ = server2;
 
-            final Server server3 = new Server(PORT3);
-            final WebAppContext context3 = new WebAppContext();
-            context3.setContextPath("/");
-            context3.setResourceBase("./");
-            context3.addServlet(MockWebConnectionServlet.class, "/*");
-            server3.setHandler(context3);
-            WebServerTestCase.tryStart(PORT3, server3);
-
+            final Server server3 = JettyServerUtils.startWebServer(PORT3, "./", servlets, null, false, null);
             STATIC_SERVER3_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer3Starter"));
             STATIC_SERVER3_ = server3;
-            /*
-             * The mock connection servlet call sit under both servers, so long as tests
-             * keep the URLs distinct.
-             */
         }
     }
 
