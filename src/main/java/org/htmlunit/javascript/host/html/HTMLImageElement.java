@@ -15,8 +15,6 @@
 package org.htmlunit.javascript.host.html;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.DomElement;

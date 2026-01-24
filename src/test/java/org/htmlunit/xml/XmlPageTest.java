@@ -240,7 +240,7 @@ public class XmlPageTest extends WebServerTestCase {
         assertEquals(HttpStatus.OK_200, page.getWebResponse().getStatusCode());
         assertEquals(MimeType.TEXT_XML, page.getWebResponse().getContentType());
 
-        assertTrue(page instanceof Page);
+        assertTrue(page instanceof XmlPage);
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getWebResponse().getContentAsString());
         assertNull(xmlPage.getXmlDocument());
@@ -266,7 +266,7 @@ public class XmlPageTest extends WebServerTestCase {
         assertEquals(HttpStatus.OK_200, page.getWebResponse().getStatusCode());
         assertEquals(MimeType.TEXT_XML, page.getWebResponse().getContentType());
 
-        assertTrue(page instanceof Page);
+        assertTrue(page instanceof XmlPage);
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getWebResponse().getContentAsString());
         assertNull(xmlPage.getXmlDocument());
@@ -292,7 +292,7 @@ public class XmlPageTest extends WebServerTestCase {
         assertEquals(HttpStatus.OK_200, page.getWebResponse().getStatusCode());
         assertEquals("text/xml", page.getWebResponse().getContentType());
 
-        assertTrue(page instanceof Page);
+        assertTrue(page instanceof XmlPage);
         final XmlPage xmlPage = (XmlPage) page;
         assertEquals(content, xmlPage.getWebResponse().getContentAsString());
         assertNull(xmlPage.getXmlDocument());
