@@ -658,7 +658,6 @@ public class ArchitectureTest {
     public static final ArchRule jettyPackageRule = noClasses()
         .should().dependOnClassesThat().resideInAnyPackage("org.eclipse.jetty..");
 
-
     /**
      * Some methods should not be used.
      */

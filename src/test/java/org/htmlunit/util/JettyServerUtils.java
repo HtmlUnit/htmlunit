@@ -14,8 +14,11 @@
  */
 package org.htmlunit.util;
 
+import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
+
 import java.io.IOException;
 import java.net.BindException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.EnumSet;
 import java.util.Map;
@@ -45,7 +48,9 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
+import org.htmlunit.HttpWebConnectionInsecureSSLWithClientCertificateTest;
 import org.htmlunit.WebServerTestCase;
+import org.htmlunit.WebServerTestCase.SSLVariant;
 import org.htmlunit.WebTestCase;
 
 /**
@@ -59,7 +64,7 @@ public final class JettyServerUtils {
             final Map<String, Class<? extends Servlet>> servlets,
             final Charset serverCharset,
             final boolean isBasicAuthentication,
-            final SslConnectionFactory sslConnectionFactory) throws Exception {
+            final WebServerTestCase.SSLVariant sslVariant) throws Exception {
         final Server server = buildServer(port);
 
         final ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
@@ -113,7 +118,31 @@ public final class JettyServerUtils {
 
         server.setHandler(context);
 
-        if (sslConnectionFactory != null) {
+        if (sslVariant != SSLVariant.NONE) {
+            org.eclipse.jetty.util.ssl.SslContextFactory.Server contextFactory = null;
+
+            switch (sslVariant) {
+                case INSECURE: {
+                    final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
+                            .getClassLoader().getResource("insecureSSL.pfx");
+
+                    contextFactory = new org.eclipse.jetty.util.ssl.SslContextFactory.Server();
+                    contextFactory.setKeyStorePath(url.toExternalForm());
+                    contextFactory.setKeyStorePassword("nopassword");
+                    contextFactory.setEndpointIdentificationAlgorithm(null);
+                }
+                case SELF_SIGNED: {
+                    final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
+                            .getClassLoader().getResource("self-signed-cert.keystore");
+
+                    contextFactory = new org.eclipse.jetty.util.ssl.SslContextFactory.Server();
+                    contextFactory.setKeyStoreType("jks");
+                    contextFactory.setKeyStorePath(url.toExternalForm());
+                    contextFactory.setKeyStorePassword("nopassword");
+                    contextFactory.setEndpointIdentificationAlgorithm(null);
+                }
+            }
+
             final HttpConfiguration sslConfiguration = new HttpConfiguration();
             final SecureRequestCustomizer secureRequestCustomizer = new SecureRequestCustomizer();
 
@@ -125,6 +154,7 @@ public final class JettyServerUtils {
 
             final HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(sslConfiguration);
 
+            final SslConnectionFactory sslConnectionFactory = new SslConnectionFactory(contextFactory, HTTP_1_1.toString());
             final ServerConnector connector = new ServerConnector(server, sslConnectionFactory, httpConnectionFactory);
             connector.setPort(WebTestCase.PORT2);
             server.addConnector(connector);

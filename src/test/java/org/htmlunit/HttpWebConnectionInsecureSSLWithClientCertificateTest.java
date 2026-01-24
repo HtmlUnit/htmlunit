@@ -14,16 +14,12 @@
  */
 package org.htmlunit;
 
-import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
 
 import javax.net.ssl.SSLHandshakeException;
 
-import org.eclipse.jetty.server.SslConnectionFactory;
-import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -99,14 +95,7 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends WebSe
     }
 
     @Override
-    public SslConnectionFactory getSslConnectionFactory() {
-        final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
-                .getClassLoader().getResource("insecureSSL.pfx");
-
-        final Server contextFactory = new Server();
-        contextFactory.setKeyStorePath(url.toExternalForm());
-        contextFactory.setKeyStorePassword("nopassword");
-        contextFactory.setEndpointIdentificationAlgorithm(null);
-        return new SslConnectionFactory(contextFactory, HTTP_1_1.toString());
+    public SSLVariant getSSLVariant() {
+        return SSLVariant.INSECURE;
     }
 }

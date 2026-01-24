@@ -26,7 +26,6 @@ import java.util.Map;
 import javax.servlet.Servlet;
 
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.SslConnectionFactory;
 import org.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.util.JettyServerUtils;
@@ -44,6 +43,12 @@ import org.junit.jupiter.api.AfterEach;
  * @author Ronald Brill
  */
 public abstract class WebServerTestCase extends WebTestCase {
+
+    public enum SSLVariant {
+        NONE,
+        INSECURE,
+        SELF_SIGNED
+    }
 
     /** Timeout used when waiting for successful bind. */
     public static final int BIND_TIMEOUT = 1000;
@@ -66,7 +71,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
 
-        server_ =  JettyServerUtils.startWebServer(PORT, resourceBase, null, null, isBasicAuthentication(), getSslConnectionFactory());
+        server_ =  JettyServerUtils.startWebServer(PORT, resourceBase, null, null, isBasicAuthentication(), getSSLVariant());
     }
 
     /**
@@ -245,7 +250,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
             servlets.put("/*", MockWebConnectionServlet.class);
 
-            STATIC_SERVER_ = JettyServerUtils.startWebServer(PORT, "./", servlets, null, isBasicAuthentication(), getSslConnectionFactory());
+            STATIC_SERVER_ = JettyServerUtils.startWebServer(PORT, "./", servlets, null, isBasicAuthentication(), getSSLVariant());
         }
         MockWebConnectionServlet.setMockconnection(mockConnection);
     }
@@ -301,10 +306,10 @@ public abstract class WebServerTestCase extends WebTestCase {
     }
 
     /**
-     * @return SslConnectionFactory for https
+     * @return the {@link SSLVariant} to be used
      */
-    protected SslConnectionFactory getSslConnectionFactory() {
-        return null;
+    public SSLVariant getSSLVariant() {
+        return SSLVariant.NONE;
     }
 
     /**

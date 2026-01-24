@@ -14,16 +14,12 @@
  */
 package org.htmlunit;
 
-import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
 
-import org.eclipse.jetty.server.SslConnectionFactory;
-import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
 import org.htmlunit.html.HtmlPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Assumptions;
@@ -115,14 +111,7 @@ public class SocksProxyTest extends WebServerTestCase {
     }
 
     @Override
-    public SslConnectionFactory getSslConnectionFactory() {
-        final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
-                .getClassLoader().getResource("insecureSSL.pfx");
-
-        final Server contextFactory = new Server();
-        contextFactory.setKeyStorePath(url.toExternalForm());
-        contextFactory.setKeyStorePassword("nopassword");
-        contextFactory.setEndpointIdentificationAlgorithm(null);
-        return new SslConnectionFactory(contextFactory, HTTP_1_1.toString());
+    public SSLVariant getSSLVariant() {
+        return SSLVariant.INSECURE;
     }
 }
