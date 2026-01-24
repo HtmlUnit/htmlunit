@@ -66,12 +66,6 @@ public final class JettyServerUtils {
         context.setContextPath("/");
         context.setResourceBase(resourceBase);
 
-        // For static resources
-        final ServletHolder defaultHolder = new ServletHolder("default", DefaultServlet.class);
-        defaultHolder.setInitParameter("resourceBase", resourceBase);
-        defaultHolder.setInitParameter("dirAllowed", "true");
-        context.addServlet(defaultHolder, "/");
-
         if (serverCharset != null) {
             AsciiEncodingFilter.CHARSET_ = serverCharset;
             context.addFilter(AsciiEncodingFilter.class, "/*",
@@ -86,18 +80,35 @@ public final class JettyServerUtils {
             constraintMapping.setConstraint(constraint);
             constraintMapping.setPathSpec("/*");
 
-            final ConstraintSecurityHandler securityHandler = (ConstraintSecurityHandler) context.getSecurityHandler();
+            final ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
             securityHandler.setLoginService(new HashLoginService("MyRealm", "./src/test/resources/realm.properties"));
             securityHandler.setAuthMethod(Constraint.__BASIC_AUTH);
             securityHandler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
+
+            context.setSecurityHandler(securityHandler);
         }
 
+        boolean overwritesDefaultPath = false;
         if (servlets != null) {
             for (final Map.Entry<String, Class<? extends Servlet>> entry : servlets.entrySet()) {
                 final String pathSpec = entry.getKey();
                 final Class<? extends Servlet> servlet = entry.getValue();
                 context.addServlet(servlet, pathSpec);
+
+                // disable defaults if someone likes to register his own root servlet
+                overwritesDefaultPath |= "/".equals(pathSpec);
             }
+        }
+
+        if (overwritesDefaultPath) {
+            context.addServlet(DefaultServlet.class, "/favicon.ico");
+        }
+        else {
+            // For static resources
+            final ServletHolder defaultHolder = new ServletHolder("default", DefaultServlet.class);
+            defaultHolder.setInitParameter("resourceBase", resourceBase);
+            defaultHolder.setInitParameter("dirAllowed", "true");
+            context.addServlet(defaultHolder, "/");
         }
 
         server.setHandler(context);
