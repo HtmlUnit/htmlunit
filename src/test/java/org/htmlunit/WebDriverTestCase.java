@@ -753,7 +753,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected static void startWebServer(final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
-        startWebServer(resourceBase, classpath, servlets, null);
+        stopWebServers();
+        LAST_TEST_UsesMockWebConnection_ = Boolean.FALSE;
+
+        STATIC_SERVER_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServerStarter"));
+        STATIC_SERVER_ = WebServerTestCase.createWebServer(PORT, resourceBase, classpath, servlets);
     }
 
     /**
@@ -773,27 +777,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             STATIC_SERVER2_.stop();
         }
         STATIC_SERVER2_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer2Starter"));
-        STATIC_SERVER2_ = WebServerTestCase.createWebServer(PORT2, resourceBase, classpath, servlets, null);
-    }
-
-    /**
-     * Starts the web server on the default {@link #PORT}.
-     * The given resourceBase is used to be the ROOT directory that serves the default context.
-     * <p><b>Don't forget to stop the returned Server after the test</b>
-     *
-     * @param resourceBase the base of resources for the default context
-     * @param classpath additional classpath entries to add (may be null)
-     * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
-     * @param handler wrapper for handler (can be null)
-     * @throws Exception if the test fails
-     */
-    protected static void startWebServer(final String resourceBase, final String[] classpath,
-            final Map<String, Class<? extends Servlet>> servlets, final HandlerWrapper handler) throws Exception {
-        stopWebServers();
-        LAST_TEST_UsesMockWebConnection_ = Boolean.FALSE;
-
-        STATIC_SERVER_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServerStarter"));
-        STATIC_SERVER_ = WebServerTestCase.createWebServer(PORT, resourceBase, classpath, servlets, handler);
+        STATIC_SERVER2_ = WebServerTestCase.createWebServer(PORT2, resourceBase, classpath, servlets);
     }
 
     /**

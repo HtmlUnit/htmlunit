@@ -39,7 +39,6 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.server.handler.HandlerWrapper;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.util.security.Constraint;
@@ -52,8 +51,8 @@ import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.AfterEach;
 
 /**
- * A WebTestCase which starts a local server, and doens't use WebDriver.
- *
+ * A WebTestCase which starts a local server, and doesn't use WebDriver.
+ * <p>
  * <b>Note that {@link WebDriverTestCase} should be used unless HtmlUnit-specific feature
  * is needed and Selenium does not support it.</b>
  *
@@ -122,7 +121,7 @@ public abstract class WebServerTestCase extends WebTestCase {
 
     /**
      * This is usually needed if you want to have a running server during many tests invocation.
-     *
+     * <p>
      * Creates and starts a web server on the default {@link #PORT}.
      * The given resourceBase is used to be the ROOT directory that serves the default context.
      * <p><b>Don't forget to stop the returned Server after the test</b>
@@ -133,12 +132,12 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public static Server createWebServer(final String resourceBase, final String[] classpath) throws Exception {
-        return createWebServer(PORT, resourceBase, classpath, null, null);
+        return createWebServer(PORT, resourceBase, classpath, null);
     }
 
     /**
      * This is usually needed if you want to have a running server during many tests invocation.
-     *
+     * <p>
      * Creates and starts a web server on the default {@link #PORT}.
      * The given resourceBase is used to be the ROOT directory that serves the default context.
      * <p><b>Don't forget to stop the returned Server after the test</b>
@@ -147,12 +146,11 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @param resourceBase the base of resources for the default context
      * @param classpath additional classpath entries to add (may be null)
      * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
-     * @param handler wrapper for handler (can be null)
      * @return the newly created server
      * @throws Exception if an error occurs
      */
     public static Server createWebServer(final int port, final String resourceBase, final String[] classpath,
-            final Map<String, Class<? extends Servlet>> servlets, final HandlerWrapper handler) throws Exception {
+            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
 
         final Server server = buildServer(port);
 
@@ -181,13 +179,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             }
         }
         context.setClassLoader(loader);
-        if (handler != null) {
-            handler.setHandler(context);
-            server.setHandler(handler);
-        }
-        else {
-            server.setHandler(context);
-        }
+        server.setHandler(context);
 
         tryStart(port, server);
         return server;
@@ -407,8 +399,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             }
             catch (final IOException e) {
                 // looks like newer jetty already catches the bind exception
-                final Throwable cause = e.getCause();
-                if (cause != null && cause instanceof BindException) {
+                if (e.getCause() instanceof BindException) {
                     if (System.currentTimeMillis() > maxWait) {
                         // destroy the server to free all associated resources
                         server.stop();

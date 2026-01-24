@@ -43,7 +43,7 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
         startWebServer("src/test/resources/testfiles/noproxyroot/");
 
         final Server proxyWebServer = createWebServer(PORT_PROXY_SERVER,
-                                            "src/test/resources/testfiles/proxyroot/", null, null, null);
+                                            "src/test/resources/testfiles/proxyroot/", null, null);
         WebServerTestCase.tryStart(PORT_PROXY_SERVER, proxyWebServer);
         proxyWebServer_ = proxyWebServer;
 
