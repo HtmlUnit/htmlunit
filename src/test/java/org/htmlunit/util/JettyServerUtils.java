@@ -118,7 +118,7 @@ public final class JettyServerUtils {
 
         server.setHandler(context);
 
-        if (sslVariant != SSLVariant.NONE) {
+        if (sslVariant != null && sslVariant != SSLVariant.NONE) {
             org.eclipse.jetty.util.ssl.SslContextFactory.Server contextFactory = null;
 
             switch (sslVariant) {

@@ -14,6 +14,7 @@
  */
 package org.htmlunit.libraries.dojo;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -24,9 +25,18 @@ import org.junit.jupiter.api.Test;
  */
 public class Dojo193Test extends DojoTestBase {
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeAll
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/dojo/1.9.3", null, null);
+    }
+
     @Override
-    String getVersion() {
-        return "1.9.3";
+    protected String loadExpectation(final String expFileName) throws Exception {
+        final String resourcePrefix = "/libraries/dojo/1.9.3/expectations/" + expFileName;
+        return loadExpectation(resourcePrefix, ".txt");
     }
 
     @Override

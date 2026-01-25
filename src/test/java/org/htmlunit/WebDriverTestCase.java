@@ -676,11 +676,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
         MockWebConnectionServlet.MockConnection_ = mockConnection;
 
         if (STATIC_SERVER2_ == null && needThreeConnections()) {
-            final Server server2 = JettyServerUtils.startWebServer(PORT2, "./", servlets, null, false, null);
+            final Server server2 = JettyServerUtils.startWebServer(PORT2, "./", servlets, null, false, SSLVariant.NONE);
             STATIC_SERVER2_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer2Starter"));
             STATIC_SERVER2_ = server2;
 
-            final Server server3 = JettyServerUtils.startWebServer(PORT3, "./", servlets, null, false, null);
+            final Server server3 = JettyServerUtils.startWebServer(PORT3, "./", servlets, null, false, SSLVariant.NONE);
             STATIC_SERVER3_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer3Starter"));
             STATIC_SERVER3_ = server3;
         }
