@@ -133,7 +133,7 @@ public class WebResponseTest extends WebServerTestCase {
     public void responseHeaders() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", ResponseHeadersServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "test");
         assertEquals("some_value", page.getWebResponse().getResponseHeaderValue("some_header"));
@@ -209,7 +209,7 @@ public class WebResponseTest extends WebServerTestCase {
     public void binaryResponseHeaders() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", BinaryResponseHeadersServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final HtmlPage page = getWebClient().getPage(URL_FIRST + "test");
         assertEquals(BinaryResponseHeadersServlet.RESPONSE,

@@ -56,7 +56,7 @@ public class HtmlPage4Test extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> map = new HashMap<>();
         map.put("/one.html", RefreshServlet.class);
         map.put("/two.html", RefreshServlet.class);
-        startWebServer(".", null, map);
+        startWebServer(".", map);
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "one.html");
         final HtmlSubmitInput submit = page.getHtmlElementById("myButton");
@@ -146,7 +146,7 @@ public class HtmlPage4Test extends WebServerTestCase {
         map.put("/one.html", BigJavaScriptServlet1.class);
         map.put("/two.js", BigJavaScriptServlet2.class);
         map.put("/three.css", BigJavaScriptServlet3.class);
-        startWebServer(".", null, map);
+        startWebServer(".", map);
         try (WebClient client = getWebClient()) {
             final CollectingAlertHandler alertHandler = new CollectingAlertHandler();
             client.setAlertHandler(alertHandler);

@@ -368,7 +368,7 @@ public class XmlPageTest extends WebServerTestCase {
     public void noResponse() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoResponseServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         client.getPage(URL_FIRST + "test");

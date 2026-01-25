@@ -705,7 +705,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         LAST_TEST_UsesMockWebConnection_ = Boolean.FALSE;
 
         STATIC_SERVER_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServerStarter"));
-        STATIC_SERVER_ = WebServerTestCase.createWebServer(PORT, resourceBase, classpath, servlets);
+        STATIC_SERVER_ = WebServerTestCase.createWebServer(PORT, resourceBase, servlets);
     }
 
     /**
@@ -725,7 +725,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             STATIC_SERVER2_.stop();
         }
         STATIC_SERVER2_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer2Starter"));
-        STATIC_SERVER2_ = WebServerTestCase.createWebServer(PORT2, resourceBase, classpath, servlets);
+        STATIC_SERVER2_ = WebServerTestCase.createWebServer(PORT2, resourceBase, servlets);
     }
 
     /**

@@ -75,22 +75,6 @@ public abstract class WebServerTestCase extends WebTestCase {
     }
 
     /**
-     * Starts the web server on the default {@link #PORT}.
-     * The given resourceBase is used to be the ROOT directory that serves the default context.
-     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
-     *
-     * @param resourceBase the base of resources for the default context
-     * @param classpath additional classpath entries to add (may be null)
-     * @throws Exception if the test fails
-     */
-    protected void startWebServer(final String resourceBase, final String[] classpath) throws Exception {
-        if (server_ != null) {
-            throw new IllegalStateException("startWebServer() can not be called twice");
-        }
-        server_ = createWebServer(resourceBase, classpath);
-    }
-
-    /**
      * This is usually needed if you want to have a running server during many tests invocation.
      * <p>
      * Creates and starts a web server on the default {@link #PORT}.
@@ -98,12 +82,11 @@ public abstract class WebServerTestCase extends WebTestCase {
      * <p><b>Don't forget to stop the returned Server after the test</b>
      *
      * @param resourceBase the base of resources for the default context
-     * @param classpath additional classpath entries to add (may be null)
      * @return the newly created server
      * @throws Exception if an error occurs
      */
-    public static Server createWebServer(final String resourceBase, final String[] classpath) throws Exception {
-        return createWebServer(PORT, resourceBase, classpath, null);
+    public static Server createWebServer(final String resourceBase) throws Exception {
+        return createWebServer(PORT, resourceBase, null);
     }
 
     /**
@@ -115,12 +98,11 @@ public abstract class WebServerTestCase extends WebTestCase {
      *
      * @param port the port to which the server is bound
      * @param resourceBase the base of resources for the default context
-     * @param classpath additional classpath entries to add (may be null)
      * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
      * @return the newly created server
      * @throws Exception if an error occurs
      */
-    public static Server createWebServer(final int port, final String resourceBase, final String[] classpath,
+    public static Server createWebServer(final int port, final String resourceBase,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
 
         return JettyServerUtils.startWebServer(port, resourceBase, servlets, null, false, SSLVariant.NONE);
@@ -132,17 +114,16 @@ public abstract class WebServerTestCase extends WebTestCase {
      * <p><b>Don't forget to stop the returned HttpServer after the test</b>
      *
      * @param resourceBase the base of resources for the default context
-     * @param classpath additional classpath entries to add (may be null)
      * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
      * @throws Exception if the test fails
      */
-    protected void startWebServer(final String resourceBase, final String[] classpath,
+    protected void startWebServer(final String resourceBase,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
         if (server_ != null) {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
 
-        server_ = createWebServer(PORT, resourceBase, classpath, servlets);
+        server_ = createWebServer(PORT, resourceBase, servlets);
     }
 
     /**

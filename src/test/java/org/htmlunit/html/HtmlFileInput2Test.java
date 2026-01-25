@@ -453,7 +453,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Upload1Servlet.class);
         servlets.put("/upload2", Upload2Servlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
         final URL fileURL = getClass().getClassLoader().getResource(filename);
@@ -546,7 +546,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Multiple1Servlet.class);
         servlets.put("/upload2", PrintRequestServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final String filename1 = "HtmlFileInputTest_one.txt";
         final String path1 = getClass().getResource(filename1).toExternalForm();
@@ -585,7 +585,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", MultipleWebkitdirectoryServlet.class);
         servlets.put("/upload2", PrintRequestServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final File dir = new File("src/test/resources/pjl-comp-filter");
         assertTrue(dir.exists());

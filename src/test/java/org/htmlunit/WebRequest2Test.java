@@ -57,7 +57,7 @@ public class WebRequest2Test extends WebServerTestCase {
 
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/", InspectServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
     }
 
     /**

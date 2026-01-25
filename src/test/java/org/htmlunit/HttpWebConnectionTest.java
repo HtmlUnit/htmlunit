@@ -269,7 +269,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public void emptyPut() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", EmptyPutServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final String[] expectedAlerts = {"1"};
         final WebClient client = getWebClient();
@@ -322,7 +322,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test1", Cookie1Servlet.class);
         servlets.put("/test2", Cookie2Servlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
 
@@ -382,7 +382,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public void remotePort() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", RemotePortServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
 
@@ -420,7 +420,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public void contentLengthSmallerThanContent() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/contentLengthSmallerThanContent", ContentLengthSmallerThanContentServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "contentLengthSmallerThanContent");
@@ -458,7 +458,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public void contentLengthSmallerThanContentLargeContent() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/contentLengthSmallerThanContent", ContentLengthSmallerThanContentLargeContentServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "contentLengthSmallerThanContent");
@@ -623,7 +623,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/big", BigContentServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         client.setWebConnection(new HttpWebConnection(client) {

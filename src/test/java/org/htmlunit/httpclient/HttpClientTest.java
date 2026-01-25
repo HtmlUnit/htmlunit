@@ -115,7 +115,7 @@ public class HttpClientTest extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload2", UploadServlet.class);
 
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
         final HttpPost filePost = new HttpPost(URL_FIRST + "upload2");
 
         final MultipartEntityBuilder builder = MultipartEntityBuilder.create();

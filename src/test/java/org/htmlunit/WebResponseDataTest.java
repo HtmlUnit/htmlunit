@@ -286,7 +286,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/folder1/page1", RedirectionServlet.class);
         servlets.put("/folder2/page2", RedirectionServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
 

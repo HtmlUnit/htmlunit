@@ -325,7 +325,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         servlets.put("/test", StreamingServlet.class);
 
         final String resourceBase = "./src/test/resources/org/htmlunit/javascript/host";
-        startWebServer(resourceBase, null, servlets);
+        startWebServer(resourceBase, servlets);
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "XMLHttpRequestTest_streaming.html");
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), client.waitForBackgroundJavaScriptStartingBefore(1000));
@@ -391,7 +391,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         servlets.put("/content.html", ContentServlet.class);
         servlets.put("/ajax_headers.html", AjaxHeaderServlet.class);
         servlets.put("/form_headers.html", FormHeaderServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         COLLECTED_HEADERS.clear();
         XMLHttpRequest3Test.STATE_ = 0;

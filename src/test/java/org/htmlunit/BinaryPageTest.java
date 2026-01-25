@@ -41,7 +41,7 @@ public class BinaryPageTest extends WebServerTestCase {
     public void binary() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/big", BinaryServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
 
@@ -77,7 +77,7 @@ public class BinaryPageTest extends WebServerTestCase {
     public void chunkedBigContent() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/bigChunked", ChunkedBigContentServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
 

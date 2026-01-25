@@ -146,7 +146,7 @@ public class CookieManager5Test extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put(SetCookieExpires10Servlet.URL, SetCookieExpires10Servlet.class);
         servlets.put(SetCookieExpires1000Servlet.URL, SetCookieExpires1000Servlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         try (WebClient webClient = getWebClient()) {
             webClient.getCookieManager().clearCookies();
@@ -178,7 +178,7 @@ public class CookieManager5Test extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put(SetCookieExpires10Servlet.URL, SetCookieExpires10Servlet.class);
         servlets.put(SetCookieExpires1000Servlet.URL, SetCookieExpires1000Servlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         try (WebClient webClient = getWebClient()) {
             webClient.getPage("http://localhost:" + PORT + SetCookieExpires10Servlet.URL);
