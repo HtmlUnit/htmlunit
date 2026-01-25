@@ -19,19 +19,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
-import org.htmlunit.WebServerTestCase;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.SetExpectedAlertsBeforeTestExecutionCallback;
 import org.htmlunit.util.WebConnectionWrapper;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -69,8 +65,6 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
             return new WebResponse(RESPONSE_DATA, request, 0);
         }
     }
-
-    private static Server SERVER_;
 
     /**
      * Returns the jQuery version being tested.
@@ -199,27 +193,5 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
         String result = output.getText();
         result = result.substring(0, result.indexOf("Rerun")).trim();
         return result;
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @BeforeEach
-    public void aaa_startSesrver() throws Exception {
-        if (SERVER_ == null) {
-            SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/jQuery/" + getVersion(), null);
-        }
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @AfterAll
-    public static void zzz_stopServer() throws Exception {
-        if (SERVER_ != null) {
-            SERVER_.stop();
-            SERVER_.destroy();
-            SERVER_ = null;
-        }
     }
 }

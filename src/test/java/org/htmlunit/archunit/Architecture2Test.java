@@ -231,4 +231,21 @@ public class Architecture2Test {
     @ArchTest
     public static final ArchRule googleCommonPackageRule = noClasses()
             .should().dependOnClassesThat().resideInAnyPackage("com.google.common..");
-}
+
+    /**
+     * Do not use jetty.
+     */
+    @ArchTest
+    public static final ArchRule jettyPackageRule = noClasses()
+        .that()
+            .resideOutsideOfPackage("org.htmlunit.archunit..")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.JettyServerUtils")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.JettyServerUtils$AsciiEncodingFilter")
+
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.WebServerTestCase")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.WebDriverTestCase")
+
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.HttpWebConnectionProxyTest")
+        .should()
+            .dependOnClassesThat().resideInAnyPackage("org.eclipse.jetty..");
+    }

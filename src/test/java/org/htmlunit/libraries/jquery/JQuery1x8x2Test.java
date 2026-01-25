@@ -14,8 +14,14 @@
  */
 package org.htmlunit.libraries.jquery;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.Servlet;
+
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -31,6 +37,16 @@ import org.junit.jupiter.api.Test;
  * @author Frank Danek
  */
 public class JQuery1x8x2Test extends JQueryTestBase {
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeAll
+    public static void startServer() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("*.php", com.caucho.quercus.servlet.QuercusServlet.class);
+        startWebServer("src/test/resources/libraries/jQuery/1.8.2", null, servlets);
+    }
 
     /**
      * {@inheritDoc}

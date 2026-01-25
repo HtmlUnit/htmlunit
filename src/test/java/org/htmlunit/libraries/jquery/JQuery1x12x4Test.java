@@ -16,9 +16,14 @@ package org.htmlunit.libraries.jquery;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.Servlet;
 
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,6 +41,16 @@ import org.openqa.selenium.WebElement;
 public class JQuery1x12x4Test extends JQueryTestBase {
 
     private String[] testResultLines_ = null;
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeAll
+    public static void startServer() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("*.php", com.caucho.quercus.servlet.QuercusServlet.class);
+        startWebServer("src/test/resources/libraries/jQuery/1.12.4", null, servlets);
+    }
 
     /**
      * {@inheritDoc}
