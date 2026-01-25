@@ -50,6 +50,8 @@ import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.eclipse.jetty.websocket.api.WebSocketListener;
+import org.eclipse.jetty.websocket.server.config.JettyWebSocketServletContainerInitializer;
 import org.htmlunit.HttpWebConnectionInsecureSSLWithClientCertificateTest;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.WebServerTestCase.SSLVariant;
@@ -76,6 +78,28 @@ public final class JettyServerUtils {
      */
     public static Server startWebServer(final int port, final String resourceBase,
             final Map<String, Class<? extends Servlet>> servlets,
+            final Charset serverCharset,
+            final boolean isBasicAuthentication,
+            final WebServerTestCase.SSLVariant sslVariant) throws Exception {
+
+        return startWebServer(port, resourceBase, servlets, null, serverCharset, isBasicAuthentication, sslVariant);
+    }
+
+    /**
+     * Starts a web server with the given configuration.
+     *
+     * @param port the port to bind to
+     * @param resourceBase the resource base directory
+     * @param servlets map of servlet path specs to servlet classes
+     * @param serverCharset the charset for the server (can be null)
+     * @param isBasicAuthentication whether to enable basic authentication
+     * @param sslVariant the SSL variant to use (can be null for no SSL)
+     * @return the started server
+     * @throws Exception if server startup fails
+     */
+    public static Server startWebServer(final int port, final String resourceBase,
+            final Map<String, Class<? extends Servlet>> servlets,
+            final Map<String, Class<? extends WebSocketListener>> socketListeners,
             final Charset serverCharset,
             final boolean isBasicAuthentication,
             final WebServerTestCase.SSLVariant sslVariant) throws Exception {
@@ -131,6 +155,19 @@ public final class JettyServerUtils {
         }
 
         server.setHandler(context);
+
+        if (socketListeners != null) {
+            JettyWebSocketServletContainerInitializer.configure(context, (servletContext, container) ->
+            {
+                // Configure the ServerContainer.
+                container.setMaxTextMessageSize(128 * 1024);
+
+                // Add your WebSocket endpoint(s) to the JettyWebSocketServerContainer.
+                for (final Map.Entry<String, Class<? extends WebSocketListener>> entry : socketListeners.entrySet()) {
+                    container.addMapping("/ws", entry.getValue());
+                }
+            });
+        }
 
         if (sslVariant != null && sslVariant != SSLVariant.NONE) {
             org.eclipse.jetty.util.ssl.SslContextFactory.Server contextFactory = null;

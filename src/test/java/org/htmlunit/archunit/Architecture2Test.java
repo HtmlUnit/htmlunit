@@ -246,6 +246,9 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebDriverTestCase")
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.HttpWebConnectionProxyTest")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.WebSocketTest$ChatWebSocketListener")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.WebSocketTest$CookiesWebSocketListener")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.WebSocketTest$EventsWebSocketListener")
         .should()
             .dependOnClassesThat().resideInAnyPackage("org.eclipse.jetty..");
     }
