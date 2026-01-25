@@ -31,7 +31,7 @@ public class Bootstrap538Test extends WebDriverTestCase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/bootstrap/5.3.8", null, null);
+        startWebServer("src/test/resources/libraries/bootstrap/5.3.8", null);
     }
 
     /**

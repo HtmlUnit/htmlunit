@@ -30,7 +30,7 @@ public class Prototype171Test extends PrototypeTestBase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/prototype/1.7.1/test/unit/", null, null);
+        startWebServer("src/test/resources/libraries/prototype/1.7.1/test/unit/", null);
     }
 
     /**

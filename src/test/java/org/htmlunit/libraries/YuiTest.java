@@ -50,7 +50,7 @@ public class YuiTest extends WebDriverTestCase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/yui/2.3.0", null, null);
+        startWebServer("src/test/resources/libraries/yui/2.3.0", null);
     }
 
     /**

@@ -695,12 +695,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * <p><b>Don't forget to stop the returned HttpServer after the test</b>
      *
      * @param resourceBase the base of resources for the default context
-     * @param classpath additional classpath entries to add (may be null)
      * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
      * @throws Exception if the test fails
      */
-    protected static void startWebServer(final String resourceBase, final String[] classpath,
-            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+    protected static void startWebServer(final String resourceBase, final Map<String, Class<? extends Servlet>> servlets) throws Exception {
         stopWebServers();
         LAST_TEST_UsesMockWebConnection_ = Boolean.FALSE;
 
@@ -988,7 +986,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         getMockWebConnection().setResponse(url, html);
         MockWebConnectionServlet.MockConnection_ = getMockWebConnection();
 
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
         if (servlets2 != null) {
             startWebServer2("./", null, servlets2);
         }

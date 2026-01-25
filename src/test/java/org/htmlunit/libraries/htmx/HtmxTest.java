@@ -40,7 +40,7 @@ public abstract class HtmxTest extends WebDriverTestCase {
     private static final long RUN_TIME = 42 * DEFAULT_WAIT_TIME.toMillis();
 
     protected void htmx(final String subDir, final boolean min) throws Exception {
-        startWebServer("src/test/resources/libraries/htmx/" + subDir, null, null);
+        startWebServer("src/test/resources/libraries/htmx/" + subDir, null);
 
         try {
             final String url = URL_FIRST + "test/index" + (min ? ".min.html" : ".html");

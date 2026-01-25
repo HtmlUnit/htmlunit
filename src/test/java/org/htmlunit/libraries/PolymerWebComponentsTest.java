@@ -33,7 +33,7 @@ public class PolymerWebComponentsTest extends WebDriverTestCase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/polymer/0_6_1", null, null);
+        startWebServer("src/test/resources/libraries/polymer/0_6_1", null);
     }
 
     /**

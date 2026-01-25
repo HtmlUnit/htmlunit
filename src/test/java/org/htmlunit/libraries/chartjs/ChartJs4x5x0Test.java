@@ -35,7 +35,7 @@ public class ChartJs4x5x0Test extends WebDriverTestCase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/chartjs/4.5.0/", null, null);
+        startWebServer("src/test/resources/libraries/chartjs/4.5.0/", null);
     }
 
     /**

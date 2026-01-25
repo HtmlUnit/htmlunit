@@ -42,7 +42,7 @@ public class MooTools121Test extends WebDriverTestCase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/mootools/1.2.1", null, null);
+        startWebServer("src/test/resources/libraries/mootools/1.2.1", null);
     }
 
     /**

@@ -34,7 +34,7 @@ public class CurvyCornersTest extends WebDriverTestCase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/curvyCorners/1.2.9-beta/", null, null);
+        startWebServer("src/test/resources/libraries/curvyCorners/1.2.9-beta/", null);
     }
 
     /**

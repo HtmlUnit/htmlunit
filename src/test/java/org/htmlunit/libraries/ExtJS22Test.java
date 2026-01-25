@@ -37,7 +37,7 @@ public class ExtJS22Test extends WebDriverTestCase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/ExtJS/" + getVersion(), null, null);
+        startWebServer("src/test/resources/libraries/ExtJS/" + getVersion(), null);
     }
 
     /**

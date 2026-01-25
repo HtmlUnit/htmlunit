@@ -328,7 +328,7 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
             final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
             servlets.put("/upload1", Upload1Servlet.class);
             servlets.put("/upload2", ContentTypeUpload2Servlet.class);
-            startWebServer("./", new String[0], servlets);
+            startWebServer("./", servlets);
         }
         catch (final Exception e) {
             throw new RuntimeException(e);

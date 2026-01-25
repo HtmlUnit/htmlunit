@@ -31,7 +31,7 @@ public class MyFacesTest extends WebDriverTestCase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/myfaces/4_0_2", null, null);
+        startWebServer("src/test/resources/libraries/myfaces/4_0_2", null);
     }
 
     /**

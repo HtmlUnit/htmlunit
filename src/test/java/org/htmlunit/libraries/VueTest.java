@@ -33,7 +33,7 @@ public class VueTest extends WebDriverTestCase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/vue/hello_world", null, null);
+        startWebServer("src/test/resources/libraries/vue/hello_world", null);
     }
 
     /**

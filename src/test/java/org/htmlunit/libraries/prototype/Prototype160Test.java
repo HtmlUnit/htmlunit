@@ -37,7 +37,7 @@ public class Prototype160Test extends PrototypeTestBase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/prototype/1.6.0/", null, null);
+        startWebServer("src/test/resources/libraries/prototype/1.6.0/", null);
     }
 
     /**

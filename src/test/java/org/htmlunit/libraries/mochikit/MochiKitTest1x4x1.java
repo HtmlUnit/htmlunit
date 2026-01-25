@@ -14,6 +14,8 @@
  */
 package org.htmlunit.libraries.mochikit;
 
+import org.junit.jupiter.api.BeforeAll;
+
 /**
  * Tests for compatibility with <a href="http://mochikit.com">MochiKit</a>.
  *
@@ -23,9 +25,16 @@ package org.htmlunit.libraries.mochikit;
  */
 public class MochiKitTest1x4x1 extends MochiKitTest {
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeAll
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/MochiKit/1.4.1", null);
+    }
+
     @Override
     public String srcFolder() {
         return "1.4.1";
     }
-
 }

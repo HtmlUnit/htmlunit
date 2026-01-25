@@ -17,7 +17,6 @@ package org.htmlunit.libraries.mochikit;
 import java.time.Duration;
 
 import org.htmlunit.WebDriverTestCase;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -186,14 +185,5 @@ public abstract class MochiKitTest extends WebDriverTestCase {
     private String loadExpectation(final String testName) throws Exception {
         final String resourcePrefix = "/libraries/MochiKit/" + srcFolder() + "/test-" + testName;
         return loadExpectation(resourcePrefix, ".expected.txt");
-    }
-
-    /**
-     * Performs pre-test initialization.
-     * @throws Exception if an error occurs
-     */
-    @BeforeEach
-    public void setUp() throws Exception {
-        startWebServer("src/test/resources/libraries/MochiKit/" + srcFolder(), null, null);
     }
 }

@@ -39,7 +39,7 @@ public class Html2CanvasTest extends WebDriverTestCase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/html2canvas/", null, null);
+        startWebServer("src/test/resources/libraries/html2canvas/", null);
     }
 
     /**

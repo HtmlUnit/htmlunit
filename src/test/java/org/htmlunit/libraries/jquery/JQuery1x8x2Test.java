@@ -45,7 +45,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
     public static void startServer() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("*.php", com.caucho.quercus.servlet.QuercusServlet.class);
-        startWebServer("src/test/resources/libraries/jQuery/1.8.2", null, servlets);
+        startWebServer("src/test/resources/libraries/jQuery/1.8.2", servlets);
     }
 
     /**

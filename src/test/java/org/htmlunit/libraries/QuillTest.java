@@ -38,7 +38,7 @@ public class QuillTest extends WebDriverTestCase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/quill/", null, null);
+        startWebServer("src/test/resources/libraries/quill/", null);
     }
 
     /**

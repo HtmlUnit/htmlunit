@@ -30,7 +30,7 @@ public class Dojo193Test extends DojoTestBase {
      */
     @BeforeAll
     public static void startServer() throws Exception {
-        startWebServer("src/test/resources/libraries/dojo/1.9.3", null, null);
+        startWebServer("src/test/resources/libraries/dojo/1.9.3", null);
     }
 
     @Override
