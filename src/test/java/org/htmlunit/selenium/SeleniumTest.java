@@ -32,7 +32,7 @@ public class SeleniumTest extends WebDriverTestCase {
     @BeforeEach
     public void beforeTest() {
         try {
-            startWebServer("src/test/resources/selenium", null, null);
+            startWebServer("src/test/resources/selenium", null);
         }
         catch (final Exception e) {
             throw new RuntimeException(e);

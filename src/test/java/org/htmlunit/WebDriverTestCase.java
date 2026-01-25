@@ -474,23 +474,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if it fails
      */
     protected static void stopWebServers() throws Exception {
-        if (STATIC_SERVER_ != null) {
-            STATIC_SERVER_.stop();
-            STATIC_SERVER_.destroy();
-            STATIC_SERVER_ = null;
-        }
+        JettyServerUtils.stopServer(STATIC_SERVER_);
+        STATIC_SERVER_ = null;
 
-        if (STATIC_SERVER2_ != null) {
-            STATIC_SERVER2_.stop();
-            STATIC_SERVER2_.destroy();
-            STATIC_SERVER2_ = null;
-        }
+        JettyServerUtils.stopServer(STATIC_SERVER2_);
+        STATIC_SERVER2_ = null;
 
-        if (STATIC_SERVER3_ != null) {
-            STATIC_SERVER3_.stop();
-            STATIC_SERVER3_.destroy();
-            STATIC_SERVER3_ = null;
-        }
+        JettyServerUtils.stopServer(STATIC_SERVER3_);
+        STATIC_SERVER3_ = null;
+
         LAST_TEST_UsesMockWebConnection_ = null;
     }
 
@@ -712,15 +704,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * <p><b>Don't forget to stop the returned HttpServer after the test</b>
      *
      * @param resourceBase the base of resources for the default context
-     * @param classpath additional classpath entries to add (may be null)
      * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
      * @throws Exception if the test fails
      */
-    protected static void startWebServer2(final String resourceBase, final String[] classpath,
-            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+    protected static void startWebServer2(final String resourceBase, final Map<String, Class<? extends Servlet>> servlets) throws Exception {
 
         if (STATIC_SERVER2_ != null) {
-            STATIC_SERVER2_.stop();
+            JettyServerUtils.stopServer(STATIC_SERVER2_);
         }
         STATIC_SERVER2_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer2Starter"));
         STATIC_SERVER2_ = WebServerTestCase.createWebServer(PORT2, resourceBase, servlets);
@@ -988,7 +978,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         startWebServer("./", servlets);
         if (servlets2 != null) {
-            startWebServer2("./", null, servlets2);
+            startWebServer2("./", servlets2);
         }
 
         WebDriver driver = getWebDriver();

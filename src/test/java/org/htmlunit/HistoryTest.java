@@ -54,7 +54,7 @@ public class HistoryTest extends WebDriverTestCase {
         servlets.put("/post1", Post1Servlet.class);
         servlets.put("/post2", Post2Servlet.class);
         servlets.put("/post3", Post3Servlet.class);
-        startWebServer("./", new String[0], servlets);
+        startWebServer("./", servlets);
 
         final WebDriver driver = getWebDriver();
         driver.get(URL_FIRST + "post1");
@@ -95,7 +95,7 @@ public class HistoryTest extends WebDriverTestCase {
         for (int i = 0; i < testDeep; i++) {
             servlets.put("/post" + i, Post1Servlet.class);
         }
-        startWebServer("./", new String[0], servlets);
+        startWebServer("./", servlets);
 
         final WebDriver driver = getWebDriver();
 

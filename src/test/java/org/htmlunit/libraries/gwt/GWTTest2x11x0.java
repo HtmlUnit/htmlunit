@@ -16,6 +16,8 @@ package org.htmlunit.libraries.gwt;
 
 import java.util.List;
 
+import org.eclipse.jetty.server.Server;
+import org.htmlunit.util.JettyServerUtils;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -134,18 +136,25 @@ public class GWTTest2x11x0 extends GWTTest {
      */
     @Test
     public void dynaTable() throws Exception {
-        startWebServer("src/test/resources/libraries/GWT/" + getDirectory() + "/DynaTable",
-                new String[] {"src/test/resources/libraries/GWT/" + getDirectory() + "/gwt-servlet.jar"}, null);
+        stopWebServers();
 
-        final String url = URL_FIRST + "DynaTable.html";
-        final WebDriver driver = loadGWTPage(url,
-                "/html/body/table/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[2]/td[2]");
+        final Server server = JettyServerUtils.startWebAppServer(PORT,
+                            "src/test/resources/libraries/GWT/" + getDirectory() + "/DynaTable",
+                            new String[] {"src/test/resources/libraries/GWT/" + getDirectory() + "/gwt-servlet.jar"});
+        try {
+            final String url = URL_FIRST + "DynaTable.html";
+            final WebDriver driver = loadGWTPage(url,
+                    "/html/body/table/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[2]/td[2]");
 
-        final List<WebElement> cells = driver.findElements(By.xpath("//table[@class='table']//tr[2]/td"));
-        assertEquals(3, cells.size());
+            final List<WebElement> cells = driver.findElements(By.xpath("//table[@class='table']//tr[2]/td"));
+            assertEquals(3, cells.size());
 
-        textToBePresentInElement(driver, cells.get(0), "Inman Mendez");
-        assertEquals("Majoring in Phrenology", cells.get(1).getText());
-        assertEquals("Mon 9:45-10:35, Tues 2:15-3:05, Fri 8:45-9:35, Fri 9:45-10:35", cells.get(2).getText());
+            textToBePresentInElement(driver, cells.get(0), "Inman Mendez");
+            assertEquals("Majoring in Phrenology", cells.get(1).getText());
+            assertEquals("Mon 9:45-10:35, Tues 2:15-3:05, Fri 8:45-9:35, Fri 9:45-10:35", cells.get(2).getText());
+        }
+        finally {
+            JettyServerUtils.stopServer(server);
+        }
     }
 }

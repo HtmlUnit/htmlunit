@@ -48,6 +48,8 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
+import org.eclipse.jetty.webapp.WebAppClassLoader;
+import org.eclipse.jetty.webapp.WebAppContext;
 import org.htmlunit.HttpWebConnectionInsecureSSLWithClientCertificateTest;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.WebServerTestCase.SSLVariant;
@@ -60,6 +62,18 @@ import org.htmlunit.WebTestCase;
  */
 public final class JettyServerUtils {
 
+    /**
+     * Starts a web server with the given configuration.
+     *
+     * @param port the port to bind to
+     * @param resourceBase the resource base directory
+     * @param servlets map of servlet path specs to servlet classes
+     * @param serverCharset the charset for the server (can be null)
+     * @param isBasicAuthentication whether to enable basic authentication
+     * @param sslVariant the SSL variant to use (can be null for no SSL)
+     * @return the started server
+     * @throws Exception if server startup fails
+     */
     public static Server startWebServer(final int port, final String resourceBase,
             final Map<String, Class<? extends Servlet>> servlets,
             final Charset serverCharset,
@@ -130,6 +144,7 @@ public final class JettyServerUtils {
                     contextFactory.setKeyStorePath(url.toExternalForm());
                     contextFactory.setKeyStorePassword("nopassword");
                     contextFactory.setEndpointIdentificationAlgorithm(null);
+                    break;
                 }
                 case SELF_SIGNED: {
                     final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
@@ -140,28 +155,67 @@ public final class JettyServerUtils {
                     contextFactory.setKeyStorePath(url.toExternalForm());
                     contextFactory.setKeyStorePassword("nopassword");
                     contextFactory.setEndpointIdentificationAlgorithm(null);
+                    break;
                 }
+                default:
+                    break;
             }
 
-            final HttpConfiguration sslConfiguration = new HttpConfiguration();
-            final SecureRequestCustomizer secureRequestCustomizer = new SecureRequestCustomizer();
+            if (contextFactory != null) {
+                final HttpConfiguration sslConfiguration = new HttpConfiguration();
+                final SecureRequestCustomizer secureRequestCustomizer = new SecureRequestCustomizer();
 
-            // Jetty 10, SecureRequestCustomizer performs SNI (Server Name Indication) host checking by default,
-            // which causes issues with localhost and self-signed certificates.
-            // without this we see 400 Bad Request error's
-            secureRequestCustomizer.setSniHostCheck(false);
-            sslConfiguration.addCustomizer(secureRequestCustomizer);
+                // Jetty 10, SecureRequestCustomizer performs SNI (Server Name Indication) host checking by default,
+                // which causes issues with localhost and self-signed certificates.
+                // without this we see 400 Bad Request error's
+                secureRequestCustomizer.setSniHostCheck(false);
+                sslConfiguration.addCustomizer(secureRequestCustomizer);
 
-            final HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(sslConfiguration);
+                final HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(sslConfiguration);
 
-            final SslConnectionFactory sslConnectionFactory = new SslConnectionFactory(contextFactory, HTTP_1_1.toString());
-            final ServerConnector connector = new ServerConnector(server, sslConnectionFactory, httpConnectionFactory);
-            connector.setPort(WebTestCase.PORT2);
-            server.addConnector(connector);
+                final SslConnectionFactory sslConnectionFactory = new SslConnectionFactory(contextFactory, HTTP_1_1.toString());
+                final ServerConnector connector = new ServerConnector(server, sslConnectionFactory, httpConnectionFactory);
+                connector.setPort(WebTestCase.PORT2);
+                server.addConnector(connector);
+            }
         }
 
         tryStart(port, server);
 
+        return server;
+    }
+
+    /**
+     * A special version of the server; more or less a complete EE server supporting WEB-INF.
+     *
+     * Creates and starts a web server on the default {@link #PORT}.
+     * The given resourceBase is used to be the ROOT directory that serves the default context.
+     * <p><b>Don't forget to stop the returned Server after the test</b>
+     *
+     * @param port the port to which the server is bound
+     * @param resourceBase the base of resources for the default context
+     * @param classpath additional classpath entries to add (may be null)
+     * @return the newly created server
+     * @throws Exception if an error occurs
+     */
+    public static Server startWebAppServer(final int port, final String resourceBase, final String[] classpath) throws Exception {
+
+        final Server server = buildServer(port);
+
+        final WebAppContext context = new WebAppContext();
+        context.setContextPath("/");
+        context.setResourceBase(resourceBase);
+
+        final WebAppClassLoader loader = new WebAppClassLoader(context);
+        if (classpath != null) {
+            for (final String path : classpath) {
+                loader.addClassPath(path);
+            }
+        }
+        context.setClassLoader(loader);
+        server.setHandler(context);
+
+        tryStart(port, server);
         return server;
     }
 
@@ -194,8 +248,7 @@ public final class JettyServerUtils {
             catch (final BindException e) {
                 if (System.currentTimeMillis() > maxWait) {
                     // destroy the server to free all associated resources
-                    server.stop();
-                    server.destroy();
+                    stopServer(server);
 
                     throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
                 }
@@ -221,6 +274,13 @@ public final class JettyServerUtils {
                     throw e;
                 }
             }
+        }
+    }
+
+    public static void stopServer(Server server) throws Exception {
+        if (server != null) {
+            server.stop();
+            server.destroy();
         }
     }
 

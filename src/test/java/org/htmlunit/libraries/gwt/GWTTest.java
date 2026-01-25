@@ -36,7 +36,7 @@ public abstract class GWTTest extends WebDriverTestCase {
      */
     @BeforeEach
     public void startSesrver() throws Exception {
-        startWebServer("src/test/resources/libraries/GWT/" + getDirectory(), null, null);
+        startWebServer("src/test/resources/libraries/GWT/" + getDirectory(), null);
     }
 
     /**

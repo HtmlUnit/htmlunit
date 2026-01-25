@@ -17,6 +17,7 @@ package org.htmlunit;
 import java.net.URL;
 
 import org.eclipse.jetty.server.Server;
+import org.htmlunit.util.JettyServerUtils;
 import org.htmlunit.util.UrlUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,10 +59,7 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
     @Override
     @AfterEach
     public void tearDown() throws Exception {
-        if (proxyWebServer_ != null) {
-            proxyWebServer_.stop();
-            proxyWebServer_.destroy();
-        }
+        JettyServerUtils.stopServer(proxyWebServer_);
         proxyWebServer_ = null;
 
         super.tearDown();

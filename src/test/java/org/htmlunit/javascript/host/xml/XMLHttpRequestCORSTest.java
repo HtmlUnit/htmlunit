@@ -112,7 +112,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "cookie=sweet"));
@@ -155,7 +155,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/simple1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -191,7 +191,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/simple1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -227,7 +227,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/simple1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -309,7 +309,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = header;
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/simple1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -463,7 +463,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PINGOTHER";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         final URL url = new URL(URL_FIRST, "/preflight1");
 
@@ -568,7 +568,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = null;
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/preflight1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -609,7 +609,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PING, X-PONG";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/preflight1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -891,7 +891,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         WithCredentialsServerServlet.ACCESS_CONTROL_ALLOW_CREDENTIALS_ = accessControlAllowCredentials;
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/withCredentials2", WithCredentialsServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "cookie=sweet"));

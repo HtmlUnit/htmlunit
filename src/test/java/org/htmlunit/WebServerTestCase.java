@@ -132,11 +132,8 @@ public abstract class WebServerTestCase extends WebTestCase {
      */
     @AfterEach
     public void tearDown() throws Exception {
-        if (server_ != null) {
-            server_.stop();
-            server_.destroy();
-            server_ = null;
-        }
+        JettyServerUtils.stopServer(server_);
+        server_ = null;
 
         stopWebServer();
     }
@@ -241,11 +238,8 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @throws Exception if it fails
      */
     protected static void stopWebServer() throws Exception {
-        if (STATIC_SERVER_ != null) {
-            STATIC_SERVER_.stop();
-            STATIC_SERVER_.destroy();
-            STATIC_SERVER_ = null;
-        }
+        JettyServerUtils.stopServer(STATIC_SERVER_);
+        STATIC_SERVER_ = null;
     }
 
     /**
