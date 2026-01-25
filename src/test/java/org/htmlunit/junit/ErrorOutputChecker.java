@@ -47,6 +47,7 @@ public class ErrorOutputChecker implements BeforeEachCallback, AfterEachCallback
             Pattern.compile("SLF4J\\(I\\): .*\r?\n"),
 
             // Quercus
+            Pattern.compile(".*org.htmlunit.util.quercus.servlet.QuercusServlet initImpl\r?\n"),
             Pattern.compile(".*com.caucho.quercus.servlet.QuercusServlet initImpl\r?\n"),
             Pattern.compile(".*QuercusServlet starting as QuercusServletImpl\r?\n"),
             Pattern.compile(".*Quercus finished initialization in \\d*ms\r?\n"),
