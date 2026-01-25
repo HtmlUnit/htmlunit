@@ -18,20 +18,17 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Writer;
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadBase;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload2.core.DiskFileItem;
+import org.apache.commons.fileupload2.core.DiskFileItemFactory;
+import org.apache.commons.fileupload2.core.FileUploadException;
+import org.apache.commons.fileupload2.core.FileUploadSizeException;
+import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
+import org.apache.commons.fileupload2.jakarta.JakartaServletRequestContext;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
@@ -39,6 +36,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for {@link HtmlFileInput}.
@@ -408,18 +411,25 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
             throws ServletException, IOException {
             request.setCharacterEncoding(UTF_8.name());
             response.setContentType(MimeType.TEXT_HTML);
-            try (Writer writer = response.getWriter()) {
-                if (ServletFileUpload.isMultipartContent(request)) {
+            try (PrintWriter writer = response.getWriter()) {
+                if (JakartaServletFileUpload.isMultipartContent(request)) {
                     try {
-                        final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-                        for (final FileItem item : upload.parseRequest(request)) {
+                        final JakartaServletFileUpload<DiskFileItem, DiskFileItemFactory> upload =
+                            new JakartaServletFileUpload<>(DiskFileItemFactory.builder().get());
+
+                        final List<DiskFileItem> items = upload.parseRequest(new JakartaServletRequestContext(request));
+
+                        for (final DiskFileItem item : items) {
                             if ("myInput".equals(item.getFieldName())) {
                                 writer.write("CONTENT_TYPE:" + item.getContentType());
                             }
                         }
                     }
-                    catch (final FileUploadBase.SizeLimitExceededException e) {
+                    catch (final FileUploadSizeException e) {
                         writer.write("SizeLimitExceeded");
+                    }
+                    catch (final FileUploadException e) {
+                        writer.write("error");
                     }
                     catch (final Exception e) {
                         writer.write("error");

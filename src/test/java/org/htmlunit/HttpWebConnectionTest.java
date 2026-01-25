@@ -32,12 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -57,6 +51,12 @@ import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.ServletContentWrapper;
 import org.junit.jupiter.api.Test;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests methods in {@link HttpWebConnection}.
@@ -345,7 +345,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.addCookie(new javax.servlet.http.Cookie("key1", "value1"));
+            response.addCookie(new jakarta.servlet.http.Cookie("key1", "value1"));
             response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
             final String location = request.getRequestURL().toString().replace("test1", "test2");
             response.setHeader("Location", location);
@@ -368,7 +368,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 writer.write("No Cookies");
             }
             else {
-                for (final javax.servlet.http.Cookie c : request.getCookies()) {
+                for (final jakarta.servlet.http.Cookie c : request.getCookies()) {
                     writer.write(c.getName() + '=' + c.getValue());
                 }
             }

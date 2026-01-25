@@ -29,19 +29,16 @@ import java.net.URLDecoder;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadBase;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload2.core.DiskFileItem;
+import org.apache.commons.fileupload2.core.DiskFileItemFactory;
+import org.apache.commons.fileupload2.core.FileUploadException;
+import org.apache.commons.fileupload2.core.FileUploadSizeException;
+import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
+import org.apache.commons.fileupload2.jakarta.JakartaServletRequestContext;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -54,6 +51,12 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for {@link HtmlFileInput}.
@@ -514,10 +517,22 @@ public class HtmlFileInput2Test extends WebServerTestCase {
             request.setCharacterEncoding(UTF_8.name());
             response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
-            if (ServletFileUpload.isMultipartContent(request)) {
+            if (JakartaServletFileUpload.isMultipartContent(request)) {
                 try {
-                    final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-                    for (final FileItem item : upload.parseRequest(request)) {
+                    final DiskFileItemFactory factory = DiskFileItemFactory.builder()
+                        .setBufferSize(4096)
+                        .get();
+
+                    final JakartaServletFileUpload<DiskFileItem, DiskFileItemFactory> upload =
+                        new JakartaServletFileUpload<>(factory);
+
+                    // Set size limits if needed
+                    upload.setFileSizeMax(10 * 1024 * 1024); // 10 MB per file
+                    upload.setSizeMax(50 * 1024 * 1024);      // 50 MB total
+
+                    final List<DiskFileItem> items = upload.parseRequest(new JakartaServletRequestContext(request));
+
+                    for (final DiskFileItem item : items) {
                         if ("myInput".equals(item.getFieldName())) {
                             final String path = item.getName();
                             for (final char ch : path.toCharArray()) {
@@ -528,8 +543,11 @@ public class HtmlFileInput2Test extends WebServerTestCase {
                         }
                     }
                 }
-                catch (final FileUploadBase.SizeLimitExceededException e) {
+                catch (final FileUploadSizeException e) {
                     writer.write("SizeLimitExceeded");
+                }
+                catch (final FileUploadException e) {
+                    writer.write("error");
                 }
                 catch (final Exception e) {
                     writer.write("error");

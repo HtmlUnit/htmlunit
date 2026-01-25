@@ -23,15 +23,6 @@ import java.nio.charset.Charset;
 import java.util.EnumSet;
 import java.util.Map;
 
-import javax.servlet.DispatcherType;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
@@ -56,6 +47,15 @@ import org.htmlunit.HttpWebConnectionInsecureSSLWithClientCertificateTest;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.WebServerTestCase.SSLVariant;
 import org.htmlunit.WebTestCase;
+
+import jakarta.servlet.DispatcherType;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 /**
  * Helpers to centralize Jetty access.

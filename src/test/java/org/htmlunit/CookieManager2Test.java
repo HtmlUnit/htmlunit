@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.http.Cookie;
+import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -59,12 +59,12 @@
         <!-- test dependencies -->
         <junit.version>6.0.2</junit.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
-        <jetty.version>10.0.26</jetty.version>
+        <jetty.version>11.0.26</jetty.version>
         <quercus.version>4.0.66</quercus.version>
         <log4j.version>2.25.3</log4j.version>
         <slf4j.version>2.0.17</slf4j.version>
         <commons-text.version>1.15.0</commons-text.version>
-        <commons-fileupload.version>1.6.0</commons-fileupload.version>
+        <commons-fileupload.version>2.0.0-M1</commons-fileupload.version>
         <image-comparison.version>4.4.0</image-comparison.version>
         <imageio-batik.version>3.13.0</imageio-batik.version>
         <jfreechart.version>1.5.6</jfreechart.version>
@@ -1531,18 +1531,14 @@
         </dependency>
 
         <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-fileupload2-jakarta</artifactId>
             <version>${commons-fileupload.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
                     <groupId>commons-io</groupId>
                     <artifactId>commons-io</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

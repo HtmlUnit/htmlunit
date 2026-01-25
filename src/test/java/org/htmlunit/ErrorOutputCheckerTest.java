@@ -14,6 +14,7 @@
  */
 package org.htmlunit;
 
+import org.htmlunit.junit.ErrorOutputChecker;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

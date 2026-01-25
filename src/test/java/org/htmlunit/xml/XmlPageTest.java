@@ -21,11 +21,6 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.io.ByteOrderMark;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.Page;
@@ -39,6 +34,11 @@ import org.htmlunit.util.MimeType;
 import org.htmlunit.util.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for {@link XmlPage}.

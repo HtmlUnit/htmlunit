@@ -23,14 +23,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-
 import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.util.JettyServerUtils;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.AfterEach;
+
+import jakarta.servlet.Servlet;
 
 /**
  * A WebTestCase which starts a local server, and doesn't use WebDriver.

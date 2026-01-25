@@ -34,9 +34,9 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.http.Cookie;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.htmlunit.http.Cookie;
 import org.junit.jupiter.api.Test;
 
 /**
