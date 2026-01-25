@@ -16,7 +16,6 @@ package org.htmlunit.libraries.prototype;
 
 import java.util.List;
 
-import org.htmlunit.WebServerTestCase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -38,8 +37,8 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if an error occurs
      */
     @BeforeAll
-    public static void startSesrver() throws Exception {
-        SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/prototype/1.5.0-rc1/", null);
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/prototype/1.5.0-rc1/", null, null);
     }
 
     /**

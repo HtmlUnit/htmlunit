@@ -37,13 +37,8 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,7 +49,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.htmlunit.MockWebConnection.RawResponseData;
 import org.htmlunit.WebServerTestCase.SSLVariant;
@@ -1683,39 +1677,5 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     protected WebClient getWebClient() {
         return webDriver_.getWebClient();
-    }
-
-    /**
-     * Needed as Jetty starting from 9.4.4 expects UTF-8 encoding by default.
-     */
-    public static class AsciiEncodingFilter implements Filter {
-
-        private static Charset CHARSET_;
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void init(final FilterConfig filterConfig) throws ServletException {
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
-                throws IOException, ServletException {
-            if (request instanceof Request) {
-                ((Request) request).setQueryEncoding(CHARSET_.name());
-            }
-            chain.doFilter(request, response);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void destroy() {
-        }
     }
 }

@@ -23,9 +23,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebDriverTestCase;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -44,8 +42,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public abstract class PrototypeTestBase extends WebDriverTestCase {
 
     private static final Log LOG = LogFactory.getLog(PrototypeTestBase.class);
-    /** The server. */
-    protected static Server SERVER_;
 
     /**
      * Gets the prototype tested version.
@@ -125,18 +121,6 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
         }
 
         assertEquals(expected, actual);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @AfterAll
-    public static void stopServer() throws Exception {
-        if (SERVER_ != null) {
-            SERVER_.stop();
-            SERVER_.destroy();
-            SERVER_ = null;
-        }
     }
 
     /**
