@@ -177,6 +177,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             BROWSER_VERSION_ = getBrowserVersion();
         }
 
+        getMockWebConnection().setDefaultResponse("<html></html>");
         loadPageVerifyTextArea2(html);
     }
 
