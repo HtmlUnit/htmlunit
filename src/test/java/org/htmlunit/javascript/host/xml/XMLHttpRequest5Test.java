@@ -339,7 +339,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text/html;charset=UTF-8",
+    @Alerts({"text/html;charset=utf-8",
              "<!DOCTYPE html>"
                     + "<html><head><title>foo</title><script>\n"
                     + "  function test() {\n"
@@ -355,7 +355,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                     + "</script></head>\n"
                     + "<body onload=\"test()\">\n"
                     + "</body></html>"})
-    @HtmlUnitNYI(CHROME = {"text/html;charset=UTF-8",
+    @HtmlUnitNYI(CHROME = {"text/html;charset=utf-8",
                            "<!DOCTYPE html>"
                              + "<html><head><title>foo</title><script>\n"
                              + "  function test() {\n"
@@ -371,7 +371,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                              + "</script></head>"
                              + "<body onload=\"test()\">\n"
                              + "</body></html>"},
-                 EDGE = {"text/html;charset=UTF-8",
+                 EDGE = {"text/html;charset=utf-8",
                          "<!DOCTYPE html>"
                            + "<html><head><title>foo</title><script>\n"
                            + "  function test() {\n"
@@ -387,7 +387,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "</script></head>"
                            + "<body onload=\"test()\">\n"
                            + "</body></html>"},
-                 FF = {"text/html;charset=UTF-8",
+                 FF = {"text/html;charset=utf-8",
                        "<!DOCTYPE html>"
                            + "<html><head><title>foo</title><script>\n"
                            + "  function test() {\n"
@@ -403,7 +403,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "</script></head>"
                            + "<body onload=\"test()\">\n"
                            + "</body></html>"},
-                 FF_ESR = {"text/html;charset=UTF-8",
+                 FF_ESR = {"text/html;charset=utf-8",
                            "<!DOCTYPE html>"
                            + "<html><head><title>foo</title><script>\n"
                            + "  function test() {\n"
@@ -430,7 +430,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text/html;charset=UTF-8",
+    @Alerts({"text/html;charset=utf-8",
              "<html><head><title>foo</title><script>\n"
                     + "  function test() {\n"
                     + "    try {\n"
@@ -445,7 +445,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                     + "</script></head>\n"
                     + "<body onload=\"test()\">\n"
                     + "</body></html>"})
-    @HtmlUnitNYI(CHROME = {"text/html;charset=UTF-8",
+    @HtmlUnitNYI(CHROME = {"text/html;charset=utf-8",
                            "<html><head><title>foo</title><script>\n"
                              + "  function test() {\n"
                              + "    try {\n"
@@ -460,7 +460,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                              + "</script></head>"
                              + "<body onload=\"test()\">\n"
                              + "</body></html>"},
-                 EDGE = {"text/html;charset=UTF-8",
+                 EDGE = {"text/html;charset=utf-8",
                          "<html><head><title>foo</title><script>\n"
                            + "  function test() {\n"
                            + "    try {\n"
@@ -475,7 +475,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "</script></head>"
                            + "<body onload=\"test()\">\n"
                            + "</body></html>"},
-                 FF = {"text/html;charset=UTF-8",
+                 FF = {"text/html;charset=utf-8",
                        "<html><head><title>foo</title><script>\n"
                            + "  function test() {\n"
                            + "    try {\n"
@@ -490,7 +490,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "</script></head>"
                            + "<body onload=\"test()\">\n"
                            + "</body></html>"},
-                 FF_ESR = {"text/html;charset=UTF-8",
+                 FF_ESR = {"text/html;charset=utf-8",
                            "<html><head><title>foo</title><script>\n"
                            + "  function test() {\n"
                            + "    try {\n"
