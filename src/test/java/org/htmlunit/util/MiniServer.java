@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit;
+package org.htmlunit.util;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -34,8 +34,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.HttpMethod;
+import org.htmlunit.MockWebConnection;
 import org.htmlunit.MockWebConnection.RawResponseData;
-import org.htmlunit.util.NameValuePair;
+import org.htmlunit.WebRequest;
+import org.htmlunit.WebServerTestCase;
 
 /**
  * Mini server simulating some not standard behaviors.

@@ -16,10 +16,10 @@ package org.htmlunit.javascript.host.xml;
 
 import java.net.URL;
 
-import org.htmlunit.MiniServer;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
+import org.htmlunit.util.MiniServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

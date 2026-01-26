@@ -25,13 +25,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.htmlunit.HttpMethod;
-import org.htmlunit.MiniServer;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.MiniServer;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

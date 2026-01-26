@@ -20,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.htmlunit.util.MiniServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
