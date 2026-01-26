@@ -59,7 +59,7 @@ public class BinaryPageTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            final int length = 1000;
+            final int length = 1024;
             response.setContentLength(length);
             final byte[] buffer = new byte[1024];
             try (OutputStream out = response.getOutputStream()) {

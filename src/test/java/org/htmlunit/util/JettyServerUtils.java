@@ -40,12 +40,17 @@ import org.eclipse.jetty.http.HttpVersion;
 import org.eclipse.jetty.http.UriCompliance;
 import org.eclipse.jetty.security.Constraint;
 import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.security.authentication.BasicAuthenticator;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Response;
 import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SslConnectionFactory;
+import org.eclipse.jetty.server.handler.ErrorHandler;
+import org.eclipse.jetty.util.Callback;
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.util.resource.ResourceFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
@@ -56,6 +61,7 @@ import org.htmlunit.WebServerTestCase;
 import org.htmlunit.WebServerTestCase.SSLVariant;
 import org.htmlunit.WebTestCase;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
 
 /**
@@ -113,21 +119,36 @@ public final class JettyServerUtils {
         final Resource baseResource = ResourceFactory.of(context).newResource(getResourceBasePath(resourceBase));
         context.setBaseResource(baseResource);
 
+        context.setErrorHandler(new ConsoleErrorHandler());
+
         if (isBasicAuthentication) {
-            final Constraint constraint = Constraint.from("user", Constraint.Authorization.SPECIFIC_ROLE);
-
-            final ConstraintMapping constraintMapping = new ConstraintMapping();
-            constraintMapping.setConstraint(constraint);
-            constraintMapping.setPathSpec("/*");
-
             final ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
-            securityHandler.setAuthenticator(new org.eclipse.jetty.security.authentication.BasicAuthenticator());
 
-            // Use context's ResourceFactory for consistency
-            final Path realmPath = Paths.get("./src/test/resources/realm.properties");
+            // Create and configure login service
+            final Path realmPath = Paths.get("./src/test/resources/realm.properties").toAbsolutePath();
+            if (!Files.exists(realmPath)) {
+                throw new IOException("Realm file not found: '" + realmPath + "'");
+            }
+
             final Resource realmResource = ResourceFactory.of(context).newResource(realmPath);
-            securityHandler.setLoginService(new HashLoginService("MyRealm", realmResource));
-            securityHandler.setConstraintMappings(java.util.List.of(constraintMapping));
+            final HashLoginService loginService = new HashLoginService("MyRealm", realmResource);
+            securityHandler.setLoginService(loginService);
+
+            // Set authenticator
+            securityHandler.setAuthenticator(new BasicAuthenticator());
+
+            // Create constraint that requires "user" role
+            final Constraint constraint = new Constraint.Builder()
+                                                .authorization(Constraint.Authorization.SPECIFIC_ROLE)
+                                                .roles("user")
+                                                .build();
+
+            // Apply constraint to all paths
+            final ConstraintMapping mapping = new ConstraintMapping();
+            mapping.setConstraint(constraint);
+            mapping.setPathSpec("/*");
+
+            securityHandler.setConstraintMappings(java.util.List.of(mapping));
 
             context.setSecurityHandler(securityHandler);
         }
@@ -246,6 +267,8 @@ public final class JettyServerUtils {
         context.setContextPath("/");
         final Resource baseResource = ResourceFactory.of(context).newResource(getResourceBasePath(resourceBase));
         context.setBaseResource(baseResource);
+
+        context.setErrorHandler(new ConsoleErrorHandler());
 
         if (classpath != null && classpath.length > 0) {
             final ClassLoader parentClassLoader = Thread.currentThread().getContextClassLoader();
@@ -376,5 +399,23 @@ public final class JettyServerUtils {
         }
 
         return resourceBasePath;
+    }
+
+    private static final class ConsoleErrorHandler extends ErrorHandler {
+        @Override
+        public boolean handle(Request request, Response response, Callback callback) throws Exception {
+
+            Throwable errorException = (Throwable) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
+            if (errorException != null) {
+                System.err.println("\n==== Jetty Servlet Error ====");
+                System.err.println("URI:       " + request.getHttpURI());
+                System.err.println("Exception: " + errorException.getClass().getName());
+                System.err.println("Message:   " + errorException.getMessage());
+                errorException.printStackTrace(System.err);
+                System.err.println("=============================\n");
+            }
+
+            return super.handle(request, response, callback);
+        }
     }
 }

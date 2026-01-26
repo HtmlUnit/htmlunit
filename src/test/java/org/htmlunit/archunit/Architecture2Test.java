@@ -240,7 +240,7 @@ public class Architecture2Test {
         .that()
             .resideOutsideOfPackage("org.htmlunit.archunit..")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.util.JettyServerUtils")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.JettyServerUtils$AsciiEncodingFilter")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.JettyServerUtils$ConsoleErrorHandler")
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebServerTestCase")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebDriverTestCase")
