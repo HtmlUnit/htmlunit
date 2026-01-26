@@ -68,7 +68,7 @@ public class QuercusHttpServletResponseImpl implements QuercusHttpServletRespons
   @Override
   public void setStatus(int code, String status)
   {
-    _response.setStatus(code, status);
+    _response.setStatus(code);
   }
 
   @Override

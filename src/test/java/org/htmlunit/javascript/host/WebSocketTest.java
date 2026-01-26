@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host;
 
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,8 +23,9 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.websocket.api.Callback;
 import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.WebSocketListener;
+import org.eclipse.jetty.websocket.api.Session.Listener.AutoDemanding;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebServerTestCase.SSLVariant;
@@ -215,7 +215,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
         stopWebServers();
 
-        final Map<String, Class<? extends WebSocketListener>> socketListeners = new HashMap<>();
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
         socketListeners.put("/ws", ChatWebSocketListener.class);
         final Server server = JettyServerUtils.startWebServer(PORT,
                 "src/test/resources/org/htmlunit/javascript/host", null, socketListeners, null, false, SSLVariant.NONE);
@@ -254,26 +254,21 @@ public class WebSocketTest extends WebDriverTestCase {
         }
     }
 
-    public static class ChatWebSocketListener implements WebSocketListener
+    public static class ChatWebSocketListener implements AutoDemanding
     {
         private static final Set<ChatWebSocketListener> webSockets_ = new CopyOnWriteArraySet<>();
         private Session session_;
 
         @Override
-        public void onWebSocketConnect(final Session session) {
+        public void onWebSocketOpen(Session session) {
             session_ = session;
             webSockets_.add(this);
         }
 
         @Override
         public void onWebSocketText(final String data) {
-            try {
-                for (final ChatWebSocketListener webSocket : webSockets_) {
-                    webSocket.session_.getRemote().sendString(data);
-                }
-            }
-            catch (final IOException e) {
-                session_.close();
+            for (final ChatWebSocketListener webSocket : webSockets_) {
+                webSocket.session_.sendText(data, Callback.NOOP);
             }
         }
 
@@ -331,7 +326,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
         stopWebServers();
 
-        final Map<String, Class<? extends WebSocketListener>> socketListeners = new HashMap<>();
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
         socketListeners.put("/ws", CookiesWebSocketListener.class);
         final Server server = JettyServerUtils.startWebServer(PORT,
                 "src/test/resources/org/htmlunit/javascript/host", null, socketListeners, null, false, SSLVariant.NONE);
@@ -368,29 +363,28 @@ public class WebSocketTest extends WebDriverTestCase {
         }
     }
 
-    public static class CookiesWebSocketListener implements WebSocketListener
+    public static class CookiesWebSocketListener implements AutoDemanding
     {
         private static final Set<CookiesWebSocketListener> webSockets_ = new CopyOnWriteArraySet<>();
         private Session session_;
         private int counter_ = 1;
 
         @Override
-        public void onWebSocketConnect(final Session session) {
+        public void onWebSocketOpen(Session session) {
             session_ = session;
             webSockets_.add(this);
         }
 
         @Override
         public void onWebSocketText(final String data) {
-            try {
-                final String cookie = session_.getUpgradeRequest().getHeaders()
-                                                    .get(HttpHeader.COOKIE).get(0) + counter_++;
-                for (final CookiesWebSocketListener webSocket : webSockets_) {
-                    webSocket.session_.getRemote().sendString(cookie);
-                }
-            }
-            catch (final IOException e) {
-                session_.close();
+            final String cookie = session_
+                                    .getUpgradeRequest()
+                                    .getHeaders()
+                                    .get(HttpHeader.COOKIE)
+                                    .get(0) + counter_++;
+
+            for (final CookiesWebSocketListener webSocket : webSockets_) {
+                webSocket.session_.sendText(cookie, Callback.NOOP);
             }
         }
 
@@ -423,7 +417,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
         stopWebServers();
 
-        final Map<String, Class<? extends WebSocketListener>> socketListeners = new HashMap<>();
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
         socketListeners.put("/ws", EventsWebSocketListener.class);
         final Server server = JettyServerUtils.startWebServer(PORT,
                 "src/test/resources/org/htmlunit/javascript/host", null, socketListeners, null, false, SSLVariant.NONE);
@@ -525,7 +519,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
         stopWebServers();
 
-        final Map<String, Class<? extends WebSocketListener>> socketListeners = new HashMap<>();
+        final Map<String, Class<? extends AutoDemanding>> socketListeners = new HashMap<>();
         socketListeners.put("/ws", EventsWebSocketListener.class);
         final Server server = JettyServerUtils.startWebServer(PORT,
                 "src/test/resources/org/htmlunit/javascript/host", null, socketListeners, null, false, SSLVariant.NONE);
@@ -598,23 +592,18 @@ public class WebSocketTest extends WebDriverTestCase {
         assertEquals("Node should be visible, domId: " + domId, true, domE.isDisplayed());
     }
 
-    public static class EventsWebSocketListener implements WebSocketListener {
+    public static class EventsWebSocketListener implements AutoDemanding {
         private Session session_;
 
         @Override
-        public void onWebSocketConnect(final Session session) {
+        public void onWebSocketOpen(Session session) {
             session_ = session;
         }
 
         @Override
         public void onWebSocketText(final String data) {
             if ("text".equals(data)) {
-                try {
-                    session_.getRemote().sendString("server_text");
-                }
-                catch (final IOException e) {
-                    throw new IllegalStateException(e.getMessage(), e);
-                }
+                session_.sendText("server_text", Callback.NOOP);
             }
             else if ("close".equals(data)) {
                 session_.close();
@@ -625,19 +614,26 @@ public class WebSocketTest extends WebDriverTestCase {
         }
 
         @Override
-        public void onWebSocketBinary(final byte[] payload, final int offset, final int len) {
-            final String data = new String(payload, offset, len, UTF_16LE);
-            if ("binary".equals(data)) {
-                final ByteBuffer response = ByteBuffer.wrap("server_binary".getBytes(UTF_16LE));
-                try {
-                    session_.getRemote().sendBytes(response);
+        public void onWebSocketBinary(ByteBuffer payload, Callback callback) {
+            try {
+                // Extract bytes from ByteBuffer
+                final byte[] bytes = new byte[payload.remaining()];
+                payload.get(bytes);
+                final String data = new String(bytes, UTF_16LE);
+
+                if ("binary".equals(data)) {
+                    final ByteBuffer response = ByteBuffer.wrap("server_binary".getBytes(UTF_16LE));
+
+                    // Send binary response using new API
+                    session_.sendBinary(response,
+                                        Callback.from(() -> callback.succeed(), error -> callback.fail(error)));
                 }
-                catch (final IOException e) {
-                    throw new IllegalStateException(e.getMessage(), e);
+                else {
+                    callback.fail(new IllegalArgumentException("Unknown request: " + data));
                 }
             }
-            else {
-                throw new IllegalArgumentException("Unknown request: " + data);
+            catch (Exception e) {
+                callback.fail(e);
             }
         }
     }

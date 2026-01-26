@@ -152,7 +152,7 @@ public class QuercusHttpServletRequestImpl implements QuercusHttpServletRequest
   @Override
   public String getRealPath(String path)
   {
-    return _request.getRealPath(path);
+    return _request.getServletContext().getRealPath(path);
   }
 
   @Override

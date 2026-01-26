@@ -14,48 +14,45 @@
  */
 package org.htmlunit.util;
 
-import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
-
 import java.io.IOException;
 import java.net.BindException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.EnumSet;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
-import org.eclipse.jetty.security.ConstraintMapping;
-import org.eclipse.jetty.security.ConstraintSecurityHandler;
+import org.eclipse.jetty.ee10.servlet.DefaultServlet;
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.servlet.ServletHolder;
+import org.eclipse.jetty.ee10.servlet.security.ConstraintMapping;
+import org.eclipse.jetty.ee10.servlet.security.ConstraintSecurityHandler;
+import org.eclipse.jetty.ee10.webapp.WebAppClassLoader;
+import org.eclipse.jetty.ee10.webapp.WebAppContext;
+import org.eclipse.jetty.ee10.websocket.server.config.JettyWebSocketServletContainerInitializer;
+import org.eclipse.jetty.http.CookieCompliance;
+import org.eclipse.jetty.http.HttpVersion;
+import org.eclipse.jetty.http.UriCompliance;
+import org.eclipse.jetty.security.Constraint;
 import org.eclipse.jetty.security.HashLoginService;
-import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
-import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SslConnectionFactory;
-import org.eclipse.jetty.servlet.DefaultServlet;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
-import org.eclipse.jetty.util.security.Constraint;
+import org.eclipse.jetty.util.resource.Resource;
+import org.eclipse.jetty.util.resource.ResourceFactory;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
-import org.eclipse.jetty.webapp.WebAppClassLoader;
-import org.eclipse.jetty.webapp.WebAppContext;
-import org.eclipse.jetty.websocket.api.WebSocketListener;
-import org.eclipse.jetty.websocket.server.config.JettyWebSocketServletContainerInitializer;
+import org.eclipse.jetty.websocket.api.Session.Listener.AutoDemanding;
 import org.htmlunit.HttpWebConnectionInsecureSSLWithClientCertificateTest;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.WebServerTestCase.SSLVariant;
 import org.htmlunit.WebTestCase;
 
-import jakarta.servlet.DispatcherType;
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
 import jakarta.servlet.Servlet;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
 
 /**
  * Helpers to centralize Jetty access.
@@ -91,6 +88,7 @@ public final class JettyServerUtils {
      * @param port the port to bind to
      * @param resourceBase the resource base directory
      * @param servlets map of servlet path specs to servlet classes
+     * @param socketListeners map of WebSocket path specs to listener classes
      * @param serverCharset the charset for the server (can be null)
      * @param isBasicAuthentication whether to enable basic authentication
      * @param sslVariant the SSL variant to use (can be null for no SSL)
@@ -99,34 +97,33 @@ public final class JettyServerUtils {
      */
     public static Server startWebServer(final int port, final String resourceBase,
             final Map<String, Class<? extends Servlet>> servlets,
-            final Map<String, Class<? extends WebSocketListener>> socketListeners,
+            final Map<String, Class<? extends AutoDemanding>> socketListeners,
             final Charset serverCharset,
             final boolean isBasicAuthentication,
             final WebServerTestCase.SSLVariant sslVariant) throws Exception {
-        final Server server = buildServer(port);
+        final Server server = buildServer(port, serverCharset);
 
         final ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
-        context.setResourceBase(resourceBase);
 
-        if (serverCharset != null) {
-            AsciiEncodingFilter.CHARSET_ = serverCharset;
-            context.addFilter(AsciiEncodingFilter.class, "/*",
-                    EnumSet.of(DispatcherType.INCLUDE, DispatcherType.REQUEST));
-        }
+        final Resource baseResource = ResourceFactory.of(context).newResource(getResourceBasePath(resourceBase));
+        context.setBaseResource(baseResource);
 
         if (isBasicAuthentication) {
-            final Constraint constraint = new Constraint(Constraint.__BASIC_AUTH, "user");
-            constraint.setAuthenticate(true);
+            final Constraint constraint = Constraint.from("user", Constraint.Authorization.SPECIFIC_ROLE);
 
             final ConstraintMapping constraintMapping = new ConstraintMapping();
             constraintMapping.setConstraint(constraint);
             constraintMapping.setPathSpec("/*");
 
             final ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
-            securityHandler.setLoginService(new HashLoginService("MyRealm", "./src/test/resources/realm.properties"));
-            securityHandler.setAuthMethod(Constraint.__BASIC_AUTH);
-            securityHandler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
+            securityHandler.setAuthenticator(new org.eclipse.jetty.security.authentication.BasicAuthenticator());
+
+            // Use context's ResourceFactory for consistency
+            final Path realmPath = Paths.get("./src/test/resources/realm.properties");
+            final Resource realmResource = ResourceFactory.of(context).newResource(realmPath);
+            securityHandler.setLoginService(new HashLoginService("MyRealm", realmResource));
+            securityHandler.setConstraintMappings(java.util.List.of(constraintMapping));
 
             context.setSecurityHandler(securityHandler);
         }
@@ -147,10 +144,12 @@ public final class JettyServerUtils {
             context.addServlet(DefaultServlet.class, "/favicon.ico");
         }
         else {
-            // For static resources
+            // For static resources - use DefaultServlet
             final ServletHolder defaultHolder = new ServletHolder("default", DefaultServlet.class);
-            defaultHolder.setInitParameter("resourceBase", resourceBase);
+            // Don't set resourceBase here - it will use the context's base resource
+            // defaultHolder.setInitParameter("resourceBase", resourceBase);
             defaultHolder.setInitParameter("dirAllowed", "true");
+            defaultHolder.setInitParameter("pathInfoOnly", "true");
             context.addServlet(defaultHolder, "/");
         }
 
@@ -163,21 +162,21 @@ public final class JettyServerUtils {
                 container.setMaxTextMessageSize(128 * 1024);
 
                 // Add your WebSocket endpoint(s) to the JettyWebSocketServerContainer.
-                for (final Map.Entry<String, Class<? extends WebSocketListener>> entry : socketListeners.entrySet()) {
-                    container.addMapping("/ws", entry.getValue());
+                for (final Map.Entry<String, Class<? extends AutoDemanding>> entry : socketListeners.entrySet()) {
+                    container.addMapping(entry.getKey(), entry.getValue());
                 }
             });
         }
 
         if (sslVariant != null && sslVariant != SSLVariant.NONE) {
-            org.eclipse.jetty.util.ssl.SslContextFactory.Server contextFactory = null;
+            SslContextFactory.Server contextFactory = null;
 
             switch (sslVariant) {
                 case INSECURE: {
                     final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
                             .getClassLoader().getResource("insecureSSL.pfx");
 
-                    contextFactory = new org.eclipse.jetty.util.ssl.SslContextFactory.Server();
+                    contextFactory = new SslContextFactory.Server();
                     contextFactory.setKeyStorePath(url.toExternalForm());
                     contextFactory.setKeyStorePassword("nopassword");
                     contextFactory.setEndpointIdentificationAlgorithm(null);
@@ -187,7 +186,7 @@ public final class JettyServerUtils {
                     final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
                             .getClassLoader().getResource("self-signed-cert.keystore");
 
-                    contextFactory = new org.eclipse.jetty.util.ssl.SslContextFactory.Server();
+                    contextFactory = new SslContextFactory.Server();
                     contextFactory.setKeyStoreType("jks");
                     contextFactory.setKeyStorePath(url.toExternalForm());
                     contextFactory.setKeyStorePassword("nopassword");
@@ -202,7 +201,7 @@ public final class JettyServerUtils {
                 final HttpConfiguration sslConfiguration = new HttpConfiguration();
                 final SecureRequestCustomizer secureRequestCustomizer = new SecureRequestCustomizer();
 
-                // Jetty 10, SecureRequestCustomizer performs SNI (Server Name Indication) host checking by default,
+                // Jetty 12, SecureRequestCustomizer performs SNI (Server Name Indication) host checking by default,
                 // which causes issues with localhost and self-signed certificates.
                 // without this we see 400 Bad Request error's
                 secureRequestCustomizer.setSniHostCheck(false);
@@ -210,7 +209,7 @@ public final class JettyServerUtils {
 
                 final HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(sslConfiguration);
 
-                final SslConnectionFactory sslConnectionFactory = new SslConnectionFactory(contextFactory, HTTP_1_1.toString());
+                final SslConnectionFactory sslConnectionFactory = new SslConnectionFactory(contextFactory, HttpVersion.HTTP_1_1.asString());
                 final ServerConnector connector = new ServerConnector(server, sslConnectionFactory, httpConnectionFactory);
                 connector.setPort(WebTestCase.PORT2);
                 server.addConnector(connector);
@@ -237,33 +236,46 @@ public final class JettyServerUtils {
      */
     public static Server startWebAppServer(final int port, final String resourceBase, final String[] classpath) throws Exception {
 
-        final Server server = buildServer(port);
+        final Server server = buildServer(port, null);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
-        context.setResourceBase(resourceBase);
+        final Resource baseResource = ResourceFactory.of(context).newResource(getResourceBasePath(resourceBase));
+        context.setBaseResource(baseResource);
 
-        final WebAppClassLoader loader = new WebAppClassLoader(context);
         if (classpath != null) {
+            final WebAppClassLoader loader = new WebAppClassLoader(context);
             for (final String path : classpath) {
                 loader.addClassPath(path);
             }
+            context.setClassLoader(loader);
         }
-        context.setClassLoader(loader);
+
         server.setHandler(context);
 
         tryStart(port, server);
         return server;
     }
 
-    private static Server buildServer(final int port) {
+    private static Server buildServer(final int port, final Charset queryEncoding) {
         final QueuedThreadPool threadPool = new QueuedThreadPool(10, 2);
 
         final Server server = new Server(threadPool);
 
-        final ServerConnector connector = new ServerConnector(server, 1, -1, new HttpConnectionFactory());
+        final HttpConfiguration httpConfig = new HttpConfiguration();
+
+        if (queryEncoding != null) {
+            httpConfig.setRequestCookieCompliance(CookieCompliance.RFC6265);
+            httpConfig.setResponseCookieCompliance(CookieCompliance.RFC6265);
+            // Note: In Jetty 12, query encoding is handled via UriCompliance
+            httpConfig.setUriCompliance(UriCompliance.DEFAULT);
+        }
+
+        final HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(httpConfig);
+
+        final ServerConnector connector = new ServerConnector(server, 1, -1, httpConnectionFactory);
         connector.setPort(port);
-        server.setConnectors(new Connector[] {connector});
+        server.addConnector(connector);
 
         return server;
     }
@@ -296,8 +308,7 @@ public final class JettyServerUtils {
                 if (e.getCause() instanceof BindException) {
                     if (System.currentTimeMillis() > maxWait) {
                         // destroy the server to free all associated resources
-                        server.stop();
-                        server.destroy();
+                        stopServer(server);
 
                         throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
                     }
@@ -305,8 +316,7 @@ public final class JettyServerUtils {
                 }
                 else {
                     // destroy the server to free all associated resources
-                    server.stop();
-                    server.destroy();
+                    stopServer(server);
 
                     throw e;
                 }
@@ -321,37 +331,19 @@ public final class JettyServerUtils {
         }
     }
 
-    /**
-     * Needed as Jetty starting from 9.4.4 expects UTF-8 encoding by default.
-     */
-    public static class AsciiEncodingFilter implements Filter {
-
-        private static Charset CHARSET_;
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void init(final FilterConfig filterConfig) throws ServletException {
+    private static Path getResourceBasePath(final String resourceBase) throws IOException {
+        if (StringUtils.isEmptyOrNull(resourceBase)) {
+            throw new IllegalArgumentException("Resource base cannot be null or empty");
         }
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
-                throws IOException, ServletException {
-            if (request instanceof Request) {
-                ((Request) request).setQueryEncoding(CHARSET_.name());
-            }
-            chain.doFilter(request, response);
+        final Path resourceBasePath = Paths.get(resourceBase).toAbsolutePath();
+        if (!Files.isDirectory(resourceBasePath)) {
+            throw new IOException("Resource path is not a directory: '" + resourceBasePath + "'");
+        }
+        if (!Files.isReadable(resourceBasePath)) {
+            throw new IOException("Resource path is not readable: '" + resourceBasePath + "'");
         }
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void destroy() {
-        }
+        return resourceBasePath;
     }
 }
