@@ -1329,27 +1329,34 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts({"§§URL§§/foo.xml", "null", "null"})
     public void originHeaderGet() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
                 + "function test() {\n"
-                + "  req = new XMLHttpRequest();\n"
-                + "  req.open('get', 'foo.xml', false);\n"
-                + "  req.send('');\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('get', 'foo.xml', false);\n"
+                + "    req.send('');\n"
+                + "  } catch(e) { logEx(e); }\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'></body></html>";
 
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
-        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
+
+        expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
         loadPage2(html);
 
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
+
         final WebRequest request = getMockWebConnection().getLastWebRequest();
-        assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
-        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getUrl());
+        assertEquals(getExpectedAlerts()[1], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[2], "" + request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
     /**
@@ -1357,27 +1364,35 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
+    @Alerts({"§§URL§§/foo.xml", "§§URL§§", "null"})
     public void originHeaderPost() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
-                + "  req = new XMLHttpRequest();\n"
-                + "  req.open('post', 'foo.xml', false);\n"
-                + "  req.send('');\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('post', 'foo.xml', false);\n"
+                + "    req.send('');\n"
+                + "  } catch(e) { logEx(e); }\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'></body></html>";
 
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
-        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
-        loadPage2(html);
+
+        expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
+        loadPageVerifyTitle2(html, new String[0]);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
-        assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
-        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getUrl());
+        assertEquals(getExpectedAlerts()[1], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[2], "" + request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
     /**
@@ -1385,27 +1400,35 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
+    @Alerts({"§§URL§§/foo.xml", "§§URL§§", "null"})
     public void originHeaderPut() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
-                + "  req = new XMLHttpRequest();\n"
-                + "  req.open('put', 'foo.xml', false);\n"
-                + "  req.send('');\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('put', 'foo.xml', false);\n"
+                + "    req.send('');\n"
+                + "  } catch(e) { logEx(e); }\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'></body></html>";
 
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
-        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
-        loadPage2(html);
+
+        expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
+        loadPageVerifyTitle2(html, new String[0]);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
-        assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
-        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getUrl());
+        assertEquals(getExpectedAlerts()[1], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[2], "" + request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
     /**
@@ -1413,27 +1436,35 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
+    @Alerts({"§§URL§§/foo.xml", "§§URL§§", "null"})
     public void originHeaderDelete() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
-                + "  req = new XMLHttpRequest();\n"
-                + "  req.open('delete', 'foo.xml', false);\n"
-                + "  req.send('');\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('put', 'foo.xml', false);\n"
+                + "    req.send('');\n"
+                + "  } catch(e) { logEx(e); }\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'></body></html>";
 
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
-        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
-        loadPage2(html);
+
+        expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
+        loadPageVerifyTitle2(html, new String[0]);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
-        assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
-        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getUrl());
+        assertEquals(getExpectedAlerts()[1], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[2], "" + request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
     /**
@@ -1449,27 +1480,31 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     public void originHeaderPatch() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
-                + "  req = new XMLHttpRequest();\n"
-                + "  req.open('patch', 'foo.xml', false);\n"
-                + "  req.send('');\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('patch', 'foo.xml', false);\n"
+                + "    req.send('');\n"
+                + "  } catch(e) { logEx(e); }\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'></body></html>";
 
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
-        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
-        loadPage2(html);
 
-        expandExpectedAlertsVariables(URL_FIRST);
+        expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
+        loadPageVerifyTitle2(html, new String[0]);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(getExpectedAlerts()[0], request.getUrl());
-        assertEquals(getExpectedAlerts()[1],
-                "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[2],
-                "" + request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+        assertEquals(getExpectedAlerts()[1], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[2], "" + request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
     /**
@@ -1477,27 +1512,33 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts({"SecurityError/DOMException", "§§URL§§"})
     public void originHeaderTrace() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
-                + "  req = new XMLHttpRequest();\n"
-                + "  req.open('trace', 'foo.xml', false);\n"
-                + "  req.send('');\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('trace', 'foo.xml', false);\n"
+                + "    req.send('');\n"
+                + "  } catch(e) { logEx(e); }\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'></body></html>";
 
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
-        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
-        loadPage2(html);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html, getExpectedAlerts()[0]);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
-        assertEquals(URL_FIRST, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
-        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+        assertEquals(getExpectedAlerts()[1], request.getUrl());
     }
 
     /**
@@ -1505,27 +1546,35 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts({"§§URL§§/foo.xml", "null", "null"})
     public void originHeaderHead() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
-                + "  req = new XMLHttpRequest();\n"
-                + "  req.open('head', 'foo.xml', false);\n"
-                + "  req.send('');\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('head', 'foo.xml', false);\n"
+                + "    req.send('');\n"
+                + "  } catch(e) { logEx(e); }\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'></body></html>";
 
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
-        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
-        loadPage2(html);
+
+        expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
+        loadPageVerifyTitle2(html, new String[0]);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
-        assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
-        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getUrl());
+        assertEquals(getExpectedAlerts()[1], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[2], "" + request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
     /**
@@ -1533,27 +1582,71 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
+    @Alerts({"§§URL§§/foo.xml", "§§URL§§", "null"})
     public void originHeaderOptions() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
-                + "  req = new XMLHttpRequest();\n"
-                + "  req.open('options', 'foo.xml', false);\n"
-                + "  req.send('');\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('options', 'foo.xml', false);\n"
+                + "    req.send('');\n"
+                + "  } catch(e) { logEx(e); }\n"
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='test()'></body></html>";
 
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
-        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
-        loadPage2(html);
+
+        expandExpectedAlertsVariables(URL_FIRST.getProtocol() + "://" + URL_FIRST.getHost() + ":" + URL_FIRST.getPort());
+        loadPageVerifyTitle2(html, new String[0]);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
-        assertEquals(urlPage2, request.getUrl());
-        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
-        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+        assertEquals(getExpectedAlerts()[0], request.getUrl());
+        assertEquals(getExpectedAlerts()[1], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[2], "" + request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+    }
+
+    /**
+     * Tests that the <tt>origin</tt> header is set correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"§§URL§§", "null", "null"})
+    public void originHeaderUnknown() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('unknown', 'foo.xml', false);\n"
+                + "    req.send('');\n"
+                + "  } catch(e) { logEx(e); }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html, new String[0]);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
+
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        assertEquals(getExpectedAlerts()[0], request.getUrl());
+        assertEquals(getExpectedAlerts()[1], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[2], "" + request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
     }
 
     /**
@@ -2396,7 +2489,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"q=HtmlUnit&u=%D0%BB%C6%89", "done", "application/x-www-form-urlencoded;charset=UTF-8",
+    @Alerts({"q=HtmlUnit&u=%D0%BB%C6%89", "done", "application/x-www-form-urlencoded;charset=utf-8",
             "q=HtmlUnit", "u=\u043B\u0189"})
     public void enctypeURLSearchParams() throws Exception {
         final String html = DOCTYPE_HTML
@@ -2490,7 +2583,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text/plain;charset=UTF-8", "HtmlUnit \u043B\u0189"})
+    @Alerts({"text/plain;charset=utf-8", "HtmlUnit \u043B\u0189"})
     public void enctypeString() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
