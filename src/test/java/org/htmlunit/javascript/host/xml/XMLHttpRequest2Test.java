@@ -243,6 +243,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "}\n"
             + "</script></body></html>";
 
+        getMockWebConnection().setDefaultResponse("<html></html>");
         final WebDriver driver = loadPage2(html);
 
         final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
@@ -596,7 +597,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "cookie=sweet"));
 
-        getMockWebConnection().setResponse(URL_FIRST, html,
+        getMockWebConnection().setResponse(URL_FIRST, "<html></html>",
                 200, "OK", "text/html;charset=ISO-8859-1", ISO_8859_1, responseHeader);
         loadPage2(URL_FIRST, null);
 
@@ -610,8 +611,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     public static class PostServlet2 extends HttpServlet {
 
         @Override
-        protected void doPost(final HttpServletRequest req, final HttpServletResponse resp)
-            throws ServletException, IOException {
+        protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
             final Writer writer = resp.getWriter();
 
             writer.write(req.getQueryString() + ',' + req.getContentLength());
@@ -1094,22 +1094,18 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "date\\sXYZ\\sGMT\\r\\n"
                         + "server:\\sJetty(XXX)\\r\\n"
                         + "transfer-encoding:\\schunked\\r\\n"})
-    @HtmlUnitNYI(CHROME = {"", "", "Date\\sXYZ\\sGMT\\r\\n"
+    @HtmlUnitNYI(CHROME = {"", "", "Server:\\sJetty(XXX)\\r\\nDate\\sXYZ\\sGMT\\r\\n"
                                     + "Content-Type:\\stext/xml;charset=iso-8859-1\\r\\n"
-                                    + "Transfer-Encoding:\\schunked\\r\\n"
-                                    + "Server:\\sJetty(XXX)\\r\\n"},
-            EDGE = {"", "", "Date\\sXYZ\\sGMT\\r\\n"
+                                    + "Transfer-Encoding:\\schunked\\r\\n"},
+            EDGE = {"", "", "Server:\\sJetty(XXX)\\r\\nDate\\sXYZ\\sGMT\\r\\n"
                                     + "Content-Type:\\stext/xml;charset=iso-8859-1\\r\\n"
-                                    + "Transfer-Encoding:\\schunked\\r\\n"
-                                    + "Server:\\sJetty(XXX)\\r\\n"},
-            FF = {"", "", "Date\\sXYZ\\sGMT\\r\\n"
+                                    + "Transfer-Encoding:\\schunked\\r\\n"},
+            FF = {"", "", "Server:\\sJetty(XXX)\\r\\nDate\\sXYZ\\sGMT\\r\\n"
                                     + "Content-Type:\\stext/xml;charset=iso-8859-1\\r\\n"
-                                    + "Transfer-Encoding:\\schunked\\r\\n"
-                                    + "Server:\\sJetty(XXX)\\r\\n"},
-            FF_ESR = {"", "", "Date\\sXYZ\\sGMT\\r\\n"
+                                    + "Transfer-Encoding:\\schunked\\r\\n"},
+            FF_ESR = {"", "", "Server:\\sJetty(XXX)\\r\\nDate\\sXYZ\\sGMT\\r\\n"
                                     + "Content-Type:\\stext/xml;charset=iso-8859-1\\r\\n"
-                                    + "Transfer-Encoding:\\schunked\\r\\n"
-                                    + "Server:\\sJetty(XXX)\\r\\n"})
+                                    + "Transfer-Encoding:\\schunked\\r\\n"})
     public void getAllResponseHeaders() throws Exception {
         final String html = DOCTYPE_HTML
                         + "<html>\n"

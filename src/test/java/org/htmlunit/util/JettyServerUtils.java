@@ -409,6 +409,7 @@ public final class JettyServerUtils {
             if (errorException != null) {
                 System.err.println("\n==== Jetty Servlet Error ====");
                 System.err.println("URI:       " + request.getHttpURI());
+                System.err.println("Method:    " + request.getMethod());
                 System.err.println("Exception: " + errorException.getClass().getName());
                 System.err.println("Message:   " + errorException.getMessage());
                 errorException.printStackTrace(System.err);
