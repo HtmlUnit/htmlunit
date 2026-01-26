@@ -14,13 +14,18 @@
  */
 package org.htmlunit.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.BindException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jetty.ee10.servlet.DefaultServlet;
@@ -28,7 +33,6 @@ import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
 import org.eclipse.jetty.ee10.servlet.ServletHolder;
 import org.eclipse.jetty.ee10.servlet.security.ConstraintMapping;
 import org.eclipse.jetty.ee10.servlet.security.ConstraintSecurityHandler;
-import org.eclipse.jetty.ee10.webapp.WebAppClassLoader;
 import org.eclipse.jetty.ee10.webapp.WebAppContext;
 import org.eclipse.jetty.ee10.websocket.server.config.JettyWebSocketServletContainerInitializer;
 import org.eclipse.jetty.http.CookieCompliance;
@@ -243,12 +247,39 @@ public final class JettyServerUtils {
         final Resource baseResource = ResourceFactory.of(context).newResource(getResourceBasePath(resourceBase));
         context.setBaseResource(baseResource);
 
-        if (classpath != null) {
-            final WebAppClassLoader loader = new WebAppClassLoader(context);
+        if (classpath != null && classpath.length > 0) {
+            final ClassLoader parentClassLoader = Thread.currentThread().getContextClassLoader();
+            final List<URL> urls = new ArrayList<>();
+
             for (final String path : classpath) {
-                loader.addClassPath(path);
+                if (StringUtils.isBlank(path)) {
+                    throw new IllegalArgumentException("Classpath entry cannot be null or empty");
+                }
+
+                final File file = new File(path);
+                if (!file.exists()) {
+                    throw new IOException("Classpath entry does not exist: '" + path + "'");
+                }
+                if (!file.canRead()) {
+                    throw new IOException("Classpath entry is not readable: '" + path + "'");
+                }
+                if (!file.isDirectory() && !path.toLowerCase().endsWith(".jar")) {
+                    throw new IllegalArgumentException(
+                        "Classpath entry must be a directory or JAR file: '" + path + "'");
+                }
+
+                try {
+                    urls.add(file.toURI().toURL());
+                } catch (final MalformedURLException e) {
+                    throw new RuntimeException("Invalid classpath entry: '" + path + "'", e);
+                }
             }
-            context.setClassLoader(loader);
+
+            final URLClassLoader classLoader = new URLClassLoader(
+                urls.toArray(new URL[0]),
+                parentClassLoader
+            );
+            context.setClassLoader(classLoader);
         }
 
         server.setHandler(context);
