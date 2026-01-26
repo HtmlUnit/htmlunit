@@ -119,7 +119,7 @@ public final class JettyServerUtils {
         final Resource baseResource = ResourceFactory.of(context).newResource(getResourceBasePath(resourceBase));
         context.setBaseResource(baseResource);
 
-        context.setErrorHandler(new ConsoleErrorHandler());
+        // context.setErrorHandler(new ConsoleErrorHandler());
 
         if (isBasicAuthentication) {
             final ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
@@ -268,7 +268,7 @@ public final class JettyServerUtils {
         final Resource baseResource = ResourceFactory.of(context).newResource(getResourceBasePath(resourceBase));
         context.setBaseResource(baseResource);
 
-        context.setErrorHandler(new ConsoleErrorHandler());
+        // context.setErrorHandler(new ConsoleErrorHandler());
 
         if (classpath != null && classpath.length > 0) {
             final ClassLoader parentClassLoader = Thread.currentThread().getContextClassLoader();
