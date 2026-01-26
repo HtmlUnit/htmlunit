@@ -708,7 +708,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if the test fails
      */
     protected static void startWebServer2(final String resourceBase, final Map<String, Class<? extends Servlet>> servlets) throws Exception {
-
         if (STATIC_SERVER2_ != null) {
             JettyServerUtils.stopServer(STATIC_SERVER2_);
         }

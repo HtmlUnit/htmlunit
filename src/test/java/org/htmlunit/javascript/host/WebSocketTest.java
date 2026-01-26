@@ -254,8 +254,7 @@ public class WebSocketTest extends WebDriverTestCase {
         }
     }
 
-    public static class ChatWebSocketListener implements AutoDemanding
-    {
+    public static class ChatWebSocketListener implements AutoDemanding {
         private static final Set<ChatWebSocketListener> webSockets_ = new CopyOnWriteArraySet<>();
         private Session session_;
 
@@ -363,8 +362,7 @@ public class WebSocketTest extends WebDriverTestCase {
         }
     }
 
-    public static class CookiesWebSocketListener implements AutoDemanding
-    {
+    public static class CookiesWebSocketListener implements AutoDemanding {
         private static final Set<CookiesWebSocketListener> webSockets_ = new CopyOnWriteArraySet<>();
         private Session session_;
         private int counter_ = 1;
@@ -554,7 +552,6 @@ public class WebSocketTest extends WebDriverTestCase {
              "onCloseListener code: 1006  wasClean: false",
              "onClose code: 1006  wasClean: false"})
     public void eventsNoSocketServer() throws Exception {
-
         stopWebServers();
 
         final Server server = JettyServerUtils.startWebServer(PORT,

@@ -181,8 +181,7 @@ public final class JettyServerUtils {
         server.setHandler(context);
 
         if (socketListeners != null) {
-            JettyWebSocketServletContainerInitializer.configure(context, (servletContext, container) ->
-            {
+            JettyWebSocketServletContainerInitializer.configure(context, (servletContext, container) -> {
                 // Configure the ServerContainer.
                 container.setMaxTextMessageSize(128 * 1024);
 
@@ -260,7 +259,6 @@ public final class JettyServerUtils {
      * @throws Exception if an error occurs
      */
     public static Server startWebAppServer(final int port, final String resourceBase, final String[] classpath) throws Exception {
-
         final Server server = buildServer(port, null);
 
         final WebAppContext context = new WebAppContext();
@@ -404,7 +402,6 @@ public final class JettyServerUtils {
     private static final class ConsoleErrorHandler extends ErrorHandler {
         @Override
         public boolean handle(Request request, Response response, Callback callback) throws Exception {
-
             Throwable errorException = (Throwable) request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
             if (errorException != null) {
                 System.err.println("\n==== Jetty Servlet Error ====");

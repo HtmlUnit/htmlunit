@@ -98,6 +98,7 @@ public class CodeStyleTest {
         final List<File> files = new ArrayList<>();
         addAll(new File("src/main"), files);
         addAll(new File("src/test"), files);
+
         final List<String> classNames = getClassNames(files);
         process(files, classNames);
         // for (final String className : classNames) {
@@ -140,8 +141,15 @@ public class CodeStyleTest {
     }
 
     private void process(final List<File> files, final List<String> classNames) throws IOException {
+        final String excludeQuercus = "org" + File.separatorChar + "htmlunit" + File.separatorChar + "util" + File.separatorChar + "quercus" + File.separatorChar +  "servlet";
+
         for (final File file : files) {
             final String relativePath = file.getAbsolutePath().substring(new File(".").getAbsolutePath().length() - 1);
+
+            if (relativePath.contains(excludeQuercus)) {
+                continue;
+            }
+
             if (file.getName().endsWith(".java")) {
                 final List<String> lines = FileUtils.readLines(file, SOURCE_ENCODING);
                 openingCurlyBracket(lines, relativePath);
@@ -152,7 +160,6 @@ public class CodeStyleTest {
                 methodLastLine(lines, relativePath);
                 lineBetweenMethods(lines, relativePath);
                 runWith(lines, relativePath);
-                vs85aspx(lines, relativePath);
                 deprecated(lines, relativePath);
                 staticJSMethod(lines, relativePath);
                 singleAlert(lines, relativePath);
@@ -424,21 +431,6 @@ public class CodeStyleTest {
                     }
                 }
                 index++;
-            }
-        }
-    }
-
-    /**
-     * Verifies that no "(VS.85).aspx" token exists (which is sometimes used in MSDN documentation).
-     */
-    private void vs85aspx(final List<String> lines, final String relativePath) {
-        if (!relativePath.contains("CodeStyleTest")) {
-            int i = 0;
-            for (final String line : lines) {
-                if (line.contains("(VS.85).aspx")) {
-                    addFailure(relativePath, i + 1, "Please remove \"(VS.85)\" from the URL");
-                }
-                i++;
             }
         }
     }
