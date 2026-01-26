@@ -49,6 +49,7 @@ import org.htmlunit.http.HttpStatus;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.PrimitiveWebServer;
 import org.htmlunit.util.ServletContentWrapper;
 import org.junit.jupiter.api.Test;
 
@@ -418,36 +419,25 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void contentLengthSmallerThanContent() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/contentLengthSmallerThanContent", ContentLengthSmallerThanContentServlet.class);
-        startWebServer("./", servlets);
-
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage(URL_FIRST + "contentLengthSmallerThanContent");
-        assertEquals("visible text", page.asNormalizedText());
-    }
-
-    /**
-     * Servlet for {@link #contentLengthSmallerThanContent()}.
-     */
-    public static class ContentLengthSmallerThanContentServlet extends ServletContentWrapper {
-
-        /** Constructor. */
-        public ContentLengthSmallerThanContentServlet() {
-            super(DOCTYPE_HTML
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<body>\n"
                 + "  <p>visible text</p>\n"
                 + "  <p>missing text</p>\n"
                 + "</body>\n"
-                + "</html>");
-        }
+                + "</html>";
+        int contentLenght = html.indexOf("<p>missing text</p>");
+        final String response = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + contentLenght + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + html;
 
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-            throws IOException, ServletException {
-            response.setContentLength(getContent().indexOf("<p>missing text</p>"));
-            super.doGet(request, response);
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
+            final WebClient client = getWebClient();
+
+            final HtmlPage page = client.getPage("http://localhost:" + primitiveWebServer.getPort());
+            assertEquals("visible text", page.asNormalizedText());
         }
     }
 
@@ -456,23 +446,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void contentLengthSmallerThanContentLargeContent() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/contentLengthSmallerThanContent", ContentLengthSmallerThanContentLargeContentServlet.class);
-        startWebServer("./", servlets);
-
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage(URL_FIRST + "contentLengthSmallerThanContent");
-        assertTrue(page.asNormalizedText(), page.asNormalizedText().endsWith("visible text"));
-    }
-
-    /**
-     * Servlet for {@link #contentLengthSmallerThanContentLargeContent()}.
-     */
-    public static class ContentLengthSmallerThanContentLargeContentServlet extends ServletContentWrapper {
-
-        /** Constructor. */
-        public ContentLengthSmallerThanContentLargeContentServlet() {
-            super(DOCTYPE_HTML
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<body>\n"
                 + "  <p>"
@@ -481,14 +455,19 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 + "  <p>visible text</p>\n"
                 + "  <p>missing text</p>\n"
                 + "</body>\n"
-                + "</html>");
-        }
+                + "</html>";
+        int contentLenght = html.indexOf("<p>missing text</p>");
+        final String response = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + contentLenght + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + html;
 
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-            throws IOException, ServletException {
-            response.setContentLength(getContent().indexOf("<p>missing text</p>"));
-            super.doGet(request, response);
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
+            final WebClient client = getWebClient();
+
+            final HtmlPage page = client.getPage("http://localhost:" + primitiveWebServer.getPort());
+            assertTrue(page.asNormalizedText(), page.asNormalizedText().endsWith("visible text"));
         }
     }
 

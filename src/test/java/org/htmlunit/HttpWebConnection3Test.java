@@ -24,6 +24,7 @@ import java.util.Arrays;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.htmlunit.util.PrimitiveWebServer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;

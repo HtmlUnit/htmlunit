@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit;
+package org.htmlunit.util;
 
 import java.io.CharArrayWriter;
 import java.io.Closeable;
@@ -31,6 +31,9 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.HttpHeader;
+import org.htmlunit.WebServerTestCase;
+import org.htmlunit.WebTestCase;
 
 /**
  * A very simple implementation of a Web Server.
@@ -110,8 +113,7 @@ public class PrimitiveWebServer implements Closeable {
                             break;
                         }
                     }
-                    final int contentLengthPos =
-                            StringUtils.indexOfIgnoreCase(requestString, HttpHeader.CONTENT_LENGTH);
+                    final int contentLengthPos = StringUtils.indexOfIgnoreCase(requestString, HttpHeader.CONTENT_LENGTH);
                     if (contentLengthPos > -1) {
                         final int endPos = requestString.indexOf('\n', contentLengthPos + 16);
                         final String toParse = requestString.substring(contentLengthPos + 16, endPos);
