@@ -39,10 +39,10 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+//import javax.naming.Context;
+//import javax.naming.InitialContext;
+//import javax.naming.NamingException;
+// import javax.sql.DataSource;
 
 import com.caucho.config.ConfigException;
 import com.caucho.quercus.QuercusContext;
@@ -423,9 +423,9 @@ public class QuercusServlet
     if ("compile".equals(paramName)) {
       setCompile(paramValue);
     }
-    else if ("database".equals(paramName)) {
-      setJndiDatabase(paramValue);
-    }
+//    else if ("database".equals(paramName)) {
+//      setJndiDatabase(paramValue);
+//    }
     else if ("ini-file".equals(paramName)) {
       setIniFile(paramValue);
     }
@@ -468,34 +468,34 @@ public class QuercusServlet
     }
   }
 
-  private void setJndiDatabase(String value)
-    throws ServletException
-  {
-    try {
-      Context ic = new InitialContext();
-      DataSource ds;
-
-      if (! value.startsWith("java:comp")) {
-        try {
-          ds = (DataSource) ic.lookup("java:comp/env/" + value);
-        }
-        catch (Exception e) {
-          // for glassfish
-          ds = (DataSource) ic.lookup(value);
-        }
-      }
-      else {
-        ds = (DataSource) ic.lookup(value);
-      }
-
-      if (ds == null)
-        throw new ServletException(L.l("database '{0}' is not valid", value));
-
-      // setDatabase(new QuercusDataSource(ds, null, null, false));
-    } catch (NamingException e) {
-      throw new ServletException(e);
-    }
-  }
+//  private void setJndiDatabase(String value)
+//    throws ServletException
+//  {
+//    try {
+//      Context ic = new InitialContext();
+//      DataSource ds;
+//
+//      if (! value.startsWith("java:comp")) {
+//        try {
+//          ds = (DataSource) ic.lookup("java:comp/env/" + value);
+//        }
+//        catch (Exception e) {
+//          // for glassfish
+//          ds = (DataSource) ic.lookup(value);
+//        }
+//      }
+//      else {
+//        ds = (DataSource) ic.lookup(value);
+//      }
+//
+//      if (ds == null)
+//        throw new ServletException(L.l("database '{0}' is not valid", value));
+//
+//      // setDatabase(new QuercusDataSource(ds, null, null, false));
+//    } catch (NamingException e) {
+//      throw new ServletException(e);
+//    }
+//  }
 
   private void initImpl(ServletConfig config)
     throws ServletException
