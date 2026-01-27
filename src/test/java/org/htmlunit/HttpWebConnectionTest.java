@@ -604,6 +604,8 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         servlets.put("/big", BigContentServlet.class);
         startWebServer("./", servlets);
 
+        BigContentServlet.CANCEL_ = false;
+
         final WebClient client = getWebClient();
         client.setWebConnection(new HttpWebConnection(client) {
             @Override
