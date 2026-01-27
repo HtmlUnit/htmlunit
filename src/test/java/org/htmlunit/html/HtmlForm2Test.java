@@ -36,6 +36,7 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.PrimitiveWebServer;
 import org.htmlunit.util.UrlUtils;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -301,9 +302,10 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"§§URL§§?par%F6m=Hello+G%FCnter", "par\u00F6m", "Hello G\u00FCnter"})
+    @Alerts({"§§URL§§/?par%F6m=Hello+G%FCnter", "GET /?par%F6m=Hello+G%FCnter HTTP/1.1"})
     public void encodingSubmit() throws Exception {
         stopWebServers();
+
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
@@ -316,21 +318,28 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        expandExpectedAlertsVariables(URL_FIRST);
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=ISO-8859-1", ISO_8859_1, ISO_8859_1);
-        driver.findElement(new ById("mySubmit")).click();
-        if (useRealBrowser()) {
-            Thread.sleep(400);
+        final String response = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + (html.length()) + "\r\n"
+                + "Content-Type: text/html;charset=ISO-8859-1\r\n"
+                + "\r\n"
+                + html;
+
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
+            final URL url = new URL("http://localhost:" + primitiveWebServer.getPort());
+            expandExpectedAlertsVariables(url);
+
+            final WebDriver driver = getWebDriver();
+            driver.get(url.toExternalForm());
+
+            driver.findElement(new ById("mySubmit")).click();
+            if (useRealBrowser()) {
+                Thread.sleep(400);
+            }
+
+            assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+            assertEquals(2, primitiveWebServer.getRequests().size());
+            assertTrue(primitiveWebServer.getRequests().get(1).contains(getExpectedAlerts()[1]));
         }
-
-        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
-        assertEquals(2, getMockWebConnection().getRequestCount());
-
-        final List<NameValuePair> requestedParams =
-                getMockWebConnection().getLastWebRequest().getRequestParameters();
-        assertEquals(1, requestedParams.size());
-        assertEquals(getExpectedAlerts()[1], requestedParams.get(0).getName());
-        assertEquals(getExpectedAlerts()[2], requestedParams.get(0).getValue());
     }
 
     /**
