@@ -251,4 +251,15 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.WebSocketTest$EventsWebSocketListener")
         .should()
             .dependOnClassesThat().resideInAnyPackage("org.eclipse.jetty..");
-    }
+
+    /**
+     * Do not use java.util.logging.
+     */
+    @ArchTest
+    public static final ArchRule javaLogginPackageRule = noClasses()
+        .that()
+            .resideOutsideOfPackage("org.htmlunit.archunit..")
+            .and().resideOutsideOfPackage("org.htmlunit.jetty..")
+       .should()
+            .dependOnClassesThat().resideInAnyPackage("java.util.logging..");
+}

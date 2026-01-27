@@ -36,8 +36,11 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 //import javax.naming.Context;
 //import javax.naming.InitialContext;
@@ -66,8 +69,8 @@ public class QuercusServlet
   extends HttpServlet
 {
   private static final L10N L = new L10N(QuercusServlet.class);
-  private static final Logger log
-    = Logger.getLogger(QuercusServlet.class.getName());
+  // private static final Logger log = Logger.getLogger(QuercusServlet.class.getName());
+  private static final Log log = LogFactory.getLog(QuercusServlet.class);
 
   private QuercusContext _quercus;
   private QuercusServletImpl _impl;
@@ -126,7 +129,8 @@ public class QuercusServlet
         impl = (QuercusServletImpl) cons.newInstance(_licenseDirectory);
       }
       catch (Exception e) {
-        log.log(Level.FINEST, e.getMessage(), e);
+        // log.log(Level.FINEST, e.getMessage(), e);
+        log.debug(e.getMessage(), e);
       }
     }
 
@@ -138,7 +142,8 @@ public class QuercusServlet
         impl = (QuercusServletImpl) cons.newInstance(_licenseDirectory);
       }
       catch (Exception e) {
-        log.log(Level.FINEST, e.getMessage(), e);
+        // log.log(Level.FINEST, e.getMessage(), e);
+        log.debug(e.getMessage(), e);
       }
     }
 

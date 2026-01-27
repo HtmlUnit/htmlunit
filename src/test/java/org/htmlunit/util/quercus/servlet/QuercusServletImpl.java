@@ -32,9 +32,11 @@ package org.htmlunit.util.quercus.servlet;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.htmlunit.util.quercus.servlet.api.QuercusHttpServletRequestImpl;
 import org.htmlunit.util.quercus.servlet.api.QuercusHttpServletResponseImpl;
 import org.htmlunit.util.quercus.servlet.api.QuercusServletContextImpl;
@@ -73,8 +75,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public class QuercusServletImpl extends HttpServlet
 {
   private static final L10N L = new L10N(QuercusServletImpl.class);
-  private static final Logger log
-    = Logger.getLogger(QuercusServletImpl.class.getName());
+  // private static final Logger log = Logger.getLogger(QuercusServletImpl.class.getName());
+  private static final Log log = LogFactory.getLog(QuercusServletImpl.class);
 
   protected QuercusContext _quercus;
   protected ServletConfig _config;
@@ -159,7 +161,8 @@ public class QuercusServletImpl extends HttpServlet
       }
       catch (FileNotFoundException e) {
         // php/2001
-        log.log(Level.FINER, e.toString(), e);
+        // log.log(Level.FINER, e.toString(), e);
+        log.debug(e.getMessage(), e);
 
         response.sendError(HttpServletResponse.SC_NOT_FOUND);
 
@@ -232,13 +235,15 @@ public class QuercusServletImpl extends HttpServlet
         throw e;
       }
       catch (QuercusLineRuntimeException e) {
-        log.log(Level.FINE, e.toString(), e);
+        // log.log(Level.FINE, e.toString(), e);
+        log.debug(e.getMessage(), e);
 
         ws.println(e.getMessage());
         //  return;
       }
       catch (QuercusValueException e) {
-        log.log(Level.FINE, e.toString(), e);
+        // log.log(Level.FINE, e.toString(), e);
+        log.debug(e.getMessage(), e);
 
         ws.println(e.toString());
 
@@ -269,15 +274,18 @@ public class QuercusServletImpl extends HttpServlet
     }
     catch (QuercusDieException e) {
       // normal exit
-      log.log(Level.FINE, e.toString(), e);
+      // log.log(Level.FINE, e.toString(), e);
+      log.debug(e.getMessage(), e);
     }
     catch (QuercusExitException e) {
       // normal exit
-      log.log(Level.FINER, e.toString(), e);
+      // log.log(Level.FINER, e.toString(), e);
+      log.debug(e.getMessage(), e);
     }
     catch (QuercusErrorException e) {
       // error exit
-      log.log(Level.FINE, e.toString(), e);
+      // log.log(Level.FINE, e.toString(), e);
+      log.debug(e.getMessage(), e);
     }
     catch (RuntimeException e) {
       throw e;
