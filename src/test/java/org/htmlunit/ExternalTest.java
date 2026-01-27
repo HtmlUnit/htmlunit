@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.htmlunit.html.DomNode;
@@ -85,6 +86,8 @@ public class ExternalTest {
         try (FileReader fileReader = new FileReader(pomFile)) {
             final Model model = reader.read(fileReader);
 
+            final Pattern ignorePattern = Pattern.compile("" + model.getProperties().get("maven.version.ignore"));
+
             final List<String> wrongVersions = new LinkedList<>();
             for (var dep : model.getDependencies()) {
                 String version = dep.getVersion();
@@ -92,7 +95,7 @@ public class ExternalTest {
                     version = "" + model.getProperties().get(version.substring(2, version.length() - 1));
                 }
                 try {
-                    assertVersion(dep.getGroupId(), dep.getArtifactId(), version);
+                    assertVersion(dep.getGroupId(), dep.getArtifactId(), version, ignorePattern);
                 }
                 catch (final AssertionError e) {
                     wrongVersions.add(e.getMessage());
@@ -102,8 +105,6 @@ public class ExternalTest {
                 Assertions.fail(String.join("\n ", wrongVersions));
             }
         }
-
-        assertVersion("org.sonatype.oss", "oss-parent", "9");
     }
 
     /**
@@ -215,7 +216,8 @@ public class ExternalTest {
         }
     }
 
-    private static void assertVersion(final String groupId, final String artifactId, final String pomVersion)
+    private static void assertVersion(final String groupId, final String artifactId,
+                            final String pomVersion, final Pattern ignorePattern)
             throws Exception {
         String latestMavenCentralVersion = null;
         String url = MAVEN_REPO_URL_
@@ -232,7 +234,7 @@ public class ExternalTest {
                 for (final HtmlAnchor anchor : page.getAnchors()) {
                     String mavenCentralVersion = anchor.getTextContent();
                     mavenCentralVersion = mavenCentralVersion.substring(0, mavenCentralVersion.length() - 1);
-                    if (!isIgnored(groupId, artifactId, mavenCentralVersion)) {
+                    if (!isIgnored(groupId, artifactId, mavenCentralVersion, ignorePattern)) {
                         if (isVersionAfter(mavenCentralVersion, latestMavenCentralVersion)) {
                             latestMavenCentralVersion = mavenCentralVersion;
                         }
@@ -243,6 +245,7 @@ public class ExternalTest {
                 // ignore because our ci machine sometimes fails
             }
         }
+
         if (!pomVersion.endsWith("-SNAPSHOT")
                 || !isVersionAfter(
                         pomVersion.substring(0, pomVersion.length() - "-SNAPSHOT".length()),
@@ -259,78 +262,15 @@ public class ExternalTest {
         if (centralVersion == null) {
             return true;
         }
-        final String[] pomValues = pomVersion.split("\\.");
-        final String[] centralValues = centralVersion.split("\\.");
-        for (int i = 0; i < pomValues.length; i++) {
-            if (pomValues[i].startsWith("v")) {
-                pomValues[i] = pomValues[i].substring(1);
-            }
-            try {
-                Integer.parseInt(pomValues[i]);
-            }
-            catch (final NumberFormatException e) {
-                return false;
-            }
-        }
-        for (int i = 0; i < centralValues.length; i++) {
-            if (centralValues[i].startsWith("v")) {
-                centralValues[i] = centralValues[i].substring(1);
-            }
-            try {
-                Integer.parseInt(centralValues[i]);
-            }
-            catch (final NumberFormatException e) {
-                return true;
-            }
-        }
-        for (int i = 0; i < pomValues.length; i++) {
-            if (i == centralValues.length) {
-                return true;
-            }
-            final int pomValuePart = Integer.parseInt(pomValues[i]);
-            final int centralValuePart = Integer.parseInt(centralValues[i]);
-            if (pomValuePart < centralValuePart) {
-                return false;
-            }
-            if (pomValuePart > centralValuePart) {
-                return true;
-            }
-        }
-        return false;
+
+        return new ComparableVersion(pomVersion).compareTo(new ComparableVersion(centralVersion)) > 0;
     }
 
-    private static boolean isIgnored(@SuppressWarnings("unused") final String groupId,
-            @SuppressWarnings("unused") final String artifactId, @SuppressWarnings("unused") final String version) {
-        if (groupId.startsWith("org.eclipse.jetty")
-                && (version.startsWith("11.") || version.startsWith("10."))) {
-            return true;
-        }
-
+    private static boolean isIgnored(final String groupId, final String artifactId,
+            final String version, final Pattern ignorePattern) {
         // version > 3.12.0 does not work with our site.xml and also not with a refactored one
         if ("maven-site-plugin".equals(artifactId)
                 && (version.startsWith("3.12.1") || version.startsWith("3.20.") || version.startsWith("3.21."))) {
-            return true;
-        }
-
-        // >= 11.x requires java11
-        if ("org.owasp".equals(groupId)
-                && (version.startsWith("11.") || version.startsWith("12."))) {
-            return true;
-        }
-
-        // 6.x requires java11
-        if ("org.apache.felix".equals(groupId)
-                && version.startsWith("6.")) {
-            return true;
-        }
-
-        // 6.x requires java17
-        if ("org.junit.jupiter".equals(groupId)
-                && version.startsWith("6.")) {
-            return true;
-        }
-        if ("org.junit.platform".equals(groupId)
-                && version.startsWith("6.")) {
             return true;
         }
 
@@ -339,6 +279,10 @@ public class ExternalTest {
             return true;
         }
         if ("commons-net".equals(artifactId) && (version.startsWith("2003"))) {
+            return true;
+        }
+
+        if (ignorePattern.matcher(version).matches()) {
             return true;
         }
 
