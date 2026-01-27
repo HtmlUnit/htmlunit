@@ -680,6 +680,16 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             request.setDefaultResponseContentCharset(UTF_8);
             request.setRefererHeader(pageUrl);
 
+            try {
+                HttpMethod.validateHttpMethodName(method);
+            }
+            catch (final IllegalArgumentException e) {
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        e.getMessage(),
+                        DOMException.SYNTAX_ERR);
+            }
+
             final String methodUC = method.toUpperCase(Locale.ROOT);
             if ("TRACE".equals(methodUC)) {
                 throw JavaScriptEngine.asJavaScriptException(

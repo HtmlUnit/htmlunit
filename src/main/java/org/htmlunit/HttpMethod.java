@@ -40,5 +40,55 @@ public enum HttpMethod {
     /** TRACE. */
     TRACE,
     /** PATCH. */
-    PATCH
+    PATCH;
+
+    /**
+     * Validates that an HTTP method string contains only ASCII characters
+     * and matches the HTTP token specification (RFC 7230).
+     *
+     * @param methodName the HTTP method to validate
+     * @throws IllegalArgumentException if method is null or empty
+     */
+    public static void validateHttpMethodName(final String methodName) {
+        if (methodName == null || methodName.isEmpty()) {
+            throw new IllegalArgumentException("HTTP method cannot be null or empty");
+        }
+
+        for (int i = 0; i < methodName.length(); i++) {
+            final char c = methodName.charAt(i);
+
+            // Check if non-ASCII
+            if (c > 127) {
+                throw new IllegalArgumentException(
+                    "'" + methodName + "' is not a valid HTTP method (contains non-ASCII character)");
+            }
+
+            // Check if invalid token character
+            if (!isHttpTokenChar(c)) {
+                throw new IllegalArgumentException(
+                    "'" + methodName + "' is not a valid HTTP method (invalid character: '" + c + "')");
+            }
+        }
+    }
+
+    private static boolean isHttpTokenChar(final char c) {
+        return (c >= 'A' && c <= 'Z')
+                || (c >= 'a' && c <= 'z')
+                || (c >= '0' && c <= '9')
+                || c == '!'
+                || c == '#'
+                || c == '$'
+                || c == '%'
+                || c == '&'
+                || c == '\''
+                || c == '*'
+                || c == '+'
+                || c == '-'
+                || c == '.'
+                || c == '^'
+                || c == '_'
+                || c == '`'
+                || c == '|'
+                || c == '~';
+    }
 }

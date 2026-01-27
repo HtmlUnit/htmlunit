@@ -795,7 +795,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             final URL requestedUrl = new URL(url);
             final WebRequest webRequest = new WebRequest(requestedUrl);
-            webRequest.setHttpMethod(HttpMethod.valueOf(request.getMethod()));
+
+            final String method = request.getMethod().toUpperCase(Locale.ROOT);
+            webRequest.setHttpMethod(HttpMethod.valueOf(method));
 
             // copy headers
             for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {

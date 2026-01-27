@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
@@ -64,6 +65,163 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Anton Demydenko
  */
 public class XMLHttpRequest2Test extends WebDriverTestCase {
+
+    /**
+     * Tests that the different HTTP methods are supported.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("§§URL§§foo.xml")
+    public void methods() throws Exception {
+        testMethod(HttpMethod.GET);
+        testMethod(HttpMethod.HEAD);
+        testMethod(HttpMethod.DELETE);
+        testMethod(HttpMethod.POST);
+        testMethod(HttpMethod.PUT);
+        testMethod(HttpMethod.OPTIONS);
+        testMethod(HttpMethod.PATCH);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"SecurityError/DOMException", "§§URL§§"})
+    public void methodTrace() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('trace', 'foo.xml', false);\n"
+                + "    req.send('');\n"
+                + "  } catch(e) { logEx(e); }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html, getExpectedAlerts()[0]);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
+
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        assertEquals(getExpectedAlerts()[1], request.getUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void methodEmpty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('', 'foo.xml', false);\n"
+                + "  } catch(e) { logEx(e); }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("SyntaxError/DOMException")
+    public void methodContainsWhitespace() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('GET post', 'foo.xml', false);\n"
+                + "  } catch(e) { logEx(e); }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("accepted")
+    public void methodCustomMethod() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  try {"
+                + "    req = new XMLHttpRequest();\n"
+                + "    req.open('Custom', 'foo.xml', false);\n"
+                + "    log('accepted');"
+                + "  } catch(e) { logEx(e); }\n"
+                + "}\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    private void testMethod(final HttpMethod method) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {"
+            + "    var req = new XMLHttpRequest();\n"
+            + "    req.open('" + method.name().toLowerCase(Locale.ROOT) + "', 'foo.xml', false);\n"
+            + "    req.send('');\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html, new String[0]);
+
+        if (useRealBrowser()) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
+        }
+
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        assertEquals(getExpectedAlerts()[0], request.getUrl());
+        assertEquals(method, request.getHttpMethod());
+    }
 
     /**
      * This produced a deadlock situation with HtmlUnit-2.6 and HttmlUnit-2.7-SNAPSHOT on 17.09.09.

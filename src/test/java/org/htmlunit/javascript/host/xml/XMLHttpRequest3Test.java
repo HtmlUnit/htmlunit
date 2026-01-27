@@ -22,11 +22,9 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.htmlunit.CollectingAlertHandler;
-import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
@@ -181,49 +179,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         final String[] alerts = {URL_FIRST.toExternalForm(), "before long loop", "after long loop",
             urlPage2.toExternalForm(), "ready state handler, content loaded: j=5000" };
         assertEquals(alerts, collectedAlerts);
-    }
-
-    /**
-     * Tests that the different HTTP methods are supported.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void methods() throws Exception {
-        testMethod(HttpMethod.GET);
-        testMethod(HttpMethod.HEAD);
-        testMethod(HttpMethod.DELETE);
-        testMethod(HttpMethod.POST);
-        testMethod(HttpMethod.PUT);
-        testMethod(HttpMethod.OPTIONS);
-        testMethod(HttpMethod.TRACE);
-        testMethod(HttpMethod.PATCH);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    private void testMethod(final HttpMethod method) throws Exception {
-        final String content = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + "function test() {\n"
-            + "  var req = new XMLHttpRequest();\n"
-            + "  req.open('" + method.name().toLowerCase(Locale.ROOT) + "', 'foo.xml', false);\n"
-            + "  req.send('');\n"
-            + "}\n"
-            + "</script></head>\n"
-            + "<body onload='test()'></body></html>";
-
-        final WebClient client = getWebClient();
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, content);
-        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
-        conn.setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
-        client.setWebConnection(conn);
-        client.getPage(URL_FIRST);
-
-        final WebRequest request = conn.getLastWebRequest();
-        assertEquals(urlPage2, request.getUrl());
-        assertSame(method, request.getHttpMethod());
     }
 
     /**
