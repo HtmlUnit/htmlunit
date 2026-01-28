@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,11 +29,9 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Attachment}.
@@ -44,7 +42,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Lai Quang Duong
  */
-@RunWith(BrowserRunner.class)
 public class AttachmentTest extends SimpleWebTestCase {
 
     /**
@@ -53,7 +50,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void basic() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -79,7 +77,7 @@ public class AttachmentTest extends SimpleWebTestCase {
         final Page clickResult = anchor.click();
         assertEquals(result, clickResult);
         assertEquals(1, attachments.size());
-        assertTrue(HtmlPage.class.isInstance(attachments.get(0).getPage()));
+        assertTrue(attachments.get(0).getPage() instanceof HtmlPage);
         // the attachment is opened inside a new window
         assertEquals(2, client.getWebWindows().size());
 
@@ -99,7 +97,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void contentDispositionCaseInsensitive() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -133,7 +132,7 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void filename() throws Exception {
-        final String content = "<html>But is it really?</html>";
+        final String content = DOCTYPE_HTML + "<html>But is it really?</html>";
 
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
@@ -191,7 +190,8 @@ public class AttachmentTest extends SimpleWebTestCase {
         final List<Attachment> attachments = new ArrayList<>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
 
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "var blob = new Blob(['foo'], {type: 'text/plain'}),\n"
@@ -222,7 +222,8 @@ public class AttachmentTest extends SimpleWebTestCase {
         final List<Attachment> attachments = new ArrayList<>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
 
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "var blob = new File(['bar'], 'bar.txt', {type: 'text/plain'}),\n"
@@ -255,7 +256,8 @@ public class AttachmentTest extends SimpleWebTestCase {
         final List<Attachment> attachments = new ArrayList<>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
 
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "var blob = new File(['bar'], 'bar.txt', {type: 'text/plain'}),\n"
@@ -282,7 +284,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void jsChangeLocationAfterReceptionOfAttachment() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form action='action'>\n"
             + "<input type='submit' onclick='window.location=\"foo\"; return false'>\n"
             + "</form>\n"
@@ -305,7 +308,7 @@ public class AttachmentTest extends SimpleWebTestCase {
         page.getAnchors().get(0).click();
         assertEquals(1, attachments.size());
 
-        final HtmlElement htmlElement = (HtmlElement) page.getFirstByXPath("//input");
+        final HtmlElement htmlElement = page.getFirstByXPath("//input");
         htmlElement.click(); // exception was occurring here
     }
 
@@ -315,7 +318,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void handleResponseFromHandler() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -375,7 +379,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void handleResponseFromHandlerWithFileName() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -435,7 +440,8 @@ public class AttachmentTest extends SimpleWebTestCase {
      */
     @Test
     public void handleResponseOnlyApplicationOctetstream() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"

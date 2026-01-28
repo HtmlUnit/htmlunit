@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,5 +27,10 @@ import org.htmlunit.platform.geom.IntDimension2D;
  */
 public interface ImageData extends AutoCloseable {
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     * @return the {@link IntDimension2D} of this
+     * @throws IOException in case of error
+     */
     IntDimension2D getWidthHeight() throws IOException;
 }

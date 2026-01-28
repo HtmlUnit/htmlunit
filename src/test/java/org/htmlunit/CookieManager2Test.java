@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,15 @@
  */
 package org.htmlunit;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.util.Cookie;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.http.Cookie;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link CookieManager}.
@@ -35,7 +32,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class CookieManager2Test extends SimpleWebTestCase {
 
     /**
@@ -43,8 +39,8 @@ public class CookieManager2Test extends SimpleWebTestCase {
      */
     @Test
     public void resettingCookie() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function createCookie(name, value, days, path) {\n"
             + "    if (days) {\n"
@@ -95,8 +91,7 @@ public class CookieManager2Test extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, CookieManagerTest.HTML_ALERT_COOKIE);
+        webConnection.setResponse(URL_FIRST, CookieManagerTest.HTML_ALERT_COOKIE);
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();
@@ -118,8 +113,7 @@ public class CookieManager2Test extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, CookieManagerTest.HTML_ALERT_COOKIE);
+        webConnection.setResponse(URL_FIRST, CookieManagerTest.HTML_ALERT_COOKIE);
         webClient.setWebConnection(webConnection);
 
         final CookieManager mgr = webClient.getCookieManager();
@@ -151,7 +145,8 @@ public class CookieManager2Test extends SimpleWebTestCase {
      */
     @Test
     public void getCookiesShouldReturnACopyOfCurentState() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<button id='it' onclick=\"document.cookie = 'foo=bla'\">click me</button>\n"
                 + "<script>\n"
                 + "document.cookie = 'cookie1=value1';\n"

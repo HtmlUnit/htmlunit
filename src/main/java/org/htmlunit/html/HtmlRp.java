@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 package org.htmlunit.html;
-
-import static org.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
 
 import java.util.Map;
 
@@ -69,9 +67,6 @@ public class HtmlRp extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)) {
-            return DisplayStyle.INLINE;
-        }
         if (wasCreatedByJavascript()) {
             if (getParentNode() == null) {
                 return DisplayStyle.EMPTY;

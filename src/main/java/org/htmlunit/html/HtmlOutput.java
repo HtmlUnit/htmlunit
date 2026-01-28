@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "output".
@@ -87,7 +87,7 @@ public class HtmlOutput extends HtmlElement implements LabelableElement, Validat
      */
     @Override
     public boolean isCustomErrorValidityState() {
-        return !StringUtils.isEmpty(customValidity_);
+        return !StringUtils.isEmptyOrNull(customValidity_);
     }
 
     @Override

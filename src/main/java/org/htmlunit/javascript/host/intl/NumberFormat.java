@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,19 +21,19 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.javascript.RecursiveFunctionObject;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for {@code NumberFormat}.
@@ -54,7 +54,6 @@ public class NumberFormat extends HtmlUnitScriptable {
     static {
         final Map<String, String> commonFormats = new HashMap<>();
         commonFormats.put("", "");
-        commonFormats.put("ar", "\u066c\u066b\u0660");
         commonFormats.put("ar-DZ", ".,");
         commonFormats.put("ar-LY", ".,");
         commonFormats.put("ar-MA", ".,");
@@ -74,9 +73,6 @@ public class NumberFormat extends HtmlUnitScriptable {
         commonFormats.put("fr", "\u202f,");
         commonFormats.put("fr-CA", "\u00a0,");
 
-        FF_FORMATS_.putAll(commonFormats);
-        FF_ESR_FORMATS_.putAll(commonFormats);
-
         commonFormats.put("ar", ",.0");
         commonFormats.put("ar-BH", "\u066c\u066b\u0660");
         commonFormats.put("ar-EG", "\u066c\u066b\u0660");
@@ -90,16 +86,18 @@ public class NumberFormat extends HtmlUnitScriptable {
         commonFormats.put("ar-SD", "\u066c\u066b\u0660");
         commonFormats.put("ar-SY", "\u066c\u066b\u0660");
         commonFormats.put("ar-YE", "\u066c\u066b\u0660");
+
+        FF_FORMATS_.putAll(commonFormats);
+        FF_ESR_FORMATS_.putAll(commonFormats);
+
         commonFormats.put("be", ",.");
         commonFormats.put("mk", ",.");
         commonFormats.put("is", ",.");
 
         CHROME_FORMATS_.putAll(commonFormats);
-        CHROME_FORMATS_.put("en-ZA", ",.");
+        CHROME_FORMATS_.put("sq", ",.");
 
         EDGE_FORMATS_.putAll(commonFormats);
-
-        CHROME_FORMATS_.put("sq", ",.");
     }
 
     /**
@@ -170,9 +168,11 @@ public class NumberFormat extends HtmlUnitScriptable {
     public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         final String[] locales;
-        if (args.length != 0) {
-            if (args[0] instanceof NativeArray) {
-                final NativeArray array = (NativeArray) args[0];
+        if (args.length == 0) {
+            locales = new String[] {""};
+        }
+        else {
+            if (args[0] instanceof NativeArray array) {
                 locales = new String[(int) array.getLength()];
                 for (int i = 0; i < locales.length; i++) {
                     locales[i] = JavaScriptEngine.toString(array.get(i));
@@ -182,13 +182,10 @@ public class NumberFormat extends HtmlUnitScriptable {
                 locales = new String[] {JavaScriptEngine.toString(args[0])};
             }
         }
-        else {
-            locales = new String[] {""};
-        }
         final Window window = getWindow(ctorObj);
         final NumberFormat format = new NumberFormat(locales, window.getBrowserVersion());
         format.setParentScope(window);
-        format.setPrototype(((RecursiveFunctionObject) ctorObj).getClassPrototype());
+        format.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return format;
     }
 
@@ -205,11 +202,11 @@ public class NumberFormat extends HtmlUnitScriptable {
 
     /**
      * @return A new object with properties reflecting the locale and date and time formatting options
-     * computed during the initialization of the given {@code DateTimeFormat} object.
+     *         computed during the initialization of the given {@code DateTimeFormat} object.
      */
     @JsxFunction
     public Scriptable resolvedOptions() {
-        return Context.getCurrentContext().newObject(getParentScope());
+        return JavaScriptEngine.newObject(getParentScope());
     }
 
     /**
@@ -220,7 +217,7 @@ public class NumberFormat extends HtmlUnitScriptable {
 
         NumberFormatHelper(final String localeName, final BrowserVersion browserVersion, final String pattern) {
             Locale locale = browserVersion.getBrowserLocale();
-            if (StringUtils.isNotEmpty(localeName)) {
+            if (!StringUtils.isEmptyOrNull(localeName)) {
                 locale = Locale.forLanguageTag(localeName);
             }
 

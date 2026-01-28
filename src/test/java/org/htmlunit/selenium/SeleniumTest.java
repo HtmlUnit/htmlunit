@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 package org.htmlunit.selenium;
 
 import org.htmlunit.WebDriverTestCase;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -29,10 +29,10 @@ public class SeleniumTest extends WebDriverTestCase {
      * Starts the web server.
      */
     @Override
-    @Before
+    @BeforeEach
     public void beforeTest() {
         try {
-            startWebServer("src/test/resources/selenium", null, null);
+            startWebServer("src/test/resources/selenium", null);
         }
         catch (final Exception e) {
             throw new RuntimeException(e);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import org.w3c.dom.Text;
  * Representation of a text node in the HTML DOM.
  *
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Rodney Gitzel
  * @author Ahmed Ashour
  * @author Sudhan Moghe
@@ -128,23 +128,20 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * Recursively writes the XML data for the node tree starting at <code>node</code>.
-     *
-     * @param indent white space to indent child nodes
-     * @param printWriter writer where child nodes are written
+     * {@inheritDoc}
      */
     @Override
-    protected void printXml(final String indent, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
         String data = getData();
-        if (org.apache.commons.lang3.StringUtils.isNotBlank(data)) {
-            printWriter.print(indent);
+        boolean tag = tagBefore;
+        if (StringUtils.isNotBlank(data)) {
             if (!(getParentNode() instanceof HtmlStyle) || !data.startsWith("<!--") || !data.endsWith("-->")) {
                 data = StringUtils.escapeXmlChars(data);
             }
             printWriter.print(data);
-            printWriter.print("\r\n");
+            tag = false;
         }
-        printChildrenAsXml(indent, printWriter);
+        return printChildrenAsXml(indent, tag, printWriter);
     }
 
     /**
@@ -187,7 +184,7 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * Indicates if the provided character can by "typed" in the element.
+     * Indicates if the provided character can be "typed" in the element.
      * @param c the character
      * @return {@code true} if it is accepted
      */

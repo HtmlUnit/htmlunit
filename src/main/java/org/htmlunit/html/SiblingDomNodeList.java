@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import org.w3c.dom.Node;
 /**
  * An implementation of DomNodeList that is much less expensive for iteration.
  *
- * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Tom Anderson
  */
 class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomNodeList<DomNode> {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlCheckBoxInput}.
@@ -28,8 +26,8 @@ import org.junit.runner.RunWith;
  * @author Mike Bresnahan
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
 
     /**
@@ -43,8 +41,8 @@ public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
      */
     @Test
     public void onClick() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
             + "  <input type='checkbox' name='checkbox' id='checkbox' "
             + "onClick='alert(\"foo\");alert(event.type);'>Check me</input>\n"
@@ -73,8 +71,8 @@ public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
      */
     @Test
     public void onClickThatSubmitsForm() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' name='form1'>\n"
             + "  <input type='checkbox' name='checkbox' id='checkbox' "
             + "onClick='document.form1.submit()'>Check me</input>\n"
@@ -94,8 +92,8 @@ public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html
-            = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
             + "</form></body></html>";

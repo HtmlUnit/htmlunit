@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,7 +96,8 @@ public class HTMLUnknownElement extends HTMLElement {
      */
     @Override
     protected boolean isEndTagForbidden() {
-        if ("BGSOUND".equals(getNodeName())) {
+        final String nodeName = getNodeName();
+        if ("BGSOUND".equals(nodeName) || "KEYGEN".equals(nodeName)) {
             return true;
         }
         return super.isEndTagForbidden();

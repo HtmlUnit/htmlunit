@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,9 @@
 package org.htmlunit.svg;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -30,7 +27,6 @@ import org.openqa.selenium.WebDriver;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class SvgMatrixTest extends WebDriverTestCase {
 
     /**
@@ -39,7 +35,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts("function SVGMatrix() { [native code] }")
     public void simpleScriptable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -56,7 +52,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts({"1, 0, 0, 1, 0, 0", "2, 3, 4, 5, 6, 7"})
     public void fields() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"
@@ -80,7 +76,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  m.e = 6;\n"
             + "  m.f = 7;\n"
             + "  alertFields(m);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -94,7 +90,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Alerts({"function", "function", "function", "function", "function", "function", "function", "function",
              "function", "function", "function"})
     public void methods() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"
@@ -114,7 +110,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  log(typeof m.skewX);\n"
             + "  log(typeof m.skewY);\n"
             + "  log(typeof m.translate);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -152,9 +148,9 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidStateError/DOMException")
     public void inverseNotPossible() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><body>\n"
                 + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
                 + "  </svg>\n"
@@ -178,7 +174,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
                 + "  m.f = 6;\n"
                 + "  m = m.inverse();\n"
                 + "  alertFields(m);\n"
-                + "} catch(e) { log('exception'); }\n"
+                + "} catch(e) { logEx(e); }\n"
                 + "</script>\n"
                 + "</body></html>";
 
@@ -226,7 +222,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidAccessError/DOMException")
     public void rotateFromVectorZeroX() throws Exception {
         transformTest("rotateFromVector(0, 74)");
     }
@@ -235,7 +231,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidAccessError/DOMException")
     public void rotateFromVectorZeroY() throws Exception {
         transformTest("rotateFromVector(17, 0)");
     }
@@ -244,7 +240,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidAccessError/DOMException")
     public void rotateFromVectorZeroXY() throws Exception {
         transformTest("rotateFromVector(0, 0)");
     }
@@ -299,7 +295,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
     }
 
     private void transformTest(final String transforamtion) throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"
@@ -332,7 +328,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  r = m." + transforamtion + ";\n"
             + "  log(m === r);\n"
             + "  alertFields(r);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -352,7 +348,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
         else {
             for (int i = 0; i < expectedAlerts.length; i++) {
                 try {
-                    Assert.assertEquals(
+                    Assertions.assertEquals(
                             Double.parseDouble(expectedAlerts[i]),
                             Double.parseDouble(actualAlerts[i]), 0.000001);
                 }

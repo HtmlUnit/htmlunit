@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -216,14 +216,34 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /** {@inheritDoc} */
     @Override
     public int waitForJobsStartingBefore(final long delayMillis) {
-        return waitForJobsStartingBefore(delayMillis, null);
+        return waitForJobsStartingBefore(delayMillis, -1, null);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int waitForJobsStartingBefore(final long delayMillis, final long timeoutMillis) {
+        return waitForJobsStartingBefore(delayMillis, timeoutMillis, null);
     }
 
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("PMD.GuardLogStatement")
     public int waitForJobsStartingBefore(final long delayMillis, final JavaScriptJobFilter filter) {
+        return waitForJobsStartingBefore(delayMillis, -1, filter);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("PMD.GuardLogStatement")
+    public int waitForJobsStartingBefore(final long delayMillis, final long timeoutMillis,
+            final JavaScriptJobFilter filter) {
         final boolean debug = LOG.isDebugEnabled();
+
+        long now = System.currentTimeMillis();
+        long end = now + timeoutMillis;
+        if (timeoutMillis < 0 || timeoutMillis < delayMillis) {
+            end = -1;
+        }
 
         final long latestExecutionTime = System.currentTimeMillis() + delayMillis;
         if (debug) {
@@ -242,9 +262,9 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                             && currentlyRunningJob_.getTargetExecutionTime() < latestExecutionTime
                        );
 
-            while (pending) {
+            while (pending && (end == -1 || now < end)) {
                 try {
-                    wait(interval);
+                    wait(Math.max(40,  Math.min(interval, end - now)));
                 }
                 catch (final InterruptedException e) {
                     LOG.error("InterruptedException while in waitForJobsStartingBefore", e);
@@ -261,6 +281,9 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                                 && (filter == null || filter.passes(currentlyRunningJob_))
                                 && currentlyRunningJob_.getTargetExecutionTime() < latestExecutionTime
                            );
+                if (pending) {
+                    now = System.currentTimeMillis();
+                }
             }
         }
 

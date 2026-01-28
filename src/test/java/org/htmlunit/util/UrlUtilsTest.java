@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import java.net.InetAddress;
 import java.net.URL;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link UrlUtils}.
@@ -584,8 +584,8 @@ public class UrlUtilsTest extends SimpleWebTestCase {
         // issue #1787
         // final URL u1 = new URL("http://sourceforge.net/");
         // final URL u2 = new URL("http://ch3.sourceforge.net/");
-        final URL u1 = new URL("http://htmlunit.org/");
-        final URL u2 = new URL("http://host1.htmlunit.org/");
+        final URL u1 = new URL("http://htmlunit-dev.org/");
+        final URL u2 = new URL("http://host1.htmlunit-dev.org/");
         assertEquals(InetAddress.getByName(u1.getHost()), InetAddress.getByName(u2.getHost()));
         assertFalse(UrlUtils.sameFile(u1, u2));
     }
@@ -619,5 +619,165 @@ public class UrlUtilsTest extends SimpleWebTestCase {
                     UrlUtils.normalize(new URL("https://localhost:443/bug.html")));
         assertEquals("https://localhost:8443/bug.html",
                     UrlUtils.normalize(new URL("https://localhost:8443/bug.html")));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameOriginSameProtocolHostPort() throws Exception {
+        final URL url1 = new URL("http://example.com:8080/path1");
+        final URL url2 = new URL("http://example.com:8080/path2");
+        assertTrue(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameOriginDefaultHttpPort() throws Exception {
+        final URL url1 = new URL("http://example.com/path1");
+        final URL url2 = new URL("http://example.com:80/path2");
+        assertTrue(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameOriginDefaultHttpsPort() throws Exception {
+        final URL url1 = new URL("https://example.com/path1");
+        final URL url2 = new URL("https://example.com:443/path2");
+        assertTrue(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void differentOriginProtocol() throws Exception {
+        final URL url1 = new URL("http://example.com/path1");
+        final URL url2 = new URL("https://example.com/path2");
+        assertFalse(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void differentOriginHost() throws Exception {
+        final URL url1 = new URL("http://example.com/path1");
+        final URL url2 = new URL("http://other.com/path2");
+        assertFalse(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void differentOriginPort() throws Exception {
+        final URL url1 = new URL("http://example.com:8080/path1");
+        final URL url2 = new URL("http://example.com:9090/path2");
+        assertFalse(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void differentOriginHttpsToHttp() throws Exception {
+        final URL url1 = new URL("https://example.com:443/path1");
+        final URL url2 = new URL("http://example.com:80/path2");
+        assertFalse(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameOriginWithQuery() throws Exception {
+        final URL url1 = new URL("http://example.com/path?query1=value1");
+        final URL url2 = new URL("http://example.com/other?query2=value2");
+        assertTrue(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameOriginWithFragment() throws Exception {
+        final URL url1 = new URL("http://example.com/path#fragment1");
+        final URL url2 = new URL("http://example.com/path#fragment2");
+        assertTrue(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameOriginCaseSensitiveHost() throws Exception {
+        final URL url1 = new URL("http://Example.Com/path1");
+        final URL url2 = new URL("http://example.com/path2");
+        assertTrue(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameOriginCaseSensitiveProtocol() throws Exception {
+        final URL url1 = new URL("HTTP://example.com/path1");
+        final URL url2 = new URL("http://example.com/path2");
+        assertTrue(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void differentOriginSubdomain() throws Exception {
+        final URL url1 = new URL("http://example.com/path1");
+        final URL url2 = new URL("http://sub.example.com/path2");
+        assertFalse(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameOriginFileProtocol() throws Exception {
+        final URL url1 = new URL("file:///path/to/file1.html");
+        final URL url2 = new URL("file:///path/to/file2.html");
+        assertTrue(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameOriginCustomPort() throws Exception {
+        final URL url1 = new URL("http://example.com:3000/api/v1");
+        final URL url2 = new URL("http://example.com:3000/api/v2");
+        assertTrue(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void differentOriginHttpsDefaultVsCustom() throws Exception {
+        final URL url1 = new URL("https://example.com/path1");
+        final URL url2 = new URL("https://example.com:8443/path2");
+        assertFalse(UrlUtils.isSameOrigin(url1, url2));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void sameOriginWithUserInfo() throws Exception {
+        final URL url1 = new URL("http://user1:pass1@example.com/path1");
+        final URL url2 = new URL("http://user2:pass2@example.com/path2");
+        assertTrue(UrlUtils.isSameOrigin(url1, url2));
     }
 }

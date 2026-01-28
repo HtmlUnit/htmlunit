@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,15 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLProgressElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLProgressElementTest extends WebDriverTestCase {
 
     /**
@@ -34,8 +32,8 @@ public class HTMLProgressElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
@@ -60,6 +58,30 @@ public class HTMLProgressElementTest extends WebDriverTestCase {
             + "  <progress id='e3'>e 3</progress><br>\n"
             + "  <label id='l4' for='e4'> what about</label>\n"
             + "  <label> this<progress id='e4'>e 4</progress></label><br>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "number"})
+    public void value() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var e1 = document.getElementById('e1');\n"
+            + "      log(e1.value);\n"
+            + "      log(typeof e1.value);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <progress id='e1'>e 1</progress>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

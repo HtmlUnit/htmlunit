@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,10 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
-import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
@@ -42,8 +39,7 @@ public class HashChangeEvent extends Event {
      * Creates a new event instance.
      */
     public HashChangeEvent() {
-        super();
-        setEventType("");
+        super("");
     }
 
     /**
@@ -83,28 +79,11 @@ public class HashChangeEvent extends Event {
     }
 
     /**
-     * Initializes this event.
-     *
-     * @param type the event type
-     * @param bubbles whether or not the event should bubble
-     * @param cancelable whether or not the event the event should be cancelable
-     * @param oldURL the old URL
-     * @param newURL the new URL
-     */
-    @JsxFunction(FF_ESR)
-    public void initHashChangeEvent(final String type, final boolean bubbles, final boolean cancelable,
-        final String oldURL, final String newURL) {
-        initEvent(type, bubbles, cancelable);
-        oldURL_ = oldURL;
-        newURL_ = newURL;
-    }
-
-    /**
      * Returns the old URL.
      * @return the old URL
      */
     @JsxGetter
-    public Object getOldURL() {
+    public String getOldURL() {
         return oldURL_;
     }
 
@@ -113,7 +92,7 @@ public class HashChangeEvent extends Event {
      * @return the new URL
      */
     @JsxGetter
-    public Object getNewURL() {
+    public String getNewURL() {
         return newURL_;
     }
 }

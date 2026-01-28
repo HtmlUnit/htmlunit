@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +61,9 @@ public abstract class PostponedAction {
      */
     public boolean isStillAlive() {
         final Page owningPage = getOwningPage();
-        return owningPage != null && owningPage == owningPage.getEnclosingWindow().getEnclosedPage();
+        return owningPage != null
+                && owningPage.getEnclosingWindow() != null
+                && owningPage == owningPage.getEnclosingWindow().getEnclosedPage();
     }
 
     @Override

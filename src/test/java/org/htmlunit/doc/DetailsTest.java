@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ package org.htmlunit.doc;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,12 +34,11 @@ import org.htmlunit.WebResponseData;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.HttpStatus;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.WebConnectionWrapper;
-import org.junit.Test;
-
-import com.google.common.base.Charsets;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the sample code from the documentation to make sure
@@ -74,7 +74,7 @@ public class DetailsTest extends WebServerTestCase {
 
                     // construct alternative response
                     final String content = "<html><html>";
-                    final WebResponseData data = new WebResponseData(content.getBytes(Charsets.UTF_8),
+                    final WebResponseData data = new WebResponseData(content.getBytes(StandardCharsets.UTF_8),
                             HttpStatus.OK_200, "blocked", Collections.emptyList());
                     final WebResponse blocked = new WebResponse(data, request, 0L);
                     // if you like to check later on for blocked responses
@@ -97,7 +97,7 @@ public class DetailsTest extends WebServerTestCase {
      */
     @Test
     public void contentBlockingResponse() throws Exception {
-        final byte[] content = new byte[] {};
+        final byte[] content = ArrayUtils.EMPTY_BYTE_ARRAY;
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair(HttpHeader.CONTENT_LENGTH, String.valueOf(content.length)));
 
@@ -119,11 +119,11 @@ public class DetailsTest extends WebServerTestCase {
                         final long startTime) throws IOException {
 
                     // check content length header
-                    final int contentLenght = Integer.parseInt(
+                    final int contentLength = Integer.parseInt(
                             httpResponse.getFirstHeader(HttpHeader.CONTENT_LENGTH).getValue());
 
                     // if not too big - done
-                    if (contentLenght < 1_000) {
+                    if (contentLength < 1_000) {
                         return super.downloadResponse(httpMethod, webRequest, httpResponse, startTime);
                     }
 
@@ -132,14 +132,35 @@ public class DetailsTest extends WebServerTestCase {
 
                     // construct alternative response
                     final String alternativeContent = "<html><html>";
-                    final WebResponseData data = new WebResponseData(alternativeContent.getBytes(Charsets.UTF_8),
+                    final WebResponseData data = new WebResponseData(
+                            alternativeContent.getBytes(StandardCharsets.UTF_8),
                             HttpStatus.OK_200, "blocked", Collections.emptyList());
                     final WebResponse blocked = new WebResponse(data, webRequest, 0L);
                     // if you like to check later on for blocked responses
                     blocked.markAsBlocked("Blocked URL: '" + url.toExternalForm()
-                                + "' content length: " + contentLenght);
+                                + "' content length: " + contentLength);
                     return blocked;
                 }
+            });
+
+            // use the client as usual
+            final HtmlPage page = webClient.getPage(url);
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentBlockingFrames() throws Exception {
+        final URL url = new URL("https://www.htmlunit.org/");
+
+        try (WebClient webClient = new WebClient()) {
+            // use our own FrameContentHandler
+            webClient.setFrameContentHandler(baseFrameElement -> {
+                final String src = baseFrameElement.getSrcAttribute();
+                // don't load the content from google
+                return !src.contains("google");
             });
 
             // use the client as usual

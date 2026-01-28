@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 package org.htmlunit;
 
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,8 +23,8 @@ import java.util.Map;
 
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * A simple WebTestCase which doesn't require server to run, and doens't use WebDriver.
@@ -33,7 +34,7 @@ import org.junit.Before;
  * <b>Note that {@link WebDriverTestCase} should be used unless HtmlUnit-specific feature
  * is needed and Selenium does not support it.</b>
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Chris Erskine
@@ -188,7 +189,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final HtmlPage loadPageWithAlerts(final String html) throws Exception {
-        return loadPageWithAlerts(html, URL_FIRST, -1);
+        return loadPageWithAlerts(html, URL_FIRST, null);
     }
 
     /**
@@ -201,7 +202,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      * @return the new page
      * @throws Exception if something goes wrong
      */
-    protected final HtmlPage loadPageWithAlerts(final String html, final URL url, final int waitForJS)
+    protected final HtmlPage loadPageWithAlerts(final String html, final URL url, final Duration waitForJS)
         throws Exception {
         if (getExpectedAlerts() == null) {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
@@ -218,8 +219,8 @@ public abstract class SimpleWebTestCase extends WebTestCase {
         webConnection.setResponse(url, html);
 
         final HtmlPage page = client.getPage(url);
-        if (waitForJS > 0) {
-            assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(waitForJS));
+        if (waitForJS != null) {
+            assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(waitForJS.toMillis()));
         }
         assertEquals(getExpectedAlerts(), collectedAlerts);
         return page;
@@ -228,11 +229,15 @@ public abstract class SimpleWebTestCase extends WebTestCase {
     /**
      * Reads the number of JS threads remaining from unit tests run before.
      * This should be always 0.
+     * @throws Exception in case of error
      */
-    @Before
-    public void before() {
+    @BeforeEach
+    public void before() throws Exception {
         if (webClient_ != null && webClient_.getJavaScriptEngine() instanceof JavaScriptEngine) {
-            assertTrue(getJavaScriptThreads().isEmpty());
+            if (!getJavaScriptThreads().isEmpty()) {
+                Thread.sleep(200);
+            }
+            assertTrue("There are already JS threads running before the test", getJavaScriptThreads().isEmpty());
         }
     }
 
@@ -240,7 +245,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      * Cleanup after a test.
      */
     @Override
-    @After
+    @AfterEach
     public void releaseResources() {
         super.releaseResources();
         boolean rhino = false;
@@ -258,7 +263,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
             // collect stack traces
             // caution: the threads may terminate after the threads have been returned by getJavaScriptThreads()
             // and before stack traces are retrieved
-            if (jsThreads.size() > 0) {
+            if (!jsThreads.isEmpty()) {
                 final Map<String, StackTraceElement[]> stackTraces = new HashMap<>();
                 for (final Thread t : jsThreads) {
                     final StackTraceElement[] elts = t.getStackTrace();

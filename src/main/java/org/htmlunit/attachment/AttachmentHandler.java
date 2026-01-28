@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,19 @@
 package org.htmlunit.attachment;
 
 import java.io.Serializable;
-import java.util.Locale;
 
 import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 
 /**
  * <p>A handler for attachments, which represent pages received from the server which contain
  * {@code Content-Disposition=attachment} headers. Normally pages are loaded inline: clicking on
  * a link, for example, loads the linked page in the current window. Attached pages are different
  * in that they are intended to be loaded outside of this flow: clicking on a link prompts the
- * user to either save the linked page, or open it outside of the current window, but does not
+ * user to either save the linked page, or open it outside the current window, but does not
  * load the page in the current window.</p>
  *
  * <p>HtmlUnit complies with the semantics described above when an <code>AttachmentHandler</code> has
@@ -88,8 +88,8 @@ public interface AttachmentHandler extends Serializable {
             // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#applicationoctet-stream
             // They treat it as if the Content-Disposition header was set to attachment, and propose a "Save As" dialog.
             final String contentType = response.getResponseHeaderValue(HttpHeader.CONTENT_TYPE);
-            return MimeType.APPLICATION_OCTET_STREAM.equals(contentType.toLowerCase(Locale.ROOT));
+            return MimeType.APPLICATION_OCTET_STREAM.equalsIgnoreCase(contentType);
         }
-        return disp.toLowerCase(Locale.ROOT).startsWith("attachment");
+        return StringUtils.startsWithIgnoreCase(disp, "attachment");
     }
 }

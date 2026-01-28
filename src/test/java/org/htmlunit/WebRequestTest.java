@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,22 +15,16 @@
 package org.htmlunit;
 
 import static org.htmlunit.WebTestCase.URL_FIRST;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.io.File;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.http.auth.BasicUserPrincipal;
 import org.apache.http.auth.Credentials;
-import org.htmlunit.http.HttpUtils;
-import org.htmlunit.util.KeyDataPair;
-import org.htmlunit.util.NameValuePair;
-import org.htmlunit.util.UrlUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebRequest}.
@@ -41,6 +35,7 @@ import org.junit.Test;
  * @author Ronald Brill
  * @author Joerg Werner
  * @author Michael Lueck
+ * @author Kristof Neirynck
  */
 public class WebRequestTest {
 
@@ -166,7 +161,7 @@ public class WebRequestTest {
         final URL url = new URL("http://john.smith:secret@localhost");
         final WebRequest request = new WebRequest(url);
         final Credentials credentials = request.getUrlCredentials();
-        assertNotNull("Credentials object is null", credentials);
+        assertNotNull(credentials, "Credentials object is null");
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
         assertEquals("secret", credentials.getPassword());
     }
@@ -179,7 +174,7 @@ public class WebRequestTest {
         final URL url = new URL("http://john.smith:secret@localhost/../foo.html");
         final WebRequest request = new WebRequest(url);
         final Credentials credentials = request.getUrlCredentials();
-        assertNotNull("Credentials object is null", credentials);
+        assertNotNull(credentials, "Credentials object is null");
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
         assertEquals("secret", credentials.getPassword());
     }
@@ -192,7 +187,7 @@ public class WebRequestTest {
         final URL url = new URL("http://john.smith:secret@löcälhöst/");
         final WebRequest request = new WebRequest(url);
         final Credentials credentials = request.getUrlCredentials();
-        assertNotNull("Credentials object is null", credentials);
+        assertNotNull(credentials, "Credentials object is null");
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
         assertEquals("secret", credentials.getPassword());
     }
@@ -279,125 +274,6 @@ public class WebRequestTest {
      * @throws Exception if the test fails
      */
     @Test
-    public void getParametersNone() throws Exception {
-        final URL url = new URL("http://localhost/test");
-        final WebRequest request = new WebRequest(url);
-        assertEquals(0, request.getParameters().size());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getParametersFromUrlGet() throws Exception {
-        final URL url = new URL("http://localhost/test?x=u");
-        final WebRequest request = new WebRequest(url);
-
-        assertEquals(1, request.getParameters().size());
-        assertEquals("x", request.getParameters().get(0).getName());
-        assertEquals("u", request.getParameters().get(0).getValue());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getParametersFromUrlKeyEqualsOnlyGet() throws Exception {
-        final URL url = new URL("http://localhost/test?x=");
-        final WebRequest request = new WebRequest(url);
-
-        assertEquals(1, request.getParameters().size());
-        assertEquals("x", request.getParameters().get(0).getName());
-        assertEquals("", request.getParameters().get(0).getValue());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getParametersFromUrlKeyOnlyGet() throws Exception {
-        final URL url = new URL("http://localhost/test?x");
-        final WebRequest request = new WebRequest(url);
-
-        assertEquals(1, request.getParameters().size());
-        assertEquals("x", request.getParameters().get(0).getName());
-        assertEquals("", request.getParameters().get(0).getValue());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getParametersFromRequestParametersGet() throws Exception {
-        final URL url = new URL("http://localhost/test?x=u");
-        final WebRequest request = new WebRequest(url);
-
-        final List<NameValuePair> pairs = new ArrayList<>();
-        request.setRequestParameters(pairs);
-        assertEquals(1, request.getParameters().size());
-        assertEquals("x", request.getParameters().get(0).getName());
-        assertEquals("u", request.getParameters().get(0).getValue());
-
-        pairs.add(new NameValuePair("hello", "world"));
-        assertEquals(1, request.getParameters().size());
-        assertEquals("hello", request.getParameters().get(0).getName());
-        assertEquals("world", request.getParameters().get(0).getValue());
-
-        // test for our internal conversation
-        String query = HttpUtils.toQueryFormFields(pairs, StandardCharsets.UTF_8);
-        assertEquals("http://localhost/test?hello=world", UrlUtils.toURI(url, query).toString());
-
-        pairs.add(new NameValuePair("empty", ""));
-        assertEquals(2, request.getParameters().size());
-        assertEquals("empty", request.getParameters().get(1).getName());
-        assertEquals("", request.getParameters().get(1).getValue());
-
-        // test for our internal conversation
-        query = HttpUtils.toQueryFormFields(pairs, StandardCharsets.UTF_8);
-        assertEquals("http://localhost/test?hello=world&empty=", UrlUtils.toURI(url, query).toString());
-
-        pairs.add(new NameValuePair("null", null));
-        assertEquals(3, request.getParameters().size());
-        assertEquals("null", request.getParameters().get(2).getName());
-        assertEquals("", request.getParameters().get(2).getValue());
-
-        // test for our internal conversation
-        query = HttpUtils.toQueryFormFields(pairs, StandardCharsets.UTF_8);
-        assertEquals("http://localhost/test?hello=world&empty=&null", UrlUtils.toURI(url, query).toString());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getParametersFromUrlPost() throws Exception {
-        final URL url = new URL("http://localhost/test?x=u");
-        final WebRequest request = new WebRequest(url);
-        request.setHttpMethod(HttpMethod.POST);
-
-        assertEquals(0, request.getParameters().size());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getParametersFromUrlEncodedBodyPost() throws Exception {
-        final URL url = new URL("http://localhost/test");
-        final WebRequest request = new WebRequest(url);
-        request.setHttpMethod(HttpMethod.POST);
-        request.setEncodingType(FormEncodingType.URL_ENCODED);
-        request.setRequestBody("x=u");
-
-        assertEquals(1, request.getParameters().size());
-        assertEquals("x", request.getParameters().get(0).getName());
-        assertEquals("u", request.getParameters().get(0).getValue());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void getRequestParametersNone() throws Exception {
         final URL url = new URL("http://localhost/test");
         final WebRequest request = new WebRequest(url);
@@ -454,46 +330,20 @@ public class WebRequestTest {
         assertEquals(0, request.getRequestParameters().size());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
-    public void getParametersShouldNotModifyAlreadyNormalizedRequestParams() throws Exception {
-        final WebRequest request = new WebRequest(new URL("http://localhost/test"));
-        request.setHttpMethod(HttpMethod.POST);
-        request.setEncodingType(FormEncodingType.MULTIPART);
+    public void serialization() throws Exception {
+        final WebRequest request = new WebRequest(URL_FIRST);
+        request.setCharset(StandardCharsets.UTF_8);
+        request.setDefaultResponseContentCharset(StandardCharsets.US_ASCII);
 
-        final List<NameValuePair> requestParams = new ArrayList<>();
-        requestParams.add(new NameValuePair("test", "x"));
-        requestParams.add(new KeyDataPair("file",
-                                          new File("test"),
-                                          "test",
-                                          "application/octet-stream",
-                                          StandardCharsets.UTF_8));
-        request.setRequestParameters(requestParams);
+        final byte[] bytes = SerializationUtils.serialize(request);
+        final WebRequest deserialized = SerializationUtils.deserialize(bytes);
 
-        //check that the result of getParams is equal to the requestParams after "normalization"
-        assertEquals(requestParams, request.getParameters());
-    }
-
-    @Test
-    public void getParametersShouldNormalizeMultiPartRequestParams() throws Exception {
-        final WebRequest request = new WebRequest(new URL("http://localhost/test"));
-        request.setHttpMethod(HttpMethod.POST);
-        request.setEncodingType(FormEncodingType.MULTIPART);
-
-        final List<NameValuePair> requestParams = new ArrayList<>();
-        requestParams.add(new NameValuePair("test", null));
-        requestParams.add(new KeyDataPair("file", null, null, null, StandardCharsets.UTF_8));
-        request.setRequestParameters(requestParams);
-
-        final List<NameValuePair> expectedResults = new ArrayList<>();
-        expectedResults.add(new NameValuePair("test", ""));
-        // the constructor of the KeyDataPair already creates normalized object
-        // where the value is set to empty string if the passed file is null.
-        expectedResults.add(new KeyDataPair("file", null, null, null, StandardCharsets.UTF_8));
-
-        final List<NameValuePair> normalizedParams = request.getParameters();
-        assertEquals(expectedResults, normalizedParams);
-
-        // check that the value of the KeyDataPair is really normalized to empty string
-        assertEquals("", normalizedParams.get(1).getValue());
+        assertEquals(URL_FIRST, deserialized.getUrl());
+        assertEquals(StandardCharsets.UTF_8, deserialized.getCharset());
+        assertEquals(StandardCharsets.US_ASCII, deserialized.getDefaultResponseContentCharset());
     }
 }

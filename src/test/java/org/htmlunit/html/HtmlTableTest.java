@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,19 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlTable}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlTableTest extends SimpleWebTestCase {
 
     /**
@@ -39,8 +36,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
      */
     @Test
     public void getCellAt() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1' summary='Test table'>\n"
             + "<tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
             + "<tr><td colspan='2'>cell3</td></tr>\n"
@@ -71,8 +68,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
      */
     @Test
     public void getCellAtColspan() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
             + "<tr>\n"
             + "  <td>row 1 col 1</td>\n"
@@ -113,8 +110,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
      */
     @Test
     public void getCellAtComplex() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1' border='1'>\n"
             + "  <tr>\n"
             + "    <th colspan='1'>H 1.1</th><th>H 1.2</th>\n"
@@ -271,8 +268,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
      */
     @Test
     public void getTableCell_NotFound() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1' summary='Test table'>\n"
             + "<tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
             + "<tr><td colspan='2'>cell3</td></tr>\n"
@@ -291,8 +288,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
      */
     @Test
     public void getTableRows() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
             + "<tr id='row1'><td>cell1</td></tr>\n"
             + "<tr id='row2'><td>cell2</td></tr>\n"
@@ -322,8 +319,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
      */
     @Test
     public void getTableRows_WithHeadBodyFoot() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
             + "<thead>\n"
             + "  <tr id='row1'><td>cell1</td></tr>\n"
@@ -359,8 +356,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
      */
     @Test
     public void rowGroupings_AllDefined() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
             + "<thead>\n"
             + "  <tr id='row1'><td>cell1</td></tr>\n"
@@ -396,8 +393,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
     public void rowGroupings_NoneDefined()
         throws Exception {
 
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
             + "  <tr id='row1'><td>cell1</td></tr>\n"
             + "  <tr id='row2'><td>cell2</td></tr>\n"
@@ -421,8 +418,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
      */
     @Test
     public void getCaptionText() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1' summary='Test table'>\n"
             + "<caption>MyCaption</caption>\n"
             + "<tr><td>cell1</td><td>cell2</td><td rowspan='2'>cell4</td></tr>\n"
@@ -444,8 +441,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
      */
     @Test
     public void insertionOfTbodyTags() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<table>\n"
             + "<tr><td id='cell1'>cell1</td></tr>\n"
             + "</table>\n"
@@ -457,15 +454,15 @@ public class HtmlTableTest extends SimpleWebTestCase {
 
         // Check that a <tbody> was inserted properly
         final HtmlTableDataCell cell1 = page.getHtmlElementById("cell1");
-        assertTrue(HtmlTableRow.class.isInstance(cell1.getParentNode()));
-        assertTrue(HtmlTableBody.class.isInstance(cell1.getParentNode().getParentNode()));
-        assertTrue(HtmlTable.class.isInstance(cell1.getParentNode().getParentNode().getParentNode()));
+        assertTrue(cell1.getParentNode() instanceof HtmlTableRow);
+        assertTrue(cell1.getParentNode().getParentNode() instanceof HtmlTableBody);
+        assertTrue(cell1.getParentNode().getParentNode().getParentNode() instanceof HtmlTable);
 
         // Check that the existing <tbody> wasn't messed up.
         final HtmlTableDataCell cell2 = page.getHtmlElementById("cell2");
-        assertTrue(HtmlTableRow.class.isInstance(cell2.getParentNode()));
-        assertTrue(HtmlTableBody.class.isInstance(cell2.getParentNode().getParentNode()));
-        assertTrue(HtmlTable.class.isInstance(cell2.getParentNode().getParentNode().getParentNode()));
+        assertTrue(cell2.getParentNode() instanceof HtmlTableRow);
+        assertTrue(cell2.getParentNode().getParentNode() instanceof HtmlTableBody);
+        assertTrue(cell2.getParentNode().getParentNode().getParentNode() instanceof HtmlTable);
     }
 
     /**
@@ -473,7 +470,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "  <table id='myId'>\n"
             + "  <caption>This is the caption</caption>\n"
@@ -502,7 +500,8 @@ public class HtmlTableTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml_emptyTable() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head/>\n"
             + "<body>\n"
             + "<div style=\"visibility: hidden\">\n"

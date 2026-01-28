@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,32 +24,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.htmlunit.HttpMethod;
-import org.htmlunit.MiniServer;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.Retry;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.MiniServer;
 import org.htmlunit.util.NameValuePair;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for the LifeCycle events for XMLHttpRequests.
@@ -70,7 +67,6 @@ import org.openqa.selenium.WebDriverException;
  * @author Ronald Brill
  *
  */
-@RunWith(Enclosed.class)
 public final class XMLHttpRequestLifeCycleTest {
     private static final String SUCCESS_URL = "/xmlhttprequest/success.html";
     private static final String SUCCESS_WITHOUT_ORIGIN_URL = "/xmlhttprequest/success_without_origin.html";
@@ -132,152 +128,15 @@ public final class XMLHttpRequestLifeCycleTest {
     /**
      * Test using our JettyServer.
      */
-    @RunWith(BrowserRunner.class)
-    public static class JettyServerTest extends WebDriverTestCase {
-
-        public static class Xml200Servlet extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-            }
-
-            @Override
-            protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-                    throws ServletException, IOException {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-
-                response.setContentType(MimeType.TEXT_XML);
-                response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.OK_200);
-                final ServletOutputStream outputStream = response.getOutputStream();
-                try (Writer writer = new OutputStreamWriter(outputStream)) {
-                    writer.write(RETURN_XML);
-                }
-            }
-        }
-
-        public static class Xml200ServletWithoutOriginHeader extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-            }
-
-            @Override
-            protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-                    throws ServletException, IOException {
-                response.setContentType(MimeType.TEXT_XML);
-                response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.OK_200);
-                final ServletOutputStream outputStream = response.getOutputStream();
-                try (Writer writer = new OutputStreamWriter(outputStream)) {
-                    writer.write(RETURN_XML);
-                }
-            }
-        }
-
-        public static class Xml403Servlet extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-            }
-
-            @Override
-            protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-                    throws ServletException, IOException {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-
-                response.setContentType(MimeType.TEXT_XML);
-                response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.FORBIDDEN_403);
-                final ServletOutputStream outputStream = response.getOutputStream();
-                try (Writer writer = new OutputStreamWriter(outputStream)) {
-                    writer.write(RETURN_XML);
-                }
-            }
-        }
-
-        public static class Xml500Servlet extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-            }
-
-            @Override
-            protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-                    throws ServletException, IOException {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-
-                response.setContentType(MimeType.TEXT_XML);
-                response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
-                final ServletOutputStream outputStream = response.getOutputStream();
-                try (Writer writer = new OutputStreamWriter(outputStream)) {
-                    writer.write(RETURN_XML);
-                }
-            }
-        }
-
-        public static class Preflight403Servlet extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setStatus(HttpStatus.FORBIDDEN_403);
-            }
-        }
-
-        public static class Preflight500Servlet extends HttpServlet {
-
-            @Override
-            protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
-            }
-        }
-
-        public static class XmlTimeoutServlet extends HttpServlet {
-
-            @Override
-            protected void doGet(final HttpServletRequest req, final HttpServletResponse response)
-                    throws ServletException, IOException {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
-
-                response.setContentType(MimeType.TEXT_XML);
-                response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.OK_200);
-                final ServletOutputStream outputStream = response.getOutputStream();
-                try (Writer writer = new OutputStreamWriter(outputStream)) {
-                    writer.flush();
-                    Thread.sleep(500);
-                    writer.write(RETURN_XML);
-                }
-                catch (final Exception ignored) {
-                    // ignore
-                }
-            }
-        }
+    @Nested
+    public class JettyServerTest extends WebDriverTestCase {
 
         private final Map<String, Class<? extends Servlet>> servlets_ = new HashMap<>();
 
-        @Before
+        /**
+         * Setup our servlets.
+         */
+        @BeforeEach
         public void prepareTestingServlets() {
             servlets_.put(SUCCESS_URL, Xml200Servlet.class);
             servlets_.put(SUCCESS_WITHOUT_ORIGIN_URL, Xml200ServletWithoutOriginHeader.class);
@@ -451,7 +310,8 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_Error403() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_403), URL_FIRST,
                     servlets_);
-            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n",
+                    getExpectedAlerts()), DEFAULT_WAIT_TIME.multipliedBy(10));
         }
 
         /**
@@ -492,7 +352,8 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_Error500() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500), URL_FIRST,
                     servlets_);
-            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()),
+                    DEFAULT_WAIT_TIME.multipliedBy(10));
         }
 
         /**
@@ -671,7 +532,8 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_networkErrorTriggered_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()),
+                    DEFAULT_WAIT_TIME.multipliedBy(10));
         }
 
         /**
@@ -876,7 +738,8 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_Error403() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_403), URL_FIRST,
                     servlets_);
-            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()),
+                    DEFAULT_WAIT_TIME.multipliedBy(10));
         }
 
         /**
@@ -919,7 +782,8 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_Error500() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_500), URL_FIRST,
                     servlets_);
-            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()),
+                    DEFAULT_WAIT_TIME.multipliedBy(10));
         }
 
         /**
@@ -996,7 +860,6 @@ public final class XMLHttpRequestLifeCycleTest {
          * @throws Exception if the test fails
          */
         @Test
-        @Retry
         @Alerts({"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
                  "send-done: 1_0", "readystatechange_4_0_true", "abort_4_0_false",
                  "loadend_4_0_false", "abort-done: 0_0"})
@@ -1194,17 +1057,25 @@ public final class XMLHttpRequestLifeCycleTest {
     /**
      * Test using our MiniServer to be able to simulate special error conditions.
      */
-    @RunWith(BrowserRunner.class)
-    public static class MiniServerTest extends WebDriverTestCase {
+    @Nested
+    public class MiniServerTest extends WebDriverTestCase {
 
-        @Before
+        /**
+         * Shoutdown all web browsers and reset the {@link MiniServer}.
+         * @throws Exception in case of error
+         */
+        @BeforeEach
         public void before() throws Exception {
             // Chrome seems to cache preflight results
             shutDownAll();
             MiniServer.resetDropRequests();
         }
 
-        @After
+        /**
+         * Reset the {@link MiniServer}.
+         * @throws Exception in case of error.
+         */
+        @AfterEach
         public void after() throws Exception {
             MiniServer.resetDropRequests();
         }
@@ -1322,12 +1193,9 @@ public final class XMLHttpRequestLifeCycleTest {
          * @throws Exception if the test fails
          */
         @Test
-        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
-                           "send-done: 1_0", "readystatechange_4_0_true", "error_4_0_false",
-                           "loadend_4_0_false"},
-                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
-                          "send-done: 1_0", "progress_1_0_false", "readystatechange_4_0_true",
-                          "error_4_0_false", "loadend_4_0_false"})
+        @Alerts({"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                 "send-done: 1_0", "readystatechange_4_0_true", "error_4_0_false",
+                 "loadend_4_0_false"})
         public void addEventListener_async_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
@@ -1535,12 +1403,9 @@ public final class XMLHttpRequestLifeCycleTest {
          * @throws Exception if the test fails
          */
         @Test
-        @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
-                           "send-done: 1_0", "readystatechange_4_0_true", "error_4_0_false",
-                           "loadend_4_0_false"},
-                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
-                          "send-done: 1_0", "progress_1_0_false", "readystatechange_4_0_true",
-                          "error_4_0_false", "loadend_4_0_false"})
+        @Alerts({"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                 "send-done: 1_0", "readystatechange_4_0_true", "error_4_0_false",
+                 "loadend_4_0_false"})
         public void onKeyWord_async_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.ASYNC, Execution.ONLY_SEND));
@@ -1636,19 +1501,16 @@ public final class XMLHttpRequestLifeCycleTest {
         }
     }
 
-    static String extractLog(final WebDriver driver) {
-        return driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+    private static String extractLog(final WebDriver driver) {
+        return driver.findElement(By.id("log")).getDomProperty("value").trim().replaceAll("\r", "");
     }
 
     /**
-     * Alerts each State that has been triggered in the form of:
-     * event.type_(isUndefined?)
-     * @param mode
-     * @param execution
-     * @param statesParam
-     * @return
+     * @param mode the {@link Mode}
+     * @param execution the {@link Execution}
+     * @return the generated test html
      */
-    static String buildHtml(final Mode mode, final Execution execution) {
+    private static String buildHtml(final Mode mode, final Execution execution) {
         final StringBuffer htmlBuilder = new StringBuffer();
         htmlBuilder.append("<html>\n");
         htmlBuilder.append("  <head>\n");
@@ -1732,7 +1594,7 @@ public final class XMLHttpRequestLifeCycleTest {
             htmlBuilder.append("           xhr.abort();\n");
             htmlBuilder.append("           logText('abort-done: ' + xhr.readyState + '_' + xhr.status);\n");
         }
-        htmlBuilder.append("        } catch (e) { logText('ExceptionThrown'); }\n");
+        htmlBuilder.append("        } catch(e) { logText('ExceptionThrown'); }\n");
         htmlBuilder.append("      }\n");
 
         htmlBuilder.append("      function alertEventState(event) {\n");
@@ -1745,7 +1607,7 @@ public final class XMLHttpRequestLifeCycleTest {
             htmlBuilder.append("            logText('abort-done: ' + xhr.readyState + '_' + xhr.status);");
             htmlBuilder.append("          }\n");
         }
-        htmlBuilder.append("        } catch (e) { logText('ExceptionThrown abort'); }\n");
+        htmlBuilder.append("        } catch(e) { logText('ExceptionThrown abort'); }\n");
         htmlBuilder.append("      }\n");
 
         htmlBuilder.append("      function logText(txt) {\n");
@@ -1774,5 +1636,166 @@ public final class XMLHttpRequestLifeCycleTest {
     }
 
     private XMLHttpRequestLifeCycleTest() {
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Xml200Servlet extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws ServletException, IOException {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+            response.setContentType(MimeType.TEXT_XML);
+            response.setContentLength(RETURN_XML.length());
+            response.setStatus(HttpStatus.OK_200);
+            final ServletOutputStream outputStream = response.getOutputStream();
+            try (Writer writer = new OutputStreamWriter(outputStream)) {
+                writer.write(RETURN_XML);
+            }
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Xml200ServletWithoutOriginHeader extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws ServletException, IOException {
+            response.setContentType(MimeType.TEXT_XML);
+            response.setContentLength(RETURN_XML.length());
+            response.setStatus(HttpStatus.OK_200);
+            final ServletOutputStream outputStream = response.getOutputStream();
+            try (Writer writer = new OutputStreamWriter(outputStream)) {
+                writer.write(RETURN_XML);
+            }
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Xml403Servlet extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws ServletException, IOException {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+            response.setContentType(MimeType.TEXT_XML);
+            response.setContentLength(RETURN_XML.length());
+            response.setStatus(HttpStatus.FORBIDDEN_403);
+            final ServletOutputStream outputStream = response.getOutputStream();
+            try (Writer writer = new OutputStreamWriter(outputStream)) {
+                writer.write(RETURN_XML);
+            }
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Xml500Servlet extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+                throws ServletException, IOException {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+            response.setContentType(MimeType.TEXT_XML);
+            response.setContentLength(RETURN_XML.length());
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
+            final ServletOutputStream outputStream = response.getOutputStream();
+            try (Writer writer = new OutputStreamWriter(outputStream)) {
+                writer.write(RETURN_XML);
+            }
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Preflight403Servlet extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setStatus(HttpStatus.FORBIDDEN_403);
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class Preflight500Servlet extends HttpServlet {
+
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
+        }
+    }
+
+    /**
+     * Helper servlet.
+     */
+    public static class XmlTimeoutServlet extends HttpServlet {
+
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse response)
+                throws ServletException, IOException {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER");
+
+            response.setContentType(MimeType.TEXT_XML);
+            response.setContentLength(RETURN_XML.length());
+            response.setStatus(HttpStatus.OK_200);
+            final ServletOutputStream outputStream = response.getOutputStream();
+            try (Writer writer = new OutputStreamWriter(outputStream)) {
+                writer.flush();
+                Thread.sleep(500);
+                writer.write(RETURN_XML);
+            }
+            catch (final Exception ignored) {
+                // ignore
+            }
+        }
     }
 }

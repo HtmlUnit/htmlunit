@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
-
 import java.io.IOException;
 import java.util.Map;
 
@@ -25,10 +23,10 @@ import org.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "input".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:chen_jun@users.sourceforge.net">Jun Chen</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Jun Chen
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Mike Bresnahan
  * @author Daniel Gredler
@@ -208,8 +206,7 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
      */
     @Override
     protected boolean propagateClickStateUpdateToParent() {
-        return !hasFeature(HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR)
-                && super.propagateClickStateUpdateToParent();
+        return false;
     }
 
     @Override

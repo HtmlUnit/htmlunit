@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,12 @@
  */
 package org.htmlunit;
 
-import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
-
 import java.net.URL;
 
 import javax.net.ssl.SSLHandshakeException;
 
-import org.eclipse.jetty.server.SslConnectionFactory;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for custom trust store.
@@ -34,7 +28,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HttpWebConnectionTruststoreTest extends WebServerTestCase {
 
     /**
@@ -54,26 +47,16 @@ public class HttpWebConnectionTruststoreTest extends WebServerTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @Test(expected = SSLHandshakeException.class)
+    @Test
     public void selfSignedCertNotInTruststore() throws Exception {
         final URL https = new URL("https://localhost:" + PORT2 + "/");
-        loadPage("<div>test</div>", https);
+
+        Assertions.assertThrows(SSLHandshakeException.class,
+                    () -> loadPage("<div>test</div>", https));
     }
 
     @Override
-    protected boolean isHttps() {
-        return true;
-    }
-
-    @Override
-    public SslConnectionFactory getSslConnectionFactory() {
-        final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
-                .getClassLoader().getResource("self-signed-cert.keystore");
-
-        final SslContextFactory contextFactory = new Server.Server();
-        contextFactory.setKeyStoreType("jks");
-        contextFactory.setKeyStorePath(url.toExternalForm());
-        contextFactory.setKeyStorePassword("nopassword");
-        return new SslConnectionFactory(contextFactory, HTTP_1_1.toString());
+    public SSLVariant getSSLVariant() {
+        return SSLVariant.SELF_SIGNED;
     }
 }

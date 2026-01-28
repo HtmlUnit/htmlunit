@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "input" where type is "week".
@@ -63,7 +63,7 @@ public class HtmlWeekInput extends HtmlInput implements LabelableElement {
     @Override
     public void setValue(final String newValue) {
         if (!hasFeature(HTMLINPUT_TYPE_WEEK_SUPPORTED)
-                || StringUtils.isEmpty(newValue)) {
+                || StringUtils.isEmptyOrNull(newValue)) {
             super.setValue(newValue);
             return;
         }

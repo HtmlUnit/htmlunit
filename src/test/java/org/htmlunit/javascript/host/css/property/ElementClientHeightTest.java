@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,18 @@
 package org.htmlunit.javascript.host.css.property;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 /**
- * Unit tests for {@code offsetHeight} of an element.
+ * Unit tests for {@code clientHeight} of an element.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class ElementClientHeightTest extends WebDriverTestCase {
 
     private static final String VALUE_ = "e == null ? e : (e.clientHeight < 1000 ? e.clientHeight :"
@@ -39,7 +38,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
         }
 
         if ("frame".equals(tagName)) {
-            return "<html><head>\n"
+            return DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + LOG_TITLE_FUNCTION
                     + "function test() {\n"
@@ -53,7 +53,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
                     + "</frameset></html>";
         }
         if ("script".equals(tagName)) {
-            return "<html><head>\n"
+            return DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + LOG_TITLE_FUNCTION
                     + "function test() {\n"
@@ -67,7 +68,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
                     + "</body></html>";
         }
         if ("frameset".equals(tagName)) {
-            return "<html><head>\n"
+            return DOCTYPE_HTML
+                    + "<html><head>\n"
                     + "<script>\n"
                     + LOG_TITLE_FUNCTION
                     + "function test() {\n"
@@ -81,7 +83,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
                     + "</frameset></html>";
         }
 
-        return "<html><head>\n"
+        return DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -95,7 +98,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     }
 
     private static String testInput(final String type) {
-        return "<html><head>\n"
+        return DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -109,7 +113,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     }
 
     private static String headElementClosesItself(final String tagName) {
-        return "<html><head>\n"
+        return DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<" + tagName + " id='outer'><" + tagName + ">\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -319,14 +324,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "621",
-            EDGE = "632",
-            FF = "677",
-            FF_ESR = "677")
-    @HtmlUnitNYI(CHROME = "605",
-            EDGE = "605",
-            FF = "605",
-            FF_ESR = "605")
+    @Alerts("0")
     public void body() throws Exception {
         loadPageVerifyTitle2(test("body"));
     }
@@ -667,9 +665,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "621",
-            EDGE = "632",
-            FF = "677",
-            FF_ESR = "677")
+            EDGE = "630",
+            FF = "674",
+            FF_ESR = "674")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
@@ -685,9 +683,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "621",
-            EDGE = "632",
-            FF = "677",
-            FF_ESR = "677")
+            EDGE = "630",
+            FF = "674",
+            FF_ESR = "674")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -802,9 +800,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "621",
-            EDGE = "632",
-            FF = "8",
-            FF_ESR = "8")
+            EDGE = "630",
+            FF = "674",
+            FF_ESR = "674")
     @HtmlUnitNYI(CHROME = "605",
             EDGE = "605",
             FF = "605",
@@ -1038,11 +1036,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
-    @HtmlUnitNYI(CHROME = "18",
-            EDGE = "18",
-            FF = "18",
-            FF_ESR = "18")
+    @Alerts("18")
     public void marquee() throws Exception {
         loadPageVerifyTitle2(test("marquee"));
     }
@@ -1195,9 +1189,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     @HtmlUnitNYI(CHROME = "18",
-            EDGE = "18",
-            FF = "0",
-            FF_ESR = "0")
+            EDGE = "18")
     public void noscript() throws Exception {
         loadPageVerifyTitle2(test("noscript"));
     }
@@ -1240,10 +1232,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20",
             FF = "18",
-            FF_ESR = "0")
-    @HtmlUnitNYI(CHROME = "18",
-            EDGE = "18",
             FF_ESR = "18")
+    @HtmlUnitNYI(CHROME = "18",
+            EDGE = "18")
     public void optgroup() throws Exception {
         loadPageVerifyTitle2(test("optgroup"));
     }
@@ -1347,7 +1338,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            FF = "17",
+            FF_ESR = "17")
     public void ruby() throws Exception {
         loadPageVerifyTitle2(test("ruby"));
     }
@@ -1358,7 +1351,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            FF = "17",
+            FF_ESR = "17")
     public void rb() throws Exception {
         loadPageVerifyTitle2(test("rb"));
     }
@@ -1380,7 +1375,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            FF = "9",
+            FF_ESR = "9")
     public void rt() throws Exception {
         loadPageVerifyTitle2(test("rt"));
     }
@@ -1678,8 +1675,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "34",
-            FF_ESR = "51")
+    @Alerts("34")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",
@@ -1742,7 +1738,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     public void title() throws Exception {
         // title is a bit special, we have to provide at least
         // one closing tab otherwise title spans to the end of the file
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
@@ -1867,8 +1864,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "13",
-            FF = "10",
-            FF_ESR = "10")
+            FF = "14",
+            FF_ESR = "14")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
     }
@@ -1921,8 +1918,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "13",
-            FF = "10",
-            FF_ESR = "10")
+            FF = "14",
+            FF_ESR = "14")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));
     }
@@ -2038,4 +2035,161 @@ public class ElementClientHeightTest extends WebDriverTestCase {
         loadPageVerifyTitle2(test("slot"));
     }
 
+    /**
+     * Tests the relation between {@code fontSize} and {@code clientHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "10, 11, 16, 18, 21, 27, 37, 55",
+            FF = "11, 12, 16, 18, 21, 28, 38, 56",
+            FF_ESR = "11, 12, 16, 18, 21, 28, 38, 56")
+    public void clientHeightSmallLarge() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><body>\n"
+                + "  <div id='myDiv'>a</div>\n"
+                + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+                + "<script>\n"
+                + "var e = document.getElementById('myDiv');\n"
+                + "var array = [];\n"
+
+                + "e.style.fontSize = 'xx-small';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'x-small';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'small';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'medium';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'large';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'x-large';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'xx-large';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'xxx-large';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "document.getElementById('myTextarea').value = array.join(', ');\n"
+                + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
+     * Tests the relation between {@code fontSize} and {@code clientHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("16, 22")
+    public void clientHeightSmallerLarger() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><body>\n"
+                + "  <div id='myDiv'>a</div>\n"
+                + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+                + "<script>\n"
+                + "var e = document.getElementById('myDiv');\n"
+                + "var array = [];\n"
+
+                + "e.style.fontSize = 'smaller';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "e.style.fontSize = 'larger';\n"
+                + "array.push(e.clientHeight);\n"
+
+                + "document.getElementById('myTextarea').value = array.join(', ');\n"
+                + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
+     * Tests the relation between {@code fontSize} and {@code clientHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "11, 49, 6",
+            FF = "12, 49, 3",
+            FF_ESR = "12, 49, 3")
+    @HtmlUnitNYI(CHROME = "11, 49, 2",
+            EDGE = "11, 49, 2")
+    public void clientHeightUnits() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDivPX' style='font-size: 10px;'>a</div>\n"
+            + "  <div id='myDivEM' style='font-size: 2.7em;'>a</div>\n"
+            + "  <div id='myDivP' style='font-size: 10%;'>a</div>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "<script>\n"
+            + "var array = [];\n"
+
+            + "var e = document.getElementById('myDivPX');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "e = document.getElementById('myDivEM');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "e = document.getElementById('myDivP');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
+
+    /**
+     * Tests the relation between {@code fontSize} and {@code clientHeight}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "12, 49, 6",
+            FF = "13, 49, 4",
+            FF_ESR = "13, 49, 4")
+    @HtmlUnitNYI(CHROME = "12, 49, 4",
+            EDGE = "12, 49, 4",
+            FF = "13, 49, 5",
+            FF_ESR = "13, 49, 5")
+    public void clientHeightUnitsWidth() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div id='myDivPX' style='font-size: 11.4px; width: 40px;'>a</div>\n"
+            + "  <div id='myDivEM' style='font-size: 2.7em; width: 40px;'>a</div>\n"
+            + "  <div id='myDivP' style='font-size: 17%; width: 40px;'>a</div>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "<script>\n"
+            + "var array = [];\n"
+
+            + "var e = document.getElementById('myDivPX');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "e = document.getElementById('myDivEM');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "e = document.getElementById('myDivP');\n"
+            + "array.push(e.clientHeight);\n"
+
+            + "document.getElementById('myTextarea').value = array.join(', ');\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String actual = driver.findElement(By.id("myTextarea")).getDomProperty("value");
+        assertEquals(getExpectedAlerts()[0], actual);
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,7 @@
 package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DomComment}.
@@ -25,8 +23,8 @@ import org.junit.runner.RunWith;
  * @author Karel Kolman
  * @author Ahmed Ashour
  * @author Philip Graf
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DomCommentTest extends SimpleWebTestCase {
 
     /**
@@ -35,19 +33,19 @@ public class DomCommentTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String content = "<html><body><!-- a comment --></body></html>";
+        final String content = DOCTYPE_HTML + "<html><body><!-- a comment --></body></html>";
         final HtmlPage page = loadPage(content);
         assertEquals("", page.asNormalizedText());
     }
 
      /**
-     * Test the comment correctness.
-     * @throws Exception if the test fails
-     */
+      * Test the comment correctness.
+      * @throws Exception if the test fails
+      */
     @Test
     public void asXml() throws Exception {
         final String comment = "<!-- a comment -->";
-        final String content = "<html><body><span id='foo'>" + comment + "</span></body></html>";
+        final String content = DOCTYPE_HTML + "<html><body><span id='foo'>" + comment + "</span></body></html>";
         final HtmlPage page = loadPage(content);
         final HtmlElement elt = page.getHtmlElementById("foo");
         final DomNode node = elt.getFirstChild();
@@ -55,12 +53,12 @@ public class DomCommentTest extends SimpleWebTestCase {
     }
 
      /**
-     * Test comment and character data sibling correctness.
-     * @throws Exception if the test fails
-     */
+      * Test comment and character data sibling correctness.
+      * @throws Exception if the test fails
+      */
     @Test
     public void textSibling() throws Exception {
-        final String content = "<html><body id='body'><!-- c1 -->text<!-- c2 --></body></html>";
+        final String content = DOCTYPE_HTML + "<html><body id='body'><!-- c1 -->text<!-- c2 --></body></html>";
         final HtmlPage page = loadPage(content);
         final DomNode node = page.getHtmlElementById("body").getFirstChild();
         assertEquals(DomText.NODE_NAME, node.getNextSibling().getNodeName());
@@ -71,7 +69,7 @@ public class DomCommentTest extends SimpleWebTestCase {
      */
     @Test
     public void setTextContent() throws Exception {
-        final String html = "<html><body><span id='s'><!--abc--></span></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><span id='s'><!--abc--></span></body></html>";
         final HtmlPage page = loadPage(html);
         final DomComment comment = (DomComment) page.getElementById("s").getFirstChild();
         assertEquals("abc", comment.getTextContent());
@@ -87,7 +85,7 @@ public class DomCommentTest extends SimpleWebTestCase {
      */
     @Test
     public void getCanonicalXPath_withoutCommentSiblings() throws Exception {
-        final String html = "<html><body><span id='s'><!--abc--></span></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><span id='s'><!--abc--></span></body></html>";
         final HtmlPage page = loadPage(html);
         final DomComment comment = (DomComment) page.getElementById("s").getFirstChild();
         assertEquals("/html/body/span/comment()", comment.getCanonicalXPath());
@@ -102,7 +100,7 @@ public class DomCommentTest extends SimpleWebTestCase {
      */
     @Test
     public void getCanonicalXPath_withCommentSiblings() throws Exception {
-        final String html = "<html><body><span id='s'><!--abc--><br/><!--def--></span></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><span id='s'><!--abc--><br/><!--def--></span></body></html>";
         final HtmlPage page = loadPage(html);
 
         final DomComment comment1 = (DomComment) page.getElementById("s").getFirstChild();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -30,7 +28,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HtmlHeading2Test extends WebDriverTestCase {
 
     /**
@@ -39,7 +36,8 @@ public class HtmlHeading2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLHeadingElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -63,8 +61,8 @@ public class HtmlHeading2Test extends WebDriverTestCase {
     @Test
     @Alerts({"left", "right", "center", "justify", "wrong", ""})
     public void getAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form>\n"
             + "  <h1 id='e1' align='left'>Header1</h1>\n"
             + "  <h2 id='e2' align='right'>Header2</h2>\n"
@@ -94,8 +92,8 @@ public class HtmlHeading2Test extends WebDriverTestCase {
     @Test
     @Alerts({"CenTer", "8", "foo"})
     public void setAlign() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form>\n"
             + "  <h1 id='e1' align='left'>Header1</h1>\n"
             + "</form>\n"
@@ -105,9 +103,7 @@ public class HtmlHeading2Test extends WebDriverTestCase {
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) {\n"
-            + "      log('error');\n"
-            + "    }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('e1');\n"
@@ -130,8 +126,8 @@ public class HtmlHeading2Test extends WebDriverTestCase {
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
              "undefined", "left", "none", "right", "all", "2", "abc", "8"})
     public void clear() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<h1 id='h1'>h1</h1>\n"
             + "<h2 id='h2' clear='left'>h2</h2>\n"
             + "<h3 id='h3' clear='all'>h3</h3>\n"

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,20 +18,19 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.xml.XmlPage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for {@link DefaultPageCreator}.
@@ -40,7 +39,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DefaultPageCreatorTest extends WebServerTestCase {
 
     /**
@@ -52,7 +50,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void contentTypes() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/x", ContentTypeServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient c = getWebClient();
         final String base = URL_FIRST + "x?";
@@ -113,7 +111,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeXhtml() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeXhtmlServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final XHtmlPage page = client.getPage(URL_FIRST + "test");
@@ -144,7 +142,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeXhtmlLeadingBlank() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeXhtmlLeadingBlankServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final XHtmlPage page = client.getPage(URL_FIRST + "test");
@@ -175,7 +173,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeXml() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeXmlServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final XmlPage page = client.getPage(URL_FIRST + "test");
@@ -202,7 +200,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeXmlLeadingBlank() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeXmlLeadingBlankServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final XmlPage page = client.getPage(URL_FIRST + "test");
@@ -229,7 +227,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeDoctype() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeDoctypeServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "test");
@@ -255,7 +253,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeHtml() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeHtmlServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "test");
@@ -282,7 +280,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeHtmlStartsNotWith() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeHtmlStartsNotWithServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final TextPage page = client.getPage(URL_FIRST + "test");
@@ -308,7 +306,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeHead() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeHeadServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "test");
@@ -334,7 +332,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeScript() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeScriptServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "test");
@@ -360,7 +358,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeTitle() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeTitleServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "test");
@@ -375,7 +373,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             final Writer writer = response.getWriter();
-            writer.write("<html><head><title>\u00d3</title></head><body></body></html>");
+            writer.write(DOCTYPE_HTML + "<html><head><title>\u00d3</title></head><body></body></html>");
         }
     }
 
@@ -386,7 +384,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeBomUtf8() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeBomUtf8Servlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final TextPage page = client.getPage(URL_FIRST + "test");
@@ -412,7 +410,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     public void noContentTypeBomUtf16() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NoContentTypeBomUtf16Servlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
         final TextPage page = client.getPage(URL_FIRST + "test");
@@ -430,8 +428,8 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
             output.write('\u00fe');
             output.write('\u00ff');
             output.flush();
-            final Writer writer = new OutputStreamWriter(output, "UTF16");
-            writer.write("<html><head></head><body></body></html>");
+            final Writer writer = new OutputStreamWriter(output, StandardCharsets.UTF_16);
+            writer.write(DOCTYPE_HTML + "<html><head></head><body></body></html>");
             writer.flush();
         }
     }

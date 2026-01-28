@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -28,7 +26,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlOutputTest extends WebDriverTestCase {
 
     /**
@@ -37,8 +34,8 @@ public class HtmlOutputTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLOutputElement]", "[object HTMLFormElement]"})
     public void simpleScriptable() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -65,8 +62,8 @@ public class HtmlOutputTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "center", "8", "foo"})
     public void align() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form>\n"
             + "  <output id='o1' align='left'>\n"
             + "  <output id='o2' align='right'>\n"
@@ -77,9 +74,7 @@ public class HtmlOutputTest extends WebDriverTestCase {
             + "  function set(fs, value) {\n"
             + "    try {\n"
             + "      fs.align = value;\n"
-            + "    } catch (e) {\n"
-            + "      log('error');\n"
-            + "    }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  var o1 = document.getElementById('o1');\n"
             + "  var o2 = document.getElementById('o2');\n"
@@ -105,8 +100,8 @@ public class HtmlOutputTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "false", "false", "false"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -188,8 +183,8 @@ public class HtmlOutputTest extends WebDriverTestCase {
     }
 
     private void validation(final String htmlPart, final String jsPart) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"

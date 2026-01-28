@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.protocol.data;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -28,7 +26,6 @@ import org.openqa.selenium.WebDriver;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DataURLDecoderTest extends WebDriverTestCase {
 
     /**
@@ -37,7 +34,8 @@ public class DataURLDecoderTest extends WebDriverTestCase {
     @Test
     @Alerts({"one", "two", "three", "four", "five's"})
     public void dataProtocol() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "var d1, d2, d3, d4, d5;\n"
             + "</script>\n"
@@ -66,13 +64,13 @@ public class DataURLDecoderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAHBJREFUOE+tkkkOACAIA+3/H40hEYOI"
-                + "iAtXYKBNQURUHgq3AACFbx8DeJFLHu8AaWTUaNUDILLDHnA/WAH026GETrU6m2Es7xgwLUQmDua0Qe14+gM9eA0QiDU25UGU"
-                + "hS9BcpNode8SOQXpC2B31etXnvKZ0TEDfq8AAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAjUlEQVR4AaSQAQ7EIAgEnf7/z3e3mjXSwLW2JgQEdkCPz8tz"
+                + "tIcH6MptANCA9ls8AmAU4L+XymLFYQMVKlOzDXDYAmBmTwEMgeCnUg4A+jvX5kys+uUGgPpKSwGeBkPse0ZJAVljlSsBnmq/"
+                + "DZDgSqyesAHQfx9qL9FqE3Bn2ip0PAFO7PoA0BZ3zYO+AAAA//+f6uVAAAAABklEQVQDACTlk+G7ekp7AAAAAElFTkSuQmCC",
             EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAHBJREFUOE+tkkkOACAIA+3/H40hEYOI"
-                + "iAtXYKBNQURUHgq3AACFbx8DeJFLHu8AaWTUaNUDILLDHnA/WAH026GETrU6m2Es7xgwLUQmDua0Qe14+gM9eA0QiDU25UGU"
-                + "hS9BcpNode8SOQXpC2B31etXnvKZ0TEDfq8AAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAjUlEQVR4AaSQAQ7EIAgEnf7/z3e3mjXSwLW2JgQEdkCPz8tz"
+                + "tIcH6MptANCA9ls8AmAU4L+XymLFYQMVKlOzDXDYAmBmTwEMgeCnUg4A+jvX5kys+uUGgPpKSwGeBkPse0ZJAVljlSsBnmq/"
+                + "DZDgSqyesAHQfx9qL9FqE3Bn2ip0PAFO7PoA0BZ3zYO+AAAA//+f6uVAAAAABklEQVQDACTlk+G7ekp7AAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAcElEQVQ4T62SSQ4AIAgD7f8frZKIQUTEhSsw0KbItdJD4RYA"
                 + "INHtYwAtUvHjHcCNiBqpegB4dugD5gcrgHzbldCpWmczjOQdA6YFz8TBnDYoHQ9/IAevAQzRxoY88LLwJUhmErXuXSKnIH0B"
@@ -82,7 +80,8 @@ public class DataURLDecoderTest extends WebDriverTestCase {
                 + "INHtYwAtUvHjHcCNiBqpegB4dugD5gcrgHzbldCpWmczjOQdA6YFz8TBnDYoHQ9/IAevAQzRxoY88LLwJUhmErXuXSKnIH0B"
                 + "7K5a/QKe8pnRes1vRwAAAABJRU5ErkJggg==")
     public void base64WithPlus() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"

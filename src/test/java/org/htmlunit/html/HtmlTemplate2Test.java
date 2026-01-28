@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,7 @@
 package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlTemplate}.
@@ -25,12 +23,15 @@ import org.junit.runner.RunWith;
  * @author Ronny Shapiro
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlTemplate2Test extends SimpleWebTestCase {
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void asXmlWithChildren() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -41,17 +42,20 @@ public class HtmlTemplate2Test extends SimpleWebTestCase {
                 + "</html>";
 
         final HtmlPage htmlPage = loadPage(html);
-        assertEquals(htmlPage.getBody().asXml(), "<body>\r\n"
+        assertEquals("<body>\r\n"
                 + "  <template id=\"template\">\r\n"
-                + "    <div>\r\n"
-                + "    </div>\r\n"
+                + "    <div></div>\r\n"
                 + "  </template>\r\n"
-                + "</body>\r\n");
+                + "</body>", htmlPage.getBody().asXml());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void asXmlWithoutChildren() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -60,9 +64,8 @@ public class HtmlTemplate2Test extends SimpleWebTestCase {
                 + "</html>";
 
         final HtmlPage htmlPage = loadPage(html);
-        assertEquals(htmlPage.getBody().asXml(), "<body>\r\n"
-                + "  <template id=\"template\">\r\n"
-                + "  </template>\r\n"
-                + "</body>\r\n");
+        assertEquals("<body>\r\n"
+                + "  <template id=\"template\"></template>\r\n"
+                + "</body>", htmlPage.getBody().asXml());
     }
 }

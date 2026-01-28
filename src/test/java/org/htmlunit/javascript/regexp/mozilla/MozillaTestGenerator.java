@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ public final class MozillaTestGenerator {
         System.out.println("package org.htmlunit.javascript.regexp.mozilla."
                 + jsPathTokens[4] + ";");
         System.out.println();
-        System.out.println("import org.junit.Test;");
+        System.out.println("import org.junit.jupiter.api.Test;");
         System.out.println("import org.junit.runner.RunWith;");
         System.out.println();
         System.out.println("import org.htmlunit.BrowserRunner;");
@@ -115,7 +115,7 @@ public final class MozillaTestGenerator {
             System.out.println("    private void test(final String script) throws Exception {");
             System.out.println("        test(null, script);");
             System.out.println("    }");
-            System.out.println("");
+            System.out.println();
             System.out.println(
                     "    private void test(final String initialScript, final String script) throws Exception {");
             System.out.println("        String html = \"<html><head><title>foo</title><script>\\n\";");
@@ -186,7 +186,7 @@ public final class MozillaTestGenerator {
                     i = p1 - 1;
                     p1 = p0;
                 }
-                if (builder.length() != 0) {
+                if (!builder.isEmpty()) {
                     builder.append(',');
                 }
                 builder.append(line, p0, p1);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,8 @@ package org.htmlunit.html;
 
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlTitle}.
@@ -27,7 +25,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-@RunWith(BrowserRunner.class)
 public class HtmlTitleTest extends SimpleWebTestCase {
 
     /**
@@ -37,7 +34,8 @@ public class HtmlTitleTest extends SimpleWebTestCase {
      */
     @Test
     public void pageAsNormalizedText() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<title>Dummy</title>\n"
             + "</head>\n"
@@ -57,7 +55,8 @@ public class HtmlTitleTest extends SimpleWebTestCase {
      */
     @Test
     public void getTitleText() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<title>Title\nText     Test</title>\n"
             + "</head>\n"
@@ -76,7 +75,8 @@ public class HtmlTitleTest extends SimpleWebTestCase {
      */
     @Test
     public void asTextEmptyTitle() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<title></title>\n"
             + "</head>\n"
@@ -95,7 +95,8 @@ public class HtmlTitleTest extends SimpleWebTestCase {
      */
     @Test
     public void asTextContainingTags() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<title>My<br>Title<p>Text</p></title>\n"
             + "</head>\n"
@@ -115,7 +116,8 @@ public class HtmlTitleTest extends SimpleWebTestCase {
      */
     @Test
     public void getTitleTextDontLoadCss() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<title>Title</title>\n"
             + "<link href='styles.css' type='text/css' rel='stylesheet'>\n"
@@ -142,7 +144,8 @@ public class HtmlTitleTest extends SimpleWebTestCase {
     @Test
     @Alerts("")
     public void titleAfterDeleteDocumentElement() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  try {\n"

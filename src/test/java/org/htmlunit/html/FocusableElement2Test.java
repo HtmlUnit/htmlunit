@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,10 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -33,16 +31,15 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class FocusableElement2Test extends WebDriverTestCase {
 
     /**
      * We like to start with a new browser for each test.
      * @throws Exception If an error occurs
      */
-    @After
+    @AfterEach
     public void shutDownRealBrowsers() throws Exception {
-        super.shutDownAll();
+        shutDownAll();
     }
 
     /**
@@ -57,8 +54,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
             FF_ESR = {"body", "active: body", "onload", "active: body"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void bodyLoad() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -90,8 +87,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
             FF_ESR = {"before", "active: focusId", "after", "active: focusId"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void body() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -125,8 +122,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
             FF_ESR = {"before", "active: body", "after", "active: body"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void bodySwitchFromBodyToNotFocusable() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -184,8 +181,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
                       "after", "active: body"})
     // TODO FF & FF68 fail due to wrong body vs. window event handling
     public void bodySwitchFromBodyToFocusable() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -253,8 +250,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
     }
 
     private void testBodySwitchWithCallFocusAndBlur(final String snippet) throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -776,8 +773,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
     private void testWithCallFocusAndBlur(String snippet) throws Exception {
         snippet = snippet.replaceFirst("id='focusId'( /)?>", "id='focusId' " + logEvents("") + "$1>");
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -893,8 +890,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
         snippet = snippet.replaceFirst("id='focusId1'( /)?>", "id='focusId1' " + logEvents("1") + "$1>");
         snippet = snippet.replaceFirst("id='focusId2'( /)?>", "id='focusId2' " + logEvents("2") + "$1>");
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -962,8 +959,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
     private void testWithCallClick(String snippet) throws Exception {
         snippet = snippet.replaceFirst("id='focusId'( /)?>", "id='focusId' " + logEvents("") + "$1>");
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -1059,8 +1056,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
     private void testWithClick(String snippet) throws Exception {
         snippet = snippet.replaceFirst("id='focusId'( /)?>", "id='focusId' " + logEvents("") + "$1>");
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -1123,8 +1120,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
         snippet = snippet.replaceFirst("id='focusId1'( /)?>", "id='focusId1' " + logEvents("1") + "$1>");
         snippet = snippet.replaceFirst("id='focusId2'( /)?>", "id='focusId2' " + logEvents("2") + "$1>");
 
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + logger()
@@ -1156,5 +1153,78 @@ public class FocusableElement2Test extends WebDriverTestCase {
             + "onfocusin=\"log('onfocusin" + aSuffix + "', event)\" "
             + "onfocusout=\"log('onfocusout" + aSuffix + "', event)\" "
             + "onfocus=\"log('onfocus" + aSuffix + "', event)\"";
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onfocus2:focusId2", "active: focusId2",
+             "onfocusin2:focusId2", "active: focusId2",
+             "onfocusin1:focusId2", "active: focusId2"})
+    public void bubblesDiv() throws Exception {
+        String snippet =
+                "<div id='focusId1'>\n"
+                + "<input type='text' readonly id='focusId2'>\n"
+                + "</div>";
+
+        snippet = snippet.replaceFirst("id='focusId1'( /)?>", "id='focusId1' " + logEvents("1") + "$1>");
+        snippet = snippet.replaceFirst("id='focusId2'( /)?>", "id='focusId2' " + logEvents("2") + "$1>");
+
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body'>\n"
+            + snippet
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+
+        driver.findElement(By.id("focusId2")).click();
+
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onfocus2:focusId2", "active: focusId2",
+             "onfocusin2:focusId2", "active: focusId2",
+             "onfocusin1:focusId2", "active: focusId2"})
+    public void bubblesDivDiv() throws Exception {
+        String snippet =
+                "<div id='focusId1'>\n"
+                + "<div>"
+                + "<input type='text' readonly id='focusId2'>\n"
+                + "</div>"
+                + "</div>";
+
+        snippet = snippet.replaceFirst("id='focusId1'( /)?>", "id='focusId1' " + logEvents("1") + "$1>");
+        snippet = snippet.replaceFirst("id='focusId2'( /)?>", "id='focusId2' " + logEvents("2") + "$1>");
+
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + logger()
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body'>\n"
+            + snippet
+            + "  </body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+
+        driver.findElement(By.id("focusId2")).click();
+
+        assertTitle(driver, String.join(";", getExpectedAlerts()) + (getExpectedAlerts().length > 0 ? ";" : ""));
     }
 }

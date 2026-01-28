@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
  */
 package org.htmlunit.util.geometry;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Polygon2D}.
@@ -28,6 +28,9 @@ import org.junit.Test;
  */
 public class Polygon2DTest {
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testSimplePolygon() {
         final Polygon2D polygon =
@@ -48,6 +51,9 @@ public class Polygon2DTest {
         assertFalse(polygon.contains(100, 200));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testPolygonFigure6() {
         // example 1
@@ -131,6 +137,9 @@ public class Polygon2DTest {
         assertTrue(polygon.contains(3, 3.9));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void testBorders() {
         /*

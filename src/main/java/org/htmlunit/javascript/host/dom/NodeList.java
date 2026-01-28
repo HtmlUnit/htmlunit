@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@ public class NodeList extends AbstractList implements Callable {
      *
      * @param domNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
-     * of a descendant node of parentScope changes (attribute added, modified or removed)
+     *        of a descendant node of parentScope changes (attribute added, modified or removed)
      */
     public NodeList(final DomNode domNode, final boolean attributeChangeSensitive) {
         super(domNode, attributeChangeSensitive, null);
@@ -147,17 +147,32 @@ public class NodeList extends AbstractList implements Callable {
      */
     @JsxFunction
     public void forEach(final Object callback) {
-        final List<DomNode> nodes = getElements();
+        if (!(callback instanceof Function function)) {
+            throw JavaScriptEngine.typeError(
+                    "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
+        }
+
+        if (getElements().isEmpty()) {
+            return;
+        }
 
         final WebClient client = getWindow().getWebWindow().getWebClient();
         final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
 
         final ContextAction<Object> contextAction = cx -> {
-            final Function function = (Function) callback;
             final Scriptable scope = getParentScope();
-            for (int i = 0; i < nodes.size(); i++) {
+
+            List<DomNode> nodes = getElements();
+            final int size = nodes.size();
+            int i = 0;
+            while (i < size && i < nodes.size()) {
                 function.call(cx, scope, this, new Object[] {nodes.get(i).getScriptableObject(), i, this});
+
+                // refresh
+                nodes = getElements();
+                i++;
             }
+
             return null;
         };
         cf.call(contextAction);

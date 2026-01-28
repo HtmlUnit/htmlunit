@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -118,7 +118,7 @@ public class XPathResult extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
-        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.typeErrorIllegalConstructor();
     }
 
     /**
@@ -187,11 +187,11 @@ public class XPathResult extends HtmlUnitScriptable {
 
     /**
      * @return signifies that the iterator has become invalid.
-     * It is true if XPathResult.resultType is UNORDERED_NODE_ITERATOR_TYPE or
-     * ORDERED_NODE_ITERATOR_TYPE and the document has been modified since this result was returned.
+     *         It is true if XPathResult.resultType is UNORDERED_NODE_ITERATOR_TYPE or
+     *         ORDERED_NODE_ITERATOR_TYPE and the document has been modified since this result was returned.
      */
     @JsxGetter
-    public boolean getInvalidIteratorState() {
+    public boolean isInvalidIteratorState() {
         return false;
     }
 
@@ -242,8 +242,8 @@ public class XPathResult extends HtmlUnitScriptable {
             if (o instanceof Number) {
                 return ((Double) o).doubleValue();
             }
-            if (o instanceof Boolean) {
-                return ((Boolean) o).booleanValue() ? 1 : 0;
+            if (o instanceof Boolean boolean1) {
+                return boolean1.booleanValue() ? 1 : 0;
             }
         }
 
@@ -263,6 +263,7 @@ public class XPathResult extends HtmlUnitScriptable {
      * @return the value of this boolean result
      */
     @JsxGetter
+    @SuppressWarnings("PMD.BooleanGetMethodName")
     public boolean getBooleanValue() {
         if (resultType_ != BOOLEAN_TYPE) {
             throw JavaScriptEngine.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
@@ -278,11 +279,11 @@ public class XPathResult extends HtmlUnitScriptable {
 
                 return 0.0 != d;
             }
-            if (o instanceof String) {
-                return !((String) o).isEmpty();
+            if (o instanceof String string) {
+                return !string.isEmpty();
             }
-            if (o instanceof Boolean) {
-                return ((Boolean) o).booleanValue();
+            if (o instanceof Boolean boolean1) {
+                return boolean1.booleanValue();
             }
         }
 
@@ -307,11 +308,11 @@ public class XPathResult extends HtmlUnitScriptable {
         }
 
         final Object resultObj = result_.get(0);
-        if (resultObj instanceof DomAttr) {
-            return ((DomAttr) resultObj).getValue();
+        if (resultObj instanceof DomAttr attr) {
+            return attr.getValue();
         }
-        if (resultObj instanceof DomNode) {
-            return ((DomNode) resultObj).asNormalizedText();
+        if (resultObj instanceof DomNode node) {
+            return node.asNormalizedText();
         }
         return resultObj.toString();
     }

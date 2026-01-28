@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,8 @@ import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlObject}.
@@ -32,7 +30,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlObjectTest extends SimpleWebTestCase {
     /**
      * @throws Exception if the test fails
@@ -40,7 +37,8 @@ public class HtmlObjectTest extends SimpleWebTestCase {
     @Test
     @Alerts("undefined")
     public void classid() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             // Window Media Player CLASSID
             + "<object id='wm' classid='clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6'></object>\n"
             + "<script>\n"

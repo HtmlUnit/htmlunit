@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,12 @@ import java.util.Locale;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.javascript.RecursiveFunctionObject;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -62,9 +62,9 @@ public class V8BreakIterator extends HtmlUnitScriptable {
         Locale locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
         if (args.length != 0) {
             final Object locales = args[0];
-            if (locales instanceof NativeArray) {
-                if (((NativeArray) locales).getLength() != 0) {
-                    locale = new Locale.Builder().setLanguage(((NativeArray) locales).get(0).toString()).build();
+            if (locales instanceof NativeArray array) {
+                if (array.getLength() != 0) {
+                    locale = new Locale.Builder().setLanguage(array.get(0).toString()).build();
                 }
             }
             else if (locales instanceof String) {
@@ -79,8 +79,8 @@ public class V8BreakIterator extends HtmlUnitScriptable {
         final V8BreakIterator iterator = new V8BreakIterator();
         if (args.length > 1) {
             final Object types = args[1];
-            if (types instanceof NativeObject) {
-                final Object obj = ((NativeObject) types).get("type", (NativeObject) types);
+            if (types instanceof NativeObject object) {
+                final Object obj = object.get("type", object);
                 if ("character".equals(obj)) {
                     iterator.breakIterator_ = BreakIterator.getCharacterInstance(locale);
                     iterator.typeAlwaysNone_ = true;
@@ -101,7 +101,7 @@ public class V8BreakIterator extends HtmlUnitScriptable {
 
         final Window window = getWindow(ctorObj);
         iterator.setParentScope(window);
-        iterator.setPrototype(((RecursiveFunctionObject) ctorObj).getClassPrototype());
+        iterator.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return iterator;
     }
 

@@ -1,0 +1,2 @@
+
+var aGlobalVar = "hello"

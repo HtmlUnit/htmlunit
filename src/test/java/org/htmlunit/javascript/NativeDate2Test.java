@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,123 +18,174 @@ import java.util.TimeZone;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for the Date support.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class NativeDate2Test extends WebDriverTestCase {
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T22:23:00.000Z")
     public void ctorDateTimeStringGMT() throws Exception {
         ctorDateTimeString("new Date('2021-12-18T22:23:00.000+00:00').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T22:23:00.000Z")
     public void ctorDateTimeStringGMT2() throws Exception {
         ctorDateTimeString("new Date('Sat, 18 Dec 2021 22:23:00 GMT').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T22:23:00.000Z")
     public void ctorDateTimeStringUTC() throws Exception {
         ctorDateTimeString("new Date('2021-12-18T22:23:00.000+00:00').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T22:23:00.000Z")
     public void ctorDateTimeStringUTC2() throws Exception {
         ctorDateTimeString("new Date('Sat, 18 Dec 2021 22:23:00 UTC').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T22:23:00.000Z")
     public void ctorDateTimeStringUT() throws Exception {
         ctorDateTimeString("new Date('Sat, 18 Dec 2021 22:23:00 UT').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T12:23:00.000Z")
     public void ctorDateTimeStringEST() throws Exception {
         ctorDateTimeString("new Date('2021-12-18T17:23:00.000+05:00').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T03:23:00.000Z")
     public void ctorDateTimeStringEST2() throws Exception {
         ctorDateTimeString("new Date('Sat, 18 Dec 2021 22:23:00 EST').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T02:23:00.000Z")
     public void ctorDateTimeStringEDT() throws Exception {
         ctorDateTimeString("new Date('Sat, 18 Dec 2021 22:23:00 EDT').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T04:23:00.000Z")
     public void ctorDateTimeStringCST() throws Exception {
         ctorDateTimeString("new Date('Sat, 18 Dec 2021 22:23:00 CST').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T03:23:00.000Z")
     public void ctorDateTimeStringCDT() throws Exception {
         ctorDateTimeString("new Date('Sat, 18 Dec 2021 22:23:00 CDT').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T05:23:00.000Z")
     public void ctorDateTimeStringMST() throws Exception {
         ctorDateTimeString("new Date('Sat, 18 Dec 2021 22:23:00 MST').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T04:23:00.000Z")
     public void ctorDateTimeStringMDT() throws Exception {
         ctorDateTimeString("new Date('Sat, 18 Dec 2021 22:23:00 MDT').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T06:23:00.000Z")
     public void ctorDateTimeStringPST() throws Exception {
         ctorDateTimeString("new Date('Sat, 18 Dec 2021 22:23:00 PST').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T05:23:00.000Z")
     public void ctorDateTimeStringPDT() throws Exception {
         ctorDateTimeString("new Date('Sat, 18 Dec 2021 22:23:00 PDT').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T18:23:00.000Z")
     public void ctorDateTimeStringBerlin() throws Exception {
         ctorDateTimeString("new Date('2021-12-18T17:23:00.000-01:00').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T02:23:00.000Z")
     public void ctorDateTimeStringTokyo() throws Exception {
         ctorDateTimeString("new Date('2021-12-18T17:23:00.000-09:00').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T02:23:00.000Z")
     public void ctorDateTimeStringJST() throws Exception {
         ctorDateTimeString("new Date('2021-12-18T17:23:00.000-09:00').toISOString()");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T12:23:00.000Z")
     public void ctorDateTimeStringNewYork() throws Exception {
@@ -142,8 +193,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void ctorDateTimeString(final String js) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(" + js + ");\n"
             + "</script>\n"
@@ -152,6 +203,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T22:23:00.000Z")
     @BuggyWebDriver(FF = "2021-12-18T21:23:00.000Z",
@@ -160,6 +214,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         ctorDateTime("GMT");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T22:23:00.000Z")
     @BuggyWebDriver(FF = "2021-12-18T21:23:00.000Z",
@@ -168,6 +225,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         ctorDateTime("UTC");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T03:23:00.000Z")
     @BuggyWebDriver(FF = "2021-12-18T21:23:00.000Z",
@@ -176,12 +236,18 @@ public class NativeDate2Test extends WebDriverTestCase {
         ctorDateTime("EST");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T21:23:00.000Z")
     public void ctorDateTimeBerlin() throws Exception {
         ctorDateTime("Europe/Berlin");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T13:23:00.000Z")
     @BuggyWebDriver(FF = "2021-12-18T21:23:00.000Z",
@@ -190,6 +256,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         ctorDateTime("Asia/Tokyo");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T13:23:00.000Z")
     @BuggyWebDriver(FF = "2021-12-18T21:23:00.000Z",
@@ -198,6 +267,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         ctorDateTime("JST");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-19T03:23:00.000Z")
     @BuggyWebDriver(FF = "2021-12-18T21:23:00.000Z",
@@ -207,8 +279,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void ctorDateTime(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date('2021-12-18T22:23').toISOString());\n"
             + "</script>\n"
@@ -228,42 +300,63 @@ public class NativeDate2Test extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T00:00:00.000Z")
     public void ctorDateGMT() throws Exception {
         ctorDate("GMT");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T00:00:00.000Z")
     public void ctorDateUTC() throws Exception {
         ctorDate("UTC");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T00:00:00.000Z")
     public void ctorDateEST() throws Exception {
         ctorDate("EST");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T00:00:00.000Z")
     public void ctorDateBerlin() throws Exception {
         ctorDate("Europe/Berlin");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T00:00:00.000Z")
     public void ctorDateNewYork() throws Exception {
         ctorDate("America/New_York");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T00:00:00.000Z")
     public void ctorDateTokyo() throws Exception {
         ctorDate("Asia/Tokyo");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021-12-18T00:00:00.000Z")
     public void ctorDateJST() throws Exception {
@@ -271,8 +364,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void ctorDate(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date('2021-12-18').toISOString());\n"
             + "</script>\n"
@@ -292,11 +385,14 @@ public class NativeDate2Test extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2000-02-28T23:59:59.000Z")
     public void ctorInt() throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date(951782399000).toISOString());\n"
             + "</script>\n"
@@ -305,11 +401,14 @@ public class NativeDate2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2035-11-30T01:46:40.000Z")
     public void ctorDouble() throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date(208e10).toISOString());\n"
             + "</script>\n"
@@ -318,6 +417,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("12/18/2021, 10:23:00 PM")
     @HtmlUnitNYI(CHROME = "12/18/21, 10:23 PM",
@@ -328,6 +430,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toLocale("new Date('2021-12-18T22:23').toLocaleString('en-US')");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("12/18/2021")
     @HtmlUnitNYI(CHROME = "12/18/21",
@@ -338,6 +443,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toLocale("new Date('2021-12-18T22:23').toLocaleDateString('en-US')");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("10:23:00 PM")
     @HtmlUnitNYI(CHROME = "10:23 PM",
@@ -348,6 +456,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toLocale("new Date('2021-12-18T22:23').toLocaleTimeString('en-US')");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("18.12.2021, 22:23:00")
     @HtmlUnitNYI(CHROME = "18.12.21, 22:23",
@@ -358,6 +469,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toLocale("new Date('2021-12-18T22:23').toLocaleString('de-DE')");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("18.12.2021")
     @HtmlUnitNYI(CHROME = "18.12.21",
@@ -368,6 +482,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toLocale("new Date('2021-12-18T22:23').toLocaleDateString('de-DE')");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("22:23:00")
     @HtmlUnitNYI(CHROME = "22:23",
@@ -378,6 +495,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toLocale("new Date('2021-12-18T22:23').toLocaleTimeString('de-DE')");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021/12/18 22:23:00")
     @HtmlUnitNYI(CHROME = "2021/12/18 22:23",
@@ -388,12 +508,18 @@ public class NativeDate2Test extends WebDriverTestCase {
         toLocale("new Date('2021-12-18T22:23').toLocaleString('ja-JP')");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021/12/18")
     public void toLocaleJaJpDate() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleDateString('ja-JP')");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("22:23:00")
     @HtmlUnitNYI(CHROME = "22:23",
@@ -404,6 +530,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toLocale("new Date('2021-12-18T22:23').toLocaleTimeString('ja-JP')");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021/12/18 22:23:00")
     @HtmlUnitNYI(CHROME = "2021/12/18 22:23",
@@ -414,12 +543,18 @@ public class NativeDate2Test extends WebDriverTestCase {
         toLocale("new Date('2021-12-18T22:23').toLocaleString(['foo', 'ja-JP', 'en-US'])");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2021/12/18")
     public void toLocaleArrayDate() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleDateString(['foo', 'ja-JP', 'en-US'])");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("22:23:00")
     @HtmlUnitNYI(CHROME = "22:23",
@@ -431,8 +566,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void toLocale(final String js) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(" + js + ");\n"
             + "</script>\n"
@@ -452,36 +587,54 @@ public class NativeDate2Test extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat Dec 18 2021")
     public void toDateStringGMT() throws Exception {
         toDateString("GMT");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat Dec 18 2021")
     public void toDateStringUTC() throws Exception {
         toDateString("UTC");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat Dec 18 2021")
     public void toDateStringEST() throws Exception {
         toDateString("EST");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat Dec 18 2021")
     public void toDateStringBerlin() throws Exception {
         toDateString("Europe/Berlin");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat Dec 18 2021")
     public void toDateStringNewYork() throws Exception {
         toDateString("America/New_York");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sun Dec 19 2021")
     @BuggyWebDriver(FF = "Sat Dec 18 2021",
@@ -490,6 +643,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toDateString("Asia/Tokyo");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sun Dec 19 2021")
     @BuggyWebDriver(FF = "Sat Dec 18 2021",
@@ -499,8 +655,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void toDateString(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date('Sat, 18 Dec 2021 22:23:00 UTC').toDateString());\n"
             + "</script>\n"
@@ -520,6 +676,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("22:23:00 GMT+0000 (Greenwich Mean Time)")
     @BuggyWebDriver(FF = "23:23:00 GMT+0100 (Central European Standard Time)",
@@ -532,6 +691,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toTimeString("GMT");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("22:23:00 GMT+0000 (Coordinated Universal Time)")
     @BuggyWebDriver(FF = "23:23:00 GMT+0100 (Central European Standard Time)",
@@ -544,8 +706,11 @@ public class NativeDate2Test extends WebDriverTestCase {
         toTimeString("UTC");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
-    @Alerts("17:23:00 GMT-0500 (GMT-05:00)")
+    @Alerts("17:23:00 GMT-0500 (Eastern Standard Time)")
     @BuggyWebDriver(FF = "23:23:00 GMT+0100 (Central European Standard Time)",
             FF_ESR = "23:23:00 GMT+0100 (Central European Standard Time)")
     @HtmlUnitNYI(CHROME = "17:23:00 GMT-0500 (-05:00)",
@@ -556,6 +721,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toTimeString("EST");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("23:23:00 GMT+0100 (Central European Standard Time)")
     @HtmlUnitNYI(CHROME = "23:23:00 GMT+0100 (CET)",
@@ -566,6 +734,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toTimeString("Europe/Berlin");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("17:23:00 GMT-0500 (Eastern Standard Time)")
     @BuggyWebDriver(FF = "23:23:00 GMT+0100 (Central European Standard Time)",
@@ -578,6 +749,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toTimeString("America/New_York");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("07:23:00 GMT+0900 (Japan Standard Time)")
     @BuggyWebDriver(FF = "23:23:00 GMT+0100 (Central European Standard Time)",
@@ -590,6 +764,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         toTimeString("Asia/Tokyo");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("07:23:00 GMT+0900 (Japan Standard Time)")
     @BuggyWebDriver(FF = "23:23:00 GMT+0100 (Central European Standard Time)",
@@ -603,8 +780,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void toTimeString(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date('Sat, 18 Dec 2021 22:23:00 UTC').toTimeString());\n"
             + "</script>\n"
@@ -624,42 +801,63 @@ public class NativeDate2Test extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat, 18 Dec 2021 22:23:00 GMT")
     public void toUTCStringGMT() throws Exception {
         toUTCString("GMT");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat, 18 Dec 2021 22:23:00 GMT")
     public void toUTCStringUTC() throws Exception {
         toUTCString("UTC");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat, 18 Dec 2021 22:23:00 GMT")
     public void toUTCStringEST() throws Exception {
         toUTCString("EST");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat, 18 Dec 2021 22:23:00 GMT")
     public void toUTCStringBerlin() throws Exception {
         toUTCString("Europe/Berlin");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat, 18 Dec 2021 22:23:00 GMT")
     public void toUTCStringNewYork() throws Exception {
         toUTCString("America/New_York");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat, 18 Dec 2021 22:23:00 GMT")
     public void toUTCStringTokyo() throws Exception {
         toUTCString("Asia/Tokyo");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("Sat, 18 Dec 2021 22:23:00 GMT")
     public void toUTCStringJST() throws Exception {
@@ -667,8 +865,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void toUTCString(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date('Sat, 18 Dec 2021 22:23:00 UTC').toUTCString());\n"
             + "</script>\n"
@@ -688,6 +886,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("0")
     @BuggyWebDriver(FF = "-60",
@@ -696,6 +897,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         timezoneOffset("GMT");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("0")
     @BuggyWebDriver(FF = "-60",
@@ -704,6 +908,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         timezoneOffset("UTC");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("300")
     @BuggyWebDriver(FF = "-60",
@@ -712,12 +919,18 @@ public class NativeDate2Test extends WebDriverTestCase {
         timezoneOffset("EST");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("-60")
     public void timezoneOffsetBerlin() throws Exception {
         timezoneOffset("Europe/Berlin");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("300")
     @BuggyWebDriver(FF = "-60",
@@ -726,6 +939,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         timezoneOffset("America/New_York");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("-540")
     @BuggyWebDriver(FF = "-60",
@@ -734,6 +950,9 @@ public class NativeDate2Test extends WebDriverTestCase {
         timezoneOffset("Asia/Tokyo");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("-540")
     @BuggyWebDriver(FF = "-60",
@@ -743,8 +962,8 @@ public class NativeDate2Test extends WebDriverTestCase {
     }
 
     private void timezoneOffset(final String tz) throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "log(new Date(0).getTimezoneOffset());\n"
             + "</script>\n"

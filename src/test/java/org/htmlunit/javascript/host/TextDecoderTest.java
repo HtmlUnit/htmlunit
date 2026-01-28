@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TextDecoder}.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder">TextDecoder() - Web APIs | MDN</a>
  */
-@RunWith(BrowserRunner.class)
 public class TextDecoderTest extends WebDriverTestCase {
 
     /**
@@ -35,7 +32,8 @@ public class TextDecoderTest extends WebDriverTestCase {
     @Test
     @Alerts({"utf-8", "utf-8", "utf-8", "utf-8"})
     public void encoding() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -277,7 +275,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("exception")
+    @Alerts("RangeError")
     public void encoding_iso_8859_15_ex() throws Exception {
         encoding("latin9");
     }
@@ -501,7 +499,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("exception")
+    @Alerts("RangeError")
     public void encoding_hz_gb_2312() throws Exception {
         encoding("hz-gb-2312");
     }
@@ -577,7 +575,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("exception")
+    @Alerts("RangeError")
     public void encoding_iso_2022_kr() throws Exception {
         encoding("csiso2022kr");
         encoding("iso-2022-kr");
@@ -615,14 +613,15 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("exception")
+    @Alerts("RangeError")
     public void encoding_replacement() throws Exception {
         encoding("iso-2022-cn");
         encoding("iso-2022-cn-ext");
     }
 
     private void encoding(final String encoding) throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -630,7 +629,7 @@ public class TextDecoderTest extends WebDriverTestCase {
             + "      try {\n"
             + "        enc = new TextDecoder('" + encoding + "');\n"
             + "        log(enc.encoding);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -646,7 +645,8 @@ public class TextDecoderTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "8", "72", "116"})
     public void encode() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -673,9 +673,10 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("HtmlUnit")
+    @Alerts({"HtmlUnit", "mlU"})
     public void decode() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -686,6 +687,10 @@ public class TextDecoderTest extends WebDriverTestCase {
             + "      var dec = new TextDecoder('utf-8');\n"
             + "      var decoded = dec.decode(encoded);\n"
             + "      log(decoded);\n"
+
+            + "      var arrayBuffer = encoded.buffer;\n"
+            + "      var typedArray = new Uint8Array(arrayBuffer, 2, 3);\n"
+            + "      log(dec.decode(typedArray));\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -699,9 +704,10 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"", "exception"})
+    @Alerts({"", "TypeError"})
     public void decode2() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -709,11 +715,11 @@ public class TextDecoderTest extends WebDriverTestCase {
             + "      var dec = new TextDecoder('utf-8');\n"
             + "      try {\n"
             + "        log(dec.decode(undefined));\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
 
             + "      try {\n"
             + "        log(dec.decode(null));\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -727,16 +733,17 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("ex")
+    @Alerts("RangeError")
     public void decodeReplacement() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      try {\n"
             + "        var dec = new TextDecoder('iso-2022-kr');\n"
-            + "      } catch(e) { log('ex'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -750,9 +757,10 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"", "ex-null", "\uf7cf!"})
+    @Alerts({"", "ex-null", "TypeError", "\uf7cf!"})
     public void decodeXuserDefined() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -761,16 +769,16 @@ public class TextDecoderTest extends WebDriverTestCase {
 
             + "      try {\n"
             + "        log(dec.decode(undefined));\n"
-            + "      } catch(e) { log('ex-undefined'); }\n"
+            + "      } catch(e) { log('ex-undefined'); logEx(e); }\n"
 
             + "      try {\n"
             + "        log(dec.decode(null));\n"
-            + "      } catch(e) { log('ex-null'); }\n"
+            + "      } catch(e) { log('ex-null'); logEx(e); }\n"
 
             + "      try {\n"
             + "        var bytes = new Uint8Array([ 207, 33]);"
             + "        log(dec.decode(bytes));\n"
-            + "      } catch(e) { log('exception' + e); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

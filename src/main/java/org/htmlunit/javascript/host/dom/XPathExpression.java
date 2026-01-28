@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -108,8 +108,8 @@ public class XPathExpression extends HtmlUnitScriptable {
             final XPathExpression expression = (XPathExpression) thisObj;
 
             final XPathResult xPathResult;
-            if (result instanceof XPathResult) {
-                xPathResult = (XPathResult) result;
+            if (result instanceof XPathResult pathResult) {
+                xPathResult = pathResult;
             }
             else {
                 xPathResult = new XPathResult();

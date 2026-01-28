@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DebuggingWebConnection}.
@@ -44,8 +44,7 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
     @Test
     public void nameValueListToJsMap() throws Exception {
         assertEquals("{}", DebuggingWebConnection.nameValueListToJsMap(null));
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        assertEquals("{}", DebuggingWebConnection.nameValueListToJsMap(emptyList));
+        assertEquals("{}", DebuggingWebConnection.nameValueListToJsMap(Collections.emptyList()));
 
         List<NameValuePair> list = Collections.singletonList(new NameValuePair("name", "value"));
         assertEquals("{'name': 'value'}", DebuggingWebConnection.nameValueListToJsMap(list));

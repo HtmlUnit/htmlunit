@@ -7,7 +7,7 @@ MozAnimationIterationCount
 MozAnimationName
 MozAnimationPlayState
 MozAnimationTimingFunction
-MozAppearance
+MozBackfaceVisibility
 MozBorderEnd
 MozBorderEndColor
 MozBorderEndStyle
@@ -34,14 +34,19 @@ MozMarginStart
 MozOrient
 MozPaddingEnd
 MozPaddingStart
+MozPerspective
+MozPerspectiveOrigin
 MozTabSize
 MozTextSizeAdjust
 MozTransform
 MozTransformOrigin
-MozUserInput
-MozUserModify
+MozTransformStyle
+MozTransition
+MozTransitionDelay
+MozTransitionDuration
+MozTransitionProperty
+MozTransitionTimingFunction
 MozUserSelect
-MozWindowDragging
 WebkitAlignContent
 WebkitAlignItems
 WebkitAlignSelf
@@ -82,6 +87,7 @@ WebkitFlexFlow
 WebkitFlexGrow
 WebkitFlexShrink
 WebkitFlexWrap
+WebkitFontFeatureSettings
 WebkitJustifyContent
 WebkitLineClamp
 WebkitMask
@@ -294,6 +300,7 @@ fontVariant
 fontVariantAlternates
 fontVariantCaps
 fontVariantEastAsian
+fontVariantEmoji
 fontVariantLigatures
 fontVariantNumeric
 fontVariantPosition
@@ -321,6 +328,7 @@ gridTemplateColumns
 gridTemplateRows
 height
 hyphenateCharacter
+hyphenateLimitChars
 hyphens
 imageOrientation
 imageRendering
@@ -375,6 +383,7 @@ maskRepeat
 maskSize
 maskType
 mathDepth
+mathShift
 mathStyle
 maxBlockSize
 maxHeight
@@ -496,9 +505,11 @@ tableLayout
 textAlign
 textAlignLast
 textAnchor
+textAutospace
 textCombineUpright
 textDecoration
 textDecorationColor
+textDecorationInset
 textDecorationLine
 textDecorationSkipInk
 textDecorationStyle
@@ -526,6 +537,7 @@ transformBox
 transformOrigin
 transformStyle
 transition
+transitionBehavior
 transitionDelay
 transitionDuration
 transitionProperty
@@ -535,6 +547,8 @@ unicodeBidi
 userSelect
 vectorEffect
 verticalAlign
+viewTransitionClass
+viewTransitionName
 visibility
 webkitAlignContent
 webkitAlignItems
@@ -576,6 +590,7 @@ webkitFlexFlow
 webkitFlexGrow
 webkitFlexShrink
 webkitFlexWrap
+webkitFontFeatureSettings
 webkitJustifyContent
 webkitLineClamp
 webkitMask

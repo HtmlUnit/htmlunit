@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,9 @@
 package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link URLSearchParams}.
@@ -28,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author cd alexndr
  * @author Lai Quang Duong
  */
-@RunWith(BrowserRunner.class)
 public class URLSearchParamsTest extends WebDriverTestCase {
 
     /**
@@ -37,8 +34,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"foo=1&bar=2", ""})
     public void ctor() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -57,6 +54,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"",
              "Failed to construct 'URLSearchParams': The provided value cannot be converted to a sequence",
@@ -65,8 +65,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
              "a%2Cb=1%2C2%2C3",
              "Failed to construct 'URLSearchParams': The object must have a callable @@iterator property"})
     public void ctorArray() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -122,11 +122,14 @@ public class URLSearchParamsTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"foo=1&bar=2", "foo=%5Bobject+Object%5D&bar=3"})
     public void ctorObject() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -155,6 +158,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"foo=1&bar=%5Bobject+Object%5D&foobar=4%2C5%2C6",
              "foo=1&bar=2", "foo=1&bar=2",
@@ -164,8 +170,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
              "foo=1&bar=2",
              "Failed to construct 'URLSearchParams': The provided value cannot be converted to a sequence"})
     public void ctorIterable() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -245,8 +251,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "foo=1&bar=2", "q=Html+Unit&unml=%C3%A4%C3%9C", "q=HtmlUnit&u=%3F%3F"})
     public void string() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -281,8 +287,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"=emptyKey", "null=nullKey", "undefined=undefinedKey"})
     public void stringKeys() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -316,8 +322,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"emptyValue=", "nullValue=null", "undefinedValue=undefined"})
     public void stringValues() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -349,14 +355,14 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception param")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = "noValue=undefined",
             EDGE = "noValue=undefined",
             FF = "noValue=undefined",
             FF_ESR = "noValue=undefined")
     public void stringMissingParam() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -366,7 +372,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "          searchParams = new URLSearchParams();\n"
             + "          searchParams.append('noValue');\n"
             + "          log(searchParams);\n"
-            + "        } catch(e) { log('exception param'); }\n"
+            + "        } catch(e) { logEx(e); }\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -386,8 +392,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
              "key=value&empty-key=undefined&key=overwrite",
              "key=value&empty-key=undefined&key=overwrite&key-null=null"})
     public void append() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -421,8 +427,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
              "%3Fkey%3D%26=value&url=http%3A%2F%2Ffoo.com%2F%3Fx%3D1%26y%3D2%26z%3D3",
              "http://foo.com/?x=1&y=2&z=3"})
     public void appendSpecialChars() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -455,8 +461,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
              "key=value&empty-key=undefined&key=overwrite&key-null=null",
              "http://test.com/p?key=value&empty-key=undefined&key=overwrite&key-null=null"})
     public void appendFromUrl() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -491,8 +497,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"key2=val2&key2=val3", "", "", "", ""})
     public void delete() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -526,8 +532,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"key2=val2&key2=val3", "", "", "", "", "http://test.com/p"})
     public void deleteFromUrl() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -573,8 +579,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                  FF_ESR = {"key+1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
                            "key2=val2", "http://test.com/p?key2=val2"})
     public void deleteFromUrlSpecialChars() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -605,8 +611,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"val1", "val2", "null", "null", "null"})
     public void get() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -635,8 +641,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "false", "false", "false"})
     public void has() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -665,8 +671,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"val1,val3", "val2", "", "", ""})
     public void getAll() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -699,8 +705,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
              "key1=new1&key2=new2&key4=val4&key3=undefined",
              "key1=new1&key2=new2&key4=null&key3=undefined"})
     public void set() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -740,8 +746,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
              "key1=new1&key2=new2&key4=null&key3=undefined",
              "http://test.com/p?key1=new1&key2=new2&key4=null&key3=undefined"})
     public void setFromUrl() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -779,8 +785,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Alerts({"function keys() { [native code] }", "[object URLSearchParams Iterator]",
              "key1", "key2", "key1", "", "true"})
     public void keys() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -820,8 +826,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Alerts({"function values() { [native code] }", "[object URLSearchParams Iterator]",
              "val1", "", "val3", "val4", "true"})
     public void values() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -860,8 +866,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"val1", "", "val3", "val4"})
     public void valuesForOf() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -891,8 +897,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
              "key1-val1", "key3-val3",
              "key2-val2", "key3-val3"})
     public void forEach() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -923,14 +929,41 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError"})
+    public void forEachWrongParam() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  if (self.URLSearchParams) {\n"
+                + "    var param = new URLSearchParams('key1=val1&key2=val2&key3=val3');\n"
+                + "    try {\n"
+                + "      param.forEach();\n"
+                + "    } catch(e) { logEx(e); }\n"
+                + "    try {\n"
+                + "      param.forEach('wrong');\n"
+                + "    } catch(e) { logEx(e); }\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "  <div id='d1' class=' a b \t c \n d \u000B e \u000C f \r g'></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts({"true", "function entries() { [native code] }", "[object URLSearchParams Iterator]",
              "key1-val1", "key2-", "key1-val3", "-val4", "true"})
     public void entries() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -973,8 +1006,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"key1,val1", "key2,", "key1,val3", ",val4"})
     public void entriesForOf() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1002,8 +1035,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts({"4", "0", "1"})
     public void size() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1037,7 +1070,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
              "function URLSearchParams() { [native code] }",
              "key1=val1", "key1=val1", "key1=val1"})
     public void testToString() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  if (self.URLSearchParams) {\n"

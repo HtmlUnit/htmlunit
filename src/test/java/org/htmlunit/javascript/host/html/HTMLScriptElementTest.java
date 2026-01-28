@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,10 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -38,7 +36,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLScriptElementTest extends WebDriverTestCase {
 
     /**
@@ -48,7 +45,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "2", "3", "4", "onload"})
     public void onReadyStateChangeHandler() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -76,7 +74,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("log('4');", MimeType.TEXT_JAVASCRIPT);
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -86,7 +85,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     public void srcWithJavaScriptProtocol_Static() throws Exception {
-        final String html = "<html><head><script src='javascript:\"alert(1)\"'></script></head><body></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head><script src='javascript:\"alert(1)\"'></script></head><body></body></html>";
         loadPageWithAlerts2(html);
     }
 
@@ -96,8 +96,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§foo.js", "foo.js", "§§URL§§", ""})
     public void srcPropertyShouldBeAFullUrl() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -129,8 +129,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "null", "", "null"})
     public void srcPropertyNoSource() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -161,8 +161,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     public void srcWithJavaScriptProtocol_Dynamic() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var script=document.createElement('script');\n"
@@ -182,8 +182,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void reexecuteModifiedScript() throws Exception {
-        final String html =
-              "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  log('start');\n"
@@ -211,7 +211,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
-            + LOG_TITLE_FUNCTION
+            // do not use LOG_TITLE_FUNCTION here
+            + "    function log(msg) { window.document.title += msg + '\\u00a7'; }\n"
             + "</script>\n"
             + "  <script>\n"
             + "    //<![CDATA[\n"
@@ -252,7 +253,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
-            + LOG_TITLE_FUNCTION
+            // do not use LOG_TITLE_FUNCTION here
+            + "    function log(msg) { window.document.title += msg + '\\u00a7'; }\n"
             + "</script>\n"
             + "  <script>\n"
             + "    //<![CDATA[\n"
@@ -283,8 +285,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"hello", "hello", "-"})
     public void scriptInCdataHtml() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -319,8 +321,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void createElementWithCreateTextNode() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  log('start');\n"
@@ -328,7 +330,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log('exception'); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
@@ -344,8 +346,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "middle", "executed", "end"})
     public void createElementWithCreateTextNodeAndAppend() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  log('start');\n"
@@ -353,7 +355,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log('exception'); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('middle');\n"
               + "  document.body.appendChild(script);\n"
               + "  log('end');\n"
@@ -370,8 +372,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void createElementWithSetText() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  log('start');\n"
@@ -392,8 +394,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "middle", "executed", "end"})
     public void createElementWithSetTextAndAppend() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  log('start');\n"
@@ -415,8 +417,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void createElementWithSetSrc() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  log('start');\n"
@@ -440,8 +442,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "middle", "end", "executed"})
     public void createElementWithSetSrcAndAppend() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  log('start');\n"
@@ -467,8 +469,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void replaceSelfWithCreateTextNode() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  log('start');\n"
@@ -476,7 +478,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log('exception'); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
@@ -492,8 +494,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "end"})
     public void replaceSelfWithSetText() throws Exception {
         // TODO this test is the same as #reexecuteModifiedScriptWhenReappending()
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  log('start');\n"
@@ -514,8 +516,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void replaceSelfWithSetSrc() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  log('start');\n"
@@ -539,8 +541,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "executed", "end"})
     public void replaceWithCreateTextNodeEmpty() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script id='js1'></script>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -549,7 +551,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log('exception'); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
@@ -564,8 +566,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void replaceWithCreateTextNodeBlank() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script id='js1'> </script>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -574,7 +576,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log('exception'); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
@@ -589,8 +591,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"script", "start", "end"})
     public void replaceWithCreateTextNodeScript() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script id='js1'>\n"
               + LOG_TITLE_FUNCTION
               + "  log('script');\n"
@@ -601,7 +603,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {log('exception'); }\n"
+              + "  } catch(e) {logEx(e); }\n"
               + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
@@ -616,8 +618,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "executed", "end"})
     public void replaceWithSetTextEmpty() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script id='js1'></script>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -638,8 +640,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void replaceWithSetTextBlank() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script id='js1'> </script>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -660,8 +662,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"script", "start", "end"})
     public void replaceWithSetTextScript() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script id='js1'>\n"
               + LOG_TITLE_FUNCTION
               + "  log('script');\n"
@@ -684,8 +686,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end", "executed"})
     public void replaceWithSetSrcEmpty() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "</script>\n"
@@ -711,8 +713,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void replaceWithSetSrcBlank() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script id='js1'> </script>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -736,8 +738,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"script", "start", "end"})
     public void replaceWithSetSrcScript() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script id='js1'>\n"
               + LOG_TITLE_FUNCTION
               + "  log('script');\n"
@@ -763,8 +765,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"executed", "start", "end"})
     public void moveWithAppend() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<div>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
@@ -789,8 +791,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"executed", "start", "end"})
     public void moveWithInsert() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<div>\n"
               + "<script id='js1'>\n"
               + LOG_TITLE_FUNCTION
@@ -812,7 +814,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"script-for", "exception", "script-body"})
+    @Alerts({"script-for", "TypeError", "script-body"})
     public void scriptForEvent() throws Exception {
         // IE accepts it with () or without
         scriptForEvent("onload");
@@ -820,7 +822,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     private void scriptForEvent(final String eventName) throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -829,7 +832,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "  try {\n"
             + "    document.form1.txt.value = 'hello';\n"
             + "    log(document.form1.txt.value);\n"
-            + "  } catch(e) {log('exception'); }\n"
+            + "  } catch(e) {logEx(e); }\n"
             + "</script></head>\n"
             + "<body>\n"
             + "  <form name='form1'><input type='text' name='txt'></form>\n"
@@ -851,8 +854,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "4", "2", "5"})
     public void onReadyStateChange_Order() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -874,8 +877,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     public void onReadyStateChange_EventAvailable() throws Exception {
-        final String html =
-              "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "var s = document.createElement('script');\n"
             + "s.src = '//:';\n"
@@ -896,8 +899,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"3", "4", "2"})
     public void onReadyStateChange_Order_NoBody() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -919,8 +922,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void text() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -949,8 +952,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts("onload")
     public void onload_after_deferReadStateComplete() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -972,8 +975,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "2", "3"})
     public void scriptType() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -995,8 +998,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts("\\n\\s\\s<ul>{{for\\speople}}\\n\\s\\s\\s\\s<li>Name:\\s{{:name}}</li>\\n\\s\\s{{/for}}</ul>\\n")
     public void specialScriptType() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
@@ -1027,8 +1030,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     public void appendChild_UnexpectedCall() throws Exception {
-        final String html =
-                "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  var script = document.createElement('script');\n"
@@ -1050,8 +1053,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     public void insertBeforeUnexpectedCall() throws Exception {
-        final String html =
-                "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><head><title>foo</title></head><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  var script = document.createElement('script');\n"
@@ -1075,7 +1078,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts("onload for window")
     public void scriptEventFor() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1107,8 +1111,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"function foo() { return a > b}", "function mce() { return a &gt; b}"})
     public void innerHtml() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
 
             + "<script id='script1'>function foo() { return a > b}</script>\n"
 
@@ -1138,8 +1142,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts("\\n\\s\\s\\s\\s<script\\sid=\"testScript\">function\\sfoo()\\s{\\sreturn\\sa\\s>\\sb}</script>\\n\\s\\s")
     public void innerHTMLGetSet() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
 
@@ -1152,7 +1156,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "    var div = document.getElementById('tester');\n"
             + "    try {\n"
             + "      div.innerHTML = div.innerHTML;\n"
-            + "    } catch (e) { log('exception'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "    log(div.innerHTML);\n"
             + "  </script>\n"
 
@@ -1168,7 +1172,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts("1 3 2")
     public void async() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script src='js1.js'></script>\n"
             + "<script src='js2.js' async></script>\n"
             + "<script src='js3.js'></script>\n"
@@ -1183,13 +1188,44 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
+     * The async attribute must not be used if the src attribute is absent (i.e. for inline scripts)
+     * for classic scripts, in this case it would have no effect.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1 two 3 5 4")
+    public void asyncWithoutSrc() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script src='js1.js'></script>\n"
+            + "<script async>document.title += ' two';</script>\n"
+            + "<script src='js3.js'></script>\n"
+            + "<script src='js4.js' async>document.title += ' four';</script>\n"
+            + "<script src='js5.js'></script>\n"
+            + "</body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "document.title += ' 1';");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js3.js"), "document.title += ' 3';");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js4.js"), "document.title += ' 4';");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js5.js"), "document.title += ' 5';");
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("2 1")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "1 2",
+            EDGE = "1 2",
+            FF = "1 2",
+            FF_ESR = "1 2")
     public void async2() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + "  var s1 = document.createElement('script');\n"
             + "  s1.src = 'js1.js';\n"
@@ -1210,14 +1246,21 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2 1")
-    public void asyncLoadsAsync() throws Exception {
-        final String html = "<html><body>\n"
-            + "<script async>\n"
+    @Alerts("0 3 2 1")
+    @HtmlUnitNYI(CHROME = "0 3 1 2",
+            EDGE = "0 3 1 2",
+            FF = "0 3 1 2",
+            FF_ESR = "0 3 1 2")
+    public void syncLoadsAsync() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script>\n"
+            + "  document.title += ' 0';"
             + "  var s1 = document.createElement('script');\n"
             + "  s1.src = 'js1.js';\n"
             + "  s1.async = true;\n"
             + "  document.body.appendChild(s1);\n"
+            + "  document.title += ' 3';"
             + "</script>\n"
             + "<script src='js2.js'></script>\n"
             + "</body></html>\n";
@@ -1233,21 +1276,28 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1 2 3")
-    public void asyncFromAsyncTask() throws Exception {
-        final String html = "<html><body><script>\n"
-            + "function addAsyncScript() {\n"
-            + "  var script = document.createElement('script');\n"
-            + "  script.src = 'js.js';\n"
-            + "  script.async = true;\n"
-            + "  document.head.appendChild(script);\n"
-            + "  document.title += ' 2';\n"
-            + "}\n"
-            + "setTimeout(addAsyncScript, 5);\n"
-            + "document.title += ' 1';\n"
-            + "</script></body></html>\n";
+    @Alerts(DEFAULT = "2 0 3 1",
+            FF_ESR = "0 3 2 1")
+    @HtmlUnitNYI(FF_ESR = "2 0 3 1")
+    public void asyncLoadsAsync() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<script src='script.js' async></script>\n"
+            + "<script src='js2.js'></script>\n"
+            + "</body></html>\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "document.title += ' 3';");
+        final String script =
+                "  document.title += ' 0';"
+                + "  var s1 = document.createElement('script');\n"
+                + "  s1.src = 'js1.js';\n"
+                + "  s1.async = true;\n"
+                + "  document.body.appendChild(s1);\n"
+                + "  document.title += ' 3';\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script.js"), script);
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "document.title += ' 1';");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "document.title += ' 2';");
 
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
@@ -1257,9 +1307,61 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"1", "2", "3"})
+    public void syncFromAsyncTask() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function addScript() {\n"
+            + "  var script = document.createElement('script');\n"
+            + "  script.src = 'js.js';\n"
+            + "  document.head.appendChild(script);\n"
+            + "  log('2');\n"
+            + "}\n"
+            + "setTimeout(addScript, 5);\n"
+            + "  log('1');\n"
+            + "</script></body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "log('3')");
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "2", "3"})
+    public void asyncFromAsyncTask() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function addAsyncScript() {\n"
+            + "  var script = document.createElement('script');\n"
+            + "  script.src = 'js.js';\n"
+            + "  script.async = true;\n"
+            + "  document.head.appendChild(script);\n"
+            + "  log('2');\n"
+            + "}\n"
+            + "setTimeout(addAsyncScript, 5);\n"
+            + "  log('1');\n"
+            + "</script></body></html>\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "log('3')");
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"undefined", "append", "append done", "from script", "undefined"})
     public void asyncOnLoad() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "</script>\n"
@@ -1289,7 +1391,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "null", "true", "", "true", "", "false", "null"})
     public void asyncProperty() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script id='script1' src='js1.js'></script>\n"
             + "<script id='script2' src='js2.js' async></script>\n"
@@ -1329,7 +1432,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "null", "true", "true", "true", "", "true", "true", "false", "null"})
     public void asyncAttribute() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script id='script1' src='js1.js'></script>\n"
             + "<script id='script2' src='js2.js' async></script>\n"
@@ -1373,7 +1477,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts("inside script.js")
     public void loadScriptDynamicallyAdded() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1405,7 +1510,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"change type", "type changed"})
     public void loadScriptDynamicallyAddedUnsupportedType() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1439,8 +1545,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"out", "\\n\\s\\s\\s\\s<!--\\syy\\s--!>\\n\\s\\s\\s\\slog('out');\\n\\s\\s"})
     public void incorrectlyClosedComment() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
@@ -1469,8 +1575,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"null-", "testType-testType", "-"})
     public void modifyType() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script id='testScript'></script>\n"
             + "</head>\n"
@@ -1501,8 +1607,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"typeAttr-typeAttr", "null-", "newType-newType", "null-null"})
     public void modifyTypeAttribute() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script id='testScript' type='typeAttr'></script>\n"
             + "</head>\n"
@@ -1536,8 +1642,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"typeAttr", "text/javascript"})
     public void modifyTypeToJs() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1566,7 +1672,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts("onerror")
     public void onErrorHandler() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1585,8 +1692,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"var x = 'HtmlUnit'", "</> htmx rocks!"})
     public void innerHtml1() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Page Title</title>\n"
             + "    <script>\n"
@@ -1614,8 +1721,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"var x = 'HtmlUnit'", "<div>htmx rocks</div>"})
     public void innerHtmlTag() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Page Title</title>\n"
             + "    <script>\n"
@@ -1643,8 +1750,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "&lt;/> htmx rocks!"})
     public void innerHtmlEscaping() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Page Title</title>\n"
             + "    <script>\n"

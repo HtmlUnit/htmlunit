@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,9 @@ package org.htmlunit.javascript.host.worker;
 import java.net.URL;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@code DedicatedWorkerGlobalScope}.
@@ -29,7 +27,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Rural Hunter
  */
-@RunWith(BrowserRunner.class)
 public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
     /**
@@ -38,7 +35,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: Result = 15")
     public void onmessage() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -47,7 +45,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -67,7 +65,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: Result = 15")
     public void selfOnmessage() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
@@ -75,7 +74,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "self.onmessage = function(e) {\n"
@@ -95,7 +94,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: Result = 15")
     public void selfAddEventListener() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
@@ -103,7 +103,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "self.addEventListener('message', (e) => {\n"
@@ -123,14 +123,15 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: timeout")
     public void selfSetTimeout() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "self.setTimeout(function() {\n"
@@ -149,14 +150,15 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: interval")
     public void selfSetInterval() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "var id = self.setInterval(function() {\n"
@@ -170,17 +172,21 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("Received: func=function addEventListener() { [native code] }")
     public void functionDefaultValue() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "postMessage('func='+self.addEventListener);";
@@ -199,7 +205,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             FF = {},
             FF_ESR = {})
     public void workerCodeWithWrongMimeType() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -208,7 +215,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -228,7 +235,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: Bob [GSCE] [undefined]")
     public void workerName() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -237,7 +245,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -268,7 +276,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts("Received: Bob the builder")
     public void workerNameSet() throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -277,12 +286,70 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
             + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
                 + "  name = name + ' the builder';\n"
                 + "  postMessage(name);\n"
+                + "}\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Received: working")
+    public void workerOptionsUndefined() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js', undefined);\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    log('Received: ' + e.data);\n"
+            + "  };\n"
+            + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
+            + "} catch(e) { logEx(e); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "onmessage = function(e) {\n"
+                + "  postMessage('working');\n"
+                + "}\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Received: working")
+    public void workerOptionsNull() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js', null);\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    log('Received: ' + e.data);\n"
+            + "  };\n"
+            + "  setTimeout(function() { myWorker.postMessage('Heho');}, 10);\n"
+            + "} catch(e) { logEx(e); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "onmessage = function(e) {\n"
+                + "  postMessage('working');\n"
                 + "}\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);

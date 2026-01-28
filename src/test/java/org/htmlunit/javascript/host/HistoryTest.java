@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,24 +19,22 @@ import org.htmlunit.TopLevelWindow;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link History}.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HistoryTest extends WebServerTestCase {
 
     /**
      * Starts the web server prior to test execution.
      * @throws Exception if an error occurs
      */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         startWebServer("src/test/resources/org/htmlunit/javascript/host");
     }

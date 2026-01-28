@@ -25,7 +25,7 @@
 
     var room = {
         init : function() {
-            var location = "ws://" + window.location.hostname + ":" + window.location.port;
+            var location = "ws://" + window.location.hostname + ":" + window.location.port + "/ws";
             this._ws = new WebSocket(location);
             this._ws.binaryType = 'arraybuffer';
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@ package org.htmlunit.html.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
@@ -252,6 +253,7 @@ public class SimpleRange implements Serializable {
         else {
             end = endContainer_.getNextSibling();
         }
+
         boolean foundStart = false;
         boolean started = false;
         final Iterator<DomNode> i = ancestor.getDescendants().iterator();
@@ -276,6 +278,7 @@ public class SimpleRange implements Serializable {
      * Moves the contents of a Range from the containing document or document
      * fragment to a new DocumentFragment.
      * @return DocumentFragment containing the extracted contents
+     * @throws DOMException in case of error
      */
     public DomDocumentFragment extractContents() throws DOMException {
         final DomDocumentFragment fragment = cloneContents();
@@ -289,7 +292,8 @@ public class SimpleRange implements Serializable {
 
     /**
      * @return true if startContainer equals endContainer and
-     * startOffset equals endOffset
+     *         startOffset equals endOffset
+     * @throws DOMException in case of error
      */
     public boolean isCollapsed() throws DOMException {
         return startContainer_ == endContainer_ && startOffset_ == endOffset_;
@@ -297,7 +301,8 @@ public class SimpleRange implements Serializable {
 
     /**
      * @return the deepest common ancestor container of this range's two
-     * boundary-points.
+     *         boundary-points.
+     * @throws DOMException in case of error
      */
     public DomNode getCommonAncestorContainer() throws DOMException {
         if (startContainer_ != null && endContainer_ != null) {
@@ -376,8 +381,7 @@ public class SimpleRange implements Serializable {
     }
 
     private static void insertNodeOrDocFragment(final DomNode parent, final DomNode newNode, final DomNode refNode) {
-        if (newNode instanceof DocumentFragment) {
-            final DocumentFragment fragment = (DocumentFragment) newNode;
+        if (newNode instanceof DocumentFragment fragment) {
 
             final NodeList childNodes = fragment.getChildNodes();
             while (childNodes.getLength() > 0) {
@@ -449,10 +453,9 @@ public class SimpleRange implements Serializable {
      */
     @Override
     public boolean equals(final Object obj) {
-        if (!(obj instanceof SimpleRange)) {
+        if (!(obj instanceof SimpleRange other)) {
             return false;
         }
-        final SimpleRange other = (SimpleRange) obj;
         return new EqualsBuilder()
             .append(startContainer_, other.startContainer_)
             .append(endContainer_, other.endContainer_)
@@ -465,11 +468,7 @@ public class SimpleRange implements Serializable {
      */
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-            .append(startContainer_)
-            .append(endContainer_)
-            .append(startOffset_)
-            .append(endOffset_).toHashCode();
+        return Objects.hash(startContainer_, endContainer_, startOffset_, endOffset_);
     }
 
     /**
@@ -489,15 +488,15 @@ public class SimpleRange implements Serializable {
     }
 
     private static String getText(final DomNode node) {
-        if (node instanceof SelectableTextInput) {
-            return ((SelectableTextInput) node).getText();
+        if (node instanceof SelectableTextInput input) {
+            return input.getText();
         }
         return node.getTextContent();
     }
 
     private static void setText(final DomNode node, final String text) {
-        if (node instanceof SelectableTextInput) {
-            ((SelectableTextInput) node).setText(text);
+        if (node instanceof SelectableTextInput input) {
+            input.setText(text);
         }
         else {
             node.setTextContent(text);
@@ -552,10 +551,9 @@ public class SimpleRange implements Serializable {
      * @return a list with all nodes contained in this range
      */
     public List<DomNode> containedNodes() {
-        final List<DomNode> nodes = new ArrayList<>();
         final DomNode ancestor = getCommonAncestorContainer();
         if (ancestor == null) {
-            return nodes;
+            return Collections.emptyList();
         }
 
         final DomNode start;
@@ -591,6 +589,7 @@ public class SimpleRange implements Serializable {
 
         boolean foundStart = false;
         boolean started = false;
+        final List<DomNode> nodes = new ArrayList<>();
         for (final DomNode n : ancestor.getDescendants()) {
             if (n == end) {
                 break;

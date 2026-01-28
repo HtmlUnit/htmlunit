@@ -24,7 +24,7 @@
     <module name="Translation"/>
 
     <module name="Header">
-        <property name="header" value="/*\n * Copyright (c) 2002-2024 Gargoyle Software Inc.\n *\n * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n * https://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\n"/>
+        <property name="header" value="/*\n * Copyright (c) 2002-2026 Gargoyle Software Inc.\n *\n * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n * https://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\n"/>
     </module>
 
     <module name="FileTabCharacter">
@@ -33,6 +33,7 @@
 
     <module name="LineLength">
         <property name="max" value="120"/>
+        <property name="ignorePattern" value="^(package|import| *\* *[^ ]+).*"/>
     </module>
 
     <!-- Prevent two spaces after @xxxx -->
@@ -105,6 +106,10 @@
         <property name="message" value="System.out.print/ln found"/>
     </module>
 
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value="(.*[\\/]test[\\/].*$)|(module\-info\.java$)"/>
+    </module>
+
     <module name="TreeWalker">
 
         <property name="tabWidth" value="4"/>
@@ -121,6 +126,10 @@
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
+        <module name="MissingJavadocMethod"/>
+        <module name="MissingJavadocPackage"/>
+        <module name="MissingJavadocType"/>
+
         <module name="JavadocMethod">
             <property name="accessModifiers" value="public, protected"/>
         </module>
@@ -129,7 +138,7 @@
             <property name="authorFormat" value="\S \S"/>
         </module>
         <module name="JavadocVariable">
-            <property name="scope" value="protected"/>
+            <property name="accessModifiers" value="protected"/>
         </module>
         <module name="JavadocStyle">
             <property name="scope" value="protected"/>
@@ -137,6 +146,16 @@
             <property name="checkEmptyJavadoc" value="false"/>
             <property name="checkHtml" value="true"/>
         </module>
+        <module name="InvalidJavadocPosition"/>
+        <module name="JavadocContentLocation"/>
+        <module name="JavadocLeadingAsteriskAlign" />
+        <!--module name="JavadocMissingLeadingAsterisk"/-->
+        <module name="JavadocMissingWhitespaceAfterAsterisk"/>
+        <!--module name="JavadocParagraph"/-->
+        <module name="JavadocTagContinuationIndentation"/>
+        <module name="NonEmptyAtclauseDescription"/>
+        <!--module name="RequireEmptyLineBeforeBlockTagGroup"/-->
+        <module name="SingleLineJavadoc"/>
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
@@ -249,7 +268,6 @@
             <property name="tokens" value="VARIABLE_DEF,PARAMETER_DEF"/>
             <property name="validateEnhancedForLoopVariable" value="true"/>
         </module>
-        <module name="HiddenField"/>
         <module name="MissingOverride"/>
     </module>
 </module>

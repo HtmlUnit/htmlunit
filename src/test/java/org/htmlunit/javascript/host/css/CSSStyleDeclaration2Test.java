@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,9 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -31,7 +27,6 @@ import org.openqa.selenium.WebDriver;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
     /*
@@ -90,7 +85,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
         buffer += ',' + node.style[prop];
         node.style[prop] = '42';
         buffer += ',' + node.style[prop];
-      } catch (e) {
+      } catch(e) {
           buffer += ',' + 'error';
       }
       ta.value += buffer + '\n';
@@ -106,7 +101,10 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"success", "success", "success", "success"})
+    @Alerts({"bottom: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "left: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "right: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "top: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]"})
     public void width_like_properties() throws Exception {
         width_like_properties("bottom", "left", "right", "top");
     }
@@ -115,8 +113,10 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"borderBottomWidth 42% - 42em", "borderLeftWidth 42% - 42em",
-                "borderRightWidth 42% - 42em", "borderTopWidth 42% - 42em"})
+    @Alerts({"borderBottomWidth: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42em]",
+             "borderLeftWidth: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42em]",
+             "borderRightWidth: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42em]",
+             "borderTopWidth: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42em]"})
     public void width_like_properties_border() throws Exception {
         width_like_properties("borderBottomWidth", "borderLeftWidth", "borderRightWidth", "borderTopWidth");
     }
@@ -125,7 +125,10 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"success", "success", "success", "success"})
+    @Alerts({"marginBottom: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "marginLeft: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "marginRight: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "marginTop: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]"})
     public void width_like_properties_margin() throws Exception {
         width_like_properties("marginBottom", "marginLeft", "marginRight", "marginTop");
     }
@@ -134,7 +137,10 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"success", "success", "success", "success"})
+    @Alerts({"paddingBottom: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "paddingLeft: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "paddingRight: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "paddingTop: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]"})
     public void width_like_properties_padding() throws Exception {
         width_like_properties("paddingBottom", "paddingLeft", "paddingRight", "paddingTop");
     }
@@ -143,7 +149,12 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"success", "success", "success", "success", "success", "success"})
+    @Alerts({"height: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "width: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "maxHeight: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "maxWidth: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "minHeight: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+             "minWidth: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]"})
     public void width_like_properties_heightWidth() throws Exception {
         width_like_properties("height", "width", "maxHeight", "maxWidth", "minHeight", "minWidth");
     }
@@ -152,21 +163,24 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"success", "letterSpacing 42% - 42em",
-                       "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
-                       "success",
-                       "success",
-                       "wordSpacing 42% - 42em"},
-            FF = {"success", "letterSpacing 42% - 42em",
-                  "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
-                  "success",
-                  "success",
-                  "success"},
-            FF_ESR = {"success", "letterSpacing 42% - 42em",
-                      "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
-                      "success",
-                      "success",
-                      "success"})
+    @Alerts(DEFAULT = {"fontSize: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+                       "letterSpacing: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42em]",
+                       "outlineWidth: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42em]",
+                       "textIndent: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+                       "verticalAlign: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+                       "wordSpacing: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42em]"},
+            FF = {"fontSize: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+                  "letterSpacing: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+                  "outlineWidth: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42em]",
+                  "textIndent: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+                  "verticalAlign: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+                  "wordSpacing: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]"},
+            FF_ESR = {"fontSize: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+                      "letterSpacing: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+                      "outlineWidth: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42em]",
+                      "textIndent: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+                      "verticalAlign: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]",
+                      "wordSpacing: initial [] 42.0 [] 42.7 [] 42 [] 42px [42px] 42mm [42mm] 42em [42em] 42% [42%]"})
     public void width_like_properties_font() throws Exception {
         width_like_properties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
                         "verticalAlign", "wordSpacing");
@@ -174,66 +188,41 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
     private void width_like_properties(final String... properties) throws Exception {
         final String props = "'" + String.join("', '", properties) + "'";
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var properties = [" + props + "];\n"
             + "\n"
             + "  for (var prop in properties) {\n"
             + "    prop = properties[prop];\n"
-            + "    var result = '';\n"
+            + "    var result = prop + ':';\n"
 
             + "    var node = document.createElement('div');\n"
-            + "    if (node.style[prop] != '') {\n"
-            + "      if (result == '') { result += prop } else { result += '; ' }\n"
-            + "      result += ' initial ' + node.style[prop];\n"
-            + "    }\n"
+            + "    result += ' initial [' + node.style[prop] + ']';\n"
 
             + "    node.style[prop] = '42.0';\n"
-            + "    if (node.style[prop] != '42px') {\n"
-            + "      if (result == '') { result += prop } else { result += ';' }\n"
-            + "      result += ' 42.0 - ' + node.style[prop];\n"
-            + "    }\n"
+            + "    result += ' 42.0 [' + node.style[prop] + ']';\n"
 
             + "    node.style[prop] = '42.7';\n"
-            + "    var expected = document.all ? '42px' : '42.7px';\n"
-            + "    if (node.style[prop] != expected) {\n"
-            + "      if (result == '') { result += prop } else { result += ';' }\n"
-            + "      result += ' 42.7 - ' + node.style[prop];\n"
-            + "    }\n"
+            + "    result += ' 42.7 [' + node.style[prop] + ']';\n"
 
             + "    node.style[prop] = '42';\n"
-            + "    if (node.style[prop] != '42px') {\n"
-            + "      if (result == '') { result += prop } else { result += ';' }\n"
-            + "      result += ' 42 - ' + node.style[prop];\n"
-            + "    }\n"
+            + "    result += ' 42 [' + node.style[prop] + ']';\n"
 
             + "    node.style[prop] = '42px';\n"
-            + "    if (node.style[prop] != '42px') {\n"
-            + "      if (result == '') { result += prop } else { result += ';' }\n"
-            + "      result += ' 42px - ' + node.style[prop];\n"
-            + "    }\n"
+            + "    result += ' 42px [' + node.style[prop] + ']';\n"
 
             + "    node.style[prop] = '42mm';\n"
-            + "    if (node.style[prop] != '42mm') {\n"
-            + "      if (result == '') { result += prop } else { result += ';' }\n"
-            + "      result += ' 42mm - ' + node.style[prop];\n"
-            + "    }\n"
+            + "    result += ' 42mm [' + node.style[prop] + ']';\n"
 
             + "    node.style[prop] = '42em';\n"
-            + "    if (node.style[prop] != '42em') {\n"
-            + "      if (result == '') { result += prop } else { result += ';' }\n"
-            + "      result += ' 42em - ' + node.style[prop];\n"
-            + "    }\n"
+            + "    result += ' 42em [' + node.style[prop] + ']';\n"
 
             + "    node.style[prop] = '42%';\n"
-            + "    if (node.style[prop] != '42%') {\n"
-            + "      if (result == '') { result += prop } else { result += ';' }\n"
-            + "      result += ' 42% - ' + node.style[prop];\n"
-            + "    }\n"
+            + "    result += ' 42% [' + node.style[prop] + ']';\n"
 
-            + "    log(result == '' ? 'success' : result);\n"
+            + "    log(result);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -266,8 +255,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
     private void checkPropertyValuesDirect(final String property, final String... propertyValues) throws Exception {
         final String propValues = "'" + String.join("', '", propertyValues) + "'";
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var propValues = [" + propValues + "];\n"
@@ -290,8 +279,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
     private void checkPropertyValues(final String property, final String... propertyValues) throws Exception {
         final String propValues = "'" + String.join("', '", propertyValues) + "'";
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var propValues = [" + propValues + "];\n"
@@ -317,8 +306,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      */
     @Test
     public void properties() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Tester</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -330,22 +319,18 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             + "    } catch(e) {}\n" // ignore strange properties like '@@iterator'
             + "  }\n"
             + "  array.sort();\n"
-            + "  document.getElementById('myTextarea').value = array.join('\\n');\n"
+            + "  document.getElementById('myLog').value = array.join('\\n');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'><br></div>\n"
-            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties", ".txt");
 
         final WebDriver driver = loadPage2(html);
-
-        String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
-        actual = StringUtils.replace(actual, "\r\n", "\n");
-
-        assertEquals(expected, actual);
+        verify(() -> driver.findElement(By.id("myLog")).getDomProperty("value"), expected);
     }
 
     /**
@@ -354,8 +339,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      */
     @Test
     public void properties2() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -367,21 +352,18 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             + "    } catch(e) {}\n" // ignore strange properties like '@@iterator'
             + "  }\n"
             + "  array.sort();\n"
-            + "  document.getElementById('myTextarea').value = array.join('\\n');\n"
+            + "  document.getElementById('myLog').value = array.join('\\n');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'><br></div>\n"
-            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties2", ".txt");
 
         final WebDriver driver = loadPage2(html);
-
-        String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
-        actual = StringUtils.replace(actual, "\r\n", "\n");
-        assertEquals(expected, actual);
+        verify(() -> driver.findElement(By.id("myLog")).getDomProperty("value"), expected);
     }
 
     /**
@@ -390,8 +372,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void setLength() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -416,8 +398,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
     @Test
     @Alerts({"0", "Type error"})
     public void setLengthStrictMode() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -443,7 +425,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
     @Test
     @Alerts({"function values() { [native code] }", "no for..of", "display"})
     public void iterator() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION

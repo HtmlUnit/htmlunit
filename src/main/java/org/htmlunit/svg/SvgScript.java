@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@ package org.htmlunit.svg;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.ScriptElement;
 import org.htmlunit.html.ScriptElementSupport;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the SVG element {@code script}.
@@ -64,10 +64,22 @@ public class SvgScript extends SvgElement implements ScriptElement {
     }
 
     /**
+     * Returns the value of the attribute {@code src}. Refer to the
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return the value of the attribute {@code src}
+     *         or an empty string if that attribute isn't defined.
+     */
+    public final String getSrcAttribute() {
+        return getSrcAttributeNormalized();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
-    public final String getSrcAttribute() {
+    public final String getScriptSource() {
         return getSrcAttributeNormalized();
     }
 
@@ -75,12 +87,9 @@ public class SvgScript extends SvgElement implements ScriptElement {
      * Helper for src retrieval and normalization.
      *
      * @return the value of the attribute {@code src} with all line breaks removed
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     protected final String getSrcAttributeNormalized() {
-        // at the moment StringUtils.replaceChars returns the org string
-        // if nothing to replace was found but the doc implies, that we
-        // can't trust on this in the future
         final String attrib = getAttributeDirect(SRC_ATTRIBUTE);
         if (ATTRIBUTE_NOT_DEFINED == attrib) {
             return attrib;
@@ -90,10 +99,22 @@ public class SvgScript extends SvgElement implements ScriptElement {
     }
 
     /**
+     * Returns the value of the attribute {@code charset}. Refer to the
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return the value of the attribute {@code charset}
+     *         or an empty string if that attribute isn't defined.
+     */
+    public final String getCharsetAttribute() {
+        return getAttributeDirect("charset");
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
-    public final String getCharsetAttribute() {
+    public final String getScriptCharset() {
         return getAttributeDirect("charset");
     }
 
@@ -103,7 +124,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code defer}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getDeferAttribute() {
         return getAttributeDirect("defer");

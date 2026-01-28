@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,14 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-
 import java.net.URL;
 
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -39,16 +34,16 @@ import org.openqa.selenium.WebDriver;
  * @author Madis Pärn
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class Document2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidCharacterError/DOMException")
     public void createElementWithAngleBrackets() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -56,7 +51,7 @@ public class Document2Test extends WebDriverTestCase {
             + "      var select = document.createElement('<select>');\n"
             + "      log(select.add == undefined);\n"
             + "    }\n"
-            + "    catch (e) { log('exception') }\n"
+            + "    catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -68,9 +63,10 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("InvalidCharacterError/DOMException")
     public void createElementWithHtml() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -85,7 +81,7 @@ public class Document2Test extends WebDriverTestCase {
             + "      log(option.id);\n"
             + "      log(option.childNodes.length);\n"
             + "    }\n"
-            + "    catch (e) { log('exception') }\n"
+            + "    catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -101,7 +97,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void createElementPrototype() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var HAS_EXTENDED_CREATE_ELEMENT_SYNTAX = (function() {\n"
@@ -125,8 +122,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void appendChild() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -148,8 +145,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void getElementByTagNameNS_includesHtml() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -183,7 +180,8 @@ public class Document2Test extends WebDriverTestCase {
     }
 
     private void importNode(final boolean deep) throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -213,7 +211,8 @@ public class Document2Test extends WebDriverTestCase {
                 "<?xml version=\"1.0\"?><html xmlns=\"http://www.w3.org/1999/xhtml\"><div id='child'> </div></html>",
                 200, "OK", MimeType.TEXT_XML);
 
-        final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
+        final String html =
+            "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -256,7 +255,8 @@ public class Document2Test extends WebDriverTestCase {
                 + "<div id='child'><div id='child2'><div id='child3'>-</div></div></div></html>",
                 200, "OK", MimeType.TEXT_XML);
 
-        final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
+        final String html =
+            "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -295,7 +295,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"div1", "null", "null"})
     public void adoptNode() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var newDoc = document.implementation.createHTMLDocument('something');\n"
@@ -317,7 +318,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"null", "text1"})
     public void activeElement() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  alert(document.activeElement);\n"
             + "  function test() {\n"
             + "    alert(document.activeElement.id);\n"
@@ -342,8 +344,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLBodyElement]", "§§URL§§#", "§§URL§§#"})
     public void activeElement_iframe() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
 
@@ -407,7 +409,8 @@ public class Document2Test extends WebDriverTestCase {
              "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
              "<p>a & b</p> &amp; \u0162 \" '"})
     public void createTextNodeWithHtml() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onload='test()'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -434,13 +437,14 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void queryCommandEnabled() throws Exception {
-        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function x() {\n"
             + "  var d = window.frames['f'].document;\n"
-            + "  try { log(d.queryCommandEnabled('SelectAll')); } catch(e) { log('error'); }\n"
-            + "  try { log(d.queryCommandEnabled('sElectaLL')); } catch(e) { log('error'); }\n"
+            + "  try { log(d.queryCommandEnabled('SelectAll')); } catch(e) { logEx(e); }\n"
+            + "  try { log(d.queryCommandEnabled('sElectaLL')); } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></body></html>";
 
@@ -455,9 +459,11 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true", "true", "true"},
             FF = {"false", "false", "false"},
             FF_ESR = {"false", "false", "false"})
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(FF = {"true", "true", "true"},
+            FF_ESR = {"true", "true", "true"})
     public void queryCommandEnabledDesignMode() throws Exception {
-        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function x() {\n"
@@ -478,8 +484,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"bar", "null", "null"})
     public void getElementById() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -496,14 +502,40 @@ public class Document2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"zero", "udef"})
+    public void getElementByIdNull() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  log(top.document.getElementById(null).name);\n"
+            + "  log(top.document.getElementById(undefined).name);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form id='form1'>\n"
+            + "<input id='undefined' name='udef' type='text' value='u' />\n"
+            + "<input id='null' name='zero' type='text' value='n' />\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
     /**
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"bar", "null"})
     public void getElementById_resetId() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -527,8 +559,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("bar")
     public void getElementById_setNewId() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -552,8 +584,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("id1")
     public void getElementById_divId() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -573,8 +605,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("script1")
     public void getElementById_scriptId() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script id='script1'>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -592,7 +624,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"first", "newest"})
     public void getElementById_alwaysFirstOneInDocumentOrder() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='it' class='first'></span>\n"
             + "<span id='it' class='second'></span>\n"
             + "<script>\n"
@@ -613,8 +646,8 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     public void createStyleSheet() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -640,8 +673,8 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     public void createStyleSheet_emptyUrl() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + LOG_TITLE_FUNCTION
             + "<script>\n"
             + "  function doTest() {\n"
@@ -667,8 +700,8 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     public void createStyleSheet_insertAt() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -698,8 +731,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts({"Initial State:loading", "Changed:interactive", "Changed:complete"})
     public void readyStateEventListener() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script></head>\n"

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,6 @@
  */
 package org.htmlunit.libraries;
 
-import static org.junit.Assert.fail;
-
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,16 +22,15 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -45,9 +42,16 @@ import org.openqa.selenium.WebElement;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class YuiTest extends WebDriverTestCase {
     private static final Log LOG = LogFactory.getLog(YuiTest.class);
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeAll
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/yui/2.3.0", null);
+    }
 
     /**
      * @throws Exception if an error occurs
@@ -101,11 +105,11 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Ignore
+    @Disabled
     public void config() throws Exception {
         // Test currently commented out as there are problems with the YUI test.
         // A bug has been filed against YUI regarding the problems with the test.
-        fail("YUI test has a bug that causes this to fail.");
+        Assertions.fail("YUI test has a bug that causes this to fail.");
         //doTest("config.html");
     }
 
@@ -153,7 +157,16 @@ public class YuiTest extends WebDriverTestCase {
                     "test_createlink", "test_selected_element", "test_dom_path"},
             FF = "test_createlink",
             FF_ESR = "test_createlink")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"test_blank_image", "test_insertimage", "test_image_props",
+                           "test_close_window", "test_bold", "test_selected_element",
+                           "test_dom_path", "test_createlink"},
+            EDGE = {"test_blank_image", "test_insertimage", "test_image_props",
+                    "test_close_window", "test_bold", "test_selected_element",
+                    "test_dom_path", "test_createlink"},
+            FF = {"test_blank_image", "test_insertimage", "test_image_props",
+                  "test_bold", "test_createlink", "test_hidden_elements"},
+            FF_ESR = {"test_blank_image", "test_insertimage", "test_image_props",
+                      "test_bold", "test_createlink", "test_hidden_elements"})
     public void editor() throws Exception {
         doTest("editor.html", Arrays.asList(getExpectedAlerts()));
     }
@@ -162,7 +175,11 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
+    @Alerts("")
+    @HtmlUnitNYI(CHROME = "org.htmlunit.ScriptException: TypeError: Cannot call method \"appendChild\" of null",
+            EDGE = "org.htmlunit.ScriptException: TypeError: Cannot call method \"appendChild\" of null",
+            FF = "org.htmlunit.ScriptException: TypeError: Cannot call method \"appendChild\" of null",
+            FF_ESR = "org.htmlunit.ScriptException: TypeError: Cannot call method \"appendChild\" of null")
     public void yuiLoaderRollup() throws Exception {
         doTest("yuiloader_rollup.html");
     }
@@ -211,11 +228,11 @@ public class YuiTest extends WebDriverTestCase {
     }
 
     private void doTest(final String fileName, final String buttonToClick) throws Exception {
-        doTest(fileName, Collections.<String>emptyList(), buttonToClick, 0);
+        doTest(fileName, Collections.emptyList(), buttonToClick, 0);
     }
 
     private void doTest(final String fileName) throws Exception {
-        doTest(fileName, Collections.<String>emptyList(), null, 0);
+        doTest(fileName, Collections.emptyList(), null, 0);
     }
 
     private void doTest(final String fileName, final List<String> knownFailingTests) throws Exception {
@@ -230,7 +247,13 @@ public class YuiTest extends WebDriverTestCase {
         assertNotNull(url);
 
         final WebDriver driver = getWebDriver();
-        driver.get(url);
+        try {
+            driver.get(url);
+        }
+        catch (final WebDriverException e) {
+            assertTrue(e.getMessage(), e.getMessage().startsWith(getExpectedAlerts()[0]));
+            return;
+        }
 
         if (buttonToPush != null) {
             driver.findElement(By.id(buttonToPush)).click();
@@ -246,17 +269,11 @@ public class YuiTest extends WebDriverTestCase {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         final List<WebElement> tests = driver.findElements(By.xpath("//p[span[@class='pass' or @class='fail']]"));
         if (tests.isEmpty()) {
-            fail("No tests were executed!");
+            Assertions.fail("No tests were executed!");
         }
 
         for (final WebElement pre : tests) {
-            final String[] parts;
-            try {
-                parts = pre.getText().split(" ");
-            }
-            catch (final StaleElementReferenceException e) {
-                continue; // happens for FF17 on imageLoader test
-            }
+            final String[] parts = pre.getText().split(" ");
             final String result = parts[0];
             final String testName = parts[1].substring(0, parts[1].length() - 1);
             if ("pass".equalsIgnoreCase(result)) {
@@ -268,14 +285,5 @@ public class YuiTest extends WebDriverTestCase {
                                 knownFailingTests.contains(testName));
             }
         }
-    }
-
-    /**
-     * Performs pre-test initialization.
-     * @throws Exception if an error occurs
-     */
-    @Before
-    public void setUp() throws Exception {
-        startWebServer("src/test/resources/libraries/yui/2.3.0", null, null);
     }
 }

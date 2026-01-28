@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,20 +25,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for {@link WebResponseData}.
@@ -47,7 +46,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class WebResponseDataTest extends WebServerTestCase {
 
     private static final String GZIPPED_FILE = "testfiles/test.html.gz";
@@ -257,7 +255,7 @@ public class WebResponseDataTest extends WebServerTestCase {
      */
     @Test
     public void nullBody() throws Exception {
-        final DownloadedContent downloadedContent = new DownloadedContent.InMemory(new byte[] {});
+        final DownloadedContent downloadedContent = new DownloadedContent.InMemory(ArrayUtils.EMPTY_BYTE_ARRAY);
         final List<NameValuePair> headers = new ArrayList<>();
         final WebResponseData data = new WebResponseData(downloadedContent, 304, "NOT_MODIFIED", headers);
         assertEquals(0, data.getBody().length);
@@ -288,7 +286,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/folder1/page1", RedirectionServlet.class);
         servlets.put("/folder2/page2", RedirectionServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
 

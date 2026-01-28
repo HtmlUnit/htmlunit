@@ -3,18 +3,20 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.4.0-SNAPSHOT</version>
+    <version>5.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
     <name>HtmlUnit</name>
+    <description>
+        A headless browser intended for use in testing web-based applications.
+    </description>
     <organization>
         <name>Gargoyle Software Inc.</name>
         <url>http://www.GargoyleSoftware.com/</url>
     </organization>
-    <packaging>jar</packaging>
-    <description>
-        A headless browser intended for use in testing web-based applications.
-    </description>
     <url>https://www.htmlunit.org</url>
 
     <properties>
@@ -22,32 +24,77 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
 
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
 
-        <htmlunitcssparser.version>4.4.0-SNAPSHOT</htmlunitcssparser.version>
-        <htmlunitcsp.version>4.3.0</htmlunitcsp.version>
-        <htmlunitneko.version>4.3.0</htmlunitneko.version>
-        <htmlunitxpath.version>4.3.0</htmlunitxpath.version>
-        <htmlunitcorejs.version>4.4.0-SNAPSHOT</htmlunitcorejs.version>
-        <htmlunitwebsocketclient.version>4.4.0-SNAPSHOT</htmlunitwebsocketclient.version>
+        <surefire.argLine.modules>
+            --add-modules org.slf4j
+            --add-reads org.htmlunit=org.apache.logging.log4j
+            --add-reads org.htmlunit=org.apache.logging.log4j.core
+            --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
+            --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
+        </surefire.argLine.modules>
+
+        <maven.version.ignore>(?i).*-(alpha|beta|m|rc)([\.-]?\d+)?</maven.version.ignore>
+
+        <htmlunitcsp.version>5.0.0-SNAPSHOT</htmlunitcsp.version>
+        <htmlunitcssparser.version>5.0.0-SNAPSHOT</htmlunitcssparser.version>
+        <htmlunitcorejs.version>5.0.0-SNAPSHOT</htmlunitcorejs.version>
+        <htmlunitneko.version>5.0.0-SNAPSHOT</htmlunitneko.version>
+        <htmlunitwebsocketclient.version>4.21.0</htmlunitwebsocketclient.version>
+        <htmlunitxpath.version>5.0.0-SNAPSHOT</htmlunitxpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
+        <commons-lang3.version>3.20.0</commons-lang3.version>
+        <commons-io.version>2.21.0</commons-io.version>
+        <commons-logging.version>1.3.5</commons-logging.version>
+        <!--brotli.version>0.1.2</brotli.version-->
 
-        <htmlunitdriver.version>4.23.0-SNAPSHOT</htmlunitdriver.version>
-        <selenium.version>4.23.0</selenium.version>
+        <!-- selenium -->
+        <htmlunitdriver.version>4.40.0-SNAPSHOT</htmlunitdriver.version>
+        <selenium.version>4.40.0</selenium.version>
+        <selenium.devtools.artifactId>selenium-devtools-v143</selenium.devtools.artifactId>
 
-        <jetty.version>9.4.55.v20240627</jetty.version>
-        <log4j.version>2.23.1</log4j.version>
-        <slf4j.version>2.0.13</slf4j.version>
+        <!-- test dependencies -->
+        <junit.version>6.0.2</junit.version>
+        <junit-pioneer.version>2.3.0</junit-pioneer.version>
+        <jetty.version>12.1.5</jetty.version>
+        <quercus.version>4.0.66</quercus.version>
+        <log4j.version>2.25.3</log4j.version>
+        <slf4j.version>2.0.17</slf4j.version>
+        <commons-text.version>1.15.0</commons-text.version>
+        <commons-fileupload.version>2.0.0-M1</commons-fileupload.version>
+        <image-comparison.version>4.4.0</image-comparison.version>
+        <imageio-batik.version>3.13.0</imageio-batik.version>
+        <jfreechart.version>1.5.6</jfreechart.version>
+        <maven-model.version>3.9.12</maven-model.version>
+        <maven-artifact.version>3.9.12</maven-artifact.version>
 
-        <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>10.17.0</checkstyle.version>
-        <spotbugs.version>4.8.6</spotbugs.version>
-        <pmd.version>7.3.0</pmd.version>
-        <junit.version>4.13.2</junit.version>
-        <archunit.version>1.3.0</archunit.version>
-        <dependencycheck.version>10.0.3</dependencycheck.version>
+        <!-- quality -->
+        <checkstyle.version>12.3.1</checkstyle.version>
+        <spotbugs.version>4.9.8</spotbugs.version>
+        <pmd.version>7.20.0</pmd.version>
+        <archunit.version>1.4.1</archunit.version>
+        <dependencycheck.version>10.0.4</dependencycheck.version>
+
+        <!-- plugins -->
+        <central-publishing-plugin.version>0.9.0</central-publishing-plugin.version>
+        <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
+        <pmd-plugin.version>3.28.0</pmd-plugin.version>
+        <spotbugs-plugin.version>4.9.8.2</spotbugs-plugin.version>
+        <gpg-plugin.version>3.2.8</gpg-plugin.version>
+        <enforcer-plugin.version>3.6.2</enforcer-plugin.version>
+        <changes-plugin.version>2.12.1</changes-plugin.version>
+        <compiler-plugin.version>3.14.1</compiler-plugin.version>
+        <jar-plugin.version>3.5.0</jar-plugin.version>
+        <assembly-plugin.version>3.8.0</assembly-plugin.version>
+        <source-plugin.version>3.4.0</source-plugin.version>
+        <javadoc-plugin.version>3.12.0</javadoc-plugin.version>
+        <surefire-plugin.version>3.5.4</surefire-plugin.version>
+        <site-plugin.version>3.21.0</site-plugin.version>
+        <jacoco-plugin.version>0.8.14</jacoco-plugin.version>
+        <cyclonedx-plugin.version>2.9.1</cyclonedx-plugin.version>
     </properties>
 
     <build>
@@ -55,17 +102,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
-                <configuration>
-                    <testExcludes>
-                        <exclude>**/CodeChecker.java</exclude>
-                    </testExcludes>
-                </configuration>
+                <version>${compiler-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>${checkstyle-plugin.version}</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                     <suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
@@ -82,7 +124,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.8.6.2</version>
+                <version>${spotbugs-plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.github.spotbugs</groupId>
@@ -97,7 +139,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.24.0</version>
+                <version>${pmd-plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>net.sourceforge.pmd</groupId>
@@ -130,7 +172,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.2</version>
+                <version>${jar-plugin.version}</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -155,12 +197,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.10.0</version>
+                <version>${site-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.7.1</version>
+                <version>${assembly-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>make-assembly</id>
@@ -182,7 +224,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>${source-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -194,19 +236,22 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>${surefire-plugin.version}</version>
+                <configuration>
+                    <argLine>${surefire.argLine.modules}</argLine>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>${javadoc-plugin.version}</version>
                 <configuration>
                     <quiet>true</quiet>
                     <show>protected</show>
-                    <doclint>html,missing,reference,syntax</doclint>
+                    <doclint>html,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
-                    <excludePackageNames>netscape:netscape.*:org.htmlunit.platform.util</excludePackageNames>
+                    <excludePackageNames>org.htmlunit.platform.util</excludePackageNames>
                 </configuration>
                 <executions>
                     <execution>
@@ -219,7 +264,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>${gpg-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>verify</phase>
@@ -230,6 +275,16 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>${central-publishing-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
+            </plugin>
+            <!--
+            <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>${dependencycheck.version}</version>
@@ -237,6 +292,7 @@
                     <suppressionFiles>owasp-suppressions.xml</suppressionFiles>
                     <failBuildOnCVSS>0</failBuildOnCVSS>
                     <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <nvdDatafeedUrl>https://mirror.cveb.in/nvd/json/cve/1.1/nvdcve-1.1-{0}.json.gz</nvdDatafeedUrl>
                 </configuration>
                 <executions>
                     <execution>
@@ -246,10 +302,11 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>${enforcer-plugin.version}</version>
                 <executions>
                     <execution>
                         <configuration>
@@ -258,7 +315,7 @@
                                     <version>3.6.3</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <version>1.8.0</version>
+                                    <version>17</version>
                                 </requireJavaVersion>
                                 <dependencyConvergence />
                             </rules>
@@ -268,6 +325,25 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.cyclonedx</groupId>
+                <artifactId>cyclonedx-maven-plugin</artifactId>
+                <version>${cyclonedx-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>makeAggregateBom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <projectType>library</projectType>
+                    <outputFormat>json</outputFormat>
+                    <!-- strange but it helps -->
+                    <skipNotDeployed>false</skipNotDeployed>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -283,10 +359,11 @@
                     </instructions>
                 </configuration>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
-                <version>1.18.2</version>
+                <version>1.19.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -295,6 +372,7 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
         </plugins>
     </build>
     <profiles>
@@ -310,19 +388,44 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <excludes>
                                 <exclude>**/libraries/*.java</exclude>
+                                <exclude>**/libraries/**/*.java</exclude>
                                 <exclude>**/huge/*.java</exclude>
                                 <exclude>**/encoding/*.java</exclude>
                             </excludes>
-                            <argLine>-Xms128m -Xmx512m -Dsun.reflect.noInflation=true</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms128m -Xmx1g -Dsun.reflect.noInflation=true</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>${jacoco-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>report</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <excludes>
+                                <exclude>org/htmlunit/cssparser/**</exclude>
+                            </excludes>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -340,17 +443,23 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/libraries/*.java</include>
+                                <!--
+                                    we have to restrict to one subfolder level;
+                                    using '**' seems to confuse surefire by placing some gwt classes
+                                    in the path and then failing when trying to instantiate
+                                -->
+                                <include>**/libraries/*/*.java</include>
                             </includes>
                             <excludes>
-                                <exclude>**/libraries/JQuery3x3x1Test.java</exclude>
+                                <exclude>**/libraries/jquery/JQuery3x3x1Test.java</exclude>
                             </excludes>
-                            <argLine>-Xms128m -Xmx512m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -371,14 +480,14 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/libraries/JQuery3x3x1Test.java</include>
                             </includes>
-                            <argLine>-Xms128m -Xmx512m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -399,14 +508,16 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
+                                <include>**/huge/CtorPrototypeTest.java</include>
                                 <include>**/huge/ElementClosesElementTest.java</include>
+                                <include>**/huge/ElementClosesElement2Test.java</include>
                             </includes>
-                            <argLine>-Xms256m -Xmx512m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms256m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -427,7 +538,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -436,7 +547,7 @@
                                 <include>**/huge/HostParentOfBTest.java</include>
                                 <include>**/huge/HostParentOfCTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -457,7 +568,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -465,7 +576,7 @@
                                 <include>**/huge/HostParentOfDTest.java</include>
                                 <include>**/huge/HostParentOfFTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -486,7 +597,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -494,7 +605,7 @@
                                 <include>**/huge/HostParentOfHTest.java</include>
                                 <include>**/huge/HostParentOfITest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -515,7 +626,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -523,7 +634,7 @@
                                 <include>**/huge/HostParentOfMTest.java</include>
                                 <include>**/huge/HostParentOfNTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -544,14 +655,14 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/huge/HostParentOfPTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -572,14 +683,14 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/huge/HostParentOfSTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -600,14 +711,14 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/huge/HostParentOfS2Test.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -628,7 +739,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -636,7 +747,7 @@
                                 <include>**/huge/HostParentOfTTest.java</include>
                                 <include>**/huge/HostParentOfWTest.java</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -657,14 +768,14 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>${surefire-plugin.version}</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/encoding/**</include>
                             </includes>
-                            <argLine>-Xms512m -Xmx1024m</argLine>
+                            <argLine>${surefire.argLine.modules} -Xms512m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -679,14 +790,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>${javadoc-plugin.version}</version>
                 <configuration>
                     <quiet>true</quiet>
                     <show>protected</show>
-                    <doclint>html,missing,reference,syntax</doclint>
+                    <doclint>html,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
-                    <excludePackageNames>netscape:netscape.*:org.htmlunit.platform.util</excludePackageNames>
+                    <excludePackageNames>org.htmlunit.platform.util</excludePackageNames>
                 </configuration>
                 <reportSets>
                     <reportSet>
@@ -699,17 +810,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.6.2</version>
+                <version>3.9.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>3.6.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
-                <version>2.12.1</version>
+                <version>${changes-plugin.version}</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -728,7 +839,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jdepend-maven-plugin</artifactId>
-                <version>2.0</version>
+                <version>2.1</version>
             </plugin>
         </plugins>
     </reporting>
@@ -856,6 +967,7 @@
         </contributor>
         <contributor>
             <name>Barnaby Court</name>
+            <email>BarnabyCourt@users.sourceforge.net</email>
         </contributor>
         <contributor>
             <name>Andreas Hangler</name>
@@ -883,6 +995,7 @@
         </contributor>
         <contributor>
             <name>Mike Gallaher</name>
+            <email>gallaherm@pragmatics.com</email>
         </contributor>
         <contributor>
             <name>Dierk Koenig</name>
@@ -895,6 +1008,7 @@
         </contributor>
         <contributor>
             <name>Chris Eldredge</name>
+            <email>chriseldredge@comcast.net</email>
         </contributor>
         <contributor>
             <name>Hans Donner</name>
@@ -904,6 +1018,7 @@
         </contributor>
         <contributor>
             <name>George Murnock</name>
+            <email>george@murnock.com</email>
         </contributor>
         <contributor>
             <name>Kent Tong</name>
@@ -937,6 +1052,7 @@
         </contributor>
         <contributor>
             <name>Mark van Leeuwen</name>
+            <url>https://sourceforge.net/users/marlee/</url>
         </contributor>
         <contributor>
             <name>Brad Murray</name>
@@ -1000,6 +1116,7 @@
         </contributor>
         <contributor>
             <name>Mike Dirolf</name>
+            <email>mike@10gen.com</email>
         </contributor>
         <contributor>
             <name>Mirko Friedenhagen</name>
@@ -1191,18 +1308,47 @@
         <contributor>
             <name>Sven Strickroth</name>
         </contributor>
+        <contributor>
+            <name>Kristof Neirynck</name>
+        </contributor>
+        <contributor>
+            <name>Markus Winter</name>
+        </contributor>
+        <contributor>
+            <name>Christoph Burgmer</name>
+        </contributor>
+        <contributor>
+            <name>Tom Anderson</name>
+            <email>tom.anderson@univ.oxon.org</email>
+        </contributor>
+        <contributor>
+            <name>Knut Johannes Dahle</name>
+            <email>knut.johannes.dahle@gmail.com</email>
+        </contributor>
+        <contributor>
+            <name>Alexei Goussev</name>
+            <email>gousseff@netscape.net</email>
+        </contributor>
+        <contributor>
+            <name>Nick Kralevich</name>
+            <email>nnk@google.com</email>
+        </contributor>
+        <contributor>
+            <name>Marcos Vinicius B. de Souza</name>
+            <email>marvin.java@gmail.com</email>
+        </contributor>
+        <contributor>
+            <name>Jakob Ackermann</name>
+            <email>das7pad@outlook.com</email>
+        </contributor>
     </contributors>
     <dependencies>
-        <!-- this includes httpclient as depencency -->
+        <!-- this includes httpclient as dependency -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
             <version>${httpcomponents.version}</version>
             <exclusions>
-                <exclusion>
-                    <groupId>commons-codec</groupId>
-                    <artifactId>commons-codec</artifactId>
-                </exclusion>
                 <exclusion>
                     <groupId>commons-logging</groupId>
                     <artifactId>commons-logging</artifactId>
@@ -1219,12 +1365,6 @@
             <groupId>org.htmlunit</groupId>
             <artifactId>neko-htmlunit</artifactId>
             <version>${htmlunitneko.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>xercesImpl</artifactId>
-            <version>2.12.2</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.htmlunit</groupId>
@@ -1250,55 +1390,53 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.15.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-            <version>1.12.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-lang3</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${commons-lang3.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.16.1</version>
+            <version>${commons-io.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.3.3</version>
+            <version>${commons-logging.version}</version>
         </dependency>
-        <dependency>
-            <groupId>commons-net</groupId>
-            <artifactId>commons-net</artifactId>
-            <version>3.11.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.17.1</version>
-        </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.brotli</groupId>
             <artifactId>dec</artifactId>
-            <version>0.1.2</version>
-        </dependency>
+            <version>${brotli.version}</version>
+        </dependency-->
 
         <!-- Test dependencies. -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit-pioneer</groupId>
+            <artifactId>junit-pioneer</artifactId>
+            <version>${junit-pioneer.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.tngtech.archunit</groupId>
-            <artifactId>archunit-junit4</artifactId>
+            <artifactId>archunit-junit5</artifactId>
             <version>${archunit.version}</version>
             <scope>test</scope>
             <exclusions>
@@ -1346,7 +1484,7 @@
         <dependency>
             <groupId>com.twelvemonkeys.imageio</groupId>
             <artifactId>imageio-batik</artifactId>
-            <version>3.11.0</version>
+            <version>${imageio-batik.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -1362,7 +1500,7 @@
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
-            <version>1.17</version>
+            <version>1.19</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -1373,54 +1511,77 @@
                     <groupId>commons-io</groupId>
                     <artifactId>commons-io</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
         <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.5</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>${commons-text.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-fileupload2-jakarta</artifactId>
+            <version>${commons-fileupload.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
                     <groupId>commons-io</groupId>
                     <artifactId>commons-io</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
-                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
             <groupId>com.github.romankh3</groupId>
             <artifactId>image-comparison</artifactId>
-            <version>4.4.0</version>
+            <version>${image-comparison.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>jfreechart</artifactId>
-            <version>1.5.5</version>
+            <version>${jfreechart.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model</artifactId>
+            <version>${maven-model.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
+            <version>${maven-artifact.version}</version>
         </dependency>
         <!-- Jetty -->
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-webapp</artifactId>
+            <groupId>org.eclipse.jetty.ee10</groupId>
+            <artifactId>jetty-ee10-webapp</artifactId>
             <version>${jetty.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-server</artifactId>
+            <groupId>org.eclipse.jetty.ee10.websocket</groupId>
+            <artifactId>jetty-ee10-websocket-jetty-server</artifactId>
             <version>${jetty.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>quercus</artifactId>
-            <version>4.0.66</version>
+            <version>${quercus.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- WebDriver -->
@@ -1464,45 +1625,25 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v126</artifactId>
+            <artifactId>${selenium.devtools.artifactId}</artifactId>
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>s01-sonatype-nexus-snapshots</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>s01-sonatype-nexus-staging</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
-    </distributionManagement>
-
+    <!-- for snapshots of our dependencies -->
     <repositories>
         <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
+            <name>Central Portal Snapshots</name>
+            <id>central-portal-snapshots</id>
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
-            <id>OSS Sonatype snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
             <snapshots>
                 <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
             </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>S01 OSS Sonatype snapshots</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
         </repository>
     </repositories>
+
 </project>

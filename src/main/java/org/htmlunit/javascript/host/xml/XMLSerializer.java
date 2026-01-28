@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import org.w3c.dom.NamedNodeMap;
 
 /**
  * A JavaScript object for {@code XMLSerializer}.
+ * see https://w3c.github.io/DOM-Parsing/#the-xmlserializer-interface
  *
  * @author Ahmed Ashour
  * @author Darrell DeBoer
@@ -47,8 +48,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
     private static final Set<String> NON_EMPTY_TAGS = new HashSet<>(Arrays.asList(
             HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
             HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlAudio.TAG_NAME,
-            HtmlBackgroundSound.TAG_NAME,
-            HtmlBidirectionalOverride.TAG_NAME, HtmlBig.TAG_NAME, HtmlBlink.TAG_NAME,
+            HtmlBidirectionalOverride.TAG_NAME, HtmlBig.TAG_NAME,
             HtmlBlockQuote.TAG_NAME, HtmlBody.TAG_NAME, HtmlBold.TAG_NAME,
             HtmlButton.TAG_NAME, HtmlCanvas.TAG_NAME, HtmlCaption.TAG_NAME,
             HtmlCenter.TAG_NAME, HtmlCitation.TAG_NAME, HtmlCode.TAG_NAME,
@@ -64,11 +64,11 @@ public class XMLSerializer extends HtmlUnitScriptable {
             HtmlHeading4.TAG_NAME, HtmlHeading5.TAG_NAME,
             HtmlHeading6.TAG_NAME, HtmlHead.TAG_NAME,
             HtmlHtml.TAG_NAME, HtmlInlineFrame.TAG_NAME,
-            HtmlInsertedText.TAG_NAME, HtmlIsIndex.TAG_NAME,
+            HtmlInsertedText.TAG_NAME,
             HtmlItalic.TAG_NAME, HtmlKeyboard.TAG_NAME, HtmlLabel.TAG_NAME,
             HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
             HtmlMap.TAG_NAME, HtmlMarquee.TAG_NAME,
-            HtmlMenu.TAG_NAME, HtmlMultiColumn.TAG_NAME,
+            HtmlMenu.TAG_NAME,
             HtmlNoBreak.TAG_NAME, HtmlNoEmbed.TAG_NAME, HtmlNoFrames.TAG_NAME,
             HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
             HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlParagraph.TAG_NAME,
@@ -119,7 +119,8 @@ public class XMLSerializer extends HtmlUnitScriptable {
             return builder.toString().trim();
         }
 
-        if (root instanceof Document) {
+        final boolean rootIsDocument = root instanceof Document;
+        if (rootIsDocument) {
             root = ((Document) root).getDocumentElement();
         }
 
@@ -130,7 +131,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
             final boolean isHtmlPage = page != null && page.isHtmlPage();
 
             String forcedNamespace = null;
-            if (isHtmlPage) {
+            if (!rootIsDocument && isHtmlPage) {
                 forcedNamespace = "http://www.w3.org/1999/xhtml";
             }
             toXml(1, node, builder, forcedNamespace);
@@ -168,10 +169,11 @@ public class XMLSerializer extends HtmlUnitScriptable {
         }
 
         final NamedNodeMap attributesMap = node.getAttributes();
-        for (int i = 0; i < attributesMap.getLength(); i++) {
+        final int length = attributesMap.getLength();
+        for (int i = 0; i < length; i++) {
             final DomAttr attrib = (DomAttr) attributesMap.item(i);
-            builder.append(' ').append(attrib.getQualifiedName()).append('=')
-                .append('"').append(attrib.getValue()).append('"');
+            builder.append(' ').append(attrib.getQualifiedName())
+                   .append("=\"").append(attrib.getValue()).append('"');
         }
         boolean startTagClosed = false;
         for (final DomNode child : node.getChildren()) {
@@ -199,7 +201,11 @@ public class XMLSerializer extends HtmlUnitScriptable {
                     break;
             }
         }
-        if (!startTagClosed) {
+
+        if (startTagClosed) {
+            builder.append("</").append(nodeName).append('>');
+        }
+        else {
             final String tagName = StringUtils.toRootLowerCase(nodeName);
             if (NON_EMPTY_TAGS.contains(tagName)) {
                 builder.append("></").append(nodeName).append('>');
@@ -207,9 +213,6 @@ public class XMLSerializer extends HtmlUnitScriptable {
             else {
                 builder.append(optionalPrefix).append("/>");
             }
-        }
-        else {
-            builder.append("</").append(nodeName).append('>');
         }
     }
 

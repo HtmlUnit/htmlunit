@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import java.net.URI;
  * @author Ronald Brill
  */
 public interface WebSocketAdapter {
+
     /**
      * Starts the client.
      *
@@ -67,52 +68,4 @@ public interface WebSocketAdapter {
      * @throws Exception in case of error
      */
     void closeClient() throws Exception;
-
-    /**
-     * Callback to be called when connecting.
-     */
-    void onWebSocketConnecting();
-
-    /**
-     * Callback to be called when connected.
-     */
-    void onWebSocketConnect();
-
-    /**
-     * Callback to be called when closed.
-     *
-     * @param statusCode the status code
-     * @param reason the reason
-     */
-    void onWebSocketClose(int statusCode, String reason);
-
-    /**
-     * Callback to be called when closed.
-     *
-     * @param message the message
-     */
-    void onWebSocketText(String message);
-
-    /**
-     * Callback to be called when binary data retrieved.
-     *
-     * @param data the bytes
-     * @param offset start offset
-     * @param length the length
-     */
-    void onWebSocketBinary(byte[] data, int offset, int length);
-
-    /**
-     * Callback to be called on connect error.
-     *
-     * @param cause the cause
-     */
-    void onWebSocketConnectError(Throwable cause);
-
-    /**
-     * Callback to be called on error.
-     *
-     * @param cause the cause
-     */
-    void onWebSocketError(Throwable cause);
 }

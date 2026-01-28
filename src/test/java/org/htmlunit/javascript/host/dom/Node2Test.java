@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,18 @@ package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Node}.
  *
  * @author Brad Clarke
- * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author George Murnock
  * @author Bruce Faulkner
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class Node2Test extends SimpleWebTestCase {
 
     /**
@@ -38,8 +35,8 @@ public class Node2Test extends SimpleWebTestCase {
      */
     @Test
     public void replaceChild_WithSameNode() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  var a = document.getElementById('a');\n"
             + "  var b = document.getElementById('b');\n"

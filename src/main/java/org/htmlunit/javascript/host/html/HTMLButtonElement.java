@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import org.htmlunit.javascript.host.dom.NodeList;
 /**
  * The JavaScript object that represents a {@link HtmlButton} (&lt;button type=...&gt;).
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -167,7 +167,7 @@ public class HTMLButtonElement extends HTMLElement {
      * @return always false
      */
     @JsxGetter
-    public boolean getWillValidate() {
+    public boolean isWillValidate() {
         return ((HtmlButton) getDomNodeOrDie()).willValidate();
     }
 

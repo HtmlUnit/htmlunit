@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ import org.w3c.dom.Node;
 /**
  * Wrapper for the HTML element "optgroup".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David D. Kilzer
  * @author Ahmed Ashour
  * @author Daniel Gredler
@@ -59,8 +59,8 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
 
         Node node = getParentNode();
         while (node != null) {
-            if (node instanceof DisabledElement
-                    && ((DisabledElement) node).isDisabled()) {
+            if (node instanceof DisabledElement element
+                    && element.isDisabled()) {
                 return true;
             }
             node = node.getParentNode();

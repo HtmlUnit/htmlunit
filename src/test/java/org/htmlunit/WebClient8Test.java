@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,8 @@ import org.htmlunit.html.HtmlCheckBoxInput;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlRadioButtonInput;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebClient} running with js disabled.
@@ -33,7 +31,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Ronny Shapiro
  */
-@RunWith(BrowserRunner.class)
 public class WebClient8Test extends SimpleWebTestCase {
 
     /**
@@ -41,8 +38,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html =
-                "<html><head><title>foo</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head>\n"
                 + "<body><div>Hello <b>HtmlUnit</b></div></body></html>";
 
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
@@ -56,22 +53,21 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String html =
-                "<html><head><title>foo</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head>\n"
                 + "<body><div>Hello <b>HtmlUnit</b></div></body></html>";
 
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
             final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
             assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n<html>\r\n"
                     + "  <head>\r\n"
-                    + "    <title>\r\n      foo\r\n    </title>\r\n"
+                    + "    <title>foo</title>\r\n"
                     + "  </head>\r\n"
                     + "  <body>\r\n"
-                    + "    <div>\r\n      Hello \r\n"
-                    + "      <b>\r\n        HtmlUnit\r\n      </b>\r\n"
+                    + "    <div>Hello <b>HtmlUnit</b>\r\n"
                     + "    </div>\r\n"
                     + "  </body>\r\n"
-                    + "</html>\r\n",
+                    + "</html>",
                     page.asXml());
         }
     }
@@ -81,7 +77,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void cloneNode() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "<p>hello world</p>\n"
@@ -104,13 +101,15 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void appendChildMoved() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "<p>hello</p>\n"
                 + "</body></html>";
 
-        final String html2 = "<html>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "<p id='tester'>world</p>\n"
@@ -133,13 +132,15 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void iFrame() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "  <iframe id='tester' src='second.html'></iframe>\n"
                 + "</body></html>";
 
-        final String html2 = "<html>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>frame</title></head>\n"
                 + "<body>\n"
                 + "</body></html>";
@@ -162,7 +163,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void iFrameTextContent() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "  <iframe id='tester' src='second.html'></iframe>\n"
@@ -188,13 +190,15 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void iFrameInFragment() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title></head>\n"
                 + "<body>\n"
                 + "<p id='para'>hello</p>\n"
                 + "</body></html>";
 
-        final String html2 = "<html>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>frame</title></head>\n"
                 + "<body>\n"
                 + "</body></html>";
@@ -209,7 +213,7 @@ public class WebClient8Test extends SimpleWebTestCase {
 
             final HtmlPage page = webClient.getPage(URL_FIRST);
             final DomElement para = page.getElementById("para");
-            page.getWebClient().getPageCreator().getHtmlParser().parseFragment(para, fragment);
+            page.getWebClient().getPageCreator().getHtmlParser().parseFragment(null, para, para, fragment, false);
 
             final HtmlInlineFrame iFrame = (HtmlInlineFrame) page.getElementById("tester");
             assertEquals("frame", ((HtmlPage) iFrame.getEnclosedWindow().getEnclosedPage()).getTitleText());
@@ -221,7 +225,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void script() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "  <script src='script.js'></script>\n"
@@ -247,7 +252,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void link() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "  <link rel='stylesheet' href='simple.css'>\n"
@@ -271,7 +277,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void object() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "</head>\n"
@@ -295,7 +302,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void svgScript() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "</head>\n"
@@ -316,7 +324,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void invalidElementEventWithNoJS() throws Exception {
-        final String html = "<html>"
+        final String html = DOCTYPE_HTML
+                + "<html>"
                 + "<head>"
                 + "  <title>foo</title>"
                 + "</head>"
@@ -334,7 +343,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void checkingWithNoJS() throws Exception {
-        final String html = "<html>"
+        final String html = DOCTYPE_HTML
+                + "<html>"
                 + "<head>"
                 + "  <title>foo</title>"
                 + "</head>"
@@ -362,7 +372,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void frameSetWithNoJS() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>foo</title>\n"
                 + "</head>\n"
@@ -384,7 +395,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void imageEventHandlersWithNoJs() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "  <body>\n"
@@ -402,7 +414,8 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void clickWithNoJs() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "</head>\n"
                 + "  <body>\n"

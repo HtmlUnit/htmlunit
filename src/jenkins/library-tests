@@ -4,15 +4,15 @@ pipeline {
     lock resource: 'htmlunit-test-ports'
     disableConcurrentBuilds()
     timestamps()
-    timeout(time: 210, unit: 'MINUTES')
+    timeout(time: 6, unit: 'HOURS')
   }
   tools {
-    jdk 'openjdk-11+28'
+    jdk 'openlogic-openjdk-17.0.17+10'
   }
   stages {
     stage('Build') {
       steps {
-        sh 'mvn clean test -U -P only-library-tests -Dgpg.skip -Djava.awt.headless=true'
+        sh 'mvn clean test -U -P only-library-tests --show-version -Dgpg.skip -Djava.awt.headless=true'
       }
     }
   }

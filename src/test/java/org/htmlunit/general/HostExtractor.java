@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -96,11 +95,7 @@ public final class HostExtractor {
         final Set<String> unusedNames = new HashSet<>(set);
         final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
         for (final String line : lines) {
-            for (final Iterator<String> it = unusedNames.iterator(); it.hasNext();) {
-                if (line.contains("(\"" + it.next() + "\")")) {
-                    it.remove();
-                }
-            }
+            unusedNames.removeIf(s -> line.contains("(\"" + s + "\")"));
         }
         unusedNames.remove("this");
         unusedNames.remove("Boolean");
@@ -111,7 +106,7 @@ public final class HostExtractor {
                 if (name.contains(" ")) {
                     continue;
                 }
-                System.out.println("");
+                System.out.println();
                 System.out.println("    /**");
                 System.out.println("     * @throws Exception if the test fails");
                 System.out.println("     */");

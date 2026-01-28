@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ import org.xml.sax.helpers.AttributesImpl;
 /**
  * The JavaScript object for {@link HtmlOption}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Marc Guillemot
@@ -111,8 +111,8 @@ public class HTMLOptionElement extends HTMLElement {
     @JsxSetter
     public void setValue(final String newValue) {
         final DomNode dom = getDomNodeOrNull();
-        if (dom instanceof HtmlOption) {
-            ((HtmlOption) dom).setValueAttribute(newValue);
+        if (dom instanceof HtmlOption option) {
+            option.setValueAttribute(newValue);
         }
     }
 
@@ -123,8 +123,8 @@ public class HTMLOptionElement extends HTMLElement {
     @JsxGetter
     public String getText() {
         final DomNode dom = getDomNodeOrNull();
-        if (dom instanceof HtmlOption) {
-            return ((HtmlOption) dom).getText();
+        if (dom instanceof HtmlOption option) {
+            return option.getText();
         }
         return null;
     }
@@ -136,8 +136,8 @@ public class HTMLOptionElement extends HTMLElement {
     @JsxSetter
     public void setText(final String newText) {
         final DomNode dom = getDomNodeOrNull();
-        if (dom instanceof HtmlOption) {
-            ((HtmlOption) dom).setText(newText);
+        if (dom instanceof HtmlOption option) {
+            option.setText(newText);
 
             if (!hasAttribute("label")) {
                 setLabel(newText);
@@ -152,8 +152,8 @@ public class HTMLOptionElement extends HTMLElement {
     @JsxGetter
     public boolean isSelected() {
         final DomNode dom = getDomNodeOrNull();
-        if (dom instanceof HtmlOption) {
-            return ((HtmlOption) dom).isSelected();
+        if (dom instanceof HtmlOption option) {
+            return option.isSelected();
         }
         return false;
     }
@@ -185,8 +185,8 @@ public class HTMLOptionElement extends HTMLElement {
     @JsxGetter
     public boolean isDefaultSelected() {
         final DomNode dom = getDomNodeOrNull();
-        if (dom instanceof HtmlOption) {
-            return ((HtmlOption) dom).isDefaultSelected();
+        if (dom instanceof HtmlOption option) {
+            return option.isDefaultSelected();
         }
         return false;
     }
@@ -198,8 +198,8 @@ public class HTMLOptionElement extends HTMLElement {
     @JsxGetter
     public String getLabel() {
         final DomNode domNode = getDomNodeOrNull();
-        if (domNode instanceof HtmlOption) {
-            return ((HtmlOption) domNode).getLabelAttribute();
+        if (domNode instanceof HtmlOption option) {
+            return option.getLabelAttribute();
         }
         return ((HtmlOptionGroup) domNode).getLabelAttribute();
     }
@@ -211,8 +211,8 @@ public class HTMLOptionElement extends HTMLElement {
     @JsxSetter
     public void setLabel(final String label) {
         final DomNode domNode = getDomNodeOrNull();
-        if (domNode instanceof HtmlOption) {
-            ((HtmlOption) domNode).setLabelAttribute(label);
+        if (domNode instanceof HtmlOption option) {
+            option.setLabelAttribute(label);
         }
         else {
             ((HtmlOptionGroup) domNode).setLabelAttribute(label);

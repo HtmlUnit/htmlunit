@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,13 @@
 package org.htmlunit.javascript.host.file;
 
 import java.io.IOException;
-import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
-import java.nio.file.Files;
+import java.util.Base64;
 import java.util.Locale;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.Charsets;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.corejs.javascript.Function;
@@ -41,6 +38,7 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.protocol.data.DataURLConnection;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for {@code FileReader}.
@@ -108,29 +106,13 @@ public class FileReader extends EventTarget {
         result_ = DataURLConnection.DATA_PREFIX;
 
         final byte[] bytes = ((Blob) object).getBytes();
-        final String value = new String(Base64.encodeBase64(bytes), StandardCharsets.US_ASCII);
+        final String value = new String(Base64.getEncoder().encode(bytes), StandardCharsets.US_ASCII);
 
         String contentType = ((Blob) object).getType();
-        if (StringUtils.isEmpty(contentType)) {
+        if (StringUtils.isEmptyOrNull(contentType)) {
             contentType = MimeType.APPLICATION_OCTET_STREAM;
         }
 
-        if (object instanceof File) {
-            final java.io.File file = ((File) object).getFile();
-            if (value.isEmpty()) {
-                contentType = URLConnection.guessContentTypeFromName(file.getName());
-            }
-            else {
-                contentType = Files.probeContentType(file.toPath());
-                // this is a bit weak, on linux we get different results
-                // e.g. 'application/octet-stream' for a file with random bits
-                // instead of null on windows
-            }
-        }
-
-        if (contentType == null) {
-            contentType = MimeType.APPLICATION_OCTET_STREAM;
-        }
         result_ += contentType + ";base64," + value;
         readyState_ = DONE;
 
@@ -146,8 +128,8 @@ public class FileReader extends EventTarget {
     public void readAsArrayBuffer(final Object object) {
         readyState_ = LOADING;
 
-        if (object instanceof Blob) {
-            final byte[] bytes = ((Blob) object).getBytes();
+        if (object instanceof Blob blob) {
+            final byte[] bytes = blob.getBytes();
 
             final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
             System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
@@ -191,8 +173,8 @@ public class FileReader extends EventTarget {
             }
         }
 
-        if (object instanceof Blob) {
-            result_ = new String(((Blob) object).getBytes(), charset);
+        if (object instanceof Blob blob) {
+            result_ = new String(blob.getBytes(), charset);
         }
 
         readyState_ = DONE;

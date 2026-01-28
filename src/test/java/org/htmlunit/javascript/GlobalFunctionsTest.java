@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,8 @@ package org.htmlunit.javascript;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -30,7 +28,6 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class GlobalFunctionsTest extends WebDriverTestCase {
 
     /**
@@ -43,8 +40,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     @Test
     @Alerts({"7.89", "7.89"})
     public void parseFloat() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            +  "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  log(parseFloat('\\n 7.89 '));\n"
@@ -65,8 +62,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     @Alerts({"0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100",
                 "100", "NaN", "NaN"})
     public void parseInt() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  log(parseInt('0'));\n"
@@ -133,8 +130,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     @Alerts({"http%3A%2F%2Fw3schools.com%2Fmy%20test.asp%3Fname%3Dst%C3%A5le%26car%3Dsaab",
                 "%E6%B5%8B%E8%A9%A6"})
     public void encodeURIComponent() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -160,8 +157,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     @Test
     @Alerts("%E6%B5%8B%E8%A9%A6")
     public void encodeURIComponentUtf8() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -183,24 +180,32 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"\u00ee\u0010\u0043\u0072\u00f4\u00ef\u00b6\u0062\u0034",
-                "\u00ee\u0010\u0043\u0072\u00f4\u00ef\u00b6\u0062\u0034"})
+    @Alerts({"\\u00ee\\u0010\\u0043\\u0072\\u00f4\\u00ef\\u00b6\\u0062\\u0034",
+             "\\u00ee\\u0010\\u0043\\u0072\\u00f4\\u00ef\\u00b6\\u0062\\u0034"})
     public void decodeURIComponent() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    var escaped = '';\n"
+            + "    for (var i = 0; i < msg.length; ++i) {\n"
+            + "      var hex = msg.charCodeAt(i).toString(16).toLowerCase();\n"
+            + "      escaped += '\\\\u' + '0000'.substr(hex.length) + hex;\n"
+            + "    }\n"
+            + "    window.document.title += escaped + '\\u00a7';\n"
+            + "  }\n"
+
             + "  function test() {\n"
             + "    var uri='%c3%ae%10%43%72%c3%b4%c3%af%c2%b6%62%34';\n"
-            + "    alert(decodeURIComponent(uri));\n"
-
-            + "    alert(decodeURIComponent(uri, false));\n"
+            + "    log(decodeURIComponent(uri));\n"
+            + "    log(decodeURIComponent(uri, false));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

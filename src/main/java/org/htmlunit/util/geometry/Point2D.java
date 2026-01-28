@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
  */
 package org.htmlunit.util.geometry;
 
+import java.util.Objects;
+
 /**
  * Simple 2D point.
  *
@@ -23,15 +25,26 @@ public class Point2D {
     private final double myX_;
     private final double myY_;
 
+    /**
+     * Ctor.
+     * @param x x value
+     * @param y y value
+     */
     public Point2D(final double x, final double y) {
         myX_ = x;
         myY_ = y;
     }
 
+    /**
+     * @return the x value
+     */
     public double getX() {
         return myX_;
     }
 
+    /**
+     * @return the y value
+     */
     public double getY() {
         return myY_;
     }
@@ -39,5 +52,20 @@ public class Point2D {
     @Override
     public String toString() {
         return "Point2D (" + myX_ + ", " + myY_ + ")";
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final Point2D point2D = (Point2D) o;
+        return Double.compare(myX_, point2D.myX_) == 0 && Double.compare(myY_, point2D.myY_) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(myX_, myY_);
     }
 }

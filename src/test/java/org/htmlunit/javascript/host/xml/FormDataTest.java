@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,25 +26,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for {@link FormData}.
@@ -55,7 +53,6 @@ import org.openqa.selenium.WebDriver;
  * @author Thorsten Wendelmuth
  * @author Lai Quang Duong
  */
-@RunWith(BrowserRunner.class)
 public class FormDataTest extends WebDriverTestCase {
 
     /**
@@ -65,8 +62,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Alerts({"function", "function", "function", "function", "function", "function",
              "function", "function", "function", "function"})
     public void functions() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -94,13 +90,12 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void empty() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
             + "    var formData = new FormData();\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('create: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -109,7 +104,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "    alert(xhr.responseText);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
@@ -136,8 +131,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void append() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
@@ -147,7 +141,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    formData.append('myKeyNull', null);\n"
             + "    formData.append('myKeyUndef', undefined);\n"
             + "    formData.append('myKeyEmpty', '');\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('create: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -156,7 +150,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "    alert(xhr.responseText);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
@@ -198,8 +192,7 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void appendFile() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
@@ -208,7 +201,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    var files = document.testForm.myFile.files;\n"
             + "    var formData = new FormData();\n"
             + "    formData.append('myKey', files[0]);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('create: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -217,7 +210,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "    alert(xhr.responseText);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
@@ -332,8 +325,7 @@ public class FormDataTest extends WebDriverTestCase {
     }
 
     private String appendFile(final String extension, final String name) throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
@@ -342,7 +334,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    var files = document.testForm.myFile.files;\n"
             + "    var formData = new FormData();\n"
             + "    formData.append('myKey', files[0], '" + name + "');\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('create: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -351,7 +343,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "    alert(xhr.responseText);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
@@ -388,13 +380,122 @@ public class FormDataTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void appendInMemoryFile() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "    let file = new File(['Html', 'Unit', 'is great'], 'htMluniT.txt');\n"
+            + "    formData.append('myKey', file);\n"
+            + "  } catch(e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  } catch(e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+
+        driver.findElement(By.id("testBtn")).click();
+
+        final List<String> alerts = getCollectedAlerts(driver, 1);
+        if (!alerts.isEmpty()) {
+            final String[] lines = alerts.get(0).split("\\n");
+            assertEquals(6, lines.length);
+            assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"htMluniT.txt\"", lines[1]);
+            assertEquals("Content-Type: application/octet-stream", lines[2]);
+            assertEquals("", lines[3]);
+            assertEquals("HtmlUnitis great", lines[4]);
+            assertEquals(lines[0] + "--", lines[5]);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void appendBlob() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "    let blob = new Blob(['Hello HtmlUnit'], {type : 'text/html'});\n"
+            + "    formData.append('myKey', blob);\n"
+            + "  } catch(e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  } catch(e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+
+        driver.findElement(By.id("testBtn")).click();
+
+        final List<String> alerts = getCollectedAlerts(driver, 1);
+        if (!alerts.isEmpty()) {
+            final String[] lines = alerts.get(0).split("\\n");
+            assertEquals(6, lines.length);
+            assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"blob\"", lines[1]);
+            assertEquals("Content-Type: text/html", lines[2]);
+            assertEquals("", lines[3]);
+            assertEquals("Hello HtmlUnit", lines[4]);
+            assertEquals(lines[0] + "--", lines[5]);
+        }
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts({"myKey", "myKey1"})
     public void delete() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
@@ -406,7 +507,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    formData.append('mykey 2', '');\n"
             + "    formData.append('mykey3', 'myVal3');\n"
             + "    formData.append('mykey3', 'myVal4');\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('create: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -416,7 +517,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    formData.delete('mykey 2');\n"
             + "    formData.delete('mykey3');\n"
             + "    formData.delete('');\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('delete: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -425,7 +526,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "    alert(xhr.responseText);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
@@ -446,8 +547,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"myValue", "null", "null", "null", "null"})
     public void get() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -460,7 +560,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    formData.append('myKey', 'myValue2');\n"
             + "    formData.append('mykey3', 'myValue3');\n"
             + "    formData.append('mykey4', '');\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    log('create: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -471,7 +571,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    log(formData.get('myKey3'));\n"
             + "    log(formData.get('myKey4'));\n"
             + "    log(formData.get(''));\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    log('get: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -491,21 +591,20 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"myValue,myValue2", "", "", "", ""})
     public void getAll() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var formData = new FormData();\n"
-            + "    if (!formData.get) { log('no getAll'); return; }\n"
+            + "    if (!formData.getAll) { log('no getAll'); return; }\n"
 
             + "    formData.append('myKey', 'myValue');\n"
             + "    formData.append('myKey', 'myValue2');\n"
             + "    formData.append('mykey3', 'myValue3');\n"
             + "    formData.append('mykey4', '');\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    log('create: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -516,7 +615,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    log(formData.getAll('myKey3'));\n"
             + "    log(formData.getAll('myKey4'));\n"
             + "    log(formData.getAll(''));\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    log('getAll: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -536,8 +635,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "false"})
     public void has() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -549,7 +647,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    formData.append('myKey', 'myValue');\n"
             + "    formData.append('myKey1', '');\n"
             + "    formData.append('mykey 2', '');\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    log('create: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -558,7 +656,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    log(formData.has('myKey'));\n"
             + "    log(formData.has('mykey'));\n"
             + "    log(formData.has(''));\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    log('has: ' + e.message);\n"
             + "  }\n"
             + "}\n"
@@ -577,8 +675,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no set",
             FF = "")
     public void set() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
@@ -591,7 +688,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    formData.set('myKey1', 'new1');\n"
             + "    formData.set('myKey4', 'new4');\n"
             + "    formData.set('myKeyX', 'newX');\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('set: ' + e.message);\n"
             + "    return;\n"
             + "  }\n"
@@ -600,7 +697,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "    alert(xhr.responseText);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
@@ -641,16 +738,125 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void setInMemoryFile() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "    let file = new File(['Html', 'Unit', 'is great'], 'htMluniT.txt');\n"
+            + "    formData.set('myKey', file);\n"
+            + "  } catch(e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  } catch(e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+
+        driver.findElement(By.id("testBtn")).click();
+
+        final List<String> alerts = getCollectedAlerts(driver, 1);
+        if (!alerts.isEmpty()) {
+            final String[] lines = alerts.get(0).split("\\n");
+            assertEquals(6, lines.length);
+            assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"htMluniT.txt\"", lines[1]);
+            assertEquals("Content-Type: application/octet-stream", lines[2]);
+            assertEquals("", lines[3]);
+            assertEquals("HtmlUnitis great", lines[4]);
+            assertEquals(lines[0] + "--", lines[5]);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setBlob() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var formData = new FormData();\n"
+            + "    let blob = new Blob(['Hello HtmlUnit'], {type : 'text/html'});\n"
+            + "    formData.set('myKey', blob);\n"
+            + "  } catch(e) {\n"
+            + "    alert('create: ' + e.message);\n"
+            + "    return;\n"
+            + "  }\n"
+            + "  try {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('POST', '/test2', false);\n"
+            + "    xhr.send(formData);\n"
+            + "    alert(xhr.responseText);\n"
+            + "  } catch(e) {\n"
+            + "    alert('send: ' + e.message);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet.class);
+
+        final WebDriver driver = loadPage2(html, servlets);
+
+        driver.findElement(By.id("testBtn")).click();
+
+        final List<String> alerts = getCollectedAlerts(driver, 1);
+        if (!alerts.isEmpty()) {
+            final String[] lines = alerts.get(0).split("\\n");
+            assertEquals(6, lines.length);
+            assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"blob\"", lines[1]);
+            assertEquals("Content-Type: text/html", lines[2]);
+            assertEquals("", lines[3]);
+            assertEquals("Hello HtmlUnit", lines[4]);
+            assertEquals(lines[0] + "--", lines[5]);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void fromForm() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  try {\n"
             + "    var formData = new FormData(document.testForm);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('create: ' + e.message);\n"
             + "  }\n"
             + "  try {\n"
@@ -658,7 +864,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "    alert(xhr.responseText);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
@@ -719,15 +925,14 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void fromFormAndAppend() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  try {\n"
             + "    var formData = new FormData(document.testForm);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('create: ' + e.message);\n"
             + "  }\n"
             + "  try {\n"
@@ -736,7 +941,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "    alert(xhr.responseText);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
@@ -777,15 +982,14 @@ public class FormDataTest extends WebDriverTestCase {
      */
     @Test
     public void fromFormChangeBeforeSend() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  try {\n"
             + "    var formData = new FormData(document.testForm);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('create: ' + e.message);\n"
             + "  }\n"
             + "  try {\n"
@@ -794,7 +998,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
             + "    alert(xhr.responseText);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    alert('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
@@ -908,8 +1112,8 @@ public class FormDataTest extends WebDriverTestCase {
     }
 
     private void enctype(final String enctype) throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -919,7 +1123,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('POST', '/test2', false);\n"
             + "    xhr.send(formData);\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    log('send: ' + e.message);\n"
             + "  }\n"
             + "}\n"
@@ -936,7 +1140,7 @@ public class FormDataTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyTitle2(driver, new String[] {});
+        verifyTitle2(driver, ArrayUtils.EMPTY_STRING_ARRAY);
 
         driver.findElement(By.id("testBtn")).click();
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
@@ -955,8 +1159,8 @@ public class FormDataTest extends WebDriverTestCase {
     @Alerts({"function keys() { [native code] }", "[object FormData Iterator]",
              "key1", "key2", "key1", "undefined", "true"})
     public void keys() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1005,8 +1209,8 @@ public class FormDataTest extends WebDriverTestCase {
     @Alerts({"function values() { [native code] }", "[object FormData Iterator]",
              "val1", "undefined", "val3", "val4", "true"})
     public void values() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1053,8 +1257,8 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"val1", "undefined", "val3", "val4"})
     public void valuesForOf() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1092,8 +1296,8 @@ public class FormDataTest extends WebDriverTestCase {
              "key1-val1", "key3-val3",
              "key2-val2", "key3-val3"})
     public void forEach() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -1140,8 +1344,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
     public void entries_forOf() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1185,8 +1388,7 @@ public class FormDataTest extends WebDriverTestCase {
             FF_ESR = {"true", "[object FormData Iterator]", "value", "done",
                       "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
     public void entriesIterator() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1233,8 +1435,7 @@ public class FormDataTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false"})
     public void fromFormDisabled() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1246,7 +1447,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    log(formData.has('n2'));\n"
             + "    log(formData.has('n3'));\n"
             + "    log(formData.has('n4'));\n"
-            + "  } catch (e) {\n"
+            + "  } catch(e) {\n"
             + "    log('has: ' + e.message);\n"
             + "  }\n"
             + "}\n"

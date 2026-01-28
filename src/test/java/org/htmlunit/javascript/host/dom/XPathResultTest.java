@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link XPathResult}.
@@ -28,17 +26,16 @@ import org.junit.runner.RunWith;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class XPathResultTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function", "error"})
+    @Alerts({"function", "TypeError"})
     public void ctor() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -52,7 +49,7 @@ public class XPathResultTest extends WebDriverTestCase {
             + "      try {\n"
             + "        log(typeof XPathResult);\n"
             + "        new XPathResult();\n"
-            + "      } catch(e) { log('error'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -70,7 +67,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"4", "1", "3"})
     public void resultType() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -96,7 +94,7 @@ public class XPathResultTest extends WebDriverTestCase {
                                 + " XPathResult.ANY_TYPE, null);\n"
             + "          log(result.resultType);\n"
             + "        }\n"
-            + "      } catch (e) { log(e); }\n"
+            + "      } catch(e) { log(e); }\n"
             + "    } else {\n"
             + "      log('evaluate not supported');\n"
             + "    }\n"
@@ -113,7 +111,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"7", "id1", "id2"})
     public void snapshotType() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -138,7 +137,7 @@ public class XPathResultTest extends WebDriverTestCase {
             + "        for (var i = 0; i < result.snapshotLength; i++) {\n"
             + "          log(result.snapshotItem(i).getAttribute('id'));\n"
             + "        }\n"
-            + "      } catch (e) { log(e); }\n"
+            + "      } catch(e) { log(e); }\n"
             + "    } else {\n"
             + "      log('evaluate not supported');\n"
             + "    }\n"
@@ -155,7 +154,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"9", "id1"})
     public void singleNodeValue() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -178,7 +178,7 @@ public class XPathResultTest extends WebDriverTestCase {
                             + " XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
             + "        log(result.resultType);\n"
             + "        log(result.singleNodeValue.getAttribute('id'));\n"
-            + "      } catch (e) { log(e); }\n"
+            + "      } catch(e) { log(e); }\n"
             + "    } else {\n"
             + "      log('evaluate not supported');\n"
             + "    }\n"
@@ -195,7 +195,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"id1", "id2"})
     public void iterateNext() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -222,7 +223,7 @@ public class XPathResultTest extends WebDriverTestCase {
             + "          log(thisNode.getAttribute('id'));\n"
             + "          thisNode = result.iterateNext();\n"
             + "        }\n"
-            + "      } catch (e) { log(e); }\n"
+            + "      } catch(e) { log(e); }\n"
             + "    } else {\n"
             + "      log('evaluate not supported');\n"
             + "    }\n"
@@ -239,7 +240,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts("7")
     public void notOr() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -249,7 +251,7 @@ public class XPathResultTest extends WebDriverTestCase {
             + "        var result = document.evaluate(expression, document, null, "
                             + "XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n"
             + "        log(result.resultType);\n"
-            + "      } catch (e) { log(e); }\n"
+            + "      } catch(e) { log(e); }\n"
             + "    } else {\n"
             + "      log('evaluate not supported');\n"
             + "    }\n"
@@ -266,7 +268,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"bar", "foo", "foo"})
     public void stringType() throws Exception {
-        final String html = "<html><head><title attr=\"bar\">foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title attr=\"bar\">foo</title><script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
@@ -280,7 +283,7 @@ public class XPathResultTest extends WebDriverTestCase {
             + "        var result = document.evaluate('//title/text()', document, null, "
                             + "XPathResult.STRING_TYPE, null);\n"
             + "        log(result.stringValue);\n"
-            + "      } catch (e) { log(e); }\n"
+            + "      } catch(e) { log(e); }\n"
             + "    } else {\n"
             + "      log('evaluate not supported');\n"
             + "    }\n"
@@ -298,7 +301,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true"})
     public void numberType() throws Exception {
-        final String html = "<html><head><title attr=\"1234\">4321.5</title><span>foo</span><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title attr=\"1234\">4321.5</title><span>foo</span><script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
@@ -315,7 +319,7 @@ public class XPathResultTest extends WebDriverTestCase {
             + "        result = document.evaluate('//span', document, null, "
                             + "XPathResult.NUMBER_TYPE, null);\n"
             + "        log(isNaN(result.numberValue));\n"
-            + "      } catch (e) { log(e); }\n"
+            + "      } catch(e) { log(e); }\n"
             + "    } else {\n"
             + "      log('evaluate not supported');\n"
             + "    }\n"
@@ -333,7 +337,8 @@ public class XPathResultTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true", "true", "true"})
     public void booleanType() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -361,7 +366,7 @@ public class XPathResultTest extends WebDriverTestCase {
             + "        result = document.evaluate('//span/@attr', document, null, "
                             + "XPathResult.BOOLEAN_TYPE, null);\n"
             + "        log(result.booleanValue === true);\n"
-            + "      } catch (e) { log(e); }\n"
+            + "      } catch(e) { log(e); }\n"
             + "    } else {\n"
             + "      log('evaluate not supported');\n"
             + "    }\n"
@@ -605,7 +610,8 @@ public class XPathResultTest extends WebDriverTestCase {
     }
 
     private void type(final String xpath, final String type) throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -617,24 +623,24 @@ public class XPathResultTest extends WebDriverTestCase {
             + "        log(result.resultType);\n"
             + "        try {\n"
             + "          log(result.booleanValue);\n"
-            + "        } catch (e) { log('not boolean'); }\n"
+            + "        } catch(e) { log('not boolean'); }\n"
 
             + "        try {\n"
             + "          log(result.numberValue);\n"
-            + "        } catch (e) { log('not number'); }\n"
+            + "        } catch(e) { log('not number'); }\n"
 
             + "        try {\n"
             + "          log(result.stringValue);\n"
-            + "        } catch (e) { log('not string'); }\n"
+            + "        } catch(e) { log('not string'); }\n"
 
             + "        try {\n"
             + "          log(result.singleNodeValue);\n"
-            + "        } catch (e) { log('not node'); }\n"
+            + "        } catch(e) { log('not node'); }\n"
 
             + "        try {\n"
             + "          log(result.snapshotLength);\n"
-            + "        } catch (e) { log('not length'); }\n"
-            + "      } catch (e) { log(e); }\n"
+            + "        } catch(e) { log('not length'); }\n"
+            + "      } catch(e) { log(e); }\n"
             + "    } else {\n"
             + "      log('evaluate not supported');\n"
             + "    }\n"

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +44,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.platform.image.ImageIOImageData;
@@ -260,7 +260,7 @@ public class AwtRenderingBackend implements RenderingBackend {
         strokeColor_ = Color.black;
         lineWidth_ = 1;
         transformation_ = new AffineTransform();
-        setGlobalAlpha(1.0);
+        updateGlobalAlpha(1f);
         graphics2D_.setClip(null);
 
         final Font font = new Font("SansSerif", Font.PLAIN, 10);
@@ -292,10 +292,14 @@ public class AwtRenderingBackend implements RenderingBackend {
         }
 
         if (globalAlpha >= 0 && globalAlpha <= 1) {
-            globalAlpha_ = (float) globalAlpha;
-            final AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, globalAlpha_);
-            graphics2D_.setComposite(composite);
+            updateGlobalAlpha((float) globalAlpha);
         }
+    }
+
+    private void updateGlobalAlpha(final float globalAlpha) {
+        globalAlpha_ = globalAlpha;
+        final AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, globalAlpha_);
+        graphics2D_.setComposite(composite);
     }
 
     /**
@@ -537,7 +541,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             ImageIO.write(image_, imageType, bos);
 
             final byte[] imageBytes = bos.toByteArray();
-            return new String(Base64.encodeBase64(imageBytes), StandardCharsets.US_ASCII);
+            return new String(Base64.getEncoder().encode(imageBytes), StandardCharsets.US_ASCII);
         }
     }
 

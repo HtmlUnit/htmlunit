@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code NodeFilter}.
  *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">
- * DOM-Level-2-Traversal-Range</a>
+ *     DOM-Level-2-Traversal-Range</a>
  *
- * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
+ * @author Mike Dirolf
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
@@ -58,7 +58,8 @@ public class NodeFilter extends HtmlUnitScriptable {
     @JsxConstant
     public static final int SHOW_ELEMENT = org.w3c.dom.traversal.NodeFilter.SHOW_ELEMENT;
 
-    /** Show Attr nodes. Only useful when creating a TreeWalker with an
+    /**
+     * Show Attr nodes. Only useful when creating a TreeWalker with an
      * attribute node as its root. */
     @JsxConstant
     public static final int SHOW_ATTRIBUTE = org.w3c.dom.traversal.NodeFilter.SHOW_ATTRIBUTE;

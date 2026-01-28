@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  *
- * @see <a href="http://www.xulplanet.com/references/objref/MimeType.html">XUL Planet</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MimeType">MimeType</a>
  */
 @JsxClass
 public class MimeType extends HtmlUnitScriptable {
@@ -98,7 +98,7 @@ public class MimeType extends HtmlUnitScriptable {
      * @return the plugin
      */
     @JsxGetter
-    public Object getEnabledPlugin() {
+    public Plugin getEnabledPlugin() {
         return enabledPlugin_;
     }
 }

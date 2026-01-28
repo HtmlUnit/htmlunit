@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * Level 2 Event Documentation</a> or <a href="http://msdn2.microsoft.com/en-us/library/aa703876.aspx">IE's
  * IHTMLEventObj interface</a>.
  *
- * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
+ * @author Chris Eldredge
  * @author Mike Bowler
  * @author Chris Erskine
  * @author Marc Guillemot
@@ -186,14 +186,8 @@ public class Event extends HtmlUnitScriptable {
     /** The auxclick event type, triggered by {@code auxclick} event handlers. */
     public static final String TYPE_AUXCLICK = "auxclick";
 
-//    /** The mspointerleave event type, triggered by {@code mspointerleave} event handlers. */
-//    public static final String TYPE_MSPOINTERLEAVE = "mspointerleave";
-//
     /** The webkitanimationstart event type, triggered by {@code webkitanimationstart} event handlers. */
     public static final String TYPE_WEBANIMATIONSTART = "webkitanimationstart";
-
-//    /** The msgesturestart event type, triggered by {@code msgesturestart} event handlers. */
-//    public static final String TYPE_MSGESTURESTART = "msgesturestart";
 
     /** The drag event type, triggered by {@code drag} event handlers. */
     public static final String TYPE_DRAG = "drag";
@@ -254,9 +248,6 @@ public class Event extends HtmlUnitScriptable {
 
     /** The pageshow event type, triggered by {@code pageshow} event handlers. */
     public static final String TYPE_PAGESHOW = "pageshow";
-
-//    /** The mspointerenter event type, triggered by {@code mspointerenter} event handlers. */
-//    public static final String TYPE_MSPOINTENTER = "mspointerenter";
 
     /** The mozfullscreenchange event type, triggered by {@code mozfullscreenchange} event handlers. */
     public static final String TYPE_MOZFULLSCREENCHANGE = "mozfullscreenchange";
@@ -372,9 +363,6 @@ public class Event extends HtmlUnitScriptable {
     /** The transitionend event type, triggered by {@code transitionend} event handlers. */
     public static final String TYPE_TRANSITIONEND = "transitionend";
 
-//    /** The msgesturehold event type, triggered by {@code msgesturehold} event handlers. */
-//    public static final String TYPE_MSGESTUREHOLD = "msgesturehold";
-
     /** The deviceorientationabsolute event type, triggered by {@code deviceorientationabsolute} event handlers. */
     public static final String TYPE_DEVICEORIENTATIONABSOLUTE = "deviceorientationabsolute";
 
@@ -440,12 +428,6 @@ public class Event extends HtmlUnitScriptable {
 
     /** The ongamepaddisconnected event type, triggered by {@code ongamepaddisconnected} event handlers. */
     public static final String TYPE_GAMEPAD_DISCONNECTED = "ongamepaddisconnected";
-
-    /**
-     * The mssitemodejumplistitemremoved event type, triggered
-     * by {@code mssitemodejumplistitemremoved} event handlers.
-     */
-    public static final String TYPE_MSSITEMODEJUMPLISTITEMREMOVED = "mssitemodejumplistitemremoved";
 
     /** No event phase. */
     @JsxConstant
@@ -528,7 +510,7 @@ public class Event extends HtmlUnitScriptable {
      * @param type the event type
      */
     public Event(final DomNode domNode, final String type) {
-        this((EventTarget) domNode.getScriptableObject(), type);
+        this(domNode.getScriptableObject(), type);
         setDomNode(domNode, false);
     }
 
@@ -538,11 +520,11 @@ public class Event extends HtmlUnitScriptable {
      * @param type the event type
      */
     public Event(final EventTarget target, final String type) {
-        super();
+        this(type);
+
         srcElement_ = target;
         target_ = target;
         currentTarget_ = target;
-        type_ = type;
 
         setParentScope(target);
         setPrototype(getPrototype(getClass()));
@@ -567,6 +549,15 @@ public class Event extends HtmlUnitScriptable {
             bubbles_ = false;
             cancelable_ = false;
         }
+    }
+
+    /**
+     * Creates a new event instance.
+     * @param type the event type
+     */
+    public Event(final String type) {
+        super();
+        type_ = type;
     }
 
     /**
@@ -636,7 +627,7 @@ public class Event extends HtmlUnitScriptable {
     public void endFire() {
         final Context context = Context.getCurrentContext();
         final ArrayList<Event> events = (ArrayList<Event>) context.getThreadLocal(KEY_CURRENT_EVENT);
-        if (events != null && events.size() > 0) {
+        if (events != null && !events.isEmpty()) {
             events.remove(events.size() - 1);
         }
     }
@@ -824,7 +815,7 @@ public class Event extends HtmlUnitScriptable {
     /**
      * @param bubbles the bubbles to set
      */
-    protected void setBubbles(final boolean bubbles) {
+    public void setBubbles(final boolean bubbles) {
         bubbles_ = bubbles;
     }
 
@@ -839,13 +830,13 @@ public class Event extends HtmlUnitScriptable {
     /**
      * @param cancelable the cancelable to set
      */
-    protected void setCancelable(final boolean cancelable) {
+    public void setCancelable(final boolean cancelable) {
         cancelable_ = cancelable;
     }
 
     /**
      * Returns {@code true} if both <code>cancelable</code> is {@code true} and <code>preventDefault()</code> has been
-     * called for this event. Otherwise this attribute must return {@code false}.
+     * called for this event, otherwise this attribute must return {@code false}.
      * @return {@code true} if this event has been cancelled or not
      */
     @JsxGetter
@@ -924,7 +915,7 @@ public class Event extends HtmlUnitScriptable {
      * Initializes this event.
      * @param type the event type
      * @param bubbles whether or not the event should bubble
-     * @param cancelable whether or not the event the event should be cancelable
+     * @param cancelable whether or not the event should be cancelable
      */
     @JsxFunction
     public void initEvent(final String type, final boolean bubbles, final boolean cancelable) {
@@ -1006,7 +997,7 @@ public class Event extends HtmlUnitScriptable {
      * @return the return composed property
      */
     @JsxGetter
-    public Object getComposed() {
+    public boolean isComposed() {
         return false;
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,9 @@
 package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLANK;
-import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
-import static org.htmlunit.BrowserVersionFeatures.URL_IGNORE_SPECIAL;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.net.MalformedURLException;
@@ -28,7 +26,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.SgmlPage;
@@ -43,13 +40,14 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.DOMTokenList;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 
 /**
  * The JavaScript object that represents an anchor.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:gousseff@netscape.net">Alexei Goussev</a>
+ * @author Mike Bowler
+ * @author Alexei Goussev
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Chris Erskine
@@ -214,7 +212,7 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter
     public String getReferrerPolicy() {
         String attrib = getDomNodeOrDie().getAttribute("referrerPolicy");
-        if (StringUtils.isEmpty(attrib)) {
+        if (StringUtils.isEmptyOrNull(attrib)) {
             return "";
         }
         attrib = attrib.toLowerCase(Locale.ROOT);
@@ -255,7 +253,7 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Sets the search portion of the link's URL (the portion starting with '?'
-     * and up to but not including any '#')..
+     * and up to but not including any '#').
      * @param search the new search portion of the link's URL
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
@@ -263,7 +261,9 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxSetter
     public void setSearch(final String search) throws Exception {
         final String query;
-        if (search == null || "?".equals(search) || "".equals(search)) {
+        if (search == null
+                || StringUtils.isEmptyString(search)
+                || StringUtils.equalsChar('?', search)) {
             query = null;
         }
         else if (search.charAt(0) == '?') {
@@ -379,7 +379,7 @@ public class HTMLAnchorElement extends HTMLElement {
                 setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
             }
         }
-        else if (!StringUtils.isEmpty(hostname)) {
+        else if (!StringUtils.isEmptyOrNull(hostname)) {
             setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
         }
     }
@@ -398,19 +398,12 @@ public class HTMLAnchorElement extends HTMLElement {
                 String href = anchor.getHrefAttribute();
                 if (href.length() > 1 && Character.isLetter(href.charAt(0)) && ':' == href.charAt(1)) {
                     if (browser.hasFeature(JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS)) {
-                        href = StringUtils.capitalize(href);
+                        href = org.apache.commons.lang3.StringUtils.capitalize(href);
                     }
                     if (browser.hasFeature(JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL)) {
                         href = "/" + href;
                     }
                     return href;
-                }
-            }
-            else if (browser.hasFeature(JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL)) {
-                final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
-                final String href = anchor.getHrefAttribute();
-                if (href.length() > 1 && Character.isLetter(href.charAt(0)) && ':' == href.charAt(1)) {
-                    return href.substring(2);
                 }
             }
             return getUrl().getPath();
@@ -505,25 +498,7 @@ public class HTMLAnchorElement extends HTMLElement {
             return;
         }
 
-        String bareProtocol = StringUtils.substringBefore(protocol, ":");
-        if (getBrowserVersion().hasFeature(URL_IGNORE_SPECIAL)) {
-            if (!UrlUtils.isValidScheme(bareProtocol)) {
-                return;
-            }
-
-            try {
-                URL url = UrlUtils.getUrlWithNewProtocol(getUrl(), bareProtocol);
-                url = UrlUtils.removeRedundantPort(url);
-                setUrl(url);
-            }
-            catch (final MalformedURLException ignored) {
-                // ignore
-            }
-
-            return;
-        }
-
-        bareProtocol = bareProtocol.trim();
+        final String bareProtocol = StringUtils.substringBefore(protocol, ":").trim();
         if (!UrlUtils.isValidScheme(bareProtocol)) {
             return;
         }
@@ -681,7 +656,7 @@ public class HTMLAnchorElement extends HTMLElement {
             if (userInfo == null) {
                 return "";
             }
-            return StringUtils.substringBefore(userInfo, ':');
+            return org.apache.commons.lang3.StringUtils.substringBefore(userInfo, ':');
         }
         catch (final MalformedURLException e) {
             return "";

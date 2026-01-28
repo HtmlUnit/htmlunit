@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,6 +77,13 @@ public class Rectangle2D implements Shape2D {
                 && y >= bottom_;
     }
 
+    /**
+     * Makes sure the provided point is part of the extended {@link Rectangle2D} by
+     * moving the right or left border to include y and moving the top or bottom border
+     * to include y.
+     * @param x the x position to include
+     * @param y the y position to include
+     */
     public void extend(final double x, final double y) {
         if (x > right_) {
             right_ = x;

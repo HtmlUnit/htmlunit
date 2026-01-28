@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,15 @@
 package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DeviceOrientationEvent}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DeviceOrientationEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
@@ -51,14 +47,14 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void create_ctor() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent('orientation');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -71,20 +67,20 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object DeviceOrientationEvent]", "undefined", "false", "false", "false"},
             EDGE = {"[object DeviceOrientationEvent]", "undefined", "false", "false", "false"},
             FF = {"[object DeviceOrientationEvent]", "undefined", "false", "false", "false"},
             FF_ESR = {"[object DeviceOrientationEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,14 +95,14 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "42", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -121,14 +117,14 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "null", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -141,16 +137,16 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -165,14 +161,14 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new DeviceOrientationEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -187,7 +183,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void create_ctorAllDetails() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -196,7 +192,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             // + "        'data': 'mozart'\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -211,7 +207,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -219,7 +215,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             + "      var event = new DeviceOrientationEvent('orientation', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -234,7 +230,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object DeviceOrientationEvent]", "orientation", "false", "false", "false"})
     public void create_ctorAllDetailsWrongData() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -243,7 +239,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -258,8 +254,8 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void inWindow() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

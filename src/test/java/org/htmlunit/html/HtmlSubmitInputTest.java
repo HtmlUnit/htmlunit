@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,9 @@ import java.util.List;
 
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,13 +31,12 @@ import org.openqa.selenium.WebElement;
 /**
  * Tests for {@link HtmlSubmitInput}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HtmlSubmitInputTest extends WebDriverTestCase {
 
     /**
@@ -47,8 +44,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     public void submit() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "<input type='submit' name='aButton' value='foo'/>\n"
             + "<input type='suBMit' name='button' value='foo'/>\n"
@@ -62,6 +59,9 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
 
         assertTitle(driver, "foo");
 
+        if (useRealBrowser()) {
+            Thread.sleep(200);
+        }
         assertEquals(Collections.singletonList(new NameValuePair("button", "foo")),
             getMockWebConnection().getLastParameters());
     }
@@ -72,8 +72,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"foo", "bar"})
     public void click_onClick() throws Exception {
-        final String html
-            = "<html><head>"
+        final String html = DOCTYPE_HTML
+            + "<html><head>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -95,13 +95,13 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     public void click_onClick_JavascriptReturnsTrue() throws Exception {
-        final String html
-            = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form name='form1' method='get' action='foo.html'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button1'"
             + "onclick='return true'/></form>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.html"), secondHtml);
 
@@ -119,8 +119,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void outsideForm() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -142,7 +142,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void onclickDisables() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script type='text/javascript'>\n"
             + "    function submitForm() {\n"
@@ -171,7 +172,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts("2")
     public void doubleSubmission() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script type='text/javascript'>\n"
             + "    function submitForm() {\n"
@@ -192,6 +194,9 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
         final WebElement input = webDriver.findElement(By.name("submitBtn"));
         input.click();
 
+        if (useRealBrowser()) {
+            Thread.sleep(200);
+        }
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
     }
 
@@ -200,7 +205,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     public void doubleSubmissionWithRedirect() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + "function submitForm(btn) {\n"
             + "  btn.form.submit();\n"
@@ -219,7 +225,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
         mockWebConnection.setResponse(new URL(URL_FIRST, "test"), "", 302, "Found", null, redirectHeaders);
 
         mockWebConnection.setResponse(new URL(URL_FIRST, "nextPage"),
-            "<html><head><title>next page</title></head></html>");
+                DOCTYPE_HTML + "<html><head><title>next page</title></head></html>");
 
         final WebDriver driver = loadPage2(html);
         final WebElement input = driver.findElement(By.name("btn"));
@@ -235,7 +241,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"-", "-", "-"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -267,7 +274,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"-", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -303,7 +311,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -343,7 +352,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Alerts({"initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -381,7 +391,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"initial-initial", "default-default", "newValue-newValue", "newdefault-newdefault"})
     public void defaultValue() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -412,7 +423,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -438,8 +450,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -521,8 +533,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     }
 
     private void validation(final String htmlPart, final String jsPart) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"

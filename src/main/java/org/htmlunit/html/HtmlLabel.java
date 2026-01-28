@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ import org.htmlunit.javascript.host.event.Event;
 /**
  * Wrapper for the HTML element "label".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -56,7 +56,7 @@ public class HtmlLabel extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code for}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getForAttribute() {
         return getAttributeDirect("for");
@@ -68,7 +68,7 @@ public class HtmlLabel extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code accesskey}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAccessKeyAttribute() {
         return getAttributeDirect("accesskey");
@@ -80,7 +80,7 @@ public class HtmlLabel extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onfocus}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getOnFocusAttribute() {
         return getAttributeDirect("onfocus");
@@ -92,7 +92,7 @@ public class HtmlLabel extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onblur}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getOnBlurAttribute() {
         return getAttributeDirect("onblur");

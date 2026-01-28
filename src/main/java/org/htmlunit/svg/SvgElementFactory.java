@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  */
 package org.htmlunit.svg;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.DomAttr;
@@ -53,7 +53,7 @@ public class SvgElementFactory implements ElementFactory {
         SvgTitle.class, SvgTRef.class, SvgTSpan.class, SvgUse.class, SvgView.class, SvgVKern.class
     };
 
-    private static final Map<String, Class<?>> ELEMENTS_ = new HashMap<>();
+    private static final Map<String, Class<?>> ELEMENTS_ = new ConcurrentHashMap<>();
 
     static {
         try {
@@ -79,17 +79,8 @@ public class SvgElementFactory implements ElementFactory {
      * {@inheritDoc}
      */
     @Override
-    public DomElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
-            final Attributes attributes) {
-        return createElementNS(page, namespaceURI, qualifiedName, attributes, false);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public DomElement createElementNS(final SgmlPage page, final String namespaceURI, String qualifiedNameLC,
-            final Attributes attributes, final boolean checkBrowserCompatibility) {
+            final Attributes attributes) {
 
         final Map<String, DomAttr> attributeMap = toMap(page, attributes);
         qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedNameLC);

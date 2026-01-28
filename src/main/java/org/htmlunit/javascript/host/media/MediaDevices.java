@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.media;
 
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -38,8 +39,12 @@ public class MediaDevices extends EventTarget {
         super.jsConstructor();
     }
 
+    /**
+     * @return a {@link NativePromise} that resolves to a {@link DOMException} because HtmlUnit
+     *         does not support media streaming
+     */
     @JsxFunction
-    public Object getUserMedia() {
+    public NativePromise getUserMedia() {
         return setupRejectedPromise(() ->
                 new DOMException("HtmlUnit does not support media streaming.", DOMException.NOT_FOUND_ERR));
     }

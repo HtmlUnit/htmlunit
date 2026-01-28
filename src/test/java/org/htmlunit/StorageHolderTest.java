@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,13 @@ package org.htmlunit;
 import java.util.Map;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link StorageHolder}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class StorageHolderTest extends SimpleWebTestCase {
 
     /**
@@ -39,8 +36,8 @@ public class StorageHolderTest extends SimpleWebTestCase {
         final Map<String, String> localStorage = webClient.getStorageHolder().getLocalStorage(URL_FIRST);
         assertEquals(0, localStorage.size());
 
-        String html
-            = "<html><body>\n"
+        String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + "  localStorage.setItem('myCat', 'Tom');"
             + "</script>\n"
@@ -50,8 +47,8 @@ public class StorageHolderTest extends SimpleWebTestCase {
         assertEquals(1, localStorage.size());
         assertEquals("Tom", localStorage.get("myCat"));
 
-        html
-            = "<html><body>\n"
+        html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + "  localStorage.clear();"
             + "</script>\n"
@@ -73,8 +70,8 @@ public class StorageHolderTest extends SimpleWebTestCase {
 
         localStorage.put("myCat", "Tom");
 
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + "  document.title = localStorage.getItem('myCat', 'Tom');"
             + "</script>\n"
@@ -96,8 +93,8 @@ public class StorageHolderTest extends SimpleWebTestCase {
                 webClient.getStorageHolder().getSessionStorage(webClient.getCurrentWindow());
         assertEquals(0, sessionStorage.size());
 
-        String html
-            = "<html><body>\n"
+        String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + "  sessionStorage.setItem('myCat', 'Tom');"
             + "</script>\n"
@@ -107,8 +104,8 @@ public class StorageHolderTest extends SimpleWebTestCase {
         assertEquals(1, sessionStorage.size());
         assertEquals("Tom", sessionStorage.get("myCat"));
 
-        html
-            = "<html><body>\n"
+        html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + "  sessionStorage.clear();"
             + "</script>\n"
@@ -131,8 +128,8 @@ public class StorageHolderTest extends SimpleWebTestCase {
 
         sessionStorage.put("myCat", "Tom");
 
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + "  document.title = sessionStorage.getItem('myCat', 'Tom');"
             + "</script>\n"

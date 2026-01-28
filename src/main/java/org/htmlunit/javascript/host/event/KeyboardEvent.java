@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1002,17 +1002,12 @@ public class KeyboardEvent extends UIEvent {
         if (code == 0) {
             code = getCharCode();
         }
-        switch (code) {
-            case DOM_VK_SHIFT:
-                return "Shift";
-            case DOM_VK_PERIOD:
-                return ".";
-            case DOM_VK_RETURN:
-                return "Enter";
-
-            default:
-                return String.valueOf(isShiftKey() ? (char) which_ : Character.toLowerCase((char) which_));
-        }
+        return switch (code) {
+            case DOM_VK_SHIFT -> "Shift";
+            case DOM_VK_PERIOD -> ".";
+            case DOM_VK_RETURN -> "Enter";
+            default -> String.valueOf(isShiftKey() ? (char) which_ : Character.toLowerCase((char) which_));
+        };
     }
 
     /**
@@ -1024,18 +1019,12 @@ public class KeyboardEvent extends UIEvent {
         if (code == 0) {
             code = getCharCode();
         }
-        switch (code) {
-            case DOM_VK_SHIFT:
-                return "ShiftLeft";
-            case DOM_VK_PERIOD:
-            case '.':
-                return "Period";
-            case DOM_VK_RETURN:
-                return "Enter";
-
-            default:
-                return "Key" + Character.toUpperCase((char) which_);
-        }
+        return switch (code) {
+            case DOM_VK_SHIFT -> "ShiftLeft";
+            case DOM_VK_PERIOD, '.' -> "Period";
+            case DOM_VK_RETURN -> "Enter";
+            default -> "Key" + Character.toUpperCase((char) which_);
+        };
     }
 
     /**
@@ -1262,7 +1251,7 @@ public class KeyboardEvent extends UIEvent {
      * @return whether or not the "meta" key was pressed during the event firing
      */
     @JsxGetter
-    public boolean getMetaKey() {
+    public boolean isMetaKey() {
         return metaKey_;
     }
 

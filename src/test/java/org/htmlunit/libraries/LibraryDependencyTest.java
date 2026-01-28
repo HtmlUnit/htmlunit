@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +18,14 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Duration;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests that depend on one of JavaScript libraries.
@@ -34,7 +33,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class LibraryDependencyTest extends WebDriverTestCase {
 
     /**
@@ -44,8 +42,8 @@ public class LibraryDependencyTest extends WebDriverTestCase {
     @Alerts("2")
     @Test
     public void contextFactory_Browser() throws Exception {
-        final String firstHtml =
-            "<html>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>1</title>\n"
             + "  <script src='" + URL_THIRD + "' type='text/javascript'></script>\n"
@@ -60,8 +58,8 @@ public class LibraryDependencyTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        final String secondHtml =
-            "<html>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>2</title>\n"
             + "  <script src='" + URL_THIRD + "' type='text/javascript'></script>\n"
@@ -76,7 +74,7 @@ public class LibraryDependencyTest extends WebDriverTestCase {
         webConnection.setResponse(URL_SECOND, secondHtml);
         webConnection.setResponse(URL_THIRD, prototype, MimeType.TEXT_JAVASCRIPT);
 
-        loadPageWithAlerts2(firstHtml, 10_000);
+        loadPageWithAlerts2(firstHtml, Duration.ofMillis(10_000));
     }
 
     private String getContent(final String resourceName) throws IOException {

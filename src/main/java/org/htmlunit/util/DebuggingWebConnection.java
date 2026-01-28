@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,7 +80,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * Wraps a web connection to have a report generated of the received responses.
      * @param webConnection the webConnection that do the real work
      * @param dirName the name of the directory to create in the tmp folder to save received responses.
-     * If this folder already exists, it will be deleted first.
+     *        If this folder already exists, it will be deleted first.
      * @throws IOException in case of problems writing the files
      */
     public DebuggingWebConnection(final WebConnection webConnection,
@@ -189,17 +189,17 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
 
         final StringBuilder bduiler = new StringBuilder();
         bduiler.append("tab[tab.length] = {code: ").append(response.getStatusCode())
-                .append(", ").append("fileName: '").append(file.getName()).append("', ")
-                .append("contentType: '").append(response.getContentType()).append("', ")
-                .append("method: '").append(request.getHttpMethod().name()).append("', ");
+                .append(", fileName: '").append(file.getName()).append("', ")
+                .append("contentType: '").append(response.getContentType())
+                .append("', method: '").append(request.getHttpMethod().name()).append("', ");
         if (request.getHttpMethod() == HttpMethod.POST && request.getEncodingType() == FormEncodingType.URL_ENCODED) {
             bduiler.append("postParameters: ").append(nameValueListToJsMap(request.getRequestParameters()))
                 .append(", ");
         }
-        bduiler.append("url: '").append(escapeJSString(url.toString())).append("', ")
-                .append("loadTime: ").append(response.getLoadTime()).append(", ")
-                .append("responseSize: ").append(length).append(", ")
-                .append("responseHeaders: ").append(nameValueListToJsMap(response.getResponseHeaders()))
+        bduiler.append("url: '").append(escapeJSString(url.toString()))
+                .append("', loadTime: ").append(response.getLoadTime())
+                .append(", responseSize: ").append(length)
+                .append(", responseHeaders: ").append(nameValueListToJsMap(response.getResponseHeaders()))
                 .append("};\n");
         appendToJSFile(bduiler.toString());
     }
@@ -271,8 +271,8 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      */
     private File createFile(final URL url, final String extension) throws IOException {
         String name = url.getPath().replaceFirst("/$", "").replaceAll(".*/", "");
-        name = StringUtils.substringBefore(name, "?"); // remove query
-        name = StringUtils.substringBefore(name, ";"); // remove additional info
+        name = org.htmlunit.util.StringUtils.substringBefore(name, "?"); // remove query
+        name = org.htmlunit.util.StringUtils.substringBefore(name, ";"); // remove additional info
         name = StringUtils.substring(name, 0, 30); // avoid exceptions due to too long file names
         name = org.htmlunit.util.StringUtils.sanitizeForFileName(name);
         if (!name.endsWith(extension)) {

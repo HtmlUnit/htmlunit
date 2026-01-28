@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,21 +19,18 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlTextArea}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Amit Khanna
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlTextAreaTest extends SimpleWebTestCase {
 
     /**
@@ -48,8 +45,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
     }
 
     private void formSubmission(final String textAreaText, final String expectedValue) throws Exception {
-        final String content
-            = "<html><head><title>foo</title></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'>" + textAreaText + "</textarea>\n"
             + "<input type='submit' id='mysubmit'/>\n"
@@ -72,8 +69,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void formSubmission_NewValue() throws Exception {
-        final String content
-            = "<html><head><title>foo</title></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'>foo</textarea>\n"
             + "<input type='submit' id='mysubmit'/>\n"
@@ -95,8 +92,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void getText() throws Exception {
-        final String content
-            = "<html><head><title>foo</title></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'> foo \n bar </textarea>\n"
             + "</form></body></html>";
@@ -114,7 +111,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "<textarea id='tester'> foo \n bar\r\n test\r a "
@@ -135,8 +133,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String content
-            = "<html><head><title>foo</title></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'> foo \n bar </textarea>\n"
             + "<textarea name='textArea2'></textarea>\n"
@@ -162,8 +160,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void preventDefault() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function handler(e) {\n"
             + "    if (e && e.target.value.length > 2)\n"
             + "      e.preventDefault();\n"
@@ -189,7 +187,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void type() throws Exception {
-        final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body><textarea id='t'></textarea></body></html>";
         final HtmlPage page = loadPage(html, null);
         final HtmlTextArea t = page.getHtmlElementById("t");
         t.type("abc");
@@ -213,7 +211,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void typeWithSelection() throws Exception {
-        final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body><textarea id='t'></textarea></body></html>";
         final HtmlPage page = loadPage(html, null);
         final HtmlTextArea t = page.getHtmlElementById("t");
         t.type("abc");
@@ -235,7 +233,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void typeWhileDisabled() throws Exception {
-        final String html = "<html><body><textarea id='t' disabled='disabled'></textarea></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><textarea id='t' disabled='disabled'></textarea></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlTextArea t = page.getHtmlElementById("t");
         t.type("abc");
@@ -248,8 +246,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void getTextAndVisibility() throws Exception {
-        final String content
-            = "<html><head><title>foo</title></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<textarea name='textArea1' style='visibility:hidden'> foo \n bar "
             + "</textarea>\n"
@@ -266,7 +264,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void typeLeftArrow() throws Exception {
-        final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body><textarea id='t'></textarea></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlTextArea t = page.getHtmlElementById("t");
         t.type('t');
@@ -286,7 +284,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void typeDelKey() throws Exception {
-        final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body><textarea id='t'></textarea></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlTextArea t = page.getHtmlElementById("t");
         t.type('t');
@@ -307,7 +305,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void removeFocus() throws Exception {
-        final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body><textarea id='t'></textarea></body></html>";
         final HtmlPage page = loadPage(html, null);
         final HtmlTextArea t = page.getHtmlElementById("t");
         t.removeFocus();
@@ -318,8 +316,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void typingAndClone() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -340,8 +338,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void typingAndReset() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -365,8 +363,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     public void typingAndSetTextContent() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"

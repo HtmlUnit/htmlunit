@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,15 @@ package org.htmlunit.html;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "map".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
@@ -52,7 +52,7 @@ public class HtmlMap extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
         return getAttributeDirect(NAME_ATTRIBUTE);
@@ -80,7 +80,7 @@ public class HtmlMap extends HtmlElement {
         String name = getNameAttribute();
         if (null != page && StringUtils.isNotBlank(name)) {
             name = "#" + name.trim();
-            for (final HtmlElement elem : page.getDocumentElement().getElementsByTagName("img")) {
+            for (final HtmlElement elem : page.getDocumentElement().getStaticElementsByTagName("img")) {
                 final HtmlImage image = (HtmlImage) elem;
                 if (name.equals(image.getUseMapAttribute())) {
                     return image;

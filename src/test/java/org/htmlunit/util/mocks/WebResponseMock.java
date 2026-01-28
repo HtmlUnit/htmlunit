@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,12 +29,17 @@ import org.htmlunit.util.NameValuePair;
  * Simple mock for {@link WebResponse}.
  *
  * @author Ronald Brill
-*/
+ */
 public class WebResponseMock extends WebResponse {
-    private Map<String, String> headers_;
+    private final Map<String, String> headers_;
 
-    private Map<String, Integer> callCounts_ = new HashMap<>();
+    private final Map<String, Integer> callCounts_ = new HashMap<>();
 
+    /**
+     * Ctor.
+     * @param request the request
+     * @param headers the headers
+     */
     public WebResponseMock(final WebRequest request, final Map<String, String> headers) {
         super(null, request, 0);
 
@@ -58,11 +63,6 @@ public class WebResponseMock extends WebResponse {
 
     @Override
     public Charset getContentCharset() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public Charset getContentCharsetOrNull() {
         throw new RuntimeException("not implemented");
     }
 
@@ -114,6 +114,10 @@ public class WebResponseMock extends WebResponse {
         super.cleanUp();
     }
 
+    /**
+     * @param method the method name
+     * @return the number of call for the given method name
+     */
     public int getCallCount(final String method) {
         return callCounts_.getOrDefault(method, 0);
     }

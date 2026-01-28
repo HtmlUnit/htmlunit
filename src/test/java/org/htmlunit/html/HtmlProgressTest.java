@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -28,7 +26,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HtmlProgressTest extends WebDriverTestCase {
 
     /**
@@ -37,7 +34,8 @@ public class HtmlProgressTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLProgressElement]")
     public void simpleScriptable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -52,10 +50,10 @@ public class HtmlProgressTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             if ("[object HTMLProgressElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(HtmlProgress.class.isInstance(page.getHtmlElementById("myId")));
+                assertTrue(page.getHtmlElementById("myId") instanceof HtmlProgress);
             }
             else {
-                assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
+                assertTrue(page.getHtmlElementById("myId") instanceof HtmlUnknownElement);
             }
         }
     }
@@ -66,7 +64,8 @@ public class HtmlProgressTest extends WebDriverTestCase {
     @Test
     @Alerts({"number70", "number100"})
     public void properties() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<progress id='it' value='70' max='100'>70%</progress>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

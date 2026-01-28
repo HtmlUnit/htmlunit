@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,33 +26,28 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlImageInput}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlImageInput2Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"button.x#100", "button.y#200", "button#foo"},
-            FF = {"button.x#100", "button.y#200"},
-            FF_ESR = {"button.x#100", "button.y#200"})
+    @Alerts({"button.x#100", "button.y#200"})
     public void click_WithPosition() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "<input type='image' name='aButton' value='foo'/>\n"
             + "<input type='image' name='button' value='foo'/>\n"
@@ -81,8 +76,8 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void noNameClick_WithPosition() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "<input type='image' value='foo'/>\n"
             + "</form></body></html>";
@@ -95,10 +90,8 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
         final HtmlPage secondPage = imageInput.click(100, 200);
         assertNotNull(secondPage);
 
-        final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair[]{
-            new NameValuePair("x", "100"),
-            new NameValuePair("y", "200")
-        });
+        final List<NameValuePair> expectedPairs = Arrays.asList(new NameValuePair("x", "100"),
+                new NameValuePair("y", "200"));
 
         assertEquals(expectedPairs, webConnection.getLastParameters());
     }
@@ -112,11 +105,11 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
                 getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <input type='image' src='img.jpg' >\n"
@@ -136,8 +129,8 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"4x7.jpg", "§§URL§§4x7.jpg"})
     public void src() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "  <input type='image' id='myImage' src='4x7.jpg' >\n"

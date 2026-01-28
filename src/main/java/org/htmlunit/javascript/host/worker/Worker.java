@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,8 +85,8 @@ public class Worker extends EventTarget {
 
         final String url = JavaScriptEngine.toString(args[0]);
         Scriptable options = null;
-        if (args.length > 1) {
-            options = (Scriptable) args[1];
+        if (args.length > 1 && args[1] instanceof Scriptable scriptable) {
+            options = scriptable;
         }
         return new Worker(cx, getWindow(ctorObj), url, options);
     }
@@ -123,7 +123,7 @@ public class Worker extends EventTarget {
      * @return the handler
      */
     @JsxGetter
-    public Object getOnmessage() {
+    public Function getOnmessage() {
         return getEventListenersContainer().getEventHandler(Event.TYPE_MESSAGE);
     }
 }

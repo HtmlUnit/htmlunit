@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,9 @@ import org.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "tr".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
@@ -91,7 +91,7 @@ public class HtmlTableRow extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
         return getAttributeDirect("align");
@@ -103,7 +103,7 @@ public class HtmlTableRow extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code char}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
         return getAttributeDirect("char");
@@ -115,7 +115,7 @@ public class HtmlTableRow extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code charoff}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
         return getAttributeDirect("charoff");
@@ -127,7 +127,7 @@ public class HtmlTableRow extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code valign}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
         return getAttributeDirect("valign");
@@ -147,7 +147,7 @@ public class HtmlTableRow extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code bgcolor}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
         return getAttributeDirect("bgcolor");
@@ -166,7 +166,9 @@ public class HtmlTableRow extends HtmlElement {
             setNextCell(getFirstChild());
         }
 
-        /** @return whether there is another cell available */
+        /**
+         * @return whether there is another cell available
+         */
         @Override
         public boolean hasNext() {
             return nextCell_ != null;
@@ -216,13 +218,13 @@ public class HtmlTableRow extends HtmlElement {
         private void setNextCell(final DomNode node) {
             nextCell_ = null;
             for (DomNode next = node; next != null; next = next.getNextSibling()) {
-                if (next instanceof HtmlTableCell) {
-                    nextCell_ = (HtmlTableCell) next;
+                if (next instanceof HtmlTableCell cell) {
+                    nextCell_ = cell;
                     return;
                 }
-                else if (currentForm_ == null && next instanceof HtmlForm) {
+                else if (currentForm_ == null && next instanceof HtmlForm form) {
                     // Completely illegal HTML but some of the big sites (ie amazon) do this
-                    currentForm_ = (HtmlForm) next;
+                    currentForm_ = form;
                     setNextCell(next.getFirstChild());
                     return;
                 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -107,18 +107,6 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentCharsetOrNull() on the wrapped webResponse object.
-     *
-     * @deprecated as of version 4.0.0; use {@link #getContentCharset()} instead
-     */
-    @Override
-    @Deprecated
-    public Charset getContentCharsetOrNull() {
-        return wrappedWebResponse_.getContentCharsetOrNull();
-    }
-
-    /**
-     * {@inheritDoc}
      * The default behavior of this method is to return getContentCharset() on the wrapped webResponse object.
      */
     @Override
@@ -196,17 +184,6 @@ public class WebResponseWrapper extends WebResponse {
     @Override
     public void cleanUp() {
         wrappedWebResponse_.cleanUp();
-    }
-
-    /**
-     * {@inheritDoc}
-     * The default behavior of this method is to call defaultCharsetUtf8() on the wrapped webResponse object.
-     * @deprecated as of version 4.0.0; use {@link WebRequest#setDefaultResponseContentCharset(Charset)} instead
-     */
-    @Deprecated
-    @Override
-    public void defaultCharsetUtf8() {
-        wrappedWebResponse_.defaultCharsetUtf8();
     }
 
     @Override

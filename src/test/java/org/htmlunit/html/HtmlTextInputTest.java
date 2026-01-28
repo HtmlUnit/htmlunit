@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  */
 package org.htmlunit.html;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.GraphicsEnvironment;
 import java.util.Arrays;
@@ -22,12 +22,11 @@ import java.util.Collections;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Assume;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.Keys;
@@ -41,7 +40,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ronald Brill
  * @author Anton Demydenko
  */
-@RunWith(BrowserRunner.class)
 public class HtmlTextInputTest extends WebDriverTestCase {
 
     private static boolean SKIP_ = false;
@@ -60,8 +58,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -84,19 +82,30 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     public void type() throws Exception {
-        final String html = "<html><head></head><body><input type='text' id='t'/></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head></head><body><input type='text' id='t'/></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement t = driver.findElement(By.id("t"));
+
         t.sendKeys("abc");
-        assertEquals("abc", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("abc", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("ab", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("ab", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("a", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("a", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("", t.getDomProperty("value"));
     }
 
     /**
@@ -104,7 +113,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     public void typeWhileDisabled() throws Exception {
-        final String html = "<html><body><input type='text' id='p' disabled='disabled'/></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><input type='text' id='p' disabled='disabled'/></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
         try {
@@ -114,7 +124,9 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         catch (final InvalidElementStateException e) {
             // as expected
         }
-        assertEquals("", p.getAttribute("value"));
+
+        assertNull(p.getDomAttribute("value"));
+        assertEquals("", p.getDomProperty("value"));
     }
 
     /**
@@ -123,7 +135,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null"})
     public void typeDoesNotChangeValueAttribute() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -153,7 +166,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"HtmlUnit", "HtmlUnit"})
     public void typeDoesNotChangeValueAttributeWithInitialValue() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -182,8 +196,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     public void preventDefault_OnKeyDown() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function handler(e) {\n"
             + "    if (e && e.target.value.length > 2)\n"
             + "      e.preventDefault();\n"
@@ -200,8 +214,10 @@ public class HtmlTextInputTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
+
         p.sendKeys("abcd");
-        assertEquals("abc", p.getAttribute("value"));
+        assertNull(p.getDomAttribute("value"));
+        assertEquals("abc", p.getDomProperty("value"));
     }
 
     /**
@@ -209,8 +225,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     public void preventDefault_OnKeyPress() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function handler(e) {\n"
             + "    if (e && e.target.value.length > 2)\n"
             + "      e.preventDefault();\n"
@@ -227,8 +243,10 @@ public class HtmlTextInputTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
+
         p.sendKeys("abcd");
-        assertEquals("abc", p.getAttribute("value"));
+        assertNull(p.getDomAttribute("value"));
+        assertEquals("abc", p.getDomProperty("value"));
     }
 
     /**
@@ -236,8 +254,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     public void typeOnChange() throws Exception {
-        final String html =
-              "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "</script>"
@@ -276,8 +294,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     public void setValueOnChange() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head></head>\n"
               + "<body>\n"
               + "  <input type='text' id='t' value='Hello world'"
@@ -301,8 +319,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     public void setDefaultValueOnChange() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+              + "<html>\n"
               + "<head></head>\n"
               + "<body>\n"
               + "  <input type='text' id='t' value='Hello world'"
@@ -328,7 +346,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -360,7 +379,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -397,7 +417,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
                 "newValue-initial-initial", "newValue-initial-initial",
                 "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -438,7 +459,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
                 "newValue-initial-initial", "newValue-initial-initial",
                 "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -478,7 +500,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
                 "newValue-default-default", "newValue-attribValue-attribValue",
                 "newValue-newDefault-newDefault"})
     public void value() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -515,7 +538,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
             FF = "7",
             FF_ESR = "7")
     public void textLength() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -542,8 +566,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void selection() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    log(getSelection(document.getElementById('text1')).length);\n"
@@ -586,7 +610,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     }
 
     private void selection2(final int selectionStart, final int selectionEnd) throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<input id='myTextInput' value='Bonjour' type='text'>\n"
             + "<script>\n"
@@ -611,7 +636,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"0,0", "4,5", "10,10", "4,4", "1,1"})
     public void selectionOnUpdate() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<input id='myTextInput' value='Hello' type='text'>\n"
             + "<script>\n"
@@ -644,8 +670,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     public void submitOnEnter() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <form action='result.html'>\n"
             + "    <input id='t' value='hello'/>\n"
@@ -658,7 +684,9 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         final WebElement field = driver.findElement(By.id("t"));
 
         field.sendKeys("\n");
-
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
 
@@ -667,8 +695,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     public void sendKeysEnterWithoutForm() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <input id='t' value='hello'>\n"
             + "</body>\n"
@@ -683,17 +711,17 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void submitWithoutForm() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <input id='t' value='hello'>\n"
             + "</body>\n"
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("t")).submit();
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> driver.findElement(By.id("t")).submit());
 
         assertEquals(1, getMockWebConnection().getRequestCount());
     }
@@ -704,7 +732,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -729,6 +758,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0987654321!",
+             "0987654321!",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -743,6 +773,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"68746d6c756e69742072756c657a21",
+             "68746d6c756e69742072756c657a21",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -757,6 +788,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -770,6 +802,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({" ",
+             " ",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -783,6 +816,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"  \t",
+             "  \t",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -796,6 +830,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({" 210 ",
+             " 210 ",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -808,7 +843,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({" 210 ",
+    @Alerts({"null",
+             " 210 ",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -821,7 +857,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"abcd",
+    @Alerts({"null",
+             "abcd",
              "false",
              "false-false-false-false-false-false-false-true-false-false-false",
              "true",
@@ -835,6 +872,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"ab",
+             "ab",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -847,7 +885,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -860,7 +899,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"abcdefghi",
+    @Alerts({"null",
+             "abcdefghi",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -873,7 +913,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"abcd",
+    @Alerts({"null",
+             "abcd",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -886,7 +927,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"abcde",
+    @Alerts({"null",
+             "abcde",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -900,6 +942,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"abcdefghi",
+             "abcdefghi",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -914,8 +957,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -944,7 +987,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -957,7 +1001,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-true-false-false-false-false-false-false-false-false-false",
              "true",
@@ -970,7 +1015,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-true-false-false-false-false-false-false-false-false-false",
              "true",
@@ -983,7 +1029,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -997,7 +1044,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-false-false-false-false-false-false-false-false-false-true",
              "true",
@@ -1010,7 +1058,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -1023,7 +1072,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -1033,8 +1083,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     }
 
     private void validation(final String htmlPart, final String jsPart, final String sendKeys) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"
@@ -1067,8 +1117,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
                 + "  </form>\n"
                 + "</body></html>";
 
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head><title>second</title></head><body>\n"
                 + "  <p>hello world</p>\n"
                 + "</body></html>";
 
@@ -1081,14 +1131,18 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         if (sendKeys != null) {
             foo.sendKeys(sendKeys);
         }
-        assertEquals(getExpectedAlerts()[0], foo.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], "" + foo.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], foo.getDomProperty("value"));
 
         driver.findElement(By.id("myTest")).click();
-        verifyTitle2(driver, getExpectedAlerts()[1], getExpectedAlerts()[2], getExpectedAlerts()[3]);
+        verifyTitle2(driver, getExpectedAlerts()[2], getExpectedAlerts()[3], getExpectedAlerts()[4]);
 
         driver.findElement(By.id("myButton")).click();
-        assertEquals(getExpectedAlerts()[4], getMockWebConnection().getLastWebRequest().getUrl());
-        assertEquals(Integer.parseInt(getExpectedAlerts()[5]), getMockWebConnection().getRequestCount());
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
+        assertEquals(getExpectedAlerts()[5], getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[6]), getMockWebConnection().getRequestCount());
     }
 
     /**
@@ -1097,10 +1151,10 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"abcx", "", "abcx", "abcx"})
     public void clipboard() throws Exception {
-        Assume.assumeFalse(SKIP_);
+        Assumptions.assumeFalse(SKIP_);
 
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"

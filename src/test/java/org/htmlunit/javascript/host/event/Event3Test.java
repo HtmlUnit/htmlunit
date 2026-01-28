@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,23 +25,20 @@ import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlButton;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.Keyboard;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests that when DOM events such as "onclick" have access
  * to an {@link Event} object with context information.
  *
- * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
+ * @author Chris Eldredge
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class Event3Test extends SimpleWebTestCase {
 
     /**
@@ -60,8 +57,8 @@ public class Event3Test extends SimpleWebTestCase {
     private void testEventOnKeyDown_Shift_Ctrl_Alt(
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
             final String... expectedAlerts) throws Exception {
-        final String content
-            = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <button type='button' id='clickId'/>\n"
@@ -114,8 +111,8 @@ public class Event3Test extends SimpleWebTestCase {
 
     private void testEventOnClick_Shift_Ctrl_Alt(final boolean shiftKey,
             final boolean ctrlKey, final boolean altKey, final String[] expectedAlerts) throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <button name='button' type='button' id='button'>Push me</button>\n"
             + "</form>\n"
@@ -143,8 +140,8 @@ public class Event3Test extends SimpleWebTestCase {
      */
     @Test
     public void eventOnBlur() throws Exception {
-        final String content
-            = "<html><head></head><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form action='foo'>\n"
             + "<input name='textField' id='textField' onblur='alert(event != null)'>\n"
             + "<input type='submit' id='otherField'>\n"
@@ -157,40 +154,6 @@ public class Event3Test extends SimpleWebTestCase {
         page.getHtmlElementById("otherField").focus();
         final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Test for event bubbling in IE.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented // TODO: in IE no click event can be registered for the window
-    @Alerts({"span bubbling", "div", "div bubbling"})
-    public void ie_EventBubbling() throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
-            + "<script>\n"
-            + "function t(_s) {\n"
-            + "  return function() { alert(_s) };\n"
-            + "}\n"
-            + "function init() {\n"
-            + "  window.attachEvent('onclick', t('window bubbling'));\n"
-            + "  var oDiv = document.getElementById('theDiv');\n"
-            + "  oDiv.attachEvent('onclick', t('div bubbling'));\n"
-            + "  var oSpan = document.getElementById('theSpan');\n"
-            + "  oSpan.attachEvent('onclick', t('span bubbling'));\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='init()'>\n"
-            + "<div onclick=\"alert('div')\" id='theDiv'>\n"
-            + "<span id='theSpan'>blabla</span>\n"
-            + "</div>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        page.getHtmlElementById("theSpan").click();
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -231,8 +194,8 @@ public class Event3Test extends SimpleWebTestCase {
     private void testEventBubblingReturns(final String onclick1,
         final String onclick2, final String onclick3, final boolean changesPage) throws Exception {
 
-        final String html1
-            = "<html><head><title>First</title></head><body>\n"
+        final String html1 = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<div onclick='alert(\"d\"); " + onclick1 + "'>\n"
             + "<span onclick='alert(\"s\"); " + onclick2 + "'>\n"
             + "<a href='" + URL_SECOND + "' id='a' onclick='alert(\"a\"); " + onclick3 + "'>go</a>\n"
@@ -240,7 +203,7 @@ public class Event3Test extends SimpleWebTestCase {
             + "</div>\n"
             + "</body></html>";
 
-        final String html2 = "<html><head><title>Second</title></head><body></body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();

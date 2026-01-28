@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -35,6 +36,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.util.KeyDataPair;
 
 /**
  * A JavaScript object for {@code File}.
@@ -84,11 +86,6 @@ public class File extends Blob {
         }
 
         @Override
-        public java.io.File getFile() {
-            return file_;
-        }
-
-        @Override
         byte[] getBytes(final int start, final int end) {
             final byte[] result = new byte[end - start];
             try {
@@ -98,6 +95,14 @@ public class File extends Blob {
                 LOG.error("FileBackend.getBytes failed", e);
             }
             return result;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public KeyDataPair getKeyDataPair(final String name, final String fileName, final String contentType) {
+            return new KeyDataPair(name, file_, fileName, contentType, (Charset) null);
         }
     }
 
@@ -182,13 +187,5 @@ public class File extends Blob {
     @JsxFunction
     public void slice() {
         // nothing to do
-    }
-
-    /**
-     * Returns the underlying file.
-     * @return the underlying file
-     */
-    public java.io.File getFile() {
-        return getBackend().getFile();
     }
 }

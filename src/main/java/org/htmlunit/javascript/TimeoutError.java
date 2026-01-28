@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ public class TimeoutError extends Error {
 
     TimeoutError(final long allowedTime, final long executionTime) {
         super("Javascript execution takes too long (allowed: " + allowedTime
-                + ", already elapsed: " + executionTime + ")");
+                + "ms, already elapsed: " + executionTime + "ms)");
         allowedTime_ = allowedTime;
         executionTime_ = executionTime;
     }

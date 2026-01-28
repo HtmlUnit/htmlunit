@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import static org.htmlunit.HttpHeader.IF_NONE_MATCH;
 import static org.htmlunit.HttpHeader.LAST_MODIFIED;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,13 +35,11 @@ import java.util.Map;
 import org.apache.commons.lang3.time.DateUtils;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.http.HttpStatus;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.mocks.WebResponseMock;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Cache}.
@@ -52,8 +51,7 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Ashley Frieze
  * @author Lai Quang Duong
-*/
-@RunWith(BrowserRunner.class)
+ */
 public class CacheTest extends SimpleWebTestCase {
 
     private static final long ONE_MINUTE = 60_000L;
@@ -104,11 +102,17 @@ public class CacheTest extends SimpleWebTestCase {
         assertFalse(cache.isCacheableContent(response));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithNoHeadersIsNotCached() {
         assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, null), now_, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithExpiryDateIsCached() {
         final Map<String, String> headers = new HashMap<>();
@@ -117,6 +121,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithExpiryDateInFutureButShortMaxAgeIsNotInCacheWindow() {
         final Map<String, String> headers = new HashMap<>();
@@ -127,6 +134,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithExpiryDateInFutureButShortSMaxAgeIsNotInCacheWindow() {
         final Map<String, String> headers = new HashMap<>();
@@ -137,6 +147,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithBothMaxAgeAndSMaxUsesSMaxAsPriority() {
         final Map<String, String> headers = new HashMap<>();
@@ -145,6 +158,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithMaxAgeInFutureWillBeCached() {
         final Map<String, String> headers = new HashMap<>();
@@ -158,6 +174,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithLongLastModifiedTimeComparedToNowIsCachedOnDownload() {
         final Map<String, String> headers = new HashMap<>();
@@ -166,6 +185,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithLastModifiedTimeIsCachedAfterAFewPercentOfCreationAge() {
         final Map<String, String> headers = new HashMap<>();
@@ -174,6 +196,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_HOUR, now_));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void contentWithLastModifiedTimeIsNotCachedAfterALongerPeriod() {
         final Map<String, String> headers = new HashMap<>();
@@ -183,18 +208,20 @@ public class CacheTest extends SimpleWebTestCase {
     }
 
     /**
-     *@throws Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void usage() throws Exception {
-        final String content = "<html><head><title>page 1</title>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<script src='foo1.js'></script>\n"
             + "<script src='foo2.js'></script>\n"
             + "</head><body>\n"
             + "<a href='page2.html'>to page 2</a>\n"
             + "</body></html>";
 
-        final String content2 = "<html><head><title>page 2</title>\n"
+        final String content2 = DOCTYPE_HTML
+            + "<html><head><title>page 2</title>\n"
             + "<script src='foo2.js'></script>\n"
             + "</head><body>\n"
             + "<a href='page1.html'>to page 1</a>\n"
@@ -235,11 +262,12 @@ public class CacheTest extends SimpleWebTestCase {
     }
 
     /**
-     *@throws Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void jsUrlEncoded() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>page 1</title>\n"
             + "  <script src='foo1.js'></script>\n"
@@ -250,7 +278,8 @@ public class CacheTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String content2 = "<html>\n"
+        final String content2 = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>page 2</title>\n"
             + "  <script src='foo2.js?foo[1]=bar/baz'></script>\n"
@@ -292,11 +321,12 @@ public class CacheTest extends SimpleWebTestCase {
     }
 
     /**
-     *@throws Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void cssUrlEncoded() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>page 1</title>\n"
             + "  <link href='foo1.css' type='text/css' rel='stylesheet'>\n"
@@ -315,7 +345,8 @@ public class CacheTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String content2 = "<html>\n"
+        final String content2 = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>page 2</title>\n"
             + "  <link href='foo2.js?foo[1]=bar/baz' type='text/css' rel='stylesheet'>\n"
@@ -362,11 +393,12 @@ public class CacheTest extends SimpleWebTestCase {
     }
 
     /**
-     *@throws Exception if the test fails
+     * @throws Exception if the test fails
      */
     @Test
     public void maxSizeMaintained() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<script src='foo1.js' type='text/javascript'/>\n"
             + "<script src='foo2.js' type='text/javascript'/>\n"
             + "</head><body>abc</body></html>";
@@ -398,7 +430,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void cssIsCached() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<style>.x { color: red; }</style>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
@@ -428,7 +461,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void cssIsCachedIfUrlWasRedirected() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body onload='document.styleSheets.item(0); document.styleSheets.item(1);'>x</body>\n"
@@ -468,7 +502,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void cssFromCacheIsUsed() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
@@ -501,7 +536,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void cssManuallyAddeToCache() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>\n"
@@ -523,7 +559,7 @@ public class CacheTest extends SimpleWebTestCase {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair(LAST_MODIFIED, "Sun, 15 Jul 2007 20:46:27 GMT"));
         final WebRequest request = new WebRequest(cssUrl);
-        final WebResponseData data = new WebResponseData(css.getBytes("UTF-8"),
+        final WebResponseData data = new WebResponseData(css.getBytes(StandardCharsets.UTF_8),
                 HttpStatus.OK_200, HttpStatus.OK_200_MSG, headers);
         final WebResponse response = new WebResponse(data, request, 100);
         client.getCache().cacheIfPossible(new WebRequest(cssUrl), response, headers);
@@ -542,7 +578,8 @@ public class CacheTest extends SimpleWebTestCase {
     @Test
     @Alerts({"hello", "hello"})
     public void xhrContentCached() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<script>\n"
             + "  function doTest() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
@@ -573,7 +610,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void testNoStoreCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>x</body>\n"
@@ -600,9 +638,13 @@ public class CacheTest extends SimpleWebTestCase {
         assertEquals(4, connection.getRequestCount());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void testNoCacheCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>page 1</title>\n"
                 + "</head>\n"
                 + "<body>x</body>\n"
                 + "</html>";
@@ -672,7 +714,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void testMaxAgeCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>x</body>\n"
@@ -716,7 +759,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void testSMaxageCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>x</body>\n"
@@ -760,7 +804,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void testExpiresCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>x</body>\n"
@@ -800,7 +845,8 @@ public class CacheTest extends SimpleWebTestCase {
      */
     @Test
     public void testMaxAgeOverrulesExpiresCacheControl() throws Exception {
-        final String html = "<html><head><title>page 1</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>page 1</title>\n"
             + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
             + "</head>\n"
             + "<body>x</body>\n"

@@ -1,0 +1,51 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on:
+  pull_request:
+    paths-ignore:
+      - '.github/**'
+      - '!.github/workflows/maven.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        java: ['11', '17', '21']
+
+    steps:
+    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+    - name: Set up JDK ${{ matrix.Java }}
+      uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
+      with:
+        java-version: ${{ matrix.Java }}
+        distribution: 'temurin'
+        cache: maven
+    - uses: reviewdog/action-setup@d8edfce3dd5e1ec6978745e801f9c50b5ef80252 # v0.20.1
+      name: Set up reviewdog
+      with:
+        reviewdog_version: latest
+    - name: Build with Maven
+      run: mvn --batch-mode --errors --fail-at-end --show-version -Dgpg.skip -Djava.awt.headless=true compile test-compile
+    - name: Run CodeStyleTest
+      if: ${{ matrix.Java == 21 }}
+      run: EXPORT_FAILURES=1 mvn --batch-mode --fail-never --show-version -Dgpg.skip -Djava.awt.headless=true -Dtest=org.htmlunit.CodeStyleTest test
+    - name: Upload check results
+      if: ${{ matrix.Java == 21 }}
+      env:
+        WORKDIR: ./
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        [ -s target/CodeStyle.txt ] && cat target/CodeStyle.txt | { reviewdog -efm="%f, line %l: %m" -name="CodeStyleTest::codeStyle" -reporter=github-pr-check -filter-mode=diff_context -fail-on-error || touch reporterror; }
+        [ -s target/Tests.txt ] && cat target/Tests.txt | { reviewdog -efm="%f, line %l: %m" -name="CodeStyleTest::tests" -reporter=github-pr-check -filter-mode=diff_context -fail-on-error || touch reporterror; }
+        [ -s target/XMLStyle.txt ] && cat target/XMLStyle.txt | { reviewdog -efm="%f, line %l: %m" -name="CodeStyleTest::xmlStyle" -reporter=github-pr-check -filter-mode=diff_context -fail-on-error || touch reporterror; }
+        [ -f reporterror ] && exit 1
+        exit 0

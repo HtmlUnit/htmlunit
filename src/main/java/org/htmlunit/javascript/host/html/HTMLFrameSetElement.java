@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,6 @@
  * limitations under the License.
  */
 package org.htmlunit.javascript.host.html;
-
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.html.HtmlFrameSet;
@@ -123,7 +120,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code ongamepadconnected} event handler.
      * @return the {@code ongamepadconnected} event handler
      */
-    @JsxGetter({FF, FF_ESR})
+    @JsxGetter
     public Function getOngamepadconnected() {
         return getEventHandler(Event.TYPE_GAMEPAD_CONNECTED);
     }
@@ -132,7 +129,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code ongamepadconnected} event handler.
      * @param gamepadconnected the {@code ongamepadconnected} event handler
      */
-    @JsxSetter({FF, FF_ESR})
+    @JsxSetter
     public void setOngamepadconnected(final Object gamepadconnected) {
         setEventHandler(Event.TYPE_GAMEPAD_CONNECTED, gamepadconnected);
     }
@@ -141,7 +138,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code ongamepaddisconnected} event handler.
      * @return the {@code ongamepaddisconnected} event handler
      */
-    @JsxGetter({FF, FF_ESR})
+    @JsxGetter
     public Function getOngamepaddisconnected() {
         return getEventHandler(Event.TYPE_GAMEPAD_DISCONNECTED);
     }
@@ -150,7 +147,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code ongamepaddisconnected} event handler.
      * @param gamepaddisconnected the {@code ongamepaddisconnected} event handler
      */
-    @JsxSetter({FF, FF_ESR})
+    @JsxSetter
     public void setOngamepaddisconnected(final Object gamepaddisconnected) {
         setEventHandler(Event.TYPE_GAMEPAD_DISCONNECTED, gamepaddisconnected);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,18 +29,15 @@ import org.htmlunit.html.DomNodeList;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlDivision;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link SgmlPage}.
  *
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public final class SgmlPageTest extends WebServerTestCase {
 
     /**
@@ -67,8 +64,8 @@ public final class SgmlPageTest extends WebServerTestCase {
      */
     @Test
     public void getElementsByTagNameAsterisk() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<form><input type='button' name='button1' value='pushme'></form>\n"
             + "<div>a</div> <div>b</div> <div>c</div>\n"
@@ -107,8 +104,8 @@ public final class SgmlPageTest extends WebServerTestCase {
      */
     @Test
     public void getElementsByTagNameNSAsterisk() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<form><input type='button' name='button1' value='pushme'></form>\n"
             + "<div>a</div> <div>b</div> <div>c</div>\n"

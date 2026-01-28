@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     /** The {@code null} value represents any host. */
     public static final String ANY_HOST = null;
 
-    /**The {@code -1} value represents any port. */
+    /** The {@code -1} value represents any port. */
     public static final int ANY_PORT = -1;
 
     /** The {@code null} value represents any realm. */
@@ -59,7 +59,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     private static SocksProxyAuthenticator SocksAuthenticator_;
     private final Map<AuthScopeProxy, Credentials> credentialsMap_ = new HashMap<>();
 
-    // Because this is used for the whole JVM i try to make it as less invasive as possible.
+    // Because this is used for the whole JVM I try to make it as less invasive as possible.
     // But in general this might disturb other application running on the same JVM.
     private static final class SocksProxyAuthenticator extends Authenticator {
         private CredentialsProvider credentialsProvider_;
@@ -93,47 +93,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * authentication may receive the specified username and password.
      * @param username the username for the new credentials
      * @param password the password for the new credentials
-     *
-     * @deprecated as of version 3.4.0; use addCredentials(String, char[]) instead
-     */
-    @Deprecated
-    public void addCredentials(final String username, final String password) {
-        addCredentials(username, password, ANY_HOST, ANY_PORT, ANY_REALM);
-    }
-
-    /**
-     * Adds credentials for the specified username/password for any host/port/realm combination.
-     * The credentials may be for any authentication scheme, including NTLM, digest and basic
-     * HTTP authentication. If you are using sensitive username/password information, please do
-     * NOT use this method. If you add credentials using this method, any server that requires
-     * authentication may receive the specified username and password.
-     * @param username the username for the new credentials
-     * @param password the password for the new credentials
      */
     public void addCredentials(final String username, final char[] password) {
         addCredentials(username, password, ANY_HOST, ANY_PORT, ANY_REALM);
-    }
-
-    /**
-     * Adds credentials for the specified username/password on the specified host/port for the
-     * specified realm. The credentials may be for any authentication scheme, including NTLM,
-     * digest and basic HTTP authentication.
-     * @param username the username for the new credentials
-     * @param password the password for the new credentials
-     * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
-     * @param port the port to which to the new credentials apply (negative if applicable to any port)
-     * @param realm the realm to which to the new credentials apply ({@code null} if applicable to any realm)
-     *
-     * @deprecated as of version 3.4.0;
-     * use DefaultCredentialsProvider.addCredentials(String, char[], String, int, String) instead
-     */
-    @Deprecated
-    public void addCredentials(final String username, final String password, final String host,
-            final int port, final String realm) {
-        final AuthScope authscope = new AuthScope(host, port, realm, ANY_SCHEME);
-        final HtmlUnitUsernamePasswordCredentials credentials =
-                    new HtmlUnitUsernamePasswordCredentials(username, password.toCharArray());
-        setCredentials(authscope, credentials);
     }
 
     /**
@@ -164,55 +126,12 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param workstation The workstation the authentication request is originating from.
      *        Essentially, the computer name for this machine.
      * @param domain the domain to authenticate within
-     *
-     * @deprecated as of version 3.4.0;
-     * use DefaultCredentialsProvider.addNTLMCredentials(String, char[], String, int, String, String) instead
-     */
-    @Deprecated
-    public void addNTLMCredentials(final String username, final String password, final String host,
-            final int port, final String workstation, final String domain) {
-        final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
-        final NTCredentials credentials = new NTCredentials(username, password, workstation, domain);
-        setCredentials(authscope, credentials);
-    }
-
-    /**
-     * Adds NTLM credentials for the specified username/password on the specified host/port.
-     * @param username the username for the new credentials; should not include the domain to authenticate with;
-     *        for example: <code>"user"</code> is correct whereas <code>"DOMAIN\\user"</code> is not
-     * @param password the password for the new credentials
-     * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
-     * @param port the port to which to the new credentials apply (negative if applicable to any port)
-     * @param workstation The workstation the authentication request is originating from.
-     *        Essentially, the computer name for this machine.
-     * @param domain the domain to authenticate within
      */
     public void addNTLMCredentials(final String username, final char[] password, final String host,
             final int port, final String workstation, final String domain) {
         final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
         final NTCredentials credentials = new NTCredentials(username, String.valueOf(password), workstation, domain);
         setCredentials(authscope, credentials);
-    }
-
-    /**
-     * Adds Socks credentials for the specified username/password on the specified host/port.
-     * @param username the username for the new credentials
-     * @param password the password for the new credentials
-     * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
-     * @param port the port to which to the new credentials apply (negative if applicable to any port)
-     *
-     * @deprecated as of version 3.4.0;
-     * use DefaultCredentialsProvider.addSocksCredentials(String, char[], String, int) instead
-     */
-    @Deprecated
-    public void addSocksCredentials(final String username, final String password, final String host,
-            final int port) {
-        final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
-        final HtmlUnitUsernamePasswordCredentials credentials =
-                    new HtmlUnitUsernamePasswordCredentials(username, password.toCharArray());
-        setCredentials(authscope, credentials);
-
-        initSocksAuthenticatorIfNeeded(this);
     }
 
     /**
@@ -373,7 +292,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
 
         @Override
         public boolean equals(final Object obj) {
-            return obj instanceof AuthScopeProxy && authScope_.equals(((AuthScopeProxy) obj).getAuthScope());
+            return obj instanceof AuthScopeProxy asp && authScope_.equals(asp.getAuthScope());
         }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -114,10 +114,14 @@ public class CSSGroupingRule extends CSSRule {
                     return positionInt;
                 }
                 catch (final DOMException ex) {
-                    throw JavaScriptEngine.throwAsScriptRuntimeEx(ex);
+                    throw JavaScriptEngine.asJavaScriptException(
+                            getWindow(), ex.getMessage(), ex.code);
                 }
             }
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    e.getMessage(),
+                    org.htmlunit.javascript.host.dom.DOMException.SYNTAX_ERR);
         }
     }
 
@@ -133,7 +137,7 @@ public class CSSGroupingRule extends CSSRule {
             refreshCssRules();
         }
         catch (final DOMException e) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
+            throw JavaScriptEngine.asJavaScriptException(getWindow(), e.getMessage(), e.code);
         }
     }
 

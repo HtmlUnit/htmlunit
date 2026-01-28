@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,12 +28,13 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
+import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.dom.NodeList;
 
 /**
  * The JavaScript object for {@link HtmlSelect}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Marc Guillemot
  * @author Chris Erskine
@@ -110,20 +111,20 @@ public class HTMLSelectElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    public Object appendChild(final Object childObject) {
-        final Object object = super.appendChild(childObject);
+    public Node appendChild(final Object childObject) {
+        final Node node = super.appendChild(childObject);
         getDomNodeOrDie().ensureSelectedIndex();
-        return object;
+        return node;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Object insertBeforeImpl(final Object[] args) {
-        final Object object = super.insertBeforeImpl(args);
+    public Node insertBeforeImpl(final Object[] args) {
+        final Node node = super.insertBeforeImpl(args);
         getDomNodeOrDie().ensureSelectedIndex();
-        return object;
+        return node;
     }
 
     /**
@@ -395,7 +396,7 @@ public class HTMLSelectElement extends HTMLElement {
      * @return whether the element is a candidate for constraint validation
      */
     @JsxGetter
-    public boolean getWillValidate() {
+    public boolean isWillValidate() {
         return getDomNodeOrDie().willValidate();
     }
 
@@ -408,6 +409,9 @@ public class HTMLSelectElement extends HTMLElement {
         getDomNodeOrDie().setCustomValidity(message);
     }
 
+    /**
+     * @return the Iterator symbol
+     */
     @JsxSymbol
     public Scriptable iterator() {
         return getOptions().iterator();

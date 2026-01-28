@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,15 +20,15 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.neko.HtmlUnitNekoHtmlParser;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
 
 /**
@@ -69,9 +69,9 @@ import org.htmlunit.xml.XmlPage;
  *    </tr>
  *  </table>
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
- * @author <a href="mailto:yourgod@users.sourceforge.net">Brad Clarke</a>
+ * @author Mike Bowler
+ * @author Christian Sell
+ * @author Brad Clarke
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler
@@ -119,8 +119,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             return PageType.UNKNOWN;
         }
 
-        final String contentTypeLC = org.htmlunit.util.StringUtils
-                                            .toRootLowerCase(contentType);
+        final String contentTypeLC = StringUtils.toRootLowerCase(contentType);
 
         if (MimeType.isJavascriptMimeType(contentTypeLC)) {
             return PageType.JAVASCRIPT;
@@ -156,7 +155,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     public static PageType determinePageType(final WebResponse webResponse) throws IOException {
         final String contentType = webResponse.getContentType();
-        if (!StringUtils.isEmpty(contentType)) {
+        if (!StringUtils.isEmptyOrNull(contentType)) {
             return determinePageType(contentType);
         }
 
@@ -279,10 +278,16 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     private static byte[] read(final InputStream stream, final int maxNb) throws IOException {
         final byte[] buffer = new byte[maxNb];
         final int nbRead = stream.read(buffer);
+        if (nbRead == -1) {
+            return ArrayUtils.EMPTY_BYTE_ARRAY;
+        }
         if (nbRead == buffer.length) {
             return buffer;
         }
-        return ArrayUtils.subarray(buffer, 0, nbRead);
+
+        final byte[] result = new byte[nbRead];
+        System.arraycopy(buffer, 0, result, 0, nbRead);
+        return result;
     }
 
     /**
@@ -297,7 +302,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         final HtmlPage page = new HtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
-        HTML_PARSER.parse(webResponse, page, false, false);
+        HTML_PARSER.parse(webWindow.getWebClient(), webResponse, page, false, false);
         return page;
     }
 
@@ -313,7 +318,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
-        HTML_PARSER.parse(webResponse, page, true, false);
+        HTML_PARSER.parse(webWindow.getWebClient(), webResponse, page, true, false);
         return page;
     }
 

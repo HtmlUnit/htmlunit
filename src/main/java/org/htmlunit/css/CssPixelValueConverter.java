@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,11 @@ import static org.htmlunit.css.CssStyleSheet.AUTO;
 
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.math.NumberUtils;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlCanvas;
 import org.htmlunit.html.HtmlHtml;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Utilities for css value handling.
@@ -57,7 +57,7 @@ public final class CssPixelValueConverter {
     }
 
     /**
-     * Returns the specified length CSS attribute value value as a pixel length value.
+     * Returns the specified length CSS attribute value as a pixel length value.
      * If the specified CSS attribute value is a percentage, this method
      * uses the specified value object to recursively retrieve the base (parent) CSS attribute value.
      * @param element the element for which the CSS attribute value is to be retrieved
@@ -78,14 +78,14 @@ public final class CssPixelValueConverter {
     /**
      * Converts the specified length string value into an integer number of pixels. This method does
      * <b>NOT</b> handle percentages correctly; use {@link #pixelString(DomElement, CssValue)} if you
-     * need percentage support).
+     * need percentage support.
      * @param value the length string value to convert to an integer number of pixels
      * @return the integer number of pixels corresponding to the specified length string value
      * @see <a href="http://htmlhelp.com/reference/css/units.html">CSS Units</a>
      * @see #pixelString(DomElement, CssValue)
      */
     public static int pixelValue(final String value) {
-        float i = NumberUtils.toFloat(TO_FLOAT_PATTERN.matcher(value).replaceAll("$1"), 0);
+        float i = StringUtils.toFloat(TO_FLOAT_PATTERN.matcher(value).replaceAll("$1"), 0);
         if (value.length() < 2) {
             return Math.round(i);
         }
@@ -100,16 +100,13 @@ public final class CssPixelValueConverter {
             i = i * 16 / 100;
         }
         else if (value.endsWith("ex")) {
-            i = i * 10;
-        }
-        else if (value.endsWith("in")) {
-            i = i * 150;
+            i = i * 8;
         }
         else if (value.endsWith("cm")) {
-            i = i * 50;
+            i = i * 38;
         }
         else if (value.endsWith("mm")) {
-            i = i * 5;
+            i = i * 4;
         }
         else if (value.endsWith("pt")) {
             i = i * 2;
@@ -117,22 +114,43 @@ public final class CssPixelValueConverter {
         else if (value.endsWith("pc")) {
             i = i * 24;
         }
+        else if (value.endsWith("ch")) {
+            i = i * 8;
+        }
+        else if (value.endsWith("ch")) {
+            i = i * 8;
+        }
+        else if (value.endsWith("vh")
+                || value.endsWith("vmin")) {
+            // this matches also
+            // "dvh" "dvmin" "lvh" "lvmin" "svh" "svmin"
+            i = i * 6;
+        }
+        else if (value.endsWith("vw")
+                || value.endsWith("vmax")) {
+            // this matches also
+            // "dvw" "dvmax" "lvw" "lvmax" "svw" "svmax"
+            i = i * 12;
+        }
+        // placed at the end to handle min before
+        else if (value.endsWith("in")) {
+            i = i * 150;
+        }
         return Math.round(i);
     }
 
     private static int pixelValue(final DomElement element,
             final String styleValue, final CssValue value, final boolean percentMode) {
         if (styleValue.endsWith("%") || (styleValue.isEmpty() && element instanceof HtmlHtml)) {
-            final float i = NumberUtils.toFloat(TO_FLOAT_PATTERN.matcher(styleValue).replaceAll("$1"), 100);
+            final float i = StringUtils.toFloat(TO_FLOAT_PATTERN.matcher(styleValue).replaceAll("$1"), 100);
 
             final DomNode parent = element.getParentNode();
             final int absoluteValue;
-            if (parent instanceof DomElement) {
-                final DomElement parentElem = (DomElement) parent;
+            if (parent instanceof DomElement parentElem) {
                 final ComputedCssStyleDeclaration style =
                         parentElem.getPage().getEnclosingWindow().getComputedStyle(parentElem, null);
                 final String parentStyleValue = value.get(style);
-                absoluteValue = pixelValue((DomElement) parent, parentStyleValue, value, true);
+                absoluteValue = pixelValue(parentElem, parentStyleValue, value, true);
             }
             else {
                 absoluteValue = value.getWindowDefaultValue();

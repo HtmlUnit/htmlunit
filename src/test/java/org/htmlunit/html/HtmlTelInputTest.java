@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,7 +29,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ronald Brill
  * @author Anton Demydenko
  */
-@RunWith(BrowserRunner.class)
 public class HtmlTelInputTest extends WebDriverTestCase {
 
     /**
@@ -40,7 +37,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -51,7 +49,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
             + "      input = document.createElement('input');\n"
             + "      input.type = 'tel';\n"
             + "      log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
-            + "    } catch(e)  { log('exception'); }\n"
+            + "    } catch(e)  { logEx(e); }\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"tel\">';\n"
@@ -74,7 +72,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -87,7 +86,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
             + "      input.type = 'tel';\n"
             + "      input = input.cloneNode(false);\n"
             + "      log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
-            + "    } catch(e)  { log('exception'); }\n"
+            + "    } catch(e)  { logEx(e); }\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"tel\">';\n"
@@ -112,8 +111,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -136,10 +135,10 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts({"1234567", ""})
     public void clearInput() throws Exception {
-        final String htmlContent
-                = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
@@ -150,8 +149,12 @@ public class HtmlTelInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
         final WebElement element = driver.findElement(By.id("tester"));
 
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomProperty("value"));
+
         element.clear();
-        assertEquals(getExpectedAlerts()[0], element.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], element.getDomProperty("value"));
     }
 
     /**
@@ -159,8 +162,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      */
     @Test
     public void typing() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='tel' id='foo'>\n"
             + "</form></body></html>";
@@ -168,8 +171,10 @@ public class HtmlTelInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
 
         final WebElement input = driver.findElement(By.id("foo"));
+
         input.sendKeys("hello");
-        assertEquals("hello", input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals("hello", input.getDomProperty("value"));
     }
 
     /**
@@ -178,7 +183,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -203,6 +209,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0123-456-7890",
+             "0123-456-7890",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -217,6 +224,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"123-456-7890",
+             "123-456-7890",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -231,6 +239,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -244,6 +253,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({" ",
+             " ",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -257,6 +267,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"  \t",
+             "  \t",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -270,6 +281,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({" 123-456-7890",
+             " 123-456-7890",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -283,7 +295,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({" 123-456-7890",
+    @Alerts({"null",
+             " 123-456-7890",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -297,7 +310,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1234",
+    @Alerts({"null",
+             "1234",
              "false",
              "false-false-false-false-false-false-false-true-false-false-false",
              "true",
@@ -311,6 +325,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1234",
+             "1234",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -323,7 +338,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -336,7 +352,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"123456789",
+    @Alerts({"null",
+             "123456789",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -349,7 +366,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1234",
+    @Alerts({"null",
+             "1234",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -362,7 +380,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"12345",
+    @Alerts({"null",
+             "12345",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -376,6 +395,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1234567890",
+             "1234567890",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -390,8 +410,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -420,7 +440,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -433,7 +454,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-true-false-false-false-false-false-false-false-false-false",
              "true",
@@ -446,7 +468,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-true-false-false-false-false-false-false-false-false-false",
              "true",
@@ -459,7 +482,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -473,7 +497,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "false",
              "false-false-false-false-false-false-false-false-false-false-true",
              "true",
@@ -486,7 +511,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
+    @Alerts({"null",
+             "",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
              "true",
@@ -500,6 +526,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0123-456-7890",
+             "0123-456-7890",
              "false",
              "false-false-true-false-false-false-false-false-false-false-false",
              "true",
@@ -510,8 +537,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
     }
 
     private void validation(final String htmlPart, final String jsPart, final String sendKeys) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"
@@ -544,8 +571,8 @@ public class HtmlTelInputTest extends WebDriverTestCase {
                 + "  </form>\n"
                 + "</body></html>";
 
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head><title>second</title></head><body>\n"
                 + "  <p>hello world</p>\n"
                 + "</body></html>";
 
@@ -558,13 +585,17 @@ public class HtmlTelInputTest extends WebDriverTestCase {
         if (sendKeys != null) {
             foo.sendKeys(sendKeys);
         }
-        assertEquals(getExpectedAlerts()[0], foo.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], "" + foo.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], foo.getDomProperty("value"));
 
         driver.findElement(By.id("myTest")).click();
-        verifyTitle2(driver, getExpectedAlerts()[1], getExpectedAlerts()[2], getExpectedAlerts()[3]);
+        verifyTitle2(driver, getExpectedAlerts()[2], getExpectedAlerts()[3], getExpectedAlerts()[4]);
 
         driver.findElement(By.id("myButton")).click();
-        assertEquals(getExpectedAlerts()[4], getMockWebConnection().getLastWebRequest().getUrl());
-        assertEquals(Integer.parseInt(getExpectedAlerts()[5]), getMockWebConnection().getRequestCount());
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
+        assertEquals(getExpectedAlerts()[5], getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[6]), getMockWebConnection().getRequestCount());
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,36 @@
 package org.htmlunit.javascript.host.css;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link CSSKeyframesRule}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class CSSKeyframesRuleTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("TypeError")
+    public void ctor() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "try {\n"
+            + "  var rule = new CSSKeyframesRule();\n"
+            + "  log(rule);\n"
+            + "} catch(e) { logEx(e); }\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
 
     /**
      * @throws Exception if an error occurs
@@ -35,8 +52,8 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object CSSKeyframesRule]", "7"})
     public void simple() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"
@@ -64,10 +81,13 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object CSSKeyframesRule]", "identifier"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"[object CSSKeyframesRule]", "undefined"},
+            EDGE = {"[object CSSKeyframesRule]", "undefined"},
+            FF = {"[object CSSKeyframesRule]", "undefined"},
+            FF_ESR = {"[object CSSKeyframesRule]", "undefined"})
     public void name() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"
@@ -95,10 +115,13 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object CSSRuleList]")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "undefined",
+            EDGE = "undefined",
+            FF = "undefined",
+            FF_ESR = "undefined")
     public void cssRules() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
 
             + "<style>\n"
             + "  @keyframes identifier { 0% { top: 0; left: 0; } 100% { top: 100px; left: 100%; }}\n"

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.function.Predicate;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.StringWebResponse;
@@ -38,6 +37,7 @@ import org.htmlunit.javascript.host.dom.Attr;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.svg.SvgElement;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
 
 /**
@@ -100,7 +100,7 @@ public class XMLDocument extends Document {
     public boolean loadXML(final String strXML) {
         final WebWindow webWindow = getWindow().getWebWindow();
         try {
-            if (StringUtils.isEmpty(strXML)) {
+            if (StringUtils.isEmptyOrNull(strXML)) {
                 throw new IOException("Error parsing XML '" + strXML + "'");
             }
 

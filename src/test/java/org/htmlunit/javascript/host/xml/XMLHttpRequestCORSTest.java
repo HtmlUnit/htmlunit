@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,20 +25,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for Cross-Origin Resource Sharing for {@link XMLHttpRequest}.
@@ -48,7 +46,6 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
     /**
@@ -57,7 +54,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts({"error [object ProgressEvent]", "error", "false", "0", "false"})
     public void noCorsHeaderCallsErrorHandler() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -73,7 +71,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "                    log(event.total > 0);\n"
                 + "                  };\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { log('exception'); }\n"
+                + "  } catch(e) { logEx(e); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -92,7 +90,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void simple() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -113,7 +112,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "cookie=sweet"));
@@ -134,7 +133,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void simpleHead() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -155,7 +155,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/simple1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -169,7 +169,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void simplePost() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -190,7 +191,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/simple1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -200,11 +201,12 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts("exception")
+    @Alerts("NetworkError/DOMException")
     public void simplePut() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -216,7 +218,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    log(xhr.readyState);\n"
                 + "    log(xhr.status);\n"
                 + "    log(xhr.responseXML.firstChild.firstChild.nodeValue);\n"
-                + "  } catch(e) { log('exception') }\n"
+                + "  } catch(e) { logEx(e) }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -225,7 +227,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/simple1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -277,7 +279,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"exception", "4", "0", ""})
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
     public void noAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin(null);
     }
@@ -285,7 +287,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     private void incorrectAccessControlAllowOrigin(final String header) throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -294,7 +297,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
                 + "    xhr.open('GET', url, false);\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { log('exception') }\n"
+                + "  } catch(e) { logEx(e) }\n"
                 + "  log(xhr.readyState);\n"
                 + "  log(xhr.status);\n"
                 + "  log(xhr.responseText);\n"
@@ -306,7 +309,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = header;
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/simple1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -316,7 +319,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"exception", "4", "0", ""})
+    @Alerts({"NetworkError/DOMException", "4", "0", ""})
     public void nonMatchingAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin("http://www.sourceforge.net");
     }
@@ -430,7 +433,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                             throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT)); // url without trailing "/"
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var xhr = new XMLHttpRequest();\n"
@@ -459,7 +463,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PINGOTHER";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         final URL url = new URL(URL_FIRST, "/preflight1");
 
@@ -535,12 +539,13 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"exception", "4", "0"})
+    @Alerts({"NetworkError/DOMException", "4", "0"})
     // unstable test case, this will fail on real Chrome if individually run, but will succeed if run with other cases
     public void preflight_incorrect_headers() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -550,7 +555,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.open('GET', url, false);\n"
                 + "    xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { log('exception') }\n"
+                + "  } catch(e) { logEx(e) }\n"
                 + "  log(xhr.readyState);\n"
                 + "  log(xhr.status);\n"
                 + "}\n"
@@ -563,7 +568,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = null;
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/preflight1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -577,7 +582,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void preflight_many_header_values() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -588,7 +594,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.setRequestHeader('X-PING', 'ping');\n"
                 + "    xhr.setRequestHeader('X-PONG', 'pong');\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { log('exception') }\n"
+                + "  } catch(e) { logEx(e) }\n"
                 + "  log(xhr.readyState);\n"
                 + "  log(xhr.status);\n"
                 + "  log(xhr.responseXML.firstChild.childNodes[3].tagName);\n"
@@ -603,7 +609,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PING, X-PONG";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         loadPage2(html, new URL(URL_FIRST, "/preflight1"));
         verifyTitle2(getWebDriver(), getExpectedAlerts());
@@ -617,7 +623,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void withCredentials_defaultValue() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -642,7 +649,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false", "true"})
     public void withCredentials_setBeforeOpenSync() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -683,7 +691,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false", "true"})
     public void withCredentials_setBeforeOpenAsync() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -725,7 +734,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "true", "false"})
     public void withCredentials_setAfterOpenSync() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -759,7 +769,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "true", "false"})
     public void withCredentials_setAfterOpenAsync() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -845,7 +856,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             final String accessControlAllowCredentials) throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
@@ -856,7 +868,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.withCredentials = true;\n"
                 + "    xhr.onreadystatechange = onReadyStateChange;\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { log('exception') }\n"
+                + "  } catch(e) { logEx(e) }\n"
                 + "  log(xhr.readyState);\n"
                 + "  try {\n"
                 + "    log(xhr.status);\n"
@@ -879,7 +891,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         WithCredentialsServerServlet.ACCESS_CONTROL_ALLOW_CREDENTIALS_ = accessControlAllowCredentials;
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/withCredentials2", WithCredentialsServerServlet.class);
-        startWebServer2(".", null, servlets2);
+        startWebServer2(".", servlets2);
 
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "cookie=sweet"));
@@ -898,7 +910,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts("done 200")
     public void testWithCredentialsIFrame() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_WINDOW_NAME_FUNCTION
 

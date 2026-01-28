@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@ import org.htmlunit.WebClient.PooledCSS3Parser;
 import org.htmlunit.cssparser.parser.CSSOMParser;
 import org.htmlunit.cssparser.parser.InputSource;
 import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebClient} and its CSS3Parser pool.
@@ -32,7 +30,6 @@ import org.junit.runner.RunWith;
  * @author René Schwietzke
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class WebClient9Test extends SimpleWebTestCase {
 
     /**
@@ -141,6 +138,9 @@ public class WebClient9Test extends SimpleWebTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void multithreading() throws InterruptedException {
         final String css = "body { background-color: green; }";

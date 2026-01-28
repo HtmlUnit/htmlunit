@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,14 @@
  */
 package org.htmlunit;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ScriptException}.
@@ -31,7 +29,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public final class ScriptExceptionTest extends SimpleWebTestCase {
 
     /**
@@ -41,7 +38,7 @@ public final class ScriptExceptionTest extends SimpleWebTestCase {
     public void constructor() throws Exception {
         final String message = "bla bla";
         final Throwable t = new RuntimeException(message);
-        final HtmlPage page = loadPage("<html></html>");
+        final HtmlPage page = loadPage(DOCTYPE_HTML + "<html></html>");
         final ScriptException exception = new ScriptException(page, t);
 
         assertEquals(t, exception.getCause());
@@ -54,7 +51,7 @@ public final class ScriptExceptionTest extends SimpleWebTestCase {
      */
     @Test
     public void getPage() throws Exception {
-        final String html = "<html><script>notExisting()</script></html>";
+        final String html = DOCTYPE_HTML + "<html><script>notExisting()</script></html>";
         try {
             loadPage(html);
         }

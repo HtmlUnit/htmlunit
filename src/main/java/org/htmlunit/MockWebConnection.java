@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,13 +27,14 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 
 /**
  * A fake {@link WebConnection} designed to mock out the actual HTTP connections.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Noboru Sinohara
  * @author Marc Guillemot
  * @author Brad Clarke
@@ -98,7 +99,7 @@ public class MockWebConnection implements WebConnection {
                 content = byteContent_;
             }
             else if (stringContent_ == null) {
-                content = new byte[] {};
+                content = ArrayUtils.EMPTY_BYTE_ARRAY;
             }
             else {
                 content = stringContent_.getBytes(charset_);
@@ -386,7 +387,7 @@ public class MockWebConnection implements WebConnection {
      * @param title the title of the page
      */
     public void setResponseAsGenericHtml(final URL url, final String title) {
-        final String content = "<html><head><title>" + title + "</title></head><body></body></html>";
+        final String content = "<!DOCTYPE html><html><head><title>" + title + "</title></head><body></body></html>";
         setResponse(url, content);
     }
 
@@ -485,9 +486,9 @@ public class MockWebConnection implements WebConnection {
     }
 
     /**
-     * Returns the additional headers that were used in the in the last call
+     * Returns the additional headers that were used in the last call
      * to {@link #getResponse(WebRequest)}.
-     * @return the additional headers that were used in the in the last call
+     * @return the additional headers that were used in the last call
      *         to {@link #getResponse(WebRequest)}
      */
     public Map<String, String> getLastAdditionalHeaders() {
@@ -495,9 +496,9 @@ public class MockWebConnection implements WebConnection {
     }
 
     /**
-     * Returns the {@link WebRequest} that was used in the in the last call
+     * Returns the {@link WebRequest} that was used in the last call
      * to {@link #getResponse(WebRequest)}.
-     * @return the {@link WebRequest} that was used in the in the last call
+     * @return the {@link WebRequest} that was used in the last call
      *         to {@link #getResponse(WebRequest)}
      */
     public WebRequest getLastWebRequest() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlResetInput}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class HtmlResetInputTest extends SimpleWebTestCase {
 
     /**
@@ -36,8 +33,8 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
      */
     @Test
     public void reset() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='text' name='textfield1' id='textfield1' value='foo'/>\n"
             + "<input type='password' name='password1' id='password1' value='foo'/>\n"
@@ -68,10 +65,6 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
         page.<HtmlTextInput>getHtmlElementById("textfield1").setValue("Flintstone");
         page.<HtmlHiddenInput>getHtmlElementById("hidden1").setValue("Flintstone");
         page.<HtmlPasswordInput>getHtmlElementById("password1").setValue("Flintstone");
-        HtmlElement elem = page.getHtmlElementById("isindex1");
-        if (elem instanceof HtmlIsIndex) {
-            ((HtmlIsIndex) elem).setValue("Flintstone");
-        }
 
         // Check to make sure they did get changed
         assertEquals("bar", form.getCheckedRadioButton("radioButton").getValueAttribute());
@@ -84,10 +77,6 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
         assertEquals("Flintstone", page.<HtmlTextInput>getHtmlElementById("textfield1").getValue());
         assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
         assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValue());
-        elem = page.getHtmlElementById("isindex1");
-        if (elem instanceof HtmlIsIndex) {
-            assertEquals("Flintstone", ((HtmlIsIndex) elem).getValue());
-        }
 
         final HtmlPage secondPage = resetInput.click();
         assertSame(page, secondPage);
@@ -109,10 +98,6 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
 
         assertEquals("foo", page.<HtmlPasswordInput>getHtmlElementById("password1").getValueAttribute());
         assertEquals("foo", page.<HtmlPasswordInput>getHtmlElementById("password1").getValue());
-        elem = page.getHtmlElementById("isindex1");
-        if (elem instanceof HtmlIsIndex) {
-            assertEquals("", ((HtmlIsIndex) elem).getValue());
-        }
     }
 
     /**
@@ -120,8 +105,8 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
      */
     @Test
     public void resetClick_onClick() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
             + "  <button type='reset' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
@@ -143,8 +128,8 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
      */
     @Test
     public void outsideForm() throws Exception {
-        final String html =
-            "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "<input id='myInput' type='reset' onclick='alert(1)'>\n"
             + "</body></html>";

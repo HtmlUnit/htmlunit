@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomNodeIterator;
 import org.htmlunit.html.DomNodeList;
 import org.htmlunit.html.DomText;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -54,6 +55,8 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     private WebWindow enclosingWindow_;
     private final WebClient webClient_;
     private boolean printing_;
+    private boolean domChangeListenerInUse_;
+    private boolean characterDataChangeListenerInUse_;
 
     /**
      * Creates an instance of SgmlPage.
@@ -266,14 +269,14 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      */
     @Override
     public DomNodeList<DomElement> getElementsByTagName(final String tagName) {
-        return new AbstractDomNodeList<DomElement>(this) {
+        return new AbstractDomNodeList<>(this) {
             @Override
             protected List<DomElement> provideElements() {
                 final List<DomElement> res = new ArrayList<>();
                 final boolean caseSensitive = hasCaseSensitiveTagNames();
                 for (final DomElement elem : getDomElementDescendants()) {
                     final String localName = elem.getLocalName();
-                    if ("*".equals(tagName) || localName.equals(tagName)
+                    if (StringUtils.equalsChar('*', tagName) || localName.equals(tagName)
                             || (!caseSensitive && localName.equalsIgnoreCase(tagName))) {
                         res.add(elem);
                     }
@@ -288,7 +291,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      */
     @Override
     public DomNodeList<DomElement> getElementsByTagNameNS(final String namespaceURI, final String localName) {
-        return new AbstractDomNodeList<DomElement>(this) {
+        return new AbstractDomNodeList<>(this) {
             @Override
             protected List<DomElement> provideElements() {
                 final List<DomElement> res = new ArrayList<>();
@@ -304,8 +307,10 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
                 for (final DomElement elem : getDomElementDescendants()) {
                     final String locName = elem.getLocalName();
 
-                    if (("*".equals(namespaceURI) || comparator.compare(namespaceURI, elem.getNamespaceURI()) == 0)
-                            && ("*".equals(locName) || comparator.compare(locName, elem.getLocalName()) == 0)) {
+                    if ((StringUtils.equalsChar('*', namespaceURI)
+                            || comparator.compare(namespaceURI, elem.getNamespaceURI()) == 0)
+                            && (StringUtils.equalsChar('*', locName)
+                            || comparator.compare(locName, elem.getLocalName()) == 0)) {
                         res.add(elem);
                     }
                 }
@@ -342,24 +347,23 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * Create a new <code>NodeIterator</code> over the subtree rooted at the
      * specified node.
      * @param root The node which will be iterated together with its
-     *   children. The <code>NodeIterator</code> is initially positioned
-     *   just before this node. The <code>whatToShow</code> flags and the
-     *   filter, if any, are not considered when setting this position. The
-     *   root must not be <code>null</code>.
+     *        children. The <code>NodeIterator</code> is initially positioned
+     *        just before this node. The <code>whatToShow</code> flags and the
+     *        filter, if any, are not considered when setting this position. The
+     *        root must not be <code>null</code>.
      * @param whatToShow This flag specifies which node types may appear in
-     *   the logical view of the tree presented by the
-     *   <code>NodeIterator</code>. See the description of
-     *   <code>NodeFilter</code> for the set of possible <code>SHOW_</code>
-     *   values.These flags can be combined using <code>OR</code>.
+     *        the logical view of the tree presented by the
+     *        <code>NodeIterator</code>. See the description of
+     *        <code>NodeFilter</code> for the set of possible <code>SHOW_</code>
+     *        values.These flags can be combined using <code>OR</code>.
      * @param filter The <code>NodeFilter</code> to be used with this
-     *   <code>NodeIterator</code>, or <code>null</code> to indicate no
-     *   filter.
+     *        <code>NodeIterator</code>, or <code>null</code> to indicate no
+     *        filter.
      * @param entityReferenceExpansion The value of this flag determines
-     *   whether entity reference nodes are expanded.
+     *        whether entity reference nodes are expanded.
      * @return The newly created <code>NodeIterator</code>.
      * @exception DOMException
-     *   NOT_SUPPORTED_ERR: Raised if the specified <code>root</code> is
-     *   <code>null</code>.
+     *            NOT_SUPPORTED_ERR: Raised if the specified <code>root</code> is <code>null</code>.
      */
     public DomNodeIterator createNodeIterator(final Node root, final int whatToShow, final NodeFilter filter,
             final boolean entityReferenceExpansion) throws DOMException {
@@ -415,5 +419,33 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     public void setPrinting(final boolean printing) {
         printing_ = printing;
         clearComputedStyles();
+    }
+
+    /**
+     * Informs about the use of a domChangeListener.
+     */
+    public void domChangeListenerAdded() {
+        domChangeListenerInUse_ = true;
+    }
+
+    /**
+     * @return true if at least one domChangeListener was registered.
+     */
+    public boolean isDomChangeListenerInUse() {
+        return domChangeListenerInUse_;
+    }
+
+    /**
+     * Informs about the use of a characterDataChangeListener.
+     */
+    public void characterDataChangeListenerAdded() {
+        characterDataChangeListenerInUse_ = true;
+    }
+
+    /**
+     * @return true if at least one characterDataChangeListener was registered.
+     */
+    public boolean isCharacterDataChangeListenerInUse() {
+        return characterDataChangeListenerInUse_;
     }
 }

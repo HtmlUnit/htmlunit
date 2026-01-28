@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,21 +27,18 @@ import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlSelect;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLSelectElement}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Marc Guillemot
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-@RunWith(BrowserRunner.class)
 public class HTMLSelectElement2Test extends SimpleWebTestCase {
 
     /**
@@ -50,7 +47,8 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void noOnchangeFromJS() throws Exception {
-        final String html = "<html><head><title>Test infinite loop on js onchange</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>Test infinite loop on js onchange</title></head>\n"
             + "<body><form name='myForm'>\n"
             + "<select name='a' onchange='this.form.b.selectedIndex=0'>\n"
             + "<option value='1'>one</option>\n"
@@ -89,8 +87,8 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void rightPageAfterOnchange() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<iframe src='fooIFrame.html'></iframe>\n"
             + "<form name='form1' action='http://first' method='post'>\n"
             + "  <select name='select1' onchange='this.form.submit()'>\n"
@@ -120,8 +118,8 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void onChangeCallsFormSubmit() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "<form name='test' action='foo'>\n"
@@ -134,7 +132,7 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        webConnection.setDefaultResponse("<html><title>page 2</title><body></body></html>");
+        webConnection.setDefaultResponse(DOCTYPE_HTML + "<html><title>page 2</title><body></body></html>");
         webConnection.setResponse(URL_FIRST, html);
         webClient.setWebConnection(webConnection);
 
@@ -149,8 +147,8 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void selectedIndexReset() throws Exception {
-        final String html
-            = "<html><head><title>first</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>first</title></head>\n"
             + "<body onload='document.forms[0].testSelect.selectedIndex = -1; "
             + "  document.forms[0].testSelect.options[0].selected = true;'>\n"
             + "<form>\n"

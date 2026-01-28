@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
 
 import java.io.IOException;
-import java.util.Deque;
 import java.util.function.Supplier;
 
 import org.apache.commons.lang3.function.FailableSupplier;
@@ -31,6 +30,7 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.LambdaConstructor;
 import org.htmlunit.corejs.javascript.LambdaFunction;
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomNode;
@@ -42,7 +42,7 @@ import org.htmlunit.javascript.host.html.HTMLUnknownElement;
 /**
  * Base class for Rhino host objects in HtmlUnit (not bound to a DOM node).
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Marc Guillemot
  * @author Chris Erskine
@@ -109,7 +109,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
         }
         catch (final IllegalArgumentException e) {
             // is it the right place or should Rhino throw a RuntimeError instead of an IllegalArgumentException?
-            throw JavaScriptEngine.reportRuntimeError("'set "
+            throw JavaScriptEngine.typeError("'set "
                 + name + "' called on an object that does not implement interface " + getClassName());
         }
     }
@@ -117,22 +117,17 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
     /**
      * Gets a named property from the object.
      * Normally HtmlUnit objects don't need to overwrite this method as properties are defined
-     * on the prototypes from the XML configuration. In some cases where "content" of object
+     * on the prototypes. In some cases where "content" of object
      * has priority compared to the properties consider using utility {@link #getWithPreemption(String)}.
+     * <p>
      * {@inheritDoc}
      */
     @Override
     public Object get(final String name, final Scriptable start) {
         // Try to get property configured on object itself.
-        Object response = super.get(name, start);
-        if (response != NOT_FOUND) {
-            return response;
-        }
-        if (this == start) {
-            response = getWithPreemption(name);
-        }
-        if (response == NOT_FOUND && start instanceof Window) {
-            response = ((Window) start).getWithFallback(name);
+        final Object response = super.get(name, start);
+        if (response == NOT_FOUND && this == start) {
+            return getWithPreemption(name);
         }
         return response;
     }
@@ -214,8 +209,8 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      * @return the JavaScript object or NOT_FOUND
      */
     protected HtmlUnitScriptable getScriptableFor(final Object object) {
-        if (object instanceof WebWindow) {
-            return ((WebWindow) object).getScriptableObject();
+        if (object instanceof WebWindow window) {
+            return window.getScriptableObject();
         }
 
         final DomNode domNode = (DomNode) object;
@@ -236,8 +231,8 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
         // Get the JS class name for the specified DOM node.
         // Walk up the inheritance chain if necessary.
         Class<? extends HtmlUnitScriptable> javaScriptClass = null;
-        if (domNode instanceof HtmlImage && "image".equals(((HtmlImage) domNode).getOriginalQualifiedName())
-                && ((HtmlImage) domNode).wasCreatedByJavascript()) {
+        if (domNode instanceof HtmlImage image && "image".equals(image.getOriginalQualifiedName())
+                && image.wasCreatedByJavascript()) {
             if (domNode.hasFeature(HTMLIMAGE_HTMLELEMENT)) {
                 javaScriptClass = HTMLElement.class;
             }
@@ -338,25 +333,23 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      */
     protected static Window getWindow(final Scriptable s) throws RuntimeException {
         final Scriptable top = ScriptableObject.getTopLevelScope(s);
-        if (top instanceof Window) {
-            return (Window) top;
+        if (top instanceof Window window) {
+            return window;
         }
         throw new RuntimeException("Unable to find window associated with " + s);
     }
 
     /**
-     * Gets the scriptable used at starting scope for the execution of current script.
-     * @return the scope as defined in {@link JavaScriptEngine#callFunction}
-     * or {@link JavaScriptEngine#execute}.
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @return the window that is set as the top call scope
      */
-    protected Scriptable getStartingScope() {
-        @SuppressWarnings("unchecked")
-        final Deque<Scriptable> stack =
-                (Deque<Scriptable>) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
-        if (null == stack) {
-            return null;
+    protected static Window getWindowFromTopCallScope() throws RuntimeException {
+        final Scriptable top = JavaScriptEngine.getTopCallScope();
+        if (top instanceof Window window) {
+            return window;
         }
-        return stack.peek();
+        throw new RuntimeException("Unable to find window in scope");
     }
 
     /**
@@ -403,8 +396,8 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      */
     @Override
     protected Object equivalentValues(Object value) {
-        if (value instanceof HtmlUnitScriptableProxy<?>) {
-            value = ((HtmlUnitScriptableProxy<?>) value).getDelegee();
+        if (value instanceof HtmlUnitScriptableProxy<?> proxy) {
+            value = proxy.getDelegee();
         }
         return super.equivalentValues(value);
     }
@@ -422,24 +415,24 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
         }
     }
 
-    protected Object setupPromise(final FailableSupplier<Object, IOException> resolver) {
+    protected NativePromise setupPromise(final FailableSupplier<Object, IOException> resolver) {
         final Scriptable scope = ScriptableObject.getTopLevelScope(this);
         final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
 
         try {
             final LambdaFunction resolve = (LambdaFunction) getProperty(ctor, "resolve");
-            return resolve.call(Context.getCurrentContext(), this, ctor, new Object[] {resolver.get()});
+            return (NativePromise) resolve.call(Context.getCurrentContext(), this, ctor, new Object[] {resolver.get()});
         }
         catch (final IOException e) {
             final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
-            return reject.call(Context.getCurrentContext(), this, ctor, new Object[] {e.getMessage()});
+            return (NativePromise) reject.call(Context.getCurrentContext(), this, ctor, new Object[] {e.getMessage()});
         }
     }
 
-    protected Object setupRejectedPromise(final Supplier<Object> resolver) {
+    protected NativePromise setupRejectedPromise(final Supplier<Object> resolver) {
         final Scriptable scope = ScriptableObject.getTopLevelScope(this);
         final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
         final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
-        return reject.call(Context.getCurrentContext(), this, ctor, new Object[] {resolver.get()});
+        return (NativePromise) reject.call(Context.getCurrentContext(), this, ctor, new Object[] {resolver.get()});
     }
 }

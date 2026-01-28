@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,8 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link XMLHttpRequest}.
@@ -37,7 +35,6 @@ import org.junit.runner.RunWith;
  * @author Thorsten Wendelmuth
  * @author Atsushi Nakagawa
  */
-@RunWith(BrowserRunner.class)
 public class XMLHttpRequest4Test extends SimpleWebTestCase {
 
     /**
@@ -45,8 +42,8 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
      */
     @Test
     public void setLocation_onreadystatechange() throws Exception {
-        final String content =
-              "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Page1</title>\n"
             + "    <script>\n"
@@ -74,10 +71,13 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
         assertEquals("about:blank", window.getEnclosedPage().getUrl());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void setLocation_addEventListener() throws Exception {
-        final String content =
-              "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>Page1</title>\n"
             + "    <script>\n"
@@ -131,7 +131,7 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
              "onreadystatechange_3: readyState=4",
              "onreadystatechange_4: readyState=4"})
     public void eventInvocationOrder() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -172,9 +172,12 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
             + "</html>\n";
 
         getMockWebConnection().setDefaultResponse("");
-        loadPageWithAlerts(html, URL_FIRST, 1000);
+        loadPageWithAlerts(html, URL_FIRST, DEFAULT_WAIT_TIME);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("onreadystatechange [object Event]§readystatechange§1§"
             + "onreadystatechange [object Event]§readystatechange§4§")
@@ -193,6 +196,9 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
         assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("onreadystatechange [object Event]§readystatechange§1§"
             + "onreadystatechange [object Event]§readystatechange§4§")

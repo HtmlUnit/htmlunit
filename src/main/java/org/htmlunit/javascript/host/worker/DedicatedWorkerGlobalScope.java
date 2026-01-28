@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@ package org.htmlunit.javascript.host.worker;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,22 +39,23 @@ import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.javascript.RecursiveFunctionObject;
 import org.htmlunit.javascript.background.BasicJavaScriptJob;
 import org.htmlunit.javascript.background.JavaScriptJob;
-import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.configuration.WorkerJavaScriptConfiguration;
 import org.htmlunit.javascript.host.Window;
-import org.htmlunit.javascript.host.WindowOrWorkerGlobalScope;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScopeMixin;
 import org.htmlunit.javascript.host.event.Event;
-import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MessageEvent;
+import org.htmlunit.javascript.host.event.SecurityPolicyViolationEvent;
+import org.htmlunit.javascript.host.media.MediaSource;
+import org.htmlunit.javascript.host.media.SourceBuffer;
+import org.htmlunit.javascript.host.media.SourceBufferList;
 import org.htmlunit.util.MimeType;
 
 /**
@@ -63,17 +66,20 @@ import org.htmlunit.util.MimeType;
  * @author Rural Hunter
  */
 @JsxClass
-public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrWorkerGlobalScope {
+public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);
 
     private static final Method GETTER_NAME;
     private static final Method SETTER_NAME;
 
+    private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
     private final Window owningWindow_;
     private final String origin_;
     private String name_;
     private final Worker worker_;
+    private WorkerLocation workerLocation_;
+    private WorkerNavigator workerNavigator_;
 
     static {
         try {
@@ -95,6 +101,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         origin_ = null;
         name_ = null;
         worker_ = null;
+        workerLocation_ = null;
     }
 
     /**
@@ -118,26 +125,45 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
 
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
 
-        context.initSafeStandardObjects(this);
+        final Scriptable scope = context.initSafeStandardObjects(this);
         JavaScriptEngine.configureRhino(webClient, browserVersion, this);
 
-        ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
-                (Class<? extends HtmlUnitScriptable>) DedicatedWorkerGlobalScope.class.getSuperclass(),
-                browserVersion);
-        final HtmlUnitScriptable parentPrototype = JavaScriptEngine.configureClass(config, this, browserVersion);
+        final WorkerJavaScriptConfiguration jsConfig = WorkerJavaScriptConfiguration.getInstance(browserVersion);
 
-        config = AbstractJavaScriptConfiguration.getClassConfiguration(
-                                DedicatedWorkerGlobalScope.class, browserVersion);
-        final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this, browserVersion);
-        prototype.setPrototype(parentPrototype);
+        final ClassConfiguration config = jsConfig.getDedicatedWorkerGlobalScopeClassConfiguration();
+        final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this);
         setPrototype(prototype);
 
+        final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
+        final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
+
+        prototypes.put(config.getHostClass(), prototype);
+        prototypesPerJSName.put(config.getClassName(), prototype);
+
         final FunctionObject functionObject =
-                new RecursiveFunctionObject(DedicatedWorkerGlobalScope.class.getName(),
-                        config.getJsConstructor().getValue(), this, browserVersion);
+                new FunctionObject(DedicatedWorkerGlobalScope.class.getSimpleName(),
+                        config.getJsConstructor().getValue(), this);
         functionObject.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
 
-        // TODO we have to do more configuration here
+        JavaScriptEngine.configureScope(this, config, functionObject, jsConfig,
+                browserVersion, prototypes, prototypesPerJSName);
+        // remove some aliases
+        delete("webkitURL");
+        delete("WebKitCSSMatrix");
+
+        // hack for the moment
+        if (browserVersion.isFirefox()) {
+            delete(MediaSource.class.getSimpleName());
+            delete(SecurityPolicyViolationEvent.class.getSimpleName());
+            delete(SourceBuffer.class.getSimpleName());
+            delete(SourceBufferList.class.getSimpleName());
+        }
+
+        if (!webClient.getOptions().isWebSocketEnabled()) {
+            delete("WebSocket");
+        }
+
+        setPrototypes(prototypes);
 
         owningWindow_ = owningWindow;
         final URL currentURL = owningWindow.getWebWindow().getEnclosedPage().getUrl();
@@ -147,6 +173,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         defineProperty("name", null, GETTER_NAME, SETTER_NAME, ScriptableObject.READONLY);
 
         worker_ = worker;
+        workerLocation_ = null;
     }
 
     /**
@@ -177,6 +204,22 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     }
 
     /**
+     * @return returns the WorkerLocation associated with the worker
+     */
+    @JsxGetter
+    public WorkerLocation getLocation() {
+        return workerLocation_;
+    }
+
+    /**
+     * @return returns the WorkerNavigator associated with the worker
+     */
+    @JsxGetter
+    public WorkerNavigator getNavigator() {
+        return workerNavigator_;
+    }
+
+    /**
      * @return the {@code name}
      */
     public String jsGetName() {
@@ -189,28 +232,6 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      */
     public void jsSetName(final Scriptable name) {
         name_ = JavaScriptEngine.toString(name);
-    }
-
-    /**
-     * Creates a base-64 encoded ASCII string from a string of binary data.
-     * @param stringToEncode string to encode
-     * @return the encoded string
-     */
-    @JsxFunction
-    @Override
-    public String btoa(final String stringToEncode) {
-        return WindowOrWorkerGlobalScopeMixin.btoa(stringToEncode);
-    }
-
-    /**
-     * Decodes a string of data which has been encoded using base-64 encoding.
-     * @param encodedData the encoded string
-     * @return the decoded value
-     */
-    @JsxFunction
-    @Override
-    public String atob(final String encodedData) {
-        return WindowOrWorkerGlobalScopeMixin.atob(encodedData);
     }
 
     /**
@@ -272,8 +293,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         if (handlers != null) {
             final Object[] args = {event};
             for (final Scriptable scriptable : handlers) {
-                if (scriptable instanceof Function) {
-                    final Function handlerFunction = (Function) scriptable;
+                if (scriptable instanceof Function handlerFunction) {
                     handlerFunction.call(cx, this, this, args);
                 }
             }
@@ -312,6 +332,14 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         final HtmlPage page = (HtmlPage) owningWindow_.getDocument().getPage();
         final URL fullUrl = page.getFullyQualifiedUrl(url);
 
+        workerLocation_ = new WorkerLocation(fullUrl, origin_);
+        workerLocation_.setParentScope(this);
+        workerLocation_.setPrototype(getPrototype(workerLocation_.getClass()));
+
+        workerNavigator_ = new WorkerNavigator(webClient.getBrowserVersion());
+        workerNavigator_.setParentScope(this);
+        workerNavigator_.setPrototype(getPrototype(workerNavigator_.getClass()));
+
         final WebRequest webRequest = new WebRequest(fullUrl);
         final WebResponse response = webClient.loadWebResponse(webRequest);
         if (checkMimeType && !MimeType.isJavascriptMimeType(response.getContentType())) {
@@ -323,9 +351,8 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         final AbstractJavaScriptEngine<?> javaScriptEngine = webClient.getJavaScriptEngine();
 
         final DedicatedWorkerGlobalScope thisScope = this;
-        final ContextAction<Object> action = cx -> {
-            return javaScriptEngine.execute(page, thisScope, scriptCode, fullUrl.toExternalForm(), 1);
-        };
+        final ContextAction<Object> action =
+                cx -> javaScriptEngine.execute(page, thisScope, scriptCode, fullUrl.toExternalForm(), 1);
 
         final HtmlUnitContextFactory cf = javaScriptEngine.getContextFactory();
 
@@ -344,7 +371,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      * and does not contain another page than the one that originated the setTimeout.
      *
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout">
-     * MDN web docs</a>
+     *     MDN web docs</a>
      *
      * @param context the JavaScript context
      * @param scope the scope
@@ -364,7 +391,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed.
      *
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval">
-     * MDN web docs</a>
+     *     MDN web docs</a>
      * @param context the JavaScript context
      * @param scope the scope
      * @param thisObj the scriptable
@@ -377,6 +404,24 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setInterval(context,
                 ((DedicatedWorkerGlobalScope) thisObj).owningWindow_, args, function);
+    }
+
+    /**
+     * Returns the prototype object corresponding to the specified HtmlUnit class inside the window scope.
+     * @param jsClass the class whose prototype is to be returned
+     * @return the prototype object corresponding to the specified class inside the specified scope
+     */
+    @Override
+    public Scriptable getPrototype(final Class<? extends HtmlUnitScriptable> jsClass) {
+        return prototypes_.get(jsClass);
+    }
+
+    /**
+     * Sets the prototypes for HtmlUnit host classes.
+     * @param map a Map of ({@link Class}, {@link Scriptable})
+     */
+    public void setPrototypes(final Map<Class<? extends Scriptable>, Scriptable> map) {
+        prototypes_ = map;
     }
 }
 

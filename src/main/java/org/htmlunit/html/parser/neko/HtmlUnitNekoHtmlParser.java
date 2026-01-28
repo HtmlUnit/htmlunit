@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,18 @@ package org.htmlunit.html.parser.neko;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.htmlunit.ObjectInstantiationException;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.cyberneko.HTMLScanner;
 import org.htmlunit.cyberneko.HTMLTagBalancer;
@@ -55,7 +55,7 @@ import org.xml.sax.SAXException;
  * <p>SAX parser implementation that uses the NekoHTML {@link org.htmlunit.cyberneko.HTMLConfiguration}
  * to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.</p>
  *
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Ahmed Ashour
@@ -73,7 +73,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
      */
     public static final SvgElementFactory SVG_FACTORY = new SvgElementFactory();
 
-    private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new HashMap<>();
+    private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new ConcurrentHashMap<>();
 
     static {
         final DefaultElementFactory defaultElementFactory = new DefaultElementFactory();
@@ -83,37 +83,16 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
     }
 
     /**
-     * Parses the HTML content from the given string into an object tree representation.
-     *
-     * @param parent the parent for the new nodes
-     * @param source the (X)HTML to be parsed
-     * @throws SAXException if a SAX error occurs
-     * @throws IOException if an IO error occurs
+     * {@inheritDoc}
      */
     @Override
-    public void parseFragment(final DomNode parent, final String source) throws SAXException, IOException {
-        parseFragment(parent, parent, source, false);
-    }
-
-    /**
-     * Parses the HTML content from the given string into an object tree representation.
-     *
-     * @param parent where the new parsed nodes will be added to
-     * @param context the context to build the fragment context stack
-     * @param source the (X)HTML to be parsed
-     * @param createdByJavascript if true the (script) tag was created by javascript
-     * @throws SAXException if a SAX error occurs
-     * @throws IOException if an IO error occurs
-     */
-    @Override
-    public void parseFragment(final DomNode parent, final DomNode context, final String source,
-            final boolean createdByJavascript)
+    public void parseFragment(final WebClient webClient, final DomNode parent, final DomNode context,
+            final String source, final boolean createdByJavascript)
         throws SAXException, IOException {
         final Page page = parent.getPage();
-        if (!(page instanceof HtmlPage)) {
+        if (!(page instanceof HtmlPage htmlPage)) {
             return;
         }
-        final HtmlPage htmlPage = (HtmlPage) page;
         final URL url = htmlPage.getUrl();
 
         final HtmlUnitNekoDOMBuilder domBuilder =
@@ -153,16 +132,10 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
     }
 
     /**
-     * Parses the WebResponse into an object tree representation.
-     *
-     * @param webResponse the response data
-     * @param page the HtmlPage to add the nodes
-     * @param xhtml if true use the XHtml parser
-     * @param createdByJavascript if true the (script) tag was created by javascript
-     * @throws IOException if there is an IO error
+     * {@inheritDoc}
      */
     @Override
-    public void parse(final WebResponse webResponse, final HtmlPage page,
+    public void parse(final WebClient webClient, final WebResponse webResponse, final HtmlPage page,
             final boolean xhtml, final boolean createdByJavascript) throws IOException {
         final URL url = webResponse.getWebRequest().getUrl();
         final HtmlUnitNekoDOMBuilder domBuilder =
@@ -180,6 +153,15 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
                 domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
                 domBuilder.setFeature(HTMLScanner.SCRIPT_STRIP_CDATA_DELIMS, true);
                 domBuilder.setFeature(HTMLScanner.STYLE_STRIP_CDATA_DELIMS, true);
+                domBuilder.setFeature(HTMLScanner.CDATA_SECTIONS, true);
+                domBuilder.setFeature(HTMLScanner.CDATA_EARLY_CLOSING, false);
+            }
+
+            if (webClient != null) {
+                final int bufferSize = webClient.getOptions().getNekoReaderBufferSize();
+                if (bufferSize > 0) {
+                    domBuilder.setProperty(HTMLScanner.READER_BUFFER_SIZE, bufferSize);
+                }
             }
         }
         catch (final Exception e) {
@@ -206,27 +188,26 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
     }
 
     /**
-     * Extract nested exception within an XNIException (Nekohtml uses reflection and generated
-     * exceptions are wrapped many times within XNIException and InvocationTargetException)
+     * Extract nested exception within an XNIException.
      *
      * @param e the original XNIException
      * @return the cause exception
      */
     static Throwable extractNestedException(final Throwable e) {
-        Throwable originalException = e;
-        Throwable cause = ((XNIException) e).getException();
-        while (cause != null) {
+        Throwable originalException;
+        Throwable cause = e;
+        do {
             originalException = cause;
+
             if (cause instanceof XNIException) {
-                cause = ((XNIException) cause).getException();
-            }
-            else if (cause instanceof InvocationTargetException) {
                 cause = cause.getCause();
             }
             else {
                 cause = null;
             }
         }
+        while (cause != null);
+
         return originalException;
     }
 
@@ -314,7 +295,9 @@ class HtmlUnitNekoHTMLErrorHandler implements XMLErrorHandler {
         html_ = htmlContent;
     }
 
-    /** @see DefaultErrorHandler#error(String,String,XMLParseException) */
+    /**
+     * @see DefaultErrorHandler#error(String,String,XMLParseException)
+     */
     @Override
     public void error(final String domain, final String key,
             final XMLParseException exception) throws XNIException {
@@ -326,7 +309,9 @@ class HtmlUnitNekoHTMLErrorHandler implements XMLErrorHandler {
                 key);
     }
 
-    /** @see DefaultErrorHandler#warning(String,String,XMLParseException) */
+    /**
+     * @see DefaultErrorHandler#warning(String,String,XMLParseException)
+     */
     @Override
     public void warning(final String domain, final String key,
             final XMLParseException exception) throws XNIException {

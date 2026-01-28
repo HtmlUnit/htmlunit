@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,10 +33,8 @@ import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.javascript.host.html.HTMLStyleElement;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.NodeList;
 
 /**
@@ -45,8 +43,8 @@ import org.w3c.dom.NodeList;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
     /**
@@ -54,7 +52,8 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      */
     @Test
     public void selects_miscSelectors() throws Exception {
-        final String html = "<html><head><title>test</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>test</title>\n"
             + "</head><body><style></style>\n"
             + "<form name='f1' action='foo' class='yui-log'>\n"
             + "<div><div><input name='i1' id='m1'></div></div>\n"
@@ -74,7 +73,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final BrowserVersion browserVersion = getBrowserVersion();
 
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
+        final HTMLStyleElement host = node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
 
         Selector selector = parseSelector(sheet, "*.yui-log input");
@@ -179,8 +178,8 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      */
     @Test
     public void selectsIdConditionWithSpecialChars() throws Exception {
-        final String html =
-                "<html><body><style></style>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><body><style></style>\n"
               + "<div id='d:e'></div>\n"
               + "<div id='d-e'></div>\n"
               + "</body></html>";
@@ -231,8 +230,8 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
     private void testSelects(final String css, final boolean selectBody, final boolean selectDivD,
         final boolean selectSpanS) throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body id='b'>\n"
             + "    <style></style>\n"
             + "    <div id='d' class='foo bar' lang='en-GB'>\n"
@@ -271,5 +270,4 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final ComputedCssStyleDeclaration style = htmlPage.getEnclosingWindow().getComputedStyle(element, null);
         assertEquals(getExpectedAlerts()[0], style.toString());
     }
-
 }

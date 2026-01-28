@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,26 +16,23 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlUnitScriptable}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:BarnabyCourt@users.sourceforge.net">Barnaby Court</a>
+ * @author Mike Bowler
+ * @author Barnaby Court
  * @author David K. Taylor
- * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Ben Curren
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Sudhan Moghe
- * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
+ * @author Mike Dirolf
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HtmlUnitScriptableTest extends SimpleWebTestCase {
 
     /**
@@ -44,8 +41,8 @@ public class HtmlUnitScriptableTest extends SimpleWebTestCase {
     @Test
     @Alerts("past focus")
     public void callInheritedFunction() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  document.form1.textfield1.focus();\n"
             + "  alert('past focus');\n"

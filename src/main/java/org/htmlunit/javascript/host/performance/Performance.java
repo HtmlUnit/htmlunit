@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,10 +79,10 @@ public class Performance extends EventTarget {
 
     /**
      * @return a list of all PerformanceEntry objects for the page.
-     * The list's members (entries) can be created by making performance marks
-     * or measures (for example by calling the mark() method) at explicit points in time.
-     * If you are only interested in performance entries of certain types or that have
-     * certain names, see getEntriesByType() and getEntriesByName().
+     *         The list's members (entries) can be created by making performance marks
+     *         or measures (for example by calling the mark() method) at explicit points in time.
+     *         If you are only interested in performance entries of certain types or that have
+     *         certain names, see getEntriesByType() and getEntriesByName().
      */
     @JsxFunction
     public Scriptable getEntries() {
@@ -91,10 +91,10 @@ public class Performance extends EventTarget {
 
     /**
      * @return a list of all PerformanceEntry objects for the page.
-     * The list's members (entries) can be created by making performance marks
-     * or measures (for example by calling the mark() method) at explicit points in time.
-     * If you are only interested in performance entries of certain types or that have
-     * certain names, see getEntriesByType() and getEntriesByName().
+     *         The list's members (entries) can be created by making performance marks
+     *         or measures (for example by calling the mark() method) at explicit points in time.
+     *         If you are only interested in performance entries of certain types or that have
+     *         certain names, see getEntriesByType() and getEntriesByName().
      */
     @JsxFunction
     public Scriptable getEntriesByName() {
@@ -103,8 +103,8 @@ public class Performance extends EventTarget {
 
     /**
      * @return a list of PerformanceEntry objects for a given type. The list's
-     * members (entries) can be created by making performance marks or measures
-     * (for example by calling the mark() method) at explicit points in time.
+     *         members (entries) can be created by making performance marks or measures
+     *         (for example by calling the mark() method) at explicit points in time.
      */
     @JsxFunction
     public Scriptable getEntriesByType() {

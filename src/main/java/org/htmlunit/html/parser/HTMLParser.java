@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package org.htmlunit.html.parser;
 import java.io.IOException;
 
 import org.htmlunit.SgmlPage;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.ElementFactory;
@@ -26,7 +27,7 @@ import org.xml.sax.SAXException;
 /**
  * <p>Interface for the parser used to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.</p>
  *
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Ahmed Ashour
@@ -71,16 +72,7 @@ public interface HTMLParser {
     /**
      * Parses the HTML content from the given string into an object tree representation.
      *
-     * @param parent the parent for the new nodes
-     * @param source the (X)HTML to be parsed
-     * @throws SAXException if a SAX error occurs
-     * @throws IOException if an IO error occurs
-     */
-    void parseFragment(DomNode parent, String source) throws SAXException, IOException;
-
-    /**
-     * Parses the HTML content from the given string into an object tree representation.
-     *
+     * @param webClient the {@link WebClient}
      * @param parent where the new parsed nodes will be added to
      * @param context the context to build the fragment context stack
      * @param source the (X)HTML to be parsed
@@ -88,17 +80,19 @@ public interface HTMLParser {
      * @throws SAXException if a SAX error occurs
      * @throws IOException if an IO error occurs
      */
-    void parseFragment(DomNode parent, DomNode context, String source,
+    void parseFragment(WebClient webClient, DomNode parent, DomNode context, String source,
             boolean createdByJavascript) throws SAXException, IOException;
 
     /**
      * Parses the WebResponse into an object tree representation.
      *
+     * @param webClient the {@link WebClient}
      * @param webResponse the response data
      * @param page the HtmlPage to add the nodes
      * @param xhtml if true use the XHtml parser
      * @param createdByJavascript if true the (script) tag was created by javascript
      * @throws IOException if there is an IO error
      */
-    void parse(WebResponse webResponse, HtmlPage page, boolean xhtml, boolean createdByJavascript) throws IOException;
+    void parse(WebClient webClient, WebResponse webResponse, HtmlPage page,
+            boolean xhtml, boolean createdByJavascript) throws IOException;
 }

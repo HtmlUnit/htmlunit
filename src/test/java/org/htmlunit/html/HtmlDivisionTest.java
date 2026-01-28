@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,7 @@
 package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlDivision}.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlDivisionTest extends SimpleWebTestCase {
 
     /**
@@ -55,7 +52,8 @@ public class HtmlDivisionTest extends SimpleWebTestCase {
     }
 
     private void testAsNormalizedText(final String expected, final String htmlSnippet) throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + htmlSnippet
             + "</body></html>";
 
@@ -68,7 +66,8 @@ public class HtmlDivisionTest extends SimpleWebTestCase {
      */
     @Test
     public void asTextDiv() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<div id='foo'>\n \n hello </div>\n"
             + "</body></html>";
 
@@ -83,7 +82,8 @@ public class HtmlDivisionTest extends SimpleWebTestCase {
      */
     @Test
     public void css() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<div style='display:inline'>1</div><div style='display:inline'>2</div>\n"
             + "</body></html>";
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
  */
 package org.htmlunit.html;
 
+import java.io.Serializable;
+
 import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.NodeIterator;
@@ -24,7 +26,7 @@ import org.w3c.dom.traversal.NodeIterator;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public class DomNodeIterator implements NodeIterator {
+public class DomNodeIterator implements NodeIterator, Serializable {
 
     private final DomNode root_;
     private final int whatToShow_;
@@ -38,7 +40,7 @@ public class DomNodeIterator implements NodeIterator {
      *
      * @param root The root node at which to begin the {@link NodeIterator}'s traversal
      * @param whatToShow an optional int representing a bitmask created by combining
-     * the constant properties of {@link NodeFilter}
+     *        the constant properties of {@link NodeFilter}
      * @param expandEntityReferences If false, the contents of
      *          EntityReference nodes are not present in the logical view.
      * @param filter an object implementing the {@link NodeFilter} interface
@@ -143,15 +145,7 @@ public class DomNodeIterator implements NodeIterator {
             }
             else {
                 if (beforeNode) {
-                    final DomNode left = getSibling(node, true);
-                    if (left == null) {
-                        final Node parent = node.getParentNode();
-                        if (parent == null) {
-                            node = null;
-                        }
-                    }
-
-                    DomNode follow = left;
+                    DomNode follow = getSibling(node, true);
                     if (follow != null) {
                         while (follow.hasChildNodes()) {
                             final DomNode toFollow = getChild(follow, false);

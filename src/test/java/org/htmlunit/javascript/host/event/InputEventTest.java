@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,15 @@
 package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link InputEvent}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class InputEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
@@ -47,14 +43,14 @@ public class InputEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object InputEvent]", "type", "false", "false", "false", ",,false"})
     public void create_ctor() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var event = new InputEvent('type');\n"
                 + "      dump(event);\n"
-                + "    } catch (e) { log('exception') }\n"
+                + "    } catch(e) { logEx(e) }\n"
                 + "  }\n"
                 + DUMP_EVENT_FUNCTION
                 + "</script></head><body onload='test()'>\n"
@@ -67,7 +63,7 @@ public class InputEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     @HtmlUnitNYI(CHROME = {"[object InputEvent]", "undefined", "false", "false", "false",
                            ",,false"},
             EDGE = {"[object InputEvent]", "undefined", "false", "false", "false",
@@ -77,14 +73,14 @@ public class InputEventTest extends WebDriverTestCase {
             FF_ESR = {"[object InputEvent]", "undefined", "false", "false", "false",
                       ",,false"})
     public void create_ctorWithoutType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new InputEvent();\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,14 +95,14 @@ public class InputEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object InputEvent]", "42", "false", "false", "false", ",,false"})
     public void create_ctorNumericType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new InputEvent(42);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -121,14 +117,14 @@ public class InputEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object InputEvent]", "null", "false", "false", "false", ",,false"})
     public void create_ctorNullType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new InputEvent(null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -141,16 +137,16 @@ public class InputEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new InputEvent(unknown);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -165,14 +161,14 @@ public class InputEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object InputEvent]", "HtmlUnitEvent", "false", "false", "false", ",,false"})
     public void create_ctorArbitraryType() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new InputEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -192,7 +188,7 @@ public class InputEventTest extends WebDriverTestCase {
             EDGE = {"[object InputEvent]", "input", "false", "false", "false",
                     "data,,true"})
     public void create_ctorAllDetails() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -200,7 +196,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "      var event = new InputEvent('input', "
                              + "{ inputType: 'inputType', data: 'data', isComposing: true });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -215,7 +211,7 @@ public class InputEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,true"})
     public void create_ctorSomeDetails() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -223,7 +219,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "      var event = new InputEvent('input', "
                              + "{ isComposing: true });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -238,7 +234,7 @@ public class InputEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,false"})
     public void create_ctorMissingData() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -246,7 +242,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "      var event = new InputEvent('input', {\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -261,14 +257,14 @@ public class InputEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,false"})
     public void create_ctorNullData() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new InputEvent('input', null);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -283,14 +279,14 @@ public class InputEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,false"})
     public void create_ctorUndefinedData() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new InputEvent('input', undefined);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -305,7 +301,7 @@ public class InputEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object InputEvent]", "input", "false", "false", "false", "Html,Unit,,false"})
     public void create_ctorWrongData() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -314,7 +310,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "        'data': ['Html', 'Unit']\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

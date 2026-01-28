@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,7 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.ScriptException;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for IE weird JavaScript syntax.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class IEWeirdSyntaxTest extends WebDriverTestCase {
 
     /**

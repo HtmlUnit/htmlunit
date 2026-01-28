@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLAllCollection}.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class HTMLAllCollectionTest extends WebDriverTestCase {
 
     /**
@@ -147,8 +144,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     }
 
     private void namedItem(final String name) throws Exception {
-        final String html
-            = "<!doctype html>\n"
+        final String html = DOCTYPE_HTML
             + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
             + "  alerts = ''\n"
             + "  function log(msg) { alerts += msg + '§';}\n"
@@ -281,11 +277,11 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     }
 
     private void item(final String name) throws Exception {
-        final String html
-            = "<!doctype html>\n"
-            + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
-            + "  alerts = ''\n"
-            + "  function log(msg) { alerts += msg + '§';}\n"
+        final String html = DOCTYPE_HTML
+            + "<html id='myHtml'>\n"
+            + "<head id='myHead'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function report(result) {\n"
             + "    if (result == null || result == undefined) {\n"
             + "      log(result);\n"
@@ -305,8 +301,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var item = document.all.item(" + name + ");\n"
             + "      report(item);\n"
-            + "    } catch(e) { log('exception'); }\n"
-            + "    document.title = alerts;"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -393,17 +388,17 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("myTitle-undefined")
+    @Alerts("myScript-undefined")
     public void arrayIndex_IndexAsString() throws Exception {
         arrayIndex("'2'");
     }
 
     private void arrayIndex(final String name) throws Exception {
-        final String html
-            = "<!doctype html>\n"
-            + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
-            + "  alerts = ''\n"
-            + "  function log(msg) { alerts += msg + '§';}\n"
+        final String html = DOCTYPE_HTML
+            + "<html id='myHtml'>\n"
+            + "<head id='myHead'>\n"
+            + "<script id='myScript'>\n"
+            + LOG_TITLE_FUNCTION
             + "  function report(result) {\n"
             + "    if (result == null || result == undefined) {\n"
             + "      log(result);\n"
@@ -423,8 +418,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var item = document.all[" + name + "];\n"
             + "      report(item);\n"
-            + "    } catch(e) { log('exception'); }\n"
-            + "    document.title = alerts;"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -511,17 +505,17 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("myTitle-undefined")
+    @Alerts("myScript-undefined")
     public void functionIndex_IndexAsString() throws Exception {
         functionIndex("'2'");
     }
 
     private void functionIndex(final String name) throws Exception {
-        final String html
-            = "<!doctype html>\n"
-            + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
-            + "  alerts = ''\n"
-            + "  function log(msg) { alerts += msg + '§';}\n"
+        final String html = DOCTYPE_HTML
+            + "<html id='myHtml'>\n"
+            + "<head id='myHead'>\n"
+            + "<script id='myScript'>\n"
+            + LOG_TITLE_FUNCTION
             + "  function report(result) {\n"
             + "    if (result == null || result == undefined) {\n"
             + "      log(result);\n"
@@ -541,8 +535,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var item = document.all(" + name + ");\n"
             + "      report(item);\n"
-            + "    } catch(e) { log('exception'); }\n"
-            + "    document.title = alerts;"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -559,7 +552,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }"})
     public void type() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -567,7 +560,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(document.all);\n"
             + "      log(HTMLAllCollection);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -583,7 +576,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts("function () { [native code] }")
     public void proto() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -593,6 +586,102 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * See https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void looselyEqualToUndefined() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(undefined === document.all);\n"
+            + "  log(undefined == document.all);\n"
+            + "  log(document.all === undefined);\n"
+            + "  log(document.all == undefined);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * See https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void looselyEqualToNull() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(null === document.all);\n"
+            + "  log(null == document.all);\n"
+            + "  log(document.all === null);\n"
+            + "  log(document.all == null);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * See https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"7", "1", "3", "[object HTMLAllCollection]", "5"})
+    public void falsyInBooleanContexts() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  x = 11;\n"
+            + "  if(document.all) { x = 1 } else { x = 7 }"
+            + "  log(x);\n"
+
+            + "  if(!document.all) { x = 1 } else { x = 7 }"
+            + "  log(x);\n"
+
+            + "  log(document.all ? 4 : 3);\n"
+
+            + "  log(document.all ?? 'htmlunit');\n"
+            + "  log(document.all?.length);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * See https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection#special_type_conversion_behavior.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void typeof() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof document.all);\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

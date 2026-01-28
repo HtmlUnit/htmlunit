@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,10 +60,8 @@ import org.apache.http.client.AuthCache;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
-import org.apache.http.client.methods.HttpOptions;
 import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -119,7 +117,7 @@ import org.htmlunit.util.UrlUtils;
 /**
  * Default implementation of {@link WebConnection}, using the HttpClient library to perform HTTP requests.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Noboru Sinohara
  * @author David D. Kilzer
  * @author Marc Guillemot
@@ -139,7 +137,7 @@ public class HttpWebConnection implements WebConnection {
     private static final String HACKED_COOKIE_POLICY = "mine";
 
     // have one per thread because this is (re)configured for every call (see configureHttpProcessorBuilder)
-    // do not use a ThreadLocal because this in only accessed form this class
+    // do not use a ThreadLocal because this in only accessed form this class, but we still need it synchronized
     private final Map<Thread, HttpClientBuilder> httpClientBuilder_ = new WeakHashMap<>();
     private final WebClient webClient_;
 
@@ -213,7 +211,9 @@ public class HttpWebConnection implements WebConnection {
                 // Calling code may catch the StackOverflowError, but due to the leak, the httpClient_ may
                 // come out of connections and throw a ConnectionPoolTimeoutException.
                 // => best solution, discard the HttpClient instance.
-                httpClientBuilder_.remove(Thread.currentThread());
+                synchronized (httpClientBuilder_) {
+                    httpClientBuilder_.remove(Thread.currentThread());
+                }
                 throw e;
             }
         }
@@ -295,15 +295,19 @@ public class HttpWebConnection implements WebConnection {
         final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         setProxy(httpMethod, webRequest);
 
-        // POST, PUT and PATCH
-        if (httpMethod instanceof HttpEntityEnclosingRequest) {
-            // developer note:
-            // this has to be in sync with org.htmlunit.WebRequest.getRequestParameters()
+        // developer note:
+        // this has to be in sync with org.htmlunit.WebRequest.getRequestParameters()
+
+        // POST, PUT, PATCH, DELETE, OPTIONS
+        if (httpMethod instanceof HttpPost
+                || httpMethod instanceof HttpPut
+                || httpMethod instanceof HttpPatch
+                || httpMethod instanceof org.htmlunit.httpclient.HttpDelete
+                || httpMethod instanceof org.htmlunit.httpclient.HttpOptions) {
 
             final HttpEntityEnclosingRequest method = (HttpEntityEnclosingRequest) httpMethod;
 
-            if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED && method instanceof HttpPost) {
-                final HttpPost postMethod = (HttpPost) method;
+            if (FormEncodingType.URL_ENCODED == webRequest.getEncodingType()) {
                 if (webRequest.getRequestBody() == null) {
                     final List<NameValuePair> pairs = webRequest.getRequestParameters();
                     final String query = HttpUtils.toQueryFormFields(pairs, charset);
@@ -318,17 +322,16 @@ public class HttpWebConnection implements WebConnection {
                         urlEncodedEntity = new StringEntity(query, charset);
                         urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
                     }
-                    postMethod.setEntity(urlEncodedEntity);
+                    method.setEntity(urlEncodedEntity);
                 }
                 else {
                     final String body = StringUtils.defaultString(webRequest.getRequestBody());
                     final StringEntity urlEncodedEntity = new StringEntity(body, charset);
                     urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
-                    postMethod.setEntity(urlEncodedEntity);
+                    method.setEntity(urlEncodedEntity);
                 }
             }
-            else if (webRequest.getEncodingType() == FormEncodingType.TEXT_PLAIN && method instanceof HttpPost) {
-                final HttpPost postMethod = (HttpPost) method;
+            else if (FormEncodingType.TEXT_PLAIN == webRequest.getEncodingType()) {
                 if (webRequest.getRequestBody() == null) {
                     final StringBuilder body = new StringBuilder();
                     for (final NameValuePair pair : webRequest.getRequestParameters()) {
@@ -339,13 +342,13 @@ public class HttpWebConnection implements WebConnection {
                     }
                     final StringEntity bodyEntity = new StringEntity(body.toString(), charset);
                     bodyEntity.setContentType(MimeType.TEXT_PLAIN);
-                    postMethod.setEntity(bodyEntity);
+                    method.setEntity(bodyEntity);
                 }
                 else {
                     final String body = StringUtils.defaultString(webRequest.getRequestBody());
                     final StringEntity bodyEntity =
                             new StringEntity(body, ContentType.create(MimeType.TEXT_PLAIN, charset));
-                    postMethod.setEntity(bodyEntity);
+                    method.setEntity(bodyEntity);
                 }
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
@@ -354,8 +357,8 @@ public class HttpWebConnection implements WebConnection {
                 builder.setCharset(c);
 
                 for (final NameValuePair pair : webRequest.getRequestParameters()) {
-                    if (pair instanceof KeyDataPair) {
-                        buildFilePart((KeyDataPair) pair, builder);
+                    if (pair instanceof KeyDataPair dataPair) {
+                        buildFilePart(dataPair, builder);
                     }
                     else {
                         builder.addTextBody(pair.getName(), pair.getValue(),
@@ -364,7 +367,8 @@ public class HttpWebConnection implements WebConnection {
                 }
                 method.setEntity(builder.build());
             }
-            else { // for instance a PUT or PATCH request
+            else {
+                // for instance a PATCH request
                 final String body = webRequest.getRequestBody();
                 if (body != null) {
                     method.setEntity(new StringEntity(body, charset));
@@ -372,9 +376,9 @@ public class HttpWebConnection implements WebConnection {
             }
         }
         else {
-            // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
-            if (!webRequest.getRequestParameters().isEmpty()) {
-                final List<NameValuePair> pairs = webRequest.getRequestParameters();
+            // GET, TRACE, HEAD
+            final List<NameValuePair> pairs = webRequest.getRequestParameters();
+            if (!pairs.isEmpty()) {
                 final String query = HttpUtils.toQueryFormFields(pairs, charset);
                 uri = UrlUtils.toURI(url, query);
                 httpMethod.setURI(uri);
@@ -419,11 +423,11 @@ public class HttpWebConnection implements WebConnection {
 
     private static Charset getCharset(final Charset charset, final List<NameValuePair> pairs) {
         for (final NameValuePair pair : pairs) {
-            if (pair instanceof KeyDataPair) {
-                final KeyDataPair pairWithFile = (KeyDataPair) pair;
+            if (pair instanceof KeyDataPair pairWithFile) {
                 if (pairWithFile.getData() == null && pairWithFile.getFile() != null) {
                     final String fileName = pairWithFile.getFile().getName();
-                    for (int i = 0; i < fileName.length(); i++) {
+                    final int length = fileName.length();
+                    for (int i = 0; i < length; i++) {
                         if (fileName.codePointAt(i) > 127) {
                             return charset;
                         }
@@ -441,48 +445,37 @@ public class HttpWebConnection implements WebConnection {
         }
 
         final ContentType contentType = ContentType.create(mimeType);
-        final File file = pairWithFile.getFile();
 
-        if (pairWithFile.getData() != null) {
-            final String filename;
-            if (file == null) {
+        final File file = pairWithFile.getFile();
+        if (file != null) {
+            String filename = pairWithFile.getFileName();
+            if (filename == null) {
+                filename = pairWithFile.getFile().getName();
+            }
+            builder.addBinaryBody(pairWithFile.getName(), file, contentType, filename);
+            return;
+        }
+
+        final byte[] data = pairWithFile.getData();
+        if (data != null) {
+            String filename = pairWithFile.getFileName();
+            if (filename == null) {
                 filename = pairWithFile.getValue();
             }
-            else if (pairWithFile.getFileName() == null) {
-                filename = file.getName();
-            }
-            else {
-                filename = pairWithFile.getFileName();
-            }
 
-            builder.addBinaryBody(pairWithFile.getName(), new ByteArrayInputStream(pairWithFile.getData()),
+            builder.addBinaryBody(pairWithFile.getName(), new ByteArrayInputStream(data),
                     contentType, filename);
             return;
         }
 
-        if (file == null) {
-            builder.addPart(pairWithFile.getName(),
-                    // Overridden in order not to have a chunked response.
-                    new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, pairWithFile.getValue()) {
-                    @Override
-                    public long getContentLength() {
-                        return 0;
-                    }
-                });
-            return;
-        }
-
-        final String filename;
-        if (pairWithFile.getFile() == null) {
-            filename = pairWithFile.getValue();
-        }
-        else if (pairWithFile.getFileName() == null) {
-            filename = pairWithFile.getFile().getName();
-        }
-        else {
-            filename = pairWithFile.getFileName();
-        }
-        builder.addBinaryBody(pairWithFile.getName(), pairWithFile.getFile(), contentType, filename);
+        builder.addPart(pairWithFile.getName(),
+                // Overridden in order not to have a chunked response.
+                new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, pairWithFile.getValue()) {
+                @Override
+                public long getContentLength() {
+                    return 0;
+                }
+            });
     }
 
     /**
@@ -492,43 +485,16 @@ public class HttpWebConnection implements WebConnection {
      * @return a new HttpClient HTTP method based on the specified parameters
      */
     private static HttpRequestBase buildHttpMethod(final HttpMethod submitMethod, final URI uri) {
-        final HttpRequestBase method;
-        switch (submitMethod) {
-            case GET:
-                method = new HttpGet(uri);
-                break;
-
-            case POST:
-                method = new HttpPost(uri);
-                break;
-
-            case PUT:
-                method = new HttpPut(uri);
-                break;
-
-            case DELETE:
-                method = new HttpDelete(uri);
-                break;
-
-            case OPTIONS:
-                method = new HttpOptions(uri);
-                break;
-
-            case HEAD:
-                method = new HttpHead(uri);
-                break;
-
-            case TRACE:
-                method = new HttpTrace(uri);
-                break;
-
-            case PATCH:
-                method = new HttpPatch(uri);
-                break;
-
-            default:
-                throw new IllegalStateException("Submit method not yet supported: " + submitMethod);
-        }
+        final HttpRequestBase method = switch (submitMethod) {
+            case GET -> new HttpGet(uri);
+            case POST -> new HttpPost(uri);
+            case PUT -> new HttpPut(uri);
+            case DELETE -> new org.htmlunit.httpclient.HttpDelete(uri);
+            case OPTIONS -> new org.htmlunit.httpclient.HttpOptions(uri);
+            case HEAD -> new HttpHead(uri);
+            case TRACE -> new HttpTrace(uri);
+            case PATCH -> new HttpPatch(uri);
+        };
         return method;
     }
 
@@ -539,23 +505,26 @@ public class HttpWebConnection implements WebConnection {
      */
     protected HttpClientBuilder getHttpClientBuilder() {
         final Thread currentThread = Thread.currentThread();
-        HttpClientBuilder builder = httpClientBuilder_.get(currentThread);
-        if (builder == null) {
-            builder = createHttpClientBuilder();
 
-            // this factory is required later
-            // to be sure this is done, we do it outside the createHttpClient() call
-            final RegistryBuilder<CookieSpecProvider> registeryBuilder
-                = RegistryBuilder.<CookieSpecProvider>create()
-                            .register(HACKED_COOKIE_POLICY, htmlUnitCookieSpecProvider_);
-            builder.setDefaultCookieSpecRegistry(registeryBuilder.build());
+        synchronized (httpClientBuilder_) {
+            HttpClientBuilder builder = httpClientBuilder_.get(currentThread);
+            if (builder == null) {
+                builder = createHttpClientBuilder();
 
-            builder.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
-            builder.setUserAgent(webClient_.getBrowserVersion().getUserAgent());
-            httpClientBuilder_.put(currentThread, builder);
+                // this factory is required later
+                // to be sure this is done, we do it outside the createHttpClient() call
+                final RegistryBuilder<CookieSpecProvider> registeryBuilder
+                    = RegistryBuilder.<CookieSpecProvider>create()
+                                .register(HACKED_COOKIE_POLICY, htmlUnitCookieSpecProvider_);
+                builder.setDefaultCookieSpecRegistry(registeryBuilder.build());
+
+                builder.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
+                builder.setUserAgent(webClient_.getBrowserVersion().getUserAgent());
+                httpClientBuilder_.put(currentThread, builder);
+            }
+
+            return builder;
         }
-
-        return builder;
     }
 
     /**
@@ -828,7 +797,7 @@ public class HttpWebConnection implements WebConnection {
     /**
      * Constructs an appropriate WebResponse.
      * May be overridden by subclasses to return a specialized WebResponse.
-     * @param responseData Data that was send back
+     * @param responseData Data that was sent back
      * @param webRequest the request used to get this response
      * @param loadTime How long the response took to be sent
      * @return the new WebResponse
@@ -1295,7 +1264,11 @@ public class HttpWebConnection implements WebConnection {
      */
     @Override
     public void close() {
-        httpClientBuilder_.clear();
+        synchronized (httpClientBuilder_) {
+            httpClientBuilder_.clear();
+        }
+        sharedAuthCache_.clear();
+        httpClientContextByThread_.clear();
 
         if (connectionManager_ != null) {
             connectionManager_.shutdown();

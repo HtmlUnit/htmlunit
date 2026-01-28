@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,11 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -31,24 +31,49 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.CodeStyleTest;
+import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.general.HostExtractor;
-import org.junit.ComparisonFailure;
-import org.junit.runners.model.FrameworkMethod;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.TestExecutionExceptionHandler;
+import org.opentest4j.AssertionFailedError;
 
 /**
  * This is meant to automatically correct the test case to put either the real browser expectations,
- * or the {@link org.htmlunit.junit.BrowserRunner.NotYetImplemented} annotation for HtmlUnit.
+ * or the {@link HtmlUnitNYI} annotation for HtmlUnit.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-final class TestCaseCorrector {
+public final class TestCaseCorrector implements TestExecutionExceptionHandler {
 
-    private TestCaseCorrector() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void handleTestExecutionException(final ExtensionContext context,
+                    final Throwable throwable) throws Throwable {
+
+        final Object testInstance = context.getRequiredTestInstance();
+
+        if (Boolean.parseBoolean(System.getProperty(WebDriverTestCase.AUTOFIX_))
+                && testInstance instanceof WebDriverTestCase webDriverTestCase) {
+            final Method testMethod = context.getRequiredTestMethod();
+            final boolean realBrowser = webDriverTestCase.useRealBrowser();
+            final BrowserVersion browserVersion = webDriverTestCase.getBrowserVersion();
+
+            // TODO @HtmlUnitNYI !realBrowser
+            correct(testInstance, testMethod, realBrowser, browserVersion, false, throwable);
+        }
+
+        throw throwable;
     }
 
-    static void correct(final FrameworkMethod method, final boolean realBrowser, final BrowserVersion browserVersion,
-            final boolean notYetImplemented, final Throwable t) throws IOException {
+    static void correct(final Object testInstance, final Method method,
+                    final boolean realBrowser, final BrowserVersion browserVersion,
+                    final boolean notYetImplemented, final Throwable t) throws IOException {
+
+
         final String testRoot = "src/test/java/";
         String browserString = browserVersion.getNickname().toUpperCase(Locale.ROOT);
         browserString = browserString.replace('-', '_'); // FF-ESR-> FF_ESR
@@ -63,11 +88,11 @@ final class TestCaseCorrector {
                     defaultExpectation = getDefaultExpectation(lines, i);
                 }
                 if (lines.get(i).startsWith(methodLine)) {
-                    i = addExpectation(lines, i, browserString, (ComparisonFailure) t);
+                    i = addExpectation(lines, i, browserString, (AssertionFailedError) t);
                     break;
                 }
                 if (i == lines.size() - 2) {
-                    addMethodWithExpectation(lines, i, browserString, method.getName(), (ComparisonFailure) t,
+                    addMethodWithExpectation(lines, i, browserString, method.getName(), (AssertionFailedError) t,
                             defaultExpectation);
                     break;
                 }
@@ -113,16 +138,12 @@ final class TestCaseCorrector {
     }
 
     private static int addExpectation(final List<String> lines, int i,
-            final String browserString, final ComparisonFailure comparisonFailure) {
+            final String browserString, final AssertionFailedError comparisonFailure) {
         while (!lines.get(i).startsWith("    @Alerts")) {
             i--;
         }
         final List<String> alerts = CodeStyleTest.alertsToList(lines, i);
-        for (final Iterator<String> it = alerts.iterator(); it.hasNext();) {
-            if (it.next().startsWith(browserString + " = ")) {
-                it.remove();
-            }
-        }
+        alerts.removeIf(s -> s.startsWith(browserString + " = "));
         alerts.add(browserString + " = " + getActualString(comparisonFailure));
         lines.remove(i);
         while (lines.get(i).startsWith("        ")) {
@@ -165,10 +186,10 @@ final class TestCaseCorrector {
         return i;
     }
 
-    private static String getActualString(final ComparisonFailure failure) {
+    private static String getActualString(final AssertionFailedError failure) {
         final int lineLength = 96;
 
-        String actual = failure.getActual();
+        String actual = failure.getActual().getStringRepresentation();
         actual = actual.substring(0, actual.length() - 1);
         actual = StringEscapeUtils.escapeJava(actual);
         if (actual.length() > lineLength) {
@@ -178,10 +199,10 @@ final class TestCaseCorrector {
                 if (length == 0 && !actual.isEmpty()) {
                     length = Math.min(lineLength, actual.length());
                 }
-                if (builder.length() != 0) {
+                if (!builder.isEmpty()) {
                     builder.append(System.lineSeparator()).append("                + ");
                 }
-                builder.append('"').append(actual.substring(0, length)).append('"');
+                builder.append('"').append(actual, 0, length).append('"');
                 actual = actual.substring(length);
             }
             return builder.toString();
@@ -217,11 +238,7 @@ final class TestCaseCorrector {
             }
             else {
                 final List<String> allBrowsers = new ArrayList<>(Arrays.asList("CHROME", "EDGE", "FF", "FF_ESR"));
-                for (final Iterator<String> it = allBrowsers.iterator(); it.hasNext();) {
-                    if (it.next().equals(browserString)) {
-                        it.remove();
-                    }
-                }
+                allBrowsers.removeIf(s -> s.equals(browserString));
                 lines.set(i - 1, "    @NotYetImplemented({" + String.join(", ", allBrowsers) + "})");
             }
         }
@@ -272,7 +289,7 @@ final class TestCaseCorrector {
     }
 
     private static void addMethodWithExpectation(final List<String> lines,
-            int i, final String browserString, final String methodName, final ComparisonFailure comparisonFailure,
+            int i, final String browserString, final String methodName, final AssertionFailedError comparisonFailure,
             final String defaultExpectations) {
         String parent = methodName;
         final String child = parent.substring(parent.lastIndexOf('_') + 1);

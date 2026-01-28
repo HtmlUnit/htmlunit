@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,8 @@ import java.util.List;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SimpleWebTestCase;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  * Tests the <code>isDisabled()</code> method on all of the elements that must implement the <code>disabled</code>
@@ -34,15 +32,14 @@ import org.junit.runners.Parameterized.Parameters;
  *
  * @author David D. Kilzer
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(Parameterized.class)
 public class DisabledElementTest extends SimpleWebTestCase {
 
     /**
      * Tests data.
      * @return tests data
      */
-    @Parameters
     public static Collection<String[]> data() {
         return Arrays.asList(new String[][] {
             {"<button id='element1' {0}>foo</button>"},
@@ -63,27 +60,16 @@ public class DisabledElementTest extends SimpleWebTestCase {
         });
     }
 
-    private final String htmlContent_;
-
-    /**
-     * Creates an instance of the test class for testing <em>one</em> of the test methods.
-     *
-     * @param elementHtml the HTML representing the element to test with attribute <code>id='element1'</code>
-     */
-    public DisabledElementTest(final String elementHtml) {
-        final String htmlContent = "<html><body><form id='form1'>{0}</form></body></html>";
-        htmlContent_ = MessageFormat.format(htmlContent, new Object[]{elementHtml});
-    }
-
     /**
      * Tests that the <code>isDisabled()</code> method returns {@code false} when the <code>disabled</code>
      * attribute does not exist.
      *
      * @throws Exception if the test fails
      */
-    @Test
-    public void noDisabledAttribute() throws Exception {
-        executeDisabledTest("", false);
+    @ParameterizedTest
+    @MethodSource("data")
+    void noDisabledAttribute(final String elementHtml) throws Exception {
+        executeDisabledTest(elementHtml, "", false);
     }
 
     /**
@@ -92,9 +78,10 @@ public class DisabledElementTest extends SimpleWebTestCase {
      *
      * @throws Exception if the test fails
      */
-    @Test
-    public void blankDisabledAttribute() throws Exception {
-        executeDisabledTest("disabled=''", true);
+    @ParameterizedTest
+    @MethodSource("data")
+    void blankDisabledAttribute(final String elementHtml) throws Exception {
+        executeDisabledTest(elementHtml, "disabled=''", true);
     }
 
     /**
@@ -103,9 +90,10 @@ public class DisabledElementTest extends SimpleWebTestCase {
      *
      * @throws Exception if the test fails
      */
-    @Test
-    public void populatedDisabledAttribute() throws Exception {
-        executeDisabledTest("disabled='disabled'", true);
+    @ParameterizedTest
+    @MethodSource("data")
+    void populatedDisabledAttribute(final String elementHtml) throws Exception {
+        executeDisabledTest(elementHtml, "disabled='disabled'", true);
     }
 
     /**
@@ -115,14 +103,19 @@ public class DisabledElementTest extends SimpleWebTestCase {
      * @param expectedIsDisabled the expected return value of the <code>isDisabled()</code> method
      * @throws Exception if test fails
      */
-    private void executeDisabledTest(final String disabledAttribute, final boolean expectedIsDisabled)
-        throws Exception {
+    private void executeDisabledTest(final String elementHtml,
+            final String disabledAttribute, final boolean expectedIsDisabled)
+                    throws Exception {
 
-        final String htmlContent = MessageFormat.format(htmlContent_, new Object[]{disabledAttribute});
+        String htmlContent = DOCTYPE_HTML + "<html><body><form id='form1'>{0}</form></body></html>";
+        htmlContent = MessageFormat.format(htmlContent, elementHtml);
+
+
+        htmlContent = MessageFormat.format(htmlContent, disabledAttribute);
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(BrowserVersion.CHROME, htmlContent, collectedAlerts, URL_FIRST);
 
-        final DisabledElement element = (DisabledElement) page.getHtmlElementById("element1");
+        final DisabledElement element = page.getHtmlElementById("element1");
         assertEquals(expectedIsDisabled, element.isDisabled());
     }
 

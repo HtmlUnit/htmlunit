@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.dom.DOMException;
 
 /**
  * A JavaScript object for {@code SVGMatrix}.
@@ -222,8 +223,10 @@ public class SVGMatrix extends HtmlUnitScriptable {
         final double determinant = scaleX_ * scaleY_ - shearX_ * shearY_;
 
         if (Math.abs(determinant) < 1E-10) {
-            throw JavaScriptEngine.constructError("Error",
-                    "Failed to execute 'inverse' on 'SVGMatrix': The matrix is not invertible.");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "Failed to execute 'inverse' on 'SVGMatrix': The matrix is not invertible.",
+                    DOMException.INVALID_STATE_ERR);
         }
 
         final SVGMatrix result = new SVGMatrix(getWindow());
@@ -288,8 +291,10 @@ public class SVGMatrix extends HtmlUnitScriptable {
     @JsxFunction
     public SVGMatrix rotateFromVector(final double x, final double y) {
         if (x == 0 || y == 0) {
-            throw JavaScriptEngine.constructError("Error",
-                    "Failed to execute 'rotateFromVector' on 'SVGMatrix': Arguments cannot be zero.");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "Failed to execute 'rotateFromVector' on 'SVGMatrix': Arguments cannot be zero.",
+                    DOMException.INVALID_ACCESS_ERR);
         }
 
         final double theta = Math.atan2(y, x);

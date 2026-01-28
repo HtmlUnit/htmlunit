@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,18 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * Tests for {@link HtmlTableCell}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HtmlTableCellTest extends WebDriverTestCase {
 
     /**
@@ -38,7 +35,8 @@ public class HtmlTableCellTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLTableCellElement]", "[object HTMLTableCellElement]"})
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -58,8 +56,8 @@ public class HtmlTableCellTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlTableCell.class.isInstance(page.getHtmlElementById("myId1")));
-            assertTrue(HtmlTableCell.class.isInstance(page.getHtmlElementById("myId2")));
+            assertTrue(page.getHtmlElementById("myId1") instanceof HtmlTableCell);
+            assertTrue(page.getHtmlElementById("myId2") instanceof HtmlTableCell);
         }
     }
 }

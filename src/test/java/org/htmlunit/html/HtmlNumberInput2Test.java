@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,8 @@ package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlNumberInput}.
@@ -28,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author Anton Demydenko
  * @author Michael Lueck
  */
-@RunWith(BrowserRunner.class)
 public class HtmlNumberInput2Test extends SimpleWebTestCase {
 
     /**
@@ -38,8 +35,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts("123")
     public void asNormalizedText() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -56,8 +53,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typingAndClone() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -79,8 +76,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typingAndReset() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -105,8 +102,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typingAndSetValueAttribute() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -131,8 +128,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typingAndSetValue() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -157,7 +154,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void minValidation() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
@@ -196,7 +194,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void minValidationWithDecimalStepping() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
@@ -258,7 +257,9 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void maxValidation() throws Exception {
-        final String htmlContent = "<html>\n" + "<head></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
                 + "  <input type='number' id='first' max='10'>\n"
@@ -297,8 +298,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typeWhileSelected() throws Exception {
-        final String html =
-              "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<input type='number' id='myInput' value='123456789012345'><br>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
@@ -314,7 +315,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typeLeftArrow() throws Exception {
-        final String html = "<html><head></head><body><input type='number' id='t'/></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body><input type='number' id='t'/></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlNumberInput t = page.getHtmlElementById("t");
         t.type('2');
@@ -338,7 +339,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void typeDelKey() throws Exception {
-        final String html = "<html><head></head><body><input type='number' id='t'/></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body><input type='number' id='t'/></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlNumberInput t = page.getHtmlElementById("t");
         t.type('2');
@@ -362,7 +363,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"true", "true", "true", "", "1234567"})
     public void maxLengthValidation() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -390,7 +392,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"true", "true", "true", "", "12345"})
     public void minLengthValidation() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"

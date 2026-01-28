@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -27,8 +27,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -36,17 +38,21 @@ import java.util.function.Supplier;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
-import org.htmlunit.junit.RetryRule;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.rules.MethodRule;
-import org.junit.rules.TestName;
+import org.htmlunit.junit.BrowserVersionClassTemplateInvocationContextProvider;
+import org.htmlunit.junit.ErrorOutputChecker;
+import org.htmlunit.junit.SetExpectedAlertsBeforeTestExecutionCallback;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.ClassTemplate;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.github.romankh3.image.comparison.ImageComparison;
 import com.github.romankh3.image.comparison.ImageComparisonUtil;
@@ -56,7 +62,7 @@ import com.github.romankh3.image.comparison.model.ImageComparisonState;
 /**
  * Common superclass for HtmlUnit tests.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Chris Erskine
@@ -65,23 +71,22 @@ import com.github.romankh3.image.comparison.model.ImageComparisonState;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
+@ClassTemplate
+@ExtendWith({BrowserVersionClassTemplateInvocationContextProvider.class,
+             SetExpectedAlertsBeforeTestExecutionCallback.class,
+             ErrorOutputChecker.class})
+@TestMethodOrder(MethodOrderer.DisplayName.class)
 public abstract class WebTestCase {
+
+    /** The html5 doctype. */
+    public static final String DOCTYPE_HTML = "<!DOCTYPE html>\n";
 
     /**
      * Make the test method name available to the tests.
      */
-    @Rule
-    public TestName testMethodName_ = new TestName();
+    public TestInfo testInfo_;
 
-    /**
-     * Define retry.
-     */
-    @Rule
-    public final RetryRule retryRule_ = new RetryRule(4);
-
-
-
-    /** Logging support. */
+    // /** Logging support. */
     // private static final Log LOG = LogFactory.getLog(WebTestCase.class);
 
     /** save the environment */
@@ -114,7 +119,7 @@ public abstract class WebTestCase {
     public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
 
     /** The default time used to wait for the expected alerts. */
-    protected static final long DEFAULT_WAIT_TIME = 1000;
+    protected static final Duration DEFAULT_WAIT_TIME = Duration.ofSeconds(1);
 
     /** Constant for the URL which is used in the tests. */
     public static final URL URL_FIRST;
@@ -148,12 +153,6 @@ public abstract class WebTestCase {
     private String[] expectedAlerts_;
     private MockWebConnection mockWebConnection_;
 
-    /**
-     * JUnit 4 {@link Rule} controlling System.err.
-     */
-    @Rule
-    public final MethodRule errOutputChecker_ = new ErrorOutputChecker();
-
     static {
         try {
             URL_FIRST = new URL("http://localhost:" + PORT + "/");
@@ -175,12 +174,17 @@ public abstract class WebTestCase {
     protected WebTestCase() {
     }
 
+    @BeforeEach
+    void init(final TestInfo testInfo) {
+        testInfo_ = testInfo;
+    }
+
     /**
      * Assert that the specified object is null.
      * @param object the object to check
      */
     public static void assertNull(final Object object) {
-        Assert.assertNull("Expected null but found [" + object + "]", object);
+        Assertions.assertNull(object, "Expected null but found [" + object + "]");
     }
 
     /**
@@ -189,7 +193,7 @@ public abstract class WebTestCase {
      * @param object the object to check
      */
     public static void assertNull(final String message, final Object object) {
-        Assert.assertNull(message, object);
+        Assertions.assertNull(object, message);
     }
 
     /**
@@ -197,7 +201,7 @@ public abstract class WebTestCase {
      * @param object the object to check
      */
     public static void assertNotNull(final Object object) {
-        Assert.assertNotNull(object);
+        Assertions.assertNotNull(object);
     }
 
     /**
@@ -206,7 +210,7 @@ public abstract class WebTestCase {
      * @param object the object to check
      */
     public static void assertNotNull(final String message, final Object object) {
-        Assert.assertNotNull(message, object);
+        Assertions.assertNotNull(object, message);
     }
 
     /**
@@ -215,7 +219,7 @@ public abstract class WebTestCase {
      * @param actual the actual object
      */
     public static void assertSame(final Object expected, final Object actual) {
-        Assert.assertSame(expected, actual);
+        Assertions.assertSame(expected, actual);
     }
 
     /**
@@ -225,7 +229,7 @@ public abstract class WebTestCase {
      * @param actual the actual object
      */
     public static void assertSame(final String message, final Object expected, final Object actual) {
-        Assert.assertSame(message, expected, actual);
+        Assertions.assertSame(expected, actual, message);
     }
 
     /**
@@ -234,7 +238,7 @@ public abstract class WebTestCase {
      * @param actual the actual object
      */
     public static void assertNotSame(final Object expected, final Object actual) {
-        Assert.assertNotSame(expected, actual);
+        Assertions.assertNotSame(expected, actual);
     }
 
     /**
@@ -244,7 +248,7 @@ public abstract class WebTestCase {
      * @param actual the actual object
      */
     public static void assertNotSame(final String message, final Object expected, final Object actual) {
-        Assert.assertNotSame(message, expected, actual);
+        Assertions.assertNotSame(expected, actual, message);
     }
 
     /**
@@ -254,7 +258,7 @@ public abstract class WebTestCase {
      * @param actualUrl the URL to test
      */
     protected static void assertEquals(final URL expectedUrl, final URL actualUrl) {
-        Assert.assertEquals(expectedUrl.toExternalForm(), actualUrl.toExternalForm());
+        Assertions.assertEquals(expectedUrl.toExternalForm(), actualUrl.toExternalForm());
     }
 
     /**
@@ -263,7 +267,7 @@ public abstract class WebTestCase {
      * @param actual the object to test
      */
     protected static void assertEquals(final Object expected, final Object actual) {
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     /**
@@ -273,7 +277,7 @@ public abstract class WebTestCase {
      * @param actual the object to test
      */
     protected static void assertEquals(final String message, final Object expected, final Object actual) {
-        Assert.assertEquals(message, expected, actual);
+        Assertions.assertEquals(expected, actual, message);
     }
 
     /**
@@ -282,7 +286,7 @@ public abstract class WebTestCase {
      * @param actual the int to test
      */
     protected static void assertEquals(final int expected, final int actual) {
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     /**
@@ -291,7 +295,7 @@ public abstract class WebTestCase {
      * @param actual the boolean to test
      */
     protected void assertEquals(final boolean expected, final boolean actual) {
-        Assert.assertEquals(Boolean.valueOf(expected), Boolean.valueOf(actual));
+        Assertions.assertEquals(Boolean.valueOf(expected), Boolean.valueOf(actual));
     }
 
     /**
@@ -302,7 +306,7 @@ public abstract class WebTestCase {
      * @param actualUrl the URL to test
      */
     protected void assertEquals(final String message, final URL expectedUrl, final URL actualUrl) {
-        Assert.assertEquals(message, expectedUrl.toExternalForm(), actualUrl.toExternalForm());
+        Assertions.assertEquals(expectedUrl.toExternalForm(), actualUrl.toExternalForm(), message);
     }
 
     /**
@@ -311,7 +315,7 @@ public abstract class WebTestCase {
      * @param actualUrl the URL to test
      */
     protected void assertEquals(final String expectedUrl, final URL actualUrl) {
-        Assert.assertEquals(expectedUrl, actualUrl.toExternalForm());
+        Assertions.assertEquals(expectedUrl, actualUrl.toExternalForm());
     }
 
     /**
@@ -336,7 +340,7 @@ public abstract class WebTestCase {
      * @param actual the collection of strings to test
      */
     protected void assertEquals(final String message, final String[] expected, final List<String> actual) {
-        Assert.assertEquals(message, Arrays.asList(expected).toString(), actual.toString());
+        Assertions.assertEquals(Arrays.asList(expected).toString(), actual.toString(), message);
     }
 
     /**
@@ -346,7 +350,7 @@ public abstract class WebTestCase {
      * @param actualUrl the URL to test
      */
     protected void assertEquals(final String message, final String expectedUrl, final URL actualUrl) {
-        Assert.assertEquals(message, expectedUrl, actualUrl.toExternalForm());
+        Assertions.assertEquals(expectedUrl, actualUrl.toExternalForm(), message);
     }
 
     /**
@@ -354,7 +358,7 @@ public abstract class WebTestCase {
      * @param condition condition to test
      */
     protected void assertTrue(final boolean condition) {
-        Assert.assertTrue(condition);
+        Assertions.assertTrue(condition);
     }
 
     /**
@@ -363,7 +367,7 @@ public abstract class WebTestCase {
      * @param condition condition to test
      */
     protected void assertTrue(final String message, final boolean condition) {
-        Assert.assertTrue(message, condition);
+        Assertions.assertTrue(condition, message);
     }
 
     /**
@@ -371,7 +375,7 @@ public abstract class WebTestCase {
      * @param condition condition to test
      */
     protected void assertFalse(final boolean condition) {
-        Assert.assertFalse(condition);
+        Assertions.assertFalse(condition);
     }
 
     /**
@@ -380,7 +384,7 @@ public abstract class WebTestCase {
      * @param condition condition to test
      */
     protected void assertFalse(final String message, final boolean condition) {
-        Assert.assertFalse(message, condition);
+        Assertions.assertFalse(condition, message);
     }
 
     /**
@@ -395,7 +399,7 @@ public abstract class WebTestCase {
      * Returns the current {@link BrowserVersion}.
      * @return current {@link BrowserVersion}
      */
-    protected final BrowserVersion getBrowserVersion() {
+    public final BrowserVersion getBrowserVersion() {
         if (browserVersion_ == null) {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
         }
@@ -453,7 +457,7 @@ public abstract class WebTestCase {
      * Prepare the environment.
      * Rhino has localized error message... for instance for French
      */
-    @BeforeClass
+    @BeforeAll
     public static void beforeClass() {
         Locale.setDefault(Locale.US);
     }
@@ -461,7 +465,7 @@ public abstract class WebTestCase {
     /**
      * Restore the environment.
      */
-    @AfterClass
+    @AfterAll
     public static void afterClass() {
         Locale.setDefault(SAVE_LOCALE);
     }
@@ -484,8 +488,8 @@ public abstract class WebTestCase {
      * @throws Exception in case of failure
      */
     protected void verify(final Supplier<String> func, final String expected,
-            final long maxWaitTime) throws Exception {
-        final long maxWait = System.currentTimeMillis() + maxWaitTime;
+            final Duration maxWaitTime) throws Exception {
+        final long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
 
         String actual = null;
         while (System.currentTimeMillis() < maxWait) {
@@ -515,7 +519,7 @@ public abstract class WebTestCase {
     /**
      * Cleanup after a test.
      */
-    @After
+    @AfterEach
     public void releaseResources() {
         if (mockWebConnection_ != null) {
             mockWebConnection_.clear();
@@ -553,7 +557,7 @@ public abstract class WebTestCase {
 
     protected void compareImages(final String expected, final String current) throws IOException {
         final String currentBase64Image = current.split(",")[1];
-        final byte[] currentImageBytes = Base64.decodeBase64(currentBase64Image);
+        final byte[] currentImageBytes = Base64.getDecoder().decode(currentBase64Image);
 
         try (ByteArrayInputStream currentBis = new ByteArrayInputStream(currentImageBytes)) {
             final BufferedImage currentImage = ImageIO.read(currentBis);
@@ -565,7 +569,7 @@ public abstract class WebTestCase {
     protected void compareImages(final String expected,
             final String current, final BufferedImage currentImage) throws IOException {
         final String expectedBase64Image = expected.split(",")[1];
-        final byte[] expectedImageBytes = Base64.decodeBase64(expectedBase64Image);
+        final byte[] expectedImageBytes = Base64.getDecoder().decode(expectedBase64Image);
 
         try (ByteArrayInputStream expectedBis = new ByteArrayInputStream(expectedImageBytes)) {
             final BufferedImage expectedImage = ImageIO.read(expectedBis);
@@ -579,7 +583,7 @@ public abstract class WebTestCase {
             final ImageComparisonState imageComparisonState = imageComparisonResult.getImageComparisonState();
 
             if (ImageComparisonState.SIZE_MISMATCH == imageComparisonState) {
-                final String dir = "target/" + testMethodName_.getMethodName();
+                final String dir = "target/" + testInfo_.getDisplayName();
                 Files.createDirectories(Paths.get(dir));
 
                 final File expectedOut = new File(dir, "expected.png");
@@ -598,7 +602,7 @@ public abstract class WebTestCase {
                 fail(fail);
             }
             else if (ImageComparisonState.MISMATCH == imageComparisonState) {
-                final String dir = "target/" + testMethodName_.getMethodName();
+                final String dir = "target/" + testInfo_.getDisplayName();
                 Files.createDirectories(Paths.get(dir));
 
                 final File expectedOut = new File(dir, "expected.png");

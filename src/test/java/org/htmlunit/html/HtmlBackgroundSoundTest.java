@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -29,7 +27,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlBackgroundSoundTest extends WebDriverTestCase {
 
     /**
@@ -38,7 +35,8 @@ public class HtmlBackgroundSoundTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLUnknownElement]")
     public void simpleScriptable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ +  "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -51,7 +49,7 @@ public class HtmlBackgroundSoundTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver && getExpectedAlerts()[0].contains("Sound")) {
-            assertTrue(HtmlBackgroundSound.class.isInstance(toHtmlElement(driver.findElement(By.id("myId")))));
+            assertTrue(toHtmlElement(driver.findElement(By.id("myId"))) instanceof HtmlBackgroundSound);
         }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +20,9 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -35,7 +31,6 @@ import org.openqa.selenium.WebDriver;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class URLTest extends WebDriverTestCase {
 
     /**
@@ -44,8 +39,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts("function URL() { [native code] }")
     public void windowURL() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -67,10 +62,10 @@ public class URLTest extends WebDriverTestCase {
     @Alerts({"https://developer.mozilla.org/", "https://developer.mozilla.org/",
              "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
              "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
-             "http://www.example.com/", "type error", "type error" })
+             "http://www.example.com/"})
     public void ctor() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -85,12 +80,62 @@ public class URLTest extends WebDriverTestCase {
             + "        log(new URL('/en-US/docs', d));\n"
             + "        log(new URL('/en-US/docs', 'https://developer.mozilla.org/fr-FR/toto'));\n"
             + "        log(new URL('http://www.example.com', 'https://developers.mozilla.com'));\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"data:,foo", "data:,foo"})
+    public void ctorDataUrl() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (typeof window.URL === 'function') {\n"
+            + "        log(new URL('data:,foo'));\n"
+            + "        log(new URL('data:,foo', 'http://localhost:22222/test/index.html'));\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError"})
+    public void ctorInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (typeof window.URL === 'function') {\n"
             + "        try {\n"
             + "          new URL('/en-US/docs', '');\n"
-            + "        } catch(e) { log('type error'); }\n"
+            + "        } catch(e) { logEx(e); }\n"
             + "        try {\n"
             + "          new URL('/en-US/docs');\n"
-            + "        } catch(e) { log('type error'); }\n"
+            + "        } catch(e) { logEx(e); }\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -108,8 +153,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts("http://developer.mozilla.org")
     public void origin() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -133,8 +178,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts("http://developer.mozilla.org")
     public void originDefaultPort() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -158,8 +203,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts("http://developer.mozilla.org:1234")
     public void originPort() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -182,8 +227,7 @@ public class URLTest extends WebDriverTestCase {
      */
     @Test
     public void createObjectURL() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -218,7 +262,7 @@ public class URLTest extends WebDriverTestCase {
             driver.findElement(By.id("testBtn")).click();
 
             final String url = getCollectedAlerts(driver, 1).get(0);
-            Assert.assertTrue(url, url.startsWith("blob:"));
+            assertTrue(url, url.startsWith("blob:"));
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -231,8 +275,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "a=u&x="})
     public void searchParams() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -258,8 +302,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "a=u&x=", "x=22", "x=22"})
     public void searchParamsSyncedWithUrlChanges() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -285,11 +329,14 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"/", "/en-US/docs", "/en-US/docs"})
     public void getPathName() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -311,13 +358,16 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"/path", "/path",
              "http://developer.mozilla.org/new/path?a=u&x",
              "http://developer.mozilla.org/?a=u&x"})
     public void setPathName() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -343,6 +393,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"", "#abcd", "#bcd",
              "#hash", "http://developer.mozilla.org/?a=b#hash",
@@ -350,8 +403,8 @@ public class URLTest extends WebDriverTestCase {
              "#undefined", "http://developer.mozilla.org/#undefined",
              "#null", "http://developer.mozilla.org/#null"})
     public void hash() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -393,6 +446,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"developer.mozilla.org", "developer.mozilla.org",
              "new.host", "new.host:1234", "new.host:1234", "0.0.91.160:80",
@@ -400,8 +456,8 @@ public class URLTest extends WebDriverTestCase {
              "new.host", "new.host",
              "developer.mozilla.org", "developer.mozilla.org:4097", "developer.mozilla.org:80"})
     public void host() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -457,30 +513,33 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts(DEFAULT = {"developer.mozilla.org",
                        "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                       "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
-                       "newhost", "https://newhost/en-US/docs/Web/API/URL/host"},
+                       "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
+                       "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host"},
             CHROME =  {"developer.mozilla.org",
                        "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                       "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                       "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
                        "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host"},
             EDGE = {"developer.mozilla.org",
                     "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                    "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                    "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
                     "%20%20", "https://%20%20/en-US/docs/Web/API/URL/host"})
     @HtmlUnitNYI(CHROME =  {"developer.mozilla.org",
                             "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                            "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                            "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
                             "%20%20", "https:// /en-US/docs/Web/API/URL/host"},
                 EDGE = {"developer.mozilla.org",
                         "developer.mozilla.org", "https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
-                        "newhost", "https://newhost/en-US/docs/Web/API/URL/host",
+                        "htmlunit-dev.org", "https://htmlunit-dev.org/en-US/docs/Web/API/URL/host",
                         "%20%20", "https:// /en-US/docs/Web/API/URL/host"})
     public void hostname() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -493,7 +552,7 @@ public class URLTest extends WebDriverTestCase {
                         + "        log(u.hostname);\n"
                         + "        log(u.toString());\n"
 
-                        + "        u.hostname = 'newhost';\n"
+                        + "        u.hostname = 'htmlunit-dev.org';\n"
                         + "        log(u.hostname);\n"
                         + "        log(u.toString());\n"
 
@@ -510,12 +569,15 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"https://developer.mozilla.org/en-US/docs/Web/API/URL/host",
              "http://new.com/href", "http://new.com/hrefWithPort"})
     public void href() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -539,6 +601,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"flabada",
              "", "https://anonymous@developer.mozilla.org/",
@@ -547,8 +612,8 @@ public class URLTest extends WebDriverTestCase {
              "undefined", "https://anonymous:undefined@developer.mozilla.org/",
              "null", "https://anonymous:null@developer.mozilla.org/"})
     public void password() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -586,12 +651,15 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"80", "123", "", "https://mydomain.com/svn/Repos/",
              "", "http://mydomain.com/svn/Repos/"})
     public void port() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -618,30 +686,23 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
-    @Alerts(DEFAULT = {"https:",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "ex-unknown"},
-            FF_ESR = {"https:",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "null:", "null://mydomain.com/svn/Repos/",
-                      "ex-unknown"})
+    @Alerts({"https:",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "ex-unknown", "ReferenceError"})
     public void protocol() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -679,16 +740,16 @@ public class URLTest extends WebDriverTestCase {
                         + "        log(u.toString());\n"
 
                         + "        try {\n"
-                        + "        u.protocol = null;\n"
-                        + "        log(u.protocol);\n"
-                        + "        log(u.toString());\n"
-                        + "        } catch(e) { log('ex-null') }\n"
+                        + "          u.protocol = null;\n"
+                        + "          log(u.protocol);\n"
+                        + "          log(u.toString());\n"
+                        + "        } catch(e) { log('ex-null'); logEx(e); }\n"
 
                         + "        try {\n"
-                        + "        u.protocol = unknown;\n"
-                        + "        log(u.protocol);\n"
-                        + "        log(u.toString());\n"
-                        + "        } catch(e) { log('ex-unknown') }\n"
+                        + "          u.protocol = unknown;\n"
+                        + "          log(u.protocol);\n"
+                        + "          log(u.toString());\n"
+                        + "        } catch(e) { log('ex-unknown'); logEx(e); }\n"
                         + "      }\n"
                         + "    }\n"
                         + "  </script>\n"
@@ -699,28 +760,22 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
-    @Alerts(DEFAULT = {"https:",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "ex-unknown"},
-            FF_ESR = {"https:",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "null:", "null://mydomain.com/svn/Repos/",
-                      "ex-unknown"})
+    @Alerts({"https:",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "ex-unknown", "ReferenceError"})
     public void protocol2() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -754,16 +809,16 @@ public class URLTest extends WebDriverTestCase {
                         + "        log(u.toString());\n"
 
                         + "        try {\n"
-                        + "        u.protocol = null;\n"
-                        + "        log(u.protocol);\n"
-                        + "        log(u.toString());\n"
-                        + "        } catch(e) { log('ex-null') }\n"
+                        + "          u.protocol = null;\n"
+                        + "          log(u.protocol);\n"
+                        + "          log(u.toString());\n"
+                        + "        } catch(e) { log('ex-null'); logEx(e); }\n"
 
                         + "        try {\n"
-                        + "        u.protocol = unknown;\n"
-                        + "        log(u.protocol);\n"
-                        + "        log(u.toString());\n"
-                        + "        } catch(e) { log('ex-unknown') }\n"
+                        + "          u.protocol = unknown;\n"
+                        + "          log(u.protocol);\n"
+                        + "          log(u.toString());\n"
+                        + "        } catch(e) { log('ex-unknown'); logEx(e); }\n"
                         + "      }\n"
                         + "    }\n"
                         + "  </script>\n"
@@ -774,28 +829,22 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
-    @Alerts(DEFAULT = {"https:",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "http:", "http://mydomain.com/svn/Repos/",
-                       "ex-unknown"},
-            FF_ESR = {"https:",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "http:", "http://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
-                      "null:", "null://mydomain.com/svn/Repos/",
-                      "ex-unknown"})
+    @Alerts({"https:",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "http:", "http://mydomain.com/svn/Repos/",
+             "ex-unknown", "ReferenceError"})
     public void protocol3() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -829,16 +878,16 @@ public class URLTest extends WebDriverTestCase {
                         + "        log(u.toString());\n"
 
                         + "        try {\n"
-                        + "        u.protocol = null;\n"
-                        + "        log(u.protocol);\n"
-                        + "        log(u.toString());\n"
-                        + "        } catch(e) { log('ex-null') }\n"
+                        + "          u.protocol = null;\n"
+                        + "          log(u.protocol);\n"
+                        + "          log(u.toString());\n"
+                        + "        } catch(e) { log('ex-null'); logEx(e); }\n"
 
                         + "        try {\n"
-                        + "        u.protocol = unknown;\n"
-                        + "        log(u.protocol);\n"
-                        + "        log(u.toString());\n"
-                        + "        } catch(e) { log('ex-unknown') }\n"
+                        + "          u.protocol = unknown;\n"
+                        + "          log(u.protocol);\n"
+                        + "          log(u.toString());\n"
+                        + "        } catch(e) { log('ex-unknown'); logEx(e); }\n"
                         + "      }\n"
                         + "    }\n"
                         + "  </script>\n"
@@ -849,6 +898,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts(DEFAULT = {"https:",
                        "http:", "http://mydomain.com/svn/Repos/",
@@ -870,7 +922,7 @@ public class URLTest extends WebDriverTestCase {
                       "http:", "http://mydomain.com/svn/Repos/",
                       "https:", "https://mydomain.com/svn/Repos/",
                       "ftp:", "ftp://mydomain.com/svn/Repos/",
-                      "ftps:", "ftps://mydomain.com/svn/Repos/",
+                      "ftp:", "ftp://mydomain.com/svn/Repos/",
                       "ws:", "ws://mydomain.com/svn/Repos/",
                       "wss:", "wss://mydomain.com/svn/Repos/",
                       "file:", "file:///svn/Repos/"})
@@ -887,13 +939,13 @@ public class URLTest extends WebDriverTestCase {
                       "http:", "http://mydomain.com/svn/Repos/",
                       "https:", "https://mydomain.com/svn/Repos/",
                       "ftp:", "ftp://mydomain.com/svn/Repos/",
-                      "ftps:", "ftps://mydomain.com/svn/Repos/",
+                      "ftp:", "ftp://mydomain.com/svn/Repos/",
                       "ws:", "ws://mydomain.com/svn/Repos/",
                       "wss:", "wss://mydomain.com/svn/Repos/",
                       "file:", "file://mydomain.com/svn/Repos/"})
     public void specialScheme() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -939,6 +991,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"?q=123",
              "?a=b&c=d", "https://developer.mozilla.org/search?a=b&c=d",
@@ -951,8 +1006,8 @@ public class URLTest extends WebDriverTestCase {
              "?undefined", "https://developer.mozilla.org/search?undefined",
              "?null", "https://developer.mozilla.org/search?null"})
     public void search() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -1007,6 +1062,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"https://developer.mozilla.org/search?q%20a=1%202%203", "?q%20a=1%202%203"})
     @HtmlUnitNYI(CHROME = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
@@ -1014,8 +1072,8 @@ public class URLTest extends WebDriverTestCase {
                  FF = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
                  FF_ESR = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"})
     public void searchEncoding() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -1034,6 +1092,9 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"anonymous",
              "user", "https://user:flabada@developer.mozilla.org/",
@@ -1044,8 +1105,8 @@ public class URLTest extends WebDriverTestCase {
              "undefined", "https://undefined:pass@developer.mozilla.org/",
              "null", "https://null:pass@developer.mozilla.org/"})
     public void username() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "<head>\n"
                         + "  <script>\n"
                         + LOG_TITLE_FUNCTION
@@ -1110,7 +1171,8 @@ public class URLTest extends WebDriverTestCase {
              "https://developer.mozilla.org/",
              "https://developer.mozilla.org/"})
     public void testToString() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  if (typeof window.URL === 'function') {\n"
@@ -1129,10 +1191,14 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("https://developer.mozilla.org/")
-    public void testToJSON() throws Exception {
-        final String html = "<html><body>\n"
+    public void toJSON() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  if (typeof window.URL === 'function') {\n"
@@ -1151,8 +1217,8 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts({"https://htmlunit.org/", "https://htmlunit.org/", "true"})
     public void webkitURL() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

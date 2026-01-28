@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,7 +91,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
     /**
      * Specifies the alpha (transparency) value that is applied to shapes and images
-     * before they are drawn onto the canvas..
+     * before they are drawn onto the canvas.
      * @return the {@code globalAlpha} property
      */
     @JsxGetter
@@ -113,7 +113,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @return the {@code fillStyle} property
      */
     @JsxGetter
-    public Object getFillStyle() {
+    public HtmlUnitScriptable getFillStyle() {
         LOG.info("CanvasRenderingContext2D.getFillStyle() not yet implemented");
         return null;
     }
@@ -132,7 +132,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @return the {@code strokeStyle} property
      */
     @JsxGetter
-    public Object getStrokeStyle() {
+    public HtmlUnitScriptable getStrokeStyle() {
         LOG.info("CanvasRenderingContext2D.getStrokeStyle() not yet implemented");
         return null;
     }
@@ -244,11 +244,10 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     @JsxFunction
     public static void clip(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
-        if (!(thisObj instanceof CanvasRenderingContext2D)) {
+        if (!(thisObj instanceof CanvasRenderingContext2D canvas)) {
             throw JavaScriptEngine.reportRuntimeError(
                     "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");
         }
-        final CanvasRenderingContext2D canvas = (CanvasRenderingContext2D) thisObj;
 
         RenderingBackend.WindingRule windingRule = WindingRule.NON_ZERO;
         if (args.length == 1) {
@@ -298,14 +297,12 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     @JsxFunction
     public static ImageData createImageData(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
-        if (!(thisObj instanceof CanvasRenderingContext2D)) {
+        if (!(thisObj instanceof CanvasRenderingContext2D canvas)) {
             throw JavaScriptEngine.reportRuntimeError(
                     "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");
         }
-        final CanvasRenderingContext2D canvas = (CanvasRenderingContext2D) thisObj;
 
-        if (args.length > 0 && args[0] instanceof ImageData) {
-            final ImageData imageDataParameter = (ImageData) args[0];
+        if (args.length > 0 && args[0] instanceof ImageData imageDataParameter) {
             final ImageData imageData = new ImageData(null,
                     0, 0, imageDataParameter.getWidth(), imageDataParameter.getHeight());
             imageData.setParentScope(canvas.getParentScope());
@@ -393,8 +390,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     public void drawImage(final Object image, final int sx, final int sy, final Object sWidth, final Object sHeight,
             final Object dx, final Object dy, final Object dWidth, final Object dHeight) {
 
-        if (image instanceof HTMLImageElement) {
-            final HTMLImageElement imageElem = (HTMLImageElement) image;
+        if (image instanceof HTMLImageElement imageElem) {
             try {
                 final org.htmlunit.platform.image.ImageData imageData
                             = ((HtmlImage) imageElem.getDomNodeOrDie()).getImageData();
@@ -563,8 +559,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     @JsxFunction
     public TextMetrics measureText(final Object text) {
         if (text == null || JavaScriptEngine.isUndefined(text)) {
-            throw JavaScriptEngine.throwAsScriptRuntimeEx(
-                    new RuntimeException("Missing argument for CanvasRenderingContext2D.measureText()."));
+            throw JavaScriptEngine.typeError("Missing argument for CanvasRenderingContext2D.measureText().");
         }
 
         final String textValue = JavaScriptEngine.toString(text);
@@ -594,13 +589,13 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @param dx horizontal position (x coordinate) at which to place the image data in the destination canvas
      * @param dy vertical position (y coordinate) at which to place the image data in the destination canvas
      * @param dirtyX horizontal position (x coordinate) of the top-left corner
-     *  from which the image data will be extracted. Defaults to 0.
+     *        from which the image data will be extracted. Defaults to 0.
      * @param dirtyY vertical position (y coordinate) of the top-left corner
-     *  from which the image data will be extracted. Defaults to 0.
+     *        from which the image data will be extracted. Defaults to 0.
      * @param dirtyWidth width of the rectangle to be painted.
-     *  Defaults to the width of the image data.
+     *        Defaults to the width of the image data.
      * @param dirtyHeight height of the rectangle to be painted.
-     *  Defaults to the height of the image data.
+     *        Defaults to the height of the image data.
      */
     @JsxFunction
     public void putImageData(final ImageData imageData,

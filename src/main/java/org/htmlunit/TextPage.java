@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import java.nio.file.Path;
  * A generic page that will be returned for any text related content.
  * Specifically any content types that start with {@code text/}
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Ronald Brill
  * @author Ahmed Ashour
@@ -60,6 +60,6 @@ public class TextPage extends AbstractPage {
         final Path savePath = file.toPath();
         final String text = getContent();
         final Charset charset = getWebResponse().getContentCharset();
-        Files.write(savePath, text.getBytes(charset));
+        Files.writeString(savePath, text, charset);
     }
 }

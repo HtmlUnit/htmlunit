@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package org.htmlunit.html;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -27,12 +28,10 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebResponse;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,7 +44,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlLink2Test extends WebDriverTestCase {
 
     /**
@@ -54,7 +52,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLLinkElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<link id='myId' href='file1.css'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -68,7 +67,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlLink.class.isInstance(page.getHtmlElementById("myId")));
+            assertTrue(page.getHtmlElementById("myId") instanceof HtmlLink);
         }
     }
 
@@ -79,8 +78,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <link id='tester' href='file1.css'>\n"
             + "</head>\n"
@@ -102,8 +101,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
      */
     @Test
     public void isDisplayed() throws Exception {
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <link id='l' href='file1.css'>\n"
                 + "</head>\n"
@@ -120,9 +119,9 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onLoad", "body onLoad"})
+    @Alerts({"2", "onLoad", "body onLoad"})
     public void onLoad() throws Exception {
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
         onLoadOnError("rel='stylesheet' href='simple.css'");
     }
 
@@ -130,9 +129,9 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onLoad", "body onLoad"})
+    @Alerts({"2", "onLoad", "body onLoad"})
     public void onLoadRelCase() throws Exception {
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
         onLoadOnError("rel='sTYLeSheet' href='simple.css'");
     }
 
@@ -140,9 +139,9 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onLoad", "body onLoad"})
+    @Alerts({"2", "onLoad", "body onLoad"})
     public void onLoadMediaScreen() throws Exception {
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
         onLoadOnError("rel='stylesheet' href='simple.css' media='screen'");
     }
 
@@ -150,9 +149,9 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onLoad", "body onLoad"})
+    @Alerts({"2", "onLoad", "body onLoad"})
     public void onLoadMediaPrint() throws Exception {
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
         onLoadOnError("rel='stylesheet' href='simple.css' media='print'");
     }
 
@@ -160,9 +159,9 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onLoad", "body onLoad"})
+    @Alerts({"2", "onLoad", "body onLoad"})
     public void onLoadMediaQueryMatch() throws Exception {
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
         onLoadOnError("rel='stylesheet' href='simple.css' media='(min-width: 100px)'");
     }
 
@@ -170,9 +169,9 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onLoad", "body onLoad"})
+    @Alerts({"2", "onLoad", "body onLoad"})
     public void onLoadMediaQueryNotMatch() throws Exception {
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
         onLoadOnError("rel='stylesheet' href='simple.css' media='(max-width: 10px)'");
     }
 
@@ -180,9 +179,9 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onLoad", "body onLoad"})
+    @Alerts({"2", "onLoad", "body onLoad"})
     public void onLoadRelWhitespace() throws Exception {
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
         onLoadOnError("rel='\t stylesheet     ' href='simple.css'");
     }
 
@@ -190,7 +189,114 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onError", "body onLoad"})
+    @Alerts({"2", "onLoad", "body onLoad"})
+    public void onLoadTypeCss() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
+        onLoadOnError("rel='stylesheet' href='simple.css' type='" + MimeType.TEXT_CSS + "'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "body onLoad"},
+            FF = {"2", "body onLoad"},
+            FF_ESR = {"2", "body onLoad"})
+    public void onLoadTypePlain() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
+        onLoadOnError("rel='stylesheet' href='simple.css' type='" + MimeType.TEXT_PLAIN + "'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "body onLoad"},
+            FF = {"2", "body onLoad"},
+            FF_ESR = {"2", "body onLoad"})
+    public void onLoadTypeHtml() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
+        onLoadOnError("rel='stylesheet' href='simple.css' type='" + MimeType.TEXT_HTML + "'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "body onLoad"},
+            FF = {"2", "body onLoad"},
+            FF_ESR = {"2", "body onLoad"})
+    public void onLoadTypeJs() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
+        onLoadOnError("rel='stylesheet' href='simple.css' type='" + MimeType.TEXT_JAVASCRIPT + "'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "body onLoad"},
+            FF = {"2", "body onLoad"},
+            FF_ESR = {"2", "body onLoad"})
+    public void onLoadTypeGif() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_CSS);
+        onLoadOnError("rel='stylesheet' href='simple.css' type='" + MimeType.IMAGE_GIF + "'");
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "onLoad", "body onLoad"},
+            FF = {"2", "onError", "body onLoad"},
+            FF_ESR = {"2", "onError", "body onLoad"})
+    public void onLoadResponseTypePlain() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_PLAIN);
+        onLoadOnError("rel='stylesheet' href='simple.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "onLoad", "body onLoad"},
+            FF = {"2", "onError", "body onLoad"},
+            FF_ESR = {"2", "onError", "body onLoad"})
+    public void onLoadResponseTypeHtml() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_HTML);
+        onLoadOnError("rel='stylesheet' href='simple.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "onLoad", "body onLoad"},
+            FF = {"2", "onError", "body onLoad"},
+            FF_ESR = {"2", "onError", "body onLoad"})
+    public void onLoadResponseTypeJs() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.TEXT_JAVASCRIPT);
+        onLoadOnError("rel='stylesheet' href='simple.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "onLoad", "body onLoad"},
+            FF = {"2", "onError", "body onLoad"},
+            FF_ESR = {"2", "onError", "body onLoad"})
+    public void onLoadResponseTypeGif() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "", MimeType.IMAGE_GIF);
+        onLoadOnError("rel='stylesheet' href='simple.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "onError", "body onLoad"})
     public void onError() throws Exception {
         onLoadOnError("rel='stylesheet' href='unknown.css'");
     }
@@ -199,14 +305,14 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("body onLoad")
+    @Alerts({"1", "body onLoad"})
     public void onLoadOnErrorWithoutRel() throws Exception {
         onLoadOnError("href='unknown.css'");
     }
 
     private void onLoadOnError(final String attribs) throws Exception {
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -219,21 +325,29 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "</html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
+        final int requests = getMockWebConnection().getRequestCount();
+        final String[] expected = getExpectedAlerts();
+        setExpectedAlerts(Arrays.copyOfRange(expected, 1, expected.length));
         loadPageVerifyTitle2(html);
+
+        final int count = Integer.parseInt(expected[0]);
+        assertEquals(count, getMockWebConnection().getRequestCount() - requests);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onLoad1", "onLoadJs1", "onLoad2", "body onLoad"})
+    @Alerts(DEFAULT = {"4", "onLoad1", "onLoadJs1", "onLoad2", "body onLoad"},
+            FF = {"4", "onLoadJs1", "onLoad2", "body onLoad"},
+            FF_ESR = {"4", "onLoadJs1", "onLoad2", "body onLoad"})
     public void onLoadOrder() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.css"), "");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple2.css"), "");
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.js"), "var x=1;");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple2.css"), "", MimeType.TEXT_CSS);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.js"), "var x=1;", MimeType.TEXT_JAVASCRIPT);
 
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -246,18 +360,26 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
+        final int requests = getMockWebConnection().getRequestCount();
+        final String[] expected = getExpectedAlerts();
+        setExpectedAlerts(Arrays.copyOfRange(expected, 1, expected.length));
         loadPageVerifyTitle2(html);
+
+        final int count = Integer.parseInt(expected[0]);
+        assertEquals(count, getMockWebConnection().getRequestCount() - requests);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("onLoad [object Event]")
+    @Alerts(DEFAULT = "onLoad [object Event]",
+            FF = "onError [object Event]",
+            FF_ESR = "onError [object Event]")
     public void onLoadDynamic() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -287,8 +409,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Alerts("onError [object Event]")
     public void onLoadDynamicUnknown() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -319,8 +441,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§sample?string=a&int=1", "/sample?string=a&int=1"})
     public void testEntityRefWithoutSemicolon() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <a id='target' href='/sample?string=a&int=1'>/sample?string=a&int=1</a>\n"
@@ -342,8 +464,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§sample?string=a&iexcl=1", "/sample?string=a\u00A1=1"})
     public void testEntityRefWithoutSemicolonReplaceInAttrib() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <a id='target' href='/sample?string=a&iexcl=1'>/sample?string=a&iexcl=1</a>\n"
@@ -385,7 +507,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"),
                 bigContent,  200, "OK", MimeType.TEXT_CSS, headers);
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<link id='myId' href='simple.css'></link>\n"
             + "</head><body>\n"
             + "</body></html>";
@@ -418,7 +541,8 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void polymerImportCheck() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -438,19 +562,20 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§index.html?test")
     public void getResponse_referer() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<link rel='stylesheet' href='" + URL_SECOND + "'></link>\n"
             + "</head><body>\n"
             + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
 
-        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+        final URL indexUrl = new URL(URL_FIRST + "index.html");
 
         getMockWebConnection().setResponse(indexUrl, html);
         getMockWebConnection().setResponse(URL_SECOND, "");
 
-        loadPage2(html, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        loadPage2(html, new URL(URL_FIRST + "index.html?test#ref"));
 
         assertEquals(2, getMockWebConnection().getRequestCount());
 

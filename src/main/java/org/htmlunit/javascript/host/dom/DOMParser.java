@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,12 +69,12 @@ public class DOMParser extends HtmlUnitScriptable {
         try {
             final Document document = parseFromString(this, str, type);
             if (document == null) {
-                throw JavaScriptEngine.reportRuntimeError("Invalid 'type' parameter: " + type);
+                throw JavaScriptEngine.typeError("Invalid 'type' parameter: " + type);
             }
             return document;
         }
         catch (final IOException e) {
-            throw JavaScriptEngine.reportRuntimeError("Parsing failed" + e.getMessage());
+            throw JavaScriptEngine.syntaxError("Parsing failed" + e.getMessage());
         }
     }
 
@@ -93,7 +93,7 @@ public class DOMParser extends HtmlUnitScriptable {
     public static Document parseFromString(final HtmlUnitScriptable scriptable, final String str, final Object type)
                 throws IOException {
         if (type == null || JavaScriptEngine.isUndefined(type)) {
-            throw JavaScriptEngine.reportRuntimeError("Missing 'type' parameter");
+            throw JavaScriptEngine.typeError("Missing 'type' parameter");
         }
 
         if (MimeType.TEXT_XML.equals(type)
@@ -145,7 +145,7 @@ public class DOMParser extends HtmlUnitScriptable {
 
         final WebClient webClient = webWindow.getWebClient();
         final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-        htmlParser.parse(webResponse, page, false, true);
+        htmlParser.parse(webClient, webResponse, page, false, true);
         return page.getScriptableObject();
     }
 }

@@ -47,9 +47,6 @@ MozTransitionDelay
 MozTransitionDuration
 MozTransitionProperty
 MozTransitionTimingFunction
-MozUserFocus
-MozUserInput
-MozUserModify
 MozUserSelect
 MozWindowDragging
 WebkitAlignContent
@@ -92,6 +89,7 @@ WebkitFlexFlow
 WebkitFlexGrow
 WebkitFlexShrink
 WebkitFlexWrap
+WebkitFontFeatureSettings
 WebkitJustifyContent
 WebkitLineClamp
 WebkitMask
@@ -256,6 +254,7 @@ container-name
 containerName
 containerType
 content
+contentVisibility
 counterIncrement
 counterReset
 counterSet
@@ -295,6 +294,7 @@ fontSizeAdjust
 fontStretch
 fontStyle
 fontSynthesis
+fontSynthesisPosition
 fontSynthesisSmallCaps
 fontSynthesisStyle
 fontSynthesisWeight
@@ -329,6 +329,7 @@ gridTemplateColumns
 gridTemplateRows
 height
 hyphenateCharacter
+hyphenateLimitChars
 hyphens
 imageOrientation
 imageRendering
@@ -382,6 +383,8 @@ maskPositionY
 maskRepeat
 maskSize
 maskType
+mathDepth
+mathStyle
 maxBlockSize
 maxHeight
 maxInlineSize
@@ -397,6 +400,7 @@ offset
 offsetAnchor
 offsetDistance
 offsetPath
+offsetPosition
 offsetRotate
 opacity
 order
@@ -521,6 +525,9 @@ textShadow
 textTransform
 textUnderlineOffset
 textUnderlinePosition
+textWrap
+textWrapMode
+textWrapStyle
 top
 touchAction
 transform
@@ -528,6 +535,7 @@ transformBox
 transformOrigin
 transformStyle
 transition
+transitionBehavior
 transitionDelay
 transitionDuration
 transitionProperty
@@ -578,6 +586,7 @@ webkitFlexFlow
 webkitFlexGrow
 webkitFlexShrink
 webkitFlexWrap
+webkitFontFeatureSettings
 webkitJustifyContent
 webkitLineClamp
 webkitMask
@@ -609,6 +618,7 @@ webkitTransitionProperty
 webkitTransitionTimingFunction
 webkitUserSelect
 whiteSpace
+whiteSpaceCollapse
 width
 willChange
 wordBreak
@@ -618,3 +628,4 @@ writingMode
 x
 y
 zIndex
+zoom

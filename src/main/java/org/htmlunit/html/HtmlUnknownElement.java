@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_RP_DISPLAY_NONE;
 import static org.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
-import static org.htmlunit.BrowserVersionFeatures.MULTICOL_BLOCK;
 
 import java.util.Map;
 
@@ -25,9 +24,9 @@ import org.htmlunit.SgmlPage;
 /**
  * An element that is returned for an HTML tag that is not supported by this framework.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  * @author Ronald Brill
@@ -101,11 +100,6 @@ public class HtmlUnknownElement extends HtmlElement {
                     return DisplayStyle.BLOCK;
                 }
                 return DisplayStyle.RUBY_TEXT_CONTAINER;
-            case HtmlMultiColumn.TAG_NAME:
-                if (hasFeature(MULTICOL_BLOCK)) {
-                    return DisplayStyle.BLOCK;
-                }
-                break;
             case HtmlDialog.TAG_NAME:
                 return DisplayStyle.NONE;
             case HtmlSlot.TAG_NAME:

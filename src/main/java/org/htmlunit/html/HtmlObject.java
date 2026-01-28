@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,21 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR;
-
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.javascript.host.html.HTMLObjectElement;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
 
 /**
  * Wrapper for the HTML element "object".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
@@ -62,7 +60,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code declare}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getDeclareAttribute() {
         return getAttributeDirect("declare");
@@ -74,7 +72,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code classid}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getClassIdAttribute() {
         return getAttributeDirect("classid");
@@ -86,7 +84,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute "codebase"
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCodebaseAttribute() {
         return getAttributeDirect("codebase");
@@ -98,7 +96,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code data}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getDataAttribute() {
         return getAttributeDirect("data");
@@ -110,7 +108,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code type}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
         return getAttributeDirect(TYPE_ATTRIBUTE);
@@ -122,7 +120,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute "codetype"
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCodeTypeAttribute() {
         return getAttributeDirect("codetype");
@@ -134,7 +132,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code archive}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getArchiveAttribute() {
         return getAttributeDirect("archive");
@@ -146,7 +144,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code standby}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getStandbyAttribute() {
         return getAttributeDirect("standby");
@@ -158,7 +156,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code height}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getHeightAttribute() {
         return getAttributeDirect("height");
@@ -170,7 +168,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code width}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
         return getAttributeDirect("width");
@@ -182,7 +180,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code usemap}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getUseMapAttribute() {
         return getAttributeDirect("usemap");
@@ -194,7 +192,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
         return getAttributeDirect(NAME_ATTRIBUTE);
@@ -206,7 +204,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code tabindex}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getTabIndexAttribute() {
         return getAttributeDirect("tabindex");
@@ -218,7 +216,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
         return getAttributeDirect("align");
@@ -230,7 +228,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code border}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getBorderAttribute() {
         return getAttributeDirect("border");
@@ -242,7 +240,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code hspace}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getHspaceAttribute() {
         return getAttributeDirect("hspace");
@@ -254,7 +252,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code vspace}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getVspaceAttribute() {
         return getAttributeDirect("vspace");
@@ -314,11 +312,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     @Override
     public boolean isCustomErrorValidityState() {
-        if (hasFeature(JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR)) {
-            return false;
-        }
-
-        return !StringUtils.isEmpty(customValidity_);
+        return !StringUtils.isEmptyOrNull(customValidity_);
     }
 
     @Override

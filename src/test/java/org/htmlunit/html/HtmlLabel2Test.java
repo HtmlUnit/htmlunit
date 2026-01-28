@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlLabel}.
@@ -30,7 +28,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HtmlLabel2Test extends SimpleWebTestCase {
 
     /**
@@ -39,8 +36,8 @@ public class HtmlLabel2Test extends SimpleWebTestCase {
      */
     @Test
     public void test_click() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='checkbox' name='checkbox' id='testCheckbox' onclick='alert(\"checkbox\")'/>\n"
             + "  <label for='testCheckbox' id='testLabel' onclick='alert(\"label\")'>Check me</label>\n"
@@ -64,7 +61,8 @@ public class HtmlLabel2Test extends SimpleWebTestCase {
      */
     @Test
     public void triggerRadio() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <ul>\n"
             + "  <li>\n"
@@ -88,7 +86,8 @@ public class HtmlLabel2Test extends SimpleWebTestCase {
      */
     @Test
     public void triggerRadioComplexCase() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <ul>\n"
             + "  <li>\n"
@@ -116,7 +115,8 @@ public class HtmlLabel2Test extends SimpleWebTestCase {
      */
     @Test
     public void triggerCheckbox() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <ul>\n"
             + "  <li>\n"
@@ -140,7 +140,8 @@ public class HtmlLabel2Test extends SimpleWebTestCase {
      */
     @Test
     public void triggerCheckboxComplexCase() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <ul>\n"
             + "  <li>\n"

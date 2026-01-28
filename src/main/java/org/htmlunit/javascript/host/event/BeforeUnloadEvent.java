@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,8 +40,7 @@ public class BeforeUnloadEvent extends Event {
      * Creates a new event instance.
      */
     public BeforeUnloadEvent() {
-        super();
-        setType("");
+        super("");
         returnValue_ = "";
     }
 
@@ -50,7 +49,7 @@ public class BeforeUnloadEvent extends Event {
      */
     @JsxConstructor
     public void jsConstructor() {
-        throw JavaScriptEngine.throwAsScriptRuntimeEx(new IllegalArgumentException("Illegal Constructor"));
+        throw JavaScriptEngine.typeError("Illegal Constructor");
     }
 
     /**

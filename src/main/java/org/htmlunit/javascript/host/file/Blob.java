@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,14 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.charset.Charset;
 import java.util.Locale;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebRequest;
 import org.htmlunit.corejs.javascript.NativeArray;
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
@@ -37,6 +38,9 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.ReadableStream;
+import org.htmlunit.util.KeyDataPair;
+import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for {@code Blob}.
@@ -81,10 +85,13 @@ public class Blob extends HtmlUnitScriptable {
 
         /**
          * @return the text
+         * @throws IOException in case of error
          */
         abstract String getText() throws IOException;
 
         /**
+         * @param start the start position
+         * @param end the end position
          * @return the bytes
          */
         abstract byte[] getBytes(int start, int end);
@@ -96,8 +103,15 @@ public class Blob extends HtmlUnitScriptable {
             // to make it package protected
         }
 
-        // TODO
-        abstract java.io.File getFile();
+        /**
+         * Returns the KeyDataPair for this Blob/File.
+         *
+         * @param name the name
+         * @param fileName the file name
+         * @param contentType the content type
+         * @return the KeyDataPair to hold the data
+         */
+        abstract KeyDataPair getKeyDataPair(String name, String fileName, String contentType);
     }
 
     /**
@@ -143,18 +157,18 @@ public class Blob extends HtmlUnitScriptable {
             }
 
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
-            for (long i = 0; i < fileBits.getLength(); i++) {
+            final long length = fileBits.getLength();
+            for (long i = 0; i < length; i++) {
                 final Object fileBit = fileBits.get(i);
-                if (fileBit instanceof NativeArrayBuffer) {
-                    final byte[] bytes = ((NativeArrayBuffer) fileBit).getBuffer();
+                if (fileBit instanceof NativeArrayBuffer buffer) {
+                    final byte[] bytes = buffer.getBuffer();
                     out.write(bytes, 0, bytes.length);
                 }
-                else if (fileBit instanceof NativeArrayBufferView) {
-                    final byte[] bytes = ((NativeArrayBufferView) fileBit).getBuffer().getBuffer();
+                else if (fileBit instanceof NativeArrayBufferView view) {
+                    final byte[] bytes = view.getBuffer().getBuffer();
                     out.write(bytes, 0, bytes.length);
                 }
-                else if (fileBit instanceof Blob) {
-                    final Blob blob = (Blob) fileBit;
+                else if (fileBit instanceof Blob blob) {
                     final byte[] bytes = blob.getBackend().getBytes(0, (int) blob.getSize());
                     out.write(bytes, 0, bytes.length);
                 }
@@ -212,19 +226,24 @@ public class Blob extends HtmlUnitScriptable {
          * {@inheritDoc}
          */
         @Override
-        public java.io.File getFile() {
-            throw new UnsupportedOperationException(
-                    "org.htmlunit.javascript.host.file.File.InMemoryBackend.getFile()");
+        public byte[] getBytes(final int start, final int end) {
+            final byte[] result = new byte[end - start];
+            System.arraycopy(bytes_, start, result, 0, result.length);
+            return result;
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public byte[] getBytes(final int start, final int end) {
-            final byte[] result = new byte[end - start];
-            System.arraycopy(bytes_, start, result, 0, result.length);
-            return result;
+        public KeyDataPair getKeyDataPair(final String name, final String fileName, final String contentType) {
+            String fname = fileName;
+            if (fname == null) {
+                fname = getName();
+            }
+            final KeyDataPair data = new KeyDataPair(name, null, fname, contentType, (Charset) null);
+            data.setData(bytes_);
+            return data;
         }
     }
 
@@ -248,7 +267,7 @@ public class Blob extends HtmlUnitScriptable {
         }
 
         final Object optionsType = properties.get(OPTIONS_LASTMODIFIED, properties);
-        if (optionsType != null && properties != Scriptable.NOT_FOUND
+        if (optionsType != null && optionsType != Scriptable.NOT_FOUND
                 && !JavaScriptEngine.isUndefined(optionsType)) {
             try {
                 return Long.parseLong(JavaScriptEngine.toString(optionsType));
@@ -280,9 +299,9 @@ public class Blob extends HtmlUnitScriptable {
             nativeBits = null;
         }
 
-        setBackend(InMemoryBackend.create(nativeBits, null,
+        backend_ = InMemoryBackend.create(nativeBits, null,
                             extractFileTypeOrDefault(properties),
-                            extractLastModifiedOrDefault(properties)));
+                            extractLastModifiedOrDefault(properties));
     }
 
     /**
@@ -316,10 +335,10 @@ public class Blob extends HtmlUnitScriptable {
 
     /**
      * @return a Promise that resolves with an ArrayBuffer containing the
-     * data in binary form.
+     *         data in binary form.
      */
     @JsxFunction
-    public Object arrayBuffer() {
+    public NativePromise arrayBuffer() {
         return setupPromise(() -> {
             final byte[] bytes = getBytes();
             final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
@@ -330,6 +349,19 @@ public class Blob extends HtmlUnitScriptable {
         });
     }
 
+    /**
+     * @param start An index into the Blob indicating the first byte to include in the new Blob. If you specify
+     *        a negative value, it's treated as an offset from the end of the Blob toward the beginning.
+     *        For example, -10 would be the 10th from last byte in the Blob. The default value is 0.
+     *        If you specify a value for start that is larger than the size of the source Blob,
+     *        the returned Blob has size 0 and contains no data.
+     * @param end An index into the Blob indicating the first byte that will not be included in the
+     *        new Blob (i.e. the byte exactly at this index is not included). If you specify a negative value,
+     *        it's treated as an offset from the end of the Blob toward the beginning.
+     *        For example, -10 would be the 10th from last byte in the Blob. The default value is size.
+     * @param contentType The content type to assign to the new Blob; this will be the value of its type property. The default value is an empty string.
+     * @return a new Blob object which contains data from a subset of the blob on which it's called.
+     */
     @JsxFunction
     public Blob slice(final Object start, final Object end, final Object contentType) {
         final Blob blob = new Blob();
@@ -369,6 +401,9 @@ public class Blob extends HtmlUnitScriptable {
         return blob;
     }
 
+    /**
+     * @return a ReadableStream which, upon reading, returns the contents of the Blob.
+     */
     @JsxFunction
     public ReadableStream stream() {
         throw new UnsupportedOperationException("Blob.stream() is not yet implemented.");
@@ -376,13 +411,16 @@ public class Blob extends HtmlUnitScriptable {
 
     /**
      * @return a Promise that resolves with a string containing the
-     * contents of the blob, interpreted as UTF-8.
+     *         contents of the blob, interpreted as UTF-8.
      */
     @JsxFunction
-    public Object text() {
+    public NativePromise text() {
         return setupPromise(() -> getBackend().getText());
     }
 
+    /**
+     * @return the bytes of this blob
+     */
     public byte[] getBytes() {
         return getBackend().getBytes(0, (int) getBackend().getSize());
     }
@@ -402,6 +440,21 @@ public class Blob extends HtmlUnitScriptable {
             }
             webRequest.setEncodingType(null);
         }
+    }
+
+    /**
+     * Delegates the KeyDataPair construction to the backend.
+     * @param name the name
+     * @param fileName the filename
+     * @return the constructed {@link KeyDataPair}
+     */
+    public KeyDataPair getKeyDataPair(final String name, final String fileName) {
+        String contentType = getType();
+        if (StringUtils.isEmptyOrNull(contentType)) {
+            contentType = MimeType.APPLICATION_OCTET_STREAM;
+        }
+
+        return backend_.getKeyDataPair(name, fileName, contentType);
     }
 
     protected Backend getBackend() {

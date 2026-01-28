@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,8 @@ package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlMenu;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +30,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HTMLMenuElementTest extends WebDriverTestCase {
 
     /**
@@ -41,7 +38,8 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLMenuElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -66,8 +64,8 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
     @Alerts({"false", "true", "true", "true", "null", "", "blah", "2",
              "true", "false", "true", "false", "", "null", "", "null"})
     public void compact() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -115,8 +113,8 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
              "null", "", "blah", "context", "ToolBar", "list",
              "context", "toolbar", "ConText", "", "unknown"})
     public void type() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -132,22 +130,22 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 + "        log(document.getElementById('menu4').getAttribute('type'));\n"
                 + "        log(document.getElementById('menu5').getAttribute('type'));\n"
 
-                + "        try { document.getElementById('menu1').type = 'list' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = 'list' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'context' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = 'context' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'toolbar' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = 'toolbar' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'ConText' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = 'ConText' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = '' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = '' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'unknown' } catch(e) {log('ex');}\n"
+                + "        try { document.getElementById('menu1').type = 'unknown' } catch(e) { logEx(e); }\n"
                 + "        log(document.getElementById('menu1').type);\n"
                 + "      }\n"
                 + "    </script>\n"
@@ -170,8 +168,8 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "new", ""})
     public void label() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
                 + LOG_TITLE_FUNCTION

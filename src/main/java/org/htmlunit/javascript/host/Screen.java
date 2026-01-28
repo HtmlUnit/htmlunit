@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
 /**
  * A JavaScript object for {@code Screen}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Ronald Brill
@@ -38,7 +38,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * @author cd alexndr
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535868.aspx">
- * MSDN documentation</a>
+ *     MSDN documentation</a>
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>
  */
 @JsxClass
@@ -187,7 +187,7 @@ public class Screen extends EventTarget {
      * @return the {@code orientation} property
      */
     @JsxGetter({CHROME, EDGE})
-    public boolean getIsExtended() {
+    public boolean isIsExtended() {
         return false;
     }
 

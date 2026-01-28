@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -30,7 +28,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlMetaTest extends WebDriverTestCase {
 
     /**
@@ -39,7 +36,8 @@ public class HtmlMetaTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLMetaElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<meta id='m' http-equiv='content-type' content='text/html'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -53,7 +51,7 @@ public class HtmlMetaTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlMeta.class.isInstance(page.getHtmlElementById("m")));
+            assertTrue(page.getHtmlElementById("m") instanceof HtmlMeta);
         }
     }
 
@@ -62,7 +60,8 @@ public class HtmlMetaTest extends WebDriverTestCase {
      */
     @Test
     public void getText() throws Exception {
-        final String html = "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
         final String text = driver.findElement(By.id("m")).getText();
@@ -74,7 +73,8 @@ public class HtmlMetaTest extends WebDriverTestCase {
      */
     @Test
     public void isDisplayed() throws Exception {
-        final String html = "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
         final boolean displayed = driver.findElement(By.id("m")).isDisplayed();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,13 @@
  */
 package org.htmlunit.javascript;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -49,21 +50,19 @@ import org.htmlunit.html.HtmlFrame;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlScript;
 import org.htmlunit.html.HtmlTextInput;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.Retry;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link JavaScriptEngine}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Noboru Sinohara
  * @author Darrell DeBoer
- * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Ben Curren
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author David K. Taylor
@@ -71,7 +70,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Carsten Steul
  */
-@RunWith(BrowserRunner.class)
 public class JavaScriptEngineTest extends SimpleWebTestCase {
 
     /**
@@ -79,8 +77,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void setJavascriptEnabled_false() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "  document.form1.textfield1 = 'blue'"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
@@ -105,8 +103,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void setInputValue() throws Exception {
-        final String content
-            = "<html><head><title>foo</title><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  document.form1.textfield1.value = 'blue'"
             + "}\n"
@@ -131,8 +129,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void scopeOfNewFunctionCalledFormOtherWindow() throws Exception {
-        final String firstContent
-            = "<html><head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "var foo = 'foo';\n"
             + "var test = new Function('alert(foo);');\n"
@@ -143,7 +141,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String secondContent = "<html><head><script>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "var foo = 'foo2';\n"
             + "parent.test();\n"
             + "var f = parent.test;\n"
@@ -172,8 +171,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void scopeInInactivePage() throws Exception {
-        final String firstContent
-            = "<html><head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "var foo = 'foo';\n"
             + "</script>\n"
@@ -214,8 +213,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     @Test
     @Alerts("got here")
     public void externalScript() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script src='/foo.js' id='script1'/>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script src='/foo.js' id='script1'/>\n"
             + "</head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
@@ -245,8 +244,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script src='/foo.js' id='script1'><!-- this shouldn't be a problem --></script>\n"
             + "<script src='/foo2.js' id='script2'><!-- this shouldn't be a problem --></script>\n"
             + "</head><body>\n"
@@ -276,8 +275,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     @Test
     public void scriptErrorContainsPageUrl() throws Exception {
         // embedded script
-        final String content1
-            = "<html><head><script>a.foo</script>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><head><script>a.foo</script>\n"
             + "</head><body>\n"
             + "</body></html>";
 
@@ -285,15 +284,15 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             loadPageWithAlerts(content1);
         }
         catch (final Exception e) {
-            assertTrue(e.getMessage().indexOf(URL_FIRST.toString()) > -1);
+            assertTrue(e.getMessage().contains(URL_FIRST.toString()));
         }
 
         // external script
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String content2
-            = "<html><head><title>foo</title><script src='/foo.js'/>\n"
+        final String content2 = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script src='/foo.js'/>\n"
             + "</head><body>\n"
             + "</body></html>";
 
@@ -308,7 +307,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             client.getPage(URL_FIRST);
         }
         catch (final Exception e) {
-            assertTrue(e.getMessage(), e.getMessage().indexOf(urlScript.toString()) > -1);
+            assertTrue(e.getMessage(), e.getMessage().contains(urlScript.toString()));
         }
     }
 
@@ -323,7 +322,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final String jsContent = "function doTest() { alert('gZip'); }";
         final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         try (GZIPOutputStream gzipper = new GZIPOutputStream(bytes)) {
-            gzipper.write(jsContent.getBytes("ASCII"));
+            gzipper.write(jsContent.getBytes(StandardCharsets.US_ASCII));
         }
 
         final List<NameValuePair> headers = new ArrayList<>();
@@ -331,8 +330,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         webConnection.setResponse(new URL(URL_FIRST, "foo.js"),
                 bytes.toByteArray(), 200, "OK", "text/javascript", headers);
 
-        final String htmlContent
-            = "<html><head>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<title>foo</title>\n"
             + "<script src='/foo.js'></script>\n"
             + "</head><body onload='doTest()'>\n"
@@ -351,7 +350,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = getMockWebConnection();
 
         try (ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
-            bytes.write("".getBytes("ASCII"));
+            bytes.write("".getBytes(StandardCharsets.US_ASCII));
 
             final List<NameValuePair> headers = new ArrayList<>();
             headers.add(new NameValuePair(HttpHeader.CONTENT_LENGTH, "0"));
@@ -360,8 +359,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                     bytes.toByteArray(), 200, "OK", "text/javascript", headers);
         }
 
-        final String htmlContent
-            = "<html><head>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<title>foo</title>\n"
             + "<script src='/foo.js'></script>\n"
             + "</head><body onload='alert(\"done\");'>\n"
@@ -380,7 +379,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         try (ByteArrayOutputStream bytes = new ByteArrayOutputStream()) {
             final String jsContent = "function doTest() { alert('gZip'); }";
-            bytes.write(jsContent.getBytes("ASCII"));
+            bytes.write(jsContent.getBytes(StandardCharsets.US_ASCII));
 
             final List<NameValuePair> headers = new ArrayList<>();
             headers.add(new NameValuePair("Content-Encoding", "gzip"));
@@ -388,8 +387,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                     bytes.toByteArray(), 200, "OK", "text/javascript", headers);
         }
 
-        final String htmlContent
-            = "<html><head>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<title>foo</title>\n"
             + "<script src='/foo.js'></script>\n"
             + "</head><body onload='doTest();alert(\"done\");'>\n"
@@ -412,8 +411,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String htmlContent
-            = "<html><head><title>foo</title><script src='./test.js'></script>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script src='./test.js'></script>\n"
             + "<script>var testLocalVariable = new Array();</script>\n"
             + "</head><body onload='testNestedMethod();' >\n"
             + "<form name='form1' method='POST' action='../foo' >\n"
@@ -439,8 +438,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void javaScriptUrl() throws Exception {
-        final String htmlContent
-            = "<html><head><script language='javascript'>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><script language='javascript'>\n"
             + "var f1 = '<html><head><title>frame1</title></head><body><h1>frame1</h1></body></html>';\n"
             + "var f2 = '<html><head><title>frame2</title></head><body><h1>frame2</h1></body></html>';\n"
             + "</script></head>\n"
@@ -468,8 +467,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void thisDotInOnClick() throws Exception {
-        final String htmlContent
-            = "<html><head><title>First</title><script>function foo(message){alert(message);}</script><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+             + "<html><head><title>First</title><script>function foo(message){alert(message);}</script><body>\n"
              + "<form name='form1'><input type='submit' name='button1' onClick='foo(this.name)'></form>\n"
              + "</body></html>";
 
@@ -491,8 +490,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String htmlContent
-            = "<html><head><title>foo</title><script src='./test.js'></script>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script src='./test.js'></script>\n"
             + "</head><body>\n"
             + "  <script>externalMethod()</script>\n"
             + "</body></html>";
@@ -529,8 +528,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final String htmlContent
-            = "<html><head><title>foo</title>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "</head><body>\n"
             + "<script src='test.js'>\n</script>\n" // \n between opening and closing tag is important
             + "</body></html>";
@@ -558,8 +557,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void functionDefinedInSameFile() throws Exception {
-        final String htmlContent
-            = "<html><head><title>First</title><script>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>First</title><script>\n"
             + "function showFoo(foo) {\n"
             + "  alert('Foo is: |' + foo + '|');\n"
             + "}\n"
@@ -598,8 +597,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String content
-            = "<html><head><title>foo</title><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "myDate = 'foo';\n"
             + "function doUnqualifiedVariableAccess() {\n"
             + "  alert('unqualified: ' + myDate);\n"
@@ -683,7 +682,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     }
 
     private static String getJavaScriptContent(final String javascript) {
-        return "<html><head><title>foo</title><script>\n"
+        return DOCTYPE_HTML
+             + "<html><head><title>foo</title><script>\n"
              + javascript
              + "</script></head><body>\n"
              + "<p>hello world</p>\n"
@@ -700,8 +700,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void scriptErrorIsolated() throws Exception {
-        final String content
-            = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>alert(1);</script>\n"
             + "<script>alert(2</script>\n"
@@ -756,15 +756,15 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     }
 
     private void prototypeScope(final String name, final String value) throws Exception {
-        final String content1
-            = "<html><head>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "window.open('second.html', 'secondWindow');\n"
             + "</script>\n"
             + "</head><body></body></html>";
 
-        final String content2
-            = "<html><head>\n"
+        final String content2 = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "alert('in page 2');\n"
             + name + ".prototype.foo = function() {\n"
@@ -801,25 +801,20 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         client.setJavaScriptTimeout(timeout);
 
         try {
-            client.getOptions().setThrowExceptionOnScriptError(false);
-
-            final String content = "<html><body><script>while(1) {}</script></body></html>";
+            final String content = DOCTYPE_HTML + "<html><body><script>while(1) {}</script></body></html>";
             final MockWebConnection webConnection = new MockWebConnection();
             webConnection.setDefaultResponse(content);
             client.setWebConnection(webConnection);
 
             final Exception[] exceptions = {null};
-            final Thread runner = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        client.getPage(URL_FIRST);
-                    }
-                    catch (final Exception e) {
-                        exceptions[0] = e;
-                    }
+            final Thread runner = new Thread(() -> {
+                try {
+                    client.getPage(URL_FIRST);
                 }
-            };
+                catch (final Exception e) {
+                    exceptions[0] = e;
+                }
+            });
 
             runner.start();
 
@@ -828,7 +823,19 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 runner.interrupt();
                 fail("Script was still running after timeout");
             }
-            assertNull(exceptions[0]);
+
+            Assertions.assertInstanceOf(RuntimeException.class, exceptions[0], exceptions[0].getMessage());
+            final Throwable cause = exceptions[0].getCause();
+            String msg = cause.getMessage();
+            Assertions.assertTrue(cause.getMessage().startsWith(
+                    "Javascript execution takes too long (allowed: 2000ms, already elapsed: "), cause.getMessage());
+
+            msg = msg.substring(msg.indexOf("already elapsed: ") + 17);
+            msg = msg.substring(0, msg.indexOf("ms"));
+            final long execTime = Long.parseLong(msg);
+
+            Assertions.assertTrue(execTime >= timeout, "execTime: " + execTime);
+            Assertions.assertTrue(execTime < (timeout + 2), "execTime: " + execTime);
         }
         finally {
             client.setJavaScriptTimeout(oldTimeout);
@@ -883,22 +890,30 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             return super.callFunction(page, javaScriptFunction, thisObject, args, htmlElementScope);
         }
 
-        /** @return the number of times that this engine has called functions */
+        /**
+         * @return the number of times that this engine has called functions
+         */
         public int getCallCount() {
             return scriptCallCount_;
         }
 
-        /** @return the number of times that this engine has executed code */
+        /**
+         * @return the number of times that this engine has executed code
+         */
         public int getExecutionCount() {
             return scriptExecutionCount_;
         }
 
-        /** @return the number of times that this engine has compiled code */
+        /**
+         * @return the number of times that this engine has compiled code
+         */
         public int getCompileCount() {
             return scriptCompileCount_;
         }
 
-        /** @return the number of times that this engine has executed a compiled script */
+        /**
+         * @return the number of times that this engine has executed a compiled script
+         */
         public int getExecuteScriptCount() {
             return scriptExecuteScriptCount_;
         }
@@ -910,8 +925,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     @Test
     @Alerts({"", "ex thrown"})
     public void commentNoDoubleSlash() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script><!-- alert(1);\n"
             + " alert(2);\n"
             + "alert(3) --></script>\n"
@@ -927,7 +942,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         }
         catch (final ScriptException e) {
             exceptionThrown = "ex thrown";
-            assertEquals(4, e.getFailingLineNumber());
+            assertEquals(5, e.getFailingLineNumber());
         }
 
         assertEquals(expectedExThrown, exceptionThrown);
@@ -939,14 +954,14 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void compiledScriptCached() throws Exception {
-        final String content1
-            = "<html><head><title>foo</title>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script src='script.js'></script>\n"
             + "</head><body>\n"
             + "<a href='page2.html'>to page 2</a>\n"
             + "</body></html>";
-        final String content2
-            = "<html><head><title>page 2</title>\n"
+        final String content2 = DOCTYPE_HTML
+            + "<html><head><title>page 2</title>\n"
             + "<script src='script.js'></script>\n"
             + "</head><body>\n"
             + "</body></html>";
@@ -988,8 +1003,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void scriptTags_AllLocalContent() throws Exception {
-        final String content
-            = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>foo</title>\n"
             + "<script>One</script>\n" // no language specified - assume JavaScript
             + "<script language='javascript'>Two</script>\n"
@@ -1076,7 +1091,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         };
         webClient.setJavaScriptEngine(myEngine);
 
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Test page</title><\n"
             + "<script>\n"
             + "function myFunction() {\n"
@@ -1109,7 +1125,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void daemonExecutorThread() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "function f() { alert('foo'); }\n"
             + "setTimeout(f, 5);\n"
             + "</script>\n"
@@ -1166,10 +1183,10 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Retry
     @Alerts("starting")
     public void shutdownShouldKill() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>Test page</title>\n"
                 + "<script>\n"
                 + "  function test() {\n"
@@ -1182,6 +1199,50 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 + "</body></html>";
 
         try (WebClient webClient = getWebClient()) {
+            // there is no way to kill a thread in later JDK's
+            // to make the test running we need a final timeout for js stuff
+            webClient.setJavaScriptTimeout(DEFAULT_WAIT_TIME.toMillis() * 10);
+
+            final List<String> collectedAlerts = new ArrayList<>();
+            webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+            loadPage(html);
+            Thread.sleep(100);
+            assertEquals(getExpectedAlerts(), collectedAlerts);
+
+        }
+        Thread.sleep(400);
+        try {
+            assertTrue(getJavaScriptThreads().isEmpty());
+        }
+        catch (final AssertionError e) {
+            Thread.sleep(DEFAULT_WAIT_TIME.toMillis() * 10);
+            assertTrue(getJavaScriptThreads().isEmpty());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("starting")
+    public void shutdownShouldKillJavaScriptTimeout() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head><title>Test page</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert('starting');\n"
+                + "    while(true) { Math.sin(3.14) * Math.sin(3.14);}\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='setTimeout(test, 50);'>\n"
+                + "</body></html>";
+
+        try (WebClient webClient = getWebClient()) {
+            webClient.setJavaScriptTimeout(DEFAULT_WAIT_TIME.toMillis());
+
             final List<String> collectedAlerts = new ArrayList<>();
             webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -1200,7 +1261,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     @Test
     @Alerts("unload")
     public void shutdownOnUnload() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>Test page</title>\n"
                 + "<script>\n"
                 + "  window.onbeforeunload = function(e) {\n"
@@ -1240,7 +1302,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void initRaceCondition() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>Test page</title><\n"
                 + "<script>\n"
                 + "  var d = document.visibilityState;\n"
@@ -1259,33 +1322,25 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
             final int runs = 100;
 
-            final Thread t1 = new Thread(new Runnable() {
-
-                @Override
-                public void run() {
-                    try {
-                        for (int i = 0; i < runs; i++) {
-                            webClient.getPage(window1, new WebRequest(URL_FIRST));
-                        }
+            final Thread t1 = new Thread(() -> {
+                try {
+                    for (int i = 0; i < runs; i++) {
+                        webClient.getPage(window1, new WebRequest(URL_FIRST));
                     }
-                    catch (final FailingHttpStatusCodeException | IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                }
+                catch (final FailingHttpStatusCodeException | IOException e) {
+                    throw new RuntimeException(e);
                 }
             });
 
-            final Thread t2 = new Thread(new Runnable() {
-
-                @Override
-                public void run() {
-                    try {
-                        for (int i = 0; i < runs; i++) {
-                            webClient.getPage(window2, new WebRequest(URL_FIRST));
-                        }
+            final Thread t2 = new Thread(() -> {
+                try {
+                    for (int i = 0; i < runs; i++) {
+                        webClient.getPage(window2, new WebRequest(URL_FIRST));
                     }
-                    catch (final FailingHttpStatusCodeException | IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                }
+                catch (final FailingHttpStatusCodeException | IOException e) {
+                    throw new RuntimeException(e);
                 }
             });
 

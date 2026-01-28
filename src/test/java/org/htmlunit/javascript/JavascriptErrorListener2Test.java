@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,13 @@ import org.htmlunit.ScriptException;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JavaScriptErrorListener}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class JavascriptErrorListener2Test extends SimpleWebTestCase {
 
     /**
@@ -48,12 +45,12 @@ public class JavascriptErrorListener2Test extends SimpleWebTestCase {
             }
         });
 
-        final String html = "<html><body><script>while (</script></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><script>while (</script></body></html>";
         getMockWebConnection().setDefaultResponse(html);
         webClient.getPage(URL_FIRST);
 
         assertEquals("org.htmlunit.corejs.javascript.EvaluatorException: "
-            + "Unexpected end of file (script in " + URL_FIRST + " from (1, 21) to (1, 37)#1)\n",
+            + "Unexpected end of file (script in " + URL_FIRST + " from (2, 21) to (2, 37)#2)\n",
                 scriptExceptions.toString());
     }
 }

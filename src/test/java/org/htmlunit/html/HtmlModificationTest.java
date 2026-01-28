@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -29,7 +27,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlModificationTest extends WebDriverTestCase {
 
     /**
@@ -39,7 +36,8 @@ public class HtmlModificationTest extends WebDriverTestCase {
     @Test
     @Alerts("Some text is inserted or deleted")
     public void getVisibleText() throws Exception {
-        final String html = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
                 + "<body id='tester'>\n"
                 + "  Some text is <ins id='myId1'>inserted</ins> or <del id='myId2'>deleted</del>\n"
                 + "</body></html>";
@@ -60,7 +58,8 @@ public class HtmlModificationTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLModElement]", "[object HTMLModElement]"})
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -78,8 +77,8 @@ public class HtmlModificationTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlInsertedText.class.isInstance(page.getHtmlElementById("myId1")));
-            assertTrue(HtmlDeletedText.class.isInstance(page.getHtmlElementById("myId2")));
+            assertTrue(page.getHtmlElementById("myId1") instanceof HtmlInsertedText);
+            assertTrue(page.getHtmlElementById("myId2") instanceof HtmlDeletedText);
         }
     }
 }

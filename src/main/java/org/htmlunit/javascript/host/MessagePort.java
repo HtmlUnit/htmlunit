@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.net.URL;
 
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.PostponedAction;
@@ -71,7 +72,7 @@ public class MessagePort extends EventTarget {
      * @return the value of the window's {@code onmessage} property
      */
     @JsxGetter
-    public Object getOnmessage() {
+    public Function getOnmessage() {
         return getHandlerForJavaScript(Event.TYPE_MESSAGE);
     }
 
@@ -84,7 +85,7 @@ public class MessagePort extends EventTarget {
         setHandlerForJavaScript(Event.TYPE_MESSAGE, onmessage);
     }
 
-    private Object getHandlerForJavaScript(final String eventName) {
+    private Function getHandlerForJavaScript(final String eventName) {
         return getEventListenersContainer().getEventHandler(eventName);
     }
 
@@ -104,8 +105,9 @@ public class MessagePort extends EventTarget {
             final Window w = getWindow();
             final WebWindow webWindow = w.getWebWindow();
             final Page page = webWindow.getEnclosedPage();
-            final URL currentURL = page.getUrl();
+
             final MessageEvent event = new MessageEvent();
+            final URL currentURL = page.getUrl();
             final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
             event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", w, transfer);
             event.setParentScope(port_);
@@ -123,4 +125,22 @@ public class MessagePort extends EventTarget {
         }
     }
 
+    /**
+     * Starts the sending of messages queued on the port
+     * (only needed when using EventTarget.addEventListener; it is implied when using onmessage).
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/start">MDN documentation</a>
+     */
+    @JsxFunction
+    public void start() {
+        // dummy for the moment
+    }
+
+    /**
+     * Disconnects the port, so it is no longer active.
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MessagePort/close">MDN documentation</a>
+     */
+    @JsxFunction
+    public void close() {
+        // dummy for the moment
+    }
 }

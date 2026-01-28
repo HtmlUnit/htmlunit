@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,20 @@ package org.htmlunit.javascript.host.html;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.htmlunit.corejs.javascript.Callable;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlForm;
+import org.htmlunit.html.HtmlInput;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxFunction;
+import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSymbol;
+import org.htmlunit.javascript.host.dom.AbstractList;
 
 /**
  * A special {@link HTMLCollection} for <code>document.all</code>.
@@ -32,7 +39,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  */
 @JsxClass
-public class HTMLAllCollection extends HTMLCollection {
+public class HTMLAllCollection extends AbstractList implements Callable {
 
     /**
      * Creates an instance.
@@ -44,10 +51,9 @@ public class HTMLAllCollection extends HTMLCollection {
     /**
      * JavaScript constructor.
      */
-    @Override
     @JsxConstructor
     public void jsConstructor() {
-        super.jsConstructor();
+        // nothing to do
     }
 
     /**
@@ -55,7 +61,7 @@ public class HTMLAllCollection extends HTMLCollection {
      * @param parentScope parent scope
      */
     public HTMLAllCollection(final DomNode parentScope) {
-        super(parentScope, false);
+        super(parentScope, false, null);
     }
 
     /**
@@ -64,12 +70,11 @@ public class HTMLAllCollection extends HTMLCollection {
      * @return the element or elements corresponding to the specified index or key
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
-    @Override
+    @JsxFunction
     public Object item(final Object index) {
         final double numb;
 
-        if (index instanceof String) {
-            final String name = (String) index;
+        if (index instanceof String name) {
             final Object result = namedItem(name);
             if (null != result && !JavaScriptEngine.isUndefined(result)) {
                 return result;
@@ -99,18 +104,21 @@ public class HTMLAllCollection extends HTMLCollection {
     }
 
     /**
-     * {@inheritDoc}
+     * Retrieves the item or items corresponding to the specified name (checks ids, and if
+     * that does not work, then names).
+     * @param name the name or id the element or elements to return
+     * @return the element or elements corresponding to the specified name or id
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
      */
-    @Override
-    public final Object namedItem(final String name) {
+    @JsxFunction
+    public final Scriptable namedItem(final String name) {
         final List<DomNode> elements = getElements();
 
         // See if there is an element in the element array with the specified id.
         final List<DomElement> matching = new ArrayList<>();
 
         for (final DomNode next : elements) {
-            if (next instanceof DomElement) {
-                final DomElement elem = (DomElement) next;
+            if (next instanceof DomElement elem) {
                 if (name.equals(elem.getAttributeDirect(DomElement.NAME_ATTRIBUTE))
                         || name.equals(elem.getId())) {
                     matching.add(elem);
@@ -139,8 +147,8 @@ public class HTMLAllCollection extends HTMLCollection {
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         boolean nullIfNotFound = false;
-        if (args[0] instanceof Number) {
-            final double val = ((Number) args[0]).doubleValue();
+        if (args[0] instanceof Number number) {
+            final double val = number.doubleValue();
             if (val != (int) val) {
                 return null;
             }
@@ -158,7 +166,13 @@ public class HTMLAllCollection extends HTMLCollection {
             }
         }
 
-        final Object value = super.call(cx, scope, thisObj, args);
+        if (args.length == 0) {
+            throw JavaScriptEngine.reportRuntimeError("Zero arguments; need an index or a key.");
+        }
+        Object value = getIt(args[0]);
+        if (value == NOT_FOUND) {
+            value = null;
+        }
         if (nullIfNotFound && JavaScriptEngine.isUndefined(value)) {
             return null;
         }
@@ -169,7 +183,77 @@ public class HTMLAllCollection extends HTMLCollection {
      * {@inheritDoc}
      */
     @Override
-    protected boolean supportsParentheses() {
+    protected Object equivalentValues(final Object value) {
+        if (value == null || JavaScriptEngine.isUndefined(value)) {
+            return Boolean.TRUE;
+        }
+
+        return super.equivalentValues(value);
+    }
+
+    /**
+     * @return the Iterator symbol
+     */
+    @JsxSymbol
+    public Scriptable iterator() {
+        return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
+    }
+
+    /**
+     * Returns the length.
+     * @return the length
+     */
+    @JsxGetter
+    @Override
+    public final int getLength() {
+        return super.getLength();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object getWithPreemptionByName(final String name, final List<DomNode> elements) {
+        final List<DomNode> matchingElements = new ArrayList<>();
+        final boolean searchName = isGetWithPreemptionSearchName();
+        for (final DomNode next : elements) {
+            if (next instanceof DomElement element
+                    && (searchName || next instanceof HtmlInput || next instanceof HtmlForm)) {
+                final String nodeName = element.getAttributeDirect(DomElement.NAME_ATTRIBUTE);
+                if (name.equals(nodeName)) {
+                    matchingElements.add(next);
+                }
+            }
+        }
+
+        if (matchingElements.isEmpty()) {
+            return NOT_FOUND;
+        }
+
+        if (matchingElements.size() == 1) {
+            return getScriptableForElement(matchingElements.get(0));
+        }
+
+        // many elements => build a sub collection
+        final DomNode domNode = getDomNodeOrNull();
+        final HTMLCollection collection = new HTMLCollection(domNode, matchingElements);
+        collection.setAvoidObjectDetection(true);
+        return collection;
+    }
+
+    /**
+     * Returns whether {@link #getWithPreemption(String)} should search by name or not.
+     * @return whether {@link #getWithPreemption(String)} should search by name or not
+     */
+    protected boolean isGetWithPreemptionSearchName() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected HTMLCollection create(final DomNode parentScope, final List<DomNode> initialElements) {
+        return new HTMLCollection(parentScope, initialElements);
     }
 }

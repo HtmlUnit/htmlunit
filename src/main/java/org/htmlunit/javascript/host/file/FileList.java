@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,16 @@
  */
 package org.htmlunit.javascript.host.file;
 
+import java.util.ArrayList;
+
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 
 /**
  * A JavaScript object for {@code FileList}.
@@ -30,7 +34,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 @JsxClass
 public class FileList extends HtmlUnitScriptable {
 
-    private File[] files_;
+    private ArrayList<File> files_;
 
     /**
      * Creates an instance.
@@ -53,11 +57,20 @@ public class FileList extends HtmlUnitScriptable {
      */
     public FileList(final java.io.File[] array) {
         super();
-        files_ = new File[array.length];
+        files_ = new ArrayList<>();
 
-        for (int i = 0; i < array.length; i++) {
-            files_[i] = new File(array[i].getAbsolutePath());
+        for (final java.io.File f : array) {
+            files_.add(new File(f.getAbsolutePath()));
         }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * Update the backing file array.
+     * @param files the new files list
+     */
+    public void updateFiles(final ArrayList<File> files) {
+        files_ = files;
     }
 
     /**
@@ -80,7 +93,7 @@ public class FileList extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
-        return files_.length;
+        return files_.size();
     }
 
     /**
@@ -90,7 +103,10 @@ public class FileList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public File item(final int index) {
-        return files_[index];
+        if (index >= 0 && index < files_.size()) {
+            return files_.get(index);
+        }
+        return null;
     }
 
     /**
@@ -98,6 +114,20 @@ public class FileList extends HtmlUnitScriptable {
      */
     @Override
     public Object get(final int index, final Scriptable start) {
-        return item(index);
+        if (this == start) {
+            if (index >= 0 && index < files_.size()) {
+                return files_.get(index);
+            }
+        }
+        return super.get(index, start);
+    }
+
+    /**
+     * Returns an Iterator allowing to go through all keys contained in this object.
+     * @return a NativeArrayIterator
+     */
+    @JsxSymbol(symbolName = "iterator")
+    public Scriptable values() {
+        return JavaScriptEngine.newArrayIteratorTypeValues(getParentScope(), this);
     }
 }

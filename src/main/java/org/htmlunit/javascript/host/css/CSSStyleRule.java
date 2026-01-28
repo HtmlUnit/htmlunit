@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,7 +73,7 @@ public class CSSStyleRule extends CSSRule {
     public String getSelectorText() {
         String selectorText = ((CSSStyleRuleImpl) getRule()).getSelectorText();
         final Matcher m = SELECTOR_PARTS_PATTERN.matcher(selectorText);
-        final StringBuffer sb = new StringBuffer();
+        final StringBuilder sb = new StringBuilder();
         while (m.find()) {
             String fixedName = m.group();
             // this should be handled with the right regex but...

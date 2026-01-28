@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.util.MemoryLeakDetector;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * <p>Tests for memory leaks. This test passes when run independently in Eclipse or via
@@ -66,7 +66,8 @@ public class MemoryLeakTest extends SimpleWebTestCase {
             detector.register("w", client.getCurrentWindow());
 
             final MockWebConnection conn = new MockWebConnection();
-            conn.setResponse(URL_FIRST, "<html><body><script>setInterval('alert(1)',5000)</script></body></html>");
+            conn.setResponse(URL_FIRST,
+                    DOCTYPE_HTML + "<html><body><script>setInterval('alert(1)',5000)</script></body></html>");
             client.setWebConnection(conn);
 
             client.getPage(URL_FIRST);

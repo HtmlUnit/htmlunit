@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,9 @@ package org.htmlunit.xml;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.javascript.host.xml.XMLDocumentTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link XmlPage}.
@@ -28,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class XmlPage2Test extends WebDriverTestCase {
 
     /**
@@ -90,7 +87,7 @@ public class XmlPage2Test extends WebDriverTestCase {
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    try {\n"
             + "      log(doc.createElementNS('myNS', 'ppp:eee'));\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

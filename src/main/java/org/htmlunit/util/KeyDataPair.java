@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,12 +77,12 @@ public class KeyDataPair extends NameValuePair {
     /**
      * Private constructor setting plain properties.
      *
-     * @param name will passed as name to the super constructor
+     * @param name will be passed as name to the super constructor
      * @param value will be passed as value to the super constructor
      * @param file the file, may be null
-     * @param fileName, the filename, may be null
-     * @param mimeType, the mimetype, may be null
-     * @param charset, the charset, may be null
+     * @param fileName the filename, may be null
+     * @param mimeType the mimetype, may be null
+     * @param charset the charset, may be null
      */
     private KeyDataPair(final String name, final String value, final File file,
               final String fileName, final String mimeType, final Charset charset,
@@ -118,7 +118,7 @@ public class KeyDataPair extends NameValuePair {
     public int hashCode() {
         // this is overwritten to make FindBugs happy
         // and to make it clear, that we really want to have
-        // the same hashCode like our parent class
+        // the same hashCode as our parent class
         return super.hashCode();
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import org.htmlunit.html.DefaultElementFactory;
 import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for various test cases.
@@ -49,7 +49,7 @@ public final class TestCaseTest {
      */
     @Test
     public void generateTestForHtmlElements() throws Exception {
-        allClassNames_ = getAllClassNames();
+        allClassNames_ = getAllConfiguredJsClassNames();
         generateTestForHtmlElements(new File("src/test/java"));
     }
 
@@ -88,7 +88,7 @@ public final class TestCaseTest {
      * @return the list
      * @throws Exception if an error occurs.
      */
-    public static Set<String> getAllClassNames() throws Exception {
+    public static Set<String> getAllConfiguredJsClassNames() throws Exception {
         final Set<String> names = new HashSet<>();
 
         for (final BrowserVersion browser : BrowserVersion.ALL_SUPPORTED_BROWSERS) {
@@ -105,7 +105,7 @@ public final class TestCaseTest {
      * @return the list
      * @throws Exception if an error occurs.
      */
-    public static Set<String> getAllConstructorNames() throws Exception {
+    public static Set<String> getAllConfiguredJsConstructorNames() throws Exception {
         final Set<String> names = new HashSet<>();
 
         for (final BrowserVersion browser : BrowserVersion.ALL_SUPPORTED_BROWSERS) {

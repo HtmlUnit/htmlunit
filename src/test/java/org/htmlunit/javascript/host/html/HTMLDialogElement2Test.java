@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,16 +19,13 @@ import org.htmlunit.WebClient;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlDialog;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link HTMLDialogElement}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLDialogElement2Test extends SimpleWebTestCase {
 
     /**
@@ -36,8 +33,8 @@ public class HTMLDialogElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void formClosesDialogWithoutJs() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body>\n"
             + "    <dialog id='tester' onclose='document.title=\"closed\"'>\n"
             + "      <p>HtmlUNit dialog</p>\n"
@@ -53,8 +50,7 @@ public class HTMLDialogElement2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final DomElement elem = page.getElementById("tester");
-        if (elem instanceof HtmlDialog) {
-            final HtmlDialog dialog = (HtmlDialog) elem;
+        if (elem instanceof HtmlDialog dialog) {
 
             assertFalse(dialog.isOpen());
             dialog.show();

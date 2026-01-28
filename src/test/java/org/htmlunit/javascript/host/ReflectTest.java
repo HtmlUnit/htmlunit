@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for Reflect.
@@ -26,21 +24,29 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Lai Quang Duong
  */
-@RunWith(BrowserRunner.class)
 public class ReflectTest extends WebDriverTestCase {
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("[object Reflect]")
     public void testToString() throws Exception {
         test("log(Reflect.toString())");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("1")
     public void apply() throws Exception {
         test("log(Reflect.apply(Math.floor, undefined, [1.75]))");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"1", "true", "4", "arg1", "2", "undefined", "null"})
     public void applyDetails() throws Exception {
@@ -69,43 +75,55 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void applyMissingArgs() throws Exception {
         final String js =
                 "try {\n"
                 + "  Reflect.apply();\n"
                 + "} catch(e) {\n"
-                + "  log('exception');\n"
+                + "  logEx(e);\n"
                 + "}";
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void applyTargetNotFunction() throws Exception {
         final String js =
                 "try {\n"
                 + "  Reflect.apply({}, undefined, [1.75]);\n"
                 + "} catch(e) {\n"
-                + "  log('exception');\n"
+                + "  logEx(e);\n"
                 + "}";
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void applyArgumentsListNotFunction() throws Exception {
         final String js =
                 "var s1 = Symbol('1');"
                 + "try {\n"
                 + "  Reflect.apply(Math.floor, undefined, s1);\n"
                 + "} catch(e) {\n"
-                + "  log('exception');\n"
+                + "  logEx(e);\n"
                 + "}";
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "1776"})
     public void construct() throws Exception {
@@ -116,6 +134,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "42"})
     public void defineProperty() throws Exception {
@@ -127,6 +148,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "true", "undefined"})
     public void definePropertyWithoutValue() throws Exception {
@@ -140,6 +164,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"false", "undefined"})
     public void definePropertyFreezed() throws Exception {
@@ -152,6 +179,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"[get,set,enumerable,configurable]", "false", "true", "true", "true"})
     public void getOwnPropertyDescriptor() throws Exception {
@@ -173,6 +203,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "false", "false"})
     public void isExtensible() throws Exception {
@@ -190,6 +223,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"p1,p2", "length"})
     public void ownKeys() throws Exception {
@@ -235,6 +271,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("0")
     public void ownKeysEmptyObj() throws Exception {
@@ -243,6 +282,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("0")
     public void ownKeysDeleteObj() throws Exception {
@@ -253,6 +295,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("length")
     public void ownKeysEmptyArray() throws Exception {
@@ -261,6 +306,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("2,length")
     public void ownKeysArray() throws Exception {
@@ -269,6 +317,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("p1,p2")
     public void ownKeysNotEnumerable() throws Exception {
@@ -281,6 +332,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "false", "true"})
     public void has() throws Exception {
@@ -310,6 +364,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "false"})
     public void hasSymbol() throws Exception {
@@ -324,6 +381,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("function")
     public void hasProto() throws Exception {
@@ -333,6 +393,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"42", "true", "true", "true"})
     public void getOwnPropertyDescriptorSymbol() throws Exception {
@@ -350,6 +413,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("true")
     public void getOwnPropertyDescriptorUndefinedProperty() throws Exception {
@@ -359,6 +425,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("one")
     public void getPropertyByInt() throws Exception {
@@ -369,6 +438,9 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"value 1", "undefined", "foo", "42", "undefined"})
     public void getProperty() throws Exception {
@@ -392,6 +464,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "true", "false"})
     public void setPrototypeOf() throws Exception {
@@ -407,6 +482,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("false")
     public void setPrototypeOfCycle() throws Exception {
@@ -416,6 +494,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "true", "false"})
     public void setPrototypeOfCycleComplex() throws Exception {
@@ -430,6 +511,9 @@ public class ReflectTest extends WebDriverTestCase {
         test(js);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"true", "true", "true"})
     public void setPrototypeOfSame() throws Exception {
@@ -451,7 +535,8 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     private void test(final String js) throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION

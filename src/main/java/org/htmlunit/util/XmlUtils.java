@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.nio.charset.Charset;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -45,7 +44,6 @@ import org.htmlunit.html.DomProcessingInstruction;
 import org.htmlunit.html.DomText;
 import org.htmlunit.html.ElementFactory;
 import org.htmlunit.html.Html;
-import org.htmlunit.platform.Platform;
 import org.htmlunit.xml.XmlPage;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -133,8 +131,8 @@ public final class XmlUtils {
 
         Charset charset = webResponse.getContentCharset();
         try (InputStream is = webResponse.getContentAsStreamWithBomIfApplicable()) {
-            if (is instanceof BOMInputStream) {
-                final String bomCharsetName = ((BOMInputStream) is).getBOMCharsetName();
+            if (is instanceof BOMInputStream stream) {
+                final String bomCharsetName = stream.getBOMCharsetName();
                 if (bomCharsetName != null) {
                     charset = Charset.forName(bomCharsetName);
                 }
@@ -217,34 +215,18 @@ public final class XmlUtils {
      */
     public static void appendChild(final SgmlPage page, final DomNode parent, final Node child,
         final boolean handleXHTMLAsHTML) {
-        appendChild(page, parent, child, handleXHTMLAsHTML, null);
-    }
-
-    /**
-     * Recursively appends a {@link Node} child to {@link DomNode} parent.
-     *
-     * @param page the owner page of {@link DomElement}s to be created
-     * @param parent the parent DomNode
-     * @param child the child Node
-     * @param handleXHTMLAsHTML if true elements from the XHTML namespace are handled as HTML elements instead of
-     *     DOM elements
-     * @param attributesOrderMap (optional) the one returned by {@link #getAttributesOrderMap(Document)}
-     */
-    public static void appendChild(final SgmlPage page, final DomNode parent, final Node child,
-        final boolean handleXHTMLAsHTML, final Map<Integer, List<String>> attributesOrderMap) {
         final DocumentType documentType = child.getOwnerDocument().getDoctype();
-        if (documentType != null && page instanceof XmlPage) {
+        if (documentType != null && page instanceof XmlPage xmlPage) {
             final DomDocumentType domDoctype = new DomDocumentType(
                     page, documentType.getName(), documentType.getPublicId(), documentType.getSystemId());
-            ((XmlPage) page).setDocumentType(domDoctype);
+            xmlPage.setDocumentType(domDoctype);
         }
-        final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML, attributesOrderMap);
+        final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML);
         parent.appendChild(childXml);
-        copy(page, child, childXml, handleXHTMLAsHTML, attributesOrderMap);
+        copy(page, child, childXml, handleXHTMLAsHTML);
     }
 
-    private static DomNode createFrom(final SgmlPage page, final Node source, final boolean handleXHTMLAsHTML,
-            final Map<Integer, List<String>> attributesOrderMap) {
+    private static DomNode createFrom(final SgmlPage page, final Node source, final boolean handleXHTMLAsHTML) {
         if (source.getNodeType() == Node.TEXT_NODE) {
             return new DomText(page, source.getNodeValue());
         }
@@ -264,7 +246,7 @@ public final class XmlUtils {
         if (handleXHTMLAsHTML && Html.XHTML_NAMESPACE.equals(ns)) {
             final ElementFactory factory = page.getWebClient().getPageCreator().getHtmlParser().getFactory(localName);
             return factory.createElementNS(page, ns, localName,
-                    namedNodeMapToSaxAttributes(source.getAttributes(), attributesOrderMap, source));
+                    namedNodeMapToSaxAttributes(source.getAttributes()));
         }
         final NamedNodeMap nodeAttributes = source.getAttributes();
         if (page != null && page.isHtmlPage()) {
@@ -282,13 +264,12 @@ public final class XmlUtils {
         if (Html.SVG_NAMESPACE.equals(namespaceURI)) {
             return page.getWebClient().getPageCreator().getHtmlParser().getSvgFactory()
                     .createElementNS(page, namespaceURI, qualifiedName,
-                            namedNodeMapToSaxAttributes(nodeAttributes, attributesOrderMap, source));
+                            namedNodeMapToSaxAttributes(nodeAttributes));
         }
 
         final OrderedFastHashMap<String, DomAttr> attributes = new OrderedFastHashMap<>();
         for (int i = 0; i < nodeAttributes.getLength(); i++) {
-            final int orderedIndex = Platform.getIndex(nodeAttributes, attributesOrderMap, source, i);
-            final Attr attribute = (Attr) nodeAttributes.item(orderedIndex);
+            final Attr attribute = (Attr) nodeAttributes.item(i);
             final String attributeNamespaceURI = attribute.getNamespaceURI();
             final String attributeQualifiedName;
             if (attribute.getPrefix() == null) {
@@ -306,13 +287,11 @@ public final class XmlUtils {
         return new DomElement(namespaceURI, qualifiedName, page, attributes);
     }
 
-    private static Attributes namedNodeMapToSaxAttributes(final NamedNodeMap attributesMap,
-            final Map<Integer, List<String>> attributesOrderMap, final Node element) {
+    private static Attributes namedNodeMapToSaxAttributes(final NamedNodeMap attributesMap) {
         final AttributesImpl attributes = new AttributesImpl();
         final int length = attributesMap.getLength();
         for (int i = 0; i < length; i++) {
-            final int orderedIndex = Platform.getIndex(attributesMap, attributesOrderMap, element, i);
-            final Node attr = attributesMap.item(orderedIndex);
+            final Node attr = attributesMap.item(i);
             attributes.addAttribute(attr.getNamespaceURI(), attr.getLocalName(),
                 attr.getNodeName(), null, attr.getNodeValue());
         }
@@ -329,15 +308,15 @@ public final class XmlUtils {
      *     DOM elements
      */
     private static void copy(final SgmlPage page, final Node source, final DomNode dest,
-        final boolean handleXHTMLAsHTML, final Map<Integer, List<String>> attributesOrderMap) {
+        final boolean handleXHTMLAsHTML) {
         final NodeList nodeChildren = source.getChildNodes();
         for (int i = 0; i < nodeChildren.getLength(); i++) {
             final Node child = nodeChildren.item(i);
             switch (child.getNodeType()) {
                 case Node.ELEMENT_NODE:
-                    final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML, attributesOrderMap);
+                    final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML);
                     dest.appendChild(childXml);
-                    copy(page, child, childXml, handleXHTMLAsHTML, attributesOrderMap);
+                    copy(page, child, childXml, handleXHTMLAsHTML);
                     break;
 
                 case Node.TEXT_NODE:
@@ -382,8 +361,8 @@ public final class XmlUtils {
         }
         if (ATTRIBUTE_NOT_DEFINED == uri) {
             final DomNode parentNode = element.getParentNode();
-            if (parentNode instanceof DomElement) {
-                uri = lookupNamespaceURI((DomElement) parentNode, prefix);
+            if (parentNode instanceof DomElement domElement) {
+                uri = lookupNamespaceURI(domElement, prefix);
             }
         }
         return uri;
@@ -405,24 +384,13 @@ public final class XmlUtils {
             }
         }
         for (final DomNode child : element.getChildren()) {
-            if (child instanceof DomElement) {
-                final String prefix = lookupPrefix((DomElement) child, namespace);
+            if (child instanceof DomElement domElement) {
+                final String prefix = lookupPrefix(domElement, namespace);
                 if (prefix != null) {
                     return prefix;
                 }
             }
         }
         return null;
-    }
-
-    /**
-     * Returns internal Xerces details about all elements in the specified document.
-     * The id of the returned {@link Map} is the {@code nodeIndex} of an element, and the list
-     * is the array of ordered attributes names.
-     * @param document the document
-     * @return the map of an element index with its ordered attribute names
-     */
-    public static Map<Integer, List<String>> getAttributesOrderMap(final Document document) {
-        return Platform.getAttributesOrderMap(document);
     }
 }

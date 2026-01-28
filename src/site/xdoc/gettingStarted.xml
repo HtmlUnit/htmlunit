@@ -41,15 +41,15 @@
             <source><![CDATA[
 @Test
 public void homePage() throws Exception {
-    try (final WebClient webClient = new WebClient()) {
+    try (WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-        Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+        Assertions.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
 
         final String pageAsXml = page.asXml();
-        Assert.assertTrue(pageAsXml.contains("<body class=\"topBarDisabled\">"));
+        Assertions.assertTrue(pageAsXml.contains("<body class=\"topBarDisabled\">"));
 
         final String pageAsText = page.asNormalizedText();
-        Assert.assertTrue(pageAsText.contains("Support for the HTTP and HTTPS protocols"));
+        Assertions.assertTrue(pageAsText.contains("Support for the HTTP and HTTPS protocols"));
     }
 }]]></source>
         </section>
@@ -62,14 +62,14 @@ public void homePage() throws Exception {
             <source><![CDATA[
 @Test
 public void submittingForm() throws Exception {
-    try (final WebClient webClient = new WebClient()) {
+    try (WebClient webClient = new WebClient()) {
 
         // Get the first page
-        final HtmlPage page1 = webClient.getPage("http://some_url");
+        final HtmlPage page = webClient.getPage("http://some_url");
 
-        // Get the form that we are dealing with and within that form, 
+        // Get the form that we are dealing with and within that form,
         // find the submit button and the field that we want to change.
-        final HtmlForm form = page1.getFormByName("myform");
+        final HtmlForm form = page.getFormByName("myform");
 
         final HtmlSubmitInput button = form.getInputByName("submitbutton");
         final HtmlTextInput textField = form.getInputByName("userid");
@@ -78,7 +78,7 @@ public void submittingForm() throws Exception {
         textField.type("root");
 
         // Now submit the form by clicking the button and get back the second page.
-        final HtmlPage page2 = button.click();
+        final HtmlPage secondPage = button.click();
     }
 }]]></source>
 
@@ -115,7 +115,7 @@ final HtmlTextInput textField = form.getInputByName("userid");]]></source>
                 </p>
             </subsection>
 
-            <subsection name="Text input &lt;input type='test'&gt;">
+            <subsection name="Text input &lt;input type='text'&gt;">
                 <p>
                     These form elements represented as instances of class HtmlTextInput.
                 </p>
@@ -140,7 +140,7 @@ textField.type("RBRi");]]></source>
                     These form elements represented as instances of class HtmlTextArea.
                 </p>
                 <source><![CDATA[
-final HtmlTextArea textArea = form.getInputByName("comment");]]></source>
+final HtmlTextArea textArea = form.getTextAreaByName("comment");]]></source>
                 <p>
                     The usage of HtmlTextArea is similar to HtmlTextInput (because both derived from HtmlSelectableTextInput).
                     This means you can also use type(String) or even setValue(String) for updating these elements.
@@ -209,8 +209,9 @@ currency.setSelectedAttribute(euro, true);]]></source>
                 <source><![CDATA[
 @Test
 public void getElements() throws Exception {
-    try (final WebClient webClient = new WebClient()) {
+    try (WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("http://some_url");
+
         final HtmlDivision div = page.getHtmlElementById("some_div_id");
         final HtmlAnchor anchor = page.getAnchorByName("anchor_name");
     }
@@ -221,12 +222,13 @@ public void getElements() throws Exception {
                 <source><![CDATA[
  @Test
  public void getElements() throws Exception {
-     try (final WebClient webClient = new WebClient()) {
-         final HtmlPage page = webClient.getPage("http://some_url");
-         NodeList inputs = page.getElementsByTagName("input");
-         final Iterator<E> nodesIterator = nodes.iterator();
-         // now iterate
-     }
+    try (WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("http://some_url");
+
+        final DomNodeList<DomElement> inputs = page.getElementsByTagName("input");
+        final Iterator<DomElement> nodesIterator = inputs.iterator();
+        // now iterate
+    }
  }]]></source>
                 <p>
                     There is rich set of methods usable to locate page elements e.g.
@@ -260,8 +262,8 @@ public void getElements() throws Exception {
                 <source><![CDATA[
 @Test
 public void xpath() throws Exception {
-    try (final WebClient webClient = new WebClient()) {
-        final HtmlPage page = webClient.getPage("https://htmlunit.sourceforge.io/");
+    try (WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
 
         //get list of all divs
         final List<?> divs = page.getByXPath("//div");
@@ -279,13 +281,13 @@ public void xpath() throws Exception {
                 <source><![CDATA[
 @Test
 public void cssSelector() throws Exception {
-    try (final WebClient webClient = new WebClient()) {
+    try (WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
 
         //get list of all divs
         final DomNodeList<DomNode> divs = page.querySelectorAll("div");
-        for (DomNode div : divs) {
-            ....
+        for (final DomNode div : divs) {
+            // ....
         }
 
         //get div which has the id 'breadcrumbs'
@@ -295,5 +297,50 @@ public void cssSelector() throws Exception {
             </subsection>
         </section>
 
+        <section name="Extracting text">
+            <p>
+                When you need to extract text from a web page, think of it as a two-step process: find it, then extract it.
+                Use HtmlUnit's search methods (like getElementById(), XPath, or CSS selectors) to find the specific element
+                containing the text you want. Then simply call the asNormalizedText() method on that element to get the text
+                exactly as a user would see it in their browser.<br/>
+                See following example:
+            </p>
+                <source><![CDATA[
+@Test
+public void extractTextToc() throws Exception {
+    try (WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
+
+        final DomNode sponsoringDiv = page.querySelector("#bodyColumn > section:nth-child(1) > div:nth-child(2)");
+
+        // A normalized textual representation of this element that represents
+        // what would be visible to the user if this page was shown in a web browser.
+        // Whitespace is normalized like in the browser and block tags are separated by '\n'.
+        final String content = sponsoringDiv.asNormalizedText();
+    }
+}]]></source>
+
+            <subsection name="Extracting the whole page content">
+                <p>
+                    If you want to extract all text from an entire page without targeting specific elements, you can call asNormalizedText() 
+                    directly on the body element. This is useful for getting a quick overview of all visible content or for full-text indexing.<br/>
+                    Here's a simple example that loads a page and extracts all its text:
+                </p>
+                <source><![CDATA[
+@Test
+public void extractTextFromBody() throws Exception {
+    try (WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
+
+        final HtmlBody body = page.getBody();
+
+        // A normalized textual representation of this element that represents
+        // what would be visible to the user if this page was shown in a web browser.
+        // Whitespace is normalized like in the browser and block tags are separated by '\n'.
+        final String bodyContent = body.asNormalizedText();
+    }
+}]]></source>
+            </subsection>
+        </section>
     </body>
 </document>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
  */
 package org.htmlunit.javascript.host.event;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Event}.
  *
- * @author <a href="mailto:chriseldredge@comcast.net">Chris Eldredge</a>
+ * @author Chris Eldredge
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Marc Guillemot

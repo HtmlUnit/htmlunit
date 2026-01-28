@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,15 +19,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.jetty.server.Server;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.WebServerTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,29 +35,14 @@ import org.openqa.selenium.WebElement;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class MooTools121Test extends WebDriverTestCase {
 
-    private static Server SERVER_;
-
     /**
      * @throws Exception if an error occurs
      */
-    @BeforeClass
-    public static void startSesrver() throws Exception {
-        SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/mootools/1.2.1", null);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @AfterClass
-    public static void stopServer() throws Exception {
-        if (SERVER_ != null) {
-            SERVER_.stop();
-            SERVER_.destroy();
-            SERVER_ = null;
-        }
+    @BeforeAll
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/mootools/1.2.1", null);
     }
 
     /**

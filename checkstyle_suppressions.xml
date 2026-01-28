@@ -1,20 +1,36 @@
 <?xml version="1.0"?>
 
 <!DOCTYPE suppressions PUBLIC
-    "-//Puppy Crawl//DTD Suppressions 1.0//EN"
-    "https://checkstyle.org/dtds/suppressions_1_0.dtd">
+    "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+    "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 
 <suppressions>
     <suppress checks="[a-zA-Z0-9]*" files="[\\/]src[\\/]test[\\/]resources[\\/]"/>
+    <suppress checks="[a-zA-Z0-9]*" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]htmlunit[\\/]util[\\/]brotli[\\/]"/>
+    <suppress checks="[a-zA-Z0-9]*" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]htmlunit[\\/]util[\\/]quercus[\\/]"/>
 
     <suppress checks="JavadocPackage" files="[\\/]src[\\/](test)[\\/]"/>
+
     <suppress checks="AvoidStarImport" files="JavaScriptConfiguration.java"/>
     <suppress checks="AvoidStarImport" files="XMLSerializer.java"/>
+
+    <suppress checks="AvoidDuplicateLiterals" files="Color.java"/>
+    <suppress checks="AvoidDuplicateLiterals" files="DebuggingWebConnection.java"/>
+    <suppress checks="AvoidDuplicateLiterals" files="DomElement.java"/>
+    <suppress checks="AvoidDuplicateLiterals" files="DOMImplementation.java"/>
+    <suppress checks="AvoidDuplicateLiterals" files="DomNode.java"/>
+    <suppress checks="AvoidDuplicateLiterals" files="DOMTokenList.java"/>
+    <suppress checks="AvoidDuplicateLiterals" files="Element.java"/>
+    <suppress checks="AvoidDuplicateLiterals" files="HTMLAnchorElement.java"/>
+    <suppress checks="AvoidDuplicateLiterals" files="HTMLEmbedElement.java"/>
+    <suppress checks="AvoidDuplicateLiterals" files="HTMLHRElement.java"/>
+
     <suppress checks="Header" files=".+.properties"/>
 
     <suppress checks="JavadocPackage" files=".*Test.java|StandardsMode.java|StandardsMode.java|ElementTestSource.java|BrowserStatement.java|Patch.java|BrowserVersionClassRunnerWithParameters.java|ToRunWithRealBrowsers.java|PatchedHtmlUnitKeyboard.java|CanvasRenderingContext2D2Test2.java"/>
     <suppress checks="JavadocMethod" files="HtmlDomTreeWalker.java" />
 
+    <suppress checks="LineLength" files="ArchitectureTest.java"/>
     <suppress checks="LineLength" files="BrowserVersion.java"/>
     <suppress checks="LineLength" files="JavaScriptEngine.java"/>
     <suppress checks="LineLength" files="EncodingSniffer.java"/>
@@ -25,9 +41,10 @@
     <suppress checks="LineLength" files="HTMLOptionsCollection.java" lines="1-30"/>
     <suppress checks="LineLength" files="HTMLScriptElementTest.java"/>
     <suppress checks="LineLength" files="HTMLTableElement.java" lines="1-30"/>
-    <suppress checks="LineLength" files="HtmlUnitRegExpProxyTest.java"/>
+    <suppress checks="LineLength" files="RegExp3Test.java"/>
     <suppress checks="LineLength" files="JQuery1x8x2Test.java"/>
     <suppress checks="LineLength" files="JQuery1x11x3Test.java"/>
+    <suppress checks="LineLength" files="JQuery1x12x4Test.java"/>
     <suppress checks="LineLength" files="JQuery3x3x1Test.java"/>
     <suppress checks="LineLength" files="Node.java" lines="1-30"/>
     <suppress checks="LineLength" files="NodeTest.java" lines="1-30"/>
@@ -50,22 +67,29 @@
     <suppress checks="LineLength" files="XMLSerializer.java" lines="1-30"/>
     <suppress checks="LineLength" files="XMLSerializerTest.java"/>
     <suppress checks="LineLength" files="XSLProcessorTest.java"/>
+    <suppress checks="LineLength" files="XMLHttpRequestResponseAsTextEncodingTest.java"/>
+    <suppress checks="LineLength" files="XMLHttpRequestResponseAsXMLEncodingTest.java"/>
     <suppress checks="LineLength" files="XMLHttpRequestResponseTextEncodingTest.java"/>
+    <suppress checks="LineLength" files="XMLHttpRequestResponseXMLEncodingTest.java"/>
 
     <suppress checks="MethodName" files="HtmlPageEncodingTest.java"/>
     <suppress checks="MethodName" files="CssStyleSheetEncodingTest.java"/>
     <suppress checks="MethodName" files="ScriptEncodingTest.java"/>
 
+    <suppress checks="MethodName" files="CtorPrototypeTest.java"/>
     <suppress checks="MethodName" files="ElementClosesElementTest.java"/>
+    <suppress checks="MethodName" files="ElementClosesElement2Test.java"/>
     <suppress checks="MethodName" files="HostConstructorTest.java"/>
+    <suppress checks="MethodName" files="DedicatedWorkerGlobalScopeConstantsTest.java"/>
     <suppress checks="MethodName" files="HostParentOf.+Test.java"/>
     <suppress checks="MethodName" files="StyleAttributesIterableTest.java"/>
     <suppress checks="MethodName" files="XMLHttpRequestResponseTextEncodingTest.java"/>
 
     <suppress checks="TypeName" files="webkit.*\.java$|moz.*\.java$"/>
     <suppress checks="TypeName" files="EXT_.*\.java$|OES_.*\.java$|WEBGL_.*\.java$|ANGLE_.*\.java$"/>
-    
-    <suppress checks="ConstantName" files="WebGL2RenderingContext.java"/>
+
+    <suppress checks="ConstantName" files="WebGL2RenderingContext.java" message="Name 'FLOAT_MAT\dx\d' must match" />
+    <suppress checks="ConstantName" files="Notification.java" message="Name 'maxActions' must match" />
     <suppress checks="ConstantName" files="ArchitectureTest.java"/>
     <suppress checks="ConstantName" files="Architecture2Test.java"/>
 

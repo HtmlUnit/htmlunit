@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,8 +73,8 @@ public final class NativeFunctionToStringFunction {
         public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
             final String s = (String) super.call(cx, scope, thisObj, args);
 
-            if (thisObj instanceof BaseFunction && s.contains("[native code")) {
-                final String functionName = ((BaseFunction) thisObj).getFunctionName();
+            if (thisObj instanceof BaseFunction function && s.contains("[native code")) {
+                final String functionName = function.getFunctionName();
                 return "function " + functionName + "() { [native code] }";
             }
             return s.replace("function anonymous() {", "function anonymous(\n) {\n");
@@ -94,8 +94,8 @@ public final class NativeFunctionToStringFunction {
         public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
             final String s = (String) super.call(cx, scope, thisObj, args);
 
-            if (thisObj instanceof BaseFunction && s.contains("[native code")) {
-                final String functionName = ((BaseFunction) thisObj).getFunctionName();
+            if (thisObj instanceof BaseFunction function && s.contains("[native code")) {
+                final String functionName = function.getFunctionName();
                 return "function " + functionName + "() {\n    [native code]\n}";
             }
             return s.replace("function anonymous() {", "function anonymous(\n) {\n");

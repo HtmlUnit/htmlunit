@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,17 +17,14 @@ package org.htmlunit.javascript;
 import org.apache.commons.lang3.SerializationUtils;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link FunctionWrapper}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class FunctionsWrapper2Test extends SimpleWebTestCase {
 
     /**
@@ -36,8 +33,8 @@ public class FunctionsWrapper2Test extends SimpleWebTestCase {
     @Test
     @Alerts("1")
     public void function_toString() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  x = test.toString;\n"

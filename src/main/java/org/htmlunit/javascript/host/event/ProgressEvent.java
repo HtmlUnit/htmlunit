@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,8 +51,8 @@ public class ProgressEvent extends Event {
 
         if (details != null && !JavaScriptEngine.isUndefined(details)) {
             final Object lengthComputable = details.get("lengthComputable");
-            if (lengthComputable instanceof Boolean) {
-                lengthComputable_ = (Boolean) lengthComputable;
+            if (lengthComputable instanceof Boolean boolean1) {
+                lengthComputable_ = boolean1;
             }
             else {
                 lengthComputable_ = Boolean.parseBoolean(lengthComputable.toString());
@@ -62,8 +62,8 @@ public class ProgressEvent extends Event {
             if (loaded instanceof Long) {
                 loaded_ = loaded;
             }
-            else if (loaded instanceof Double) {
-                loaded_ = ((Double) loaded).longValue();
+            else if (loaded instanceof Double double1) {
+                loaded_ = double1.longValue();
             }
             else {
                 try {
@@ -75,11 +75,11 @@ public class ProgressEvent extends Event {
             }
 
             final Object total = details.get("total");
-            if (total instanceof Long) {
-                total_ = (Long) total;
+            if (total instanceof Long long1) {
+                total_ = long1;
             }
-            else if (total instanceof Double) {
-                total_ = ((Double) total).longValue();
+            else if (total instanceof Double double1) {
+                total_ = double1.longValue();
             }
             else {
                 try {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for setup done in {@link org.htmlunit.corejs.javascript.NativeGlobal}.
@@ -27,7 +25,6 @@ import org.junit.runner.RunWith;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class NativeGlobalTest extends WebDriverTestCase {
 
     /**
@@ -37,8 +34,8 @@ public class NativeGlobalTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "NaN", "Infinity"})
     public void assignConst() throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "undefined = 123;\n"
             + "log(undefined);\n"
@@ -58,8 +55,8 @@ public class NativeGlobalTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "NaN", "Infinity"})
     public void redeclareConst() throws Exception {
-        final String html
-            = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
             + "var undefined;\n"
             + "var NaN;\n"

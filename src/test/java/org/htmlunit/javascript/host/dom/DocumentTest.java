@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,35 +20,31 @@ import static org.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocume
 import java.net.URL;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.htmlunit.junit.Retry;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnJre;
+import org.junit.jupiter.api.condition.JRE;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
  * Tests for {@link Document}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Barnaby Court
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Michael Ottati
- * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author George Murnock
  * @author Ahmed Ashour
  * @author Rob Di Marco
  * @author Sudhan Moghe
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DocumentTest extends WebDriverTestCase {
 
     /**
@@ -57,8 +53,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "form1", "form2"})
     public void formsAccessor_TwoForms() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  log(document.forms.length);\n"
@@ -86,8 +82,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void formsAccessor_FormWithNoName() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  log(document.forms.length);\n"
@@ -108,8 +104,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void formsAccessor_NoForms() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  log(document.forms.length);\n"
@@ -130,8 +126,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "second"})
     public void formArray() throws Exception {
-        final String firstHtml
-            = "<html><head><SCRIPT lang='JavaScript'>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><SCRIPT lang='JavaScript'>\n"
             + "function doSubmit(formName){\n"
             + "  var form = document.forms[formName];\n"
             + "  form.submit();\n"
@@ -165,8 +161,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "1", "true"})
     public void formsLive() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -195,8 +191,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "1", "true", "name: end"})
     public void anchors() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -232,8 +228,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "0", "true"})
     public void anchorsEmpty() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -260,8 +256,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "0", "true"})
     public void applets() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -291,8 +287,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "0", "true"})
     public void appletsEmpty() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -319,8 +315,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "3", "3", "true", "firstEmbed"})
     public void embeds() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -351,8 +347,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "0", "true"})
     public void embedsEmpty() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -379,8 +375,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "3", "3", "true", "firstEmbed"})
     public void plugins() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -411,8 +407,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "0", "true"})
     public void pluginsEmpty() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -439,8 +435,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "3", "3", "true", "firstLink"})
     public void links() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -472,8 +468,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "0", "true"})
     public void linksEmpty() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -500,8 +496,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"parentNode: null", "DIV", "1", "null", "DIV", "button1value", "text1value", "text"})
     public void createElement() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -547,8 +543,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts({"DIV,DIV,http://www.w3.org/1999/xhtml,null,div",
                 "HI:DIV,HI:DIV,http://www.w3.org/1999/xhtml,null,hi:div"})
     public void documentCreateElement2() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -570,14 +566,531 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLUnknownElement]",
+             "InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
+             "InvalidCharacterError/DOMException", "InvalidCharacterError/DOMException",
+             "[object HTMLUnknownElement]",
+             "[object HTMLUnknownElement]", "InvalidCharacterError/DOMException"})
+    public void documentCreateElementUnknown() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function doTest() {\n"
+            + "        try {"
+            + "          var elem = document.createElement('anchor');\n"
+            + "          log(elem);\n"
+            + "        } catch(e) {logEx(e);}\n"
+
+            + "        try {"
+            + "          var elem = document.createElement('not known');\n"
+            + "          log(elem);\n"
+            + "        } catch(e) {logEx(e);}\n"
+
+            + "        try {"
+            + "          var elem = document.createElement('<div');\n"
+            + "          log(elem);\n"
+            + "        } catch(e) {logEx(e);}\n"
+
+            + "        try {"
+            + "          var elem = document.createElement('div>');\n"
+            + "          log(elem);\n"
+            + "        } catch(e) {logEx(e);}\n"
+
+            + "        try {"
+            + "          var elem = document.createElement('<div>');\n"
+            + "          log(elem);\n"
+            + "        } catch(e) {logEx(e);}\n"
+
+            + "        try {"
+            + "          var elem = document.createElement(undefined);\n"
+            + "          log(elem);\n"
+            + "        } catch(e) {logEx(e);}\n"
+
+            + "        try {"
+            + "          var elem = document.createElement(null);\n"
+            + "          log(elem);\n"
+            + "        } catch(e) {logEx(e);}\n"
+
+            + "        try {"
+            + "          var elem = document.createElement(42);\n"
+            + "          log(elem);\n"
+            + "        } catch(e) {logEx(e);}\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "/", ">"},
+            FF = {"", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",",
+                  "/", ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
+                  "{", "|", "}", "~"},
+            FF_ESR = {"", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",",
+                      "/", ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
+                      "{", "|", "}", "~"})
+    @HtmlUnitNYI(
+            CHROME = {"", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",",
+                      "/", ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
+                      "{", "|", "}", "~"},
+            EDGE = {"", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",",
+                    "/", ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
+                    "{", "|", "}", "~"})
+    public void documentCreateElementValidTagNames() throws Exception {
+        expandExpectedAlertsVariables("\\\\");
+
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function doTest() {\n"
+            + "        for(var i=32; i < 127; ++i) {\n"
+            + "          var testChar = String.fromCharCode(i);\n"
+            + "          try {"
+            + "            document.createElement('x' + testChar);\n"
+            + "          } catch(ex) {\n"
+            + "            log(testChar);\n"
+            + "          }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "!", "\"", "#", "$", "%", "&", "'", "(", ")",
+             "*", "+", ",", "-", ".", "/",
+             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+             ";", "<", "=", ">", "?", "@", "[", "§§URL§§", "]", "^", "`",
+             "{", "|", "}", "~"})
+    public void documentCreateElementValidTagNamesFirstChar() throws Exception {
+        expandExpectedAlertsVariables("\\\\");
+
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function doTest() {\n"
+            + "        for(var i=32; i < 127; ++i) {\n"
+            + "          var testChar = String.fromCharCode(i);\n"
+            + "          try {"
+            + "            document.createElement(testChar);\n"
+            + "          } catch(ex) {\n"
+            + "            log(testChar);\n"
+            + "          }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[128-999]",
+            FF = {"[170]", "[181]", "[186]", "[192-214]", "[216-246]", "[248-305]", "[308-318]", "[321-328]",
+                  "[330-382]", "[384-451]", "[461-496]", "[500-501]", "[506-535]", "[592-680]",
+                  "[699-705]", "[902]", "[904-906]", "[908]", "[910-929]",
+                  "[931-974]", "[976-982]", "[986]", "[988]", "[990]", "[992]", "[994-999]"},
+            FF_ESR = {"[170]", "[181]", "[186]", "[192-214]", "[216-246]", "[248-305]", "[308-318]", "[321-328]",
+                      "[330-382]", "[384-451]", "[461-496]", "[500-501]", "[506-535]", "[592-680]",
+                      "[699-705]", "[902]", "[904-906]", "[908]", "[910-929]",
+                      "[931-974]", "[976-982]", "[986]", "[988]", "[990]", "[992]", "[994-999]"})
+    @HtmlUnitNYI(CHROME = {"[170]", "[181]", "[186]", "[192-214]", "[216-246]",
+                           "[248-687]", "[880-883]", "[886-887]", "[891-893]", "[895]",
+                           "[902]", "[904-906]", "[908]", "[910-929]", "[931-999]"},
+            EDGE = {"[170]", "[181]", "[186]", "[192-214]", "[216-246]",
+                    "[248-687]", "[880-883]", "[886-887]", "[891-893]", "[895]",
+                    "[902]", "[904-906]", "[908]", "[910-929]", "[931-999]"},
+            FF = {"[170]", "[181]", "[186]", "[192-214]", "[216-246]",
+                  "[248-687]", "[880-883]", "[886-887]", "[891-893]", "[895]",
+                  "[902]", "[904-906]", "[908]", "[910-929]", "[931-999]"},
+            FF_ESR = {"[170]", "[181]", "[186]", "[192-214]", "[216-246]",
+                      "[248-687]", "[880-883]", "[886-887]", "[891-893]", "[895]",
+                      "[902]", "[904-906]", "[908]", "[910-929]", "[931-999]"})
+    public void documentCreateElementValidTagNames1000() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function doTest() {\n"
+            + "        var lastState = '';\n"
+            + "        var firstValid = 0;\n"
+            + "        for(var i=127; i < 1000; ++i) {\n"
+            + "          var testChar = String.fromCharCode(i);\n"
+            + "          try {"
+            + "            document.createElement(testChar);\n"
+            + "            if ('ok' != lastState) firstValid = i;\n"
+            + "            lastState = 'ok';\n"
+            + "          } catch(ex) {\n"
+            + "            if ('ok' == lastState) {\n"
+            + "              if (firstValid == (i - 1)) {\n"
+            + "                log('[' + firstValid + ']');\n"
+            + "              } else {\n"
+            + "                log('[' + firstValid + '-' + (i - 1) + ']');\n"
+            + "              }\n"
+            + "            }\n"
+            + "            lastState = 'ex';\n"
+            + "          }\n"
+            + "        }\n"
+            + "        if ('ok' == lastState) {\n"
+            + "          if (firstValid == (i - 1)) {\n"
+            + "            log('[' + firstValid + ']');\n"
+            + "          } else {\n"
+            + "            log('[' + firstValid + '-' + (i - 1) + ']');\n"
+            + "          }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[1000-1007]", "[1011]", "[1015-1016]", "[1018-1153]", "[1162-1327]", "[1329-1366]",
+                       "[1369]", "[1376-1414]", "[1416]", "[1488-1514]", "[1519-1522]", "[1568-1599]",
+                       "[1601-1610]", "[1646-1647]", "[1649-1652]", "[1657-1747]", "[1749]", "[1765-1766]",
+                       "[1774-1775]", "[1786-1788]", "[1791]", "[1808]", "[1810-1839]", "[1869-1957]",
+                       "[1969]", "[1994-1999]"},
+            FF = {"[1000-1011]", "[1025-1036]", "[1038-1103]", "[1105-1116]", "[1118-1153]", "[1168-1220]",
+                  "[1223-1224]", "[1227-1228]", "[1232-1259]", "[1262-1269]", "[1272-1273]", "[1329-1366]",
+                  "[1369]", "[1377-1414]", "[1488-1514]", "[1520-1522]", "[1569-1594]", "[1601-1610]",
+                  "[1649-1719]", "[1722-1726]", "[1728-1742]", "[1744-1747]", "[1749]", "[1765-1766]"},
+            FF_ESR = {"[1000-1011]", "[1025-1036]", "[1038-1103]", "[1105-1116]", "[1118-1153]", "[1168-1220]",
+                      "[1223-1224]", "[1227-1228]", "[1232-1259]", "[1262-1269]", "[1272-1273]", "[1329-1366]",
+                      "[1369]", "[1377-1414]", "[1488-1514]", "[1520-1522]", "[1569-1594]", "[1601-1610]",
+                      "[1649-1719]", "[1722-1726]", "[1728-1742]", "[1744-1747]", "[1749]", "[1765-1766]"})
+    @HtmlUnitNYI(CHROME = {"[1000-1013]", "[1015-1153]", "[1162-1327]", "[1329-1366]", "[1376-1416]",
+                           "[1488-1514]", "[1519-1522]", "[1568-1599]", "[1601-1610]", "[1646-1647]",
+                           "[1649-1747]", "[1749]", "[1774-1775]", "[1786-1788]", "[1791]", "[1808]",
+                           "[1810-1839]", "[1869-1957]", "[1969]", "[1994-1999]"},
+            EDGE = {"[1000-1013]", "[1015-1153]", "[1162-1327]", "[1329-1366]", "[1376-1416]",
+                    "[1488-1514]", "[1519-1522]", "[1568-1599]", "[1601-1610]", "[1646-1647]",
+                    "[1649-1747]", "[1749]", "[1774-1775]", "[1786-1788]", "[1791]", "[1808]",
+                    "[1810-1839]", "[1869-1957]", "[1969]", "[1994-1999]"},
+            FF = {"[1000-1013]", "[1015-1153]", "[1162-1327]", "[1329-1366]", "[1376-1416]",
+                  "[1488-1514]", "[1519-1522]", "[1568-1599]", "[1601-1610]", "[1646-1647]",
+                  "[1649-1747]", "[1749]", "[1774-1775]", "[1786-1788]", "[1791]", "[1808]",
+                  "[1810-1839]", "[1869-1957]", "[1969]", "[1994-1999]"},
+            FF_ESR = {"[1000-1013]", "[1015-1153]", "[1162-1327]", "[1329-1366]", "[1376-1416]",
+                      "[1488-1514]", "[1519-1522]", "[1568-1599]", "[1601-1610]", "[1646-1647]",
+                      "[1649-1747]", "[1749]", "[1774-1775]", "[1786-1788]", "[1791]", "[1808]",
+                      "[1810-1839]", "[1869-1957]", "[1969]", "[1994-1999]"})
+    @EnabledOnJre(JRE.JAVA_17)
+    public void documentCreateElementValidTagNames2000() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function doTest() {\n"
+            + "        var lastState = '';\n"
+            + "        var firstValid = 0;\n"
+            + "        for(var i=1000; i < 2000; ++i) {\n"
+            + "          var testChar = String.fromCharCode(i);\n"
+            + "          try {"
+            + "            document.createElement(testChar);\n"
+            + "            if ('ok' != lastState) firstValid = i;\n"
+            + "            lastState = 'ok';\n"
+            + "          } catch(ex) {\n"
+            + "            if ('ok' == lastState) {\n"
+            + "              if (firstValid == (i - 1)) {\n"
+            + "                log('[' + firstValid + ']');\n"
+            + "              } else {\n"
+            + "                log('[' + firstValid + '-' + (i - 1) + ']');\n"
+            + "              }\n"
+            + "            }\n"
+            + "            lastState = 'ex';\n"
+            + "          }\n"
+            + "        }\n"
+            + "        if ('ok' == lastState) {\n"
+            + "          if (firstValid == (i - 1)) {\n"
+            + "            log('[' + firstValid + ']');\n"
+            + "          } else {\n"
+            + "            log('[' + firstValid + '-' + (i - 1) + ']');\n"
+            + "          }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[2000-2026]", "[2048-2069]", "[2112-2136]", "[2144-2154]", "[2160-2183]",
+                       "[2185-2190]", "[2208-2248]", "[2308-2361]", "[2365]", "[2384]", "[2392-2401]",
+                       "[2418-2432]", "[2437-2444]", "[2447-2448]", "[2451-2472]", "[2474-2480]", "[2482]",
+                       "[2486-2489]", "[2493]", "[2510]", "[2524-2525]", "[2527-2529]", "[2544-2545]",
+                       "[2556]", "[2565-2570]", "[2575-2576]", "[2579-2600]", "[2602-2608]", "[2610-2611]",
+                       "[2613-2614]", "[2616-2617]", "[2649-2652]", "[2654]", "[2674-2676]", "[2693-2701]",
+                       "[2703-2705]", "[2707-2728]", "[2730-2736]", "[2738-2739]", "[2741-2745]", "[2749]",
+                       "[2768]", "[2784-2785]", "[2809]", "[2821-2828]", "[2831-2832]", "[2835-2856]",
+                       "[2858-2864]", "[2866-2867]", "[2869-2873]", "[2877]", "[2908-2909]", "[2911-2913]",
+                       "[2929]", "[2947]", "[2949-2954]", "[2958-2960]", "[2962-2965]", "[2969-2970]",
+                       "[2972]", "[2974-2975]", "[2979-2980]", "[2984-2986]", "[2990-2999]"},
+            FF = {"[2309-2361]", "[2365]", "[2392-2401]", "[2437-2444]", "[2447-2448]", "[2451-2472]",
+                  "[2474-2480]", "[2482]", "[2486-2489]", "[2524-2525]", "[2527-2529]", "[2544-2545]",
+                  "[2565-2570]", "[2575-2576]", "[2579-2600]", "[2602-2608]", "[2610-2611]", "[2613-2614]",
+                  "[2616-2617]", "[2649-2652]", "[2654]", "[2674-2676]", "[2693-2699]", "[2701]", "[2703-2705]",
+                  "[2707-2728]", "[2730-2736]", "[2738-2739]", "[2741-2745]", "[2749]", "[2784]", "[2821-2828]",
+                  "[2831-2832]", "[2835-2856]", "[2858-2864]", "[2866-2867]", "[2870-2873]", "[2877]",
+                  "[2908-2909]", "[2911-2913]", "[2949-2954]", "[2958-2960]", "[2962-2965]", "[2969-2970]",
+                  "[2972]", "[2974-2975]", "[2979-2980]", "[2984-2986]", "[2990-2997]", "[2999]"},
+            FF_ESR = {"[2309-2361]", "[2365]", "[2392-2401]", "[2437-2444]", "[2447-2448]", "[2451-2472]",
+                      "[2474-2480]", "[2482]", "[2486-2489]", "[2524-2525]", "[2527-2529]", "[2544-2545]",
+                      "[2565-2570]", "[2575-2576]", "[2579-2600]", "[2602-2608]", "[2610-2611]", "[2613-2614]",
+                      "[2616-2617]", "[2649-2652]", "[2654]", "[2674-2676]", "[2693-2699]", "[2701]", "[2703-2705]",
+                      "[2707-2728]", "[2730-2736]", "[2738-2739]", "[2741-2745]", "[2749]", "[2784]", "[2821-2828]",
+                      "[2831-2832]", "[2835-2856]", "[2858-2864]", "[2866-2867]", "[2870-2873]", "[2877]",
+                      "[2908-2909]", "[2911-2913]", "[2949-2954]", "[2958-2960]", "[2962-2965]", "[2969-2970]",
+                      "[2972]", "[2974-2975]", "[2979-2980]", "[2984-2986]", "[2990-2997]", "[2999]"})
+    @HtmlUnitNYI(CHROME = {"[2000-2026]", "[2048-2069]", "[2112-2136]", "[2144-2154]", "[2208-2228]", "[2230-2247]",
+                           "[2308-2361]", "[2365]", "[2384]", "[2392-2401]", "[2418-2432]", "[2437-2444]",
+                           "[2447-2448]", "[2451-2472]", "[2474-2480]", "[2482]", "[2486-2489]", "[2493]", "[2510]",
+                           "[2524-2525]", "[2527-2529]", "[2544-2545]", "[2556]", "[2565-2570]", "[2575-2576]",
+                           "[2579-2600]", "[2602-2608]", "[2610-2611]", "[2613-2614]", "[2616-2617]", "[2649-2652]",
+                           "[2654]", "[2674-2676]", "[2693-2701]", "[2703-2705]", "[2707-2728]", "[2730-2736]",
+                           "[2738-2739]", "[2741-2745]", "[2749]", "[2768]", "[2784-2785]", "[2809]", "[2821-2828]",
+                           "[2831-2832]", "[2835-2856]", "[2858-2864]", "[2866-2867]", "[2869-2873]", "[2877]",
+                           "[2908-2909]", "[2911-2913]", "[2929]", "[2947]", "[2949-2954]", "[2958-2960]",
+                           "[2962-2965]", "[2969-2970]", "[2972]", "[2974-2975]", "[2979-2980]",
+                           "[2984-2986]", "[2990-2999]"},
+            EDGE = {"[2000-2026]", "[2048-2069]", "[2112-2136]", "[2144-2154]", "[2208-2228]", "[2230-2247]",
+                    "[2308-2361]", "[2365]", "[2384]", "[2392-2401]", "[2418-2432]", "[2437-2444]",
+                    "[2447-2448]", "[2451-2472]", "[2474-2480]", "[2482]", "[2486-2489]", "[2493]", "[2510]",
+                    "[2524-2525]", "[2527-2529]", "[2544-2545]", "[2556]", "[2565-2570]", "[2575-2576]",
+                    "[2579-2600]", "[2602-2608]", "[2610-2611]", "[2613-2614]", "[2616-2617]", "[2649-2652]",
+                    "[2654]", "[2674-2676]", "[2693-2701]", "[2703-2705]", "[2707-2728]", "[2730-2736]",
+                    "[2738-2739]", "[2741-2745]", "[2749]", "[2768]", "[2784-2785]", "[2809]", "[2821-2828]",
+                    "[2831-2832]", "[2835-2856]", "[2858-2864]", "[2866-2867]", "[2869-2873]", "[2877]",
+                    "[2908-2909]", "[2911-2913]", "[2929]", "[2947]", "[2949-2954]", "[2958-2960]",
+                    "[2962-2965]", "[2969-2970]", "[2972]", "[2974-2975]", "[2979-2980]",
+                    "[2984-2986]", "[2990-2999]"},
+            FF = {"[2000-2026]", "[2048-2069]", "[2112-2136]", "[2144-2154]", "[2208-2228]", "[2230-2247]",
+                  "[2308-2361]", "[2365]", "[2384]", "[2392-2401]", "[2418-2432]", "[2437-2444]",
+                  "[2447-2448]", "[2451-2472]", "[2474-2480]", "[2482]", "[2486-2489]", "[2493]", "[2510]",
+                  "[2524-2525]", "[2527-2529]", "[2544-2545]", "[2556]", "[2565-2570]", "[2575-2576]",
+                  "[2579-2600]", "[2602-2608]", "[2610-2611]", "[2613-2614]", "[2616-2617]", "[2649-2652]",
+                  "[2654]", "[2674-2676]", "[2693-2701]", "[2703-2705]", "[2707-2728]", "[2730-2736]",
+                  "[2738-2739]", "[2741-2745]", "[2749]", "[2768]", "[2784-2785]", "[2809]", "[2821-2828]",
+                  "[2831-2832]", "[2835-2856]", "[2858-2864]", "[2866-2867]", "[2869-2873]", "[2877]",
+                  "[2908-2909]", "[2911-2913]", "[2929]", "[2947]", "[2949-2954]", "[2958-2960]",
+                  "[2962-2965]", "[2969-2970]", "[2972]", "[2974-2975]", "[2979-2980]",
+                  "[2984-2986]", "[2990-2999]"},
+            FF_ESR = {"[2000-2026]", "[2048-2069]", "[2112-2136]", "[2144-2154]", "[2208-2228]", "[2230-2247]",
+                      "[2308-2361]", "[2365]", "[2384]", "[2392-2401]", "[2418-2432]", "[2437-2444]",
+                      "[2447-2448]", "[2451-2472]", "[2474-2480]", "[2482]", "[2486-2489]", "[2493]", "[2510]",
+                      "[2524-2525]", "[2527-2529]", "[2544-2545]", "[2556]", "[2565-2570]", "[2575-2576]",
+                      "[2579-2600]", "[2602-2608]", "[2610-2611]", "[2613-2614]", "[2616-2617]", "[2649-2652]",
+                      "[2654]", "[2674-2676]", "[2693-2701]", "[2703-2705]", "[2707-2728]", "[2730-2736]",
+                      "[2738-2739]", "[2741-2745]", "[2749]", "[2768]", "[2784-2785]", "[2809]", "[2821-2828]",
+                      "[2831-2832]", "[2835-2856]", "[2858-2864]", "[2866-2867]", "[2869-2873]", "[2877]",
+                      "[2908-2909]", "[2911-2913]", "[2929]", "[2947]", "[2949-2954]", "[2958-2960]",
+                      "[2962-2965]", "[2969-2970]", "[2972]", "[2974-2975]", "[2979-2980]",
+                      "[2984-2986]", "[2990-2999]"})
+    @EnabledOnJre(JRE.JAVA_17)
+    public void documentCreateElementValidTagNames3000() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function doTest() {\n"
+            + "        var lastState = '';\n"
+            + "        var firstValid = 0;\n"
+            + "        for(var i=2000; i < 3000; ++i) {\n"
+            + "          var testChar = String.fromCharCode(i);\n"
+            + "          try {"
+            + "            document.createElement(testChar);\n"
+            + "            if ('ok' != lastState) firstValid = i;\n"
+            + "            lastState = 'ok';\n"
+            + "          } catch(ex) {\n"
+            + "            if ('ok' == lastState) {\n"
+            + "              if (firstValid == (i - 1)) {\n"
+            + "                log('[' + firstValid + ']');\n"
+            + "              } else {\n"
+            + "                log('[' + firstValid + '-' + (i - 1) + ']');\n"
+            + "              }\n"
+            + "            }\n"
+            + "            lastState = 'ex';\n"
+            + "          }\n"
+            + "        }\n"
+            + "        if ('ok' == lastState) {\n"
+            + "          if (firstValid == (i - 1)) {\n"
+            + "            log('[' + firstValid + ']');\n"
+            + "          } else {\n"
+            + "            log('[' + firstValid + '-' + (i - 1) + ']');\n"
+            + "          }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[3000-3001]", "[3024]", "[3077-3084]", "[3086-3088]", "[3090-3112]", "[3114-3129]",
+                       "[3133]", "[3160-3162]", "[3165]", "[3168-3169]", "[3200]", "[3205-3212]", "[3214-3216]",
+                       "[3218-3240]", "[3242-3251]", "[3253-3257]", "[3261]", "[3293-3294]", "[3296-3297]",
+                       "[3313-3314]", "[3332-3340]", "[3342-3344]", "[3346-3386]", "[3389]", "[3406]",
+                       "[3412-3414]", "[3423-3425]", "[3450-3455]", "[3461-3478]", "[3482-3505]",
+                       "[3507-3515]", "[3517]", "[3520-3526]", "[3585-3632]", "[3634]", "[3648-3653]",
+                       "[3713-3714]", "[3716]", "[3718-3722]", "[3724-3747]", "[3749]", "[3751-3760]",
+                       "[3762]", "[3773]", "[3776-3780]", "[3806-3807]", "[3840]", "[3904-3911]",
+                       "[3913-3948]", "[3976-3980]"},
+            FF = {"[3000-3001]", "[3077-3084]", "[3086-3088]", "[3090-3112]", "[3114-3123]", "[3125-3129]",
+                  "[3168-3169]", "[3205-3212]", "[3214-3216]", "[3218-3240]", "[3242-3251]", "[3253-3257]",
+                  "[3294]", "[3296-3297]", "[3333-3340]", "[3342-3344]", "[3346-3368]", "[3370-3385]",
+                  "[3424-3425]", "[3585-3630]", "[3632]", "[3634-3635]", "[3648-3653]", "[3713-3714]",
+                  "[3716]", "[3719-3720]", "[3722]", "[3725]", "[3732-3735]", "[3737-3743]", "[3745-3747]",
+                  "[3749]", "[3751]", "[3754-3755]", "[3757-3758]", "[3760]", "[3762-3763]", "[3773]",
+                  "[3776-3780]", "[3904-3911]", "[3913-3945]"},
+            FF_ESR = {"[3000-3001]", "[3077-3084]", "[3086-3088]", "[3090-3112]", "[3114-3123]", "[3125-3129]",
+                      "[3168-3169]", "[3205-3212]", "[3214-3216]", "[3218-3240]", "[3242-3251]", "[3253-3257]",
+                      "[3294]", "[3296-3297]", "[3333-3340]", "[3342-3344]", "[3346-3368]", "[3370-3385]",
+                      "[3424-3425]", "[3585-3630]", "[3632]", "[3634-3635]", "[3648-3653]", "[3713-3714]",
+                      "[3716]", "[3719-3720]", "[3722]", "[3725]", "[3732-3735]", "[3737-3743]", "[3745-3747]",
+                      "[3749]", "[3751]", "[3754-3755]", "[3757-3758]", "[3760]", "[3762-3763]", "[3773]",
+                      "[3776-3780]", "[3904-3911]", "[3913-3945]"})
+    @HtmlUnitNYI(CHROME = {"[3000-3001]", "[3024]", "[3077-3084]", "[3086-3088]", "[3090-3112]",
+                           "[3114-3129]", "[3133]", "[3160-3162]", "[3168-3169]", "[3200]", "[3205-3212]",
+                           "[3214-3216]", "[3218-3240]", "[3242-3251]", "[3253-3257]", "[3261]", "[3294]",
+                           "[3296-3297]", "[3313-3314]", "[3332-3340]", "[3342-3344]", "[3346-3386]",
+                           "[3389]", "[3406]", "[3412-3414]", "[3423-3425]", "[3450-3455]",
+                           "[3461-3478]", "[3482-3505]", "[3507-3515]", "[3517]", "[3520-3526]",
+                           "[3585-3632]", "[3634-3635]", "[3648-3653]", "[3713-3714]", "[3716]",
+                           "[3718-3722]", "[3724-3747]", "[3749]", "[3751-3760]", "[3762-3763]", "[3773]",
+                           "[3776-3780]", "[3804-3807]", "[3840]", "[3904-3911]", "[3913-3948]", "[3976-3980]"},
+            EDGE = {"[3000-3001]", "[3024]", "[3077-3084]", "[3086-3088]", "[3090-3112]",
+                    "[3114-3129]", "[3133]", "[3160-3162]", "[3168-3169]", "[3200]", "[3205-3212]",
+                    "[3214-3216]", "[3218-3240]", "[3242-3251]", "[3253-3257]", "[3261]", "[3294]",
+                    "[3296-3297]", "[3313-3314]", "[3332-3340]", "[3342-3344]", "[3346-3386]",
+                    "[3389]", "[3406]", "[3412-3414]", "[3423-3425]", "[3450-3455]",
+                    "[3461-3478]", "[3482-3505]", "[3507-3515]", "[3517]", "[3520-3526]",
+                    "[3585-3632]", "[3634-3635]", "[3648-3653]", "[3713-3714]", "[3716]",
+                    "[3718-3722]", "[3724-3747]", "[3749]", "[3751-3760]", "[3762-3763]", "[3773]",
+                    "[3776-3780]", "[3804-3807]", "[3840]", "[3904-3911]", "[3913-3948]", "[3976-3980]"},
+            FF = {"[3000-3001]", "[3024]", "[3077-3084]", "[3086-3088]", "[3090-3112]",
+                  "[3114-3129]", "[3133]", "[3160-3162]", "[3168-3169]", "[3200]", "[3205-3212]",
+                  "[3214-3216]", "[3218-3240]", "[3242-3251]", "[3253-3257]", "[3261]", "[3294]",
+                  "[3296-3297]", "[3313-3314]", "[3332-3340]", "[3342-3344]", "[3346-3386]",
+                  "[3389]", "[3406]", "[3412-3414]", "[3423-3425]", "[3450-3455]",
+                  "[3461-3478]", "[3482-3505]", "[3507-3515]", "[3517]", "[3520-3526]",
+                  "[3585-3632]", "[3634-3635]", "[3648-3653]", "[3713-3714]", "[3716]",
+                  "[3718-3722]", "[3724-3747]", "[3749]", "[3751-3760]", "[3762-3763]", "[3773]",
+                  "[3776-3780]", "[3804-3807]", "[3840]", "[3904-3911]", "[3913-3948]", "[3976-3980]"},
+            FF_ESR = {"[3000-3001]", "[3024]", "[3077-3084]", "[3086-3088]", "[3090-3112]",
+                      "[3114-3129]", "[3133]", "[3160-3162]", "[3168-3169]", "[3200]", "[3205-3212]",
+                      "[3214-3216]", "[3218-3240]", "[3242-3251]", "[3253-3257]", "[3261]", "[3294]",
+                      "[3296-3297]", "[3313-3314]", "[3332-3340]", "[3342-3344]", "[3346-3386]",
+                      "[3389]", "[3406]", "[3412-3414]", "[3423-3425]", "[3450-3455]",
+                      "[3461-3478]", "[3482-3505]", "[3507-3515]", "[3517]", "[3520-3526]",
+                      "[3585-3632]", "[3634-3635]", "[3648-3653]", "[3713-3714]", "[3716]",
+                      "[3718-3722]", "[3724-3747]", "[3749]", "[3751-3760]", "[3762-3763]", "[3773]",
+                      "[3776-3780]", "[3804-3807]", "[3840]", "[3904-3911]", "[3913-3948]", "[3976-3980]"})
+    @EnabledOnJre(JRE.JAVA_17)
+    public void documentCreateElementValidTagNames4000() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function doTest() {\n"
+            + "        var lastState = '';\n"
+            + "        var firstValid = 0;\n"
+            + "        for(var i=3000; i < 4000; ++i) {\n"
+            + "          var testChar = String.fromCharCode(i);\n"
+            + "          try {"
+            + "            document.createElement(testChar);\n"
+            + "            if ('ok' != lastState) firstValid = i;\n"
+            + "            lastState = 'ok';\n"
+            + "          } catch(ex) {\n"
+            + "            if ('ok' == lastState) {\n"
+            + "              if (firstValid == (i - 1)) {\n"
+            + "                log('[' + firstValid + ']');\n"
+            + "              } else {\n"
+            + "                log('[' + firstValid + '-' + (i - 1) + ']');\n"
+            + "              }\n"
+            + "            }\n"
+            + "            lastState = 'ex';\n"
+            + "          }\n"
+            + "        }\n"
+            + "        if ('ok' == lastState) {\n"
+            + "          if (firstValid == (i - 1)) {\n"
+            + "            log('[' + firstValid + ']');\n"
+            + "          } else {\n"
+            + "            log('[' + firstValid + '-' + (i - 1) + ']');\n"
+            + "          }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Ensures that <tt>document.createElementNS()</tt> works correctly.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"Some:Div", "Some:Div", "myNS", "Some", "Div", "svg", "svg", "http://www.w3.org/2000/svg", "null", "svg"})
     public void createElementNS() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -609,8 +1122,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"Some Text", "9", "3", "Some Text", "#text"})
     public void createTextNode() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -636,8 +1149,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void appendChild() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    var form = document.forms['form1'];\n"
@@ -660,10 +1173,10 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1", "exception"})
+    @Alerts({"2", "HierarchyRequestError/DOMException"})
     public void appendChildAtDocumentLevel() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -677,9 +1190,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "        log(document.childNodes[0].tagName);\n"
             + "        log(document.childNodes[1].tagName);\n"
             + "        log(document.getElementsByTagName('div').length);\n"
-            + "      } catch(ex) {\n"
-            + "        log('exception');\n"
-            + "      }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -696,8 +1207,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("Some Text")
     public void appendChild_textNode() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -722,8 +1233,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true"})
     public void cloneNode() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -751,8 +1262,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void insertBefore() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -776,8 +1287,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("text/javascript")
     public void getElementById_scriptType() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script id='script1' type='text/javascript'>\n"
             + LOG_TITLE_FUNCTION
             + "  doTest=function() {\n"
@@ -796,8 +1307,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§script/")
     public void getElementById_scriptSrc() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -823,8 +1334,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("parentDiv")
     public void parentNode_Nested() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -845,8 +1356,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void parentNode_Document() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -865,8 +1376,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void parentNode_CreateElement() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -886,8 +1397,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("parentDiv")
     public void parentNode_AppendChild() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -910,8 +1421,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "HTML", "true"})
     public void documentElement() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -933,8 +1444,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("childDiv")
     public void firstChild_Nested() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -955,8 +1466,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("childDiv")
     public void firstChild_AppendChild() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -981,8 +1492,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("childDiv")
     public void lastChild_Nested() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -1003,8 +1514,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("childDiv")
     public void lastChild_AppendChild() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    var childDiv1=document.getElementById('childDiv1');\n"
@@ -1028,8 +1539,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("nextDiv")
     public void nextSibling_Nested() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    var div1 = document.getElementById('previousDiv');\n"
@@ -1050,8 +1561,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("nextDiv")
     public void nextSibling_AppendChild() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -1076,8 +1587,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("previousDiv")
     public void previousSibling_Nested() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -1098,8 +1609,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("previousDiv")
     public void previousSibling_AppendChild() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -1123,8 +1634,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"tangerine", "ginger"})
     public void allProperty_KeyByName() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1151,8 +1662,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("DIV")
     public void allProperty_CalledDuringPageLoad() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='ARSMenuDiv1' style='VISIBILITY: hidden; POSITION: absolute; z-index: 1000000'></div>\n"
             + "<script language='Javascript'>\n"
             + LOG_TITLE_FUNCTION
@@ -1169,10 +1680,12 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§")
     public void referrer() throws Exception {
-        final String firstHtml = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<a href='" + URL_SECOND + "'>click me</a></body></html>";
 
-        final String secondHtml = "<html><head><title>Second</title></head><body onload='alert(document.referrer);'>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body onload='alert(document.referrer);'>\n"
             + "</form></body></html>";
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
@@ -1253,8 +1766,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("button")
     public void getElementsByTagName_CaseInsensitive() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
@@ -1277,8 +1790,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void getElementsByTagName_Inline() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script type=\"text/javascript\">\n"
             + LOG_TITLE_FUNCTION
             + "log(document.getElementsByTagName('script').length);\n"
@@ -1294,7 +1807,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void getElementsByTagName_LoadScript() throws Exception {
-        final String html = "<html><body><script src=\"" + URL_FIRST + "script\"></script></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><script src=\"" + URL_FIRST + "script\"></script></body></html>";
 
         final String script = "alert(document.getElementsByTagName('script').length);\n";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "script"), script, "text/javascript");
@@ -1308,8 +1822,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "<nested>Three</nested>", "Four", "1", "Two", "0", "0"})
     public void getElementsByTagNameXml() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1341,7 +1855,7 @@ public class DocumentTest extends WebDriverTestCase {
 
             + "    res = xmlDoc.getElementsByTagName('rEsulT');\n"
             + "    log(res.length);\n"
-            + "  } catch(e) {log('exception ' + e)}\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -1353,8 +1867,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"HTML", "HEAD", "TITLE", "SCRIPT", "BODY"})
     public void all_WithParentheses() throws Exception {
-        final String html
-            = "<html><head><title></title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title></title>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1382,8 +1896,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"HTML", "HEAD", "TITLE", "SCRIPT", "BODY"})
     public void all_IndexByInt() throws Exception {
-        final String html
-            = "<html><head><title></title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title></title>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1404,8 +1918,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("HTML")
     public void all_Item() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1481,8 +1995,7 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     private void namedItem(final String name) throws Exception {
-        final String html
-            = "<!doctype html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  var res = '';"
@@ -1521,10 +2034,10 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void all_tags() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1539,7 +2052,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "    log(document.all.tags('input').item(1).name);\n"
             + "    // Make sure tags() returns an empty element array if there are no matches.\n"
             + "    log(document.all.tags('xxx').length);\n"
-            + "  } catch (e) { log('exception') }\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<input type='text' name='a' value='1'>\n"
@@ -1556,7 +2069,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "undefined"})
     public void all() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1578,8 +2092,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "2"})
     public void all_Caching() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -1599,7 +2113,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null", "null"})
     public void all_NotExisting() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1619,8 +2134,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"value1", "value1", "value2", "value2"})
     public void getElementsByName() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1647,7 +2162,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("IAmTheBody")
     public void body_read() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -1664,7 +2180,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("FRAMESET")
     public void body_readFrameset() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<frameset onload='alert(document.body.tagName)'>\n"
             + "<frame src='about:blank' name='foo'>\n"
             + "</frameset></html>";
@@ -1679,8 +2196,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "3", "3", "true", "firstImage"})
     public void images() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1711,8 +2228,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "0", "true"})
     public void imagesEmpty() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1739,8 +2256,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "2", "2", "true"})
     public void allImages() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1771,8 +2288,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("correct title")
     public void settingTitle() throws Exception {
-        final String html
-            = "<html><head><title>Bad Title</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>Bad Title</title></head>\n"
             + "<body>\n"
             + "<script>\n"
             + "  document.title = 'correct title';\n"
@@ -1791,7 +2308,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("correct title")
     public void settingMissingTitle() throws Exception {
-        final String html = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + "  document.title = 'correct title';\n"
@@ -1809,7 +2327,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("correct title")
     public void settingBlankTitle() throws Exception {
-        final String html = "<html><head><title></title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title></title></head>\n"
             + "<body>\n"
             + "<script>\n"
             + "  document.title = 'correct title';\n"
@@ -1827,7 +2346,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("foo")
     public void title() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  alert(document.title);\n"
             + "}\n"
@@ -1847,7 +2367,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"loading", "complete"})
     public void readyState() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function testIt() {\n"
@@ -1868,8 +2389,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void documentWithNoBody() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  log(document.body);\n"
@@ -1885,8 +2406,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "byId"})
     public void getElementById_findByName() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "<input type='text' name='findMe'>\n"
             + "<input type='text' id='findMe2' name='byId'>\n"
@@ -1909,7 +2430,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"myImageId", "2", "FORM", "undefined", "undefined", "undefined", "undefined"})
     public void directAccessByName() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -1940,20 +2462,20 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
      /**
-     * @throws Exception if the test fails
-     */
+      * @throws Exception if the test fails
+      */
     @Test
     @Alerts({"[object HTMLCollection]", "2"})
     public void scriptsArray() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script lang='JavaScript'>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    log(document.scripts);\n"
             + "    try {\n"
             + "      log(document.scripts.length);\n" // This line used to blow up
-            + "    }\n"
-            + "    catch (e) { log('exception occured') }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></head><body onload='doTest();'>\n"
             + "<script>var scriptTwo = 1;</script>\n"
@@ -1969,7 +2491,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"object", "FORM"})
     public void precedence() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -1989,7 +2512,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false"})
     public void defaultViewAndParentWindow() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(document.defaultView == window);\n"
@@ -2007,7 +2531,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "123"})
     public void put() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  log(document.foo);\n"
@@ -2028,7 +2553,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts({"[object HTMLDocument]", "[object HTMLBodyElement]",
                 "true", "true", "true", "false", "true", "false"})
     public void documentCloneNode() throws Exception {
-        final String html = "<html><body id='hello' onload='doTest()'>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body id='hello' onload='doTest()'>\n"
                 + "  <script id='jscript'>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function doTest() {\n"
@@ -2055,19 +2581,16 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void createStyleSheet() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var s = document.createStyleSheet('foo.css', 1);\n"
             + "  log(s);\n"
-            + "}\n"
-            + "catch(ex) {\n"
-            + "  log('exception');\n"
-            + "}\n"
+            + "} catch(e) {logEx(e);}\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
@@ -2078,25 +2601,25 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("#document-fragment_null_11_null_0_")
+    @Alerts({"#document-fragment", "null", "11", "null", "0"})
     public void createDocumentFragment() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<title>foo</title><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    var fragment = document.createDocumentFragment();\n"
-            + "    var textarea = document.getElementById('myTextarea');\n"
-            + "    textarea.value += fragment.nodeName + '_';\n"
-            + "    textarea.value += fragment.nodeValue + '_';\n"
-            + "    textarea.value += fragment.nodeType + '_';\n"
-            + "    textarea.value += fragment.parentNode + '_';\n"
-            + "    textarea.value += fragment.childNodes.length + '_';\n"
+            + "    log(fragment.nodeName);\n"
+            + "    log(fragment.nodeValue);\n"
+            + "    log(fragment.nodeType);\n"
+            + "    log(fragment.parentNode);\n"
+            + "    log(fragment.childNodes.length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
-            + "<textarea id='myTextarea' cols='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-        final String expected = getExpectedAlerts()[0];
-        assertEquals(expected, driver.findElement(By.id("myTextarea")).getAttribute("value"));
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -2130,14 +2653,14 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("NotSupportedError/DOMException")
     public void createEvent_Bogus() throws Exception {
         createEvent("Bogus");
     }
 
     private void createEvent(final String eventType) throws Exception {
-        final String html =
-              "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -2147,7 +2670,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "  log(e);\n"
             + "  log(e.cancelable);\n"
             + "}\n"
-            + "catch (e) { log('exception') }\n"
+            + "catch(e) { logEx(e) }\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
@@ -2160,8 +2683,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null", "[object HTMLDivElement]"})
     public void createEvent_target() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body onload='test()'>\n"
             + "    <div id='d' onclick='log(event.target)'>abc</div>\n"
             + "    <script>\n"
@@ -2174,7 +2697,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "               1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
             + "          log(event.target);\n"
             + "          document.getElementById('d').dispatchEvent(event);\n"
-            + "        } catch (e) { log('exception') }\n"
+            + "        } catch(e) { logEx(e) }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
@@ -2189,8 +2712,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("function onload(event) { log(\"hi\") }")
     public void createEvent_overridden() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body onload='test()'>\n"
             + "    <div id='d' onclick='log(onload)' onload='log(\"hi\")'>abc</div>\n"
             + "    <script>\n"
@@ -2201,7 +2724,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "          event.initMouseEvent('click', true, true, window,\n"
             + "               1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
             + "          document.getElementById('d').dispatchEvent(event);\n"
-            + "        } catch (e) { log('exception') }\n"
+            + "        } catch(e) { logEx(e) }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
@@ -2215,10 +2738,13 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("test")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "null",
+            EDGE = "null",
+            FF = "null",
+            FF_ESR = "null")
     public void createEvent_caller() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body onload='test()'>\n"
             + "    <div id='d' onclick='var c = arguments.callee.caller; log(c ? c.name : c)'>abc</div>\n"
             + "    <script>\n"
@@ -2229,7 +2755,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "          event.initMouseEvent('click', true, true, window,\n"
             + "               1, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
             + "          document.getElementById('d').dispatchEvent(event);\n"
-            + "        } catch (e) { log('exception') }\n"
+            + "        } catch(e) { logEx(e) }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
@@ -2242,10 +2768,9 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    @NotYetImplemented
     public void caller() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -2266,8 +2791,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("onload")
     public void caller_event() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body onload='test()'>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -2286,10 +2811,10 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void createEventObject_IE() throws Exception {
-        final String html =
-              "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -2297,9 +2822,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "  log(e != null);\n"
             + "  log(typeof e);\n"
             + "  log(e);\n"
-            + "} catch(ex) {\n"
-            + "  log('exception');\n"
-            + "}\n"
+            + "} catch(e) {logEx(e);}\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
@@ -2312,7 +2835,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void elementFromPoint() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2330,7 +2854,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object StyleSheetList]", "0", "true"})
     public void styleSheets() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2365,7 +2890,8 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     private void designMode(final String doc) throws Exception {
-        final String html = "<html><body><iframe name='f' id='f'></iframe><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><iframe name='f' id='f'></iframe><script>\n"
             + LOG_TITLE_FUNCTION
             + "var d = " + doc + ";\n"
             + "log(d.designMode);\n"
@@ -2396,29 +2922,32 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Retry
     @Alerts(DEFAULT = {"0", "0", "0"},
             FF = {"0", "1", "1"},
             FF_ESR = {"0", "1", "1"})
     public void designMode_createsSelectionRange() throws Exception {
-        final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";
-        final String html2 = "<html><body onload='test()'>\n"
+        final String html1 = DOCTYPE_HTML
+            + "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";
+        final String html2 = DOCTYPE_HTML
+            + "<html><body onload='test()'>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  var selection = document.selection;\n"
             + "  if(!selection) selection = window.getSelection();\n"
             + "  function test() {\n"
-            + "    alert(selection.rangeCount);\n"
+            + "    log(selection.rangeCount);\n"
             + "    document.designMode = 'on';\n"
-            + "    alert(selection.rangeCount);\n"
+            + "    log(selection.rangeCount);\n"
             + "    document.designMode = 'off';\n"
-            + "    alert(selection.rangeCount);\n"
+            + "    log(selection.rangeCount);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
-        loadPageWithAlerts2(html1);
+        loadPage2(html1);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -2430,7 +2959,8 @@ public class DocumentTest extends WebDriverTestCase {
             CHROME = {"false", "false"},
             EDGE = {"false", "false"})
     public void execCommand() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2439,7 +2969,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(document.execCommand('foo', false, null));\n"
             + "    }\n"
-            + "    catch (e) {\n"
+            + "    catch(e) {\n"
             + "      log('command foo not supported');\n"
             + "    }\n"
             + "    document.designMode = 'Off';\n"
@@ -2456,7 +2986,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLHeadingElement]")
     public void evaluate_caseInsensitiveAttribute() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2479,7 +3010,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLHtmlElement]")
     public void evaluate_caseInsensitiveTagName() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2507,8 +3039,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1: null", "2: null", "3: [object HTMLBodyElement]"})
     public void noBodyTag() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -2531,8 +3063,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1: [object HTMLBodyElement]", "2: [object HTMLBodyElement]"})
     public void noBodyTag_IFrame() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2559,9 +3091,9 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     public void fireEvent() throws Exception {
-        final String html =
-              "<html><body>\n"
-            + " <span id='s' onclick='\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <span id='s' onclick='\n"
             + "  if(document.fireEvent) {\n"
             + "    document.onkeydown = function() {log(\"x\")};\n"
             + "    document.fireEvent(\"onkeydown\");\n"
@@ -2582,7 +3114,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void ownerDocument() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body id='hello' onload='doTest()'>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -2601,7 +3134,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLDocument]", "true"})
     public void getRootNode() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body id='hello' onload='doTest()'>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -2624,7 +3158,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts({"null", "text1", "not available"})
     // the execution order is not yet correct: the onfocus is called during onload not after it
     public void setActive() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  log(document.activeElement);\n"
@@ -2657,7 +3192,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"123", "captured"})
     public void captureEvents() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function t() { log('captured'); }\n"
@@ -2682,7 +3218,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "true", "true", "false", "false"})
     public void contains() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2712,7 +3248,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object Comment]", "false"})
     public void createComment() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2736,7 +3273,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"books", "books", "3", "#text", "0"})
     public void createAttribute() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2772,7 +3310,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1"})
     public void getElementsByTagNameNS() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -2807,7 +3346,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void oninput() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -2829,7 +3369,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "42"})
     public void documentDefineProperty() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -2859,7 +3400,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§", "undefined"})
     public void urlUnencoded() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -2886,7 +3428,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object HTMLHtmlElement]"})
     public void children() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -2917,7 +3460,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"application/xml", "text/html"})
     public void contentType() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -2942,7 +3486,8 @@ public class DocumentTest extends WebDriverTestCase {
             FF = {"undefined", "undefined"},
             FF_ESR = {"undefined", "undefined"})
     public void xmlEncoding() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -2967,7 +3512,8 @@ public class DocumentTest extends WebDriverTestCase {
             FF = {"undefined", "undefined"},
             FF_ESR = {"undefined", "undefined"})
     public void xmlStandalone() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -2992,7 +3538,8 @@ public class DocumentTest extends WebDriverTestCase {
             FF = {"undefined", "undefined"},
             FF_ESR = {"undefined", "undefined"})
     public void xmlVersion() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -3015,7 +3562,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null"})
     public void rootElement() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -3038,7 +3586,8 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object HTMLHtmlElement]", "[object HTMLHtmlElement]"})
     public void firstElementChild() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -3191,12 +3740,13 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"about:blank", "about:blank", "undefined", "null", "null"})
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void newDoc() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -3210,12 +3760,175 @@ public class DocumentTest extends WebDriverTestCase {
             + "        log(doc.origin);\n"
             + "        log(doc.firstElementChild);\n"
             + "        log(doc.defaultView);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'></body>\n"
             + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "0", "8", "1256"},
+            EDGE = {"0", "0", "8", "1248"})
+    @HtmlUnitNYI(EDGE = {"0", "0", "8", "1256"})
+    public void documentElementBoundingClientRect() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let rect = document.documentElement.getBoundingClientRect();\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "0", "621", "1256"},
+            EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "8", "1256"},
+            FF_ESR = {"0", "0", "8", "1256"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "613", "1256"},
+            EDGE = {"0", "0", "613", "1256"},
+            FF = {"0", "0", "613", "1256"},
+            FF_ESR = {"0", "0", "613", "1256"})
+    public void documentElementBoundingClientRectQuirks() throws Exception {
+        final String html =
+            "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let rect = document.documentElement.getBoundingClientRect();\n"
+            + "  log(rect.top);\n"
+            + "  log(rect.left);\n"
+            + "  log(rect.bottom);\n"
+            + "  log(rect.right);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "0", "8", "1256"},
+            EDGE = {"0", "0", "8", "1248"})
+    @HtmlUnitNYI(EDGE = {"0", "0", "8", "1256"})
+    public void documentElementOffset() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let doc = document.documentElement;\n"
+            + "  log(doc.offsetTop);\n"
+            + "  log(doc.offsetLeft);\n"
+            + "  log(doc.offsetHeight);\n"
+            + "  log(doc.offsetWidth);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "0", "621", "1256"},
+            EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "8", "1256"},
+            FF_ESR = {"0", "0", "8", "1256"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "613", "1256"},
+            EDGE = {"0", "0", "613", "1256"},
+            FF = {"0", "0", "613", "1256"},
+            FF_ESR = {"0", "0", "613", "1256"})
+    public void documentElementOffsetQuirks() throws Exception {
+        final String html =
+            "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  let doc = document.documentElement;\n"
+            + "  log(doc.offsetTop);\n"
+            + "  log(doc.offsetLeft);\n"
+            + "  log(doc.offsetHeight);\n"
+            + "  log(doc.offsetWidth);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "0", "621", "1256"},
+            EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "674", "1256"},
+            FF_ESR = {"0", "0", "674", "1256"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "605", "1256"},
+            EDGE = {"0", "0", "605", "1256"},
+            FF = {"0", "0", "605", "1256"},
+            FF_ESR = {"0", "0", "605", "1256"})
+    public void documentElementClientWidthHeight() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.documentElement.clientTop);\n"
+            + "  log(document.documentElement.clientLeft);\n"
+            + "  log(document.documentElement.clientHeight);\n"
+            + "  log(document.documentElement.clientWidth);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "0", "621", "1256"},
+            EDGE = {"0", "0", "630", "1248"},
+            FF = {"0", "0", "8", "1256"},
+            FF_ESR = {"0", "0", "8", "1256"})
+    @HtmlUnitNYI(CHROME = {"0", "0", "605", "1256"},
+            EDGE = {"0", "0", "605", "1256"},
+            FF = {"0", "0", "605", "1256"},
+            FF_ESR = {"0", "0", "605", "1256"})
+    public void documentElementClientWidthHeightQuirks() throws Exception {
+        final String html =
+            "<html>"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.documentElement.clientTop);\n"
+            + "  log(document.documentElement.clientLeft);\n"
+            + "  log(document.documentElement.clientHeight);\n"
+            + "  log(document.documentElement.clientWidth);\n"
+            + "</script>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

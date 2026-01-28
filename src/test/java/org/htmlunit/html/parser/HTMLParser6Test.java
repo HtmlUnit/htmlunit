@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,14 @@
 package org.htmlunit.html.parser;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for {@link HTMLParser}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLParser6Test extends WebDriverTestCase {
 
     /**
@@ -123,6 +120,81 @@ public class HTMLParser6Test extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <select><option id='myOption'>op1</option></select>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<div id=\"myTest\"></div><div a<b=\"7\">xy</div> ")
+    public void fragmentParserLtInAttributeName() throws Exception {
+        final String fragment = "<div a<b=7>xy</div>";
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var element = document.getElementById('myTest');\n"
+            + "    var range = element.ownerDocument.createRange();\n"
+            + "    range.setStartAfter(element);\n"
+            + "    var fragment = range.createContextualFragment('" + fragment + "');\n"
+            + "    element.parentNode.insertBefore(fragment, element.nextSibling);\n"
+            + "    log(element.parentNode.innerHTML);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myTest'></div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<div id=\"myTest\"></div><div <ab=\"7\">xy</div> ")
+    public void fragmentParserLtFirstInAttributeName() throws Exception {
+        final String fragment = "<div <ab=7>xy</div>";
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var element = document.getElementById('myTest');\n"
+            + "    var range = element.ownerDocument.createRange();\n"
+            + "    range.setStartAfter(element);\n"
+            + "    var fragment = range.createContextualFragment('" + fragment + "');\n"
+            + "    element.parentNode.insertBefore(fragment, element.nextSibling);\n"
+            + "    log(element.parentNode.innerHTML);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myTest'></div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<div id=\"myTest\"></div><div 7=\"ab\">xy</div> ")
+    public void fragmentParserNumericAttributeName() throws Exception {
+        final String fragment = "<div 7=\"ab\">xy</div>";
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var element = document.getElementById('myTest');\n"
+            + "    var range = element.ownerDocument.createRange();\n"
+            + "    range.setStartAfter(element);\n"
+            + "    var fragment = range.createContextualFragment('" + fragment + "');\n"
+            + "    element.parentNode.insertBefore(fragment, element.nextSibling);\n"
+            + "    log(element.parentNode.innerHTML);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myTest'></div>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

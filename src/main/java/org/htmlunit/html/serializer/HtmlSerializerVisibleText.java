@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,12 @@ import static org.htmlunit.css.CssStyleSheet.BLOCK;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes.Definition;
+import org.htmlunit.html.DomCDataSection;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -58,6 +58,7 @@ import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.html.HtmlUnorderedList;
 import org.htmlunit.html.TableRowGroup;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder.Mode;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Special serializer to generate the output we need
@@ -105,80 +106,83 @@ public class HtmlSerializerVisibleText {
      * @param mode the {@link Mode} to use for processing
      */
     protected void appendNode(final HtmlSerializerTextBuilder builder, final DomNode node, final Mode mode) {
-        if (node instanceof DomText) {
-            appendText(builder, (DomText) node, mode);
+        if (node instanceof DomCDataSection) {
+            // ignore
         }
-        else if (node instanceof DomComment) {
-            appendComment(builder, (DomComment) node, mode);
+        else if (node instanceof DomText text1) {
+            appendText(builder, text1, mode);
         }
-        else if (node instanceof HtmlBreak) {
-            appendBreak(builder, (HtmlBreak) node, mode);
+        else if (node instanceof DomComment comment) {
+            appendComment(builder, comment, mode);
         }
-        else if (node instanceof HtmlHiddenInput) {
-            appendHiddenInput(builder, (HtmlHiddenInput) node, mode);
+        else if (node instanceof HtmlBreak break1) {
+            appendBreak(builder, break1, mode);
         }
-        else if (node instanceof HtmlScript) {
-            appendScript(builder, (HtmlScript) node, mode);
+        else if (node instanceof HtmlHiddenInput input4) {
+            appendHiddenInput(builder, input4, mode);
         }
-        else if (node instanceof HtmlStyle) {
-            appendStyle(builder, (HtmlStyle) node, mode);
+        else if (node instanceof HtmlScript script1) {
+            appendScript(builder, script1, mode);
         }
-        else if (node instanceof HtmlNoFrames) {
-            appendNoFrames(builder, (HtmlNoFrames) node, mode);
+        else if (node instanceof HtmlStyle style) {
+            appendStyle(builder, style, mode);
         }
-        else if (node instanceof HtmlTextArea) {
-            appendTextArea(builder, (HtmlTextArea) node, mode);
+        else if (node instanceof HtmlNoFrames frames) {
+            appendNoFrames(builder, frames, mode);
         }
-        else if (node instanceof HtmlTitle) {
-            appendTitle(builder, (HtmlTitle) node, mode);
+        else if (node instanceof HtmlTextArea area) {
+            appendTextArea(builder, area, mode);
         }
-        else if (node instanceof HtmlTableRow) {
-            appendTableRow(builder, (HtmlTableRow) node, mode);
+        else if (node instanceof HtmlTitle title) {
+            appendTitle(builder, title, mode);
         }
-        else if (node instanceof HtmlSelect) {
-            appendSelect(builder, (HtmlSelect) node, mode);
+        else if (node instanceof HtmlTableRow row) {
+            appendTableRow(builder, row, mode);
         }
-        else if (node instanceof HtmlOption) {
-            appendOption(builder, (HtmlOption) node, mode);
+        else if (node instanceof HtmlSelect select) {
+            appendSelect(builder, select, mode);
         }
-        else if (node instanceof HtmlSubmitInput) {
-            appendSubmitInput(builder, (HtmlSubmitInput) node, mode);
+        else if (node instanceof HtmlOption option) {
+            appendOption(builder, option, mode);
         }
-        else if (node instanceof HtmlResetInput) {
-            appendResetInput(builder, (HtmlResetInput) node, mode);
+        else if (node instanceof HtmlSubmitInput input3) {
+            appendSubmitInput(builder, input3, mode);
         }
-        else if (node instanceof HtmlCheckBoxInput) {
-            appendCheckBoxInput(builder, (HtmlCheckBoxInput) node, mode);
+        else if (node instanceof HtmlResetInput input2) {
+            appendResetInput(builder, input2, mode);
         }
-        else if (node instanceof HtmlRadioButtonInput) {
-            appendRadioButtonInput(builder, (HtmlRadioButtonInput) node, mode);
+        else if (node instanceof HtmlCheckBoxInput input1) {
+            appendCheckBoxInput(builder, input1, mode);
+        }
+        else if (node instanceof HtmlRadioButtonInput input) {
+            appendRadioButtonInput(builder, input, mode);
         }
         else if (node instanceof HtmlInput) {
             // nothing
         }
-        else if (node instanceof HtmlTable) {
-            appendTable(builder, (HtmlTable) node, mode);
+        else if (node instanceof HtmlTable table) {
+            appendTable(builder, table, mode);
         }
-        else if (node instanceof HtmlOrderedList) {
-            appendOrderedList(builder, (HtmlOrderedList) node, mode);
+        else if (node instanceof HtmlOrderedList list1) {
+            appendOrderedList(builder, list1, mode);
         }
-        else if (node instanceof HtmlUnorderedList) {
-            appendUnorderedList(builder, (HtmlUnorderedList) node, mode);
+        else if (node instanceof HtmlUnorderedList list) {
+            appendUnorderedList(builder, list, mode);
         }
-        else if (node instanceof HtmlPreformattedText) {
-            appendPreformattedText(builder, (HtmlPreformattedText) node, mode);
+        else if (node instanceof HtmlPreformattedText text) {
+            appendPreformattedText(builder, text, mode);
         }
-        else if (node instanceof HtmlInlineFrame) {
-            appendInlineFrame(builder, (HtmlInlineFrame) node, mode);
+        else if (node instanceof HtmlInlineFrame frame) {
+            appendInlineFrame(builder, frame, mode);
         }
-        else if (node instanceof HtmlMenu) {
-            appendMenu(builder, (HtmlMenu) node, mode);
+        else if (node instanceof HtmlMenu menu) {
+            appendMenu(builder, menu, mode);
         }
-        else if (node instanceof HtmlDetails) {
-            appendDetails(builder, (HtmlDetails) node, mode);
+        else if (node instanceof HtmlDetails details) {
+            appendDetails(builder, details, mode);
         }
-        else if (node instanceof HtmlNoScript && node.getPage().getWebClient().isJavaScriptEnabled()) {
-            appendNoScript(builder, (HtmlNoScript) node, mode);
+        else if (node instanceof HtmlNoScript script && node.getPage().getWebClient().isJavaScriptEnabled()) {
+            appendNoScript(builder, script, mode);
         }
         else {
             appendDomNode(builder, node, mode);
@@ -198,9 +202,9 @@ public class HtmlSerializerVisibleText {
         if (domNode instanceof HtmlBody) {
             block = false;
         }
-        else if (domNode instanceof DomElement) {
+        else if (domNode instanceof DomElement element) {
             final WebWindow window = domNode.getPage().getEnclosingWindow();
-            final String display = window.getComputedStyle((DomElement) domNode, null).getDisplay();
+            final String display = window.getComputedStyle(element, null).getDisplay();
             block = BLOCK.equals(display);
         }
         else {
@@ -374,11 +378,11 @@ public class HtmlSerializerVisibleText {
             final HtmlTableRow htmlTableRow, final Mode mode) {
         boolean first = true;
         for (final HtmlTableCell cell : htmlTableRow.getCells()) {
-            if (!first) {
-                builder.appendBlank();
+            if (first) {
+                first = false;
             }
             else {
-                first = false;
+                builder.appendBlank();
             }
             appendChildren(builder, cell, mode); // trim?
         }
@@ -512,9 +516,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendOption(final HtmlSerializerTextBuilder builder,
             final HtmlOption htmlOption, final Mode mode) {
-        builder.ignoreHtmlBreaks();
         appendChildren(builder, htmlOption, mode);
-        builder.processHtmlBreaks();
     }
 
     /**
@@ -598,8 +600,8 @@ public class HtmlSerializerVisibleText {
         if (isDisplayed(htmlInlineFrame)) {
             builder.appendBlockSeparator();
             final Page page = htmlInlineFrame.getEnclosedPage();
-            if (page instanceof SgmlPage) {
-                builder.append(((SgmlPage) page).asNormalizedText(), mode);
+            if (page instanceof SgmlPage sgmlPage) {
+                builder.append(sgmlPage.asNormalizedText(), mode);
             }
             builder.appendBlockSeparator();
         }
@@ -682,10 +684,10 @@ public class HtmlSerializerVisibleText {
             if (window.getWebClient().getOptions().isCssEnabled()) {
                 DomNode node = domNode;
                 while (node != null) {
-                    if (node instanceof DomElement) {
-                        final ComputedCssStyleDeclaration style = window.getComputedStyle((DomElement) node, null);
+                    if (node instanceof DomElement element) {
+                        final ComputedCssStyleDeclaration style = window.getComputedStyle(element, null);
                         final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
-                        if (StringUtils.isNoneEmpty(value)) {
+                        if (!StringUtils.isEmptyOrNull(value)) {
                             if ("normal".equalsIgnoreCase(value)) {
                                 return Mode.WHITE_SPACE_NORMAL;
                             }
@@ -715,10 +717,10 @@ public class HtmlSerializerVisibleText {
         if (page != null) {
             final WebWindow window = page.getEnclosingWindow();
             if (window.getWebClient().getOptions().isCssEnabled()) {
-                if (domNode instanceof DomElement) {
-                    final ComputedCssStyleDeclaration style = window.getComputedStyle((DomElement) domNode, null);
+                if (domNode instanceof DomElement element) {
+                    final ComputedCssStyleDeclaration style = window.getComputedStyle(element, null);
                     final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
-                    if (StringUtils.isNoneEmpty(value)) {
+                    if (!StringUtils.isEmptyOrNull(value)) {
                         if ("normal".equalsIgnoreCase(value)) {
                             return Mode.WHITE_SPACE_NORMAL;
                         }
@@ -767,7 +769,7 @@ public class HtmlSerializerVisibleText {
 
             /**
              * Sequences of white space are collapsed. Lines are broken
-             * at newline characters, at <br>, and as necessary
+             * at newline characters, at <br> and as necessary
              * to fill line boxes.
              */
             WHITE_SPACE_PRE_LINE
@@ -787,7 +789,6 @@ public class HtmlSerializerVisibleText {
         private final StringBuilder builder_;
         private int trimRightPos_;
         private boolean contentAdded_;
-        private boolean ignoreHtmlBreaks_;
 
         /**
          * Ctor.
@@ -815,9 +816,9 @@ public class HtmlSerializerVisibleText {
             }
 
             length--;
-            int i = -1;
-            for (char c : content.toCharArray()) {
-                i++;
+            final int contentLength = content.length();
+            for (int i = 0; i < contentLength; i++) {
+                char c = content.charAt(i);
 
                 // handle \r
                 if (c == '\r') {
@@ -985,10 +986,6 @@ public class HtmlSerializerVisibleText {
          * @param mode the {@link Mode}
          */
         public void appendBreak(final Mode mode) {
-            if (ignoreHtmlBreaks_) {
-                return;
-            }
-
             builder_.setLength(trimRightPos_);
 
             builder_.append('\n');
@@ -1044,20 +1041,6 @@ public class HtmlSerializerVisibleText {
          */
         public void resetContentAdded() {
             contentAdded_ = false;
-        }
-
-        /**
-         * Ignore the following html breaks in the content to be added.
-         */
-        public void ignoreHtmlBreaks() {
-            ignoreHtmlBreaks_ = true;
-        }
-
-        /**
-         * Prozess the following html breaks in the content to be added.
-         */
-        public void processHtmlBreaks() {
-            ignoreHtmlBreaks_ = false;
         }
 
         /**

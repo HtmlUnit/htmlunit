@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
@@ -61,6 +60,7 @@ import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.html.HtmlUnorderedList;
 import org.htmlunit.html.TableRowGroup;
 import org.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder.Mode;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Utility to handle conversion from HTML code to string.
@@ -108,14 +108,14 @@ public class HtmlSerializerNormalizedText {
      * @param node the node to process
      */
     protected void appendNode(final HtmlSerializerTextBuilder builder, final DomNode node) {
-        if (node instanceof DomText) {
-            appendText(builder, (DomText) node);
+        if (node instanceof DomText text1) {
+            appendText(builder, text1);
         }
         else if (node instanceof DomComment) {
             // nothing to do
         }
-        else if (node instanceof HtmlBreak) {
-            appendBreak(builder, (HtmlBreak) node);
+        else if (node instanceof HtmlBreak break1) {
+            appendBreak(builder, break1);
         }
         else if (node instanceof HtmlHiddenInput) {
             // nothing to do
@@ -129,53 +129,53 @@ public class HtmlSerializerNormalizedText {
         else if (node instanceof HtmlNoFrames) {
             // nothing to do
         }
-        else if (node instanceof HtmlTextArea) {
-            appendTextArea(builder, (HtmlTextArea) node);
+        else if (node instanceof HtmlTextArea area) {
+            appendTextArea(builder, area);
         }
-        else if (node instanceof HtmlTitle) {
-            appendTitle(builder, (HtmlTitle) node);
+        else if (node instanceof HtmlTitle title) {
+            appendTitle(builder, title);
         }
-        else if (node instanceof HtmlTableRow) {
-            appendTableRow(builder, (HtmlTableRow) node);
+        else if (node instanceof HtmlTableRow row) {
+            appendTableRow(builder, row);
         }
-        else if (node instanceof HtmlSelect) {
-            appendSelect(builder, (HtmlSelect) node);
+        else if (node instanceof HtmlSelect select) {
+            appendSelect(builder, select);
         }
-        else if (node instanceof HtmlSubmitInput) {
-            appendSubmitInput(builder, (HtmlSubmitInput) node);
+        else if (node instanceof HtmlSubmitInput input5) {
+            appendSubmitInput(builder, input5);
         }
-        else if (node instanceof HtmlResetInput) {
-            appendResetInput(builder, (HtmlResetInput) node);
+        else if (node instanceof HtmlResetInput input4) {
+            appendResetInput(builder, input4);
         }
-        else if (node instanceof HtmlCheckBoxInput) {
-            appendCheckBoxInput(builder, (HtmlCheckBoxInput) node);
+        else if (node instanceof HtmlCheckBoxInput input3) {
+            appendCheckBoxInput(builder, input3);
         }
-        else if (node instanceof HtmlRadioButtonInput) {
-            appendRadioButtonInput(builder, (HtmlRadioButtonInput) node);
+        else if (node instanceof HtmlRadioButtonInput input2) {
+            appendRadioButtonInput(builder, input2);
         }
-        else if (node instanceof HtmlNumberInput) {
-            appendNumberInput(builder, (HtmlNumberInput) node);
+        else if (node instanceof HtmlNumberInput input1) {
+            appendNumberInput(builder, input1);
         }
-        else if (node instanceof HtmlInput) {
-            appendInput(builder, (HtmlInput) node);
+        else if (node instanceof HtmlInput input) {
+            appendInput(builder, input);
         }
-        else if (node instanceof HtmlTable) {
-            appendTable(builder, (HtmlTable) node);
+        else if (node instanceof HtmlTable table) {
+            appendTable(builder, table);
         }
-        else if (node instanceof HtmlOrderedList) {
-            appendOrderedList(builder, (HtmlOrderedList) node);
+        else if (node instanceof HtmlOrderedList list1) {
+            appendOrderedList(builder, list1);
         }
-        else if (node instanceof HtmlUnorderedList) {
-            appendUnorderedList(builder, (HtmlUnorderedList) node);
+        else if (node instanceof HtmlUnorderedList list) {
+            appendUnorderedList(builder, list);
         }
-        else if (node instanceof HtmlPreformattedText) {
-            appendPreformattedText(builder, (HtmlPreformattedText) node);
+        else if (node instanceof HtmlPreformattedText text) {
+            appendPreformattedText(builder, text);
         }
-        else if (node instanceof HtmlInlineFrame) {
-            appendInlineFrame(builder, (HtmlInlineFrame) node);
+        else if (node instanceof HtmlInlineFrame frame) {
+            appendInlineFrame(builder, frame);
         }
-        else if (node instanceof HtmlDetails) {
-            appendDetails(builder, (HtmlDetails) node);
+        else if (node instanceof HtmlDetails details) {
+            appendDetails(builder, details);
         }
         else if (node instanceof HtmlNoScript && node.getPage().getWebClient().isJavaScriptEnabled()) {
             // nothing to do
@@ -197,13 +197,13 @@ public class HtmlSerializerNormalizedText {
             final SgmlPage page = domNode.getPage();
             final WebWindow window = page.getEnclosingWindow();
             if (window.getWebClient().getOptions().isCssEnabled()) {
-                if (domNode instanceof DomElement) {
-                    final String display = window.getComputedStyle((DomElement) domNode, null).getDisplay();
+                if (domNode instanceof DomElement element) {
+                    final String display = window.getComputedStyle(element, null).getDisplay();
                     block = BLOCK.equals(display);
                 }
             }
-            else if (domNode instanceof HtmlElement) {
-                block = DisplayStyle.BLOCK == ((HtmlElement) domNode).getDefaultStyleDisplay();
+            else if (domNode instanceof HtmlElement element) {
+                block = DisplayStyle.BLOCK == element.getDefaultStyleDisplay();
             }
         }
 
@@ -326,8 +326,8 @@ public class HtmlSerializerNormalizedText {
         // of the containing dom text;
         // this optimization defers the load of the style sheets
         final DomNode child = htmlTitle.getFirstChild();
-        if (child instanceof DomText) {
-            builder.append(((DomText) child).getData(), Mode.NORMALIZE);
+        if (child instanceof DomText text) {
+            builder.append(text.getData(), Mode.NORMALIZE);
             builder.appendBlockSeparator();
         }
     }
@@ -341,11 +341,11 @@ public class HtmlSerializerNormalizedText {
     protected void appendTableRow(final HtmlSerializerTextBuilder builder, final HtmlTableRow htmlTableRow) {
         boolean first = true;
         for (final HtmlTableCell cell : htmlTableRow.getCells()) {
-            if (!first) {
-                builder.appendTab();
+            if (first) {
+                first = false;
             }
             else {
-                first = false;
+                builder.appendTab();
             }
             appendChildren(builder, cell); // trim?
         }
@@ -499,8 +499,8 @@ public class HtmlSerializerNormalizedText {
         if (isVisible(htmlInlineFrame)) {
             builder.appendBlockSeparator();
             final Page page = htmlInlineFrame.getEnclosedPage();
-            if (page instanceof SgmlPage) {
-                builder.append(((SgmlPage) page).asNormalizedText(), Mode.NORMALIZE);
+            if (page instanceof SgmlPage sgmlPage) {
+                builder.append(sgmlPage.asNormalizedText(), Mode.NORMALIZE);
             }
             builder.appendBlockSeparator();
         }
@@ -634,11 +634,14 @@ public class HtmlSerializerNormalizedText {
 
             String text = content;
             if (mode == Mode.PRESERVE_BLANK_NEWLINE) {
-                text = StringUtils.stripEnd(text, null);
+                text = StringUtils.trimRight(text);
             }
 
             boolean crFound = false;
-            for (final char c : text.toCharArray()) {
+            final int textLength = text.length();
+            for (int i = 0; i < textLength; i++) {
+                final char c = text.charAt(i);
+
                 if (mode == Mode.NORMALIZE) {
                     if (isSpace(c)) {
                         switch (state_) {
@@ -708,7 +711,7 @@ public class HtmlSerializerNormalizedText {
             }
 
             if (mode != Mode.NORMALIZE) {
-                // reset state to empty to restart whitespace normalization afterwards
+                // reset state to empty to restart whitespace normalization afterward
                 state_ = State.TRIM;
             }
         }

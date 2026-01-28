@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,17 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_SET_ZERO_IF_INVALID;
-
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.StringUtils;
 
 /**
  * An abstract cell that provides the implementation for HtmlTableDataCell and HtmlTableHeaderCell.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Lai Quang Duong
@@ -60,10 +58,7 @@ public abstract class HtmlTableCell extends HtmlElement {
             if (span < 1) {
                 return 1;
             }
-            if (span > 1_000) {
-                return 1_000;
-            }
-            return span;
+            return Math.min(span, 1_000);
         }
         catch (final NumberFormatException e) {
             return 1;
@@ -80,24 +75,14 @@ public abstract class HtmlTableCell extends HtmlElement {
         }
         try {
             final int span = (int) Double.parseDouble(spanString);
-            if (getPage().getWebClient().getBrowserVersion().hasFeature(JS_TABLE_SPAN_SET_ZERO_IF_INVALID)) {
-                if (span < 0) {
-                    return 1;
-                }
-                if (span < 1) {
-                    return 0;
-                }
+            if (span < 0) {
+                return 1;
             }
-            else {
-                if (span < 1) {
-                    return 1;
-                }
+            if (span < 1) {
+                return 0;
             }
 
-            if (span > 65_534) {
-                return 65_534;
-            }
-            return span;
+            return Math.min(span, 65_534);
         }
         catch (final NumberFormatException e) {
             return 1;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +30,6 @@ import org.openqa.selenium.WebElement;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLLabelElementTest extends WebDriverTestCase {
 
     /**
@@ -41,8 +38,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void htmlForNone() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -66,8 +63,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void htmlForEmpty() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -91,8 +88,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("unknown")
     public void htmlForUnknown() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -116,8 +113,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("text1")
     public void htmlForKnown() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -141,16 +138,16 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"unknown", "null", "null"})
     public void htmlForSetToUnknown() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').htmlFor = 'unknown';\n"
-            + "        } catch (e) {"
-            + "          log('exception');\n"
+            + "        } catch(e) {"
+            + "          logEx(e);\n"
             + "        }\n"
             + "        log(document.getElementById('label1').htmlFor);\n"
             + "        log(document.getElementById('label1').control);\n"
@@ -175,16 +172,16 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"div1", "null", "null"})
     public void htmlForSetToNotLabelable() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').htmlFor = 'div1';\n"
-            + "        } catch (e) {"
-            + "          log('exception');\n"
+            + "        } catch(e) {"
+            + "          logEx(e);\n"
             + "        }\n"
             + "        log(document.getElementById('label1').htmlFor);\n"
             + "        log(document.getElementById('label1').control);\n"
@@ -209,16 +206,16 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"text1", "[object HTMLInputElement]", "[object HTMLFormElement]"})
     public void htmlForSetToLabelable() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').htmlFor = 'text1';\n"
-            + "        } catch (e) {"
-            + "          log('exception');\n"
+            + "        } catch(e) {"
+            + "          logEx(e);\n"
             + "        }\n"
             + "        log(document.getElementById('label1').htmlFor);\n"
             + "        log(document.getElementById('label1').control);\n"
@@ -573,7 +570,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     }
 
     private static String generateControlPage(final String snippet) {
-        return "<html>\n"
+        return DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -594,16 +592,16 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void controlSet() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').control = document.getElementById('text1');\n"
-            + "        } catch (e) {"
-            + "          log('exception');\n"
+            + "        } catch(e) {"
+            + "          logEx(e);\n"
             + "        }\n"
             + "        log(document.getElementById('label1').control);\n"
             + "      }\n"
@@ -757,7 +755,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     }
 
     private static String generateFormPage(final String snippet) {
-        return "<html>\n"
+        return DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -781,16 +780,16 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void formSet() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
             + "      function doTest() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').form = document.getElementById('form1');\n"
-            + "        } catch (e) {"
-            + "          log('exception');\n"
+            + "        } catch(e) {"
+            + "          logEx(e);\n"
             + "        }\n"
             + "        log(document.getElementById('label1').form);\n"
             + "      }\n"
@@ -812,8 +811,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      */
     @Test
     public void clickAfterHtmlForSetByJS() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function doTest() {\n"
@@ -839,8 +838,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      */
     @Test
     public void clickAfterNestedByJS() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function doTest() {\n"
@@ -866,8 +865,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      */
     @Test
     public void clickByJSAfterHtmlForSetByJS() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function doTest() {\n"
@@ -876,7 +875,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "      function delegateClick() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').click();\n"
-            + "        } catch (e) {}\n"
+            + "        } catch(e) {}\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -899,8 +898,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      */
     @Test
     public void clickByJSAfterNestedByJS() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function doTest() {\n"
@@ -909,7 +908,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
             + "      function delegateClick() {\n"
             + "        try {\n"
             + "          document.getElementById('label1').click();\n"
-            + "        } catch (e) {}\n"
+            + "        } catch(e) {}\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -933,8 +932,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
     @Test
     @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
     public void accessKey() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body>\n"
             + "    <label id='a1'>a1</label>\n"
             + "    <label id='a2' accesskey='A'>a2</label>\n"

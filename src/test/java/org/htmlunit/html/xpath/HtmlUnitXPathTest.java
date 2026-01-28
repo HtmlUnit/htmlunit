@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  */
 package org.htmlunit.html.xpath;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,9 +29,7 @@ import org.htmlunit.html.HtmlDivision;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlTableCell;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for XPath evaluation on HtmlUnit DOM.
@@ -40,7 +38,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlUnitXPathTest extends SimpleWebTestCase {
 
     /**
@@ -49,7 +46,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
      */
     @Test
     public void simplePath() throws Exception {
-        final String content = "<html><head><title>Test page</title></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>Test page</title></head>\n"
             + "<body><a href='foo.html' id='myLink'>foo</a></body>\n"
             + "</html>";
 
@@ -66,7 +64,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
      */
     @Test
     public void xpathFromElement() throws Exception {
-        final String content = "<html><head><title>Test page</title></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>Test page</title></head>\n"
             + "<body><a href='foo.html' id='myLink'>foo</a></body>\n"
             + "</html>";
 
@@ -83,8 +82,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
     @Test
     @SuppressWarnings("unchecked")
     public void elementOrder() throws Exception {
-        final String content
-            = "<html><head><title>First</title><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>First</title><script>\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
@@ -105,8 +104,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
      */
     @Test
     public void whenJSChangesPage() throws Exception {
-        final String content
-            = "<html><head><title>foo</title><script>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "function addOption() {\n"
             + "  var options = document.form1.select1.options;\n"
             + "  var index = options.length;\n"
@@ -141,8 +140,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
     @Test
     @SuppressWarnings("unchecked")
     public void listAttributesResult() throws Exception {
-        final String content
-            = "<html><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<img src='1.png'>\n"
             + "<img src='2.png'>\n"
             + "<img src='3.png'>\n"
@@ -175,7 +174,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
      */
     @Test
     public void optionText_getFirstByXPath() throws Exception {
-        final String content = "<html><head><title>Test page</title></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>Test page</title></head>\n"
             + "<body><form name='foo'>\n"
             + "<select name='test'><option value='1'>foo&nbsp;and&nbsp;foo</option></select>\n"
             + "</form></body></html>";
@@ -197,7 +197,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
      */
     @Test
     public void followingAxis() throws Exception {
-        final String content = "<html><title>XPath tests</title><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><title>XPath tests</title><body>\n"
             + "<table id='table1'>\n"
             + "<tr id='tr1'>\n"
             + "<td id='td11'>a3</td>\n"
@@ -232,7 +233,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
      */
     @Test
     public void id() throws Exception {
-        final String content = "<html><head><title>foo</title></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head>\n"
             + "<body>\n"
             + "<div>\n"
             + "  <a href='link.html' id='test'>\n"
@@ -254,7 +256,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
      */
     @Test
     public void changingAttributes() throws Exception {
-        final String content = "<html><head><title>foo</title></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head>\n"
             + "<body>\n"
             + "<div id='testDiv' title='foo'></div>\n"
             + "</body></html>";
@@ -274,7 +277,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
      */
     @Test
     public void specialAttribute() throws Exception {
-        final String content = "<html><head></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <table><tr>\n"
             + "    <td id='myTd' ab='test' a_b='test' a-b='test' a.b='test'>@X</td></tr></table>\n"
@@ -302,7 +306,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
      */
     @Test
     public void specialAtInText() throws Exception {
-        final String content = "<html><head></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <table><tr><td id='myTd'>@X</td></tr></table>\n"
             + "</body></html>";
@@ -319,7 +324,8 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
      */
     @Test
     public void specialBracesInText() throws Exception {
-        String content = "<html><head></head>\n"
+        String content = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <table><tr><td id='myTd'>(X)</td></tr></table>\n"
             + "</body></html>";
@@ -330,10 +336,11 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
         assertNull(page.getFirstByXPath("//td[normalize-space()='(x)']"));
         assertSame(cell, page.getFirstByXPath("//td[normalize-space()='(X)']"));
 
-        content = "<html><head></head>\n"
-                + "<body>\n"
-                + "  <table><tr><td id='myTd'>[X]</td></tr></table>\n"
-                + "</body></html>";
+        content = DOCTYPE_HTML
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <table><tr><td id='myTd'>[X]</td></tr></table>\n"
+            + "</body></html>";
 
         page = loadPage(content);
 

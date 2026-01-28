@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,8 @@ import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
  * Contains information about a single style element, including its name, its value, and an index which
  * can be compared against other indices in order to determine precedence.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
+ * @author Christian Sell
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Ahmed Ashour
@@ -35,7 +35,7 @@ import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class StyleElement implements Comparable<StyleElement>, Serializable {
+public class StyleElement implements Serializable {
     /** CSS important property constant. */
     public static final String PRIORITY_IMPORTANT = "important";
 
@@ -133,28 +133,41 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * This takes only the importance, the specificity and the index into account.
+     * The name and value properties are ignored.
+     *
+     * @param first the {@link StyleElement} to compare
+     * @param second the {@link StyleElement} to compare with
+     * @return a negative integer, zero, or a positive integer as this object
+     *         is less than, equal to, or greater than the specified object.
      */
-    @Override
-    public int compareTo(final StyleElement e) {
-        if (e == null) {
+    public static int compareToByImportanceAndSpecificity(final StyleElement first, final StyleElement second) {
+        if (first == null) {
+            return second == null ? 0 : -1;
+        }
+
+        if (second == null) {
             return 1;
         }
 
-        if (isImportant()) {
-            if (!e.isImportant()) {
+        if (first == second) {
+            return 0;
+        }
+
+        if (first.isImportant()) {
+            if (!second.isImportant()) {
                 return 1;
             }
         }
         else {
-            if (e.isImportant()) {
+            if (second.isImportant()) {
                 return -1;
             }
         }
 
-        final int comp = getSpecificity().compareTo(e.getSpecificity());
+        final int comp = first.getSpecificity().compareTo(second.getSpecificity());
         if (comp == 0) {
-            return Long.compare(getIndex(), e.getIndex());
+            return Long.compare(first.getIndex(), second.getIndex());
         }
         return comp;
     }

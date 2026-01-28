@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -28,11 +27,9 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DownloadingAttachmentHandler}.
@@ -40,7 +37,6 @@ import org.junit.runner.RunWith;
  * @author Marek Andreansky
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
 
     /**
@@ -48,7 +44,8 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
      */
     @Test
     public void basic() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -87,9 +84,11 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
             anchor.click();
             files = FileUtils.listFiles(downloadFolder, null, false);
             assertEquals(2, files.size());
-            final Iterator<File> filesIter = files.iterator();
-            assertEquals("download", filesIter.next().getName());
-            assertEquals("download(1)", filesIter.next().getName());
+
+            // be order agnostic
+            assertTrue(files.removeIf(f -> f.getName().equals("download")));
+            assertTrue(files.removeIf(f -> f.getName().equals("download(1)")));
+            assertEquals(0, files.size());
         }
         finally {
             FileUtils.deleteDirectory(downloadFolder);
@@ -101,7 +100,8 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
      */
     @Test
     public void basicFileNameFromUrl() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "test.txt'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -140,9 +140,11 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
             anchor.click();
             files = FileUtils.listFiles(downloadFolder, null, false);
             assertEquals(2, files.size());
-            final Iterator<File> filesIter = files.iterator();
-            assertEquals("test(1).txt", filesIter.next().getName());
-            assertEquals("test.txt", filesIter.next().getName());
+
+            // be order agnostic
+            assertTrue(files.removeIf(f -> f.getName().equals("test.txt")));
+            assertTrue(files.removeIf(f -> f.getName().equals("test(1).txt")));
+            assertEquals(0, files.size());
         }
         finally {
             FileUtils.deleteDirectory(downloadFolder);
@@ -154,7 +156,8 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
      */
     @Test
     public void basicFileNameFromHeader() throws Exception {
-        final String content1 = "<html><body>\n"
+        final String content1 = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form method='POST' name='form' action='" + URL_SECOND + "test.txt'>\n"
             + "<input type='submit' value='ok'>\n"
             + "</form>\n"
@@ -164,6 +167,7 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
 
         final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
         final File downloadFolder = new File(tmpFolder, "downloading-attachment-test");
+        FileUtils.deleteDirectory(downloadFolder);
 
         try {
             FileUtils.forceMkdir(downloadFolder);
@@ -193,9 +197,11 @@ public class DownloadingAttachmentHandlerTest extends SimpleWebTestCase {
             anchor.click();
             files = FileUtils.listFiles(downloadFolder, null, false);
             assertEquals(2, files.size());
-            final Iterator<File> filesIter = files.iterator();
-            assertEquals("sample(1).pdf", filesIter.next().getName());
-            assertEquals("sample.pdf", filesIter.next().getName());
+
+            // be order agnostic
+            assertTrue(files.removeIf(f -> f.getName().equals("sample.pdf")));
+            assertTrue(files.removeIf(f -> f.getName().equals("sample(1).pdf")));
+            assertEquals(0, files.size());
         }
         finally {
             FileUtils.deleteDirectory(downloadFolder);

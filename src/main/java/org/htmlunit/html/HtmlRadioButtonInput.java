@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
-
 import java.io.IOException;
 import java.util.Map;
 
@@ -27,9 +25,9 @@ import org.htmlunit.javascript.host.event.Event;
 /**
  * Wrapper for the HTML element "input".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Mike Bresnahan
  * @author Daniel Gredler
@@ -98,7 +96,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
      *
      * @param isChecked true if this element is to be selected
      * @return the page that occupies this window after setting checked status
-     * It may be the same window or it may be a freshly loaded one.
+     *         It may be the same window, or it may be a freshly loaded one.
      */
     @Override
     public Page setChecked(final boolean isChecked) {
@@ -154,8 +152,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
     private void setCheckedForPage(final HtmlPage htmlPage) {
         final String name = getNameAttribute();
         for (final HtmlElement htmlElement : htmlPage.getHtmlElementDescendants()) {
-            if (htmlElement instanceof HtmlRadioButtonInput) {
-                final HtmlRadioButtonInput radioInput = (HtmlRadioButtonInput) htmlElement;
+            if (htmlElement instanceof HtmlRadioButtonInput radioInput) {
                 if (name.equals(radioInput.getAttribute(NAME_ATTRIBUTE))
                         && radioInput.getEnclosingForm() == null) {
                     if (radioInput == this) {
@@ -279,8 +276,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
      */
     @Override
     protected boolean propagateClickStateUpdateToParent() {
-        return !hasFeature(HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR)
-                && super.propagateClickStateUpdateToParent();
+        return false;
     }
 
     @Override
@@ -294,8 +290,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
 
         final String name = getNameAttribute();
         for (final HtmlElement htmlElement : getPage().getHtmlElementDescendants()) {
-            if (htmlElement instanceof HtmlRadioButtonInput) {
-                final HtmlRadioButtonInput radioInput = (HtmlRadioButtonInput) htmlElement;
+            if (htmlElement instanceof HtmlRadioButtonInput radioInput) {
                 if (name.equals(radioInput.getAttribute(NAME_ATTRIBUTE))
                         && radioInput.isChecked()) {
                     return false;

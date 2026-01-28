@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      * Instantiate a new attribute.
      *
      * @param page the page that the attribute belongs to
-     * @param namespaceURI the namespace that defines the attribute name (may be {@code null})
+     * @param namespaceURI the namespace that defines the attribute name (maybe {@code null})
      * @param qualifiedName the name of the attribute
      * @param value the value of the attribute
      * @param specified {@code true} if this attribute was explicitly given a value in the source document,
@@ -108,7 +108,13 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      */
     @Override
     public void setValue(final String value) {
-        value_ = value;
+        if (value != null
+                && value.isEmpty()) {
+            value_ = DomElement.ATTRIBUTE_VALUE_EMPTY;
+        }
+        else {
+            value_ = value;
+        }
         specified_ = true;
     }
 
@@ -174,13 +180,15 @@ public class DomAttr extends DomNamespaceNode implements Attr {
      */
     @Override
     public void setTextContent(final String textContent) {
-        final boolean mappedElement = HtmlPage.isMappedElement(getOwnerDocument(), getName());
+        final boolean mappedElement =
+                getOwnerDocument() instanceof HtmlPage
+                && (DomElement.NAME_ATTRIBUTE.equals(getName()) || DomElement.ID_ATTRIBUTE.equals(getName()));
         if (mappedElement) {
-            ((HtmlPage) getPage()).removeMappedElement((HtmlElement) getOwnerElement());
+            ((HtmlPage) getPage()).removeMappedElement(getOwnerElement(), false, false);
         }
         setValue(textContent);
         if (mappedElement) {
-            ((HtmlPage) getPage()).addMappedElement(getOwnerElement());
+            ((HtmlPage) getPage()).addMappedElement(getOwnerElement(), false);
         }
     }
 }

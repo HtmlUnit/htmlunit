@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,10 @@ import java.net.URL;
 import java.util.Arrays;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
+import org.htmlunit.util.ArrayUtils;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -33,24 +32,23 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  * @author Atsushi Nakagawa
  */
-@RunWith(BrowserRunner.class)
 public class MutationObserverTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void observeNullNode() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var observer = new MutationObserver(function(mutations) {});\n"
             + "\n"
             + "  try {\n"
             + "    observer.observe(div, {});\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -64,10 +62,10 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void observeNullInit() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
@@ -75,7 +73,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "\n"
             + "  try {\n"
             + "    observer.observe(div);\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -89,10 +87,10 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void observeEmptyInit() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
@@ -100,7 +98,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "\n"
             + "  try {\n"
             + "    observer.observe(div, {});\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -114,10 +112,10 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception", "childList", "attributes", "characterData"})
+    @Alerts({"TypeError", "childList", "attributes", "characterData"})
     public void observeRequiredMissingInit() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
@@ -125,19 +123,19 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "\n"
             + "  try {\n"
             + "    observer.observe(div, {subtree: true});\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  try {\n"
             + "    observer.observe(div, {childList: true});\n"
             + "    log('childList');\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  try {\n"
             + "    observer.observe(div, {attributes: true});\n"
             + "    log('attributes');\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "  try {\n"
             + "    observer.observe(div, {characterData: true});\n"
             + "    log('characterData');\n"
-            + "  } catch(e) { log('exception'); }\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -153,8 +151,8 @@ public class MutationObserverTest extends WebDriverTestCase {
     @Test
     @Alerts({"old", "new"})
     public void characterData() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
@@ -187,8 +185,8 @@ public class MutationObserverTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "new"})
     public void characterDataNoOldValue() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
@@ -219,8 +217,8 @@ public class MutationObserverTest extends WebDriverTestCase {
      */
     @Test
     public void characterDataNoSubtree() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
@@ -251,8 +249,8 @@ public class MutationObserverTest extends WebDriverTestCase {
     @Test
     @Alerts({"attributes", "ltr"})
     public void attributes() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
@@ -287,8 +285,8 @@ public class MutationObserverTest extends WebDriverTestCase {
     @Alerts({"heho", "attributes", "value", "null", "x", "abc",
              "heho", "attributes", "value", "null", "y", "abc"})
     public void attributeValue() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -317,10 +315,10 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "</body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("tester")).sendKeys("abc");
-        verifyTitle2(driver, new String[] {});
+        verifyTitle2(driver, ArrayUtils.EMPTY_STRING_ARRAY);
 
         driver.findElement(By.id("doAlert")).click();
-        verifyTitle2(driver, new String[] {"heho"});
+        verifyTitle2(driver, "heho");
 
         final String[] expected = getExpectedAlerts();
         driver.findElement(By.id("doIt")).click();
@@ -334,32 +332,87 @@ public class MutationObserverTest extends WebDriverTestCase {
     }
 
     /**
+     * Test case for issue #1811.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"heho", "attributes", "value", "null", "x", "abc", "0", "0",
+             "heho", "attributes", "value", "null", "null", "abc", "0", "0"})
+    public void attributeValueAddRemove() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var config = { attributes: true, childList: true, characterData: true, subtree: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        log(mutation.type);\n"
+            + "        log(mutation.attributeName);\n"
+            + "        log(mutation.oldValue);\n"
+            + "        log(mutation.target.getAttribute(\"value\"));\n"
+            + "        log(mutation.target.value);\n"
+            + "        log(mutation.addedNodes.length);\n"
+            + "        log(mutation.removedNodes.length);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(document.getElementById('tester'), config);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='tester'>\n"
+            + "  <button id='doAlert' onclick='log(\"heho\");'>DoAlert</button>\n"
+            + "  <button id='doIt' "
+                        + "onclick='document.getElementById(\"tester\").setAttribute(\"value\", \"x\")'>"
+                        + "DoIt</button>\n"
+            + "  <button id='doItAgain' "
+                        + " onclick='document.getElementById(\"tester\").removeAttribute(\"value\")'>"
+                        + "DoItAgain</button>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("tester")).sendKeys("abc");
+        verifyTitle2(driver, ArrayUtils.EMPTY_STRING_ARRAY);
+
+        driver.findElement(By.id("doAlert")).click();
+        verifyTitle2(driver, "heho");
+
+        final String[] expected = getExpectedAlerts();
+        driver.findElement(By.id("doIt")).click();
+        verifyTitle2(driver, Arrays.copyOfRange(expected, 0, 8));
+
+        driver.findElement(By.id("doAlert")).click();
+        verifyTitle2(driver, Arrays.copyOfRange(expected, 0, 9));
+
+        driver.findElement(By.id("doItAgain")).click();
+        verifyTitle2(driver, expected);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("[object HTMLHeadingElement]-attributes")
-    @BuggyWebDriver(FF = "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLHeadingElement]-attributes",
-            FF_ESR = "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLInputElement]-attributes\n"
-            + "[object HTMLHeadingElement]-attributes")
+    @BuggyWebDriver(
+            FF = {"[object HTMLInputElement]-attributesn",
+                  "[object HTMLInputElement]-attributes",
+                  "[object HTMLInputElement]-attributes",
+                  "[object HTMLInputElement]-attributes",
+                  "[object HTMLHeadingElement]-attributes"},
+            FF_ESR = {"[object HTMLInputElement]-attributesn",
+                      "[object HTMLInputElement]-attributes",
+                      "[object HTMLInputElement]-attributes",
+                      "[object HTMLInputElement]-attributes",
+                      "[object HTMLHeadingElement]-attributes"})
     public void attributeValue2() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function makeRed() {\n"
             + "    document.getElementById('headline').setAttribute('style', 'color: red');\n"
             + "  }\n"
 
             + "  function print(mutation) {\n"
             + "    log(mutation.target + '-' + mutation.type);\n"
-            + "  }\n"
-
-            + "  function log(x) {\n"
-            + "    document.getElementById('log').value += x + '\\n';\n"
             + "  }\n"
 
             + "  function test() {\n"
@@ -383,13 +436,12 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "    <h1 id='headline' style='font-style: italic'>Some headline</h1>\n"
             + "    <input id='id1' type='button' onclick='makeRed()' value='Make Red'>\n"
             + "  </div>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>\n";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("id1")).click();
 
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 
     /**
@@ -398,8 +450,8 @@ public class MutationObserverTest extends WebDriverTestCase {
     @Test
     @Alerts({"before", "after div", "after text", "div observed", "text observed"})
     public void callbackOrder() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
@@ -435,12 +487,13 @@ public class MutationObserverTest extends WebDriverTestCase {
     @Test
     @Alerts("Content")
     public void callbackRequiresStackSetup() throws Exception {
-        final String content = "<html><head><title>Content</title></head><body><p>content</p></body></html>";
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>Content</title></head><body><p>content</p></body></html>";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), content);
 
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "function test() {\n"
             + "\n"
             + "  var text = document.createTextNode('')\n"
@@ -468,8 +521,8 @@ public class MutationObserverTest extends WebDriverTestCase {
             CHROME = {"[object MutationObserver]", "[object MutationObserver]", "true"},
             EDGE = {"[object MutationObserver]", "[object MutationObserver]", "true"})
     public void webKitMutationObserver() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

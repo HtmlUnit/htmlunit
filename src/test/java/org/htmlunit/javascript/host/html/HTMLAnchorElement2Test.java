@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,26 +25,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.UrlUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Unit tests for {@link HTMLAnchorElement}.
@@ -54,7 +51,6 @@ import org.openqa.selenium.WebDriver;
  * @author Marc Guillemot
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
     /**
@@ -63,8 +59,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "", "§§URL§§test.css", "stylesheet", "stylesheet1"})
     public void attributes() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body onload='test()'>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -94,8 +90,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"attachEvent not available", "href"})
     public void javaScriptPreventDefaultIE() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -116,6 +112,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         verifyTitle2(driver, getExpectedAlerts()[0]);
 
         driver.findElement(By.id("link")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
         verifyTitle2(driver, getExpectedAlerts());
     }
 
@@ -125,8 +124,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("onclick")
     public void javaScriptPreventDefault() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -154,8 +153,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"", "§§URL§§foo.html", "javascript:void(0)", "§§URL§§#", "mailto:"})
     public void defaultConversionToString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(document.getElementById('myAnchor'));\n"
@@ -182,8 +181,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("Second")
     public void javaScriptAnchorClick() throws Exception {
-        final String html
-            = "<html><head><title>First</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>First</title><script>\n"
             + "function delegateClick() {\n"
             + "  try {\n"
             + "    document.getElementById(\"link1\").click();\n"
@@ -197,8 +196,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final String secondHtml
-            = "<html>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Second</title></head>\n"
             + "</html>";
 
@@ -217,8 +216,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts({"§§URL§§testsite1.html", "testsite1.html", "§§URL§§testsite2.html",
              "testsite2.html", "13", "testanchor", "mailto:"})
     public void getAttribute_and_href() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function doTest(anchorElement) {\n"
@@ -252,8 +251,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts({"http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§#test",
              "§§URL§§#", "§§URL§§"})
     public void getDefaultValue() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -285,8 +284,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts({"http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§#test",
              "§§URL§§#", "§§URL§§"})
     public void getDefaultValueWithHash() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -319,8 +318,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts({"http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§index.html#test",
              "§§URL§§index.html#", "§§URL§§index.html"})
     public void getDefaultValueWithHashAndFileName() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + LOG_TITLE_FUNCTION
@@ -352,8 +351,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("function onclick(event) { log(\"on click\") }§not defined")
     public void onclickToString() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -378,8 +377,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void readWriteAccessKey() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "  <a id='a1' href='#'></a><a id='a2' href='#' accesskey='A'></a>\n"
                 + "<script>\n"
@@ -414,7 +413,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"9", "9", "true", "false"})
     public void hrefTrimmed() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -531,15 +531,15 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             return;
         }
 
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>main</title></head>\n"
             + "<body title='main'>\n"
             + "  <iframe id='testFrame' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
 
-        final String secondHtml
-            = "<html>\n"
+        final String secondHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>inner</title></head>\n"
             + "<body title='inner'>\n"
             + "  <a id='tester' " + target
@@ -586,8 +586,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void thisInJavascriptHref() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "</script>\n"
@@ -609,7 +609,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }"})
     public void typeof() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -618,7 +618,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "      log(document.links[0]);\n"
             + "      log(typeof document.links[0]);\n"
             + "      log(HTMLAnchorElement);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -636,7 +636,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"", "", "text/html", "TExT/hTMl", " text/html ", "application/pdf", "unknown"})
     public void getType() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -673,7 +674,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"text/html", "", " TExT/hTMl  ", "unknown", "application/pdf"})
     public void setType() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
@@ -716,13 +718,12 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             EDGE = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
                     "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
             FF = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                  "foo:||||||blabla", "p:||||||//", "p:||||||/", "p:||||||/TeMp"},
+                  "foo:||||||blabla", "p:||||||", "p:||||||/", "p:||||||/TeMp"},
             FF_ESR = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                      "foo:||||||blabla", "p:||||||//", "p:||||||/", "p:||||||/TeMp"})
-    @HtmlUnitNYI(FF = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                       "foo:||||||blabla", "p:||||||", "p:||||||/", "p:||||||/TeMp"})
+                      "foo:||||||blabla", "p:||||||", "p:||||||/", "p:||||||/TeMp"})
     public void propertiesNonStandardHref() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <a href='http://'>http://</a>\n"
             + "  <a href='https://'>https://</a>\n"
@@ -758,8 +759,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     }
 
     private void attribute(final String attribute, final String value) throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body onload='test()'>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -812,8 +813,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     public void originAttrib() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -846,8 +847,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts({"-null", "-", "-  \t ", "no-referrer-no-referrer",
              "origin-origin", "unsafe-url-unsafe-url", "-unknown"})
     public void referrerPolicy() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
                 + LOG_TEXTAREA_FUNCTION
@@ -881,8 +882,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts({"origin-origin", "-unknown", "no-referrer-no-referrer",
              "-", "no-referrer-NO-reFerrer", "origin-origin", "- ", "-unknown"})
     public void setReferrerPolicy() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
                 + LOG_TITLE_FUNCTION
@@ -928,8 +929,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts({"[object HTMLButtonElement]", "[object HTMLButtonElement]",
              "§§URL§§", "http://srv/htmlunit.org"})
     public void focus() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -973,8 +973,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             CHROME = "PING",
             EDGE = "PING")
     public void ping() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <a href='" + URL_SECOND + "' ping='test2?h'>clickMe</a>\n"
             + "</body></html>";
 
@@ -1012,7 +1012,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     public static class PingServlet extends HttpServlet {
 
-        private static Map<String, String> HEADERS_ = new HashMap<>();
+        private static final Map<String, String> HEADERS_ = new HashMap<>();
         private static String BODY_;
 
         /**
@@ -1042,8 +1042,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
     public void readWriteRel() throws Exception {
-        final String html
-            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
             + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
@@ -1070,8 +1070,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"0", "2", "alternate", "help"})
     public void relList() throws Exception {
-        final String html
-            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
             + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
@@ -1082,7 +1082,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  for (var i = 0; i < a2.relList.length; i++) {\n"
             + "    log(a2.relList[i]);\n"
             + "  }\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -1094,8 +1094,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"})
     public void setRelListString() throws Exception {
-        final String html
-            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
             + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
@@ -1119,7 +1119,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -1131,8 +1131,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"0", "2", "0", "0", "", "\\s\\s\\t"})
     public void setRelListStringBlank() throws Exception {
-        final String html
-            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
@@ -1148,7 +1148,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -1160,8 +1160,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"0", "2", "1", "1", "null", "null", "null", "null"})
     public void setRelListNull() throws Exception {
-        final String html
-            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
@@ -1185,7 +1185,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -1197,8 +1197,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"})
     public void setRelListUndefined() throws Exception {
-        final String html
-            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
@@ -1222,7 +1222,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
             + "  log(a1.rel);\n"
             + "  log(a2.rel);\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
@@ -1258,8 +1258,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                   "Tester", "https://Tester@developer.mozilla.org",
                   "Tester", "https://Tester@developer.mozilla.org"})
     public void readWriteUsername() throws Exception {
-        final String html
-            = "<html><body><a id='a1'>a1</a>"
+        final String html = DOCTYPE_HTML
+                + "<html><body><a id='a1'>a1</a>"
                 + "<a id='a2' href='https://user:password@developer.mozilla.org'>a2</a>"
                 + "<a id='a3' href='https://user@developer.mozilla.org'>a3</a>"
                 + "<a id='a4' href='https://developer.mozilla.org'>a3</a>"
@@ -1327,8 +1327,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                   "Tester", "https://:Tester@developer.mozilla.org",
                   "Tester", "https://:Tester@developer.mozilla.org"})
     public void readWritePassword() throws Exception {
-        final String html
-            = "<html><body><a id='a1'>a1</a>"
+        final String html = DOCTYPE_HTML
+                + "<html><body><a id='a1'>a1</a>"
                 + "<a id='a2' href='https://user:password@developer.mozilla.org'>a2</a>"
                 + "<a id='a3' href='https://:password@developer.mozilla.org'>a3</a>"
                 + "<a id='a4' href='https://developer.mozilla.org'>a3</a>"
@@ -1372,8 +1372,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"http:", "https:", "https://§§URL§§/foo.html#O"})
     public void readWriteProtocol() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1400,13 +1400,10 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http:", "axdeg:", "axdeg://§§URL§§/foo.html#O"},
-            CHROME = {"http:", "http:", "http://§§URL§§/foo.html#O"},
-            EDGE = {"http:", "http:", "http://§§URL§§/foo.html#O"},
-            FF = {"http:", "http:", "http://§§URL§§/foo.html#O"})
+    @Alerts({"http:", "http:", "http://§§URL§§/foo.html#O"})
     public void readWriteProtocolUnknown() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1435,8 +1432,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"http:", "https:", "https://§§URL§§/foo.html#O"})
     public void readWriteProtocolIncludingColon() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1465,8 +1462,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"http:", "https:", "https://§§URL§§/foo.html#O"})
     public void readWriteProtocolWithUrl() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1496,8 +1493,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts({"http:", "http:", "http://§§URL§§/foo.html#O",
              "http:", "http://§§URL§§/abc_xyz://localhost/foo.html"})
     public void readWriteProtocolBroken() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1533,8 +1530,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"localhost", "motion", "http://§§URL§§/foo.html#O"})
     public void readWriteAnchorHostname() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -1572,8 +1569,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                 EDGE = {"localhost", "localhost", "http://localhost:§§URL§§/foo.html#O",
                         "%20%20%20%20", "http:// :§§URL§§/foo.html#O"})
     public void readWriteAnchorHostnameEmpty() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION

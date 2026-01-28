@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.dom.DOMException;
 
 /**
  * A JavaScript object for {@code Crypto}.
@@ -50,7 +51,7 @@ public class Crypto extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
-        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.typeErrorIllegalConstructor();
     }
 
     /**
@@ -75,13 +76,17 @@ public class Crypto extends HtmlUnitScriptable {
             throw JavaScriptEngine.typeError("Argument 1 of Crypto.getRandomValues is not an object.");
         }
         if (array.getByteLength() > 65_536) {
-            throw JavaScriptEngine.reportRuntimeError("Error: Failed to execute 'getRandomValues' on 'Crypto': "
-                    + "The ArrayBufferView's byte length "
-                    + "(" + array.getByteLength() + ") exceeds the number of bytes "
-                    + "of entropy available via this API (65536).");
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "Error: Failed to execute 'getRandomValues' on 'Crypto': "
+                            + "The ArrayBufferView's byte length "
+                            + "(" + array.getByteLength() + ") exceeds the number of bytes "
+                            + "of entropy available via this API (65536).",
+                    DOMException.QUOTA_EXCEEDED_ERR);
         }
 
-        for (int i = 0; i < array.getByteLength() / array.getBytesPerElement(); i++) {
+        final int length = array.getByteLength() / array.getBytesPerElement();
+        for (int i = 0; i < length; i++) {
             array.put(i, array, RANDOM.nextInt());
         }
         return array;
@@ -100,6 +105,9 @@ public class Crypto extends HtmlUnitScriptable {
         return stuble;
     }
 
+    /**
+     * @return a v4 UUID generated using a cryptographically secure random number generator
+     */
     @JsxFunction
     public String randomUUID() {
         // Let bytes be a byte sequence of length 16.
@@ -139,6 +147,6 @@ public class Crypto extends HtmlUnitScriptable {
     }
 
     private static String toHex(final byte b) {
-        return String.format("%02X ", b).trim().toLowerCase(Locale.ROOT);
+        return "%02X ".formatted(b).trim().toLowerCase(Locale.ROOT);
     }
 }

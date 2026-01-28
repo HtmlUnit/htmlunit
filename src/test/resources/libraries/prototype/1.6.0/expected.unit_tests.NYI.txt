@@ -1,0 +1,14 @@
+10 tests, 82 assertions, 1 failures, 0 errors
+Status Test Message
+failed testIsRunningFromRake 0 assertions, 1 failures, 0 errors
+Failure: assert: got "false"
+Info: -- skipped for comparison --
+passed testAssertEqual 11 assertions, 0 failures, 0 errors
+passed testAssertEnumEqual 4 assertions, 0 failures, 0 errors
+passed testAssertHashEqual 4 assertions, 0 failures, 0 errors
+passed testAssertRespondsTo 2 assertions, 0 failures, 0 errors
+passed testAssertIdentical 15 assertions, 0 failures, 0 errors
+passed testAssertNullAndAssertUndefined 12 assertions, 0 failures, 0 errors
+passed testAssertMatch 7 assertions, 0 failures, 0 errors
+passed testAssertInstanceOf 3 assertions, 0 failures, 0 errors
+passed testAssertVisible 24 assertions, 0 failures, 0 errors

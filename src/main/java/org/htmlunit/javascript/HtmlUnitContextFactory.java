@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,18 @@
  */
 package org.htmlunit.javascript;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_ARRAY_SORT_ACCEPTS_INCONSISTENT_COMPERATOR;
 import static org.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
 
 import java.io.Serializable;
+import java.util.function.Consumer;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ScriptException;
 import org.htmlunit.ScriptPreProcessor;
 import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.Callable;
+import org.htmlunit.corejs.javascript.CompilerEnvirons;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.ContextFactory;
@@ -31,12 +34,10 @@ import org.htmlunit.corejs.javascript.Evaluator;
 import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.debug.Debugger;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
 
 /**
  * ContextFactory that supports termination of scripts if they exceed a timeout. Based on example from
@@ -93,7 +94,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      * The HtmlUnit default implementation ({@link DebuggerImpl}, {@link DebugFrameImpl}) may be
      * used, or a custom debugger may be used instead. By default, no debugger is used.
      *
-     * @param debugger the JavaScript debugger to use (may be {@code null})
+     * @param debugger the JavaScript debugger to use (maybe {@code null})
      */
     public void setDebugger(final Debugger debugger) {
         debugger_ = debugger;
@@ -155,7 +156,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
         @Override
         protected Script compileString(String source, final Evaluator compiler,
                 final ErrorReporter compilationErrorReporter, final String sourceName,
-                final int lineno, final Object securityDomain) {
+                final int lineno, final Object securityDomain,
+                final Consumer<CompilerEnvirons> compilerEnvironsProcessor) {
 
             // this method gets called by Context.compileString and by ScriptRuntime.evalSpecial
             // which is used for window.eval. We have to take care in which case we are.
@@ -191,7 +193,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             source = preProcess(page, source, sourceName, lineno, null);
 
             return super.compileString(source, compiler, compilationErrorReporter,
-                    sourceName, lineno, securityDomain);
+                    sourceName, lineno, securityDomain, compilerEnvironsProcessor);
         }
 
         @Override
@@ -248,12 +250,10 @@ public class HtmlUnitContextFactory extends ContextFactory {
         cx.setTimeZone(browserVersion_.getSystemTimezone());
 
         // make sure no java classes are usable from js
-        cx.setClassShutter(fullClassName -> {
-            return false;
-        });
+        cx.setClassShutter(fullClassName -> false);
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.
-        cx.setOptimizationLevel(-1);
+        cx.setInterpretedMode(true);
 
         // Set threshold on how often we want to receive the callbacks
         cx.setInstructionObserverThreshold(INSTRUCTION_COUNT_THRESHOLD);
@@ -265,9 +265,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
         if (debugger_ != null) {
             cx.setDebugger(debugger_, null);
         }
-
-        // register custom RegExp processing
-        ScriptRuntime.setRegExpProxy(cx, new HtmlUnitRegExpProxy(ScriptRuntime.getRegExpProxy(cx)));
 
         cx.setMaximumInterpreterStackDepth(5_000);
 
@@ -302,6 +299,19 @@ public class HtmlUnitContextFactory extends ContextFactory {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Object doTopCall(final Script script,
+            final Context cx, final Scriptable scope,
+            final Scriptable thisObj) {
+
+        final TimeoutContext tcx = (TimeoutContext) cx;
+        tcx.startClock();
+        return super.doTopCall(script, cx, scope, thisObj);
+    }
+
+    /**
      * Same as {@link ContextFactory}{@link #call(ContextAction)} but with handling
      * of some exceptions.
      *
@@ -325,32 +335,16 @@ public class HtmlUnitContextFactory extends ContextFactory {
      */
     @Override
     protected boolean hasFeature(final Context cx, final int featureIndex) {
-        switch (featureIndex) {
-            case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER:
-                return true;
-            case Context.FEATURE_E4X:
-                return false;
-            case Context.FEATURE_OLD_UNDEF_NULL_THIS:
-                return true;
-            case Context.FEATURE_NON_ECMA_GET_YEAR:
-                return false;
-            case Context.FEATURE_LITTLE_ENDIAN:
-                return true;
-            case Context.FEATURE_LOCATION_INFORMATION_IN_ERROR:
-                return true;
-            case Context.FEATURE_INTL_402:
-                return true;
-            case Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW:
-                return true;
-            case Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK:
-                return true;
-            case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME:
-                return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
-            case Context.FEATURE_HTMLUNIT_MEMBERBOX_NEWLINE:
-                return false;
-            default:
-                return super.hasFeature(cx, featureIndex);
-        }
+        return switch (featureIndex) {
+            case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER, Context.FEATURE_OLD_UNDEF_NULL_THIS,
+                 Context.FEATURE_LITTLE_ENDIAN, Context.FEATURE_LOCATION_INFORMATION_IN_ERROR, Context.FEATURE_INTL_402,
+                 Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW -> true;
+            case Context.FEATURE_E4X, Context.FEATURE_NON_ECMA_GET_YEAR -> false;
+            case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME -> browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
+            case Context.FEATURE_HTMLUNIT_ARRAY_SORT_COMPERATOR_ACCEPTS_BOOL ->
+                browserVersion_.hasFeature(JS_ARRAY_SORT_ACCEPTS_INCONSISTENT_COMPERATOR);
+            default -> super.hasFeature(cx, featureIndex);
+        };
     }
 
     private static final class HtmlUnitErrorReporter implements ErrorReporter, Serializable {
@@ -395,7 +389,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         public void error(final String message, final String sourceName, final int line,
                 final String lineSource, final int lineOffset) {
             // no need to log here, this is only used to create the exception
-            // the exception gets logged if not catched later on
+            // gets logged if not catched later on
             throw new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
         }
 
@@ -414,7 +408,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 final String message, final String sourceName, final int line,
                 final String lineSource, final int lineOffset) {
             // no need to log here, this is only used to create the exception
-            // the exception gets logged if not catched later on
+            // gets logged if not catched later on
             return new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
         }
     }

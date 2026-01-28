@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,13 +55,11 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
         if (value.endsWith(".")) {
             return;
         }
-        String domain = value;
-        domain = domain.toLowerCase(Locale.ROOT);
+        String domain = value.toLowerCase(Locale.ROOT);
 
         final int dotIndex = domain.indexOf('.');
         if (browserVersion_.hasFeature(HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS)
                 && dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
-            domain = domain.toLowerCase(Locale.ROOT);
             domain = domain.substring(1);
         }
         if (dotIndex > 0) {
@@ -84,11 +82,10 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
         final int dotIndex = domain.indexOf('.');
         if (dotIndex == 0 && domain.length() > 1 && domain.indexOf('.', 1) == -1) {
             final String host = origin.getHost();
-            domain = domain.toLowerCase(Locale.ROOT);
             if (browserVersion_.hasFeature(HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS)) {
                 domain = domain.substring(1);
             }
-            return host.equals(domain);
+            return host.equalsIgnoreCase(domain);
         }
 
         if (dotIndex == -1

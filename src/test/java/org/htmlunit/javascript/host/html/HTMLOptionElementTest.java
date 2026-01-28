@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,8 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlSelect;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLOptionElement}.
@@ -29,8 +27,7 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
-*/
-@RunWith(BrowserRunner.class)
+ */
 public class HTMLOptionElementTest extends SimpleWebTestCase {
 
     /**
@@ -39,8 +36,8 @@ public class HTMLOptionElementTest extends SimpleWebTestCase {
     @Test
     @Alerts({"value1", "text1", "label1", "value2", "text2", "text2"})
     public void label() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var s = document.getElementById('testSelect');\n"
             + "  var lastIndex = s.length;\n"

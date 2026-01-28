@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,27 +17,33 @@ package org.htmlunit.javascript.host.html;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlTable;
 import org.htmlunit.html.HtmlTableBody;
 import org.htmlunit.html.HtmlTableFooter;
 import org.htmlunit.html.HtmlTableHeader;
 import org.htmlunit.html.HtmlTableRow;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.DOMException;
+import org.htmlunit.javascript.host.dom.Node;
 
 /**
  * The JavaScript object {@code HTMLTableElement}.
  *
  * @author David D. Kilzer
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Marc Guillemot
@@ -46,7 +52,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlTable.class)
-public class HTMLTableElement extends RowContainer {
+public class HTMLTableElement extends HTMLElement {
 
     /**
      * JavaScript constructor.
@@ -63,8 +69,8 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's caption element
      */
     @JsxGetter
-    public Object getCaption() {
-        final List<HtmlElement> captions = getDomNodeOrDie().getElementsByTagName("caption");
+    public HtmlUnitScriptable getCaption() {
+        final List<HtmlElement> captions = getDomNodeOrDie().getStaticElementsByTagName("caption");
         if (captions.isEmpty()) {
             return null;
         }
@@ -77,14 +83,13 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setCaption(final Object o) {
-        if (!(o instanceof HTMLTableCaptionElement)) {
-            throw JavaScriptEngine.reportRuntimeError("Not a caption");
+        if (!(o instanceof HTMLTableCaptionElement caption)) {
+            throw JavaScriptEngine.typeError("Not a caption");
         }
 
         // remove old caption (if any)
         deleteCaption();
 
-        final HTMLTableCaptionElement caption = (HTMLTableCaptionElement) o;
         getDomNodeOrDie().appendChild(caption.getDomNodeOrDie());
     }
 
@@ -94,8 +99,8 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's tfoot element
      */
     @JsxGetter
-    public Object getTFoot() {
-        final List<HtmlElement> tfoots = getDomNodeOrDie().getElementsByTagName("tfoot");
+    public HtmlUnitScriptable getTFoot() {
+        final List<HtmlElement> tfoots = getDomNodeOrDie().getStaticElementsByTagName("tfoot");
         if (tfoots.isEmpty()) {
             return null;
         }
@@ -108,16 +113,15 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setTFoot(final Object o) {
-        if (!(o instanceof HTMLTableSectionElement
-            && "TFOOT".equals(((HTMLTableSectionElement) o).getTagName()))) {
-            throw JavaScriptEngine.reportRuntimeError("Not a tFoot");
+        if (!(o instanceof HTMLTableSectionElement element
+            && "TFOOT".equals(element.getTagName()))) {
+            throw JavaScriptEngine.typeError("Not a tFoot");
         }
 
         // remove old caption (if any)
         deleteTFoot();
 
-        final HTMLTableSectionElement tfoot = (HTMLTableSectionElement) o;
-        getDomNodeOrDie().appendChild(tfoot.getDomNodeOrDie());
+        getDomNodeOrDie().appendChild(element.getDomNodeOrDie());
     }
 
     /**
@@ -126,8 +130,8 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's thead element
      */
     @JsxGetter
-    public Object getTHead() {
-        final List<HtmlElement> theads = getDomNodeOrDie().getElementsByTagName("thead");
+    public HtmlUnitScriptable getTHead() {
+        final List<HtmlElement> theads = getDomNodeOrDie().getStaticElementsByTagName("thead");
         if (theads.isEmpty()) {
             return null;
         }
@@ -140,16 +144,15 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setTHead(final Object o) {
-        if (!(o instanceof HTMLTableSectionElement
-            && "THEAD".equals(((HTMLTableSectionElement) o).getTagName()))) {
-            throw JavaScriptEngine.reportRuntimeError("Not a tHead");
+        if (!(o instanceof HTMLTableSectionElement element
+            && "THEAD".equals(element.getTagName()))) {
+            throw JavaScriptEngine.typeError("Not a tHead");
         }
 
         // remove old caption (if any)
         deleteTHead();
 
-        final HTMLTableSectionElement thead = (HTMLTableSectionElement) o;
-        getDomNodeOrDie().appendChild(thead.getDomNodeOrDie());
+        getDomNodeOrDie().appendChild(element.getDomNodeOrDie());
     }
 
     /**
@@ -157,7 +160,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the tbody's in the table
      */
     @JsxGetter
-    public Object getTBodies() {
+    public HtmlUnitScriptable getTBodies() {
         final HtmlTable table = (HtmlTable) getDomNodeOrDie();
         final HTMLCollection bodies = new HTMLCollection(table, false);
         bodies.setElementsSupplier((Supplier<List<DomNode>> & Serializable) () -> new ArrayList<>(table.getBodies()));
@@ -172,7 +175,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
-    public Object createCaption() {
+    public HtmlUnitScriptable createCaption() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("caption"));
     }
 
@@ -184,7 +187,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
-    public Object createTFoot() {
+    public HtmlUnitScriptable createTFoot() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("tfoot"));
     }
 
@@ -196,7 +199,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
-    public Object createTBody() {
+    public HtmlUnitScriptable createTBody() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("tbody"));
     }
 
@@ -208,7 +211,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
-    public Object createTHead() {
+    public HtmlUnitScriptable createTHead() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("thead"));
     }
 
@@ -246,36 +249,81 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * Indicates if the row belongs to this container.
-     * @param row the row to test
-     * @return {@code true} if it belongs to this container
+     * Inserts a new row at the specified index in the element's row collection. If the index
+     * is -1 or there is no index specified, then the row is appended at the end of the
+     * element's row collection.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536457.aspx">MSDN Documentation</a>
+     * @param index specifies where to insert the row in the row's collection.
+     *        The default value is -1, which appends the new row to the end of the rows collection
+     * @return the newly-created row
      */
-    @Override
-    protected boolean isContainedRow(final HtmlTableRow row) {
-        final DomNode parent = row.getParentNode(); // the tbody, thead or tfoo
-        return parent != null
-                && parent.getParentNode() == getDomNodeOrDie();
+    @JsxFunction
+    public HtmlUnitScriptable insertRow(final Object index) {
+        int rowIndex = -1;
+        if (!JavaScriptEngine.isUndefined(index)) {
+            rowIndex = (int) JavaScriptEngine.toNumber(index);
+        }
+        final HTMLCollection rows = getRows();
+        final int rowCount = rows.getLength();
+        final int r;
+        if (rowIndex == -1 || rowIndex == rowCount) {
+            r = Math.max(0, rowCount);
+        }
+        else {
+            r = rowIndex;
+        }
+
+        if (r < 0 || r > rowCount) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "Index or size is negative or greater than the allowed amount "
+                            + "(index: " + rowIndex + ", " + rowCount + " rows)",
+                    DOMException.INDEX_SIZE_ERR);
+        }
+
+        return insertRow(r);
     }
 
     /**
-     * Handle special case where table is empty.
-     * {@inheritDoc}
+     * Inserts a new row at the given position.
+     * @param index the index where the row should be inserted (0 &lt;= index &lt;= nbRows)
+     * @return the inserted row
      */
-    @Override
-    public Object insertRow(final int index) {
+    public HtmlUnitScriptable insertRow(final int index) {
         // check if a tbody should be created
         if (index != 0) {
             for (final HtmlElement htmlElement : getDomNodeOrDie().getHtmlElementDescendants()) {
                 if (htmlElement instanceof HtmlTableBody
                         || htmlElement instanceof HtmlTableHeader
                         || htmlElement instanceof HtmlTableFooter) {
-                    return super.insertRow(index);
+
+                    final HTMLCollection rows = getRows();
+                    final int rowCount = rows.getLength();
+                    final DomElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createElement("tr");
+                    if (rowCount == 0) {
+                        getDomNodeOrDie().appendChild(newRow);
+                    }
+                    else if (index == rowCount) {
+                        final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(index - 1));
+                        row.getDomNodeOrDie().getParentNode().appendChild(newRow);
+                    }
+                    else {
+                        final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(index));
+                        // if at the end, then in the same "sub-container" as the last existing row
+                        if (index > rowCount - 1) {
+                            row.getDomNodeOrDie().getParentNode().appendChild(newRow);
+                        }
+                        else {
+                            row.getDomNodeOrDie().insertBefore(newRow);
+                        }
+                    }
+                    return getScriptableFor(newRow);
                 }
             }
         }
 
         final HtmlElement tBody = getDomNodeOrDie().appendChildIfNoneExists("tbody");
-        return ((RowContainer) getScriptableFor(tBody)).insertRow(0);
+        return ((HTMLTableSectionElement) getScriptableFor(tBody)).insertRow(0);
     }
 
     /**
@@ -374,8 +422,8 @@ public class HTMLTableElement extends RowContainer {
      * {@inheritDoc}
      */
     @Override
-    public Object appendChild(final Object childObject) {
-        final Object appendedChild = super.appendChild(childObject);
+    public Node appendChild(final Object childObject) {
+        final Node appendedChild = super.appendChild(childObject);
         getDomNodeOrDie().getPage().clearComputedStyles(getDomNodeOrDie());
         return appendedChild;
     }
@@ -384,8 +432,8 @@ public class HTMLTableElement extends RowContainer {
      * {@inheritDoc}
      */
     @Override
-    public Object removeChild(final Object childObject) {
-        final Object removedChild = super.removeChild(childObject);
+    public Node removeChild(final Object childObject) {
+        final Node removedChild = super.removeChild(childObject);
         getDomNodeOrDie().getPage().clearComputedStyles(getDomNodeOrDie());
         return removedChild;
     }
@@ -426,4 +474,64 @@ public class HTMLTableElement extends RowContainer {
         setAttribute("rules", rules);
     }
 
+    /**
+     * Returns the value of the {@code align} property.
+     * @return the value of the {@code align} property
+     */
+    @JsxGetter
+    public String getAlign() {
+        return getAlign(true);
+    }
+
+    /**
+     * Sets the value of the {@code align} property.
+     * @param align the value of the {@code align} property
+     */
+    @JsxSetter
+    public void setAlign(final String align) {
+        setAlign(align, false);
+    }
+
+    /**
+     * Deletes the row at the specified index.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536408.aspx">MSDN Documentation</a>
+     * @param rowIndex the zero-based index of the row to delete
+     */
+    @JsxFunction
+    public void deleteRow(int rowIndex) {
+        final HTMLCollection rows = getRows();
+        final int rowCount = rows.getLength();
+        if (rowIndex == -1) {
+            rowIndex = rowCount - 1;
+        }
+        final boolean rowIndexValid = rowIndex >= 0 && rowIndex < rowCount;
+        if (rowIndexValid) {
+            final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(rowIndex));
+            row.getDomNodeOrDie().remove();
+        }
+    }
+
+    /**
+     * Returns the rows in the element.
+     * @return the rows in the element
+     */
+    @JsxGetter
+    public HTMLCollection getRows() {
+        final HTMLCollection rows = new HTMLCollection(getDomNodeOrDie(), false);
+        rows.setIsMatchingPredicate(
+                (Predicate<DomNode> & Serializable)
+                node -> node instanceof HtmlTableRow htr && isContainedRow(htr));
+        return rows;
+    }
+
+    /**
+     * Indicates if the row belongs to this container.
+     * @param row the row to test
+     * @return {@code true} if it belongs to this container
+     */
+    private boolean isContainedRow(final HtmlTableRow row) {
+        final DomNode parent = row.getParentNode(); // the tbody, thead or tfoo
+        return parent != null
+                && parent.getParentNode() == getDomNodeOrDie();
+    }
 }

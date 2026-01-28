@@ -59,6 +59,7 @@
         </menu>
         <menu name="Developer docs">
             <item name="Getting Latest Code" href="/gettingLatestCode.html"/>
+            <item name="Development" href="/development.html"/>
             <item name="Coding conventions" href="/codingConventions.html"/>
             <item name="Submitting bugs" href="/submittingBugs.html"/>
             <item name="Submitting JavaScript bugs" href="/submittingJSBugs.html"/>

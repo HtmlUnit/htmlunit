@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,9 @@ package org.htmlunit.javascript.host.css;
 import java.nio.charset.StandardCharsets;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.UrlUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -34,7 +30,6 @@ import org.openqa.selenium.WebDriver;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class CSSSelectorTest extends WebDriverTestCase {
 
     /**
@@ -43,8 +38,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void querySelectorAll_nullUndefined() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -67,19 +62,19 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"exception", "exception"})
+    @Alerts({"SyntaxError/DOMException", "SyntaxError/DOMException"})
     public void querySelectorAll_emptyString() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    log(document.querySelectorAll(''));\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "  try {\n"
             + "    log(document.querySelectorAll('  '));\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -101,8 +96,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"li2", "li1", "li2", "li1", "li3", "li1", "2", "li1", "li2"})
     public void nth_child() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -135,8 +130,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "li2", "2", "li1", "li3"})
     public void nth_child_even_odd() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -164,8 +159,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object HTMLBodyElement]", "1", "0"})
     public void childSelector_html_body() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -189,15 +184,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError/DOMException")
     public void nth_child_no_argument() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    log(document.querySelectorAll('li:nth-child()'));\n"
-            + "  } catch (e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -217,8 +212,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"li1", "li4", "li7", "li10"})
     public void nth_child_equation() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('li:nth-child(3n+1)');\n"
@@ -251,15 +246,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError/DOMException")
     public void invalid() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    log(document.querySelectorAll('td:gt(4)').length);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -274,8 +269,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "ul2"})
     public void directAdjacentSelector() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -300,8 +295,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "thing1"})
     public void prefixAttribute() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -327,7 +322,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "thing1", "tHIng2"})
     public void prefixAttributeCaseInSensitive() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -354,8 +350,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void prefixAttributeEmpty() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -382,8 +378,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "something"})
     public void suffixAttribute() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -409,7 +405,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "something", "AnyThinG"})
     public void suffixAttributeCaseInSensitive() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -436,8 +433,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void suffixAttributeEmpty() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -464,8 +461,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "something", "thing2"})
     public void substringAttribute() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -491,7 +488,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "sometHIng", "thinG2"})
     public void substringAttributeInSensitive() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -517,8 +515,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void substringAttributeEmpty() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -545,8 +543,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "id1", "id2"})
     public void oneOfAttribute() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -572,8 +570,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "id1", "id2"})
     public void oneOfAttributeInSensitive() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -599,8 +597,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void oneOfAttributeEmpty() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -624,8 +622,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "id2", "id3"})
     public void hasAttribute() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -652,8 +650,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"5", "id1", "id2", "id5", "id6", "id7"})
     public void hyphenSeparatedAttributeValue() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -688,8 +686,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"5", "id1", "id2", "id5", "id6", "id7"})
     public void hyphenSeparatedAttributeValueInSensitive() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -724,8 +722,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "id1", "id4"})
     public void hyphenSeparatedAttributeValueHyphenInSelector() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -753,8 +751,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "id2", "id6"})
     public void hyphenSeparatedAttributeValueEmpty() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -785,8 +783,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "id3"})
     public void emptyAttributeValue() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -813,8 +811,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "ul2", "ul3"})
     public void generalAdjacentSelector() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -841,8 +839,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"li3", "2", "li1", "li3"})
     public void nth_last_child() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -869,8 +867,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "div1", "div3", "2", "div1", "div3", "2", "div1", "div3", "0"})
     public void nth_last_child2() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -911,8 +909,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id3")
     public void nth_of_type() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -936,8 +934,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id3")
     public void nth_last_of_type() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -960,8 +958,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     public void pseudoAfter() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -988,8 +985,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "checkbox2", "1", "checkbox2"})
     public void pseudoCheckboxChecked() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1018,8 +1015,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "radio2", "1", "radio2"})
     public void pseudoRadioChecked() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1050,7 +1047,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"theform", "id3"})
     public void pseudoInvalid() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -1083,7 +1081,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"id1", "id2", "id4", "id5", "id6"})
     public void pseudoValid() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -1114,8 +1113,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("li1")
     public void first_child() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1139,8 +1138,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("li3")
     public void last_child() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1164,8 +1163,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id2")
     public void first_of_type() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1194,8 +1193,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "link_2", "link_3"})
     public void invalid_not() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1204,7 +1203,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "    log(found.length);\n"
             + "    log(found[0].id);\n"
             + "    log(found[1].id);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1226,8 +1225,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id4")
     public void last_of_type() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1253,8 +1252,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id3")
     public void only_child() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1280,8 +1279,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id3")
     public void only_of_type() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1307,8 +1306,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"id2", "span1"})
     public void empty() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1332,8 +1331,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id2")
     public void not() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1354,14 +1353,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id2")
     public void notWithFirstOfType() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    log(document.querySelectorAll('div:not(div:first-of-type)')[0].id);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1380,7 +1380,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts({"2", "id2", "id3", "2", "id1", "id3", "2", "id1", "id2",
              "3", "id1", "id2", "id3"})
     public void notWithNthOfType() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1406,7 +1407,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "    log(res[0].id);\n"
             + "    log(res[1].id);\n"
             + "    log(res[2].id);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1424,14 +1425,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("id2")
     public void notWithLastOfType() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    log(document.querySelectorAll('div:not(div:last-of-type)')[1].id);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1450,7 +1452,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts({"2", "id1", "id2", "2", "id1", "id3", "2", "id2", "id3",
              "3", "id1", "id2", "id3"})
     public void notWithNthLastOfType() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1476,7 +1479,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "    log(res[0].id);\n"
             + "    log(res[1].id);\n"
             + "    log(res[2].id);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1494,8 +1497,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "item_2", "item_3"})
     public void childNot() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1522,8 +1525,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "item_2"})
     public void childNotNot() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1549,8 +1552,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "undefined", "1", "[object HTMLInputElement]", "id2"})
     public void focus() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1586,8 +1589,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
              "[object HTMLFormElement]", "id0",
              "[object HTMLInputElement]", "id2"})
     public void focusWithin() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1624,8 +1627,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "undefined", "1", "[object HTMLInputElement]", "id2"})
     public void focusVisible() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1658,8 +1661,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"5", "cb1", "rd1", "sl1", "ml1", "ml3"})
     public void checked() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1696,8 +1699,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "cb1", "rd1", "2", "cb2", "rd2"})
     public void checkedChanged() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1730,8 +1733,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "cb1", "rd1", "2", "cb1", "rd1"})
     public void checkedAttribute() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1764,8 +1767,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "1-iy", "1-iy", "2", "1-iy", "1-iz"})
     public void selectedChecked() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1800,8 +1803,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "id1", "id3"})
     public void enabled() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1825,8 +1828,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "id2"})
     public void disabled() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1850,7 +1853,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "fs"})
     public void disabledFieldset() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1877,7 +1881,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "fs", "i2"})
     public void disabledFieldsetDisables() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1904,8 +1909,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "id2"})
     public void target() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -1931,8 +1935,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void targetNoHash() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1954,8 +1958,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void targetUnknown() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1979,8 +1983,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object HTMLHtmlElement]"})
     public void root() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -1999,14 +2003,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "[object HTMLHeadingElement]"},
-            FF_ESR = "exception")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception")
+    @Alerts({"1", "[object HTMLHeadingElement]"})
     public void has() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2014,7 +2014,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "    var list = document.querySelectorAll('h1:has(p)');\n"
             + "    log(list.length);\n"
             + "    log(list[0]);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -2031,8 +2031,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"first", "second"})
     public void escapedAttributeValue() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "  <input id='first' name='foo[bar]'>\n"
             + "  <input id='second' name='foo.bar'>\n"
@@ -2057,8 +2057,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"6", "3"})
     public void differentWhitespaceClassName() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "  <input id='first' class='foo'>\n"
             + "  <input id='first' class='\tfoo\n'>\n"
@@ -2075,7 +2075,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "try {\n"
             + "  log(document.querySelectorAll('.foo').length);\n"
             + "  log(document.querySelectorAll('.bar').length);\n"
-            + "} catch(e) {log('exception')}\n"
+            + "} catch(e) { logEx(e) }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -2087,8 +2087,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"first", "second", "third"})
     public void escapedClassName() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "  <input id='first' class='foo[bar]'>\n"
             + "  <input id='second' class='foo.bar'>\n"
@@ -2099,7 +2099,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  log(document.querySelectorAll('.foo\\\\[bar\\\\]')[0].id);\n"
             + "  log(document.querySelectorAll('.foo\\\\.bar')[0].id);\n"
             + "  log(document.querySelectorAll('.foo\\\\:bar')[0].id);\n"
-            + "} catch(e) {log('exception')}\n"
+            + "} catch(e) { logEx(e) }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -2111,8 +2111,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"silly:id::with:colons", "silly:id::with:colons", "silly~id", "silly~id"})
     public void escapedId() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "  <input id='silly:id::with:colons'>\n"
             + "  <input id='silly~id'>\n"
@@ -2124,7 +2124,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
             + "  log(document.querySelectorAll('#silly\\\\~id')[0].id);\n"
             + "  log(document.querySelectorAll(\"#silly\\\\~id\")[0].id);\n"
-            + "} catch(e) {log('exception ' + e)}\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -2134,10 +2134,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError/DOMException")
     public void invalidSelectors() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2145,7 +2144,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var list = document.querySelectorAll('li:foo() ~ li');\n"
             + "    log(list.length);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -2379,10 +2378,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     }
 
     private void emptyAndDetached(final String selector) throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2390,20 +2387,20 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  try {\n"
             + "    found = div.querySelector('" + selector + "');\n"
             + "    log(found);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
 
             + "  div = document.createElement('div');\n"
             + "  try {\n"
             + "    found = div.querySelector('" + selector + "');\n"
             + "    log(found);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
 
             + "  var input = document.createElement('span');\n"
             + "  div.appendChild(input);\n"
             + "  try {\n"
             + "    found = div.querySelector('" + selector + "');\n"
             + "    log(found);\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -2420,8 +2417,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts({"2", "<nested>Three</nested>", "Four",
              "1", "Two", "0", "0"})
     public void xmlTagName() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2453,7 +2450,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
             + "    res = de.querySelectorAll('rEsulT');\n"
             + "    log(res.length);\n"
-            + "  } catch(e) {log('exception ' + e)}\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -2469,8 +2466,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
              "1", "ONE",
              "1", "Two"})
     public void xmlAttribute() throws Exception {
-        final String html = "<html><head>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2507,7 +2504,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "    log(res.length);\n"
             + "    log(res[0].innerHTML);\n"
 
-            + "  } catch(e) {log('exception ' + e)}\n"
+            + "  } catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -2517,18 +2514,19 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"exception", "exception"})
+    @Alerts({"SyntaxError/DOMException", "SyntaxError/DOMException"})
     public void querySelector_invalid() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    log(document.querySelectorAll('#foo > :not(:first)'));\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "  try {\n"
             + "    log(document.querySelector('#foo > :not(:first)'));\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) { logEx(e) }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -2551,7 +2549,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
              "2", "S1", "S2",
              "2", "S1", "S2"})
     public void typeSubmit() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -2593,7 +2592,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "I1"})
     public void buttonTypeInvalid() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

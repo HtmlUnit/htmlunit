@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 package org.htmlunit.javascript.host.html;
-
-import static org.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_SET_ZERO_IF_INVALID;
 
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.StyleAttributes;
@@ -31,7 +29,7 @@ import org.htmlunit.javascript.host.event.MouseEvent;
 /**
  * The JavaScript object representing a TD or TH.
  *
- * @author <a href="https://sourceforge.net/users/marlee/">Mark van Leeuwen</a>
+ * @author Mark van Leeuwen
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Daniel Gredler
@@ -40,7 +38,10 @@ import org.htmlunit.javascript.host.event.MouseEvent;
  * @author Lai Quang Duong
  */
 @JsxClass(domClass = HtmlTableCell.class)
-public class HTMLTableCellElement extends HTMLTableComponent {
+public class HTMLTableCellElement extends HTMLElement {
+
+    /** The default value of the "vAlign" property. */
+    private static final String VALIGN_DEFAULT_VALUE = "top";
 
     /**
      * JavaScript constructor.
@@ -210,22 +211,17 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     public void setRowSpan(final String rowSpan) {
         try {
             final int i = (int) Double.parseDouble(rowSpan);
-            if (i < 0 && getBrowserVersion().hasFeature(JS_TABLE_SPAN_SET_ZERO_IF_INVALID)) {
+            if (i < 0) {
                 getDomNodeOrDie().setAttribute("rowSpan", "1");
                 return;
             }
-            if (i <= 0) {
+            if (i == 0) {
                 throw new NumberFormatException(rowSpan);
             }
             getDomNodeOrDie().setAttribute("rowSpan", Integer.toString(i));
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_SET_ZERO_IF_INVALID)) {
-                getDomNodeOrDie().setAttribute("rowSpan", "0");
-            }
-            else {
-                getDomNodeOrDie().setAttribute("rowSpan", "1");
-            }
+            getDomNodeOrDie().setAttribute("rowSpan", "0");
         }
     }
 
@@ -346,5 +342,89 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     @JsxSetter
     public void setScope(final String scope) {
         getDomNodeOrDie().setAttribute("scope", scope);
+    }
+
+    /**
+     * Returns the value of the {@code align} property.
+     * @return the value of the {@code align} property
+     */
+    @JsxGetter
+    public String getAlign() {
+        return getAlign(true);
+    }
+
+    /**
+     * Sets the value of the {@code align} property.
+     * @param align the value of the {@code align} property
+     */
+    @JsxSetter
+    public void setAlign(final String align) {
+        setAlign(align, false);
+    }
+
+    /**
+     * Returns the value of the {@code vAlign} property.
+     * @return the value of the {@code vAlign} property
+     */
+    @JsxGetter
+    public String getVAlign() {
+        return getVAlign(getValidVAlignValues(), VALIGN_DEFAULT_VALUE);
+    }
+
+    /**
+     * Sets the value of the {@code vAlign} property.
+     * @param vAlign the value of the {@code vAlign} property
+     */
+    @JsxSetter
+    public void setVAlign(final Object vAlign) {
+        setVAlign(vAlign, getValidVAlignValues());
+    }
+
+    /**
+     * Returns the valid "vAlign" values for this element, depending on the browser being emulated.
+     * @return the valid "vAlign" values for this element, depending on the browser being emulated
+     */
+    private String[] getValidVAlignValues() {
+        return null;
+    }
+
+    /**
+     * Returns the value of the {@code ch} property.
+     * @return the value of the {@code ch} property
+     */
+    @Override
+    @JsxGetter
+    public String getCh() {
+        return super.getCh();
+    }
+
+    /**
+     * Sets the value of the {@code ch} property.
+     * @param ch the value of the {@code ch} property
+     */
+    @Override
+    @JsxSetter
+    public void setCh(final String ch) {
+        super.setCh(ch);
+    }
+
+    /**
+     * Returns the value of the {@code chOff} property.
+     * @return the value of the {@code chOff} property
+     */
+    @Override
+    @JsxGetter
+    public String getChOff() {
+        return super.getChOff();
+    }
+
+    /**
+     * Sets the value of the {@code chOff} property.
+     * @param chOff the value of the {@code chOff} property
+     */
+    @Override
+    @JsxSetter
+    public void setChOff(final String chOff) {
+        super.setChOff(chOff);
     }
 }

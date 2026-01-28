@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,11 @@ package org.htmlunit;
 import java.net.URL;
 
 import org.eclipse.jetty.server.Server;
-import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.util.JettyServerUtils;
 import org.htmlunit.util.UrlUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests methods in {@link HttpWebConnection}.
@@ -30,7 +29,6 @@ import org.junit.runner.RunWith;
  * @author John J Murdoch
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HttpWebConnectionProxyTest extends WebServerTestCase {
 
     private Server proxyWebServer_;
@@ -39,16 +37,13 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
      * Performs pre-test construction.
      * @throws Exception if an error occurs
      */
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         // we have to stop all servers running already to free the port
         WebDriverTestCase.stopWebServers();
         startWebServer("src/test/resources/testfiles/noproxyroot/");
 
-        final Server proxyWebServer = createWebServer(PORT_PROXY_SERVER,
-                                            "src/test/resources/testfiles/proxyroot/", null, null, null);
-        WebServerTestCase.tryStart(PORT_PROXY_SERVER, proxyWebServer);
-        proxyWebServer_ = proxyWebServer;
+        proxyWebServer_ = createWebServer(PORT_PROXY_SERVER, "src/test/resources/testfiles/proxyroot/", null);
 
         final WebClient webClient = getWebClient();
 
@@ -62,12 +57,9 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Override
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
-        if (proxyWebServer_ != null) {
-            proxyWebServer_.stop();
-            proxyWebServer_.destroy();
-        }
+        JettyServerUtils.stopServer(proxyWebServer_);
         proxyWebServer_ = null;
 
         super.tearDown();

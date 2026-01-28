@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,10 @@ import java.net.URL;
 
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link XSLTProcessor}.
@@ -31,7 +29,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class XSLTProcessorTest extends WebDriverTestCase {
 
     /**
@@ -56,7 +53,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             FF_ESR = "<html><body><h2>My CD Collection</h2>"
                 + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>")
     public void transformToDocument() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
 
@@ -76,7 +74,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      processor.importStylesheet(xslDoc);\n"
             + "      var newDocument = processor.transformToDocument(xmlDoc);\n"
             + "      log(new XMLSerializer().serializeToString(newDocument.documentElement));\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
 
             + "</script></head><body onload='test()'>\n"
@@ -130,7 +128,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "<xsl:template match=\"/\">*<xsl:value-of select=\"foo\" />*</xsl:template>"
             + "</xsl:stylesheet>";
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
 
@@ -143,7 +142,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      processor.importStylesheet(xslDoc);\n"
             + "      var newFragment = processor.transformToFragment(xmlDoc, document);\n"
             + "      log(new XMLSerializer().serializeToString(newFragment));\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
 
             + "</script></head><body onload='test()'>\n"
@@ -159,7 +158,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Alerts({"function", "function", "function", "function", "function",
              "undefined", "undefined", "undefined", "undefined"})
     public void methods() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -178,7 +178,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      } else {\n"
             + "        log('XSLTProcessor not available');\n"
             + "      }\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -193,7 +193,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Alerts({"function", "function XSLTProcessor() { [native code] }",
              "[object XSLTProcessor]"})
     public void type() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -201,7 +202,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      log(typeof XSLTProcessor);\n"
             + "      log(XSLTProcessor);\n"
             + "      log(new XSLTProcessor());\n"
-            + "    } catch (e) {log('exception')}\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -215,7 +216,8 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"})
     public void browserDetection() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -248,12 +250,15 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"preparation done", "null"},
-            FF = {"preparation done", "exception"},
-            FF_ESR = {"preparation done", "exception"})
-    @HtmlUnitNYI(CHROME = {"preparation done", "exception"},
-            EDGE = {"preparation done", "exception"})
+            FF = {"preparation done", "exception "},
+            FF_ESR = {"preparation done", "exception "})
+    @HtmlUnitNYI(CHROME = {"preparation done", "exception InternalError"},
+            EDGE = {"preparation done", "exception InternalError"},
+            FF = {"preparation done", "exception InternalError"},
+            FF_ESR = {"preparation done", "exception InternalError"})
     public void testSecurity() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
 
@@ -274,7 +279,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "      log('preparation done');\n"
             + "      var newDocument = processor.transformToDocument(xmlDoc);\n"
             + "      log(newDocument);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { log('exception ' + e.name); }\n"
             + "  }\n"
             + "</script></head>"
             + "<body onload='test()'>\n"

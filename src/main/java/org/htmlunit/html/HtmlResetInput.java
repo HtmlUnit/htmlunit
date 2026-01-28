@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ import org.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "input".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -89,14 +89,6 @@ public class HtmlResetInput extends HtmlInput implements LabelableElement {
     @Override
     public void reset() {
         // Empty.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean propagateClickStateUpdateToParent() {
-        return true;
     }
 
     /**

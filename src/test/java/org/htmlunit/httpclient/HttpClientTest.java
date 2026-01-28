@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,19 +22,16 @@ import java.io.InputStream;
 import java.io.Writer;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadBase;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload2.core.DiskFileItem;
+import org.apache.commons.fileupload2.core.DiskFileItemFactory;
+import org.apache.commons.fileupload2.core.FileUploadException;
+import org.apache.commons.fileupload2.core.FileUploadSizeException;
+import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
+import org.apache.commons.fileupload2.jakarta.JakartaServletRequestContext;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -45,10 +42,14 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.HtmlFileInput;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for {@link HtmlFileInput}.
@@ -58,7 +59,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HttpClientTest extends WebServerTestCase {
 
     /**
@@ -75,10 +75,14 @@ public class HttpClientTest extends WebServerTestCase {
             request.setCharacterEncoding(UTF_8.name());
             response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
-            if (ServletFileUpload.isMultipartContent(request)) {
+            if (JakartaServletFileUpload.isMultipartContent(request)) {
                 try {
-                    final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-                    for (final FileItem item : upload.parseRequest(request)) {
+                    final JakartaServletFileUpload<DiskFileItem, DiskFileItemFactory> upload =
+                        new JakartaServletFileUpload<>(DiskFileItemFactory.builder().get());
+
+                    final List<DiskFileItem> items = upload.parseRequest(new JakartaServletRequestContext(request));
+
+                    for (final DiskFileItem item : items) {
                         if ("myInput".equals(item.getFieldName())) {
                             final String path = item.getName();
                             for (final char ch : path.toCharArray()) {
@@ -89,8 +93,11 @@ public class HttpClientTest extends WebServerTestCase {
                         }
                     }
                 }
-                catch (final FileUploadBase.SizeLimitExceededException e) {
+                catch (final FileUploadSizeException e) {
                     writer.write("SizeLimitExceeded");
+                }
+                catch (final FileUploadException e) {
+                    writer.write("error");
                 }
                 catch (final Exception e) {
                     writer.write("error");
@@ -118,7 +125,7 @@ public class HttpClientTest extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload2", UploadServlet.class);
 
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
         final HttpPost filePost = new HttpPost(URL_FIRST + "upload2");
 
         final MultipartEntityBuilder builder = MultipartEntityBuilder.create();

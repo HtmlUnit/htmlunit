@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,13 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.NodeList;
 
 /**
  * The JavaScript object {@code HTMLTextAreaElement}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
@@ -267,7 +268,7 @@ public class HTMLTextAreaElement extends HTMLElement {
      * @return the maximum number of characters in this text area
      */
     @JsxGetter
-    public Object getMaxLength() {
+    public int getMaxLength() {
         final String maxLength = getDomNodeOrDie().getAttribute("maxLength");
 
         try {
@@ -288,8 +289,9 @@ public class HTMLTextAreaElement extends HTMLElement {
             final int i = Integer.parseInt(maxLength);
 
             if (i < 0) {
-                throw JavaScriptEngine.throwAsScriptRuntimeEx(
-                    new NumberFormatException("New value for maxLength '" + maxLength + "' is smaller than zero."));
+                throw JavaScriptEngine.asJavaScriptException(getWindow(),
+                        "New value for maxLength '" + maxLength + "' is smaller than zero.",
+                        DOMException.INDEX_SIZE_ERR);
             }
             getDomNodeOrDie().setAttribute("maxLength", maxLength);
         }
@@ -303,7 +305,7 @@ public class HTMLTextAreaElement extends HTMLElement {
      * @return the minimum number of characters in this text area
      */
     @JsxGetter
-    public Object getMinLength() {
+    public int getMinLength() {
         final String minLength = getDomNodeOrDie().getAttribute("minLength");
 
         try {
@@ -440,7 +442,7 @@ public class HTMLTextAreaElement extends HTMLElement {
      * @return whether the element is a candidate for constraint validation
      */
     @JsxGetter
-    public boolean getWillValidate() {
+    public boolean isWillValidate() {
         return getDomNodeOrDie().willValidate();
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,15 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DomNodeList}.
  *
- * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Tom Anderson
  * @author Frank Danek
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DomNodeListTest extends SimpleWebTestCase {
 
     /**
@@ -36,8 +34,8 @@ public class DomNodeListTest extends SimpleWebTestCase {
      */
     @Test
     public void getElementsByTagName() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<form><input type='button' name='button1' value='pushme'></form>\n"
             + "<div>a</div> <div>b</div> <div>c</div>\n"
@@ -61,8 +59,8 @@ public class DomNodeListTest extends SimpleWebTestCase {
      */
     @Test
     public void getChildNodes() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<form><input type='button' name='button1' value='pushme'></form>\n"
             + "<div>a</div> <div>b</div> <div>c</div>\n"

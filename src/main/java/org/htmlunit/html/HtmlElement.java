@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,9 @@ package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
 import static org.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
+import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
+import static org.htmlunit.css.CssStyleSheet.FIXED;
+import static org.htmlunit.css.CssStyleSheet.STATIC;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +26,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.Page;
@@ -31,6 +33,8 @@ import org.htmlunit.ScriptResult;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
+import org.htmlunit.WebWindow;
+import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.html.impl.SelectableTextInput;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.host.dom.Document;
@@ -40,6 +44,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.KeyboardEvent;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.javascript.host.html.HTMLElement;
+import org.htmlunit.util.StringUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -53,10 +58,10 @@ import org.w3c.dom.Text;
 /**
  * An abstract wrapper for HTML elements.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
+ * @author Mike Bowler
+ * @author Mike J. Bresnahan
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David D. Kilzer
  * @author Mike Gallaher
  * @author Denis N. Antonioli
@@ -162,7 +167,7 @@ public abstract class HtmlElement extends DomElement {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
-     * {@code null}. The map will be stored as is, not copied.
+     *        {@code null}. The map will be stored as is, not copied.
      */
     protected HtmlElement(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
@@ -176,7 +181,7 @@ public abstract class HtmlElement extends DomElement {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
-     * {@code null}. The map will be stored as is, not copied.
+     *        {@code null}. The map will be stored as is, not copied.
      */
     protected HtmlElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
@@ -191,20 +196,21 @@ public abstract class HtmlElement extends DomElement {
             final String attributeValue, final boolean notifyAttributeChangeListeners,
             final boolean notifyMutationObservers) {
 
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
-        if (null == getHtmlPageOrNull()) {
+        if (null == htmlPage) {
             super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);
             return;
         }
 
         final String oldAttributeValue = getAttribute(qualifiedName);
-        final HtmlPage htmlPage = (HtmlPage) getPage();
         final boolean mappedElement = isAttachedToPage()
-                    && HtmlPage.isMappedElement(htmlPage, qualifiedName);
+                && (DomElement.NAME_ATTRIBUTE.equals(qualifiedName) || DomElement.ID_ATTRIBUTE.equals(qualifiedName));
         if (mappedElement) {
-            // cast is save here because isMappedElement checks for HtmlPage
-            htmlPage.removeMappedElement(this);
+            // cast is safe here because isMappedElement checks for HtmlPage
+            htmlPage.removeMappedElement(this, false, false);
         }
 
         final HtmlAttributeChangeEvent event;
@@ -234,7 +240,7 @@ public abstract class HtmlElement extends DomElement {
      */
     protected static void notifyAttributeChangeListeners(final HtmlAttributeChangeEvent event,
             final HtmlElement element, final String oldAttributeValue, final boolean notifyMutationObservers) {
-        final List<HtmlAttributeChangeListener> listeners = element.attributeListeners_;
+        final List<HtmlAttributeChangeListener> listeners = new ArrayList<>(element.attributeListeners_);
         if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
             synchronized (listeners) {
                 for (final HtmlAttributeChangeListener listener : listeners) {
@@ -254,15 +260,15 @@ public abstract class HtmlElement extends DomElement {
             }
         }
         final DomNode parentNode = element.getParentNode();
-        if (parentNode instanceof HtmlElement) {
-            notifyAttributeChangeListeners(event, (HtmlElement) parentNode, oldAttributeValue, notifyMutationObservers);
+        if (parentNode instanceof HtmlElement htmlElement) {
+            notifyAttributeChangeListeners(event, htmlElement, oldAttributeValue, notifyMutationObservers);
         }
     }
 
     private void fireAttributeChangeImpl(final HtmlAttributeChangeEvent event,
             final HtmlPage htmlPage, final boolean mappedElement, final String oldAttributeValue) {
         if (mappedElement) {
-            htmlPage.addMappedElement(this);
+            htmlPage.addMappedElement(this, false);
         }
 
         if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
@@ -286,14 +292,21 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public Attr setAttributeNode(final Attr attribute) {
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+
+        // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
+        if (null == htmlPage) {
+            return super.setAttributeNode(attribute);
+        }
+
         final String qualifiedName = attribute.getName();
         final String oldAttributeValue = getAttribute(qualifiedName);
-        final HtmlPage htmlPage = (HtmlPage) getPage();
+
         final boolean mappedElement = isAttachedToPage()
-                    && HtmlPage.isMappedElement(htmlPage, qualifiedName);
+                && (DomElement.NAME_ATTRIBUTE.equals(qualifiedName)
+                        || DomElement.ID_ATTRIBUTE.equals(qualifiedName));
         if (mappedElement) {
-            // cast is save here because isMappedElement checks for HtmlPage
-            htmlPage.removeMappedElement(this);
+            htmlPage.removeMappedElement(this, false, false);
         }
 
         final HtmlAttributeChangeEvent event;
@@ -324,24 +337,33 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
-        if (htmlPage != null) {
-            htmlPage.removeMappedElement(this);
+
+        // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
+        if (null == htmlPage) {
+            super.removeAttribute(attributeName);
+            return;
+        }
+
+        final boolean mapped = DomElement.NAME_ATTRIBUTE.equals(attributeName)
+                                || DomElement.ID_ATTRIBUTE.equals(attributeName);
+        if (mapped) {
+            htmlPage.removeMappedElement(this, false, false);
         }
 
         super.removeAttribute(attributeName);
 
-        if (htmlPage != null) {
-            htmlPage.addMappedElement(this);
-
-            final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, value);
-            fireHtmlAttributeRemoved(event);
-            htmlPage.fireHtmlAttributeRemoved(event);
+        if (mapped) {
+            htmlPage.addMappedElement(this, false);
         }
+
+        final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, value);
+        fireHtmlAttributeRemoved(event);
+        htmlPage.fireHtmlAttributeRemoved(event);
     }
 
     /**
      * Support for reporting HTML attribute changes. This method can be called when an attribute
-     * has been added and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
+     * has been added, and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
      * registered {@link HtmlAttributeChangeListener}s.
      * <p>
      * Note that this method recursively calls this element's parent's
@@ -352,14 +374,14 @@ public abstract class HtmlElement extends DomElement {
      */
     protected void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
         final DomNode parentNode = getParentNode();
-        if (parentNode instanceof HtmlElement) {
-            ((HtmlElement) parentNode).fireHtmlAttributeAdded(event);
+        if (parentNode instanceof HtmlElement element) {
+            element.fireHtmlAttributeAdded(event);
         }
     }
 
     /**
      * Support for reporting HTML attribute changes. This method can be called when an attribute
-     * has been replaced and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
+     * has been replaced, and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
      * registered {@link HtmlAttributeChangeListener}s.
      * <p>
      * Note that this method recursively calls this element's parent's
@@ -370,14 +392,14 @@ public abstract class HtmlElement extends DomElement {
      */
     protected void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
         final DomNode parentNode = getParentNode();
-        if (parentNode instanceof HtmlElement) {
-            ((HtmlElement) parentNode).fireHtmlAttributeReplaced(event);
+        if (parentNode instanceof HtmlElement element) {
+            element.fireHtmlAttributeReplaced(event);
         }
     }
 
     /**
      * Support for reporting HTML attribute changes. This method can be called when an attribute
-     * has been removed and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
+     * has been removed, and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
      * registered {@link HtmlAttributeChangeListener}s.
      * <p>
      * Note that this method recursively calls this element's parent's
@@ -393,8 +415,8 @@ public abstract class HtmlElement extends DomElement {
             }
         }
         final DomNode parentNode = getParentNode();
-        if (parentNode instanceof HtmlElement) {
-            ((HtmlElement) parentNode).fireHtmlAttributeRemoved(event);
+        if (parentNode instanceof HtmlElement element) {
+            element.fireHtmlAttributeRemoved(event);
         }
     }
 
@@ -415,7 +437,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Returns this element's tab index, if it has one. If the tab index is outside of the
+     * Returns this element's tab index, if it has one. If the tab index is outside the
      * valid range (less than <code>0</code> or greater than <code>32767</code>), this method
      * returns {@link #TAB_INDEX_OUT_OF_BOUNDS}. If this element does not have
      * a tab index, or its tab index is otherwise invalid, this method returns {@code null}.
@@ -449,8 +471,8 @@ public abstract class HtmlElement extends DomElement {
         final String tagNameLC = tagName.toLowerCase(Locale.ROOT);
 
         for (DomNode currentNode = getParentNode(); currentNode != null; currentNode = currentNode.getParentNode()) {
-            if (currentNode instanceof HtmlElement && currentNode.getNodeName().equals(tagNameLC)) {
-                return (HtmlElement) currentNode;
+            if (currentNode instanceof HtmlElement element && currentNode.getNodeName().equals(tagNameLC)) {
+                return element;
             }
         }
         return null;
@@ -458,15 +480,15 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the form which contains this element, or {@code null} if this element is not inside
-     * of a form.
+     * a form.
      * @return the form which contains this element
      */
     public HtmlForm getEnclosingForm() {
         final String formId = getAttribute("form");
         if (ATTRIBUTE_NOT_DEFINED != formId) {
             final Element formById = getPage().getElementById(formId);
-            if (formById instanceof HtmlForm) {
-                return (HtmlForm) formById;
+            if (formById instanceof HtmlForm form) {
+                return form;
             }
             return null;
         }
@@ -600,10 +622,12 @@ public abstract class HtmlElement extends DomElement {
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
-            final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
-            if (submit != null) {
-                return submit.click();
+            for (final DomElement descendant : form.getDomElementDescendants()) {
+                if (descendant instanceof HtmlSubmitInput) {
+                    return descendant.click();
+                }
             }
+
             form.submit((SubmittableElement) this);
             webClient.getJavaScriptEngine().processPostponedActions();
         }
@@ -643,8 +667,7 @@ public abstract class HtmlElement extends DomElement {
         final List<Object[]> keys = keyboard.getKeys();
 
         if (keyboard.isStartAtEnd()) {
-            if (this instanceof SelectableTextInput) {
-                final SelectableTextInput textInput = (SelectableTextInput) this;
+            if (this instanceof SelectableTextInput textInput) {
                 textInput.setSelectionStart(textInput.getText().length());
             }
             else {
@@ -655,7 +678,8 @@ public abstract class HtmlElement extends DomElement {
             }
         }
 
-        for (int i = 0; i < keys.size(); i++) {
+        final int size = keys.size();
+        for (int i = 0; i < size; i++) {
             final Object[] entry = keys.get(i);
             if (entry.length == 1) {
                 type((char) entry[0], i == keys.size() - 1);
@@ -816,8 +840,8 @@ public abstract class HtmlElement extends DomElement {
             DomNodeList<DomNode> children = getChildNodes();
             while (!children.isEmpty()) {
                 final DomNode lastChild = children.get(children.size() - 1);
-                if (lastChild instanceof DomText) {
-                    return (DomText) lastChild;
+                if (lastChild instanceof DomText text) {
+                    return text;
                 }
                 children = lastChild.getChildNodes();
             }
@@ -839,7 +863,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Indicates if the provided character can by "typed" in the element.
+     * Indicates if the provided character can be "typed" in the element.
      * @param c the character
      * @return {@code true} if it is accepted
      */
@@ -926,7 +950,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public final HtmlElement appendChildIfNoneExists(final String tagName) {
         final HtmlElement child;
-        final List<HtmlElement> children = getElementsByTagName(tagName);
+        final List<HtmlElement> children = getStaticElementsByTagName(tagName);
         if (children.isEmpty()) {
             // Add a new child and return it.
             child = (HtmlElement) ((HtmlPage) getPage()).createElement(tagName);
@@ -946,7 +970,7 @@ public abstract class HtmlElement extends DomElement {
      * @param i the index of the child to remove
      */
     public final void removeChild(final String tagName, final int i) {
-        final List<HtmlElement> children = getElementsByTagName(tagName);
+        final List<HtmlElement> children = getStaticElementsByTagName(tagName);
         if (i >= 0 && i < children.size()) {
             children.get(i).remove();
         }
@@ -962,8 +986,8 @@ public abstract class HtmlElement extends DomElement {
     public final boolean hasEventHandlers(final String eventName) {
         if (getPage().getWebClient().isJavaScriptEngineEnabled()) {
             final HtmlUnitScriptable jsObj = getScriptableObject();
-            if (jsObj instanceof EventTarget) {
-                return ((EventTarget) jsObj).hasEventHandlers(eventName);
+            if (jsObj instanceof EventTarget target) {
+                return target.hasEventHandlers(eventName);
             }
         }
         return false;
@@ -1210,6 +1234,13 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * @return the value of the 'hidden' attribute or an empty string if not set.
+     */
+    public String getHidden() {
+        return getAttributeDirect(ATTRIBUTE_HIDDEN);
+    }
+
+    /**
      * @return true if the hidden attribute is set.
      */
     public boolean isHidden() {
@@ -1218,16 +1249,24 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Sets the {@code hidden} property.
+     * If the provided string is empty, the 'hidden' attribute will be removed.
+     * If the provided string is 'until-found' then the attribute value will be 'until-found'.
+     * For all other provided strings the attribute will be set to ''.
+     * @see #setHidden(boolean)
      * @param hidden the {@code hidden} property
      */
     public void setHidden(final String hidden) {
-        if ("false".equalsIgnoreCase(hidden)) {
-            removeAttribute(ATTRIBUTE_HIDDEN);
+        if ("until-found".equalsIgnoreCase(hidden)) {
+            setAttribute(ATTRIBUTE_HIDDEN, "until-found");
+            return;
         }
 
-        if (StringUtils.isNotEmpty(hidden)) {
-            setAttribute(ATTRIBUTE_HIDDEN, "");
+        if (StringUtils.isEmptyString(hidden)) {
+            removeAttribute(ATTRIBUTE_HIDDEN);
+            return;
         }
+
+        setAttribute(ATTRIBUTE_HIDDEN, "");
     }
 
     /**
@@ -1236,11 +1275,11 @@ public abstract class HtmlElement extends DomElement {
      */
     public void setHidden(final boolean hidden) {
         if (hidden) {
-            setAttribute("hidden", "");
+            setAttribute(ATTRIBUTE_HIDDEN, "");
             return;
         }
 
-        removeAttribute("hidden");
+        removeAttribute(ATTRIBUTE_HIDDEN);
     }
 
     /**
@@ -1270,12 +1309,9 @@ public abstract class HtmlElement extends DomElement {
      * Helper for src retrieval and normalization.
      *
      * @return the value of the attribute {@code src} with all line breaks removed
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     protected final String getSrcAttributeNormalized() {
-        // at the moment StringUtils.replaceChars returns the org string
-        // if nothing to replace was found but the doc implies, that we
-        // can't trust on this in the future
         final String attrib = getAttributeDirect(SRC_ATTRIBUTE);
         if (ATTRIBUTE_NOT_DEFINED == attrib) {
             return attrib;
@@ -1300,8 +1336,7 @@ public abstract class HtmlElement extends DomElement {
 
         final HtmlUnitScriptable document = page.getScriptableObject();
 
-        if (document instanceof HTMLDocument) {
-            final HTMLDocument doc = (HTMLDocument) document;
+        if (document instanceof HTMLDocument doc) {
             final Object activeElement = doc.getActiveElement();
 
             if (activeElement == getScriptableObject()) {
@@ -1414,6 +1449,186 @@ public abstract class HtmlElement extends DomElement {
                 removeAttribute(ATTRIBUTE_REQUIRED);
             }
         }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param returnNullIfFixed if position is 'fixed' return null
+     * @return the offset parent {@link HtmlElement}
+     */
+    public HtmlElement getOffsetParentInternal(final boolean returnNullIfFixed) {
+        if (getParentNode() == null) {
+            return null;
+        }
+
+        final WebWindow webWindow = getPage().getEnclosingWindow();
+        final ComputedCssStyleDeclaration style = webWindow.getComputedStyle(this, null);
+        final String position = style.getPositionWithInheritance();
+
+        if (returnNullIfFixed && FIXED.equals(position)) {
+            return null;
+        }
+
+        final boolean staticPos = STATIC.equals(position);
+
+        DomNode currentElement = this;
+        while (currentElement != null) {
+
+            final DomNode parentNode = currentElement.getParentNode();
+            if (parentNode instanceof HtmlBody
+                || (staticPos && parentNode instanceof HtmlTableDataCell)
+                || (staticPos && parentNode instanceof HtmlTable)) {
+                return (HtmlElement) parentNode;
+            }
+
+            if (parentNode instanceof HtmlElement element) {
+                final ComputedCssStyleDeclaration parentStyle =
+                        webWindow.getComputedStyle(element, null);
+                final String parentPosition = parentStyle.getPositionWithInheritance();
+                if (!STATIC.equals(parentPosition)) {
+                    return element;
+                }
+            }
+
+            currentElement = currentElement.getParentNode();
+        }
+
+        return null;
+    }
+
+    /**
+     * @return this element's top offset, which is the calculated left position of this
+     *         element relative to the <code>offsetParent</code>.
+     */
+    public int getOffsetTop() {
+        if (this instanceof HtmlBody) {
+            return 0;
+        }
+
+        int top = 0;
+
+        // Add the offset for this node.
+        final WebWindow webWindow = getPage().getEnclosingWindow();
+        ComputedCssStyleDeclaration style = webWindow.getComputedStyle(this, null);
+        top += style.getTop(true, false, false);
+
+        // If this node is absolutely positioned, we're done.
+        final String position = style.getPositionWithInheritance();
+        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
+            return top;
+        }
+
+        final HtmlElement offsetParent = getOffsetParentInternal(false);
+
+        // Add the offset for the ancestor nodes.
+        DomNode parentNode = getParentNode();
+        while (parentNode != null && parentNode != offsetParent) {
+            if (parentNode instanceof HtmlElement element) {
+                style = webWindow.getComputedStyle(element, null);
+                top += style.getTop(false, true, true);
+            }
+            parentNode = parentNode.getParentNode();
+        }
+
+        if (offsetParent != null) {
+            style = webWindow.getComputedStyle(this, null);
+            final boolean thisElementHasTopMargin = style.getMarginTopValue() != 0;
+
+            style = webWindow.getComputedStyle(offsetParent, null);
+            if (!thisElementHasTopMargin) {
+                top += style.getMarginTopValue();
+            }
+            top += style.getPaddingTopValue();
+        }
+
+        return top;
+    }
+
+    /**
+     * @return this element's left offset, which is the calculated left position of this
+     *         element relative to the <code>offsetParent</code>.
+     */
+    public int getOffsetLeft() {
+        if (this instanceof HtmlBody) {
+            return 0;
+        }
+
+        int left = 0;
+
+        // Add the offset for this node.
+        final WebWindow webWindow = getPage().getEnclosingWindow();
+        ComputedCssStyleDeclaration style = webWindow.getComputedStyle(this, null);
+        left += style.getLeft(true, false, false);
+
+        // If this node is absolutely positioned, we're done.
+        final String position = style.getPositionWithInheritance();
+        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
+            return left;
+        }
+
+        final HtmlElement offsetParent = getOffsetParentInternal(false);
+
+        DomNode parentNode = getParentNode();
+        while (parentNode != null && parentNode != offsetParent) {
+            if (parentNode instanceof HtmlElement element) {
+                style = webWindow.getComputedStyle(element, null);
+                left += style.getLeft(true, true, true);
+            }
+            parentNode = parentNode.getParentNode();
+        }
+
+        if (offsetParent != null) {
+            style = webWindow.getComputedStyle(offsetParent, null);
+            left += style.getMarginLeftValue();
+            left += style.getPaddingLeftValue();
+        }
+
+        return left;
+    }
+
+    /**
+     * Returns this element's X position.
+     * @return this element's X position
+     */
+    public int getPosX() {
+        int cumulativeOffset = 0;
+        final WebWindow webWindow = getPage().getEnclosingWindow();
+
+        HtmlElement element = this;
+        while (element != null) {
+            cumulativeOffset += element.getOffsetLeft();
+            if (element != this) {
+                final ComputedCssStyleDeclaration style =
+                        webWindow.getComputedStyle(element, null);
+                cumulativeOffset += style.getBorderLeftValue();
+            }
+            element = element.getOffsetParentInternal(false);
+        }
+
+        return cumulativeOffset;
+    }
+
+    /**
+     * Returns this element's Y position.
+     * @return this element's Y position
+     */
+    public int getPosY() {
+        int cumulativeOffset = 0;
+        final WebWindow webWindow = getPage().getEnclosingWindow();
+
+        HtmlElement element = this;
+        while (element != null) {
+            cumulativeOffset += element.getOffsetTop();
+            if (element != this) {
+                final ComputedCssStyleDeclaration style =
+                        webWindow.getComputedStyle(element, null);
+                cumulativeOffset += style.getBorderTopValue();
+            }
+            element = element.getOffsetParentInternal(false);
+        }
+
+        return cumulativeOffset;
     }
 
     /**

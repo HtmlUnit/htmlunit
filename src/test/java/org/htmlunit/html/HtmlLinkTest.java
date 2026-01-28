@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,8 @@ package org.htmlunit.html;
 import java.net.URL;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlLink}.
@@ -28,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-@RunWith(BrowserRunner.class)
 public class HtmlLinkTest extends SimpleWebTestCase {
 
     /**
@@ -40,8 +37,8 @@ public class HtmlLinkTest extends SimpleWebTestCase {
         getWebClientWithMockWebConnection().getOptions().setCssEnabled(false);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
 
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <link rel='stylesheet' href='simple.css' "
                         + "onload='alert(\"onLoad\")' onerror='alert(\"onError\")'>\n"
@@ -62,8 +59,8 @@ public class HtmlLinkTest extends SimpleWebTestCase {
         getWebClientWithMockWebConnection().getOptions().setCssEnabled(false);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
 
-        final String html
-                = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + "    function test() {\n"

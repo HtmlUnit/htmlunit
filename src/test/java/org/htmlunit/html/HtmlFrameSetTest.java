@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,20 +25,19 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlFrameSet}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Hans Donner
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlFrameSetTest extends SimpleWebTestCase {
 
     /**
@@ -46,8 +45,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
      */
     @Test
     public void loadingFrameSet() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"
             + "  <frame scrolling='no' name='left' src='" + URL_SECOND + "' frameborder='1' />\n"
             + "  <frame scrolling='auto' name='right' src='" + URL_THIRD + "' frameborder='1' />\n"
@@ -56,8 +55,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "  </noframes>\n"
             + "</frameset>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
-        final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent  = DOCTYPE_HTML + "<html><head><title>Third</title></head><body></body></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
 
@@ -74,7 +73,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         assertEquals("Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText());
 
         final WebWindow thirdWebWindow = webClient.getWebWindowByName("right");
-        assertTrue(FrameWindow.class.isInstance(thirdWebWindow));
+        assertTrue(thirdWebWindow instanceof FrameWindow);
         assertSame(firstPage, ((FrameWindow) thirdWebWindow).getEnclosingPage());
         assertEquals("Third", ((HtmlPage) thirdWebWindow.getEnclosedPage()).getTitleText());
     }
@@ -84,13 +83,13 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
      */
     @Test
     public void loadingIFrames() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "  <iframe name='left' src='" + URL_SECOND + "' />\n"
             + "  some stuff"
             + "</html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
 
@@ -102,7 +101,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final WebWindow secondWebWindow = webClient.getWebWindowByName("left");
-        assertTrue(FrameWindow.class.isInstance(secondWebWindow));
+        assertTrue(secondWebWindow instanceof FrameWindow);
         assertSame(firstPage, ((FrameWindow) secondWebWindow).getEnclosingPage());
         assertEquals("Second", ((HtmlPage) secondWebWindow.getEnclosedPage()).getTitleText());
     }
@@ -113,8 +112,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
      */
     @Test
     public void loadingFrameSetWithRelativePaths() throws Exception {
-        final String framesContent
-            = "<html><head><title>Frames</title></head>\n"
+        final String framesContent = DOCTYPE_HTML
+            + "<html><head><title>Frames</title></head>\n"
             + "<frameset rows='110,*'>\n"
             + "  <frame src='subdir1/menu.html' name='menu' scrolling='no' border='0' noresize>\n"
             + "  <frame src='subdir2/first.html' name='test' border='0' auto>\n"
@@ -123,8 +122,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "  <body>Frames not supported</body>\n"
             + "</noframes>\n"
             + "</html>";
-        final String menuContent
-            = "<html><head><title>Menu</title></head>\n"
+        final String menuContent = DOCTYPE_HTML
+            + "<html><head><title>Menu</title></head>\n"
             + "<body>\n"
             + "  <script language='javascript'>\n"
             + "    function changeEditPage() {parent.test.location='../second.html';}\n"
@@ -132,12 +131,12 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "  <a name ='changePage' onClick='javascript:changeEditPage();' href='#'>Click</a>."
             + "</body>\n"
             + "</html>";
-        final String firstContent
-            = "<html><head><title>First</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<body>First/body>\n"
             + "</html>";
-        final String secondContent
-            = "<html><head><title>Second</title></head>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head>\n"
             + "<body>Second</body>\n"
             + "</html>";
         final String baseUrl = "http://framestest";
@@ -177,8 +176,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
      */
     @Test
     public void frameOnloadAccessOtherFrame() throws Exception {
-        final String framesContent
-            = "<html><head><title>Main</title>\n"
+        final String framesContent = DOCTYPE_HTML
+            + "<html><head><title>Main</title>\n"
             + "</head>\n"
             + "  <frameset cols='18%,*'>\n"
             + "    <frame name='menu' src='" + URL_SECOND + "'>\n"
@@ -186,7 +185,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "  </frameset>\n"
             + "</html>";
 
-        final String menuContent = "<html><head><title>Menu</title>\n"
+        final String menuContent = DOCTYPE_HTML
+            + "<html><head><title>Menu</title>\n"
             + "  <script>\n"
             + "    function init() {\n"
             + "      var oFrame = top.button_pallete;\n"
@@ -218,8 +218,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
      */
     @Test
     public void refererHeader() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"
             + "  <frame scrolling='no' name='left' src='" + URL_SECOND + "' frameborder='1' />\n"
             + "  <noframes>\n"
@@ -227,7 +227,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "  </noframes>\n"
             + "</frameset>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
 
@@ -247,8 +247,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
      */
     @Test
     public void scriptUnderNoFrames() throws Exception {
-        final String firstContent
-            = "<html><head><title>first</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title></head>\n"
             + "<frameset cols='100%'>\n"
             + "  <frame src='" + URL_SECOND + "'' id='frame1'/>\n"
             + "  <noframes>\n"
@@ -256,8 +256,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "    <script src='" + URL_THIRD + "'></script>\n"
             + "   </noframes>\n"
             + "</frameset></html>";
-        final String secondContent
-            = "<html><body><script>alert(2);</script></body></html>";
+        final String secondContent = DOCTYPE_HTML
+            + "<html><body><script>alert(2);</script></body></html>";
         final String thirdContent
             = "alert('3');\n";
         final WebClient client = getWebClientWithMockWebConnection();
@@ -286,8 +286,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         final URL rightURL = new URL("http://domain/right.html");
         final URL right2URL = new URL("http://domain/right2.html");
 
-        final String framesetHtml
-            = "<html><head><title>Test Frameset</title><script>\n"
+        final String framesetHtml = DOCTYPE_HTML
+            + "<html><head><title>Test Frameset</title><script>\n"
             + "function writeLeftFrame() {\n"
             + "  var leftDoc = leftFrame.document;\n"
             + "  leftDoc.open();\n"
@@ -307,20 +307,20 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final String leftHtml
-            = "<html>\n"
+        final String leftHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<body onLoad=\"parent.writeLeftFrame()\">\n"
             + "  This is the initial left frame, to be overwritten immediately (onLoad).\n"
             + "</body></html>";
 
-        final String rightHtml
-            = "<html>\n"
+        final String rightHtml = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  This is the right frame, version 1.\n"
             + "</body></html>";
 
-        final String right2Html
-            = "<html>\n"
+        final String right2Html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  This is the right frame, version 2.\n"
             + "</body></html>";
@@ -347,22 +347,29 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @Alerts("3")
+    @HtmlUnitNYI(CHROME = "2",
+            EDGE = "2",
+            FF = "2",
+            FF_ESR = "2")
     public void onunload() throws Exception {
         final String mainHtml =
             "<frameset onunload=\"document.location.href='3.html'\">\n"
             + "<frame name='f1' src='1.html'/>\n"
             + "</frameset>";
 
-        final String frame1 = "<html><head><title>1</title></head>\n"
+        final String frame1 = DOCTYPE_HTML
+            + "<html><head><title>1</title></head>\n"
             + "<body><button id='myButton' onclick=\"top.location.href='2.html'\"/></body>\n"
             + "</html>";
 
-        final String html2 = "<html><head><title>2</title></head>\n"
+        final String html2 = DOCTYPE_HTML
+            + "<html><head><title>2</title></head>\n"
             + "<body>hello</body>\n"
             + "</html>";
 
-        final String html3 = "<html><head><title>3</title></head>\n"
+        final String html3 = DOCTYPE_HTML
+            + "<html><head><title>3</title></head>\n"
             + "<body>hello</body>\n"
             + "</html>";
 
@@ -379,7 +386,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         final HtmlPage mainPage = webClient.getPage(URL_FIRST);
         final HtmlPage framePage = (HtmlPage) mainPage.getFrameByName("f1").getEnclosedPage();
         final HtmlPage page = framePage.getHtmlElementById("myButton").click();
-        assertEquals("3", page.getTitleText());
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
 
     /**
@@ -387,8 +394,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
      */
     @Test
     public void closeShouldRemoveFramesetWindows() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"
             + "  <frame scrolling='no' name='left' src='" + URL_SECOND + "' frameborder='1' />\n"
             + "  <frame scrolling='auto' name='right' src='" + URL_THIRD + "' frameborder='1' />\n"
@@ -397,8 +404,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "  </noframes>\n"
             + "</frameset>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
-        final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent  = DOCTYPE_HTML + "<html><head><title>Third</title></head><body></body></html>";
 
         @SuppressWarnings("resource")
         final WebClient webClient = getWebClientWithMockWebConnection();
@@ -425,8 +432,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
      */
     @Test
     public void navigateShouldRemoveFramesetWindows() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"
             + "  <frame scrolling='no' name='left' src='" + URL_SECOND + "' frameborder='1' />\n"
             + "  <frame scrolling='auto' name='right' src='" + URL_THIRD + "' frameborder='1' />\n"
@@ -435,8 +442,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "  </noframes>\n"
             + "</frameset>\n"
             + "</html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
-        final String thirdContent  = "<html><head><title>Third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent  = DOCTYPE_HTML + "<html><head><title>Third</title></head><body></body></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
 

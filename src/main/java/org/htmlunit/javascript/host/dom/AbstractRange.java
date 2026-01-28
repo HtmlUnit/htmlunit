@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public class AbstractRange extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
-        throw JavaScriptEngine.reportRuntimeError("Illegal constructor.");
+        throw JavaScriptEngine.typeErrorIllegalConstructor();
     }
 
     /**
@@ -206,10 +206,9 @@ public class AbstractRange extends HtmlUnitScriptable {
 
     @Override
     protected Object equivalentValues(final Object value) {
-        if (!(value instanceof AbstractRange)) {
+        if (!(value instanceof AbstractRange other)) {
             return false;
         }
-        final AbstractRange other = (AbstractRange) value;
         return startContainer_ == other.startContainer_
                 && endContainer_ == other.endContainer_
                 && startOffset_ == other.startOffset_

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,7 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for {@link HTMLParserListener}.
@@ -37,15 +35,14 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLParserListenerTest extends SimpleWebTestCase {
     static class MessageInfo {
-        private boolean error_; // versus warning
-        private String message_;
-        private URL url_;
-        private String html_;
-        private int line_;
-        private int column_;
+        private final boolean error_; // versus warning
+        private final String message_;
+        private final URL url_;
+        private final String html_;
+        private final int line_;
+        private final int column_;
 
         /**
          * Utility class to hold data.
@@ -67,7 +64,9 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
             // ignore key
         }
 
-        /** @see Object#toString() */
+        /**
+         * @see Object#toString()
+         */
         @Override
         public String toString() {
             return message_ + " (" + url_ + " " + line_ + ":" + column_ + ")";
@@ -79,10 +78,9 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
          */
         @Override
         public boolean equals(final Object obj) {
-            if (!(obj instanceof MessageInfo)) {
+            if (!(obj instanceof MessageInfo other)) {
                 return false;
             }
-            final MessageInfo other = (MessageInfo) obj;
             final EqualsBuilder builder = new EqualsBuilder();
             builder.append(error_, other.error_);
             builder.append(message_, other.message_);

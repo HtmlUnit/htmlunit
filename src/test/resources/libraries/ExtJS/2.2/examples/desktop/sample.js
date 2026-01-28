@@ -6,6 +6,7 @@
  * http://extjs.com/license
  */
 
+Ext.BLANK_IMAGE_URL = '../../resources/images/default/s.gif';
 
 // Sample desktop configuration
 MyDesktop = new Ext.app.App({

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,14 @@
 package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlDefinitionDescription}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlDefinitionDescriptionTest extends SimpleWebTestCase {
 
     /**
@@ -32,12 +30,13 @@ public class HtmlDefinitionDescriptionTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml_emptyTag() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<dd id='foo'></dd>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
         final HtmlElement element = page.getHtmlElementById("foo");
-        assertTrue(element.asXml().contains("</dd>"));
+        assertEquals("<dd id=\"foo\"></dd>", element.asXml());
     }
 }

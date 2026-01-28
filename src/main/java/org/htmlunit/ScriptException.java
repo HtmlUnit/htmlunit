@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ import org.htmlunit.html.HtmlPage;
  * An exception that will be thrown if an error occurs during the processing of
  * a script.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ronald Brill
@@ -52,8 +52,8 @@ public class ScriptException extends RuntimeException {
      * @param page the page in which the script causing this exception was executed
      * @param throwable the exception that was thrown from the script engine
      * @param scriptSourceCode the code that was being executed when this exception
-     * was thrown. This may be null if the exception was not caused by execution
-     * of JavaScript.
+     *        was thrown. This may be null if the exception was not caused by execution
+     *        of JavaScript.
      */
     public ScriptException(final HtmlPage page, final Throwable throwable,
             final String scriptSourceCode) {
@@ -116,8 +116,7 @@ public class ScriptException extends RuntimeException {
         printWriter.println("======= EXCEPTION START ========");
 
         if (getCause() != null) {
-            if (getCause() instanceof EcmaError) {
-                final EcmaError ecmaError = (EcmaError) getCause();
+            if (getCause() instanceof EcmaError ecmaError) {
                 printWriter.print("EcmaError: ");
                 printWriter.print("lineNumber=[");
                 printWriter.print(ecmaError.lineNumber());
@@ -144,15 +143,14 @@ public class ScriptException extends RuntimeException {
             final Object value = ((JavaScriptException) getCause()).getValue();
 
             printWriter.print("JavaScriptException value = ");
-            if (value instanceof Throwable) {
-                ((Throwable) value).printStackTrace(printWriter);
+            if (value instanceof Throwable throwable) {
+                throwable.printStackTrace(printWriter);
             }
             else {
                 printWriter.println(value);
             }
         }
-        else if (getCause() instanceof WrappedException) {
-            final WrappedException wrappedException = (WrappedException) getCause();
+        else if (getCause() instanceof WrappedException wrappedException) {
             printWriter.print("WrappedException: ");
             wrappedException.printStackTrace(printWriter);
 
@@ -192,7 +190,7 @@ public class ScriptException extends RuntimeException {
      * thrown.
      *
      * @return the line of source or an empty string if the exception was not thrown
-     * due to the execution of a script.
+     *         due to the execution of a script.
      */
     public String getFailingLine() {
         final int lineNumber = getFailingLineNumber();
@@ -218,11 +216,10 @@ public class ScriptException extends RuntimeException {
      * Returns the line number of the source that was executing at the time of the exception.
      *
      * @return the line number or -1 if the exception was not thrown due to the
-     * execution of a script.
+     *         execution of a script.
      */
     public int getFailingLineNumber() {
-        if (getCause() instanceof RhinoException) {
-            final RhinoException cause = (RhinoException) getCause();
+        if (getCause() instanceof RhinoException cause) {
             return cause.lineNumber();
         }
 
@@ -233,11 +230,10 @@ public class ScriptException extends RuntimeException {
      * Returns the column number of the source that was executing at the time of the exception.
      *
      * @return the column number or -1 if the exception was not thrown due to the
-     * execution of a script.
+     *         execution of a script.
      */
     public int getFailingColumnNumber() {
-        if (getCause() instanceof RhinoException) {
-            final RhinoException cause = (RhinoException) getCause();
+        if (getCause() instanceof RhinoException cause) {
             return cause.columnNumber();
         }
 

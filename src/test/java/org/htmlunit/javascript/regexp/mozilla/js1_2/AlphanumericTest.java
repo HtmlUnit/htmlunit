@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,16 @@
 package org.htmlunit.javascript.regexp.mozilla.js1_2;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests originally in '/js/src/tests/js1_2/regexp/alphanumeric.js'.
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class AlphanumericTest extends WebDriverTestCase {
 
     private static final String NON_ALPHANUMERIC = "~`!@#$%^&*()-+={[}]|\\\\:;\\'<,>./?\\f\\n\\r\\t \"\\v";
@@ -188,7 +186,7 @@ public class AlphanumericTest extends WebDriverTestCase {
 
             setExpectedAlerts(expected);
 
-            final String s = "sd" + input + String.valueOf((i + 10) * (i + 10) - 2 * (i + 10));
+            final String s = "sd" + input + ((i + 10) * (i + 10) - 2 * (i + 10));
             test("'" + s + "'.match(new RegExp('\\\\W'))", false);
         }
     }

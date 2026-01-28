@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,13 +24,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.client.utils.DateUtils;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -44,12 +41,10 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class CookieManagerTest extends WebDriverTestCase {
 
     /** HTML code with JS code <code>alert(document.cookie)</code>. */
-    public static final String HTML_ALERT_COOKIE
-        = HtmlPageTest.STANDARDS_MODE_PREFIX_
+    public static final String HTML_ALERT_COOKIE = DOCTYPE_HTML
         + "<html><head>\n"
         + "<script>\n"
         + LOG_TITLE_FUNCTION
@@ -100,7 +95,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     public void orderCookiesByPath_fromJs() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "document.cookie = 'exampleCookie=rootPath;path=/';\n"
             + "document.cookie = 'exampleCookie=currentPath;path=/testpages/';\n"
             + "</script>\n"
@@ -303,7 +299,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts({"cookies: first=1", "cookies: "})
     public void setCookieTimeout() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -324,7 +320,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeader1);
 
         loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
-        verifyTitle2(DEFAULT_WAIT_TIME * 4, getWebDriver(), getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(4), getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -535,7 +531,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts({"Cookies: cookie1=value1; cookie2=value2", "Cookies: cookie2=value2"})
     public void cookieExpiresAfterBeingSet() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function f() {\n"
@@ -556,7 +552,7 @@ public class CookieManagerTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPage2(html);
-        verifyTitle2(4 * DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(4), getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -652,7 +648,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts({"cookies: first=1", "cookies: "})
     public void setCookieDuring302() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -677,7 +673,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", MimeType.TEXT_HTML, responseHeader1);
 
         loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
-        verifyTitle2(DEFAULT_WAIT_TIME * 4, getWebDriver(), getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(4), getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -767,7 +763,8 @@ public class CookieManagerTest extends WebDriverTestCase {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1"));
 
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body><script>\n"
             + "  document.cookie = 'first=new';\n"
@@ -793,7 +790,8 @@ public class CookieManagerTest extends WebDriverTestCase {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/c"));
 
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body><script>\n"
             + "  document.cookie = 'first=new';\n"
@@ -806,50 +804,6 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", MimeType.TEXT_HTML, responseHeader1);
 
         loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
-        verifyTitle2(getWebDriver(), getExpectedAlerts());
-    }
-
-    /**
-     * Test for issue #270.
-     * @throws Exception in case of error
-     *
-     * This requires an entry in your hosts file
-     * 127.0.0.1       host1.htmlunit.org
-     */
-    @Test
-    @Alerts("JDSessionID=1234567890")
-    public void issue270() throws Exception {
-        final List<NameValuePair> responseHeader1 = new ArrayList<>();
-        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/c"));
-
-        final String html = "<html>\n"
-            + "<head></head>\n"
-            + "<body><script>\n"
-
-            + "function setCookie(name, value, expires, path, domain, secure) {\n"
-            + "  var curCookie = name + '=' + escape(value) +\n"
-            + "    ((expires) ? '; expires=' + expires.toGMTString() : '') +\n"
-            + "    ((path) ? '; path=' + path : '') +\n"
-            + "    ((domain) ? '; domain=' + domain : '') +\n"
-            + "    ((secure) ? '; secure' : '');\n"
-
-            + "  document.cookie = curCookie;\n"
-            + "}\n"
-
-            + "var now = new Date();\n"
-            + "now.setTime(now.getTime() + 60 * 60 * 1000);\n"
-            + "setCookie('JDSessionID', '1234567890', now, '/', 'htmlunit.org');\n"
-
-//             + "alert('cookies: ' + document.cookie);\n"
-
-            + "</script></body>\n"
-            + "</html>";
-
-        final URL firstUrl = new URL("http://host1.htmlunit.org:" + PORT + "/");
-        getMockWebConnection().setResponse(firstUrl, html);
-        loadPage2(html, firstUrl);
-
-        loadPage2(HTML_ALERT_COOKIE, firstUrl);
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 }

@@ -7,12 +7,12 @@ pipeline {
     timeout(time: 50, unit: 'MINUTES')
   }
   tools {
-    jdk 'openjdk-11+28'
+    jdk 'openlogic-openjdk-17.0.17+10'
   }
   stages {
     stage('Build') {
       steps {
-        sh 'mvn clean test -P only-huge-tests-h-l -Dgpg.skip -Djava.awt.headless=true'
+        sh 'mvn clean test -P only-huge-tests-h-l --show-version -Dgpg.skip -Djava.awt.headless=true'
       }
     }
   }

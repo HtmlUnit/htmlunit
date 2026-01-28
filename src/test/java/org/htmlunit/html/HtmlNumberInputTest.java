@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,16 @@
  */
 package org.htmlunit.html;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Collections;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -40,7 +39,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Anton Demydenko
  * @author Raik Bieniek
  */
-@RunWith(BrowserRunner.class)
 public class HtmlNumberInputTest extends WebDriverTestCase {
 
     /**
@@ -50,14 +48,14 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleTextInteger() throws Exception {
-        final String htmlContent
-            = "<html>\n"
-            + "<head></head>\n"
-            + "<body>\n"
-            + "<form id='form1'>\n"
-            + "  <input type='number' name='tester' id='tester' value='123'>\n"
-            + "</form>\n"
-            + "</body></html>";
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<form id='form1'>\n"
+                + "  <input type='number' name='tester' id='tester' value='123'>\n"
+                + "</form>\n"
+                + "</body></html>";
 
         final WebDriver driver = loadPage2(htmlContent);
         final String text = driver.findElement(By.id("tester")).getText();
@@ -76,14 +74,14 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleTextDouble() throws Exception {
-        final String htmlContent
-            = "<html>\n"
-            + "<head></head>\n"
-            + "<body>\n"
-            + "<form id='form1'>\n"
-            + "  <input type='number' name='tester' id='tester' value='1.23'>\n"
-            + "</form>\n"
-            + "</body></html>";
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<form id='form1'>\n"
+                + "  <input type='number' name='tester' id='tester' value='1.23'>\n"
+                + "</form>\n"
+                + "</body></html>";
 
         final WebDriver driver = loadPage2(htmlContent);
         final String text = driver.findElement(By.id("tester")).getText();
@@ -100,19 +98,32 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     public void typeInteger() throws Exception {
-        final String html = "<html><head></head><body><input type='number' id='inpt'/></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head></head><body><input type='number' id='inpt'/></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement t = driver.findElement(By.id("inpt"));
+
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("", t.getDomProperty("value"));
+
         t.sendKeys("123");
-        assertEquals("123", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("123", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("12", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("12", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("1", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("1", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("", t.getDomProperty("value"));
+
         t.sendKeys(Keys.BACK_SPACE);
-        assertEquals("", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("", t.getDomProperty("value"));
     }
 
     /**
@@ -121,12 +132,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"123", "true"})
     public void typeIntegerValid() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "  <input type='number' id='inpt'/>\n"
                 + "  <button id='check' "
-                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
                 + "DoIt</button>\n"
                 + "</body>\n"
                 + "</html>";
@@ -136,7 +148,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement check = driver.findElement(By.id("check"));
 
         input.sendKeys("123");
-        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomProperty("value"));
+
         check.click();
         assertEquals(getExpectedAlerts()[1], driver.getTitle());
     }
@@ -147,12 +161,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"12", "true", "123", "false"})
     public void typeIntegerTooLarge() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "  <input type='number' id='inpt' max='100'/>\n"
                 + "  <button id='check' "
-                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
                 + "DoIt</button>\n"
                 + "</body>\n"
                 + "</html>";
@@ -162,12 +177,14 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement check = driver.findElement(By.id("check"));
 
         input.sendKeys("12");
-        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[1], driver.getTitle());
 
         input.sendKeys("3");
-        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[2], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[3], driver.getTitle());
     }
@@ -178,12 +195,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"12", "false", "123", "true"})
     public void typeIntegerTooSmall() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "  <input type='number' id='inpt' min='100'/>\n"
                 + "  <button id='check' "
-                        + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
+                + "onclick='document.title = document.getElementById(\"inpt\").checkValidity()');'>"
                 + "DoIt</button>\n"
                 + "</body>\n"
                 + "</html>";
@@ -193,12 +211,15 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement check = driver.findElement(By.id("check"));
 
         input.sendKeys("12");
-        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[1], driver.getTitle());
 
         input.sendKeys("3");
-        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[2], input.getDomProperty("value"));
+
         check.click();
         assertEquals(getExpectedAlerts()[3], driver.getTitle());
     }
@@ -210,18 +231,19 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Alerts({"1", "1--null-true", "1", "1--null-true", "1.2", "1.2--null-false"})
     @HtmlUnitNYI(CHROME = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},
             EDGE = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},
-            FF = {"1", "1--null-true", "1.", "--null-false", "1.2", "1.2--null-false"},
-            FF_ESR = {"1", "1--null-true", "1.", "--null-false", "1.2", "1.2--null-false"})
+            FF = {"1", "1--null-true", "", "--null-false", "1.2", "1.2--null-false"},
+            FF_ESR = {"1", "1--null-true", "", "--null-false", "1.2", "1.2--null-false"})
     public void typeIntegerWithDot() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var input = document.getElementById('inpt');\n"
                 + "    document.title = input.value + '-' "
-                                + "+ input.defaultValue + '-' "
-                                + "+ input.getAttribute('value')+ '-' "
-                                + "+ input.checkValidity();\n"
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity();\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -237,17 +259,20 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement check = driver.findElement(By.id("check"));
 
         input.sendKeys("1");
-        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[1], driver.getTitle());
 
         input.sendKeys(".");
-        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[2], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[3], driver.getTitle());
 
         input.sendKeys("2");
-        assertEquals(getExpectedAlerts()[4], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[4], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[5], driver.getTitle());
     }
@@ -257,20 +282,17 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"})
-    @HtmlUnitNYI(CHROME = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
-            EDGE = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
-            FF = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
-            FF_ESR = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"})
     public void typeIntegerNegativeValid() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var input = document.getElementById('inpt');\n"
                 + "    document.title = input.value + '-' "
-                                + "+ input.defaultValue + '-' "
-                                + "+ input.getAttribute('value')+ '-' "
-                                + "+ input.checkValidity();\n"
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity();\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -286,17 +308,20 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement check = driver.findElement(By.id("check"));
 
         input.sendKeys("-");
-        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[1], driver.getTitle());
 
         input.sendKeys("12");
-        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[2], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[3], driver.getTitle());
 
         input.sendKeys("3");
-        assertEquals(getExpectedAlerts()[4], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[4], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[5], driver.getTitle());
     }
@@ -306,20 +331,17 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"", "--null-false", "-12", "-12--null-false"})
-    @HtmlUnitNYI(CHROME = {"-", "--null-false", "-12", "-12--null-false"},
-            EDGE = {"-", "--null-false", "-12", "-12--null-false"},
-            FF = {"-", "--null-false", "-12", "-12--null-false"},
-            FF_ESR = {"-", "--null-false", "-12", "-12--null-false"})
     public void typeIntegerNegativeInvalid() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var input = document.getElementById('inpt');\n"
                 + "    document.title = input.value + '-' "
-                                + "+ input.defaultValue + '-' "
-                                + "+ input.getAttribute('value')+ '-' "
-                                + "+ input.checkValidity();\n"
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity();\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -335,12 +357,14 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement check = driver.findElement(By.id("check"));
 
         input.sendKeys("-");
-        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[1], driver.getTitle());
 
         input.sendKeys("12");
-        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        assertNull(input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[2], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[3], driver.getTitle());
     }
@@ -350,13 +374,15 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     public void typeDouble() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head></head><body>\n"
                 + "<input type='number' step='0.01' id='t'/>\n"
                 + "</body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement t = driver.findElement(By.id("t"));
         t.sendKeys("1.23");
-        assertEquals("1.23", t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals("1.23", t.getDomProperty("value"));
     }
 
     /**
@@ -364,7 +390,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     public void typeWhileDisabled() throws Exception {
-        final String html = "<html><body><input type='number' id='p' disabled='disabled'/></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><input type='number' id='p' disabled='disabled'/></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
         try {
@@ -374,7 +401,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         catch (final InvalidElementStateException e) {
             // as expected
         }
-        assertEquals("", p.getAttribute("value"));
+
+        assertNull(p.getDomAttribute("value"));
+        assertEquals("", p.getDomProperty("value"));
     }
 
     /**
@@ -383,13 +412,14 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "null"})
     public void typeDoesNotChangeValueAttribute() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "  <input type='number' id='t'/>\n"
                 + "  <button id='check' onclick='document.title = "
-                                    + "document.getElementById(\"t\").getAttribute(\"value\");'>"
-                        + "DoIt</button>\n"
+                + "document.getElementById(\"t\").getAttribute(\"value\");'>"
+                + "DoIt</button>\n"
                 + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -410,13 +440,14 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"1234", "1234"})
     public void typeDoesNotChangeValueAttributeWithInitialValue() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "  <input type='number' id='t' value='1234'/>\n"
                 + "  <button id='check' onclick='document.title = "
-                                    + "document.getElementById(\"t\").getAttribute(\"value\");'>"
-                        + "DoIt</button>\n"
+                + "document.getElementById(\"t\").getAttribute(\"value\");'>"
+                + "DoIt</button>\n"
                 + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -436,26 +467,27 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     public void preventDefault_OnKeyDown() throws Exception {
-        final String html =
-              "<html><head><script>\n"
-            + "  function handler(e) {\n"
-            + "    if (e && e.target.value.length > 2)\n"
-            + "      e.preventDefault();\n"
-            + "    else if (!e && window.event.srcElement.value.length > 2)\n"
-            + "      return false;\n"
-            + "  }\n"
-            + "  function init() {\n"
-            + "    document.getElementById('p').onkeydown = handler;\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body onload='init()'>\n"
-            + "<input type='number' id='p'></input>\n"
-            + "</body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + "  function handler(e) {\n"
+                + "    if (e && e.target.value.length > 2)\n"
+                + "      e.preventDefault();\n"
+                + "    else if (!e && window.event.srcElement.value.length > 2)\n"
+                + "      return false;\n"
+                + "  }\n"
+                + "  function init() {\n"
+                + "    document.getElementById('p').onkeydown = handler;\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='init()'>\n"
+                + "<input type='number' id='p'></input>\n"
+                + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
         p.sendKeys("1234");
-        assertEquals("123", p.getAttribute("value"));
+        assertNull(p.getDomAttribute("value"));
+        assertEquals("123", p.getDomProperty("value"));
     }
 
     /**
@@ -463,26 +495,27 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     public void preventDefault_OnKeyPress() throws Exception {
-        final String html =
-              "<html><head><script>\n"
-            + "  function handler(e) {\n"
-            + "    if (e && e.target.value.length > 2)\n"
-            + "      e.preventDefault();\n"
-            + "    else if (!e && window.event.srcElement.value.length > 2)\n"
-            + "      return false;\n"
-            + "  }\n"
-            + "  function init() {\n"
-            + "    document.getElementById('p').onkeypress = handler;\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body onload='init()'>\n"
-            + "<input type='number' id='p'></input>\n"
-            + "</body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + "  function handler(e) {\n"
+                + "    if (e && e.target.value.length > 2)\n"
+                + "      e.preventDefault();\n"
+                + "    else if (!e && window.event.srcElement.value.length > 2)\n"
+                + "      return false;\n"
+                + "  }\n"
+                + "  function init() {\n"
+                + "    document.getElementById('p').onkeypress = handler;\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='init()'>\n"
+                + "<input type='number' id='p'></input>\n"
+                + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
         p.sendKeys("1234");
-        assertEquals("123", p.getAttribute("value"));
+        assertNull(p.getDomAttribute("value"));
+        assertEquals("123", p.getDomProperty("value"));
     }
 
     /**
@@ -490,8 +523,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     public void typeOnChange() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -499,10 +532,10 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body>\n"
                 + "<input type='number' id='p' value='1234'"
-                    + " onChange='log(\"foo\");log(event.type);'"
-                    + " onBlur='log(\"boo\");log(event.type);'>\n"
-            + "<button id='b'>some button</button>\n"
-            + "</body></html>";
+                + " onChange='log(\"foo\");log(event.type);'"
+                + " onBlur='log(\"boo\");log(event.type);'>\n"
+                + "<button id='b'>some button</button>\n"
+                + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
@@ -530,19 +563,19 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     public void setValueOnChange() throws Exception {
-        final String html =
-              "<html>\n"
-              + "<head>\n"
-              + "<script>\n"
-              + LOG_TITLE_FUNCTION
-              + "</script>\n"
-              + "</head>\n"
-              + "<body>\n"
-              + "  <input type='number' id='t' value='1234'"
-                    + " onChange='log(\"foo\");log(event.type);'>\n"
-              + "  <button id='b'>some button</button>\n"
-              + "  <button id='set' onclick='document.getElementById(\"t\").value=\"1234\"'>setValue</button>\n"
-              + "</body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='t' value='1234'"
+                + " onChange='log(\"foo\");log(event.type);'>\n"
+                + "  <button id='b'>some button</button>\n"
+                + "  <button id='set' onclick='document.getElementById(\"t\").value=\"1234\"'>setValue</button>\n"
+                + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
@@ -558,20 +591,20 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     public void setDefaultValueOnChange() throws Exception {
-        final String html =
-              "<html>\n"
-              + "<head>"
-              + "<script>\n"
-              + LOG_TITLE_FUNCTION
-              + "</script>\n"
-              + "</head>\n"
-              + "<body>\n"
-              + "  <input type='number' id='t' value='1234'"
-                    + " onChange='log(\"foo\");log(event.type);'>\n"
-              + "  <button id='b'>some button</button>\n"
-              + "  <button id='set' onclick='document.getElementById(\"t\").defaultValue=\"1234\"'>"
-                      + "setValue</button>\n"
-              + "</body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <input type='number' id='t' value='1234'"
+                + " onChange='log(\"foo\");log(event.type);'>\n"
+                + "  <button id='b'>some button</button>\n"
+                + "  <button id='set' onclick='document.getElementById(\"t\").defaultValue=\"1234\"'>"
+                + "setValue</button>\n"
+                + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
@@ -588,208 +621,225 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null-true", "--null-true", "--null-true"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var input = document.getElementById('inpt');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.getElementById('inpt');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input = document.createElement('input');\n"
-            + "    input.type = 'number';\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input = document.createElement('input');\n"
+                + "    input.type = 'number';\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    var builder = document.createElement('div');\n"
-            + "    builder.innerHTML = '<input type=\"number\">';\n"
-            + "    input = builder.firstChild;\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='inpt'>\n"
-            + "</form>\n"
-            + "</body></html>";
+                + "    var builder = document.createElement('div');\n"
+                + "    builder.innerHTML = '<input type=\"number\">';\n"
+                + "    input = builder.firstChild;\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='inpt'>\n"
+                + "</form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"8-8-8-true", "-abc-abc-true", "---true",
-             "99999999999999999999999999999-99999999999999999999999999999"
-                               + "-99999999999999999999999999999-true"})
+            "99999999999999999999999999999-99999999999999999999999999999"
+                    + "-99999999999999999999999999999-true"})
     public void defaultValuesInvalidValue() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var input = document.getElementById('foo');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.getElementById('foo');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input = document.getElementById('bar');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input = document.getElementById('bar');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input = document.getElementById('baz');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input = document.getElementById('baz');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input = document.getElementById('another');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='number' id='foo' value='8'>\n"
-            + "  <input type='number' id='bar' value='abc'>\n"
-            + "  <input type='number' id='baz' value=''>\n"
-            + "  <input type='number' id='another' value='99999999999999999999999999999'>\n"
-            + "</body>\n"
-            + "</html>";
+                + "    input = document.getElementById('another');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <input type='number' id='foo' value='8'>\n"
+                + "  <input type='number' id='bar' value='abc'>\n"
+                + "  <input type='number' id='baz' value=''>\n"
+                + "  <input type='number' id='another' value='99999999999999999999999999999'>\n"
+                + "</body>\n"
+                + "</html>";
 
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"8-8-8-true", "-\\s\\s-\\s\\s-true",
-             "-\\s\\s\\n\\s\\s\\t\\s-\\s\\s\\n\\s\\s\\t\\s-true",
-             "-\\s3\\s9\\s-\\s3\\s9\\s-true"})
+            "-\\s\\s\\n\\s\\s\\t\\s-\\s\\s\\n\\s\\s\\t\\s-true",
+            "-\\s3\\s9\\s-\\s3\\s9\\s-true"})
     public void defaultValuesBlankValue() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION_NORMALIZE
-            + "  function test() {\n"
-            + "    var input = document.getElementById('foo');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION_NORMALIZE
+                + "  function test() {\n"
+                + "    var input = document.getElementById('foo');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input = document.getElementById('bar');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input = document.getElementById('bar');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input = document.getElementById('baz');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input = document.getElementById('baz');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input = document.getElementById('another');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='number' id='foo' value='8'>\n"
-            + "  <input type='number' id='bar' value='  '>\n"
-            + "  <input type='number' id='baz' value='  \n  \t '>\n"
-            + "  <input type='number' id='another' value=' 3 9 '>\n"
-            + "</body>\n"
-            + "</html>";
+                + "    input = document.getElementById('another');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <input type='number' id='foo' value='8'>\n"
+                + "  <input type='number' id='bar' value='  '>\n"
+                + "  <input type='number' id='baz' value='  \n  \t '>\n"
+                + "  <input type='number' id='another' value=' 3 9 '>\n"
+                + "</body>\n"
+                + "</html>";
 
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"8-8-8-true", "7-7-7-false", "6-6-6-false"})
     public void defaultValuesIntegerValueOutside() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var input = document.getElementById('foo');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.getElementById('foo');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input = document.getElementById('bar');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input = document.getElementById('bar');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input = document.getElementById('baz');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='number' id='foo' value='8' min='1' max='10'>\n"
-            + "  <input type='number' id='bar' value='7'  min='9' max='10'>\n"
-            + "  <input type='number' id='baz' value='6'  min='1' max='4'>\n"
-            + "</body>\n"
-            + "</html>";
+                + "    input = document.getElementById('baz');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <input type='number' id='foo' value='8' min='1' max='10'>\n"
+                + "  <input type='number' id='bar' value='7'  min='9' max='10'>\n"
+                + "  <input type='number' id='baz' value='6'  min='1' max='4'>\n"
+                + "</body>\n"
+                + "</html>";
 
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts({"8-8-8-true", "7-7-7-false", "7.13-7.13-7.13-false"})
     public void defaultValuesInvalid() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var input = document.getElementById('foo');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.getElementById('foo');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input = document.getElementById('bar');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input = document.getElementById('bar');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input = document.getElementById('baz');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='number' id='foo' value='8' min='2' max='10' step='2' >\n"
-            + "  <input type='number' id='bar' value='7' min='2' max='10' step='2' >\n"
-            + "  <input type='number' id='baz' value='7.13' min='2' max='10' step='2' >\n"
-            + "</body>\n"
-            + "</html>";
+                + "    input = document.getElementById('baz');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <input type='number' id='foo' value='8' min='2' max='10' step='2' >\n"
+                + "  <input type='number' id='bar' value='7' min='2' max='10' step='2' >\n"
+                + "  <input type='number' id='baz' value='7.13' min='2' max='10' step='2' >\n"
+                + "</body>\n"
+                + "</html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -800,31 +850,32 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var input = document.getElementById('inpt');\n"
-            + "    input = input.cloneNode(false);\n"
-            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.getElementById('inpt');\n"
+                + "    input = input.cloneNode(false);\n"
+                + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
-            + "    input = document.createElement('input');\n"
-            + "    input.type = 'number';\n"
-            + "    input = input.cloneNode(false);\n"
-            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+                + "    input = document.createElement('input');\n"
+                + "    input.type = 'number';\n"
+                + "    input = input.cloneNode(false);\n"
+                + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
-            + "    var builder = document.createElement('div');\n"
-            + "    builder.innerHTML = '<input type=\"number\">';\n"
-            + "    input = builder.firstChild;\n"
-            + "    input = input.cloneNode(false);\n"
-            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='inpt'>\n"
-            + "</form>\n"
-            + "</body></html>";
+                + "    var builder = document.createElement('div');\n"
+                + "    builder.innerHTML = '<input type=\"number\">';\n"
+                + "    input = builder.firstChild;\n"
+                + "    input = input.cloneNode(false);\n"
+                + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='inpt'>\n"
+                + "</form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -834,38 +885,39 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1234-1234-1234", "1234-1234-1234",
-                "5678-1234-1234", "5678-1234-1234",
-                "5678-2345-2345", "5678-2345-2345"})
+            "5678-1234-1234", "5678-1234-1234",
+            "5678-2345-2345", "5678-2345-2345"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var text = document.getElementById('testId');\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var text = document.getElementById('testId');\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
-            + "    document.getElementById('testReset').click;\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+                + "    document.getElementById('testReset').click;\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
-            + "    text.value = '5678';\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+                + "    text.value = '5678';\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
-            + "    document.getElementById('testReset').click;\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+                + "    document.getElementById('testReset').click;\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
-            + "    text.defaultValue = '2345';\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+                + "    text.defaultValue = '2345';\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
-            + "    document.forms[0].reset;\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='testId' value='1234'>\n"
-            + "  <input type='reset' id='testReset'>\n"
-            + "</form>\n"
-            + "</body></html>";
+                + "    document.forms[0].reset;\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='testId' value='1234'>\n"
+                + "  <input type='reset' id='testReset'>\n"
+                + "</form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -875,37 +927,38 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1234-1234-1234", "1234-1234-1234",
-                "5678-1234-1234", "5678-1234-1234",
-                "5678-2345-2345", "5678-2345-2345"})
+            "5678-1234-1234", "5678-1234-1234",
+            "5678-2345-2345", "5678-2345-2345"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var text = document.getElementById('testId');\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var text = document.getElementById('testId');\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
-            + "    document.forms[0].reset;\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+                + "    document.forms[0].reset;\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
-            + "    text.value = '5678';\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+                + "    text.value = '5678';\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
-            + "    document.forms[0].reset;\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+                + "    document.forms[0].reset;\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
-            + "    text.defaultValue = '2345';\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+                + "    text.defaultValue = '2345';\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
 
-            + "    document.forms[0].reset;\n"
-            + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='testId' value='1234'>\n"
-            + "</form>\n"
-            + "</body></html>";
+                + "    document.forms[0].reset;\n"
+                + "    log(text.value + '-' + text.defaultValue + '-' + text.getAttribute('value'));\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='testId' value='1234'>\n"
+                + "</form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -915,49 +968,50 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1234-1234-1234-true", "2345-2345-2345-true",
-                "3456-2345-2345-true", "3456-9876-9876-true",
-                "3456-44-44-true"})
+            "3456-2345-2345-true", "3456-9876-9876-true",
+            "3456-44-44-true"})
     public void value() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var input = document.getElementById('testId');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.getElementById('testId');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.defaultValue = '2345';\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input.defaultValue = '2345';\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.value = '3456';\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input.value = '3456';\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.setAttribute('value', '9876');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input.setAttribute('value', '9876');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.defaultValue = '44';\n"
-            + "    log(input.value + '-' "
-                        + "+ input.defaultValue + '-' "
-                        + "+ input.getAttribute('value')+ '-' "
-                        + "+ input.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='testId' value='1234'>\n"
-            + "</form>\n"
-            + "</body></html>";
+                + "    input.defaultValue = '44';\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='testId' value='1234'>\n"
+                + "</form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -969,40 +1023,41 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"123-123-123-true", "2-2-2-false", "20000-2-2-false", "20000-9-9-false"})
     public void valueOutside() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var input = document.getElementById('testId');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.getElementById('testId');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.defaultValue = '2';\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input.defaultValue = '2';\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.value = '20000';\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input.value = '20000';\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.setAttribute('value', '9');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='testId' value='123' min='10' max='1000' >\n"
-            + "</form>\n"
-            + "</body></html>";
+                + "    input.setAttribute('value', '9');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='testId' value='123' min='10' max='1000' >\n"
+                + "</form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -1011,24 +1066,25 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"12-12-12-true", "12312", "12312-12-12-false"})
+    @Alerts({"12-12-12-true", "12", "12312", "12312-12-12-false"})
     public void typeValueOutside() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var input = document.getElementById('testId');\n"
-            + "    document.title = input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity();\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='testId' value='12' min='10' max='20' >\n"
-            + "  <input type='button' id='testBtn' onclick='test()' >\n"
-            + "</form>\n"
-            + "</body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var input = document.getElementById('testId');\n"
+                + "    document.title = input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity();\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='testId' value='12' min='10' max='20' >\n"
+                + "  <input type='button' id='testBtn' onclick='test()' >\n"
+                + "</form>\n"
+                + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
@@ -1036,34 +1092,36 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement t = driver.findElement(By.id("testId"));
         t.sendKeys(Keys.HOME);
         t.sendKeys("123");
-        assertEquals(getExpectedAlerts()[1], t.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], t.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[2], t.getDomProperty("value"));
 
         driver.findElement(By.id("testBtn")).click();
-        assertEquals(getExpectedAlerts()[2], driver.getTitle());
+        assertEquals(getExpectedAlerts()[3], driver.getTitle());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2-2-2-false", "42", "42-2-2-false"})
+    @Alerts({"2-2-2-false", "2", "42", "42-2-2-false"})
     public void typeValueNotReachableByStep() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var input = document.getElementById('testId');\n"
-            + "    document.title = input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity();\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='testId' value='2' min='0' max='200' step='51' >\n"
-            + "  <input type='button' id='testBtn' onclick='test()' >\n"
-            + "</form>\n"
-            + "</body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var input = document.getElementById('testId');\n"
+                + "    document.title = input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity();\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='testId' value='2' min='0' max='200' step='51' >\n"
+                + "  <input type='button' id='testBtn' onclick='test()' >\n"
+                + "</form>\n"
+                + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
@@ -1071,34 +1129,36 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement t = driver.findElement(By.id("testId"));
         t.sendKeys(Keys.HOME);
         t.sendKeys("4");
-        assertEquals(getExpectedAlerts()[1], t.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], t.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[2], t.getDomProperty("value"));
 
         driver.findElement(By.id("testBtn")).click();
-        assertEquals(getExpectedAlerts()[2], driver.getTitle());
+        assertEquals(getExpectedAlerts()[3], driver.getTitle());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2.1-2.1-2.1-false", "42.1", "42.1-2.1-2.1-false"})
+    @Alerts({"2.1-2.1-2.1-false", "2.1", "42.1", "42.1-2.1-2.1-false"})
     public void typeValueNotReachableByStepDouble() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var input = document.getElementById('testId');\n"
-            + "    document.title = input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity();\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='testId' value='2.1' min='0' max='200' step='0.5' >\n"
-            + "  <input type='button' id='testBtn' onclick='test()' >\n"
-            + "</form>\n"
-            + "</body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var input = document.getElementById('testId');\n"
+                + "    document.title = input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity();\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='testId' value='2.1' min='0' max='200' step='0.5' >\n"
+                + "  <input type='button' id='testBtn' onclick='test()' >\n"
+                + "</form>\n"
+                + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
@@ -1106,10 +1166,11 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement t = driver.findElement(By.id("testId"));
         t.sendKeys(Keys.HOME);
         t.sendKeys("4");
-        assertEquals(getExpectedAlerts()[1], t.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], t.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[2], t.getDomProperty("value"));
 
         driver.findElement(By.id("testBtn")).click();
-        assertEquals(getExpectedAlerts()[2], driver.getTitle());
+        assertEquals(getExpectedAlerts()[3], driver.getTitle());
     }
 
     /**
@@ -1119,38 +1180,39 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"--null-true", "4", "4--null-true", "4", "4--null-true"},
             FF = {"--null-true", "4", "4--null-true", "", "--null-false"},
             FF_ESR = {"--null-true", "4", "4--null-true", "", "--null-false"})
-    @HtmlUnitNYI(FF = {"--null-true", "4", "4--null-true", "4a", "--null-false"},
-            FF_ESR = {"--null-true", "4", "4--null-true", "4a", "--null-false"})
     public void typeInvalidChars() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var input = document.getElementById('testId');\n"
-            + "    document.title = input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity();\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='testId'>\n"
-            + "  <input type='button' id='testBtn' onclick='test()' >\n"
-            + "</form>\n"
-            + "</body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var input = document.getElementById('testId');\n"
+                + "    document.title = input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity();\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='testId'>\n"
+                + "  <input type='button' id='testBtn' onclick='test()' >\n"
+                + "</form>\n"
+                + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
 
         final WebElement t = driver.findElement(By.id("testId"));
         t.sendKeys(Keys.END, "4");
-        assertEquals(getExpectedAlerts()[1], t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], t.getDomProperty("value"));
 
         driver.findElement(By.id("testBtn")).click();
         assertEquals(getExpectedAlerts()[2], driver.getTitle());
 
         t.sendKeys(Keys.END, "a");
-        assertEquals(getExpectedAlerts()[3], t.getAttribute("value"));
+        assertNull(t.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[3], t.getDomProperty("value"));
 
         driver.findElement(By.id("testBtn")).click();
         assertEquals(getExpectedAlerts()[4], driver.getTitle());
@@ -1163,18 +1225,17 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-true"},
             FF = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-false"},
             FF_ESR = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-false"})
-    @HtmlUnitNYI(FF = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"},
-            FF_ESR = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"})
     public void typeCharsAndClear() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    var input = document.getElementById('inpt');\n"
                 + "    document.title = input.value + '-' "
-                                + "+ input.defaultValue + '-' "
-                                + "+ input.getAttribute('value')+ '-' "
-                                + "+ input.checkValidity();\n"
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity();\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -1190,17 +1251,20 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement check = driver.findElement(By.id("check"));
 
         input.sendKeys("12");
-        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+        assertEquals("0", input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[1], driver.getTitle());
 
         input.clear();
-        assertEquals(getExpectedAlerts()[2], input.getAttribute("value"));
+        assertEquals("0", input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[2], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[3], driver.getTitle());
 
         input.sendKeys("abc");
-        assertEquals(getExpectedAlerts()[4], input.getAttribute("value"));
+        assertEquals("0", input.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[4], input.getDomProperty("value"));
         check.click();
         assertEquals(getExpectedAlerts()[5], driver.getTitle());
     }
@@ -1214,16 +1278,17 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             FF = "-0-0-false",
             FF_ESR = "-0-0-false")
     public void issue321() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var input = document.getElementById('inpt');\n"
                 + "    log(input.value + '-' "
-                                + "+ input.defaultValue + '-' "
-                                + "+ input.getAttribute('value')+ '-' "
-                                + "+ input.checkValidity());\n"
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -1249,40 +1314,41 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"13-13-13-true", "15-15-15-false", "17-15-15-false", "17-19-19-false"})
     public void valueNotReachableByStep() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var input = document.getElementById('testId');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.getElementById('testId');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.defaultValue = '15';\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input.defaultValue = '15';\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.value = '17';\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input.value = '17';\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.setAttribute('value', '19');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='testId' value='13' min='10' max='20' step='3' >\n"
-            + "</form>\n"
-            + "</body></html>";
+                + "    input.setAttribute('value', '19');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='testId' value='13' min='10' max='20' step='3' >\n"
+                + "</form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -1293,40 +1359,41 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"1.3-1.3-1.3-true", "1.5-1.5-1.5-false", "1.7-1.5-1.5-false", "1.7-1.9-1.9-false"})
     public void valueNotReachableByStepDouble() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var input = document.getElementById('testId');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.getElementById('testId');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.defaultValue = '1.5';\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input.defaultValue = '1.5';\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.value = '1.7';\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
+                + "    input.value = '1.7';\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
 
-            + "    input.setAttribute('value', '1.9');\n"
-            + "    log(input.value + '-' "
-                            + "+ input.defaultValue + '-' "
-                            + "+ input.getAttribute('value')+ '-' "
-                            + "+ input.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='testId' value='1.3' min='1.0' max='2.0' step='0.3' >\n"
-            + "</form>\n"
-            + "</body></html>";
+                + "    input.setAttribute('value', '1.9');\n"
+                + "    log(input.value + '-' "
+                + "+ input.defaultValue + '-' "
+                + "+ input.getAttribute('value')+ '-' "
+                + "+ input.checkValidity());\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='testId' value='1.3' min='1.0' max='2.0' step='0.3' >\n"
+                + "</form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -1339,23 +1406,24 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             FF = "7",
             FF_ESR = "7")
     public void textLength() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var text = document.getElementById('testId');\n"
-            + "    if(text.textLength) {\n"
-            + "      log(text.textLength);\n"
-            + "    } else {\n"
-            + "      log('textLength not available');\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='testId' value='1234567'>\n"
-            + "</form>\n"
-            + "</body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var text = document.getElementById('testId');\n"
+                + "    if(text.textLength) {\n"
+                + "      log(text.textLength);\n"
+                + "    } else {\n"
+                + "      log('textLength not available');\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='testId' value='1234567'>\n"
+                + "</form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -1366,25 +1434,25 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void selection() throws Exception {
-        final String html =
-              "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var s = getSelection(document.getElementById('inpt'));\n"
-            + "    if (s != undefined) {\n"
-            + "      log(s.length);\n"
-            + "    }\n"
-            + "  }\n"
-            + "  function getSelection(element) {\n"
-            + "    try {\n"
-            + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
-            + "    } catch(e) { log('exception'); }\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='number' id='inpt'/>\n"
-            + "</body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var s = getSelection(document.getElementById('inpt'));\n"
+                + "    if (s != undefined) {\n"
+                + "      log(s.length);\n"
+                + "    }\n"
+                + "  }\n"
+                + "  function getSelection(element) {\n"
+                + "    try {\n"
+                + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
+                + "    } catch(e) { logEx(e); }\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <input type='number' id='inpt'/>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -1393,8 +1461,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "null,null", "exception",
-             "null,null", "exception", "null,null"})
+    @Alerts({"null,null", "null,null", "InvalidStateError/DOMException",
+            "null,null", "InvalidStateError/DOMException", "null,null"})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -1403,8 +1471,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "null,null", "exception",
-             "null,null", "exception", "null,null"})
+    @Alerts({"null,null", "null,null", "InvalidStateError/DOMException",
+            "null,null", "InvalidStateError/DOMException", "null,null"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -1413,45 +1481,46 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "null,null", "exception",
-             "null,null", "exception", "null,null"})
+    @Alerts({"null,null", "null,null", "InvalidStateError/DOMException",
+            "null,null", "InvalidStateError/DOMException", "null,null"})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
 
     private void selection2(final int selectionStart, final int selectionEnd) throws Exception {
-        final String html = "<html>\n"
-            + "<body>\n"
-            + "<input id='myTextInput' value='1234567' type='number'>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  var input = document.getElementById('myTextInput');\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<input id='myTextInput' value='1234567' type='number'>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var input = document.getElementById('myTextInput');\n"
 
-            + "  try {\n"
-            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+                + "  try {\n"
+                + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+                + "  } catch(e) { logEx(e); }\n"
 
-            + "  input.value = '12345678900';\n"
-            + "  try {\n"
-            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+                + "  input.value = '12345678900';\n"
+                + "  try {\n"
+                + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+                + "  } catch(e) { logEx(e); }\n"
 
-            + "  try {\n"
-            + "    input.selectionStart = " + selectionStart + ";\n"
-            + "  } catch(e) { log('exception'); }\n"
-            + "  try {\n"
-            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
+                + "  try {\n"
+                + "    input.selectionStart = " + selectionStart + ";\n"
+                + "  } catch(e) { logEx(e); }\n"
+                + "  try {\n"
+                + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+                + "  } catch(e) { logEx(e); }\n"
 
-            + "  try {\n"
-            + "    input.selectionEnd = " + selectionEnd + ";\n"
-            + "  } catch(e) { log('exception'); }\n"
-            + "  try {\n"
-            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
-            + "</script>\n"
-            + "</body>\n"
-            + "</html>";
+                + "  try {\n"
+                + "    input.selectionEnd = " + selectionEnd + ";\n"
+                + "  } catch(e) { logEx(e); }\n"
+                + "  try {\n"
+                + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+                + "  } catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -1460,36 +1529,37 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts({"null,null", "exception"})
+    @Alerts({"null,null", "InvalidStateError/DOMException"})
     public void selectionOnUpdate() throws Exception {
-        final String html = "<html>\n"
-            + "<body>\n"
-            + "<input id='myTextInput' value='1234567' type='number'>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  var input = document.getElementById('myTextInput');\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<input id='myTextInput' value='1234567' type='number'>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var input = document.getElementById('myTextInput');\n"
 
-            + "  try {\n"
-            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+                + "  try {\n"
+                + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
 
-            + "    input.selectionStart = 4;\n"
-            + "    input.selectionEnd = 5;\n"
-            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "    input.value = '1234567890';\n"
-            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+                + "    input.selectionStart = 4;\n"
+                + "    input.selectionEnd = 5;\n"
+                + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+                + "    input.value = '1234567890';\n"
+                + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
 
-            + "    input.value = '9876';\n"
-            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+                + "    input.value = '9876';\n"
+                + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
 
-            + "    input.selectionStart = 0;\n"
-            + "    input.selectionEnd = 4;\n"
+                + "    input.selectionStart = 0;\n"
+                + "    input.selectionEnd = 4;\n"
 
-            + "    input.value = '7';\n"
-            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { log('exception'); }\n"
-            + "</script>\n"
-            + "</body>\n"
-            + "</html>";
+                + "    input.value = '7';\n"
+                + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+                + "  } catch(e) { logEx(e); }\n"
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -1499,20 +1569,23 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     public void submitOnEnter() throws Exception {
-        final String html =
-            "<html>\n"
-            + "<body>\n"
-            + "  <form action='result.html'>\n"
-            + "    <input id='t' value='1234'/>\n"
-            + "  </form>\n"
-            + "</body>\n"
-            + "</html>";
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "  <form action='result.html'>\n"
+                + "    <input id='t' value='1234'/>\n"
+                + "  </form>\n"
+                + "</body>\n"
+                + "</html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(html);
         final WebElement field = driver.findElement(By.id("t"));
 
         field.sendKeys(Keys.ENTER);
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
 
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
@@ -1522,12 +1595,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     public void sendKeysEnterWithoutForm() throws Exception {
-        final String html =
-            "<html>\n"
-            + "<body>\n"
-            + "  <input id='t' type='number' value='1234'>\n"
-            + "</body>\n"
-            + "</html>";
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "  <input id='t' type='number' value='1234'>\n"
+                + "</body>\n"
+                + "</html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("t")).sendKeys("\n");
@@ -1538,17 +1611,18 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void submitWithoutForm() throws Exception {
-        final String html =
-            "<html>\n"
-            + "<body>\n"
-            + "  <input id='t' type='number' value='1234'>\n"
-            + "</body>\n"
-            + "</html>";
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "  <input id='t' type='number' value='1234'>\n"
+                + "</body>\n"
+                + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("t")).submit();
+        Assertions.assertThrows(UnsupportedOperationException.class,
+                () -> driver.findElement(By.id("t")).submit());
 
         assertEquals(1, getMockWebConnection().getRequestCount());
     }
@@ -1559,22 +1633,23 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var input = document.getElementById('tester');\n"
-            + "    log(input.min + '-' + input.max + '-' + input.step);\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<form>\n"
-            + "  <input type='number' id='tester'>\n"
-            + "</form>\n"
-            + "</body>\n"
-            + "</html>";
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.getElementById('tester');\n"
+                + "    log(input.min + '-' + input.max + '-' + input.step);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='number' id='tester'>\n"
+                + "</form>\n"
+                + "</body>\n"
+                + "</html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -1585,64 +1660,75 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"10", ""})
     public void clearInput() throws Exception {
-        final String html = "<html>\n"
-            + "<body>\n"
-            + "<form>\n"
-            + "  <input type='number' id='tester' value='10'>\n"
-            + "</form>\n"
-            + "</body>\n"
-            + "</html>";
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<body>\n"
+                + "<form>\n"
+                + "  <input type='number' id='tester' value='10'>\n"
+                + "</form>\n"
+                + "</body>\n"
+                + "</html>";
 
         final WebDriver driver = loadPage2(html);
         final WebElement element = driver.findElement(By.id("tester"));
-        assertEquals(getExpectedAlerts()[0], element.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomProperty("value"));
 
         element.clear();
-        assertEquals(getExpectedAlerts()[1], element.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], element.getDomProperty("value"));
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("false-true")
     public void maxValidation() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    var bar = document.getElementById('bar');\n"
-            + "    log(foo.checkValidity() + '-' + bar.checkValidity() );\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='number' max='10' id='foo' value='12'>\n"
-            + "  <input type='number' max='10' id='bar' value='8'>\n"
-            + "</body>\n"
-            + "</html>";
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var foo = document.getElementById('foo');\n"
+                + "    var bar = document.getElementById('bar');\n"
+                + "    log(foo.checkValidity() + '-' + bar.checkValidity() );\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <input type='number' max='10' id='foo' value='12'>\n"
+                + "  <input type='number' max='10' id='bar' value='8'>\n"
+                + "</body>\n"
+                + "</html>";
 
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("false-true")
     public void minValidation() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    var bar = document.getElementById('bar');\n"
-            + "    log(foo.checkValidity() + '-' + bar.checkValidity() );\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='number' min='10' id='foo' value='8'>\n"
-            + "  <input type='number' min='10' id='bar' value='10'>\n"
-            + "</body>\n"
-            + "</html>";
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var foo = document.getElementById('foo');\n"
+                + "    var bar = document.getElementById('bar');\n"
+                + "    log(foo.checkValidity() + '-' + bar.checkValidity() );\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <input type='number' min='10' id='foo' value='8'>\n"
+                + "  <input type='number' min='10' id='bar' value='10'>\n"
+                + "</body>\n"
+                + "</html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -1652,14 +1738,15 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"123456789",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=123456789", "2"})
-    // real ie clicks the wrong button
+            "123456789",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=123456789",
+            "2"})
     public void patternValidationInvalid() throws Exception {
         validation("<input type='number' pattern='[0-7]{10,40}' id='e1' name='k' value='123456789'>\n",
-                    "", null);
+                "", null);
     }
 
     /**
@@ -1667,11 +1754,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"123456701234567012345670",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=123456701234567012345670", "2"})
-    // real ie clicks the wrong button
+            "123456701234567012345670",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=123456701234567012345670",
+            "2"})
     public void patternValidationValid() throws Exception {
         validation("<input type='number' pattern='[0-7]{10,40}' "
                 + "id='e1' name='k' value='123456701234567012345670'>\n", "", null);
@@ -1682,11 +1770,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=", "2"})
-    // real ie clicks the wrong button
+            "",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=",
+            "2"})
     public void patternValidationEmpty() throws Exception {
         validation("<input type='number' pattern='[0-9]{10,40}' id='e1' name='k' value=''>\n", "", null);
     }
@@ -1695,12 +1784,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=", "2"})
-    // real ie clicks the wrong button
+    @Alerts({" ",
+            "",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=", "2"})
     public void patternValidationBlank() throws Exception {
         validation("<input type='number' pattern='[0-9]{10,40}' id='e1' name='k' value=' '>\n", "", null);
     }
@@ -1709,12 +1798,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=", "2"})
-    // real ie clicks the wrong button
+    @Alerts({"  \t",
+            "",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=",
+            "2"})
     public void patternValidationWhitespace() throws Exception {
         validation("<input type='number' pattern='[0-9]{10,40}' id='e1' name='k' value='  \t'>\n", "", null);
     }
@@ -1723,11 +1813,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=", "2"})
+    @Alerts({" 210 ",
+            "",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=",
+            "2"})
     public void patternValidationTrimInitial() throws Exception {
         validation("<input type='number' pattern='[ 012]{3,10}' id='e1' name='k' value=' 210 '>\n", "", null);
     }
@@ -1736,31 +1828,36 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"210",
-                       "true",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§?k=210", "2"},
-            FF = {"",
-                  "false",
-                  "true-false-false-false-false-false-false-false-false-false-false",
-                  "true",
-                  "§§URL§§", "1"},
-            FF_ESR = {"",
-                      "false",
-                      "true-false-false-false-false-false-false-false-false-false-false",
-                      "true",
-                      "§§URL§§", "1"})
-    @HtmlUnitNYI(FF = {" 210 ",
-                       "false",
-                       "false-false-false-false-false-false-false-false-false-true-false",
-                       "true",
-                       "§§URL§§", "1"},
-                 FF_ESR = {" 210 ",
-                           "false",
-                           "false-false-false-false-false-false-false-false-false-true-false",
-                           "true",
-                           "§§URL§§", "1"})
+    @Alerts(DEFAULT = {"null",
+            "210",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=210", "2"},
+            FF = {"null",
+                    "",
+                    "false",
+                    "true-false-false-false-false-false-false-false-false-false-false",
+                    "true",
+                    "§§URL§§", "1"},
+            FF_ESR = {"null",
+                    "",
+                    "false",
+                    "true-false-false-false-false-false-false-false-false-false-false",
+                    "true",
+                    "§§URL§§", "1"})
+    @HtmlUnitNYI(FF = {"null",
+            " 210 ",
+            "false",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§", "1"},
+            FF_ESR = {"null",
+                    " 210 ",
+                    "false",
+                    "false-false-false-false-false-false-false-false-false-true-false",
+                    "true",
+                    "§§URL§§", "1"})
     public void patternValidationTrimType() throws Exception {
         validation("<input type='number' pattern='[ 012]{3,10}' id='e1' name='k'>\n", "", " 210 ");
     }
@@ -1769,12 +1866,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1234",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=1234", "2"})
-    // real ie clicks the wrong button
+    @Alerts({"null",
+            "1234",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=1234", "2"})
     public void minLengthValidationInvalid() throws Exception {
         validation("<input type='number' minlength='5' id='e1' name='k'>\n", "", "1234");
     }
@@ -1784,11 +1881,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"12",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=12", "2"})
-    // real ie clicks the wrong button
+            "12",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=12",
+            "2"})
     public void minLengthValidationInvalidInitial() throws Exception {
         validation("<input type='number' minlength='5' id='e1' name='k' value='12'>\n", "", null);
     }
@@ -1797,12 +1895,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=", "2"})
-    // real ie clicks the wrong button
+    @Alerts({"null",
+            "",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=",
+            "2"})
     public void minLengthValidationInvalidNoInitial() throws Exception {
         validation("<input type='number' minlength='5' id='e1' name='k'>\n", "", null);
     }
@@ -1811,12 +1910,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"123456789",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=123456789", "2"})
-    // real ie clicks the wrong button
+    @Alerts({"null",
+            "123456789",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=123456789",
+            "2"})
     public void minLengthValidationValid() throws Exception {
         validation("<input type='number' minlength='5' id='e1' name='k'>\n", "", "123456789");
     }
@@ -1825,12 +1925,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"1234",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=1234", "2"})
-    // real ie clicks the wrong button
+    @Alerts({"null",
+            "1234",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=1234", "2"})
     public void maxLengthValidationValid() throws Exception {
         validation("<input type='number' maxlength='5' id='e1' name='k'>\n", "", "1234");
     }
@@ -1839,11 +1939,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"123456789",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=123456789", "2"})
+    @Alerts({"null",
+            "123456789",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=123456789",
+            "2"})
     public void maxLengthValidationInvalid() throws Exception {
         validation("<input type='number' maxlength='5' id='e1' name='k'>\n", "", "123456789");
     }
@@ -1853,11 +1955,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"123456789",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=123456789", "2"})
-    // real ie clicks the wrong button
+            "123456789",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=123456789",
+            "2"})
     public void maxLengthValidationInvalidInitial() throws Exception {
         validation("<input type='number' maxlength='5' id='e1' name='k' value='123456789'>\n", "", null);
     }
@@ -1868,8 +1971,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
@@ -1898,12 +2001,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=", "2"})
-    // real ie clicks the wrong button
+    @Alerts({"null",
+            "",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=", "2"})
     public void validationEmpty() throws Exception {
         validation("<input type='number' id='e1' name='k'>\n", "", null);
     }
@@ -1912,12 +2015,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
-             "false",
-             "false-true-false-false-false-false-false-false-false-false-false",
-             "true",
-             "§§URL§§", "1"})
-    // real ie clicks the wrong button
+    @Alerts({"null",
+            "",
+            "false",
+            "false-true-false-false-false-false-false-false-false-false-false",
+            "true",
+            "§§URL§§", "1"})
     public void validationCustomValidity() throws Exception {
         validation("<input type='number' id='e1' name='k'>\n", "elem.setCustomValidity('Invalid');", null);
     }
@@ -1926,12 +2029,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
-             "false",
-             "false-true-false-false-false-false-false-false-false-false-false",
-             "true",
-             "§§URL§§", "1"})
-    // real ie clicks the wrong button
+    @Alerts({"null",
+            "",
+            "false",
+            "false-true-false-false-false-false-false-false-false-false-false",
+            "true",
+            "§§URL§§", "1"})
     public void validationBlankCustomValidity() throws Exception {
         validation("<input type='number' id='e1' name='k'>\n", "elem.setCustomValidity(' ');\n", null);
     }
@@ -1940,12 +2043,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=", "2"})
-    // real ie clicks the wrong button
+    @Alerts({"null",
+            "",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=",
+            "2"})
     public void validationResetCustomValidity() throws Exception {
         validation("<input type='number' id='e1' name='k'>\n",
                 "elem.setCustomValidity('Invalid');elem.setCustomValidity('');", null);
@@ -1955,12 +2059,12 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
-             "false",
-             "false-false-false-false-false-false-false-false-false-false-true",
-             "true",
-             "§§URL§§", "1"})
-    // real ie clicks the wrong button
+    @Alerts({"null",
+            "",
+            "false",
+            "false-false-false-false-false-false-false-false-false-false-true",
+            "true",
+            "§§URL§§", "1"})
     public void validationRequired() throws Exception {
         validation("<input type='number' id='e1' name='k' required>\n", "", null);
     }
@@ -1969,12 +2073,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=42", "2"})
-    // real ie clicks the wrong button
+    @Alerts({"null",
+            "",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=42",
+            "2"})
     public void validationRequiredValueSet() throws Exception {
         validation("<input type='number' id='e1' name='k' required>\n", "elem.value='42';", null);
     }
@@ -1983,33 +2088,34 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"",
-             "true",
-             "false-false-false-false-false-false-false-false-false-true-false",
-             "true",
-             "§§URL§§?k=567", "2"})
-    // real ie clicks the wrong button
+    @Alerts({"null",
+            "",
+            "true",
+            "false-false-false-false-false-false-false-false-false-true-false",
+            "true",
+            "§§URL§§?k=567",
+            "2"})
     public void validationPattern() throws Exception {
         validation("<input type='number' id='e1' name='k' pattern='[012]{3}'>\n", "elem.value='567';", null);
     }
 
     private void validation(final String htmlPart, final String jsPart, final String sendKeys) throws Exception {
-        final String html =
-                "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"
                 + "      log(s.badInput"
-                        + "+ '-' + s.customError"
-                        + "+ '-' + s.patternMismatch"
-                        + "+ '-' + s.rangeOverflow"
-                        + "+ '-' + s.rangeUnderflow"
-                        + "+ '-' + s.stepMismatch"
-                        + "+ '-' + s.tooLong"
-                        + "+ '-' + s.tooShort"
-                        + " + '-' + s.typeMismatch"
-                        + " + '-' + s.valid"
-                        + " + '-' + s.valueMissing);\n"
+                + "+ '-' + s.customError"
+                + "+ '-' + s.patternMismatch"
+                + "+ '-' + s.rangeOverflow"
+                + "+ '-' + s.rangeUnderflow"
+                + "+ '-' + s.stepMismatch"
+                + "+ '-' + s.tooLong"
+                + "+ '-' + s.tooShort"
+                + " + '-' + s.typeMismatch"
+                + " + '-' + s.valid"
+                + " + '-' + s.valueMissing);\n"
                 + "    }\n"
                 + "    function test() {\n"
                 + "      var elem = document.getElementById('e1');\n"
@@ -2028,8 +2134,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                 + "  </form>\n"
                 + "</body></html>";
 
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head><title>second</title></head><body>\n"
                 + "  <p>hello world</p>\n"
                 + "</body></html>";
 
@@ -2042,13 +2148,17 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         if (sendKeys != null) {
             foo.sendKeys(sendKeys);
         }
-        assertEquals(getExpectedAlerts()[0], foo.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], "" + foo.getDomAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], foo.getDomProperty("value"));
 
         driver.findElement(By.id("myTest")).click();
-        verifyTitle2(driver, getExpectedAlerts()[1], getExpectedAlerts()[2], getExpectedAlerts()[3]);
+        verifyTitle2(driver, getExpectedAlerts()[2], getExpectedAlerts()[3], getExpectedAlerts()[4]);
 
         driver.findElement(By.id("myButton")).click();
-        assertEquals(getExpectedAlerts()[4], getMockWebConnection().getLastWebRequest().getUrl());
-        assertEquals(Integer.parseInt(getExpectedAlerts()[5]), getMockWebConnection().getRequestCount());
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
+        assertEquals(getExpectedAlerts()[5], getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[6]), getMockWebConnection().getRequestCount());
     }
 }

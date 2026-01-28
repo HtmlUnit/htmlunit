@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
@@ -31,15 +30,16 @@ import org.htmlunit.WebAssert;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
 import org.w3c.dom.Node;
 
 /**
  * Wrapper for the HTML element "select".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
+ * @author Mike Bowler
+ * @author Mike J. Bresnahan
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Daniel Gredler
@@ -117,7 +117,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * <p>Returns all of the currently selected options. The following special
+     * <p>Returns all the currently selected options. The following special
      * conditions can occur if the element is in single select mode:</p>
      * <ul>
      *   <li>if multiple options are erroneously selected, the last one is returned</li>
@@ -132,8 +132,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             // Multiple selections possible.
             result = new ArrayList<>();
             for (final HtmlElement element : getHtmlElementDescendants()) {
-                if (element instanceof HtmlOption && ((HtmlOption) element).isSelected()) {
-                    result.add((HtmlOption) element);
+                if (element instanceof HtmlOption option && option.isSelected()) {
+                    result.add(option);
                 }
             }
         }
@@ -142,8 +142,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             result = new ArrayList<>(1);
             HtmlOption lastSelected = null;
             for (final HtmlElement element : getHtmlElementDescendants()) {
-                if (element instanceof HtmlOption) {
-                    final HtmlOption option = (HtmlOption) element;
+                if (element instanceof HtmlOption option) {
                     if (option.isSelected()) {
                         lastSelected = option;
                     }
@@ -157,11 +156,11 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Returns all of the options in this select element.
-     * @return all of the options in this select element
+     * Returns all the options in this select element.
+     * @return all the options in this select element
      */
     public List<HtmlOption> getOptions() {
-        return Collections.unmodifiableList(this.getElementsByTagNameImpl("option"));
+        return Collections.unmodifiableList(getStaticElementsByTagName("option"));
     }
 
     /**
@@ -171,7 +170,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the option specified by the index
      */
     public HtmlOption getOption(final int index) {
-        return this.<HtmlOption>getElementsByTagNameImpl("option").get(index);
+        return this.<HtmlOption>getStaticElementsByTagName("option").get(index);
     }
 
     /**
@@ -179,7 +178,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the number of options
      */
     public int getOptionSize() {
-        return getElementsByTagName("option").size();
+        return getStaticElementsByTagName("option").size();
     }
 
     /**
@@ -188,7 +187,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param newLength the new length property value
      */
     public void setOptionSize(final int newLength) {
-        final List<HtmlElement> elementList = getElementsByTagName("option");
+        final List<HtmlElement> elementList = getStaticElementsByTagName("option");
 
         for (int i = elementList.size() - 1; i >= newLength; i--) {
             elementList.get(i).remove();
@@ -201,7 +200,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     public void removeOption(final int index) {
         final ChildElementsIterator iterator = new ChildElementsIterator(this);
-        for (int i = 0; iterator.hasNext();) {
+        int i = 0;
+        while (iterator.hasNext()) {
             final DomElement element = iterator.next();
             if (element instanceof HtmlOption) {
                 if (i == index) {
@@ -221,7 +221,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     public void replaceOption(final int index, final HtmlOption newOption) {
         final ChildElementsIterator iterator = new ChildElementsIterator(this);
-        for (int i = 0; iterator.hasNext();) {
+        int i = 0;
+        while (iterator.hasNext()) {
             final DomElement element = iterator.next();
             if (element instanceof HtmlOption) {
                 if (i == index) {
@@ -254,8 +255,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     @Override
     public DomNode appendChild(final Node node) {
         final DomNode response = super.appendChild(node);
-        if (node instanceof HtmlOption) {
-            final HtmlOption option = (HtmlOption) node;
+        if (node instanceof HtmlOption option) {
             if (option.isSelected()) {
                 doSelectOption(option, true, false, false, false);
             }
@@ -273,7 +273,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param optionValue the value of the option that is to change
      * @param <P> the page type
      * @return the page contained in the current window as returned
-     * by {@link org.htmlunit.WebClient#getCurrentWindow()}
+     *         by {@link org.htmlunit.WebClient#getCurrentWindow()}
      */
     public <P extends Page> P setSelectedAttribute(final String optionValue, final boolean isSelected) {
         return setSelectedAttribute(optionValue, isSelected, true);
@@ -292,7 +292,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param invokeOnFocus whether to set focus or not.
      * @param <P> the page type
      * @return the page contained in the current window as returned
-     * by {@link org.htmlunit.WebClient#getCurrentWindow()}
+     *         by {@link org.htmlunit.WebClient#getCurrentWindow()}
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final String optionValue,
@@ -319,7 +319,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param selectedOption the value of the option that is to change
      * @param <P> the page type
      * @return the page contained in the current window as returned
-     * by {@link org.htmlunit.WebClient#getCurrentWindow()}
+     *         by {@link org.htmlunit.WebClient#getCurrentWindow()}
      */
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
         return setSelectedAttribute(selectedOption, isSelected, true, true, false, true);
@@ -341,7 +341,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param isClick is mouse clicked
      * @param <P> the page type
      * @return the page contained in the current window as returned
-     * by {@link org.htmlunit.WebClient#getCurrentWindow()}
+     *         by {@link org.htmlunit.WebClient#getCurrentWindow()}
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected,
@@ -594,8 +594,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
         Node node = getParentNode();
         while (node != null) {
-            if (node instanceof DisabledElement
-                    && ((DisabledElement) node).isDisabled()) {
+            if (node instanceof DisabledElement element
+                    && element.isDisabled()) {
                 return true;
             }
             node = node.getParentNode();
@@ -658,7 +658,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCase(qualifiedName);
+        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
         if (DomElement.NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
@@ -798,7 +798,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public boolean isCustomErrorValidityState() {
-        return !StringUtils.isEmpty(customValidity_);
+        return !StringUtils.isEmptyOrNull(customValidity_);
     }
 
     @Override

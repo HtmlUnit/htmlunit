@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public interface JavaScriptErrorListener {
     void timeoutError(HtmlPage page, long allowedTime, long executionTime);
 
     /**
-     * Informs about a malformed url referencing to to script.
+     * Informs about a malformed url referencing to script.
      *
      * @param page the page that causes the problem
      * @param url the malformed url

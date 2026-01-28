@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,7 @@
 package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlStyle}.
@@ -25,7 +23,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class HtmlStyleTest extends SimpleWebTestCase {
 
     /**
@@ -34,8 +31,8 @@ public class HtmlStyleTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>foo</title>\n"
             + "  <style type='text/css' id='testStyle'>\n"
@@ -58,8 +55,8 @@ public class HtmlStyleTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText_getTextContent_insideDiv() throws Exception {
-        final String html
-            =   "<html>\n"
+        final String html = DOCTYPE_HTML
+            +   "<html>\n"
             + "<head></head>\n"
             + "<body>"
             + "<div id='tester'>"
@@ -81,8 +78,8 @@ public class HtmlStyleTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String html
-            = "<html><head><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<style type='text/css'></style>\n"
             + "<style type='text/css'><!-- \n"
             + "body > p { color: red }\n"

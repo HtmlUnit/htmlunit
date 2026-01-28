@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -29,8 +27,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlNoScriptTest extends WebDriverTestCase {
 
     /**
@@ -40,8 +38,8 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleText() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <noscript id='tester'>\n"
@@ -63,8 +61,8 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void getElementById() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -87,8 +85,8 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object Text]"})
     public void childNodes() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -112,8 +110,8 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void testJavaScript() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  alert(1);\n"
             + "</script>\n"
@@ -133,8 +131,8 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
      */
     @Test
     public void formValues() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form name='item' method='get'>\n"
             + "  <noscript>\n"
             + "    <input type=hidden name='__webpage_no_js__' value='1'>\n"
@@ -150,4 +148,40 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
         assertFalse(webDriver.getCurrentUrl().contains("__webpage_no_js__"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Has Script")
+    public void jsDetection() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<noscript>\n"
+            + "  <meta http-equiv='refresh' content='0;url=" + URL_SECOND + "'>\n"
+            + "</noscript>\n"
+            + "<title>start</title>\n"
+            + "</head>\n"
+            + "<body onload='document.form.submit()'>\n"
+            + "<form name='form' action='" + URL_THIRD + "'></form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String htmlNoScript = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head><title>No Script\u00A7</title></head>\n"
+            + "<body></body>\n"
+            + "</html>";
+        getMockWebConnection().setResponse(URL_SECOND, htmlNoScript);
+
+        final String htmlHasScript = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head><title>Has Script\u00A7</title></head>\n"
+                + "<body></body>\n"
+                + "</html>";
+        getMockWebConnection().setResponse(URL_THIRD, htmlHasScript);
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }

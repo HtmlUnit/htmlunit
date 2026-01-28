@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,14 @@ package org.htmlunit;
 
 import java.io.IOException;
 
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ImmediateRefreshHandler}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public final class ImmediateRefreshHandlerTest extends SimpleWebTestCase {
 
     /**
@@ -43,7 +41,7 @@ public final class ImmediateRefreshHandlerTest extends SimpleWebTestCase {
             private int nbCalls_ = 0;
             @Override
             public WebResponse getResponse(final WebRequest request) throws IOException {
-                String content = "<html><head>\n";
+                String content = DOCTYPE_HTML + "<html><head>\n";
                 if (nbCalls_ == 0) {
                     content += "<meta http-equiv='refresh' content='0;url="
                         + URL_FIRST.toExternalForm()

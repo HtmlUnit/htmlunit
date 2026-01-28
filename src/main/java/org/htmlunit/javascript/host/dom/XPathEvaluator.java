@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,23 +77,22 @@ public class XPathEvaluator extends HtmlUnitScriptable {
             final Object resolver, final int type, final Object result) {
         try {
             // contextNodeObj can be either a node or an array with the node as the first element.
-            if (!(contextNodeObj instanceof Node)) {
-                throw JavaScriptEngine.reportRuntimeError("Illegal value for parameter 'context'");
+            if (!(contextNodeObj instanceof Node contextNode)) {
+                throw JavaScriptEngine.typeError("Illegal value for parameter 'context'");
             }
 
-            final Node contextNode = (Node) contextNodeObj;
             PrefixResolver prefixResolver = null;
-            if (resolver instanceof PrefixResolver) {
-                prefixResolver = (PrefixResolver) resolver;
+            if (resolver instanceof PrefixResolver prefixResolver1) {
+                prefixResolver = prefixResolver1;
             }
-            else if (resolver instanceof NativeFunction) {
+            else if (resolver instanceof NativeFunction function) {
                 prefixResolver = new NativeFunctionPrefixResolver(
-                                        (NativeFunction) resolver, contextNode.getParentScope());
+                                        function, contextNode.getParentScope());
             }
 
             final XPathResult xPathResult;
-            if (result instanceof XPathResult) {
-                xPathResult = (XPathResult) result;
+            if (result instanceof XPathResult pathResult) {
+                xPathResult = pathResult;
             }
             else {
                 xPathResult = new XPathResult();
@@ -105,7 +104,7 @@ public class XPathEvaluator extends HtmlUnitScriptable {
             return xPathResult;
         }
         catch (final Exception e) {
-            throw JavaScriptEngine.reportRuntimeError("Failed to execute 'evaluate': " + e.getMessage());
+            throw JavaScriptEngine.typeError("Failed to execute 'evaluate': " + e.getMessage());
         }
     }
 
@@ -128,12 +127,12 @@ public class XPathEvaluator extends HtmlUnitScriptable {
         PrefixResolver prefixResolver = null;
         if (args.length > 1) {
             final Object resolver = args[1];
-            if (resolver instanceof PrefixResolver) {
-                prefixResolver = (PrefixResolver) resolver;
+            if (resolver instanceof PrefixResolver prefixResolver1) {
+                prefixResolver = prefixResolver1;
             }
-            else if (resolver instanceof NativeFunction) {
+            else if (resolver instanceof NativeFunction nativeFunction) {
                 prefixResolver = new NativeFunctionPrefixResolver(
-                                        (NativeFunction) resolver, scope.getParentScope());
+                                        nativeFunction, scope.getParentScope());
             }
         }
 
@@ -149,7 +148,7 @@ public class XPathEvaluator extends HtmlUnitScriptable {
             return xPathExpression;
         }
         catch (final Exception e) {
-            throw JavaScriptEngine.constructError("SyntaxError",
+            throw JavaScriptEngine.syntaxError(
                     "Failed to compile xpath '" + args[0] + "' (" + e.getMessage() + ")");
         }
     }

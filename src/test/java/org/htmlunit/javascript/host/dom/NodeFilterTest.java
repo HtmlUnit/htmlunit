@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link NodeFilter}.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class NodeFilterTest extends WebDriverTestCase {
 
     /**
@@ -35,7 +32,8 @@ public class NodeFilterTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "2", "3", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024", "2048"})
     public void constants() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var properties = ['FILTER_ACCEPT', 'FILTER_REJECT', 'FILTER_SKIP',\n"
@@ -46,7 +44,7 @@ public class NodeFilterTest extends WebDriverTestCase {
             + "    for (var i = 0; i < properties.length; i++) {\n"
             + "      log(NodeFilter[properties[i]]);\n"
             + "    }\n"
-            + "  } catch(e) { log('exception');}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
@@ -59,12 +57,13 @@ public class NodeFilterTest extends WebDriverTestCase {
     @Test
     @Alerts("4294967295")
     public void constants_SHOW_ALL() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    log(NodeFilter.SHOW_ALL);\n"
-            + "  } catch(e) { log('exception');}\n"
+            + "  } catch(e) { logEx(e);}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 

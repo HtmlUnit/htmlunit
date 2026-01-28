@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -127,7 +125,8 @@ public class XmlPage extends SgmlPage {
                     LOG.warn("Failed parsing XML document '" + webResponse.getWebRequest().getUrl() + "'", e);
                 }
                 if (!ignoreSAXException) {
-                    throw new IOException(e.getMessage());
+                    throw new IOException(
+                            "Failed parsing XML document '" + webResponse.getWebRequest().getUrl() + "'", e);
                 }
             }
         }
@@ -142,15 +141,8 @@ public class XmlPage extends SgmlPage {
             }
         }
 
-        final Map<Integer, List<String>> attributesOrderMap;
-        if (node_ != null) {
-            attributesOrderMap = XmlUtils.getAttributesOrderMap(node_.getOwnerDocument());
-        }
-        else {
-            attributesOrderMap = null;
-        }
         for (Node node = node_; node != null; node = node.getNextSibling()) {
-            XmlUtils.appendChild(this, this, node, handleXHTMLAsHTML, attributesOrderMap);
+            XmlUtils.appendChild(this, this, node, handleXHTMLAsHTML);
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,8 @@ import java.io.ObjectOutputStream;
 
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLFrameElement} when used for {@link org.htmlunit.html.HtmlFrame}.
@@ -34,7 +32,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HTMLFrameElementTest extends SimpleWebTestCase {
 
     /**
@@ -43,8 +40,8 @@ public class HTMLFrameElementTest extends SimpleWebTestCase {
     @Test
     @Alerts("Frame2")
     public void serialization() throws Exception {
-        final String html
-            = "<html><head><title>first</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "  <frame id='frame1'>\n"
             + "  <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"

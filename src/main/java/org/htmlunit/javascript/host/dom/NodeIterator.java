@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ public class NodeIterator extends HtmlUnitScriptable {
      *
      * @param root The root node at which to begin the {@link NodeIterator}'s traversal
      * @param whatToShow an optional long representing a bitmask created by combining
-     * the constant properties of {@link NodeFilter}
+     *        the constant properties of {@link NodeFilter}
      * @param filter an object implementing the {@link NodeFilter} interface
      */
     public NodeIterator(final Node root, final int whatToShow,

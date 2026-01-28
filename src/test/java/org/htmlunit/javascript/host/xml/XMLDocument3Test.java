@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,11 @@ import static org.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocume
 import static org.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromString;
 
 import java.util.Collections;
-import java.util.List;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -41,7 +37,6 @@ import org.openqa.selenium.WebDriver;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class XMLDocument3Test extends WebDriverTestCase {
 
     /**
@@ -50,7 +45,8 @@ public class XMLDocument3Test extends WebDriverTestCase {
     @Test
     @Alerts({"1610", "1575", "32", "1604", "1610", "1610", "1610", "1610", "1610", "1610", "1604"})
     public void load_Encoding() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -68,8 +64,8 @@ public class XMLDocument3Test extends WebDriverTestCase {
         final String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<something>\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u064A\u064A\u0644</something>";
 
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        getMockWebConnection().setResponse(URL_SECOND, xml.getBytes("UTF-8"), 200, "OK", MimeType.TEXT_XML, emptyList);
+        getMockWebConnection().setResponse(URL_SECOND, xml.getBytes(UTF_8), 200, "OK",
+                MimeType.TEXT_XML, Collections.emptyList());
 
         loadPageVerifyTitle2(html);
     }
@@ -80,7 +76,8 @@ public class XMLDocument3Test extends WebDriverTestCase {
     @Test
     @Alerts({"230", "230"})
     public void parseIso88591Encoding() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -108,7 +105,8 @@ public class XMLDocument3Test extends WebDriverTestCase {
     @Test
     @Alerts({"1044", "1044"})
     public void parseUtf8Encoding() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

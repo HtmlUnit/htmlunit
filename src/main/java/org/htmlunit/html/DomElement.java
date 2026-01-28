@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_CONTEXT_MENU_HAS_DETAIL_1;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 
 import java.io.IOException;
@@ -24,6 +23,7 @@ import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -31,8 +31,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,6 +49,7 @@ import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
 import org.htmlunit.cyberneko.util.FastHashMap;
+import org.htmlunit.html.DefaultElementFactory.OrderedFastHashMapWithLowercaseKeys;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.host.event.Event;
@@ -70,7 +69,7 @@ import org.xml.sax.SAXException;
 /**
  * @author Ahmed Ashour
  * @author Marc Guillemot
- * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Tom Anderson
  * @author Ronald Brill
  * @author Frank Danek
  * @author Sven Strickroth
@@ -110,6 +109,9 @@ public class DomElement extends DomNamespaceNode implements Element {
     private String styleString_;
     private LinkedHashMap<String, StyleElement> styleMap_;
 
+    private static final Comparator<StyleElement> STYLE_ELEMENT_COMPARATOR =
+            (first, second) -> StyleElement.compareToByImportanceAndSpecificity(first, second);
+
     /**
      * Whether the Mouse is currently over this element or not.
      */
@@ -122,13 +124,16 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
-     * {@code null}. The map will be stored as is, not copied.
+     *        {@code null}. The map will be stored as is, not copied.
      */
     public DomElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page);
 
-        if (attributes != null) {
+        if (attributes == null) {
+            attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
+        }
+        else {
             attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive(), attributes);
 
             for (final DomAttr entry : attributes.values()) {
@@ -143,9 +148,6 @@ public class DomElement extends DomNamespaceNode implements Element {
                     namespaces_.put(attrNamespaceURI, prefix);
                 }
             }
-        }
-        else {
-            attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
         }
     }
 
@@ -187,7 +189,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      *
      * @param attributeName the name of the attribute
      * @return true if an attribute with the given name is specified on this element or has a
-     * default value, false otherwise.
+     *        default value, false otherwise.
      */
     @Override
     public boolean hasAttribute(final String attributeName) {
@@ -205,7 +207,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param priority the new priority of the property; <code>"important"</code>or the empty string if none.
      */
     public void replaceStyleAttribute(final String name, final String value, final String priority) {
-        if (org.apache.commons.lang3.StringUtils.isBlank(value)) {
+        if (StringUtils.isBlank(value)) {
             removeStyleAttribute(name);
             return;
         }
@@ -342,28 +344,41 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Recursively write the XML data for the node tree starting at <code>node</code>.
-     *
-     * @param indent white space to indent child nodes
-     * @param printWriter writer where child nodes are written
+     * {@inheritDoc}
      */
     @Override
-    protected void printXml(final String indent, final PrintWriter printWriter) {
+    protected boolean printXml(final String indent, final boolean tagBefore, final PrintWriter printWriter) {
         final boolean hasChildren = getFirstChild() != null;
-        printWriter.print(indent + "<");
+
+        if (tagBefore) {
+            printWriter.print("\r\n");
+            printWriter.print(indent);
+        }
+
+        printWriter.print('<');
         printOpeningTagContentAsXml(printWriter);
 
-        if (hasChildren || isEmptyXmlTagExpanded()) {
-            printWriter.print(">\r\n");
-            printChildrenAsXml(indent, printWriter);
-            printWriter.print(indent);
+        if (hasChildren) {
+            printWriter.print(">");
+            final boolean tag = printChildrenAsXml(indent, true, printWriter);
+            if (tag) {
+                printWriter.print("\r\n");
+                printWriter.print(indent);
+            }
             printWriter.print("</");
             printWriter.print(getTagName());
-            printWriter.print(">\r\n");
+            printWriter.print(">");
+        }
+        else if (isEmptyXmlTagExpanded()) {
+            printWriter.print("></");
+            printWriter.print(getTagName());
+            printWriter.print(">");
         }
         else {
-            printWriter.print("/>\r\n");
+            printWriter.print("/>");
         }
+
+        return true;
     }
 
     /**
@@ -404,7 +419,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Returns the value of the attribute specified by name or an empty string. If the
      * result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
-     * attribute was specified but it was empty.
+     * attribute was specified, but it was empty.
      *
      * @param attributeName the name of the attribute
      * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
@@ -469,7 +484,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param namespaceURI the URI that identifies an XML namespace
      * @param localName the name within the namespace
      * @return true if an attribute with the given name is specified on this element or has a
-     * default value, false otherwise.
+     *         default value, false otherwise.
      */
     @Override
     public final boolean hasAttributeNS(final String namespaceURI, final String localName) {
@@ -556,7 +571,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Returns the value of the attribute specified by namespace and local name or an empty
      * string. If the result is an empty string then it will be either {@link #ATTRIBUTE_NOT_DEFINED}
      * if the attribute wasn't specified or {@link #ATTRIBUTE_VALUE_EMPTY} if the
-     * attribute was specified but it was empty.
+     * attribute was specified, but it was empty.
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param localName the name within the namespace
@@ -597,9 +612,15 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param styleMap the styles
      */
     public void writeStyleToElement(final Map<String, StyleElement> styleMap) {
+        if (styleMap.isEmpty()) {
+            setAttribute("style", "");
+            return;
+        }
+
         final StringBuilder builder = new StringBuilder();
-        final SortedSet<StyleElement> sortedValues = new TreeSet<>(styleMap.values());
-        for (final StyleElement e : sortedValues) {
+        final List<StyleElement> styleElements = new ArrayList<>(styleMap.values());
+        styleElements.sort(STYLE_ELEMENT_COMPARATOR);
+        for (final StyleElement e : styleElements) {
             if (builder.length() != 0) {
                 builder.append(' ');
             }
@@ -608,13 +629,12 @@ public class DomElement extends DomNamespaceNode implements Element {
                 .append(e.getValue());
 
             final String prio = e.getPriority();
-            if (org.apache.commons.lang3.StringUtils.isNotBlank(prio)) {
+            if (StringUtils.isNotBlank(prio)) {
                 builder.append(" !").append(prio);
             }
             builder.append(';');
         }
-        final String value = builder.toString();
-        setAttribute("style", value);
+        setAttribute("style", builder.toString());
     }
 
     /**
@@ -631,7 +651,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return A list of matching elements.
      */
     <E extends HtmlElement> DomNodeList<E> getElementsByTagNameImpl(final String tagName) {
-        return new AbstractDomNodeList<E>(this) {
+        return new AbstractDomNodeList<>(this) {
             @Override
             @SuppressWarnings("unchecked")
             protected List<E> provideElements() {
@@ -644,6 +664,27 @@ public class DomElement extends DomNamespaceNode implements Element {
                 return res;
             }
         };
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param <E> the specific HtmlElement type
+     * @param tagName The name of the tag to match on
+     * @return A list of matching elements; this is not a live list
+     */
+    public <E extends HtmlElement> List<E> getStaticElementsByTagName(final String tagName) {
+        final List<E> res = new ArrayList<>();
+        for (final Iterator<HtmlElement> iterator = this.new DescendantHtmlElementsIterator(); iterator.hasNext();) {
+            final HtmlElement elem = iterator.next();
+            if (elem.getLocalName().equalsIgnoreCase(tagName)) {
+                final String prefix = elem.getPrefix();
+                if (prefix == null || prefix.isEmpty()) {
+                    res.add((E) elem);
+                }
+            }
+        }
+        return res;
     }
 
     /**
@@ -764,10 +805,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      * Returns the current number of element nodes that are children of this element.
      * @return the current number of element nodes that are children of this element.
      */
-    @SuppressWarnings("PMD.UnusedLocalVariable")
     public int getChildElementCount() {
         int counter = 0;
-        for (final DomElement elem : getChildElements()) {
+
+        for (final DomElement domElement : getChildElements()) {
             counter++;
         }
         return counter;
@@ -786,7 +827,8 @@ public class DomElement extends DomNamespaceNode implements Element {
     private static class ChildElementsIterable implements Iterable<DomElement> {
         private final Iterator<DomElement> iterator_;
 
-        /** Constructor.
+        /**
+         * Constructor.
          * @param domNode the parent
          */
         protected ChildElementsIterable(final DomNode domNode) {
@@ -806,14 +848,15 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         private DomElement nextElement_;
 
-        /** Constructor.
+        /**
+         * Constructor.
          * @param domNode the parent
          */
         protected ChildElementsIterator(final DomNode domNode) {
             final DomNode child = domNode.getFirstChild();
             if (child != null) {
-                if (child instanceof DomElement) {
-                    nextElement_ = (DomElement) child;
+                if (child instanceof DomElement element) {
+                    nextElement_ = element;
                 }
                 else {
                     setNextElement(child);
@@ -821,13 +864,17 @@ public class DomElement extends DomNamespaceNode implements Element {
             }
         }
 
-        /** @return is there a next one ? */
+        /**
+         * @return is there a next one ?
+         */
         @Override
         public boolean hasNext() {
             return nextElement_ != null;
         }
 
-        /** @return the next one */
+        /**
+         * @return the next one
+         */
         @Override
         public DomElement next() {
             if (nextElement_ != null) {
@@ -944,7 +991,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return true if this is an {@link DisabledElement} and disabled
      */
     protected boolean isDisabledElementAndDisabled() {
-        return this instanceof DisabledElement && ((DisabledElement) this).isDisabled();
+        return this instanceof DisabledElement de && de.isDisabled();
     }
 
     /**
@@ -1011,16 +1058,16 @@ public class DomElement extends DomNamespaceNode implements Element {
                     // give focus to current element (if possible) or only remove it from previous one
                     DomElement elementToFocus = null;
                     if (this instanceof SubmittableElement
-                        || this instanceof HtmlAnchor
-                            && ATTRIBUTE_NOT_DEFINED != ((HtmlAnchor) this).getHrefAttribute()
-                        || this instanceof HtmlArea
-                            && (ATTRIBUTE_NOT_DEFINED != ((HtmlArea) this).getHrefAttribute()
+                        || this instanceof HtmlAnchor anchor
+                            && ATTRIBUTE_NOT_DEFINED != anchor.getHrefAttribute()
+                        || this instanceof HtmlArea area
+                            && (ATTRIBUTE_NOT_DEFINED != area.getHrefAttribute()
                                 || webClient.getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
                         || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null) {
                         elementToFocus = this;
                     }
-                    else if (this instanceof HtmlOption) {
-                        elementToFocus = ((HtmlOption) this).getEnclosingSelect();
+                    else if (this instanceof HtmlOption option) {
+                        elementToFocus = option.getEnclosingSelect();
                     }
 
                     if (elementToFocus == null) {
@@ -1037,27 +1084,22 @@ public class DomElement extends DomNamespaceNode implements Element {
 
                 MouseEvent event = null;
                 if (webClient.isJavaScriptEnabled()) {
-                    final BrowserVersion browser = webClient.getBrowserVersion();
-                    if (browser.hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                        event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                                ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
-                    }
-                    else {
-                        event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                                ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
-                    }
+                    event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
 
                     if (disableProcessLabelAfterBubbling) {
                         event.disableProcessLabelAfterBubbling();
                     }
                 }
-                return click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
+                click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
             }
             finally {
                 if (webClient.isJavaScriptEnabled()) {
                     jsEngine.processPostponedActions();
                 }
             }
+
+            return (P) webClient.getCurrentWindow().getEnclosedPage();
         }
     }
 
@@ -1141,7 +1183,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param ctrlKey {@code true} if CTRL is pressed
      *
      * @return true if doClickFireEvent method has to be called later on (to signal,
-     * that the value was changed)
+     *         that the value was changed)
      * @throws IOException if an IO error occurs
      */
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
@@ -1150,8 +1192,8 @@ public class DomElement extends DomNamespaceNode implements Element {
             // it should probably be changed to do this at the event level but currently
             // this wouldn't work with JS disabled as events are propagated in the host object tree.
             final DomNode parent = getParentNode();
-            if (parent instanceof DomElement) {
-                return ((DomElement) parent).doClickStateUpdate(false, false);
+            if (parent instanceof DomElement element) {
+                return element.doClickStateUpdate(false, false);
             }
         }
 
@@ -1159,11 +1201,9 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * @see #doClickStateUpdate(boolean, boolean)
-     * Usually the click is propagated to the parent. Overwrite if you
-     * like to disable this.
-     *
+     * Usually the click is propagated to the parent. Overwrite if you like to disable this.
      * @return true or false
+     * @see #doClickStateUpdate(boolean, boolean)
      */
     protected boolean propagateClickStateUpdateToParent() {
         return true;
@@ -1206,9 +1246,9 @@ public class DomElement extends DomNamespaceNode implements Element {
      * action listeners, etc. Note also that {@link #click(boolean, boolean, boolean)} is automatically
      * called first.
      *
-     * @param shiftKey {@code true} if SHIFT is pressed during the double-click
-     * @param ctrlKey {@code true} if CTRL is pressed during the double-click
-     * @param altKey {@code true} if ALT is pressed during the double-click
+     * @param shiftKey {@code true} if SHIFT is pressed during the double click
+     * @param ctrlKey {@code true} if CTRL is pressed during the double click
+     * @param altKey {@code true} if ALT is pressed during the double click
      * @param <P> the page type
      * @return the page that occupies this element's window after the element has been double-clicked
      * @exception IOException if an IO error occurs
@@ -1441,14 +1481,11 @@ public class DomElement extends DomNamespaceNode implements Element {
         final Event event;
         if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)) {
             final BrowserVersion browserVersion = webClient.getBrowserVersion();
-            if (browserVersion.hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 0);
-            }
-            else if (browserVersion.hasFeature(EVENT_CONTEXT_MENU_HAS_DETAIL_1)) {
-                event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 1);
+            if (browserVersion.hasFeature(EVENT_CONTEXT_MENU_HAS_DETAIL_1)) {
+                event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 1);
             }
             else {
-                event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 2);
+                event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 0);
             }
         }
         else if (MouseEvent.TYPE_DBL_CLICK.equals(eventType)) {
@@ -1535,9 +1572,9 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public void focus() {
         if (!(this instanceof SubmittableElement
-            || this instanceof HtmlAnchor && ATTRIBUTE_NOT_DEFINED != ((HtmlAnchor) this).getHrefAttribute()
-            || this instanceof HtmlArea
-                && (ATTRIBUTE_NOT_DEFINED != ((HtmlArea) this).getHrefAttribute()
+            || this instanceof HtmlAnchor anchor && ATTRIBUTE_NOT_DEFINED != anchor.getHrefAttribute()
+            || this instanceof HtmlArea area
+                && (ATTRIBUTE_NOT_DEFINED != area.getHrefAttribute()
                     || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
             || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null)) {
             return;
@@ -1661,18 +1698,9 @@ public class DomElement extends DomNamespaceNode implements Element {
  * The {@link NamedNodeMap} to store the node attributes.
  */
 class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serializable {
-    protected static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
-
     private final OrderedFastHashMap<String, DomAttr> map_;
     private final DomElement domNode_;
     private final boolean caseSensitive_;
-
-    private NamedAttrNodeMapImpl() {
-        super();
-        domNode_ = null;
-        caseSensitive_ = true;
-        map_ = new OrderedFastHashMap<>(0);
-    }
 
     NamedAttrNodeMapImpl(final DomElement domNode, final boolean caseSensitive) {
         super();
@@ -1693,11 +1721,15 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
         domNode_ = domNode;
         caseSensitive_ = caseSensitive;
 
-        // we expect a special map here, if we don't get it... we have to create us one
-        if (caseSensitive && attributes instanceof OrderedFastHashMap) {
+        if (attributes instanceof OrderedFastHashMapWithLowercaseKeys) {
             // no need to rework the map at all, we are case sensitive, so
-            // we keep all attributes and we got the right map from outside too
+            // we keep all attributes, and we got the right map from outside too
             map_ = (OrderedFastHashMap) attributes;
+        }
+        else if (caseSensitive && attributes instanceof OrderedFastHashMap map) {
+            // no need to rework the map at all, we are case sensitive, so
+            // we keep all attributes, and we got the right map from outside too
+            map_ = map;
         }
         else {
             // this is more expensive but atypical, so we don't have to care that much
@@ -1801,8 +1833,8 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      */
     @Override
     public DomAttr remove(final Object key) {
-        if (key instanceof String) {
-            final String name = fixName((String) key);
+        if (key instanceof String string) {
+            final String name = fixName(string);
             return map_.remove(name);
         }
         return null;
@@ -1832,8 +1864,8 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      */
     @Override
     public boolean containsKey(final Object key) {
-        if (key instanceof String) {
-            final String name = fixName((String) key);
+        if (key instanceof String string) {
+            final String name = fixName(string);
             return map_.containsKey(name);
         }
         return false;
@@ -1844,8 +1876,8 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      */
     @Override
     public DomAttr get(final Object key) {
-        if (key instanceof String) {
-            final String name = fixName((String) key);
+        if (key instanceof String string) {
+            final String name = fixName(string);
             return map_.get(name);
         }
         return null;

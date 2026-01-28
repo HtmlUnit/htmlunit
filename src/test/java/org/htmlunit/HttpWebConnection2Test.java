@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -33,7 +31,6 @@ import org.openqa.selenium.WebDriver;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HttpWebConnection2Test extends WebDriverTestCase {
 
     /**
@@ -60,7 +57,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      */
     @Test
     public void redirectBrokenGzip() throws Exception {
-        final String html = "<html></html>";
+        final String html = DOCTYPE_HTML + "<html></html>";
 
         final List<NameValuePair> headers = Arrays.asList(new NameValuePair("Location", URL_SECOND.toString()),
                 new NameValuePair("Content-Encoding", "gzip"));

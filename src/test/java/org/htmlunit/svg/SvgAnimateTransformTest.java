@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,8 @@ package org.htmlunit.svg;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -29,8 +26,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class SvgAnimateTransformTest extends WebDriverTestCase {
 
     /**
@@ -39,7 +36,7 @@ public class SvgAnimateTransformTest extends WebDriverTestCase {
     @Test
     @Alerts("[object SVGAnimateTransformElement]")
     public void simpleScriptable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -57,10 +54,10 @@ public class SvgAnimateTransformTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             if ("[object SVGAnimateTransformElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgAnimateTransform.class.isInstance(page.getElementById("myId")));
+                assertTrue(page.getElementById("myId") instanceof SvgAnimateTransform);
             }
             else {
-                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
+                assertTrue(page.getElementById("myId") instanceof SvgElement);
             }
         }
     }

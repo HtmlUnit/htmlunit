@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.Document;
 
 /**
- * Proxy for a {@link Document} script object. In theory we could satisfy single-document requirements
+ * Proxy for a {@link Document} script object. In theory, we could satisfy single-document requirements
  * without a proxy, by reusing (with appropriate cleanup and re-initialization) a single {@link Document}
  * instance across various pages. However, we allow users to keep references to old pages as they navigate
  * across a series of pages, and all of these pages need to be usable -- so we can't just leave these old

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,6 +66,9 @@ public class URLSearchParams extends HtmlUnitScriptable {
 
     private URL url_;
 
+    /**
+     * {@link ES6Iterator} implementation for js support.
+     */
     public static final class NativeParamsIterator extends ES6Iterator {
         enum Type { KEYS, VALUES, BOTH }
 
@@ -73,10 +76,19 @@ public class URLSearchParams extends HtmlUnitScriptable {
         private final String className_;
         private final transient Iterator<NameValuePair> iterator_;
 
+        /**
+         * Init.
+         * @param scope the scope
+         * @param className the class name
+         */
         public static void init(final ScriptableObject scope, final String className) {
             ES6Iterator.init(scope, false, new NativeParamsIterator(className), URL_SEARCH_PARMS_TAG);
         }
 
+        /**
+         * Ctor.
+         * @param className the class name
+         */
         public NativeParamsIterator(final String className) {
             super();
             iterator_ = Collections.emptyIterator();
@@ -84,6 +96,13 @@ public class URLSearchParams extends HtmlUnitScriptable {
             className_ = className;
         }
 
+        /**
+         * Ctor.
+         * @param scope the scope
+         * @param className the class name
+         * @param type the type
+         * @param iterator the backing iterator
+         */
         public NativeParamsIterator(final Scriptable scope, final String className, final Type type,
                                         final Iterator<NameValuePair> iterator) {
             super(scope, URL_SEARCH_PARMS_TAG);
@@ -105,16 +124,11 @@ public class URLSearchParams extends HtmlUnitScriptable {
         @Override
         protected Object nextValue(final Context cx, final Scriptable scope) {
             final NameValuePair e = iterator_.next();
-            switch (type_) {
-                case KEYS:
-                    return e.getName();
-                case VALUES:
-                    return e.getValue();
-                case BOTH:
-                    return cx.newArray(scope, new Object[] {e.getName(), e.getValue()});
-                default:
-                    throw new AssertionError();
-            }
+            return switch (type_) {
+                case KEYS -> e.getName();
+                case VALUES -> e.getValue();
+                case BOTH -> cx.newArray(scope, new Object[]{e.getName(), e.getValue()});
+            };
         }
     }
 
@@ -163,10 +177,9 @@ public class URLSearchParams extends HtmlUnitScriptable {
      */
     private static List<NameValuePair> resolveParams(final Object params) {
         // if params is a sequence
-        if (params instanceof Scriptable && hasProperty((Scriptable) params, SymbolKey.ITERATOR)) {
+        if (params instanceof Scriptable paramsScriptable && hasProperty(paramsScriptable, SymbolKey.ITERATOR)) {
 
             final Context cx = Context.getCurrentContext();
-            final Scriptable paramsScriptable = (Scriptable) params;
 
             final List<NameValuePair> nameValuePairs = new ArrayList<>();
 
@@ -204,9 +217,9 @@ public class URLSearchParams extends HtmlUnitScriptable {
         }
 
         // if params is a record
-        if (params instanceof NativeObject) {
+        if (params instanceof NativeObject object) {
             final List<NameValuePair> nameValuePairs = new ArrayList<>();
-            for (final Map.Entry<Object, Object> keyValuePair : ((NativeObject) params).entrySet()) {
+            for (final Map.Entry<Object, Object> keyValuePair : object.entrySet()) {
                 nameValuePairs.add(
                         new NameValuePair(
                                 JavaScriptEngine.toString(keyValuePair.getKey()),
@@ -227,7 +240,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
         final List<NameValuePair> splitted = new ArrayList<>();
 
         params = StringUtils.stripStart(params, "?");
-        if (StringUtils.isEmpty(params)) {
+        if (org.htmlunit.util.StringUtils.isEmptyOrNull(params)) {
             return splitted;
         }
 
@@ -420,12 +433,10 @@ public class URLSearchParams extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void forEach(final Object callback) {
-        if (!(callback instanceof Function)) {
+        if (!(callback instanceof Function fun)) {
             throw JavaScriptEngine.typeError(
                     "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
-
-        final Function fun = (Function) callback;
 
         String currentSearch = null;
         List<NameValuePair> params = null;
@@ -455,7 +466,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
      */
     @JsxFunction
     @JsxSymbol(symbolName = "iterator")
-    public Object entries() {
+    public ES6Iterator entries() {
         final List<NameValuePair> splitted = splitQuery();
 
         return new NativeParamsIterator(getParentScope(),
@@ -469,7 +480,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
      * @return an iterator.
      */
     @JsxFunction
-    public Object keys() {
+    public ES6Iterator keys() {
         final List<NameValuePair> splitted = splitQuery();
 
         return new NativeParamsIterator(getParentScope(),
@@ -483,7 +494,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
      * @return an iterator.
      */
     @JsxFunction
-    public Object values() {
+    public ES6Iterator values() {
         final List<NameValuePair> splitted = splitQuery();
 
         return new NativeParamsIterator(getParentScope(),

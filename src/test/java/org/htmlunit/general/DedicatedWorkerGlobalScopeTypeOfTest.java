@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,23 +20,21 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.javascript.host.css.CSSStyleRule;
 import org.htmlunit.javascript.host.css.CSSStyleSheet;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests that {@code typeof} host class is correct.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
 
     private void test(final String className) throws Exception {
-        final String html = "<html><body>"
+        final String html = DOCTYPE_HTML
+                + "<html><body>"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "try {\n"
@@ -45,21 +43,21 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
                 + "    log('' + e.data);\n"
                 + "  };\n"
                 + "  setTimeout(function() { myWorker.postMessage('test');}, 10);\n"
-                + "} catch(e) { log('exception'); }\n"
+                + "} catch(e) { logEx(e); }\n"
                 + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
                 + "  var workerResult = '';\n"
                 + "  try {\n"
                 + "    workerResult += typeof " + className + ";\n"
-                + "  } catch(e) {workerResult = 'exception'}\n"
+                + "  } catch(e) {workerResult = e.name}\n"
                 + "  postMessage(workerResult);\n"
                 + "}\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
 
         loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME / 4, getWebDriver(), getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -252,7 +250,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void apps_mgmt() throws Exception {
         test("Apps.mgmt");
     }
@@ -324,7 +322,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("object")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void atomics() throws Exception {
         test("Atomics");
     }
@@ -510,6 +507,15 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("function")
+    public void bigInt() throws Exception {
+        test("BigInt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("undefined")
     public void biquadFilterNode() throws Exception {
         test("BiquadFilterNode");
@@ -520,7 +526,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void blob() throws Exception {
         test("Blob");
     }
@@ -674,7 +679,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void broadcastChannel() throws Exception {
         test("BroadcastChannel");
     }
@@ -720,7 +724,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void cache() throws Exception {
         test("Cache");
     }
@@ -730,7 +733,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void cacheStorage() throws Exception {
         test("CacheStorage");
     }
@@ -794,7 +796,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void canvasGradient() throws Exception {
         test("CanvasGradient");
     }
@@ -813,7 +814,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void canvasPattern() throws Exception {
         test("CanvasPattern");
     }
@@ -917,26 +917,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.ClientRect}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void clientRect() throws Exception {
-        test("ClientRect");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void clientRectList() throws Exception {
-        test("ClientRectList");
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -968,7 +948,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void closeEvent() throws Exception {
         test("CloseEvent");
     }
@@ -1121,7 +1100,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void crypto() throws Exception {
         test("Crypto");
     }
@@ -1131,7 +1109,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void cryptoKey() throws Exception {
         test("CryptoKey");
     }
@@ -1154,6 +1131,17 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void css2Properties() throws Exception {
         test("CSS2Properties");
+    }
+
+    /**
+     * Test CSSPageDescriptors.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void cssPageDescriptors() throws Exception {
+        test("CSSPageDescriptors");
     }
 
     /**
@@ -1397,7 +1385,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void customEvent() throws Exception {
         test("CustomEvent");
     }
@@ -1761,7 +1748,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void domException() throws Exception {
         test("DOMException");
     }
@@ -1827,7 +1813,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void domMatrix() throws Exception {
         test("DOMMatrix");
     }
@@ -1837,7 +1822,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void domMatrixReadOnly() throws Exception {
         test("DOMMatrixReadOnly");
     }
@@ -1867,7 +1851,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void domPoint() throws Exception {
         test("DOMPoint");
     }
@@ -1877,19 +1860,17 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void domPointReadOnly() throws Exception {
         test("DOMPointReadOnly");
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.ClientRect}.
+     * Test {@link org.htmlunit.javascript.host.DOMRect}.
      *
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void domRect() throws Exception {
         test("DOMRect");
     }
@@ -1908,7 +1889,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void domRectReadOnly() throws Exception {
         test("DOMRectReadOnly");
     }
@@ -1917,9 +1897,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF_ESR = "function")
-    @HtmlUnitNYI(FF_ESR = "undefined")
+    @Alerts("undefined")
     public void domRequest() throws Exception {
         test("DOMRequest");
     }
@@ -1947,7 +1925,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void domStringList() throws Exception {
         test("DOMStringList");
     }
@@ -2118,7 +2095,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void errorEvent() throws Exception {
         test("ErrorEvent");
     }
@@ -2157,7 +2133,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void event() throws Exception {
         test("Event");
     }
@@ -2185,7 +2160,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void eventSource() throws Exception {
         test("EventSource");
     }
@@ -2195,7 +2169,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void eventTarget() throws Exception {
         test("EventTarget");
     }
@@ -2324,7 +2297,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void file() throws Exception {
         test("File");
     }
@@ -2379,7 +2351,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void fileList() throws Exception {
         test("FileList");
     }
@@ -2389,7 +2360,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void fileReader() throws Exception {
         test("FileReader");
     }
@@ -2521,7 +2491,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void fontFace() throws Exception {
         test("FontFace");
     }
@@ -2533,7 +2502,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             FF = "function",
             FF_ESR = "function")
-    @HtmlUnitNYI(FF = "undefined", FF_ESR = "undefined")
     public void fontFaceSet() throws Exception {
         test("FontFaceSet");
     }
@@ -2554,7 +2522,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void formData() throws Exception {
         test("FormData");
     }
@@ -2718,7 +2685,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void headers() throws Exception {
         test("Headers");
     }
@@ -3857,7 +3823,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void idbCursor() throws Exception {
         test("IDBCursor");
     }
@@ -3876,7 +3841,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void idbCursorWithValue() throws Exception {
         test("IDBCursorWithValue");
     }
@@ -3886,7 +3850,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void idbDatabase() throws Exception {
         test("IDBDatabase");
     }
@@ -3932,7 +3895,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void idbFactory() throws Exception {
         test("IDBFactory");
     }
@@ -3951,7 +3913,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void idbIndex() throws Exception {
         test("IDBIndex");
     }
@@ -3970,7 +3931,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void idbKeyRange() throws Exception {
         test("IDBKeyRange");
     }
@@ -3998,7 +3958,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void idbObjectStore() throws Exception {
         test("IDBObjectStore");
     }
@@ -4017,7 +3976,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void idbOpenDBRequest() throws Exception {
         test("IDBOpenDBRequest");
     }
@@ -4027,7 +3985,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void idbRequest() throws Exception {
         test("IDBRequest");
     }
@@ -4037,7 +3994,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void idbTransaction() throws Exception {
         test("IDBTransaction");
     }
@@ -4056,7 +4012,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void idbVersionChangeEvent() throws Exception {
         test("IDBVersionChangeEvent");
     }
@@ -4113,7 +4068,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void imageBitmap() throws Exception {
         test("ImageBitmap");
     }
@@ -4132,7 +4086,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void imageBitmapRenderingContext() throws Exception {
         test("ImageBitmapRenderingContext");
     }
@@ -4142,7 +4095,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void imageData() throws Exception {
         test("ImageData");
     }
@@ -4268,7 +4220,8 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             FF = "function",
             FF_ESR = "function")
-    @HtmlUnitNYI(CHROME = "function", EDGE = "function")
+    @HtmlUnitNYI(CHROME = "function",
+            EDGE = "function")
     public void internalError() throws Exception {
         test("InternalError");
     }
@@ -4351,9 +4304,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function")
+    @Alerts("function")
     public void iterator() throws Exception {
         test("Iterator");
     }
@@ -4409,7 +4360,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_formatValue() throws Exception {
         test("L10n.formatValue");
     }
@@ -4418,7 +4369,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_get() throws Exception {
         test("L10n.get");
     }
@@ -4427,7 +4378,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_language_code() throws Exception {
         test("L10n.language.code");
     }
@@ -4436,7 +4387,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_language_direction() throws Exception {
         test("L10n.language.direction");
     }
@@ -4445,7 +4396,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_once() throws Exception {
         test("L10n.once");
     }
@@ -4454,7 +4405,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_ready() throws Exception {
         test("L10n.ready");
     }
@@ -4463,7 +4414,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_readyState() throws Exception {
         test("L10n.readyState");
     }
@@ -4472,7 +4423,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void l10n_setAttributes() throws Exception {
         test("L10n.setAttributes");
     }
@@ -4733,7 +4684,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             FF = "undefined",
             FF_ESR = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void mediaSource() throws Exception {
         test("MediaSource");
     }
@@ -4835,7 +4785,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void messageChannel() throws Exception {
         test("MessageChannel");
     }
@@ -4847,7 +4796,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void messageEvent() throws Exception {
         test("MessageEvent");
     }
@@ -4859,7 +4807,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void messagePort() throws Exception {
         test("MessagePort");
     }
@@ -5597,7 +5544,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
             EDGE = "function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void networkInformation() throws Exception {
         test("NetworkInformation");
     }
@@ -5669,7 +5615,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void notification() throws Exception {
         test("Notification");
     }
@@ -5911,7 +5856,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void path2D() throws Exception {
         test("Path2D");
     }
@@ -5948,7 +5892,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void performance() throws Exception {
         test("Performance");
     }
@@ -5958,7 +5901,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void performanceEntry() throws Exception {
         test("PerformanceEntry");
     }
@@ -5977,7 +5919,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void performanceMark() throws Exception {
         test("PerformanceMark");
     }
@@ -5987,7 +5928,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void performanceMeasure() throws Exception {
         test("PerformanceMeasure");
     }
@@ -6015,7 +5955,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void performanceObserver() throws Exception {
         test("PerformanceObserver");
     }
@@ -6025,7 +5964,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void performanceObserverEntryList() throws Exception {
         test("PerformanceObserverEntryList");
     }
@@ -6035,7 +5973,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void performanceResourceTiming() throws Exception {
         test("PerformanceResourceTiming");
     }
@@ -6065,7 +6002,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
             EDGE = "function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void periodicSyncManager() throws Exception {
         test("PeriodicSyncManager");
     }
@@ -6092,10 +6028,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF = "undefined",
-            FF_ESR = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
+    @Alerts("function")
     public void permissions() throws Exception {
         test("Permissions");
     }
@@ -6113,10 +6046,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF = "undefined",
-            FF_ESR = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
+    @Alerts("function")
     public void permissionStatus() throws Exception {
         test("PermissionStatus");
     }
@@ -6334,7 +6264,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void progressEvent() throws Exception {
         test("ProgressEvent");
     }
@@ -6362,7 +6291,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void promiseRejectionEvent() throws Exception {
         test("PromiseRejectionEvent");
     }
@@ -6398,10 +6326,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF = "undefined",
-            FF_ESR = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
+    @Alerts("function")
     public void pushManager() throws Exception {
         test("PushManager");
     }
@@ -6428,10 +6353,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF = "undefined",
-            FF_ESR = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
+    @Alerts("function")
     public void pushSubscription() throws Exception {
         test("PushSubscription");
     }
@@ -6440,10 +6362,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF = "undefined",
-            FF_ESR = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
+    @Alerts("function")
     public void pushSubscriptionOptions() throws Exception {
         test("PushSubscriptionOptions");
     }
@@ -6500,7 +6419,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void readableStream() throws Exception {
         test("ReadableStream");
     }
@@ -6555,7 +6473,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void request() throws Exception {
         test("Request");
     }
@@ -6565,7 +6482,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void response() throws Exception {
         test("Response");
     }
@@ -6603,7 +6519,9 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "function",
+            FF_ESR = "undefined")
+    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined")
     public void rtcDataChannel() throws Exception {
         test("RTCDataChannel");
     }
@@ -6752,7 +6670,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             FF = "undefined",
             FF_ESR = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void securityPolicyViolationEvent() throws Exception {
         test("SecurityPolicyViolationEvent");
     }
@@ -6772,7 +6689,11 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function",
+            FF_ESR = "function")
+    @HtmlUnitNYI(FF = "undefined",
+            FF_ESR = "undefined")
     public void serviceWorker() throws Exception {
         test("ServiceWorker");
     }
@@ -6781,7 +6702,11 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function",
+            FF_ESR = "function")
+    @HtmlUnitNYI(FF = "undefined",
+            FF_ESR = "undefined")
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
     }
@@ -6808,10 +6733,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            FF = "undefined",
-            FF_ESR = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
+    @Alerts("function")
     public void serviceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration");
     }
@@ -6914,7 +6836,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool16x8() throws Exception {
         test("SIMD.Bool16x8");
     }
@@ -6923,7 +6845,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool32x4() throws Exception {
         test("SIMD.Bool32x4");
     }
@@ -6932,7 +6854,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool64x2() throws Exception {
         test("SIMD.Bool64x2");
     }
@@ -6941,7 +6863,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Bool8x16() throws Exception {
         test("SIMD.Bool8x16");
     }
@@ -6950,7 +6872,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_float32x4() throws Exception {
         test("SIMD.float32x4");
     }
@@ -6959,7 +6881,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Float32x4() throws Exception {
         test("SIMD.Float32x4");
     }
@@ -6968,7 +6890,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_float64x2() throws Exception {
         test("SIMD.float64x2");
     }
@@ -6977,7 +6899,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Float64x2() throws Exception {
         test("SIMD.Float64x2");
     }
@@ -6986,7 +6908,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_int16x8() throws Exception {
         test("SIMD.int16x8");
     }
@@ -6995,7 +6917,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Int16x8() throws Exception {
         test("SIMD.Int16x8");
     }
@@ -7004,7 +6926,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_int32x4() throws Exception {
         test("SIMD.int32x4");
     }
@@ -7013,7 +6935,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Int32x4() throws Exception {
         test("SIMD.Int32x4");
     }
@@ -7022,7 +6944,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_int8x16() throws Exception {
         test("SIMD.int8x16");
     }
@@ -7031,7 +6953,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Int8x16() throws Exception {
         test("SIMD.Int8x16");
     }
@@ -7040,7 +6962,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Uint16x8() throws Exception {
         test("SIMD.Uint16x8");
     }
@@ -7049,7 +6971,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Uint32x4() throws Exception {
         test("SIMD.Uint32x4");
     }
@@ -7058,7 +6980,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void simd_Uint8x16() throws Exception {
         test("SIMD.Uint8x16");
     }
@@ -7090,7 +7012,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             FF = "undefined",
             FF_ESR = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void sourceBuffer() throws Exception {
         test("SourceBuffer");
     }
@@ -7102,7 +7023,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             FF = "undefined",
             FF_ESR = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void sourceBufferList() throws Exception {
         test("SourceBufferList");
     }
@@ -7296,7 +7216,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void storageManager() throws Exception {
         test("StorageManager");
     }
@@ -7362,7 +7281,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void subtleCrypto() throws Exception {
         test("SubtleCrypto");
     }
@@ -8802,7 +8720,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
             EDGE = "function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined")
     public void syncManager() throws Exception {
         test("SyncManager");
     }
@@ -8886,7 +8803,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void textDecoder() throws Exception {
         test("TextDecoder");
     }
@@ -8896,7 +8812,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void textEncoder() throws Exception {
         test("TextEncoder");
     }
@@ -8915,7 +8830,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void textMetrics() throws Exception {
         test("TextMetrics");
     }
@@ -9200,7 +9114,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void url() throws Exception {
         test("URL");
     }
@@ -9212,7 +9125,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void urlSearchParams() throws Exception {
         test("URLSearchParams");
     }
@@ -9528,7 +9440,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGL2RenderingContext() throws Exception {
         test("WebGL2RenderingContext");
     }
@@ -9538,7 +9449,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLActiveInfo() throws Exception {
         test("WebGLActiveInfo");
     }
@@ -9548,7 +9458,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLBuffer() throws Exception {
         test("WebGLBuffer");
     }
@@ -9558,7 +9467,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLContextEvent() throws Exception {
         test("WebGLContextEvent");
     }
@@ -9568,7 +9476,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLFramebuffer() throws Exception {
         test("WebGLFramebuffer");
     }
@@ -9578,7 +9485,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLProgram() throws Exception {
         test("WebGLProgram");
     }
@@ -9588,7 +9494,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLQuery() throws Exception {
         test("WebGLQuery");
     }
@@ -9598,7 +9503,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLRenderbuffer() throws Exception {
         test("WebGLRenderbuffer");
     }
@@ -9608,7 +9512,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLRenderingContext() throws Exception {
         test("WebGLRenderingContext");
     }
@@ -9618,7 +9521,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLSampler() throws Exception {
         test("WebGLSampler");
     }
@@ -9628,7 +9530,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLShader() throws Exception {
         test("WebGLShader");
     }
@@ -9638,7 +9539,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLShaderPrecisionFormat() throws Exception {
         test("WebGLShaderPrecisionFormat");
     }
@@ -9648,7 +9548,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLSync() throws Exception {
         test("WebGLSync");
     }
@@ -9658,7 +9557,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLTexture() throws Exception {
         test("WebGLTexture");
     }
@@ -9677,7 +9575,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLTransformFeedback() throws Exception {
         test("WebGLTransformFeedback");
     }
@@ -9687,7 +9584,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLUniformLocation() throws Exception {
         test("WebGLUniformLocation");
     }
@@ -9697,7 +9593,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webGLVertexArrayObject() throws Exception {
         test("WebGLVertexArrayObject");
     }
@@ -9934,7 +9829,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void webSocket() throws Exception {
         test("WebSocket");
     }
@@ -10017,7 +9911,7 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("ReferenceError")
     public void windowEventHandlers_onbeforeprint() throws Exception {
         test("WindowEventHandlers.onbeforeprint");
     }
@@ -10056,7 +9950,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void worker() throws Exception {
         test("Worker");
     }
@@ -10066,7 +9959,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void workerGlobalScope() throws Exception {
         test("WorkerGlobalScope");
     }
@@ -10076,7 +9968,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void workerLocation() throws Exception {
         test("WorkerLocation");
     }
@@ -10086,7 +9977,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void workerNavigator() throws Exception {
         test("WorkerNavigator");
     }
@@ -10118,7 +10008,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void xmlHttpRequest() throws Exception {
         test("XMLHttpRequest");
     }
@@ -10128,7 +10017,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void xmlHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget");
     }
@@ -10147,7 +10035,6 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("function")
-    @HtmlUnitNYI(CHROME = "undefined", EDGE = "undefined", FF = "undefined", FF_ESR = "undefined")
     public void xmlHttpRequestUpload() throws Exception {
         test("XMLHttpRequestUpload");
     }
@@ -10223,5 +10110,36 @@ public class DedicatedWorkerGlobalScopeTypeOfTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void xsltProcessor() throws Exception {
         test("XSLTProcessor");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortController}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void abortController() throws Exception {
+        test("AbortController");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortSignal}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void abortSignal() throws Exception {
+        test("AbortSignal");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void global() throws Exception {
+        test("global");
     }
 }

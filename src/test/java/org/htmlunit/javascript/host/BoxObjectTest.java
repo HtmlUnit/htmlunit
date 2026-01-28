@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,16 @@
 package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for BoxObject.
  *
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class BoxObjectTest extends WebDriverTestCase {
 
     /**
@@ -34,10 +32,10 @@ public class BoxObjectTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void elementAttributes() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body onload='test()'>\n"
             + "    <span id='foo'>foo</span><div id='d'><span id='a'>a</span><span id='b'>b</span></div><span id='bar'>bar</span>\n"
             + "    <script>\n"
@@ -55,7 +53,7 @@ public class BoxObjectTest extends WebDriverTestCase {
             + "          log(box.lastChild == spanB);\n"
             + "          log(box.previousSibling == spanFoo);\n"
             + "          log(box.nextSibling == spanBar);\n"
-            + "        } catch (e) {log('exception')}\n"
+            + "        } catch(e) { logEx(e) }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
@@ -69,10 +67,10 @@ public class BoxObjectTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void positionAndSizeAttributes() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body onload='test()'>\n"
             + "    <style>#d { position:absolute; left:50px; top:100px; width:500px; height:400px; border:3px; padding: 5px; margin: 23px; }</style>\n"
             + "    <div id='d'>daniel</div>\n"
@@ -85,7 +83,7 @@ public class BoxObjectTest extends WebDriverTestCase {
             + "          log(box.x + '-' + box.y);\n"
             + "          log(box.screenX + '-' + box.screenY);\n"
             + "          log(box.width + '-' + box.height);\n"
-            + "        } catch (e) {log('exception')}\n"
+            + "        } catch(e) { logEx(e) }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"

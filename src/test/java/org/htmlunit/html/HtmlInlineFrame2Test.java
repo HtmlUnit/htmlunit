@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-
 import java.io.File;
 import java.net.URL;
 import java.util.Map;
@@ -24,12 +21,9 @@ import java.util.Map;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -37,14 +31,13 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 /**
  * Unit tests for {@link HtmlInlineFrame}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HtmlInlineFrame2Test extends WebDriverTestCase {
 
     /**
@@ -53,7 +46,8 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLIFrameElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -67,7 +61,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
         final WebDriver webDriver = loadPageVerifyTitle2(html);
         if (webDriver instanceof HtmlUnitDriver) {
             final HtmlElement element = toHtmlElement(webDriver.findElement(By.id("myId")));
-            assertTrue(HtmlInlineFrame.class.isInstance(element));
+            assertTrue(element instanceof HtmlInlineFrame);
         }
     }
 
@@ -78,7 +72,8 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts({"1", "[object HTMLIFrameElement]", "null"})
     public void selfClosingIFrame() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -103,18 +98,21 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      */
     @Test
     public void targetResolution() throws Exception {
-        final String framesContent = "<html><head><title>Top Page</title></head>\n"
+        final String framesContent = DOCTYPE_HTML
+                + "<html><head><title>Top Page</title></head>\n"
                 + "<body><div id='content'>Body of top frame</div>\n"
                 + "  <iframe src='left.html' id='id-left' name='left'></iframe>\n"
                 + "  <iframe src='right.html' id='id-right' name='right'></iframe>\n"
                 + "</body>\n"
                 + "</html>";
 
-        final String rightFrame = "<html><head><title>Right Frame</title></head>\n"
+        final String rightFrame = DOCTYPE_HTML
+                + "<html><head><title>Right Frame</title></head>\n"
                 + "<body><div id='content'>Body of right frame</div></body>\n"
                 + "</html>";
 
-        final String leftFrame = "<html><head><title>Left Frame</title></head>\n"
+        final String leftFrame = DOCTYPE_HTML
+                + "<html><head><title>Left Frame</title></head>\n"
                 + "<body>\n"
                 + "  <div id='content'>Body of left frame</div>\n"
                 + "  <a id='link' name='link' href='new_inner.html' target='right'>Click link</a>\n"
@@ -122,11 +120,13 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        final String innerFrame = "<html><head><title>Inner Frame</title></head>\n"
+        final String innerFrame = DOCTYPE_HTML
+                + "<html><head><title>Inner Frame</title></head>\n"
                 + "<body><div id='content'>Body of inner frame</div></body>\n"
                 + "</html>";
 
-        final String newInnerFrame = "<html><head><title>New inner Frame</title></head>\n"
+        final String newInnerFrame = DOCTYPE_HTML
+                + "<html><head><title>New inner Frame</title></head>\n"
                 + "<body><div id='content'>Body of new inner frame</div></body>\n"
                 + "</html>";
 
@@ -184,15 +184,15 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts("2")
     public void scriptUnderIFrame() throws Exception {
-        final String firstContent
-            = "<html><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<iframe src='" + URL_SECOND + "'>\n"
             + "  <div><script>alert(1);</script></div>\n"
             + "  <script src='" + URL_THIRD + "'></script>\n"
             + "</iframe>\n"
             + "</body></html>";
-        final String secondContent
-            = "<html><body><script>alert(2);</script></body></html>";
+        final String secondContent = DOCTYPE_HTML
+            + "<html><body><script>alert(2);</script></body></html>";
         final String thirdContent = "alert('3');";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
@@ -211,17 +211,18 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "about:blank",
             CHROME = "about://unsupported",
             EDGE = "about://unsupported")
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = "about:blank",
+            EDGE = "about:blank")
     public void aboutSrc() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var frame = document.getElementById('tstFrame');\n"
             + "    try {"
             + "      log(frame.contentWindow.location.href);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -250,7 +251,8 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
             FF = {"1:false", "2:false", "3:false", "4:false"},
             FF_ESR = {"1:false", "2:false", "3:false", "4:false"})
     public void createIframeFromStrictFunction() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -280,28 +282,30 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§index.html?test")
     public void referrer() throws Exception {
-        final String framesContent = "<html>\n"
+        final String framesContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>Top Page</title></head>\n"
                 + "<body>\n"
                 + "  <iframe src='iframe.html'></iframe>\n"
                 + "</body>\n"
                 + "</html>";
 
-        final String iFrame = "<html>\n"
+        final String iFrame = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>Body</body>\n"
                 + "</html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
 
-        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
-        final URL iFrameUrl = new URL(URL_FIRST.toString() + "iframe.html");
+        final URL indexUrl = new URL(URL_FIRST + "index.html");
+        final URL iFrameUrl = new URL(URL_FIRST + "iframe.html");
 
         getMockWebConnection().setResponse(indexUrl, framesContent);
         getMockWebConnection().setResponse(iFrameUrl, iFrame);
 
-        loadPage2(framesContent, new URL(URL_FIRST.toString() + "index.html?test#ref"));
-        Thread.sleep(DEFAULT_WAIT_TIME / 10);
+        loadPage2(framesContent, new URL(URL_FIRST + "index.html?test#ref"));
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 10);
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
@@ -317,7 +321,8 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
         final File file = new File(fileURL.toURI());
         assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
 
-        final String html = "<html>"
+        final String html = DOCTYPE_HTML
+                + "<html>"
                 + "<head><title>Top Page</title></head>\n"
                 + "<body>\n"
                 + "  <iframe id='myFrame' src='" + fileURL + "'></iframe>\n"

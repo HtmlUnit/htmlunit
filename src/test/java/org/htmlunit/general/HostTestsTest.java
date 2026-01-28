@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,18 @@
 package org.htmlunit.general;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the general host tests have all JavaScript objects names defined in all the other tests.
@@ -40,7 +39,7 @@ import org.junit.Test;
  */
 public class HostTestsTest {
 
-    private Pattern pattern_ = Pattern.compile("\"\\[object (\\w+)\\]\"");
+    private final Pattern pattern_ = Pattern.compile("\"\\[object (\\w+)\\]\"");
 
     /**
      * @throws Exception if an error occurs
@@ -53,11 +52,7 @@ public class HostTestsTest {
 
         // Remove all Prototypes, as we plan to have test cases separate for them soon
         // TODO: add Prototype tests (e.g. alert(Element.prototype)
-        for (final Iterator<String> it = set.iterator(); it.hasNext();) {
-            if (it.next().endsWith("Prototype")) {
-                it.remove();
-            }
-        }
+        set.removeIf(s -> s.endsWith("Prototype"));
         if (set.contains("Arguments")) {
             set.remove("Arguments");
             set.add("arguments");
@@ -99,11 +94,7 @@ public class HostTestsTest {
         final Set<String> unusedNames = new HashSet<>(set);
         final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
         for (final String line : lines) {
-            for (final Iterator<String> it = unusedNames.iterator(); it.hasNext();) {
-                if (line.contains("(\"" + it.next() + "\")")) {
-                    it.remove();
-                }
-            }
+            unusedNames.removeIf(s -> line.contains("(\"" + s + "\")"));
         }
         if (!unusedNames.isEmpty()) {
             fail("You must specify the following line"

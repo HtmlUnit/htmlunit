@@ -7,6 +7,7 @@
 
     <description>HtmlUnit rules</description>
     <exclude-pattern>.*/src/test/resources/.*</exclude-pattern>
+    <exclude-pattern>.*/src/main/java/org/htmlunit/util/brotli/.*</exclude-pattern>
 
     <rule ref="category/java/codestyle.xml/UnnecessaryFullyQualifiedName">
         <properties>
@@ -23,8 +24,8 @@
     </rule>
 
     <rule ref="category/java/bestpractices.xml">
-        <exclude name="AccessorClassGeneration"/>
         <exclude name="AccessorMethodGeneration"/>
+        <exclude name="UseVarargs"/>
     </rule>
 
     <rule ref="category/java/codestyle.xml">

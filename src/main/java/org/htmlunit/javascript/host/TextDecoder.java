@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Locale;
 
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
@@ -79,29 +80,36 @@ public class TextDecoder extends HtmlUnitScriptable {
             return "";
         }
 
-        NativeArrayBuffer arrayBuffer = null;
-        if (buffer instanceof NativeArrayBuffer) {
-            arrayBuffer = (NativeArrayBuffer) buffer;
-        }
-        else if (buffer instanceof NativeArrayBufferView) {
-            arrayBuffer = ((NativeArrayBufferView) buffer).getBuffer();
+        if (buffer instanceof NativeArrayBuffer arrayBuffer) {
+            return new String(arrayBuffer.getBuffer(), getEncoding(whatwgEncoding_));
         }
 
-        if (arrayBuffer != null) {
-            if (XUserDefinedCharset.NAME.equalsIgnoreCase(whatwgEncoding_)) {
-                return new String(arrayBuffer.getBuffer(), XUserDefinedCharset.INSTANCE);
+        if (buffer instanceof NativeArrayBufferView arrayBufferView) {
+            final NativeArrayBuffer arrayBuffer = arrayBufferView.getBuffer();
+            if (arrayBuffer != null) {
+                final int byteLength = arrayBufferView.getByteLength();
+                final int byteOffset = arrayBufferView.getByteOffset();
+                final byte[] backedBytes = arrayBuffer.getBuffer();
+                final byte[] bytes = Arrays.copyOfRange(backedBytes, byteOffset, byteOffset + byteLength);
+                return new String(bytes, getEncoding(whatwgEncoding_));
             }
-
-            final String ianaEncoding = StandardEncodingTranslator
-                    .ENCODING_TO_IANA_ENCODING.getOrDefault(whatwgEncoding_, whatwgEncoding_);
-            // Convert our IANA encoding names to Java charset names
-            final String javaEncoding = StandardEncodingTranslator
-                    .IANA_TO_JAVA_ENCODINGS.getOrDefault(ianaEncoding, ianaEncoding);
-
-            return new String(arrayBuffer.getBuffer(), Charset.forName(javaEncoding));
         }
 
         throw JavaScriptEngine.typeError("Argument 1 of TextDecoder.decode could not be"
                                 + " converted to any of: ArrayBufferView, ArrayBuffer.");
+    }
+
+    private Charset getEncoding(final String encodingLabel) {
+        if (XUserDefinedCharset.NAME.equalsIgnoreCase(encodingLabel)) {
+            return XUserDefinedCharset.INSTANCE;
+        }
+
+        final String ianaEncoding = StandardEncodingTranslator
+                .ENCODING_TO_IANA_ENCODING.getOrDefault(encodingLabel, encodingLabel);
+        // Convert our IANA encoding names to Java charset names
+        final String javaEncoding = StandardEncodingTranslator
+                .IANA_TO_JAVA_ENCODINGS.getOrDefault(ianaEncoding, ianaEncoding);
+
+        return Charset.forName(javaEncoding);
     }
 }

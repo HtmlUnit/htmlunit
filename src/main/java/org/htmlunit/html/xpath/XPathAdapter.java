@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,14 +45,6 @@ public class XPathAdapter {
     }
 
     private final Expression mainExp_;
-    private FunctionTable funcTable_;
-
-    /**
-     * Initiates the function table.
-     */
-    private void initFunctionTable() {
-        funcTable_ = new FunctionTable();
-    }
 
     /**
      * Constructor.
@@ -64,17 +56,14 @@ public class XPathAdapter {
     public XPathAdapter(final String exprString, final PrefixResolver prefixResolver, final boolean caseSensitive)
                 throws TransformerException {
 
-        initFunctionTable();
-
         final ErrorListener errorHandler = new DefaultErrorHandler();
         final XPathParser parser = new XPathParser(errorHandler);
-        final Compiler compiler = new Compiler(errorHandler, funcTable_);
+        final Compiler compiler = new Compiler(errorHandler, new FunctionTable());
 
         final String expression = preProcessXPath(exprString, caseSensitive);
         parser.initXPath(compiler, expression, prefixResolver);
 
-        final Expression expr = compiler.compile(0);
-        mainExp_ = expr;
+        mainExp_ = compiler.compile(0);
     }
 
     /**

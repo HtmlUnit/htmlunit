@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,7 +68,7 @@ class DoTypeProcessor implements Serializable {
         SPECIAL_KEYS_MAP_.put(DOM_VK_SUBTRACT, '-');
 
         for (int i = DOM_VK_NUMPAD0; i <= DOM_VK_NUMPAD9; i++) {
-            SPECIAL_KEYS_MAP_.put(i, (char) ('0' + (i - DOM_VK_NUMPAD0)));
+            SPECIAL_KEYS_MAP_.put(i, (char) ('0' + i - DOM_VK_NUMPAD0));
         }
     }
 
@@ -158,8 +158,8 @@ class DoTypeProcessor implements Serializable {
     }
 
     private void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
-        if (domNode_ instanceof DomText) {
-            ((DomText) domNode_).setData(newValue);
+        if (domNode_ instanceof DomText text) {
+            text.setData(newValue);
         }
         else {
             ((HtmlElement) domNode_).typeDone(newValue, notifyAttributeChangeListeners);
@@ -167,8 +167,8 @@ class DoTypeProcessor implements Serializable {
     }
 
     private boolean acceptChar(final char ch) {
-        if (domNode_ instanceof DomText) {
-            return ((DomText) domNode_).acceptChar(ch);
+        if (domNode_ instanceof DomText text) {
+            return text.acceptChar(ch);
         }
         return ((HtmlElement) domNode_).acceptChar(ch);
     }

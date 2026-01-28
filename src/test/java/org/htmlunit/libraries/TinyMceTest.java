@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,10 @@ import java.time.Duration;
 import java.util.List;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,8 +36,15 @@ import org.openqa.selenium.WebElement;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class TinyMceTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeAll
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/tinymce/3.2.7", null);
+    }
 
     /**
      * @throws Exception if an error occurs
@@ -57,7 +62,10 @@ public class TinyMceTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"89", "0"},
             CHROME = {"89", "1"},
             EDGE = {"89", "1"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"70", "50"},
+            EDGE = {"70", "50"},
+            FF = {"70", "50"},
+            FF_ESR = {"70", "50"})
     public void basic() throws Exception {
         test("basic", Integer.parseInt(getExpectedAlerts()[0]), Integer.parseInt(getExpectedAlerts()[1]));
     }
@@ -86,15 +94,6 @@ public class TinyMceTest extends WebDriverTestCase {
 
         final WebElement failedSpan = result.findElement(By.xpath("./span[@class='bad']"));
         final int failed = Integer.parseInt(failedSpan.getText());
-        assertEquals(msg.toString(), expectedFailed, failed);
-    }
-
-    /**
-     * Performs pre-test initialization.
-     * @throws Exception if an error occurs
-     */
-    @Before
-    public void setUp() throws Exception {
-        startWebServer("src/test/resources/libraries/tinymce/3.2.7", null, null);
+        assertEquals(expectedFailed, failed);
     }
 }

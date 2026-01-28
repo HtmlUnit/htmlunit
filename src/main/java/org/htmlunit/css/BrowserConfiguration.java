@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ abstract class BrowserConfiguration {
 
     abstract boolean matches(BrowserVersion browserVersion);
 
-    public boolean isIteratable() {
+    public boolean isIterable() {
         return true;
     }
 
@@ -128,7 +128,7 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean isIteratable() {
+        public boolean isIterable() {
             return false;
         }
     }
@@ -201,7 +201,7 @@ abstract class BrowserConfiguration {
         }
 
         @Override
-        public boolean isIteratable() {
+        public boolean isIterable() {
             return false;
         }
     }

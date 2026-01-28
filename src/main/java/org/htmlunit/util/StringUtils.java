@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,11 @@ import org.htmlunit.html.impl.Color;
  */
 public final class StringUtils {
 
+    /**
+     * The empty String {@code ""}.
+     */
+    public static final String EMPTY_STRING = "";
+
     private static final Pattern HEX_COLOR = Pattern.compile("#([\\da-fA-F]{3}|[\\da-fA-F]{6})");
     private static final Pattern RGB_COLOR =
         Pattern.compile("rgb\\(\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,"
@@ -59,11 +64,262 @@ public final class StringUtils {
     }
 
     /**
-     * Escapes the characters '&lt;', '&gt;' and '&amp;' into their XML entity equivalents. Note that
-     * sometimes we have to use this method instead of
-     * {@link org.apache.commons.lang3.StringEscapeUtils#escapeXml(String)} or
-     * {@link org.apache.commons.lang3.StringEscapeUtils#escapeHtml4(String)} because those methods
-     * escape some unicode characters as well.
+     * Returns true if the param is not null and empty. This is different from
+     * {@link org.apache.commons.lang3.StringUtils#isEmpty(CharSequence)} because
+     * this returns false if the provided string is null.
+     *
+     * @param s the string to check
+     * @return true if the param is not null and empty
+     */
+    public static boolean isEmptyString(final CharSequence s) {
+        return s != null && s.length() == 0;
+    }
+
+    /**
+     * Returns true if the param is null or empty.
+     *
+     * @param s the string to check
+     * @return true if the param is null or empty
+     */
+    public static boolean isEmptyOrNull(final CharSequence s) {
+        return s == null || s.length() == 0;
+    }
+
+    /**
+     * Returns either the passed in CharSequence, or if the CharSequence is
+     * empty or {@code null}, the default value.
+     *
+     * @param <T> the kind of CharSequence
+     * @param s  the CharSequence to check
+     * @param defaultString the default to return if the input is empty or null
+     * @return the passed in CharSequence, or the defaultString
+     */
+    public static <T extends CharSequence> T defaultIfEmptyOrNull(final T s, final T defaultString) {
+        return isEmptyOrNull(s) ? defaultString : s;
+    }
+
+    /**
+     * Tests if a CharSequence is null, empty, or contains only whitespace.
+     *
+     * @param s the CharSequence to check
+     * @return true if a CharSequence is null, empty, or contains only whitespace
+     */
+    public static boolean isBlank(final CharSequence s) {
+        if (s == null) {
+            return true;
+        }
+
+        final int length = s.length();
+        if (length == 0) {
+            return true;
+        }
+
+        for (int i = 0; i < length; i++) {
+            if (!Character.isWhitespace(s.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Tests if a CharSequence is NOT null, empty, or contains only whitespace.
+     *
+     * @param s the CharSequence to check
+     * @return false if a CharSequence is null, empty, or contains only whitespace
+     */
+    public static boolean isNotBlank(final CharSequence s) {
+        if (s == null) {
+            return false;
+        }
+
+        final int length = s.length();
+        if (length == 0) {
+            return false;
+        }
+
+        for (int i = 0; i < length; i++) {
+            if (!Character.isWhitespace(s.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param expected the char that we expect
+     * @param s the string to check
+     * @return true if the provided string has only one char and this matches the expectation
+     */
+    public static boolean equalsChar(final char expected, final CharSequence s) {
+        return s != null && s.length() == 1 && expected == s.charAt(0);
+    }
+
+    /**
+     * Tests if a CharSequence starts with a specified prefix.
+     *
+     * @param s the string to check
+     * @param expectedStart the string that we expect at the beginning (has to be not null and not empty)
+     * @return true if the provided string has only one char and this matches the expectation
+     */
+    public static boolean startsWithIgnoreCase(final String s, final String expectedStart) {
+        if (expectedStart == null || expectedStart.length() == 0) {
+            throw new IllegalArgumentException("Expected start string can't be null or empty");
+        }
+
+        if (s == null) {
+            return false;
+        }
+        if (s == expectedStart) {
+            return true;
+        }
+
+        return s.regionMatches(true, 0, expectedStart, 0, expectedStart.length());
+    }
+
+    /**
+     * Tests if a CharSequence ends with a specified prefix.
+     *
+     * @param s the string to check
+     * @param expectedEnd the string that we expect at the end (has to be not null and not empty)
+     * @return true if the provided string has only one char and this matches the expectation
+     */
+    public static boolean endsWithIgnoreCase(final String s, final String expectedEnd) {
+        if (expectedEnd == null) {
+            throw new IllegalArgumentException("Expected end string can't be null or empty");
+        }
+
+        final int expectedEndLength = expectedEnd.length();
+        if (expectedEndLength == 0) {
+            throw new IllegalArgumentException("Expected end string can't be null or empty");
+        }
+
+        if (s == null) {
+            return false;
+        }
+        if (s == expectedEnd) {
+            return true;
+        }
+
+        return s.regionMatches(true, s.length() - expectedEndLength, expectedEnd, 0, expectedEndLength);
+    }
+
+    /**
+     * Tests if a CharSequence ends with a specified prefix.
+     *
+     * @param s the string to check
+     * @param expected the string that we expect to be a substring (has to be not null and not empty)
+     * @return true if the provided string has only one char and this matches the expectation
+     */
+    public static boolean containsIgnoreCase(final String s, final String expected) {
+        if (expected == null) {
+            throw new IllegalArgumentException("Expected string can't be null or empty");
+        }
+
+        final int expectedLength = expected.length();
+        if (expectedLength == 0) {
+            throw new IllegalArgumentException("Expected string can't be null or empty");
+        }
+
+        if (s == null) {
+            return false;
+        }
+        if (s == expected) {
+            return true;
+        }
+
+        final int max = s.length() - expectedLength;
+        for (int i = 0; i <= max; i++) {
+            if (s.regionMatches(true, i, expected, 0, expectedLength)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Replaces multiple characters in a String in one go.
+     * This method can also be used to delete characters.
+     *
+     * @param str          String to replace characters in, may be null.
+     * @param searchChars  a set of characters to search for, may be null.
+     * @param replaceChars a set of characters to replace, may be null.
+     * @return modified String, or the input string if no replace was done.
+     */
+    @SuppressWarnings("null")
+    public static String replaceChars(final String str, final String searchChars, final String replaceChars) {
+        if (isEmptyOrNull(str) || isEmptyOrNull(searchChars)) {
+            return str;
+        }
+
+        final int replaceCharsLength = replaceChars == null ? 0 : replaceChars.length();
+        final int strLength = str.length();
+
+        StringBuilder buf = null;
+        int i = 0;
+        for ( ; i < strLength; i++) {
+            final char ch = str.charAt(i);
+            final int index = searchChars.indexOf(ch);
+            if (index != -1) {
+                buf = new StringBuilder(strLength);
+                buf.append(str, 0, i);
+                if (index < replaceCharsLength) {
+                    buf.append(replaceChars.charAt(index));
+                }
+                break;
+            }
+        }
+
+        if (buf == null) {
+            return str;
+        }
+
+        i++;
+        for ( ; i < strLength; i++) {
+            final char ch = str.charAt(i);
+            final int index = searchChars.indexOf(ch);
+            if (index != -1) {
+                if (index < replaceCharsLength) {
+                    buf.append(replaceChars.charAt(index));
+                }
+            }
+            else {
+                buf.append(ch);
+            }
+        }
+
+        return buf.toString();
+    }
+
+    /**
+     * Gets the substring after the first occurrence of a separator. The separator is not returned.
+     * <p>
+     * A {@code null} string input will return {@code null}.
+     * An empty ("") string input will return the empty string.
+     * A {@code null} separator will return the empty string if the input string is not {@code null}.
+     * <p>
+     * If nothing is found, the empty string is returned.
+     *
+     * @param str the String to get a substring from, may be null.
+     * @param find the String to find, may be null.
+     * @return the substring after the first occurrence of the specified string, {@code null} if null String input.
+     */
+    public static String substringAfter(final String str, final String find) {
+        if (isEmptyOrNull(str)) {
+            return str;
+        }
+        if (find == null) {
+            return EMPTY_STRING;
+        }
+        final int pos = str.indexOf(find);
+        if (pos == -1) {
+            return EMPTY_STRING;
+        }
+        return str.substring(pos + find.length());
+    }
+
+    /**
+     * Escapes the characters '&lt;', '&gt;' and '&amp;' into their XML entity equivalents.
      *
      * @param s the string to escape
      * @return the escaped form of the specified string
@@ -74,6 +330,83 @@ public final class StringUtils {
     }
 
     /**
+     * Escape the string to be used as xml 1.0 content be replacing the
+     * characters '&quot;', '&amp;', '&#39;', '&lt;', and '&gt;' into their XML entity equivalents.
+     * @param text the attribute value
+     * @return the escaped value
+     */
+    public static String escapeXml(final String text) {
+        if (text == null) {
+            return null;
+        }
+
+        StringBuilder escaped = null;
+
+        final int offset = 0;
+        final int max = text.length();
+
+        int readOffset = offset;
+
+        for (int i = offset; i < max; i++) {
+            final int codepoint = Character.codePointAt(text, i);
+            final boolean codepointValid = supportedByXML10(codepoint);
+
+            if (!codepointValid
+                    || codepoint == '<'
+                    || codepoint == '>'
+                    || codepoint == '&'
+                    || codepoint == '\''
+                    || codepoint == '"') {
+
+                // replacement required
+                if (escaped == null) {
+                    escaped = new StringBuilder(max);
+                }
+
+                if (i > readOffset) {
+                    escaped.append(text, readOffset, i);
+                }
+
+                if (Character.charCount(codepoint) > 1) {
+                    i++;
+                }
+                readOffset = i + 1;
+
+                // skip
+                if (!codepointValid) {
+                    continue;
+                }
+
+                if (codepoint == '<') {
+                    escaped.append("&lt;");
+                }
+                else if (codepoint == '>') {
+                    escaped.append("&gt;");
+                }
+                else if (codepoint == '&') {
+                    escaped.append("&amp;");
+                }
+                else if (codepoint == '\'') {
+                    escaped.append("&apos;");
+                }
+                else if (codepoint == '\"') {
+                    escaped.append("&quot;");
+                }
+            }
+        }
+
+        if (escaped == null) {
+            return text;
+        }
+
+        if (max > readOffset) {
+            escaped.append(text, readOffset, max);
+        }
+
+        return escaped.toString();
+    }
+
+    /**
      * Escape the string to be used as attribute value.
      * Only {@code <}, {@code &} and {@code "} have to be escaped (see
      * <a href="http://www.w3.org/TR/REC-xml/#d0e888">http://www.w3.org/TR/REC-xml/#d0e888</a>).
@@ -81,33 +414,96 @@ public final class StringUtils {
      * @return the escaped value
      */
     public static String escapeXmlAttributeValue(final String attValue) {
-        final int len = attValue.length();
-        StringBuilder sb = null;
-        for (int i = len - 1; i >= 0; --i) {
-            final char c = attValue.charAt(i);
-            String replacement = null;
-            if (c == '<') {
-                replacement = "&lt;";
-            }
-            else if (c == '&') {
-                replacement = "&amp;";
-            }
-            else if (c == '\"') {
-                replacement = "&quot;";
-            }
+        if (attValue == null) {
+            return null;
+        }
 
-            if (replacement != null) {
-                if (sb == null) {
-                    sb = new StringBuilder(attValue);
+        StringBuilder escaped = null;
+
+        final int offset = 0;
+        final int max = attValue.length();
+
+        int readOffset = offset;
+
+        for (int i = offset; i < max; i++) {
+            final int codepoint = Character.codePointAt(attValue, i);
+            final boolean codepointValid = supportedByXML10(codepoint);
+
+            if (!codepointValid
+                    || codepoint == '<'
+                    || codepoint == '&'
+                    || codepoint == '"') {
+
+                // replacement required
+                if (escaped == null) {
+                    escaped = new StringBuilder(max);
                 }
-                sb.replace(i, i + 1, replacement);
+
+                if (i > readOffset) {
+                    escaped.append(attValue, readOffset, i);
+                }
+
+                if (Character.charCount(codepoint) > 1) {
+                    i++;
+                }
+                readOffset = i + 1;
+
+                // skip
+                if (!codepointValid) {
+                    continue;
+                }
+
+                if (codepoint == '<') {
+                    escaped.append("&lt;");
+                }
+                else if (codepoint == '&') {
+                    escaped.append("&amp;");
+                }
+                else if (codepoint == '\"') {
+                    escaped.append("&quot;");
+                }
             }
         }
 
-        if (sb != null) {
-            return sb.toString();
+        if (escaped == null) {
+            return attValue;
         }
-        return attValue;
+
+        if (max > readOffset) {
+            escaped.append(attValue, readOffset, max);
+        }
+
+        return escaped.toString();
+    }
+
+    /*
+     * XML 1.0 does not allow control characters or unpaired Unicode surrogate codepoints.
+     * We will remove characters that do not fit in the following ranges:
+     * #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]
+     */
+    private static boolean supportedByXML10(final int codepoint) {
+        if (codepoint < 0x20) {
+            return codepoint == 0x9 || codepoint == 0xA || codepoint == 0xD;
+        }
+        if (codepoint <= 0xD7FF) {
+            return true;
+        }
+
+        if (codepoint < 0xE000) {
+            return false;
+        }
+        if (codepoint <= 0xFFFD) {
+            return true;
+        }
+
+        if (codepoint < 0x10000) {
+            return false;
+        }
+        if (codepoint <= 0x10FFFF) {
+            return true;
+        }
+
+        return true;
     }
 
     /**
@@ -448,7 +844,7 @@ public final class StringUtils {
      * Splits the provided text into an array, using comma or blank as the
      * separator.
      *
-     * @param str  the String to parse, may be null
+     * @param str the String to parse, may be null
      * @return an array of parsed Strings, an empty array if null String input
      */
     public static String[] splitAtCommaOrBlank(final String str) {
@@ -457,5 +853,123 @@ public final class StringUtils {
             return new String[0];
         }
         return parts;
+    }
+
+    /**
+     * Gets the substring before the first occurrence of a separator. The separator is not returned.
+     * A {@code null} string input will return {@code null}.
+     * An empty ("") string input will return the empty string.
+     * A {@code null} or empty separator is not allowed (will throw).
+     *
+     * @param str the String to get a substring from, may be null.
+     * @param find the String to find, not null and not empty
+     * @return the substring before the first occurrence of the specified string, {@code null} if null String input.
+     */
+    public static String substringBefore(final String str, final String find) {
+        if (isEmptyOrNull(find)) {
+            throw new IllegalArgumentException("'find' string parameter has to be not empty and not null");
+        }
+
+        if (isEmptyString(str)) {
+            return str;
+        }
+
+        final int pos = str.indexOf(find);
+        if (pos == -1) {
+            return str;
+        }
+        return str.substring(0, pos);
+    }
+
+    /**
+     * Tries to converts a {@link String} into an {@code int}, returning a default value if the conversion fails.
+     * If the string is {@code null}, the default value is returned.
+     *
+     * @param str the string to convert, may be null.
+     * @param defaultValue the default value.
+     * @return the int represented by the string, or the default if conversion fails or the provides str is {@code null}
+     */
+    public static int toInt(final String str, final int defaultValue) {
+        try {
+            return Integer.parseInt(str);
+        }
+        catch (final RuntimeException e) {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Tries to converts a {@link String} into an {@code float}, returning a default value if the conversion fails.
+     * If the string is {@code null}, the default value is returned.
+     *
+     * @param str the string to convert, may be null.
+     * @param defaultValue the default value.
+     * @return the float represented by the string, or the default if conversion fails or the provides str is {@code null}
+     */
+    public static float toFloat(final String str, final float defaultValue) {
+        try {
+            return Float.parseFloat(str);
+        }
+        catch (final RuntimeException e) {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Strips any whitespace from the end of a String.
+     * <p>
+     * A {@code null} input String returns {@code null}. An empty string ("") input returns the empty string.
+     * </p>
+     *
+     * @param str the String to remove characters from, may be null.
+     * @return the stripped String, {@code null} if null String input.
+     */
+    public static String trimRight(final String str) {
+        if (isEmptyOrNull(str)) {
+            return str;
+        }
+
+        int end = str.length();
+        while (end != 0 && Character.isWhitespace(str.charAt(end - 1))) {
+            end--;
+        }
+
+        if (end == str.length()) {
+            return str;
+        }
+
+        return str.substring(0, end);
+    }
+
+    /**
+     * @param cs the String to check, may be null.
+     * @param valid an array of valid chars, may be null.
+     * @return true if it only contains valid chars and is non-null.
+     */
+    public static boolean containsOnly(final CharSequence cs, final char... valid) {
+        if (valid == null || valid.length == 0) {
+            throw new IllegalArgumentException("Expected valid char[] can't be null or empty");
+        }
+        if (isEmptyOrNull(cs)) {
+            return false;
+        }
+
+        final int csLength = cs.length();
+        final int validLength = valid.length;
+        for (int i = 0; i < csLength; i++) {
+            final char testChar = cs.charAt(i);
+            int j = 0;
+            for ( ; j < validLength; j++) {
+                final char validChar = valid[j];
+                if (validChar == testChar) {
+                    break;
+                }
+            }
+            if (j == validLength) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

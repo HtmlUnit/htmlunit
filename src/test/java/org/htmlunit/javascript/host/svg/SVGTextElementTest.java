@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,15 @@
 package org.htmlunit.javascript.host.svg;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link SVGTextElement}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class SVGTextElementTest extends WebDriverTestCase {
 
     /**
@@ -36,7 +32,7 @@ public class SVGTextElementTest extends WebDriverTestCase {
     @Test
     @Alerts("function SVGTextElement() { [native code] }")
     public void simpleScriptable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -56,7 +52,7 @@ public class SVGTextElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object SVGTextElement]", "true"})
     public void getComputedTextLengthAvailable() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -82,9 +78,12 @@ public class SVGTextElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object SVGTextElement]", "117.3"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"[object SVGTextElement]", "180.0"},
+            EDGE = {"[object SVGTextElement]", "180.0"},
+            FF = {"[object SVGTextElement]", "180.0"},
+            FF_ESR = {"[object SVGTextElement]", "180.0"})
     public void getComputedTextLength() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

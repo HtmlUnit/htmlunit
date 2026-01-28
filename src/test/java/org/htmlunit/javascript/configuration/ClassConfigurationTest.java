@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,18 @@
  */
 package org.htmlunit.javascript.configuration;
 
-import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link ClassConfiguration}.
  *
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-public class ClassConfigurationTest extends SimpleWebTestCase {
+public class ClassConfigurationTest {
 
     /**
      * @throws Exception on error
@@ -32,7 +33,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     @Test
     public void forJSFlagTrue() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class, null, true, null, "");
-        assertTrue("JSObject Flag should have been set", config1.isJsObject());
+        Assertions.assertTrue(config1.isJsObject(), "JSObject Flag should have been set");
     }
 
     /**
@@ -41,13 +42,13 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     @Test
     public void forJSFlagFalse() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class, null, false, null, "");
-        assertFalse("JSObject Flag should not have been set", config1.isJsObject());
+        Assertions.assertFalse(config1.isJsObject(), "JSObject Flag should not have been set");
     }
 
     /**
      * Test class.
      */
-    protected class ConfigTestClass extends HtmlUnitScriptable {
+    protected static class ConfigTestClass extends HtmlUnitScriptable {
         private boolean test_ = false;
 
         /**

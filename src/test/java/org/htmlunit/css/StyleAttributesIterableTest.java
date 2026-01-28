@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,9 @@ import java.util.List;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.css.StyleAttributes.Definition;
-import org.htmlunit.junit.BrowserParameterizedRunner;
-import org.htmlunit.junit.BrowserParameterizedRunner.Default;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  * Tests for iterability of CSS style attributes defined in {@link StyleAttributes}.
@@ -34,7 +31,6 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserParameterizedRunner.class)
 public class StyleAttributesIterableTest extends WebDriverTestCase {
 
     private static int ServerRestartCount_ = 0;
@@ -44,11 +40,10 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @return the parameterized data
      * @throws Exception if an error occurs
      */
-    @Parameters
-    public static Collection<Object[]> data() throws Exception {
-        final List<Object[]> list = new ArrayList<>();
+    public static Collection<Arguments> data() throws Exception {
+        final List<Arguments> list = new ArrayList<>();
         for (final Definition definition : StyleAttributes.Definition.values()) {
-            list.add(new Object[] {definition});
+            list.add(Arguments.of(definition));
         }
         return list;
     }
@@ -68,16 +63,17 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     /**
      * The {@link Definition} to test.
      */
-    @Parameter
-    public Definition definition_;
+    private Definition definition_;
 
     /**
      * The default test.
+     * @param definition the definition param
      * @throws Exception if an error occurs
      */
-    @Test
-    @Default
-    public void test() throws Exception {
+    @ParameterizedTest
+    @MethodSource("data")
+    public void test(final Definition definition) throws Exception {
+        definition_ = definition;
         test(definition_.getPropertyName());
     }
 
@@ -88,8 +84,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
             ServerRestartCount_ = 0;
         }
 
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var e = document.getElementById('myDiv');\n"

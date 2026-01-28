@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,9 @@
 package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link AudioProcessingEvent}.
@@ -29,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author Madis Pärn
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class AudioProcessingEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
@@ -44,15 +40,15 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void create_ctor() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new AudioProcessingEvent('audioprocessing');\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -65,13 +61,13 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object AudioProcessingEvent]", "audioprocessing", "false", "false", "false"},
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     // audioCtx.createBuffer is missing
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception")
+    @HtmlUnitNYI(CHROME = "TypeError",
+            EDGE = "TypeError")
     public void create_ctorAllDetails() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -85,7 +81,7 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "        'playbackTime': 4,\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + DUMP_EVENT_FUNCTION
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
@@ -98,16 +94,16 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void create_ctorMissingDetails() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new AudioProcessingEvent('audioprocessing');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + DUMP_EVENT_FUNCTION
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
@@ -120,16 +116,16 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("NotSupportedError/DOMException")
     public void create_createEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('AudioProcessingEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -144,8 +140,8 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void inWindow() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,17 @@
 package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.htmlunit.util.MimeType;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link EventTarget}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class EventTargetTest extends WebDriverTestCase {
 
     /**
@@ -34,7 +34,8 @@ public class EventTargetTest extends WebDriverTestCase {
     @Test
     @Alerts("not defined")
     public void cloneEvent() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('myId');\n"
@@ -55,4 +56,57 @@ public class EventTargetTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"before dispatchEvent()", "dispatchEvent() listener",
+             "insertBefore start", "insertBefore done", "after dispatchEvent()", "external script"})
+    @HtmlUnitNYI(
+            CHROME = {"before dispatchEvent()", "dispatchEvent() listener",
+                      "insertBefore start", "insertBefore done", "external script", "after dispatchEvent()"},
+            EDGE = {"before dispatchEvent()", "dispatchEvent() listener",
+                    "insertBefore start", "insertBefore done", "external script", "after dispatchEvent()"},
+            FF = {"before dispatchEvent()", "dispatchEvent() listener",
+                  "insertBefore start", "insertBefore done", "external script", "after dispatchEvent()"},
+            FF_ESR = {"before dispatchEvent()", "dispatchEvent() listener",
+                      "insertBefore start", "insertBefore done", "external script", "after dispatchEvent()"})
+    public void dispatchEventPostponed() throws Exception {
+        getMockWebConnection().setDefaultResponse("log('external script');", MimeType.TEXT_JAVASCRIPT);
+
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var listener = function(evt) {\n"
+            + "    log('dispatchEvent() listener');\n"
+
+            + "    var newnode = document.createElement('script');\n"
+            + "    try {\n"
+            + "      newnode.setAttribute('src', 'script.js');\n"
+            + "      var outernode = document.getElementById('myId');\n"
+            + "      log('insertBefore start');\n"
+            + "      outernode.insertBefore(newnode, null);\n"
+            + "      log('insertBefore done');\n"
+            + "    } catch(e) { logEx(e); }\n"
+            + "  }\n"
+
+            + "  document.getElementById('myId').addEventListener('TestEvent', listener);\n"
+
+            + "  var myEvent = new Event('TestEvent');\n"
+
+            + "  log('before dispatchEvent()');\n"
+            + "  document.getElementById('myId').dispatchEvent(myEvent);\n"
+            + "  log('after dispatchEvent()');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>"
+            + "<body onload='test()'>\n"
+            + "  <div id='myId'></div>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }

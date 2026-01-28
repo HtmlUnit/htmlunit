@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,9 @@
 package org.htmlunit.libraries;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -28,8 +26,15 @@ import org.openqa.selenium.WebDriver;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class PolymerWebComponentsTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeAll
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/polymer/0_6_1", null);
+    }
 
     /**
      * See https://github.com/HtmlUnit/htmlunit/issues/23.
@@ -45,14 +50,5 @@ public class PolymerWebComponentsTest extends WebDriverTestCase {
         driver.get(url);
 
         verify(() -> driver.findElement(By.tagName("body")).getText(), getExpectedAlerts()[0]);
-    }
-
-    /**
-     * Performs pre-test initialization.
-     * @throws Exception if an error occurs
-     */
-    @Before
-    public void setUp() throws Exception {
-        startWebServer("src/test/resources/libraries/polymer/0_6_1", null, null);
     }
 }

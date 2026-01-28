@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,9 @@ import org.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "col".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
@@ -51,7 +51,7 @@ public class HtmlTableColumn extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code span}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getSpanAttribute() {
         return getAttributeDirect("span");
@@ -63,7 +63,7 @@ public class HtmlTableColumn extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code width}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
         return getAttributeDirect("width");
@@ -75,7 +75,7 @@ public class HtmlTableColumn extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
         return getAttributeDirect("align");
@@ -87,7 +87,7 @@ public class HtmlTableColumn extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code char}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
         return getAttributeDirect("char");
@@ -99,7 +99,7 @@ public class HtmlTableColumn extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code charoff}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
         return getAttributeDirect("charoff");
@@ -111,7 +111,7 @@ public class HtmlTableColumn extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code valign}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
         return getAttributeDirect("valign");

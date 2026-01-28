@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package org.htmlunit.html;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,26 +28,22 @@ import org.htmlunit.HttpMethod;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.Page;
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Tests for {@link HtmlSelect}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Mike Williams
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlSelectTest extends SimpleWebTestCase {
 
-    /** JUnit rule must be public fields :-(. */
-    @Rule
-    public TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();
+    @TempDir
+    static Path TEMP_DIR_;
 
     /**
      * Test the good path of submitting a select.
@@ -54,7 +51,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void select() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1'>Option1</option>\n"
             + "<option value='option2' selected='selected'>Option2</option>\n"
@@ -71,7 +69,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         final HtmlSubmitInput button = form.getInputByName("button");
 
         // Test that the select is being correctly identified as a submittable element
-        assertEquals(Arrays.asList(new Object[] {select, button}), form.getSubmittableElements(button));
+        assertEquals(Arrays.asList(select, button), form.getSubmittableElements(button));
 
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = button.click();
@@ -87,7 +85,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void select_MultipleSelectNoneSelected() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
             + "<option value='option1'>Option1</option>\n"
             + "<option value='option2'>Option2</option>\n"
@@ -119,7 +118,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void select_ChangeSelectedOption_SingleSelect() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
             + "<option value='option2'>Option2</option>\n"
@@ -152,7 +152,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void select_ChangeSelectedOption_MultipleSelect() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple='multiple'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
             + "<option value='option2'>Option2</option>\n"
@@ -187,7 +188,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void select_MultipleSelectMultipleSelected() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
             + "<option value='option2'>Option2</option>\n"
@@ -215,7 +217,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void select_SingleSelectMultipleSelected() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
             + "<option value='option2'>Option2</option>\n"
@@ -242,7 +245,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void select_SingleSelectNoneSelected() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1'>Option1</option>\n"
             + "<option value='option2'>Option2</option>\n"
@@ -268,7 +272,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void select_SingleSelectNoneSelectedButSizeGreaterThanOne() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
             + "<select name='select1' size='2' id='mySelect'>\n"
             + "<option value='option1'>Option1</option>\n"
@@ -290,7 +295,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void setSelected_IllegalValue() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
             + "<option value='option2'>Option2</option>\n"
@@ -313,7 +319,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void getOptions() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
             + "<option value='option2'>Option2</option>\n"
@@ -342,7 +349,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void select_OptionMultiple_NoValueOnAttribute() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' id='select1' multiple>\n"
             + "<option value='option1'>Option1</option>\n"
             + "<option value='option2' >Option2</option>\n"
@@ -361,7 +369,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void getOptionByValue() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body><form id='form1'>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body><form id='form1'>\n"
             + "<select name='select1'>\n"
             + "  <option value='option1'>s1o1</option>\n"
             + "  <option value='option2'>s1o2</option>\n"
@@ -388,7 +397,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void select_SetSelected_OnChangeHandler() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' onChange='alert(\"changing\")'>\n"
             + "<option value='option1' selected='selected'>Option1</option>\n"
             + "<option value='option2'>Option2</option>\n"
@@ -415,7 +425,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void setSelectionOnOptionWithNoName() throws Exception {
-        final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select' multiple size='5'>\n"
             + "<option value='1'>111</option>\n"
             + "<option id='option2'>222</option>\n"
@@ -440,10 +451,13 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         }
     }
 
-    /** @throws Exception if the test fails */
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void removeOptionsFromSelect() throws Exception {
-        final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select' id='theSelect'>"
             + "<option value='a'>111</option>"
             + "<option value='b'>222</option>"
@@ -489,10 +503,13 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         assertEquals(0, theSelect.getOptions().size());
     }
 
-    /** @throws Exception if the test fails */
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void editOptions() throws Exception {
-        final String htmlContent = "<html><body><form name='form' method='GET' action='action.html'>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select' id='theSelect'>\n"
             + "<option value='a'>111</option>\n"
             + "<option value='b'>222</option>\n"
@@ -534,7 +551,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedTextWhenNothingSelected() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
             + "<select name='select1' size='1' id='mySelect'>\n"
             + "</select>\n"
@@ -554,7 +572,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedTextWithMultipleSelect() throws Exception {
-        final String html = "<html><body><form>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><form>\n"
             + "<select name='a' multiple>\n"
             + "<option value='1'selected>foo</option>\n"
             + "<option value='2'>bar</option>\n"
@@ -573,7 +592,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void setSelectedAttributeReturnedPage() throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  document.getElementById('iframe').src = 'about:blank';\n"
@@ -602,8 +622,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void onChangeResultPage() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<select name='select1' id='select1' onchange='location=\"about:blank\"'>\n"
             + "  <option id='option1'>Option1</option>\n"
@@ -623,8 +643,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void onChange_resultPage_newCurrentWindow() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<select name='select1' id='select1' onchange='window.open(\"about:blank\", \"_blank\")'>\n"
             + "  <option id='option1'>Option1</option>\n"
@@ -645,7 +665,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void asXml_size() throws Exception {
-        final String content = "<html><head><title>foo</title></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head>\n"
             + "<body>\n"
             + "<select/>\n"
             + "</body></html>";
@@ -659,7 +680,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void select_focus() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<select name='select1' id='select1' multiple onfocus='alert(\"focus\")'>\n"
             + "<option value='option1'>Option1</option>\n"
@@ -687,7 +709,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void getOptionByText() throws Exception {
-        final String html = "<html><head><title>foo</title></head><body><form id='form1'>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body><form id='form1'>\n"
             + "<select name='select1'>\n"
             + "  <option value='option1'>s1o1</option>\n"
             + "  <option value='option2'>s1o2</option>\n"
@@ -714,7 +737,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
      */
     @Test
     public void savePageSavesSelectedOption() throws Exception {
-        final String content = "<html><body>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<form action=''>\n"
             + "  <select id='main'>\n"
             + "    <option value='1'>option 1</option>\n"
@@ -734,7 +758,11 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         assertEquals("option 2", select.getSelectedOptions().get(0).getText());
 
         // save the file and reload it
-        final File file = new File(tmpFolderProvider_.newFolder("tmp"), "test.html");
+        final File tmpFolder = new File(TEMP_DIR_.toFile(), "hu");
+        tmpFolder.mkdir();
+        final File file = new File(tmpFolder, "test.html");
+        FileUtils.deleteQuietly(file);
+
         page.save(file);
         final String html2 = FileUtils.readFileToString(file, UTF_8);
         final HtmlPage page2 = loadPage(html2);

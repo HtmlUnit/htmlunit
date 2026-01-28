@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for WeakSet.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class WeakSetTest extends WebDriverTestCase {
 
     /**
@@ -35,8 +32,8 @@ public class WeakSetTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void constructorArray() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -59,8 +56,8 @@ public class WeakSetTest extends WebDriverTestCase {
     @Test
     @Alerts({ "false", "true"})
     public void constructorSetParam() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -84,8 +81,8 @@ public class WeakSetTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "false", "false"})
     public void constructorMapParam() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -112,8 +109,8 @@ public class WeakSetTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false"})
     public void constructorIteratorParam() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function logElement(value) {\n"
@@ -154,7 +151,8 @@ public class WeakSetTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "true"})
     public void has() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -179,7 +177,8 @@ public class WeakSetTest extends WebDriverTestCase {
     @Test
     @Alerts({"Type error", "Type error", "true"})
     public void add() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

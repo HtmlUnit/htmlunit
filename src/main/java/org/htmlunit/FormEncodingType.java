@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 package org.htmlunit;
 
 import java.io.Serializable;
-import java.util.Locale;
 
 import org.htmlunit.util.MimeType;
 
@@ -31,7 +30,7 @@ public final class FormEncodingType implements Serializable {
     /** URL-encoded form encoding. */
     public static final FormEncodingType URL_ENCODED = new FormEncodingType("application/x-www-form-urlencoded");
 
-    /** Multipart form encoding (used to be a constant in HttpClient but it was deprecated with no alternative). */
+    /** Multipart form encoding (used to be a constant in HttpClient, but it was deprecated with no alternative). */
     public static final FormEncodingType MULTIPART = new FormEncodingType("multipart/form-data");
 
     /** text/plain. */
@@ -59,13 +58,11 @@ public final class FormEncodingType implements Serializable {
      * @return the constant corresponding to the specified name, {@link #URL_ENCODED} if none match.
      */
     public static FormEncodingType getInstance(final String name) {
-        final String lowerCaseName = name.toLowerCase(Locale.ROOT);
-
-        if (MULTIPART.getName().equals(lowerCaseName)) {
+        if (MULTIPART.getName().equalsIgnoreCase(name)) {
             return MULTIPART;
         }
 
-        if (TEXT_PLAIN.getName().equals(lowerCaseName)) {
+        if (TEXT_PLAIN.getName().equalsIgnoreCase(name)) {
             return TEXT_PLAIN;
         }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,9 @@ import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLCollection}.
@@ -37,7 +35,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HTMLCollection2Test extends SimpleWebTestCase {
 
     /**
@@ -46,7 +43,8 @@ public class HTMLCollection2Test extends SimpleWebTestCase {
     @Test
     @Alerts("1")
     public void childNodes() throws Exception {
-        final String firstContent = "<html><head><title>foo</title><script>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    alert(doc.documentElement.childNodes.length);\n"

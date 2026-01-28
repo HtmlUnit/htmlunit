@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,11 @@
  */
 package org.htmlunit.javascript.host.xml;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.FormEncodingType;
 import org.htmlunit.WebRequest;
 import org.htmlunit.corejs.javascript.Context;
@@ -34,11 +32,11 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxSymbol;
+import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.file.File;
 import org.htmlunit.javascript.host.html.HTMLFormElement;
-import org.htmlunit.util.KeyDataPair;
-import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for {@code FormData}.
@@ -133,16 +131,12 @@ public class FormData extends HtmlUnitScriptable {
             }
 
             final NameValuePair nextNameValuePair = nameValuePairList_.get(index_++);
-            switch (type_) {
-                case KEYS:
-                    return nextNameValuePair.getName();
-                case VALUES:
-                    return nextNameValuePair.getValue();
-                case BOTH:
-                    return cx.newArray(scope, new Object[] {nextNameValuePair.getName(), nextNameValuePair.getValue()});
-                default:
-                    throw new AssertionError();
-            }
+            return switch (type_) {
+                case KEYS -> nextNameValuePair.getName();
+                case VALUES -> nextNameValuePair.getValue();
+                case BOTH ->
+                    cx.newArray(scope, new Object[]{nextNameValuePair.getName(), nextNameValuePair.getValue()});
+            };
         }
     }
 
@@ -152,8 +146,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor(final Object formObj) {
-        if (formObj instanceof HTMLFormElement) {
-            final HTMLFormElement form = (HTMLFormElement) formObj;
+        if (formObj instanceof HTMLFormElement form) {
             requestParameters_.addAll(form.getHtmlForm().getParameterListForSubmit(null));
         }
     }
@@ -167,22 +160,18 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void append(final String name, final Object value, final Object filename) {
-        if (value instanceof File) {
-            final File file = (File) value;
-            String fileName = null;
-            String contentType;
-            if (filename instanceof String) {
-                fileName = (String) filename;
+        if (value instanceof Blob blob) {
+            String fileName = "blob";
+            if (value instanceof File) {
+                fileName = null;
             }
-            contentType = file.getType();
-            if (StringUtils.isEmpty(contentType)) {
-                contentType = MimeType.APPLICATION_OCTET_STREAM;
+            if (filename instanceof String string) {
+                fileName = string;
             }
-            requestParameters_.add(new KeyDataPair(name, file.getFile(), fileName, contentType, (Charset) null));
+            requestParameters_.add(blob.getKeyDataPair(name, fileName));
+            return;
         }
-        else {
-            requestParameters_.add(new NameValuePair(name, JavaScriptEngine.toString(value)));
-        }
+        requestParameters_.add(new NameValuePair(name, JavaScriptEngine.toString(value)));
     }
 
     /**
@@ -191,7 +180,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction(functionName = "delete")
     public void delete_js(final String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmptyOrNull(name)) {
             return;
         }
 
@@ -204,7 +193,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public String get(final String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmptyOrNull(name)) {
             return null;
         }
 
@@ -222,7 +211,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Scriptable getAll(final String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmptyOrNull(name)) {
             return JavaScriptEngine.newArray(this, 0);
         }
 
@@ -243,7 +232,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public boolean has(final String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmptyOrNull(name)) {
             return false;
         }
 
@@ -264,7 +253,7 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void set(final String name, final Object value, final Object filename) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmptyOrNull(name)) {
             return;
         }
 
@@ -287,14 +276,15 @@ public class FormData extends HtmlUnitScriptable {
             pos = requestParameters_.size();
         }
 
-        if (value instanceof File) {
-            final File file = (File) value;
-            String fileName = null;
-            if (filename instanceof String) {
-                fileName = (String) filename;
+        if (value instanceof Blob blob) {
+            String fileName = "blob";
+            if (value instanceof File) {
+                fileName = null;
             }
-            requestParameters_.add(pos,
-                    new KeyDataPair(name, file.getFile(), fileName, file.getType(), (Charset) null));
+            if (filename instanceof String string) {
+                fileName = string;
+            }
+            requestParameters_.add(pos, blob.getKeyDataPair(name, fileName));
         }
         else {
             requestParameters_.add(pos, new NameValuePair(name, JavaScriptEngine.toString(value)));
@@ -326,12 +316,10 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void forEach(final Object callback) {
-        if (!(callback instanceof Function)) {
+        if (!(callback instanceof Function fun)) {
             throw JavaScriptEngine.typeError(
                     "Foreach callback '" + JavaScriptEngine.toString(callback) + "' is not a function");
         }
-
-        final Function fun = (Function) callback;
 
         // This must be indexes instead of iterator() for correct behavior when of list changes while iterating
         for (int i = 0;; i++) {
@@ -352,7 +340,7 @@ public class FormData extends HtmlUnitScriptable {
      * @return an iterator.
      */
     @JsxFunction
-    public Object keys() {
+    public FormDataIterator keys() {
         return new FormDataIterator(getParentScope(),
                 "FormData Iterator", FormDataIterator.Type.KEYS, requestParameters_);
     }
@@ -364,7 +352,7 @@ public class FormData extends HtmlUnitScriptable {
      * @return an iterator.
      */
     @JsxFunction
-    public Object values() {
+    public FormDataIterator values() {
         return new FormDataIterator(getParentScope(),
                 "FormData Iterator", FormDataIterator.Type.VALUES, requestParameters_);
     }

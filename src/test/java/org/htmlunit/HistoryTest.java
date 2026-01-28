@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,20 +22,18 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for {@link History}.
@@ -43,7 +41,6 @@ import org.openqa.selenium.WebDriver;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HistoryTest extends WebDriverTestCase {
 
     /**
@@ -57,17 +54,23 @@ public class HistoryTest extends WebDriverTestCase {
         servlets.put("/post1", Post1Servlet.class);
         servlets.put("/post2", Post2Servlet.class);
         servlets.put("/post3", Post3Servlet.class);
-        startWebServer("./", new String[0], servlets);
+        startWebServer("./", servlets);
 
         final WebDriver driver = getWebDriver();
         driver.get(URL_FIRST + "post1");
 
         driver.findElement(By.id("mySubmit")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
         assertEquals(URL_FIRST + "post2", driver.getCurrentUrl());
         assertTrue(driver.getPageSource().contains("POST"));
         assertTrue(driver.getPageSource().contains("para1=value1"));
 
         driver.findElement(By.linkText("Go to GET")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
         assertEquals(URL_FIRST + "post3", driver.getCurrentUrl());
         assertTrue(driver.getPageSource().contains("GET"));
 
@@ -92,7 +95,7 @@ public class HistoryTest extends WebDriverTestCase {
         for (int i = 0; i < testDeep; i++) {
             servlets.put("/post" + i, Post1Servlet.class);
         }
-        startWebServer("./", new String[0], servlets);
+        startWebServer("./", servlets);
 
         final WebDriver driver = getWebDriver();
 
@@ -111,7 +114,7 @@ public class HistoryTest extends WebDriverTestCase {
             }
 
             if (count != Post1Servlet.Count_) {
-                Assert.fail("Server called for " + i);
+                Assertions.fail("Server called for " + i);
                 break;
             }
         }
@@ -135,7 +138,8 @@ public class HistoryTest extends WebDriverTestCase {
             response.setCharacterEncoding(UTF_8.name());
             response.setContentType(MimeType.TEXT_HTML);
             response.getWriter().write(
-                    "<html>\n"
+                    DOCTYPE_HTML
+                    + "<html>\n"
                     + "<body>\n"
                     + "  <h1>Call: " + Count_ + "</h1>\n"
                     + "  <form action='post2' method='post'>\n"

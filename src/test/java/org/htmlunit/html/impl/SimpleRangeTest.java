@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,13 @@ package org.htmlunit.html.impl;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for SimpleRange.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class SimpleRangeTest extends SimpleWebTestCase {
 
     /**
@@ -34,7 +31,8 @@ public class SimpleRangeTest extends SimpleWebTestCase {
      */
     @Test
     public void toStringOneNode() throws Exception {
-        final String content = "<html><head><title>Test page</title></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>Test page</title></head>\n"
             + "<body>\n"
             + "  <input type='text' id='myInput' value='abcd'>\n"
             + "</body>\n"

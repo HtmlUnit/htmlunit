@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ import org.htmlunit.WebClient;
 /**
  * Wrapper for the HTML element "meta".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
@@ -68,7 +68,7 @@ public class HtmlMeta extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code http-equiv}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getHttpEquivAttribute() {
         return getAttribute("http-equiv");
@@ -80,7 +80,7 @@ public class HtmlMeta extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
         return getAttributeDirect(NAME_ATTRIBUTE);
@@ -92,7 +92,7 @@ public class HtmlMeta extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code content}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getContentAttribute() {
         return getAttributeDirect("content");
@@ -104,7 +104,7 @@ public class HtmlMeta extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code scheme}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getSchemeAttribute() {
         return getAttributeDirect("scheme");

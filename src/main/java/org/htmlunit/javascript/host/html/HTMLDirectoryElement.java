@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,11 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.html.HtmlDirectory;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * The JavaScript object {@code HTMLDirectoryElement}.
@@ -26,7 +29,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlDirectory.class)
-public class HTMLDirectoryElement extends HTMLListElement {
+public class HTMLDirectoryElement extends HTMLElement {
 
     /**
      * JavaScript constructor.
@@ -35,5 +38,28 @@ public class HTMLDirectoryElement extends HTMLListElement {
     @JsxConstructor
     public void jsConstructor() {
         super.jsConstructor();
+    }
+
+    /**
+     * Returns the value of the {@code compact} attribute.
+     * @return the value of the {@code compact} attribute
+     */
+    @JsxGetter
+    public boolean isCompact() {
+        return getDomNodeOrDie().hasAttribute("compact");
+    }
+
+    /**
+     * Sets the value of the {@code compact} attribute.
+     * @param compact the value of the {@code compact} attribute
+     */
+    @JsxSetter
+    public void setCompact(final Object compact) {
+        if (JavaScriptEngine.toBoolean(compact)) {
+            getDomNodeOrDie().setAttribute("compact", "");
+        }
+        else {
+            getDomNodeOrDie().removeAttribute("compact");
+        }
     }
 }

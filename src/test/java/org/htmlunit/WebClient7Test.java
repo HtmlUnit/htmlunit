@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,11 @@ package org.htmlunit;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.htmlunit.util.PrimitiveWebServer;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -33,7 +32,6 @@ import org.openqa.selenium.WebDriverException;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class WebClient7Test extends WebDriverTestCase {
 
     /**
@@ -114,7 +112,8 @@ public class WebClient7Test extends WebDriverTestCase {
     }
 
     private void testRequestUrlEncoding(final String url) throws Exception {
-        final String html = "<html>"
+        final String html = DOCTYPE_HTML
+                + "<html>"
                 + "<head><title>foo</title></head>"
                 + "<body></body></html>";
 
@@ -143,7 +142,8 @@ public class WebClient7Test extends WebDriverTestCase {
             final String responseEncodingCharset,
             final String addHeader,
             final String addHtml) throws Exception {
-        String html = "<html>\n"
+        String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title>\n";
         if (!header) {
             html += "  <meta http-equiv='Content-Type' content='text/html; charset=" + charset + "'>\n";
@@ -469,7 +469,8 @@ public class WebClient7Test extends WebDriverTestCase {
             final String addHeader,
             final String addHtml,
             final boolean click) throws Exception {
-        String html = "<html>\n"
+        String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head><title>foo</title>\n";
         if (!header) {
             html += "  <meta http-equiv='Content-Type' content='text/html; charset=" + charset + "'>\n";
@@ -540,7 +541,8 @@ public class WebClient7Test extends WebDriverTestCase {
     }
 
     private void framesetUrlEncoding(final String charset) throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<frameset><frame src='test.html?k\u00F6nig'></frameset>\n"
                 + "</html>";
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,12 +23,9 @@ import java.util.TimeZone;
 import org.apache.commons.io.FileUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -37,7 +34,6 @@ import org.openqa.selenium.WebDriver;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class FileTest extends WebDriverTestCase {
 
     /**
@@ -52,8 +48,7 @@ public class FileTest extends WebDriverTestCase {
             FF_ESR = {"1", "ScriptExceptionTest1.txt", "undefined",
                       "1437920507000", "", "14", MimeType.TEXT_PLAIN})
     public void properties() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -115,8 +110,7 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "function", "Hello HtmlUnit"})
     public void text() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -191,8 +185,7 @@ public class FileTest extends WebDriverTestCase {
     }
 
     private void type(final String extension) throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -237,7 +230,7 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "TypeError true"})
     public void ctorNoArgs() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -264,7 +257,7 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object File]", "htMluniT.txt", "", "true", "0", ""})
     public void ctorEmpty() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -298,7 +291,7 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object File]", "htMluniT.txt", "", "true", "8", "HtmlUnit"})
     public void ctorString() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -333,7 +326,7 @@ public class FileTest extends WebDriverTestCase {
     @Alerts({"[object File]", "htMluniT.txt", "application/octet-stream", "1234567", "8",
              "HtmlUnit"})
     public void ctorStringWithOptions() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -369,7 +362,7 @@ public class FileTest extends WebDriverTestCase {
     @Alerts({"[object File]", "htMluniT.txt", "", "true", "16",
              "HtmlUnitis great"})
     public void ctorStrings() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -403,7 +396,7 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object File]", "htMluniT.txt", "", "true", "12", "HtmlUnitMMMK"})
     public void ctorMixed() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -491,8 +484,7 @@ public class FileTest extends WebDriverTestCase {
     }
 
     private void lastModifiedDate(final String tz, final Locale locale) throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,7 +32,6 @@ import org.openqa.selenium.WebElement;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public final class HtmlInput2Test extends WebDriverTestCase {
     private static final String TEST_ID = "clickId";
 
@@ -42,10 +39,10 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"null", "error", "handler", "null", "error"})
+    @Alerts({"null", "TypeError", "handler", "null", "TypeError"})
     public void onchangeDirectCall() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function handler() { log('handler');}\n"
@@ -55,7 +52,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
             + "      log(elem.onchange);\n"
             + "      elem.onchange();\n"
             + "      log('onchange called');\n"
-            + "    } catch (e) {log('error')}\n"
+            + "    } catch(e) { logEx(e) }\n"
 
             + "    elem.onchange = handler;\n"
             + "    elem.onchange();\n"
@@ -65,7 +62,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
             + "      log(elem.onchange);\n"
             + "      elem.onchange();\n"
             + "      log('onchange called');\n"
-            + "    } catch (e) {log('error')}\n"
+            + "    } catch(e) { logEx(e) }\n"
 
             + "  }\n"
             + "</script>\n"
@@ -82,8 +79,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"function handler() {}", "null"})
     public void onchangeNull() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function handler() {}\n"
@@ -203,7 +200,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
             tag = StringUtils.replaceOnce(tag, "onclick')", "onclick');return false;");
         }
 
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + "  function log(x) {\n"
                 + "    document.getElementById('log_').value += x + '; ';\n"
@@ -225,12 +223,12 @@ public final class HtmlInput2Test extends WebDriverTestCase {
         final WebElement log = driver.findElement(By.id("log_"));
 
         driver.findElement(By.id(TEST_ID)).click();
-        alerts.add(log.getAttribute("value").trim());
+        alerts.add(log.getDomProperty("value").trim());
 
         log.clear();
         driver.findElement(By.id("next")).click();
 
-        alerts.add(log.getAttribute("value").trim());
+        alerts.add(log.getDomProperty("value").trim());
         assertEquals(getExpectedAlerts(), alerts);
     }
 
@@ -240,8 +238,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Test
     @Alerts("something")
     public void placeholder() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -262,8 +260,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Test
     @Alerts("text")
     public void badInputType() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -284,8 +282,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined"})
     public void select() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

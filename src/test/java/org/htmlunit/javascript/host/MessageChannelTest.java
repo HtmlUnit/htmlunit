@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -29,8 +27,8 @@ import org.openqa.selenium.WebDriver;
  * Tests for {@link MessageChannel}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class MessageChannelTest extends WebDriverTestCase {
 
     /**
@@ -39,7 +37,8 @@ public class MessageChannelTest extends WebDriverTestCase {
     @Test
     @Alerts("Message back from the IFrame, Hello from the main page!")
     public void test() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<p>My body</p>\n"
                 + "<iframe src='" + URL_SECOND + "' width='480' height='320'></iframe>\n"
                 + "</body>\n"
@@ -60,7 +59,8 @@ public class MessageChannelTest extends WebDriverTestCase {
                 + "  }\n"
                 + "</script></html>";
 
-        final String html2 = "<html><body>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "  <p>iFrame body</p>\n"
                 + "</body>\n"
                 + "<script>\n"

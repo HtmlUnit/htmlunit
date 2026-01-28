@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import org.w3c.dom.CharacterData;
  * Wrapper for the DOM node CharacterData.
  *
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Philip Graf
  * @author Ronald Brill
@@ -60,7 +60,11 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     public void setData(final String data) {
         final String oldData = data_;
         data_ = data;
-        fireCharacterDataChanged(new CharacterDataChangeEvent(this, oldData));
+
+        final SgmlPage page = getPage();
+        if (page == null || page.isCharacterDataChangeListenerInUse()) {
+            fireCharacterDataChanged(this, oldData);
+        }
     }
 
     /**
@@ -101,9 +105,9 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     /**
      * Deletes characters from character data.
      * @param offset the position of the first character to be deleted (can't be
-     * less than zero)
+     *        less than zero)
      * @param count the number of characters to be deleted, if less than zero
-     * leaves the first offset chars
+     *        leaves the first offset chars
      */
     @Override
     public void deleteData(final int offset, final int count) {

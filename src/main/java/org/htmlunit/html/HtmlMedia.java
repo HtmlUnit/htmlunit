@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@ package org.htmlunit.html;
 import java.net.MalformedURLException;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.StringUtils;
 
 /**
  * HTML Media element, e.g. {@link HtmlAudio} or {@link HtmlVideo}.
@@ -47,7 +47,7 @@ public class HtmlMedia extends HtmlElement {
      * @return "probably", "maybe", or "". The current implementation returns ""
      */
     public String canPlayType(final String type) {
-        if (StringUtils.isAllBlank(type)) {
+        if (StringUtils.isBlank(type)) {
             return "";
         }
 
@@ -77,7 +77,7 @@ public class HtmlMedia extends HtmlElement {
      */
     public String getSrc() {
         final String src = getSrcAttribute();
-        if ("".equals(src)) {
+        if (StringUtils.isEmptyString(src)) {
             return src;
         }
         try {

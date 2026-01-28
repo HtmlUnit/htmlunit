@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.html.parser;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
 
 /**
@@ -27,7 +25,6 @@ import org.openqa.selenium.JavascriptExecutor;
  * @author Atsushi Nakagawa
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLParser5Test extends WebDriverTestCase {
 
     private static final String LOG_INPUT_FORMS =
@@ -38,6 +35,9 @@ public class HTMLParser5Test extends WebDriverTestCase {
             + "  log(inp.id + '-' + (f?f.name:null))"
             + "}";
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"i1-f1", "i2-f2"})
     public void formEnclosure_table() throws Exception {
@@ -62,6 +62,9 @@ public class HTMLParser5Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"i1-f1", "i2-f2"})
     public void formEnclosure_div() throws Exception {
@@ -86,6 +89,9 @@ public class HTMLParser5Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"i1-f1", "i2-f1"})
     public void formEnclosure_table_nestedForms() throws Exception {
@@ -110,6 +116,9 @@ public class HTMLParser5Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"i1-f1", "i2-f1"})
     public void formEnclosure_div_nestedForms() throws Exception {
@@ -134,6 +143,9 @@ public class HTMLParser5Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"i1-f1", "i2-f1", "i3-null", "i4-null"})
     public void formEnclosure_nestedForms() throws Exception {
@@ -156,6 +168,9 @@ public class HTMLParser5Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"i1-f1", "i2-f1", "i3-f1", "i4-f1", "i5-f1", "i6-f1", "i7-null"})
     public void formEnclosure_tree1() throws Exception {
@@ -189,6 +204,9 @@ public class HTMLParser5Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"i1-f1", "i2-f1", "i3-f1", "i4-f2", "i5-f2", "i6-f2", "i7-f1", "i8-null"})
     public void formEnclosure_tree2() throws Exception {
@@ -223,6 +241,9 @@ public class HTMLParser5Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"i1-f1", "i2-null"})
     public void formEnclosure_tree3() throws Exception {
@@ -243,6 +264,9 @@ public class HTMLParser5Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts("x<form name=\"f1\">y</form>")
     public void unclosedForm() throws Exception {

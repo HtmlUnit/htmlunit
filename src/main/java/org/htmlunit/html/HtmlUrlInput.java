@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@ package org.htmlunit.html;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "input" where type is "url".
@@ -38,18 +38,8 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
      */
     HtmlUrlInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(qualifiedName, page, trimValueAttribute(page, attributes));
-    }
-
-    private static Map<String, DomAttr> trimValueAttribute(final SgmlPage page, final Map<String, DomAttr> attributes) {
-        for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
-            if (VALUE_ATTRIBUTE.equalsIgnoreCase(entry.getKey())) {
-                entry.getValue().setValue(entry.getValue().getValue().trim());
-                break;
-            }
-        }
-
-        return attributes;
+        super(qualifiedName, page, attributes);
+        setRawValue(getValue().trim());
     }
 
     /**

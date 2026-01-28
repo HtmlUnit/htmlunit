@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link History} with {@link WebClient}.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Madis Pärn
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class History2Test extends SimpleWebTestCase {
 
     /**
@@ -37,7 +34,8 @@ public class History2Test extends SimpleWebTestCase {
     @Test
     @Alerts("5")
     public void historyCacheLimit() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + "function log(msg) { window.document.title = msg; }\n"
                 + "function test() {\n"
@@ -63,7 +61,8 @@ public class History2Test extends SimpleWebTestCase {
      */
     @Test
     public void historyCacheSize() throws Exception {
-        final String content = "<html><head><title></title>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head><title></title>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body></html>";
@@ -96,7 +95,8 @@ public class History2Test extends SimpleWebTestCase {
      */
     @Test
     public void historyPageCacheLimit() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body></html>";
@@ -129,7 +129,8 @@ public class History2Test extends SimpleWebTestCase {
      */
     @Test
     public void historyPageCacheLimitZero() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body></html>";
@@ -162,7 +163,8 @@ public class History2Test extends SimpleWebTestCase {
      */
     @Test
     public void historyPageCacheLimitMinusOne() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "</body></html>";

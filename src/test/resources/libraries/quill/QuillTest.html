@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <title>QuillTest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+
+    <!-- Include Quill stylesheet -->
+    <link href="quill.snow.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <!-- Create the toolbar container -->
+    <div id="toolbar">
+        <button class="ql-bold">Bold</button>
+        <button class="ql-italic">Italic</button>
+    </div>
+    
+    <!-- Create the editor container -->
+    <div id="editor">
+        <p>Hello World!</p>
+        <p>Some initial <strong>bold</strong> text</p>
+        <p><br /></p>
+    </div>
+    
+    <!-- Include the Quill library -->
+    <script src="quill.js"></script>
+
+    <!-- Initialize Quill editor -->
+    <script>
+        const quill = new Quill("#editor", {
+            theme: "snow",
+        });
+    </script>
+
+</body>
+</html>
+

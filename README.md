@@ -1,44 +1,77 @@
-# HtmlUnit
+# ![HtmlUnit Logo](https://github.com/HtmlUnit/htmlunit/blob/master/src/site/resources/images/htmlunit.png)
 
-Version 4.3.0 / June 27, 2024
+Version 4.21.0 / December 28, 2025
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit)
+[![Maven Central Version](https://img.shields.io/maven-central/v/org.htmlunit/htmlunit)](https://central.sonatype.com/artifact/org.htmlunit/htmlunit)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/HtmlUnit/htmlunit/badge)](https://securityscorecards.dev/viewer/?uri=github.com/HtmlUnit/htmlunit)
+
 
 ### Homepage
 
-[htmlunit.org][4]
+[htmlunit.org](https://www.htmlunit.org)
 
-[HtmlUnit@mastodon][13] | [HtmlUnit@Twitter][3]
+### News
 
-[HtmlUnit Kanban Board][6]
+**[Developer Blog](https://htmlunit.github.io/htmlunit-blog/)**
 
-> **Check out HtmlUnit [satellite projects](https://github.com/orgs/HtmlUnit/repositories)**,
-such as:
-> * [HtmlUnit on android](https://github.com/HtmlUnit/htmlunit-android)
-> * [HtmlUnit for .Net](https://github.com/HtmlUnit/NHtmlUnit)
-> * or [our Rhino fork](https://github.com/HtmlUnit/htmlunit-rhino-fork) (the JS engine)
->
-> Note as well that you can use HtmlUnit with [Selenium](https://www.selenium.dev/) via
-> their [htmlunit-driver](https://github.com/SeleniumHQ/htmlunit-driver)!
+[HtmlUnit@mastodon](https://fosstodon.org/@HtmlUnit) | [HtmlUnit@bsky](https://bsky.app/profile/htmlunit.bsky.social) | [HtmlUnit@Twitter](https://twitter.com/HtmlUnit)
 
 
-## Sponsoring
+## Table of Contents
+- [Overview](#overview)
+- [Get it!](#get-it)
+  - [Maven](#maven)
+  - [Gradle](#gradle)
+- [Getting Started](#getting-started)
+- [Features](#features)
+  - [Selenium Integration](#selenium-integration)
+  - [jsoup Bridge](#jsoup-bridge)
+  - [HtmlUnit satellite projects](#htmlunit-satellite-projects)
+  - [Built on HtmlUnit](#built-on-htmlunit)
+- [Vulnerabilities](#vulnerabilities)
+- [Sponsoring](#sponsoring)
+- [Contributing](#contributing)
+- [Last CI build](#last-ci-build)
+  - [Maven](#maven-1)
+  - [Gradle](#gradle-1)
+- [License](#license)
+- [Development](#development)
+- [Some insights](#some-insights)
 
-Constantly updating and maintaining the HtmlUnit code base already takes a lot of time.
+## Overview
+HtmlUnit is a "GUI-less browser for Java programs". It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc... just like you do in your "normal" browser.
 
-I would like to make 2 major extensions in the next few months
-* [Add HTTP/2 support](https://github.com/HtmlUnit/htmlunit/issues/370)
-* [Replace the Rhino based JavaScript engine](https://github.com/HtmlUnit/htmlunit/issues/755)
+It has fairly good JavaScript support (which is constantly improving) and is able to work even with quite complex AJAX libraries, simulating Chrome, Firefox or Edge depending on the configuration used.
 
-For doing this I need your [sponsoring](https://github.com/sponsors/rbri).
+HtmlUnit is typically used for testing purposes or to retrieve information from web sites.
+
+
+#### Version 5
+
+Work on HtmlUnit 5.0 has started. This new major version will require **JDK 17 or higher**.
+
+
+#### Legacy Support (JDK 8)
+
+If you need to continue using **JDK 8**, please note that versions 4.x will remain available as-is. However,
+**ongoing maintenance and fixes for JDK 8 compatibility are only available through sponsorship**.
+
+Maintaining separate fix versions for JDK 8 requires significant additional effort for __backporting__, testing, and release management.
+
+**To enable continued JDK 8 support**, please contact me via email to discuss sponsorship options. Sponsorship provides:
+
+- __Backporting__ security and bug fixes to the 4.x branch
+- Maintaining compatibility with older Java versions
+- Timely releases for critical issues
+
+Without sponsorship, the 4.x branch will not receive updates. Your support ensures the long-term __sustainability__ of this project across multiple Java versions.
 
 ## Get it!
 
-* [Download from GitHub][12]
-* [Download from Sourceforge][1]
+* [Download from GitHub](https://github.com/HtmlUnit/htmlunit/releases)
+* [Download from Sourceforge](https://sourceforge.net/projects/htmlunit/files/htmlunit/)
 * [Release History](https://www.htmlunit.org/changes-report.html)
 
 ### Maven
@@ -49,7 +82,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.3.0</version>
+    <version>4.21.0</version>
 </dependency>
 ```
 
@@ -58,21 +91,19 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.3.0'
+implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.21.0'
 ```
 
-## Vulnerabilities
+## Getting Started
+You can start here:
+* [Getting Started](https://www.htmlunit.org/gettingStarted.html)
+* [Introduction to HtmlUnit - Baeldung](https://www.baeldung.com/htmlunit)
+* [The Java Web Scraping Handbook](https://www.scrapingbee.com/java-webscraping-book/) A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
+* [Web Scraping](https://www.innoq.com/en/blog/webscraping/) Examples how to implement web scraping using HtmlUnit, Selenium or jaunt and compares them.
+* [The Complete Guide to Web Scraping with Java](https://www.webscrapingapi.com/java-web-scraping/) A small straightforward guide to web scraping with Java.
+* [How to test Jakarta Faces with HtmlUnit and Arquillian](http://www.mastertheboss.com/java-ee/jsf/how-to-test-jakarta-faces-with-htmlunit-and-arquillian)
+* [WebScraping.AI HtmlUnit FAQ](https://webscraping.ai/faq/htmlunit)
 
-[List of Vulnerabilities](https://github.com/HtmlUnit/htmlunit/blob/master/CVE.md)
-
-[Security Policy](https://github.com/HtmlUnit/htmlunit/blob/master/SECURITY.md)
-
-## Overview
-HtmlUnit is a "GUI-less browser for Java programs". It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc... just like you do in your "normal" browser.
-
-It has fairly good JavaScript support (which is constantly improving) and is able to work even with quite complex AJAX libraries, simulating Chrome, Firefox or Internet Explorer depending on the configuration used.
-
-HtmlUnit is typically used for testing purposes or to retrieve information from web sites.
 
 ## Features
 * Support for the HTTP and HTTPS protocols
@@ -89,21 +120,99 @@ HtmlUnit is typically used for testing purposes or to retrieve information from 
 * Support for basic and NTLM authentication
 * Excellent JavaScript support
 
-## Getting Started
-You can start here:
-* [Getting Started][7]
-* [The Java Web Scraping Handbook][8] A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
-* [Web Scraping][9] Examples how to implement web scraping using HtmlUnit, Selenium or jaunt and compares them.
-* [The Complete Guide to Web Scraping with Java][10] A small straightforward guide to web scraping with Java.
-* [How to test Jakarta Faces with HTMLUnit and Arquillian][11]
+### Selenium Integration
+
+HtmlUnit can be used as a [Selenium](https://www.selenium.dev/) 
+[WebDriver](https://www.selenium.dev/documentation/webdriver/)-compatible browser through the 
+[htmlunit-driver](https://github.com/SeleniumHQ/htmlunit-driver).
+This integration allows you to use HtmlUnit as a headless browser option within Selenium test suites, 
+providing fast execution without the overhead of launching a full browser instance.
+
+Please have a look at the [HtmlUnit Remote](https://github.com/HtmlUnit/htmlunit-remote) project 
+if you like to use this driver from Selenium 4 Grid.
+
+
+### jsoup Bridge
+
+The [htmlunit-jsoup](https://github.com/HtmlUnit/htmlunit-jsoup) library provides utilities 
+to bridge the gap between [HtmlUnit](https://htmlunit.org) and [jsoup](https://jsoup.org/).
+The `HtmlUnitDOMToJsoupConverter` enables seamless integration between HtmlUnit's comprehensive
+browser simulation capabilities and all the jsoup-based libraries,
+allowing you to leverage the full ecosystem of jsoup tools 
+while maintaining HtmlUnit's JavaScript execution and dynamic content handling.
+
+
+### HtmlUnit [satellite projects](https://github.com/orgs/HtmlUnit/repositories)
+
+* [HtmlUnit on android](https://github.com/HtmlUnit/htmlunit-android)
+* [Htmlunit - NekoHtml Parser](https://github.com/HtmlUnit/htmlunit-neko)
+* [HtmlUnit - CSSParser](https://github.com/HtmlUnit/htmlunit-cssparser)
+* [HtmlUnit - CSP](https://github.com/HtmlUnit/htmlunit-csp)
+* or [core-js](https://github.com/HtmlUnit/htmlunit-core-js) our [Rhino](https://github.com/mozilla/rhino) fork
+
+
+### Built on HtmlUnit
+
+HtmlUnit is used as the underlying "browser" by different Open Source tools like
+ * [WebDriver](https://github.com/SeleniumHQ/selenium)
+ * [Arquillian Drone](https://arquillian.org/arquillian-extension-drone)
+ * [Serenity BDD](https://serenity-bdd.info)
+ * [XLT](https://www.xceptance.com/en/products/xlt/)
+ * [FluentLenium](https://github.com/FluentLenium/FluentLenium)
+ * [WETATOR](https://www.wetator.org/)
+ * [Selenium Foundation](https://github.com/sbabcoc/Selenium-Foundation)
+ * [Spring Testing](https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#spring-mvc-test-server-htmlunit)
+ * [Selenide](https://selenide.org/)
+ * [JWebUnit](https://jwebunit.github.io/jwebunit/)
+ * [JSFUnit](http://www.jboss.org/jsfunit/)
+ * ...
+
+HtmlUnit is used by many projects for automated web testing
+ * [jenkins-test-harness](https://github.com/jenkinsci/jenkins-test-harness)
+ * [Apache Shiro](https://shiro.apache.org/)
+ * [Apache Struts](https://struts.apache.org/)
+ * [Quarkus](https://quarkus.io/)
+ * [Togglz](https://www.togglz.org/)
+ * [Dataverse](https://dataverse.org/)
+ * [Janssen Project](https://github.com/JanssenProject/jans)
+ * [Apache TomEE](https://github.com/apache/tomee)
+ * [Apache Maven Surefire](https://maven.apache.org/surefire/)
+ * [JSCover](http://tntim96.github.io/JSCover/)
+ * [Apache Jackrabbit](https://jackrabbit.apache.org/jcr/index.html)
+ * [Apache MyFaces](https://myfaces.apache.org/)
+ * [JakartaEE TCK](https://github.com/jakartaee/platform-tck)
+ * [Jakarta Security](https://github.com/jakartaee/security)
+ * [OpenXava](https://github.com/openxava/openxava)
+ * [Cargo](https://github.com/codehaus-cargo/cargo)
+ * [piranha cloud](https://github.com/piranhacloud/piranha)
+ * ...
+
+## Vulnerabilities
+
+[List of Vulnerabilities](https://github.com/HtmlUnit/htmlunit/blob/master/CVE.md)
+
+[Security Policy](https://github.com/HtmlUnit/htmlunit/blob/master/SECURITY.md)
+
+
+## Sponsoring
+
+Constantly updating and maintaining the HtmlUnit code base already takes a lot of time.
+
+I would like to make 2 major extensions in the next few months
+* [Add HTTP/2 support](https://github.com/HtmlUnit/htmlunit/issues/370)
+* [Replace the Rhino based JavaScript engine](https://github.com/HtmlUnit/htmlunit/issues/755)
+
+For doing this I need your [sponsoring](https://github.com/sponsors/rbri).
 
 ## Contributing
 Pull Requests and all other Community Contributions are essential for open source software.
 Every contribution - from bug reports to feature requests, typos to full new features - are greatly appreciated.
 
+Please try to keep your pull requests small (don't bundle unrelated changes) and try to include test cases.
+
 ## Last CI build
 The latest builds are available from our
-[Jenkins CI build server][2]
+[Jenkins CI build server](https://jenkins.wetator.org/view/HtmlUnit/)
 
 [![Build Status](https://jenkins.wetator.org/buildStatus/icon?job=HtmlUnit+-+Headless)](https://jenkins.wetator.org/job/HtmlUnit%20-%20Headless/)
 
@@ -116,15 +225,15 @@ Add the snapshot repository and dependency to your `pom.xml`:
 ```xml
     <!-- ... -->
     <repository>
-      <id>OSS Sonatype snapshots</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
+        <name>Central Portal Snapshots</name>
+        <id>central-portal-snapshots</id>
+        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        <releases>
+            <enabled>false</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
     </repository>
 
     <!-- ... -->
@@ -132,7 +241,7 @@ Add the snapshot repository and dependency to your `pom.xml`:
       <dependency>
           <groupId>org.htmlunit</groupId>
           <artifactId>htmlunit</artifactId>
-          <version>4.4.0-SNAPSHOT</version>
+          <version>4.22.0-SNAPSHOT</version>
       </dependency>
       <!-- ... -->
     </dependencies>
@@ -146,12 +255,12 @@ Add the snapshot repository and dependency to your `build.gradle`:
 
 ```groovy
 repositories {
-  maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
+  maven { url "https://central.sonatype.com/repository/maven-snapshots/" }
   // ...
 }
 // ...
 dependencies {
-    implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.4.0-SNAPSHOT'
+    implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.21.0-SNAPSHOT'
   // ...
 }
 ```
@@ -164,47 +273,26 @@ This project is licensed under the Apache 2.0 License
 
 ## Development
 
-### useful mvn command lines
-setup as or refresh the eclipse project
+Checkout these pages on our website for detailed hints about starting with the development:
+ * [HtmlUnit Development](https://www.htmlunit.org/development.html) 
+ * [Coding Conventions](https://www.htmlunit.org/codingConventions.html)
 
-```
-mvn eclipse:eclipse -DdownloadSources=true
-```
 
-run the whole core test suite (no huge tests, no libary tests)
-
-```
-mvn test -U -P without-library-and-huge-tests -Dgpg.skip -Djava.awt.headless=true
-```
-
-check dependencies for known security problems
-
-```
-mvn dependency-check:check
-```
-
-### Contributing
-
-I welcome contributions, especially in the form of pull requests.
-Please try to keep your pull requests small (don't bundle unrelated changes) and try to include test cases.
 
 ## Some insights
-[HtmlUnit at openhub][5]
-
-### Stargazers
-[![Stargazers](https://starchart.cc/HtmlUnit/htmlunit.svg)](https://starchart.cc/HtmlUnit/htmlunit)
+[HtmlUnit at openhub](https://www.openhub.net/p/HtmlUnit)
 
 
-[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/4.1.0/ "HtmlUnit on sourceforge"
-[2]: https://jenkins.wetator.org/view/HtmlUnit/ "HtmlUnit CI"
-[3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
-[4]: https://www.htmlunit.org "https://www.htmlunit.org"
-[5]: https://www.openhub.net/p/HtmlUnit "https://www.openhub.net/p/HtmlUnit"
-[6]: https://github.com/HtmlUnit/htmlunit/projects/1 "https://github.com/HtmlUnit/htmlunit/projects/1"
-[7]: https://www.htmlunit.org/gettingStarted.html
-[8]: https://www.scrapingbee.com/java-webscraping-book/
-[9]: https://www.innoq.com/en/blog/webscraping/
-[10]: https://www.webscrapingapi.com/java-web-scraping/
-[11]: http://www.mastertheboss.com/java-ee/jsf/how-to-test-jakarta-faces-with-htmlunit-and-arquillian
-[12]: https://github.com/HtmlUnit/htmlunit/releases
-[13]: https://fosstodon.org/@HtmlUnit
+## Development Tools
+
+Special thanks to:
+
+<a href="https://www.jetbrains.com/community/opensource/"><img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" alt="JetBrains" width="42"></a>
+<a href="https://www.jetbrains.com/idea/"><img src="https://resources.jetbrains.com/storage/products/company/brand/logos/IntelliJ_IDEA_icon.svg" alt="IntelliJ IDEA" width="42"></a>  
+**[JetBrains](https://www.jetbrains.com/)** for providing IntelliJ IDEA under their [open source development license](https://www.jetbrains.com/community/opensource/) and
+
+<a href="https://www.eclipse.org/"><img src="https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-foundation-grey-orange.svg" alt="Eclipse Foundation" width="80"></a>  
+Eclipse Foundation for their Eclipse IDE
+
+<a href="https://www.syntevo.com/smartgit/"><img src="https://www.syntevo.com/assets/images/logos/smartgit-8c1aa1e2.svg" alt="SmartGit" width="54"></a>  
+to **[Syntevo](https://www.syntevo.com/)** for their excellent [SmartGit](https://www.smartgit.dev/)!

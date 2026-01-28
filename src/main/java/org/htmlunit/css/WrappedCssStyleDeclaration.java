@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@ import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
 /**
  * A css StyleDeclaration backed by a {@link CSSStyleDeclarationImpl}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Mike Bowler
+ * @author Christian Sell
  * @author Daniel Gredler
  * @author Chris Erskine
  * @author Ahmed Ashour
@@ -131,8 +131,8 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public Object item(final int index) {
-        return cssStyleDeclarationImpl_.getProperties().get(index);
+    public String item(final int index) {
+        return cssStyleDeclarationImpl_.getProperties().get(index).toString();
     }
 
     /**

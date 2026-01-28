@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -35,7 +32,6 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class BrowserVersion2Test extends WebDriverTestCase {
 
     /**
@@ -44,11 +40,10 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,"
                     + "image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-            FF = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,"
-                    + "image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8",
-            FF_ESR = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8")
+            FF = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            FF_ESR = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     public void acceptHeaderGetUrl() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html><body>Response</body></html>";
         loadPage2(html);
 
@@ -62,16 +57,14 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;"
                     + "q=0.8,application/signed-exchange;v=b3;q=0.7"},
-            FF = {"2", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8"},
-            FF_ESR = {"2", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"})
+            FF = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
+            FF_ESR = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"})
     public void acceptHeaderWindowOpen() throws Exception {
-        String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        String html = DOCTYPE_HTML
                 + "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
-        html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        html = DOCTYPE_HTML
                 + "<html><head><title>First</title></head>\n"
                 + "<body>\n"
                 + "  <a id='clickme' href='javascript: window.open(\"" + URL_SECOND + "\")'>Click me</a>\n"
@@ -79,7 +72,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickme")).click();
         // because real browsers are doing the open async, we have to be a bit patient
-        Thread.sleep(DEFAULT_WAIT_TIME);
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis());
 
         assertEquals(getExpectedAlerts()[0], Integer.toString(getMockWebConnection().getRequestCount()));
         assertEquals(getExpectedAlerts()[1], acceptHeaderString());
@@ -92,16 +85,14 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;"
                     + "q=0.8,application/signed-exchange;v=b3;q=0.7"},
-            FF = {"2", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8"},
-            FF_ESR = {"2", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"})
+            FF = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
+            FF_ESR = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"})
     public void acceptHeaderAnchorClick() throws Exception {
-        String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        String html = DOCTYPE_HTML
                 + "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
-        html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        html = DOCTYPE_HTML
                 + "<html><head><title>First</title></head>\n"
                 + "<body>\n"
                 + "  <a id='clickme' href='test.html'>Click me</a>\n"
@@ -120,16 +111,14 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;"
                     + "q=0.9,image/avif,image/webp,image/apng,*/*;"
                     + "q=0.8,application/signed-exchange;v=b3;q=0.7",
-            FF = "Accept: text/html,application/xhtml+xml,application/xml;"
-                    + "q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8",
-            FF_ESR = "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8")
+            FF = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            FF_ESR = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     public void acceptHeaderAnchorClickWithType() throws Exception {
-        String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        String html = DOCTYPE_HTML
                 + "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
-        html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        html = DOCTYPE_HTML
                 + "<html><head><title>First</title></head>\n"
                 + "<body>\n"
                 + "  <a id='clickme' href='test.html' type='text/plain'>Click me</a>\n"
@@ -150,10 +139,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
             FF = "Accept: image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
-            FF_ESR = "Accept: image/avif,image/webp,*/*")
+            FF_ESR = "Accept: image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5")
     public void acceptHeaderImage() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + "  function doTest() {\n"
@@ -177,8 +165,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts("Accept: text/css,*/*;q=0.1")
     public void acceptHeaderCss() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type='text/css'>\n"
             + "<script>\n"
@@ -203,8 +190,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts("Accept: */*")
     public void acceptHeaderJavascript() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "  <script src='test.js' type='text/javascript'></script>\n"
             + "</head>\n"
@@ -223,8 +209,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts("Accept: */*")
     public void acceptHeaderJavascriptWithoutType() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "  <script src='test.js'></script>\n"
             + "</head>\n"
@@ -243,8 +228,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts("Accept: text/css,*/*;q=0.1")
     public void acceptHeaderCssWithoutType() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet'>\n"
             + "<script>\n"
@@ -269,8 +253,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2", "Accept: text/css,*/*;q=0.1"})
     public void acceptHeaderCssEmptyType() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type=''>\n"
             + "<script>\n"
@@ -298,8 +281,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2", "Accept: text/css,*/*;q=0.1"})
     public void acceptHeaderCssBlankType() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type=' '>\n"
             + "<script>\n"
@@ -333,8 +315,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
                     + "application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;"
                     + "q=0.8,application/signed-exchange;v=b3;q=0.7"})
     public void acceptHeaderCssDifferentType() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type='text/html'>\n"
             + "<script>\n"
@@ -368,8 +349,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
                     + "application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;"
                     + "q=0.8,application/signed-exchange;v=b3;q=0.7"})
     public void acceptHeaderCssWrongType() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type='css'>\n"
             + "<script>\n"
@@ -397,8 +377,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts("Accept: */*")
     public void acceptHeaderXMLHttpRequest() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "  <head>\n"
             + "    <title>XMLHttpRequest Test</title>\n"

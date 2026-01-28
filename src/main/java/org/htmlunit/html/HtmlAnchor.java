@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,6 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -37,14 +35,16 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import org.htmlunit.util.ArrayUtils;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "a".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Dmitri Zoubkov
  * @author Ronald Brill
@@ -174,7 +174,7 @@ public class HtmlAnchor extends HtmlElement {
         webRequest.setCharset(page.getCharset());
 
         if (!relContainsNoreferrer()) {
-            webRequest.setRefererlHeader(page.getUrl());
+            webRequest.setRefererHeader(page.getUrl());
         }
 
         if (LOG.isDebugEnabled()) {
@@ -195,14 +195,14 @@ public class HtmlAnchor extends HtmlElement {
             target = page.getResolvedTarget(getTargetAttribute());
         }
         page.getWebClient().download(page.getEnclosingWindow(), target, webRequest,
-                true, false, (ATTRIBUTE_NOT_DEFINED != downloadAttribute) ? downloadAttribute : null, "Link click");
+                true, (ATTRIBUTE_NOT_DEFINED == downloadAttribute) ? null : downloadAttribute, "Link click");
     }
 
     private boolean relContainsNoreferrer() {
         String rel = getRelAttribute();
         if (rel != null) {
             rel = rel.toLowerCase(Locale.ROOT);
-            return ArrayUtils.contains(org.htmlunit.util.StringUtils.splitAtBlank(rel), "noreferrer");
+            return ArrayUtils.contains(StringUtils.splitAtBlank(rel), "noreferrer");
         }
         return false;
     }
@@ -218,7 +218,7 @@ public class HtmlAnchor extends HtmlElement {
     public static URL getTargetUrl(final String href, final HtmlPage page) throws MalformedURLException {
         URL url = page.getFullyQualifiedUrl(href);
         // fix for empty url
-        if (StringUtils.isEmpty(href)) {
+        if (StringUtils.isEmptyOrNull(href)) {
             url = UrlUtils.getUrlWithNewRef(url, null);
         }
         return url;

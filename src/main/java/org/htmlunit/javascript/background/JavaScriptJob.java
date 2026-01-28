@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,8 +48,8 @@ public interface JavaScriptJob extends Runnable, Comparable<JavaScriptJob> {
     void setTargetExecutionTime(long targetExecutionTime);
 
     /**
-     * Returns the amount of time to wait between executions of this job (may be {@code null}).
-     * @return the amount of time to wait between executions of this job (may be {@code null})
+     * Returns the amount of time to wait between executions of this job (perhaps {@code null}).
+     * @return the amount of time to wait between executions of this job (perhaps {@code null})
      */
     Integer getPeriod();
 
@@ -60,8 +60,7 @@ public interface JavaScriptJob extends Runnable, Comparable<JavaScriptJob> {
     boolean isPeriodic();
 
     /**
-     * Returns {@code true} if has to be executed ASAP.
-     * @return {@code true} if has to be executed ASAP
+     * @return {@code true} if this has to be executed ASAP
      */
     boolean isExecuteAsap();
 }

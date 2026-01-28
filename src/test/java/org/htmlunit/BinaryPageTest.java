@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,13 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.htmlunit.util.PrimitiveWebServer;
+import org.junit.jupiter.api.Test;
 
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for binary content.
@@ -34,7 +33,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class BinaryPageTest extends WebServerTestCase {
 
     /**
@@ -44,7 +42,7 @@ public class BinaryPageTest extends WebServerTestCase {
     public void binary() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/big", BinaryServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
 
@@ -62,7 +60,7 @@ public class BinaryPageTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            final int length = 1000;
+            final int length = 1024;
             response.setContentLength(length);
             final byte[] buffer = new byte[1024];
             try (OutputStream out = response.getOutputStream()) {
@@ -80,7 +78,7 @@ public class BinaryPageTest extends WebServerTestCase {
     public void chunkedBigContent() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/bigChunked", ChunkedBigContentServlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
 

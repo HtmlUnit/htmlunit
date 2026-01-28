@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebConnection;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DebugFrameImpl}.
@@ -42,8 +42,8 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
 
     private final Logger loggerDebugFrameImpl_ = (Logger) LogManager.getLogger(DebugFrameImpl.class);
 
-    private Level originalLogLevel_;
-    private WebClient client_;
+    private final Level originalLogLevel_;
+    private final WebClient client_;
 
     /**
      * Constructor.
@@ -51,7 +51,7 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
      */
     public DebugFrameImplTest() throws Exception {
         client_ = new WebClient(BrowserVersion.FIREFOX);
-        ((JavaScriptEngine) client_.getJavaScriptEngine()).getContextFactory().setDebugger(new DebuggerImpl());
+        client_.getJavaScriptEngine().getContextFactory().setDebugger(new DebuggerImpl());
 
         originalLogLevel_ = loggerDebugFrameImpl_.getLevel();
         loggerDebugFrameImpl_.setLevel(Level.TRACE);
@@ -61,7 +61,7 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
      * Cleans up the client, and resets the log to its original state.
      * @throws Exception when a problem occurs
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         client_.getJavaScriptEngine().getContextFactory().setDebugger(null);
         client_.close();
@@ -73,7 +73,8 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
      */
     @Test
     public void withCallable() throws Exception {
-        final String content = "<html><head><title>debug test</title>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head><title>debug test</title>\n"
             + "<script>\n"
             + "  var counter = 0;\n"
             + "  window.__defineGetter__('foo', function(a) { return counter++ });\n"

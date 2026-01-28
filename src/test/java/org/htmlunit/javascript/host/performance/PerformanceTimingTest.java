@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,9 @@
 package org.htmlunit.javascript.host.performance;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -29,7 +26,6 @@ import org.openqa.selenium.WebDriver;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class PerformanceTimingTest extends WebDriverTestCase {
     private static final long NOE = System.currentTimeMillis();
 
@@ -39,8 +35,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts("[object PerformanceTiming]")
     public void available() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -64,8 +59,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void navigationStart() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -89,8 +83,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void secureConnectionStart() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -114,8 +107,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void unloadEvent() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -140,8 +132,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void redirect() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -166,8 +157,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void domainLookup() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -193,8 +183,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void response() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -220,8 +209,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void loadEvent() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -250,8 +238,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void connect() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -277,8 +264,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void fetchStart() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -302,8 +288,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void domContentLoadedEvent() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -332,8 +317,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true", "true"})
     public void dom() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -363,10 +347,12 @@ public class PerformanceTimingTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object Object]")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {},
+            EDGE = {},
+            FF = {},
+            FF_ESR = {})
     public void toJSON() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"

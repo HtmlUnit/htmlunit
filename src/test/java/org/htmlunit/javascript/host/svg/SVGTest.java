@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.svg;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Very simple test for SVG "support".
@@ -27,7 +25,6 @@ import org.junit.runner.RunWith;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class SVGTest extends WebDriverTestCase {
 
     /**
@@ -37,7 +34,8 @@ public class SVGTest extends WebDriverTestCase {
     @Test
     @Alerts("svgElem")
     public void getAttribute() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
@@ -45,7 +43,7 @@ public class SVGTest extends WebDriverTestCase {
             + "  svg.setAttribute('id', 'svgElem');\n"
             + "  document.body.appendChild(svg);\n"
             + "  log(document.getElementById('svgElem').getAttribute('id'));\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -58,8 +56,8 @@ public class SVGTest extends WebDriverTestCase {
     @Test
     @Alerts("clicked")
     public void triggerEvent() throws Exception {
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
@@ -71,7 +69,7 @@ public class SVGTest extends WebDriverTestCase {
                 + "      var e = document.createEvent('MouseEvents');\n"
                 + "      e.initEvent('click', true, false);\n"
                 + "      document.getElementById('rect').dispatchEvent(e);\n"
-                + "    } catch (e) { log('exception'); }\n"
+                + "    } catch(e) { logEx(e); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"

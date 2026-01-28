@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE;
 import static org.htmlunit.BrowserVersionFeatures.HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY;
 import static org.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
 
@@ -22,24 +21,23 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
 import org.w3c.dom.Node;
 
 /**
  * Wrapper for the HTML element "button".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David D. Kilzer
  * @author Daniel Gredler
  * @author Ahmed Ashour
@@ -91,7 +89,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
-        if (hasFeature(HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE) || !isDisabled()) {
+        if (!isDisabled()) {
             final HtmlForm form = getEnclosingForm();
             if (form != null) {
                 final String type = getType();
@@ -124,8 +122,8 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
         Node node = getParentNode();
         while (node != null) {
-            if (node instanceof DisabledElement
-                    && ((DisabledElement) node).isDisabled()) {
+            if (node instanceof DisabledElement element
+                    && element.isDisabled()) {
                 return true;
             }
             node = node.getParentNode();
@@ -260,11 +258,11 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the normalized type value (submit|reset|button).
      */
     public String getType() {
-        final String type = getTypeAttribute().toLowerCase(Locale.ROOT);
-        if (TYPE_RESET.equals(type)) {
+        final String type = getTypeAttribute();
+        if (TYPE_RESET.equalsIgnoreCase(type)) {
             return TYPE_RESET;
         }
-        if (TYPE_BUTTON.equals(type)) {
+        if (TYPE_BUTTON.equalsIgnoreCase(type)) {
             return TYPE_BUTTON;
         }
         return TYPE_SUBMIT;
@@ -332,7 +330,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCase(qualifiedName);
+        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
         if (NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
@@ -414,7 +412,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public boolean isCustomErrorValidityState() {
-        return !StringUtils.isEmpty(customValidity_);
+        return !StringUtils.isEmptyOrNull(customValidity_);
     }
 
     @Override

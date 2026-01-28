@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,6 @@
  * limitations under the License.
  */
 package org.htmlunit.javascript.host.event;
-
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
@@ -203,7 +200,7 @@ public class PointerEvent extends MouseEvent {
     /**
      * @return the pointerType
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter
     @SuppressWarnings("PMD.UseUnderscoresInNumericLiterals")
     public double getAltitudeAngle() {
         return 1.5707963267948966;
@@ -212,8 +209,18 @@ public class PointerEvent extends MouseEvent {
     /**
      * @return the pointerType
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter
     public double getAzimuthAngle() {
+        return 0d;
+    }
+
+    /**
+     * @return the persistentDeviceId
+     */
+    @JsxGetter
+    public double getPersistentDeviceId() {
+        // dummy but valid regarding the spec
+        // https://w3c.github.io/pointerevents/#dom-pointerevent-persistentdeviceid
         return 0d;
     }
 }

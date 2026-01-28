@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,16 @@ package org.htmlunit.javascript.host.html;
 
 import java.util.List;
 
+import javax.net.ssl.SSLHandshakeException;
+
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.FrameWindow;
-import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLIFrameElement}.
@@ -36,7 +36,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HTMLIFrameElementTest extends SimpleWebTestCase {
 
     /**
@@ -44,8 +43,8 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      */
     @Test
     public void setSrcAttribute() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title><script>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
             + "    document.getElementById('iframe1').setAttribute('src', '" + URL_SECOND + "');\n"
             + "  }\n"
@@ -54,8 +53,8 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
             + "<iframe id='iframe1'>\n"
             + "</body></html>";
 
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
-        final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdContent = DOCTYPE_HTML + "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = getMockWebConnection();
@@ -84,7 +83,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      */
     @Test
     public void srcJavaScriptUrl_JavaScriptDisabled() throws Exception {
-        final String html = "<html><body><iframe src='javascript:false;'></iframe></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body><iframe src='javascript:false;'></iframe></body></html>";
 
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);
@@ -101,7 +100,8 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      */
     @Test
     public void removeFrameWindow() throws Exception {
-        final String index = "<html><head></head><body>\n"
+        final String index = DOCTYPE_HTML
+                + "<html><head></head><body>\n"
                 + "<div id='content'>\n"
                 + "  <iframe name='content' src='second/'></iframe>\n"
                 + "</div>\n"
@@ -109,7 +109,8 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
                 +     "onClick=\"document.getElementById('content').innerHTML = 'new content';\">Item</button>\n"
                 + "</body></html>";
 
-        final String frame1 = "<html><head></head><body>\n"
+        final String frame1 = DOCTYPE_HTML
+                + "<html><head></head><body>\n"
                 + "<p>frame content</p>\n"
                 + "</body></html>";
 
@@ -128,12 +129,41 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
         assertEquals("frame content", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).asNormalizedText());
 
         // replace frame tag with javascript
-        ((HtmlElement) page.getElementById("clickId")).click();
+        page.getElementById("clickId").click();
 
         assertEquals("new content", page.getElementById("content").asNormalizedText());
 
         // frame has to be gone
         frames = page.getFrames();
         assertTrue(frames.isEmpty());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "2"})
+    public void iframeUrlInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function log(msg) { window.document.title += msg + '\\u00a7'; }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <iframe id='frame1' src='" + URL_SECOND + "' "
+                        + "onLoad='log(\"loaded\")' onError='log(\"error\")'></iframe>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        getMockWebConnection().setThrowable(URL_SECOND, new SSLHandshakeException("Test"));
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final HtmlPage page = loadPage(html);
+        assertEquals(expectedAlerts[0], page.getTitleText());
+
+        assertEquals(Integer.parseInt(expectedAlerts[1]), getMockWebConnection().getRequestCount());
     }
 }

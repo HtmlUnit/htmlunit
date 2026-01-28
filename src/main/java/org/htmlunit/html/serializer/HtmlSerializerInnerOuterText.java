@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ package org.htmlunit.html.serializer;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
@@ -40,6 +39,7 @@ import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.html.ScriptElement;
 import org.htmlunit.html.serializer.HtmlSerializerInnerOuterText.HtmlSerializerTextBuilder.Mode;
 import org.htmlunit.svg.SvgTitle;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Special serializer to generate the output we need
@@ -112,20 +112,20 @@ public class HtmlSerializerInnerOuterText {
      */
     protected void appendNode(final HtmlSerializerTextBuilder builder, final DomNode node,
             final Mode mode, final boolean insideHead) {
-        if (node instanceof DomText) {
-            appendText(builder, (DomText) node, mode);
+        if (node instanceof DomText text) {
+            appendText(builder, text, mode);
         }
-        else if (node instanceof HtmlBreak) {
-            appendBreak(builder, (HtmlBreak) node);
+        else if (node instanceof HtmlBreak break1) {
+            appendBreak(builder, break1);
         }
-        else if (node instanceof HtmlParagraph) {
-            appendParagraph(builder, (HtmlParagraph) node, mode, insideHead);
+        else if (node instanceof HtmlParagraph paragraph) {
+            appendParagraph(builder, paragraph, mode, insideHead);
         }
-        else if (node instanceof HtmlListItem) {
-            appendListItem(builder, (HtmlListItem) node, mode, insideHead);
+        else if (node instanceof HtmlListItem item) {
+            appendListItem(builder, item, mode, insideHead);
         }
-        else if (node instanceof HtmlDetails) {
-            appendDetails(builder, (HtmlDetails) node, mode, insideHead);
+        else if (node instanceof HtmlDetails details) {
+            appendDetails(builder, details, mode, insideHead);
         }
         else if (node instanceof HtmlHead) {
             appendChildren(builder, node, mode, true);
@@ -261,7 +261,7 @@ public class HtmlSerializerInnerOuterText {
                                         window.getComputedStyle((DomElement) domNode, null);
                                 final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
 
-                                if (StringUtils.isNoneEmpty(value)) {
+                                if (!StringUtils.isEmptyOrNull(value)) {
                                     if ("normal".equalsIgnoreCase(value)) {
                                         return Mode.WHITE_SPACE_NORMAL;
                                     }
@@ -315,7 +315,7 @@ public class HtmlSerializerInnerOuterText {
 
             /**
              * Sequences of white space are collapsed. Lines are broken
-             * at newline characters, at <br>, and as necessary
+             * at newline characters, at <br> and as necessary
              * to fill line boxes.
              */
             WHITE_SPACE_PRE_LINE
@@ -387,9 +387,9 @@ public class HtmlSerializerInnerOuterText {
             }
 
             length--;
-            int i = -1;
-            for (char c : content.toCharArray()) {
-                i++;
+            final int contentLength = content.length();
+            for (int i = 0; i < contentLength; i++) {
+                char c = content.charAt(i);
 
                 // handle \r
                 if (c == '\r') {

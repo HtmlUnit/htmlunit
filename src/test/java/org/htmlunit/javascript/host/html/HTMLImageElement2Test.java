@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,20 +25,16 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
-import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLImageElement}.
  *
- * @author <a href="mailto:george@murnock.com">George Murnock</a>
+ * @author George Murnock
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLImageElement2Test extends SimpleWebTestCase {
 
     /**
@@ -49,7 +45,8 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void onLoad_notDownloadedWhenJavascriptDisabled() throws Exception {
-        final String html = "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
+        final String html = DOCTYPE_HTML
+                + "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
         client.getOptions().setJavaScriptEnabled(false);
@@ -71,12 +68,12 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "  function test(i) {\n"
@@ -119,12 +116,12 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
 
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_JPEG, emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok",
+                    MimeType.IMAGE_JPEG, Collections.emptyList());
         }
 
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
                 + "  function test(i) {\n"

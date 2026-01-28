@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,8 @@
 package org.htmlunit.javascript.regexp;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
@@ -27,7 +24,6 @@ import org.junit.runner.RunWith;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase {
 
     private void testProperties(final String string, final String regexp) throws Exception {
@@ -150,14 +146,6 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
     @Test
     @Alerts({"html,body,div,div,div", "undefined", "undefined", "undefined",
                 "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"})
-    @HtmlUnitNYI(CHROME = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
-                           "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
-            FF = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
-                  "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
-            FF_ESR = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
-                      "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
-            EDGE = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
-                    "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"})
     public void regExResultProperties() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

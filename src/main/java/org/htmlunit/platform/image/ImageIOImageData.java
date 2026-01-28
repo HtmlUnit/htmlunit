@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,11 +33,11 @@ import org.htmlunit.platform.geom.IntDimension2D;
  * of objects which could all be garbage collected without impacting the ImageReader it is better to
  * wrap it in another class.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
- * @author <a href="mailto:knut.johannes.dahle@gmail.com">Knut Johannes Dahle</a>
+ * @author Knut Johannes Dahle
  * @author Ronald Brill
  * @author Frank Danek
  * @author Carsten Steul
@@ -49,6 +49,11 @@ public class ImageIOImageData implements ImageData {
 
     private final ImageReader imageReader_;
 
+    /**
+     * Ctor.
+     * @param inputStream the {@link InputStream} to read from
+     * @throws IOException in case of error
+     */
     public ImageIOImageData(final InputStream inputStream) throws IOException {
         final ImageInputStream iis = ImageIO.createImageInputStream(inputStream);
         final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);

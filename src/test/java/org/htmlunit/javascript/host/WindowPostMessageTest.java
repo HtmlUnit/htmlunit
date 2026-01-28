@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -29,9 +27,7 @@ import org.openqa.selenium.WebDriver;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Thorsten Wendelmuth
- *
  */
-@RunWith(BrowserRunner.class)
 public class WindowPostMessageTest extends WebDriverTestCase {
 
     /**
@@ -45,8 +41,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
         expectedAlerts[4] += "http://127.0.0.1:" + PORT;
         setExpectedAlerts(expectedAlerts);
 
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <iframe id='myFrame' src='" + URL_THIRD + "'></iframe>\n"
@@ -68,7 +64,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final String iframe = "<html><body><script>\n"
+        final String iframe = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "  top.postMessage('hello', '*');\n"
             + "</script></body></html>";
 
@@ -87,8 +84,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
         expectedAlerts[4] += "http://localhost:" + PORT;
         setExpectedAlerts(expectedAlerts);
 
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <iframe id='myFrame' src='" + URL_THIRD + "'></iframe>\n"
@@ -112,9 +109,10 @@ public class WindowPostMessageTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final String iframe = "<html><body><p>inside frame</p></body></html>";
+        final String iframe = DOCTYPE_HTML
+                + "<html><body><p>inside frame</p></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, iframe);
+        getMockWebConnection().setResponse(URL_THIRD, iframe);
         loadPageVerifyTitle2(html);
     }
 
@@ -122,18 +120,18 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void postMessageMissingParameters() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    window.postMessage();\n"
-            + "  } catch (e) {\n"
-            + "    log('exception');\n"
+            + "  } catch(e) {\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
@@ -152,8 +150,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
         expectedAlerts[4] += "http://localhost:" + PORT;
         setExpectedAlerts(expectedAlerts);
 
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <iframe id='myFrame' src='" + URL_THIRD + "'></iframe>\n"
@@ -177,7 +175,53 @@ public class WindowPostMessageTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final String iframe = "<html><body><p>inside frame</p></body></html>";
+        final String iframe = DOCTYPE_HTML
+                + "<html><body><p>inside frame</p></body></html>";
+
+        getMockWebConnection().setResponse(URL_THIRD, iframe);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"type: message", "bubbles: false", "cancelable: false", "data: hello",
+             "origin: ", "source: false true", "lastEventId: "})
+    public void postMessageWithTransferableOnly() throws Exception {
+        final String[] expectedAlerts = getExpectedAlerts();
+        expectedAlerts[4] += "http://localhost:" + PORT;
+        setExpectedAlerts(expectedAlerts);
+
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <iframe id='myFrame' src='" + URL_THIRD + "'></iframe>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var win = document.getElementById('myFrame').contentWindow;\n"
+
+            + "  function receiveMessage(event) {\n"
+            + "    log('type: ' + event.type);\n"
+            + "    log('bubbles: ' + event.bubbles);\n"
+            + "    log('cancelable: ' + event.cancelable);\n"
+            + "    log('data: ' + event.data);\n"
+            + "    log('origin: ' + event.origin);\n"
+            + "    log('source: ' + (event.source === win) + ' ' + (event.source === window));\n"
+            + "    log('lastEventId: ' + event.lastEventId);\n"
+            + "  }\n"
+
+            + "  win.addEventListener('message', receiveMessage, false);\n"
+
+            + "  uInt8Array = new Uint8Array(1);\n"
+            + "  win.postMessage('hello', [uInt8Array.buffer]);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final String iframe = DOCTYPE_HTML
+                + "<html><body><p>inside frame</p></body></html>";
 
         getMockWebConnection().setResponse(URL_THIRD, iframe);
         loadPageVerifyTitle2(html);
@@ -191,8 +235,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
     @Test
     @Alerts({"data: hello", "source: true false"})
     public void postMessageFromClick() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -226,8 +270,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
     @Test
     @Alerts("sync: false")
     public void postMessageSyncOrAsync() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -241,7 +285,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
             + "  <iframe src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
 
-        final String iframe = "<html><body><script>\n"
+        final String iframe = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "  top.postMessage('hello', '*');\n"
             + "  top.sync = false;\n"
             + "</script></body></html>";
@@ -332,8 +377,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
     }
 
     private void postMessage(final String url) throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -346,7 +391,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
             + "  <iframe src='" + URL_THIRD + "'></iframe>\n"
             + "</body></html>";
 
-        final String iframe = "<html><body><script>\n"
+        final String iframe = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "  top.postMessage('hello', '" + url + "');\n"
             + "</script></body></html>";
 
@@ -355,8 +401,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
     }
 
     private void postMessageSameOrigin(final String url) throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -369,7 +415,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
             + "  <iframe src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
 
-        final String iframe = "<html><body><script>\n"
+        final String iframe = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "  top.postMessage('hello', '" + url + "');\n"
             + "</script></body></html>";
 
@@ -381,7 +428,7 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError/DOMException")
     public void postMessageTargetOriginNotUrl() throws Exception {
         postMessageInvalidTargetOrigin("abcd");
     }
@@ -390,7 +437,7 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError/DOMException")
     public void postMessageTargetOriginEmpty() throws Exception {
         postMessageInvalidTargetOrigin("");
     }
@@ -399,22 +446,22 @@ public class WindowPostMessageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("SyntaxError/DOMException")
     public void postMessageTargetOriginSubpath() throws Exception {
         postMessageInvalidTargetOrigin("/abc");
     }
 
     private void postMessageInvalidTargetOrigin(final String targetOrigin) throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    window.postMessage('hello', '" + targetOrigin + "');\n"
-            + "  } catch (e) {\n"
-            + "    log('exception');\n"
+            + "  } catch(e) {\n"
+            + "    logEx(e);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
@@ -422,11 +469,14 @@ public class WindowPostMessageTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("data: 2")
     public void postMessage_jsonPayload() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -440,7 +490,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
             + "  <iframe src='" + URL_THIRD + "'></iframe>\n"
             + "</body></html>";
 
-        final String iframe = "<html><body><script>\n"
+        final String iframe = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "  top.postMessage({outer: 2}, '*');\n"
             + "</script></body></html>";
 
@@ -448,11 +499,14 @@ public class WindowPostMessageTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts("data: innerProperty")
     public void postMessage_jsonPayloadWithNestedObjects() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
@@ -466,7 +520,8 @@ public class WindowPostMessageTest extends WebDriverTestCase {
             + "  <iframe src='" + URL_THIRD + "'></iframe>\n"
             + "</body></html>";
 
-        final String iframe = "<html><body><script>\n"
+        final String iframe = DOCTYPE_HTML
+            + "<html><body><script>\n"
             + "  top.postMessage({inner: {property: 'innerProperty'}}, '*');\n"
             + "</script></body></html>";
 

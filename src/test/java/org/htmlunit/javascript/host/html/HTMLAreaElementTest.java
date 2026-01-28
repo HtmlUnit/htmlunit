@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,8 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLAreaElement}.
@@ -29,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HTMLAreaElementTest extends WebDriverTestCase {
 
     /**
@@ -38,8 +34,8 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void readWriteAccessKey() throws Exception {
-        final String html
-            = "<html><body><map><area id='a1'/><area id='a2' accesskey='A'/></map><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><map><area id='a1'/><area id='a2' accesskey='A'/></map><script>\n"
             + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
             + "log(a1.accessKey);\n"
@@ -66,7 +62,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "function HTMLAreaElement() { [native code] }"})
     public void type() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -75,7 +71,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(elem);\n"
             + "      log(HTMLAreaElement);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -95,8 +91,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
             FF = {"[object HTMLButtonElement]", "", "§§URL§§", "http://srv/htmlunit.org"},
             FF_ESR = {"[object HTMLButtonElement]", "", "§§URL§§", "http://srv/htmlunit.org"})
     public void focus() throws Exception {
-        final String html =
-            HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -143,7 +138,8 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"a1 clicked", "a2 clicked"})
     public void click() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -171,8 +167,8 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"})
     public void readWriteRel() throws Exception {
-        final String html
-            = "<html><body><map><area id='a1'/><area id='a2' rel='alternate help'/></map><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><map><area id='a1'/><area id='a2' rel='alternate help'/></map><script>\n"
             + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
@@ -199,8 +195,8 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "2", "alternate", "help"})
     public void relList() throws Exception {
-        final String html
-            = "<html><body><map><area id='a1'/><area id='a2' rel='alternate help'/></map><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><map><area id='a1'/><area id='a2' rel='alternate help'/></map><script>\n"
             + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
@@ -211,7 +207,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
             + "  for (var i = 0; i < a2.relList.length; i++) {\n"
             + "    log(a2.relList[i]);\n"
             + "  }\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
 
             + "</script></body></html>";
         loadPageVerifyTitle2(html);

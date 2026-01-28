@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,10 @@ package org.htmlunit.javascript.host.dom;
 import java.io.IOException;
 
 import org.htmlunit.StringWebResponse;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
+import org.htmlunit.html.Html;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -28,6 +30,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.javascript.host.xml.XMLDocument;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xml.XmlPage;
 
@@ -40,7 +43,7 @@ import org.htmlunit.xml.XmlPage;
  * @author Adam Afeltowicz
  *
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-102161490">
- * W3C Dom Level 1</a>
+ *     W3C Dom Level 1</a>
  */
 @JsxClass
 public class DOMImplementation extends HtmlUnitScriptable {
@@ -69,7 +72,6 @@ public class DOMImplementation extends HtmlUnitScriptable {
                 switch (version) {
                     case "1.0":
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
@@ -79,9 +81,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
             case "Views":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
@@ -89,14 +89,19 @@ public class DOMImplementation extends HtmlUnitScriptable {
                 break;
 
             case "StyleSheets":
+            case "KeyboardEvents":
+            case "MutationNameEvents":
+            case "TextEvents":
+            case "LS":
+            case "LS-Async":
+            case "Validation":
+            case "XPath":
                 return true;
 
             case "CSS":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
@@ -106,9 +111,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
             case "CSS2":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
@@ -118,9 +121,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
             case "CSS3":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
@@ -133,7 +134,6 @@ public class DOMImplementation extends HtmlUnitScriptable {
             case "MutationEvents":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
                     case "3.0":
                         return true;
@@ -145,51 +145,28 @@ public class DOMImplementation extends HtmlUnitScriptable {
                 switch (version) {
                     case "1.0":
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
                 }
                 break;
-
-            case "KeyboardEvents":
-                return true;
-
-            case "MutationNameEvents":
-                return true;
-
-            case "TextEvents":
-                return true;
-
-            case "LS":
-            case "LS-Async":
-                return true;
 
             case "Range":
             case "Traversal":
                 switch (version) {
                     case "1.0":
-                        return true;
                     case "2.0":
-                        return true;
                     case "3.0":
                         return true;
                     default:
                 }
                 break;
-
-            case "Validation":
-                return true;
-
-            case "XPath":
-                return true;
 
             case "http://www.w3.org/TR/SVG11/feature#BasicStructure":
             case "http://www.w3.org/TR/SVG11/feature#Shape":
                 switch (version) {
                     case "1.0":
                     case "1.1":
-                        return true;
                     case "1.2":
                         return true;
                     default:
@@ -218,7 +195,8 @@ public class DOMImplementation extends HtmlUnitScriptable {
         document.setPrototype(getPrototype(document.getClass()));
         if (qualifiedName != null && !qualifiedName.isEmpty()) {
             final XmlPage page = (XmlPage) document.getDomNodeOrDie();
-            page.appendChild(page.createElementNS("".equals(namespaceURI) ? null : namespaceURI, qualifiedName));
+            page.appendChild(page.createElementNS(
+                    StringUtils.isEmptyString(namespaceURI) ? null : namespaceURI, qualifiedName));
         }
         return document;
     }
@@ -226,7 +204,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
     /**
      * Creates an {@link HTMLDocument}.
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMImplementation/createHTMLDocument">
-     *   createHTMLDocument (MDN)</a>
+     *     createHTMLDocument (MDN)</a>
      *
      * @param titleObj the document title
      * @return the newly created {@link HTMLDocument}
@@ -239,10 +217,11 @@ public class DOMImplementation extends HtmlUnitScriptable {
             final WebWindow webWindow = getWindow().getWebWindow();
             final String html;
             if (JavaScriptEngine.isUndefined(titleObj)) {
-                html = "<html><head></head><body></body></html>";
+                html = Html.DOCTYPE_HTML + "<html><head></head><body></body></html>";
             }
             else {
-                html = "<html><head><title>"
+                html = Html.DOCTYPE_HTML
+                        + "<html><head><title>"
                         + JavaScriptEngine.toString(titleObj)
                         + "</title></head><body></body></html>";
             }
@@ -259,8 +238,9 @@ public class DOMImplementation extends HtmlUnitScriptable {
             // document.setWindow(getWindow());
             document.setDomNode(page);
 
-            final HTMLParser htmlParser = webWindow.getWebClient().getPageCreator().getHtmlParser();
-            htmlParser.parse(webResponse, page, false, false);
+            final WebClient webClient = webWindow.getWebClient();
+            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
+            htmlParser.parse(webClient, webResponse, page, false, false);
             return page.getScriptableObject();
         }
         catch (final IOException e) {

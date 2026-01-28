@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,13 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.Page;
 import org.htmlunit.WebResponse;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Implementation of an {@link AttachmentHandler} that mimics how browsers handle attachments, specifically
@@ -34,7 +33,7 @@ import org.htmlunit.WebResponse;
  * <li>download file into a default folder when attachment response is detected</li>
  * <li>infer filename from octet stream response and use that when saving file</li>
  * <li>if a file already exists, append number to it.
- * Keep incrementing numbers until you find a slot that is free (thats how Chrome handles duplicate filenames).</li>
+ * Keep incrementing numbers until you find a slot that is free (that's how Chrome handles duplicate filenames).</li>
  * </ul>
  *
  * @author Marek Andreansky
@@ -44,7 +43,7 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
 
     private static final Log LOG = LogFactory.getLog(DownloadingAttachmentHandler.class);
 
-    private Path downloadFolder_;
+    private final Path downloadFolder_;
 
     /**
      * Creates a new DownloadingAttachmentHandler that stores all downloaded files in the
@@ -57,7 +56,7 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
         downloadFolder_ = downloadFolder;
         if (Files.notExists(downloadFolder)) {
             throw new IOException("The provided download folder '"
-                        + downloadFolder.toString() + "' does not exist");
+                        + downloadFolder + "' does not exist");
         }
         if (!Files.isWritable(downloadFolder)) {
             throw new IOException("Can't write to the download folder '"
@@ -72,7 +71,7 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
      * @throws IOException if the folder does not exist or the folder is not writable
      */
     public DownloadingAttachmentHandler() throws IOException {
-        this(Paths.get(System.getProperty("java.io.tmpdir")));
+        this(Path.of(System.getProperty("java.io.tmpdir")));
     }
 
     /**
@@ -98,12 +97,12 @@ public class DownloadingAttachmentHandler implements AttachmentHandler {
     private Path determineDestionationFile(final Page page, final String attachmentFilename) {
         String fileName = attachmentFilename;
 
-        if (StringUtils.isAllBlank(fileName)) {
+        if (StringUtils.isBlank(fileName)) {
             final String file = page.getWebResponse().getWebRequest().getUrl().getFile();
             fileName = file.substring(file.lastIndexOf('/') + 1);
         }
 
-        if (StringUtils.isAllBlank(fileName)) {
+        if (StringUtils.isBlank(fileName)) {
             fileName = "download";
         }
 

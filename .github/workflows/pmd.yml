@@ -1,0 +1,39 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+name: PMD
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/pmd.yml'
+      - 'pom.xml'
+      - 'pmd-ruleset.xml'
+      - 'src/main/java/**'
+
+permissions:
+  contents: read
+
+jobs:
+  PMD:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+    - name: Set up JDK
+      uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
+      with:
+        java-version: 21
+        distribution: 'temurin'
+        cache: maven
+    - uses: reviewdog/action-setup@d8edfce3dd5e1ec6978745e801f9c50b5ef80252 # v0.20.1
+      name: Set up reviewdog
+      with:
+        reviewdog_version: latest
+    - name: Run PMD
+      run: mvn --batch-mode --errors --fail-at-end --show-version -Dgpg.skip -Djava.awt.headless=true -Dformat=net.sourceforge.pmd.renderers.SarifRenderer pmd:pmd
+    - name: Upload check results
+      env:
+        WORKDIR: ./
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        [ -s target/pmd.sarif.json ] && cat target/pmd.sarif.json | reviewdog -f=sarif -name="PMD" -reporter=github-pr-check -filter-mode=added -fail-on-error=false

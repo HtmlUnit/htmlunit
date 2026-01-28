@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link HTMLFrameSetElement}.
@@ -27,7 +25,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLFrameSetElementTest extends WebDriverTestCase {
 
     /**
@@ -36,8 +33,8 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"20%,*", "*,*"})
     public void cols() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -61,28 +58,30 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"20%,*", "*,*"})
     public void rows() throws Exception {
-        final String framesetContent =
-            "<html><head></head>\n"
+        final String framesetContent = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<frameset id='fs' rows='20%,*'>\n"
             + "  <frame name='top' src='" + URL_SECOND + "' />\n"
             + "  <frame name='bottom' src='about:blank' />\n"
             + "</frameset>\n"
             + "</html>";
 
-        final String frameContent =
-            "<html><head><title>TopFrame</title>\n"
+        final String frameContent = DOCTYPE_HTML
+            + "<html><head><title>TopFrame</title>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "function doTest() {\n"
-            + "  alert(parent.document.getElementById('fs').rows);\n"
+            + "  log(parent.document.getElementById('fs').rows);\n"
             + "  parent.document.getElementById('fs').rows = '*,*';\n"
-            + "  alert(parent.document.getElementById('fs').rows);\n"
+            + "  log(parent.document.getElementById('fs').rows);\n"
             + "}</script>\n"
             + "</head>\n"
             + "<body onload='doTest()'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, frameContent);
 
-        loadPageWithAlerts2(framesetContent);
+        loadPage2(framesetContent);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -91,8 +90,8 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"<frameset id=\"fs\" onload=\"test()\"> </frameset>", "new"})
     public void outerHTML() throws Exception {
-        final String html =
-            "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

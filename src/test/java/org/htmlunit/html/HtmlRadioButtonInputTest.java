@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,8 @@ import java.util.List;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlRadioButtonInput}.
@@ -33,7 +31,6 @@ import org.junit.runner.RunWith;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
 
     /**
@@ -42,8 +39,8 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
      */
     @Test
     public void asTextWhenNotChecked() throws Exception {
-        final String html
-            = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='radio' name='radio' id='radio'>Check me</input>\n"
             + "</form></body></html>";
@@ -63,8 +60,8 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
     @Test
     @Alerts("newtrue")
     public void onchangeHandlerInvoked() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='radio' name='radio' id='radio'"
             + "onchange='this.value=\"new\" + this.checked'>Check me</input>\n"
@@ -87,8 +84,8 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
      */
     @Test
     public void onchangeHandlerNotInvokedIfNotChanged() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='radio' name='radio' id='radio'"
             + "onchange='this.value=\"new\" + this.checked'>Check me</input>\n"
@@ -113,8 +110,8 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
     @Test
     @Alerts({"oneItem.checked: false twoItems.checked: true", "oneItem.checked: true twoItems.checked: false"})
     public void updateStateFirstForOnclickHandler() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<script type='text/javascript'>\n"
             + "  function itemOnClickHandler() {\n"
             + "    var oneItem = document.getElementById('oneItem');\n"
@@ -159,14 +156,14 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
     @Test
     @Alerts("Second")
     public void setChecked() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<form>\n"
             + "<input id='myRadio' type='radio' onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
             + "</form>\n"
             + "</body></html>";
-        final String secondHtml
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
 
@@ -189,8 +186,8 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
      */
     @Test
     public void clickResponse() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "<form name='myForm'>\n"

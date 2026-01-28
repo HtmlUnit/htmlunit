@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,15 @@
  */
 package org.htmlunit;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static org.junit.Assert.fail;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,11 +35,14 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 /**
  * Test of coding style for issues which cannot be detected by Checkstyle.
@@ -46,35 +50,43 @@ import org.junit.Test;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Sven Strickroth
+ * @author Kristof Neirynck
  */
 public class CodeStyleTest {
 
+    private static final Charset SOURCE_ENCODING = StandardCharsets.UTF_8;
     private static final Pattern LEADING_WHITESPACE = Pattern.compile("^\\s+");
     private static final Pattern LOG_STATIC_STRING =
                                     Pattern.compile("^\\s*LOG\\.[a-z]+\\(\"[^\"]*\"(, [a-zA-Z_]+)?\\);");
-    private List<String> failures_ = new ArrayList<>();
+    private final List<String> failures_ = new ArrayList<>();
+    private String title_ = "unknown";
 
     /**
      * After.
+     * @throws IOException in case of error
      */
-    @After
-    public void after() {
+    @AfterEach
+    public void after() throws IOException {
         final StringBuilder sb = new StringBuilder();
         for (final String error : failures_) {
             sb.append('\n').append(error);
         }
 
+        if (System.getenv("EXPORT_FAILURES") != null) {
+            Files.write(Paths.get("target", title_ + ".txt"), failures_);
+        }
+
         final int errorsNumber = failures_.size();
         if (errorsNumber == 1) {
-            fail("CodeStyle error: " + sb);
+            Assertions.fail(title_ + " error: " + sb);
         }
         else if (errorsNumber > 1) {
-            fail("CodeStyle " + errorsNumber + " errors: " + sb);
+            Assertions.fail(title_ + " " + errorsNumber + " errors: " + sb);
         }
     }
 
-    private void addFailure(final String error) {
-        failures_.add(error);
+    private void addFailure(final String file, final int line, final String error) {
+        failures_.add(file + ", line " + (line <= 0 ? 1 : line) + ": " + error);
     }
 
     /**
@@ -82,9 +94,11 @@ public class CodeStyleTest {
      */
     @Test
     public void codeStyle() throws IOException {
+        title_ = "CodeStyle";
         final List<File> files = new ArrayList<>();
         addAll(new File("src/main"), files);
         addAll(new File("src/test"), files);
+
         final List<String> classNames = getClassNames(files);
         process(files, classNames);
         // for (final String className : classNames) {
@@ -115,6 +129,7 @@ public class CodeStyleTest {
             for (final File child : children) {
                 if (child.isDirectory()
                         && !".git".equals(child.getName())
+                        && !"brotli".equals(child.getName())
                         && !("test".equals(dir.getName()) && "resources".equals(child.getName()))) {
                     addAll(child, files);
                 }
@@ -126,10 +141,17 @@ public class CodeStyleTest {
     }
 
     private void process(final List<File> files, final List<String> classNames) throws IOException {
+        final String excludeQuercus = "org" + File.separatorChar + "htmlunit" + File.separatorChar + "util" + File.separatorChar + "quercus" + File.separatorChar +  "servlet";
+
         for (final File file : files) {
             final String relativePath = file.getAbsolutePath().substring(new File(".").getAbsolutePath().length() - 1);
+
+            if (relativePath.contains(excludeQuercus)) {
+                continue;
+            }
+
             if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
+                final List<String> lines = FileUtils.readLines(file, SOURCE_ENCODING);
                 openingCurlyBracket(lines, relativePath);
                 year(lines, relativePath);
                 javaDocFirstLine(lines, relativePath);
@@ -138,7 +160,6 @@ public class CodeStyleTest {
                 methodLastLine(lines, relativePath);
                 lineBetweenMethods(lines, relativePath);
                 runWith(lines, relativePath);
-                vs85aspx(lines, relativePath);
                 deprecated(lines, relativePath);
                 staticJSMethod(lines, relativePath);
                 singleAlert(lines, relativePath);
@@ -160,7 +181,7 @@ public class CodeStyleTest {
         int index = 1;
         for (final String line : lines) {
             if ("{".equals(line.trim())) {
-                addFailure("Opening curly bracket is alone at " + path + ", line: " + index);
+                addFailure(path, index, "Opening curly bracket is alone");
             }
             index++;
         }
@@ -172,7 +193,7 @@ public class CodeStyleTest {
     private void year(final List<String> lines, final String path) {
         final int year = Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR);
         if (lines.size() < 2 || !lines.get(1).contains("Copyright (c) 2002-" + year)) {
-            addFailure("Incorrect year in " + path);
+            addFailure(path, lines.size() < 2 ? 0 : 1, "Incorrect year");
         }
     }
 
@@ -185,12 +206,12 @@ public class CodeStyleTest {
             final String currentLine = lines.get(index);
             if ("/**".equals(previousLine.trim())) {
                 if ("*".equals(currentLine.trim()) || currentLine.contains("*/")) {
-                    addFailure("Empty line in " + relativePath + ", line: " + (index + 1));
+                    addFailure(relativePath, index + 1, "Empty first line in JavaDoc");
                 }
                 if (currentLine.trim().startsWith("*")) {
                     final String text = currentLine.trim().substring(1).trim();
                     if (!text.isEmpty() && Character.isLowerCase(text.charAt(0))) {
-                        addFailure("Lower case start in " + relativePath + ", line: " + (index + 1));
+                        addFailure(relativePath, index + 1, "Lower case start of text in JavaDoc");
                     }
                 }
             }
@@ -205,7 +226,7 @@ public class CodeStyleTest {
             final String previousLine = lines.get(index - 1);
             final String currentLine = lines.get(index);
             if (currentLine.startsWith("/**") && !previousLine.isEmpty()) {
-                addFailure("Not empty line in " + relativePath + ", line: " + index);
+                addFailure(relativePath, index, "No empty line the beginning of JavaDoc");
             }
         }
     }
@@ -223,7 +244,7 @@ public class CodeStyleTest {
                 && (!Character.isWhitespace(line.charAt(4))
                     || line.trim().startsWith("public") || line.trim().startsWith("protected")
                     || line.trim().startsWith("private"))) {
-                addFailure("Empty line in " + relativePath + ", line: " + (index + 2));
+                addFailure(relativePath, index + 2, "Empty line");
             }
         }
     }
@@ -236,7 +257,7 @@ public class CodeStyleTest {
             final String line = lines.get(index);
             final String nextLine = lines.get(index + 1);
             if (StringUtils.isBlank(line) && "    }".equals(nextLine)) {
-                addFailure("Empty line in " + relativePath + ", line: " + (index + 1));
+                addFailure(relativePath, index + 1, "Empty line");
             }
         }
     }
@@ -249,10 +270,10 @@ public class CodeStyleTest {
             final String line = lines.get(index);
             final String nextLine = lines.get(index + 1);
             if ("    }".equals(line) && !nextLine.isEmpty() && !"}".equals(nextLine)) {
-                addFailure("Non-empty line in " + relativePath + ", line: " + (index + 1));
+                addFailure(relativePath, index + 1, "Non-empty line");
             }
             if (nextLine.trim().equals("/**") && line.trim().equals("}")) {
-                addFailure("Non-empty line in " + relativePath + ", line: " + (index + 2));
+                addFailure(relativePath, index + 2, "Non-empty line");
             }
         }
     }
@@ -262,6 +283,7 @@ public class CodeStyleTest {
      */
     @Test
     public void xmlStyle() throws Exception {
+        title_ = "XMLStyle";
         processXML(new File("."), false);
         processXML(new File("src/main/resources"), true);
         processXML(new File("src/assembly"), true);
@@ -279,7 +301,7 @@ public class CodeStyleTest {
                 }
                 else {
                     if (file.getName().endsWith(".xml")) {
-                        final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
+                        final List<String> lines = FileUtils.readLines(file, SOURCE_ENCODING);
                         final String relativePath = file.getAbsolutePath().substring(
                                 new File(".").getAbsolutePath().length() - 1);
                         mixedIndentation(lines, relativePath);
@@ -298,7 +320,7 @@ public class CodeStyleTest {
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
             if (line.indexOf('\t') != -1) {
-                addFailure("Mixed indentation in " + relativePath + ", line: " + (i + 1));
+                addFailure(relativePath, i + 1, "Mixed indentation");
             }
         }
     }
@@ -312,7 +334,7 @@ public class CodeStyleTest {
             if (!line.isEmpty()) {
                 final char last = line.charAt(line.length() - 1);
                 if (Character.isWhitespace(last)) {
-                    addFailure("Trailing whitespace in " + relativePath + ", line: " + (i + 1));
+                    addFailure(relativePath, i + 1, "Trailing whitespace");
                 }
             }
         }
@@ -325,7 +347,7 @@ public class CodeStyleTest {
         for (int i = 0; i < lines.size(); i++) {
             final int indentation = getIndentation(lines.get(i));
             if (indentation % 4 != 0) {
-                addFailure("Bad indentation level (" + indentation + ") in " + relativePath + ", line: " + (i + 1));
+                addFailure(relativePath, i + 1, "Bad indentation level (" + indentation + ")");
             }
         }
     }
@@ -334,19 +356,19 @@ public class CodeStyleTest {
      * Checks the year in {@code LICENSE.txt}.
      */
     private void licenseYear() throws IOException {
-        final List<String> lines = FileUtils.readLines(new File("checkstyle.xml"), ISO_8859_1);
+        final List<String> lines = FileUtils.readLines(new File("checkstyle.xml"), SOURCE_ENCODING);
         boolean check = false;
         final String copyright = "Copyright (c) 2002-" + LocalDate.now().getYear();
         for (final String line : lines) {
             if (line.contains("<property name=\"header\"")) {
                 if (!line.contains(copyright)) {
-                    addFailure("Incorrect year in LICENSE.txt");
+                    addFailure("checkstyle.xml", 0, "Incorrect year in checkstyle.xml");
                 }
                 check = true;
             }
         }
         if (!check) {
-            addFailure("Not found \"header\" in checkstyle.xml");
+            addFailure("checkstyle.xml", 0, "No \"header\" found");
         }
     }
 
@@ -356,23 +378,23 @@ public class CodeStyleTest {
     private void versionYear() throws IOException {
         final List<String> lines =
                 FileUtils.readLines(new File("src/main/java/org/htmlunit/Version.java"),
-                        ISO_8859_1);
+                        SOURCE_ENCODING);
         for (final String line : lines) {
             if (line.contains("return \"Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {
                 return;
             }
         }
-        addFailure("Incorrect year in Version.getCopyright()");
+        addFailure("src/main/java/org/htmlunit/Version.java", 0, "Incorrect year in Version.getCopyright()");
     }
 
     /**
      * Verifies no &lt;parent&gt; tag in {@code pom.xml}.
      */
     private void parentInPom() throws IOException {
-        final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
+        final List<String> lines = FileUtils.readLines(new File("pom.xml"), SOURCE_ENCODING);
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).contains("<parent>")) {
-                addFailure("'pom.xml' should not have <parent> tag in line: " + (i + 1));
+                addFailure("pom.xml", i + 1, "'pom.xml' should not have <parent> tag");
                 break;
             }
         }
@@ -401,31 +423,14 @@ public class CodeStyleTest {
                 }
                 if (runWith) {
                     if (!browserNone && line.contains("new WebClient(") && !line.contains("getBrowserVersion()")) {
-                        addFailure("Test " + relativePath + " line " + index
-                            + " should never directly instantiate WebClient, please use getWebClient() instead.");
+                        addFailure(relativePath, index,
+                                "Never directly instantiate WebClient, please use getWebClient() instead.");
                     }
                     if (line.contains("notYetImplemented()")) {
-                        addFailure("Use @NotYetImplemented instead of notYetImplemented() in "
-                            + relativePath + ", line: " + index);
+                        addFailure(relativePath, index, "Use @NotYetImplemented instead of notYetImplemented()");
                     }
                 }
                 index++;
-            }
-        }
-    }
-
-    /**
-     * Verifies that no "(VS.85).aspx" token exists (which is sometimes used in MSDN documentation).
-     */
-    private void vs85aspx(final List<String> lines, final String relativePath) {
-        if (!relativePath.contains("CodeStyleTest")) {
-            int i = 0;
-            for (final String line : lines) {
-                if (line.contains("(VS.85).aspx")) {
-                    addFailure("Please remove \"(VS.85)\" from the URL found in "
-                        + relativePath + ", line: " + (i + 1));
-                }
-                i++;
             }
         }
     }
@@ -439,11 +444,11 @@ public class CodeStyleTest {
             line = line.trim().toLowerCase(Locale.ROOT);
             if (line.startsWith("* @deprecated")) {
                 if (!line.startsWith("* @deprecated as of ") && !line.startsWith("* @deprecated since ")) {
-                    addFailure("@deprecated must be immediately followed by \"As of \" or \"since \" in "
-                        + relativePath + ", line: " + (i + 1));
+                    addFailure(relativePath, i + 1,
+                            "@deprecated must be immediately followed by \"As of \" or \"since \"");
                 }
                 if (!getAnnotations(lines, i).contains("@Deprecated")) {
-                    addFailure("No \"@Deprecated\" annotation for " + relativePath + ", line: " + (i + 1));
+                    addFailure(relativePath, i + 1, "No \"@Deprecated\" annotation");
                 }
             }
             i++;
@@ -479,7 +484,7 @@ public class CodeStyleTest {
                     && (line.contains(" jsxFunction_") || line.contains(" jsxGet_") || line.contains(" jsxSet_"))
                     && !line.contains(" jsxFunction_write") && !line.contains(" jsxFunction_insertBefore")
                     && !line.contains(" jsxFunction_drawImage")) {
-                addFailure("Use of static JavaScript function in " + relativePath + ", line: " + (i + 1));
+                addFailure(relativePath, i + 1, "Use of static JavaScript function");
             }
             i++;
         }
@@ -495,7 +500,7 @@ public class CodeStyleTest {
                 final String alert = line.substring(line.indexOf('{'), line.indexOf('}'));
                 if (!alert.contains(",") && alert.contains("\"")
                         && alert.indexOf('"', alert.indexOf('"') + 1) != -1) {
-                    addFailure("No need for curly brackets in " + relativePath + ", line: " + (i + 1));
+                    addFailure(relativePath, i + 1, "No need for curly brackets");
                 }
             }
             i++;
@@ -517,7 +522,7 @@ public class CodeStyleTest {
                     && !line.contains("webConsoleLogger_") // this one is there by design
                     && !line.contains("(final Log logger)") // logger as parameter
                     && !line.contains("httpclient.wire")) {
-                addFailure("Non-static logger in " + relativePath + ", line: " + (i + 1));
+                addFailure(relativePath, i + 1, "Non-static logger detected");
             }
             i++;
         }
@@ -559,8 +564,7 @@ public class CodeStyleTest {
                 return;
             }
             if (getIndentation(line) == 4) { // a method
-                addFailure("You must check \"if (LOG.is" + method + "Enabled())\" around " + relativePath
-                        + ", line: " + (index + 1));
+                addFailure(relativePath, index + 1, "Must be inside a \"if (LOG.is" + method + "Enabled())\" check");
                 return;
             }
         }
@@ -611,6 +615,7 @@ public class CodeStyleTest {
             String fileName = relativePath.substring(0, relativePath.length() - 5);
             fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
             String wrongName = null;
+            int i = 0;
             for (final String line : lines) {
                 if (line.startsWith(" * ")) {
                     int p0 = line.indexOf("{@code ");
@@ -640,10 +645,11 @@ public class CodeStyleTest {
                 }
                 else if (line.startsWith("public class")) {
                     if (wrongName != null) {
-                        addFailure("Incorrect host class '" + wrongName + "' in " + relativePath);
+                        addFailure(relativePath, i + 1, "Incorrect host class '" + wrongName + "'");
                     }
                     return;
                 }
+                ++i;
             }
         }
     }
@@ -670,7 +676,7 @@ public class CodeStyleTest {
         final StringBuilder alerts = new StringBuilder();
         for (int i = alertsIndex;; i++) {
             final String line = lines.get(i);
-            if (alerts.length() != 0) {
+            if (!alerts.isEmpty()) {
                 alerts.append('\n');
             }
             if (line.startsWith("    @Alerts(")) {
@@ -703,8 +709,7 @@ public class CodeStyleTest {
     private void alertVerify(final List<String> alerts, final String relativePath, final int lineIndex) {
         if (alerts.size() == 1) {
             if (alerts.get(0).contains("DEFAULT")) {
-                addFailure("No need for \"DEFAULT\" in "
-                        + relativePath + ", line: " + (lineIndex + 1));
+                addFailure(relativePath, lineIndex + 1, "No need for \"DEFAULT\"");
             }
         }
         else {
@@ -713,8 +718,7 @@ public class CodeStyleTest {
                 String cleanedAlert = alert;
                 if (alert.charAt(0) == ',') {
                     if (alert.charAt(1) != '\n') {
-                        addFailure("Expectation must be in a separate line in "
-                                + relativePath + ", line: " + (lineIndex + 1));
+                        addFailure(relativePath, lineIndex + 1, "Expectation must be in a separate line");
                     }
                     cleanedAlert = alert.substring(1).trim();
                 }
@@ -745,17 +749,17 @@ public class CodeStyleTest {
             boolean startsWithBraces = false;
             for (final String token : string.split("(?<!\\\\)\"")) {
                 insideString = !insideString;
-                if (currentToken.length() != 0) {
+                if (!currentToken.isEmpty()) {
                     currentToken.append('"');
                 }
                 else {
-                    startsWithBraces = token.toString().contains("{");
+                    startsWithBraces = token.contains("{");
                 }
 
                 if (!insideString && token.startsWith(",") && !startsWithBraces) {
                     list.add(currentToken.toString());
                     currentToken.setLength(0);
-                    startsWithBraces = token.toString().contains("{");
+                    startsWithBraces = token.contains("{");
                 }
 
                 if (!insideString && token.contains("}")) {
@@ -769,7 +773,7 @@ public class CodeStyleTest {
                     if (!insideString && token.contains(",") && !startsWithBraces) {
                         final String[] expressions = token.split(",");
                         currentToken.append(expressions[0]);
-                        if (currentToken.length() != 0) {
+                        if (!currentToken.isEmpty()) {
                             list.add(currentToken.toString());
                         }
                         for (int i = 1; i < expressions.length - 1; i++) {
@@ -783,7 +787,7 @@ public class CodeStyleTest {
                     }
                 }
             }
-            if (currentToken.length() != 0) {
+            if (!currentToken.isEmpty()) {
                 if (!currentToken.toString().contains("\"")) {
                     currentToken.insert(0, '"');
                 }
@@ -814,8 +818,7 @@ public class CodeStyleTest {
         switch (browserName) {
             case "DEFAULT":
                 if (!previousList.isEmpty()) {
-                    addFailure("DEFAULT must be first in "
-                            + relativePath + ", line: " + (lineIndex + 1));
+                    addFailure(relativePath, lineIndex + 1, "DEFAULT must come first");
                 }
                 break;
 
@@ -839,10 +842,10 @@ public class CodeStyleTest {
                         || lineTrimmed.startsWith("if")) {
                     final int difference = getInitialSpaces(next) - getInitialSpaces(line);
                     if (difference > 2) {
-                        addFailure("Too many initial spaces in " + relativePath + ", line: " + (i + 2));
+                        addFailure(relativePath, i + 2, "Too many initial spaces");
                     }
                     else if (difference == 1) {
-                        addFailure("Add one more space in " + relativePath + ", line: " + (i + 2));
+                        addFailure(relativePath, i + 2, "Add one more space");
                     }
                 }
             }
@@ -859,7 +862,7 @@ public class CodeStyleTest {
                     || line.startsWith("        EDGE = ")
                     || line.startsWith("        FF = ")
                     || line.startsWith("        FF_ESR = ")) {
-                addFailure("Incorrect indentation in " + relativePath + ", line: " + (i + 2));
+                addFailure(relativePath, i + 2, "Incorrect indentation");
             }
         }
     }
@@ -878,6 +881,7 @@ public class CodeStyleTest {
      */
     @Test
     public void tests() throws Exception {
+        title_ = "Tests";
         testTests(new File("src/test/java"));
     }
 
@@ -912,15 +916,25 @@ public class CodeStyleTest {
                             if (ctor.getParameterTypes().length == 0) {
                                 for (final Method method : clazz.getDeclaredMethods()) {
                                     if (Modifier.isPublic(method.getModifiers())
-                                            && method.getAnnotation(Before.class) == null
-                                            && method.getAnnotation(BeforeClass.class) == null
-                                            && method.getAnnotation(After.class) == null
-                                            && method.getAnnotation(AfterClass.class) == null
+                                            && method.getAnnotation(BeforeEach.class) == null
+                                            && method.getAnnotation(BeforeAll.class) == null
+                                            && method.getAnnotation(AfterEach.class) == null
+                                            && method.getAnnotation(AfterAll.class) == null
                                             && method.getAnnotation(Test.class) == null
+                                            && method.getAnnotation(RepeatedTest.class) == null
+                                            && method.getAnnotation(RetryingTest.class) == null
                                             && method.getReturnType() == Void.TYPE
                                             && method.getParameterTypes().length == 0) {
-                                        fail("Method '" + method.getName()
-                                                + "' in " + name + " does not declare @Test annotation");
+                                        final List<String> lines = FileUtils.readLines(file, SOURCE_ENCODING);
+                                        int line = -1;
+                                        for (int i = 0; i < lines.size(); ++i) {
+                                            if (lines.get(i).contains("public void " + method.getName() + "()")) {
+                                                line = i + 1;
+                                                break;
+                                            }
+                                        }
+                                        addFailure(file.toString().replace('\\', '/'), line,
+                                                "Method '" + method.getName() + "' does not declare @Test annotation");
                                     }
                                 }
                             }

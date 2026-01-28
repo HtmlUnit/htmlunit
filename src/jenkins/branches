@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'mvn clean verify spotbugs:spotbugs checkstyle:checkstyle pmd:pmd pmd:cpd javadoc:javadoc -U -P without-library-and-huge-tests -Dgpg.skip -Djava.awt.headless=true'
+        sh 'mvn clean verify spotbugs:spotbugs checkstyle:checkstyle pmd:pmd pmd:cpd javadoc:javadoc -U -P without-library-and-huge-tests --show-version -Dgpg.skip -Djava.awt.headless=true'
       }
     }
   }

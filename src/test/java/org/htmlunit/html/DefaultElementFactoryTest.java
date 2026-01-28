@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,18 @@ package org.htmlunit.html;
 import java.util.Iterator;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Tests for {@link DefaultElementFactory}.
  *
- * @author <a href="mailto:marvin.java@gmail.com">Marcos Vinicius B. de Souza</a>
+ * @author Marcos Vinicius B. de Souza
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  * @since 1.2
  */
-@RunWith(BrowserRunner.class)
 public class DefaultElementFactoryTest extends SimpleWebTestCase {
 
     /**
@@ -40,7 +38,8 @@ public class DefaultElementFactoryTest extends SimpleWebTestCase {
     @Test
     public void attributeOrder() throws Exception {
         // Construct the test page.
-        final String html = "<html><head><title>test page</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>test page</title></head>\n"
                 + "<body><div>test message</div></body></html>";
 
         // Load the test page.
@@ -88,7 +87,8 @@ public class DefaultElementFactoryTest extends SimpleWebTestCase {
      */
     @Test
     public void attributeOrderLive() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<a href='http://www.google.com' tabindex='2' accesskey='F'>foo</a>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);

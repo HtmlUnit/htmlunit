@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,19 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TreeWalker}.
  *
- * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
+ * @author Mike Dirolf
  * @author Marc Guillemot
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class TreeWalkerTest extends WebDriverTestCase {
-    private static final String CONTENT_START = "<html><head><title></title>\n"
+    private static final String CONTENT_START = DOCTYPE_HTML
+        + "<html><head><title></title>\n"
         + "<script>\n"
         + LOG_TITLE_FUNCTION
         + "function safeTagName(o) {\n"
@@ -44,7 +42,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "function test() {\n"
         + "  try {\n";
 
-    private static final String CONTENT_END = "\n  } catch(e) { log('exception') }\n"
+    private static final String CONTENT_END = "\n  } catch(e) { logEx(e) }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -59,7 +57,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    private static final String CONTENT_START2 = "<html><head><title></title>\n"
+    private static final String CONTENT_START2 =
+        "<html><head><title></title>\n"
         + "<script>\n"
         + LOG_TITLE_FUNCTION
         + "function safeTagName(o) {\n"
@@ -68,7 +67,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "function test() {\n"
         + "  try {\n";
 
-    private static final String CONTENT_END2 = "\n  } catch(e) { log('exception') }\n"
+    private static final String CONTENT_END2 = "\n  } catch(e) { logEx(e) }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -320,11 +319,11 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void nullRoot() throws Exception {
         final String script = "try {\n"
             + "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, null, true);\n"
-            + "} catch(e) { log('exception'); }\n";
+            + "} catch(e) { logEx(e); }\n";
 
         test2(script);
     }
@@ -384,11 +383,11 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void emptyFilter() throws Exception {
         final String script = "try {\n"
             + "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, {}, true);\n"
-            + "} catch(e) { log('exception'); }\n";
+            + "} catch(e) { logEx(e); }\n";
 
         test2(script);
     }
@@ -399,8 +398,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
     @Test
     @Alerts({"P", "undefined"})
     public void secondFilterReject() throws Exception {
-        final String script = ""
-            + "var noScripts = {\n"
+        final String script = "var noScripts = {\n"
             + "  acceptNode: function(node) {\n"
             + "    if (node.tagName == 'SPAN' || node.tagName == 'DIV') {\n"
             + "      return NodeFilter.FILTER_REJECT;\n"

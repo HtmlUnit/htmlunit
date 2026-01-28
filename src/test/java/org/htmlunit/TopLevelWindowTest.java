@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,20 +24,17 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.JavaScriptJob;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TopLevelWindow}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class TopLevelWindowTest extends SimpleWebTestCase {
 
     /**
@@ -96,6 +93,17 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
             /** {@inheritDoc} */
             @Override
             public int waitForJobsStartingBefore(final long delayMillis) {
+                return jobCount.intValue();
+            }
+            /** {@inheritDoc} */
+            @Override
+            public int waitForJobsStartingBefore(final long delayMillis, final long timeoutMillis) {
+                return jobCount.intValue();
+            }
+            /** {@inheritDoc} */
+            @Override
+            public int waitForJobsStartingBefore(final long delayMillis, final long timeoutMillis,
+                            final JavaScriptJobFilter filter) {
                 return jobCount.intValue();
             }
             /** {@inheritDoc} */
@@ -191,7 +199,8 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         window.setJobManager(mgr);
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setDefaultResponse("<html><body><script>window.setTimeout('', 500);</script></body></html>");
+        conn.setDefaultResponse(DOCTYPE_HTML
+                + "<html><body><script>window.setTimeout('', 500);</script></body></html>");
 
         client.getPage(URL_FIRST);
         assertEquals(1, jobCount.intValue());
@@ -210,10 +219,13 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         final History history = window.getHistory();
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, "<html><body><a name='a' href='" + URL_SECOND + "'>foo</a>\n"
-            + "<a name='b' href='#b'>bar</a></body></html>");
-        conn.setResponse(URL_SECOND, "<html><body><a name='a' href='" + URL_THIRD + "'>foo</a></body></html>");
-        conn.setResponse(URL_THIRD, "<html><body><a name='a' href='" + URL_FIRST + "'>foo</a></body></html>");
+        conn.setResponse(URL_FIRST, DOCTYPE_HTML
+                + "<html><body><a name='a' href='" + URL_SECOND + "'>foo</a>\n"
+                + "<a name='b' href='#b'>bar</a></body></html>");
+        conn.setResponse(URL_SECOND, DOCTYPE_HTML
+                + "<html><body><a name='a' href='" + URL_THIRD + "'>foo</a></body></html>");
+        conn.setResponse(URL_THIRD, DOCTYPE_HTML
+                + "<html><body><a name='a' href='" + URL_FIRST + "'>foo</a></body></html>");
 
         assertEquals(0, history.getLength());
         assertEquals(-1, history.getIndex());
@@ -305,7 +317,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
      */
     @Test
     public void onBeforeUnloadCalledOnClose() throws Exception {
-        final String html = "<html><body onbeforeunload='alert(7)'>abc</body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onbeforeunload='alert(7)'>abc</body></html>";
         final List<String> alerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, alerts);
         assertTrue(alerts.isEmpty());
@@ -323,7 +335,8 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
     @Test
     @Alerts("closing")
     public void setTimeoutDuringOnUnload() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "function f() {\n"
             + "  alert('closing');\n"

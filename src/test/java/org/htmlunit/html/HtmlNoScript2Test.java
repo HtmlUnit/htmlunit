@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,8 @@ package org.htmlunit.html;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for elements inside {@link HtmlNoScript}.
@@ -29,7 +27,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlNoScript2Test extends SimpleWebTestCase {
 
     /**
@@ -37,13 +34,11 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts("<body>\r\n"
-                        + "  <noscript>\r\n"
-                        + "    &lt;div&gt;hello\r\n"
-                        + "  </noscript>\r\n"
-                        + "</body>\r\n")
+                + "  <noscript>&lt;div&gt;hello</noscript>\r\n"
+                + "</body>")
     public void asXml_jsEnabled() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<noscript><div>hello</noscript>"
             + "</body></html>";
 
@@ -56,17 +51,16 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      */
     @Test
     public void asXml_jsDisabled() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<noscript><div>hello</noscript>"
             + "</body></html>";
 
         final String expected = "<body>\r\n"
             + "  <noscript>\r\n"
-            + "    <div>\r\n"
-            + "      hello\r\n"
-            + "    </div>\r\n"
+            + "    <div>hello</div>\r\n"
             + "  </noscript>\r\n"
-            + "</body>\r\n";
+            + "</body>";
 
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);
@@ -84,8 +78,8 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedTextjsEnabled() throws Exception {
-        final String htmlContent
-            = "<html><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<noscript>hello</noscript>"
             + "</body></html>";
 
@@ -98,7 +92,8 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText_jsDisabled() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<noscript>hello</noscript>"
             + "</body></html>";
 
@@ -120,7 +115,8 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      */
     @Test
     public void isEmptyXmlTagExpanded() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<noscript></noscript>"
             + "</body></html>";
 

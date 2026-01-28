@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,7 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.HtmlPage;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 /**
@@ -32,6 +31,9 @@ import org.junit.Test;
  */
 public class WebClientTest extends WebServerTestCase {
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void homePage_Firefox() throws Exception {
         try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
@@ -41,10 +43,13 @@ public class WebClientTest extends WebServerTestCase {
             webClient.getOptions().setCssEnabled(false);
 
             final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-            Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+            assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void homePage_Firefox2() throws Exception {
         try (WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
@@ -52,10 +57,13 @@ public class WebClientTest extends WebServerTestCase {
             webClient.getOptions().setThrowExceptionOnScriptError(false);
 
             final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-            Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+            assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void changeBrowserLanguage() throws Exception {
         final BrowserVersion.BrowserVersionBuilder builder =
@@ -68,10 +76,13 @@ public class WebClientTest extends WebServerTestCase {
         final BrowserVersion germanFirefox = builder.build();
         try (WebClient webClient = new WebClient(germanFirefox)) {
             final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-            Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+            assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void changeUserAgent() throws Exception {
         final BrowserVersion.BrowserVersionBuilder builder =
@@ -83,7 +94,7 @@ public class WebClientTest extends WebServerTestCase {
         final BrowserVersion iosFirefox = builder.build();
         try (WebClient webClient = new WebClient(iosFirefox)) {
             final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-            Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+            assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
         }
     }
 }

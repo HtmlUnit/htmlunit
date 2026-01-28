@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,23 +39,20 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.attachment.AttachmentHandler;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlAnchor}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Stefan Anzinger
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Lai Quang Duong
  */
-@RunWith(BrowserRunner.class)
 public class HtmlAnchor2Test extends SimpleWebTestCase {
 
     /**
@@ -63,15 +60,15 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_onClickHandler() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
             + "<a href='" + URL_SECOND + "' id='a2' "
             + "onClick='alert(\"clicked\")'>link to foo2</a>\n"
             + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>\n"
             + "</body></html>";
-        final String secondContent
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -98,14 +95,14 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_onClickHandler_returnFalse() throws Exception {
-        final String firstContent
-            = "<html><head><title>First</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
             + "<a href='" + URL_SECOND + "' id='a2' "
             + "onClick='alert(\"clicked\");return false;'>link to foo2</a>\n"
             + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -132,8 +129,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_onClickHandler_javascriptDisabled() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
             + "<a href='http://www.foo2.com' id='a2' "
             + "onClick='alert(\"clicked\")'>link to foo2</a>\n"
@@ -169,8 +166,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_javascriptUrl() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
             + "<a href='javascript:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
             + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>\n"
@@ -193,8 +190,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_javascriptUrlMixedCase() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<a href='JAVAscrIpt:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
@@ -215,8 +212,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_javascriptUrlLeadingWhitespace() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<a href='  javascript:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
@@ -237,8 +234,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_javascriptUrl_javascriptDisabled() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
             + "<a href='javascript:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
             + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>\n"
@@ -269,8 +266,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_javascriptUrl_InvalidReturn_RegressionTest() throws Exception {
-        final String htmlContent
-            = "<html><head><SCRIPT lang=\"JavaScript\">\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><SCRIPT lang=\"JavaScript\">\n"
             + "function doSubmit(formName) {\n"
             + "  return false;\n"
             + "}\n"
@@ -291,18 +288,18 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_javascriptUrl_targetPageWithIframe() throws Exception {
-        final String firstContent
-            = " <html>\n"
+        final String firstContent = DOCTYPE_HTML
+            + " <html>\n"
             + "<head><title>Page A</title></head>\n"
             + "<body><a href='#' onclick=\"document.location.href='" + URL_SECOND + "'\" id='link'>link</a></body>\n"
             + "</html>";
-        final String secondContent
-            = "<html>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Page B</title></head>\n"
             + "<body><iframe src='" + URL_THIRD + "'></iframe></body>\n"
             + "</html>";
-        final String thirdContent
-            = "<html>\n"
+        final String thirdContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><title>Page C</title></head>\n"
             + "<body>test</body>\n"
             + "</html>";
@@ -326,8 +323,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_javascriptUrl_encoded() throws Exception {
-        final String htmlContent
-            = "<html><body><script>function hello() { alert('hello') }</script>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><body><script>function hello() { alert('hello') }</script>\n"
             + "<a href='javascript:%20hello%28%29' id='a1'>a1</a>\n"
             + "<a href='javascript: hello%28%29' id='a2'>a2</a>\n"
             + "<a href='javascript:hello%28%29' id='a3'>a3</a>\n"
@@ -349,7 +346,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void openLinkInNewWindow() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
             + "</body></html>";
 
@@ -362,7 +360,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
 
         assertNotSame("new page not returned", page, secondPage);
         assertTrue("new page in wrong window type",
-                TopLevelWindow.class.isInstance(secondPage.getEnclosingWindow()));
+                secondPage.getEnclosingWindow() instanceof TopLevelWindow);
         assertEquals("new window not created", 2, page.getWebClient().getWebWindows().size());
         assertNotSame("new window not used", page.getEnclosingWindow(), secondPage
                 .getEnclosingWindow());
@@ -378,11 +376,12 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void correctLinkTargetWhenOnclickOpensWindow() throws Exception {
-        final String firstContent = "<html><head><title>First</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<a href='page2.html' id='clickme' onclick=\"window.open('popup.html', 'newWindow');\">X</a>\n"
             + "</body></html>";
-        final String html2 = "<html><head><title>Second</title></head><body></body></html>";
-        final String htmlPopup = "<html><head><title>Popup</title></head><body></body></html>";
+        final String html2 = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
+        final String htmlPopup = DOCTYPE_HTML + "<html><head><title>Popup</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -410,8 +409,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void preventDefault1() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function handler(e) {\n"
             + "    if (e)\n"
             + "      e.preventDefault();\n"
@@ -437,8 +436,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void preventDefault2() throws Exception {
-        final String html =
-              "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function handler(e) {\n"
             + "    if (e.preventDefault)\n"
             + "      e.preventDefault();\n"
@@ -461,8 +460,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void preventDefault3() throws Exception {
-        final String html =
-              "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<a href='" + URL_SECOND + "' id='a1' onclick='return false'>Test</a>\n"
             + "</body></html>";
 
@@ -478,7 +477,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void hashAnchor() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<a id='a' href='#a'>a</a>\n"
                 + "<a id='a_target' href='#target' target='_blank'>target</a>\n"
                 + "</body></html>";
@@ -533,8 +533,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void clickNestedElement_jsDisabled() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "<a href='page2.html'>\n"
             + "<span id='theSpan'>My Link</span></a>\n"
@@ -554,13 +554,14 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void asXml_emptyTag() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<a name='foo'></a>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
         final HtmlAnchor htmlAnchor = page.getAnchorByName("foo");
-        assertTrue(htmlAnchor.asXml().contains("</a>"));
+        assertEquals("<a name=\"foo\"></a>", htmlAnchor.asXml());
     }
 
     /**
@@ -568,12 +569,12 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void clickShift() throws Exception {
-        final String first
-            = "<html><head><title>First</title></head><body>\n"
+        final String first = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "  <a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
             + "</body></html>";
-        final String second
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String second = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -598,12 +599,12 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void clickCtrl() throws Exception {
-        final String first
-            = "<html><head><title>First</title></head><body>\n"
+        final String first = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "  <a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
             + "</body></html>";
-        final String second
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String second = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -628,12 +629,12 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void clickCtrlShift() throws Exception {
-        final String first
-            = "<html><head><title>First</title></head><body>\n"
+        final String first = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "  <a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
             + "</body></html>";
-        final String second
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String second = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -658,12 +659,12 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void clickShiftJavascript() throws Exception {
-        final String first
-            = "<html><head><title>First</title></head><body>\n"
+        final String first = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "  <a href='javascript: window.location=\"" + URL_SECOND + "\"' id='a2'>link to foo2</a>\n"
             + "</body></html>";
-        final String second
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String second = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -688,12 +689,12 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void clickCtrlJavascript() throws Exception {
-        final String first
-            = "<html><head><title>First</title></head><body>\n"
+        final String first = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "  <a href='javascript: window.location=\"" + URL_SECOND + "\"' id='a2'>link to foo2</a>\n"
             + "</body></html>";
-        final String second
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String second = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -718,12 +719,12 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void clickShiftCtrlJavascript() throws Exception {
-        final String first
-            = "<html><head><title>First</title></head><body>\n"
+        final String first = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "  <a href='javascript: window.location=\"" + URL_SECOND + "\"' id='a2'>link to foo2</a>\n"
             + "</body></html>";
-        final String second
-            = "<html><head><title>Second</title></head><body></body></html>";
+        final String second = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
         final List<String> collectedAlerts = new ArrayList<>();
@@ -748,8 +749,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void asText_getTextContent() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <a href='localhost' id='a2'>\n"
@@ -772,7 +773,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"1", "First"})
     public void clickWithDownloadAttribute() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>First</title>\n"
                 + "</head>\n"
@@ -799,7 +801,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
     @Test
     @Alerts({"1", "First"})
     public void clickWithDownloadAttributeFromJs() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>First</title>\n"
                 + "  <script>\n"
@@ -837,7 +840,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
                     + "7OwQg2JoQ9LE1exdlYvBBeZ7jqch9//q1uH4TLzw4d6+ErXMMcXuHWxId3KOETnnXXV6MJpcq2MLaI"
                     + "97CER3N0vr4MkhoXe0rZigAAAABJRU5ErkJggg=="})
     public void clickWithDownloadAttributeDataUrl() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head>\n"
                 + "  <title>First</title>\n"
                 + "</head>\n"
@@ -877,8 +881,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_unexpectedPage() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
             + "</body>\n"
@@ -899,8 +903,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_unexpectedPageAttachmentHandlerDoesNotHandleContentType() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
             + "</body>\n"
@@ -909,13 +913,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         getMockWebConnection().setResponse(URL_SECOND, "{name: \"Test\"};", MimeType.APPLICATION_JSON);
 
         final LinkedList<Page> pages = new LinkedList<>();
-        getWebClient().setAttachmentHandler(new AttachmentHandler() {
-
-            @Override
-            public void handleAttachment(final Page page, final String attachmentFilename) {
-                pages.add(page);
-            }
-        });
+        getWebClient().setAttachmentHandler((AttachmentHandler) (page, attachmentFilename) -> pages.add(page));
 
         try {
             final HtmlPage page = loadPage(html);
@@ -939,8 +937,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_unexpectedPageAttachmentHandlerHandleContentType() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
             + "</body>\n"
@@ -984,8 +982,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_unexpectedPageAttachmentHandlerHandleResponseDoesNotHandleContentType() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
             + "</body>\n"
@@ -1028,8 +1026,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_unexpectedPageAttachmentHandlerHandleResponseHandlesContentType() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <a href='" + URL_SECOND + "' id='link'>link</a>\n"
             + "</body>\n"
@@ -1078,8 +1076,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_unexpectedPageDownloadAttribute() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <a href='" + URL_SECOND + "' id='link' download='test.json'>link</a>\n"
             + "</body>\n"
@@ -1102,8 +1100,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_unexpectedPageDownloadAttributeAttachmentHandler() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <a href='" + URL_SECOND + "' id='link' download='test.json'>link</a>\n"
             + "</body>\n"
@@ -1112,12 +1110,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         getMockWebConnection().setResponse(URL_SECOND, "{name: \"Test\"};", MimeType.APPLICATION_JSON);
 
         final LinkedList<Page> pages = new LinkedList<>();
-        getWebClient().setAttachmentHandler(new AttachmentHandler() {
-            @Override
-            public void handleAttachment(final Page page, final String attachmentFilename) {
-                pages.add(page);
-            }
-        });
+        getWebClient().setAttachmentHandler((AttachmentHandler) (page, attachmentFilename) -> pages.add(page));
 
         try {
             final HtmlPage page = loadPage(html);
@@ -1142,8 +1135,8 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_unexpectedPageDownloadAttributeAttachmentHandlerHandleResponse() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <a href='" + URL_SECOND + "' id='link' download='test.json'>link</a>\n"
             + "</body>\n"

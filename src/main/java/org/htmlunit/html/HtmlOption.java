@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,9 @@ import org.w3c.dom.Node;
 /**
  * Wrapper for the HTML element "option".
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -122,8 +122,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     @Override
     public void insertBefore(final DomNode newNode) {
         super.insertBefore(newNode);
-        if (newNode instanceof HtmlOption) {
-            final HtmlOption option = (HtmlOption) newNode;
+        if (newNode instanceof HtmlOption option) {
             if (option.isSelected()) {
                 getEnclosingSelect().setSelectedAttribute(option, true);
             }
@@ -151,7 +150,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code selected}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getSelectedAttribute() {
         return getAttributeDirect("selected");
@@ -179,8 +178,8 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
 
         Node node = getParentNode();
         while (node != null) {
-            if (node instanceof DisabledElement
-                    && ((DisabledElement) node).isDisabled()) {
+            if (node instanceof DisabledElement element
+                    && element.isDisabled()) {
                 return true;
             }
             node = node.getParentNode();
@@ -224,7 +223,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION">
-     * initial value if value attribute is not set</a>
+     *     initial value if value attribute is not set</a>
      * @return the value of the attribute {@code value}
      */
     public final String getValueAttribute() {

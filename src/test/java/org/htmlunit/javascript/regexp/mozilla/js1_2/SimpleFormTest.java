@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,15 @@
 package org.htmlunit.javascript.regexp.mozilla.js1_2;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests originally in '/js/src/tests/js1_2/regexp/simple_form.js'.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class SimpleFormTest extends WebDriverTestCase {
 
     /**
@@ -33,7 +31,7 @@ public class SimpleFormTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void test1() throws Exception {
         test("/[0-9]{3}/('23 2 34 678 9 09')");
     }
@@ -43,7 +41,7 @@ public class SimpleFormTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void test2() throws Exception {
         test("/3.{4}8/('23 2 34 678 9 09')");
     }
@@ -53,7 +51,7 @@ public class SimpleFormTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void test3() throws Exception {
         test("(/3.{4}8/('23 2 34 678 9 09')).length");
     }
@@ -63,7 +61,7 @@ public class SimpleFormTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void test4() throws Exception {
         test("var re = /[0-9]{3}/", "re('23 2 34 678 9 09')");
     }
@@ -73,7 +71,7 @@ public class SimpleFormTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void test5() throws Exception {
         test("var re = /3.{4}8/", "re('23 2 34 678 9 09')");
     }
@@ -83,7 +81,7 @@ public class SimpleFormTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void test6() throws Exception {
         test("/3.{4}8/('23 2 34 678 9 09')");
     }
@@ -93,7 +91,7 @@ public class SimpleFormTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void test7() throws Exception {
         test("var re =/3.{4}8/", "(re('23 2 34 678 9 09')).length");
     }
@@ -103,7 +101,7 @@ public class SimpleFormTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void test8() throws Exception {
         test("(/3.{4}8/('23 2 34 678 9 09')).length");
     }
@@ -120,7 +118,7 @@ public class SimpleFormTest extends WebDriverTestCase {
             html += initialScript + ";\n";
         }
         html += "  log(" + script + ");\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageVerifyTitle2(html);

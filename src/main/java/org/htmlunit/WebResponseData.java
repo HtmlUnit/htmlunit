@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,13 +28,13 @@ import java.util.zip.InflaterInputStream;
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.brotli.dec.BrotliInputStream;
+import org.htmlunit.util.ArrayUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.StringUtils;
+import org.htmlunit.util.brotli.BrotliInputStream;
 
 /**
  * Simple data object to simplify WebResponse creation.
@@ -102,7 +102,7 @@ public class WebResponseData implements Serializable {
         final List<NameValuePair> headers = getResponseHeaders();
         final String encoding = getHeader(headers, "content-encoding");
         if (encoding != null) {
-            boolean isGzip = StringUtils.contains(encoding, "gzip") && !"no-gzip".equals(encoding);
+            boolean isGzip = StringUtils.containsIgnoreCase(encoding, "gzip") && !"no-gzip".equals(encoding);
             if ("gzip-only-text/html".equals(encoding)) {
                 isGzip = MimeType.TEXT_HTML.equals(getHeader(headers, "content-type"));
             }
@@ -114,14 +114,15 @@ public class WebResponseData implements Serializable {
                     LOG.error("Reading gzip encodec content failed.", e);
                     stream.close();
                     stream = IOUtils.toInputStream(
-                                "<html>\n"
-                                 + "<head><title>Problem loading page</title></head>\n"
-                                 + "<body>\n"
-                                 + "<h1>Content Encoding Error</h1>\n"
-                                 + "<p>The page you are trying to view cannot be shown because"
-                                 + " it uses an invalid or unsupported form of compression.</p>\n"
-                                 + "</body>\n"
-                                 + "</html>", ISO_8859_1);
+                                """
+                                <!DOCTYPE html><html>
+                                <head><title>Problem loading page</title></head>
+                                <body>
+                                <h1>Content Encoding Error</h1>
+                                <p>The page you are trying to view cannot be shown because\
+                                 it uses an invalid or unsupported form of compression.</p>
+                                </body>
+                                </html>""", ISO_8859_1);
                 }
                 if (stream != null && bomHeaders != null) {
                     stream = BOMInputStream.builder().setInputStream(stream).setByteOrderMarks(bomHeaders).get();
@@ -137,19 +138,20 @@ public class WebResponseData implements Serializable {
                     LOG.error("Reading Brotli encodec content failed.", e);
                     stream.close();
                     stream = IOUtils.toInputStream(
-                                "<html>\n"
-                                 + "<head><title>Problem loading page</title></head>\n"
-                                 + "<body>\n"
-                                 + "<h1>Content Encoding Error</h1>\n"
-                                 + "<p>The page you are trying to view cannot be shown because"
-                                 + " it uses an invalid or unsupported form of compression.</p>\n"
-                                 + "</body>\n"
-                                 + "</html>", ISO_8859_1);
+                                """
+                                <!DOCTYPE html><html>
+                                <head><title>Problem loading page</title></head>
+                                <body>
+                                <h1>Content Encoding Error</h1>
+                                <p>The page you are trying to view cannot be shown because\
+                                 it uses an invalid or unsupported form of compression.</p>
+                                </body>
+                                </html>""", ISO_8859_1);
                 }
                 return stream;
             }
 
-            if (StringUtils.contains(encoding, "deflate")) {
+            if (StringUtils.containsIgnoreCase(encoding, "deflate")) {
                 boolean zlibHeader = false;
                 if (stream.markSupported()) { // should be always the case as the content is in a byte[] or in a file
                     stream.mark(2);

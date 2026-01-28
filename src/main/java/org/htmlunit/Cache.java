@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,7 +91,7 @@ public class Cache implements Serializable {
          */
         @Override
         public boolean equals(final Object obj) {
-            return obj instanceof Entry && lastAccess_ == ((Entry) obj).lastAccess_;
+            return obj instanceof Entry e && lastAccess_ == e.lastAccess_;
         }
 
         /**
@@ -168,8 +168,8 @@ public class Cache implements Serializable {
      *
      * @param request the request corresponding to the specified compiled script
      * @param response the response corresponding to the specified compiled script
-     * @param toCache the object that is to be cached, if possible (may be for instance a compiled script or
-     * simply a WebResponse)
+     * @param toCache the object that is to be cached, if possible (for instance a compiled script or
+     *        simply a WebResponse)
      * @return whether the response was cached or not
      */
     public boolean cacheIfPossible(final WebRequest request, final WebResponse response, final Object toCache) {

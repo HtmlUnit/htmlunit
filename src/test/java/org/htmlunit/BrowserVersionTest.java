@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
  */
 package org.htmlunit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 import java.util.TimeZone;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link BrowserVersion}.
@@ -38,10 +38,10 @@ public class BrowserVersionTest {
      */
     @Test
     public void getBrowserVersionNumeric() {
-        assertEquals(128, BrowserVersion.FIREFOX.getBrowserVersionNumeric());
-        assertEquals(115, BrowserVersion.FIREFOX_ESR.getBrowserVersionNumeric());
-        assertEquals(126, BrowserVersion.CHROME.getBrowserVersionNumeric());
-        assertEquals(126, BrowserVersion.EDGE.getBrowserVersionNumeric());
+        assertEquals(146, BrowserVersion.FIREFOX.getBrowserVersionNumeric());
+        assertEquals(140, BrowserVersion.FIREFOX_ESR.getBrowserVersionNumeric());
+        assertEquals(143, BrowserVersion.CHROME.getBrowserVersionNumeric());
+        assertEquals(143, BrowserVersion.EDGE.getBrowserVersionNumeric());
     }
 
     /**
@@ -51,24 +51,13 @@ public class BrowserVersionTest {
     public void testClone() {
         final BrowserVersion ff = BrowserVersion.FIREFOX;
 
-        final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 32.0 r0", "32.0.0.445", "Flash.ocx");
-        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
-                "Shockwave Flash", "swf"));
-        ff.getPlugins().add(flash);
-
         final BrowserVersion clone = new BrowserVersion.BrowserVersionBuilder(ff).build();
 
         // Nickname is used as key for dictionaries storing browser setups
-        assertTrue(ff.getNickname().equals(clone.getNickname()));
+        assertEquals(ff.getNickname(), clone.getNickname());
 
-        assertFalse(ff == clone);
-        assertFalse(ff.equals(clone));
-
-        assertFalse(clone.getPlugins().isEmpty());
-        clone.getPlugins().clear();
-        assertTrue(clone.getPlugins().isEmpty());
-        assertFalse(ff.getPlugins().isEmpty());
+        assertNotSame(ff, clone);
+        assertNotEquals(ff, clone);
     }
 
     /**
@@ -81,11 +70,11 @@ public class BrowserVersionTest {
                                                 .build();
 
         // Nickname is used as key for dictionaries storing browser setups
-        assertTrue(BrowserVersion.FIREFOX.getNickname().equals(ffBerlin.getNickname()));
+        assertEquals(BrowserVersion.FIREFOX.getNickname(), ffBerlin.getNickname());
 
-        assertFalse(BrowserVersion.FIREFOX == ffBerlin);
-        assertFalse(BrowserVersion.FIREFOX.equals(ffBerlin));
+        assertNotSame(BrowserVersion.FIREFOX, ffBerlin);
+        assertNotEquals(BrowserVersion.FIREFOX, ffBerlin);
 
-        assertNotEquals(BrowserVersion.FIREFOX.getSystemTimezone(), ffBerlin.getSystemTimezone());
+        Assertions.assertNotEquals(BrowserVersion.FIREFOX.getSystemTimezone(), ffBerlin.getSystemTimezone());
     }
 }

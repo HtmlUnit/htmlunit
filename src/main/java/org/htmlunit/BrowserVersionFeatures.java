@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,10 +46,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     CSS_BACKGROUND_RGBA,
 
-    /** {@code CSSFontFaceRule.cssText} uses one more blank. */
-    @BrowserFeature(FF)
-    CSS_CSSTEXT_FF_STYLE,
-
     /** Is display style 'block'. */
     @BrowserFeature({FF, FF_ESR})
     CSS_DISPLAY_BLOCK,
@@ -63,11 +59,11 @@ public enum BrowserVersionFeatures {
     CSS_RP_DISPLAY_NONE,
 
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
-    @BrowserFeature(FF_ESR)
+    @BrowserFeature({FF, FF_ESR})
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
     /** The context menu MouseEvent has a detail of 1. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     EVENT_CONTEXT_MENU_HAS_DETAIL_1,
 
     /** Triggers the onfocus event when focusing the body on load. */
@@ -78,10 +74,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED,
 
-    /** Triggers 'onclick' event handler using <code>PointerEvent</code>. */
-    @BrowserFeature({CHROME, EDGE})
-    EVENT_ONCLICK_USES_POINTEREVENT,
-
     /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,
@@ -90,15 +82,19 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED,
 
-    /** Supports event type 'TextEvent'. */
-    @BrowserFeature({CHROME, EDGE})
-    EVENT_TYPE_TEXTEVENT,
+    /** Scroll events are of type 'UIEvent'. */
+    @BrowserFeature({FF, FF_ESR})
+    EVENT_SCROLL_UIEVENT,
+
+    /** Supports event type 'MutationEvent'. */
+    @BrowserFeature(FF_ESR)
+    EVENT_TYPE_MUTATIONEVENT,
 
     /** Supports event type 'WheelEvent'. */
     @BrowserFeature({CHROME, EDGE})
     EVENT_TYPE_WHEELEVENT,
 
-    /** Form elements are able to refer to the for by using the from attribute. */
+    /** Form elements are able to refer to the for by using the form attribute. */
     @BrowserFeature({CHROME, EDGE})
     FORM_IGNORE_REL_NOREFERRER,
 
@@ -106,17 +102,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE,
 
-    /** If the frame src has 'about:' scheme always use 'about:blank' as source. */
-    @BrowserFeature({FF, FF_ESR})
-    FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME,
-
     /** Should org.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden(). */
     @BrowserFeature({FF, FF_ESR})
     HTMLBASEFONT_END_TAG_FORBIDDEN,
-
-    /** If type submit/reset the form update is triggered even if disabled. */
-    @BrowserFeature(FF_ESR)
-    HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE,
 
     /** willValidate does not check the readonly property. */
     @BrowserFeature({FF, FF_ESR})
@@ -126,19 +114,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLCOLLECTION_NAMED_ITEM_ID_FIRST,
 
-    /** Calling cookies setter with blank string does not reset the cookies. */
-    @BrowserFeature({CHROME, EDGE})
-    HTMLDOCUMENT_COOKIES_IGNORE_BLANK,
-
     /**
     /** {@code document.getElementsByName} returns an empty list if called with the empty string.
      */
     @BrowserFeature({FF, FF_ESR})
     HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY,
-
-    /** Calls to <code>document.XYZ</code> also looks at frames. */
-    @BrowserFeature({CHROME, EDGE})
-    HTMLDOCUMENT_GET_ALSO_FRAMES,
 
     /** Removing the active element from the dom tree triggers the onblur event. */
     @BrowserFeature({CHROME, EDGE})
@@ -160,14 +140,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLIMAGE_HTMLUNKNOWNELEMENT,
 
-    /** Clicking an image input submits the value as param if defined. */
-    @BrowserFeature({CHROME, EDGE})
-    HTMLIMAGE_NAME_VALUE_PARAMS,
-
-    /** When clicking a {@code checkbox} or {@code radio} input the surrounding anchor is not clicked. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
-
     /** HTMLInputElement image type is not supported. */
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY,
@@ -179,6 +151,10 @@ public enum BrowserVersionFeatures {
     /** HTMLInputElement week type is supported. */
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_TYPE_WEEK_SUPPORTED,
+
+    /** For a stylesheet link report an error if the response type is not text/css. */
+    @BrowserFeature({FF, FF_ESR})
+    HTMLLINK_CHECK_RESPONSE_TYPE_FOR_STYLESHEET,
 
     /** If the type is present for a link only use if type is text/css. */
     @BrowserFeature({CHROME, EDGE})
@@ -195,6 +171,10 @@ public enum BrowserVersionFeatures {
     /** HTML parser supports the 'command' tag. */
     @BrowserFeature({CHROME, EDGE})
     HTML_COMMAND_TAG,
+
+    /** HTML parser supports the 'layer' tag. */
+    @BrowserFeature({CHROME, EDGE})
+    HTML_LAYER_TAG,
 
     /** Additionally support dates in format "d/M/yyyy". */
     @BrowserFeature({FF, FF_ESR})
@@ -213,18 +193,15 @@ public enum BrowserVersionFeatures {
     HTTP_HEADER_CH_UA,
 
     /** Browser sends Priority headers. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     HTTP_HEADER_PRIORITY,
 
     /** The anchor hostname setter ignores blank url's. */
     @BrowserFeature({FF, FF_ESR})
     JS_ANCHOR_HOSTNAME_IGNORE_BLANK,
 
-    /** The anchor pathname detects url's starting with one letter as file url's. */
-    @BrowserFeature(FF_ESR)
-    JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
-
-    /** The anchor pathname detects url's starting with one letter as file url's
+    /**
+     * The anchor pathname detects url's starting with one letter as file url's
      * and replaces them with the file protocol. */
     @BrowserFeature({CHROME, EDGE})
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE,
@@ -241,13 +218,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_AREA_WITHOUT_HREF_FOCUSABLE,
 
+    /** Sorting an array using a user defined comperator accepts inconsistent iterators. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_ARRAY_SORT_ACCEPTS_INCONSISTENT_COMPERATOR,
+
     /** AudioProcessingEvent ctor is callable. */
     @BrowserFeature({CHROME, EDGE})
     JS_AUDIO_PROCESSING_EVENT_CTOR,
-
-    /** HTMLBGSoundElement reported as HTMLUnknownElement. */
-    @BrowserFeature({FF, FF_ESR})
-    JS_BGSOUND_AS_UNKNOWN,
 
     /** toDataURL for canvas returns the CHROME version of the PNG. */
     @BrowserFeature({CHROME, EDGE})
@@ -261,33 +238,45 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_CLIENTHEIGHT_INPUT_18,
 
-    /** ClientHeight for radio button and checkbox is 10. */
+    /** ClientHeight for radio button and checkbox is 14. */
     @BrowserFeature({FF, FF_ESR})
-    JS_CLIENTHEIGHT_RADIO_CHECKBOX_10,
+    JS_CLIENTHEIGHT_RADIO_CHECKBOX_14,
+
+    /** ClientHeight for rb is 17. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_CLIENTHEIGHT_RB_17,
+
+    /** ClientHeight for rt is 9. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_CLIENTHEIGHT_RT_9,
+
+    /** ClientHeight for ruby is 17. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_CLIENTHEIGHT_RUBY_17,
+
+    /** ClientWidth for text/password input is 157. */
+    @BrowserFeature(FF)
+    JS_CLIENTWIDTH_INPUT_TEXT_157,
 
     /** ClientWidth for text/password input is 173. */
     @BrowserFeature({CHROME, EDGE})
     JS_CLIENTWIDTH_INPUT_TEXT_173,
 
-    /** ClientWidth for radio button and checkbox is 10. */
+    /** ClientWidth for radio button and checkbox is 14. */
     @BrowserFeature({FF, FF_ESR})
-    JS_CLIENTWIDTH_RADIO_CHECKBOX_10,
+    JS_CLIENTWIDTH_RADIO_CHECKBOX_14,
 
     /** item is enumerated before length property of CSSRuleList. */
     @BrowserFeature({FF, FF_ESR})
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
 
-    /** Javascript document.evaluate creates a new result object even if provided as param. */
+    /** Javascript document.evaluate() creates a new result object even if provided as param. */
     @BrowserFeature({CHROME, EDGE})
     JS_DOCUMENT_EVALUATE_RECREATES_RESULT,
 
     /** The browser has selection {@code rangeCount}. */
     @BrowserFeature({FF, FF_ESR})
     JS_DOCUMENT_SELECTION_RANGE_COUNT,
-
-    /** Javascript {@code Error.captureStackTrace}. */
-    @BrowserFeature({CHROME, EDGE})
-    JS_ERROR_CAPTURE_STACK_TRACE,
 
     /** Javascript {@code Error.stackTraceLimit}. */
     @BrowserFeature({CHROME, EDGE})
@@ -301,20 +290,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_EVENT_KEYBOARD_CTOR_WHICH,
 
-    /** do not trigger the onload event if the frame content
-     * was not shown because of the csp. */
-    @BrowserFeature(FF_ESR)
-    JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY,
-
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
     @BrowserFeature({FF, FF_ESR})
     JS_FORM_DISPATCHEVENT_SUBMITS,
 
-    /** HTMLObject Validity isValid ignores custom error property. */
-    @BrowserFeature({CHROME, EDGE})
-    JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR,
-
-    /** Executes the {@code onload} handler, regardless of the whether the element was already attached to the page. */
+    /** Executes the {@code onload} handler, regardless of the element was already attached to the page. */
     @BrowserFeature({FF, FF_ESR})
     JS_IFRAME_ALWAYS_EXECUTE_ONLOAD,
 
@@ -336,7 +316,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_INNER_TEXT_SVG_NL,
 
-    /** The value is ignored when the type of an week/month input is changed. */
+    /** The value is ignored when the type of the week/month input is changed. */
     @BrowserFeature({CHROME, EDGE})
     JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH,
 
@@ -352,9 +332,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_INTL_V8_BREAK_ITERATOR,
 
-    /** Indicates that window.Iterator is supported. */
-    @BrowserFeature({CHROME, EDGE})
-    JS_ITERATOR_VISIBLE_IN_WINDOW,
+    /** For the 'about' protocol the location always returns an empty query. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_LOCATION_IGNORE_QUERY_FOR_ABOUT_PROTOCOL,
 
     /** Reload sends a referrer header. */
     @BrowserFeature({CHROME, EDGE})
@@ -377,7 +357,7 @@ public enum BrowserVersionFeatures {
     JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED,
 
     /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     JS_OFFSET_PARENT_NULL_IF_FIXED,
 
     /** element.outerHTML removes all children from detached node. */
@@ -388,7 +368,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_PROPERTY_DESCRIPTOR_NAME,
 
-    /** script tags created from js as child of templates are processed if added to the dom. */
+    /** script tags created from js as child of templates is processed if added to the dom. */
     @BrowserFeature({CHROME, EDGE})
     JS_SCRIPT_IN_TEMPLATE_EXECUTED_ON_ATTACH,
 
@@ -404,17 +384,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_STORAGE_PRESERVED_INCLUDED,
 
+    /** Indicates letterSpacing support percent values. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT,
+
     /** Indicates wordSpacing support percent values. */
     @BrowserFeature({FF, FF_ESR})
     JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT,
-
-    /** Set span zo zero if provided value is invalid. */
-    @BrowserFeature({CHROME, EDGE})
-    JS_TABLE_SPAN_SET_ZERO_IF_INVALID,
-
-    /** WebSocket constructor accepts undefined/null. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    JS_WEBSOCKET_CTOR_ACCEPTS_UNDEFINED,
 
     /** window.getComputedStyle works with pseudo selectors without colon in front. */
     @BrowserFeature({CHROME, EDGE})
@@ -425,10 +401,10 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_INSTALL_TRIGGER_NULL,
 
     /**
-     * Difference of window.outer/inner height is 136.
+     * Difference of window.outer/inner height is 138.
      */
     @BrowserFeature(EDGE)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_136,
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_138,
 
     /**
      * Difference of window.outer/inner height is 147.
@@ -437,10 +413,10 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_147,
 
     /**
-     * Difference of window.outer/inner height is 91.
+     * Difference of window.outer/inner height is 94.
      */
     @BrowserFeature({FF, FF_ESR})
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91,
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94,
 
     /** Window.getSelection returns null, if the window is not visible. */
     @BrowserFeature({FF, FF_ESR})
@@ -455,20 +431,6 @@ public enum BrowserVersionFeatures {
     KEYBOARD_EVENT_SPECIAL_KEYPRESS,
 
     /**
-     * The default display style of multicol is 'block'.
-     */
-    @BrowserFeature(FF_ESR)
-    MULTICOL_BLOCK,
-
-    /** The protocol setter does not check for special protocols. */
-    @BrowserFeature(FF_ESR)
-    URL_IGNORE_SPECIAL,
-
-    /** XMLHttpRequest.getAllResponseHeaders() uses only Lf as separator. */
-    @BrowserFeature({FF, FF_ESR})
-    XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF,
-
-    /**
      * Indicates that the Browser handles async and sync network errors the same way.
      */
     @BrowserFeature({FF, FF_ESR})
@@ -477,11 +439,6 @@ public enum BrowserVersionFeatures {
     /** XMLHttpRequest triggers the load events also if the abort was signaled. */
     @BrowserFeature({FF, FF_ESR})
     XHR_LOAD_ALWAYS_AFTER_DONE,
-
-    /** XMLHttpRequest triggers an additional progress event if a network error
-     * was thrown in async mode. */
-    @BrowserFeature(FF_ESR)
-    XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC,
 
     /** If state unsent the response text is empty even if the response type is wrong. */
     @BrowserFeature({FF, FF_ESR})

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,14 @@ package org.htmlunit.html;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
-import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
-import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,7 +33,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 /**
  * Unit tests for {@link HtmlElement}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Denis N. Antonioli
  * @author Daniel Gredler
  * @author Ahmed Ashour
@@ -45,7 +41,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlElement2Test extends WebDriverTestCase {
 
     /**
@@ -53,8 +48,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     public void onpropertychange() throws Exception {
-        final String html =
-            "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    document.getElementById('input1').value = 'New Value';\n"
@@ -76,8 +71,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void duplicateId() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -100,7 +95,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     public void onpropertychange2() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    document.getElementById('input1').value = 'New Value';\n"
@@ -126,7 +122,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "a", "a", "b", "b", "b", "c"})
     public void clonedNodeAttributes() throws Exception {
-        final String html = "<html><body id='a' title='b'><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body id='a' title='b'><script>\n"
             + LOG_TITLE_FUNCTION
             + "var x = document.body.cloneNode(true);\n"
             + "log(document.body == x);\n"
@@ -151,8 +148,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "undefined"})
     public void textAndXmlUndefined() throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <input type='text' id='textfield1' onfocus='log(1)'>\n"
             + "  <script>\n"
@@ -174,12 +171,15 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Alerts("something")
     @BuggyWebDriver(FF = "",
             FF_ESR = "")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "initialsomething",
+            EDGE = "initialsomething",
+            FF = "initialsomething",
+            FF_ESR = "initialsomething")
     //TODO: fails because of HTMLElement.getContentEditable doesn't detect DomElement.ATTRIBUTE_VALUE_EMPTY
     // this could be a general attribute issue
     public void contentEditable() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body contentEditable><p>initial</p></body>\n"
             + "</html>";
 
@@ -201,7 +201,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @BuggyWebDriver(FF_ESR = "down: 49,0 press: 33,33 up: 49,0 down: 220,0 press: 124,124 up: 220,0",
                 FF = "down: 49,0 press: 33,33 up: 49,0 down: 220,0 press: 124,124 up: 220,0")
     public void shiftKeys() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function appendMessage(message) {\n"
             + "    document.getElementById('result').innerHTML += message + ' ';\n"
             + "  }\n"
@@ -228,8 +229,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
             CHROME = "[object HTMLInputElement] onblur onfocusout [object HTMLBodyElement]",
             EDGE = "[object HTMLInputElement] onblur onfocusout [object HTMLBodyElement]")
     public void removeActiveElement() throws Exception {
-        final String html =
-               HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -261,8 +261,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
             CHROME = "[object HTMLInputElement] onblur1 onfocusout1 [object HTMLBodyElement]",
             EDGE = "[object HTMLInputElement] onblur1 onfocusout1 [object HTMLBodyElement]")
     public void removeParentOfActiveElement() throws Exception {
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -303,12 +302,10 @@ public class HtmlElement2Test extends WebDriverTestCase {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String html =
-                HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -347,7 +344,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     public void keyPressEventWhenPreventsDefault() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "  <input id='suppress' onkeydown='event.preventDefault()' onkeypress='alert(\"press\")'>\n"
                 + "</body></html>";
@@ -363,7 +361,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("press")
     public void keyUpEventWhenPreventsDefault() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<body>\n"
                 + "  <input id='suppress' onkeydown='event.preventDefault()' onkeyup='alert(\"press\")'>\n"
                 + "</body></html>";
@@ -379,7 +378,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLHtmlElement]", "null"})
     public void detach() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
@@ -407,7 +407,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("Hello-world")
     public void typeAtEndOfEditableDiv() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myInput').value);\n"
             + "  }\n"
@@ -432,7 +433,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @BuggyWebDriver(FF = "Hello\n-world",
             FF_ESR = "Hello\n-world")
     public void typeAtEndOfEditableDivWithParagraphInside() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myInput').value);\n"
             + "  }\n"
@@ -456,7 +458,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"bottom", "bottom", "bottom", "", "bottom", "bottom"})
     public void setGetStyle() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION

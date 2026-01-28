@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,8 +122,7 @@ public class FrameWindow extends WebWindowImpl {
         // so we have to disable future updates during initialization
         // see org.htmlunit.html.HtmlPage.loadFrames()
         final WebResponse webResponse = page.getWebResponse();
-        if (webResponse instanceof StringWebResponse) {
-            final StringWebResponse response = (StringWebResponse) webResponse;
+        if (webResponse instanceof StringWebResponse response) {
             if (response.isFromJavascript()) {
                 final BaseFrameElement frame = getFrameElement();
                 frame.setContentLoaded();

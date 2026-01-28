@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,23 +16,19 @@ package org.htmlunit.javascript.host.intl;
 
 import org.apache.commons.lang3.CharUtils;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.ComparisonFailure;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 /**
  * Tests for {@link NumberFormat}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class NumberFormat2Test extends WebDriverTestCase {
 
     private void test(final String... string) throws Exception {
-        final StringBuilder html = new StringBuilder(HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final StringBuilder html = new StringBuilder(DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
@@ -44,7 +40,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
         }
         html.append(
             "      log(" + string[string.length - 1] + ");\n"
-            + "    } catch(e) {log('exception')}\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -54,7 +50,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
         try {
             loadPageVerifyTextArea2(html.toString());
         }
-        catch (final ComparisonFailure e) {
+        catch (final AssertionFailedError e) {
             final String msg = e.getMessage();
             for (int i = 0; i < msg.length(); i++) {
                 final char c = msg.charAt(i);
@@ -159,9 +155,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31,415.927",
-            FF = "\u0663\u0661\u066c\u0664\u0661\u0665\u066b\u0669\u0662\u0667",
-            FF_ESR = "\u0663\u0661\u066c\u0664\u0661\u0665\u066b\u0669\u0662\u0667")
+    @Alerts("31,415.927")
     public void format_ar() throws Exception {
         test("new Intl.NumberFormat('ar').format(number)");
     }
@@ -588,8 +582,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "31\u00a0415,927",
-            CHROME = "31,415.927")
+    @Alerts("31\u00a0415,927")
     public void format_en_za() throws Exception {
         test("new Intl.NumberFormat('en-ZA').format(number)");
     }
@@ -1200,7 +1193,7 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("RangeError")
     public void format_no_no_ny() throws Exception {
         test("new Intl.NumberFormat('no-NO-NY').format(number)");
     }

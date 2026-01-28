@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,20 +26,16 @@ import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlArea}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlArea2Test extends SimpleWebTestCase {
 
     private WebClient createWebClient(final String onClick) throws IOException {
@@ -48,20 +44,19 @@ public class HtmlArea2Test extends SimpleWebTestCase {
         final URL urlImage = new URL(URL_FIRST, "img.jpg");
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            webConnection.setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+            webConnection.setResponse(urlImage, directBytes, 200, "ok", "image/jpg", Collections.emptyList());
         }
 
-        final String firstContent
-            = "<html><head><title>first</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>first</title></head><body>\n"
             + "<img src='" + urlImage + "' width='145' height='126' usemap='#planetmap'>\n"
             + "<map id='planetmap' name='planetmap'>\n"
             + "<area shape='rect' onClick=\"" + onClick + "\" coords='0,0,82,126' id='second' "
             + "href='" + URL_SECOND + "'>\n"
             + "<area shape='circle' coords='90,58,3' id='third' href='" + URL_THIRD + "'>\n"
             + "</map></body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
-        final String thirdContent = "<html><head><title>third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head><body></body></html>";
+        final String thirdContent = DOCTYPE_HTML + "<html><head><title>third</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
 
@@ -128,8 +123,8 @@ public class HtmlArea2Test extends SimpleWebTestCase {
      */
     @Test
     public void click_javascriptUrl_javascriptDisabled() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body><map>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
         final WebClient client = getWebClient();

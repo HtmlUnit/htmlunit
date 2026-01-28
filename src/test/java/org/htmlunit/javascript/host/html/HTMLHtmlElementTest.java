@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,9 @@ package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlHtml;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -35,7 +33,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLHtmlElementTest extends WebDriverTestCase {
 
     /**
@@ -44,7 +41,8 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLHtmlElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html id='myId'><head><title>foo</title><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"
             + "  }\n"
@@ -64,14 +62,15 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLHtmlElement]", "function HTMLHtmlElement() { [native code] }"})
     public void HTMLHtmlElement_toString() throws Exception {
-        final String html = "<html id='myId'><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html id='myId'><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      log(document.getElementById('myId'));\n"
             + "      log(HTMLHtmlElement);\n"
-            + "    } catch (e) {\n"
-            + "      log('exception');\n"
+            + "    } catch(e) {\n"
+            + "      logEx(e);\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
@@ -88,7 +87,8 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     public void childNodes_1() throws Exception {
         // The whitespace in this HTML is very important, because we're verifying
         // that it doesn't get included in the childNodes collection.
-        final String html = "<html> \n <body> \n <script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html> \n <body> \n <script>\n"
             + LOG_TITLE_FUNCTION
             + "var nodes = document.documentElement.childNodes;\n"
             + "log(nodes.length);\n"
@@ -109,7 +109,8 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     public void childNodes_2() throws Exception {
         // The whitespace in this HTML is very important, because we're verifying
         // that it doesn't get included in the childNodes collection.
-        final String html = "<html> \n <head> \n <script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html> \n <head> \n <script>\n"
             + LOG_TITLE_FUNCTION
             + "var nodes = document.documentElement.childNodes;\n"
             + "log(nodes.length);\n"
@@ -149,7 +150,8 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     @Test
     @Alerts("Hello World")
     public void innerText() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -180,10 +182,10 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"8", "16", "13", "0"},
             FF = {"8", "16", "0", "0"},
             FF_ESR = {"8", "16", "0", "0"})
-    @HtmlUnitNYI(CHROME = {"613", "1256", "13", "0"},
-            EDGE = {"613", "1256", "13", "0"},
-            FF = {"613", "1256", "13", "0"},
-            FF_ESR = {"613", "1256", "13", "0"})
+    @HtmlUnitNYI(CHROME = {"8", "1256", "13", "0"},
+            EDGE = {"8", "1256", "13", "0"},
+            FF = {"8", "1256", "13", "0"},
+            FF_ESR = {"8", "1256", "13", "0"})
     public void offsetsHtmlAbsoluteLeft() throws Exception {
         offsetsHtml("position: absolute; left: 13px;");
     }
@@ -197,13 +199,13 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"8", "16", "1227", "0"},
-            EDGE = {"8", "16", "1179", "0"},
+            EDGE = {"8", "16", "1219", "0"},
             FF = {"8", "16", "0", "0"},
             FF_ESR = {"8", "16", "0", "0"})
-    @HtmlUnitNYI(CHROME = {"613", "1256", "1243", "0"},
-            EDGE = {"613", "1256", "1243", "0"},
-            FF = {"613", "1256", "1243", "0"},
-            FF_ESR = {"613", "1256", "1243", "0"})
+    @HtmlUnitNYI(CHROME = {"8", "1256", "1243", "0"},
+            EDGE = {"8", "1256", "1243", "0"},
+            FF = {"8", "1256", "1243", "0"},
+            FF_ESR = {"8", "1256", "1243", "0"})
     public void offsetsHtmlAbsoluteRight() throws Exception {
         offsetsHtml("position: absolute; right: 13px;");
     }
@@ -217,10 +219,10 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"8", "16", "0", "0"})
-    @HtmlUnitNYI(CHROME = {"613", "1256", "0", "0"},
-            EDGE = {"613", "1256", "0", "0"},
-            FF = {"613", "1256", "0", "0"},
-            FF_ESR = {"613", "1256", "0", "0"})
+    @HtmlUnitNYI(CHROME = {"8", "1256", "0", "0"},
+            EDGE = {"8", "1256", "0", "0"},
+            FF = {"8", "1256", "0", "0"},
+            FF_ESR = {"8", "1256", "0", "0"})
     public void offsetsHtmlFixed() throws Exception {
         offsetsHtml("position: fixed;");
     }
@@ -234,19 +236,20 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"8", "16", "1227", "0"},
-            EDGE = {"8", "16", "1179", "0"},
+            EDGE = {"8", "16", "1219", "0"},
             FF = {"8", "16", "0", "0"},
             FF_ESR = {"8", "16", "0", "0"})
-    @HtmlUnitNYI(CHROME = {"613", "1256", "1243", "0"},
-            EDGE = {"613", "1256", "1243", "0"},
-            FF = {"613", "1256", "1243", "0"},
-            FF_ESR = {"613", "1256", "1243", "0"})
+    @HtmlUnitNYI(CHROME = {"8", "1256", "1243", "0"},
+            EDGE = {"8", "1256", "1243", "0"},
+            FF = {"8", "1256", "1243", "0"},
+            FF_ESR = {"8", "1256", "1243", "0"})
     public void offsetsHtmlFixedRight() throws Exception {
         offsetsHtml("position: fixed; right: 13px;");
     }
 
     private void offsetsHtml(final String style) throws Exception {
-        final String html = "<html id='my' style='" + style + "'>\n"
+        final String html = DOCTYPE_HTML
+              + "<html id='my' style='" + style + "'>\n"
               + "<head></head>\n"
               + "<body>\n"
               + "</div></body>\n"

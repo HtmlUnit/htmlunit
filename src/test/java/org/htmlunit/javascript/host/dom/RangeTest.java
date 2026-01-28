@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Range}.
@@ -29,10 +27,10 @@ import org.junit.runner.RunWith;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class RangeTest extends WebDriverTestCase {
 
-    private static final String CONTENT_START = "<html><head><title></title>\n"
+    private static final String CONTENT_START = DOCTYPE_HTML
+        + "<html><head><title></title>\n"
         + "<script>\n"
         + LOG_TITLE_FUNCTION
         + "function safeTagName(o) {\n"
@@ -96,7 +94,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts("<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>")
     public void createContextualFragment() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -121,7 +120,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object Text]", "[object HTMLTableRowElement]"})
     public void createContextualFragment2() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id ='d'></div>\n"
             + "<table><tr id='t'><td>old</td></tr></table>\n"
             + "<script>\n"
@@ -137,8 +137,33 @@ public class RangeTest extends WebDriverTestCase {
             + "try {\n"
             + "  test('d');\n"
             + "  test('t');\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<div id=\"myDiv2\"></div>hello:<div id=\"myDiv3\"></div>")
+    public void createContextualStrangeCode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var element = document.getElementById('myDiv2');\n"
+            + "    var range = element.ownerDocument.createRange();\n"
+            + "    range.setStartAfter(element);\n"
+            + "    var fragment = range.createContextualFragment('hello:<world');\n"
+            + "    element.parentNode.insertBefore(fragment, element.nextSibling);\n"
+            + "    log(element.parentNode.innerHTML);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myDiv'><div id='myDiv2'></div><div id='myDiv3'></div></div>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -151,8 +176,8 @@ public class RangeTest extends WebDriverTestCase {
     @Alerts({"qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
              "[object HTMLSpanElement]"})
     public void extractContents() throws Exception {
-        final String html =
-              "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var d = document.getElementById('d');\n"
@@ -183,8 +208,8 @@ public class RangeTest extends WebDriverTestCase {
              "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
              "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>"})
     public void extractContents2() throws Exception {
-        final String html =
-            "<html><body><div id='d'><p><b id='b'>text1<span id='s'>inner</span>text2</b></p></div>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'><p><b id='b'>text1<span id='s'>inner</span>text2</b></p></div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var d = document.getElementById('d');\n"
@@ -215,8 +240,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "2", "3"})
     public void constants() throws Exception {
-        final String html =
-              "<html><body>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><body>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
             + "  log(Range.START_TO_START);\n"
@@ -233,7 +258,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts({"-1", "1", "1", "-1", "0"})
     public void compareBoundaryPoints() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<div id='d1'><div id='d2'></div></div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -256,8 +282,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts({"abcd", "bc", "null", "null", "ad", "bc"})
     public void extractContents3() throws Exception {
-        final String html =
-            "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span>"
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span>"
             + "<span id='c'>c</span><span id='d'>d</span></div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -284,8 +310,8 @@ public class RangeTest extends WebDriverTestCase {
     @Alerts({"qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]",
              "qwerty", "[object HTMLSpanElement]"})
     public void cloneContents() throws Exception {
-        final String html =
-            "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var d = document.getElementById('d');\n"
@@ -310,8 +336,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts({"qwerty", "bcqwertyxy", "null", "az"})
     public void deleteContents() throws Exception {
-        final String html =
-            "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var d = document.getElementById('d');\n"
@@ -334,8 +360,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts({"abcd", "bc", "null", "null", "ad"})
     public void deleteContents2() throws Exception {
-        final String html =
-            "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"
             + "<span id='d'>d</span></div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -360,8 +386,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void getClientRectsEmpty() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<body>\n"
             + "  <div id='d'>a</div>\n"
             + "<script>\n"
@@ -381,8 +407,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void getClientRectsMany() throws Exception {
-        final String html =
-            "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"
             + "<span id='d'>d</span></div>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -404,8 +430,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLBodyElement]")
     public void getBoundingClientRectDoesNotChangeTheParent() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -435,8 +461,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLBodyElement]")
     public void getClientRectsDoesNotChangeTheParent() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
@@ -464,8 +490,8 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts({"tyxy", "tyxy", "tyxy"})
     public void testToString() throws Exception {
-        final String html =
-              "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div>\n"
+        final String html = DOCTYPE_HTML
+              + "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div>\n"
               + "<script>\n"
               + LOG_TITLE_FUNCTION
               + "  var d = document.getElementById('d');\n"

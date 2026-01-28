@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,8 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLTableRowElement}.
@@ -28,7 +25,6 @@ import org.junit.runner.RunWith;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLTableRowElementTest extends WebDriverTestCase {
 
     /**
@@ -37,7 +33,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLTableRowElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -57,9 +54,11 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "td1", "3", "td2", "td4", "2", "td3", "exception", "exception"})
+    @Alerts({"4", "td1", "3", "td2", "td4", "2", "td3",
+             "IndexSizeError/DOMException", "IndexSizeError/DOMException"})
     public void deleteCell() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -73,8 +72,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "    tr.deleteCell(-1);\n"
             + "    log(tr.cells.length);\n"
             + "    log(tr.cells[tr.cells.length-1].id);\n"
-            + "    try { tr.deleteCell(25); } catch(e) { log('exception'); }\n"
-            + "    try { tr.deleteCell(-2); } catch(e) { log('exception'); }\n"
+            + "    try { tr.deleteCell(25); } catch(e) { logEx(e); }\n"
+            + "    try { tr.deleteCell(-2); } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -95,15 +94,16 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"4", "exception", "4"})
+    @Alerts({"4", "TypeError", "4"})
     public void deleteCell_noArg() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var tr = document.getElementById('myId');\n"
             + "    log(tr.cells.length);\n"
-            + "    try { tr.deleteCell(); } catch(e) { log('exception'); }\n"
+            + "    try { tr.deleteCell(); } catch(e) { logEx(e); }\n"
             + "    log(tr.cells.length);\n"
             + "  }\n"
             + "</script>\n"
@@ -126,8 +126,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"left", "right", "3", "center", "8", "foo"})
     public void align() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr id='tr1' align='left'><td>a</td></tr>\n"
             + "  <tr id='tr2' align='right'><td>b</td></tr>\n"
             + "  <tr id='tr3' align='3'><td>c</td></tr>\n"
@@ -137,9 +137,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  function set(e, value) {\n"
             + "    try {\n"
             + "      e.align = value;\n"
-            + "    } catch (e) {\n"
-            + "      log('error');\n"
-            + "    }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  var tr1 = document.getElementById('tr1');\n"
             + "  var tr2 = document.getElementById('tr2');\n"
@@ -165,8 +163,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"p", "po", "", "u", "8", "U8"})
     public void ch() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr id='tr1' char='p'><td>a</td></tr>\n"
             + "  <tr id='tr2' char='po'><td>b</td></tr>\n"
             + "  <tr id='tr3'><td>c</td></tr>\n"
@@ -197,8 +195,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "4", "", "5.2", "-3", "abc"})
     public void chOff() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr id='tr1' charoff='0'><td>a</td></tr>\n"
             + "  <tr id='tr2' charoff='4'><td>b</td></tr>\n"
             + "  <tr id='tr3'><td>c</td></tr>\n"
@@ -229,8 +227,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"top", "baseline", "3", "middle", "8", "BOTtom"})
     public void vAlign() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr id='tr1' valign='top'><td>a</td></tr>\n"
             + "  <tr id='tr2' valign='baseline'><td>b</td></tr>\n"
             + "  <tr id='tr3' valign='3'><td>c</td></tr>\n"
@@ -240,9 +238,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  function set(e, value) {\n"
             + "    try {\n"
             + "      e.vAlign = value;\n"
-            + "    } catch (e) {\n"
-            + "      log('error');\n"
-            + "    }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "  var tr1 = document.getElementById('tr1');\n"
             + "  var tr2 = document.getElementById('tr2');\n"
@@ -267,8 +263,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "#0000aa", "x"})
     public void bgColor() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -296,8 +292,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0", "3", "1", "-1", "true", "false"})
     public void rowIndex_sectionRowIndex() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr id='tr1'><td>a</td></tr>\n"
             + "  <tr id='tr2'><td>b</td></tr>\n"
             + "  <tfoot>\n"
@@ -331,8 +327,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void offsetLeftDifferentRows() throws Exception {
-        final String html
-            = "<html><body><table>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><table>\n"
             + "  <tr>\n"
             + "    <td id='td_1_1'>1_1</td>\n"
             + "    <td id='td_1_2'>1_2</td>\n"
@@ -358,8 +354,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"cell1", "[object HTMLTableCellElement]", "abc", "[object Text]", ""})
     public void innerText() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <tr id='tab_row'><td>cell1</td></tr>\n"
             + "  </table>\n"
@@ -369,11 +365,11 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = 'abc'; } catch(e) { logEx(e); }\n"
             + "  log(node.innerText);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.innerText = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.innerText);\n"
             + "</script></body></html>";
 
@@ -386,8 +382,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"cell1", "[object HTMLTableCellElement]", "abc", "[object Text]", ""})
     public void textContent() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table>\n"
             + "    <tr id='tab_row'><td>cell1</td></tr>\n"
             + "  </table>\n"
@@ -397,11 +393,11 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = 'abc'; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = 'abc'; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = ''; } catch(e) {log('ex');}\n"
+            + "  try { node.textContent = ''; } catch(e) { logEx(e); }\n"
             + "  log(node.textContent);\n"
             + "</script></body></html>";
 
@@ -409,8 +405,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     }
 
     private void insertCell(final String cellIndex) throws Exception {
-        final String html
-            = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <table>\n"
             + "    <tr id='myRow'>\n"
@@ -426,7 +422,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "      var newCell = row.insertCell(" + cellIndex + ");\n"
             + "      log(row.cells.length);\n"
             + "      log(newCell.cellIndex);\n"
-            + "    } catch (e) { log('exception'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  </script>\n"
             + "</body></html>";
 
@@ -446,7 +442,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "exception"})
+    @Alerts({"2", "IndexSizeError/DOMException"})
     public void insertCell_MinusTwo() throws Exception {
         insertCell("-2");
     }
@@ -491,7 +487,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "exception"})
+    @Alerts({"2", "IndexSizeError/DOMException"})
     public void insertCell_Three() throws Exception {
         insertCell("3");
     }
@@ -502,8 +498,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "#667788", "unknown", "undefined", "undefined", "undefined"})
     public void borderColor() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table><tr id='tabr1'></tr></table>\n"
             + "  <table><tr id='tabr2' borderColor='red'></tr></table>\n"
             + "  <table><tr id='tabr3' borderColor='#123456'></tr></table>\n"
@@ -537,8 +533,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void borderColorDark() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table><tr id='tabr1'></tr></table>\n"
             + "  <table><tr id='tabr2' borderColorDark='red'></tr></table>\n"
             + "  <table><tr id='tabr3' borderColorDark='#123456'></tr></table>\n"
@@ -571,8 +567,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void borderColorLight() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "  <table><tr id='tabr1'></tr></table>\n"
             + "  <table><tr id='tabr2' borderColorLight='red'></tr></table>\n"
             + "  <table><tr id='tabr3' borderColorLight='#123456'></tr></table>\n"
@@ -606,8 +602,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void heightIsMaxOfCells() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><body>\n"
             + "<table>\n"
             + "  <tr id='tr1'>\n"

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,9 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -28,7 +26,6 @@ import org.openqa.selenium.WebDriver;
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLDialogElementTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
@@ -47,8 +44,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Alerts({"false", "null", "true", "", "false", "null", "true", "",
              "true", "", "true", "TrUE", "false", "null"})
     public void open() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -106,8 +103,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "null", "false", "null", "true", "", "true", "blah", "false", "null"})
     public void openString() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -157,8 +154,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "null", "true", "", "true", ""})
     public void show() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -200,8 +197,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "", "true", ""})
     public void showAlreadyOpend() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -239,8 +236,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "null", "true", "", "true", ""})
     public void showModal() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -284,8 +281,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "", "InvalidStateError", "true", ""})
     public void showModalAlreadyOpend() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -325,8 +322,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "null", "true", "", "true", ""})
     public void showAfterShow() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -370,8 +367,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "null", "true", "", "InvalidStateError", "true", ""})
     public void showAfterShowModal() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -415,8 +412,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "null", "true", "", "InvalidStateError", "true", ""})
     public void showModalAfterShow() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -460,8 +457,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "null", "true", "", "true", ""})
     public void showModalAfterShowModal() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -507,8 +504,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
              "false", "null", "", "false", "null", "",
              "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
     public void close() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -559,8 +556,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Alerts({"false", "null", "", "true", "", "",
              "false", "null", "", "false", "null", "", "closed"})
     public void closeOnclose() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -597,7 +594,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -608,8 +606,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
              "false", "null", "Html", "false", "null", "Html",
              "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
     public void closeReturnValue() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -650,7 +648,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -660,8 +659,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Alerts({"false", "", "1", "true", "1", "2", "false", "3", "4",
              "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"})
     public void returnValue() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -712,8 +711,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "string ", "string null", "string undefined", "string 4", "string [object Object]"})
     public void returnValueSpecial() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -772,8 +771,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
                       "false"})
     public void formClosesDialog() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -828,8 +827,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
                       "false"})
     public void formClosesDialogWithoutJs() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -862,7 +861,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -871,8 +871,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "true"})
     public void formGet() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_WINDOW_NAME_FUNCTION
@@ -904,14 +904,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>second</title></head><body>\n"
             + "<p>hello world</p>\n"
             + "</body></html>";
         getMockWebConnection().setDefaultResponse(secondContent);
 
         loadPage2(html);
-        Thread.sleep(DEFAULT_WAIT_TIME / 20); // FF
+        Thread.sleep(DEFAULT_WAIT_TIME.toMillis() / 20); // FF
         verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -921,8 +921,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "true"})
     public void formOutsideDialog() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -968,8 +968,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
              "Show dialog\nHello World\nDismiss", "true",
              "Show dialog", "false"})
     public void useCaseIssue598() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <body>\n"
             + "    <button id='showMyDialog'>Show dialog</button><br/>\n"
             + "    <dialog id='mydialog'>\n"

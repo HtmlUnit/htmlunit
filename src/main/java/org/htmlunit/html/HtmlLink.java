@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
  */
 package org.htmlunit.html;
 
+import static org.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_RESPONSE_TYPE_FOR_STYLESHEET;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -34,6 +34,8 @@ import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLLinkElement;
+import org.htmlunit.util.ArrayUtils;
+import org.htmlunit.util.MimeType;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
 
@@ -41,9 +43,9 @@ import org.htmlunit.xml.XmlPage;
  * Wrapper for the HTML element "link". <b>Note:</b> This is not a clickable link,
  * that one is an HtmlAnchor
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
@@ -79,7 +81,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code charset}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getCharsetAttribute() {
         return getAttributeDirect("charset");
@@ -91,7 +93,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code href}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getHrefAttribute() {
         return getAttributeDirect("href");
@@ -103,7 +105,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code hreflang}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getHrefLangAttribute() {
         return getAttributeDirect("hreflang");
@@ -115,7 +117,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code type}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
         return getAttributeDirect(TYPE_ATTRIBUTE);
@@ -127,7 +129,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rel}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getRelAttribute() {
         return getAttributeDirect("rel");
@@ -139,7 +141,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rev}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getRevAttribute() {
         return getAttributeDirect("rev");
@@ -151,7 +153,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code media}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getMediaAttribute() {
         return getAttributeDirect("media");
@@ -163,7 +165,7 @@ public class HtmlLink extends HtmlElement {
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code target}
-     * or an empty string if that attribute isn't defined.
+     *         or an empty string if that attribute isn't defined.
      */
     public final String getTargetAttribute() {
         return getAttributeDirect("target");
@@ -176,11 +178,11 @@ public class HtmlLink extends HtmlElement {
      *
      * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
      * @return {@code null} if no download should be performed and when this wasn't already done; the response
-     * received when performing a request for the content referenced by this tag otherwise
+     *         received when performing a request for the content referenced by this tag otherwise
      * @throws IOException if an error occurs while downloading the content
      */
     public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
-        return getWebResponse(downloadIfNeeded, null);
+        return getWebResponse(downloadIfNeeded, null, false, null);
     }
 
     /**
@@ -191,35 +193,53 @@ public class HtmlLink extends HtmlElement {
      *
      * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
      * @param request the request; if null getWebRequest() is called to create one
+     * @param isStylesheetRequest true if this should return a stylesheet
+     * @param type the type definined for the stylesheet link
      * @return {@code null} if no download should be performed and when this wasn't already done; the response
-     * received when performing a request for the content referenced by this tag otherwise
+     *         received when performing a request for the content referenced by this tag otherwise
      * @throws IOException if an error occurs while downloading the content
      */
-    public WebResponse getWebResponse(final boolean downloadIfNeeded, WebRequest request) throws IOException {
-        final WebClient webclient = getPage().getWebClient();
+    public WebResponse getWebResponse(final boolean downloadIfNeeded, WebRequest request,
+            final boolean isStylesheetRequest, final String type) throws IOException {
+        final WebClient webClient = getPage().getWebClient();
         if (null == request) {
             request = getWebRequest();
         }
 
         if (downloadIfNeeded) {
             try {
-                final WebResponse response = webclient.loadWebResponse(request);
+                final WebResponse response = webClient.loadWebResponse(request);
                 if (response.isSuccess()) {
-                    executeEvent(Event.TYPE_LOAD);
+                    if (isStylesheetRequest
+                            && webClient.getBrowserVersion()
+                                 .hasFeature(HTMLLINK_CHECK_RESPONSE_TYPE_FOR_STYLESHEET)) {
+
+                        if (StringUtils.isNotBlank(type)
+                                && !MimeType.TEXT_CSS.equals(type)) {
+                            return null;
+                        }
+
+                        final String respType = response.getContentType();
+                        if (StringUtils.isNotBlank(respType)
+                                && !MimeType.TEXT_CSS.equals(respType)) {
+                            executeEvent(webClient, Event.TYPE_ERROR);
+                            return response;
+                        }
+                    }
+                    executeEvent(webClient, Event.TYPE_LOAD);
+                    return response;
                 }
-                else {
-                    executeEvent(Event.TYPE_ERROR);
-                }
+                executeEvent(webClient, Event.TYPE_ERROR);
                 return response;
             }
             catch (final IOException e) {
-                executeEvent(Event.TYPE_ERROR);
+                executeEvent(webClient, Event.TYPE_ERROR);
                 throw e;
             }
         }
 
         // retrieve the response, from the cache if available
-        return webclient.getCache().getCachedResponse(request);
+        return webClient.getCache().getCachedResponse(request);
     }
 
     /**
@@ -235,7 +255,7 @@ public class HtmlLink extends HtmlElement {
         final WebRequest request = new WebRequest(url, browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
         // use the page encoding even if this is a GET requests
         request.setCharset(page.getCharset());
-        request.setRefererlHeader(page.getUrl());
+        request.setRefererHeader(page.getUrl());
 
         return request;
     }
@@ -256,7 +276,11 @@ public class HtmlLink extends HtmlElement {
         return false;
     }
 
-    private void executeEvent(final String type) {
+    private void executeEvent(final WebClient webClient, final String type) {
+        if (!webClient.isJavaScriptEngineEnabled()) {
+            return;
+        }
+
         final HTMLLinkElement link = getScriptableObject();
         final Event event = new Event(this, type);
         link.executeEventLocally(event);
@@ -274,55 +298,55 @@ public class HtmlLink extends HtmlElement {
             LOG.debug("Link node added: " + asXml());
         }
 
-        if (!isStyleSheetLink()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Link type '" + getRelAttribute() + "' not supported ("
-                            + asXml().replaceAll("[\\r\\n]", "") + ").");
+        if (isStyleSheetLink()) {
+            final WebClient webClient = getPage().getWebClient();
+            if (!webClient.getOptions().isCssEnabled()) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Stylesheet Link found but ignored because css support is disabled ("
+                                + asXml().replaceAll("[\\r\\n]", "") + ").");
+                }
+                return;
+            }
+
+            if (!webClient.isJavaScriptEngineEnabled()) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Stylesheet Link found but ignored because javascript engine is disabled ("
+                                + asXml().replaceAll("[\\r\\n]", "") + ").");
+                }
+                return;
+            }
+
+            final PostponedAction action = new PostponedAction(getPage(), "Loading of link " + this) {
+                @Override
+                public void execute() {
+                    final HTMLLinkElement linkElem = HtmlLink.this.getScriptableObject();
+                    // force loading, caching inside the link
+                    linkElem.getSheet();
+                }
+            };
+
+            final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
+            if (postponed) {
+                engine.addPostponedAction(action);
+            }
+            else {
+                try {
+                    action.execute();
+                }
+                catch (final RuntimeException e) {
+                    throw e;
+                }
+                catch (final Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             return;
         }
 
-        final WebClient webClient = getPage().getWebClient();
-        if (!webClient.getOptions().isCssEnabled()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Stylesheet Link found but ignored because css support is disabled ("
-                            + asXml().replaceAll("[\\r\\n]", "") + ").");
-            }
-            return;
-        }
-
-        if (!webClient.isJavaScriptEngineEnabled()) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Stylesheet Link found but ignored because javascript engine is disabled ("
-                            + asXml().replaceAll("[\\r\\n]", "") + ").");
-            }
-            return;
-        }
-
-        final PostponedAction action = new PostponedAction(getPage(), "Loading of link " + this) {
-            @Override
-            public void execute() {
-                final HTMLLinkElement linkElem = HtmlLink.this.getScriptableObject();
-                // force loading, caching inside the link
-                linkElem.getSheet();
-            }
-        };
-
-        final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
-        if (postponed) {
-            engine.addPostponedAction(action);
-        }
-        else {
-            try {
-                action.execute();
-            }
-            catch (final RuntimeException e) {
-                throw e;
-            }
-            catch (final Exception e) {
-                throw new RuntimeException(e);
-            }
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Link type '" + getRelAttribute() + "' not supported ("
+                        + asXml().replaceAll("[\\r\\n]", "") + ").");
         }
     }
 
@@ -342,10 +366,20 @@ public class HtmlLink extends HtmlElement {
      * @return true if the rel attribute is 'stylesheet'
      */
     public boolean isStyleSheetLink() {
-        String rel = getRelAttribute();
+        final String rel = getRelAttribute();
         if (rel != null) {
-            rel = rel.toLowerCase(Locale.ROOT);
-            return ArrayUtils.contains(StringUtils.splitAtBlank(rel), "stylesheet");
+            return ArrayUtils.containsIgnoreCase(StringUtils.splitAtBlank(rel), "stylesheet");
+        }
+        return false;
+    }
+
+    /**
+     * @return true if the rel attribute is 'modulepreload'
+     */
+    public boolean isModulePreloadLink() {
+        final String rel = getRelAttribute();
+        if (rel != null) {
+            return ArrayUtils.containsIgnoreCase(StringUtils.splitAtBlank(rel), "modulepreload");
         }
         return false;
     }
@@ -361,7 +395,7 @@ public class HtmlLink extends HtmlElement {
     public boolean isActiveStyleSheetLink() {
         if (isStyleSheetLink()) {
             final String media = getMediaAttribute();
-            if (org.apache.commons.lang3.StringUtils.isBlank(media)) {
+            if (StringUtils.isBlank(media)) {
                 return true;
             }
 

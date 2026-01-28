@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link XPathEvaluator}.
@@ -27,7 +25,6 @@ import org.junit.runner.RunWith;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class XPathEvaluatorTest extends WebDriverTestCase {
 
     /**
@@ -36,7 +33,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
     public void evaluate() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"
@@ -67,7 +65,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
     public void evaluateWithoutResult() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"
@@ -98,7 +97,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
     public void evaluateWithoutTypeResult() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"
@@ -129,7 +129,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""})
     public void evaluateWithoutResolverTypeResult() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"
@@ -158,9 +159,10 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts("TypeError")
     public void namespacesWithNodeInArray() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  var xml = "
@@ -182,7 +184,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "        var result = xpe.evaluate('/soap:Envelope/soap:books/soap:book/title/text()', "
                                      + "[doc.documentElement], nsResolver, XPathResult.STRING_TYPE, null);\n"
             + "        log(result.stringValue);\n"
-            + "      } catch(e) { log('exception'); }\n"
+            + "      } catch(e) { logEx(e); }\n"
             + "    } else {\n"
             + "      log('window.XPathEvaluator undefined');\n"
             + "    }\n"
@@ -199,7 +201,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts("Immortality")
     public void namespacesWithCustomNSResolver() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function nsResolver(prefix) {\n"
@@ -239,7 +242,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void createExpressionNoXPath() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var res = '';\n"
@@ -259,7 +263,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object XPathExpression]§"})
     public void createExpressionUndefinedXPath() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<span id='first'>hello</span>\n"
                 + "<div><span id='second'>world</span></div>\n"
                 + "<script>\n"
@@ -290,7 +295,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts({"function", "[object XPathEvaluator]", "[object XPathExpression]§"})
     public void createExpressionNullXPath() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<span id='first'>hello</span>\n"
                 + "<div><span id='second'>world</span></div>\n"
                 + "<script>\n"
@@ -321,7 +327,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts("SyntaxError")
     public void createExpressionInvalid() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "var res = '';\n"

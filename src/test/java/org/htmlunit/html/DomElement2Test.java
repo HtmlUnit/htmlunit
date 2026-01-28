@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,15 @@ package org.htmlunit.html;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.xml.XmlPage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DomElement}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public final class DomElement2Test extends SimpleWebTestCase {
 
     /**
@@ -36,7 +33,8 @@ public final class DomElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void isMouseOver() throws Exception {
-        final String html = "<html>\n"
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "  <div id='d1'>\n"

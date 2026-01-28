@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Listener for messages from the HTML parser. <br>
  * The classification of problems as warnings or errors is the one of the HTML parser
- * used by HtmlUnit. The line and column may indicates the position of the problem detected
+ * used by HtmlUnit. The line and column may indicate the position of the problem detected
  * by the parser. This is only an indication and in some cases the position where
  * the problem has to be solved is located lines before.
  * In some cases (when parsing a html snippet), the html content is also available.

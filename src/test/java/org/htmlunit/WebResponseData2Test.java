@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,7 @@
  */
 package org.htmlunit;
 
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebResponseData}.
@@ -24,7 +22,6 @@ import org.junit.runner.RunWith;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class WebResponseData2Test extends SimpleWebTestCase {
 
     /**
@@ -33,9 +30,7 @@ public class WebResponseData2Test extends SimpleWebTestCase {
     @Test
     public void bigContent() throws Exception {
         final StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < 300; i++) {
-            builder.append(' ');
-        }
+        builder.append(" ".repeat(300));
         builder.append("Hello World!");
         loadPage(builder.toString());
     }

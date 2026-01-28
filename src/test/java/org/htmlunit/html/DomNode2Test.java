@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,16 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DomNode}.
  *
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DomNode2Test extends WebDriverTestCase {
 
     /**
@@ -35,16 +33,17 @@ public class DomNode2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"exception", "0"})
+    @Alerts({"HierarchyRequestError/DOMException", "0"})
     public void appendChild_recursive() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var e = document.createElement('div');\n"
                 + "  try {\n"
                 + "    log(e.appendChild(e) === e);\n"
-                + "  } catch(e) {log('exception');}\n"
+                + "  } catch(e) {logEx(e);}\n"
                 + "  log(e.childNodes.length);\n"
                 + "}\n"
                 + "</script>\n"
@@ -60,9 +59,10 @@ public class DomNode2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"true", "exception", "1", "0"})
+    @Alerts({"true", "HierarchyRequestError/DOMException", "1", "0"})
     public void appendChild_recursive_parent() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "function test() {\n"
@@ -71,7 +71,7 @@ public class DomNode2Test extends WebDriverTestCase {
                 + "  try {\n"
                 + "    log(e1.appendChild(e2) === e2);\n"
                 + "    log(e2.appendChild(e1) === e1);\n"
-                + "  } catch(e) {log('exception');}\n"
+                + "  } catch(e) {logEx(e);}\n"
                 + "  log(e1.childNodes.length);\n"
                 + "  log(e2.childNodes.length);\n"
                 + "}\n"
@@ -88,7 +88,8 @@ public class DomNode2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true"})
     public void ownerDocument() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -116,7 +117,8 @@ public class DomNode2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true"})
     public void getRootNode() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
@@ -140,4 +142,29 @@ public class DomNode2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(content);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("beforeafter")
+    public void textContentCdata() throws Exception {
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      log(document.getElementById('tester').textContent);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='tester'>before<![CDATA[inside]]>after</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
 }

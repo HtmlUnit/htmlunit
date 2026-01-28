@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,17 @@
 package org.htmlunit;
 
 import static org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -23,24 +33,19 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.htmlunit.junit.Retry;
-import org.htmlunit.util.Cookie;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.http.Cookie;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebClient} that run with BrowserRunner.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
-@RunWith(BrowserRunner.class)
 public class WebClient2Test extends SimpleWebTestCase {
 
     /**
@@ -49,8 +54,8 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     public void loadPage_HandleDoubleDotsAtRoot() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "</body></html>";
 
         final WebClient client = getWebClient();
@@ -87,12 +92,12 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     public void serialization_pageLoad() throws Exception {
-        final String page1Content = "<html><body>hello 1</body></html>";
+        final String page1Content = DOCTYPE_HTML + "<html><body>hello 1</body></html>";
         try (WebClient client = getWebClient()) {
             final HtmlPage page1 = loadPage(client, page1Content, null, URL_FIRST);
             assertEquals("hello 1", page1.asNormalizedText());
 
-            final String page2Content = "<html><body>hello 2</body></html>";
+            final String page2Content = DOCTYPE_HTML + "<html><body>hello 2</body></html>";
             try (WebClient copy = clone(client)) {
                 final HtmlPage page2 = loadPage(copy, page2Content, null, URL_SECOND);
                 assertEquals("hello 2", page2.asNormalizedText());
@@ -106,8 +111,8 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     public void serialization_withClickAfterwards() throws Exception {
-        final String html =
-              "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function foo() {\n"
             + "    document.getElementById('mybox').innerHTML='hello world';\n"
@@ -134,10 +139,14 @@ public class WebClient2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
+    @Alerts({"1", "1", "exiting"})
+    @HtmlUnitNYI(CHROME = {"1", "0", ""},
+            EDGE = {"1", "0", ""},
+            FF = {"1", "0", ""},
+            FF_ESR = {"1", "0", ""})
     public void serialization_withJSBackgroundTasks() throws Exception {
-        final String html =
-              "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "  function foo() {\n"
             + "    if (window.name == 'hello') {\n"
@@ -148,19 +157,23 @@ public class WebClient2Test extends SimpleWebTestCase {
             + "  var intervalId = setInterval(foo, 10);\n"
             + "</script></head>\n"
             + "<body></body></html>";
+
+        final String[] expected = getExpectedAlerts();
+
+        setExpectedAlerts();
         final HtmlPage page = loadPageWithAlerts(html);
         // verify that 1 background job exists
-        assertEquals(1, page.getEnclosingWindow().getJobManager().getJobCount());
+        assertEquals(Integer.parseInt(expected[0]), page.getEnclosingWindow().getJobManager().getJobCount());
 
         final byte[] bytes = SerializationUtils.serialize(page);
         page.getWebClient().close();
 
         // deserialize page and verify that 1 background job exists
-        final HtmlPage clonedPage = (HtmlPage) SerializationUtils.deserialize(bytes);
-        assertEquals(1, clonedPage.getEnclosingWindow().getJobManager().getJobCount());
+        final HtmlPage clonedPage = SerializationUtils.deserialize(bytes);
+        assertEquals(Integer.parseInt(expected[1]), clonedPage.getEnclosingWindow().getJobManager().getJobCount());
 
         // configure a new CollectingAlertHandler (in fact it has surely already one and we could get and cast it)
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         final AlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
         clonedPage.getWebClient().setAlertHandler(alertHandler);
 
@@ -169,7 +182,8 @@ public class WebClient2Test extends SimpleWebTestCase {
 
         clonedPage.getWebClient().waitForBackgroundJavaScriptStartingBefore(100);
         assertEquals(0, clonedPage.getEnclosingWindow().getJobManager().getJobCount());
-        final String[] expectedAlerts = {"exiting"};
+
+        final String[] expectedAlerts = {expected[2]};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -182,7 +196,7 @@ public class WebClient2Test extends SimpleWebTestCase {
             FF = "en-US,en;q=0.5",
             FF_ESR = "en-US,en;q=0.5")
     public void acceptLanguage() throws Exception {
-        final String html = "<html><body></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body></body></html>";
         loadPage(html);
         assertEquals(getExpectedAlerts()[0],
                 getMockWebConnection().getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
@@ -194,7 +208,7 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     public void acceptLanguageFr() throws Exception {
-        final String html = "<html><body></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body></body></html>";
 
         final BrowserVersion frBrowser =
                 new BrowserVersion.BrowserVersionBuilder(getBrowserVersion())
@@ -216,7 +230,7 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     public void newWindowScopeForAboutBlank() throws Exception {
-        final HtmlPage p = loadPage("<html><body></body></html>");
+        final HtmlPage p = loadPage(DOCTYPE_HTML + "<html><body></body></html>");
         p.executeJavaScript("top.foo = 'hello';");
         final ScriptResult result = p.executeJavaScript("top.foo");
         assertEquals("hello", result.getJavaScriptResult());
@@ -249,8 +263,9 @@ public class WebClient2Test extends SimpleWebTestCase {
               "toto", "foo", "/myPath", true, null);
 
         // Check that we are able to parse and set the expiration date correctly
-        final String dateString = "Fri, 21 Jul 2024 20:47:11 UTC";
-        final Date date = DateUtils.parseDate(dateString, "EEE, dd MMM yyyy HH:mm:ss z");
+        final ZonedDateTime inOneYear = ZonedDateTime.now().plusYears(1).truncatedTo(ChronoUnit.SECONDS);
+        final String dateString = DateTimeFormatter.RFC_1123_DATE_TIME.format(inOneYear);
+        final Date date = Date.from(inOneYear.toInstant());
         checkCookie("toto=foo; expires=" + dateString, "toto", "foo", "/", false, date);
     }
 
@@ -268,22 +283,27 @@ public class WebClient2Test extends SimpleWebTestCase {
         assertEquals(path, cookie.getPath());
         assertEquals(domain, cookie.getDomain());
         assertEquals(secure, cookie.isSecure());
-        assertEquals(date, cookie.getExpires());
+        // special handling for null case, because Date cannot be compared using assertEquals
+        if (date == null || cookie.getExpires() == null) {
+            assertEquals(date, cookie.getExpires());
+        }
+        else {
+            assertEquals(date.toInstant(), cookie.getExpires().toInstant());
+        }
     }
 
     /**
      * @throws Exception if something goes wrong
      */
     @Test
-    @Retry
     @Alerts({"loadExtraContent started at Page 1", " loadExtraContent finished at Page 1"})
     @HtmlUnitNYI(CHROME = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"},
             EDGE = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"},
             FF = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"},
             FF_ESR = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"})
     public void makeSureTheCurrentJobHasEndedBeforeReplaceWindowPage() throws Exception {
-        final String htmlContent1
-            = "<html>\n"
+        final String htmlContent1 = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>"
             + "  <title>Page 1</title>\n"
             + "</head>\n"
@@ -310,8 +330,8 @@ public class WebClient2Test extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String htmlContent2
-            = "<html>\n"
+        final String htmlContent2 = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>"
             + "  <title>Page 2</title>\n"
             + "</head>\n"
@@ -335,7 +355,7 @@ public class WebClient2Test extends SimpleWebTestCase {
         // Immediately load page 2. Timeout function was triggered already
         final HtmlPage page2 = client.getPage(URL_SECOND);
         verify(() -> page1.getEnclosingWindow().getName(),
-                getExpectedAlerts()[0] + getExpectedAlerts()[1], DEFAULT_WAIT_TIME * 4);
+                getExpectedAlerts()[0] + getExpectedAlerts()[1], DEFAULT_WAIT_TIME.multipliedBy(4));
 
         // Fails: return 98 (about) instead of 1
         // assertEquals(1, page.querySelectorAll("p").size());
@@ -345,9 +365,54 @@ public class WebClient2Test extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
+    @Alerts({"loadExtraContent started at Page 1", " loadExtraContent finished at Page 1"})
+    public void buttonClickReachesPageWithJScompileError() throws Exception {
+        final String htmlStartPage = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>"
+            + "  <title>Page 1</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form method='post' action='" + URL_SECOND + "'>\n"
+            + "    <input id='btnNext' type='submit' value='Next'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String htmlSecondPage = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>"
+            + "  <title>Page 2</title>\n"
+            + "  <script>\n"
+            + "    this script does not compile!"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <h1>Page2</h1>\n"
+            + "  <p>This is page 2</p>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        client.setWebConnection(webConnection);
+
+        webConnection.setDefaultResponse(htmlStartPage);
+        webConnection.setResponse(URL_SECOND, htmlSecondPage);
+
+        final HtmlPage page1 = client.getPage(URL_FIRST);
+        assertEquals("Page 1", page1.getTitleText());
+
+        assertThrows(ScriptException.class, () -> page1.getElementById("btnNext").click());
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
     public void toLocaleLowerCase() throws Exception {
-        final String html
-            = "<!DOCTYPE html>\n"
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + "  function doTest() {\n"
             + "    window.document.title = '\\u0130'.toLocaleLowerCase();\n"
@@ -368,5 +433,66 @@ public class WebClient2Test extends SimpleWebTestCase {
         setBrowserVersion(trBrowser);
         page = loadPage(html);
         assertEquals("\u0069", page.getTitleText());
+    }
+
+    /**
+     * This is supported by reals browsers but not with HtmlUnit.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void localFile() throws Exception {
+        final URL url = getClass().getClassLoader().getResource("simple.html");
+        String file = URLDecoder.decode(url.getFile(), StandardCharsets.UTF_8);
+        if (file.startsWith("/") && file.contains(":")) {
+            // we have to remove the trailing slash to test the c:\.... case.
+            file = file.substring(1);
+        }
+
+        assertTrue("File '" + file + "' does not exist", new File(file).exists());
+
+        try (WebClient webClient = new WebClient(getBrowserVersion())) {
+            webClient.getPage(file);
+            fail("IOException expected");
+        }
+        catch (final IOException e) {
+            assertTrue(e.getMessage(),
+                    e.getMessage().startsWith("Unsupported protocol '")
+                    || e.getMessage().startsWith("no protocol: /"));
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("titel - simple.html")
+    public void localFileFile() throws Exception {
+        final URL url = getClass().getClassLoader().getResource("simple.html");
+        String file = URLDecoder.decode(url.getFile(), StandardCharsets.UTF_8);
+        if (file.startsWith("/") && file.contains(":")) {
+            // we have to remove the trailing slash to test the c:\.... case.
+            file = file.substring(1);
+        }
+
+        assertTrue("File '" + file + "' does not exist", new File(file).exists());
+
+        try (WebClient webClient = new WebClient(getBrowserVersion())) {
+            final HtmlPage page = webClient.getPage("file://" + file);
+            assertEquals(getExpectedAlerts()[0], page.getTitleText());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void unknownProtocol() throws Exception {
+        try (WebClient webClient = new WebClient(getBrowserVersion())) {
+            final HtmlPage page = webClient.getPage("unknown://simple.html");
+            fail("IOException expected");
+        }
+        catch (final IOException e) {
+            assertEquals("Unsupported protocol 'unknown'", e.getMessage());
+        }
     }
 }

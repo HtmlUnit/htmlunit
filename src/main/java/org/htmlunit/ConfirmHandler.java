@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,10 @@ import java.io.Serializable;
  * A handler for the JavaScript function <code>window.confirm()</code>. Confirms
  * are triggered when the JavaScript function <code>window.confirm()</code> is invoked.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
+ * @author Ronald Brill
  */
+@FunctionalInterface
 public interface ConfirmHandler extends Serializable {
 
     /**

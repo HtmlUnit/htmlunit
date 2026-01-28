@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Date is a native JavaScript object and therefore provided by Rhino but behavior should be
@@ -29,7 +27,6 @@ import org.junit.runner.RunWith;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class NativeDateTest extends WebDriverTestCase {
 
     /**
@@ -40,8 +37,8 @@ public class NativeDateTest extends WebDriverTestCase {
     @Test
     @Alerts({"-13", "84", "109"})
     public void getYear() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  log(new Date(1887, 2, 1).getYear());\n"
@@ -115,7 +112,8 @@ public class NativeDateTest extends WebDriverTestCase {
         for (final String methodName : methodNames) {
             methodList.append(", '").append(methodName).append("'");
         }
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var o = " + object + ";\n"
@@ -138,8 +136,8 @@ public class NativeDateTest extends WebDriverTestCase {
     @Alerts({"2005-12-03T07:14:15.000Z", "2005-07-12T11:04:15.000Z",
              "2005-07-03T15:14:05.000Z"})
     public void toISOString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (new Date().toISOString) {\n"
@@ -161,8 +159,8 @@ public class NativeDateTest extends WebDriverTestCase {
     @Alerts({"Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
              "Sun, 03 Jul 2005 15:14:05 GMT"})
     public void toUTCString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toUTCString());\n"
@@ -182,8 +180,8 @@ public class NativeDateTest extends WebDriverTestCase {
     @Alerts({"Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
              "Sun, 03 Jul 2005 15:14:05 GMT"})
     public void toGMTString() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(new Date(Date.UTC(2005, 11, 3, 7, 14, 15)).toGMTString());\n"
@@ -201,8 +199,8 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     public void enumerable() throws Exception {
-        final String html
-            = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "function test() {\n"
             + "  var date = new Date(2000, 0, 1);\n"
             + "  for (var x in date) {\n"

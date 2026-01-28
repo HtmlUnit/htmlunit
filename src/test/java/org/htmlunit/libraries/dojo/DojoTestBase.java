@@ -1,0 +1,189 @@
+/*
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.htmlunit.libraries.dojo;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.WebDriverTestCase;
+import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+/**
+ * Base class for the <a href="http://dojotoolkit.org/">Dojo
+ * JavaScript library tests.</a>.
+ *
+ * Timeout was changed in: /util/doh/runner.js, line # 682
+ *
+ * @author Ahmed Ashour
+ * @author Daniel Gredler
+ * @author Ronald Brill
+ */
+public abstract class DojoTestBase extends WebDriverTestCase {
+
+    abstract String getUrl(String module);
+
+    void test(final String module) throws Exception {
+        test(module, 60);
+    }
+
+    void test(final String module, final long waitTime) throws Exception {
+        try {
+
+            final WebDriver webdriver = getWebDriver();
+            webdriver.get(getUrl(module));
+
+            final long runTime = waitTime * Duration.ofSeconds(1).toMillis();
+            final long endTime = System.currentTimeMillis() + runTime;
+
+            // wait a bit to let the tests start
+            String status = getResultElementText(webdriver);
+            while (!"Tests Running".equals(status)) {
+                Thread.sleep(42);
+
+                if (System.currentTimeMillis() > endTime) {
+                    // don't fail here, maybe we missed the start
+                    break;
+                }
+                status = getResultElementText(webdriver);
+            }
+
+            while (!"Stopped".equals(status)) {
+                Thread.sleep(42);
+
+                if (System.currentTimeMillis() > endTime) {
+                    Assertions.fail("Test runs too long (longer than " + runTime / 1000 + "s)");
+                }
+                status = getResultElementText(webdriver);
+            }
+
+            for (int i = 0; i < 10; i++) {
+                try {
+                    Thread.sleep(100);
+
+                    final WebElement output = webdriver.findElement(By.id("logBody"));
+                    final List<WebElement> lines = output.findElements(By.xpath(".//div"));
+
+                    final StringBuilder result = new StringBuilder();
+                    for (final WebElement webElement : lines) {
+                        final String text = webElement.getText();
+                        if (StringUtils.isNotBlank(text)) {
+                            result.append(text);
+                            result.append("\n");
+                        }
+                    }
+
+                    final String expFileName = module
+                                            .replace(".", "")
+                                            .replace("_", "")
+                                            .replace("/", "_");
+                    String expected = loadExpectation(expFileName);
+                    expected = expected.replace("\r\n", "\n");
+
+                    assertEquals(normalize(expected), normalize(result.toString()));
+                    // assertEquals(expected, result.toString());
+
+                    // success
+                    break;
+                }
+                catch (final AssertionError ignored) {
+                    // fails, give it another try
+                }
+            }
+        }
+        catch (final Exception e) {
+            e.printStackTrace();
+            Throwable t = e;
+            while ((t = t.getCause()) != null) {
+                t.printStackTrace();
+            }
+            throw e;
+        }
+    }
+
+    private static String normalize(final String text) {
+        StringBuilder normalized = new StringBuilder();
+
+        for (int i = 0; i < text.length(); i++) {
+            char ch = text.charAt(i);
+            if (ch == 'f'
+                    && (text.indexOf("function ", i) == i
+                            || text.indexOf("function(", i) == i)) {
+                if (normalized.toString().endsWith("(")) {
+                    normalized.delete(normalized.length() - 1, normalized.length());
+                }
+                normalized = new StringBuilder(normalized.toString().trim());
+
+                normalized.append("  function...");
+                int count = 1;
+                i = text.indexOf("{", i);
+                while (i < text.length()) {
+                    i++;
+                    ch = text.charAt(i);
+                    if ('{' == ch) {
+                        count++;
+                    }
+                    else if ('}' == ch) {
+                        count--;
+                    }
+                    if (count == 0) {
+                        break;
+                    }
+                }
+                if (normalized.toString().endsWith(")")) {
+                    normalized.delete(normalized.length() - 1, normalized.length());
+                }
+            }
+            else if (ch == 'T' && text.indexOf("TypeError: ", i) == i) {
+                normalized.append("TypeError:...");
+                while (i < text.length()) {
+                    i++;
+                    ch = text.charAt(i);
+                    if ('\r' == ch || '\n' == ch) {
+                        break;
+                    }
+                }
+            }
+            else {
+                normalized.append(ch);
+            }
+        }
+        return normalized.toString().replaceAll("\\d+ ms", "x ms");
+    }
+
+    protected abstract String loadExpectation(final String expFileName) throws Exception;
+
+    private static String getResultElementText(final WebDriver webdriver) {
+        // if the elem is not available or stale we return an empty string
+        // this will force a second try
+        try {
+            final WebElement elem = webdriver.findElement(By.id("runningStatus"));
+            try {
+                return elem.getText();
+            }
+            catch (final StaleElementReferenceException e) {
+                return "";
+            }
+        }
+        catch (final NoSuchElementException e) {
+            return "";
+        }
+    }
+}

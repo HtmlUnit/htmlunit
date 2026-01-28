@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,8 @@
 package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link NodeList}.
@@ -28,7 +25,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Lai Quang Duong
  */
-@RunWith(BrowserRunner.class)
 public class NodeListTest extends WebDriverTestCase {
 
     /**
@@ -37,7 +33,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts("[object NodeList]")
     public void defaultValue() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -57,7 +54,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "false", "true", "true", "true", "true", "true", "true"})
     public void has() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -86,7 +84,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"4", "true", "undefined"})
     public void length() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -109,7 +108,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLHtmlElement]", "[object HTMLScriptElement]", "null", "null"})
     public void item() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -133,7 +133,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLHtmlElement]", "[object HTMLScriptElement]", "undefined", "undefined"})
     public void itemBracketed() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -157,7 +158,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts("0,1,2,3,4,entries,forEach,item,keys,length,values")
     public void forIn() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -185,7 +187,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts("entries,forEach,item,keys,length,values")
     public void forInEmptyList() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -215,7 +218,8 @@ public class NodeListTest extends WebDriverTestCase {
              "[object HTMLScriptElement]", "[object HTMLBodyElement]",
              "[object HTMLDivElement]"})
     public void iterator() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
@@ -252,7 +256,8 @@ public class NodeListTest extends WebDriverTestCase {
              "[object HTMLBodyElement] 3 [object NodeList] undefined",
              "[object HTMLDivElement] 4 [object NodeList] undefined"})
     public void forEach() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -278,9 +283,169 @@ public class NodeListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"4", "4",
+             "[object HTMLElement]/0", "3", "3",
+             "[object HTMLElement]/1", "2", "2",
+             "2", "2"})
+    public void forEachRemove() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nodeList = document.getElementById('myId').childNodes;\n"
+                + "    if (nodeList.forEach) {\n"
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+
+                + "      nodeList.forEach(myFunction);\n"
+
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+                + "    } else {\n"
+                + "      log('no forEach');\n"
+                + "    }\n"
+                + "  }\n"
+
+                + "  function myFunction(value, index, list, arg) {\n"
+                + "    log(value + '/' + index);\n"
+                + "    document.getElementById('myId').removeChild(value);\n"
+                + "    log(document.getElementById('myId').childNodes.length);\n"
+                + "    log(list.length);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <div id='myId'><strong>a</strong>b<b>d</b>e</div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4", "4",
+             "[object HTMLElement]/0", "5", "5",
+             "[object Text]/1", "6", "6",
+             "[object HTMLElement]/2", "7", "7",
+             "[object Text]/3", "8", "8",
+             "8", "8"})
+    public void forEachAppend() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nodeList = document.getElementById('myId').childNodes;\n"
+                + "    if (nodeList.forEach) {\n"
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+
+                + "      nodeList.forEach(myFunction);\n"
+
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+                + "    } else {\n"
+                + "      log('no forEach');\n"
+                + "    }\n"
+                + "  }\n"
+
+                + "  function myFunction(value, index, list, arg) {\n"
+                + "    log(value + '/' + index);\n"
+                + "    if (index < 4) {\n"
+                + "      document.getElementById('myId').appendChild(document.createElement('p'));\n"
+                + "    }\n"
+                + "    log(document.getElementById('myId').childNodes.length);\n"
+                + "    log(list.length);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <div id='myId'><strong>a</strong>b<b>d</b>e</div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"4", "4",
+             "[object HTMLElement]/0", "5", "5",
+             "[object HTMLElement]/1", "6", "6",
+             "[object HTMLElement]/2", "7", "7",
+             "[object HTMLElement]/3", "8", "8",
+             "8", "8"})
+    public void forEachInsert() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var nodeList = document.getElementById('myId').childNodes;\n"
+                + "    if (nodeList.forEach) {\n"
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+
+                + "      nodeList.forEach(myFunction);\n"
+
+                + "      log(document.getElementById('myId').childNodes.length);\n"
+                + "      log(nodeList.length);\n"
+                + "    } else {\n"
+                + "      log('no forEach');\n"
+                + "    }\n"
+                + "  }\n"
+
+                + "  function myFunction(value, index, list, arg) {\n"
+                + "    log(value + '/' + index);\n"
+                + "    if (index < 4) {\n"
+                + "      document.getElementById('myId').insertBefore(document.createElement('p'), value);\n"
+                + "    }\n"
+                + "    log(document.getElementById('myId').childNodes.length);\n"
+                + "    log(list.length);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "  <div id='myId'><strong>a</strong>b<b>d</b>e</div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"TypeError", "TypeError"})
+    public void forEachWrongParam() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var nodeList = document.querySelectorAll('*');\n"
+                + "  try {\n"
+                + "    nodeList.forEach();\n"
+                + "  } catch(e) { logEx(e); }\n"
+                + "  try {\n"
+                + "    nodeList.forEach('wrong');\n"
+                + "  } catch(e) { logEx(e); }\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "  <div id='d1' class=' a b \t c \n d \u000B e \u000C f \r g'></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"value", "done", "object", "0", "[object HTMLHtmlElement]"})
     public void entries() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -311,7 +476,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
     public void entriesPropertyDescriptor() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -343,7 +509,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Alerts({"0,[object HTMLHtmlElement]", "1,[object HTMLHeadElement]",
              "2,[object HTMLScriptElement]", "3,[object HTMLBodyElement]"})
     public void entriesForOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -369,7 +536,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"value", "done", "number", "0"})
     public void keys() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -399,7 +567,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
     public void keysPropertyDescriptor() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -430,7 +599,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "2", "3"})
     public void keysForOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -456,7 +626,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0,1,2,3", ""})
     public void objectKeys() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -479,7 +650,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"value", "done", "object", "[object HTMLHtmlElement]"})
     public void values() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -509,7 +681,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "undefined", "function", "undefined", "undefined", "true", "true", "true"})
     public void valuesPropertyDescriptor() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -541,7 +714,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Alerts({"[object HTMLHtmlElement]", "[object HTMLHeadElement]",
              "[object HTMLScriptElement]", "[object HTMLBodyElement]"})
     public void valuesForOf() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -567,7 +741,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "4", "0", "1", "2", "3"})
     public void getOwnPropertySymbols() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  if (Object.getOwnPropertySymbols) {\n"
@@ -598,7 +773,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "0"})
     public void getOwnPropertySymbolsEmptyList() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  if (Object.getOwnPropertySymbols) {\n"
@@ -625,7 +801,8 @@ public class NodeListTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLHeadElement]", "[object HTMLHeadElement]"})
     public void setItem() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"

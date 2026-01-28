@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
@@ -51,7 +52,7 @@ public class FontFaceSet extends EventTarget {
      *          when all the fonts are loaded; it is rejected if one of the fonts failed to load.
      */
     @JsxFunction
-    public Object load(final String font, final String text) {
+    public NativePromise load(final String font, final String text) {
         return setupPromise(() -> "");
     }
 }

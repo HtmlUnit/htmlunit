@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,10 @@ public class Polyfill {
     private String source_;
     private Script script_;
 
+    /**
+     * @return the build in fetch polyfill
+     * @throws IOException in case of error
+     */
     public static Polyfill getFetchPolyfill() throws IOException {
         return getPolyfill("fetch/fetch.umd.js");
     }
@@ -68,7 +72,7 @@ public class Polyfill {
         }
 
         if (script_ != null) {
-            script_.exec(context, scriptable);
+            script_.exec(context, scriptable, scriptable);
         }
     }
 }

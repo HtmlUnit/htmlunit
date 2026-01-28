@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -239,7 +239,7 @@ public class MouseEvent extends UIEvent {
     }
 
     /**
-     * Returns the horizontal coordinate of the event relative to whole document..
+     * Returns the horizontal coordinate of the event relative to whole document.
      * @return the horizontal coordinate (currently the same as {@link #getScreenX()})
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/event.pageX">Mozilla doc</a>
      */
@@ -399,8 +399,8 @@ public class MouseEvent extends UIEvent {
             if (events != null && !events.isEmpty()) {
                 final int lastIdx = events.size() - 1;
                 final Event lastEvent = events.get(lastIdx);
-                if (lastEvent instanceof MouseEvent) {
-                    return (MouseEvent) lastEvent;
+                if (lastEvent instanceof MouseEvent event) {
+                    return event;
                 }
             }
         }
@@ -469,7 +469,7 @@ public class MouseEvent extends UIEvent {
      * @return whether or not the "meta" key was pressed during the event firing
      */
     @JsxGetter
-    public boolean getMetaKey() {
+    public boolean isMetaKey() {
         return metaKey_;
     }
 

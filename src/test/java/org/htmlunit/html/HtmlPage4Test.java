@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,41 +15,37 @@
 package org.htmlunit.html;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebServerTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.ServletContentWrapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Tests for {@link HtmlPage}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Noboru Sinohara
  * @author David K. Taylor
  * @author Andreas Hangler
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Christian Sell
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlPage4Test extends WebServerTestCase {
 
     /**
@@ -60,7 +56,7 @@ public class HtmlPage4Test extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> map = new HashMap<>();
         map.put("/one.html", RefreshServlet.class);
         map.put("/two.html", RefreshServlet.class);
-        startWebServer(".", null, map);
+        startWebServer(".", map);
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "one.html");
         final HtmlSubmitInput submit = page.getHtmlElementById("myButton");
@@ -84,7 +80,8 @@ public class HtmlPage4Test extends WebServerTestCase {
         protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             final Writer writer = resp.getWriter();
             resp.setContentType(MimeType.TEXT_HTML);
-            final String response = "<html>\n"
+            final String response = DOCTYPE_HTML
+                    + "<html>\n"
                     + "<body>\n"
                     + "  <form action='two.html' method='post'>\n"
                     + "  <input type='hidden' name='some_name' value='some_value'>\n"
@@ -119,7 +116,8 @@ public class HtmlPage4Test extends WebServerTestCase {
     @Test
     @Alerts("hello")
     public void bigJavaScript() throws Exception {
-        final StringBuilder html = new StringBuilder("<html><head>\n"
+        final StringBuilder html = new StringBuilder(DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script src='two.js'></script>\n"
                 + "<link rel='stylesheet' type='text/css' href='three.css'/>\n"
                 + "</head>\n"
@@ -148,7 +146,7 @@ public class HtmlPage4Test extends WebServerTestCase {
         map.put("/one.html", BigJavaScriptServlet1.class);
         map.put("/two.js", BigJavaScriptServlet2.class);
         map.put("/three.css", BigJavaScriptServlet3.class);
-        startWebServer(".", null, map);
+        startWebServer(".", map);
         try (WebClient client = getWebClient()) {
             final CollectingAlertHandler alertHandler = new CollectingAlertHandler();
             client.setAlertHandler(alertHandler);
@@ -196,12 +194,7 @@ public class HtmlPage4Test extends WebServerTestCase {
 
     private static int getTempFiles() {
         final File file = new File(System.getProperty("java.io.tmpdir"));
-        final String[] list = file.list(new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return name.startsWith("htmlunit");
-            }
-        });
+        final String[] list = file.list((dir, name) -> name.startsWith("htmlunit"));
         if (list == null) {
             return 0;
         }

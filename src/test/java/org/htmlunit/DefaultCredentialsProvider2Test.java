@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  */
 package org.htmlunit;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.StringWriter;
 import java.net.URL;
@@ -27,10 +27,8 @@ import org.apache.logging.log4j.core.appender.WriterAppender;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DefaultCredentialsProvider}.
@@ -38,7 +36,6 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
     /**
@@ -135,7 +132,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("SecRet")
     public void basicAuthenticationUserFromUrl() throws Exception {
-        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
         getWebClient().getCredentialsProvider().clear();
@@ -184,7 +181,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlUsedForNextSteps() throws Exception {
-        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
         getWebClient().getCredentialsProvider().clear();
@@ -248,7 +245,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlOverwrite() throws Exception {
-        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
         getWebClient().getCredentialsProvider().clear();
@@ -307,7 +304,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlOverwriteDefaultCredentials() throws Exception {
-        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
         getWebClient().getCredentialsProvider().clear();
@@ -333,7 +330,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlOverwriteWrongDefaultCredentials() throws Exception {
-        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
         getWebClient().getCredentialsProvider().clear();
@@ -372,7 +369,8 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("Hello World")
     public void basicAuthenticationXHR() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "var xhr = new XMLHttpRequest();\n"
             + "var handler = function() {\n"
             + "  if (xhr.readyState == 4)\n"
@@ -396,7 +394,8 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("HTTP ERROR 401")
     public void basicAuthenticationXHRWithUsername() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "var xhr = new XMLHttpRequest();\n"
             + "var handler = function() {\n"
             + "  if (xhr.readyState == 4) {\n"
@@ -423,7 +422,8 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     @Test
     @Alerts("HTTP ERROR 401")
     public void basicAuthenticationXHRWithUser() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
             + "var xhr = new XMLHttpRequest();\n"
             + "var handler = function() {\n"
             + "  if (xhr.readyState == 4) {\n"

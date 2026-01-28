@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import java.net.URLStreamHandler;
 /**
  * Stream handler for "about:" URLs.
  *
- * @author <a href="mailto:chen_jun@users.sourceforge.net">Chen Jun</a>
+ * @author Chen Jun
  */
 public class Handler extends URLStreamHandler {
 

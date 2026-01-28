@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -28,7 +26,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HtmlUnknownElementTest extends WebDriverTestCase {
 
     /**
@@ -37,7 +34,8 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLElement]"})
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -55,9 +53,9 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId1")));
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId2")));
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId3")));
+            assertTrue(page.getHtmlElementById("myId1") instanceof HtmlUnknownElement);
+            assertTrue(page.getHtmlElementById("myId2") instanceof HtmlUnknownElement);
+            assertTrue(page.getHtmlElementById("myId3") instanceof HtmlUnknownElement);
         }
     }
 
@@ -87,9 +85,9 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId1")));
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId2")));
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId3")));
+            assertTrue(page.getHtmlElementById("myId1") instanceof HtmlUnknownElement);
+            assertTrue(page.getHtmlElementById("myId2") instanceof HtmlUnknownElement);
+            assertTrue(page.getHtmlElementById("myId3") instanceof HtmlUnknownElement);
         }
     }
 
@@ -98,8 +96,8 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String html
-            = "<html><body><title>foo</title>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body><title>foo</title>\n"
             + "<foo></foo>\n"
             + "</body></html>";
 

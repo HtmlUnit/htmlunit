@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  */
 package org.htmlunit.html;
 
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,20 +26,17 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlInput}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Anton Demydenko
  * @author Ronny Shapiro
  */
-@RunWith(BrowserRunner.class)
 public final class HtmlInputTest extends SimpleWebTestCase {
 
     /**
@@ -48,8 +45,8 @@ public final class HtmlInputTest extends SimpleWebTestCase {
      */
     @Test
     public void radioButtonsAreMutuallyExclusive() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='radio' name='foo' value='1' selected='selected'/>\n"
             + "<input type='radio' name='foo' value='2'/>\n"
@@ -81,8 +78,8 @@ public final class HtmlInputTest extends SimpleWebTestCase {
      */
     @Test
     public void setChecked_CheckBox() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='checkbox' name='foo'/>\n"
             + "<input type='checkbox' name='bar'/>\n"
@@ -105,8 +102,8 @@ public final class HtmlInputTest extends SimpleWebTestCase {
      */
     @Test
     public void getChecked_RadioButton() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='radio' name='radio1'>\n"
             + "<input type='RADIO' name='radio1' value='bar' checked>\n"
@@ -128,8 +125,8 @@ public final class HtmlInputTest extends SimpleWebTestCase {
      */
     @Test
     public void setValueAttribute() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='text' name='text1' onchange='alert(\"changed\")')>\n"
             + "</form></body></html>";
@@ -150,8 +147,8 @@ public final class HtmlInputTest extends SimpleWebTestCase {
      */
     @Test
     public void checkboxDefaultValue() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='checkbox' name='checkbox1')>\n"
             + "</form></body></html>";
@@ -169,8 +166,8 @@ public final class HtmlInputTest extends SimpleWebTestCase {
      */
     @Test
     public void clickRadioButton() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='radio' name='foo' value='1' selected='selected'/>\n"
             + "<input type='radio' name='foo' value='2'/>\n"
@@ -195,8 +192,8 @@ public final class HtmlInputTest extends SimpleWebTestCase {
      */
     @Test
     public void inputNoType() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input name='foo'/>\n"
             + "</form></body></html>";
@@ -212,8 +209,8 @@ public final class HtmlInputTest extends SimpleWebTestCase {
      */
     @Test
     public void onChangeHandlerNotFiredOnLoad() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='file' name='text1' onchange='alert(\"changed\")')>\n"
             + "</form></body></html>";
@@ -228,7 +225,8 @@ public final class HtmlInputTest extends SimpleWebTestCase {
      */
     @Test
     public void testRequiredValidation() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -242,10 +240,13 @@ public final class HtmlInputTest extends SimpleWebTestCase {
         assertFalse(input.isValid());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void changeType_javascriptEngineDisabled() throws Exception {
-        final String htmlContent
-                = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head><body>\n"
                 + "<form id='form1'>\n"
                 + "<input type='text' name='text1' onchange='alert(\"changed\")')>\n"
                 + "</form></body></html>";
@@ -261,10 +262,13 @@ public final class HtmlInputTest extends SimpleWebTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void changeType_javascriptDisabled() throws Exception {
-        final String htmlContent
-                = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head><body>\n"
                 + "<form id='form1'>\n"
                 + "<input type='text' name='text1' onchange='alert(\"changed\")')>\n"
                 + "</form></body></html>";

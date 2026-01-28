@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,8 @@
 package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link CloseEvent}.
@@ -27,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class CloseEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
@@ -51,14 +47,14 @@ public class CloseEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object CloseEvent]", "type-close", "false", "false", "false", "0", "", "false"})
     public void create_ctor() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = new CloseEvent('type-close');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -73,7 +69,7 @@ public class CloseEventTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object CloseEvent]", "type-close", "true", "false", "false", "42", "test-reason", "true"})
     public void create_ctorWithDetails() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -85,7 +81,7 @@ public class CloseEventTest extends WebDriverTestCase {
             + "        'wasClean': true\n"
             + "      });\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -99,17 +95,17 @@ public class CloseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object CloseEvent]", "", "false", "false", "false", "0", "", "false"},
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "NotSupportedError/DOMException",
+            FF_ESR = "NotSupportedError/DOMException")
     public void create_createEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('CloseEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -123,10 +119,10 @@ public class CloseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no initCloseEvent",
-            FF = "exception",
-            FF_ESR = "exception")
+            FF = "NotSupportedError/DOMException",
+            FF_ESR = "NotSupportedError/DOMException")
     public void initCloseEvent() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -136,7 +132,7 @@ public class CloseEventTest extends WebDriverTestCase {
             + "        event.initCloseEvent('close', true, false, true, 42, 'time to close');\n"
             + "        dump(event);\n"
             + "      } else { log('no initCloseEvent'); }\n"
-            + "    } catch (e) { log('exception') }\n"
+            + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"

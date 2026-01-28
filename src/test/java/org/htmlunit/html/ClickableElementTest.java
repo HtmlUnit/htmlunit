@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,9 @@ import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.BuggyWebDriver;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for various clickable elements.
@@ -35,16 +33,16 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class ClickableElementTest extends SimpleWebTestCase {
 
     /**
      * Full page driver for onClick tests.
      *
      * @param htmlContent HTML fragment for body of page with clickable element
-     * identified by clickId ID attribute. Must have onClick that raises
-     * an alert of "foo".
+     *        identified by clickId ID attribute. Must have onClick that raises
+     *        an alert of "foo".
      * @throws Exception if the test fails
      */
     private void onClickPageTest(final String htmlContent) throws Exception {
@@ -56,7 +54,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
      * Full page driver for onClick tests.
      *
      * @param htmlContent HTML fragment for body of page with clickable element
-     * identified by clickId ID attribute.
+     *        identified by clickId ID attribute.
      * @param numClicks number of times to click element
      * @param expectedAlerts array of expected popup values
      * @throws Exception if the test fails
@@ -71,7 +69,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
      * @param htmlContent HTML fragment for body of page with clickable element identified by clickId ID attribute
      * @param numClicks number of times to click element
      * @param expectedAlerts array of expected popup values
-     * @param exceptionOnError
+     * @param exceptionOnError indicate to throw on error
      * @throws Exception if the test fails
      */
     private void onClickPageTest(final String htmlContent, final int numClicks,
@@ -104,7 +102,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     private void onClickBodyTest(final String htmlBody) throws Exception {
-        onClickPageTest("<html><head><title>foo</title></head>\n" + htmlBody
+        onClickPageTest(DOCTYPE_HTML + "<html><head><title>foo</title></head>\n" + htmlBody
                  + "</html>");
     }
 
@@ -309,7 +307,8 @@ public class ClickableElementTest extends SimpleWebTestCase {
      */
     @Test
     public void javaScriptError_onClick() throws Exception {
-        onClickPageTest("<html><head></head><body>\n"
+        onClickPageTest(DOCTYPE_HTML
+                + "<html><head></head><body>\n"
                 + "<form method='POST'><input type='button' id='clickId' onclick='y()'></form>\n"
                 + "</body></html>",
                 1, false);
@@ -577,7 +576,8 @@ public class ClickableElementTest extends SimpleWebTestCase {
     @BuggyWebDriver(CHROME = "")
     // ChromeDriver does not generate a "foo" but it occurs manually
     public void option_onClick() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head>\n"
                 + "<body><form><select size='2'><option id='clickId' onClick='alert(\"foo\")'>\n"
                 + "Option</option></select></form></body>\n"
                 + "</html>";
@@ -825,7 +825,8 @@ public class ClickableElementTest extends SimpleWebTestCase {
      */
     @Test
     public void tableRow_onClickSetOnLoad() throws Exception {
-        onClickPageTest("<html><head>\n"
+        onClickPageTest(DOCTYPE_HTML
+                        + "<html><head>\n"
                         + "<script language='JavaScript'>\n"
                         + "function doFoo() { alert('foo');        }\n"
                         + "function doOnload() { document.getElementById('clickId').onclick = doFoo;}\n"
@@ -840,7 +841,8 @@ public class ClickableElementTest extends SimpleWebTestCase {
      */
     @Test
     public void checkbox_onClickUpdatesStateFirst() throws Exception {
-        onClickPageTest("<html><head>\n"
+        onClickPageTest(DOCTYPE_HTML
+                        + "<html><head>\n"
                         + "<script language='JavaScript'>\n"
                         + "function doFoo(event) { if (this.checked) alert('foo'); else alert('bar'); }\n"
                         + "function doOnload() { document.getElementById('clickId').onclick = doFoo;}\n"
@@ -911,7 +913,8 @@ public class ClickableElementTest extends SimpleWebTestCase {
     @Test
     @Alerts("foo")
     public void setOnClick() throws Exception {
-        onClickPageTest("<html><body><form>\n"
+        onClickPageTest(DOCTYPE_HTML
+                + "<html><body><form>\n"
                 + "<button type='button' id='clickId' onclick='alert(\"foo\"); onclick=null;'>Item</button>\n"
                 + "</form></body></html>", 2);
     }

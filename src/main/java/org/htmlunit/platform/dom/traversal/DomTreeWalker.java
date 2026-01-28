@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import org.w3c.dom.traversal.TreeWalker;
  * An implementation of {@link TreeWalker} backed by {@link org.htmlunit.html.HtmlDomTreeWalker}.
  *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">
- * DOM-Level-2-Traversal-Range</a>
+ *     DOM-Level-2-Traversal-Range</a>
  * @author Ronald Brill
  */
 public class DomTreeWalker implements TreeWalker {

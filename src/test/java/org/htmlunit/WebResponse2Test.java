@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.mocks.WebResponseMock;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebResponse}.
@@ -34,7 +32,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class WebResponse2Test extends SimpleWebTestCase {
 
     /**
@@ -42,13 +39,13 @@ public class WebResponse2Test extends SimpleWebTestCase {
      */
     @Test
     public void charsetInMetaTag() throws Exception {
-        final String html
-            = "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "<head><meta content='text/html; charset=utf-8' http-equiv='Content-Type'/></head>\n"
             + "<body>foo</body>\n"
             + "</html>";
         final HtmlPage page = loadPage(html);
-        assertSame(UTF_8, page.getWebResponse().getContentCharsetOrNull());
+        assertSame(UTF_8, page.getWebResponse().getContentCharset());
         assertEquals(html, page.getWebResponse().getContentAsString());
     }
 

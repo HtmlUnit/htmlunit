@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,22 @@ import org.htmlunit.html.HtmlPage;
 /**
  * Utility class which contains standard assertions for HTML pages.
  *
+ * <p>This class provides a collection of static assertion methods for testing
+ * HTML page content, structure, and behavior. All assertion methods throw
+ * {@link AssertionError} when the expected condition is not met.</p>
+ *
+ * <p>Common use cases include:</p>
+ * <ul>
+ *   <li>Verifying page titles and content</li>
+ *   <li>Checking for presence/absence of elements</li>
+ *   <li>Validating form inputs and links</li>
+ *   <li>Ensuring accessibility attributes are properly set</li>
+ * </ul>
+ *
  * @author Daniel Gredler
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class WebAssert {
 
@@ -45,11 +58,13 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param title the expected title
+     * @throws AssertionError if the page title does not match the expected title
+     * @throws NullPointerException if page or title is null
      */
     public static void assertTitleEquals(final HtmlPage page, final String title) {
         final String s = page.getTitleText();
-        if (!s.equals(title)) {
-            final String msg = "Actual page title '" + s + "' does not match expected page title '" + title + "'.";
+        if (!title.equals(s)) {
+            final String msg = "Page title '" + s + "' does not match expected title '" + title + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -59,11 +74,13 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param titlePortion the substring which the page title is expected to contain
+     * @throws AssertionError if the page title does not contain the substring
+     * @throws NullPointerException if page or titlePortion is null
      */
     public static void assertTitleContains(final HtmlPage page, final String titlePortion) {
         final String s = page.getTitleText();
         if (!s.contains(titlePortion)) {
-            final String msg = "Page title '" + s + "' does not contain the substring '" + titlePortion + "'.";
+            final String msg = "Page title '" + s + "' does not contain the expected substring '" + titlePortion + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -73,11 +90,13 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param regex the regular expression that the page title is expected to match
+     * @throws AssertionError if the page title does not match the regular expression
+     * @throws NullPointerException if page or regex is null
      */
     public static void assertTitleMatches(final HtmlPage page, final String regex) {
         final String s = page.getTitleText();
         if (!s.matches(regex)) {
-            final String msg = "Page title '" + s + "' does not match the regular expression '" + regex + "'.";
+            final String msg = "Page title '" + s + "' does not match the expected regular expression '" + regex + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -86,14 +105,16 @@ public final class WebAssert {
      * Verifies that the specified page contains an element with the specified ID.
      *
      * @param page the page to check
-     * @param id the expected ID of an element in the page
+     * @param id the ID of an element expected in the page
+     * @throws AssertionError if no element with the specified ID is found
+     * @throws NullPointerException if page or id is null
      */
     public static void assertElementPresent(final HtmlPage page, final String id) {
         try {
             page.getHtmlElementById(id);
         }
         catch (final ElementNotFoundException e) {
-            final String msg = "The page does not contain an element with ID '" + id + "'.";
+            final String msg = "Expected element with ID '" + id + "' was not found on the page.";
             throw new AssertionError(msg, e);
         }
     }
@@ -101,14 +122,21 @@ public final class WebAssert {
     /**
      * Verifies that the specified page contains an element matching the specified XPath expression.
      *
+     * <p><b>Example usage:</b></p>
+     * <pre>{@code
+     * WebAssert.assertElementPresentByXPath(page, "//div[@class='error']");
+     * WebAssert.assertElementPresentByXPath(page, "//input[@type='submit' and @value='Login']");
+     * }</pre>
+     *
      * @param page the page to check
      * @param xpath the XPath expression which is expected to match an element in the page
+     * @throws AssertionError if no elements match the XPath expression
+     * @throws NullPointerException if page or xpath is null
      */
     public static void assertElementPresentByXPath(final HtmlPage page, final String xpath) {
         final List<?> elements = page.getByXPath(xpath);
         if (elements.isEmpty()) {
-            final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
-                            + "'.";
+            final String msg = "No elements found matching the XPath expression '" + xpath + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -117,7 +145,9 @@ public final class WebAssert {
      * Verifies that the specified page does not contain an element with the specified ID.
      *
      * @param page the page to check
-     * @param id the ID of an element which expected to not exist on the page
+     * @param id the ID of an element which is expected to not exist on the page
+     * @throws AssertionError if an element with the specified ID is found
+     * @throws NullPointerException if page or id is null
      */
     public static void assertElementNotPresent(final HtmlPage page, final String id) {
         try {
@@ -126,7 +156,7 @@ public final class WebAssert {
         catch (final ElementNotFoundException e) {
             return;
         }
-        final String msg = "The page contains an element with ID '" + id + "'.";
+        final String msg = "Found unexpected element with ID '" + id + "' on the page.";
         throw new AssertionError(msg);
     }
 
@@ -135,13 +165,15 @@ public final class WebAssert {
      * expression.
      *
      * @param page the page to check
-     * @param xpath the XPath expression which is expected to not match an element in the page
+     * @param xpath the XPath expression which is expected to not match any element in the page
+     * @throws AssertionError if any elements match the XPath expression
      */
     public static void assertElementNotPresentByXPath(final HtmlPage page, final String xpath) {
         final List<?> elements = page.getByXPath(xpath);
         if (!elements.isEmpty()) {
-            final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
-                            + "'.";
+            final String msg = "Found " + elements.size()
+                                    + " unexpected element(s) matching the XPath expression '"
+                                    + xpath + "'.";
             throw new AssertionError(msg);
         }
     }
@@ -151,10 +183,12 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param text the text to check for
+     * @throws AssertionError if the page does not contain the specified text
+     * @throws NullPointerException if page or text is null
      */
     public static void assertTextPresent(final HtmlPage page, final String text) {
         if (!page.asNormalizedText().contains(text)) {
-            final String msg = "The page does not contain the text '" + text + "'.";
+            final String msg = "Expected text '" + text + "' was not found on the page.";
             throw new AssertionError(msg);
         }
     }
@@ -166,18 +200,20 @@ public final class WebAssert {
      * @param page the page to check
      * @param text the text to check for
      * @param id the ID of the element which is expected to contain the specified text
+     * @throws AssertionError if the element does not contain the specified text
+     * @throws ElementNotFoundException if no element with the specified ID exists
+     * @throws NullPointerException if any parameter is null
      */
     public static void assertTextPresentInElement(final HtmlPage page, final String text, final String id) {
         try {
             final HtmlElement element = page.getHtmlElementById(id);
             if (!element.asNormalizedText().contains(text)) {
-                final String msg = "The element with ID '" + id + "' does not contain the text '" + text + "'.";
+                final String msg = "Element with ID '" + id + "' does not contain the expected text '" + text + "'.";
                 throw new AssertionError(msg);
             }
         }
         catch (final ElementNotFoundException e) {
-            final String msg = "Unable to verify that the element with ID '" + id + "' contains the text '" + text
-                            + "' because the specified element does not exist.";
+            final String msg = "Cannot verify text content: element with ID '" + id + "' was not found on the page.";
             throw new AssertionError(msg, e);
         }
     }
@@ -187,10 +223,12 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param text the text to check for
+     * @throws AssertionError if the page contains the specified text
+     * @throws NullPointerException if page or text is null
      */
     public static void assertTextNotPresent(final HtmlPage page, final String text) {
         if (page.asNormalizedText().contains(text)) {
-            final String msg = "The page contains the text '" + text + "'.";
+            final String msg = "Found unexpected text '" + text + "' on the page.";
             throw new AssertionError(msg);
         }
     }
@@ -207,13 +245,12 @@ public final class WebAssert {
         try {
             final HtmlElement element = page.getHtmlElementById(id);
             if (element.asNormalizedText().contains(text)) {
-                final String msg = "The element with ID '" + id + "' contains the text '" + text + "'.";
+                final String msg = "Element with ID '" + id + "' contains unexpected text '" + text + "'.";
                 throw new AssertionError(msg);
             }
         }
         catch (final ElementNotFoundException e) {
-            final String msg = "Unable to verify that the element with ID '" + id + "' does not contain the text '"
-                            + text + "' because the specified element does not exist.";
+            final String msg = "Cannot verify text content: element with ID '" + id + "' was not found on the page.";
             throw new AssertionError(msg);
         }
     }
@@ -223,16 +260,17 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param id the ID of the link which the page is expected to contain
+     * @throws AssertionError if no link with the specified ID is found
+     * @see #assertLinkNotPresent(HtmlPage, String)
+     * @see #assertLinkPresentWithText(HtmlPage, String)
      */
     public static void assertLinkPresent(final HtmlPage page, final String id) {
         try {
             page.getDocumentElement().getOneHtmlElementByAttribute("a", DomElement.ID_ATTRIBUTE, id);
         }
         catch (final ElementNotFoundException e) {
-            final String msg = "The page does not contain a link with ID '" + id + "'.";
-            final AssertionError aerr = new AssertionError(msg);
-            aerr.initCause(e);
-            throw aerr;
+            final String msg = "Expected link with ID '" + id + "' was not found on the page.";
+            throw new AssertionError(msg, e);
         }
     }
 
@@ -241,15 +279,18 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param id the ID of the link which the page is expected to not contain
+     * @throws AssertionError if a link with the specified ID is found
+     * @see #assertLinkPresent(HtmlPage, String)
+     * @see #assertLinkNotPresentWithText(HtmlPage, String)
      */
     public static void assertLinkNotPresent(final HtmlPage page, final String id) {
         try {
             page.getDocumentElement().getOneHtmlElementByAttribute("a", DomElement.ID_ATTRIBUTE, id);
-            // Not expected.
-            final String msg = "The page contains a link with ID '" + id + "'.";
+            final String msg = "Found unexpected link with ID '" + id + "' on the page.";
             throw new AssertionError(msg);
         }
         catch (final ElementNotFoundException expected) {
+            // Expected behavior - link should not be present
         }
     }
 
@@ -269,7 +310,7 @@ public final class WebAssert {
             }
         }
         if (!found) {
-            final String msg = "The page does not contain a link with text '" + text + "'.";
+            final String msg = "Expected link containing text '" + text + "' was not found on the page.";
             throw new AssertionError(msg);
         }
     }
@@ -290,7 +331,7 @@ public final class WebAssert {
             }
         }
         if (found) {
-            final String msg = "The page contains a link with text '" + text + "'.";
+            final String msg = "Found unexpected link containing text '" + text + "' on the page.";
             throw new AssertionError(msg);
         }
     }
@@ -300,13 +341,15 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param name the expected name of a form on the page
+     * @throws AssertionError if no form with the specified name is found
+     * @see #assertFormNotPresent(HtmlPage, String)
      */
     public static void assertFormPresent(final HtmlPage page, final String name) {
         try {
             page.getFormByName(name);
         }
         catch (final ElementNotFoundException e) {
-            final String msg = "The page does not contain a form named '" + name + "'.";
+            final String msg = "Expected form with name '" + name + "' was not found on the page.";
             throw new AssertionError(msg, e);
         }
     }
@@ -316,6 +359,8 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param name the name of a form which should not exist on the page
+     * @throws AssertionError if a form with the specified name is found
+     * @see #assertFormPresent(HtmlPage, String)
      */
     public static void assertFormNotPresent(final HtmlPage page, final String name) {
         try {
@@ -324,7 +369,7 @@ public final class WebAssert {
         catch (final ElementNotFoundException e) {
             return;
         }
-        final String msg = "The page contains a form named '" + name + "'.";
+        final String msg = "Found unexpected form with name '" + name + "' on the page.";
         throw new AssertionError(msg);
     }
 
@@ -333,12 +378,15 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param name the name of the input element to look for
+     * @throws AssertionError if no input element with the specified name is found
+     * @see #assertInputNotPresent(HtmlPage, String)
+     * @see #assertInputContainsValue(HtmlPage, String, String)
      */
     public static void assertInputPresent(final HtmlPage page, final String name) {
         final String xpath = "//input[@name='" + name + "']";
         final List<?> list = page.getByXPath(xpath);
         if (list.isEmpty()) {
-            throw new AssertionError("Unable to find an input element named '" + name + "'.");
+            throw new AssertionError("Expected input element with name '" + name + "' was not found on the page.");
         }
     }
 
@@ -347,12 +395,14 @@ public final class WebAssert {
      *
      * @param page the page to check
      * @param name the name of the input element to look for
+     * @throws AssertionError if an input element with the specified name is found
+     * @throws NullPointerException if page or name is null
      */
     public static void assertInputNotPresent(final HtmlPage page, final String name) {
         final String xpath = "//input[@name='" + name + "']";
         final List<?> list = page.getByXPath(xpath);
         if (!list.isEmpty()) {
-            throw new AssertionError("Unable to find an input element named '" + name + "'.");
+            throw new AssertionError("Found unexpected input element with name '" + name + "' on the page.");
         }
     }
 
@@ -368,13 +418,13 @@ public final class WebAssert {
         final String xpath = "//input[@name='" + name + "']";
         final List<?> list = page.getByXPath(xpath);
         if (list.isEmpty()) {
-            throw new AssertionError("Unable to find an input element named '" + name + "'.");
+            throw new AssertionError("Expected input element with name '" + name + "' was not found on the page.");
         }
         final HtmlInput input = (HtmlInput) list.get(0);
         final String s = input.getValue();
         if (!s.equals(value)) {
-            throw new AssertionError("The input element named '" + name + "' contains the value '" + s
-                            + "', not the expected value '" + value + "'.");
+            throw new AssertionError("Input element '" + name + "' has value '" + s
+                            + "' but expected '" + value + "'.");
         }
     }
 
@@ -390,13 +440,12 @@ public final class WebAssert {
         final String xpath = "//input[@name='" + name + "']";
         final List<?> list = page.getByXPath(xpath);
         if (list.isEmpty()) {
-            throw new AssertionError("Unable to find an input element named '" + name + "'.");
+            throw new AssertionError("Expected input element with name '" + name + "' was not found on the page.");
         }
         final HtmlInput input = (HtmlInput) list.get(0);
         final String s = input.getValue();
         if (s.equals(value)) {
-            throw new AssertionError("The input element named '" + name + "' contains the value '" + s
-                            + "', not the expected value '" + value + "'.");
+            throw new AssertionError("Input element '" + name + "' has unexpected value '" + s + "'.");
         }
     }
 
@@ -407,20 +456,24 @@ public final class WebAssert {
      * all tabbable elements should have the <code>tabindex</code> attribute set.</p>
      *
      * <p>This method verifies that all tabbable elements have a valid value set for
-     * the <code>tabindex</code> attribute.</p>
+     * the <code>tabindex</code> attribute. Valid values are positive integers,
+     * 0 (for default tab order), or -1 (to exclude from tab order).</p>
+     *
+     * <p>The following elements are checked: a, area, button, input, object, select, textarea</p>
      *
      * @param page the page to check
+     * @throws AssertionError if any tabbable element has an invalid or missing tabindex attribute
      */
     public static void assertAllTabIndexAttributesSet(final HtmlPage page) {
         final List<String> tags =
             Arrays.asList("a", "area", "button", "input", "object", "select", "textarea");
 
         for (final String tag : tags) {
-            for (final HtmlElement element : page.getDocumentElement().getElementsByTagName(tag)) {
+            for (final HtmlElement element : page.getDocumentElement().getStaticElementsByTagName(tag)) {
                 final Short tabIndex = element.getTabIndex();
                 if (tabIndex == null || HtmlElement.TAB_INDEX_OUT_OF_BOUNDS.equals(tabIndex)) {
                     final String s = element.getAttributeDirect("tabindex");
-                    throw new AssertionError("Illegal value for tab index: '" + s + "'.");
+                    throw new AssertionError("Invalid tabindex value '" + s + "' found on element.");
                 }
             }
         }
@@ -431,7 +484,10 @@ public final class WebAssert {
      * keyboard navigation. This method verifies that all the <code>accesskey</code> attributes on the
      * specified page are unique.
      *
+     * <p>Duplicate access keys can confuse users and make keyboard navigation unpredictable.</p>
+     *
      * @param page the page to check
+     * @throws AssertionError if any access key is used more than once on the page
      */
     public static void assertAllAccessKeyAttributesUnique(final HtmlPage page) {
         final List<String> list = new ArrayList<>();
@@ -439,7 +495,7 @@ public final class WebAssert {
             final String key = element.getAttributeDirect("accesskey");
             if (key != null && !key.isEmpty()) {
                 if (list.contains(key)) {
-                    throw new AssertionError("The access key '" + key + "' is not unique.");
+                    throw new AssertionError("Duplicate access key '" + key + "' found on the page.");
                 }
                 list.add(key);
             }
@@ -450,6 +506,8 @@ public final class WebAssert {
      * Verifies that all element IDs in the specified page are unique.
      *
      * @param page the page to check
+     * @throws AssertionError if any element ID is used more than once on the page
+     * @throws NullPointerException if page is null
      */
     public static void assertAllIdAttributesUnique(final HtmlPage page) {
         final List<String> list = new ArrayList<>();
@@ -457,7 +515,7 @@ public final class WebAssert {
             final String id = element.getId();
             if (id != null && !id.isEmpty()) {
                 if (list.contains(id)) {
-                    throw new AssertionError("The element ID '" + id + "' is not unique.");
+                    throw new AssertionError("Duplicate element ID '" + id + "' found on the page.");
                 }
                 list.add(id);
             }
@@ -467,8 +525,10 @@ public final class WebAssert {
     /**
      * Assert that the specified parameter is not null. Throw a NullPointerException
      * if a null is found.
+     *
      * @param description the description to pass into the NullPointerException
      * @param object the object to check for null
+     * @throws NullPointerException if the object is null
      */
     public static void notNull(final String description, final Object object) {
         if (object == null) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,15 @@
  */
 package org.htmlunit.html.impl;
 
+import java.util.Objects;
+
 /**
  * Our own implementation of color to be
  * independent of awt (for this).
  *
  * @author Ronald Brill
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class Color {
     private final int red_;
     private final int green_;
@@ -98,13 +101,7 @@ public class Color {
      */
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + alpha_;
-        result = prime * result + blue_;
-        result = prime * result + green_;
-        result = prime * result + red_;
-        return result;
+        return Objects.hash(red_, green_, blue_, alpha_);
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,8 +63,8 @@ public class SubmitEvent extends Event {
 
         if (details != null && !JavaScriptEngine.isUndefined(details)) {
             final Object submitter = details.get("submitter");
-            if (submitter instanceof HTMLElement) {
-                submitter_ = (HTMLElement) submitter;
+            if (submitter instanceof HTMLElement element) {
+                submitter_ = element;
             }
         }
     }

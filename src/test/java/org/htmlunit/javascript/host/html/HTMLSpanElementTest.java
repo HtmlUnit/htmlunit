@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -31,7 +29,6 @@ import org.openqa.selenium.WebDriver;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HTMLSpanElementTest extends WebDriverTestCase {
 
     /**
@@ -40,8 +37,8 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
     @Test
     @Alerts("no")
     public void doScroll() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -69,8 +66,8 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLSpanElement] undefined")
     public void cite() throws Exception {
-        final String html =
-            "<html>\n"
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -94,7 +91,8 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
     @Test
     @Alerts("beforeSpace afterSpace")
     public void getText() throws Exception {
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head></head><body>\n"
             + "<div id='foo'><span>beforeSpace</span><span> </span><span>afterSpace</span></div>\n"
             + "</body></html>";
 

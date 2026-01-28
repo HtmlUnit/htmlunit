@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import java.util.Map;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebServerTestCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the sample code from the documentation to make sure
@@ -39,7 +39,6 @@ public class StorageHolderTest extends WebServerTestCase {
         conn.setDefaultResponse("<script>sessionStorage.setItem('myNewKey', 'myNewData');</script>");
 
         startWebServer(conn);
-        final URL url = URL_FIRST;
 
         try (WebClient webClient = new WebClient()) {
 
@@ -51,7 +50,7 @@ public class StorageHolderTest extends WebServerTestCase {
             sessionStorage.put("myKey", "myData");
 
             // load the page that consumes the session storage data
-            webClient.getPage(url);
+            webClient.getPage(URL_FIRST);
 
             // make sure the new data are in
             assertEquals("myNewData", sessionStorage.get("myNewKey"));

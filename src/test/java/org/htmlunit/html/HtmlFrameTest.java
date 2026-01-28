@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  */
 package org.htmlunit.html;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,24 +22,20 @@ import java.util.List;
 
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.FailingHttpStatusCodeException;
-import org.htmlunit.FrameContentHandler;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlFrame}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlFrameTest extends SimpleWebTestCase {
 
     /**
@@ -47,8 +43,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void srcOfBlankAndEmpty() throws Exception {
-        final String html
-            = "<html><head><title>first</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "  <frame src='' id='frame1'>\n"
             + "  <frame src='about:blank' id='frame2'>\n"
@@ -72,8 +68,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String html
-            = "<html><head><title>first</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "  <frame id='frame1'>\n"
             + "  <frame onload='alert(this.tagName)' id='frame2'>\n"
@@ -99,8 +95,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void documentWrite() throws Exception {
-        final String html
-            = "<html><head><title>first</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "  <frame src='' name='frame1' id='frame1'>\n"
             + "  <frame onload=\"frame1.document.open();frame1.document.write("
@@ -127,8 +123,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClientWithMockWebConnection();
         final MockWebConnection webConnection = getMockWebConnection();
 
-        final String html
-            = "<html><head><title>first</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>first</title></head>\n"
             + "<frameset cols='100%'>\n"
             + "  <frame src='foo.txt'>\n"
             + "</frameset></html>";
@@ -147,10 +143,10 @@ public class HtmlFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void failingHttpStatusCodeException() throws Exception {
-        final String failingHtml = "<html><head><body>Not found</body></html>";
+        final String failingHtml = DOCTYPE_HTML + "<html><head><body>Not found</body></html>";
 
-        final String firstHtml
-            = "<html><head><title>First</title></head>\n"
+        final String firstHtml = DOCTYPE_HTML
+            + "<html><head><title>First</title></head>\n"
             + "<frameset cols='130,*'>\n"
             + "  <frame scrolling='no' name='left' src='" + "failing_url" + "' frameborder='1' />\n"
             + "  <frame scrolling='auto' name='right' src='" + URL_THIRD + "' frameborder='1' />\n"
@@ -160,8 +156,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
-        final String thirdHtml  = "<html><head><title>Third</title></head><body></body></html>";
+        final String secondHtml = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
+        final String thirdHtml  = DOCTYPE_HTML + "<html><head><title>Third</title></head><body></body></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
 
@@ -186,26 +182,27 @@ public class HtmlFrameTest extends SimpleWebTestCase {
      */
     @Test
     public void frameScriptReplaceOtherFrame() throws Exception {
-        final String html =
-            "<html><head><title>frames</title></head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>frames</title></head>\n"
             + "<frameset cols='180,*'>\n"
             + "<frame name='f1' src='1.html'/>\n"
             + "<frame name='f2' src='2.html'/>\n"
             + "</frameset>\n"
             + "</html>";
 
-        final String frame1 = "<html><head><title>1</title></head>\n"
+        final String frame1 = DOCTYPE_HTML
+            + "<html><head><title>1</title></head>\n"
             + "<body>1"
             + "<script>\n"
             + "  parent.frames['f2'].location.href = '3.html';\n"
             + "</script>\n"
             + "</body></html>";
 
-        final String frame3 = "<html><head><title>page 3</title></head><body></body></html>";
+        final String frame3 = DOCTYPE_HTML + "<html><head><title>page 3</title></head><body></body></html>";
 
         final WebClient webClient = getWebClientWithMockWebConnection();
         final MockWebConnection conn = getMockWebConnection();
-        conn.setDefaultResponse("<html><head><title>default</title></head><body></body></html>");
+        conn.setDefaultResponse(DOCTYPE_HTML + "<html><head><title>default</title></head><body></body></html>");
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);
         conn.setResponse(new URL(URL_FIRST, "3.html"), frame3);
@@ -224,14 +221,15 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClientWithMockWebConnection();
         final MockWebConnection webConnection = getMockWebConnection();
 
-        final String html =
-                "<html><head><title>frames</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>frames</title></head>\n"
                 + "<frameset cols='180,*'>\n"
                 + "<frame id='frame1' src='1.html'/>\n"
                 + "</frameset>\n"
                 + "</html>";
 
-        webConnection.setDefaultResponse("<html><head><title>default</title></head><body></body></html>");
+        webConnection.setDefaultResponse(DOCTYPE_HTML
+                + "<html><head><title>default</title></head><body></body></html>");
         webConnection.setResponse(URL_FIRST, html);
 
         HtmlPage page = webClient.getPage(URL_FIRST);
@@ -240,12 +238,7 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         HtmlFrame frame1 = page.getHtmlElementById("frame1");
         assertEquals(getExpectedAlerts()[0], ((HtmlPage) frame1.getEnclosedPage()).getTitleText());
 
-        webClient.setFrameContentHandler(new FrameContentHandler() {
-            @Override
-            public boolean loadFrameDocument(final BaseFrameElement baseFrameElement) {
-                return false;
-            }
-        });
+        webClient.setFrameContentHandler(baseFrameElement -> false);
 
         page = webClient.getPage(URL_FIRST);
         assertEquals("frames", page.getTitleText());

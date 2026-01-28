@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,28 +21,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.http.client.utils.DateUtils;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.util.Cookie;
+import org.htmlunit.http.Cookie;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Unit tests for {@link CookieManager}.
  *
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class CookieManager5Test extends WebServerTestCase {
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void sameDomainWithClientCookie() throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
@@ -64,6 +63,9 @@ public class CookieManager5Test extends WebServerTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void unqualifiedHostWithClientCookie() throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
@@ -85,6 +87,9 @@ public class CookieManager5Test extends WebServerTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void subdomainWithClientCookie() throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
@@ -106,6 +111,9 @@ public class CookieManager5Test extends WebServerTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     public void differentSubdomainWithClientCookie() throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
@@ -138,7 +146,7 @@ public class CookieManager5Test extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put(SetCookieExpires10Servlet.URL, SetCookieExpires10Servlet.class);
         servlets.put(SetCookieExpires1000Servlet.URL, SetCookieExpires1000Servlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
         try (WebClient webClient = getWebClient()) {
             webClient.getCookieManager().clearCookies();
@@ -170,25 +178,34 @@ public class CookieManager5Test extends WebServerTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put(SetCookieExpires10Servlet.URL, SetCookieExpires10Servlet.class);
         servlets.put(SetCookieExpires1000Servlet.URL, SetCookieExpires1000Servlet.class);
-        startWebServer("./", null, servlets);
+        startWebServer("./", servlets);
 
-        final WebClient webClient = getWebClient();
-        webClient.getPage("http://localhost:" + PORT + SetCookieExpires10Servlet.URL);
-        assertEquals(1, webClient.getCookieManager().getCookies().size());
-        Cookie cookie = webClient.getCookieManager().getCookies().iterator().next();
-        assertFalse("" + cookie.getExpires(), cookie.getExpires().after(date));
+        try (WebClient webClient = getWebClient()) {
+            webClient.getPage("http://localhost:" + PORT + SetCookieExpires10Servlet.URL);
+            assertEquals(1, webClient.getCookieManager().getCookies().size());
+            Cookie cookie = webClient.getCookieManager().getCookies().iterator().next();
+            assertFalse("" + cookie.getExpires(), cookie.getExpires().after(date));
 
-        webClient.getPage("http://localhost:" + PORT + SetCookieExpires1000Servlet.URL);
-        assertEquals(1, webClient.getCookieManager().getCookies().size());
-        cookie = webClient.getCookieManager().getCookies().iterator().next();
-        assertTrue("" + cookie.getExpires(), cookie.getExpires().after(date));
+            webClient.getPage("http://localhost:" + PORT + SetCookieExpires1000Servlet.URL);
+            assertEquals(1, webClient.getCookieManager().getCookies().size());
+            cookie = webClient.getCookieManager().getCookies().iterator().next();
+            assertTrue("" + cookie.getExpires(), cookie.getExpires().after(date));
+        }
+    }
+
+    @Override
+    protected WebClient getWebClient() {
+        final WebClient webClient = super.getWebClient();
+        // set timeout to fail fast when the url not mapped
+        webClient.getOptions().setTimeout(1000);
+        return webClient;
     }
 
     /**
      * Helper class for {@link #updateCookieExpires}.
      */
     public abstract static class SetCookieExpiresServlet extends HttpServlet {
-        private static final String HTML_ = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        private static final String HTML_ = DOCTYPE_HTML
                 + "<html><head></head>\n"
                 + "<body>\n"
                 + "</body></html>";

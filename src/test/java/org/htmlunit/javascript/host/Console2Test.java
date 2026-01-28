@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,9 @@ import java.util.List;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebConsole;
 import org.htmlunit.WebConsole.Logger;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for Console.
@@ -34,10 +32,9 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class Console2Test extends SimpleWebTestCase {
 
-    private final class LoggerMock implements Logger {
+    private static final class LoggerMock implements Logger {
         private final List<String> messages_;
 
         private LoggerMock(final List<String> messages) {
@@ -95,7 +92,7 @@ public class Console2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("info: [\"one\",\"two\",\"three\",\"[object HTMLCollection]\"]")
+    @Alerts("info: [\"one\",\"two\",\"three\",{}]")
     public void log() throws Exception {
         log("['one', 'two', 'three', document.body.children]");
     }
@@ -179,8 +176,8 @@ public class Console2Test extends SimpleWebTestCase {
         final List<String> messages = new ArrayList<>();
         console.setLogger(new LoggerMock(messages));
 
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  window.console.log(" + logInput + ");\n"
@@ -207,11 +204,12 @@ public class Console2Test extends SimpleWebTestCase {
         final String workerJs = "console.log('from worker');\n";
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_JAVASCRIPT);
 
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script async>\n"
                 + "try {\n"
                 + "  var myWorker = new Worker('worker.js');\n"
-                + "} catch(e) { log('exception'); }\n"
+                + "} catch(e) { logEx(e); }\n"
                 + "</script></body></html>\n";
 
         loadPage(html);

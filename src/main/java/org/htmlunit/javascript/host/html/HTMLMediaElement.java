@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.html.HtmlMedia;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
@@ -112,7 +113,7 @@ public class HTMLMediaElement extends HTMLElement {
      *         or is rejected if for any reason playback cannot be started
      */
     @JsxFunction
-    public Object play() {
+    public NativePromise play() {
         return setupRejectedPromise(() ->
                     new DOMException("HtmlUnit does not support media play().", DOMException.NOT_FOUND_ERR));
     }

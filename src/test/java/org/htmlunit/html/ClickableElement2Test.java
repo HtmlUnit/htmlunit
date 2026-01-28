@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -32,7 +30,6 @@ import org.openqa.selenium.interactions.Actions;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class ClickableElement2Test extends WebDriverTestCase {
 
     /**
@@ -41,8 +38,8 @@ public class ClickableElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void clickOnFocus() throws Exception {
-        final String html
-            = "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
             + "<form>\n"
             + "  <input type='button' id='textfield1' onfocus='log(1)'>\n"
             + "</form>\n"
@@ -58,21 +55,23 @@ public class ClickableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("click click dblclick ")
+    @Alerts({"click", "click", "dblclick"})
     public void dblClick() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function clickMe() {\n"
-            + "    document.getElementById('myTextarea').value+='click ';\n"
+            + "    log('click');\n"
             + "  }\n"
             + "  function dblClickMe() {\n"
-            + "    document.getElementById('myTextarea').value+='dblclick ';\n"
+            + "    log('dblclick');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body id='myBody' onclick='clickMe()' ondblclick='dblClickMe()'>\n"
-            + "<textarea id='myTextarea'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(content);
@@ -81,6 +80,6 @@ public class ClickableElement2Test extends WebDriverTestCase {
         action.doubleClick(driver.findElement(By.id("myBody")));
         action.perform();
 
-        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("myTextarea")).getAttribute("value"));
+        verifyTextArea2(driver, getExpectedAlerts());
     }
 }

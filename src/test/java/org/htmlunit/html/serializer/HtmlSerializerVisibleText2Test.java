@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +20,10 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.xml.XmlPage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,7 +36,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ronald Brill
  * @author cd alexndr
  */
-@RunWith(BrowserRunner.class)
 public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
 
     /**
@@ -132,8 +129,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceBreak(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <br id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">\n"
@@ -211,8 +208,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceInputHidden(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -294,8 +291,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceScript(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <script id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
@@ -374,8 +371,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceStyle(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <style id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
@@ -454,8 +451,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceNoframes(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <noframes id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
@@ -534,8 +531,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceDiv(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <div id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
@@ -614,8 +611,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpacePre(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <pre id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
@@ -694,8 +691,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceTextArea(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <textarea id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
@@ -774,8 +771,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceTitle(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "<title id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">"
             + "  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </title>\n"
@@ -799,9 +796,9 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "       A B C D EF G H I\n      Second\n    ",
-            EDGE = "       A B C D EF G H I\n      Second\n    ")
+    @Alerts(DEFAULT = "       A B C D EF G H\nI\n      Second\n    ",
+            FF = "A B C D EF G H I\nSecond",
+            FF_ESR = "A B C D EF G H I\nSecond")
     @HtmlUnitNYI(CHROME = "A B C D EF G H I\nSecond",
             EDGE = "A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelect() throws Exception {
@@ -813,7 +810,11 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H I\nSecond")
+    @Alerts(DEFAULT = "A B C D EF G H\nI\nSecond",
+            FF = "A B C D EF G H I\nSecond",
+            FF_ESR = "A B C D EF G H I\nSecond")
+    @HtmlUnitNYI(CHROME = "A B C D EF G H I\nSecond",
+            EDGE = "A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelectNormal() throws Exception {
         getVisibleTextWhiteSpaceSelect("normal");
     }
@@ -823,7 +824,11 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H I\nSecond")
+    @Alerts(DEFAULT = "A B C D EF G H\nI\nSecond",
+            FF = "A B C D EF G H I\nSecond",
+            FF_ESR = "A B C D EF G H I\nSecond")
+    @HtmlUnitNYI(CHROME = "A B C D EF G H I\nSecond",
+            EDGE = "A B C D EF G H I\nSecond")
     public void getVisibleTextWhiteSpaceSelectNowrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("nowrap");
     }
@@ -833,7 +838,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "       A B C D EF G H I\n      Second\n    ",
+    @Alerts(DEFAULT = "       A B C D EF G H\nI\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
             FF_ESR = "A B C D EF G H I\nSecond")
     @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
@@ -849,7 +854,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "       A B C D EF G H I\n      Second\n    ",
+    @Alerts(DEFAULT = "       A B C D EF G H\nI\n      Second\n    ",
             FF = "A B C D EF G H I\nSecond",
             FF_ESR = "A B C D EF G H I\nSecond")
     @HtmlUnitNYI(CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
@@ -865,7 +870,9 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("A B C D EF G H I\nSecond")
+    @Alerts(DEFAULT = "A B C D EF G H\nI\nSecond",
+            FF = "A B C D EF G H I\nSecond",
+            FF_ESR = "A B C D EF G H I\nSecond")
     @HtmlUnitNYI(CHROME = "A B C D \nEF\nG \n H I\n Second",
             EDGE = "A B C D \nEF\nG \n H I\n Second",
             FF = "A B C D \nEF\nG \n H I\n Second",
@@ -875,8 +882,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceSelect(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <form>\n"
@@ -959,8 +966,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceInputSubmit(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -988,8 +995,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleTextInputSubmitNoValue() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -1015,8 +1022,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleTextInputResetNoValue() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -1042,8 +1049,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleTextInputResetBlankValue() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -1069,8 +1076,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void getVisibleTextInputSubmitBlankValue() throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -1150,8 +1157,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceInputReset(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -1233,8 +1240,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceInputCheckbox(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -1316,8 +1323,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceInputRadio(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
@@ -1405,8 +1412,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceOrderedList(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <ol id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">\n"
@@ -1496,8 +1503,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     }
 
     private void getVisibleTextWhiteSpaceUnorderedList(final String whiteSpace) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  <ul id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">\n"
@@ -1764,9 +1771,21 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
                 + "</details>");
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("beforeafter")
+    public void getVisibleTextCdata() throws Exception {
+        getVisibleTextFormated("<div id='tester'>"
+                + "before<![CDATA[inside]]>after"
+                + "</div>");
+    }
+
     private void getVisibleTextFormated(final String htmlTesterSnipped) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  " + htmlTesterSnipped + "\n"
@@ -1812,8 +1831,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
 
     private void getVisibleTextFormatedAfterTyping(final String htmlTesterSnipped,
                         final String... typed) throws Exception {
-        final String htmlContent
-            = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+            + "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "  " + htmlTesterSnipped + "\n"

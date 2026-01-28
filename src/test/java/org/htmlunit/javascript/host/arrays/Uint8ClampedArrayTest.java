@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.arrays;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for Uint8ClampedArray.
@@ -28,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  * @author Michael Rimov
  */
-@RunWith(BrowserRunner.class)
 public class Uint8ClampedArrayTest extends WebDriverTestCase {
 
     /**
@@ -37,8 +34,8 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "93", "255", "0", "93", "-1"})
     public void arrayConstruction() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -49,9 +46,7 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
             + "      log(array2[i]);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -65,8 +60,8 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "11", "undefined", "undefined"})
     public void index() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -88,8 +83,8 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true", "false", "false"})
     public void in() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -111,8 +106,8 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "6", "0", "0", "0", "255", "0", "4", "undefined"})
     public void undefinedValueInArray() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -146,8 +141,8 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"0", "1", "0", "17"})
     public void specialValueInArray() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -174,17 +169,15 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void nullConstructor() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var array = new Uint8ClampedArray(null);\n"
             + "    log(array.length);\n"
-            + "  } catch(e) {\n"
-            + "    log('exception');\n"
-            + "  }\n"
+            + "  } catch(e) {logEx(e);}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -198,8 +191,8 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
     @Test
     @Alerts({"", "0", "1", "1,3", "1,3,4,7,11,0,123"})
     public void asString() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
@@ -230,8 +223,8 @@ public class Uint8ClampedArrayTest extends WebDriverTestCase {
     @Test
     @Alerts("Uint8ClampedArray")
     public void name() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"

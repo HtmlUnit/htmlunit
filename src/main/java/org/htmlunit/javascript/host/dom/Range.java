@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashSet;
 
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.WebClient;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.impl.SimpleRange;
@@ -28,8 +29,8 @@ import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.host.ClientRect;
-import org.htmlunit.javascript.host.ClientRectList;
+import org.htmlunit.javascript.host.DOMRect;
+import org.htmlunit.javascript.host.DOMRectList;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.html.HTMLElement;
 
@@ -251,15 +252,17 @@ public class Range extends AbstractRange {
      * @param valueAsString text that contains text and tags to be converted to a document fragment
      * @return a document fragment
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/range.createContextualFragment">Mozilla
-     * documentation</a>
+     *     documentation</a>
      */
     @JsxFunction
     public HtmlUnitScriptable createContextualFragment(final String valueAsString) {
         final SgmlPage page = internGetStartContainer().getDomNodeOrDie().getPage();
         final DomDocumentFragment fragment = new DomDocumentFragment(page);
         try {
-            page.getWebClient().getPageCreator().getHtmlParser()
-                    .parseFragment(fragment, internGetStartContainer().getDomNodeOrDie(), valueAsString, false);
+            final WebClient webClient = page.getWebClient();
+            webClient.getPageCreator().getHtmlParser()
+                    .parseFragment(webClient, fragment,
+                            internGetStartContainer().getDomNodeOrDie(), valueAsString, false);
         }
         catch (final Exception e) {
             LogFactory.getLog(Range.class).error("Unexpected exception occurred in createContextualFragment", e);
@@ -289,10 +292,10 @@ public class Range extends AbstractRange {
      * @param how a constant describing the comparison method
      * @param sourceRange the Range to compare boundary points with this range
      * @return -1, 0, or 1, indicating whether the corresponding boundary-point of range is respectively before,
-     * equal to, or after the corresponding boundary-point of sourceRange.
+     *         equal to, or after the corresponding boundary-point of sourceRange.
      */
     @JsxFunction
-    public Object compareBoundaryPoints(final int how, final Range sourceRange) {
+    public int compareBoundaryPoints(final int how, final Range sourceRange) {
         final Node nodeForThis;
         final int offsetForThis;
         final int containingMoficator;
@@ -320,23 +323,24 @@ public class Range extends AbstractRange {
 
         if (nodeForThis == nodeForOther) {
             if (offsetForThis < offsetForOther) {
-                return Integer.valueOf(-1);
+                return -1;
             }
             else if (offsetForThis > offsetForOther) {
-                return Integer.valueOf(1);
+                return 1;
             }
-            return Integer.valueOf(0);
+            return 0;
         }
 
         final byte nodeComparision = (byte) nodeForThis.compareDocumentPosition(nodeForOther);
         if ((nodeComparision & Node.DOCUMENT_POSITION_CONTAINED_BY) != 0) {
-            return Integer.valueOf(-1 * containingMoficator);
+            return -1 * containingMoficator;
         }
         else if ((nodeComparision & Node.DOCUMENT_POSITION_PRECEDING) != 0) {
-            return Integer.valueOf(-1);
+            return -1;
         }
-        // TODO: handle other cases!
-        return Integer.valueOf(1);
+
+        // TODO: handle other cases
+        return 1;
     }
 
     /**
@@ -400,7 +404,7 @@ public class Range extends AbstractRange {
      * @return a clone of the range
      */
     @JsxFunction
-    public Object cloneRange() {
+    public Range cloneRange() {
         try {
             return new Range(getSimpleRange().cloneRange());
         }
@@ -437,9 +441,9 @@ public class Range extends AbstractRange {
      * @return a collection of rectangles that describes the layout of the contents
      */
     @JsxFunction
-    public ClientRectList getClientRects() {
+    public DOMRectList getClientRects() {
         final Window w = getWindow();
-        final ClientRectList rectList = new ClientRectList();
+        final DOMRectList rectList = new DOMRectList();
         rectList.setParentScope(w);
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
@@ -448,7 +452,7 @@ public class Range extends AbstractRange {
             for (final DomNode node : getSimpleRange().containedNodes()) {
                 final HtmlUnitScriptable scriptable = node.getScriptableObject();
                 if (scriptable instanceof HTMLElement) {
-                    final ClientRect rect = new ClientRect(0, 0, 1, 1);
+                    final DOMRect rect = new DOMRect(0, 0, 1, 1);
                     rect.setParentScope(w);
                     rect.setPrototype(getPrototype(rect.getClass()));
                     rectList.add(rect);
@@ -468,8 +472,8 @@ public class Range extends AbstractRange {
      * @return an object the bounds the contents of the range
      */
     @JsxFunction
-    public ClientRect getBoundingClientRect() {
-        final ClientRect rect = new ClientRect();
+    public DOMRect getBoundingClientRect() {
+        final DOMRect rect = new DOMRect();
         rect.setParentScope(getWindow());
         rect.setPrototype(getPrototype(rect.getClass()));
 
@@ -477,12 +481,12 @@ public class Range extends AbstractRange {
             // simple impl for now
             for (final DomNode node : getSimpleRange().containedNodes()) {
                 final HtmlUnitScriptable scriptable = node.getScriptableObject();
-                if (scriptable instanceof HTMLElement) {
-                    final ClientRect childRect = ((HTMLElement) scriptable).getBoundingClientRect();
-                    rect.setTop(Math.min(rect.getTop(), childRect.getTop()));
-                    rect.setLeft(Math.min(rect.getLeft(), childRect.getLeft()));
-                    rect.setRight(Math.max(rect.getRight(), childRect.getRight()));
-                    rect.setBottom(Math.max(rect.getBottom(), childRect.getBottom()));
+                if (scriptable instanceof HTMLElement element) {
+                    final DOMRect childRect = element.getBoundingClientRect();
+                    rect.setY(Math.min(rect.getX(), childRect.getX()));
+                    rect.setY(Math.min(rect.getY(), childRect.getY()));
+                    rect.setWidth(Math.max(rect.getWidth(), childRect.getWidth()));
+                    rect.setHeight(Math.max(rect.getHeight(), childRect.getHeight()));
                 }
             }
 

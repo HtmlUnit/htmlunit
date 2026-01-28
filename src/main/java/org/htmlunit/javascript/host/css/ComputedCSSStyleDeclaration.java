@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,15 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
+import org.htmlunit.css.CssPixelValueConverter;
+import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.configuration.JsxSymbolConstant;
 import org.htmlunit.javascript.host.Element;
+import org.htmlunit.util.StringUtils;
 
 /**
  * An object for a CSSStyleDeclaration, which is computed.
@@ -37,12 +40,17 @@ import org.htmlunit.javascript.host.Element;
  * @author Frank Danek
  * @author Alex Gorbatovsky
  */
-@JsxClass(value = {FF, FF_ESR}, className = "CSS2Properties")
+@JsxClass(value = FF, className = "CSSStyleProperties")
+@JsxClass(value = FF_ESR, className = "CSS2Properties")
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** Symbol.toStringTag support. */
-    @JsxSymbolConstant({FF, FF_ESR})
-    public static final String TO_STRING_TAG = "CSS2Properties";
+    @JsxSymbolConstant(FF)
+    public static final String TO_STRING_TAG_FF = "CSSStyleProperties";
+
+    /** Symbol.toStringTag support. */
+    @JsxSymbolConstant(FF_ESR)
+    public static final String TO_STRING_TAG_FF_ESR = "CSS2Properties";
 
     /**
      * Creates an instance.
@@ -134,6 +142,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getBackgroundRepeat() {
         return getCssStyleDeclaration().getBackgroundRepeat();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBlockSize() {
+        return getCssStyleDeclaration().getBlockSize();
     }
 
     /**
@@ -285,7 +301,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getFontSize() {
-        return getCssStyleDeclaration().getFontSize();
+        String value = getStyleAttribute(Definition.FONT_SIZE, true);
+        if (!value.isEmpty()) {
+            value = CssPixelValueConverter.pixelValue(value) + "px";
+        }
+        return value;
     }
 
     /**
@@ -516,7 +536,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public Object getZIndex() {
+    public String getZIndex() {
         return getCssStyleDeclaration().getZIndex();
     }
 
@@ -526,7 +546,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getPropertyValue(final String name) {
         // need to invoke the getter to take care of the default value
-        final Object property = getProperty(this, org.htmlunit.util.StringUtils.cssCamelize(name));
+        final Object property = getProperty(this, StringUtils.cssCamelize(name));
         if (property == NOT_FOUND) {
             return super.getPropertyValue(name);
         }

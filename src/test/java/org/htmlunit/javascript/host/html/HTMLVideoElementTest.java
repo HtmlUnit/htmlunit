@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
 package org.htmlunit.javascript.host.html;
 
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HTMLVideoElement}.
@@ -26,7 +24,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class HTMLVideoElementTest extends WebDriverTestCase {
 
     /**
@@ -35,13 +32,13 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void prototype() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "log(HTMLVideoElement.prototype == null);\n"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -54,7 +51,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLVideoElement]", "function HTMLVideoElement() { [native code] }"})
     public void type() throws Exception {
-        final String html = ""
+        final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -63,7 +60,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      log(elem);\n"
             + "      log(HTMLVideoElement);\n"
-            + "    } catch(e) { log('exception'); }\n"
+            + "    } catch(e) { logEx(e); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -80,8 +77,8 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "VIDEO"})
     public void nodeTypeName() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<video id='v' src='flower.mp4'></video>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -89,7 +86,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  var video = document.getElementById('v');\n"
             + "  log(video.nodeType);"
             + "  log(video.nodeName);"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -103,8 +100,8 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
     @Alerts({"string", "§§URL§§flower.mp4", "§§URL§§tree.mp4",
              "<video id=\"v\" src=\"tree.mp4\"></video>"})
     public void src() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<video id='v' src='flower.mp4'></video>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -116,7 +113,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  video.src = 'tree.mp4';\n"
             + "  log(video.src);"
             + "  log(video.outerHTML);"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -131,8 +128,8 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
     @Alerts({"string", "", "§§URL§§tree.mp4",
         "<video id=\"v\" src=\"tree.mp4\"><source src=\"flower.mp4\" type=\"video/mp4\"></video>"})
     public void srcChild() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<video id='v'><source src='flower.mp4' type='video/mp4'></video>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -144,7 +141,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  video.src = 'tree.mp4';\n"
             + "  log(video.src);"
             + "  log(video.outerHTML);"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -158,8 +155,8 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"string", ""})
     public void srcNotDefined() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<video id='v'></video>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -167,7 +164,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  var src = document.getElementById('v').src;\n"
             + "  log(typeof src);"
             + "  log(src);"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -180,8 +177,8 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"string", ""})
     public void currentSrc() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<video id='v' src='flower.mp4'></video>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -189,7 +186,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  var currentSrc = document.getElementById('v').currentSrc;\n"
             + "  log(typeof currentSrc);"
             + "  log(currentSrc);"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -203,8 +200,8 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"string", ""})
     public void currentSrcChild() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<video id='v'><source src='flower.mp4' type='video/mp4'></video>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -212,7 +209,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  var currentSrc = document.getElementById('v').currentSrc;\n"
             + "  log(typeof currentSrc);"
             + "  log(currentSrc);"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -226,8 +223,8 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"string", ""})
     public void currentSrcNotDefined() throws Exception {
-        final String html
-            = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
             + "<video id='v'></video>"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -235,7 +232,7 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
             + "  var currentSrc = document.getElementById('v').currentSrc;\n"
             + "  log(typeof currentSrc);"
             + "  log(currentSrc);"
-            + "} catch (e) { log('exception'); }\n"
+            + "} catch(e) { logEx(e); }\n"
             + "</script>\n"
             + "</body></html>";
 

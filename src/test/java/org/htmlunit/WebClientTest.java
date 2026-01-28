@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
 package org.htmlunit;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -49,21 +49,20 @@ import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.neko.HtmlUnitNekoHtmlParser;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.javascript.host.html.HTMLStyleElement;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xml.XmlPage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link WebClient}.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
- * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
+ * @author Mike Bowler
+ * @author Christian Sell
+ * @author Ben Curren
  * @author Marc Guillemot
  * @author David D. Kilzer
  * @author Chris Erskine
@@ -76,7 +75,6 @@ import org.junit.runner.RunWith;
  * @author Carsten Steul
  * @author Joerg Werner
  */
-@RunWith(BrowserRunner.class)
 public class WebClientTest extends SimpleWebTestCase {
 
     /**
@@ -86,7 +84,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void credentialProvider_NoCredentials() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head><body>\n"
                 + "No access</body></html>";
         final WebClient client = getWebClient();
         client.getOptions().setPrintContentOnFailingStatusCode(false);
@@ -112,7 +111,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlWindowEvents_changed() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head><body>\n"
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
         final WebClient client = getWebClient();
@@ -142,17 +142,13 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlAnchor anchor = firstPage.getHtmlElementById("a2");
 
-        final List<WebWindowEvent> firstExpectedEvents = Arrays.asList(new WebWindowEvent[] {
-            new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE, null, firstPage)
-        });
+        final List<WebWindowEvent> firstExpectedEvents = Arrays.asList(new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE, null, firstPage));
         assertEquals(firstExpectedEvents, events);
 
         events.clear();
         final HtmlPage secondPage = anchor.click();
 
-        final List<WebWindowEvent> secondExpectedEvents = Arrays.asList(new WebWindowEvent[] {
-            new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE, firstPage, secondPage)
-        });
+        final List<WebWindowEvent> secondExpectedEvents = Arrays.asList(new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE, firstPage, secondPage));
         assertEquals(secondExpectedEvents, events);
     }
 
@@ -163,12 +159,13 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlWindowEvents_opened() throws Exception {
-        final String page1Content = "<html><head><title>foo</title>\n"
+        final String page1Content = DOCTYPE_HTML
+                + "<html><head><title>foo</title>\n"
                 + "<script>window.open('" + URL_SECOND + "', 'myNewWindow')</script>\n"
                 + "</head><body>\n"
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
-        final String page2Content = "<html><head><title>foo</title></head><body></body></html>";
+        final String page2Content = DOCTYPE_HTML + "<html><head><title>foo</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
         final List<WebWindowEvent> events = new LinkedList<>();
@@ -200,14 +197,12 @@ public class WebClientTest extends SimpleWebTestCase {
 
         final WebWindow firstWindow = client.getCurrentWindow();
         final WebWindow secondWindow = client.getWebWindowByName("myNewWindow");
-        final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent[] {
-            new WebWindowEvent(
-                secondWindow, WebWindowEvent.OPEN, null, null),
-            new WebWindowEvent(
-                secondWindow, WebWindowEvent.CHANGE, null, secondWindow.getEnclosedPage()),
-            new WebWindowEvent(
-                firstWindow, WebWindowEvent.CHANGE, null, firstPage),
-        });
+        final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent(
+            secondWindow, WebWindowEvent.OPEN, null, null),
+                new WebWindowEvent(
+                    secondWindow, WebWindowEvent.CHANGE, null, secondWindow.getEnclosedPage()),
+                new WebWindowEvent(
+                    firstWindow, WebWindowEvent.CHANGE, null, firstPage));
         assertEquals(expectedEvents, events);
     }
 
@@ -218,12 +213,13 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void htmlWindowEvents_closedFromFrame() throws Exception {
-        final String firstContent = "<html><head><title>first</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+                + "<html><head><title>first</title></head><body>\n"
                 + "<iframe src='" + URL_THIRD + "' id='frame1'></iframe>\n"
                 + "<a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
-        final String secondContent = "<html><head><title>second</title></head><body></body></html>";
-        final String thirdContent = "<html><head><title>third</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>second</title></head><body></body></html>";
+        final String thirdContent = DOCTYPE_HTML + "<html><head><title>third</title></head><body></body></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -263,12 +259,10 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals("second", secondPage.getTitleText());
 
         final WebWindow firstWindow = client.getCurrentWindow();
-        final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent[] {
-            new WebWindowEvent(
-                frame.getEnclosedWindow(), WebWindowEvent.CLOSE, thirdPage, null),
-            new WebWindowEvent(
-                firstWindow, WebWindowEvent.CHANGE, firstPage, secondPage),
-        });
+        final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent(
+            frame.getEnclosedWindow(), WebWindowEvent.CLOSE, thirdPage, null),
+                new WebWindowEvent(
+                    firstWindow, WebWindowEvent.CHANGE, firstPage, secondPage));
         assertEquals(expectedEvents.get(0), events.get(0));
         assertEquals(expectedEvents, events);
     }
@@ -279,11 +273,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection301_MovedPermanently_GetMethod() throws Exception {
-        final int statusCode = 301;
-        final HttpMethod initialRequestMethod = HttpMethod.GET;
-        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
+        doTestRedirection(301, HttpMethod.GET, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -292,8 +282,8 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     private void doTestRedirectionSameUrlAfterPost(final int statusCode) throws Exception {
-        final String firstContent = "<html><head><title>First</title></head><body></body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String firstContent = DOCTYPE_HTML + "<html><head><title>First</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient webClient = getWebClient();
 
@@ -337,7 +327,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection301_MovedPermanently_PostMethod() throws Exception {
-        doTestRedirection(301, HttpMethod.POST, HttpMethod.GET);
+        doTestRedirection(301, HttpMethod.POST, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -360,7 +350,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection302_MovedTemporarily_PostMethod() throws Exception {
-        doTestRedirection(302, HttpMethod.POST, HttpMethod.GET);
+        doTestRedirection(302, HttpMethod.POST, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -377,11 +367,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection302_MovedTemporarily_GetMethod() throws Exception {
-        final int statusCode = 302;
-        final HttpMethod initialRequestMethod = HttpMethod.GET;
-        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
+        doTestRedirection(302, HttpMethod.GET, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -399,11 +385,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection303_SeeOther_GetMethod() throws Exception {
-        final int statusCode = 303;
-        final HttpMethod initialRequestMethod = HttpMethod.GET;
-        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
+        doTestRedirection(303, HttpMethod.GET, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -412,7 +394,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection303_SeeOther_PostMethod() throws Exception {
-        doTestRedirection(303, HttpMethod.POST, HttpMethod.GET);
+        doTestRedirection(303, HttpMethod.POST, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -429,11 +411,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection307_TemporaryRedirect_GetMethod() throws Exception {
-        final int statusCode = 307;
-        final HttpMethod initialRequestMethod = HttpMethod.GET;
-        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.GET;
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
+        doTestRedirection(307, HttpMethod.GET, HttpMethod.GET, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -442,11 +420,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirection307_TemporaryRedirect_PostMethod() throws Exception {
-        final int statusCode = 307;
-        final HttpMethod initialRequestMethod = HttpMethod.POST;
-        final HttpMethod expectedRedirectedRequestMethod = HttpMethod.POST;
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod);
+        doTestRedirection(307, HttpMethod.POST, HttpMethod.POST, URL_SECOND.toExternalForm());
     }
 
     /**
@@ -455,26 +429,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @param statusCode the code to return from the initial request
      * @param initialRequestMethod the initial request
      * @param expectedRedirectedRequestMethod the submit method of the second (redirected) request
-     * If a redirect is not expected to happen then this must be null
-     * @throws Exception if the test fails
-     */
-    private void doTestRedirection(
-            final int statusCode,
-            final HttpMethod initialRequestMethod,
-            final HttpMethod expectedRedirectedRequestMethod)
-        throws Exception {
-
-        doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod,
-                URL_SECOND.toExternalForm());
-    }
-
-    /**
-     * Basic logic for all the redirection tests.
-     *
-     * @param statusCode the code to return from the initial request
-     * @param initialRequestMethod the initial request
-     * @param expectedRedirectedRequestMethod the submit method of the second (redirected) request
-     * If a redirect is not expected to happen then this must be null
+     *        If a redirect is not expected to happen then this must be null
      * @param newLocation the Location set in the redirection header
      * @throws Exception if the test fails
      */
@@ -503,13 +458,13 @@ public class WebClientTest extends SimpleWebTestCase {
             getPageWithRedirectionsSameURL(30);
         }
         catch (final Exception e) {
-            assertTrue(e.getMessage(), e.getMessage().contains("Too much redirect"));
+            assertTrue(e.getMessage(), e.getMessage().contains("Too many redirects"));
         }
     }
 
     private HtmlPage getPageWithRedirectionsSameURL(final int nbRedirections) throws Exception {
-        final String firstContent = "<html><head><title>First</title></head><body></body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String firstContent = DOCTYPE_HTML + "<html><head><title>First</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient webClient = getWebClient();
 
@@ -561,7 +516,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers = asList(new NameValuePair("Location", URL_SECOND.toString()));
         conn.setResponse(URL_FIRST, "", statusCode, "", MimeType.TEXT_HTML, headers);
-        conn.setResponse(URL_SECOND, "<html><body>abc</body></html>");
+        conn.setResponse(URL_SECOND, DOCTYPE_HTML + "<html><body>abc</body></html>");
 
         final WebRequest request = new WebRequest(URL_FIRST);
         request.setAdditionalHeader("foo", "bar");
@@ -577,7 +532,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @param statusCode the code to return from the initial request
      * @param initialRequestMethod the initial request
      * @param expectedRedirectedRequestMethod the submit method of the second (redirected) request
-     * If a redirect is not expected to happen then this must be null
+     *        If a redirect is not expected to happen then this must be null
      * @param newLocation the Location set in the redirection header
      * @param useProxy indicates if the test should be performed with a proxy
      * @throws Exception if the test fails
@@ -591,8 +546,8 @@ public class WebClientTest extends SimpleWebTestCase {
             final boolean useProxy)
         throws Exception {
 
-        final String firstContent = "<html><head><title>First</title></head><body></body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String firstContent = DOCTYPE_HTML + "<html><head><title>First</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient webClient;
         final String proxyHost;
@@ -682,7 +637,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void setPageCreator() throws Exception {
-        final String page1Content = "<html><head><title>foo</title>\n"
+        final String page1Content = DOCTYPE_HTML
+                + "<html><head><title>foo</title>\n"
                 + "</head><body>\n"
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
@@ -698,7 +654,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final Page page = client.getPage(URL_FIRST);
         assertTrue("instanceof TextPage", page instanceof TextPage);
 
-        final List<Page> expectedPageCreationItems = Arrays.asList(new Page[] {page});
+        final List<Page> expectedPageCreationItems = Arrays.asList(page);
 
         assertEquals(expectedPageCreationItems, collectedPageCreationItems);
     }
@@ -744,7 +700,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void loadPage_PostWithParameters() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head><body>\n"
                 + "</body></html>";
         final WebClient client = getWebClient();
 
@@ -765,7 +722,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void loadPage_SlashesInQueryString() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html><head><title>foo</title></head>\n"
                 + "<body><a href='foo.html?id=UYIUYTY//YTYUY..F'>to page 2</a>\n"
                 + "</body></html>";
 
@@ -792,7 +750,7 @@ public class WebClientTest extends SimpleWebTestCase {
         // It could be useful to have existing files to test in a special location in filesystem.
         // It will be really needed when we have to test binary files using the file protocol.
 
-        final String htmlContent = "<html><head><title>foo</title></head><body></body></html>";
+        final String htmlContent = DOCTYPE_HTML + "<html><head><title>foo</title></head><body></body></html>";
         final File currentDirectory = new File((new File("")).getAbsolutePath());
         final File tmpFile = File.createTempFile("test", ".html", currentDirectory);
         tmpFile.deleteOnExit();
@@ -897,7 +855,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final URL fileURL = new URL("file://" + tmpFile.getCanonicalPath());
 
         final WebClient client = getWebClient();
-        final XmlPage page = (XmlPage) client.getPage(fileURL);
+        final XmlPage page = client.getPage(fileURL);
 
         assertEquals(xmlContent, page.getWebResponse().getContentAsString());
         // "text/xml" or "application/xml", it doesn't matter
@@ -911,10 +869,12 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void redirectViaJavaScriptDuringInitialPageLoad() throws Exception {
-        final String firstContent = "<html><head><title>First</title><script>\n"
+        final String firstContent = DOCTYPE_HTML
+                + "<html><head><title>First</title><script>\n"
                 + "location.href='" + URL_SECOND + "';\n"
                 + "</script></head><body></body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient webClient = getWebClient();
 
@@ -924,9 +884,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
         webClient.setWebConnection(webConnection);
 
-        final URL url = URL_FIRST;
-
-        final HtmlPage page = webClient.getPage(url);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals("Second", page.getTitleText());
     }
 
@@ -938,10 +896,10 @@ public class WebClientTest extends SimpleWebTestCase {
     public void loadWebResponseInto() throws Exception {
         final WebClient webClient = getWebClient();
         final WebResponse webResponse = new StringWebResponse(
-                "<html><head><title>first</title></head><body></body></html>", URL_FIRST);
+                DOCTYPE_HTML + "<html><head><title>first</title></head><body></body></html>", URL_FIRST);
 
         final Page page = webClient.loadWebResponseInto(webResponse, webClient.getCurrentWindow());
-        assertTrue(HtmlPage.class.isInstance(page));
+        assertTrue(page instanceof HtmlPage);
 
         final HtmlPage htmlPage = (HtmlPage) page;
         assertEquals("first", htmlPage.getTitleText());
@@ -955,13 +913,12 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void getPageFailingStatusCode() throws Exception {
-        final String firstContent = "<html><head><title>Hello World</title></head><body></body></html>";
+        final String firstContent = DOCTYPE_HTML + "<html><head><title>Hello World</title></head><body></body></html>";
 
         final WebClient webClient = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 500, "BOOM", MimeType.TEXT_HTML, emptyList);
+        webConnection.setResponse(URL_FIRST, firstContent, 500, "BOOM", MimeType.TEXT_HTML, Collections.emptyList());
         webClient.setWebConnection(webConnection);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(true);
         webClient.getOptions().setPrintContentOnFailingStatusCode(false);
@@ -990,7 +947,7 @@ public class WebClientTest extends SimpleWebTestCase {
                 defaultProxyHost, defaultProxyPort)) {
 
             // Configure the mock web connection.
-            final String html = "<html><head><title>Hello World</title></head><body></body></html>";
+            final String html = DOCTYPE_HTML + "<html><head><title>Hello World</title></head><body></body></html>";
             final MockWebConnection webConnection = new MockWebConnection();
             webConnection.setResponse(URL_FIRST, html);
             webClient.setWebConnection(webConnection);
@@ -1060,7 +1017,7 @@ public class WebClientTest extends SimpleWebTestCase {
     public void proxyConfigWithRedirect() throws Exception {
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
-        final String html = "<html><head><title>Hello World</title></head><body></body></html>";
+        final String html = DOCTYPE_HTML + "<html><head><title>Hello World</title></head><body></body></html>";
         try (WebClient webClient = new WebClient(getBrowserVersion(), defaultProxyHost, defaultProxyPort)) {
 
             webClient.getOptions().getProxyConfig().addHostsToProxyBypass("hostToByPass");
@@ -1069,7 +1026,8 @@ public class WebClientTest extends SimpleWebTestCase {
             final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", location2));
             final MockWebConnection webConnection = new MockWebConnection();
             webConnection.setResponse(URL_FIRST, html, 302, "Some error", MimeType.TEXT_HTML, headers);
-            webConnection.setResponse(new URL(location2), "<html><head><title>2nd page</title></head></html>");
+            webConnection.setResponse(new URL(location2),
+                    DOCTYPE_HTML + "<html><head><title>2nd page</title></head></html>");
             webClient.setWebConnection(webConnection);
 
             final Page page2 = webClient.getPage(URL_FIRST);
@@ -1099,7 +1057,8 @@ public class WebClientTest extends SimpleWebTestCase {
     public void proxyConfigForJS() throws Exception {
         final String defaultProxyHost = "defaultProxyHost";
         final int defaultProxyPort = 777;
-        final String html = "<html><head><title>Hello World</title>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Hello World</title>\n"
                 + "<script language='javascript' type='text/javascript' src='foo.js'></script>\n"
                 + "</head><body></body></html>";
         try (WebClient webClient = new WebClient(getBrowserVersion(), defaultProxyHost, defaultProxyPort)) {
@@ -1162,7 +1121,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void refreshHandlerAccessors() {
         final WebClient webClient = getWebClient();
-        assertTrue(ImmediateRefreshHandler.class.isInstance(webClient.getRefreshHandler()));
+        assertTrue(webClient.getRefreshHandler() instanceof ImmediateRefreshHandler);
 
         final RefreshHandler handler = new ImmediateRefreshHandler();
         webClient.setRefreshHandler(handler);
@@ -1176,7 +1135,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void badCharset() throws Exception {
-        final String page1Content = "<html><head><title>foo</title>\n"
+        final String page1Content = DOCTYPE_HTML
+                + "<html><head><title>foo</title>\n"
                 + "</head><body></body></html>";
         final WebClient client = getWebClient();
 
@@ -1186,7 +1146,7 @@ public class WebClientTest extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         final Page page = client.getPage(URL_FIRST);
-        assertTrue(HtmlPage.class.isInstance(page));
+        assertTrue(page instanceof HtmlPage);
     }
 
     /**
@@ -1206,12 +1166,14 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void reusingHtmlPageToSubmitFormMultipleTimes() throws Exception {
-        final String firstContent = "<html><head><title>First</title></head>\n"
+        final String firstContent = DOCTYPE_HTML
+                + "<html><head><title>First</title></head>\n"
                 + "<body onload='document.myform.mysubmit.focus()'>\n"
                 + "<form action='" + URL_SECOND + "' name='myform'>\n"
                 + "<input type='submit' name='mysubmit'>\n"
                 + "</form></body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body>Second</body></html>";
+        final String secondContent = DOCTYPE_HTML
+                + "<html><head><title>Second</title></head><body>Second</body></html>";
 
         final WebClient webClient = getWebClient();
 
@@ -1234,11 +1196,13 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void openerInFrameset() throws Exception {
-        final String firstContent = "<html><head><script>alert(window.opener)</script><frameset cols='*'>\n"
+        final String firstContent = DOCTYPE_HTML
+                + "<html><head><script>alert(window.opener)</script><frameset cols='*'>\n"
                 + "<frame src='" + URL_SECOND + "'>\n"
                 + "</frameset>\n"
                 + "</html>";
-        final String secondContent = "<html><body><a href='" + URL_FIRST + "' target='_top'>to top</a></body></html>";
+        final String secondContent = DOCTYPE_HTML
+                + "<html><body><a href='" + URL_FIRST + "' target='_top'>to top</a></body></html>";
 
         final WebClient webClient = getWebClient();
 
@@ -1251,7 +1215,7 @@ public class WebClientTest extends SimpleWebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final HtmlPage pageInFrame = (HtmlPage) ((WebWindow) page.getFrames().get(0)).getEnclosedPage();
+        final HtmlPage pageInFrame = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
         pageInFrame.getAnchors().get(0).click();
 
         final String[] expectedAlerts = {"null", "null"};
@@ -1329,9 +1293,8 @@ public class WebClientTest extends SimpleWebTestCase {
         if (url == null) {
             throw new FileNotFoundException(fileName);
         }
-        final File file = new File(new URI(url.toString()));
 
-        return file;
+        return new File(new URI(url.toString()));
     }
 
     /**
@@ -1340,7 +1303,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void requestHeader() throws Exception {
-        final String content = "<html></html>";
+        final String content = DOCTYPE_HTML + "<html></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -1369,7 +1332,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final String fromRequest = "from request";
         final String fromClient = "from client";
 
-        final String content = "<html></html>";
+        final String content = DOCTYPE_HTML + "<html></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -1403,7 +1366,7 @@ public class WebClientTest extends SimpleWebTestCase {
     public void clientHeaderOverwritesDefault() throws Exception {
         final String fromClient = "from client";
 
-        final String content = "<html></html>";
+        final String content = DOCTYPE_HTML + "<html></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -1424,7 +1387,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void requestHeaderDoNotOverwriteWebRequestAcceptHeader() throws Exception {
-        final String content = "<html></html>";
+        final String content = DOCTYPE_HTML + "<html></html>";
         final WebClient webClient = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -1458,7 +1421,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void requestHeaderDoNotOverwriteWebRequestAcceptHeader2() throws Exception {
-        final String content = "<html></html>";
+        final String content = DOCTYPE_HTML + "<html></html>";
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -1496,7 +1459,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void contentTypeCaseInsensitive() throws Exception {
-        final String content = "<html><head>\n"
+        final String content = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<script type='Text/Javascript' src='foo.js'></script>\n"
                 + "</head></html>";
         final WebClient client = getWebClient();
@@ -1510,19 +1474,19 @@ public class WebClientTest extends SimpleWebTestCase {
         final String[] expectedAlerts = {"foo"};
 
         webConnection.setResponse(URL_FIRST, content, "Text/Html");
-        assertTrue(HtmlPage.class.isInstance(client.getPage(URL_FIRST)));
+        assertTrue(client.getPage(URL_FIRST) instanceof HtmlPage);
         assertEquals(expectedAlerts, collectedAlerts);
 
         webConnection.setResponse(URL_FIRST, content, "Text/Xml");
-        assertTrue(XmlPage.class.isInstance(client.getPage(URL_FIRST)));
+        assertTrue(client.getPage(URL_FIRST) instanceof XmlPage);
         webConnection.setResponse(URL_FIRST, content, MimeType.APPLICATION_XML);
-        assertTrue(XmlPage.class.isInstance(client.getPage(URL_FIRST)));
+        assertTrue(client.getPage(URL_FIRST) instanceof XmlPage);
 
         webConnection.setResponse(URL_FIRST, content, MimeType.TEXT_PLAIN);
-        assertTrue(TextPage.class.isInstance(client.getPage(URL_FIRST)));
+        assertTrue(client.getPage(URL_FIRST) instanceof TextPage);
 
         webConnection.setResponse(URL_FIRST, "", "Text/JavaScript");
-        assertTrue(HtmlPage.class.isInstance(client.getPage(URL_FIRST)));
+        assertTrue(client.getPage(URL_FIRST) instanceof HtmlPage);
     }
 
     /**
@@ -1543,7 +1507,8 @@ public class WebClientTest extends SimpleWebTestCase {
         FileUtils.writeStringToFile(tmpFileJS, "alert('foo')", encoding);
 
         // HTML file
-        final String html = "<html><head></head><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head></head><body>\n"
                 + "<script language='javascript' type='text/javascript' src='" + tmpFileJS.getName() + "'></script>\n"
                 + "</body></html>";
         final File tmpFile = File.createTempFile("test", ".html", currentDirectory);
@@ -1567,7 +1532,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void onBeforeUnloadCalledOnCorrectPage() throws Exception {
-        final String html = "<html><body onbeforeunload='alert(7)'><iframe></iframe></body></html>";
+        final String html = DOCTYPE_HTML + "<html><body onbeforeunload='alert(7)'><iframe></iframe></body></html>";
         final List<String> alerts = new ArrayList<>();
         loadPage(html, alerts);
         assertTrue(alerts.isEmpty());
@@ -1581,7 +1546,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void urlEncoding() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX, "<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX, DOCTYPE_HTML + "<html></html>", new ArrayList<>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%C3%A9%20d", wrs.getUrl());
     }
@@ -1594,7 +1559,8 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void urlEncoding2() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
-        final HtmlPage page = loadPage(BrowserVersion.BEST_SUPPORTED, "<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage(BrowserVersion.BEST_SUPPORTED,
+                DOCTYPE_HTML + "<html></html>", new ArrayList<>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%C3%A9%20d", wrs.getUrl());
     }
@@ -1606,7 +1572,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void plusNotEncodedInUrl() throws Exception {
         final URL url = new URL("http://host/search/my+category/");
-        final HtmlPage page = loadPage("<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage(DOCTYPE_HTML + "<html></html>", new ArrayList<>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/search/my+category/", wrs.getUrl());
     }
@@ -1620,8 +1586,8 @@ public class WebClientTest extends SimpleWebTestCase {
         final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);
 
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                        + "<html>\n"
                         + "  <head>\n"
                         + "    <link href='" + URL_SECOND + "' rel='stylesheet'></link>\n"
                         + "  </head>\n"
@@ -1632,7 +1598,7 @@ public class WebClientTest extends SimpleWebTestCase {
         conn.setResponse(URL_FIRST, html);
 
         final String css = ".foo { color: green; }";
-        conn.setResponse(URL_SECOND, css, 200, "OK", MimeType.TEXT_CSS, new ArrayList<NameValuePair>());
+        conn.setResponse(URL_SECOND, css, 200, "OK", MimeType.TEXT_CSS, new ArrayList<>());
 
         final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
@@ -1658,7 +1624,7 @@ public class WebClientTest extends SimpleWebTestCase {
     public void getPageDataProtocol() throws Exception {
         final WebClient webClient = getWebClient();
 
-        final String html = "<html><body>DataUrl Test</body></html>";
+        final String html = DOCTYPE_HTML + "<html><body>DataUrl Test</body></html>";
 
         final Page page = webClient.getPage("data:text/html;charset=utf-8," + html);
         assertEquals("DataUrl Test", ((HtmlPage) page).asNormalizedText());
@@ -1671,7 +1637,8 @@ public class WebClientTest extends SimpleWebTestCase {
     public void getPageJavascriptProtocol() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse("<html><head><title>Hello World</title></head><body></body></html>");
+        webConnection.setDefaultResponse(DOCTYPE_HTML
+                + "<html><head><title>Hello World</title></head><body></body></html>");
         webClient.setWebConnection(webConnection);
 
         final List<String> collectedAlerts = new ArrayList<>();
@@ -1723,25 +1690,20 @@ public class WebClientTest extends SimpleWebTestCase {
         client.setJavaScriptTimeout(timeout);
 
         try {
-            client.getOptions().setThrowExceptionOnScriptError(false);
-
-            final String content = "<html><body><script>while(1) {}</script></body></html>";
+            final String content = DOCTYPE_HTML + "<html><body><script>while(1) {}</script></body></html>";
             final MockWebConnection webConnection = new MockWebConnection();
             webConnection.setDefaultResponse(content);
             client.setWebConnection(webConnection);
 
             final Exception[] exceptions = {null};
-            final Thread runner = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        client.getPage(URL_FIRST);
-                    }
-                    catch (final Exception e) {
-                        exceptions[0] = e;
-                    }
+            final Thread runner = new Thread(() -> {
+                try {
+                    client.getPage(URL_FIRST);
                 }
-            };
+                catch (final Exception e) {
+                    exceptions[0] = e;
+                }
+            });
 
             runner.start();
 
@@ -1750,7 +1712,19 @@ public class WebClientTest extends SimpleWebTestCase {
                 runner.interrupt();
                 fail("Script was still running after timeout");
             }
-            assertNull(exceptions[0]);
+
+            Assertions.assertInstanceOf(RuntimeException.class, exceptions[0], exceptions[0].getMessage());
+            final Throwable cause = exceptions[0].getCause();
+            String msg = cause.getMessage();
+            Assertions.assertTrue(cause.getMessage().startsWith(
+                    "Javascript execution takes too long (allowed: 2000ms, already elapsed: "), cause.getMessage());
+
+            msg = msg.substring(msg.indexOf("already elapsed: ") + 17);
+            msg = msg.substring(0, msg.indexOf("ms"));
+            final long execTime = Long.parseLong(msg);
+
+            Assertions.assertTrue(execTime >= timeout, "execTime: " + execTime);
+            Assertions.assertTrue(execTime < (timeout + 2), "execTime: " + execTime);
         }
         finally {
             client.setJavaScriptTimeout(oldTimeout);
@@ -1776,7 +1750,7 @@ public class WebClientTest extends SimpleWebTestCase {
     public void basicWindowTracking() throws Exception {
         // Create mock web connection.
         final MockWebConnection conn = new MockWebConnection();
-        conn.setDefaultResponse("<html></html");
+        conn.setDefaultResponse(DOCTYPE_HTML + "<html></html");
 
         // Make sure a new client start with a single window.
         final WebClient client = getWebClient();
@@ -1828,13 +1802,15 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
 
-        final String html1 = "<html><head><title>First</title></head>\n"
+        final String html1 = DOCTYPE_HTML
+                + "<html><head><title>First</title></head>\n"
                 + "<body><form name='form1'>\n"
                 + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</button>\n"
                 + "</form></body></html>";
         conn.setResponse(URL_FIRST, html1);
 
-        final String html2 = "<html><head><title>Second</title></head>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html><head><title>Second</title></head>\n"
                 + "<body onload='doTest()'>\n"
                 + "<script>\n"
                 + "  function doTest() {\n"
@@ -1860,13 +1836,15 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
 
-        final String html1 = "<html><head><title>First</title></head>\n"
+        final String html1 = DOCTYPE_HTML
+                + "<html><head><title>First</title></head>\n"
                 + "<body><form name='form1'>\n"
                 + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</button>\n"
                 + "</form></body></html>";
         conn.setResponse(URL_FIRST, html1);
 
-        final String html2 = "<html><head><title>Third</title>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html><head><title>Third</title>\n"
                 + "<script type=\"text/javascript\">\n"
                 + "     window.close();\n"
                 + "</script></head></html>";
@@ -1892,13 +1870,15 @@ public class WebClientTest extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String html1 = "<html><head><title>First</title></head>\n"
+        final String html1 = DOCTYPE_HTML
+                + "<html><head><title>First</title></head>\n"
                 + "<body>\n"
                 + "<button id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</button>\n"
                 + "</body></html>";
         conn.setResponse(URL_FIRST, html1);
 
-        final String html2 = "<html><head><title>Second</title></head>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html><head><title>Second</title></head>\n"
                 + "<body onUnload='doTest()'>\n"
                 + "<form name='form1' action='" + URL_THIRD + "'>\n"
                 + "<button id='clickme' type='button' onclick='postBack();'>Submit</button></form>\n"
@@ -1913,7 +1893,8 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "</script></body></html>";
         conn.setResponse(URL_SECOND, html2);
 
-        final String html3 = "<html><head><title>Third</title>\n"
+        final String html3 = DOCTYPE_HTML
+                + "<html><head><title>Third</title>\n"
                 + "<script type=\"text/javascript\">\n"
                 + "     alert('Third page loaded');\n"
                 + "     window.close();\n"
@@ -1946,7 +1927,8 @@ public class WebClientTest extends SimpleWebTestCase {
         final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);
 
-        final String html = "<html><head><title>Test</title></head><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Test</title></head><body>\n"
                 + "<div id='d' onclick='this.innerHTML+=\"<iframe></iframe>\";'>go</div></body></html>";
         conn.setResponse(URL_FIRST, html);
 
@@ -2012,9 +1994,9 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals(handler, client.getCssErrorHandler());
 
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, "<html><body><style></style></body></html>");
-        conn.setResponse(URL_SECOND, "<html><body><style>.x{color:red;}</style></body></html>");
-        conn.setResponse(URL_THIRD, "<html><body><style>.x{color{}}}</style></body></html>");
+        conn.setResponse(URL_FIRST, DOCTYPE_HTML + "<html><body><style></style></body></html>");
+        conn.setResponse(URL_SECOND, DOCTYPE_HTML + "<html><body><style>.x{color:red;}</style></body></html>");
+        conn.setResponse(URL_THIRD, DOCTYPE_HTML + "<html><body><style>.x{color{}}}</style></body></html>");
         client.setWebConnection(conn);
 
         final HtmlPage page1 = client.getPage(URL_FIRST);
@@ -2043,13 +2025,15 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void maintainJavaScriptParentScope() throws Exception {
-        final String basicContent = "<html><head>\n"
+        final String basicContent = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<title>basicContentTitle</title>\n"
                 + "</head><body>\n"
                 + "<p>Hello World</p>\n"
                 + "</body></html>";
 
-        final String jsContent = "<html><head>\n"
+        final String jsContent = DOCTYPE_HTML
+                + "<html><head>\n"
                 + "<title>jsContentTitle</title>\n"
                 + "<script>function foo() {alert('Ran Here')}</script>\n"
                 + "<script>function bar() {}</script>\n"
@@ -2091,12 +2075,13 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
 
         final MockWebConnection conn = new MockWebConnection();
-        final String html = "<html><body onload='document.getElementById(\"f\").src=\"frame.html\";'>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body onload='document.getElementById(\"f\").src=\"frame.html\";'>\n"
                 + "<iframe id='f'></iframe></body></html>";
         conn.setResponse(URL_FIRST, html);
         final URL frameUrl = new URL(URL_FIRST, "frame.html");
-        conn.setResponse(frameUrl, "<html><body></body></html>");
-        conn.setResponse(URL_SECOND, "<html><body></body></html>");
+        conn.setResponse(frameUrl, DOCTYPE_HTML + "<html><body></body></html>");
+        conn.setResponse(URL_SECOND, DOCTYPE_HTML + "<html><body></body></html>");
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);
@@ -2115,7 +2100,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void currentWindow2() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + "function createFrame() {\n"
                 + "  var f = document.createElement('iframe');\n"
                 + "  f.setAttribute('style', 'width: 0pt; height: 0pt');\n"
@@ -2140,8 +2126,8 @@ public class WebClientTest extends SimpleWebTestCase {
         @SuppressWarnings("resource")
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, "<html><body><iframe></iframe></body></html>");
-        conn.setResponse(URL_SECOND, "<html><body></body></html>");
+        conn.setResponse(URL_FIRST, DOCTYPE_HTML + "<html><body><iframe></iframe></body></html>");
+        conn.setResponse(URL_SECOND, DOCTYPE_HTML + "<html><body></body></html>");
         client.setWebConnection(conn);
 
         final WebWindow firstWindow = client.getWebWindows().get(0);
@@ -2213,7 +2199,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void getTopLevelWindowsJSConcurrency() throws Exception {
-        final String html = "<html><head><title>Toplevel</title></head>\n<body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Toplevel</title></head>\n<body>\n"
                 + "<script>\n"
                 + "  setInterval(function() {\n"
                 + "    window.open('');\n"
@@ -2260,7 +2247,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void close() throws Exception {
-        final String html = "<html><head></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head></head>\n"
                 + "<body onload='setInterval(addFrame, 1)'>\n"
                 + "<iframe src='second.html'></iframe>\n"
                 + "<script>\n"
@@ -2272,7 +2260,8 @@ public class WebClientTest extends SimpleWebTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
-        final String html2 = "<html><head><script>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html><head><script>\n"
                 + "function doSomething() {}\n"
                 + "setInterval(doSomething, 100);\n"
                 + "</script>\n"
@@ -2311,7 +2300,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void test() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><body>\n"
                 + "<script type='application/javascript'>\n"
                 + "  window.onerror = function() { foo.bar() };\n"
                 + "  doit();\n"
@@ -2383,8 +2373,8 @@ public class WebClientTest extends SimpleWebTestCase {
         final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);
 
-        final String html =
-                "<html>\n"
+        final String html = DOCTYPE_HTML
+                    + "<html>\n"
                     + "  <head>\n"
                     + "    <script>alert('WebSocket' in window);</script>\n"
                     + "  </head>\n"
@@ -2415,7 +2405,8 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void loadHtmlCodeIntoCurrentWindow() throws Exception {
-        final String htmlCode = "<html>"
+        final String htmlCode = DOCTYPE_HTML
+                + "<html>"
                 + "  <head>"
                 + "    <title>Title</title>"
                 + "  </head>"
@@ -2455,11 +2446,13 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void reset() throws Exception {
-        final String html = "<html><head><title>testpage</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>testpage</title></head>\n"
                 + "<body>\n"
                 + "</body></html>";
 
-        final String html2 = "<html><head><title>testpage</title></head>\n"
+        final String html2 = DOCTYPE_HTML
+                + "<html><head><title>testpage</title></head>\n"
                 + "<body>\n"
                 + "<script>document.title = 'js'</script>\n"
                 + "</body></html>";
@@ -2516,12 +2509,71 @@ public class WebClientTest extends SimpleWebTestCase {
     }
 
     /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void loginFlowClickSubmitRedirect() throws Exception {
+        final String startPage = DOCTYPE_HTML
+                + "<html><title>Start page</title>"
+                + "<form action='submit.html' method='post'>"
+                + "  <input type='submit' name='mysubmit' id='mySubmit'>"
+                + "</form>"
+                + "<a href='submit.html' id='myAnchor'>Tester</a>\n"
+                + "</body></html>";
+
+        int reqCount = getMockWebConnection().getRequestCount();
+
+        final String submitPage = DOCTYPE_HTML
+                + "<html><title>Submit page</title>"
+                + "<body onload='document.forms[0].submit()'>"
+                + "</body>"
+                + "<form action='redirect.html' method='post'>"
+                + "</form>"
+                + "</html>";
+        final URL urlSubmitPage = new URL(URL_FIRST, "submit.html");
+        getMockWebConnection().setResponse(urlSubmitPage, submitPage);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", "/landing.html"));
+        final URL urlRedirectPage = new URL(URL_FIRST, "redirect.html");
+        getMockWebConnection().setResponse(urlRedirectPage, "", 302, "Found", null, headers);
+
+        final String landingPage = DOCTYPE_HTML
+                + "<html><title>Landing page</title>"
+                + "<body></html>";
+        final URL urlLandingPage = new URL(URL_FIRST, "landing.html");
+        getMockWebConnection().setResponse(urlLandingPage, landingPage);
+
+        // test by clicking the submit button
+        HtmlPage page = loadPage(startPage);
+        assertEquals("Start page", page.getTitleText());
+
+        HtmlPage resultPage = page.getElementById("mySubmit").click();
+        assertEquals("Landing page", resultPage.getTitleText());
+
+        assertEquals(reqCount + 4, getMockWebConnection().getRequestCount());
+        assertEquals(urlLandingPage.toExternalForm(), getMockWebConnection().getLastWebRequest().getUrl().toString());
+
+        // test by clicking the anchor
+        reqCount = getMockWebConnection().getRequestCount();
+        page = loadPage(startPage);
+        assertEquals("Start page", page.getTitleText());
+
+        resultPage = page.getElementById("myAnchor").click();
+        assertEquals("Landing page", resultPage.getTitleText());
+
+        assertEquals(reqCount + 4, getMockWebConnection().getRequestCount());
+        assertEquals(urlLandingPage.toExternalForm(), getMockWebConnection().getLastWebRequest().getUrl().toString());
+    }
+
+    /**
      * Test for https://github.com/HtmlUnit/htmlunit/issues/701.
      * @throws Exception if test fails
      */
     @Test
     public void getPageInSeparateThread() throws Exception {
-        final String html = "<html><head><title>testpage</title></head>\n"
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>testpage</title></head>\n"
                 + "<body>\n"
                 + "</body></html>";
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,8 @@ package org.htmlunit.svg;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -30,7 +28,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
 public class SvgAltGlyphTest extends WebDriverTestCase {
 
     /**
@@ -57,10 +54,10 @@ public class SvgAltGlyphTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             if ("[object SVGAltGlyphElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgAltGlyph.class.isInstance(page.getElementById("myId")));
+                assertTrue(page.getElementById("myId") instanceof SvgAltGlyph);
             }
             else {
-                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
+                assertTrue(page.getElementById("myId") instanceof SvgElement);
             }
         }
     }

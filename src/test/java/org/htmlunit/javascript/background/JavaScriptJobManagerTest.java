@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,7 @@ import org.htmlunit.TopLevelWindow;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link JavaScriptJobManagerImpl} using the full HtmlUnit stack. Minimal unit tests
@@ -35,7 +33,6 @@ import org.junit.runner.RunWith;
  * @author Brad Clarke
  * @author Ahmed Ashour
  */
-@RunWith(BrowserRunner.class)
 public class JavaScriptJobManagerTest extends SimpleWebTestCase {
     private long startTime_;
 
@@ -58,7 +55,8 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
      */
     @Test
     public void setClearTimeoutUsesManager() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
@@ -76,7 +74,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         startTimedTest();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
@@ -95,7 +93,8 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
      */
     @Test
     public void setClearIntervalUsesManager() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
@@ -116,7 +115,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         // loading the page takes some time (on our slow build machine);
@@ -126,11 +125,11 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);
         assertEquals(1, jobManager.getJobCount());
-        jobManager.waitForJobs(DEFAULT_WAIT_TIME);
+        jobManager.waitForJobs(DEFAULT_WAIT_TIME.toMillis());
         assertEquals(0, jobManager.getJobCount());
         assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
 
-        assertMaxTestRunTime(DEFAULT_WAIT_TIME + 100);
+        assertMaxTestRunTime(DEFAULT_WAIT_TIME.toMillis() + 100);
     }
 
     /**
@@ -138,7 +137,8 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
      */
     @Test
     public void navigationStopThreadsInChildWindows() throws Exception {
-        final String firstContent = "<html><head><title>First</title></head><body>\n"
+        final String firstContent = DOCTYPE_HTML
+            + "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='"
             + URL_SECOND
             + "'></iframe>\n"
@@ -146,12 +146,14 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
             + URL_THIRD.toExternalForm()
             + "' id='clickme'>click me</a>\n"
             + "</body></html>";
-        final String secondContent = "<html><head><title>Second</title></head><body>\n"
+        final String secondContent = DOCTYPE_HTML
+            + "<html><head><title>Second</title></head><body>\n"
             + "<script>\n"
             + "setInterval('', 30000);\n"
             + "</script>\n"
             + "</body></html>";
-        final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
+        final String thirdContent = DOCTYPE_HTML
+            + "<html><head><title>Third</title></head><body></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_SECOND, secondContent);
@@ -179,7 +181,8 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
      */
     @Test
     public void interruptAllWithRecursiveSetTimeout() throws Exception {
-        final String content = "<html>\n"
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
@@ -194,7 +197,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<>());
         final HtmlPage page = loadPage(content, collectedAlerts);
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);

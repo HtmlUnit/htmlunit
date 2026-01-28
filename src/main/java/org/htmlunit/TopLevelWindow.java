@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import org.htmlunit.util.UrlUtils;
 /**
  * A window representing a top level browser window.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author David D. Kilzer
  * @author Ahmed Ashour
@@ -115,7 +115,7 @@ public class TopLevelWindow extends WebWindowImpl {
      *
      * Closes this window.
      * @param ignoreOnbeforeunloadAccepted if true the result of triggering the OnbeforeunloadAccepted event
-     * will be ignored
+     *        will be ignored
      */
     public void close(final boolean ignoreOnbeforeunloadAccepted) {
         final Page page = getEnclosedPage();

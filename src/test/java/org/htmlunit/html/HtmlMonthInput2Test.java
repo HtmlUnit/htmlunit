@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,29 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlMonthInput}.
  *
  * @author Anton Demydenko
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlMonthInput2Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({FF, FF_ESR})
+    @Alerts({"true", "false", "true", "true", "true", "true"})
+    @HtmlUnitNYI(FF = {"true", "true", "true", "true", "true", "true"},
+            FF_ESR = {"true", "true", "true", "true", "true", "true"})
     public void minValidation() throws Exception {
-        final String htmlContent = "<html>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
@@ -54,30 +53,35 @@ public class HtmlMonthInput2Test extends SimpleWebTestCase {
         final HtmlMonthInput third = (HtmlMonthInput) page.getElementById("third");
 
         // empty
-        assertTrue(first.isValid());
+        assertEquals(getExpectedAlerts()[0], Boolean.toString(first.isValid()));
         // lesser
         first.setValue("2018-11");
-        assertFalse(first.isValid());
+        assertEquals(getExpectedAlerts()[1], Boolean.toString(first.isValid()));
         // equal
         first.setValue("2018-12");
-        assertTrue(first.isValid());
+        assertEquals(getExpectedAlerts()[2], Boolean.toString(first.isValid()));
         // bigger
         first.setValue("2018-12");
-        assertTrue(first.isValid());
+        assertEquals(getExpectedAlerts()[3], Boolean.toString(first.isValid()));
 
         second.setValue("2018-11");
+        assertEquals(getExpectedAlerts()[4], Boolean.toString(second.isValid()));
         assertTrue(second.isValid());
         third.setValue("2018-11");
-        assertTrue(third.isValid());
+        assertEquals(getExpectedAlerts()[5], Boolean.toString(third.isValid()));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({FF, FF_ESR})
+    @Alerts({"true", "true", "true", "false", "true", "true"})
+    @HtmlUnitNYI(FF = {"true", "true", "true", "true", "true", "true"},
+            FF_ESR = {"true", "true", "true", "true", "true", "true"})
     public void maxValidation() throws Exception {
-        final String htmlContent = "<html>\n" + "<head></head>\n"
+        final String htmlContent = DOCTYPE_HTML
+                + "<html>\n"
+                + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
                 + "  <input type='month' id='first' max='2018-12'>\n"
@@ -93,20 +97,20 @@ public class HtmlMonthInput2Test extends SimpleWebTestCase {
         final HtmlMonthInput third = (HtmlMonthInput) page.getElementById("third");
 
         // empty
-        assertTrue(first.isValid());
+        assertEquals(getExpectedAlerts()[0], Boolean.toString(first.isValid()));
         // lesser
         first.setValue("2018-11");
-        assertTrue(first.isValid());
+        assertEquals(getExpectedAlerts()[1], Boolean.toString(first.isValid()));
         // equal
         first.setValue("2018-12");
-        assertTrue(first.isValid());
+        assertEquals(getExpectedAlerts()[2], Boolean.toString(first.isValid()));
         // bigger
         first.setValue("2019-01");
-        assertFalse(first.isValid());
+        assertEquals(getExpectedAlerts()[3], Boolean.toString(first.isValid()));
 
         second.setValue("2018-12");
-        assertTrue(second.isValid());
+        assertEquals(getExpectedAlerts()[4], Boolean.toString(second.isValid()));
         third.setValue("2018-12");
-        assertTrue(third.isValid());
+        assertEquals(getExpectedAlerts()[5], Boolean.toString(third.isValid()));
     }
 }

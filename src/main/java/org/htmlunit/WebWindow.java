@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import org.htmlunit.javascript.background.JavaScriptJobManager;
 /**
  * An interface that represents one window in a browser. It could be a top level window or a frame.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Mike Bowler
  * @author David K. Taylor
  * @author David D. Kilzer
  */
@@ -71,7 +71,7 @@ public interface WebWindow extends Serializable {
      * is a top level window, then return this window.
      *
      * @return the top level window that contains this window or this
-     * window if there is no parent.
+     *         window if there is no parent.
      */
     WebWindow getTopWindow();
 
@@ -187,15 +187,15 @@ public interface WebWindow extends Serializable {
     Screen getScreen();
 
     /**
-    * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-    *
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns computed style of the element. Computed style represents the final computed values
      * of all CSS properties for the element. This method's return value is of the same type as
      * that of <code>element.style</code>, but the value returned by this method is read-only.
      *
      * @param element the element
      * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null});
-     * e.g. ':before'
+     *        e.g. ':before'
      * @return the computed style
      */
     ComputedCssStyleDeclaration getComputedStyle(DomElement element, String pseudoElement);

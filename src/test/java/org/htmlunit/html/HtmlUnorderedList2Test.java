@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,15 @@
 package org.htmlunit.html;
 
 import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link HtmlUnorderedList}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class HtmlUnorderedList2Test extends SimpleWebTestCase {
 
     /**
@@ -33,7 +31,8 @@ public class HtmlUnorderedList2Test extends SimpleWebTestCase {
      */
     @Test
     public void asNormalizedText() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <ul id='foo'>\n"
@@ -58,8 +57,8 @@ public class HtmlUnorderedList2Test extends SimpleWebTestCase {
      */
     @Test
     public void asXml() throws Exception {
-        final String content
-            = "<html><head></head>\n"
+        final String content = DOCTYPE_HTML
+            + "<html><head></head>\n"
             + "<body>\n"
             + "  <ul id='myNode'></ul>\n"
             + "foo\n"
@@ -67,7 +66,14 @@ public class HtmlUnorderedList2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlElement element = page.getHtmlElementById("myNode");
 
-        assertEquals("<ul id=\"myNode\">\r\n</ul>\r\n", element.asXml());
-        assertTrue(page.asXml().contains("</ul>"));
+        assertEquals("<ul id=\"myNode\"></ul>", element.asXml());
+        assertEquals("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n"
+                + "<html>\r\n"
+                + "  <head/>\r\n"
+                + "  <body>\r\n"
+                + "    <ul id=\"myNode\"></ul>\n"
+                + "foo\n"
+                + "</body>\r\n"
+                + "</html>", page.asXml());
     }
 }

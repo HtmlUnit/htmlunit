@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,8 @@ package org.htmlunit.general.huge;
 
 import java.util.Collection;
 
-import org.htmlunit.junit.BrowserParameterizedRunner;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameters;
+import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.params.provider.Arguments;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -30,7 +27,6 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@RunWith(BrowserParameterizedRunner.class)
 public class HostParentOfBTest extends HostParentOf {
 
     /**
@@ -38,123 +34,74 @@ public class HostParentOfBTest extends HostParentOf {
      * @return the parameterized data
      * @throws Exception if an error occurs
      */
-    @Parameters
-    public static Collection<Object[]> data() throws Exception {
+    public static Collection<Arguments> data() throws Exception {
         return HostParentOf.data(input -> {
             final char ch = Character.toUpperCase(input.charAt(0));
             return ch == 'B';
         });
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _BarProp_BarProp() throws Exception {
+    @Alerts("true/false")
+    void _BarProp_BarProp() throws Exception {
         test("BarProp", "BarProp");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _BaseAudioContext_AudioContext() throws Exception {
+    @Alerts("true/true")
+    void _BaseAudioContext_AudioContext() throws Exception {
         test("BaseAudioContext", "AudioContext");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _BaseAudioContext_BaseAudioContext() throws Exception {
+    @Alerts("true/false")
+    void _BaseAudioContext_BaseAudioContext() throws Exception {
         test("BaseAudioContext", "BaseAudioContext");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _BaseAudioContext_OfflineAudioContext() throws Exception {
+    @Alerts("true/true")
+    void _BaseAudioContext_OfflineAudioContext() throws Exception {
         test("BaseAudioContext", "OfflineAudioContext");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            FF_ESR = "false")
-    public void _BatteryManager_BatteryManager() throws Exception {
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    void _BatteryManager_BatteryManager() throws Exception {
         test("BatteryManager", "BatteryManager");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true")
-    public void _BeforeInstallPromptEvent_BeforeInstallPromptEvent() throws Exception {
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
+    void _BeforeInstallPromptEvent_BeforeInstallPromptEvent() throws Exception {
         test("BeforeInstallPromptEvent", "BeforeInstallPromptEvent");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _BeforeUnloadEvent_BeforeUnloadEvent() throws Exception {
+    @Alerts("true/false")
+    void _BeforeUnloadEvent_BeforeUnloadEvent() throws Exception {
         test("BeforeUnloadEvent", "BeforeUnloadEvent");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _BiquadFilterNode_BiquadFilterNode() throws Exception {
+    @Alerts("true/false")
+    void _BiquadFilterNode_BiquadFilterNode() throws Exception {
         test("BiquadFilterNode", "BiquadFilterNode");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Blob_Blob() throws Exception {
+    @Alerts("true/false")
+    void _Blob_Blob() throws Exception {
         test("Blob", "Blob");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Blob_File() throws Exception {
+    @Alerts("true/true")
+    void _Blob_File() throws Exception {
         test("Blob", "File");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _BlobEvent_BlobEvent() throws Exception {
+    @Alerts("true/false")
+    void _BlobEvent_BlobEvent() throws Exception {
         test("BlobEvent", "BlobEvent");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _BroadcastChannel_BroadcastChannel() throws Exception {
+    @Alerts("true/false")
+    void _BroadcastChannel_BroadcastChannel() throws Exception {
         test("BroadcastChannel", "BroadcastChannel");
     }
 }

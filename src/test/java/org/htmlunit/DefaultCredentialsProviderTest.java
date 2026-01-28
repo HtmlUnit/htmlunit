@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2024 Gargoyle Software Inc.
+ * Copyright (c) 2002-2026 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,7 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.impl.auth.BasicScheme;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.junit.BrowserRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DefaultCredentialsProvider}.
@@ -28,7 +26,6 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@RunWith(BrowserRunner.class)
 public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
 
     /**
@@ -104,7 +101,7 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
         final String scheme = new BasicScheme().getSchemeName();
 
         final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
-        provider.addCredentials("username", (char[]) null, HttpHeader.HOST_LC, 80, realm);
+        provider.addCredentials("username", null, HttpHeader.HOST_LC, 80, realm);
 
         final Credentials credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertEquals("username", credentials.getUserPrincipal().getName());
