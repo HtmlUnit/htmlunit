@@ -38,6 +38,7 @@ import org.htmlunit.javascript.host.Window;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Sven Strickroth
  */
 @JsxClass(value = {CHROME, EDGE}, className = "v8BreakIterator")
 public class V8BreakIterator extends HtmlUnitScriptable {
@@ -58,16 +59,16 @@ public class V8BreakIterator extends HtmlUnitScriptable {
     @JsxConstructor
     public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
-        Locale locale = new Locale("en", "US");
+        Locale locale = new Locale.Builder().setLanguage("en").setRegion("US").build();
         if (args.length != 0) {
             final Object locales = args[0];
             if (locales instanceof NativeArray array) {
                 if (array.getLength() != 0) {
-                    locale = new Locale(array.get(0).toString());
+                    locale = new Locale.Builder().setLanguage(array.get(0).toString()).build();
                 }
             }
             else if (locales instanceof String) {
-                locale = new Locale(locales.toString());
+                locale = new Locale.Builder().setLanguage(locales.toString()).build();
             }
             else if (!JavaScriptEngine.isUndefined(locales)) {
                 throw JavaScriptEngine.throwAsScriptRuntimeEx(
