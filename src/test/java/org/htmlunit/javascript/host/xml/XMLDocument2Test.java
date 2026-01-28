@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.xml;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -472,6 +473,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Disabled // the workarounds to make this work for specific xml parsers removed in htmlunit 5
     @Alerts({"name: item1", "id: 1", "id: 2", "name: item2", "name: item3", "id: 3"})
     public void attributeOrder() throws Exception {
         final String html = DOCTYPE_HTML

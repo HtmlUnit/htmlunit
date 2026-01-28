@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.performance;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -34,7 +32,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 @JsxClass
 public class PerformanceNavigation extends HtmlUnitScriptable {
 
-    private static final Log LOG = LogFactory.getLog(PerformanceNavigation.class);
+    // private static final Log LOG = LogFactory.getLog(PerformanceNavigation.class);
 
     /** Navigate. */
     @JsxConstant

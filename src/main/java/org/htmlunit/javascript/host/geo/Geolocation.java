@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.geo;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Function;
@@ -37,7 +35,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 @JsxClass
 public class Geolocation extends HtmlUnitScriptable {
 
-    private static final Log LOG = LogFactory.getLog(Geolocation.class);
+    // private static final Log LOG = LogFactory.getLog(Geolocation.class);
 
     private Function successHandler_;
     private Function errorHandler_;
