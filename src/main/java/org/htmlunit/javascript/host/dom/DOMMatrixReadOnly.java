@@ -14,8 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
@@ -40,7 +38,7 @@ import org.htmlunit.javascript.host.Window;
 @JsxClass
 public class DOMMatrixReadOnly extends HtmlUnitScriptable {
 
-    private static final Log LOG = LogFactory.getLog(DOMMatrixReadOnly.class);
+    // private static final Log LOG = LogFactory.getLog(DOMMatrixReadOnly.class);
 
     private double m11_;
     private double m12_;
