@@ -86,7 +86,7 @@
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
         <enforcer-plugin.version>3.6.2</enforcer-plugin.version>
         <changes-plugin.version>2.12.1</changes-plugin.version>
-        <compiler-plugin.version>3.14.1</compiler-plugin.version>
+        <compiler-plugin.version>3.15.0</compiler-plugin.version>
         <jar-plugin.version>3.5.0</jar-plugin.version>
         <assembly-plugin.version>3.8.0</assembly-plugin.version>
         <source-plugin.version>3.4.0</source-plugin.version>
