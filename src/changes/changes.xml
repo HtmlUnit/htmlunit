@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: use ThrowTypeError at all relevant places.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: debugger eval for scripts and eval scope for top-level scripts fixed.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: DataView Float16 support added.
+            </action>
             <action type="update" dev="rbri">
                 Improved HttpMethod validation in XMLHttpRequest open('trace', ...).
             </action>
