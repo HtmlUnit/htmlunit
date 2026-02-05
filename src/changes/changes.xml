@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: add a method to temporarily suspend microtask processing
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Optimize regex backtracking for quantifiers before end-of-line anchor
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: JSON.parse fixed to preserve negative zero
+            </action>
             <action type="fix" dev="rbri">
                 core-js: use ThrowTypeError at all relevant places.
             </action>
