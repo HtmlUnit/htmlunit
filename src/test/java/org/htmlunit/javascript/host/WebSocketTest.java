@@ -273,6 +273,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
         @Override
         public void onWebSocketClose(final int closeCode, final String message) {
+System.out.println("Server close");
             webSockets_.remove(this);
         }
     }

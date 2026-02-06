@@ -17,14 +17,15 @@ package org.htmlunit.websocket;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.ByteBuffer;
-import java.util.concurrent.Future;
+import java.util.function.Consumer;
 
+import org.eclipse.jetty.client.HttpClient;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
+import org.eclipse.jetty.websocket.api.Callback;
+import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.websocket.client.WebSocketClient;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebClientOptions;
-import org.htmlunit.jetty.util.ssl.SslContextFactory;
-import org.htmlunit.jetty.websocket.api.Session;
-import org.htmlunit.jetty.websocket.api.WebSocketPolicy;
-import org.htmlunit.jetty.websocket.client.WebSocketClient;
 
 /**
  * Jetty9 based impl of the WebSocketAdapter.
@@ -44,7 +45,7 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
          */
         @Override
         public WebSocketAdapter buildWebSocketAdapter(final WebClient webClient,
-                final WebSocketListener webSocketListener) {
+                final WebSocketListener webSocketListener) throws Exception {
             return new JettyWebSocketAdapter(webClient, webSocketListener);
         }
     }
@@ -52,53 +53,47 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
     private final Object clientLock_ = new Object();
     private WebSocketClient client_;
     private final WebSocketListener listener_;
+    private final JettyWebSocketAdapterImpl adapterImpl_;
 
-    private volatile Session incomingSession_;
-    private Session outgoingSession_;
+    private volatile Session session_;
 
     /**
      * Ctor.
      * @param webClient the {@link WebClient}
      * @param listener the {@link WebSocketListener}
+     * @throws Exception in case of error
      */
-    public JettyWebSocketAdapter(final WebClient webClient, final WebSocketListener listener) {
+    public JettyWebSocketAdapter(final WebClient webClient, final WebSocketListener listener) throws Exception {
         super();
         final WebClientOptions options = webClient.getOptions();
 
+        final HttpClient httpClient = new HttpClient();
+        httpClient.setHttpCookieStore(new WebSocketCookieStore(webClient));
+
+        // Initialize client
         if (webClient.getOptions().isUseInsecureSSL()) {
-            client_ = new WebSocketClient(new SslContextFactory(true), null, null);
-            // still use the deprecated method here to be backward compatible with older jetty versions
-            // see https://github.com/HtmlUnit/htmlunit/issues/36
-            // client_ = new WebSocketClient(new SslContextFactory.Client(true), null, null);
-        }
-        else {
-            client_ = new WebSocketClient();
+            final SslContextFactory.Client sslContextFactory = new SslContextFactory.Client(true);
+            sslContextFactory.setEndpointIdentificationAlgorithm(null);
+            sslContextFactory.setTrustAll(true);
+
+            httpClient.setSslContextFactory(sslContextFactory);
         }
 
+        httpClient.start();
+        client_ = new WebSocketClient(httpClient);
+
+        adapterImpl_ = new JettyWebSocketAdapterImpl();
         listener_ = listener;
 
-        // use the same executor as the rest
-        client_.setExecutor(webClient.getExecutor());
-
-        client_.getHttpClient().setCookieStore(new WebSocketCookieStore(webClient));
-
-        final WebSocketPolicy policy = client_.getPolicy();
         int size = options.getWebSocketMaxBinaryMessageSize();
         if (size > 0) {
-            policy.setMaxBinaryMessageSize(size);
-        }
-        size = options.getWebSocketMaxBinaryMessageBufferSize();
-        if (size > 0) {
-            policy.setMaxBinaryMessageBufferSize(size);
+            client_.setMaxBinaryMessageSize(size);
         }
         size = options.getWebSocketMaxTextMessageSize();
         if (size > 0) {
-            policy.setMaxTextMessageSize(size);
+            client_.setMaxTextMessageSize(size);
         }
-        size = options.getWebSocketMaxTextMessageBufferSize();
-        if (size > 0) {
-            policy.setMaxTextMessageBufferSize(size);
-        }
+
     }
 
     /**
@@ -117,16 +112,8 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
     @Override
     public void connect(final URI url) throws Exception {
         synchronized (clientLock_) {
-            final Future<Session> connectFuture = client_.connect(new JettyWebSocketAdapterImpl(), url);
-            client_.getExecutor().execute(() -> {
-                try {
-                    listener_.onWebSocketConnecting();
-                    incomingSession_ = connectFuture.get();
-                }
-                catch (final Exception e) {
-                    listener_.onWebSocketConnectError(e);
-                }
-            });
+            listener_.onWebSocketConnecting();
+            client_.connect(adapterImpl_, url);
         }
     }
 
@@ -134,36 +121,26 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      * {@inheritDoc}
      */
     @Override
-    public void send(final Object content) throws IOException {
-        if (content instanceof String string) {
-            outgoingSession_.getRemote().sendString(string);
-        }
-        else if (content instanceof ByteBuffer buffer) {
-            outgoingSession_.getRemote().sendBytes(buffer);
-        }
-        else {
-            throw new IllegalStateException(
-                    "Not Yet Implemented: WebSocket.send() was used to send non-string value");
-        }
+    public void sendText(final String message) throws IOException {
+        session_.sendText(message, Callback.from(session_::demand, adapterImpl_));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void closeIncommingSession() {
-        if (incomingSession_ != null) {
-            incomingSession_.close();
-        }
+    public void sendBinary(final ByteBuffer buffer) throws IOException {
+        session_.sendBinary(buffer, Callback.from(session_::demand, adapterImpl_));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void closeOutgoingSession() {
-        if (outgoingSession_ != null) {
-            outgoingSession_.close();
+    public void closeSession() {
+        if (session_ != null) {
+            session_.close();
+            session_ = null;
         }
     }
 
@@ -183,7 +160,10 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
         }
     }
 
-    private class JettyWebSocketAdapterImpl extends org.htmlunit.jetty.websocket.api.WebSocketAdapter {
+    /**
+     * Session.Listener.
+     */
+    public class JettyWebSocketAdapterImpl implements Session.Listener, Consumer<Throwable> {
 
         /**
          * Ctor.
@@ -196,22 +176,10 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
          * {@inheritDoc}
          */
         @Override
-        public void onWebSocketConnect(final Session session) {
-            super.onWebSocketConnect(session);
-            outgoingSession_ = session;
+        public void onWebSocketOpen(final Session session) {
+            session_ = session;
 
-            listener_.onWebSocketConnect();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void onWebSocketClose(final int statusCode, final String reason) {
-            super.onWebSocketClose(statusCode, reason);
-            outgoingSession_ = null;
-
-            listener_.onWebSocketClose(statusCode, reason);
+            listener_.onWebSocketOpen();
         }
 
         /**
@@ -219,19 +187,48 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
          */
         @Override
         public void onWebSocketText(final String message) {
-            super.onWebSocketText(message);
+            if (session_ == null) {
+                return;
+            }
+            session_.demand();
 
-            listener_.onWebSocketText(message);
+            try {
+                listener_.onWebSocketText(message);
+            }
+            catch (final Exception e) {
+                // TODO: handle exception
+            }
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
-            super.onWebSocketBinary(data, offset, length);
+        public void onWebSocketBinary(final ByteBuffer buffer, final Callback callback) {
+            if (session_ == null) {
+                return;
+            }
 
-            listener_.onWebSocketBinary(data, offset, length);
+            byte[] arr = new byte[0];
+            try {
+                arr = new byte[buffer.remaining()];
+                buffer.get(arr);
+
+                callback.succeed();
+            }
+            catch (final Exception e) {
+                callback.fail(e);
+                return;
+            }
+
+            session_.demand();
+
+            try {
+                listener_.onWebSocketBinary(arr);
+            }
+            catch (final Exception e) {
+                // TODO: handle exception
+            }
         }
 
         /**
@@ -239,10 +236,46 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
          */
         @Override
         public void onWebSocketError(final Throwable cause) {
-            super.onWebSocketError(cause);
-            outgoingSession_ = null;
 
-            listener_.onWebSocketError(cause);
+            final String className = cause.getClass().getName();
+            if ("java.nio.channels.ClosedChannelException".equals(className)
+                || "java.io.EOFException".equals(className)
+                || "java.net.SocketException".equals(className)
+                || "ClosedChannelException".contains(className)
+                || (cause.getMessage() != null
+                    && (cause.getMessage().contains("Connection reset")
+                        || cause.getMessage().contains("Broken pipe")
+                        || cause.getMessage().contains("Connection closed")))) {
+                // TODO
+                return;
+            }
+
+            accept(cause);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void onWebSocketClose(final int statusCode, final String reason) {
+            session_ = null;
+
+            try {
+                listener_.onWebSocketClose(statusCode, reason);
+            }
+            catch (final Exception e) {
+                // TODO: handle exception
+            }
+        }
+
+        @Override
+        public void accept(final Throwable cause) {
+            try {
+                listener_.onWebSocketError(cause);
+            }
+            catch (final Exception e) {
+                // TODO: handle exception
+            }
         }
     }
 }

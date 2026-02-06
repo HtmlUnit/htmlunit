@@ -32,6 +32,7 @@ public interface WebSocketAdapterFactory extends Serializable {
      * @param webClient the {@link WebClient}
      * @param webSocketListener the {@link WebSocketListener}
      * @return a new {@link WebSocketAdapter}
+     * @throws Exception in case of error
      */
-    WebSocketAdapter buildWebSocketAdapter(WebClient webClient, WebSocketListener webSocketListener);
+    WebSocketAdapter buildWebSocketAdapter(WebClient webClient, WebSocketListener webSocketListener) throws Exception;
 }

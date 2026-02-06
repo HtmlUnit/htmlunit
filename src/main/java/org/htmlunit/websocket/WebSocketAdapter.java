@@ -16,10 +16,11 @@ package org.htmlunit.websocket;
 
 import java.io.IOException;
 import java.net.URI;
+import java.nio.ByteBuffer;
 
 /**
  * Helper to have no direct dependency to the WebSockt client
- * implementation used by HtmlUnit.
+ * implementation used by HtmlUnit. This is used from the js code.
  *
  * @author Ronald Brill
  */
@@ -43,24 +44,25 @@ public interface WebSocketAdapter {
     /**
      * Sends the provided content.
      *
-     * @param content the content to be sent
+     * @param message the message to be sent
      * @throws IOException in case of error
      */
-    void send(Object content) throws IOException;
+    void sendText(String message) throws IOException;
 
     /**
-     * Close the incomming session.
+     * Sends the provided content.
+     *
+     * @param buffer the bytes to be sent
+     * @throws IOException in case of error
+     */
+    void sendBinary(ByteBuffer buffer) throws IOException;
+
+    /**
+     * Close the session.
      *
      * @throws Exception in case of error
      */
-    void closeIncommingSession() throws Exception;
-
-    /**
-     * Close the outgoing session.
-     *
-     * @throws Exception in case of error
-     */
-    void closeOutgoingSession() throws Exception;
+    void closeSession() throws Exception;
 
     /**
      * Close the client.

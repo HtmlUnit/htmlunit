@@ -120,7 +120,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 }
 
                 @Override
-                public void onWebSocketConnect() {
+                public void onWebSocketOpen() {
                     setReadyState(OPEN);
 
                     final Event openEvent = new Event(Event.TYPE_OPEN);
@@ -159,9 +159,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 }
 
                 @Override
-                public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
-                    final NativeArrayBuffer buffer = new NativeArrayBuffer(length);
-                    System.arraycopy(data, offset, buffer.getBuffer(), 0, length);
+                public void onWebSocketBinary(final byte[] bytes) {
+                    final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
+                    System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
+
                     buffer.setParentScope(getParentScope());
                     buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
 
@@ -419,17 +420,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     public void close(final Object code, final Object reason) {
         if (readyState_ != CLOSED) {
             try {
-                webSocketImpl_.closeIncommingSession();
+                webSocketImpl_.closeSession();
             }
             catch (final Throwable e) {
-                LOG.error("WS close error - incomingSession_.close() failed", e);
-            }
-
-            try {
-                webSocketImpl_.closeOutgoingSession();
-            }
-            catch (final Throwable e) {
-                LOG.error("WS close error - outgoingSession_.close() failed", e);
+                LOG.error("WS close error - session_.close() failed", e);
             }
         }
 
@@ -452,10 +446,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             if (content instanceof NativeArrayBuffer buffer1) {
                 final byte[] bytes = buffer1.getBuffer();
                 final ByteBuffer buffer = ByteBuffer.wrap(bytes);
-                webSocketImpl_.send(buffer);
+                webSocketImpl_.sendBinary(buffer);
                 return;
             }
-            webSocketImpl_.send(content);
+            webSocketImpl_.sendText(content.toString());
         }
         catch (final IOException e) {
             LOG.error("WS send error", e);

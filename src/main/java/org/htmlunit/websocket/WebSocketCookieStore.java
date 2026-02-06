@@ -14,23 +14,22 @@
  */
 package org.htmlunit.websocket;
 
-import java.net.CookieStore;
-import java.net.HttpCookie;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jetty.http.HttpCookie;
+import org.eclipse.jetty.http.HttpCookieStore;
 import org.htmlunit.WebClient;
-import org.htmlunit.javascript.host.WebSocket;
 import org.htmlunit.http.Cookie;
+import org.htmlunit.javascript.host.WebSocket;
 
 /**
  * A helper class for {@link WebSocket}.
  *
- * @author Ahmed Ashour
  * @author Ronald Brill
  */
-class WebSocketCookieStore implements CookieStore {
+class WebSocketCookieStore implements HttpCookieStore {
 
     private final WebClient webClient_;
 
@@ -38,27 +37,17 @@ class WebSocketCookieStore implements CookieStore {
         webClient_ = webClient;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void add(final URI uri, final HttpCookie cookie) {
-        throw new UnsupportedOperationException();
+    public boolean add(final URI uri, final HttpCookie cookie) {
+        return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public List<HttpCookie> get(final URI uri) {
+    public List<HttpCookie> all() {
         final List<HttpCookie> cookies = new ArrayList<>();
         try {
-            final String urlString = uri.toString().replace("ws://", "http://").replace("wss://", "https://");
-            final java.net.URL url = new java.net.URL(urlString);
-            for (final Cookie cookie : webClient_.getCookies(url)) {
-                final HttpCookie httpCookie = new HttpCookie(cookie.getName(), cookie.getValue());
-                httpCookie.setVersion(0);
-                cookies.add(httpCookie);
+            for (final Cookie htmlUnitCookie : webClient_.getCookieManager().getCookies()) {
+                cookies.add(buildHttpCookie(htmlUnitCookie));
             }
         }
         catch (final Exception e) {
@@ -67,35 +56,59 @@ class WebSocketCookieStore implements CookieStore {
         return cookies;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public List<HttpCookie> getCookies() {
-        throw new UnsupportedOperationException();
+    public List<HttpCookie> match(final URI uri) {
+        final List<HttpCookie> cookies = new ArrayList<>();
+        try {
+            final String urlString = uri.toString()
+                    .replace("ws://", "http://")
+                    .replace("wss://", "https://");
+            final java.net.URL url = new java.net.URL(urlString);
+
+            for (final Cookie htmlUnitCookie : webClient_.getCookies(url)) {
+                cookies.add(buildHttpCookie(htmlUnitCookie));
+            }
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+        return cookies;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<URI> getURIs() {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean remove(final URI uri, final HttpCookie cookie) {
-        throw new UnsupportedOperationException();
+        return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public boolean removeAll() {
+    public boolean clear() {
         return false;
+    }
+
+    private static HttpCookie buildHttpCookie(final Cookie htmlUnitCookie) {
+        final HttpCookie.Builder builder = HttpCookie.build(
+                htmlUnitCookie.getName(),
+                htmlUnitCookie.getValue());
+        if (htmlUnitCookie.getDomain() != null) {
+            builder.domain(htmlUnitCookie.getDomain());
+        }
+
+        if (htmlUnitCookie.getPath() != null) {
+            builder.path(htmlUnitCookie.getPath());
+        }
+//
+//        if (htmlUnitCookie.getMaxAge() > -1) {
+//            builder.maxAge(htmlUnitCookie.getMaxAge());
+//        }
+
+        if (htmlUnitCookie.isSecure()) {
+            builder.secure(true);
+        }
+
+        if (htmlUnitCookie.isHttpOnly()) {
+            builder.httpOnly(true);
+        }
+
+        return builder.build();
     }
 }

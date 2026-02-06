@@ -77,6 +77,7 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserListener;
+import org.htmlunit.http.Cookie;
 import org.htmlunit.http.HttpStatus;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HttpClientConverter;
@@ -94,7 +95,6 @@ import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.html.HTMLIFrameElement;
 import org.htmlunit.protocol.data.DataURLConnection;
-import org.htmlunit.http.Cookie;
 import org.htmlunit.util.HeaderUtils;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -3022,8 +3022,9 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param webSocketListener the {@link WebSocketListener}
      * @return a new {@link WebSocketAdapter}
+     * @throws Exception in case of error
      */
-    public WebSocketAdapter buildWebSocketAdapter(final WebSocketListener webSocketListener) {
+    public WebSocketAdapter buildWebSocketAdapter(final WebSocketListener webSocketListener) throws Exception {
         return webSocketAdapterFactory_.buildWebSocketAdapter(this, webSocketListener);
     }
 
