@@ -46,7 +46,7 @@
         <htmlunitxpath.version>5.0.0-SNAPSHOT</htmlunitxpath.version>
 
         <httpcomponents.core5.version>5.3.1</httpcomponents.core5.version>
-        <httpcomponents.client5.version>5.4.1</httpcomponents.client5.version>
+        <httpcomponents.client5.version>5.4.3</httpcomponents.client5.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-io.version>2.21.0</commons-io.version>
         <commons-logging.version>1.3.5</commons-logging.version>
