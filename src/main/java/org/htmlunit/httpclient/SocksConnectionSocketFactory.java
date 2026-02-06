@@ -19,12 +19,12 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
 
-import org.apache.http.HttpHost;
-import org.apache.http.conn.socket.PlainConnectionSocketFactory;
-import org.apache.http.protocol.HttpContext;
+import org.apache.hc.client5.http.socket.PlainConnectionSocketFactory;
+import org.apache.hc.core5.http.HttpHost;
+import org.apache.hc.core5.http.protocol.HttpContext;
 
 /**
- * SOCKS aware {@link org.apache.http.conn.socket.ConnectionSocketFactory}.
+ * SOCKS aware {@link org.apache.hc.client5.http.socket.ConnectionSocketFactory}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
