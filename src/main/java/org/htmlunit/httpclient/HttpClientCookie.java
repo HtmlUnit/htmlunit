@@ -14,7 +14,7 @@
  */
 package org.htmlunit.httpclient;
 
-import org.apache.http.cookie.ClientCookie;
+import org.apache.hc.client5.http.cookie.ClientCookie;
 import org.htmlunit.http.Cookie;
 
 /**

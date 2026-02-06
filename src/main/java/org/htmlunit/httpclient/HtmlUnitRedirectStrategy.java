@@ -14,18 +14,18 @@
  */
 package org.htmlunit.httpclient;
 
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.ProtocolException;
-import org.apache.http.impl.client.DefaultRedirectStrategy;
-import org.apache.http.protocol.HttpContext;
+import org.apache.hc.client5.http.impl.DefaultRedirectStrategy;
+import org.apache.hc.core5.http.HttpRequest;
+import org.apache.hc.core5.http.HttpResponse;
+import org.apache.hc.core5.http.ProtocolException;
+import org.apache.hc.core5.http.protocol.HttpContext;
 
 /**
  * Customized DefaultRedirectStrategy for HtmlUnit.
  *
  * @author Ronald Brill
  */
-public final class HtmlUnitRedirectStrategie extends DefaultRedirectStrategy {
+public final class HtmlUnitRedirectStrategy extends DefaultRedirectStrategy {
 
     @Override
     public boolean isRedirected(final HttpRequest request, final HttpResponse response,
