@@ -34,9 +34,7 @@ import org.apache.hc.client5.http.cookie.CookieAttributeHandler;
 import org.apache.hc.client5.http.cookie.CookieOrigin;
 import org.apache.hc.client5.http.cookie.CookiePathComparator;
 import org.apache.hc.client5.http.cookie.MalformedCookieException;
-import org.apache.hc.client5.http.cookie.SM;
 import org.apache.hc.client5.http.impl.cookie.BasicClientCookie;
-import org.apache.hc.client5.http.impl.cookie.BasicCommentHandler;
 import org.apache.hc.client5.http.impl.cookie.CookieSpecBase;
 import org.apache.hc.core5.http.message.BasicHeader;
 import org.apache.hc.core5.http.message.BasicHeaderElement;
@@ -140,7 +138,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         }
 
         final String headername = header.getName();
-        if (!SM.SET_COOKIE.equalsIgnoreCase(headername)) {
+        if (!"Set-Cookie".equalsIgnoreCase(headername)) {
             throw new MalformedCookieException("Unrecognized cookie header '" + header + "'");
         }
         final HeaderElement[] helems = header.getElements();
@@ -221,7 +219,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         cookies.sort(COOKIE_COMPARATOR);
 
         final CharArrayBuffer buffer = new CharArrayBuffer(20 * cookies.size());
-        buffer.append(SM.COOKIE);
+        buffer.append("Cookie");
         buffer.append(": ");
         final int size = cookies.size();
         for (int i = 0; i < size; i++) {
