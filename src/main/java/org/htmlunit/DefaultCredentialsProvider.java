@@ -84,6 +84,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
                 return null;
             }
 
+            // HttpClient 5 uses char[] for passwords instead of String for better security
+            // (char arrays can be cleared from memory after use)
             return new PasswordAuthentication(credentials.getUserPrincipal().getName(),
                     credentials.getPassword());
         }

@@ -61,7 +61,9 @@ public class HtmlUnitUsernamePasswordCredentials implements Credentials, Seriali
             return true;
         }
         if (o instanceof HtmlUnitUsernamePasswordCredentials that) {
-            if (this.getUserPrincipal().equals(that.getUserPrincipal())) {
+            final Principal thisPrincipal = this.getUserPrincipal();
+            final Principal thatPrincipal = that.getUserPrincipal();
+            if (thisPrincipal != null && thisPrincipal.equals(thatPrincipal)) {
                 return true;
             }
         }
