@@ -21,14 +21,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.CookieSpec;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.message.BufferedHeader;
-import org.apache.http.util.CharArrayBuffer;
+import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.CookieOrigin;
+import org.apache.hc.client5.http.cookie.CookieSpec;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.impl.cookie.BasicClientCookie;
+import org.apache.hc.core5.http.message.BufferedHeader;
+import org.apache.hc.core5.util.CharArrayBuffer;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.util.UrlUtils;
 
@@ -105,7 +104,7 @@ public final class HttpClientConverter {
 
         final List<org.htmlunit.http.Cookie> htmlUnitCookies = new ArrayList<>(cookies.size());
         for (final Cookie cookie : cookies) {
-            final org.htmlunit.http.Cookie htmlUnitCookie = new HttpClientCookie((ClientCookie) cookie);
+            final org.htmlunit.http.Cookie htmlUnitCookie = new HttpClientCookie(cookie);
             htmlUnitCookies.add(htmlUnitCookie);
         }
         return htmlUnitCookies;
@@ -145,7 +144,7 @@ public final class HttpClientConverter {
         }
     }
 
-    private static ClientCookie toHttpClient(final org.htmlunit.http.Cookie cookie) {
+    private static Cookie toHttpClient(final org.htmlunit.http.Cookie cookie) {
         if (cookie instanceof HttpClientCookie) {
             return ((HttpClientCookie) cookie).getHttpClientCookie();
         }
@@ -155,10 +154,12 @@ public final class HttpClientConverter {
 
         httpClientCookie.setDomain(cookie.getDomain());
         // BasicDomainHandler.match(Cookie, CookieOrigin) checks the attribute also (see #333)
-        httpClientCookie.setAttribute(ClientCookie.DOMAIN_ATTR, cookie.getDomain());
+        httpClientCookie.setAttribute(Cookie.DOMAIN_ATTR, cookie.getDomain());
 
         httpClientCookie.setPath(cookie.getPath());
-        httpClientCookie.setExpiryDate(cookie.getExpires());
+        if (cookie.getExpires() != null) {
+            httpClientCookie.setExpiryDate(cookie.getExpires().toInstant());
+        }
 
         httpClientCookie.setSecure(cookie.isSecure());
         if (cookie.isHttpOnly()) {
