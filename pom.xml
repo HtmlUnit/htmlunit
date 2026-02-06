@@ -45,7 +45,8 @@
         <htmlunitwebsocketclient.version>4.21.0</htmlunitwebsocketclient.version>
         <htmlunitxpath.version>5.0.0-SNAPSHOT</htmlunitxpath.version>
 
-        <httpcomponents.version>4.5.14</httpcomponents.version>
+        <httpcomponents.core5.version>5.3.1</httpcomponents.core5.version>
+        <httpcomponents.client5.version>5.4.1</httpcomponents.client5.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-io.version>2.21.0</commons-io.version>
         <commons-logging.version>1.3.5</commons-logging.version>
@@ -1343,17 +1344,27 @@
         </contributor>
     </contributors>
     <dependencies>
-        <!-- this includes httpclient as dependency -->
+        <!-- Apache HttpClient 5.x for HTTP/2 support -->
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-            <version>${httpcomponents.version}</version>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+            <version>${httpcomponents.client5.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5</artifactId>
+            <version>${httpcomponents.core5.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5-h2</artifactId>
+            <version>${httpcomponents.core5.version}</version>
         </dependency>
 
         <dependency>
