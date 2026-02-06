@@ -14,11 +14,11 @@
  */
 package org.htmlunit.httpclient;
 
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.cookie.CommonCookieAttributeHandler;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SetCookie;
-import org.apache.http.impl.cookie.AbstractCookieAttributeHandler;
+import org.apache.hc.client5.http.cookie.CommonCookieAttributeHandler;
+import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.cookie.SetCookie;
+import org.apache.hc.client5.http.impl.cookie.AbstractCookieAttributeHandler;
 
 /**
  * VersionAttributeHandler for HtmlUnit.
@@ -48,6 +48,6 @@ final class HtmlUnitVersionAttributeHandler extends AbstractCookieAttributeHandl
 
     @Override
     public String getAttributeName() {
-        return ClientCookie.VERSION_ATTR;
+        return Cookie.VERSION_ATTR;
     }
 }
