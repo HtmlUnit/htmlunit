@@ -52,14 +52,14 @@
         <!--brotli.version>0.1.2</brotli.version-->
 
         <!-- selenium -->
-        <htmlunitdriver.version>4.40.0-SNAPSHOT</htmlunitdriver.version>
+        <htmlunitdriver.version>4.40.0</htmlunitdriver.version>
         <selenium.version>4.40.0</selenium.version>
         <selenium.devtools.artifactId>selenium-devtools-v143</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
         <junit.version>6.0.2</junit.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
-        <jetty.version>12.1.5</jetty.version>
+        <jetty.version>12.1.6</jetty.version>
         <quercus.version>4.0.66</quercus.version>
         <log4j.version>2.25.3</log4j.version>
         <slf4j.version>2.0.17</slf4j.version>
