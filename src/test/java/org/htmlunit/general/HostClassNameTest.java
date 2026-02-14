@@ -64,6 +64,28 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortController}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function AbortController() { [native code] }")
+    public void abortController() throws Exception {
+        test("AbortController");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.abort.AbortSignal}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function AbortSignal() { [native code] }")
+    public void abortSignal() throws Exception {
+        test("AbortSignal");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1169,33 +1191,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link CSSStyleProperties}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF = "function CSSStyleProperties() { [native code] }")
-    public void cssStyleProperties() throws Exception {
-        test("CSSStyleProperties");
-    }
-
-    /**
-     * Test {@link CSSPageDescriptors}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "ReferenceError",
-            FF = "function CSSPageDescriptors() { [native code] }",
-            FF_ESR = "function CSSPageDescriptors() { [native code] }")
-    @HtmlUnitNYI(FF = "ReferenceError",
-            FF_ESR = "ReferenceError")
-    public void cssPageDescriptors() throws Exception {
-        test("CSSPageDescriptors");
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -1301,6 +1296,21 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link CSSPageDescriptors}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "function CSSPageDescriptors() { [native code] }",
+            FF_ESR = "function CSSPageDescriptors() { [native code] }")
+    @HtmlUnitNYI(FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    public void cssPageDescriptors() throws Exception {
+        test("CSSPageDescriptors");
+    }
+
+    /**
      * Test {@link CSSPageRule}.
      *
      * @throws Exception if the test fails
@@ -1353,6 +1363,18 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts("function CSSStyleDeclaration() { [native code] }")
     public void cssStyleDeclaration() throws Exception {
         test("CSSStyleDeclaration");
+    }
+
+    /**
+     * Test {@link CSSStyleProperties}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "function CSSStyleProperties() { [native code] }")
+    public void cssStyleProperties() throws Exception {
+        test("CSSStyleProperties");
     }
 
     /**
@@ -2720,6 +2742,15 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts("ReferenceError")
     public void gestureEvent() throws Exception {
         test("GestureEvent");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("ReferenceError")
+    public void global() throws Exception {
+        test("global");
     }
 
     /**
@@ -5526,7 +5557,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.dom.XPathNSResolver}.
+     * Test {@link org.htmlunit.javascript.host.dom.NativeXPathNSResolver}.
      *
      * @throws Exception if an error occurs
      */
@@ -10204,7 +10235,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.dom.XPathNSResolver}.
+     * Test {@link org.htmlunit.javascript.host.dom.NativeXPathNSResolver}.
      *
      * @throws Exception if an error occurs
      */
@@ -10243,36 +10274,5 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts("function XSLTProcessor() { [native code] }")
     public void xsltProcessor() throws Exception {
         test("XSLTProcessor");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.abort.AbortController}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function AbortController() { [native code] }")
-    public void abortController() throws Exception {
-        test("AbortController");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.abort.AbortSignal}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function AbortSignal() { [native code] }")
-    public void abortSignal() throws Exception {
-        test("AbortSignal");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("ReferenceError")
-    public void global() throws Exception {
-        test("global");
     }
 }
