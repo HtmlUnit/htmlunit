@@ -19,7 +19,7 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for {@link XPathNSResolver}.
+ * Tests for {@link NativeXPathNSResolver}.
  *
  * @author Ronald Brill
  */

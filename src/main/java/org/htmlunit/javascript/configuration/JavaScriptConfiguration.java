@@ -163,7 +163,7 @@ import org.htmlunit.javascript.host.dom.Text;
 import org.htmlunit.javascript.host.dom.TreeWalker;
 import org.htmlunit.javascript.host.dom.XPathEvaluator;
 import org.htmlunit.javascript.host.dom.XPathExpression;
-import org.htmlunit.javascript.host.dom.XPathNSResolver;
+import org.htmlunit.javascript.host.dom.NativeXPathNSResolver;
 import org.htmlunit.javascript.host.dom.XPathResult;
 import org.htmlunit.javascript.host.draganddrop.DataTransfer;
 import org.htmlunit.javascript.host.draganddrop.DataTransferItem;
@@ -581,7 +581,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebGLShaderPrecisionFormat.class, WebGLSync.class, WebGLTexture.class, WebGLTransformFeedback.class,
         WebGLUniformLocation.class, WebGLVertexArrayObject.class, WebkitSpeechGrammar.class,
         WebkitSpeechGrammarList.class, XMLSerializer.class, XPathEvaluator.class, XPathEvaluator.class,
-        XPathExpression.class, XPathNSResolver.class, XPathResult.class, XSLTProcessor.class,
+        XPathExpression.class, NativeXPathNSResolver.class, XPathResult.class, XSLTProcessor.class,
         // level 2
         AbortSignal.class, Animation.class, AnimationEvent.class, AudioNode.class, AudioProcessingEvent.class,
         BaseAudioContext.class, BatteryManager.class, BeforeInstallPromptEvent.class, BeforeUnloadEvent.class,

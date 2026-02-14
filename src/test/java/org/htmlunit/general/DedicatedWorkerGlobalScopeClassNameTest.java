@@ -5454,7 +5454,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.dom.XPathNSResolver}.
+     * Test {@link org.htmlunit.javascript.host.dom.NativeXPathNSResolver}.
      *
      * @throws Exception if an error occurs
      */
@@ -10072,7 +10072,7 @@ public class DedicatedWorkerGlobalScopeClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.dom.XPathNSResolver}.
+     * Test {@link org.htmlunit.javascript.host.dom.NativeXPathNSResolver}.
      *
      * @throws Exception if an error occurs
      */

@@ -28,8 +28,8 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@JsxClass(className = "NativeXPathNSResolver", isJSObject = false)
-public class XPathNSResolver extends HtmlUnitScriptable implements PrefixResolver {
+@JsxClass(isJSObject = false)
+public class NativeXPathNSResolver extends HtmlUnitScriptable implements PrefixResolver {
 
     private Node element_;
 
