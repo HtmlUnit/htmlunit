@@ -123,7 +123,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
                 }
                 System.out.println("--------------------------------------------");
 
-                Assertions.fail("'" + expected + "' does not contain teh current result '" + result);
+                Assertions.fail("'" + expected + "' does not contain the current result '" + result + "'");
             }
         }
         catch (final Exception e) {

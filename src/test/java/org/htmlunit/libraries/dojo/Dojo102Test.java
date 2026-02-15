@@ -276,8 +276,6 @@ public class Dojo102Test extends DojoTestBase {
      */
     @Test
     public void testsbehavior() throws Exception {
-        shutDownAll();
-
         test("tests.behavior");
     }
 
