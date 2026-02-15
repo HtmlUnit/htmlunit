@@ -57,14 +57,14 @@ public class DOMStringMapTest extends WebDriverTestCase {
     @Alerts({"heho", "ReferenceError", "world is not defined",
              "ReferenceError", "World is not defined"})
     @HtmlUnitNYI(
-            CHROME = {"heho", "ReferenceError", "\"world\" is not defined",
-                      "ReferenceError", "\"World\" is not defined"},
-            EDGE = {"heho", "ReferenceError", "\"world\" is not defined",
-                    "ReferenceError", "\"World\" is not defined"},
-            FF = {"heho", "ReferenceError", "\"world\" is not defined",
-                  "ReferenceError", "\"World\" is not defined"},
-            FF_ESR = {"heho", "ReferenceError", "\"world\" is not defined",
-                      "ReferenceError", "\"World\" is not defined"})
+            CHROME = {"heho", "ReferenceError", "\"world\" is not defined.",
+                      "ReferenceError", "\"World\" is not defined."},
+            EDGE = {"heho", "ReferenceError", "\"world\" is not defined.",
+                    "ReferenceError", "\"World\" is not defined."},
+            FF = {"heho", "ReferenceError", "\"world\" is not defined.",
+                  "ReferenceError", "\"World\" is not defined."},
+            FF_ESR = {"heho", "ReferenceError", "\"world\" is not defined.",
+                      "ReferenceError", "\"World\" is not defined."})
     public void getInvalidName() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head>\n"

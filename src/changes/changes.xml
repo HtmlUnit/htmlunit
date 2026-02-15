@@ -9,6 +9,12 @@
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
             <action type="add" dev="RhinoTeam">
+                Add delete support to DOMStringMap.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                Remove direct dependency to ScriptableObject from DOMStringMap and improve get/set impl.
+            </action>
+            <action type="add" dev="RhinoTeam">
                 core-js: migrate NativeDate away from IdScriptable.
             </action>
             <action type="add" dev="RhinoTeam">
