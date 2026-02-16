@@ -150,6 +150,7 @@ import org.htmlunit.javascript.host.dom.DocumentType;
 import org.htmlunit.javascript.host.dom.IdleDeadline;
 import org.htmlunit.javascript.host.dom.MutationObserver;
 import org.htmlunit.javascript.host.dom.MutationRecord;
+import org.htmlunit.javascript.host.dom.NativeXPathNSResolver;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.dom.NodeFilter;
 import org.htmlunit.javascript.host.dom.NodeIterator;
@@ -163,7 +164,6 @@ import org.htmlunit.javascript.host.dom.Text;
 import org.htmlunit.javascript.host.dom.TreeWalker;
 import org.htmlunit.javascript.host.dom.XPathEvaluator;
 import org.htmlunit.javascript.host.dom.XPathExpression;
-import org.htmlunit.javascript.host.dom.NativeXPathNSResolver;
 import org.htmlunit.javascript.host.dom.XPathResult;
 import org.htmlunit.javascript.host.draganddrop.DataTransfer;
 import org.htmlunit.javascript.host.draganddrop.DataTransferItem;
@@ -559,7 +559,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         IntersectionObserver.class, IntersectionObserverEntry.class, KeyframeEffect.class, Location.class,
         MIDIInputMap.class, MIDIOutputMap.class, MediaDeviceInfo.class, MediaError.class, MediaKeyStatusMap.class,
         MediaKeySystemAccess.class, MediaKeys.class, MediaList.class, MessageChannel.class, MimeType.class,
-        MimeTypeArray.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class, Navigator.class,
+        MimeTypeArray.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class,
+        NativeXPathNSResolver.class, Navigator.class,
         NodeFilter.class, NodeIterator.class, Path2D.class, PaymentAddress.class, PerformanceEntry.class,
         PerformanceNavigation.class, PerformanceObserver.class, PerformanceObserverEntryList.class,
         PerformanceTiming.class, PeriodicSyncManager.class, PeriodicWave.class, Permissions.class, Plugin.class,
@@ -581,7 +582,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebGLShaderPrecisionFormat.class, WebGLSync.class, WebGLTexture.class, WebGLTransformFeedback.class,
         WebGLUniformLocation.class, WebGLVertexArrayObject.class, WebkitSpeechGrammar.class,
         WebkitSpeechGrammarList.class, XMLSerializer.class, XPathEvaluator.class, XPathEvaluator.class,
-        XPathExpression.class, NativeXPathNSResolver.class, XPathResult.class, XSLTProcessor.class,
+        XPathExpression.class, XPathResult.class, XSLTProcessor.class,
         // level 2
         AbortSignal.class, Animation.class, AnimationEvent.class, AudioNode.class, AudioProcessingEvent.class,
         BaseAudioContext.class, BatteryManager.class, BeforeInstallPromptEvent.class, BeforeUnloadEvent.class,
