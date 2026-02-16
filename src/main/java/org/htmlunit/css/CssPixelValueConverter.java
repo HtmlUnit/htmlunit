@@ -117,9 +117,6 @@ public final class CssPixelValueConverter {
         else if (value.endsWith("ch")) {
             i = i * 8;
         }
-        else if (value.endsWith("ch")) {
-            i = i * 8;
-        }
         else if (value.endsWith("vh")
                 || value.endsWith("vmin")) {
             // this matches also

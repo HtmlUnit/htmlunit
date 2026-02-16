@@ -100,10 +100,8 @@ public class ImageIOImageData implements ImageData {
     @SuppressWarnings("PMD.UnusedLocalVariable")
     public void close() throws IOException {
         if (imageReader_ != null) {
-            try {
-                try (ImageInputStream stream = (ImageInputStream) imageReader_.getInput()) {
-                    // nothing
-                }
+            try (ImageInputStream stream = (ImageInputStream) imageReader_.getInput()) {
+                // nothing
             }
             finally {
                 imageReader_.setInput(null);

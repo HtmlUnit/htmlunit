@@ -88,8 +88,8 @@ public class HTMLTableCellElement extends HTMLElement {
         if ("collapse".equals(style.getStyleAttribute(StyleAttributes.Definition.BORDER_COLLAPSE, true))) {
             final HtmlTableRow row = getRow();
             if (row != null) {
-                w -= 0.5 * style.getBorderLeftValue();
-                w -= 0.5 * style.getBorderRightValue();
+                w -= 0.5f * style.getBorderLeftValue();
+                w -= 0.5f * style.getBorderRightValue();
             }
         }
 
