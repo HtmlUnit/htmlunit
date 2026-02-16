@@ -22,7 +22,7 @@ import org.htmlunit.util.XmlUtils;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
- * A JavaScript object for {@code XPathNSResolver}.
+ * A JavaScript object for {@code NativeXPathNSResolver}.
  *
  * @author Ahmed Ashour
  * @author Chuck Dumont

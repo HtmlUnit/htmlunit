@@ -113,6 +113,7 @@ public class DOMStringMapTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
