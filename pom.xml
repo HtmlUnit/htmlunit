@@ -30,6 +30,14 @@
 
         <maven.version.ignore>(?i).*-(alpha|beta|m|rc)([\.-]?\d+)?</maven.version.ignore>
 
+        <surefire.argLine.modules>
+            --add-modules org.slf4j
+            --add-reads org.htmlunit=org.apache.logging.log4j
+            --add-reads org.htmlunit=org.apache.logging.log4j.core
+            --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
+            --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
+        </surefire.argLine.modules>
+
         <htmlunitcsp.version>5.0.0-SNAPSHOT</htmlunitcsp.version>
         <htmlunitcssparser.version>5.0.0-SNAPSHOT</htmlunitcssparser.version>
         <htmlunitcorejs.version>5.0.0-SNAPSHOT</htmlunitcorejs.version>
