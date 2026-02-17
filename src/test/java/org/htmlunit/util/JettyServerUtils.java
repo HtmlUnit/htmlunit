@@ -56,7 +56,6 @@ import org.eclipse.jetty.util.resource.ResourceFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.websocket.api.Session.Listener.AutoDemanding;
-import org.htmlunit.HttpWebConnectionInsecureSSLWithClientCertificateTest;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.WebServerTestCase.SSLVariant;
 import org.htmlunit.WebTestCase;
@@ -197,8 +196,7 @@ public final class JettyServerUtils {
 
             switch (sslVariant) {
                 case INSECURE: {
-                    final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
-                            .getClassLoader().getResource("insecureSSL.pfx");
+                    final URL url = WebServerTestCase.class.getClassLoader().getResource("insecureSSL.pfx");
 
                     contextFactory = new SslContextFactory.Server();
                     contextFactory.setKeyStorePath(url.toExternalForm());
@@ -207,8 +205,7 @@ public final class JettyServerUtils {
                     break;
                 }
                 case SELF_SIGNED: {
-                    final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
-                            .getClassLoader().getResource("self-signed-cert.keystore");
+                    final URL url = WebServerTestCase.class.getClassLoader().getResource("self-signed-cert.keystore");
 
                     contextFactory = new SslContextFactory.Server();
                     contextFactory.setKeyStoreType("jks");
