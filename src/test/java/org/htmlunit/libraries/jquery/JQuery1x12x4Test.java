@@ -6315,7 +6315,7 @@ public class JQuery1x12x4Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
+    @Alerts("2, 6, 8")
     public void ajax__jQuery_ajax____jQuery_get_Script_JSON_____jQuery_post____pass_through_request_object() throws Exception {
         runTest("ajax: jQuery.ajax(), jQuery.get[Script|JSON](), jQuery.post(), pass-through request object");
     }

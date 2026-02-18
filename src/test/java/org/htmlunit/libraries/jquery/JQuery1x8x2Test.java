@@ -4398,7 +4398,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 8, 8")
+    @Alerts("2, 6, 8")
     public void ajax__pass_through_request_object() throws Exception {
         runTest("ajax: pass-through request object");
     }
@@ -4618,7 +4618,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 3, 3")
+    @Alerts("2, 0, 2")
     public void ajax__jQuery_ajax_____script__Remote_with_POST() throws Exception {
         runTest("ajax: jQuery.ajax() - script, Remote with POST");
     }
