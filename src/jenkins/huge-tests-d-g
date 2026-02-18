@@ -6,23 +6,23 @@ pipeline {
     timestamps()
     timeout(time: 30, unit: 'MINUTES')
   }
-  tools {
-    jdk 'openlogic-openjdk-17.0.17+10'
-  }
   stages {
     stage('Build') {
       steps {
+        sh 'java -version'
         sh 'mvn clean test -P only-huge-tests-d-g --show-version -Dgpg.skip -Djava.awt.headless=true'
       }
     }
   }
   post {
     always {
-      junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
-      recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', tools: [java()]
-      step([$class: 'Mailer',
-        notifyEveryUnstableBuild: true,
-        recipients: "rbri@rbri.de"])
+      node('') {
+        junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
+        recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', tools: [java()]
+        step([$class: 'Mailer',
+          notifyEveryUnstableBuild: true,
+          recipients: "rbri@rbri.de"])
+      }
     }
   }
 }
