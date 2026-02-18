@@ -31,9 +31,10 @@
         <maven.version.ignore>(?i).*-(alpha|beta|m|rc)([\.-]?\d+)?</maven.version.ignore>
 
         <surefire.argLine.modules>
+            --add-reads org.htmlunit=org.slf4j
+            --add-reads org.htmlunit=ch.qos.logback.core
             --add-reads org.htmlunit=ch.qos.logback.classic
             --add-reads org.htmlunit=jakarta.servlet
-            --add-reads org.htmlunit=java.servlet
             --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
             --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
         </surefire.argLine.modules>
