@@ -6,12 +6,10 @@ pipeline {
     timestamps()
     timeout(time: 6, unit: 'HOURS')
   }
-  tools {
-    jdk 'openlogic-openjdk-17.0.17+10'
-  }
   stages {
     stage('Build') {
       steps {
+        sh 'java -version'
         sh 'mvn clean test -U -P only-library-tests --show-version -Dgpg.skip -Djava.awt.headless=true'
       }
     }
