@@ -16,19 +16,21 @@ package org.htmlunit;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.StringWriter;
+import java.io.ByteArrayOutputStream;
 import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
-import org.apache.logging.log4j.core.appender.WriterAppender;
-import org.apache.logging.log4j.core.config.Configurator;
-import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.annotation.Alerts;
 import org.junit.jupiter.api.Test;
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.OutputStreamAppender;
 
 /**
  * Tests for {@link DefaultCredentialsProvider}.
@@ -95,34 +97,42 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      */
     @Test
     public void basicAuthentication_singleAuthenticaiton() throws Exception {
-        final Logger logger = (Logger) LogManager.getLogger("org.apache.http.headers");
+        final Logger logger = (Logger) LoggerFactory.getLogger("org.apache.http.headers");
         final Level oldLevel = logger.getLevel();
-        Configurator.setLevel(logger.getName(), Level.DEBUG);
+        logger.setLevel(Level.DEBUG);
 
-        final StringWriter stringWriter = new StringWriter();
-        final PatternLayout layout = PatternLayout.newBuilder().withPattern("%msg%n").build();
+        final LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        final WriterAppender writerAppender = WriterAppender.newBuilder().setName("writeLogger").setTarget(stringWriter)
-                .setLayout(layout).build();
-        writerAppender.start();
+        final PatternLayoutEncoder encoder = new PatternLayoutEncoder();
+        encoder.setContext(context);
+        encoder.setPattern("%msg%n");
+        encoder.start();
 
-        logger.addAppender(writerAppender);
+        final OutputStreamAppender<ILoggingEvent> appender = new OutputStreamAppender<>();
+        appender.setContext(context);
+        appender.setEncoder(encoder);
+        appender.setOutputStream(baos);
+        appender.start();
+
+        logger.addAppender(appender);
         try {
             ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider())
                                             .addCredentials("jetty", "jetty".toCharArray());
 
             loadPage("Hi There");
-            int unauthorizedCount = StringUtils.countMatches(stringWriter.toString(), "HTTP/1.1 401");
+            int unauthorizedCount = StringUtils.countMatches(baos.toString(), "HTTP/1.1 401");
             assertEquals(1, unauthorizedCount);
 
             // and again
             loadPage("Hi There");
-            unauthorizedCount = StringUtils.countMatches(stringWriter.toString(), "HTTP/1.1 401");
+            unauthorizedCount = StringUtils.countMatches(baos.toString(), "HTTP/1.1 401");
             assertEquals(1, unauthorizedCount);
         }
         finally {
-            logger.removeAppender(writerAppender);
-            Configurator.setLevel(logger.getName(), oldLevel);
+            logger.detachAppender(appender);
+            appender.stop();
+            logger.setLevel(oldLevel);
         }
     }
 

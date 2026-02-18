@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="update" dev="rbri">
+                Simplify logging configuration for our test by switching from log4j to logback-classic.
+            </action>
             <action type="add" dev="RhinoTeam">
                 Add delete support to DOMStringMap.
             </action>

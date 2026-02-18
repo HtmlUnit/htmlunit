@@ -32,8 +32,7 @@
 
         <surefire.argLine.modules>
             --add-modules org.slf4j
-            --add-reads org.htmlunit=org.apache.logging.log4j
-            --add-reads org.htmlunit=org.apache.logging.log4j.core
+            --add-reads org.htmlunit=ch.qos.logback.classic
             --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
             --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
         </surefire.argLine.modules>
@@ -61,8 +60,7 @@
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
         <jetty.version>12.1.6</jetty.version>
         <quercus.version>4.0.66</quercus.version>
-        <log4j.version>2.25.3</log4j.version>
-        <slf4j.version>2.0.17</slf4j.version>
+        <logback-classic.version>1.5.32</logback-classic.version>
         <commons-text.version>1.15.0</commons-text.version>
         <commons-fileupload.version>2.0.0-M1</commons-fileupload.version>
         <image-comparison.version>4.4.0</image-comparison.version>
@@ -1450,38 +1448,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- archunit uses slf4j, we have to provide a simple backend -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-nop</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>test</scope>
-        </dependency>
 
-        <!-- for some test cases we use log4j to check the output -->
+        <!-- slf4j backend for test logging with runtime level control -->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j.version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-jcl</artifactId>
-            <version>${log4j.version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- make our test for rendering svg images on canvas run -->

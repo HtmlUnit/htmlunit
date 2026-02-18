@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Console appender with pattern matching the old log4j.properties layout -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-5level %d{HH:mm:ss.SSS} %logger: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File appender
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>out.txt</file>
+        <encoder>
+            <pattern>%-5level %d{HH:mm:ss.SSS} %logger: %msg%n</pattern>
+        </encoder>
+    </appender>
+    -->
+
+    <!-- Set specific logger levels -->
+    <logger name="org.apache.http" level="ERROR" />
+    <logger name="org.apache.http.headers" level="ERROR" />
+    <logger name="org.apache.http.wire" level="ERROR" />
+    <logger name="org.eclipse.jetty.websocket" level="ERROR" />
+    <logger name="org.htmlunit" level="ERROR" />
+    <logger name="org.htmlunit.WebTestCase" level="INFO" />
+
+    <!-- Change this to TRACE when enabling the debugger -->
+    <logger name="org.htmlunit.javascript.DebugFrameImpl" level="ERROR" />
+
+    <!-- Root logger -->
+    <root level="ERROR">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>

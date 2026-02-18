@@ -16,15 +16,10 @@ package org.htmlunit.javascript;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
-import java.io.StringWriter;
+import java.io.ByteArrayOutputStream;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
-import org.apache.logging.log4j.core.appender.WriterAppender;
-import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
@@ -32,15 +27,24 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebConnection;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.OutputStreamAppender;
 
 /**
  * Tests for {@link DebugFrameImpl}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class DebugFrameImplTest extends SimpleWebTestCase {
 
-    private final Logger loggerDebugFrameImpl_ = (Logger) LogManager.getLogger(DebugFrameImpl.class);
+    private final Logger loggerDebugFrameImpl_ = (Logger) LoggerFactory.getLogger(DebugFrameImpl.class);
 
     private final Level originalLogLevel_;
     private final WebClient client_;
@@ -100,21 +104,29 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
         final String expectedLog = IOUtils.toString(getClass().getResourceAsStream("debugFrameImplTest.txt"),
                 ISO_8859_1);
 
-        final StringWriter stringWriter = new StringWriter();
-        final PatternLayout layout = PatternLayout.newBuilder().withPattern("%msg%n").build();
+        final LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        final WriterAppender writerAppender = WriterAppender.newBuilder().setName("writeLogger").setTarget(stringWriter)
-                .setLayout(layout).build();
-        writerAppender.start();
+        final PatternLayoutEncoder encoder = new PatternLayoutEncoder();
+        encoder.setContext(context);
+        encoder.setPattern("%msg%n");
+        encoder.start();
 
-        loggerDebugFrameImpl_.addAppender(writerAppender);
+        final OutputStreamAppender<ILoggingEvent> appender = new OutputStreamAppender<>();
+        appender.setContext(context);
+        appender.setEncoder(encoder);
+        appender.setOutputStream(baos);
+        appender.start();
+
+        loggerDebugFrameImpl_.addAppender(appender);
         try {
             client_.getPage(url);
         }
         finally {
-            loggerDebugFrameImpl_.removeAppender(writerAppender);
+            loggerDebugFrameImpl_.detachAppender(appender);
+            appender.stop();
         }
 
-        assertEquals(expectedLog, stringWriter.toString());
+        assertEquals(expectedLog, baos.toString(ISO_8859_1));
     }
 }
