@@ -102,12 +102,13 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         logger.setLevel(Level.DEBUG);
 
         final LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         final PatternLayoutEncoder encoder = new PatternLayoutEncoder();
         encoder.setContext(context);
         encoder.setPattern("%msg%n");
         encoder.start();
+
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         final OutputStreamAppender<ILoggingEvent> appender = new OutputStreamAppender<>();
         appender.setContext(context);

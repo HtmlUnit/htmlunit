@@ -33,7 +33,6 @@ import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
 import org.eclipse.jetty.ee10.servlet.ServletHolder;
 import org.eclipse.jetty.ee10.servlet.security.ConstraintMapping;
 import org.eclipse.jetty.ee10.servlet.security.ConstraintSecurityHandler;
-import org.eclipse.jetty.ee10.webapp.WebAppContext;
 import org.eclipse.jetty.ee10.websocket.server.config.JettyWebSocketServletContainerInitializer;
 import org.eclipse.jetty.http.CookieCompliance;
 import org.eclipse.jetty.http.HttpVersion;
@@ -255,10 +254,10 @@ public final class JettyServerUtils {
      * @return the newly created server
      * @throws Exception if an error occurs
      */
-    public static Server startWebAppServer(final int port, final String resourceBase, final String[] classpath) throws Exception {
+    public static Server startWebAppEE8Server(final int port, final String resourceBase, final String[] classpath) throws Exception {
         final Server server = buildServer(port, null);
 
-        final WebAppContext context = new WebAppContext();
+        final org.eclipse.jetty.ee8.webapp.WebAppContext context = new org.eclipse.jetty.ee8.webapp.WebAppContext();
         context.setContextPath("/");
         final Resource baseResource = ResourceFactory.of(context).newResource(getResourceBasePath(resourceBase));
         context.setBaseResource(baseResource);

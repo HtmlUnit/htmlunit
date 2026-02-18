@@ -138,7 +138,7 @@ public class GWTTest2x11x0 extends GWTTest {
     public void dynaTable() throws Exception {
         stopWebServers();
 
-        final Server server = JettyServerUtils.startWebAppServer(PORT,
+        final Server server = JettyServerUtils.startWebAppEE8Server(PORT,
                             "src/test/resources/libraries/GWT/" + getDirectory() + "/DynaTable",
                             new String[] {"src/test/resources/libraries/GWT/" + getDirectory() + "/gwt-servlet.jar"});
         try {

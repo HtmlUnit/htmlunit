@@ -31,9 +31,9 @@
         <maven.version.ignore>(?i).*-(alpha|beta|m|rc)([\.-]?\d+)?</maven.version.ignore>
 
         <surefire.argLine.modules>
-            --add-modules org.slf4j
             --add-reads org.htmlunit=ch.qos.logback.classic
             --add-reads org.htmlunit=jakarta.servlet
+            --add-reads org.htmlunit=java.servlet
             --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
             --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
         </surefire.argLine.modules>
@@ -1543,6 +1543,7 @@
             <artifactId>maven-artifact</artifactId>
             <version>${maven-artifact.version}</version>
         </dependency>
+
         <!-- Jetty -->
         <dependency>
             <groupId>org.eclipse.jetty.ee10</groupId>
@@ -1556,6 +1557,15 @@
             <version>${jetty.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- Jetty 12 EE8 support for javax.servlet-based servlets -->
+        <!-- required for the GWT Tests -->
+        <dependency>
+            <groupId>org.eclipse.jetty.ee8</groupId>
+            <artifactId>jetty-ee8-webapp</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>quercus</artifactId>

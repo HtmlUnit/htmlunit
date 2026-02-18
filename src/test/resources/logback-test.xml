@@ -21,6 +21,7 @@
     <logger name="org.apache.http" level="ERROR" />
     <logger name="org.apache.http.headers" level="ERROR" />
     <logger name="org.apache.http.wire" level="ERROR" />
+    <!-- jetty debugging <logger name="org.eclipse.jetty" level="DEBUG" /> -->
     <logger name="org.eclipse.jetty.websocket" level="ERROR" />
     <logger name="org.htmlunit" level="ERROR" />
     <logger name="org.htmlunit.WebTestCase" level="INFO" />
