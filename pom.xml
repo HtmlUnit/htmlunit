@@ -33,6 +33,7 @@
         <surefire.argLine.modules>
             --add-modules org.slf4j
             --add-reads org.htmlunit=ch.qos.logback.classic
+            --add-reads org.htmlunit=jakarta.servlet
             --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
             --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
         </surefire.argLine.modules>
