@@ -16,7 +16,6 @@ package org.htmlunit.javascript.regexp;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -473,10 +472,6 @@ public class RegExpTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0", "undefined", "true", "false", "undefined"})
-    @HtmlUnitNYI(CHROME = {"0", "undefined", "false", "false", "undefined"},
-            EDGE = {"0", "undefined", "false", "false", "undefined"},
-            FF = {"0", "undefined", "false", "false", "undefined"},
-            FF_ESR = {"0", "undefined", "false", "false", "undefined"})
     public void sourceProperty() throws Exception {
         testProperty("source");
     }
