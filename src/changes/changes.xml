@@ -8,6 +8,26 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: Support for rest parameters in destructuring.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Respect custom [Symbol.hasInstance] implementations; look up of hasInstance walks prototype chain.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: NativeError and RegEexp setup modernized.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix for setting of prototype and parent scopes on some new objects.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix scope used in iterator creation.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: IdFunctionObject.isConstructor() to return useCallAsConstructor; now methods
+                like Date.prototype.getDate, RegExp.prototype.exec, etc. no longer incorrectly
+                reported as constructors.
+            </action>
             <action type="update" dev="rbri">
                 Test suite updated to junit 6 and cleaned up.
             </action>
@@ -15,10 +35,10 @@
                 Simplify logging configuration for our test by switching from log4j to logback-classic.
             </action>
             <action type="add" dev="RhinoTeam">
-                Add delete support to DOMStringMap.
+                core-js: Add delete support to DOMStringMap.
             </action>
             <action type="update" dev="RhinoTeam">
-                Remove direct dependency to ScriptableObject from DOMStringMap and improve get/set impl.
+                core-js: Remove direct dependency to ScriptableObject from DOMStringMap and improve get/set impl.
             </action>
             <action type="add" dev="RhinoTeam">
                 core-js: migrate NativeDate away from IdScriptable.
