@@ -955,6 +955,21 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
+         * Changes the browser language property. This is used for various output
+         * formating. If you like change the language the browser requests from the server
+         * you have to adjust the {@link #setAcceptLanguageHeader(String)}.
+         *
+         * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html#field.detail">Locale constants</a>
+         * @param browserLanguage
+         * @return
+         */
+
+        public BrowserVersionBuilder setBrowserLanguage(final Locale browserLanguage) {
+            workPiece_.browserLocale_ = browserLanguage;
+            return this;
+        }
+
+        /**
          * @param onLine the onLine to set
          * @return this for fluent use
          */
