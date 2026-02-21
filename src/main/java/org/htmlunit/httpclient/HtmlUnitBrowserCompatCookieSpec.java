@@ -22,29 +22,29 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
-import org.apache.http.FormattedHeader;
-import org.apache.http.Header;
-import org.apache.http.HeaderElement;
-import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
-import org.apache.http.client.utils.DateUtils;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieAttributeHandler;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.CookiePathComparator;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SM;
-import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.impl.cookie.BasicCommentHandler;
-import org.apache.http.impl.cookie.CookieSpecBase;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicHeaderElement;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.message.BufferedHeader;
-import org.apache.http.message.ParserCursor;
-import org.apache.http.message.TokenParser;
-import org.apache.http.util.CharArrayBuffer;
+import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.CookieAttributeHandler;
+import org.apache.hc.client5.http.cookie.CookieOrigin;
+import org.apache.hc.client5.http.cookie.CookiePathComparator;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.impl.cookie.BasicClientCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicCommentHandler;
+import org.apache.hc.client5.http.impl.cookie.CookieSpecBase;
+import org.apache.hc.core5.http.FormattedHeader;
+import org.apache.hc.core5.http.Header;
+import org.apache.hc.core5.http.HeaderElement;
+import org.apache.hc.core5.http.HttpHeaders;
+import org.apache.hc.core5.http.NameValuePair;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.message.BasicHeader;
+import org.apache.hc.core5.http.message.BasicHeaderElement;
+import org.apache.hc.core5.http.message.BasicNameValuePair;
+import org.apache.hc.core5.http.message.BufferedHeader;
+import org.apache.hc.core5.http.message.ParserCursor;
+import org.apache.hc.core5.http.message.TokenParser;
+import org.apache.hc.core5.util.CharArrayBuffer;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.util.StringUtils;
 
@@ -89,7 +89,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
 
     static {
         final Calendar calendar = Calendar.getInstance(Locale.ROOT);
-        calendar.setTimeZone(DateUtils.GMT);
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
         calendar.set(1970, Calendar.JANUARY, 1, 0, 0, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         DATE_1_1_1970 = calendar.getTime();
@@ -140,7 +140,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         }
 
         final String headername = header.getName();
-        if (!SM.SET_COOKIE.equalsIgnoreCase(headername)) {
+        if (!HttpHeaders.SET_COOKIE.equalsIgnoreCase(headername)) {
             throw new MalformedCookieException("Unrecognized cookie header '" + header + "'");
         }
         final HeaderElement[] helems = header.getElements();
@@ -221,7 +221,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         cookies.sort(COOKIE_COMPARATOR);
 
         final CharArrayBuffer buffer = new CharArrayBuffer(20 * cookies.size());
-        buffer.append(SM.COOKIE);
+        buffer.append(HttpHeaders.COOKIE);
         buffer.append(": ");
         final int size = cookies.size();
         for (int i = 0; i < size; i++) {

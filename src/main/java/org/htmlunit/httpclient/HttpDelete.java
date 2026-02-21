@@ -16,14 +16,14 @@ package org.htmlunit.httpclient;
 
 import java.net.URI;
 
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
-
 /**
- * Customized HttpDelete for HtmlUnit to be an HttpEntityEnclosingRequestBase.
+ * Customized HttpDelete for HtmlUnit.
+ * In HttpClient 5, HttpDelete natively supports entity bodies, so this class
+ * is kept for backwards compatibility but just extends the standard class.
  *
  * @author Ronald Brill
  */
-public class HttpDelete extends HttpEntityEnclosingRequestBase {
+public class HttpDelete extends org.apache.hc.client5.http.classic.methods.HttpDelete {
 
     /**
      * Ctor.
@@ -37,8 +37,7 @@ public class HttpDelete extends HttpEntityEnclosingRequestBase {
      * @param uri the uri
      */
     public HttpDelete(final URI uri) {
-        super();
-        setURI(uri);
+        super(uri);
     }
 
     /**
@@ -46,12 +45,6 @@ public class HttpDelete extends HttpEntityEnclosingRequestBase {
      * @throws IllegalArgumentException if the uri is invalid.
      */
     public HttpDelete(final String uri) {
-        super();
-        setURI(URI.create(uri));
-    }
-
-    @Override
-    public String getMethod() {
-        return org.apache.http.client.methods.HttpDelete.METHOD_NAME;
+        super(uri);
     }
 }

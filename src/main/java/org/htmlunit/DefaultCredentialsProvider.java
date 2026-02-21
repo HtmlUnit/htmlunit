@@ -23,11 +23,11 @@ import java.net.PasswordAuthentication;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.NTCredentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
+import org.apache.hc.client5.http.auth.AuthScope;
+import org.apache.hc.client5.http.auth.Credentials;
+import org.apache.hc.client5.http.auth.CredentialsProvider;
+import org.apache.hc.client5.http.auth.NTCredentials;
+import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 
 /**
@@ -130,7 +130,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     public void addNTLMCredentials(final String username, final char[] password, final String host,
             final int port, final String workstation, final String domain) {
         final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
-        final NTCredentials credentials = new NTCredentials(username, String.valueOf(password), workstation, domain);
+        final NTCredentials credentials = new NTCredentials(username, password, workstation, domain);
         setCredentials(authscope, credentials);
     }
 

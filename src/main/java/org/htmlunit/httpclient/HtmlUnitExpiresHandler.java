@@ -17,12 +17,13 @@ package org.htmlunit.httpclient;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2;
 
+import java.time.Instant;
 import java.util.Date;
 
-import org.apache.http.client.utils.DateUtils;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SetCookie;
-import org.apache.http.impl.cookie.BasicExpiresHandler;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.cookie.SetCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicExpiresHandler;
+import org.apache.hc.client5.http.utils.DateUtils;
 import org.htmlunit.BrowserVersion;
 
 /**
@@ -91,11 +92,11 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
         }
         value = value.replaceAll("[ ,:-]+", " ");
 
-        Date startDate = null;
+        Instant startDate = null;
         String[] datePatterns = DEFAULT_DATE_PATTERNS;
 
         if (null != browserVersion_) {
-            startDate = HtmlUnitBrowserCompatCookieSpec.DATE_1_1_1970;
+            startDate = HtmlUnitBrowserCompatCookieSpec.DATE_1_1_1970.toInstant();
 
             if (browserVersion_.hasFeature(HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1)) {
                 datePatterns = EXTENDED_DATE_PATTERNS_1;
@@ -107,6 +108,8 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
         }
 
         final Date expiry = DateUtils.parseDate(value, datePatterns, startDate);
-        cookie.setExpiryDate(expiry);
+        if (expiry != null) {
+            cookie.setExpiryDate(expiry.toInstant());
+        }
     }
 }

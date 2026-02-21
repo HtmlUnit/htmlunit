@@ -35,13 +35,14 @@ import javax.net.ssl.SSLEngine;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.X509ExtendedTrustManager;
 
-import org.apache.http.HttpHost;
-import org.apache.http.conn.ConnectTimeoutException;
-import org.apache.http.conn.ssl.DefaultHostnameVerifier;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.protocol.HttpContext;
-import org.apache.http.ssl.SSLContexts;
+import org.apache.hc.client5.http.ConnectTimeoutException;
+import org.apache.hc.client5.http.ssl.DefaultHostnameVerifier;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
+import org.apache.hc.core5.http.HttpHost;
+import org.apache.hc.core5.http.protocol.HttpContext;
+import org.apache.hc.core5.ssl.SSLContexts;
+import org.apache.hc.core5.util.Timeout;
 import org.htmlunit.WebClientOptions;
 
 /**
@@ -145,7 +146,7 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
      */
     @Override
     public Socket connectSocket(
-            final int connectTimeout,
+            final Timeout connectTimeout,
             final Socket socket,
             final HttpHost host,
             final InetSocketAddress remoteAddress,
@@ -158,7 +159,7 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
 
             try {
                 //underlying.setSoTimeout(soTimeout);
-                underlying.connect(remoteAddress, connectTimeout);
+                underlying.connect(remoteAddress, (int) connectTimeout.toMilliseconds());
             }
             catch (final SocketTimeoutException ex) {
                 final ConnectTimeoutException cex =
