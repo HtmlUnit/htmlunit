@@ -16,10 +16,10 @@ package org.htmlunit.httpclient;
 
 import java.util.Date;
 
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SetCookie;
-import org.apache.http.impl.cookie.BasicMaxAgeHandler;
-import org.apache.http.util.Args;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.cookie.SetCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicMaxAgeHandler;
+import org.apache.hc.core5.util.Args;
 
 /**
  * Customized BasicMaxAgeHandler for HtmlUnit.

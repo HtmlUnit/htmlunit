@@ -23,11 +23,11 @@ import java.net.PasswordAuthentication;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.NTCredentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
+import org.apache.hc.client5.http.auth.AuthScope;
+import org.apache.hc.client5.http.auth.Credentials;
+import org.apache.hc.client5.http.auth.CredentialsProvider;
+import org.apache.hc.client5.http.auth.NTCredentials;
+import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 
 /**
@@ -74,14 +74,20 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
                 return null;
             }
 
-            final AuthScope authScope = new AuthScope(getRequestingHost(), getRequestingPort(), getRequestingScheme());
-            final Credentials credentials = credentialsProvider_.getCredentials(authScope);
+            final AuthScope authScope = new AuthScope.Builder()
+                    .setHost(getRequestingHost())
+                    .setPort(getRequestingPort())
+                    .setScheme(getRequestingScheme())
+                    .build();
+            final Credentials credentials = credentialsProvider_.getCredentials(authScope, null);
             if (credentials == null) {
                 return null;
             }
 
+            // HttpClient 5 uses char[] for passwords instead of String for better security
+            // (char arrays can be cleared from memory after use)
             return new PasswordAuthentication(credentials.getUserPrincipal().getName(),
-                    credentials.getPassword().toCharArray());
+                    credentials.getPassword());
         }
     }
 
@@ -110,7 +116,11 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     public void addCredentials(final String username, final char[] password, final String host,
             final int port, final String realm) {
-        final AuthScope authscope = new AuthScope(host, port, realm, ANY_SCHEME);
+        final AuthScope authscope = new AuthScope.Builder()
+                .setHost(host)
+                .setPort(port)
+                .setRealm(realm)
+                .build();
         final HtmlUnitUsernamePasswordCredentials credentials =
                     new HtmlUnitUsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
@@ -129,8 +139,11 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     public void addNTLMCredentials(final String username, final char[] password, final String host,
             final int port, final String workstation, final String domain) {
-        final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
-        final NTCredentials credentials = new NTCredentials(username, String.valueOf(password), workstation, domain);
+        final AuthScope authscope = new AuthScope.Builder()
+                .setHost(host)
+                .setPort(port)
+                .build();
+        final NTCredentials credentials = new NTCredentials(username, password, workstation, domain);
         setCredentials(authscope, credentials);
     }
 
@@ -143,7 +156,10 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     public void addSocksCredentials(final String username, final char[] password, final String host,
             final int port) {
-        final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
+        final AuthScope authscope = new AuthScope.Builder()
+                .setHost(host)
+                .setPort(port)
+                .build();
         final HtmlUnitUsernamePasswordCredentials credentials =
                     new HtmlUnitUsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
@@ -210,7 +226,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * {@inheritDoc}
      */
     @Override
-    public synchronized Credentials getCredentials(final AuthScope authscope) {
+    public synchronized Credentials getCredentials(final AuthScope authscope, 
+            final org.apache.hc.core5.http.protocol.HttpContext context) {
         if (authscope == null) {
             throw new IllegalArgumentException("Authentication scope may not be null");
         }
@@ -282,7 +299,12 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             final int port = stream.readInt();
             final String realm = (String) stream.readObject();
             final String scheme = (String) stream.readObject();
-            authScope_ = new AuthScope(host, port, realm, scheme);
+            authScope_ = new AuthScope.Builder()
+                    .setHost(host)
+                    .setPort(port)
+                    .setRealm(realm)
+                    .setScheme(scheme)
+                    .build();
         }
 
         @Override
