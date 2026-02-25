@@ -220,10 +220,6 @@ public class HostParentOfDTest extends HostParentOf {
     }
 
     @Alerts("true/false")
-    @HtmlUnitNYI(CHROME = "false/false",
-            EDGE = "false/false",
-            FF = "false/false",
-            FF_ESR = "false/false")
     void _DOMStringMap_DOMStringMap() throws Exception {
         test("DOMStringMap", "DOMStringMap");
     }
