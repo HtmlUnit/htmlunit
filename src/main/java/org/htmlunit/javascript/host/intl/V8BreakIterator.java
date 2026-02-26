@@ -31,7 +31,6 @@ import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
-import org.htmlunit.javascript.host.Window;
 
 /**
  * A JavaScript object for {@code V8BreakIterator}.
@@ -99,8 +98,7 @@ public class V8BreakIterator extends HtmlUnitScriptable {
             iterator.breakIterator_ = BreakIterator.getWordInstance(locale);
         }
 
-        final Window window = getWindow(ctorObj);
-        iterator.setParentScope(window);
+        iterator.setParentScope(getTopLevelScope(ctorObj));
         iterator.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return iterator;
     }

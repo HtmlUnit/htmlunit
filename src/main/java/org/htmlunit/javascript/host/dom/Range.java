@@ -19,6 +19,7 @@ import java.util.HashSet;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.impl.SimpleRange;
@@ -31,7 +32,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.DOMRect;
 import org.htmlunit.javascript.host.DOMRectList;
-import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -442,9 +442,9 @@ public class Range extends AbstractRange {
      */
     @JsxFunction
     public DOMRectList getClientRects() {
-        final Window w = getWindow();
+        final Scriptable topScope = getTopLevelScope(this);
         final DOMRectList rectList = new DOMRectList();
-        rectList.setParentScope(w);
+        rectList.setParentScope(topScope);
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
         try {
@@ -453,7 +453,7 @@ public class Range extends AbstractRange {
                 final HtmlUnitScriptable scriptable = node.getScriptableObject();
                 if (scriptable instanceof HTMLElement) {
                     final DOMRect rect = new DOMRect(0, 0, 1, 1);
-                    rect.setParentScope(w);
+                    rect.setParentScope(topScope);
                     rect.setPrototype(getPrototype(rect.getClass()));
                     rectList.add(rect);
                 }
@@ -474,7 +474,7 @@ public class Range extends AbstractRange {
     @JsxFunction
     public DOMRect getBoundingClientRect() {
         final DOMRect rect = new DOMRect();
-        rect.setParentScope(getWindow());
+        rect.setParentScope(getTopLevelScope(this));
         rect.setPrototype(getPrototype(rect.getClass()));
 
         try {

@@ -184,7 +184,7 @@ public class NumberFormat extends HtmlUnitScriptable {
         }
         final Window window = getWindow(ctorObj);
         final NumberFormat format = new NumberFormat(locales, window.getBrowserVersion());
-        format.setParentScope(window);
+        format.setParentScope(getTopLevelScope(ctorObj));
         format.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return format;
     }

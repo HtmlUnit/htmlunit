@@ -292,8 +292,8 @@ public class Navigator extends HtmlUnitScriptable {
     @JsxGetter
     public Geolocation getGeolocation() {
         final Geolocation geolocation = new Geolocation();
-        geolocation.setPrototype(getPrototype(geolocation.getClass()));
         geolocation.setParentScope(getParentScope());
+        geolocation.setPrototype(getPrototype(geolocation.getClass()));
         return geolocation;
     }
 

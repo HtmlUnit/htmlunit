@@ -106,7 +106,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         try {
             final WebWindow webWindow = window.getWebWindow();
             containingPage_ = (HtmlPage) webWindow.getEnclosedPage();
-            setParentScope(window);
+            final Scriptable topScope = getTopLevelScope(this);
+            setParentScope(topScope);
             setDomNode(containingPage_.getDocumentElement(), false);
 
             final WebClient webClient = webWindow.getWebClient();
@@ -124,7 +125,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     setReadyState(OPEN);
 
                     final Event openEvent = new Event(Event.TYPE_OPEN);
-                    openEvent.setParentScope(window);
+                    openEvent.setParentScope(topScope);
                     openEvent.setPrototype(getPrototype(openEvent.getClass()));
                     openEvent.setSrcElement(WebSocket.this);
                     fire(openEvent);
@@ -136,7 +137,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     setReadyState(CLOSED);
 
                     final CloseEvent closeEvent = new CloseEvent();
-                    closeEvent.setParentScope(window);
+                    closeEvent.setParentScope(topScope);
                     closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
                     closeEvent.setCode(statusCode);
                     closeEvent.setReason(reason);
@@ -148,7 +149,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 @Override
                 public void onWebSocketText(final String message) {
                     final MessageEvent msgEvent = new MessageEvent(message);
-                    msgEvent.setParentScope(window);
+                    msgEvent.setParentScope(topScope);
                     msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
                     if (originSet_) {
                         msgEvent.setOrigin(getUrl());
@@ -166,7 +167,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
 
                     final MessageEvent msgEvent = new MessageEvent(buffer);
-                    msgEvent.setParentScope(window);
+                    msgEvent.setParentScope(topScope);
                     msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
                     if (originSet_) {
                         msgEvent.setOrigin(getUrl());
@@ -188,14 +189,14 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     setReadyState(CLOSED);
 
                     final Event errorEvent = new Event(Event.TYPE_ERROR);
-                    errorEvent.setParentScope(window);
+                    errorEvent.setParentScope(topScope);
                     errorEvent.setPrototype(getPrototype(errorEvent.getClass()));
                     errorEvent.setSrcElement(WebSocket.this);
                     fire(errorEvent);
                     callFunction(errorHandler_, new Object[] {errorEvent});
 
                     final CloseEvent closeEvent = new CloseEvent();
-                    closeEvent.setParentScope(window);
+                    closeEvent.setParentScope(topScope);
                     closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
                     closeEvent.setCode(1006);
                     closeEvent.setReason(cause.getMessage());
