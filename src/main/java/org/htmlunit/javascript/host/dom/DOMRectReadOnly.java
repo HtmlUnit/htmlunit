@@ -24,7 +24,6 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.host.Window;
 
 /**
  * A JavaScript object for {@code DOMRectReadOnly}.
@@ -78,13 +77,12 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final DOMRectReadOnly rect = new DOMRectReadOnly(0, 0, 0, 0);
-        rect.init(args, ctorObj);
+        rect.init(args, scope, ctorObj);
         return rect;
     }
 
-    protected void init(final Object[] args, final Function ctorObj) {
-        final Window window = getWindow(ctorObj);
-        setParentScope(window);
+    protected void init(final Object[] args, final Scriptable scope, final Function ctorObj) {
+        setParentScope(scope);
         setPrototype(((FunctionObject) ctorObj).getClassPrototype());
 
         if (args.length == 0 || JavaScriptEngine.isUndefined(args[0])) {

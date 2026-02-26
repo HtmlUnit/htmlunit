@@ -47,7 +47,7 @@ public class DOMRect extends DOMRectReadOnly {
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final DOMRect rect = new DOMRect();
-        rect.init(args, ctorObj);
+        rect.init(args, scope, ctorObj);
         return rect;
     }
 

@@ -77,11 +77,11 @@ public class FileList extends HtmlUnitScriptable {
      * {@inheritDoc}
      */
     @Override
-    public void setParentScope(final Scriptable m) {
-        super.setParentScope(m);
+    public void setParentScope(final Scriptable scope) {
+        super.setParentScope(scope);
         if (files_ != null) {
             for (final File file : files_) {
-                file.setParentScope(m);
+                file.setParentScope(scope);
                 file.setPrototype(getPrototype(file.getClass()));
             }
         }

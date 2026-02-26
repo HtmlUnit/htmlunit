@@ -165,7 +165,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     CSSStyleDeclaration(final CSSStyleSheet parentStyleSheet, final WrappedCssStyleDeclaration styleDeclaration) {
         super();
-        setParentScope(parentStyleSheet);
+        setParentScope(parentStyleSheet.getParentScope());
         setPrototype(getPrototype(getClass()));
 
         if (styleDeclaration == null) {

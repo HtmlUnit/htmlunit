@@ -109,8 +109,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
         super();
         if (domNode != null) {
             setDomNode(domNode, false);
-            final HtmlUnitScriptable parentScope = domNode.getScriptableObject();
-            setParentScope(parentScope);
+            setParentScope(domNode.getScriptableObject().getParentScope());
             setPrototype(getPrototype(getClass()));
         }
         attributeChangeSensitive_ = attributeChangeSensitive;
