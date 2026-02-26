@@ -99,15 +99,16 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * Creates a new instance.
      *
      * @param url    the URL to which to connect
+     * @param scope  the scope
      * @param window the top level window
      */
-    private WebSocket(final String url, final Window window) {
+    private WebSocket(final String url, final Scriptable scope, final Window window) {
         super();
         try {
             final WebWindow webWindow = window.getWebWindow();
             containingPage_ = (HtmlPage) webWindow.getEnclosedPage();
-            final Scriptable topScope = getTopLevelScope(this);
-            setParentScope(topScope);
+
+            setParentScope(scope);
             setDomNode(containingPage_.getDocumentElement(), false);
 
             final WebClient webClient = webWindow.getWebClient();
@@ -125,7 +126,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     setReadyState(OPEN);
 
                     final Event openEvent = new Event(Event.TYPE_OPEN);
-                    openEvent.setParentScope(topScope);
+                    openEvent.setParentScope(scope);
                     openEvent.setPrototype(getPrototype(openEvent.getClass()));
                     openEvent.setSrcElement(WebSocket.this);
                     fire(openEvent);
@@ -137,7 +138,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     setReadyState(CLOSED);
 
                     final CloseEvent closeEvent = new CloseEvent();
-                    closeEvent.setParentScope(topScope);
+                    closeEvent.setParentScope(scope);
                     closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
                     closeEvent.setCode(statusCode);
                     closeEvent.setReason(reason);
@@ -149,7 +150,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 @Override
                 public void onWebSocketText(final String message) {
                     final MessageEvent msgEvent = new MessageEvent(message);
-                    msgEvent.setParentScope(topScope);
+                    msgEvent.setParentScope(scope);
                     msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
                     if (originSet_) {
                         msgEvent.setOrigin(getUrl());
@@ -167,7 +168,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
 
                     final MessageEvent msgEvent = new MessageEvent(buffer);
-                    msgEvent.setParentScope(topScope);
+                    msgEvent.setParentScope(scope);
                     msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
                     if (originSet_) {
                         msgEvent.setOrigin(getUrl());
@@ -189,14 +190,14 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     setReadyState(CLOSED);
 
                     final Event errorEvent = new Event(Event.TYPE_ERROR);
-                    errorEvent.setParentScope(topScope);
+                    errorEvent.setParentScope(scope);
                     errorEvent.setPrototype(getPrototype(errorEvent.getClass()));
                     errorEvent.setSrcElement(WebSocket.this);
                     fire(errorEvent);
                     callFunction(errorHandler_, new Object[] {errorEvent});
 
                     final CloseEvent closeEvent = new CloseEvent();
-                    closeEvent.setParentScope(topScope);
+                    closeEvent.setParentScope(scope);
                     closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
                     closeEvent.setCode(1006);
                     closeEvent.setReason(cause.getMessage());
@@ -254,7 +255,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             throw JavaScriptEngine.reportRuntimeError(
                     "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.");
         }
-        return new WebSocket(urlString, win);
+        return new WebSocket(urlString, getTopLevelScope(ctorObj), win);
     }
 
     /**
