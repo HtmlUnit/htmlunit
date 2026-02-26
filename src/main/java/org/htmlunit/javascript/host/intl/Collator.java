@@ -23,7 +23,6 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
-import org.htmlunit.javascript.host.Window;
 
 /**
  * A JavaScript object for {@code Collator}.
@@ -60,9 +59,8 @@ public class Collator extends HtmlUnitScriptable {
                 locales = new String[] {JavaScriptEngine.toString(args[0])};
             }
         }
-        final Window window = getWindow(ctorObj);
         final Collator format = new Collator(/*locales, window.getBrowserVersion()*/);
-        format.setParentScope(window);
+        format.setParentScope(scope);
         format.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return format;
     }

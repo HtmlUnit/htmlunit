@@ -106,7 +106,7 @@ public class BaseAudioContext extends EventTarget {
 
         final DOMException domException = new DOMException(
                 "decodeAudioData not supported by HtmlUnit", DOMException.NOT_SUPPORTED_ERR);
-        domException.setParentScope(window);
+        domException.setParentScope(getTopLevelScope(this));
         domException.setPrototype(window.getPrototype(DOMException.class));
 
         if (error != null) {

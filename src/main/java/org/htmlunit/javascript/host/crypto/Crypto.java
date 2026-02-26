@@ -99,9 +99,8 @@ public class Crypto extends HtmlUnitScriptable {
     @JsxGetter
     public SubtleCrypto getSubtle() {
         final SubtleCrypto stuble = new SubtleCrypto();
-        final Window window = getWindow();
-        stuble.setParentScope(window);
-        stuble.setPrototype(window.getPrototype(SubtleCrypto.class));
+        stuble.setParentScope(getParentScope());
+        stuble.setPrototype(getWindow().getPrototype(SubtleCrypto.class));
         return stuble;
     }
 

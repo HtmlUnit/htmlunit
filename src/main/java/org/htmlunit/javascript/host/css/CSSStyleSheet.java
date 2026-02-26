@@ -32,7 +32,6 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.w3c.dom.DOMException;
 
@@ -87,7 +86,7 @@ public class CSSStyleSheet extends StyleSheet {
     public CSSStyleSheet(final HTMLElement element, final InputSource source, final String uri) {
         super(element);
 
-        setParentScope(element.getWindow());
+        setParentScope(getTopLevelScope(this));
         setPrototype(getPrototype(CSSStyleSheet.class));
 
         styleSheet_ = new CssStyleSheet(element.getDomNodeOrDie(), source, uri);
@@ -102,8 +101,6 @@ public class CSSStyleSheet extends StyleSheet {
     public CSSStyleSheet(final HTMLElement element, final String styleSheet, final String uri) {
         super(element);
 
-        final Window win = element.getWindow();
-
         CssStyleSheet css = null;
         try (InputSource source = new InputSource(new StringReader(styleSheet))) {
             css = new CssStyleSheet(element.getDomNodeOrDie(), source, uri);
@@ -112,7 +109,7 @@ public class CSSStyleSheet extends StyleSheet {
             LOG.error(e.getMessage(), e);
         }
 
-        setParentScope(win);
+        setParentScope(element.getParentScope());
         setPrototype(getPrototype(CSSStyleSheet.class));
 
         styleSheet_ = css;

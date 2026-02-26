@@ -64,7 +64,7 @@ public class BroadcastChannel extends EventTarget {
 
         final BroadcastChannel broadcastChannel = new BroadcastChannel();
         final Window window = getWindow(ctorObj);
-        broadcastChannel.setParentScope(window);
+        broadcastChannel.setParentScope(getTopLevelScope(ctorObj));
         broadcastChannel.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
 
         broadcastChannel.name_ = JavaScriptEngine.toString(args[0]);
