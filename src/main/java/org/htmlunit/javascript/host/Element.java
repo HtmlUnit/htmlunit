@@ -343,7 +343,7 @@ public class Element extends Node {
     @JsxFunction
     public DOMRect getBoundingClientRect() {
         final DOMRect textRectangle = new DOMRect(1, 1, 0, 0);
-        textRectangle.setParentScope(getWindow());
+        textRectangle.setParentScope(getTopLevelScope(this));
         textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
         return textRectangle;
     }
@@ -659,14 +659,14 @@ public class Element extends Node {
      */
     @JsxFunction
     public DOMRectList getClientRects() {
-        final Window w = getWindow();
+        final Scriptable topScope = getTopLevelScope(this);
         final DOMRectList rectList = new DOMRectList();
-        rectList.setParentScope(w);
+        rectList.setParentScope(topScope);
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
         if (!isDisplayNone() && getDomNodeOrDie().isAttachedToPage()) {
             final DOMRect rect = new DOMRect(0, 0, 1, 1);
-            rect.setParentScope(w);
+            rect.setParentScope(topScope);
             rect.setPrototype(getPrototype(rect.getClass()));
             rectList.add(rect);
         }

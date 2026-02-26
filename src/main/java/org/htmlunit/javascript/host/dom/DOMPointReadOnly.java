@@ -24,7 +24,6 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.host.Window;
 
 /**
  * A JavaScript object for {@code DOMPointReadOnly}.
@@ -81,8 +80,7 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
     }
 
     protected void init(final Object[] args, final Function ctorObj) {
-        final Window window = getWindow(ctorObj);
-        setParentScope(window);
+        setParentScope(getTopLevelScope(this));
         setPrototype(((FunctionObject) ctorObj).getClassPrototype());
 
         if (args.length == 0 || JavaScriptEngine.isUndefined(args[0])) {

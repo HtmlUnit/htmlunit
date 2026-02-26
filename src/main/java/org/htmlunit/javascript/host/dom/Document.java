@@ -80,6 +80,7 @@ import org.htmlunit.html.HtmlSvg;
 import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.html.UnknownElementFactory;
 import org.htmlunit.html.impl.SimpleRange;
+import org.htmlunit.http.Cookie;
 import org.htmlunit.http.HttpUtils;
 import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -121,7 +122,6 @@ import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLFrameSetElement;
-import org.htmlunit.http.Cookie;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
@@ -484,7 +484,7 @@ public class Document extends Node {
     public DOMImplementation getImplementation() {
         if (implementation_ == null) {
             implementation_ = new DOMImplementation();
-            implementation_.setParentScope(getWindow());
+            implementation_.setParentScope(getTopLevelScope(this));
             implementation_.setPrototype(getPrototype(implementation_.getClass()));
         }
         return implementation_;
@@ -501,7 +501,7 @@ public class Document extends Node {
     public NativeXPathNSResolver createNSResolver(final Node nodeResolver) {
         final NativeXPathNSResolver resolver = new NativeXPathNSResolver();
         resolver.setElement(nodeResolver);
-        resolver.setParentScope(getWindow());
+        resolver.setParentScope(getTopLevelScope(this));
         resolver.setPrototype(getPrototype(resolver.getClass()));
         return resolver;
     }
@@ -1174,7 +1174,7 @@ public class Document extends Node {
 
         try {
             final Event event = clazz.getDeclaredConstructor().newInstance();
-            event.setParentScope(getWindow());
+            event.setParentScope(getTopLevelScope(this));
             event.setPrototype(getPrototype(clazz));
             event.eventCreated();
             return event;
@@ -1257,7 +1257,7 @@ public class Document extends Node {
 
         final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter, false);
         final TreeWalker t = new TreeWalker(root, whatToShowI, filterWrapper, false);
-        t.setParentScope(getWindow(this));
+        t.setParentScope(getTopLevelScope(this));
         t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
         return t;
     }
@@ -1280,7 +1280,7 @@ public class Document extends Node {
     @JsxFunction
     public Range createRange() {
         final Range range = new Range(this);
-        range.setParentScope(getWindow());
+        range.setParentScope(getTopLevelScope(this));
         range.setPrototype(getPrototype(Range.class));
         return range;
     }
@@ -3455,7 +3455,7 @@ public class Document extends Node {
     public ScriptableObject getFonts() {
         if (fonts_ == null) {
             final FontFaceSet fonts = new FontFaceSet();
-            fonts.setParentScope(getWindow());
+            fonts.setParentScope(getTopLevelScope(this));
             fonts.setPrototype(getPrototype(fonts.getClass()));
             fonts_ = fonts;
         }

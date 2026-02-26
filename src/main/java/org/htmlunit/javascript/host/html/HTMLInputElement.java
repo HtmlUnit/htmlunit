@@ -36,7 +36,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.DOMRectList;
-import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.event.Event;
@@ -832,9 +831,8 @@ public class HTMLInputElement extends HTMLElement {
     @Override
     public DOMRectList getClientRects() {
         if ("hidden".equals(getType())) {
-            final Window w = getWindow();
             final DOMRectList rectList = new DOMRectList();
-            rectList.setParentScope(w);
+            rectList.setParentScope(getTopLevelScope(this));
             rectList.setPrototype(getPrototype(rectList.getClass()));
 
             return rectList;

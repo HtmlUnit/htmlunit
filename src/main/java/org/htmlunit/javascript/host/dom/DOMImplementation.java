@@ -233,7 +233,7 @@ public class DOMImplementation extends HtmlUnitScriptable {
 
             // document knows the window but is not the windows document
             final HTMLDocument document = new HTMLDocument();
-            document.setParentScope(getWindow());
+            document.setParentScope(getTopLevelScope(this));
             document.setPrototype(getPrototype(document.getClass()));
             // document.setWindow(getWindow());
             document.setDomNode(page);

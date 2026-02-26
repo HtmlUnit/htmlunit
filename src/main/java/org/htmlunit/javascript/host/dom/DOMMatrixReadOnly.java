@@ -27,7 +27,6 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.host.Window;
 
 /**
  * A JavaScript object for {@code DOMMatrixReadOnly}.
@@ -108,8 +107,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     }
 
     protected void init(final Object[] args, final Function ctorObj) {
-        final Window window = getWindow(ctorObj);
-        setParentScope(window);
+        setParentScope(getTopLevelScope(this));
         setPrototype(((FunctionObject) ctorObj).getClassPrototype());
 
         if (args.length == 0 || JavaScriptEngine.isUndefined(args[0])) {
@@ -161,7 +159,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         }
 
         throw JavaScriptEngine.asJavaScriptException(
-                window,
+                getWindow(),
                 "An invalid or illegal string was specified",
                 DOMException.SYNTAX_ERR);
     }
@@ -491,9 +489,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     @JsxFunction
     public DOMMatrix flipX() {
         final DOMMatrix matrix = new DOMMatrix();
-        final Window window = getWindow();
-        matrix.setParentScope(window);
-        matrix.setPrototype(window.getPrototype(DOMMatrix.class));
+        matrix.setParentScope(getTopLevelScope(this));
+        matrix.setPrototype(getWindow().getPrototype(DOMMatrix.class));
 
         matrix.setM11(-m11_);
         matrix.setM12(-m12_);
@@ -527,9 +524,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     @JsxFunction
     public DOMMatrix flipY() {
         final DOMMatrix matrix = new DOMMatrix();
-        final Window window = getWindow();
-        matrix.setParentScope(window);
-        matrix.setPrototype(window.getPrototype(DOMMatrix.class));
+        matrix.setParentScope(getTopLevelScope(this));
+        matrix.setPrototype(getWindow().getPrototype(DOMMatrix.class));
 
         matrix.setM11(m11_);
         matrix.setM12(m12_);
@@ -563,9 +559,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     @JsxFunction
     public DOMMatrix inverse() {
         final DOMMatrix matrix = new DOMMatrix();
-        final Window window = getWindow();
-        matrix.setParentScope(window);
-        matrix.setPrototype(window.getPrototype(DOMMatrix.class));
+        matrix.setParentScope(getTopLevelScope(this));
+        matrix.setPrototype(getWindow().getPrototype(DOMMatrix.class));
 
         matrix.setM11(m11_);
         matrix.setM12(m12_);
@@ -602,9 +597,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     @JsxFunction
     public DOMMatrix multiply(final Object other) {
         final DOMMatrix result = new DOMMatrix();
-        final Window window = getWindow();
-        result.setParentScope(window);
-        result.setPrototype(window.getPrototype(DOMMatrix.class));
+        result.setParentScope(getTopLevelScope(this));
+        result.setPrototype(getWindow().getPrototype(DOMMatrix.class));
 
         // Handle null/undefined by treating as identity matrix
         if (other == null || JavaScriptEngine.isUndefined(other)) {
@@ -708,9 +702,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
     @JsxFunction
     public DOMMatrixReadOnly rotate(final Object rotZ) {
         final DOMMatrix result = new DOMMatrix();
-        final Window window = getWindow();
-        result.setParentScope(window);
-        result.setPrototype(window.getPrototype(DOMMatrix.class));
+        result.setParentScope(getTopLevelScope(this));
+        result.setPrototype(getWindow().getPrototype(DOMMatrix.class));
 
         // Handle undefined/null/missing parameter - default to 0
         double angleInDegrees = 0;
@@ -804,9 +797,8 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         // If axis is (0,0,0), throw TypeError per spec
         if (x == 0 && y == 0 && z == 0) {
             final DOMMatrix result = new DOMMatrix();
-            final Window window = getWindow();
-            result.setParentScope(window);
-            result.setPrototype(window.getPrototype(DOMMatrix.class));
+            result.setParentScope(getTopLevelScope(this));
+            result.setPrototype(getWindow().getPrototype(DOMMatrix.class));
             return result;
         }
 
