@@ -60,7 +60,7 @@ public class MediaList extends HtmlUnitScriptable {
     public MediaList(final CSSStyleSheet parent, final CssMediaList cssMediaList) {
         super();
         cssMediaList_ = cssMediaList;
-        setParentScope(parent.getParentScope());
+        setParentScope(parent);
         setPrototype(getPrototype(getClass()));
     }
 
