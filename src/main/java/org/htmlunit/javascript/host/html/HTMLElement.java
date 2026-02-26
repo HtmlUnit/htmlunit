@@ -231,7 +231,7 @@ public class HTMLElement extends Element {
                 || "select".equalsIgnoreCase(name)) {
             final HtmlForm form = ((HtmlElement) domNode).getEnclosingForm();
             if (form != null) {
-                setParentScope(getScriptableFor(form).getParentScope());
+                setParentScope(getScriptableFor(form));
             }
         }
     }
