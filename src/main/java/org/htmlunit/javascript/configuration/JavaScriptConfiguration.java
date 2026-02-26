@@ -711,9 +711,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     }
 
     /**
-     * @return the configuration of the scope class
+     * @return the configuration of the globalThis class
      */
     public ClassConfiguration getWindowClassConfiguration() {
-        return getScopeConfiguration();
+        return getGlobalThisConfiguration();
     }
 }

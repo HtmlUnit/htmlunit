@@ -53,22 +53,22 @@ public abstract class AbstractJavaScriptConfiguration {
     private Map<Class<?>, Class<? extends HtmlUnitScriptable>> domJavaScriptMap_;
 
     private final ArrayList<ClassConfiguration> configuration_;
-    private ClassConfiguration scopeConfiguration_;
+    private ClassConfiguration globalThisConfiguration_;
 
     /**
      * Constructor.
      * @param browser the browser version to use
-     * @param scopeClass the scope class for faster access
+     * @param globalThisClass the globalThis class for faster access
      */
-    protected AbstractJavaScriptConfiguration(final BrowserVersion browser, final Class<?> scopeClass) {
+    protected AbstractJavaScriptConfiguration(final BrowserVersion browser, final Class<?> globalThisClass) {
         configuration_ = new ArrayList<>(getClasses().length);
 
         for (final Class<? extends HtmlUnitScriptable> klass : getClasses()) {
             final ClassConfiguration config = getClassConfiguration(klass, browser);
             if (config != null) {
                 configuration_.add(config);
-                if (klass == scopeClass) {
-                    scopeConfiguration_ = config;
+                if (klass == globalThisClass) {
+                    globalThisConfiguration_ = config;
                 }
             }
         }
@@ -394,7 +394,7 @@ public abstract class AbstractJavaScriptConfiguration {
         return domJavaScriptMap_.get(clazz);
     }
 
-    protected ClassConfiguration getScopeConfiguration() {
-        return scopeConfiguration_;
+    protected ClassConfiguration getGlobalThisConfiguration() {
+        return globalThisConfiguration_;
     }
 }

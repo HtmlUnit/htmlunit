@@ -204,9 +204,9 @@ public final class WorkerJavaScriptConfiguration extends AbstractJavaScriptConfi
     }
 
     /**
-     * @return the configuration of the scope class
+     * @return the configuration of the globalThis class
      */
     public ClassConfiguration getDedicatedWorkerGlobalScopeClassConfiguration() {
-        return getScopeConfiguration();
+        return getGlobalThisConfiguration();
     }
 }
