@@ -126,7 +126,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
 
         final Scriptable scope = context.initSafeStandardObjects(this);
-        JavaScriptEngine.configureRhino(webClient, browserVersion, this);
+        JavaScriptEngine.configureRhino(webClient, browserVersion, scope, this);
 
         final WorkerJavaScriptConfiguration jsConfig = WorkerJavaScriptConfiguration.getInstance(browserVersion);
 
@@ -145,7 +145,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
                         config.getJsConstructor().getValue(), this);
         functionObject.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
 
-        JavaScriptEngine.configureScope(this, config, functionObject, jsConfig,
+        JavaScriptEngine.configureGlobalThis(this, scope, config, functionObject, jsConfig,
                 browserVersion, prototypes, prototypesPerJSName);
         // remove some aliases
         delete("webkitURL");

@@ -64,15 +64,16 @@ public class Polyfill {
      * Compile the script if needed and exec to setup the context.
      *
      * @param context the context
-     * @param scriptable the scriptable
+     * @param scope the scope to execute relative to
+     * @param thisObject the value "this" should be set to
      */
-    public void apply(final Context context, final Scriptable scriptable) {
+    public void apply(final Context context, final Scriptable scope, final Scriptable thisObject) {
         if (script_ == null) {
             script_ = context.compileString(source_, url_, 0, null);
         }
 
         if (script_ != null) {
-            script_.exec(context, scriptable, scriptable);
+            script_.exec(context, scope, thisObject);
         }
     }
 }
