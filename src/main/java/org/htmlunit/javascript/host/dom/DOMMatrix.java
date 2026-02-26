@@ -48,7 +48,7 @@ public class DOMMatrix extends DOMMatrixReadOnly {
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final DOMMatrix matrix = new DOMMatrix();
-        matrix.init(args, ctorObj);
+        matrix.init(args, scope, ctorObj);
         return matrix;
     }
 

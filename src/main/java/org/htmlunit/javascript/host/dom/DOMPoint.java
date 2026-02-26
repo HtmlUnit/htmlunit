@@ -45,7 +45,7 @@ public class DOMPoint extends DOMPointReadOnly {
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final DOMPoint point = new DOMPoint();
-        point.init(args, ctorObj);
+        point.init(args, scope, ctorObj);
         return point;
     }
 

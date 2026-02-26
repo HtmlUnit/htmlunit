@@ -243,7 +243,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final MessageEvent event = new MessageEvent();
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "",
                                     owningWindow_, JavaScriptEngine.UNDEFINED);
-        event.setParentScope(owningWindow_);
+        event.setParentScope(getTopLevelScope(this));
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 
         if (LOG.isDebugEnabled()) {
@@ -270,7 +270,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final MessageEvent event = new MessageEvent();
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "",
                                     owningWindow_, JavaScriptEngine.UNDEFINED);
-        event.setParentScope(owningWindow_);
+        event.setParentScope(getTopLevelScope(this));
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 
         final JavaScriptEngine jsEngine =

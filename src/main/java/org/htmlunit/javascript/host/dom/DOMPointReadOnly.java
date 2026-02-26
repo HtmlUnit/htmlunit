@@ -75,12 +75,12 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final DOMPointReadOnly point = new DOMPointReadOnly(0, 0, 0, 1);
-        point.init(args, ctorObj);
+        point.init(args, scope, ctorObj);
         return point;
     }
 
-    protected void init(final Object[] args, final Function ctorObj) {
-        setParentScope(getTopLevelScope(this));
+    protected void init(final Object[] args, final Scriptable scope, final Function ctorObj) {
+        setParentScope(scope);
         setPrototype(((FunctionObject) ctorObj).getClassPrototype());
 
         if (args.length == 0 || JavaScriptEngine.isUndefined(args[0])) {

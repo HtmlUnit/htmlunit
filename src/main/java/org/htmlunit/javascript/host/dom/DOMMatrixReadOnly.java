@@ -102,12 +102,12 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final DOMMatrixReadOnly matrix = new DOMMatrixReadOnly();
-        matrix.init(args, ctorObj);
+        matrix.init(args, scope, ctorObj);
         return matrix;
     }
 
-    protected void init(final Object[] args, final Function ctorObj) {
-        setParentScope(getTopLevelScope(this));
+    protected void init(final Object[] args, final Scriptable scope, final Function ctorObj) {
+        setParentScope(scope);
         setPrototype(((FunctionObject) ctorObj).getClassPrototype());
 
         if (args.length == 0 || JavaScriptEngine.isUndefined(args[0])) {

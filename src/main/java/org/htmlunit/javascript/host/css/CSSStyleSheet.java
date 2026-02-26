@@ -86,7 +86,7 @@ public class CSSStyleSheet extends StyleSheet {
     public CSSStyleSheet(final HTMLElement element, final InputSource source, final String uri) {
         super(element);
 
-        setParentScope(getTopLevelScope(this));
+        setParentScope(getTopLevelScope(element));
         setPrototype(getPrototype(CSSStyleSheet.class));
 
         styleSheet_ = new CssStyleSheet(element.getDomNodeOrDie(), source, uri);
