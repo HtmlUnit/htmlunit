@@ -66,7 +66,7 @@
         <commons-text.version>1.15.0</commons-text.version>
         <commons-fileupload.version>2.0.0-M1</commons-fileupload.version>
         <image-comparison.version>4.4.0</image-comparison.version>
-        <imageio-batik.version>3.13.0</imageio-batik.version>
+        <imageio-batik.version>3.13.1</imageio-batik.version>
         <jfreechart.version>1.5.6</jfreechart.version>
         <maven-model.version>3.9.12</maven-model.version>
         <maven-artifact.version>3.9.12</maven-artifact.version>
