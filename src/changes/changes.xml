@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="update" dev="rbri">
+                Better separtion of the scope and the global this object.
+            </action>
             <action type="update" dev="RhinoTeam">
                 core-js: Support for rest parameters in destructuring.
             </action>
