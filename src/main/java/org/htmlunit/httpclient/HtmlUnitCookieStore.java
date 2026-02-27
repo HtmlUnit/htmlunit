@@ -15,16 +15,17 @@
 package org.htmlunit.httpclient;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.http.client.CookieStore;
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.ClientCookie;
+import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.CookieStore;
 import org.htmlunit.CookieManager;
 
 /**
- * Implementation of {@link CookieStore} like {@link org.apache.http.impl.client.BasicCookieStore}
+ * Implementation of {@link CookieStore} like {@link org.apache.hc.client5.http.impl.cookie.BasicCookieStore}
  * BUT using our own {@link CookieManager} as back end.
  *
  * @author Marc Guillemot
@@ -62,8 +63,8 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public synchronized boolean clearExpired(final Date date) {
-        return manager_.clearExpired(date);
+    public synchronized boolean clearExpired(final Instant date) {
+        return manager_.clearExpired(Date.from(date));
     }
 
     /**

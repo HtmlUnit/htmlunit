@@ -33,13 +33,13 @@ import org.apache.commons.fileupload2.core.FileUploadSizeException;
 import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
 import org.apache.commons.fileupload2.jakarta.JakartaServletRequestContext;
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.entity.mime.FileBody;
+import org.apache.hc.client5.http.entity.mime.HttpMultipartMode;
+import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.io.entity.ContentType;
 import org.htmlunit.WebServerTestCase;
 import org.htmlunit.html.HtmlFileInput;
 import org.htmlunit.util.MimeType;
@@ -135,7 +135,7 @@ public class HttpClientTest extends WebServerTestCase {
         filePost.setEntity(builder.build());
 
         final HttpClientBuilder clientBuilder = HttpClientBuilder.create();
-        final HttpResponse httpResponse = clientBuilder.build().execute(filePost);
+        final ClassicHttpResponse httpResponse = clientBuilder.build().execute(filePost);
 
         try (InputStream content = httpResponse.getEntity().getContent()) {
             final String response = new String(IOUtils.toByteArray(content));

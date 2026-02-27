@@ -21,14 +21,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.CookieSpec;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.message.BufferedHeader;
-import org.apache.http.util.CharArrayBuffer;
+import org.apache.hc.client5.http.cookie.ClientCookie;
+import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.CookieOrigin;
+import org.apache.hc.client5.http.cookie.CookieSpec;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.impl.cookie.BasicClientCookie;
+import org.apache.hc.core5.http.message.BufferedHeader;
+import org.apache.hc.core5.util.CharArrayBuffer;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.util.UrlUtils;
 
