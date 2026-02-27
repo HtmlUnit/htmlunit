@@ -22,6 +22,7 @@ import java.util.List;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.DefaultElementFactory;
+import org.htmlunit.javascript.SilentJavaScriptErrorListener;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -207,6 +208,10 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final WebClient webClient = ((HtmlUnitDriver) driver).getWebClient();
             webClient.getOptions().setThrowExceptionOnScriptError(false);
+
+            // no need to log all the js errors we got because of only opened script tags
+            // hopefully this make the tests faster on CI
+            webClient.setJavaScriptErrorListener(new SilentJavaScriptErrorListener());
         }
 
         loadPage2(pageHtml);
