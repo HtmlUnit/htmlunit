@@ -4,7 +4,7 @@ pipeline {
     lock resource: 'htmlunit-test-ports'
     disableConcurrentBuilds()
     timestamps()
-    timeout(time: 60, unit: 'MINUTES')
+    timeout(time: 35, unit: 'MINUTES')
   }
   stages {
     stage('Build') {
