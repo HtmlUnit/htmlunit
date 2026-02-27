@@ -14,10 +14,10 @@
  */
 package org.htmlunit.httpclient;
 
-import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.impl.cookie.BasicPathHandler;
+import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.CookieOrigin;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.impl.cookie.BasicPathHandler;
 
 /**
  * Customized BasicPathHandler for HtmlUnit.
