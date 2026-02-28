@@ -19,7 +19,7 @@ import java.util.Map;
 
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import jakarta.servlet.Servlet;
@@ -41,8 +41,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     /**
      * @throws Exception if an error occurs
      */
-    @BeforeAll
-    public static void startServer() throws Exception {
+    @BeforeEach
+    public void startServer() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("*.php", org.htmlunit.util.quercus.servlet.QuercusServlet.class);
         servlets.put("/jquery/test/data/jsonp.php/*", org.htmlunit.util.quercus.servlet.QuercusServlet.class);
