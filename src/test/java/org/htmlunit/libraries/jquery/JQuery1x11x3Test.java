@@ -45,6 +45,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     public static void startServer() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("*.php", org.htmlunit.util.quercus.servlet.QuercusServlet.class);
+        servlets.put("/jquery/test/data/jsonp.php/*", org.htmlunit.util.quercus.servlet.QuercusServlet.class);
         startWebServer("src/test/resources/libraries/jQuery/1.11.3", servlets);
     }
 
@@ -5744,7 +5745,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2, 2, 4")
+    @Alerts("0, 4, 4")
     public void ajax__jQuery_ajax_____JSONP___Query_String___n____Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Query String (?n) - Same Domain");
     }
@@ -5794,7 +5795,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2, 2, 4")
+    @Alerts("0, 4, 4")
     public void ajax__jQuery_ajax_____JSONP___Query_String___n____Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP - Query String (?n) - Cross Domain");
     }
