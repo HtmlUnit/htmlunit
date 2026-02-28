@@ -37,6 +37,7 @@
             --add-reads org.htmlunit=jakarta.servlet
             --add-opens org.htmlunit/org.htmlunit=ALL-UNNAMED
             --add-opens org.htmlunit/org.htmlunit.junit=ALL-UNNAMED
+            --add-opens org.htmlunit/org.htmlunit.util.quercus.servlet=ALL-UNNAMED
         </surefire.argLine.modules>
 
         <htmlunitcsp.version>5.0.0-SNAPSHOT</htmlunitcsp.version>
