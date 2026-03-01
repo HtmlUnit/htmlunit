@@ -13,10 +13,9 @@ pipeline {
         sh 'mvn clean test -P only-huge-tests-t-z --show-version -Dgpg.skip -Djava.awt.headless=true'
       }
     }
-  }
-  post {
-    always {
-      node('') {
+
+    post {
+      always {
         junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
         recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', tools: [java()]
         step([$class: 'Mailer',
