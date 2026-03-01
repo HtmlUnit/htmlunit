@@ -215,9 +215,9 @@ public class RegExp2Test extends AbstractRegExpTest {
     @Test
     @Alerts({"true", "true", "true", "true", "true", "true", "true"})
     @HtmlUnitNYI(CHROME = "SyntaxError: invalid flag 'd' after regular expression",
-        EDGE = "SyntaxError: invalid flag 'd' after regular expression",
-        FF = "SyntaxError: invalid flag 'd' after regular expression",
-        FF_ESR = "SyntaxError: invalid flag 'd' after regular expression")
+            EDGE = "SyntaxError: invalid flag 'd' after regular expression",
+            FF = "SyntaxError: invalid flag 'd' after regular expression",
+            FF_ESR = "SyntaxError: invalid flag 'd' after regular expression")
     public void flagBooleanPropertiesAllSet() throws Exception {
         final String script = "var r = new RegExp('', 'dgimsuy');\n"
                             + "log(r.hasIndices);\n"
@@ -322,9 +322,9 @@ public class RegExp2Test extends AbstractRegExpTest {
     @Test
     @Alerts("/foo/dgimsuy")
     @HtmlUnitNYI(CHROME = "SyntaxError: invalid flag 'd' after regular expression",
-        EDGE = "SyntaxError: invalid flag 'd' after regular expression",
-        FF = "SyntaxError: invalid flag 'd' after regular expression",
-        FF_ESR = "SyntaxError: invalid flag 'd' after regular expression")
+            EDGE = "SyntaxError: invalid flag 'd' after regular expression",
+            FF = "SyntaxError: invalid flag 'd' after regular expression",
+            FF_ESR = "SyntaxError: invalid flag 'd' after regular expression")
     public void toStringAllFlags() throws Exception {
         final String script = "log(new RegExp('foo', 'dgimsuy').toString());";
         testEvaluate(script);

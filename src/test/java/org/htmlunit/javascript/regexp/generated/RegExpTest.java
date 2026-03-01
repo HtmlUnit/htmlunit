@@ -66,9 +66,9 @@ public class RegExpTest extends AbstractRegExpTest {
     @Test
     @Alerts("dgimsuy")
     @HtmlUnitNYI(CHROME = "SyntaxError: invalid flag 'd' after regular expression",
-        EDGE = "SyntaxError: invalid flag 'd' after regular expression",
-        FF = "SyntaxError: invalid flag 'd' after regular expression",
-        FF_ESR = "SyntaxError: invalid flag 'd' after regular expression")
+            EDGE = "SyntaxError: invalid flag 'd' after regular expression",
+            FF = "SyntaxError: invalid flag 'd' after regular expression",
+            FF_ESR = "SyntaxError: invalid flag 'd' after regular expression")
     public void flagsPropertySortedOrder() throws Exception {
         final String script = "log(new RegExp('', 'dgimsuy').flags);";
         testEvaluate(script);

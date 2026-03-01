@@ -160,10 +160,11 @@ public class RegExp7Test extends AbstractRegExpTest {
         // source is a getter on RegExp.prototype, not an own property;
         // Object.defineProperty on the instance creates a new own data property
         final String script =
-              "var r = /foo/;\n"
-            + "try { Object.defineProperty(r, 'source',"
-            + " { value: 'bar' }); log('ok'); }"
-            + " catch(e) { log('error'); }";
+                "var r = /foo/;\n"
+                + "try {\n"
+                + "  Object.defineProperty(r, 'source', { value: 'bar' });\n"
+                + "  log('ok');\n"
+                + "} catch(e) { log('error'); }";
         testEvaluate(script);
     }
 
@@ -171,9 +172,9 @@ public class RegExp7Test extends AbstractRegExpTest {
     @Alerts("bar")
     public void sourceCanBeShadowedValue() throws Exception {
         final String script =
-              "var r = /foo/;\n"
-            + "Object.defineProperty(r, 'source', { value: 'bar' });\n"
-            + "log(r.source);";
+                "var r = /foo/;\n"
+                + "Object.defineProperty(r, 'source', { value: 'bar' });\n"
+                + "log(r.source);";
         testEvaluate(script);
     }
 
@@ -184,9 +185,10 @@ public class RegExp7Test extends AbstractRegExpTest {
         // Object.defineProperty on the instance creates a new own data property
         final String script =
               "var r = /foo/;\n"
-            + "try { Object.defineProperty(r, 'flags',"
-            + " { value: 'gi' }); log('ok'); }"
-            + " catch(e) { log('error'); }";
+              + "try {\n"
+              + "  Object.defineProperty(r, 'flags', { value: 'gi' });\n"
+              + "  log('ok');\n"
+              + "} catch(e) { log('error'); }";
         testEvaluate(script);
     }
 
@@ -195,8 +197,8 @@ public class RegExp7Test extends AbstractRegExpTest {
     public void flagsCanBeShadowedValue() throws Exception {
         final String script =
               "var r = /foo/;\n"
-            + "Object.defineProperty(r, 'flags', { value: 'gi' });\n"
-            + "log(r.flags);";
+              + "Object.defineProperty(r, 'flags', { value: 'gi' });\n"
+              + "log(r.flags);";
         testEvaluate(script);
     }
 
@@ -207,8 +209,10 @@ public class RegExp7Test extends AbstractRegExpTest {
         final String script =
               "var desc = Object.getOwnPropertyDescriptor("
             + "RegExp.prototype, 'source');\n"
-            + "try { desc.get.call({}); log('ok'); }"
-            + " catch(e) { log('error'); }";
+            + "try {\n"
+            + "  desc.get.call({});\n"
+            + "  log('ok');\n"
+            + "} catch(e) { log('error'); }";
         testEvaluate(script);
     }
 
@@ -218,8 +222,10 @@ public class RegExp7Test extends AbstractRegExpTest {
         final String script =
               "var desc = Object.getOwnPropertyDescriptor("
             + "RegExp.prototype, 'global');\n"
-            + "try { desc.get.call({}); log('ok'); }"
-            + " catch(e) { log('error'); }";
+            + "try {\n"
+            + "  desc.get.call({});\n"
+            + "  log('ok');\n"
+            + "} catch(e) { log('error'); }";
         testEvaluate(script);
     }
 
