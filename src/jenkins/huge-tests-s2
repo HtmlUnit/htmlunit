@@ -12,15 +12,15 @@ pipeline {
         sh 'java -version'
         sh 'mvn clean test -P only-huge-tests-s2 --show-version -Dgpg.skip -Djava.awt.headless=true'
       }
-    }
 
-    post {
-      always {
-        junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
-        recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', tools: [java()]
-        step([$class: 'Mailer',
-          notifyEveryUnstableBuild: true,
-          recipients: "rbri@rbri.de"])
+      post {
+        always {
+          junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
+          recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', tools: [java()]
+          step([$class: 'Mailer',
+            notifyEveryUnstableBuild: true,
+            recipients: "rbri@rbri.de"])
+        }
       }
     }
   }
