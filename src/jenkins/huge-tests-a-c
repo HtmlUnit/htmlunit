@@ -6,22 +6,22 @@ pipeline {
     timestamps()
     timeout(time: 35, unit: 'MINUTES')
   }
+
   stages {
     stage('Build') {
       steps {
         sh 'java -version'
         sh 'mvn clean test -P only-huge-tests-a-c --show-version -Dgpg.skip -Djava.awt.headless=true'
       }
-    }
-  }
-  post {
-    always {
-      node('') {
-        junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
-        recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', tools: [java()]
-        step([$class: 'Mailer',
-          notifyEveryUnstableBuild: true,
-          recipients: "rbri@rbri.de"])
+
+      post {
+        always {
+          junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
+          recordIssues enabledForFailure: true, sourceCodeEncoding: 'UTF-8', tools: [java()]
+          step([$class: 'Mailer',
+            notifyEveryUnstableBuild: true,
+            recipients: "rbri@rbri.de"])
+        }
       }
     }
   }
