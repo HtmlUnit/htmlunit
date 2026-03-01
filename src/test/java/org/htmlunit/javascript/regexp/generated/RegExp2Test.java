@@ -263,10 +263,10 @@ public class RegExp2Test extends AbstractRegExpTest {
 
     @Test
     @Alerts("true")
-//    @HtmlUnitNYI(CHROME = "SyntaxError: invalid flag 'v' after regular expression",
-//        EDGE = "SyntaxError: invalid flag 'v' after regular expression",
-//        FF = "SyntaxError: invalid flag 'v' after regular expression",
-//        FF_ESR = "SyntaxError: invalid flag 'v' after regular expression")
+    @HtmlUnitNYI(CHROME = "SyntaxError: invalid flag 'v' after regular expression",
+            EDGE = "SyntaxError: invalid flag 'v' after regular expression",
+            FF = "SyntaxError: invalid flag 'v' after regular expression",
+            FF_ESR = "SyntaxError: invalid flag 'v' after regular expression")
     public void unicodeSetsPropertyOnV() throws Exception {
         final String script = "log(new RegExp('.', 'v').unicodeSets);";
         testEvaluate(script);
