@@ -1464,11 +1464,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final ProxyAutoConfigJavaScriptConfiguration jsConfig =
                     ProxyAutoConfigJavaScriptConfiguration.getInstance(browserVersion);
 
-            final ScriptableObject globalThis = (ScriptableObject) JavaScriptEngine.newObject(null);
+            final ScriptableObject globalThis = new NativeObject();
             final Scriptable scope = cx.initSafeStandardObjects(globalThis);
 
             for (final ClassConfiguration config : jsConfig.getAll()) {
-                configureFunctions(config, scope, null);
+                configureFunctions(config, scope, globalThis);
             }
 
             cx.evaluateString(scope, "var ProxyConfig = function() {}; ProxyConfig.bindings = {}; ProxyConfig", "<init>", 1, null);
