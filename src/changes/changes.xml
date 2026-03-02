@@ -9,7 +9,16 @@
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
             <action type="update" dev="RhinoTeam">
-                core-js: ix generator .return() to include value when in completed state.
+                core-js: Enforce 'WrapFactory' users to override new `wrap(...)` and `wrapAsJavaObject(...)` methods.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: use 'ClassValue' for caching class-based TypeInfo.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: a problem in dumpICode fixed and test coverage increased.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: fix generator .return() to include value when in completed state.
             </action>
             <action type="update" dev="RhinoTeam">
                 core-js: Avoid compiling `a.eval()` as a direct eval call so all the prototypes are set up correctly.
