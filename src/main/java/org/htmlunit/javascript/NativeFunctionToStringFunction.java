@@ -36,20 +36,20 @@ public final class NativeFunctionToStringFunction {
 
     /**
      * Install the wrapper in place of the native toString function on Function's prototype.
-     * @param window the scope
+     * @param scope the scope
      * @param browserVersion the simulated browser
      */
-    public static void installFix(final Scriptable window, final BrowserVersion browserVersion) {
+    public static void installFix(final Scriptable scope, final BrowserVersion browserVersion) {
         if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_COMPACT)) {
             final ScriptableObject fnPrototype =
-                    (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
+                    (ScriptableObject) ScriptableObject.getClassPrototype(scope, "Function");
             final Function originalToString = (Function) ScriptableObject.getProperty(fnPrototype, "toString");
             final Function newToString = new NativeFunctionToStringFunctionChrome(originalToString);
             ScriptableObject.putProperty(fnPrototype, "toString", newToString);
         }
         else if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NL)) {
             final ScriptableObject fnPrototype =
-                    (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
+                    (ScriptableObject) ScriptableObject.getClassPrototype(scope, "Function");
             final Function originalToString = (Function) ScriptableObject.getProperty(fnPrototype, "toString");
             final Function newToString = new NativeFunctionToStringFunctionFF(originalToString);
             ScriptableObject.putProperty(fnPrototype, "toString", newToString);

@@ -200,17 +200,17 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     /**
      * Initializes all the JS stuff for the window.
      * @param webWindow the web window
-     * @param context the current context
+     * @param cx the current context
      * @throws Exception if something goes wrong
      */
-    private void init(final WebWindow webWindow, final Page page, final Context context) throws Exception {
+    private void init(final WebWindow webWindow, final Page page, final Context cx) throws Exception {
         final WebClient webClient = getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
 
         final Window jsWindow = new Window();
         jsWindow.setClassName("Window");
 
-        final Scriptable scope = context.initSafeStandardObjects(jsWindow);
+        final Scriptable scope = cx.initSafeStandardObjects(jsWindow);
         configureRhino(webClient, browserVersion, scope, jsWindow);
 
         final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
@@ -255,9 +255,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         jsWindow.setPrototypes(prototypes);
-        jsWindow.initialize(webWindow, page);
+        jsWindow.initialize(scope, webWindow, page);
 
-        applyPolyfills(webClient, browserVersion, context, scope, jsWindow);
+        applyPolyfills(webClient, browserVersion, cx, scope, jsWindow);
     }
 
     /**
@@ -457,7 +457,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Intl intl = new Intl();
         intl.setParentScope(scope);
         globalThis.defineProperty(intl.getClassName(), intl, ScriptableObject.DONTENUM);
-        intl.defineProperties(browserVersion);
+        intl.defineProperties(scope, browserVersion);
     }
 
     /**

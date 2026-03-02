@@ -18,6 +18,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -33,21 +34,23 @@ public class Intl extends HtmlUnitScriptable {
 
     /**
      * Define needed properties.
+     * @param scope the scope
      * @param browserVersion the browser version
      */
-    public void defineProperties(final BrowserVersion browserVersion) {
-        define(Collator.class, browserVersion);
-        define(DateTimeFormat.class, browserVersion);
-        define(NumberFormat.class, browserVersion);
+    public void defineProperties(final Scriptable scope, final BrowserVersion browserVersion) {
+        define(scope, Collator.class, browserVersion);
+        define(scope, DateTimeFormat.class, browserVersion);
+        define(scope, NumberFormat.class, browserVersion);
         if (browserVersion.hasFeature(JS_INTL_V8_BREAK_ITERATOR)) {
-            define(V8BreakIterator.class, browserVersion);
+            define(scope, V8BreakIterator.class, browserVersion);
         }
     }
 
-    private void define(final Class<? extends HtmlUnitScriptable> c, final BrowserVersion browserVersion) {
+    private void define(final Scriptable scope, final Class<? extends HtmlUnitScriptable> c,
+            final BrowserVersion browserVersion) {
         try {
             final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(c, browserVersion);
-            final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this);
+            final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, scope);
             final FunctionObject functionObject =
                     new FunctionObject(config.getJsConstructor().getKey(),
                             config.getJsConstructor().getValue(), this);

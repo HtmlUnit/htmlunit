@@ -731,10 +731,11 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
     /**
      * Initializes this window.
+     * @param scope the scope
      * @param webWindow the web window corresponding to this window
      * @param pageToEnclose the page that will become the enclosing page
      */
-    public void initialize(final WebWindow webWindow, final Page pageToEnclose) {
+    public void initialize(final Scriptable scope, final WebWindow webWindow, final Page pageToEnclose) {
         webWindow_ = webWindow;
         webWindow_.setScriptableObject(this);
 
@@ -751,7 +752,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         else {
             document_ = new HTMLDocument();
         }
-        document_.setParentScope(this);
+        document_.setParentScope(scope);
         document_.setPrototype(getPrototype(document_.getClass()));
         document_.setWindow(this);
 
@@ -768,19 +769,19 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         documentProxy_ = new DocumentProxy(webWindow_);
 
         navigator_ = new Navigator();
-        navigator_.setParentScope(this);
+        navigator_.setParentScope(scope);
         navigator_.setPrototype(getPrototype(navigator_.getClass()));
 
         screen_ = new Screen(getWebWindow().getScreen());
-        screen_.setParentScope(this);
+        screen_.setParentScope(scope);
         screen_.setPrototype(getPrototype(screen_.getClass()));
 
         history_ = new History();
-        history_.setParentScope(this);
+        history_.setParentScope(scope);
         history_.setPrototype(getPrototype(history_.getClass()));
 
         location_ = new Location();
-        location_.setParentScope(this);
+        location_.setParentScope(scope);
         location_.setPrototype(getPrototype(location_.getClass()));
         location_.initialize(this, this, pageToEnclose);
 
