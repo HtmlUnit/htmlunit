@@ -28,7 +28,10 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.Page;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -146,10 +149,35 @@ public class Location extends HtmlUnitScriptable {
     private String hash_;
 
     /**
-     * Creates an instance.
+     * JavaScript constructor.
+     * @param cx the current context
+     * @param scope the scope
+     * @param args the arguments to the WebSocket constructor
+     * @param ctorObj the function object
+     * @param inNewExpr Is new or not
+     * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public void jsConstructor() {
+    public static Location jsConstructor(final Context cx, final Scriptable scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
+
+        final Location location = new Location();
+        location.setParentScope(scope);
+        location.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
+
+        location.initialize(scope, null, null);
+
+        return location;
+    }
+
+    /**
+     * Initializes this Location.
+     *
+     * @param scope the scope
+     * @param window the window that this location belongs to
+     * @param page the page that will become the enclosing page
+     */
+    public void initialize(final Scriptable scope, final Window window, final Page page) {
         final int attributes = ScriptableObject.PERMANENT | ScriptableObject.READONLY;
 
         FunctionObject functionObject = new FunctionObject(METHOD_ASSIGN.getName(), METHOD_ASSIGN, this);
@@ -173,15 +201,7 @@ public class Location extends HtmlUnitScriptable {
         defineProperty("port", null, GETTER_PORT, SETTER_PORT, attributes);
         defineProperty("protocol", null, GETTER_PROTOCOL, SETTER_PROTOCOL, attributes);
         defineProperty("search", null, GETTER_SEARCH, SETTER_SEARCH, attributes);
-    }
 
-    /**
-     * Initializes this Location.
-     *
-     * @param window the window that this location belongs to
-     * @param page the page that will become the enclosing page
-     */
-    public void initialize(final Window window, final Page page) {
         window_ = window;
         if (window_ != null && page != null) {
             setHash(null, page.getUrl().getRef());
