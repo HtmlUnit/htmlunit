@@ -131,7 +131,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final WorkerJavaScriptConfiguration jsConfig = WorkerJavaScriptConfiguration.getInstance(browserVersion);
 
         final ClassConfiguration config = jsConfig.getDedicatedWorkerGlobalScopeClassConfiguration();
-        final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this);
+        final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, scope);
         setPrototype(prototype);
 
         final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
@@ -145,7 +145,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
                         config.getJsConstructor().getValue(), this);
         functionObject.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
 
-        JavaScriptEngine.configureGlobalThis(this, scope, config, functionObject, jsConfig,
+        JavaScriptEngine.configureGlobalThis(scope, this, config, functionObject, jsConfig,
                 browserVersion, prototypes, prototypesPerJSName);
         // remove some aliases
         delete("webkitURL");

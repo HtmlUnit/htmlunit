@@ -228,7 +228,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         prototypes.put(windowConfig.getHostClass(), windowPrototype);
         prototypesPerJSName.put(windowConfig.getClassName(), windowPrototype);
 
-        configureGlobalThis(jsWindow, scope, windowConfig, functionObject, jsConfig_, browserVersion, prototypes, prototypesPerJSName);
+        configureGlobalThis(scope, jsWindow, windowConfig, functionObject, jsConfig_, browserVersion, prototypes, prototypesPerJSName);
 
         // TODO remove the cast
         URLSearchParams.NativeParamsIterator.init((ScriptableObject) scope, "URLSearchParams Iterator");
@@ -245,10 +245,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         // special handling for image/option
         final Method imageCtor = HTMLImageElement.class.getDeclaredMethod("jsConstructorImage");
-        additionalCtor(jsWindow, prototypesPerJSName.get("HTMLImageElement"), imageCtor, "Image", "HTMLImageElement");
+        additionalCtor(scope, jsWindow, prototypesPerJSName.get("HTMLImageElement"), imageCtor, "Image", "HTMLImageElement");
         final Method optionCtor = HTMLOptionElement.class.getDeclaredMethod("jsConstructorOption",
                 Object.class, String.class, boolean.class, boolean.class);
-        additionalCtor(jsWindow, prototypesPerJSName.get("HTMLOptionElement"), optionCtor, "Option", "HTMLOptionElement");
+        additionalCtor(scope, jsWindow, prototypesPerJSName.get("HTMLOptionElement"), optionCtor, "Option", "HTMLOptionElement");
 
         if (!webClient.getOptions().isWebSocketEnabled()) {
             deleteProperties(jsWindow, "WebSocket");
@@ -263,8 +263,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * @param globalThis the js scope to set up
      * @param scope the scope
+     * @param globalThis the globalThis to set up
      * @param scopeConfig the {@link ClassConfiguration} that is used for the scope
      * @param scopeContructorFunctionObject the (already registered) ctor
      * @param jsConfig the complete jsConfig
@@ -273,8 +273,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param prototypesPerJSName map of prototypes with the class name as key
      * @throws Exception in case of error
      */
-    public static void configureGlobalThis(final HtmlUnitScriptable globalThis,
+    public static void configureGlobalThis(
             final Scriptable scope,
+            final HtmlUnitScriptable globalThis,
             final ClassConfiguration scopeConfig,
             final FunctionObject scopeContructorFunctionObject,
             final AbstractJavaScriptConfiguration jsConfig,
@@ -282,7 +283,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final Map<Class<? extends Scriptable>, Scriptable> prototypes,
             final Map<String, Scriptable> prototypesPerJSName) throws Exception {
 
-        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(globalThis);
+        final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(scope);
 
         final Map<String, Function> ctorPrototypesPerJSName = new HashMap<>();
         for (final ClassConfiguration config : jsConfig.getAll()) {
@@ -336,7 +337,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         }
                     }
                     else {
-                        final FunctionObject function = new FunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), globalThis);
+                        final FunctionObject function = new FunctionObject(jsConstructor.getKey(), jsConstructor.getValue(), scope);
                         ctorPrototypesPerJSName.put(jsClassName, function);
 
                         addAsConstructorAndAlias(function, scope, globalThis, prototype, config);
@@ -383,12 +384,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
     }
 
-    private static void additionalCtor(final Window window, final Scriptable proto,
+    private static void additionalCtor(final Scriptable scope, final Window window, final Scriptable proto,
             final Method ctorMethod, final String prop, final String clazzName) throws Exception {
-        final FunctionObject function = new FunctionObject(prop, ctorMethod, window);
+        final FunctionObject function = new FunctionObject(prop, ctorMethod, scope);
         final Object prototypeProperty = ScriptableObject.getProperty(window, clazzName);
         try {
-            function.addAsConstructor(window, proto, ScriptableObject.DONTENUM);
+            function.addAsConstructor(scope, proto, ScriptableObject.DONTENUM);
         }
         catch (final Exception e) {
             // TODO see issue #1897
@@ -428,21 +429,21 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         deleteProperties(globalThis, "Continuation", "StopIteration", "uneval", "global");
 
         // Rhino defines too many methods for us, particularly since implementation of ECMAScript5
-        final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(globalThis, "String");
+        final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, "String");
         deleteProperties(stringPrototype, "equals", "equalsIgnoreCase", "toSource");
 
-        final ScriptableObject numberPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(globalThis, "Number");
+        final ScriptableObject numberPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, "Number");
         deleteProperties(numberPrototype, "toSource");
-        final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(globalThis, "Date");
+        final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, "Date");
         deleteProperties(datePrototype, "toSource");
 
-        removePrototypeProperties(globalThis, "Object", "toSource");
-        removePrototypeProperties(globalThis, "Array", "toSource");
-        removePrototypeProperties(globalThis, "Function", "toSource");
+        removePrototypeProperties(scope, "Object", "toSource");
+        removePrototypeProperties(scope, "Array", "toSource");
+        removePrototypeProperties(scope, "Function", "toSource");
 
         deleteProperties(globalThis, "isXMLName");
 
-        NativeFunctionToStringFunction.installFix(globalThis, browserVersion);
+        NativeFunctionToStringFunction.installFix(scope, browserVersion);
 
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(globalThis, "Error");
         if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
@@ -522,13 +523,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     /**
      * Removes prototype properties.
-     * @param destination the object from whose prototype the properties are to be removed
+     * @param scope the scope to search for the prototype
      * @param className the class for which properties should be removed
      * @param properties the properties to remove
      */
-    private static void removePrototypeProperties(final Scriptable destination, final String className,
+    private static void removePrototypeProperties(final Scriptable scope, final String className,
             final String... properties) {
-        final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(destination, className);
+        final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, className);
         for (final String property : properties) {
             prototype.delete(property);
         }
@@ -564,7 +565,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private static void configureConstantsStaticPropertiesAndStaticFunctions(final ClassConfiguration config,
             final Scriptable scope, final ScriptableObject scriptable) {
         configureConstants(config, scriptable);
-        configureStaticProperties(config, scriptable);
+        configureStaticProperties(config, scope, scriptable);
         configureStaticFunctions(config, scope, scriptable);
     }
 
@@ -577,20 +578,21 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private static void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
             final Scriptable scope, final ScriptableObject scriptable) {
         configureConstants(config, scriptable);
-        configureProperties(config, scriptable);
-        configureFunctions(config, scriptable);
+        configureProperties(config, scope, scriptable);
+        configureFunctions(config, scope, scriptable);
         configureSymbolConstants(config, scriptable);
         configureSymbols(config, scope, scriptable);
     }
 
-    private static void configureFunctions(final ClassConfiguration config, final ScriptableObject scriptable) {
+    private static void configureFunctions(final ClassConfiguration config,
+            final Scriptable scope, final ScriptableObject scriptable) {
         // the functions
         final Map<String, Method> functionMap = config.getFunctionMap();
         if (functionMap != null) {
             for (final Entry<String, Method> functionInfo : functionMap.entrySet()) {
                 final String functionName = functionInfo.getKey();
                 final Method method = functionInfo.getValue();
-                final FunctionObject functionObject = new FunctionObject(functionName, method, scriptable);
+                final FunctionObject functionObject = new FunctionObject(functionName, method, scope);
                 scriptable.defineProperty(functionName, functionObject, ScriptableObject.EMPTY);
             }
         }
@@ -605,7 +607,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
     }
 
-    private static void configureProperties(final ClassConfiguration config, final ScriptableObject scriptable) {
+    private static void configureProperties(final ClassConfiguration config,
+            final Scriptable scope, final ScriptableObject scriptable) {
         final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
         if (propertyMap != null) {
             for (final Entry<String, PropertyInfo> propertyEntry : propertyMap.entrySet()) {
@@ -617,7 +620,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
     }
 
-    private static void configureStaticProperties(final ClassConfiguration config, final ScriptableObject scriptable) {
+    private static void configureStaticProperties(final ClassConfiguration config,
+            final Scriptable scope, final ScriptableObject scriptable) {
         final Map<String, PropertyInfo> staticPropertyMap = config.getStaticPropertyMap();
         if (staticPropertyMap != null) {
             for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : staticPropertyMap.entrySet()) {
@@ -1460,10 +1464,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final ProxyAutoConfigJavaScriptConfiguration jsConfig =
                     ProxyAutoConfigJavaScriptConfiguration.getInstance(browserVersion);
 
-            final ScriptableObject scope = cx.initSafeStandardObjects();
+            final ScriptableObject globalThis = (ScriptableObject) JavaScriptEngine.newObject(null);
+            final Scriptable scope = cx.initSafeStandardObjects(globalThis);
 
             for (final ClassConfiguration config : jsConfig.getAll()) {
-                configureFunctions(config, scope);
+                configureFunctions(config, scope, null);
             }
 
             cx.evaluateString(scope, "var ProxyConfig = function() {}; ProxyConfig.bindings = {}; ProxyConfig", "<init>", 1, null);
