@@ -14,12 +14,12 @@
  */
 package org.htmlunit.httpclient;
 
-import java.util.Date;
+import java.time.Instant;
 
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SetCookie;
-import org.apache.http.impl.cookie.BasicMaxAgeHandler;
-import org.apache.http.util.Args;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.cookie.SetCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicMaxAgeHandler;
+import org.apache.hc.core5.util.Args;
 
 /**
  * Customized BasicMaxAgeHandler for HtmlUnit.
@@ -42,7 +42,7 @@ final class HtmlUnitMaxAgeHandler extends BasicMaxAgeHandler {
         catch (final NumberFormatException e) {
             throw new MalformedCookieException("Invalid 'max-age' attribute: " + value, e);
         }
-        cookie.setExpiryDate(new Date(System.currentTimeMillis() + age * 1000L));
+        cookie.setExpiryDate(Instant.ofEpochMilli(System.currentTimeMillis() + age * 1000L));
     }
 
 }

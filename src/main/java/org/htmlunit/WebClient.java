@@ -56,9 +56,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.NoHttpResponseException;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.auth.CredentialsProvider;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.core5.http.NoHttpResponseException;
 import org.htmlunit.attachment.Attachment;
 import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.csp.Policy;

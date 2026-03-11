@@ -17,9 +17,9 @@ package org.htmlunit.httpclient;
 import java.io.Serializable;
 import java.security.Principal;
 
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.util.LangUtils;
+import org.apache.hc.client5.http.auth.Credentials;
+import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
+import org.apache.hc.core5.util.LangUtils;
 
 /**
  * Wrapper for {@link UsernamePasswordCredentials} to avoid direct references spread around.
@@ -40,11 +40,11 @@ public class HtmlUnitUsernamePasswordCredentials implements Credentials, Seriali
     public HtmlUnitUsernamePasswordCredentials(final String userName, final char[] password) {
         httpClientUsernamePasswordCredentials_ = new UsernamePasswordCredentials(
                 userName,
-                password == null ? null : String.valueOf(password));
+                password);
     }
 
     @Override
-    public String getPassword() {
+    public char[] getPassword() {
         return httpClientUsernamePasswordCredentials_.getPassword();
     }
 

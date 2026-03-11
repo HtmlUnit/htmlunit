@@ -14,36 +14,40 @@
  */
 package org.htmlunit.httpclient;
 
-import org.apache.http.cookie.ClientCookie;
+import java.time.Instant;
+
+import org.apache.hc.client5.http.cookie.Cookie;
 import org.htmlunit.http.Cookie;
 
 /**
- * Wrapper for {@link ClientCookie}.
+ * Wrapper for {@link Cookie}.
  *
  * @author Ronald Brill
  */
-public class HttpClientCookie extends Cookie {
+public class HttpClientCookie extends org.htmlunit.http.Cookie {
 
-    private final ClientCookie httpClientCookie_;
+    private final Cookie httpClientCookie_;
 
     /**
      * Creates a new HtmlUnit cookie from the HttpClient cookie provided.
      * @param clientCookie the HttpClient cookie
      */
-    public HttpClientCookie(final ClientCookie clientCookie) {
+    public HttpClientCookie(final Cookie clientCookie) {
         // just use this ctor but in fact we will overwrite by setting the httpClient Cookie
         super(clientCookie.getDomain(), clientCookie.getName(),
                 clientCookie.getValue(), clientCookie.getPath(),
-                clientCookie.getExpiryDate(), clientCookie.isSecure(),
+                clientCookie.getExpiryInstant() != null 
+                    ? java.util.Date.from(clientCookie.getExpiryInstant()) : null,
+                clientCookie.isSecure(),
                 clientCookie.getAttribute("httponly") != null, clientCookie.getAttribute("samesite"));
 
         httpClientCookie_ = clientCookie;
     }
 
     /**
-     * @return an HttpClient ClientCookie version of this cookie
+     * @return an HttpClient Cookie version of this cookie
      */
-    public ClientCookie getHttpClientCookie() {
+    public Cookie getHttpClientCookie() {
         return httpClientCookie_;
     }
 }

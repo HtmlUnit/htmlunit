@@ -16,14 +16,14 @@ package org.htmlunit.httpclient;
 
 import java.net.URI;
 
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
-
 /**
- * Customized HttpOptions for HtmlUnit to be an HttpEntityEnclosingRequestBase.
+ * Customized HttpOptions for HtmlUnit.
+ * In HttpClient 5, HttpOptions natively supports entity bodies, so this class
+ * is kept for backwards compatibility but just extends the standard class.
  *
  * @author Ronald Brill
  */
-public class HttpOptions extends HttpEntityEnclosingRequestBase {
+public class HttpOptions extends org.apache.hc.client5.http.classic.methods.HttpOptions {
 
     /**
      * Ctor.
@@ -37,8 +37,7 @@ public class HttpOptions extends HttpEntityEnclosingRequestBase {
      * @param uri the uri
      */
     public HttpOptions(final URI uri) {
-        super();
-        setURI(uri);
+        super(uri);
     }
 
     /**
@@ -46,12 +45,6 @@ public class HttpOptions extends HttpEntityEnclosingRequestBase {
      * @throws IllegalArgumentException if the uri is invalid.
      */
     public HttpOptions(final String uri) {
-        super();
-        setURI(URI.create(uri));
-    }
-
-    @Override
-    public String getMethod() {
-        return org.apache.http.client.methods.HttpOptions.METHOD_NAME;
+        super(uri);
     }
 }

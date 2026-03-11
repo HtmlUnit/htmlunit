@@ -14,10 +14,10 @@
  */
 package org.htmlunit.httpclient;
 
-import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.impl.cookie.BasicSecureHandler;
-import org.apache.http.util.Args;
+import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.CookieOrigin;
+import org.apache.hc.client5.http.impl.cookie.BasicSecureHandler;
+import org.apache.hc.core5.util.Args;
 
 /**
  * Customized BasicSecureHandler for HtmlUnit.
