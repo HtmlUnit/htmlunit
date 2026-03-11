@@ -44,6 +44,7 @@ import org.w3c.dom.Node;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 public class HtmlSelect extends HtmlElement implements DisabledElement, SubmittableElement,
                 LabelableElement, ValidatableElement {

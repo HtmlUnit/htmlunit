@@ -41,6 +41,7 @@ import org.w3c.dom.Node;
  * @author Amit Khanna
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement,
                 LabelableElement, SelectableTextInput, ValidatableElement {

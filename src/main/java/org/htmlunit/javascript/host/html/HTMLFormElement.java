@@ -105,23 +105,21 @@ public class HTMLFormElement extends HTMLElement implements Function {
     public HTMLFormControlsCollection getElements() {
         final HtmlForm htmlForm = getHtmlForm();
 
-        final HTMLFormControlsCollection elements = new HTMLFormControlsCollection(htmlForm,
-                false) {
+        final HTMLFormControlsCollection elements = new HTMLFormControlsCollection(htmlForm, false) {
             @Override
             protected Object getWithPreemption(final String name) {
-                final List<HtmlElement> elements = findElements(name);
-                if (elements.isEmpty()) {
+                final List<HtmlElement> elementsForName = findElements(name);
+                if (elementsForName.isEmpty()) {
                     return NOT_FOUND;
                 }
-                if (elements.size() == 1) {
-                    return getScriptableFor(elements.get(0));
+                if (elementsForName.size() == 1) {
+                    return getScriptableFor(elementsForName.get(0));
                 }
 
-                final List<DomNode> nodes = new ArrayList<>(elements);
+                final List<DomNode> nodes = new ArrayList<>(elementsForName);
                 final RadioNodeList nodeList = new RadioNodeList(getHtmlForm(), nodes);
                 nodeList.setElementsSupplier(
-                        (Supplier<List<DomNode>> & Serializable)
-                        () -> new ArrayList<>(findElements(name)));
+                        (Supplier<List<DomNode>> & Serializable) () -> new ArrayList<>(findElements(name)));
                 return nodeList;
             }
         };

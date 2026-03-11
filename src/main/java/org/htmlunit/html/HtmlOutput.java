@@ -24,6 +24,7 @@ import org.htmlunit.util.StringUtils;
  *
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 public class HtmlOutput extends HtmlElement implements LabelableElement, ValidatableElement {
 

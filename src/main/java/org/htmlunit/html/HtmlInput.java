@@ -56,6 +56,7 @@ import org.xml.sax.helpers.AttributesImpl;
  * @author Frank Danek
  * @author Anton Demydenko
  * @author Ronny Shapiro
+ * @author Lai Quang Duong
  */
 public abstract class HtmlInput extends HtmlElement implements DisabledElement, SubmittableElement,
     ValidatableElement  {

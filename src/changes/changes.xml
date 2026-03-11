@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="update" dev="Lai Quang Duong">
+                In sync with the spec, a form now maintains a past names map at the form level, not on individual elements.
+                The map is populated only when form.xyz resolves to a single element, and entries are invalidated when the element's form owner changes.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-logging to 1.3.6.
             </action>
@@ -20,7 +24,7 @@
             <action type="update" dev="RhinoTeam">
                 core-js: Convert XML objects from 'IdScriptableObject's to descriptors.
             </action>
-            <action type="update" dev="rbri" issue="#1092">
+            <action type="fix" dev="rbri" issue="#1092">
                 select.remove() with no arguments now removes itself from the DOM.
             </action>
             <action type="update" dev="RhinoTeam">

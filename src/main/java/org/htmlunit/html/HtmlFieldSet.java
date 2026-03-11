@@ -28,6 +28,7 @@ import org.htmlunit.util.StringUtils;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class HtmlFieldSet extends HtmlElement implements DisabledElement, ValidatableElement {
 
