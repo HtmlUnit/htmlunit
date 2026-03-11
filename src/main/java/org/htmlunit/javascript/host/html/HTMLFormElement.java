@@ -30,7 +30,6 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
-import org.htmlunit.html.FormFieldWithNameHistory;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
@@ -110,7 +109,20 @@ public class HTMLFormElement extends HTMLElement implements Function {
                 false) {
             @Override
             protected Object getWithPreemption(final String name) {
-                return HTMLFormElement.this.getWithPreemption(name);
+                final List<HtmlElement> elements = findElements(name);
+                if (elements.isEmpty()) {
+                    return NOT_FOUND;
+                }
+                if (elements.size() == 1) {
+                    return getScriptableFor(elements.get(0));
+                }
+
+                final List<DomNode> nodes = new ArrayList<>(elements);
+                final RadioNodeList nodeList = new RadioNodeList(getHtmlForm(), nodes);
+                nodeList.setElementsSupplier(
+                        (Supplier<List<DomNode>> & Serializable)
+                        () -> new ArrayList<>(findElements(name)));
+                return nodeList;
             }
         };
 
@@ -366,6 +378,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
 
     /**
      * Overridden to allow the retrieval of certain form elements by ID or name.
+     * @see <a href="https://html.spec.whatwg.org/multipage/forms.html#dom-form-nameditem">
+     *     HTML spec - form named item</a>
      *
      * @param name {@inheritDoc}
      * @return {@inheritDoc}
@@ -378,10 +392,13 @@ public class HTMLFormElement extends HTMLElement implements Function {
         final List<HtmlElement> elements = findElements(name);
 
         if (elements.isEmpty()) {
-            return NOT_FOUND;
+            final HtmlElement element = getHtmlForm().getNamedElement(name);
+            return element != null ? getScriptableFor(element) : NOT_FOUND;
         }
         if (elements.size() == 1) {
-            return getScriptableFor(elements.get(0));
+            final HtmlElement element = elements.get(0);
+            getHtmlForm().registerPastName(name, element);
+            return getScriptableFor(element);
         }
         final List<DomNode> nodes = new ArrayList<>(elements);
 
@@ -441,7 +458,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
         }
 
         for (final HtmlElement element : form.getElementsJS()) {
-            if (isAccessibleByIdOrName(element, name)) {
+            if (name.equals(element.getId())
+                    || name.equals(element.getAttributeDirect(DomElement.NAME_ATTRIBUTE))) {
                 elements.add(element);
             }
         }
@@ -467,7 +485,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
         }
 
         for (final HtmlElement node : form.getElementsJS()) {
-            if (isAccessibleByIdOrName(node, name)) {
+            if (name.equals(node.getId())
+                    || name.equals(node.getAttributeDirect(DomElement.NAME_ATTRIBUTE))) {
                 return node;
             }
         }
@@ -482,35 +501,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
         }
 
         return null;
-    }
-
-    /**
-     * Indicates if the element can be reached by id or name in expressions like "myForm.myField".
-     * @param element the element to test
-     * @param name the name used to address the element
-     * @return {@code true} if this element matches the conditions
-     */
-    private static boolean isAccessibleByIdOrName(final HtmlElement element, final String name) {
-        if (name.equals(element.getId())) {
-            return true;
-        }
-
-        if (name.equals(element.getAttributeDirect(DomElement.NAME_ATTRIBUTE))) {
-            return true;
-        }
-
-        if (element instanceof FormFieldWithNameHistory elementWithNames) {
-
-            if (name.equals(elementWithNames.getOriginalName())) {
-                return true;
-            }
-
-            if (elementWithNames.getNewNames().contains(name)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

@@ -15,9 +15,6 @@
 package org.htmlunit.html;
 
 import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -46,14 +43,12 @@ import org.w3c.dom.Node;
  * @author Frank Danek
  */
 public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, SelectableTextInput, FormFieldWithNameHistory, ValidatableElement {
+                LabelableElement, SelectableTextInput, ValidatableElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "textarea";
 
     private String defaultValue_;
     private String valueAtFocus_;
-    private final String originalName_;
-    private Collection<String> newNames_ = Collections.emptySet();
     private String customValidity_;
 
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
@@ -69,7 +64,6 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     HtmlTextArea(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        originalName_ = getNameAttribute();
     }
 
     /**
@@ -514,39 +508,6 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * {@inheritDoc}
-     */
-    @Override
-    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
-        if (DomElement.NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
-            if (newNames_.isEmpty()) {
-                newNames_ = new HashSet<>();
-            }
-            newNames_.add(attributeValue);
-        }
-        super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
-                notifyMutationObservers);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOriginalName() {
-        return originalName_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Collection<String> getNewNames() {
-        return newNames_;
-    }
-
-    /**
-     * {@inheritDoc}
      * @return {@code true} to make generated XML readable as HTML
      */
     @Override
@@ -596,7 +557,6 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         final HtmlTextArea newnode = (HtmlTextArea) super.cloneNode(deep);
         newnode.selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
         newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
-        newnode.newNames_ = new HashSet<>(newNames_);
 
         return newnode;
     }

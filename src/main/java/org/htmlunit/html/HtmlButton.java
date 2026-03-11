@@ -18,9 +18,6 @@ import static org.htmlunit.BrowserVersionFeatures.HTMLBUTTON_WILL_VALIDATE_IGNOR
 import static org.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -47,7 +44,7 @@ import org.w3c.dom.Node;
  * @author Sven Strickroth
  */
 public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, FormFieldWithNameHistory, ValidatableElement {
+                LabelableElement, ValidatableElement {
 
     private static final Log LOG = LogFactory.getLog(HtmlButton.class);
 
@@ -58,8 +55,6 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     private static final String TYPE_RESET = "reset";
     private static final String TYPE_BUTTON = "button";
 
-    private final String originalName_;
-    private Collection<String> newNames_ = Collections.emptySet();
     private String customValidity_;
 
     /**
@@ -72,7 +67,6 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     HtmlButton(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        originalName_ = getNameAttribute();
     }
 
     /**
@@ -322,39 +316,6 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     public final String getOnBlurAttribute() {
         return getAttributeDirect("onblur");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
-        if (NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
-            if (newNames_.isEmpty()) {
-                newNames_ = new HashSet<>();
-            }
-            newNames_.add(attributeValue);
-        }
-        super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
-                notifyMutationObservers);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOriginalName() {
-        return originalName_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Collection<String> getNewNames() {
-        return newNames_;
     }
 
     /**

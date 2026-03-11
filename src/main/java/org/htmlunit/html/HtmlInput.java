@@ -20,9 +20,6 @@ import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_WEEK_SUPPORTED;
 import static org.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
 
 import java.net.MalformedURLException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 
@@ -61,7 +58,7 @@ import org.xml.sax.helpers.AttributesImpl;
  * @author Ronny Shapiro
  */
 public abstract class HtmlInput extends HtmlElement implements DisabledElement, SubmittableElement,
-    FormFieldWithNameHistory, ValidatableElement  {
+    ValidatableElement  {
 
     private static final Log LOG = LogFactory.getLog(HtmlInput.class);
 
@@ -70,8 +67,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     private String rawValue_;
     private boolean isValueDirty_;
-    private final String originalName_;
-    private Collection<String> newNames_ = Collections.emptySet();
     private boolean valueModifiedByJavascript_;
     private Object valueAtFocus_;
     private String customValidity_;
@@ -97,7 +92,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
         rawValue_ = getValueAttribute();
-        originalName_ = getNameAttribute();
     }
 
     /**
@@ -633,12 +627,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
         final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
-        if (NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
-            if (newNames_.isEmpty()) {
-                newNames_ = new HashSet<>();
-            }
-            newNames_.add(attributeValue);
-        }
 
         if (TYPE_ATTRIBUTE.equals(qualifiedNameLC)) {
             changeType(attributeValue, true);
@@ -655,22 +643,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
         super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObservers);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOriginalName() {
-        return originalName_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Collection<String> getNewNames() {
-        return newNames_;
     }
 
     /**
@@ -938,17 +910,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     protected boolean isMinMaxLengthSupported() {
         return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode cloneNode(final boolean deep) {
-        final HtmlInput newnode = (HtmlInput) super.cloneNode(deep);
-        newnode.newNames_ = new HashSet<>(newNames_);
-
-        return newnode;
     }
 
     /**
