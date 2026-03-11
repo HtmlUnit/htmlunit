@@ -783,10 +783,10 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         location_ = new Location();
         location_.setParentScope(scope);
         location_.setPrototype(getPrototype(location_.getClass()));
-        location_.initialize(this, this, pageToEnclose);
+        location_.initialize(scope, this, pageToEnclose);
 
         // like a JS new Object()
-        controllers_ = JavaScriptEngine.newObject(this);
+        controllers_ = JavaScriptEngine.newObject(scope);
 
         if (webWindow_ instanceof TopLevelWindow window) {
             final WebWindow opener = window.getOpener();
