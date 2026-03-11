@@ -24,6 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -91,6 +92,13 @@ public class HtmlForm extends HtmlElement {
     private static final Pattern SUBMIT_CHARSET_PATTERN = Pattern.compile("[ ,].*");
 
     private boolean isPreventDefault_;
+
+    /**
+     * A map that holds past names (name or id attribute) to elements belonging to this form.
+     * @see <a href="https://html.spec.whatwg.org/multipage/forms.html#the-form-element:the-form-element-10">
+     *     HTML spec - past names map</a>
+     */
+    private Map<String, HtmlElement> pastNamesMap_;
 
     /**
      * Creates an instance.
@@ -1004,5 +1012,35 @@ public class HtmlForm extends HtmlElement {
         else {
             removeAttribute(ATTRIBUTE_NOVALIDATE);
         }
+    }
+
+    /**
+     * Register an element to the past names map with the specified name.
+     * @param name name or id attribute of the element
+     * @param element the element to register
+     */
+    public void registerPastName(final String name, final HtmlElement element) {
+        if (pastNamesMap_ == null) {
+            pastNamesMap_ = new HashMap<>();
+        }
+        pastNamesMap_.put(name, element);
+    }
+
+    /**
+     * Return the element registered in the past names map with the specified name.
+     * If the element is no longer owned by this form, the entry is removed and null is returned.
+     * @param name name or id attribute of the element
+     * @return the element, or null if not found or no longer owned by this form
+     */
+    public HtmlElement getNamedElement(final String name) {
+        if (pastNamesMap_ == null) {
+            return null;
+        }
+        final HtmlElement element = pastNamesMap_.get(name);
+        if (element != null && element.getEnclosingForm() != this) {
+            pastNamesMap_.remove(name);
+            return null;
+        }
+        return element;
     }
 }

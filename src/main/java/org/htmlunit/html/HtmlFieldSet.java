@@ -14,9 +14,6 @@
  */
 package org.htmlunit.html;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
@@ -32,13 +29,11 @@ import org.htmlunit.util.StringUtils;
  * @author Frank Danek
  * @author Ronald Brill
  */
-public class HtmlFieldSet extends HtmlElement implements DisabledElement, ValidatableElement, FormFieldWithNameHistory {
+public class HtmlFieldSet extends HtmlElement implements DisabledElement, ValidatableElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "fieldset";
 
-    private final String originalName_;
-    private Collection<String> newNames_ = Collections.emptySet();
     private String customValidity_;
 
     /**
@@ -51,7 +46,6 @@ public class HtmlFieldSet extends HtmlElement implements DisabledElement, Valida
     HtmlFieldSet(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        originalName_ = getAttributeDirect(NAME_ATTRIBUTE);
     }
 
     /**
@@ -89,39 +83,6 @@ public class HtmlFieldSet extends HtmlElement implements DisabledElement, Valida
     @Override
     public boolean isValidValidityState() {
         return !isCustomErrorValidityState();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
-        if (NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
-            if (newNames_.isEmpty()) {
-                newNames_ = new HashSet<>();
-            }
-            newNames_.add(attributeValue);
-        }
-        super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
-                notifyMutationObservers);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOriginalName() {
-        return originalName_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Collection<String> getNewNames() {
-        return newNames_;
     }
 
     /**

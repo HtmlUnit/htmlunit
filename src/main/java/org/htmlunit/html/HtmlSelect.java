@@ -17,9 +17,7 @@ package org.htmlunit.html;
 import static org.htmlunit.BrowserVersionFeatures.HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -48,13 +46,11 @@ import org.w3c.dom.Node;
  * @author Frank Danek
  */
 public class HtmlSelect extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, FormFieldWithNameHistory, ValidatableElement {
+                LabelableElement, ValidatableElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "select";
 
-    private final String originalName_;
-    private Collection<String> newNames_ = Collections.emptySet();
     /** What is the index of the HtmlOption which was last selected. */
     private int lastSelectedIndex_ = -1;
     private String customValidity_;
@@ -69,7 +65,6 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     HtmlSelect(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        originalName_ = getNameAttribute();
     }
 
     /**
@@ -650,39 +645,6 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     public final String getOnChangeAttribute() {
         return getAttributeDirect("onchange");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        final String qualifiedNameLC = StringUtils.toRootLowerCase(qualifiedName);
-        if (DomElement.NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
-            if (newNames_.isEmpty()) {
-                newNames_ = new HashSet<>();
-            }
-            newNames_.add(attributeValue);
-        }
-        super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
-                notifyMutationObservers);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getOriginalName() {
-        return originalName_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Collection<String> getNewNames() {
-        return newNames_;
     }
 
     /**

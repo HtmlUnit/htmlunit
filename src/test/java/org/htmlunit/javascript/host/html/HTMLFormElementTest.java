@@ -2532,6 +2532,101 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         accessByNameAfterNameChange("<fieldset name='originalName'><legend>Legend</legend></fieldset>");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "false", "foobar", "true",
+             "undefined", "undefined", "foobar"})
+    public void formNamedPropertyInput() throws Exception {
+        formNamedProperty("<input name='foo'>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "false", "foobar", "true",
+             "undefined", "undefined", "foobar"})
+    public void formNamedPropertyButton() throws Exception {
+        formNamedProperty("<button name='foo'>btn</button>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "false", "foobar", "true",
+             "undefined", "undefined", "foobar"})
+    public void formNamedPropertyTextarea() throws Exception {
+        formNamedProperty("<textarea name='foo'></textarea>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "false", "foobar", "true",
+             "undefined", "undefined", "foobar"})
+    public void formNamedPropertyOutput() throws Exception {
+        formNamedProperty("<output name='foo'></output>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "false", "foobar", "true",
+             "undefined", "undefined", "foobar"})
+    public void formNamedPropertyFieldset() throws Exception {
+        formNamedProperty("<fieldset name='foo'></fieldset>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "false", "foobar", "true",
+             "undefined", "undefined", "foobar"})
+    public void formNamedPropertySelect() throws Exception {
+        formNamedProperty("<select name='foo'></select>");
+    }
+
+    private void formNamedProperty(final String htmlElement) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  var f = document.getElementById('f');\n"
+            + "  var f2 = document.getElementById('f2');\n"
+
+            // changing name via form.elements.xyz does NOT register in past names map
+            + "  f.elements.foo.name = 'bar';\n"
+            + "  log(f.foo && f.foo.name);\n" // undefined
+            + "  log(f.bar === f.foo);\n" // false
+
+            // changing name via form.xyz DOES register in past names map
+            + "  f.bar.name = 'foobar';\n"
+            + "  log(f.bar.name);\n" // foobar
+            + "  log(f.bar === f.foobar);\n" // true
+
+            // move element to f2 — past names map on f should be invalidated
+            + "  f2.appendChild(f.foobar);\n"
+            + "  log(f.foobar);\n" // undefined
+            + "  log(f.bar);\n" // undefined
+            + "  log(f2.foobar.name);\n" // foobar
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form id='f'>\n"
+            + htmlElement + "\n"
+            + "</form>\n"
+            + "<form id='f2'></form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
     private void accessByNameAfterNameChange(final String htmlElement) throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
