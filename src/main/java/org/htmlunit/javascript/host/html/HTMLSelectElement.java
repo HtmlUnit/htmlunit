@@ -18,6 +18,8 @@ import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_REMOVE_IGNORE_IF_IND
 
 import java.util.List;
 
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
@@ -82,19 +84,38 @@ public class HTMLSelectElement extends HTMLElement {
 
     /**
      * Removes option at the specified index.
-     * @param index the index of the item to remove
+     * @param context the context
+     * @param scope the scope
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
      */
     @JsxFunction
-    public void remove(final int index) {
-        if (index < 0 && getBrowserVersion().hasFeature(JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE)) {
-            return;
+    public static void remove(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (!(thisObj instanceof HTMLSelectElement htmlSelect)) {
+            throw JavaScriptEngine.reportRuntimeError(
+                    "HTMLSelectElement.replace() failed - this is not a HTMLSelectElement");
         }
-        final HTMLOptionsCollection options = getOptions();
-        if (index >= options.getLength() && getBrowserVersion().hasFeature(JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE)) {
+
+        if (args.length == 0) {
+            htmlSelect.remove();
             return;
         }
 
-        getOptions().remove(index);
+        final int index = JavaScriptEngine.toInt32(args[0]);
+        if (index < 0
+                && htmlSelect.getBrowserVersion().hasFeature(JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE)) {
+            return;
+        }
+
+        final HTMLOptionsCollection options = htmlSelect.getOptions();
+        if (index >= options.getLength()
+                && htmlSelect.getBrowserVersion().hasFeature(JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE)) {
+            return;
+        }
+
+        htmlSelect.getOptions().remove(index);
     }
 
     /**

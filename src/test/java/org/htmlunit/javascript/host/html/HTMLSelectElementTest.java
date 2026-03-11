@@ -1433,6 +1433,103 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"9", "Three", "value3", "8", "8", "7", "6",
+             "5", "4", "3", "2", "[object HTMLSelectElement]"})
+    public void removeIndex() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  var select = document.form1.select1;\n"
+            + "  select.remove(0);\n"
+            + "  log(select.length);\n"
+            + "  log(select[1].text);\n"
+            + "  log(select[1].value);\n"
+
+            + "  select.remove(4);\n"
+            + "  log(select.length);\n"
+
+            + "  select.remove(-1);\n"
+            + "  log(select.length);\n"
+
+            + "  select.remove(true);\n"
+            + "  log(select.length);\n"
+
+            + "  select.remove(null);\n"
+            + "  log(select.length);\n"
+
+            + "  select.remove(undefined);\n"
+            + "  log(select.length);\n"
+
+            + "  select.remove('one');\n"
+            + "  log(select.length);\n"
+
+            + "  select.remove({});\n"
+            + "  log(select.length);\n"
+
+            + "  select.remove('1');\n"
+            + "  log(select.length);\n"
+
+            + "  log(select);\n"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "  <select name='select1'>\n"
+            + "    <option name='option1' value='value1'>One</option>\n"
+            + "    <option name='option2' value='value2' selected>Two</option>\n"
+            + "    <option name='option3' value='value3'>Three</option>\n"
+            + "    <option name='option4' value='value4'>Three</option>\n"
+            + "    <option name='option5' value='value5'>Three</option>\n"
+            + "    <option name='option6' value='value6'>Three</option>\n"
+            + "    <option name='option7' value='value7'>Three</option>\n"
+            + "    <option name='option8' value='value8'>Three</option>\n"
+            + "    <option name='option9' value='value9'>Three</option>\n"
+            + "    <option name='option10' value='value10'>Three</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLSelectElement]", "null"})
+    public void removeSelect() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  var select = document.getElementById('select1');\n"
+            + "  select.remove();\n"
+            + "  log(select);\n"
+
+            + "  select = document.getElementById('select1');\n"
+            + "  log(select);\n"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "  <select id='select1'>\n"
+            + "    <option name='option1' value='value1'>One</option>\n"
+            + "    <option name='option2' value='value2' selected>Two</option>\n"
+            + "    <option name='option3' value='value3'>Three</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Method remove on the options collection exists only for IE.
      * @throws Exception if the test fails
      */

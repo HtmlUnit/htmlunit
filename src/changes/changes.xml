@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="update" dev="rbri" issue="#1092">
+                select.remove() with no arguments now removes itself from the DOM.
+            </action>
             <action type="update" dev="RhinoTeam">
                 core-js: Enforce 'WrapFactory' users to override new `wrap(...)` and `wrapAsJavaObject(...)` methods.
             </action>
