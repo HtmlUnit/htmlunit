@@ -8,6 +8,18 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade commons-logging to 1.3.6.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Syntax error when multiple comments in braceless IF.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: iCode debug printing refactored.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Convert XML objects from 'IdScriptableObject's to descriptors.
+            </action>
             <action type="update" dev="rbri" issue="#1092">
                 select.remove() with no arguments now removes itself from the DOM.
             </action>
