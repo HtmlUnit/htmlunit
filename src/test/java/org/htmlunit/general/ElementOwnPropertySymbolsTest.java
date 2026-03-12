@@ -3463,4 +3463,52 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     public void console() throws Exception {
         testInstanceString("", "console");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [Intl]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [Intl]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Intl]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Intl]")
+    public void intl() throws Exception {
+        testString("", "Intl", false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [Intl.Collator]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [Intl.Collator]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Intl.Collator]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Intl.Collator]")
+    public void intl_Collator() throws Exception {
+        testString("", "new Intl.Collator('de')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [Intl.DateTimeFormat]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [Intl.DateTimeFormat]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Intl.DateTimeFormat]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Intl.DateTimeFormat]")
+    public void intl_DateTimeFormat() throws Exception {
+        testString("", "new Intl.DateTimeFormat('en-US')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [Intl.NumberFormat]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [Intl.NumberFormat]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Intl.NumberFormat]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Intl.NumberFormat]")
+    public void intl_NumberFormat() throws Exception {
+        testString("", "new Intl.NumberFormat('de-DE')");
+    }
 }

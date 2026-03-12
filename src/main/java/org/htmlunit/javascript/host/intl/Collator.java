@@ -23,6 +23,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxSymbolConstant;
 
 /**
  * A JavaScript object for Intl.Collator.
@@ -31,6 +32,10 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  */
 @JsxClass
 public class Collator extends HtmlUnitScriptable {
+
+    /** Symbol.toStringTag support. */
+    @JsxSymbolConstant
+    public static final String TO_STRING_TAG = "Intl.Collator";
 
     /**
      * JavaScript constructor.

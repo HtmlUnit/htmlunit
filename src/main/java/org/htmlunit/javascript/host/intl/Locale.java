@@ -29,6 +29,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSymbolConstant;
 
 /**
  * A JavaScript object for Intl.Locale.
@@ -37,6 +38,10 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  */
 @JsxClass
 public class Locale extends HtmlUnitScriptable {
+
+    /** Symbol.toStringTag support. */
+    @JsxSymbolConstant
+    public static final String TO_STRING_TAG = "Intl.Locale";
 
     private static final List<String> ALLOWED_HOUR_CYCLES = List.of("h11", "h12", "h23", "h24");
     private static final List<String> ALLOWED_CASE_FIRSTS = List.of("upper", "lower", "false");

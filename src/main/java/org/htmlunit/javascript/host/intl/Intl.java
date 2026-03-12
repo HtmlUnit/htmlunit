@@ -32,6 +32,7 @@ import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -59,6 +60,7 @@ public class Intl extends HtmlUnitScriptable {
             final BrowserVersion browserVersion) {
         final Intl intl = new Intl();
         intl.setParentScope(scope);
+        intl.defineProperty(SymbolKey.TO_STRING_TAG, "Intl", ScriptableObject.DONTENUM | ScriptableObject.READONLY);
         intl.defineProperties(scope, browserVersion);
 
         // Configure static functions (getCanonicalLocales)

@@ -33,6 +33,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxStaticFunction;
+import org.htmlunit.javascript.configuration.JsxSymbolConstant;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.util.StringUtils;
 
@@ -45,6 +46,10 @@ import org.htmlunit.util.StringUtils;
  */
 @JsxClass
 public class NumberFormat extends HtmlUnitScriptable {
+
+    /** Symbol.toStringTag support. */
+    @JsxSymbolConstant
+    public static final String TO_STRING_TAG = "Intl.NumberFormat";
 
     private static final ConcurrentHashMap<String, String> CHROME_FORMATS_ = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, String> EDGE_FORMATS_ = new ConcurrentHashMap<>();
