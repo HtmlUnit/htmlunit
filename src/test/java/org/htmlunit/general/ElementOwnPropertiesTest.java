@@ -18710,4 +18710,117 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void console() throws Exception {
         testInstanceString("", "console");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Collator(),DateTimeFormat(),DisplayNames(),DurationFormat(),getCanonicalLocales(),ListFormat(),"
+                + "Locale(),NumberFormat(),PluralRules(),RelativeTimeFormat(),Segmenter(),supportedValuesOf(),"
+                + "v8BreakIterator()",
+            EDGE = "Collator(),DateTimeFormat(),DisplayNames(),DurationFormat(),getCanonicalLocales(),ListFormat(),"
+                + "Locale(),NumberFormat(),PluralRules(),RelativeTimeFormat(),Segmenter(),supportedValuesOf(),"
+                + "v8BreakIterator()",
+            FF = "Collator(),DateTimeFormat(),DisplayNames(),DurationFormat(),getCanonicalLocales(),ListFormat(),"
+                + "Locale(),NumberFormat(),PluralRules(),RelativeTimeFormat(),Segmenter(),"
+                + "supportedValuesOf()",
+            FF_ESR = "Collator(),DateTimeFormat(),DisplayNames(),DurationFormat(),getCanonicalLocales(),ListFormat(),"
+                + "Locale(),NumberFormat(),PluralRules(),RelativeTimeFormat(),Segmenter(),"
+                + "supportedValuesOf()")
+    @HtmlUnitNYI(
+            CHROME = "Collator(),DateTimeFormat(),getCanonicalLocales(),Locale(),NumberFormat(),v8BreakIterator()",
+            EDGE = "Collator(),DateTimeFormat(),getCanonicalLocales(),Locale(),NumberFormat(),v8BreakIterator()",
+            FF = "Collator(),DateTimeFormat(),getCanonicalLocales(),Locale(),NumberFormat()",
+            FF_ESR = "Collator(),DateTimeFormat(),getCanonicalLocales(),Locale(),NumberFormat()")
+    public void intl() throws Exception {
+        testString("", "Intl", false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "compare[GC],constructor(),resolvedOptions()",
+            EDGE = "compare[GC],constructor(),resolvedOptions()",
+            FF = "compare[GC],constructor(),resolvedOptions()",
+            FF_ESR = "compare[GC],constructor(),resolvedOptions()")
+    @HtmlUnitNYI(
+            CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void intl_Collator() throws Exception {
+        testString("", "new Intl.Collator('de')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),format[GC],formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()",
+            EDGE = "constructor(),format[GC],formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()",
+            FF = "constructor(),format[GC],formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()",
+            FF_ESR = "constructor(),format[GC],formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()")
+    @HtmlUnitNYI(
+            CHROME = "constructor(),format(),resolvedOptions()",
+            EDGE = "constructor(),format(),resolvedOptions()",
+            FF = "constructor(),format(),resolvedOptions()",
+            FF_ESR = "constructor(),format(),resolvedOptions()")
+    public void intl_DateTimeFormat() throws Exception {
+        testString("", "new Intl.DateTimeFormat('en-US')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "baseName[GC],calendar[GC],caseFirst[GC],collation[GC],constructor(),firstDayOfWeek[GC],"
+                + "getCalendars(),getCollations(),getHourCycles(),getNumberingSystems(),getTextInfo(),"
+                + "getTimeZones(),getWeekInfo(),hourCycle[GC],language[GC],maximize(),minimize(),"
+                + "numberingSystem[GC],numeric[GC],region[GC],script[GC],"
+                + "toString()",
+            EDGE = "baseName[GC],calendar[GC],caseFirst[GC],collation[GC],constructor(),firstDayOfWeek[GC],"
+                + "getCalendars(),getCollations(),getHourCycles(),getNumberingSystems(),getTextInfo(),"
+                + "getTimeZones(),getWeekInfo(),hourCycle[GC],language[GC],maximize(),minimize(),"
+                + "numberingSystem[GC],numeric[GC],region[GC],script[GC],"
+                + "toString()",
+            FF = "baseName[GC],calendar[GC],caseFirst[GC],collation[GC],constructor(),hourCycle[GC],language[GC],"
+                + "maximize(),minimize(),numberingSystem[GC],numeric[GC],region[GC],script[GC],toString(),"
+                + "variants[GC]",
+            FF_ESR = "baseName[GC],calendar[GC],caseFirst[GC],collation[GC],constructor(),hourCycle[GC],language[GC],"
+                + "maximize(),minimize(),numberingSystem[GC],numeric[GC],region[GC],script[GC],"
+                + "toString()")
+    @HtmlUnitNYI(
+            CHROME = "baseName[GCE],calendar[GCE],caseFirst[GCE],collation[GCE],constructor(),hourCycle[GCE],"
+                + "language[GCE],maximize(),minimize(),numberingSystem[GCE],numeric[GCE],region[GCE],"
+                + "script[GCE],toString()",
+            EDGE = "baseName[GCE],calendar[GCE],caseFirst[GCE],collation[GCE],constructor(),hourCycle[GCE],"
+                + "language[GCE],maximize(),minimize(),numberingSystem[GCE],numeric[GCE],region[GCE],"
+                + "script[GCE],toString()",
+            FF = "baseName[GCE],calendar[GCE],caseFirst[GCE],collation[GCE],constructor(),hourCycle[GCE],"
+                + "language[GCE],maximize(),minimize(),numberingSystem[GCE],numeric[GCE],region[GCE],"
+                + "script[GCE],toString()",
+            FF_ESR = "baseName[GCE],calendar[GCE],caseFirst[GCE],collation[GCE],constructor(),hourCycle[GCE],"
+                + "language[GCE],maximize(),minimize(),numberingSystem[GCE],numeric[GCE],region[GCE],"
+                + "script[GCE],toString()")
+    public void intl_Locale() throws Exception {
+        testString("", "new Intl.Locale('de')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),format[GC],formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()",
+            EDGE = "constructor(),format[GC],formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()",
+            FF = "constructor(),format[GC],formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()",
+            FF_ESR = "constructor(),format[GC],formatRange(),formatRangeToParts(),formatToParts(),resolvedOptions()")
+    @HtmlUnitNYI(
+            CHROME = "constructor(),format(),resolvedOptions()",
+            EDGE = "constructor(),format(),resolvedOptions()",
+            FF = "constructor(),format(),resolvedOptions()",
+            FF_ESR = "constructor(),format(),resolvedOptions()")
+    public void intl_NumberFormat() throws Exception {
+        testString("", "new Intl.NumberFormat('de-DE')");
+    }
 }

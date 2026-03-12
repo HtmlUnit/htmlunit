@@ -105,7 +105,7 @@ public class Intl extends HtmlUnitScriptable {
         if (staticFunctionMap != null) {
             for (final Map.Entry<String, Method> entry : staticFunctionMap.entrySet()) {
                 final FunctionObject fn = new FunctionObject(entry.getKey(), entry.getValue(), scope);
-                target.defineProperty(entry.getKey(), fn, ScriptableObject.EMPTY);
+                target.defineProperty(entry.getKey(), fn, ScriptableObject.DONTENUM);
             }
         }
     }

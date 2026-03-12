@@ -3504,6 +3504,18 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [Intl.Locale]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [Intl.Locale]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Intl.Locale]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Intl.Locale]")
+    public void intl_Locale() throws Exception {
+        testString("", "new Intl.Locale('de')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [Intl.NumberFormat]",
             EDGE = "Symbol(Symbol.toStringTag) [C] [Intl.NumberFormat]",
             FF = "Symbol(Symbol.toStringTag) [C] [Intl.NumberFormat]",

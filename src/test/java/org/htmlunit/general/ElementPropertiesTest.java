@@ -9777,4 +9777,66 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void console() throws Exception {
         testString("", "console");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("-")
+    public void intl() throws Exception {
+        testString("", "Intl");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("-")
+    public void intl_Collator() throws Exception {
+        testString("", "new Intl.Collator('de')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("-")
+    @HtmlUnitNYI(CHROME = "format(),resolvedOptions()",
+            EDGE = "format(),resolvedOptions()",
+            FF = "format(),resolvedOptions()",
+            FF_ESR = "format(),resolvedOptions()")
+    public void intl_DateTimeFormat() throws Exception {
+        testString("", "new Intl.DateTimeFormat('en-US')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("-")
+    @HtmlUnitNYI(
+            CHROME = "baseName,calendar,caseFirst,collation,hourCycle,language,maximize(),minimize(),"
+                + "numberingSystem,numeric,region,script,toString()",
+            EDGE = "baseName,calendar,caseFirst,collation,hourCycle,language,maximize(),minimize(),"
+                + "numberingSystem,numeric,region,script,toString()",
+            FF = "baseName,calendar,caseFirst,collation,hourCycle,language,maximize(),minimize(),"
+                + "numberingSystem,numeric,region,script,toString()",
+            FF_ESR = "baseName,calendar,caseFirst,collation,hourCycle,language,maximize(),minimize(),"
+                + "numberingSystem,numeric,region,script,toString()")
+    public void intl_Locale() throws Exception {
+        testString("", "new Intl.Locale('de')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("-")
+    @HtmlUnitNYI(CHROME = "format(),resolvedOptions()",
+            EDGE = "format(),resolvedOptions()",
+            FF = "format(),resolvedOptions()",
+            FF_ESR = "format(),resolvedOptions()")
+    public void intl_NumberFormat() throws Exception {
+        testString("", "new Intl.NumberFormat('de-DE')");
+    }
 }
