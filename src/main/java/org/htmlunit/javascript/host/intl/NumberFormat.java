@@ -32,6 +32,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
+import org.htmlunit.javascript.configuration.JsxStaticFunction;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.util.StringUtils;
 
@@ -207,6 +208,18 @@ public class NumberFormat extends HtmlUnitScriptable {
     @JsxFunction
     public Scriptable resolvedOptions() {
         return JavaScriptEngine.newObject(getParentScope());
+    }
+
+    /**
+     * Returns an array containing those of the provided locales that are supported
+     * without having to fall back to the default locale.
+     * @param localesArgument A string with a BCP 47 language tag, or an array of such strings
+     * @param options unused
+     * @return an array containing supported locales
+     */
+    @JsxStaticFunction
+    public static Scriptable supportedLocalesOf(final Scriptable localesArgument, final Scriptable options) {
+        return Intl.supportedLocalesOf(localesArgument);
     }
 
     /**
