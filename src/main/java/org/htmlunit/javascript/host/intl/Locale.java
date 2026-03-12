@@ -31,7 +31,7 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for {@code Intl.Locale}.
+ * A JavaScript object for Intl.Locale.
  *
  * @author Lai Quang Duong
  */

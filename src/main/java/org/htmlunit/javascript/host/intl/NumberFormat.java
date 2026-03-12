@@ -37,7 +37,7 @@ import org.htmlunit.javascript.host.Window;
 import org.htmlunit.util.StringUtils;
 
 /**
- * A JavaScript object for {@code NumberFormat}.
+ * A JavaScript object for Intl.NumberFormat.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

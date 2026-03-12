@@ -42,7 +42,7 @@ import org.htmlunit.javascript.host.Window;
 import org.htmlunit.util.StringUtils;
 
 /**
- * A JavaScript object for {@code DateTimeFormat}.
+ * A JavaScript object for Intl.DateTimeFormat.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

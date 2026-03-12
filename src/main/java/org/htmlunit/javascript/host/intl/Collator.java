@@ -25,7 +25,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code Collator}.
+ * A JavaScript object for Intl.Collator.
  *
  * @author Ahmed Ashour
  */

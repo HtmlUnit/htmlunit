@@ -41,7 +41,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxStaticFunction;
 
 /**
- * A JavaScript object for {@code Intl}.
+ * A JavaScript object for Intl.
  *
  * @author Ahmed Ashour
  * @author Lai Quang Duong
