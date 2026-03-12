@@ -45,6 +45,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
