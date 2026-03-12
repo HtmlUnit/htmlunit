@@ -1014,7 +1014,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwaiting[GSCE],onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],"
                 + "onwebkitanimationstart[GSCE],onwebkittransitionend[GSCE],onwheel[GSCE],open(),opener[GSCE],"
                 + "outerHeight[GSCE],outerWidth[GSCE],pageXOffset[GCE],pageYOffset[GCE],parent[GCE],"
-                + "performance[GSCE],PERSISTENT[E],postMessage(),print(),prompt(),releaseEvents(),"
+                + "performance[GSCE],PERSISTENT[E],postMessage(),print(),prompt(),queueMicrotask(),releaseEvents(),"
                 + "requestAnimationFrame(),resizeBy(),resizeTo(),screen[GCE],scroll(),scrollBy(),scrollTo(),"
                 + "scrollX[GCE],scrollY[GCE],self[GCE],sessionStorage[GCE],setInterval(),setTimeout(),"
                 + "speechSynthesis[GCE],status[GSCE],stop(),styleMedia[GCE],TEMPORARY[E],top[GCE],window[GCE]",
@@ -1045,7 +1045,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onwaiting[GSCE],onwebkitanimationend[GSCE],onwebkitanimationiteration[GSCE],"
                 + "onwebkitanimationstart[GSCE],onwebkittransitionend[GSCE],onwheel[GSCE],open(),opener[GSCE],"
                 + "outerHeight[GSCE],outerWidth[GSCE],pageXOffset[GCE],pageYOffset[GCE],parent[GCE],"
-                + "performance[GSCE],PERSISTENT[E],postMessage(),print(),prompt(),releaseEvents(),"
+                + "performance[GSCE],PERSISTENT[E],postMessage(),print(),prompt(),queueMicrotask(),releaseEvents(),"
                 + "requestAnimationFrame(),resizeBy(),resizeTo(),screen[GCE],scroll(),scrollBy(),scrollTo(),"
                 + "scrollX[GCE],scrollY[GCE],self[GCE],sessionStorage[GCE],setInterval(),setTimeout(),"
                 + "speechSynthesis[GCE],status[GSCE],stop(),styleMedia[GCE],TEMPORARY[E],top[GCE],window[GCE]",
@@ -1073,6 +1073,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],onunload[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],onwheel[GSCE],open(),opener[GSCE],outerHeight[GSCE],outerWidth[GSCE],"
                 + "pageXOffset[GCE],pageYOffset[GCE],parent[GCE],performance[GSCE],postMessage(),print(),prompt(),"
+                + "queueMicrotask(),"
                 + "releaseEvents(),requestAnimationFrame(),resizeBy(),resizeTo(),screen[GCE],scroll(),scrollBy(),"
                 + "scrollByLines(),scrollByPages(),scrollTo(),scrollX[GCE],scrollY[GCE],self[GCE],sessionStorage[GCE],"
                 + "setInterval(),setTimeout(),status[GSCE],stop(),top[GCE],window[GCE]",
@@ -1100,6 +1101,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],onunload[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],onwheel[GSCE],open(),opener[GSCE],outerHeight[GSCE],outerWidth[GSCE],"
                 + "pageXOffset[GCE],pageYOffset[GCE],parent[GCE],performance[GSCE],postMessage(),print(),prompt(),"
+                + "queueMicrotask(),"
                 + "releaseEvents(),requestAnimationFrame(),resizeBy(),resizeTo(),screen[GCE],scroll(),scrollBy(),"
                 + "scrollByLines(),scrollByPages(),scrollTo(),scrollX[GCE],scrollY[GCE],self[GCE],sessionStorage[GCE],"
                 + "setInterval(),setTimeout(),status[GSCE],stop(),top[GCE],window[GCE]")
