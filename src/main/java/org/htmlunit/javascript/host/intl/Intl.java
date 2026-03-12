@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.LocaleUtils;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
@@ -60,7 +61,7 @@ public class Intl extends HtmlUnitScriptable {
         intl.setParentScope(scope);
         intl.defineProperties(scope, browserVersion);
 
-        // Configure static functions
+        // Configure static functions (getCanonicalLocales)
         final ClassConfiguration intlConfig = AbstractJavaScriptConfiguration.getClassConfiguration(Intl.class, browserVersion);
         if (intlConfig != null) {
             defineStaticFunctions(intlConfig, intl, intl);
@@ -172,5 +173,37 @@ public class Intl extends HtmlUnitScriptable {
         }
 
         return cx.newArray(TopLevel.getTopLevelScope(thisObj), canonicalLocales.toArray());
+    }
+
+    /**
+     * Shared utility for {@code supportedLocalesOf} implementations.
+     * @param localesArgument the locales argument
+     * @return a Scriptable array of supported locale strings
+     */
+    static Scriptable supportedLocalesOf(final Scriptable localesArgument) {
+        final String[] locales;
+        if (localesArgument instanceof NativeArray array) {
+            locales = new String[(int) array.getLength()];
+            for (int i = 0; i < locales.length; i++) {
+                locales[i] = JavaScriptEngine.toString(array.get(i));
+            }
+        }
+        else {
+            locales = new String[] {JavaScriptEngine.toString(localesArgument)};
+        }
+
+        final List<String> supportedLocales = new ArrayList<>();
+        for (final String locale : locales) {
+            if (locale.isEmpty()) {
+                throw JavaScriptEngine.rangeError("Invalid language tag: " + locale);
+            }
+            final java.util.Locale l = java.util.Locale.forLanguageTag(locale);
+            if (LocaleUtils.isAvailableLocale(l)) {
+                supportedLocales.add(locale);
+            }
+        }
+
+        return Context.getCurrentContext().newArray(
+                TopLevel.getTopLevelScope(localesArgument), supportedLocales.toArray());
     }
 }

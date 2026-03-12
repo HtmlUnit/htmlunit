@@ -111,4 +111,27 @@ public class NumberFormatTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"en", "en,ja", ""})
+    public void supportedLocalesOf() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log(Intl.NumberFormat.supportedLocalesOf('en'));\n"
+                + "    log(Intl.NumberFormat.supportedLocalesOf(['en', 'xx-YY', 'ja']));\n"
+                + "    log(Intl.NumberFormat.supportedLocalesOf([]));\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
