@@ -1133,6 +1133,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS.equalsIgnoreCase(pair.getName())) {
                 String value = pair.getValue();
                 if (value != null) {
+                    if ("*".equals(value)) {
+                        // all headers are allowed
+                        return true;
+                    }
                     value = org.htmlunit.util.StringUtils.toRootLowerCase(value);
                     final String[] values = org.htmlunit.util.StringUtils.splitAtComma(value);
                     for (String part : values) {

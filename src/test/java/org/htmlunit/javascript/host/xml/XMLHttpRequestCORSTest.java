@@ -619,6 +619,45 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
+    @Alerts({"4", "200"})
+    public void preflight_wildcard_allow_headers() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var xhr = new XMLHttpRequest();\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
+                + "    xhr.open('GET', url, false);\n"
+                + "    xhr.setRequestHeader('X-PING', 'ping');\n"
+                + "    xhr.setRequestHeader('X-PONG', 'pong');\n"
+                + "    xhr.send();\n"
+                + "    log(xhr.readyState);\n"
+                + "    log(xhr.status);\n"
+                + "  } catch(e) { logEx(e) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "*";
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/preflight2", PreflightServerServlet.class);
+        startWebServer2(".", servlets2);
+
+        loadPage2(html, new URL(URL_FIRST, "/preflight1"));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
     @Alerts("false")
     public void withCredentials_defaultValue() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
