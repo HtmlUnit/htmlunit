@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class IntlTest extends WebDriverTestCase {
 
@@ -77,6 +78,15 @@ public class IntlTest extends WebDriverTestCase {
     @Alerts("function NumberFormat() { [native code] }")
     public void numberFormat() throws Exception {
         test("Intl.NumberFormat");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function Locale() { [native code] }")
+    public void locale() throws Exception {
+        test("Intl.Locale");
     }
 
     /**

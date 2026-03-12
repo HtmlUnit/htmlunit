@@ -40,6 +40,7 @@ public class Intl extends HtmlUnitScriptable {
     public void defineProperties(final Scriptable scope, final BrowserVersion browserVersion) {
         define(scope, Collator.class, browserVersion);
         define(scope, DateTimeFormat.class, browserVersion);
+        define(scope, Locale.class, browserVersion);
         define(scope, NumberFormat.class, browserVersion);
         if (browserVersion.hasFeature(JS_INTL_V8_BREAK_ITERATOR)) {
             define(scope, V8BreakIterator.class, browserVersion);
