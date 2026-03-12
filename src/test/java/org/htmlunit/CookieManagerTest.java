@@ -509,6 +509,38 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"first=1", ""})
+    public void cookieMaxAge_moreThan400Days() throws Exception {
+        final String moreThan400Days = "" + ((400 * 24 * 60 * 60) + 60);
+
+        List<NameValuePair> responseHeader1 = new ArrayList<>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;max-age=" + moreThan400Days));
+        getMockWebConnection().setResponse(URL_FIRST, HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML,
+                responseHeader1);
+
+        loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first=1", ""})
+    public void cookieMaxAge_long() throws Exception {
+        List<NameValuePair> responseHeader1 = new ArrayList<>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;max-age=99999999999"));
+        getMockWebConnection().setResponse(URL_FIRST, HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML,
+                responseHeader1);
+
+        loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"", "dog=dalmation"})
     public void trailing_slash() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();

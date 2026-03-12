@@ -112,7 +112,7 @@ public class CookieParserTest {
     }
 
     /**
-     * Test parsing a cookie with whitespace. 
+     * Test parsing a cookie with whitespace.
      */
     @Test
     public void testCookieWithWhitespace() throws Exception {
@@ -200,7 +200,7 @@ public class CookieParserTest {
     }
 
     /**
-     * Test parsing a cookie with SameSite=Lax. 
+     * Test parsing a cookie with SameSite=Lax.
      */
     @Test
     public void testCookieWithSameSiteLax() throws Exception {
@@ -212,7 +212,7 @@ public class CookieParserTest {
     }
 
     /**
-     * Test parsing a cookie with SameSite=None. 
+     * Test parsing a cookie with SameSite=None.
      */
     @Test
     public void testCookieWithSameSiteNone() throws Exception {
@@ -283,6 +283,31 @@ public class CookieParserTest {
         assertEquals(1, cookies.size());
         final Cookie cookie = cookies.get(0);
         assertNull(cookie.getExpires());
+    }
+
+    /**
+     * Test parsing a cookie with max-age more than 400 days.
+     */
+    @Test
+    public void testCookieWithMaxAgeTooBig() throws Exception {
+        final String moreThan400Days = "" + ((400 * 24 * 60 * 60) + 60);
+        final List<Cookie> cookies = parseCookie("name=value; max-age=" + moreThan400Days);
+
+        assertEquals(1, cookies.size());
+        final Cookie cookie = cookies.get(0);
+        assertNotNull(cookie.getExpires());
+    }
+
+    /**
+     * Test parsing a cookie with max-age that does not fit into an integer
+     */
+    @Test
+    public void testCookieWithMaxAgeLong() throws Exception {
+        final List<Cookie> cookies = parseCookie("name=value; max-age=99999999999");
+
+        assertEquals(1, cookies.size());
+        final Cookie cookie = cookies.get(0);
+        assertNotNull(cookie.getExpires());
     }
 
     /**
@@ -462,7 +487,7 @@ public class CookieParserTest {
     }
 
     /**
-     * Test parsing cookie with invalid max-age. 
+     * Test parsing cookie with invalid max-age.
      */
     @Test
     public void testCookieWithInvalidMaxAge() {

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.util.StringUtils;
@@ -54,6 +55,12 @@ public final class CookieParser {
         "EEE MMM dd yyyy HH:mm: ss z",      // Variant
         "EEE, dd MMM yy HH:mm:ss z"         // Variant
     };
+
+    // Max-Age should be 400 days at most
+    // https://httpwg.org/http-extensions/draft-ietf-httpbis-rfc6265bis.html#section-5.5
+    private static final int MAX_MAX_AGE = 400 * 24 * 60 * 60;
+
+    private static final Pattern MAX_AGE_PATTERN = Pattern.compile("-?[0-9]+");
 
     private CookieParser() {
         // Utility class
@@ -261,11 +268,19 @@ public final class CookieParser {
             return null;
         }
 
+        if (!MAX_AGE_PATTERN.matcher(maxAgeString).matches()) {
+            throw new MalformedCookieException("Invalid 'max-age' attribute: '" + maxAgeString + "'");
+        }
+
+        if (maxAgeString.startsWith("-")) {
+            return -1;
+        }
+
         try {
-            return Integer.parseInt(maxAgeString);
+            return Math.min(Integer.parseInt(maxAgeString), MAX_MAX_AGE);
         }
         catch (final NumberFormatException e) {
-            throw new MalformedCookieException("Invalid max-age value: " + maxAgeString);
+            return MAX_MAX_AGE;
         }
     }
 
