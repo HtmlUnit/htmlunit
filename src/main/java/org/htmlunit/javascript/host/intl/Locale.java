@@ -197,61 +197,81 @@ public class Locale extends HtmlUnitScriptable {
         builder.setUnicodeLocaleKeyword(unicodeKey, s);
     }
 
-    /** @return the language */
+    /**
+     * @return the language
+     */
     @JsxGetter
     public Object getLanguage() {
         return language_ != null ? language_ : JavaScriptEngine.UNDEFINED;
     }
 
-    /** @return the script */
+    /**
+     * @return the script
+     */
     @JsxGetter
     public Object getScript() {
         return script_ != null ? script_ : JavaScriptEngine.UNDEFINED;
     }
 
-    /** @return the region */
+    /**
+     * @return the region
+     */
     @JsxGetter
     public Object getRegion() {
         return region_ != null ? region_ : JavaScriptEngine.UNDEFINED;
     }
 
-    /** @return the calendar type */
+    /**
+     * @return the calendar type
+     */
     @JsxGetter
     public Object getCalendar() {
         return calendar_ != null ? calendar_ : JavaScriptEngine.UNDEFINED;
     }
 
-    /** @return the collation type */
+    /**
+     * @return the collation type
+     */
     @JsxGetter
     public Object getCollation() {
         return collation_ != null ? collation_ : JavaScriptEngine.UNDEFINED;
     }
 
-    /** @return the numbering system */
+    /**
+     * @return the numbering system
+     */
     @JsxGetter
     public Object getNumberingSystem() {
         return numberingSystem_ != null ? numberingSystem_ : JavaScriptEngine.UNDEFINED;
     }
 
-    /** @return the case first setting */
+    /**
+     * @return the case first setting
+     */
     @JsxGetter
     public Object getCaseFirst() {
         return caseFirst_ != null ? caseFirst_ : JavaScriptEngine.UNDEFINED;
     }
 
-    /** @return the hour cycle */
+    /**
+     * @return the hour cycle
+     */
     @JsxGetter
     public Object getHourCycle() {
         return hourCycle_ != null ? hourCycle_ : JavaScriptEngine.UNDEFINED;
     }
 
-    /** @return whether numeric sorting is used */
+    /**
+     * @return whether numeric sorting is used
+     */
     @JsxGetter
     public boolean isNumeric() {
         return numeric_;
     }
 
-    /** @return the base name (without Unicode extensions) */
+    /**
+     * @return the base name (without Unicode extensions)
+     */
     @JsxGetter
     public Object getBaseName() {
         final String variant = locale_.getVariant().replace("_", "-");

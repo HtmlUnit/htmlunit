@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link NumberFormat}.
  *
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class NumberFormatTest extends WebDriverTestCase {
 

@@ -63,6 +63,7 @@ public class EventHandler extends BaseFunction {
         // compile "just in time"
         if (realFunction_ == null) {
             final String js = "function on" + eventName_ + "(event) { " + jsSnippet_ + " \n}";
+            // HtmlUnitScriptable scope = scope.getTopLevelScope(scope);
             realFunction_ = cx.compileFunction(scope, js, eventName_ + " event for " + node_
                                     + " in " + node_.getPage().getUrl(), 0, null);
             realFunction_.setParentScope(scope);

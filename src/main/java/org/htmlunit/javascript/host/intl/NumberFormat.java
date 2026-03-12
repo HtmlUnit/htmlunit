@@ -41,6 +41,7 @@ import org.htmlunit.util.StringUtils;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @JsxClass
 public class NumberFormat extends HtmlUnitScriptable {

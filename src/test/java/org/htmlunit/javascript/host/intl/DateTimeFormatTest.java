@@ -29,6 +29,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
+ * @author Lai Quang Duong
  */
 public class DateTimeFormatTest extends WebDriverTestCase {
 

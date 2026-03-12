@@ -62,7 +62,8 @@ public class Intl extends HtmlUnitScriptable {
         intl.defineProperties(scope, browserVersion);
 
         // Configure static functions (getCanonicalLocales)
-        final ClassConfiguration intlConfig = AbstractJavaScriptConfiguration.getClassConfiguration(Intl.class, browserVersion);
+        final ClassConfiguration intlConfig =
+                AbstractJavaScriptConfiguration.getClassConfiguration(Intl.class, browserVersion);
         if (intlConfig != null) {
             defineStaticFunctions(intlConfig, intl, intl);
         }
