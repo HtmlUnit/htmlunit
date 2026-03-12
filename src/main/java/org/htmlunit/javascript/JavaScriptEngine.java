@@ -454,10 +454,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         // add Intl
-        final Intl intl = new Intl();
-        intl.setParentScope(scope);
-        globalThis.defineProperty(intl.getClassName(), intl, ScriptableObject.DONTENUM);
-        intl.defineProperties(scope, browserVersion);
+        Intl.init(scope, globalThis, browserVersion);
     }
 
     /**
