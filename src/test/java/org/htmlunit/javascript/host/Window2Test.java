@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 
 import org.apache.commons.io.FileUtils;
 import org.htmlunit.CookieManager4Test;
@@ -43,6 +44,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Carsten Steul
  * @author Colin Alworth
  * @author Christoph Burgmer
+ * @author Lai Quang Duong
  */
 public class Window2Test extends WebDriverTestCase {
 
@@ -3495,5 +3497,59 @@ public class Window2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         verifySessionStorage2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void queueMicrotaskNoArgs() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try { queueMicrotask(); } catch(e) { logEx(e); }\n"
+            + "</script></head></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void queueMicrotaskNonFunction() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try { queueMicrotask('str'); } catch(e) { logEx(e); }\n"
+            + "</script></head></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1-sync, 2-microtask, 3-microtask, 4-nested-microtask, 5-timeout")
+    public void queueMicrotaskExecutionOrder() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var r = [];\n"
+            + "  queueMicrotask(function() { r.push('2-microtask'); });\n"
+            + "  setTimeout(function() { r.push('5-timeout'); }, 0);\n"
+            + "  queueMicrotask(function() {\n"
+            + "    r.push('3-microtask');\n"
+            + "    queueMicrotask(function() { r.push('4-nested-microtask'); });\n"
+            + "  });\n"
+            + "  r.push('1-sync');\n"
+            + "  setTimeout(function() { log(r.join(', ')); }, 200);\n"
+            + "</script></head></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(Duration.ofSeconds(1), driver, getExpectedAlerts());
     }
 }

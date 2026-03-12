@@ -24,6 +24,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -36,6 +37,7 @@ import org.htmlunit.util.StringUtils;
  *
  * @author Ronald Brill
  * @author Rural Hunter
+ * @author Lai Quang Duong
  */
 public final class WindowOrWorkerGlobalScopeMixin {
 
@@ -149,6 +151,38 @@ public final class WindowOrWorkerGlobalScopeMixin {
                 ? Arrays.copyOfRange(args, 2, args.length)
                 : JavaScriptEngine.EMPTY_ARGS;
         return setTimeoutIntervalImpl((Window) thisObj, args[0], timeout, false, params);
+    }
+
+    /**
+     * Queues a microtask to be executed.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/queueMicrotask">
+     *     MDN web docs</a>
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @return undefined
+     */
+    public static Object queueMicrotask(final Scriptable thisObj, final Object[] args) {
+        if (args.length < 1) {
+            throw JavaScriptEngine.typeError("At least 1 argument required");
+        }
+        if (!(args[0] instanceof Function)) {
+            throw JavaScriptEngine.typeError("Argument 1 is not callable");
+        }
+
+        final Function callback = (Function) args[0];
+        final Scriptable scope = ScriptableObject.getTopLevelScope(thisObj);
+        final Context cx = Context.getCurrentContext();
+        cx.enqueueMicrotask(() -> {
+            try {
+                callback.call(cx, scope, thisObj, JavaScriptEngine.EMPTY_ARGS);
+            }
+            catch (final Exception e) {
+                // uncaught exception in a microtask must not prevent remaining microtasks from running.
+            }
+        });
+
+        return JavaScriptEngine.UNDEFINED;
     }
 
     private static int setTimeoutIntervalImpl(final Window window, final Object code,

@@ -139,6 +139,7 @@ import org.htmlunit.xml.XmlPage;
  * @author Colin Alworth
  * @author Atsushi Nakagawa
  * @author Sven Strickroth
+ * @author Lai Quang Duong
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
@@ -490,6 +491,24 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public static Object setTimeout(final Context context, final Scriptable scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setTimeout(context, thisObj, args, function);
+    }
+
+    /**
+     * Queues a microtask to be executed.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/queueMicrotask">
+     *     MDN web docs</a>
+     * @param context the JavaScript context
+     * @param scope the scope
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     * @return undefined
+     */
+    @JsxFunction
+    public static Object queueMicrotask(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        return WindowOrWorkerGlobalScopeMixin.queueMicrotask(thisObj, args);
     }
 
     /**
