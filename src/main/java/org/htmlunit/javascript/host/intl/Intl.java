@@ -17,17 +17,27 @@ package org.htmlunit.javascript.host.intl;
 import static org.htmlunit.BrowserVersionFeatures.JS_INTL_V8_BREAK_ITERATOR;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.IllformedLocaleException;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.JsxClass;
+import org.htmlunit.javascript.configuration.JsxStaticFunction;
 
 /**
  * A JavaScript object for {@code Intl}.
@@ -94,5 +104,73 @@ public class Intl extends HtmlUnitScriptable {
                 target.defineProperty(entry.getKey(), fn, ScriptableObject.EMPTY);
             }
         }
+    }
+
+    /**
+     * Returns an array containing the canonical locale names.
+     * Duplicates will be omitted and elements will be validated as structurally valid language tags.
+     *
+     * @param cx the current context
+     * @param thisObj the scriptable this
+     * @param args the arguments
+     * @param funObj the function object
+     * @return an array of canonical locale names
+     *
+     * @see <a href="https://tc39.es/ecma402/#sec-intl.getcanonicallocales">spec</a>
+     */
+    @JsxStaticFunction
+    public static Object getCanonicalLocales(final Context cx, final Scriptable thisObj,
+            final Object[] args, final Function funObj) {
+        if (args.length == 0 || JavaScriptEngine.isUndefined(args[0])) {
+            return cx.newArray(TopLevel.getTopLevelScope(thisObj), new Object[0]);
+        }
+
+        final Object localesArgument = args[0];
+        if (localesArgument == null) {
+            throw JavaScriptEngine.typeError("Cannot convert null to object");
+        }
+
+        final List<String> languageTags = new ArrayList<>();
+        if (localesArgument instanceof String s) {
+            languageTags.add(s);
+        }
+        else if (localesArgument instanceof Scriptable scriptable) {
+            if ("String".equals(scriptable.getClassName()) || scriptable instanceof Locale) {
+                languageTags.add(scriptable.toString());
+            }
+            else if (scriptable instanceof NativeArray array) {
+                for (int i = 0; i < array.getLength(); i++) {
+                    final Object elem = array.get(i);
+                    if (elem instanceof String s) {
+                        languageTags.add(s);
+                    }
+                    else if (elem instanceof Locale) {
+                        languageTags.add(elem.toString());
+                    }
+                    else if (elem instanceof ScriptableObject) {
+                        languageTags.add(JavaScriptEngine.toString(elem));
+                    }
+                    else {
+                        throw JavaScriptEngine.typeError("Invalid element in locales argument");
+                    }
+                }
+            }
+            else {
+                languageTags.add(JavaScriptEngine.toString(localesArgument));
+            }
+        }
+
+        final Set<String> canonicalLocales = new LinkedHashSet<>(languageTags.size());
+        for (final String tag : languageTags) {
+            try {
+                canonicalLocales.add(
+                        new java.util.Locale.Builder().setLanguageTag(tag).build().toLanguageTag());
+            }
+            catch (final IllformedLocaleException e) {
+                throw JavaScriptEngine.rangeError("Invalid language tag: " + tag);
+            }
+        }
+
+        return cx.newArray(TopLevel.getTopLevelScope(thisObj), canonicalLocales.toArray());
     }
 }

@@ -100,4 +100,39 @@ public class IntlTest extends WebDriverTestCase {
         test("Intl.v8BreakIterator");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"en-US", "en-US,fr-FR,ja-JP",
+             "zh-Hant-TW", "en-Latn-US",
+             "ja-JP", "en-US,fr", "en-US", "ja-JP",
+             "TypeError", "", "", "RangeError", "RangeError", ""})
+    public void getCanonicalLocales() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(Intl.getCanonicalLocales('EN-us'));\n"
+            + "    log(Intl.getCanonicalLocales(['en-US', 'fr-FR', 'ja-JP', 'EN-US']));\n"
+            + "    log(Intl.getCanonicalLocales('zh-hant-tw'));\n"
+            + "    log(Intl.getCanonicalLocales('en-latn-us'));\n"
+            + "    log(Intl.getCanonicalLocales(new Intl.Locale('ja-JP')));\n"
+            + "    log(Intl.getCanonicalLocales([new Intl.Locale('en-US'), new Intl.Locale('fr')]));\n"
+            + "    log(Intl.getCanonicalLocales(new String('en-US')));\n"
+            + "    log(Intl.getCanonicalLocales([new String('ja-JP')]));\n"
+            + "    try { log(Intl.getCanonicalLocales(null)); } catch(e) { logEx(e) }\n"
+            + "    try { log(Intl.getCanonicalLocales(undefined)); } catch(e) { logEx(e) }\n"
+            + "    try { log(Intl.getCanonicalLocales([])); } catch(e) { logEx(e) }\n"
+            + "    try { log(Intl.getCanonicalLocales('')); } catch(e) { logEx(e) }\n"
+            + "    try { log(Intl.getCanonicalLocales('en-US!@#')); } catch(e) { logEx(e) }\n"
+            + "    try { log(Intl.getCanonicalLocales(42)); } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
