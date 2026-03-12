@@ -291,7 +291,7 @@ public class Locale extends HtmlUnitScriptable {
      * @return a new Locale instance with maximized subtags
      */
     @JsxFunction
-    public Object maximize() {
+    public Locale maximize() {
         final String region;
         if (region_ != null) {
             region = region_;
@@ -325,7 +325,7 @@ public class Locale extends HtmlUnitScriptable {
      * @return a new Locale instance with minimized subtags
      */
     @JsxFunction
-    public Object minimize() {
+    public Locale minimize() {
         final java.util.Locale locale = new java.util.Locale.Builder()
                 .setLanguage(language_)
                 .setExtension('u', locale_.getExtension('u'))
@@ -340,9 +340,8 @@ public class Locale extends HtmlUnitScriptable {
     /**
      * @return the locale's Unicode locale identifier string
      */
-    @Override
-    @JsxFunction
-    public String toString() {
+    @JsxFunction(functionName = "toString")
+    public String js_toString() {
         if (locale_ == null) {
             return super.toString();
         }
