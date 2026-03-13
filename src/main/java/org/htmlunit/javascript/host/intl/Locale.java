@@ -100,13 +100,7 @@ public class Locale extends HtmlUnitScriptable {
             throw JavaScriptEngine.typeError("Invalid element in locales argument");
         }
 
-        final String languageTag;
-        if (args[0] instanceof Locale loc) {
-            languageTag = loc.toString();
-        }
-        else {
-            languageTag = JavaScriptEngine.toString(args[0]);
-        }
+        final String languageTag = JavaScriptEngine.toString(args[0]);
         if (languageTag.isEmpty()) {
             throw JavaScriptEngine.rangeError("Invalid language tag: ");
         }
@@ -123,8 +117,7 @@ public class Locale extends HtmlUnitScriptable {
 
         // Override by options if present
         if (args.length > 1 && !JavaScriptEngine.isUndefined(args[1])) {
-            locale = overrideExistingWithOptions(locale,
-                    ScriptableObject.ensureScriptableObject(args[1]));
+            locale = overrideExistingWithOptions(locale, ScriptableObject.ensureScriptableObject(args[1]));
         }
 
         final Locale l = new Locale(locale);
@@ -341,10 +334,21 @@ public class Locale extends HtmlUnitScriptable {
      * @return the locale's Unicode locale identifier string
      */
     @JsxFunction(functionName = "toString")
-    public String js_toString() {
+    public String jsToString() {
         if (locale_ == null) {
             return super.toString();
         }
         return locale_.toLanguageTag();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (getPrototype() != null && (String.class.equals(hint) || hint == null)) {
+            return jsToString();
+        }
+        return super.getDefaultValue(hint);
     }
 }

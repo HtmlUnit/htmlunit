@@ -230,22 +230,28 @@ public class LocaleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"ja-Jpan-JP-u-ca-japanese-hc-h12",
+             "xja-Jpan-JP-u-ca-japanese-hc-h12",
              "ja-u-ca-japanese-hc-h12",
              "ja-Jpan-JP-u-ca-japanese-hc-h12",
              "ja-Jpan-JP"})
-    @HtmlUnitNYI(CHROME = {"ja-Jpan-JP-u-ca-japanese-hc-h12",
-                           "ja-u-ca-japanese-hc-h12",
-                           "ja-JP-u-ca-japanese-hc-h12",
-                           "ja-Jpan-JP"},
+    @HtmlUnitNYI(
+            CHROME = {"ja-Jpan-JP-u-ca-japanese-hc-h12",
+                      "xja-Jpan-JP-u-ca-japanese-hc-h12",
+                      "ja-u-ca-japanese-hc-h12",
+                      "ja-JP-u-ca-japanese-hc-h12",
+                      "ja-Jpan-JP"},
             EDGE = {"ja-Jpan-JP-u-ca-japanese-hc-h12",
+                    "xja-Jpan-JP-u-ca-japanese-hc-h12",
                     "ja-u-ca-japanese-hc-h12",
                     "ja-JP-u-ca-japanese-hc-h12",
                     "ja-Jpan-JP"},
             FF = {"ja-Jpan-JP-u-ca-japanese-hc-h12",
+                  "xja-Jpan-JP-u-ca-japanese-hc-h12",
                   "ja-u-ca-japanese-hc-h12",
                   "ja-JP-u-ca-japanese-hc-h12",
                   "ja-Jpan-JP"},
             FF_ESR = {"ja-Jpan-JP-u-ca-japanese-hc-h12",
+                      "xja-Jpan-JP-u-ca-japanese-hc-h12",
                       "ja-u-ca-japanese-hc-h12",
                       "ja-JP-u-ca-japanese-hc-h12",
                       "ja-Jpan-JP"})
@@ -257,6 +263,7 @@ public class LocaleTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var l = new Intl.Locale('ja-Jpan-JP-u-ca-japanese-hc-h12');\n"
             + "    log(l.toString());\n"
+            + "    log('x' + l);\n"
             + "    log(l.minimize().toString());\n"
             + "    log(new Intl.Locale('ja-u-ca-japanese-hc-h12').maximize().toString());\n"
             + "    log(l.baseName);\n"
