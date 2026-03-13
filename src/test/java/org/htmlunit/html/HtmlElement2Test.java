@@ -40,6 +40,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Sudhan Moghe
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class HtmlElement2Test extends WebDriverTestCase {
 
@@ -490,5 +491,136 @@ public class HtmlElement2Test extends WebDriverTestCase {
             + "</html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("input[object HTMLInputElement]")
+    public void typeFiresInputEvent() throws Exception {
+        typeFiresInputEvent("text", "a");
+        typeFiresInputEvent("tel", "a");
+        typeFiresInputEvent("number", "1");
+        typeFiresInputEvent("search", "1");
+        typeFiresInputEvent("password", "7");
+        typeFiresInputEvent("email", "x");
+        typeFiresInputEvent("url", "h");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("input[object HTMLInputElement]")
+    @HtmlUnitNYI(
+            CHROME = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                      "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            EDGE = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                    "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            FF = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                  "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            FF_ESR = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                      "input[object HTMLInputElement]", "input[object HTMLInputElement]"})
+    public void typeFiresInputEventDate() throws Exception {
+        // date and time are a bit tricky they only trigger if the input is correct
+        typeFiresInputEvent("date", "01026");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("input[object HTMLInputElement]")
+    @HtmlUnitNYI(
+            CHROME = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                      "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            EDGE = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                    "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            FF = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                    "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            FF_ESR = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                    "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"})
+    public void typeFiresInputEventTime() throws Exception {
+        typeFiresInputEvent("time", "1122PM");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"input[object HTMLInputElement]", "input[object HTMLInputElement]"})
+    public void typeFiresInputEventEachKey() throws Exception {
+        typeFiresInputEvent("text", "ab");
+        typeFiresInputEvent("tel", "a1");
+        typeFiresInputEvent("number", "12");
+        typeFiresInputEvent("search", "1a");
+        typeFiresInputEvent("password", "7x");
+        typeFiresInputEvent("email", "xy");
+        typeFiresInputEvent("url", "ht");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            FF = "input[object HTMLInputElement]",
+            FF_ESR = "input[object HTMLInputElement]")
+    @HtmlUnitNYI(
+            CHROME = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                      "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            EDGE = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                    "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            FF = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                    "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            FF_ESR = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                    "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"})
+    public void typeFiresInputEventEachKeyDate() throws Exception {
+        typeFiresInputEvent("date", "010268");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("input[object HTMLInputElement]")
+    @HtmlUnitNYI(
+            CHROME = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                      "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            EDGE = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                    "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            FF = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                    "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"},
+            FF_ESR = {"input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]",
+                    "input[object HTMLInputElement]", "input[object HTMLInputElement]", "input[object HTMLInputElement]"})
+    public void typeFiresInputEventEachKeyTime() throws Exception {
+        typeFiresInputEvent("time", "1122PM");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    private void typeFiresInputEvent(String type, final String value) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<input type='" + type + "' id='t'>\n"
+            + "<script>\n"
+            + "  document.getElementById('t').addEventListener('input', function(e) {\n"
+            + "    log('input' + e.target);\n"
+            + "  });\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement div = driver.findElement(By.id("t"));
+        div.sendKeys(value);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 }

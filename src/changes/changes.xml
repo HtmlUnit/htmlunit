@@ -9,6 +9,9 @@
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
             <action type="fix" dev="Lai Quang Duong">
+                HtmlInputElement's of type email/url/date/time have to fire the input event.
+            </action>
+            <action type="fix" dev="Lai Quang Duong">
                 Align cookie max-age handling for huge values with the spec.
             </action>
             <action type="fix" dev="rbri">
