@@ -102,6 +102,22 @@ public class ProgressEvent extends Event {
     }
 
     /**
+     * Creates a new event instance.
+     * @param target the event target
+     * @param type the event type
+     * @param lengthComputable whether the total size is known
+     * @param loaded the number of bytes loaded
+     * @param total the total number of bytes
+     */
+    public ProgressEvent(final EventTarget target, final String type,
+            final boolean lengthComputable, final long loaded, final long total) {
+        super(target, type);
+        lengthComputable_ = lengthComputable;
+        loaded_ = loaded;
+        total_ = total;
+    }
+
+    /**
      * Returns the lengthComputable property from the event.
      * @return the lengthComputable property from the event.
      */

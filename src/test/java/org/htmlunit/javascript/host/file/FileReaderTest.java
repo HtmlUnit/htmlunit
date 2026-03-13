@@ -802,6 +802,97 @@ public class FileReaderTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"loadstart", "progress", "load", "loadend"})
+    public void readAsTextEventLifecycle() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var blob = new Blob(['HtmlUnit'], {type : 'text/plain'});\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.addEventListener('loadstart', function() { log('loadstart'); });\n"
+            + "      reader.addEventListener('progress', function() { log('progress'); });\n"
+            + "      reader.addEventListener('load', function() { log('load'); });\n"
+            + "      reader.addEventListener('loadend', function() { log('loadend'); });\n"
+            + "      reader.readAsText(blob);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "8", "8"})
+    public void readAsDataURLProgressEventProperties() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var blob = new Blob(['HtmlUnit']);\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.addEventListener('load', function(e) {\n"
+            + "        log(e.lengthComputable);\n"
+            + "        log(e.loaded);\n"
+            + "        log(e.total);\n"
+            + "      });\n"
+            + "      reader.readAsDataURL(blob);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"loadstart", "progress", "[object ArrayBuffer]", "8", "loadend"})
+    public void readAsArrayBufferPropertyHandlers() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var blob = new Blob(['HtmlUnit'], {type : 'text/html'});\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onloadstart = function() { log('loadstart'); };\n"
+            + "      reader.onprogress = function() { log('progress'); };\n"
+            + "      reader.onloadend = function() { log('loadend'); };\n"
+            + "      reader.onload = function() {\n"
+            + "        log(reader.result);\n"
+            + "        log(reader.result.byteLength);\n"
+            + "      };\n"
+            + "      reader.readAsArrayBuffer(blob);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"[object ArrayBuffer]", "8"})
     public void readAsArrayBuffer_blob() throws Exception {
         final String html = DOCTYPE_HTML
