@@ -1269,4 +1269,27 @@ public class HtmlElementTest extends SimpleWebTestCase {
         input.type(value);
         assertEquals(value, input.getValue());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void typeFiresInputEvent() throws Exception {
+        final String[] types = {"text", "tel", "number", "search", "password", "email", "url", "date", "time"};
+
+        for (final String type : types) {
+            final String html = DOCTYPE_HTML
+                + "<html><body>\n"
+                + "<input type='" + type + "' id='t'>\n"
+                + "<script>\n"
+                + "  document.getElementById('t').addEventListener('input', function() {\n"
+                + "    document.title += 'input';\n"
+                + "  });\n"
+                + "</script>\n"
+                + "</body></html>";
+            final HtmlPage page = loadPage(html);
+            page.getHtmlElementById("t").type("ab");
+            assertEquals("input event for type=" + type, "inputinput", page.getTitleText());
+        }
+    }
 }

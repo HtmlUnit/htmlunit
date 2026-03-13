@@ -592,12 +592,8 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final WebClient webClient = page.getWebClient();
-        if (this instanceof HtmlTextInput
-                || this instanceof HtmlTextArea
-                || this instanceof HtmlTelInput
-                || this instanceof HtmlNumberInput
-                || this instanceof HtmlSearchInput
-                || this instanceof HtmlPasswordInput) {
+        if (this instanceof HtmlSelectableTextInput
+                || this instanceof HtmlTextArea) {
             fireEvent(new KeyboardEvent(this, Event.TYPE_INPUT, c,
                                         shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_));
         }
