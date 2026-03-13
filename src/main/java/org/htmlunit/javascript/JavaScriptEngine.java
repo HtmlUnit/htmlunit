@@ -36,6 +36,7 @@ import org.htmlunit.ScriptException;
 import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.AbstractEcmaObjectOperations;
 import org.htmlunit.corejs.javascript.Callable;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
@@ -1423,6 +1424,23 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public static boolean isArray(final Object obj) {
         return (obj instanceof Scriptable s)
                     && "Array".equals(s.getClassName());
+    }
+
+    /**
+     * @param obj the value to check
+     * @return true if the passed in {@link Scriptable} looks like an array
+     */
+    public static boolean isArrayLike(final Scriptable obj) {
+        return ScriptRuntime.isArrayLike(obj);
+    }
+
+    /**
+     * @param cx the Context
+     * @param obj the value to check
+     * @return the length of the array like {@link Scriptable}
+     */
+    public static long lengthOfArrayLike(final Context cx, final Scriptable obj) {
+        return AbstractEcmaObjectOperations.lengthOfArrayLike(cx, obj);
     }
 
     /**

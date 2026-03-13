@@ -139,17 +139,12 @@ public class Intl extends HtmlUnitScriptable {
             languageTags.add(s);
         }
         else if (localesArgument instanceof Scriptable scriptable) {
-            if ("String".equals(scriptable.getClassName()) || scriptable instanceof Locale) {
-                languageTags.add(scriptable.toString());
-            }
-            else if (scriptable instanceof NativeArray array) {
-                for (int i = 0; i < array.getLength(); i++) {
-                    final Object elem = array.get(i);
+            if (JavaScriptEngine.isArrayLike(scriptable)) {
+                final long len = JavaScriptEngine.lengthOfArrayLike(cx, scriptable);
+                for (int i = 0; i < len; i++) {
+                    final Object elem = scriptable.get(i, scriptable);
                     if (elem instanceof String s) {
                         languageTags.add(s);
-                    }
-                    else if (elem instanceof Locale) {
-                        languageTags.add(elem.toString());
                     }
                     else if (elem instanceof ScriptableObject) {
                         languageTags.add(JavaScriptEngine.toString(elem));
@@ -171,7 +166,7 @@ public class Intl extends HtmlUnitScriptable {
                         new java.util.Locale.Builder().setLanguageTag(tag).build().toLanguageTag());
             }
             catch (final IllformedLocaleException e) {
-                throw JavaScriptEngine.rangeError("Invalid language tag: " + tag);
+                throw JavaScriptEngine.rangeError("Invalid language tag: '" + tag + "'");
             }
         }
 
@@ -198,7 +193,7 @@ public class Intl extends HtmlUnitScriptable {
         final List<String> supportedLocales = new ArrayList<>();
         for (final String locale : locales) {
             if (locale.isEmpty()) {
-                throw JavaScriptEngine.rangeError("Invalid language tag: " + locale);
+                throw JavaScriptEngine.rangeError("Invalid language tag: '" + locale + "'");
             }
             final java.util.Locale l = java.util.Locale.forLanguageTag(locale);
             if (LocaleUtils.isAvailableLocale(l)) {
