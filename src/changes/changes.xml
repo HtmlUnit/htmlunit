@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="update" dev="rbri">
+                ProgressEvent: properties loaded and total are numeric.
+            </action>
+            <action type="fix" dev="rbri">
+                Intl: getCanonicalLocales() processes arguments as array-likes in sync with the spec.
+            </action>
             <action type="add" dev="Lai Quang Duong">
                 FileReader: fire ProgressEvent and add missing event handlers
             </action>

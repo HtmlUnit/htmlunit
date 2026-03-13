@@ -32,8 +32,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 public class ProgressEvent extends Event {
 
     private boolean lengthComputable_;
-    private Object loaded_ = Long.valueOf(0L);
-    private long total_;
+    private double loaded_;
+    private double total_;
 
     /**
      * Default constructor.
@@ -60,36 +60,10 @@ public class ProgressEvent extends Event {
             }
 
             final Object loaded = details.get("loaded");
-            if (loaded instanceof Long) {
-                loaded_ = loaded;
-            }
-            else if (loaded instanceof Double double1) {
-                loaded_ = double1.longValue();
-            }
-            else {
-                try {
-                    loaded_ = Long.parseLong(loaded.toString());
-                }
-                catch (final NumberFormatException ignored) {
-                    // ignore
-                }
-            }
+            loaded_ = JavaScriptEngine.toNumber(loaded);
 
             final Object total = details.get("total");
-            if (total instanceof Long long1) {
-                total_ = long1;
-            }
-            else if (total instanceof Double double1) {
-                total_ = double1.longValue();
-            }
-            else {
-                try {
-                    total_ = Long.parseLong(details.get("total").toString());
-                }
-                catch (final NumberFormatException ignored) {
-                    // ignore
-                }
-            }
+            total_ = JavaScriptEngine.toNumber(total);
         }
     }
 
@@ -99,7 +73,7 @@ public class ProgressEvent extends Event {
      * @param type the event type
      */
     public ProgressEvent(final EventTarget target, final String type) {
-        super(target, type);
+        this(target, type, false, 0d, 0d);
     }
 
     /**
@@ -111,7 +85,7 @@ public class ProgressEvent extends Event {
      * @param total the total number of bytes
      */
     public ProgressEvent(final EventTarget target, final String type,
-            final boolean lengthComputable, final long loaded, final long total) {
+            final boolean lengthComputable, final double loaded, final double total) {
         super(target, type);
         lengthComputable_ = lengthComputable;
         loaded_ = loaded;
@@ -141,7 +115,7 @@ public class ProgressEvent extends Event {
      * @return the loaded property from the event.
      */
     @JsxGetter
-    public Object getLoaded() {
+    public double getLoaded() {
         return loaded_;
     }
 
@@ -150,7 +124,7 @@ public class ProgressEvent extends Event {
      *
      * @param loaded the loaded information for this event
      */
-    public void setLoaded(final Object loaded) {
+    public void setLoaded(final double loaded) {
         loaded_ = loaded;
     }
 
@@ -159,7 +133,7 @@ public class ProgressEvent extends Event {
      * @return the total property from the event.
      */
     @JsxGetter
-    public long getTotal() {
+    public double getTotal() {
         return total_;
     }
 
@@ -168,7 +142,7 @@ public class ProgressEvent extends Event {
      *
      * @param total the total information for this event
      */
-    public void setTotal(final long total) {
+    public void setTotal(final double total) {
         total_ = total;
     }
 }

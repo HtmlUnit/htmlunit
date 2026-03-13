@@ -94,6 +94,33 @@ public class ProgressEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"[object ProgressEvent]", "test", "true", "false", "false", "true", "2.34", "66.6"})
+    public void create_ctorWithDetailsDouble() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new ProgressEvent('test', {\n"
+            + "        'bubbles': true,\n"
+            + "        'lengthComputable': true,\n"
+            + "        'loaded': 2.34,\n"
+            + "        'total': 66.6\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("NotSupportedError/DOMException")
     public void create_createEvent() throws Exception {
         final String html = DOCTYPE_HTML
