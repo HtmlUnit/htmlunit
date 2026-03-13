@@ -70,6 +70,7 @@ import org.w3c.dom.NodeList;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class HtmlPageTest extends SimpleWebTestCase {
 
