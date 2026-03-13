@@ -30,6 +30,7 @@ import org.openqa.selenium.WebDriver;
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
+ * @author Lai Quang Duong
  */
 public class FileReaderTest extends WebDriverTestCase {
 

@@ -26,6 +26,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Thorsten Wendelmuth
+ * @author Lai Quang Duong
  */
 @JsxClass
 public class ProgressEvent extends Event {
