@@ -260,6 +260,8 @@ public class HtmlPage extends SgmlPage {
             executeEventHandlersIfNeeded(Event.TYPE_READY_STATE_CHANGE);
         }
 
+        executePostponedScriptsIfNeeded();
+
         executeDeferredScriptsIfNeeded();
 
         executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
@@ -1475,6 +1477,13 @@ public class HtmlPage extends SgmlPage {
             return metaTags.get(0).getContentAttribute().trim();
         }
         return getWebResponse().getResponseHeaderValue("Refresh");
+    }
+
+    private void executePostponedScriptsIfNeeded() {
+        if (!getWebClient().isJavaScriptEnabled()) {
+            return;
+        }
+        getWebClient().getJavaScriptEngine().processPostponedActions();
     }
 
     /**
