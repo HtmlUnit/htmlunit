@@ -17,13 +17,19 @@ package org.htmlunit.javascript.host.html;
 import static org.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.htmlunit.html.HtmlArea;
 import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.DOMTokenList;
+import org.htmlunit.util.StringUtils;
+import org.htmlunit.util.UrlUtils;
 
 /**
  * The JavaScript object {@code HTMLAreaElement}.
@@ -31,6 +37,7 @@ import org.htmlunit.javascript.host.dom.DOMTokenList;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 @JsxClass(domClass = HtmlArea.class)
 public class HTMLAreaElement extends HTMLElement {
@@ -145,4 +152,335 @@ public class HTMLAreaElement extends HTMLElement {
         getDomNodeOrDie().setAttribute("coords", coords);
     }
 
+    /**
+     * Returns the {@code href} property.
+     * @return the {@code href} property
+     */
+    @JsxGetter
+    public String getHref() {
+        final HtmlArea area = (HtmlArea) getDomNodeOrDie();
+        final String hrefAttr = area.getHrefAttribute();
+
+        if (ATTRIBUTE_NOT_DEFINED == hrefAttr) {
+            return "";
+        }
+
+        try {
+            return getUrl().toString();
+        }
+        catch (final MalformedURLException e) {
+            return hrefAttr;
+        }
+    }
+
+    /**
+     * Sets the {@code href} property.
+     * @param href the {@code href} value
+     */
+    @JsxSetter
+    public void setHref(final String href) {
+        getDomNodeOrDie().setAttribute("href", href);
+    }
+
+    /**
+     * Returns the {@code protocol} property.
+     * @return the {@code protocol} property
+     */
+    @JsxGetter
+    public String getProtocol() {
+        try {
+            return getUrl().getProtocol() + ":";
+        }
+        catch (final MalformedURLException e) {
+            return ":";
+        }
+    }
+
+    /**
+     * Sets the {@code protocol} property.
+     * @param protocol the {@code protocol} value
+     * @throws Exception if an error occurs
+     */
+    @JsxSetter
+    public void setProtocol(final String protocol) throws Exception {
+        final URL result = HTMLHyperlinkElementUtils.setProtocol(getUrl(), protocol);
+        if (result != null) {
+            setUrl(result);
+        }
+    }
+
+    /**
+     * Returns the {@code hostname} property.
+     * @return the {@code hostname} property
+     */
+    @JsxGetter
+    public String getHostname() {
+        try {
+            return HTMLHyperlinkElementUtils.getHostname(getUrl());
+        }
+        catch (final MalformedURLException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Sets the {@code hostname} property.
+     * @param hostname the {@code hostname} value
+     * @throws Exception if an error occurs
+     */
+    @JsxSetter
+    public void setHostname(final String hostname) throws Exception {
+        if (!StringUtils.isEmptyOrNull(hostname)) {
+            setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
+        }
+    }
+
+    /**
+     * Returns the {@code host} property.
+     * @return the {@code host} property
+     */
+    @JsxGetter
+    public String getHost() {
+        try {
+            final URL url = getUrl();
+            final int port = url.getPort();
+            final String host = url.getHost();
+
+            if (port == -1 || HTMLHyperlinkElementUtils.isDefaultPort(url.getProtocol(), port)) {
+                return host;
+            }
+            return host + ":" + port;
+        }
+        catch (final MalformedURLException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Sets the {@code host} property.
+     * @param host the {@code host} value
+     * @throws Exception if an error occurs
+     */
+    @JsxSetter
+    public void setHost(final String host) throws Exception {
+        setUrl(HTMLHyperlinkElementUtils.setHost(getUrl(), host));
+    }
+
+    /**
+     * Returns the {@code port} property.
+     * @return the {@code port} property
+     */
+    @JsxGetter
+    public String getPort() {
+        try {
+            final URL url = getUrl();
+            final int port = url.getPort();
+            if (port == -1 || HTMLHyperlinkElementUtils.isDefaultPort(url.getProtocol(), port)) {
+                return "";
+            }
+            return Integer.toString(port);
+        }
+        catch (final MalformedURLException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Sets the {@code port} property.
+     * @param port the {@code port} value
+     * @throws Exception if an error occurs
+     */
+    @JsxSetter
+    public void setPort(final String port) throws Exception {
+        final URL url = getUrl();
+        final int newPort = Integer.parseInt(port);
+        if (HTMLHyperlinkElementUtils.isDefaultPort(url.getProtocol(), newPort)) {
+            setUrl(UrlUtils.getUrlWithNewPort(url, -1));
+        }
+        else {
+            setUrl(UrlUtils.getUrlWithNewPort(url, newPort));
+        }
+    }
+
+    /**
+     * Returns the {@code pathname} property.
+     * @return the {@code pathname} property
+     */
+    @JsxGetter
+    public String getPathname() {
+        try {
+            return getUrl().getPath();
+        }
+        catch (final MalformedURLException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Sets the {@code pathname} property.
+     * @param pathname the {@code pathname} value
+     * @throws Exception if an error occurs
+     */
+    @JsxSetter
+    public void setPathname(final String pathname) throws Exception {
+        setUrl(HTMLHyperlinkElementUtils.setPathname(getUrl(), pathname));
+    }
+
+    /**
+     * Returns the {@code search} property.
+     * @return the {@code search} property
+     */
+    @JsxGetter
+    public String getSearch() {
+        try {
+            return HTMLHyperlinkElementUtils.getSearch(getUrl());
+        }
+        catch (final MalformedURLException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Sets the {@code search} property.
+     * @param search the {@code search} value
+     * @throws Exception if an error occurs
+     */
+    @JsxSetter
+    public void setSearch(final String search) throws Exception {
+        setUrl(HTMLHyperlinkElementUtils.setSearch(getUrl(), search));
+    }
+
+    /**
+     * Returns the {@code hash} property.
+     * @return the {@code hash} property
+     */
+    @JsxGetter
+    public String getHash() {
+        try {
+            return HTMLHyperlinkElementUtils.getHash(getUrl());
+        }
+        catch (final MalformedURLException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Sets the {@code hash} property.
+     * @param hash the {@code hash} value
+     * @throws Exception if an error occurs
+     */
+    @JsxSetter
+    public void setHash(final String hash) throws Exception {
+        setUrl(HTMLHyperlinkElementUtils.setHash(getUrl(), hash));
+    }
+
+    /**
+     * Returns the {@code origin} property.
+     * @return the {@code origin} property
+     */
+    @JsxGetter
+    public String getOrigin() {
+        if (!getDomNodeOrDie().hasAttribute("href")) {
+            return "";
+        }
+
+        try {
+            return getUrl().getProtocol() + "://" + getHost();
+        }
+        catch (final Exception e) {
+            return "";
+        }
+    }
+
+    /**
+     * Returns the {@code username} property.
+     * @return the {@code username} property
+     */
+    @JsxGetter
+    public String getUsername() {
+        try {
+            return HTMLHyperlinkElementUtils.getUsername(getUrl());
+        }
+        catch (final MalformedURLException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Sets the {@code username} property.
+     * @param username the {@code username} value
+     */
+    @JsxSetter
+    public void setUsername(final String username) {
+        try {
+            final HtmlArea area = (HtmlArea) getDomNodeOrDie();
+            final String href = area.getHrefAttribute();
+            if (ATTRIBUTE_NOT_DEFINED == href) {
+                return;
+            }
+
+            final URL url = ((HtmlPage) area.getPage()).getFullyQualifiedUrl(href);
+            setUrl(UrlUtils.getUrlWithNewUserName(url, username));
+        }
+        catch (final MalformedURLException ignored) {
+            // ignore
+        }
+    }
+
+    /**
+     * Returns the {@code password} property.
+     * @return the {@code password} property
+     */
+    @JsxGetter
+    public String getPassword() {
+        try {
+            return HTMLHyperlinkElementUtils.getPassword(getUrl());
+        }
+        catch (final MalformedURLException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Sets the {@code password} property.
+     * @param password the {@code password} value
+     */
+    @JsxSetter
+    public void setPassword(final String password) {
+        try {
+            final HtmlArea area = (HtmlArea) getDomNodeOrDie();
+            final String href = area.getHrefAttribute();
+            if (ATTRIBUTE_NOT_DEFINED == href) {
+                return;
+            }
+
+            final URL url = ((HtmlPage) area.getPage()).getFullyQualifiedUrl(href);
+            setUrl(UrlUtils.getUrlWithNewUserPassword(url, password));
+        }
+        catch (final MalformedURLException ignored) {
+            // ignore
+        }
+    }
+
+    /**
+     * Returns this area's current URL.
+     * @return this area's current URL
+     * @throws MalformedURLException if an error occurs
+     */
+    private URL getUrl() throws MalformedURLException {
+        final HtmlArea area = (HtmlArea) getDomNodeOrDie();
+        final String href = area.getHrefAttribute();
+        if (ATTRIBUTE_NOT_DEFINED == href) {
+            throw new MalformedURLException("no href attribute");
+        }
+        return ((HtmlPage) area.getPage()).getFullyQualifiedUrl(href);
+    }
+
+    /**
+     * Sets the {@code href} attribute of this area to the specified URL.
+     * @param url the new value of the {@code href} attribute
+     */
+    private void setUrl(final URL url) {
+        getDomNodeOrDie().setAttribute("href", url.toString());
+    }
 }
