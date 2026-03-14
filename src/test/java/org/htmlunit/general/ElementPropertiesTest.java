@@ -1361,10 +1361,15 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "protocol,referrerPolicy,rel,relList,search,shape,target,username",
             FF_ESR = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,"
                 + "protocol,referrerPolicy,rel,relList,search,shape,target,username")
-    @HtmlUnitNYI(CHROME = "alt,coords,rel,relList",
-            EDGE = "alt,coords,rel,relList",
-            FF_ESR = "alt,coords,rel,relList",
-            FF = "alt,coords,rel,relList")
+    @HtmlUnitNYI(
+            CHROME = "alt,coords,hash,host,hostname,href,origin,password,pathname,port,protocol,"
+                + "rel,relList,search,username",
+            EDGE = "alt,coords,hash,host,hostname,href,origin,password,pathname,port,protocol,"
+                + "rel,relList,search,username",
+            FF_ESR = "alt,coords,hash,host,hostname,href,origin,password,pathname,port,protocol,"
+                + "rel,relList,search,username",
+            FF = "alt,coords,hash,host,hostname,href,origin,password,pathname,port,protocol,"
+                + "rel,relList,search,username")
     public void area() throws Exception {
         test("area");
     }

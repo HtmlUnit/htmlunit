@@ -1887,10 +1887,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GSCE],search[GSCE],shape[GSCE],"
                 + "target[GSCE],toString(),"
                 + "username[GSCE]")
-    @HtmlUnitNYI(CHROME = "alt[GSCE],constructor(),coords[GSCE],rel[GSCE],relList[GCE]",
-            EDGE = "alt[GSCE],constructor(),coords[GSCE],rel[GSCE],relList[GCE]",
-            FF_ESR = "alt[GSCE],constructor(),coords[GSCE],rel[GSCE],relList[GCE]",
-            FF = "alt[GSCE],constructor(),coords[GSCE],rel[GSCE],relList[GCE]")
+    @HtmlUnitNYI(
+            CHROME = "alt[GSCE],constructor(),coords[GSCE],hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],"
+                + "origin[GCE],password[GSCE],pathname[GSCE],port[GSCE],protocol[GSCE],rel[GSCE],relList[GCE],"
+                + "search[GSCE],username[GSCE]",
+            EDGE = "alt[GSCE],constructor(),coords[GSCE],hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],"
+                + "origin[GCE],password[GSCE],pathname[GSCE],port[GSCE],protocol[GSCE],rel[GSCE],relList[GCE],"
+                + "search[GSCE],username[GSCE]",
+            FF_ESR = "alt[GSCE],constructor(),coords[GSCE],hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],"
+                + "origin[GCE],password[GSCE],pathname[GSCE],port[GSCE],protocol[GSCE],rel[GSCE],relList[GCE],"
+                + "search[GSCE],username[GSCE]",
+            FF = "alt[GSCE],constructor(),coords[GSCE],hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],"
+                + "origin[GCE],password[GSCE],pathname[GSCE],port[GSCE],protocol[GSCE],rel[GSCE],relList[GCE],"
+                + "search[GSCE],username[GSCE]")
     public void area() throws Exception {
         test("area");
     }

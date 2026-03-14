@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="add" dev="Lai Quang Duong">
+                Area: properties hash,host,hostname,href,origin,password,pathname,port,protocol,search, and username added.
+            </action>
             <action type="update" dev="Lai Quang Duong">
                 Extract shared HTMLHyperlinkElementUtils for URL decomposition and use it from HTMLAnchorElement and HTMLAreaElement.
             </action>
