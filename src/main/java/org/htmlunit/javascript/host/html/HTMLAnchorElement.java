@@ -55,6 +55,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Sudhan Moghe
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @JsxClass(domClass = HtmlAnchor.class)
 public class HTMLAnchorElement extends HTMLElement {
@@ -318,7 +319,7 @@ public class HTMLAnchorElement extends HTMLElement {
             final int port = url.getPort();
             final String host = url.getHost();
 
-            if (port == -1) {
+            if (port == -1 || isDefaultPort(url.getProtocol(), port)) {
                 return host;
             }
             return host + ":" + port;
@@ -436,8 +437,9 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter
     public String getPort() {
         try {
-            final int port = getUrl().getPort();
-            if (port == -1) {
+            final URL url = getUrl();
+            final int port = url.getPort();
+            if (port == -1 || isDefaultPort(url.getProtocol(), port)) {
                 return "";
             }
             return Integer.toString(port);
@@ -455,7 +457,14 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter
     public void setPort(final String port) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewPort(getUrl(), Integer.parseInt(port)));
+        final URL url = getUrl();
+        final int newPort = Integer.parseInt(port);
+        if (isDefaultPort(url.getProtocol(), newPort)) {
+            setUrl(UrlUtils.getUrlWithNewPort(url, -1));
+        }
+        else {
+            setUrl(UrlUtils.getUrlWithNewPort(url, newPort));
+        }
     }
 
     /**
@@ -811,5 +820,16 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxSetter
     public void setRelList(final Object rel) {
         setRel(JavaScriptEngine.toString(rel));
+    }
+
+    /**
+     * Checks whether the given port is the default port for the protocol.
+     * @param protocol the protocol (e.g. {@code "http"}, {@code "https"})
+     * @param port the port number
+     * @return {@code true} if the port is the default for the protocol
+     */
+    private static boolean isDefaultPort(final String protocol, final int port) {
+        return ("http".equals(protocol) && port == 80)
+                || ("https".equals(protocol) && port == 443);
     }
 }
