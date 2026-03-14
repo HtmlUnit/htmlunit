@@ -25,8 +25,17 @@ import org.htmlunit.util.UrlUtils;
  * Provides URL decomposition property logic
  * @see <a href="https://html.spec.whatwg.org/multipage/links.html#htmlhyperlinkelementutils">
  *      HTMLHyperlinkElementUtils</a>
+ *
+ * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 final class HTMLHyperlinkElementUtils {
+
+    /**
+     * Private ctor to keep Checkstyle happy
+     */
+    private HTMLHyperlinkElementUtils() {
+    }
 
     /**
      * Returns the {@code search} component of the URL.

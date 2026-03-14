@@ -50,6 +50,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Ronald Brill
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
