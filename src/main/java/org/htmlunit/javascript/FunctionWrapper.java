@@ -154,8 +154,8 @@ public class FunctionWrapper implements Function, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public void setParentScope(final Scriptable parent) {
-        wrapped_.setParentScope(parent);
+    public void setParentScope(final Scriptable scope) {
+        wrapped_.setParentScope(scope);
     }
 
     /**
