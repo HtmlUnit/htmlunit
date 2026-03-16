@@ -337,7 +337,11 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16", "rejected"})
+    @Alerts(DEFAULT = {"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16", "rejected"},
+            FF = {"rejected", "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16"},
+            FF_ESR = {"rejected", "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16"})
+    @HtmlUnitNYI(FF = {"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16", "rejected"},
+            FF_ESR = {"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16", "rejected"})
     public void exportKeyRaw() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

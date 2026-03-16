@@ -9,6 +9,30 @@
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
             <action type="add" dev="Lai Quang Duong">
+                SubtleCrypto: digest() - SHA-1, SHA-256, SHA-384, SHA-512.
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                SubtleCrypto: generateKey() - RSASSA-PKCS1-v1_5, RSA-PSS, RSA-OAEP, ECDSA, ECDH, AES-CBC, AES-CTR, AES-GCM, AES-KW, HMAC
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                SubtleCrypto: importKey("raw") - HMAC, AES-CBC, AES-CTR, AES-GCM, AES-KW
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                SubtleCrypto: exportKey("raw") - HMAC, AES-CBC, AES-CTR, AES-GCM, AES-KW
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                SubtleCrypto: sign() - HMAC, RSASSA-PKCS1-v1_5, RSA-PSS, ECDSA
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                SubtleCrypto: verify() - HMAC, RSASSA-PKCS1-v1_5, RSA-PSS, ECDSA
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                SubtleCrypto: encrypt() - AES-CBC, AES-GCM, AES-CTR, RSA-OAEP
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                SubtleCrypto: decrypt() - AES-CBC, AES-GCM, AES-CTR, RSA-OAEP
+            </action>
+            <action type="add" dev="Lai Quang Duong">
                 Area: properties hash,host,hostname,href,origin,password,pathname,port,protocol,search, and username added.
             </action>
             <action type="update" dev="Lai Quang Duong">

@@ -876,7 +876,8 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                     arrayBuffer.getBuffer(), arrayBufferView.getByteOffset(), arrayBufferView.getByteLength());
         }
         else {
-            throw JavaScriptEngine.typeError("Argument could not be converted to any of: ArrayBufferView, ArrayBuffer.");
+            throw JavaScriptEngine.typeError(
+                    "Argument could not be converted to any of: ArrayBufferView, ArrayBuffer.");
         }
     }
 
