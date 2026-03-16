@@ -529,4 +529,121 @@ public class SubtleCryptoTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"AES-CBC ok", "AES-GCM ok", "AES-CTR ok"})
+    public void encryptDecryptAes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function encryptDecryptRoundTrip(genParams, encParams) {\n"
+            + "    var data = new TextEncoder().encode('hello world');\n"
+            + "    return window.crypto.subtle.generateKey(\n"
+            + "      genParams, false, ['encrypt', 'decrypt']\n"
+            + "    ).then(function(key) {\n"
+            + "      return window.crypto.subtle.encrypt(encParams, key, data)"
+            + "        .then(function(encrypted) {\n"
+            + "        return window.crypto.subtle.decrypt(encParams, key, encrypted)"
+            + "          .then(function(decrypted) {\n"
+            + "          var result = new TextDecoder().decode(decrypted);\n"
+            + "          log(genParams.name + (result === 'hello world' ? ' ok' : ' FAIL'));\n"
+            + "        });\n"
+            + "      });\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var iv16 = crypto.getRandomValues(new Uint8Array(16));\n"
+            + "    var iv12 = crypto.getRandomValues(new Uint8Array(12));\n"
+            + "    encryptDecryptRoundTrip(\n"
+            + "      { name: 'AES-CBC', length: 256 },\n"
+            + "      { name: 'AES-CBC', iv: iv16 }\n"
+            + "    ).then(function() {\n"
+            + "      return encryptDecryptRoundTrip(\n"
+            + "        { name: 'AES-GCM', length: 256 },\n"
+            + "        { name: 'AES-GCM', iv: iv12 }\n"
+            + "      );\n"
+            + "    }).then(function() {\n"
+            + "      return encryptDecryptRoundTrip(\n"
+            + "        { name: 'AES-CTR', length: 256 },\n"
+            + "        { name: 'AES-CTR', counter: iv16, length: 64 }\n"
+            + "      );\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello world")
+    public void encryptDecryptRsaOaep() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var data = new TextEncoder().encode('hello world');\n"
+            + "    window.crypto.subtle.generateKey(\n"
+            + "      { name: 'RSA-OAEP', modulusLength: 2048,\n"
+            + "        publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' },\n"
+            + "      false, ['encrypt', 'decrypt']\n"
+            + "    ).then(function(keyPair) {\n"
+            + "      return window.crypto.subtle.encrypt(\n"
+            + "        { name: 'RSA-OAEP' }, keyPair.publicKey, data\n"
+            + "      ).then(function(encrypted) {\n"
+            + "        return window.crypto.subtle.decrypt(\n"
+            + "          { name: 'RSA-OAEP' }, keyPair.privateKey, encrypted\n"
+            + "        ).then(function(decrypted) {\n"
+            + "          log(new TextDecoder().decode(decrypted));\n"
+            + "        });\n"
+            + "      });\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello world")
+    public void encryptDecryptAesGcmAad() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var data = new TextEncoder().encode('hello world');\n"
+            + "    var aad = new TextEncoder().encode('additional data');\n"
+            + "    var iv = crypto.getRandomValues(new Uint8Array(12));\n"
+            + "    crypto.subtle.generateKey(\n"
+            + "      {name: 'AES-GCM', length: 256}, false, ['encrypt', 'decrypt']\n"
+            + "    ).then(function(key) {\n"
+            + "      return crypto.subtle.encrypt(\n"
+            + "        {name: 'AES-GCM', iv: iv, additionalData: aad}, key, data\n"
+            + "      ).then(function(encrypted) {\n"
+            + "        return crypto.subtle.decrypt(\n"
+            + "          {name: 'AES-GCM', iv: iv, additionalData: aad}, key, encrypted\n"
+            + "        ).then(function(decrypted) {\n"
+            + "          log(new TextDecoder().decode(decrypted));\n"
+            + "        });\n"
+            + "      });\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }

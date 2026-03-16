@@ -23,6 +23,7 @@ import java.security.MessageDigest;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
+import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.ECGenParameterSpec;
 import java.security.spec.MGF1ParameterSpec;
 import java.security.spec.PSSParameterSpec;
@@ -35,9 +36,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.OAEPParameterSpec;
+import javax.crypto.spec.PSource;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.htmlunit.corejs.javascript.EcmaError;
@@ -94,6 +100,11 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             new LinkedHashSet<>(List.of("encrypt", "decrypt", "sign", "verify",
                     "deriveKey", "deriveBits", "wrapKey", "unwrapKey")));
 
+    /**
+     * @see <a href="https://w3c.github.io/webcrypto/#aes-gcm-operations">AES-GCM encrypt, step 6</a>
+     */
+    private static final Set<Integer> VALID_AES_GCM_TAG_LENGTHS = Set.of(32, 64, 96, 104, 112, 120, 128);
+
     private static class InvalidAccessException extends RuntimeException {
         InvalidAccessException(final String message) {
             super(message);
@@ -114,23 +125,183 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     /**
-     * Not yet implemented.
-     *
-     * @return a Promise which will be fulfilled with the encrypted data (also known as "ciphertext")
+     * Encrypts data using the given key and algorithm.
+     * @see <a href="https://w3c.github.io/webcrypto/#SubtleCrypto-method-encrypt">SubtleCrypto.encrypt()</a>
+     * @param algorithm the algorithm identifier with parameters
+     * @param key the CryptoKey to encrypt with
+     * @param data the data to encrypt
+     * @return a Promise that fulfills with an ArrayBuffer containing the ciphertext
      */
     @JsxFunction
-    public NativePromise encrypt() {
-        return notImplemented();
+    public NativePromise encrypt(final Object algorithm, final CryptoKey key, final Object data) {
+        return doCipher(algorithm, key, data, Cipher.ENCRYPT_MODE);
     }
 
     /**
-     * Not yet implemented.
-     *
-     * @return a Promise which will be fulfilled with the decrypted data (also known as "plaintext")
+     * Decrypts data using the given key and algorithm.
+     * @see <a href="https://w3c.github.io/webcrypto/#SubtleCrypto-method-decrypt">SubtleCrypto.decrypt()</a>
+     * @param algorithm the algorithm identifier with parameters
+     * @param key the CryptoKey to decrypt with
+     * @param data the data to decrypt
+     * @return a Promise that fulfills with an ArrayBuffer containing the plaintext
      */
     @JsxFunction
-    public NativePromise decrypt() {
-        return notImplemented();
+    public NativePromise decrypt(final Object algorithm, final CryptoKey key, final Object data) {
+        return doCipher(algorithm, key, data, Cipher.DECRYPT_MODE);
+    }
+
+    /**
+     * Shared encrypt/decrypt implementation.
+     */
+    private NativePromise doCipher(final Object algorithm, final CryptoKey key,
+            final Object data, final int cipherMode) {
+        final String operation = switch (cipherMode) {
+            case Cipher.ENCRYPT_MODE -> "encrypt";
+            case Cipher.DECRYPT_MODE -> "decrypt";
+            default -> throw new IllegalArgumentException("Invalid cipher mode: " + cipherMode);
+        };
+
+        final byte[] result;
+        try {
+            final String algorithmName = resolveAlgorithmName(algorithm);
+            ensureAlgorithmIsSupported(operation, algorithmName);
+            ensureKeyAlgorithmMatches(algorithmName, key);
+            ensureKeyUsage(key, operation);
+
+            final ByteBuffer inputData = asByteBuffer(data);
+
+            // encrypt/decrypt requires algorithm parameters as an object (iv, counter, etc.)
+            if (!(algorithm instanceof Scriptable algorithmObj)) {
+                throw new IllegalArgumentException("An invalid or illegal string was specified");
+            }
+
+            switch (algorithmName) {
+                case "AES-CBC": {
+                    // https://w3c.github.io/webcrypto/#aes-cbc-operations
+                    final byte[] iv = extractBuffer(algorithmObj, "iv");
+                    if (iv == null || iv.length != 16) {
+                        throw new IllegalArgumentException(
+                                "Data provided to an operation does not meet requirements");
+                    }
+                    final SecretKey secretKey = getInternalKey(key, SecretKey.class);
+                    final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+                    cipher.init(cipherMode, secretKey, new IvParameterSpec(iv));
+                    result = cipher.doFinal(toByteArray(inputData));
+                    break;
+                }
+                case "AES-GCM": {
+                    // https://w3c.github.io/webcrypto/#aes-gcm-operations
+                    final byte[] iv = extractBuffer(algorithmObj, "iv");
+                    if (iv == null || iv.length == 0) {
+                        throw new IllegalArgumentException(
+                                "Data provided to an operation does not meet requirements");
+                    }
+
+                    final int tagLength;
+                    final Object tagLengthProp = ScriptableObject.getProperty(algorithmObj, "tagLength");
+                    if (tagLengthProp instanceof Number num) {
+                        tagLength = num.intValue();
+                        if (!VALID_AES_GCM_TAG_LENGTHS.contains(tagLength)) {
+                            throw new IllegalArgumentException(
+                                    "Data provided to an operation does not meet requirements");
+                        }
+                    }
+                    else {
+                        tagLength = 128;
+                    }
+
+                    final SecretKey secretKey = getInternalKey(key, SecretKey.class);
+                    final Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+                    cipher.init(cipherMode, secretKey, new GCMParameterSpec(tagLength, iv));
+
+                    final Object aadProp = ScriptableObject.getProperty(algorithmObj, "additionalData");
+                    if (aadProp instanceof Scriptable) {
+                        final ByteBuffer aad = asByteBuffer(aadProp);
+                        cipher.updateAAD(toByteArray(aad));
+                    }
+
+                    result = cipher.doFinal(toByteArray(inputData));
+                    break;
+                }
+                case "AES-CTR": {
+                    // https://w3c.github.io/webcrypto/#aes-ctr-operations
+                    final byte[] counter = extractBuffer(algorithmObj, "counter");
+                    if (counter == null || counter.length != 16) {
+                        throw new IllegalArgumentException(
+                                "Data provided to an operation does not meet requirements");
+                    }
+
+                    final Object lengthProp = ScriptableObject.getProperty(algorithmObj, "length");
+                    if (!(lengthProp instanceof Number numLength)) {
+                        throw new IllegalArgumentException(
+                                "Data provided to an operation does not meet requirements");
+                    }
+                    final int counterLength = numLength.intValue();
+                    if (counterLength < 1 || counterLength > 128) {
+                        throw new IllegalArgumentException(
+                                "Data provided to an operation does not meet requirements");
+                    }
+
+                    final SecretKey secretKey = getInternalKey(key, SecretKey.class);
+                    // Java always increments the full 128-bit counter, ignoring the 'length' partitioning.
+                    // This only becomes an issue when data exceeds 2^length AES blocks (16 bytes each),
+                    // but in real-world usage (length >= 64) it's pretty much unreachable.
+                    final Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
+                    cipher.init(cipherMode, secretKey, new IvParameterSpec(counter));
+                    result = cipher.doFinal(toByteArray(inputData));
+                    break;
+                }
+                case "RSA-OAEP": {
+                    // https://w3c.github.io/webcrypto/#rsa-oaep-operations
+                    final Scriptable keyAlgorithm = key.getAlgorithm();
+                    final Object hashObj = ScriptableObject.getProperty(keyAlgorithm, "hash");
+                    final String hash = resolveAlgorithmName(hashObj);
+
+                    final byte[] label;
+                    final Object labelProp = ScriptableObject.getProperty(algorithmObj, "label");
+                    if (labelProp instanceof Scriptable) {
+                        final ByteBuffer labelBuf = asByteBuffer(labelProp);
+                        label = toByteArray(labelBuf);
+                    }
+                    else {
+                        label = new byte[0];
+                    }
+
+                    final MGF1ParameterSpec mgf1Spec = new MGF1ParameterSpec(hash);
+                    final AlgorithmParameterSpec oaepSpec = new OAEPParameterSpec(
+                            hash, "MGF1", mgf1Spec, new PSource.PSpecified(label));
+
+                    final Key internalKey;
+                    if (cipherMode == Cipher.ENCRYPT_MODE) {
+                        internalKey = getInternalKey(key, PublicKey.class);
+                    }
+                    else {
+                        internalKey = getInternalKey(key, PrivateKey.class);
+                    }
+
+                    final Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPPadding");
+                    cipher.init(cipherMode, internalKey, oaepSpec);
+                    result = cipher.doFinal(toByteArray(inputData));
+                    break;
+                }
+                default:
+                    throw new UnsupportedOperationException(operation + " " + algorithmName);
+            }
+        }
+        catch (final EcmaError e) {
+            return setupRejectedPromise(() -> e);
+        }
+        catch (final InvalidAccessException e) {
+            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.INVALID_ACCESS_ERR));
+        }
+        catch (final IllegalArgumentException e) {
+            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+        }
+        catch (final GeneralSecurityException | UnsupportedOperationException e) {
+            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+                    DOMException.NOT_SUPPORTED_ERR));
+        }
+        return setupPromise(() -> createArrayBuffer(result));
     }
 
     /**
@@ -707,6 +878,21 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         else {
             throw JavaScriptEngine.typeError("Argument could not be converted to any of: ArrayBufferView, ArrayBuffer.");
         }
+    }
+
+    /**
+     * Reads a property from a JS object and converts it to a byte array.
+     * @param obj the JS object containing the property
+     * @param property the property name (e.g. "iv", "counter", "label")
+     * @return the byte array, or {@code null} if the property is absent or not convertible
+     */
+    private static byte[] extractBuffer(final Scriptable obj, final String property) {
+        final Object prop = ScriptableObject.getProperty(obj, property);
+        if (prop instanceof Scriptable) {
+            final ByteBuffer buf = asByteBuffer(prop);
+            return toByteArray(buf);
+        }
+        return null;
     }
 
     /**
