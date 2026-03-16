@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Atsushi Nakagawa
+ * @author Lai Quang Duong
  */
 public class SubtleCryptoTest extends WebDriverTestCase {
 
@@ -137,6 +138,41 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             + "        log(err);\n"
             + "      });\n"
             + "    } else { log('no window.crypto'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"SHA-1: 8843d7f92416211de9ebb963ff4ce28125932878",
+             "SHA-256: c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2",
+             "SHA-384: 3c9c30d9f665e74d515c842960d4a451c83a0125fd3de7392d7b37231af10c72"
+                     + "ea58aedfcdf89a5765bf902af93ecf06",
+             "SHA-512: 0a50261ebd1a390fed2bf326f2673c145582a6342d523204973d0219337f81616a8069b012587cf"
+                     + "5635f6925f1b56c360230c19b273500ee013e030601bf2425"})
+    public void digest() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var data = new TextEncoder().encode('foobar');\n"
+            + "    var algorithms = ['SHA-1', 'SHA-256', {name: 'SHA-384'}, {name: 'SHA-512'}];\n"
+            + "    var chain = Promise.resolve();\n"
+            + "    algorithms.forEach(function(algo) {\n"
+            + "      chain = chain.then(function() {\n"
+            + "        return window.crypto.subtle.digest(algo, data).then(function(hash) {\n"
+            + "          var hex = Array.from(new Uint8Array(hash))\n"
+            + "            .map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');\n"
+            + "          log((algo.name ? algo.name : algo) + ': ' + hex);\n"
+            + "        });\n"
+            + "      });\n"
+            + "    });\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
