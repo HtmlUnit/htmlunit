@@ -181,6 +181,71 @@ public class SubtleCryptoTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"secret", "true", "HMAC", "SHA-1", "512", "sign,verify"})
+    public void importKeyHmac() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var rawKey = new Uint8Array([154,96,73,78,144,193,22,2,31,117,82,100,53,153,70,89,"
+            + "47,64,159,6,172,145,82,124,25,206,252,42,160,14,136,161,78,165,11,207,226,149,165,112,"
+            + "172,10,127,12,252,112,105,222,227,36,1,7,227,17,178,234,9,44,20,40,127,188,114,56]);\n"
+            + "    window.crypto.subtle.importKey(\n"
+            + "      'raw', rawKey,\n"
+            + "      { name: 'HMAC', hash: { name: 'SHA-1' } },\n"
+            + "      true, ['verify', 'sign', 'verify']\n"
+            + "    ).then(function(key) {\n"
+            + "      log(key.type);\n"
+            + "      log(key.extractable);\n"
+            + "      log(key.algorithm.name);\n"
+            + "      log(key.algorithm.hash.name);\n"
+            + "      log(key.algorithm.length);\n"
+            + "      log(key.usages.join(','));\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"secret", "false", "AES-GCM", "256", "encrypt,decrypt"})
+    public void importKeyAes() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var rawKey = new Uint8Array(["
+            + "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,"
+            + "17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]);\n"
+            + "    window.crypto.subtle.importKey(\n"
+            + "      'raw', rawKey,\n"
+            + "      { name: 'AES-GCM' },\n"
+            + "      false, ['encrypt', 'decrypt']\n"
+            + "    ).then(function(key) {\n"
+            + "      log(key.type);\n"
+            + "      log(key.extractable);\n"
+            + "      log(key.algorithm.name);\n"
+            + "      log(key.algorithm.length);\n"
+            + "      log(key.usages.join(','));\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"secret", "true", "AES-GCM", "256", "encrypt,decrypt"})
     public void generateKeyAesGcm() throws Exception {
         final String html = DOCTYPE_HTML
@@ -259,6 +324,43 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             + "      log(key.privateKey.algorithm.name);\n"
             + "      log(key.privateKey.algorithm.namedCurve);\n"
             + "      log(key.privateKey.usages.join(','));\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16", "rejected"})
+    public void exportKeyRaw() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var rawKey = new Uint8Array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);\n"
+            + "    window.crypto.subtle.importKey(\n"
+            + "      'raw', rawKey,\n"
+            + "      { name: 'AES-GCM' },\n"
+            + "      true, ['encrypt', 'decrypt']\n"
+            + "    ).then(function(key) {\n"
+            + "      return window.crypto.subtle.exportKey('raw', key);\n"
+            + "    }).then(function(exported) {\n"
+            + "      log(new Uint8Array(exported).toString());\n"
+            + "    });\n"
+            + "    window.crypto.subtle.importKey(\n"
+            + "      'raw', rawKey,\n"
+            + "      { name: 'AES-GCM' },\n"
+            + "      false, ['encrypt', 'decrypt']\n"
+            + "    ).then(function(key) {\n"
+            + "      return window.crypto.subtle.exportKey('raw', key);\n"
+            + "    }).catch(function(e) {\n"
+            + "      log('rejected');\n"
             + "    });\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
