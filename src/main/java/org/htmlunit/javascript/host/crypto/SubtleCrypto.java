@@ -31,6 +31,7 @@ import java.util.Set;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.NativeObject;
@@ -329,23 +330,127 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     /**
-     * Not yet implemented.
-     *
-     * @return a CryptoKey object that you can use in the Web Crypto API
+     * Imports a key from external, portable key material.
+     * @see <a href="https://w3c.github.io/webcrypto/#SubtleCrypto-method-importKey">SubtleCrypto.importKey()</a>
+     * @param format the data format ("raw", "pkcs8", "spki", "jwk")
+     * @param keyData the key material (BufferSource for raw/pkcs8/spki, JsonWebKey for jwk)
+     * @param keyImportParams algorithm-specific import parameters
+     * @param isExtractable whether the key can be exported
+     * @param keyUsages permitted operations for this key
+     * @return a Promise that fulfills with the imported CryptoKey
      */
     @JsxFunction
-    public NativePromise importKey() {
-        return notImplemented();
+    public NativePromise importKey(final String format, final Scriptable keyData,
+            final Scriptable keyImportParams, final boolean isExtractable, final Scriptable keyUsages) {
+        final CryptoKey key;
+        try {
+            final String algorithm = resolveAlgorithmName(keyImportParams);
+            ensureAlgorithmIsSupported("importKey", algorithm);
+
+            switch (format) {
+                case "raw":
+                    key = importRawKey(algorithm, keyData, keyImportParams, isExtractable, keyUsages);
+                    break;
+                case "pkcs8":
+                case "spki":
+                case "jwk":
+                    return notImplemented();
+                default:
+                    throw new IllegalArgumentException("An invalid or illegal string was specified");
+            }
+        }
+        catch (final EcmaError e) {
+            return setupRejectedPromise(() -> e);
+        }
+        catch (final IllegalArgumentException e) {
+            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+        }
+        catch (final UnsupportedOperationException e) {
+            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+                    DOMException.NOT_SUPPORTED_ERR));
+        }
+        return setupPromise(() -> key);
+    }
+
+    private CryptoKey importRawKey(final String algorithm, final Scriptable keyData,
+            final Scriptable keyImportParams, final boolean isExtractable, final Scriptable keyUsages) {
+        final ByteBuffer byteBuffer = asByteBuffer(keyData);
+        final byte[] rawBytes = new byte[byteBuffer.remaining()];
+        byteBuffer.get(rawBytes);
+        final int bitLength = rawBytes.length * 8;
+        if (bitLength == 0) {
+            throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
+        }
+
+        final List<String> usages = resolveKeyUsages(algorithm, keyUsages);
+        if (usages.isEmpty()) {
+            throw new IllegalArgumentException("An invalid or illegal string was specified");
+        }
+
+        if ("HMAC".equals(algorithm)) {
+            final HmacKeyAlgorithm params = HmacKeyAlgorithm.from(keyImportParams, bitLength);
+            final int length = params.getLength();
+            if (length > bitLength || length <= bitLength - 8) {
+                throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
+            }
+
+            final Scriptable scriptableAlgorithm = params.toScriptableObject(keyImportParams.getParentScope());
+            final SecretKey internalKey = new SecretKeySpec(rawBytes, params.getJavaName());
+            return CryptoKey.create(getParentScope(), internalKey, isExtractable, scriptableAlgorithm, usages);
+        }
+
+        if (AesKeyAlgorithm.isSupported(algorithm)) {
+            final AesKeyAlgorithm aesAlgo = new AesKeyAlgorithm(algorithm, bitLength);
+            final Scriptable scriptableAlgorithm = aesAlgo.toScriptableObject(keyImportParams.getParentScope());
+            final SecretKey internalKey = new SecretKeySpec(rawBytes, "AES");
+            return CryptoKey.create(getParentScope(), internalKey, isExtractable, scriptableAlgorithm, usages);
+        }
+
+        throw new UnsupportedOperationException("importKey raw " + algorithm);
     }
 
     /**
-     * Not yet implemented.
-     *
-     * @return the key in an external, portable format
+     * Exports a key in the specified format.
+     * @see <a href="https://w3c.github.io/webcrypto/#SubtleCrypto-method-exportKey">SubtleCrypto.exportKey()</a>
+     * @param format the data format ("raw", "pkcs8", "spki", "jwk")
+     * @param key the CryptoKey to export
+     * @return a Promise that fulfills with the key data
      */
     @JsxFunction
-    public NativePromise exportKey() {
-        return notImplemented();
+    public NativePromise exportKey(final String format, final CryptoKey key) {
+        final byte[] result;
+        try {
+            if (!key.getExtractable()) {
+                return setupRejectedPromise(() -> new DOMException(
+                        "A parameter or an operation is not supported by the underlying object",
+                        DOMException.INVALID_ACCESS_ERR));
+            }
+
+            switch (format) {
+                case "raw": {
+                    if (!(key.getInternalKey() instanceof SecretKey secretKey)) {
+                        throw new IllegalArgumentException(
+                                "Data provided to an operation does not meet requirements");
+                    }
+                    result = secretKey.getEncoded();
+                    break;
+                }
+                case "pkcs8":
+                case "spki":
+                case "jwk":
+                    return notImplemented();
+                default:
+                    throw new IllegalArgumentException("An invalid or illegal string was specified");
+            }
+        }
+        catch (final IllegalArgumentException e) {
+            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+        }
+        catch (final UnsupportedOperationException e) {
+            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+                    DOMException.NOT_SUPPORTED_ERR));
+        }
+        return setupPromise(() -> createArrayBuffer(result));
     }
 
     /**
