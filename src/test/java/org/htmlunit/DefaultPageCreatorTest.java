@@ -38,6 +38,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class DefaultPageCreatorTest extends WebServerTestCase {
 
@@ -374,6 +375,32 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             final Writer writer = response.getWriter();
             writer.write(DOCTYPE_HTML + "<html><head><title>\u00d3</title></head><body></body></html>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void wildcardContentType() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", WildcardContentTypeServlet.class);
+        startWebServer("./", servlets);
+
+        final WebClient client = getWebClient();
+        assertTrue(client.getPage(URL_FIRST + "test") instanceof HtmlPage);
+    }
+
+    /**
+     * Servlet for {@link #wildcardContentType()}.
+     */
+    public static class WildcardContentTypeServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("*/*");
+            final Writer writer = response.getWriter();
+            writer.write("<html><head></head><body>Hello World</body></html>");
         }
     }
 
