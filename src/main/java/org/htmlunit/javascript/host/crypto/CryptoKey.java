@@ -14,24 +14,131 @@
  */
 package org.htmlunit.javascript.host.crypto;
 
+import java.security.Key;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import javax.crypto.SecretKey;
+
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.host.Window;
 
 /**
  * A JavaScript object for {@code CryptoKey}.
  *
+ * @see <a href="https://w3c.github.io/webcrypto/#dfn-CryptoKey">CryptoKey</a>
+ *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @JsxClass
 public class CryptoKey extends HtmlUnitScriptable {
+
+    private Key internalKey_;
+    private String type_;
+    private boolean isExtractable_;
+    private Scriptable algorithm_;
+    private Set<String> usages_;
 
     /**
      * JavaScript constructor.
      */
     @JsxConstructor
     public void jsConstructor() {
-        // nothing to do
+        throw JavaScriptEngine.typeErrorIllegalConstructor();
+    }
+
+    /**
+     * Creates a properly scoped CryptoKey from the given parameters.
+     *
+     * @param scope the JS scope
+     * @param internalKey the Java key (SecretKey, PublicKey, or PrivateKey)
+     * @param isExtractable whether the key can be exported
+     * @param algorithm the JS algorithm descriptor object
+     * @param usages the permitted key usages
+     * @return the new CryptoKey
+     */
+    static CryptoKey create(final Scriptable scope, final Key internalKey, final boolean isExtractable,
+            final Scriptable algorithm, final Collection<String> usages) {
+        final CryptoKey key = new CryptoKey();
+        key.internalKey_ = Objects.requireNonNull(internalKey);
+
+        if (internalKey instanceof PublicKey) {
+            key.type_ = "public";
+        }
+        else if (internalKey instanceof PrivateKey) {
+            key.type_ = "private";
+        }
+        else if (internalKey instanceof SecretKey) {
+            key.type_ = "secret";
+        }
+        else {
+            throw new IllegalStateException("Unsupported key type: " + internalKey.getClass());
+        }
+
+        key.isExtractable_ = isExtractable;
+        key.algorithm_ = algorithm;
+        key.usages_ = new LinkedHashSet<>(usages);
+
+        final Window window = getWindow(Objects.requireNonNull(scope));
+        key.setParentScope(window);
+        key.setPrototype(window.getPrototype(CryptoKey.class));
+        return key;
+    }
+
+    /**
+     * @return the Java key (opaque {@code [[handle]]} internal slot)
+     */
+    public Key getInternalKey() {
+        return internalKey_;
+    }
+
+    /**
+     * @return the key type: "public", "private", or "secret"
+     */
+    @JsxGetter
+    public String getType() {
+        return type_;
+    }
+
+    /**
+     * @return whether the key material may be exported
+     */
+    @JsxGetter
+    public boolean getExtractable() {
+        return isExtractable_;
+    }
+
+    /**
+     * @return the algorithm descriptor object
+     */
+    @JsxGetter
+    public Scriptable getAlgorithm() {
+        return algorithm_;
+    }
+
+    /**
+     * @return the permitted key usages as a JS array
+     */
+    @JsxGetter
+    public Scriptable getUsages() {
+        return JavaScriptEngine.newArray(this, usages_.toArray());
+    }
+
+    /**
+     * @return the permitted key usages as a Java set (for internal use)
+     */
+    public Set<String> getUsagesInternal() {
+        return usages_;
     }
 }
