@@ -16,14 +16,29 @@ package org.htmlunit.javascript.host.crypto;
 
 import java.nio.ByteBuffer;
 import java.security.GeneralSecurityException;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
+import java.security.spec.ECGenParameterSpec;
+import java.security.spec.RSAKeyGenParameterSpec;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+
 import org.htmlunit.corejs.javascript.EcmaError;
+import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.NativePromise;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -63,6 +78,13 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             Map.entry("deriveBits", Set.of("ECDH", "HKDF", "PBKDF2")),
             Map.entry("deriveKey", Set.of("ECDH", "HKDF", "PBKDF2"))
     );
+
+    /**
+     * @see <a href="https://w3c.github.io/webcrypto/#dfn-RecognizedKeyUsage">RecognizedKeyUsage</a>
+     */
+    private static final Set<String> RECOGNIZED_KEY_USAGES = Collections.unmodifiableSet(
+            new LinkedHashSet<>(List.of("encrypt", "decrypt", "sign", "verify",
+                    "deriveKey", "deriveBits", "wrapKey", "unwrapKey")));
 
     /**
      * Creates an instance.
@@ -150,13 +172,140 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     /**
-     * Not yet implemented.
-     *
-     * @return a new key (for symmetric algorithms) or key pair (for public-key algorithms)
+     * Generates a new key (for symmetric algorithms) or key pair (for public-key algorithms).
+     * @see <a href="https://w3c.github.io/webcrypto/#SubtleCrypto-method-generateKey">SubtleCrypto.generateKey()</a>
+     * @param keyGenParams algorithm-specific key generation parameters
+     * @param isExtractable whether the key(s) can be exported
+     * @param keyUsages permitted operations for the key(s)
+     * @return a Promise that fulfills with a CryptoKey or CryptoKeyPair
      */
     @JsxFunction
-    public NativePromise generateKey() {
-        return notImplemented();
+    public NativePromise generateKey(final Scriptable keyGenParams, final boolean isExtractable,
+            final Scriptable keyUsages) {
+        final Object result;
+        try {
+            final String algorithm = resolveAlgorithmName(keyGenParams);
+            ensureAlgorithmIsSupported("generateKey", algorithm);
+
+            final Scriptable scope = keyGenParams.getParentScope();
+
+            switch (algorithm) {
+                case "RSASSA-PKCS1-v1_5":
+                case "RSA-PSS":
+                case "RSA-OAEP": {
+                    final RsaHashedKeyAlgorithm rsaParams = RsaHashedKeyAlgorithm.from(keyGenParams);
+                    final List<String> usages = resolveKeyUsages(algorithm, keyUsages);
+
+                    final KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
+                    keyPairGen.initialize(new RSAKeyGenParameterSpec(
+                            rsaParams.getModulusLength(), rsaParams.getPublicExponentAsBigInteger()));
+                    final KeyPair keyPair = keyPairGen.generateKeyPair();
+
+                    final Scriptable algoObj = rsaParams.toScriptableObject(scope);
+                    result = createKeyPair(keyPair, algoObj, isExtractable, usages, scope);
+                    break;
+                }
+                case "ECDSA":
+                case "ECDH": {
+                    final EcKeyAlgorithm ecParams = EcKeyAlgorithm.from(keyGenParams);
+                    final List<String> usages = resolveKeyUsages(algorithm, keyUsages);
+
+                    final KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("EC");
+                    keyPairGen.initialize(new ECGenParameterSpec(ecParams.getJavaCurveName()));
+                    final KeyPair keyPair = keyPairGen.generateKeyPair();
+
+                    final Scriptable algoObj = ecParams.toScriptableObject(scope);
+                    result = createKeyPair(keyPair, algoObj, isExtractable, usages, scope);
+                    break;
+                }
+                case "AES-CBC":
+                case "AES-CTR":
+                case "AES-GCM":
+                case "AES-KW": {
+                    final AesKeyAlgorithm aesParams = AesKeyAlgorithm.from(keyGenParams);
+                    final List<String> usages = resolveKeyUsages(algorithm, keyUsages);
+                    if (usages.isEmpty()) {
+                        throw new IllegalArgumentException("An invalid or illegal string was specified");
+                    }
+
+                    final KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+                    keyGen.init(aesParams.getLength());
+                    final SecretKey secretKey = keyGen.generateKey();
+
+                    final Scriptable algoObj = aesParams.toScriptableObject(scope);
+                    result = CryptoKey.create(getParentScope(), secretKey, isExtractable, algoObj, usages);
+                    break;
+                }
+                case "HMAC": {
+                    final HmacKeyAlgorithm hmacParams = HmacKeyAlgorithm.from(keyGenParams);
+                    final List<String> usages = resolveKeyUsages("HMAC", keyUsages);
+                    if (usages.isEmpty()) {
+                        throw new IllegalArgumentException("An invalid or illegal string was specified");
+                    }
+
+                    final KeyGenerator keyGen = KeyGenerator.getInstance(hmacParams.getJavaName());
+                    keyGen.init(hmacParams.getLength());
+                    final SecretKey secretKey = keyGen.generateKey();
+
+                    final Scriptable algoObj = hmacParams.toScriptableObject(scope);
+                    result = CryptoKey.create(getParentScope(), secretKey, isExtractable, algoObj, usages);
+                    break;
+                }
+                default:
+                    throw new UnsupportedOperationException("generateKey " + algorithm);
+            }
+        }
+        catch (final EcmaError e) {
+            return setupRejectedPromise(() -> e);
+        }
+        catch (final IllegalArgumentException e) {
+            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+        }
+        catch (final GeneralSecurityException | UnsupportedOperationException e) {
+            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+                    DOMException.NOT_SUPPORTED_ERR));
+        }
+        return setupPromise(() -> result);
+    }
+
+    /**
+     * Creates a CryptoKeyPair (plain JS object with publicKey/privateKey) from a Java KeyPair.
+     * The public key is always extractable regardless of the extractable parameter.
+     * Usages are split: public gets {encrypt,verify,wrapKey},
+     * private gets {decrypt,sign,unwrapKey,deriveBits,deriveKey}.
+     */
+    private Scriptable createKeyPair(final KeyPair keyPair, final Scriptable algoObj,
+            final boolean isExtractable, final List<String> allUsages, final Scriptable scope) {
+        final Set<String> publicUsageSet = Set.of("encrypt", "verify", "wrapKey");
+        final Set<String> privateUsageSet = Set.of("decrypt", "sign", "unwrapKey", "deriveBits", "deriveKey");
+
+        final List<String> publicUsages = new ArrayList<>();
+        final List<String> privateUsages = new ArrayList<>();
+        for (final String usage : allUsages) {
+            if (publicUsageSet.contains(usage)) {
+                publicUsages.add(usage);
+            }
+            if (privateUsageSet.contains(usage)) {
+                privateUsages.add(usage);
+            }
+        }
+
+        // if privateKey usages would be empty, throw SyntaxError
+        if (privateUsages.isEmpty()) {
+            throw new IllegalArgumentException("An invalid or illegal string was specified");
+        }
+
+        // public key is always extractable
+        final CryptoKey publicKey = CryptoKey.create(
+                getParentScope(), keyPair.getPublic(), true, algoObj, publicUsages);
+        final CryptoKey privateKey = CryptoKey.create(
+                getParentScope(), keyPair.getPrivate(), isExtractable, algoObj, privateUsages);
+
+        final NativeObject keyPairObj = new NativeObject();
+        ScriptRuntime.setBuiltinProtoAndParent(keyPairObj, scope, TopLevel.Builtins.Object);
+        ScriptableObject.putProperty(keyPairObj, "publicKey", publicKey);
+        ScriptableObject.putProperty(keyPairObj, "privateKey", privateKey);
+        return keyPairObj;
     }
 
     /**
@@ -292,5 +441,43 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         buffer.setParentScope(getParentScope());
         buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
         return buffer;
+    }
+
+    /**
+     * Resolves and validates key usages from the JS array against the algorithm's supported operations.
+     * @param algorithm the algorithm name
+     * @param keyUsages the JS usages array
+     * @return the validated, ordered list of usages
+     * @throws IllegalArgumentException if usages array is invalid or contains unrecognized values
+     */
+    static List<String> resolveKeyUsages(final String algorithm, final Scriptable keyUsages) {
+        if (!ScriptRuntime.isArrayLike(keyUsages)) {
+            throw new IllegalArgumentException("An invalid or illegal string was specified");
+        }
+
+        final Set<String> supportedKeyUsages = new HashSet<>();
+        for (final Object usage : ScriptRuntime.getArrayElements(keyUsages)) {
+            if (!(usage instanceof String usageStr)) {
+                throw new IllegalArgumentException("An invalid or illegal string was specified");
+            }
+            if (!RECOGNIZED_KEY_USAGES.contains(usageStr)) {
+                throw new IllegalArgumentException("An invalid or illegal string was specified");
+            }
+
+            final Set<String> supportedAlgorithms = OPERATION_TO_SUPPORTED_ALGORITHMS.get(usageStr);
+            if (supportedAlgorithms != null && supportedAlgorithms.contains(algorithm)) {
+                supportedKeyUsages.add(usageStr);
+            }
+        }
+
+        // maintain canonical ordering per RECOGNIZED_KEY_USAGES
+        final List<String> sortedKeyUsages = new ArrayList<>();
+        for (final String keyUsage : RECOGNIZED_KEY_USAGES) {
+            if (supportedKeyUsages.contains(keyUsage)) {
+                sortedKeyUsages.add(keyUsage);
+            }
+        }
+
+        return sortedKeyUsages;
     }
 }

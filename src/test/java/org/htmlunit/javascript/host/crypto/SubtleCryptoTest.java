@@ -98,10 +98,6 @@ public class SubtleCryptoTest extends WebDriverTestCase {
              "private", "false", "sign",
              "name RSASSA-PKCS1-v1_5", "hash [object Object]", "modulusLength 2048",
              "publicExponent 1,0,1", "done"})
-    @HtmlUnitNYI(CHROME = {"[object Crypto]", "[object DOMException]"},
-            EDGE = {"[object Crypto]", "[object DOMException]"},
-            FF = {"[object Crypto]", "[object DOMException]"},
-            FF_ESR = {"[object Crypto]", "[object DOMException]"})
     public void rsassa() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -172,6 +168,97 @@ public class SubtleCryptoTest extends WebDriverTestCase {
             + "          log((algo.name ? algo.name : algo) + ': ' + hex);\n"
             + "        });\n"
             + "      });\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"secret", "true", "AES-GCM", "256", "encrypt,decrypt"})
+    public void generateKeyAesGcm() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    window.crypto.subtle.generateKey(\n"
+            + "      { name: 'AES-GCM', length: 256 },\n"
+            + "      true, ['encrypt', 'decrypt']\n"
+            + "    ).then(function(key) {\n"
+            + "      log(key.type);\n"
+            + "      log(key.extractable);\n"
+            + "      log(key.algorithm.name);\n"
+            + "      log(key.algorithm.length);\n"
+            + "      log(key.usages.join(','));\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"secret", "false", "HMAC", "SHA-256", "512", "sign,verify"})
+    public void generateKeyHmac() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    window.crypto.subtle.generateKey(\n"
+            + "      { name: 'HMAC', hash: 'SHA-256' },\n"
+            + "      false, ['sign', 'verify']\n"
+            + "    ).then(function(key) {\n"
+            + "      log(key.type);\n"
+            + "      log(key.extractable);\n"
+            + "      log(key.algorithm.name);\n"
+            + "      log(key.algorithm.hash.name);\n"
+            + "      log(key.algorithm.length);\n"
+            + "      log(key.usages.join(','));\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"public", "true", "ECDSA", "P-256", "verify",
+             "private", "false", "ECDSA", "P-256", "sign"})
+    public void generateKeyEc() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    window.crypto.subtle.generateKey(\n"
+            + "      { name: 'ECDSA', namedCurve: 'P-256' },\n"
+            + "      false, ['sign', 'verify']\n"
+            + "    ).then(function(key) {\n"
+            + "      log(key.publicKey.type);\n"
+            + "      log(key.publicKey.extractable);\n"
+            + "      log(key.publicKey.algorithm.name);\n"
+            + "      log(key.publicKey.algorithm.namedCurve);\n"
+            + "      log(key.publicKey.usages.join(','));\n"
+            + "      log(key.privateKey.type);\n"
+            + "      log(key.privateKey.extractable);\n"
+            + "      log(key.privateKey.algorithm.name);\n"
+            + "      log(key.privateKey.algorithm.namedCurve);\n"
+            + "      log(key.privateKey.usages.join(','));\n"
             + "    });\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
