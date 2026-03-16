@@ -406,6 +406,23 @@ public class LocationTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setHashAboutBlank() throws Exception {
+        try (WebClient webClient = new WebClient()) {
+            HtmlPage page = webClient.getPage("about:blank");
+            assertNull(page.getUrl().getRef());
+
+            page.executeJavaScript("location.hash = 'foo'");
+            assertEquals("foo", page.getUrl().getRef());
+
+            page = (HtmlPage) page.refresh();
+            assertEquals("foo", page.getUrl().getRef());
+        }
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
