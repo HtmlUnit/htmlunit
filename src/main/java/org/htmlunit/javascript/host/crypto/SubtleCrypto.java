@@ -14,7 +14,18 @@
  */
 package org.htmlunit.javascript.host.crypto;
 
+import java.nio.ByteBuffer;
+import java.security.GeneralSecurityException;
+import java.security.MessageDigest;
+import java.util.Map;
+import java.util.Set;
+
+import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.NativePromise;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
+import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -28,9 +39,30 @@ import org.htmlunit.javascript.host.dom.DOMException;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Atsushi Nakagawa
+ * @author Lai Quang Duong
  */
 @JsxClass
 public class SubtleCrypto extends HtmlUnitScriptable {
+
+    /**
+     * Maps each crypto operation to its supported algorithm names.
+     * @see <a href="https://w3c.github.io/webcrypto/#algorithm-overview">Algorithm Overview</a>
+     */
+    private static final Map<String, Set<String>> OPERATION_TO_SUPPORTED_ALGORITHMS = Map.ofEntries(
+            Map.entry("encrypt", Set.of("RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM")),
+            Map.entry("decrypt", Set.of("RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM")),
+            Map.entry("sign", Set.of("RSASSA-PKCS1-v1_5", "RSA-PSS", "ECDSA", "HMAC")),
+            Map.entry("verify", Set.of("RSASSA-PKCS1-v1_5", "RSA-PSS", "ECDSA", "HMAC")),
+            Map.entry("digest", Set.of("SHA-1", "SHA-256", "SHA-384", "SHA-512")),
+            Map.entry("generateKey", Set.of("RSASSA-PKCS1-v1_5", "RSA-PSS", "RSA-OAEP",
+                    "ECDSA", "ECDH", "AES-CTR", "AES-CBC", "AES-GCM", "AES-KW", "HMAC")),
+            Map.entry("importKey", Set.of("RSASSA-PKCS1-v1_5", "RSA-PSS", "RSA-OAEP", "ECDSA", "ECDH",
+                    "AES-CTR", "AES-CBC", "AES-GCM", "AES-KW", "HMAC", "HKDF", "PBKDF2")),
+            Map.entry("wrapKey", Set.of("RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM", "AES-KW")),
+            Map.entry("unwrapKey", Set.of("RSA-OAEP", "AES-CTR", "AES-CBC", "AES-GCM", "AES-KW")),
+            Map.entry("deriveBits", Set.of("ECDH", "HKDF", "PBKDF2")),
+            Map.entry("deriveKey", Set.of("ECDH", "HKDF", "PBKDF2"))
+    );
 
     /**
      * Creates an instance.
@@ -86,13 +118,35 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     /**
-     * Not yet implemented.
-     *
-     * @return a Promise which will be fulfilled with the digest
+     * Generates a digest of the given data.
+     * @see <a href="https://w3c.github.io/webcrypto/#SubtleCrypto-method-digest">SubtleCrypto.digest()</a>
+     * @param hashAlgorithm a string or an object with a single property name containing the hash algorithm to use
+     * @param data an object containing the data to be digested
+     * @return a Promise that fulfills with an ArrayBuffer containing the digest
      */
     @JsxFunction
-    public NativePromise digest() {
-        return notImplemented();
+    public NativePromise digest(final Object hashAlgorithm, final Object data) {
+        final byte[] digest;
+        try {
+            final ByteBuffer inputData = asByteBuffer(data);
+            final String algorithm = resolveAlgorithmName(hashAlgorithm);
+            ensureAlgorithmIsSupported("digest", algorithm);
+
+            final MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
+            messageDigest.update(inputData);
+            digest = messageDigest.digest();
+        }
+        catch (final EcmaError e) {
+            return setupRejectedPromise(() -> e);
+        }
+        catch (final IllegalArgumentException e) {
+            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+        }
+        catch (final GeneralSecurityException | UnsupportedOperationException e) {
+            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+                    DOMException.NOT_SUPPORTED_ERR));
+        }
+        return setupPromise(() -> createArrayBuffer(digest));
     }
 
     /**
@@ -163,5 +217,80 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     @JsxFunction
     public NativePromise unwrapKey() {
         return notImplemented();
+    }
+
+    /**
+     * Checks if the specified crypto operation supports the given algorithm.
+     * @see <a href="https://w3c.github.io/webcrypto/#algorithm-overview">Algorithm Overview</a>
+     * @param operation the crypto operation (e.g. "digest", "sign")
+     * @param algorithm the algorithm name (e.g. "SHA-256", "HMAC")
+     * @throws UnsupportedOperationException if the operation does not support the algorithm
+     */
+    private static void ensureAlgorithmIsSupported(final String operation, final String algorithm) {
+        final Set<String> supportedAlgorithms = OPERATION_TO_SUPPORTED_ALGORITHMS.get(operation);
+        if (supportedAlgorithms == null || !supportedAlgorithms.contains(algorithm)) {
+            throw new UnsupportedOperationException(operation + " " + algorithm);
+        }
+    }
+
+    /**
+     * Resolves the algorithm name from the given {@code AlgorithmIdentifier}.
+     * @see <a href="https://w3c.github.io/webcrypto/#dfn-AlgorithmIdentifier">
+     *     AlgorithmIdentifier</a>
+     * @param algorithm the algorithm identifier (String or Scriptable with name property)
+     * @return the resolved algorithm name
+     * @throws IllegalArgumentException if the identifier cannot be resolved
+     */
+    static String resolveAlgorithmName(final Object algorithm) {
+        if (algorithm instanceof String str) {
+            return str;
+        }
+        if (algorithm instanceof Scriptable obj) {
+            final Object name = ScriptableObject.getProperty(obj, "name");
+            if (name instanceof String nameStr) {
+                return nameStr;
+            }
+        }
+        throw new IllegalArgumentException("An invalid or illegal string was specified");
+    }
+
+    /**
+     * Converts ArrayBuffer or ArrayBufferView to a ByteBuffer.
+     * @param data the buffer source object
+     * @return the ByteBuffer wrapping the data
+     * @throws IllegalArgumentException if data is not a Scriptable or is NOT_FOUND
+     * @throws EcmaError if data is not an ArrayBuffer or ArrayBufferView
+     */
+    static ByteBuffer asByteBuffer(final Object data) {
+        if (!(data instanceof Scriptable)) {
+            throw new IllegalArgumentException("An invalid or illegal string was specified");
+        }
+        if (data == Scriptable.NOT_FOUND) {
+            throw new IllegalArgumentException("An invalid or illegal string was specified");
+        }
+        if (data instanceof NativeArrayBuffer nativeBuffer) {
+            return ByteBuffer.wrap(nativeBuffer.getBuffer());
+        }
+        else if (data instanceof NativeArrayBufferView arrayBufferView) {
+            final NativeArrayBuffer arrayBuffer = arrayBufferView.getBuffer();
+            return ByteBuffer.wrap(
+                    arrayBuffer.getBuffer(), arrayBufferView.getByteOffset(), arrayBufferView.getByteLength());
+        }
+        else {
+            throw JavaScriptEngine.typeError("Argument could not be converted to any of: ArrayBufferView, ArrayBuffer.");
+        }
+    }
+
+    /**
+     * Creates a NativeArrayBuffer with proper scope and prototype from the given bytes.
+     * @param data the byte array to wrap
+     * @return the new NativeArrayBuffer
+     */
+    NativeArrayBuffer createArrayBuffer(final byte[] data) {
+        final NativeArrayBuffer buffer = new NativeArrayBuffer(data.length);
+        System.arraycopy(data, 0, buffer.getBuffer(), 0, data.length);
+        buffer.setParentScope(getParentScope());
+        buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
+        return buffer;
     }
 }
