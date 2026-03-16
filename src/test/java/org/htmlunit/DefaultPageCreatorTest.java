@@ -382,9 +382,9 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void wildcardContentType() throws Exception {
+    public void wildcardContentTypeHtml() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/test", WildcardContentTypeServlet.class);
+        servlets.put("/test", WildcardContentTypeHtmlServlet.class);
         startWebServer("./", servlets);
 
         final WebClient client = getWebClient();
@@ -392,15 +392,67 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     }
 
     /**
-     * Servlet for {@link #wildcardContentType()}.
+     * Servlet for {@link #wildcardContentTypeHtml()}.
      */
-    public static class WildcardContentTypeServlet extends HttpServlet {
+    public static class WildcardContentTypeHtmlServlet extends HttpServlet {
         /** {@inheritDoc} */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             response.setContentType("*/*");
             final Writer writer = response.getWriter();
             writer.write("<html><head></head><body>Hello World</body></html>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void wildcardContentTypeXml() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", WildcardContentTypeXmlServlet.class);
+        startWebServer("./", servlets);
+
+        final WebClient client = getWebClient();
+        assertTrue(client.getPage(URL_FIRST + "test") instanceof XmlPage);
+    }
+
+    /**
+     * Servlet for {@link #wildcardContentTypeXml()}.
+     */
+    public static class WildcardContentTypeXmlServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("*/*");
+            final Writer writer = response.getWriter();
+            writer.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?><root>Hello World</root>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void wildcardContentTypeBom() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test", WildcardContentTypeBomServlet.class);
+        startWebServer("./", servlets);
+
+        final WebClient client = getWebClient();
+        assertTrue(client.getPage(URL_FIRST + "test") instanceof TextPage);
+    }
+
+    /**
+     * Servlet for {@link #wildcardContentTypeBom()}.
+     */
+    public static class WildcardContentTypeBomServlet extends HttpServlet {
+        /** {@inheritDoc} */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("*/*");
+            final Writer writer = response.getWriter();
+            writer.write("\u00ef\u00bb\u00bf<html><head></head><body></body></html>");
         }
     }
 
