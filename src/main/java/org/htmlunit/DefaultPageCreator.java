@@ -155,7 +155,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     public static PageType determinePageType(final WebResponse webResponse) throws IOException {
         final String contentType = webResponse.getContentType();
-        if (!StringUtils.isEmptyOrNull(contentType)) {
+        if (!StringUtils.isEmptyOrNull(contentType) && !"*/*".equals(contentType)) {
             return determinePageType(contentType);
         }
 
