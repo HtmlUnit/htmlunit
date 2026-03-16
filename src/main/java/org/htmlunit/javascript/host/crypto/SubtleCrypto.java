@@ -16,10 +16,16 @@ package org.htmlunit.javascript.host.crypto;
 
 import java.nio.ByteBuffer;
 import java.security.GeneralSecurityException;
+import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
 import java.security.spec.ECGenParameterSpec;
+import java.security.spec.MGF1ParameterSpec;
+import java.security.spec.PSSParameterSpec;
 import java.security.spec.RSAKeyGenParameterSpec;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +36,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.crypto.KeyGenerator;
+import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -87,6 +94,12 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             new LinkedHashSet<>(List.of("encrypt", "decrypt", "sign", "verify",
                     "deriveKey", "deriveBits", "wrapKey", "unwrapKey")));
 
+    private static class InvalidAccessException extends RuntimeException {
+        InvalidAccessException(final String message) {
+            super(message);
+        }
+    }
+
     /**
      * Creates an instance.
      */
@@ -121,23 +134,157 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     /**
-     * Not yet implemented.
-     *
-     * @return a Promise which will be fulfilled with the signature
+     * Signs data using the given key.
+     * @see <a href="https://w3c.github.io/webcrypto/#SubtleCrypto-method-sign">SubtleCrypto.sign()</a>
+     * @param algorithm the algorithm identifier (String or object with name property)
+     * @param key the CryptoKey to sign with
+     * @param data the data to sign
+     * @return a Promise that fulfills with an ArrayBuffer containing the signature
      */
     @JsxFunction
-    public NativePromise sign() {
-        return notImplemented();
+    public NativePromise sign(final Object algorithm, final CryptoKey key, final Object data) {
+        return doSignOrVerify(algorithm, key, null, data, true);
     }
 
     /**
-     * Not yet implemented.
-     *
-     * @return a Promise which will be fulfilled with a boolean value indicating whether the signature is valid
+     * Verifies a signature using the given key.
+     * @see <a href="https://w3c.github.io/webcrypto/#SubtleCrypto-method-verify">SubtleCrypto.verify()</a>
+     * @param algorithm the algorithm identifier (String or object with name property)
+     * @param key the CryptoKey to verify with
+     * @param signature the signature to verify
+     * @param data the data that was signed
+     * @return a Promise that fulfills with a boolean indicating whether the signature is valid
      */
     @JsxFunction
-    public NativePromise verify() {
-        return notImplemented();
+    public NativePromise verify(final Object algorithm, final CryptoKey key,
+            final Object signature, final Object data) {
+        return doSignOrVerify(algorithm, key, signature, data, false);
+    }
+
+    /**
+     * Shared sign/verify implementation.
+     */
+    private NativePromise doSignOrVerify(final Object algorithm, final CryptoKey key,
+            final Object existingSignature, final Object data, final boolean isSigning) {
+        final Object result;
+        try {
+            final String algorithmName = resolveAlgorithmName(algorithm);
+            final String operation = isSigning ? "sign" : "verify";
+            ensureAlgorithmIsSupported(operation, algorithmName);
+            ensureKeyAlgorithmMatches(algorithmName, key);
+            ensureKeyUsage(key, operation);
+
+            final ByteBuffer inputData = asByteBuffer(data);
+
+            switch (algorithmName) {
+                case "HMAC": {
+                    // https://w3c.github.io/webcrypto/#hmac-operations
+                    final SecretKey secretKey = getInternalKey(key, SecretKey.class);
+                    final Mac mac = Mac.getInstance(secretKey.getAlgorithm());
+                    mac.init(secretKey);
+                    mac.update(inputData);
+                    final byte[] macBytes = mac.doFinal();
+                    if (isSigning) {
+                        result = macBytes;
+                    }
+                    else {
+                        result = MessageDigest.isEqual(macBytes,
+                                toByteArray(asByteBuffer(existingSignature)));
+                    }
+                    break;
+                }
+                case "RSASSA-PKCS1-v1_5":
+                    // https://w3c.github.io/webcrypto/#rsassa-pkcs1
+                case "RSA-PSS":
+                    // https://w3c.github.io/webcrypto/#rsa-pss
+                case "ECDSA": {
+                    // https://w3c.github.io/webcrypto/#ecdsa-operations
+                    final Signature sig = "ECDSA".equals(algorithmName)
+                            ? resolveEcdsaSignature(algorithm)
+                            : resolveRsaSignature(algorithmName, algorithm, key);
+                    if (isSigning) {
+                        sig.initSign(getInternalKey(key, PrivateKey.class));
+                        sig.update(inputData);
+                        result = sig.sign();
+                    }
+                    else {
+                        sig.initVerify(getInternalKey(key, PublicKey.class));
+                        sig.update(inputData);
+                        result = sig.verify(toByteArray(asByteBuffer(existingSignature)));
+                    }
+                    break;
+                }
+                default:
+                    throw new UnsupportedOperationException(operation + " " + algorithmName);
+            }
+        }
+        catch (final EcmaError e) {
+            return setupRejectedPromise(() -> e);
+        }
+        catch (final InvalidAccessException e) {
+            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.INVALID_ACCESS_ERR));
+        }
+        catch (final IllegalArgumentException e) {
+            return setupRejectedPromise(() -> new DOMException(e.getMessage(), DOMException.SYNTAX_ERR));
+        }
+        catch (final GeneralSecurityException | UnsupportedOperationException e) {
+            return setupRejectedPromise(() -> new DOMException("Operation is not supported: " + e.getMessage(),
+                    DOMException.NOT_SUPPORTED_ERR));
+        }
+
+        if (isSigning) {
+            return setupPromise(() -> createArrayBuffer((byte[]) result));
+        }
+        return setupPromise(() -> result);
+    }
+
+    /**
+     * Resolves the RSA {@link Signature} instance for the given algorithm.
+     */
+    private static Signature resolveRsaSignature(final String algorithmName, final Object algorithmParams,
+            final CryptoKey key) throws GeneralSecurityException {
+        final Object hashObj = ScriptableObject.getProperty(key.getAlgorithm(), "hash");
+        final String hash = resolveAlgorithmName(hashObj);
+        final String javaHash = hash.replace("-", "");
+
+        if ("RSASSA-PKCS1-v1_5".equals(algorithmName)) {
+            return Signature.getInstance(javaHash + "withRSA");
+        }
+
+        if (!(algorithmParams instanceof Scriptable obj)) {
+            throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
+        }
+        final Object saltLengthProp = ScriptableObject.getProperty(obj, "saltLength");
+        if (!(saltLengthProp instanceof Number num)) {
+            throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
+        }
+        final int saltLength = num.intValue();
+
+        final MGF1ParameterSpec mgf1Spec = new MGF1ParameterSpec(hash);
+        final PSSParameterSpec pssSpec = new PSSParameterSpec(hash, "MGF1", mgf1Spec, saltLength, 1);
+        final Signature sig = Signature.getInstance("RSASSA-PSS");
+        sig.setParameter(pssSpec);
+        return sig;
+    }
+
+    /**
+     * Resolves the ECDSA {@link Signature} instance for the given algorithm params.
+     */
+    private static Signature resolveEcdsaSignature(final Object algorithmParams)
+            throws GeneralSecurityException {
+        if (!(algorithmParams instanceof Scriptable obj)) {
+            throw new IllegalArgumentException("Data provided to an operation does not meet requirements");
+        }
+        final Object hashProp = ScriptableObject.getProperty(obj, "hash");
+        final String hash = resolveAlgorithmName(hashProp);
+        final String javaHash = hash.replace("-", "");
+        return Signature.getInstance(javaHash + "withECDSAinP1363Format");
+    }
+
+    private static byte[] toByteArray(final ByteBuffer buffer) {
+        final byte[] result = new byte[buffer.remaining()];
+        buffer.get(result);
+        return result;
     }
 
     /**
@@ -488,6 +635,33 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     /**
+     * Verifies that the operation's algorithm name matches the key's algorithm name.
+     * @param algorithmName the algorithm name from the operation parameters
+     * @param key the CryptoKey being used
+     * @throws InvalidAccessException if the algorithm names don't match
+     */
+    private static void ensureKeyAlgorithmMatches(final String algorithmName, final CryptoKey key) {
+        final String keyAlgoName = resolveAlgorithmName(key.getAlgorithm());
+        if (!algorithmName.equals(keyAlgoName)) {
+            throw new InvalidAccessException(
+                    "A parameter or an operation is not supported by the underlying object");
+        }
+    }
+
+    /**
+     * Verifies that the key's usages include the specified usage.
+     * @param key the CryptoKey being used
+     * @param usage the required usage (e.g. "encrypt", "sign")
+     * @throws InvalidAccessException if the key doesn't have the required usage
+     */
+    private static void ensureKeyUsage(final CryptoKey key, final String usage) {
+        if (!key.getUsagesInternal().contains(usage)) {
+            throw new InvalidAccessException(
+                    "A parameter or an operation is not supported by the underlying object");
+        }
+    }
+
+    /**
      * Resolves the algorithm name from the given {@code AlgorithmIdentifier}.
      * @see <a href="https://w3c.github.io/webcrypto/#dfn-AlgorithmIdentifier">
      *     AlgorithmIdentifier</a>
@@ -584,5 +758,21 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         }
 
         return sortedKeyUsages;
+    }
+
+    /**
+     * Extracts the internal Java key from a CryptoKey, validating it is the expected type.
+     * @param <T> the expected key type
+     * @param cryptoKey the CryptoKey
+     * @param expectedKeyType the expected class (e.g. SecretKey.class)
+     * @return the internal key cast to the expected type
+     * @throws InvalidAccessException if the key is not the expected type
+     */
+    static <T extends Key> T getInternalKey(final CryptoKey cryptoKey, final Class<T> expectedKeyType) {
+        final Key internalKey = cryptoKey.getInternalKey();
+        if (!expectedKeyType.isInstance(internalKey)) {
+            throw new InvalidAccessException("A parameter or an operation is not supported by the underlying object");
+        }
+        return expectedKeyType.cast(internalKey);
     }
 }

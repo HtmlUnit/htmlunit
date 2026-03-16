@@ -369,4 +369,164 @@ public class SubtleCryptoTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"20", "true", "false"})
+    public void signVerifyHmac() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var rawKey = new Uint8Array([154,96,73,78,144,193,22,2,31,117,82,100,53,153,70,89,"
+            + "47,64,159,6,172,145,82,124,25,206,252,42,160,14,136,161,78,165,11,207,226,149,165,112,"
+            + "172,10,127,12,252,112,105,222,227,36,1,7,227,17,178,234,9,44,20,40,127,188,114,56]);\n"
+            + "    var data = new TextEncoder().encode('hello world');\n"
+            + "    window.crypto.subtle.importKey(\n"
+            + "      'raw', rawKey,\n"
+            + "      { name: 'HMAC', hash: 'SHA-1' },\n"
+            + "      false, ['sign', 'verify']\n"
+            + "    ).then(function(key) {\n"
+            + "      return window.crypto.subtle.sign('HMAC', key, data).then(function(sig) {\n"
+            + "        log(new Uint8Array(sig).length);\n"
+            + "        return window.crypto.subtle.verify('HMAC', key, sig, data).then(function(verified) {\n"
+            + "          log(verified);\n"
+            + "          var bad = new Uint8Array(sig);\n"
+            + "          bad[0] = bad[0] ^ 0xFF;\n"
+            + "          return window.crypto.subtle.verify('HMAC', key, bad, data).then(function(verified2) {\n"
+            + "            log(verified2);\n"
+            + "          });\n"
+            + "        });\n"
+            + "      });\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"PKCS1 true", "PKCS1 false",
+             "PSS true", "PSS false"})
+    public void signVerifyRsa() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function signVerifyRoundTrip(algoName, genParams, signParams) {\n"
+            + "    var data = new TextEncoder().encode('hello world');\n"
+            + "    return window.crypto.subtle.generateKey(\n"
+            + "      genParams, false, ['sign', 'verify']\n"
+            + "    ).then(function(keyPair) {\n"
+            + "      return window.crypto.subtle.sign(signParams, keyPair.privateKey, data)"
+            + "        .then(function(sig) {\n"
+            + "        return window.crypto.subtle.verify(signParams, keyPair.publicKey, sig, data)"
+            + "          .then(function(verified) {\n"
+            + "          log(algoName + ' ' + verified);\n"
+            + "          var bad = new Uint8Array(sig);\n"
+            + "          bad[0] = bad[0] ^ 0xFF;\n"
+            + "          return window.crypto.subtle.verify(signParams, keyPair.publicKey, bad, data)"
+            + "            .then(function(verified2) {\n"
+            + "            log(algoName + ' ' + verified2);\n"
+            + "          });\n"
+            + "        });\n"
+            + "      });\n"
+            + "    });\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var rsaBase = { modulusLength: 2048,\n"
+            + "      publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' };\n"
+            + "    signVerifyRoundTrip('PKCS1',\n"
+            + "      Object.assign({ name: 'RSASSA-PKCS1-v1_5' }, rsaBase),\n"
+            + "      'RSASSA-PKCS1-v1_5'\n"
+            + "    ).then(function() {\n"
+            + "      return signVerifyRoundTrip('PSS',\n"
+            + "        Object.assign({ name: 'RSA-PSS' }, rsaBase),\n"
+            + "        { name: 'RSA-PSS', saltLength: 32 }\n"
+            + "      );\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void signVerifyEcdsa() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var data = new TextEncoder().encode('hello world');\n"
+            + "    window.crypto.subtle.generateKey(\n"
+            + "      { name: 'ECDSA', namedCurve: 'P-256' },\n"
+            + "      false, ['sign', 'verify']\n"
+            + "    ).then(function(keyPair) {\n"
+            + "      var signParams = { name: 'ECDSA', hash: 'SHA-256' };\n"
+            + "      return window.crypto.subtle.sign(signParams, keyPair.privateKey, data)"
+            + "        .then(function(sig) {\n"
+            + "        return window.crypto.subtle.verify(signParams, keyPair.publicKey, sig, data)"
+            + "          .then(function(verified) {\n"
+            + "          log(verified);\n"
+            + "          var bad = new Uint8Array(sig);\n"
+            + "          bad[0] = bad[0] ^ 0xFF;\n"
+            + "          return window.crypto.subtle.verify(signParams, keyPair.publicKey, bad, data)"
+            + "            .then(function(verified2) {\n"
+            + "            log(verified2);\n"
+            + "          });\n"
+            + "        });\n"
+            + "      });\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void generateSignVerifyHmac() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var data = new TextEncoder().encode('hello world');\n"
+            + "    crypto.subtle.generateKey(\n"
+            + "      {name: 'HMAC', hash: 'SHA-256'}, false, ['sign', 'verify']\n"
+            + "    ).then(function(key) {\n"
+            + "      return crypto.subtle.sign('HMAC', key, data).then(function(sig) {\n"
+            + "        return crypto.subtle.verify('HMAC', key, sig, data).then(function(verified) {\n"
+            + "          log(verified);\n"
+            + "          var bad = new Uint8Array(sig);\n"
+            + "          bad[0] = bad[0] ^ 0xFF;\n"
+            + "          return crypto.subtle.verify('HMAC', key, bad, data).then(function(verified2) {\n"
+            + "            log(verified2);\n"
+            + "          });\n"
+            + "        });\n"
+            + "      });\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }
