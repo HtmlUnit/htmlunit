@@ -19,6 +19,8 @@ import java.io.Serializable;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Symbol;
+import org.htmlunit.corejs.javascript.SymbolScriptable;
 
 /**
  * Wrapper for a {@link Function} delegating all calls to the wrapped instance.
@@ -26,8 +28,9 @@ import org.htmlunit.corejs.javascript.Scriptable;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
-public class FunctionWrapper implements Function, Serializable {
+public class FunctionWrapper implements Function, SymbolScriptable, Serializable {
     private final Function wrapped_;
 
     /**
@@ -82,6 +85,14 @@ public class FunctionWrapper implements Function, Serializable {
      * {@inheritDoc}
      */
     @Override
+    public Object get(final Symbol key, final Scriptable start) {
+        return ((SymbolScriptable) wrapped_).get(key, start);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean has(final String name, final Scriptable start) {
         return wrapped_.has(name, start);
     }
@@ -92,6 +103,14 @@ public class FunctionWrapper implements Function, Serializable {
     @Override
     public boolean has(final int index, final Scriptable start) {
         return wrapped_.has(index, start);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean has(final Symbol key, final Scriptable start) {
+        return ((SymbolScriptable) wrapped_).has(key, start);
     }
 
     /**
@@ -114,6 +133,14 @@ public class FunctionWrapper implements Function, Serializable {
      * {@inheritDoc}
      */
     @Override
+    public void put(final Symbol key, final Scriptable start, final Object value) {
+        ((SymbolScriptable) wrapped_).put(key, wrapped_, value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void delete(final String name) {
         wrapped_.delete(name);
     }
@@ -124,6 +151,14 @@ public class FunctionWrapper implements Function, Serializable {
     @Override
     public void delete(final int index) {
         wrapped_.delete(index);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void delete(final Symbol key) {
+        ((SymbolScriptable) wrapped_).delete(key);
     }
 
     /**
