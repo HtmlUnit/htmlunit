@@ -9,6 +9,13 @@
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
             <action type="fix" dev="Lai Quang Duong">
+                FunctionWrapper implements SymbolScriptable - solves e.g. Function.prototype.toString instanceof Function
+                of Object.prototype.toString.call(Function.prototype.toString).
+            </action>
+            <action type="fix" dev="Ryuhei Ishizuka">
+                xpath: Add missing entry for ER_XPATH_ERROR in XPATHErrorResources.
+            </action>
+            <action type="fix" dev="Lai Quang Duong">
                 Force content sniffing for '*/*' content type to be in sync with the browsers.
             </action>
             <action type="add" dev="Lai Quang Duong">
