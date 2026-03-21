@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: Support for resizable ArrayBuffers as specified in ES2024 added.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fixed automatic semicolon insertion for 'let'
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Ensure that construction is wrapped in a top-level call when none is present, preventing assertion failures in interpreted mode
+            </action>
             <action type="fix" dev="Lai Quang Duong">
                 FunctionWrapper implements SymbolScriptable - solves e.g. Function.prototype.toString instanceof Function
                 of Object.prototype.toString.call(Function.prototype.toString).
