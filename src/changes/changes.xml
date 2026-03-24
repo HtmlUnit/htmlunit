@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+            <action type="update" dev="rbri">
+                core-js: Improve 'caller' handling depending on strict mode.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Clean up tracking of strict mode in general.
+            </action>
             <action type="add" dev="RhinoTeam">
                 core-js: Support for resizable ArrayBuffers as specified in ES2024 added.
             </action>
