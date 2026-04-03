@@ -94,7 +94,7 @@ public class NodeList extends AbstractList implements Callable {
         super();
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
-        setExternalArrayData(this);
+        setExternalArrayData(parentScope, this);
     }
 
     /**

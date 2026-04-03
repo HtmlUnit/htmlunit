@@ -211,7 +211,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Window jsWindow = new Window();
         jsWindow.setClassName("Window");
 
-        final Scriptable scope = cx.initSafeStandardObjects(jsWindow);
+        final TopLevel scope = cx.initSafeStandardObjects(new TopLevel(jsWindow));
+        jsWindow.setParentScope(scope);
         configureRhino(webClient, browserVersion, scope, jsWindow);
 
         final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
@@ -232,8 +233,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         configureGlobalThis(scope, jsWindow, windowConfig, functionObject, jsConfig_, browserVersion, prototypes, prototypesPerJSName);
 
         // TODO remove the cast
-        URLSearchParams.NativeParamsIterator.init((ScriptableObject) scope, "URLSearchParams Iterator");
-        FormData.FormDataIterator.init((ScriptableObject) scope, "FormData Iterator");
+        URLSearchParams.NativeParamsIterator.init(scope, "URLSearchParams Iterator");
+        FormData.FormDataIterator.init(scope, "FormData Iterator");
 
         // strange but this is the reality for browsers
         // because there will be still some sites using this for browser detection the property is
@@ -275,7 +276,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @throws Exception in case of error
      */
     public static void configureGlobalThis(
-            final Scriptable scope,
+            final TopLevel scope,
             final HtmlUnitScriptable globalThis,
             final ClassConfiguration scopeConfig,
             final FunctionObject scopeContructorFunctionObject,
@@ -414,17 +415,17 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param globalThis the window or the DedicatedWorkerGlobalScope
      */
     public static void configureRhino(final WebClient webClient, final BrowserVersion browserVersion,
-            final Scriptable scope, final HtmlUnitScriptable globalThis) {
+            final TopLevel scope, final HtmlUnitScriptable globalThis) {
 
         // this should be like
         // NativeConsole.init(scope, globalThis, false, webClient.getWebConsole());
         // but so far both objects are the same
-        NativeConsole.init(globalThis, false, webClient.getWebConsole());
+        NativeConsole.init(scope, false, webClient.getWebConsole());
 
         // https://developer.mozilla.org/en-US/docs/Web/API/console/timeStamp_static
         // this is not standard and therefore not in Rhino
         final ScriptableObject console = (ScriptableObject) ScriptableObject.getProperty(globalThis, "console");
-        console.defineFunctionProperties(new String[] {"timeStamp"}, ConsoleCustom.class, ScriptableObject.DONTENUM);
+        console.defineFunctionProperties(scope, new String[] {"timeStamp"}, ConsoleCustom.class, ScriptableObject.DONTENUM);
 
         // remove some objects, that Rhino defines in top scope but that we don't want
         deleteProperties(globalThis, "Continuation", "StopIteration", "uneval", "global");
@@ -543,7 +544,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @throws Exception in case of errors
      */
     public static HtmlUnitScriptable configureClass(final ClassConfiguration config,
-            final Scriptable scope)
+            final TopLevel scope)
         throws Exception {
 
         final HtmlUnitScriptable prototype = config.getHostClass().getDeclaredConstructor().newInstance();
@@ -561,7 +562,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param scriptable the object to configure
      */
     private static void configureConstantsStaticPropertiesAndStaticFunctions(final ClassConfiguration config,
-            final Scriptable scope, final ScriptableObject scriptable) {
+            final TopLevel scope, final ScriptableObject scriptable) {
         configureConstants(config, scriptable);
         configureStaticProperties(config, scope, scriptable);
         configureStaticFunctions(config, scope, scriptable);
@@ -574,7 +575,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param scriptable the object to configure
      */
     private static void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
-            final Scriptable scope, final ScriptableObject scriptable) {
+            final TopLevel scope, final ScriptableObject scriptable) {
         configureConstants(config, scriptable);
         configureProperties(config, scope, scriptable);
         configureFunctions(config, scope, scriptable);
@@ -583,7 +584,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     private static void configureFunctions(final ClassConfiguration config,
-            final Scriptable scope, final ScriptableObject scriptable) {
+            final TopLevel scope, final ScriptableObject scriptable) {
         // the functions
         final Map<String, Method> functionMap = config.getFunctionMap();
         if (functionMap != null) {
@@ -606,20 +607,20 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     private static void configureProperties(final ClassConfiguration config,
-            final Scriptable scope, final ScriptableObject scriptable) {
+            final TopLevel scope, final ScriptableObject scriptable) {
         final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
         if (propertyMap != null) {
             for (final Entry<String, PropertyInfo> propertyEntry : propertyMap.entrySet()) {
                 final PropertyInfo info = propertyEntry.getValue();
                 final Method readMethod = info.getReadMethod();
                 final Method writeMethod = info.getWriteMethod();
-                scriptable.defineProperty(propertyEntry.getKey(), null, readMethod, writeMethod, ScriptableObject.EMPTY);
+                scriptable.defineProperty(scope, propertyEntry.getKey(), null, readMethod, writeMethod, ScriptableObject.EMPTY);
             }
         }
     }
 
     private static void configureStaticProperties(final ClassConfiguration config,
-            final Scriptable scope, final ScriptableObject scriptable) {
+            final TopLevel scope, final ScriptableObject scriptable) {
         final Map<String, PropertyInfo> staticPropertyMap = config.getStaticPropertyMap();
         if (staticPropertyMap != null) {
             for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : staticPropertyMap.entrySet()) {
@@ -628,13 +629,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 final Method writeMethod = propertyEntry.getValue().getWriteMethod();
                 final int flag = ScriptableObject.EMPTY;
 
-                scriptable.defineProperty(propertyName, null, readMethod, writeMethod, flag);
+                scriptable.defineProperty(scope, propertyName, null, readMethod, writeMethod, flag);
             }
         }
     }
 
     private static void configureStaticFunctions(final ClassConfiguration config,
-            final Scriptable scope, final ScriptableObject scriptable) {
+            final TopLevel scope, final ScriptableObject scriptable) {
         final Map<String, Method> staticFunctionMap = config.getStaticFunctionMap();
         if (staticFunctionMap != null) {
             for (final Entry<String, Method> staticFunctionInfo : staticFunctionMap.entrySet()) {
@@ -656,7 +657,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     private static void configureSymbols(final ClassConfiguration config,
-            final Scriptable scope, final ScriptableObject scriptable) {
+            final TopLevel scope, final ScriptableObject scriptable) {
         final Map<Symbol, Method> symbolMap = config.getSymbolMap();
         if (symbolMap != null) {
             for (final Entry<Symbol, Method> symbolInfo : symbolMap.entrySet()) {
@@ -791,7 +792,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final HtmlUnitContextAction action = new HtmlUnitContextAction(page) {
             @Override
             public Object doRun(final Context cx) {
-                return script.exec(cx, scope, scope);
+                return script.exec(cx, scope, ((TopLevel) scope).getGlobalThis());
             }
 
             @Override
@@ -1259,15 +1260,15 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      *
      * Creates a {@link DOMException} and encapsulates it into a Rhino-compatible exception.
      *
-     * @param scope the parent scope
+     * @param scriptable the scriptable triggering this
      * @param message the exception message
      * @param type the exception type
      * @return the created exception
      */
-    public static RhinoException asJavaScriptException(final HtmlUnitScriptable scope, final String message, final int type) {
+    public static RhinoException asJavaScriptException(final HtmlUnitScriptable scriptable, final String message, final int type) {
         final DOMException domException = new DOMException(message, type);
-        domException.setParentScope(scope);
-        domException.setPrototype(scope.getPrototype(DOMException.class));
+        domException.setParentScope(scriptable.getParentScope());
+        domException.setPrototype(scriptable.getWindow().getPrototype(DOMException.class));
 
         final EcmaError helper = ScriptRuntime.syntaxError("helper");
         String fileName = helper.sourceName();
@@ -1480,7 +1481,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     ProxyAutoConfigJavaScriptConfiguration.getInstance(browserVersion);
 
             final ScriptableObject globalThis = new NativeObject();
-            final Scriptable scope = cx.initSafeStandardObjects(globalThis);
+            final TopLevel scope = cx.initSafeStandardObjects(new TopLevel(globalThis));
 
             for (final ClassConfiguration config : jsConfig.getAll()) {
                 configureFunctions(config, scope, globalThis);

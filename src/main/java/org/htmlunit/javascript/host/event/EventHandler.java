@@ -19,6 +19,8 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.html.DomNode;
 
 /**
@@ -63,10 +65,10 @@ public class EventHandler extends BaseFunction {
         // compile "just in time"
         if (realFunction_ == null) {
             final String js = "function on" + eventName_ + "(event) { " + jsSnippet_ + " \n}";
-            // HtmlUnitScriptable scope = scope.getTopLevelScope(scope);
-            realFunction_ = cx.compileFunction(thisObj, js, eventName_ + " event for " + node_
+            final TopLevel topLevelScope = ((ScriptableObject) thisObj).getTopLevelScope(thisObj);
+            realFunction_ = cx.compileFunction(topLevelScope, js, eventName_ + " event for " + node_
                                     + " in " + node_.getPage().getUrl(), 0, null);
-            realFunction_.setParentScope(thisObj);
+            realFunction_.setParentScope(topLevelScope);
         }
 
         return realFunction_.call(cx, scope, thisObj, args);

@@ -75,7 +75,7 @@ public class Storage extends HtmlUnitScriptable {
         super();
         store_ = store;
         storeSize_ = 0L;
-        setParentScope(window);
+        setParentScope(window.getWebWindow().getTopLevelScope());
         setPrototype(window.getPrototype(Storage.class));
     }
 

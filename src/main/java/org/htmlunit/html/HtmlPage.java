@@ -948,7 +948,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         final Object result = getWebClient().getJavaScriptEngine()
-                .execute(this, getEnclosingWindow().getScriptableObject(), sourceCode, sourceName, startLine);
+                .execute(this, getEnclosingWindow().getTopLevelScope(), sourceCode, sourceName, startLine);
         return new ScriptResult(result);
     }
 

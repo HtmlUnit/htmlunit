@@ -35,8 +35,8 @@ import org.htmlunit.corejs.javascript.IteratorLikeIterable;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.SymbolKey;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -81,7 +81,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
          * @param scope the scope
          * @param className the class name
          */
-        public static void init(final ScriptableObject scope, final String className) {
+        public static void init(final TopLevel scope, final String className) {
             ES6Iterator.init(scope, false, new NativeParamsIterator(className), URL_SEARCH_PARMS_TAG);
         }
 

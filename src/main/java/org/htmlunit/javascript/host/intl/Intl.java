@@ -56,7 +56,7 @@ public class Intl extends HtmlUnitScriptable {
      * @param globalThis the global object
      * @param browserVersion the browser version
      */
-    public static void init(final Scriptable scope, final ScriptableObject globalThis,
+    public static void init(final TopLevel scope, final ScriptableObject globalThis,
             final BrowserVersion browserVersion) {
         final Intl intl = new Intl();
         intl.setParentScope(scope);
@@ -73,7 +73,7 @@ public class Intl extends HtmlUnitScriptable {
         globalThis.defineProperty(intl.getClassName(), intl, ScriptableObject.DONTENUM);
     }
 
-    private void defineProperties(final Scriptable scope, final BrowserVersion browserVersion) {
+    private void defineProperties(final TopLevel scope, final BrowserVersion browserVersion) {
         define(scope, Collator.class, browserVersion);
         define(scope, DateTimeFormat.class, browserVersion);
         define(scope, Locale.class, browserVersion);
@@ -83,7 +83,7 @@ public class Intl extends HtmlUnitScriptable {
         }
     }
 
-    private void define(final Scriptable scope, final Class<? extends HtmlUnitScriptable> c,
+    private void define(final TopLevel scope, final Class<? extends HtmlUnitScriptable> c,
             final BrowserVersion browserVersion) {
         try {
             final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(c, browserVersion);

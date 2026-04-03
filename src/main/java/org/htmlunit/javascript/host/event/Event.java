@@ -526,7 +526,7 @@ public class Event extends HtmlUnitScriptable {
         target_ = target;
         currentTarget_ = target;
 
-        setParentScope(target);
+        setParentScope(target.getParentScope());
         setPrototype(getPrototype(getClass()));
 
         if (TYPE_CHANGE.equals(type)) {

@@ -1611,7 +1611,7 @@ public class Element extends Node {
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(
-                    (HtmlUnitScriptable) getTopLevelScope(thisObj),
+                    (HtmlUnitScriptable) getTopLevelScope(thisObj).getGlobalThis(),
                     "An invalid or illegal selector was specified (selector: '"
                             + selectorString + "' error: " + e.getMessage() + ").",
                     DOMException.SYNTAX_ERR);

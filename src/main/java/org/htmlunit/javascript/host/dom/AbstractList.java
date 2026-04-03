@@ -117,7 +117,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
         if (initialElements != null) {
             registerListener();
         }
-        setExternalArrayData(this);
+        setExternalArrayData(getParentScope(), this);
     }
 
     /**
@@ -471,14 +471,15 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      * {@inheritDoc}
      */
     @Override
-    public void defineProperty(final String propertyName, final Object delegateTo,
+    public void defineProperty(final Scriptable scope,
+            final String propertyName, final Object delegateTo,
             final Method getter, final Method setter, final int attributes) {
         // length is defined on the prototype, don't define it again
         if ("length".equals(propertyName) && getPrototype() != null) {
             return;
         }
 
-        super.defineProperty(propertyName, delegateTo, getter, setter, attributes);
+        super.defineProperty(scope, propertyName, delegateTo, getter, setter, attributes);
     }
 
     @Override

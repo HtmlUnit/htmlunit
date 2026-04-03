@@ -27,6 +27,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.css.ElementCssStyleDeclaration;
@@ -59,6 +60,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private final Screen screen_;
     private Page enclosedPage_;
     private transient HtmlUnitScriptable scriptObject_;
+    private transient TopLevel topLevelScope_;
     private JavaScriptJobManager jobManager_;
     private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
     private String name_ = "";
@@ -182,6 +184,22 @@ public abstract class WebWindowImpl implements WebWindow {
     @SuppressWarnings("unchecked")
     public <T> T getScriptableObject() {
         return (T) scriptObject_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setTopLevelScope(final TopLevel topLevelScope) {
+        topLevelScope_ = topLevelScope;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TopLevel getTopLevelScope() {
+        return topLevelScope_;
     }
 
     /**

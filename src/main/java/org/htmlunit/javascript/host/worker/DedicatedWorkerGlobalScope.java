@@ -34,6 +34,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
@@ -125,7 +126,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
 
-        final Scriptable scope = context.initSafeStandardObjects(this);
+        final TopLevel scope = context.initSafeStandardObjects(new TopLevel(this));
         JavaScriptEngine.configureRhino(webClient, browserVersion, scope, this);
 
         final WorkerJavaScriptConfiguration jsConfig = WorkerJavaScriptConfiguration.getInstance(browserVersion);
@@ -170,7 +171,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         origin_ = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
 
         name_ = name;
-        defineProperty("name", null, GETTER_NAME, SETTER_NAME, ScriptableObject.READONLY);
+        defineProperty(scope, "name", null, GETTER_NAME, SETTER_NAME, ScriptableObject.READONLY);
 
         worker_ = worker;
         workerLocation_ = null;

@@ -33,6 +33,7 @@ import org.htmlunit.corejs.javascript.LambdaFunction;
 import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.javascript.host.Window;
@@ -95,6 +96,9 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
     public void setParentScope(final Scriptable scope) {
         if (scope == this) {
             throw new IllegalArgumentException("Object can't be its own parentScope");
+        }
+        if (scope instanceof Window) {
+            throw new IllegalArgumentException("parentScope can't be the window");
         }
         super.setParentScope(scope);
     }
@@ -279,13 +283,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      */
     protected void initParentScope(final DomNode domNode, final HtmlUnitScriptable scriptable) {
         final SgmlPage page = domNode.getPage();
-        final WebWindow enclosingWindow = page.getEnclosingWindow();
-        if (enclosingWindow != null && enclosingWindow.getEnclosedPage() == page) {
-            scriptable.setParentScope(enclosingWindow.getScriptableObject());
-        }
-        else {
-            scriptable.setParentScope(ScriptableObject.getTopLevelScope(page.getScriptableObject()));
-        }
+        scriptable.setParentScope(ScriptableObject.getTopLevelScope(page.getScriptableObject()));
     }
 
     /**
@@ -332,8 +330,12 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      * @throws RuntimeException if the window cannot be found, which should never occur
      */
     protected static Window getWindow(final Scriptable s) throws RuntimeException {
-        final Scriptable top = ScriptableObject.getTopLevelScope(s);
-        if (top instanceof Window window) {
+        if (s instanceof Window window) {
+            return window;
+        }
+
+        final TopLevel topLevel = ScriptableObject.getTopLevelScope(s);
+        if (topLevel.getGlobalThis() instanceof Window window) {
             return window;
         }
         throw new RuntimeException("Unable to find window associated with " + s);
@@ -346,8 +348,11 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      */
     protected static Window getWindowFromTopCallScope() throws RuntimeException {
         final Scriptable top = JavaScriptEngine.getTopCallScope();
-        if (top instanceof Window window) {
-            return window;
+        if (top instanceof TopLevel topLevel) {
+            final ScriptableObject globalThis = topLevel.getGlobalThis();
+            if (globalThis instanceof Window window) {
+                return window;
+            }
         }
         throw new RuntimeException("Unable to find window in scope");
     }

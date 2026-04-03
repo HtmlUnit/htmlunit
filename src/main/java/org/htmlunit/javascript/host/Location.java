@@ -192,15 +192,15 @@ public class Location extends HtmlUnitScriptable {
         functionObject = new FunctionObject(METHOD_TO_STRING.getName(), METHOD_TO_STRING, this);
         defineProperty("toString", functionObject, attributes);
 
-        defineProperty("hash", null, GETTER_HASH, SETTER_HASH, attributes);
-        defineProperty("host", null, GETTER_HOST, SETTER_HOST, attributes);
-        defineProperty("hostname", null, GETTER_HOSTNAME, SETTER_HOSTNAME, attributes);
-        defineProperty("href", null, GETTER_HREF, SETTER_HREF, attributes);
-        defineProperty("origin", null, GETTER_ORIGIN, null, attributes);
-        defineProperty("pathname", null, GETTER_PATHNAME, SETTER_PATHNAME, attributes);
-        defineProperty("port", null, GETTER_PORT, SETTER_PORT, attributes);
-        defineProperty("protocol", null, GETTER_PROTOCOL, SETTER_PROTOCOL, attributes);
-        defineProperty("search", null, GETTER_SEARCH, SETTER_SEARCH, attributes);
+        defineProperty(scope, "hash", null, GETTER_HASH, SETTER_HASH, attributes);
+        defineProperty(scope, "host", null, GETTER_HOST, SETTER_HOST, attributes);
+        defineProperty(scope, "hostname", null, GETTER_HOSTNAME, SETTER_HOSTNAME, attributes);
+        defineProperty(scope, "href", null, GETTER_HREF, SETTER_HREF, attributes);
+        defineProperty(scope, "origin", null, GETTER_ORIGIN, null, attributes);
+        defineProperty(scope, "pathname", null, GETTER_PATHNAME, SETTER_PATHNAME, attributes);
+        defineProperty(scope, "port", null, GETTER_PORT, SETTER_PORT, attributes);
+        defineProperty(scope, "protocol", null, GETTER_PROTOCOL, SETTER_PROTOCOL, attributes);
+        defineProperty(scope, "search", null, GETTER_SEARCH, SETTER_SEARCH, attributes);
 
         window_ = window;
         if (window_ != null && page != null) {

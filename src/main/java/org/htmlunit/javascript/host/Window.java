@@ -65,6 +65,7 @@ import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Slot;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.DomElement;
@@ -754,14 +755,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @param webWindow the web window corresponding to this window
      * @param pageToEnclose the page that will become the enclosing page
      */
-    public void initialize(final Scriptable scope, final WebWindow webWindow, final Page pageToEnclose) {
+    public void initialize(final TopLevel scope, final WebWindow webWindow, final Page pageToEnclose) {
         webWindow_ = webWindow;
         webWindow_.setScriptableObject(this);
+        webWindow.setTopLevelScope(scope);
 
-        defineProperty("length", null, GETTER_LENGTH, SETTER_LENGTH, ScriptableObject.READONLY);
-        defineProperty("self", null, GETTER_SELF, SETTER_SELF, ScriptableObject.READONLY);
-        defineProperty("parent", null, GETTER_PARENT, SETTER_PARENT, ScriptableObject.READONLY);
-        defineProperty("frames", null, GETTER_FRAMES, SETTER_FRAMES, ScriptableObject.READONLY);
+        defineProperty(scope, "length", null, GETTER_LENGTH, SETTER_LENGTH, ScriptableObject.READONLY);
+        defineProperty(scope, "self", null, GETTER_SELF, SETTER_SELF, ScriptableObject.READONLY);
+        defineProperty(scope, "parent", null, GETTER_PARENT, SETTER_PARENT, ScriptableObject.READONLY);
+        defineProperty(scope, "frames", null, GETTER_FRAMES, SETTER_FRAMES, ScriptableObject.READONLY);
 
         windowProxy_ = new WindowProxy(webWindow_);
 
@@ -2002,7 +2004,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                 }
                 catch (final Exception e) {
                     throw JavaScriptEngine.asJavaScriptException(
-                            (HtmlUnitScriptable) getTopLevelScope(thisObj),
+                            (HtmlUnitScriptable) getTopLevelScope(thisObj).getGlobalThis(),
                             "Failed to execute 'postMessage' on 'Window': Invalid target origin '"
                                     + targetOrigin + "' was specified (reason: " + e.getMessage() + ".",
                             DOMException.SYNTAX_ERR);
@@ -2109,7 +2111,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxGetter({CHROME, EDGE})
     public StyleMedia getStyleMedia() {
         final StyleMedia styleMedia = new StyleMedia();
-        styleMedia.setParentScope(this);
+        styleMedia.setParentScope(getParentScope());
         styleMedia.setPrototype(getPrototype(styleMedia.getClass()));
         return styleMedia;
     }
@@ -2123,7 +2125,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxFunction
     public MediaQueryList matchMedia(final String mediaQueryString) {
         final MediaQueryList mediaQueryList = new MediaQueryList(mediaQueryString);
-        mediaQueryList.setParentScope(this);
+        mediaQueryList.setParentScope(getParentScope());
         mediaQueryList.setPrototype(getPrototype(mediaQueryList.getClass()));
         return mediaQueryList;
     }
@@ -2185,15 +2187,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @Override
     public void close() {
         // nothing to do
-    }
-
-    /**
-     * Does nothing.
-     * @param parent the new parent scope
-     */
-    @Override
-    public void setParentScope(final Scriptable parent) {
-        // nothing as the window is the top level scope and its parent scope should stay null
     }
 
     /**
