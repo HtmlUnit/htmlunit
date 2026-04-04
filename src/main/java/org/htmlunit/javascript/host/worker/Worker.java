@@ -49,10 +49,11 @@ public class Worker extends EventTarget {
         workerScope_ = null;
     }
 
-    private Worker(final Context cx, final Window owningWindow, final String url,
-                       final Scriptable options) throws Exception {
+    private Worker(final Context cx, final Scriptable scope,
+                    final Window owningWindow, final String url,
+                    final Scriptable options) throws Exception {
         super();
-        setParentScope(owningWindow);
+        setParentScope(scope);
         setPrototype(getPrototype(getClass()));
 
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
@@ -88,7 +89,7 @@ public class Worker extends EventTarget {
         if (args.length > 1 && args[1] instanceof Scriptable scriptable) {
             options = scriptable;
         }
-        return new Worker(cx, getWindow(ctorObj), url, options);
+        return new Worker(cx, scope, getWindow(ctorObj), url, options);
     }
 
     /**

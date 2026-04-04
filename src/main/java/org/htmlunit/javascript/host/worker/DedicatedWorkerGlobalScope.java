@@ -127,6 +127,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
 
         final TopLevel scope = context.initSafeStandardObjects(new TopLevel(this));
+        this.setParentScope(scope);
         JavaScriptEngine.configureRhino(webClient, browserVersion, scope, this);
 
         final WorkerJavaScriptConfiguration jsConfig = WorkerJavaScriptConfiguration.getInstance(browserVersion);
@@ -143,8 +144,8 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
         final FunctionObject functionObject =
                 new FunctionObject(DedicatedWorkerGlobalScope.class.getSimpleName(),
-                        config.getJsConstructor().getValue(), this);
-        functionObject.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
+                        config.getJsConstructor().getValue(), scope);
+        functionObject.addAsConstructor(scope, prototype, ScriptableObject.DONTENUM);
 
         JavaScriptEngine.configureGlobalThis(scope, this, config, functionObject, jsConfig,
                 browserVersion, prototypes, prototypesPerJSName);
