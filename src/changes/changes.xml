@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="5.0.0" date="April 01, 2026" description="jdk17, Bugfixes">
+        <release version="5.0.0" date="April 31, 2026" description="jdk17, Bugfixes">
+            <action type="update" dev="Lai Quang Duong">
+                core-js: Make NativeDate.toLocaleString() behave more like real browsers.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Major refactoring to separate top level scope and 'globalThis'.
+            </action>
             <action type="update" dev="rbri">
                 core-js: Improve 'caller' handling depending on strict mode.
             </action>

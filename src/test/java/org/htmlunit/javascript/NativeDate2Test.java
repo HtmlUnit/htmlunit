@@ -422,10 +422,6 @@ public class NativeDate2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("12/18/2021, 10:23:00 PM")
-    @HtmlUnitNYI(CHROME = "12/18/21, 10:23 PM",
-            EDGE = "12/18/21, 10:23 PM",
-            FF = "12/18/21, 10:23 PM",
-            FF_ESR = "12/18/21, 10:23 PM")
     public void toLocaleEnUs() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleString('en-US')");
     }
@@ -435,10 +431,6 @@ public class NativeDate2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("12/18/2021")
-    @HtmlUnitNYI(CHROME = "12/18/21",
-            EDGE = "12/18/21",
-            FF = "12/18/21",
-            FF_ESR = "12/18/21")
     public void toLocaleEnUsDate() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleDateString('en-US')");
     }
@@ -448,10 +440,6 @@ public class NativeDate2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("10:23:00 PM")
-    @HtmlUnitNYI(CHROME = "10:23 PM",
-            EDGE = "10:23 PM",
-            FF = "10:23 PM",
-            FF_ESR = "10:23 PM")
     public void toLocaleEnUsTime() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleTimeString('en-US')");
     }
@@ -461,10 +449,6 @@ public class NativeDate2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("18.12.2021, 22:23:00")
-    @HtmlUnitNYI(CHROME = "18.12.21, 22:23",
-            EDGE = "18.12.21, 22:23",
-            FF = "18.12.21, 22:23",
-            FF_ESR = "18.12.21, 22:23")
     public void toLocaleDeDe() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleString('de-DE')");
     }
@@ -474,10 +458,6 @@ public class NativeDate2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("18.12.2021")
-    @HtmlUnitNYI(CHROME = "18.12.21",
-            EDGE = "18.12.21",
-            FF = "18.12.21",
-            FF_ESR = "18.12.21")
     public void toLocaleDeDeDate() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleDateString('de-DE')");
     }
@@ -487,10 +467,6 @@ public class NativeDate2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("22:23:00")
-    @HtmlUnitNYI(CHROME = "22:23",
-            EDGE = "22:23",
-            FF = "22:23",
-            FF_ESR = "22:23")
     public void toLocaleDeDeTime() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleTimeString('de-DE')");
     }
@@ -500,10 +476,6 @@ public class NativeDate2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("2021/12/18 22:23:00")
-    @HtmlUnitNYI(CHROME = "2021/12/18 22:23",
-            EDGE = "2021/12/18 22:23",
-            FF = "2021/12/18 22:23",
-            FF_ESR = "2021/12/18 22:23")
     public void toLocaleJaJp() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleString('ja-JP')");
     }
@@ -522,10 +494,6 @@ public class NativeDate2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("22:23:00")
-    @HtmlUnitNYI(CHROME = "22:23",
-            EDGE = "22:23",
-            FF = "22:23",
-            FF_ESR = "22:23")
     public void toLocaleJaJpTime() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleTimeString('ja-JP')");
     }
@@ -535,10 +503,6 @@ public class NativeDate2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("2021/12/18 22:23:00")
-    @HtmlUnitNYI(CHROME = "2021/12/18 22:23",
-            EDGE = "2021/12/18 22:23",
-            FF = "2021/12/18 22:23",
-            FF_ESR = "2021/12/18 22:23")
     public void toLocaleArray() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleString(['foo', 'ja-JP', 'en-US'])");
     }
@@ -557,10 +521,6 @@ public class NativeDate2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("22:23:00")
-    @HtmlUnitNYI(CHROME = "22:23",
-            EDGE = "22:23",
-            FF = "22:23",
-            FF_ESR = "22:23")
     public void toLocaleArrayTime() throws Exception {
         toLocale("new Date('2021-12-18T22:23').toLocaleTimeString(['foo', 'ja-JP', 'en-US'])");
     }
