@@ -128,6 +128,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
 
         final TopLevel scope = context.initSafeStandardObjects(new TopLevel(this));
         this.setParentScope(scope);
+
         JavaScriptEngine.configureRhino(webClient, browserVersion, scope, this);
 
         final WorkerJavaScriptConfiguration jsConfig = WorkerJavaScriptConfiguration.getInstance(browserVersion);

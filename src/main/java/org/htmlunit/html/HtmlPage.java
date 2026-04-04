@@ -1028,7 +1028,7 @@ public class HtmlPage extends SgmlPage {
 
         @SuppressWarnings("unchecked")
         final AbstractJavaScriptEngine<Object> engine = (AbstractJavaScriptEngine<Object>) client.getJavaScriptEngine();
-        engine.execute(this, getEnclosingWindow().getScriptableObject(), script);
+        engine.execute(this, getEnclosingWindow().getTopLevelScope(), script);
         return JavaScriptLoadResult.SUCCESS;
     }
 

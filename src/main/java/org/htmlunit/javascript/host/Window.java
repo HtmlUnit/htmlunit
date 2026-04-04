@@ -1766,7 +1766,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public Selection getSelectionImpl() {
         if (selection_ == null) {
             selection_ = new Selection();
-            selection_.setParentScope(this);
+            selection_.setParentScope(getWebWindow().getTopLevelScope());
             selection_.setPrototype(getPrototype(selection_.getClass()));
         }
         return selection_;
@@ -2075,7 +2075,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public Scriptable getPerformance() {
         if (performance_ == null) {
             final Performance performance = new Performance();
-            performance.setParentScope(this);
+            performance.setParentScope(getWebWindow().getTopLevelScope());
             performance.setPrototype(getPrototype(performance.getClass()));
             performance_ = performance;
         }
