@@ -514,7 +514,7 @@ public class Element extends Node {
     @JsxFunction
     public NodeList querySelectorAll(final String selectors) {
         try {
-            return NodeList.staticNodeList(this, getDomNodeOrDie().querySelectorAll(selectors));
+            return NodeList.staticNodeList(getParentScope(), getDomNodeOrDie().querySelectorAll(selectors));
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(

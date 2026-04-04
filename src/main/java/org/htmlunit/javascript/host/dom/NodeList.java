@@ -23,10 +23,8 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
-import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -90,7 +88,7 @@ public class NodeList extends AbstractList implements Callable {
      * Creates an instance.
      * @param parentScope the parent scope
      */
-    NodeList(final ScriptableObject parentScope) {
+    NodeList(final Scriptable parentScope) {
         super();
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
@@ -104,7 +102,7 @@ public class NodeList extends AbstractList implements Callable {
      * @param elements the elements
      * @return an empty collection
      */
-    public static NodeList staticNodeList(final HtmlUnitScriptable parentScope, final List<DomNode> elements) {
+    public static NodeList staticNodeList(final Scriptable parentScope, final List<DomNode> elements) {
         return new NodeList(parentScope) {
             @Override
             public List<DomNode> getElements() {
