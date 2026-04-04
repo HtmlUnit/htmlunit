@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.svg;
 
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -21,7 +22,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
-import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.DOMException;
 
 /**
@@ -66,7 +66,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
      * Instantiates and configure scope and prototype.
      * @param scope the parent scope
      */
-    public SVGMatrix(final Window scope) {
+    public SVGMatrix(final TopLevel scope) {
         this();
         setParentScope(scope);
         setPrototype(getPrototype(getClass()));
@@ -186,7 +186,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
      */
     @JsxFunction
     public SVGMatrix flipX() {
-        final SVGMatrix result = new SVGMatrix(getWindow());
+        final SVGMatrix result = new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
         result.shearX_ = shearX_;
         result.shearY_ = -shearY_;
         result.scaleX_ = -scaleX_;
@@ -203,7 +203,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
      */
     @JsxFunction
     public SVGMatrix flipY() {
-        final SVGMatrix result = new SVGMatrix(getWindow());
+        final SVGMatrix result = new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
         result.shearX_ = -shearX_;
         result.shearY_ = shearY_;
         result.scaleX_ = scaleX_;
@@ -229,7 +229,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
                     DOMException.INVALID_STATE_ERR);
         }
 
-        final SVGMatrix result = new SVGMatrix(getWindow());
+        final SVGMatrix result = new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
         result.shearX_ = -shearX_ / determinant;
         result.shearY_ = -shearY_ / determinant;
         result.scaleX_ = scaleY_ / determinant;
@@ -247,7 +247,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
      */
     @JsxFunction
     public SVGMatrix multiply(final SVGMatrix by) {
-        final SVGMatrix result = new SVGMatrix(getWindow());
+        final SVGMatrix result = new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
 
         result.shearX_ = by.shearX_ * scaleX_ + by.scaleY_ * shearX_;
         result.shearY_ = by.scaleX_ * shearY_ + by.shearY_ * scaleY_;
@@ -270,7 +270,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
         final double sin = Math.sin(theta);
         final double cos = Math.cos(theta);
 
-        final SVGMatrix result = new SVGMatrix(getWindow());
+        final SVGMatrix result = new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
 
         result.shearX_ = -sin * scaleX_ + cos * shearX_;
         result.shearY_ = cos * shearY_ + sin * scaleY_;
@@ -301,7 +301,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
         final double sin = Math.sin(theta);
         final double cos = Math.cos(theta);
 
-        final SVGMatrix result = new SVGMatrix(getWindow());
+        final SVGMatrix result = new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
 
         result.shearX_ = -sin * scaleX_ + cos * shearX_;
         result.shearY_ = cos * shearY_ + sin * scaleY_;
@@ -331,7 +331,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
      */
     @JsxFunction
     public SVGMatrix scaleNonUniform(final double factorX, final double factorY) {
-        final SVGMatrix result = new SVGMatrix(getWindow());
+        final SVGMatrix result = new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
 
         result.shearX_ = factorY * shearX_;
         result.shearY_ = factorX * shearY_;
@@ -352,7 +352,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
     public SVGMatrix skewX(final double angle) {
         final double shear = Math.tan(Math.toRadians(angle));
 
-        final SVGMatrix result = new SVGMatrix(getWindow());
+        final SVGMatrix result = new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
 
         result.shearX_ = shear * scaleX_ + shearX_;
         result.shearY_ = shearY_;
@@ -373,7 +373,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
     public SVGMatrix skewY(final double angle) {
         final double shear = Math.tan(Math.toRadians(angle));
 
-        final SVGMatrix result = new SVGMatrix(getWindow());
+        final SVGMatrix result = new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
 
         result.shearX_ = shearX_;
         result.shearY_ = shearY_ + shear * scaleY_;
@@ -393,7 +393,7 @@ public class SVGMatrix extends HtmlUnitScriptable {
      */
     @JsxFunction
     public SVGMatrix translate(final double x, final double y) {
-        final SVGMatrix result = new SVGMatrix(getWindow());
+        final SVGMatrix result = new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
 
         result.shearX_ = shearX_;
         result.shearY_ = shearY_;

@@ -54,7 +54,7 @@ public class SVGSVGElement extends SVGGraphicsElement {
      */
     @JsxFunction
     public SVGMatrix createSVGMatrix() {
-        return new SVGMatrix(getWindow());
+        return new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
     }
 
     /**
@@ -63,7 +63,7 @@ public class SVGSVGElement extends SVGGraphicsElement {
      */
     @JsxFunction
     public SVGMatrix getScreenCTM() {
-        return new SVGMatrix(getWindow());
+        return new SVGMatrix(getWindow().getWebWindow().getTopLevelScope());
     }
 
     /**

@@ -91,7 +91,7 @@ public class CryptoKey extends HtmlUnitScriptable {
         key.usages_ = new LinkedHashSet<>(usages);
 
         final Window window = getWindow(Objects.requireNonNull(scope));
-        key.setParentScope(window);
+        key.setParentScope(window.getWebWindow().getTopLevelScope());
         key.setPrototype(window.getPrototype(CryptoKey.class));
         return key;
     }
