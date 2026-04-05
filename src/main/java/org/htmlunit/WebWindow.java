@@ -76,7 +76,20 @@ public interface WebWindow extends Serializable {
      */
     WebWindow getTopWindow();
 
+    /**
+     * Returns the top-level scope associated with this window, used for
+     * JavaScript execution context.
+     *
+     * @return the top-level scope for this window
+     */
     TopLevel getTopLevelScope();
+
+    /**
+     * Sets the top-level scope associated with this window, used for
+     * JavaScript execution context.
+     *
+     * @param topLevelScope the top-level scope to associate with this window
+     */
     void setTopLevelScope(TopLevel topLevelScope);
 
     /**
