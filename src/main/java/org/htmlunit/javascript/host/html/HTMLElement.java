@@ -33,6 +33,7 @@ import java.util.Set;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -231,7 +232,7 @@ public class HTMLElement extends Element {
                 || "select".equalsIgnoreCase(name)) {
             final HtmlForm form = ((HtmlElement) domNode).getEnclosingForm();
             if (form != null) {
-                setParentScope(getScriptableFor(form));
+                setParentScope(new WithScope(getParentScope(), getScriptableFor(form)));
             }
         }
     }

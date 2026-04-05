@@ -209,7 +209,7 @@ public class CSSRule extends HtmlUnitScriptable {
         super();
         stylesheet_ = stylesheet;
         rule_ = rule;
-        setParentScope(stylesheet);
+        setParentScope(stylesheet.getParentScope());
         setPrototype(getPrototype(getClass()));
     }
 

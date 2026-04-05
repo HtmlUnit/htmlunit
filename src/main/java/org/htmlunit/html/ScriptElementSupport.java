@@ -306,7 +306,7 @@ public final class ScriptElementSupport {
         final EventTarget eventTarget = element.getScriptableObject();
         final Event event = new Event(element, type);
 
-        event.setParentScope(eventTarget);
+        event.setParentScope(eventTarget.getParentScope());
         event.setPrototype(eventTarget.getPrototype(event.getClass()));
 
         eventTarget.executeEventLocally(event);

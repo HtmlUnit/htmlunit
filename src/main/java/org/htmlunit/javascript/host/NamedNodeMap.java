@@ -68,7 +68,7 @@ public class NamedNodeMap extends HtmlUnitScriptable {
      */
     public NamedNodeMap(final DomElement element) {
         super();
-        setParentScope(element.getScriptableObject());
+        setParentScope(element.getScriptableObject().getParentScope());
         setPrototype(getPrototype(getClass()));
 
         attributes_ = element.getAttributes();

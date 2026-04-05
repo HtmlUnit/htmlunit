@@ -30,6 +30,7 @@ import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.TopLevel;
+import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -286,6 +287,10 @@ public class EventListenersContainer implements Serializable {
                 if (parentScope instanceof TopLevel topLevel) {
                     parentScope = topLevel.getGlobalThis();
                 }
+                else if (parentScope instanceof WithScope withScope) {
+                    parentScope = withScope.getObject();
+                }
+
                 if (parentScope instanceof Window window) {
                     page = (HtmlPage) window.getDomNodeOrDie();
                 }

@@ -69,7 +69,7 @@ public class HTMLSelectElement extends HTMLElement {
         final HtmlSelect htmlSelect = getDomNodeOrDie();
         htmlSelect.setScriptableObject(this);
         if (optionsArray_ == null) {
-            optionsArray_ = new HTMLOptionsCollection(this);
+            optionsArray_ = new HTMLOptionsCollection(getParentScope());
             optionsArray_.initialize(htmlSelect);
         }
     }

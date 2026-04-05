@@ -1212,7 +1212,7 @@ public class Document extends Node {
                 final Object[] args = {((DomNode) n).getScriptableObject()};
                 final Object response;
                 if (filter instanceof Callable callable) {
-                    response = callable.call(Context.getCurrentContext(), filter, filter, args);
+                    response = callable.call(Context.getCurrentContext(), filter.getParentScope(), filter, args);
                 }
                 else {
                     if (filterFunctionOnly) {

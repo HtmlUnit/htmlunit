@@ -39,6 +39,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.cssparser.parser.CSSException;
@@ -122,7 +123,8 @@ public class Element extends Node {
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
 
-        setParentScope(getWindow().getDocument());
+        final Window window = getWindow();
+        setParentScope(new WithScope(window.getWebWindow().getTopLevelScope(), window.getDocument()));
         // CSSStyleDeclaration uses the parent scope
         style_ = new CSSStyleDeclaration(this, new ElementCssStyleDeclaration(getDomNodeOrDie()));
 

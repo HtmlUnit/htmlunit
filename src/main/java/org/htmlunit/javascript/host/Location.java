@@ -180,16 +180,16 @@ public class Location extends HtmlUnitScriptable {
     public void initialize(final Scriptable scope, final Window window, final Page page) {
         final int attributes = ScriptableObject.PERMANENT | ScriptableObject.READONLY;
 
-        FunctionObject functionObject = new FunctionObject(METHOD_ASSIGN.getName(), METHOD_ASSIGN, this);
+        FunctionObject functionObject = new FunctionObject(METHOD_ASSIGN.getName(), METHOD_ASSIGN, scope);
         defineProperty(METHOD_ASSIGN.getName(), functionObject, attributes);
 
-        functionObject = new FunctionObject(METHOD_RELOAD.getName(), METHOD_RELOAD, this);
+        functionObject = new FunctionObject(METHOD_RELOAD.getName(), METHOD_RELOAD, scope);
         defineProperty(METHOD_RELOAD.getName(), functionObject, attributes);
 
-        functionObject = new FunctionObject(METHOD_REPLACE.getName(), METHOD_REPLACE, this);
+        functionObject = new FunctionObject(METHOD_REPLACE.getName(), METHOD_REPLACE, scope);
         defineProperty(METHOD_REPLACE.getName(), functionObject, attributes);
 
-        functionObject = new FunctionObject(METHOD_TO_STRING.getName(), METHOD_TO_STRING, this);
+        functionObject = new FunctionObject(METHOD_TO_STRING.getName(), METHOD_TO_STRING, scope);
         defineProperty("toString", functionObject, attributes);
 
         defineProperty(scope, "hash", null, GETTER_HASH, SETTER_HASH, attributes);

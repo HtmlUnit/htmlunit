@@ -18,7 +18,9 @@ import java.io.Serializable;
 import java.util.function.Predicate;
 
 import org.htmlunit.WebClient;
+import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
 import org.htmlunit.html.HtmlElement;
@@ -83,10 +85,12 @@ public class StyleSheetList extends HtmlUnitScriptable {
      */
     public StyleSheetList(final Document document) {
         super();
-        setParentScope(document);
+
+        final WebWindow webWindow = document.getWindow().getWebWindow();
+        setParentScope(new WithScope(webWindow.getTopLevelScope(), document));
         setPrototype(getPrototype(getClass()));
 
-        final WebClient webClient = getWindow().getWebWindow().getWebClient();
+        final WebClient webClient = webWindow.getWebClient();
 
         if (webClient.getOptions().isCssEnabled()) {
             nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true);

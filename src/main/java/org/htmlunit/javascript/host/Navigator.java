@@ -198,11 +198,11 @@ public class Navigator extends HtmlUnitScriptable {
             return;
         }
         plugins_ = new PluginArray();
-        plugins_.setParentScope(this);
+        plugins_.setParentScope(getParentScope());
         plugins_.setPrototype(getPrototype(PluginArray.class));
 
         Plugin plugin = new Plugin("PDF Viewer", "Portable Document Format", "internal-pdf-viewer");
-        plugin.setParentScope(this);
+        plugin.setParentScope(getParentScope());
         plugin.setPrototype(getPrototype(Plugin.class));
 
         // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mimeTypes
@@ -210,16 +210,16 @@ public class Navigator extends HtmlUnitScriptable {
         // If PDF files can be displayed inline then application/pdf and text/pdf are listed,
         // otherwise an empty list is returned.
         mimeTypes_ = new MimeTypeArray();
-        mimeTypes_.setParentScope(this);
+        mimeTypes_.setParentScope(getParentScope());
         mimeTypes_.setPrototype(getPrototype(MimeTypeArray.class));
 
         final MimeType mimeTypeAppPdf = new MimeType("application/pdf", "Portable Document Format", "pdf", plugin);
-        mimeTypeAppPdf.setParentScope(this);
+        mimeTypeAppPdf.setParentScope(getParentScope());
         mimeTypeAppPdf.setPrototype(getPrototype(MimeType.class));
         mimeTypes_.add(mimeTypeAppPdf);
 
         final MimeType mimeTypeTxtPdf = new MimeType("text/pdf", "Portable Document Format", "pdf", plugin);
-        mimeTypeTxtPdf.setParentScope(this);
+        mimeTypeTxtPdf.setParentScope(getParentScope());
         mimeTypeTxtPdf.setPrototype(getPrototype(MimeType.class));
         mimeTypes_.add(mimeTypeTxtPdf);
 
@@ -229,28 +229,28 @@ public class Navigator extends HtmlUnitScriptable {
 
         // all the others
         plugin = new Plugin("Chrome PDF Viewer", "Portable Document Format", "internal-pdf-viewer");
-        plugin.setParentScope(this);
+        plugin.setParentScope(getParentScope());
         plugin.setPrototype(getPrototype(Plugin.class));
         plugin.add(mimeTypeAppPdf);
         plugin.add(mimeTypeTxtPdf);
         plugins_.add(plugin);
 
         plugin = new Plugin("Chromium PDF Viewer", "Portable Document Format", "internal-pdf-viewer");
-        plugin.setParentScope(this);
+        plugin.setParentScope(getParentScope());
         plugin.setPrototype(getPrototype(Plugin.class));
         plugin.add(mimeTypeAppPdf);
         plugin.add(mimeTypeTxtPdf);
         plugins_.add(plugin);
 
         plugin = new Plugin("Microsoft Edge PDF Viewer", "Portable Document Format", "internal-pdf-viewer");
-        plugin.setParentScope(this);
+        plugin.setParentScope(getParentScope());
         plugin.setPrototype(getPrototype(Plugin.class));
         plugin.add(mimeTypeAppPdf);
         plugin.add(mimeTypeTxtPdf);
         plugins_.add(plugin);
 
         plugin = new Plugin("WebKit built-in PDF", "Portable Document Format", "internal-pdf-viewer");
-        plugin.setParentScope(this);
+        plugin.setParentScope(getParentScope());
         plugin.setPrototype(getPrototype(Plugin.class));
         plugin.add(mimeTypeAppPdf);
         plugin.add(mimeTypeTxtPdf);

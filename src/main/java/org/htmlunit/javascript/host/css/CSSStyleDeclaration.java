@@ -121,6 +121,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
     /** The wrapped CSSStyleDeclaration */
     private AbstractCssStyleDeclaration styleDeclaration_;
+    private CSSStyleSheet parentStyleSheet_;
 
     /**
      * Creates an instance.
@@ -165,13 +166,14 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     CSSStyleDeclaration(final CSSStyleSheet parentStyleSheet, final WrappedCssStyleDeclaration styleDeclaration) {
         super();
-        setParentScope(parentStyleSheet);
+        setParentScope(parentStyleSheet.getParentScope());
         setPrototype(getPrototype(getClass()));
 
         if (styleDeclaration == null) {
             throw new IllegalStateException("styleDeclaration can't be null");
         }
         styleDeclaration_ = styleDeclaration;
+        parentStyleSheet_ = parentStyleSheet;
     }
 
     protected AbstractCssStyleDeclaration getCssStyleDeclaration() {
@@ -1504,7 +1506,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     public CSSRule getParentRule() {
         final AbstractCSSRuleImpl parentRule = styleDeclaration_.getParentRule();
         if (parentRule != null) {
-            return CSSRule.create((CSSStyleSheet) getParentScope(), parentRule);
+            return CSSRule.create(parentStyleSheet_, parentRule);
         }
         return null;
     }

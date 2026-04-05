@@ -97,9 +97,6 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
         if (scope == this) {
             throw new IllegalArgumentException("Object can't be its own parentScope");
         }
-        if (scope instanceof Window) {
-            throw new IllegalArgumentException("parentScope can't be the window");
-        }
         super.setParentScope(scope);
     }
 

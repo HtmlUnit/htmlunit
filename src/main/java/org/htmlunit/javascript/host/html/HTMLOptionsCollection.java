@@ -19,6 +19,7 @@ import org.htmlunit.WebAssert;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.ElementFactory;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
@@ -67,7 +68,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
      * Creates an instance.
      * @param parentScope parent scope
      */
-    public HTMLOptionsCollection(final HtmlUnitScriptable parentScope) {
+    public HTMLOptionsCollection(final VarScope parentScope) {
         super();
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));

@@ -30,6 +30,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeArray;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.SymbolKey;
@@ -67,7 +68,7 @@ public class Intl extends HtmlUnitScriptable {
         final ClassConfiguration intlConfig =
                 AbstractJavaScriptConfiguration.getClassConfiguration(Intl.class, browserVersion);
         if (intlConfig != null) {
-            defineStaticFunctions(intlConfig, intl, intl);
+            defineStaticFunctions(intlConfig, scope, intl);
         }
 
         globalThis.defineProperty(intl.getClassName(), intl, ScriptableObject.DONTENUM);
@@ -89,10 +90,17 @@ public class Intl extends HtmlUnitScriptable {
             final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(c, browserVersion);
             final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, scope);
             final FunctionObject constructorFn = new FunctionObject(config.getJsConstructor().getKey(),
-                    config.getJsConstructor().getValue(), this);
-            constructorFn.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
+                    config.getJsConstructor().getValue(), scope);
+            // constructorFn.addAsConstructor(scope, prototype, ScriptableObject.DONTENUM);
+            ScriptRuntime.setFunctionProtoAndParent(constructorFn, Context.getCurrentContext(), scope);
+            constructorFn.setImmunePrototypeProperty(prototype);
+            prototype.setParentScope(scope);
+            constructorFn.defineProperty(prototype, "constructor", this, ScriptableObject.DONTENUM);
+            constructorFn.setParentScope(scope);
 
-            defineStaticFunctions(config, this, constructorFn);
+            defineProperty(this, prototype.getClassName(), constructorFn, ScriptableObject.DONTENUM);
+
+            defineStaticFunctions(config, scope, constructorFn);
         }
         catch (final Exception e) {
             throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
@@ -126,7 +134,7 @@ public class Intl extends HtmlUnitScriptable {
     public static Object getCanonicalLocales(final Context cx, final Scriptable thisObj,
             final Object[] args, final Function funObj) {
         if (args.length == 0 || JavaScriptEngine.isUndefined(args[0])) {
-            return cx.newArray(TopLevel.getTopLevelScope(thisObj), new Object[0]);
+            return cx.newArray(ScriptableObject.getTopLevelScope(thisObj), new Object[0]);
         }
 
         final Object localesArgument = args[0];
@@ -170,7 +178,7 @@ public class Intl extends HtmlUnitScriptable {
             }
         }
 
-        return cx.newArray(TopLevel.getTopLevelScope(thisObj), canonicalLocales.toArray());
+        return cx.newArray(ScriptableObject.getTopLevelScope(thisObj), canonicalLocales.toArray());
     }
 
     /**
@@ -202,6 +210,6 @@ public class Intl extends HtmlUnitScriptable {
         }
 
         return Context.getCurrentContext().newArray(
-                TopLevel.getTopLevelScope(localesArgument), supportedLocales.toArray());
+                ScriptableObject.getTopLevelScope(localesArgument), supportedLocales.toArray());
     }
 }

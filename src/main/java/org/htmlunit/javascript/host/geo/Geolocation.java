@@ -104,7 +104,7 @@ public class Geolocation extends HtmlUnitScriptable {
         position.setPrototype(getPrototype(position.getClass()));
 
         final JavaScriptEngine jsEngine = (JavaScriptEngine) ww.getWebClient().getJavaScriptEngine();
-        jsEngine.callFunction((HtmlPage) ww.getEnclosedPage(), successHandler_, this,
-                getParentScope(), new Object[] {position});
+        jsEngine.callFunction((HtmlPage) ww.getEnclosedPage(), successHandler_,
+                getParentScope(), this, new Object[] {position});
     }
 }

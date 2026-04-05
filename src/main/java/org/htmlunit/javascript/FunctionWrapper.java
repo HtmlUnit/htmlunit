@@ -21,6 +21,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Symbol;
 import org.htmlunit.corejs.javascript.SymbolScriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 
 /**
  * Wrapper for a {@link Function} delegating all calls to the wrapped instance.
@@ -181,7 +182,7 @@ public class FunctionWrapper implements Function, SymbolScriptable, Serializable
      * {@inheritDoc}
      */
     @Override
-    public Scriptable getParentScope() {
+    public VarScope getParentScope() {
         return wrapped_.getParentScope();
     }
 

@@ -57,6 +57,8 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.StackStyle;
 import org.htmlunit.corejs.javascript.Symbol;
 import org.htmlunit.corejs.javascript.TopLevel;
+import org.htmlunit.corejs.javascript.VarScope;
+import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -857,11 +859,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         return getContextFactory().callSecured(action, page);
     }
 
-    private static Scriptable getScope(final HtmlPage page, final DomNode node) {
+    private static VarScope getScope(final HtmlPage page, final DomNode node) {
+        final TopLevel topLevel = page.getEnclosingWindow().getTopLevelScope();
         if (node != null) {
-            return node.getScriptableObject();
+            return new WithScope(topLevel, node.getScriptableObject());
         }
-        return page.getEnclosingWindow().getScriptableObject();
+        return topLevel;
     }
 
     /**
@@ -1447,7 +1450,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     /**
      * @return the top call scope
      */
-    public static Scriptable getTopCallScope() {
+    public static TopLevel getTopCallScope() {
         return ScriptRuntime.getTopCallScope(Context.getCurrentContext());
     }
 
