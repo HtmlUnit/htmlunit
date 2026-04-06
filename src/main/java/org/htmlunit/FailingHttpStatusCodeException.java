@@ -21,6 +21,7 @@ import java.net.URL;
  *
  * @author Mike Bowler
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class FailingHttpStatusCodeException extends RuntimeException {
 

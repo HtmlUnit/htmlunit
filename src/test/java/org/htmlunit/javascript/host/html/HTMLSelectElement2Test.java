@@ -38,6 +38,7 @@ import org.junit.jupiter.api.Test;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class HTMLSelectElement2Test extends SimpleWebTestCase {
 

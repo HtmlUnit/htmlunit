@@ -22,6 +22,7 @@ import org.htmlunit.html.HtmlPage;
  * is called. It gives developers the opportunity to modify the script to be executed.
  *
  * @author Ben Curren
+ * @author Ronald Brill
  */
 public interface ScriptPreProcessor {
 

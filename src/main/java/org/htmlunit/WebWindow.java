@@ -28,6 +28,7 @@ import org.htmlunit.javascript.background.JavaScriptJobManager;
  * @author Mike Bowler
  * @author David K. Taylor
  * @author David D. Kilzer
+ * @author Ronald Brill
  */
 public interface WebWindow extends Serializable {
 

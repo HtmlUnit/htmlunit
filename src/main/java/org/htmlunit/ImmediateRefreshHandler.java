@@ -29,6 +29,7 @@ import java.net.URL;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class ImmediateRefreshHandler implements RefreshHandler, Serializable {
 

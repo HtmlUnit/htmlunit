@@ -19,6 +19,7 @@ package org.htmlunit;
  *
  * @author Mike Bowler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class ObjectInstantiationException extends RuntimeException {
 

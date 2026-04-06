@@ -22,6 +22,7 @@ import java.net.URL;
  * less or equal to the configured time and otherwise ignores totally the refresh instruction.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class NiceRefreshHandler extends ImmediateRefreshHandler {
     private final int maxDelay_;

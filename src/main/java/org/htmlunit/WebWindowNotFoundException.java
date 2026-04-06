@@ -19,6 +19,7 @@ package org.htmlunit;
  * a given name.
  *
  * @author Mike Bowler
+ * @author Ronald Brill
  */
 public class WebWindowNotFoundException extends RuntimeException {
     private final String name_;

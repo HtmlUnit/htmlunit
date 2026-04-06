@@ -30,6 +30,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Mike Bowler
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class ThreadedRefreshHandler implements RefreshHandler {
 

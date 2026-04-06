@@ -30,6 +30,7 @@ import org.htmlunit.html.HtmlPage;
  * are performed synchronously.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class NicelyResynchronizingAjaxController extends AjaxController {
 

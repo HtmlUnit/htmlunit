@@ -21,6 +21,7 @@ import org.htmlunit.javascript.JavaScriptEngine;
  *
  * @author Mike Bowler
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public final class ScriptResult {
 

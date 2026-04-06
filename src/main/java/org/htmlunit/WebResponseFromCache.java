@@ -25,6 +25,7 @@ import org.htmlunit.util.WebResponseWrapper;
  * is the same but the request may have some variation like an anchor.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 class WebResponseFromCache extends WebResponseWrapper {
 

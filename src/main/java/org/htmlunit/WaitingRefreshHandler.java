@@ -31,6 +31,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Mike Bowler
  * @author Daniel Gredler
  * @author Sven Strickroth
+ * @author Ronald Brill
  */
 public class WaitingRefreshHandler implements RefreshHandler {
 

@@ -18,6 +18,7 @@ package org.htmlunit;
  * An exception that is thrown when a specified XML element cannot be found in the DOM model.
  *
  * @author Mike Bowler
+ * @author Ronald Brill
  */
 public class ElementNotFoundException extends RuntimeException {
 

@@ -26,6 +26,7 @@ import org.htmlunit.html.parser.HTMLParser;
  *
  * @author Mike Bowler
  * @author Christian Sell
+ * @author Ronald Brill
  */
 public interface PageCreator {
 

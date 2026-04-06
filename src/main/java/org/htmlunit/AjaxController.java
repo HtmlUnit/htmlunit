@@ -24,6 +24,7 @@ import org.htmlunit.html.HtmlPage;
  * deterministic and avoiding calls to <code>Thread.sleep()</code>.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class AjaxController implements Serializable {
 

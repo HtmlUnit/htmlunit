@@ -23,6 +23,7 @@ import java.io.IOException;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public interface WebConnection extends AutoCloseable {
 

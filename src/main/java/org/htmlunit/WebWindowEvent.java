@@ -21,6 +21,7 @@ import java.util.EventObject;
  *
  * @author Mike Bowler
  * @author David K. Taylor
+ * @author Ronald Brill
  */
 public final class WebWindowEvent extends EventObject {
     private final Page oldPage_;
