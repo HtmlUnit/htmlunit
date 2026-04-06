@@ -24,6 +24,7 @@ import org.htmlunit.corejs.javascript.debug.Debugger;
  * exists as a convenience for creating debugger objects.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class DebuggerAdapter implements Debugger {
 

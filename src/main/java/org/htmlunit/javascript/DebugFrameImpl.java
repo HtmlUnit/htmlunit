@@ -44,11 +44,12 @@ import org.htmlunit.javascript.host.event.Event;
  * HtmlUnit itself, rather than the debugging and development of web applications.
  * </p>
  *
+ * @see DebuggerImpl
+ *
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Sven Strickroth
- *
- * @see DebuggerImpl
+ * @author Ronald Brill
  */
 public class DebugFrameImpl extends DebugFrameAdapter {
 

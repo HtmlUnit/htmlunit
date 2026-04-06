@@ -60,6 +60,8 @@ import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptExecutor;
@@ -73,6 +75,7 @@ import org.htmlunit.javascript.host.ConsoleCustom;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.DOMException;
+import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLImageElement;
 import org.htmlunit.javascript.host.html.HTMLOptionElement;
 import org.htmlunit.javascript.host.intl.Intl;
@@ -861,9 +864,18 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     private static VarScope getScope(final HtmlPage page, final DomNode node) {
         final TopLevel topLevel = page.getEnclosingWindow().getTopLevelScope();
-        if (node != null) {
-            return new WithScope(topLevel, node.getScriptableObject());
+        if (node != null && node instanceof HtmlElement htmlElement) {
+            final HTMLElement elem = htmlElement.getScriptableObject();
+            WithScope scope = new WithScope(topLevel, elem.getOwnerDocument());
+
+            final HtmlForm enclosingForm = htmlElement.getEnclosingForm();
+            if (enclosingForm != null) {
+                scope = new WithScope(scope, enclosingForm.getScriptableObject());
+            }
+
+            return new WithScope(scope, node.getScriptableObject());
         }
+
         return topLevel;
     }
 

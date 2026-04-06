@@ -38,10 +38,11 @@ import org.htmlunit.corejs.javascript.debug.DebuggableScript;
  * {@link HtmlUnitContextFactory#setDebugger(org.htmlunit.corejs.javascript.debug.Debugger)}, passing in
  * an instance of this class, and make sure your loggers are configured to output <code>TRACE</code> level log messages.
  * </p>
- *
- * @author Daniel Gredler
  * @see DebugFrameImpl
  * @see HtmlUnitContextFactory#setDebugger(org.htmlunit.corejs.javascript.debug.Debugger)
+ *
+ * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class DebuggerImpl extends DebuggerAdapter {
 

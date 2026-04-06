@@ -23,6 +23,7 @@ import org.htmlunit.corejs.javascript.debug.DebugFrame;
  * exists as a convenience for creating debug frame objects.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class DebugFrameAdapter implements DebugFrame {
 

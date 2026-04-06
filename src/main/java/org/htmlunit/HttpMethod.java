@@ -23,7 +23,7 @@ package org.htmlunit;
  * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Marc Guillemot
- * @author Ronald Broöö
+ * @author Ronald Brill
  */
 public enum HttpMethod {
     /** OPTIONS. */
