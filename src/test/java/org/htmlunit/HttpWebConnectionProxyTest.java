@@ -43,7 +43,9 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
         WebDriverTestCase.stopWebServers();
         startWebServer("src/test/resources/testfiles/noproxyroot/");
 
-        proxyWebServer_ = createWebServer(PORT_PROXY_SERVER, "src/test/resources/testfiles/proxyroot/", null);
+        proxyWebServer_ = JettyServerUtils.startWebServer(PORT_PROXY_SERVER,
+                                            "src/test/resources/testfiles/proxyroot/", null,
+                                            null, false, SSLVariant.NONE);
 
         final WebClient webClient = getWebClient();
 
