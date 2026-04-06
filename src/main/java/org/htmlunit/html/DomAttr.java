@@ -25,6 +25,7 @@ import org.w3c.dom.TypeInfo;
  * @author Denis N. Antonioli
  * @author David K. Taylor
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class DomAttr extends DomNamespaceNode implements Attr {
 

@@ -34,6 +34,7 @@ import org.htmlunit.cssparser.parser.InputSource;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlStyle extends HtmlElement {
 

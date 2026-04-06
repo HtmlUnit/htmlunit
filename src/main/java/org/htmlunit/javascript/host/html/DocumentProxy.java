@@ -27,6 +27,7 @@ import org.htmlunit.javascript.host.dom.Document;
  * pages without a <code>window.document</code> object.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class DocumentProxy extends HtmlUnitScriptableProxy<Document> {
 

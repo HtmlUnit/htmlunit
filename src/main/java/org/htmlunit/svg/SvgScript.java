@@ -26,6 +26,7 @@ import org.htmlunit.util.StringUtils;
  * Wrapper for the SVG element {@code script}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SvgScript extends SvgElement implements ScriptElement {
 

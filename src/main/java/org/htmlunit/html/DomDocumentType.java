@@ -22,6 +22,7 @@ import org.w3c.dom.NamedNodeMap;
  * A DOM object for DocumentType.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class DomDocumentType extends DomNode implements DocumentType {
 

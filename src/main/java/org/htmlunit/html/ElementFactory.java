@@ -22,6 +22,7 @@ import org.xml.sax.Attributes;
  *
  * @author Christian Sell
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public interface ElementFactory {
 

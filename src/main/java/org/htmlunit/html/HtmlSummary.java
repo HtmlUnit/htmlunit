@@ -22,6 +22,7 @@ import org.htmlunit.SgmlPage;
  * Wrapper for the HTML element "summary".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlSummary extends HtmlElement {
 

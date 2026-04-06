@@ -23,6 +23,7 @@ import org.htmlunit.javascript.host.event.KeyboardEvent;
  * Keeps track of the typed keys.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class Keyboard {
 

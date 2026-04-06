@@ -30,6 +30,7 @@ import org.htmlunit.WebResponse;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class WebConnectionWrapper implements WebConnection {
     private final WebConnection wrappedWebConnection_;

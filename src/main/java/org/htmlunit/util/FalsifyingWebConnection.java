@@ -33,6 +33,7 @@ import org.htmlunit.WebResponseData;
  * what the wrapped connection would deliver.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
 

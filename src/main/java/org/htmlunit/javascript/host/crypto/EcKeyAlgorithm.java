@@ -28,6 +28,7 @@ import org.htmlunit.corejs.javascript.TopLevel;
  * Used by {@link SubtleCrypto} for ECDSA and ECDH key operations.
  *
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 final class EcKeyAlgorithm {
 

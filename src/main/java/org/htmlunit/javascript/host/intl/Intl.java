@@ -47,6 +47,7 @@ import org.htmlunit.javascript.configuration.JsxStaticFunction;
  *
  * @author Ahmed Ashour
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 @JsxClass
 public class Intl extends HtmlUnitScriptable {

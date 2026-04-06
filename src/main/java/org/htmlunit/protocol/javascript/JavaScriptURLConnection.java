@@ -25,6 +25,7 @@ import org.apache.commons.io.IOUtils;
  * A URLConnection for supporting JavaScript URLs.
  *
  * @author Mike Bowler
+ * @author Ronald Brill
  */
 public class JavaScriptURLConnection extends URLConnection {
 

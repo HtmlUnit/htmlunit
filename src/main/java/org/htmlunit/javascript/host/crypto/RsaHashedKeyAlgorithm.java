@@ -31,6 +31,7 @@ import org.htmlunit.corejs.javascript.typedarrays.NativeUint8Array;
  * Used by {@link SubtleCrypto} for RSA key operations.
  *
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 final class RsaHashedKeyAlgorithm {
 

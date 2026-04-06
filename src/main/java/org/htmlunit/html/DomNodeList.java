@@ -20,9 +20,10 @@ import org.w3c.dom.NodeList;
 
 /**
  * A list of {@link DomNode}s which is both a W3C {@link NodeList} and a java {@link List}.
+ * @param <E> the element type
  *
  * @author Tom Anderson
- * @param <E> the element type
+ * @author Ronald Brill
  */
 public interface DomNodeList<E extends DomNode> extends NodeList, List<E> {
 }

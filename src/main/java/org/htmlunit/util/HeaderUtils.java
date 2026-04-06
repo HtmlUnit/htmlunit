@@ -23,6 +23,7 @@ import org.htmlunit.WebResponse;
 /**
  * @author Anton Demydenko
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 public final class HeaderUtils {
 

@@ -27,6 +27,7 @@ import org.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronny Shapiro
+ * @author Ronald Brill
  */
 public class HtmlFrameSet extends HtmlElement {
 

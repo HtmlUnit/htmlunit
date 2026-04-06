@@ -19,8 +19,10 @@ import java.util.EventObject;
 /**
  * This is the event class for notifications about changes to the DOM structure.
  *
- * @author Ahmed Ashour
  * @see DomChangeListener
+ *
+ * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class DomChangeEvent extends EventObject {
 

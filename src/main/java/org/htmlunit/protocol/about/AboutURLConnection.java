@@ -21,6 +21,7 @@ import java.net.URLConnection;
  * A {@link URLConnection} for "about:" URLs.
  *
  * @author Chen Jun
+ * @author Ronald Brill
  */
 public class AboutURLConnection extends URLConnection {
 

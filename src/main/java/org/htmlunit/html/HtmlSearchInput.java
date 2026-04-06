@@ -24,6 +24,7 @@ import org.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Anton Demydenko
+ * @author Ronald Brill
  */
 public class HtmlSearchInput extends HtmlTextInput {
 

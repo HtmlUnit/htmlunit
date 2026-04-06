@@ -29,10 +29,11 @@ import org.htmlunit.javascript.configuration.JsxSymbol;
 /**
  * A JavaScript object for {@code Plugin}.
  *
+ * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
+ *
  * @author Marc Guillemot
  * @author Ahmed Ashour
- *
- * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
+ * @author Ronald Brill
  */
 @JsxClass
 public class Plugin extends HtmlUnitScriptable {

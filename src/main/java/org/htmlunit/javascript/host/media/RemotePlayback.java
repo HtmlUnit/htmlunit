@@ -25,6 +25,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * A JavaScript object for {@code RemotePlayback}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE})
 public class RemotePlayback extends EventTarget {

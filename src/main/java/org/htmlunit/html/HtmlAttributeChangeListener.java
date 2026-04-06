@@ -20,8 +20,10 @@ import java.io.Serializable;
  * Implementations of this interface receive notifications of changes to the attribute
  * list on the HtmlElement.
  *
- * @author Ahmed Ashour
  * @see HtmlAttributeChangeEvent
+ *
+ * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public interface HtmlAttributeChangeListener extends Serializable {
 

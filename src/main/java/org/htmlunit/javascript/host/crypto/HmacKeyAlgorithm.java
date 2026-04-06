@@ -27,6 +27,7 @@ import org.htmlunit.corejs.javascript.TopLevel;
  * Used by {@link SubtleCrypto} for HMAC key operations.
  *
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 final class HmacKeyAlgorithm {
 

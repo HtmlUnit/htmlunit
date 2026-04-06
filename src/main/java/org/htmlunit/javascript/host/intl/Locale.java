@@ -35,6 +35,7 @@ import org.htmlunit.javascript.configuration.JsxSymbolConstant;
  * A JavaScript object for Intl.Locale.
  *
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 @JsxClass
 public class Locale extends HtmlUnitScriptable {

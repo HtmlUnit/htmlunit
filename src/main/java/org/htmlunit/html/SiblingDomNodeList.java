@@ -24,6 +24,7 @@ import org.w3c.dom.Node;
  * An implementation of DomNodeList that is much less expensive for iteration.
  *
  * @author Tom Anderson
+ * @author Ronald Brill
  */
 class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomNodeList<DomNode> {
 

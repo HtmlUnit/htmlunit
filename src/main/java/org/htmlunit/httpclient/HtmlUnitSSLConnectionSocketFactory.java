@@ -49,6 +49,7 @@ import org.htmlunit.WebClientOptions;
  * This looks rather like a hack than like clean code but at the time of the writing it seems to
  * be the easiest way to provide SOCKS proxy support for HTTPS.
  *
+ * @author Daniel Gredler
  * @author Nicolas Belisle
  * @author Ahmed Ashour
  * @author Martin Huber
@@ -230,10 +231,6 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
 /**
  * A completely insecure (yet very easy to use) x509 trust manager. This manager trusts all servers
  * and all clients, regardless of credentials or lack thereof.
- *
- * @author Daniel Gredler
- * @author Marc Guillemot
- * @author Ronald Brill
  */
 class InsecureTrustManager extends X509ExtendedTrustManager {
     private final Set<X509Certificate> acceptedIssuers_ = new HashSet<>();

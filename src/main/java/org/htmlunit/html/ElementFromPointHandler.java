@@ -19,7 +19,9 @@ package org.htmlunit.html;
  * {@code document.elementFromPoint()}.
  * <p>
  * This is needed since calculating the element location is outside the current scope of HtmlUnit.
+ *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public interface ElementFromPointHandler {
 

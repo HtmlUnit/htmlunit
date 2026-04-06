@@ -20,6 +20,8 @@ import java.util.EventObject;
  * This is the event class for notifications about changes to the Character Data.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
+ *
  * @see CharacterDataChangeListener
  */
 public class CharacterDataChangeEvent extends EventObject {

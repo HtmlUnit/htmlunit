@@ -27,6 +27,7 @@ import org.htmlunit.SgmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlTitle extends HtmlElement {
 

@@ -1138,8 +1138,6 @@ public final class UrlUtils {
 
     /**
      * Class <code>Url</code> represents a Uniform Resource Locator.
-     *
-     * @author Martin Tamme
      */
     private static class Url {
 

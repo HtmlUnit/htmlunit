@@ -22,6 +22,7 @@ import java.net.URLStreamHandler;
  * Stream handler for JavaScript URLs.
  *
  * @author Mike Bowler
+ * @author Ronald Brill
  */
 public class Handler extends URLStreamHandler {
 

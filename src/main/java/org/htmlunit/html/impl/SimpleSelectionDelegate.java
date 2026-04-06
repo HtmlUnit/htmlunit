@@ -18,6 +18,7 @@ package org.htmlunit.html.impl;
  * Contains selection-related functionality without an associated node.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SimpleSelectionDelegate implements SelectionDelegate {
 

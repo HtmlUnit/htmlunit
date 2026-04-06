@@ -26,6 +26,7 @@ import org.apache.commons.logging.LogFactory;
  * Stream handler for data URLs.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class Handler extends URLStreamHandler {
 

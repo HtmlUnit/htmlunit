@@ -28,6 +28,7 @@ import org.apache.commons.logging.LogFactory;
  * In some cases (when parsing a html snippet), the html content is also available.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public interface HTMLParserListener {
 

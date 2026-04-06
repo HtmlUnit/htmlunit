@@ -48,6 +48,7 @@ import org.xml.sax.SAXException;
  * @author David K. Taylor
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class XmlPage extends SgmlPage {
 

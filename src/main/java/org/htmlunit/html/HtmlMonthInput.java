@@ -32,6 +32,7 @@ import org.htmlunit.util.StringUtils;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Anton Demydenko
+ * @author Ronald Brill
  */
 public class HtmlMonthInput extends HtmlInput implements LabelableElement {
 

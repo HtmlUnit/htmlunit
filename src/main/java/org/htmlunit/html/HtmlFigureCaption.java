@@ -22,6 +22,7 @@ import org.htmlunit.SgmlPage;
  * Wrapper for the HTML element "figcaption".
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlFigureCaption extends HtmlElement {
 

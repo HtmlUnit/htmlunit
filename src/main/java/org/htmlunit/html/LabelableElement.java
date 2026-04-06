@@ -19,6 +19,7 @@ package org.htmlunit.html;
  * @see <a href="https://html.spec.whatwg.org/multipage/forms.html#category-label">HTML spec</a>
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public interface LabelableElement {
 

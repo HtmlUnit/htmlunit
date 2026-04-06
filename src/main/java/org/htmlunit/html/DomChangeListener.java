@@ -19,8 +19,10 @@ import java.io.Serializable;
 /**
  * Implementations of this interface receive notifications of changes to the DOM structure.
  *
- * @author Ahmed Ashour
  * @see DomChangeEvent
+ *
+ * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public interface DomChangeListener extends Serializable {
 

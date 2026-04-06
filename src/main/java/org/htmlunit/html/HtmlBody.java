@@ -28,6 +28,7 @@ import org.htmlunit.javascript.host.event.Event;
  * @author Christian Sell
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlBody extends HtmlElement {
 

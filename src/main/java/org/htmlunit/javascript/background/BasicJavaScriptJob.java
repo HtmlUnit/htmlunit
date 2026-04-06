@@ -19,6 +19,7 @@ package org.htmlunit.javascript.background;
  *
  * @author Daniel Gredler
  * @author Amit Manjhi
+ * @author Ronald Brill
  */
 public abstract class BasicJavaScriptJob implements JavaScriptJob {
 

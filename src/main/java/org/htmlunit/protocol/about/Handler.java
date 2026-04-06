@@ -22,6 +22,7 @@ import java.net.URLStreamHandler;
  * Stream handler for "about:" URLs.
  *
  * @author Chen Jun
+ * @author Ronald Brill
  */
 public class Handler extends URLStreamHandler {
 

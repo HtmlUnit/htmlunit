@@ -21,6 +21,7 @@ import org.w3c.dom.DocumentFragment;
  * A DOM object for DocumentFragment.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class DomDocumentFragment extends DomNode implements DocumentFragment {
 

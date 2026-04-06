@@ -23,6 +23,7 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
  * A special {@link PrefixResolver} for {@link NativeFunction}s.
  *
  * @author Chuck Dumont
+ * @author Ronald Brill
  */
 public class NativeFunctionPrefixResolver implements PrefixResolver {
 

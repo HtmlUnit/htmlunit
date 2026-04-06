@@ -25,6 +25,7 @@ import org.htmlunit.SgmlPage;
  * @author Christian Sell
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlHead extends HtmlElement {
 

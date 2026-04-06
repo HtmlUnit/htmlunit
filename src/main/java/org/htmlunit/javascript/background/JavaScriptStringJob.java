@@ -19,7 +19,9 @@ import org.htmlunit.html.HtmlPage;
 
 /**
  * A {@link JavaScriptJob} created from a string of code.
+ *
  * @author Brad Clarke
+ * @author Ronald Brill
  */
 class JavaScriptStringJob extends JavaScriptExecutionJob {
 

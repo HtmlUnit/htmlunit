@@ -29,6 +29,7 @@ import org.htmlunit.javascript.HtmlUnitContextFactory;
  * Utility class containing miscellaneous {@link WebClient}-related methods.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public final class WebClientUtils {
 

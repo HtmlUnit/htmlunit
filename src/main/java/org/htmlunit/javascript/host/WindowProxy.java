@@ -22,6 +22,7 @@ import org.htmlunit.javascript.HtmlUnitScriptableProxy;
  * Proxy for a {@link Window} script object.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class WindowProxy extends HtmlUnitScriptableProxy<Window> {
 

@@ -27,6 +27,7 @@ import org.htmlunit.corejs.javascript.TopLevel;
  * Used by {@link SubtleCrypto} for AES key operations.
  *
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 final class AesKeyAlgorithm {
 

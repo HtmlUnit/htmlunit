@@ -21,6 +21,7 @@ import org.htmlunit.WebWindow;
  * A representation of an XHTML page returned from a server.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class XHtmlPage extends HtmlPage {
 

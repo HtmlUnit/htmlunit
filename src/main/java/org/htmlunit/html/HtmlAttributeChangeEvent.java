@@ -20,8 +20,10 @@ import java.util.EventObject;
  * This is the event class for notifications about changes to the attributes of the
  * HtmlElement.
  *
- * @author Ahmed Ashour
  * @see HtmlAttributeChangeListener
+ *
+ * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlAttributeChangeEvent extends EventObject {
 

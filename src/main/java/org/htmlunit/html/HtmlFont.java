@@ -27,6 +27,7 @@ import org.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlFont extends HtmlElement {
 

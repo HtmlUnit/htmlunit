@@ -27,6 +27,7 @@ import org.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlNoFrames extends HtmlElement {
 

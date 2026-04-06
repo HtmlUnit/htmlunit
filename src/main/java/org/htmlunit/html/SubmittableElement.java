@@ -21,6 +21,7 @@ import org.htmlunit.util.NameValuePair;
  *
  * @author Mike Bowler
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public interface SubmittableElement {
 

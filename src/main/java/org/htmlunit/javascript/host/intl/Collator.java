@@ -29,6 +29,7 @@ import org.htmlunit.javascript.configuration.JsxSymbolConstant;
  * A JavaScript object for Intl.Collator.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class Collator extends HtmlUnitScriptable {
