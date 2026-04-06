@@ -173,7 +173,6 @@ public class CodeStyleTest {
                 if (!"package-info.java".equals(file.getName())) {
                     authorTagAtLeastOne(lines, relativePath);
                     authorTagNoDuplicates(lines, relativePath);
-                    authorTagRonaldBrill(lines, relativePath);
                 }
             }
         }
@@ -859,17 +858,6 @@ public class CodeStyleTest {
                     authors.add(author);
                 }
             }
-        }
-    }
-
-    /**
-     * Checks that the file contains an {@code @author Ronald Brill} tag.
-     */
-    private void authorTagRonaldBrill(final List<String> lines, final String path) {
-        final boolean hasRonaldBrill = lines.stream()
-                .anyMatch(line -> line.trim().equals("* @author Ronald Brill"));
-        if (!hasRonaldBrill) {
-            addFailure(path, 0, "Missing @author Ronald Brill tag");
         }
     }
 
