@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element {@code path}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SvgPath extends SvgElement {
 

@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element {@code feFuncA}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SvgFeFuncA extends SvgElement {
 

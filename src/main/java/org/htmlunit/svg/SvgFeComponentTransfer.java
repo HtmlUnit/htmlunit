@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element {@code feComponentTransfer}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SvgFeComponentTransfer extends SvgElement {
 

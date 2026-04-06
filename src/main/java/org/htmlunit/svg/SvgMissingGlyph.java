@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element "missing-glyph".
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class SvgMissingGlyph extends SvgElement {
 

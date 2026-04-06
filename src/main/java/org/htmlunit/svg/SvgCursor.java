@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element {@code cursor}.
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class SvgCursor extends SvgElement {
 

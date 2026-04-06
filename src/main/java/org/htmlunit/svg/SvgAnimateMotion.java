@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element {@code animateMotion}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SvgAnimateMotion extends SvgElement {
 

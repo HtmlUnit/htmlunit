@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element {@code animateColor}.
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class SvgAnimateColor extends SvgElement {
 

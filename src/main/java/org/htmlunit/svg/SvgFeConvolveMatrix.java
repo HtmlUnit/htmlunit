@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element {@code feConvolveMatrix}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SvgFeConvolveMatrix extends SvgElement {
 

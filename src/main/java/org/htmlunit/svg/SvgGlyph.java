@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element {@code glyph}.
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class SvgGlyph extends SvgElement {
 

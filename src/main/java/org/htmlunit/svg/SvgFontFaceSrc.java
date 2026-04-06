@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element "font-face-src".
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class SvgFontFaceSrc extends SvgElement {
 

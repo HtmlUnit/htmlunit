@@ -24,6 +24,7 @@ import org.htmlunit.html.DomElement;
  * Parent elements of all SVG elements, and wrapper for any unknown one.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SvgElement extends DomElement {
 

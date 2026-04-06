@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element {@code switch}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SvgSwitch extends SvgElement {
 

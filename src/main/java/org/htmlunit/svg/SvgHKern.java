@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element {@code hkern}.
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class SvgHKern extends SvgElement {
 

@@ -23,6 +23,7 @@ import org.htmlunit.html.DomAttr;
  * Wrapper for the SVG element {@code altGlyphItem}.
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class SvgAltGlyphItem extends SvgElement {
 
