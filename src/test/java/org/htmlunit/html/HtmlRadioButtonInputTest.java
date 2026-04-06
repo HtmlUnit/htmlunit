@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
  * @author Marc Guillemot
  * @author Bruce Faulkner
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
 

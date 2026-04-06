@@ -38,6 +38,7 @@ import org.junit.jupiter.api.Test;
  * fix works.</p>
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class MemoryLeakTest extends SimpleWebTestCase {
 

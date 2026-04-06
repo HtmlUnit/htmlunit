@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class HTMLTextAreaElement2Test extends SimpleWebTestCase {
 

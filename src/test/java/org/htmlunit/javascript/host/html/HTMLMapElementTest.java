@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
  * Unit tests for {@link HTMLMapElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HTMLMapElementTest extends WebDriverTestCase {
 

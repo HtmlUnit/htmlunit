@@ -26,6 +26,7 @@ import org.openqa.selenium.WebElement;
  * Tests for running JavaScripts in SVG elements..
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SvgJavaScriptTest extends WebDriverTestCase {
 

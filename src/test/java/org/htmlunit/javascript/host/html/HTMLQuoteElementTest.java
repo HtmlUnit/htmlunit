@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Carsten Steul
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HTMLQuoteElementTest extends WebDriverTestCase {
 

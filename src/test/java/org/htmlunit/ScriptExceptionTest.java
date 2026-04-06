@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class ScriptExceptionTest extends SimpleWebTestCase {
 

@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class XmlPage2Test extends WebDriverTestCase {
 

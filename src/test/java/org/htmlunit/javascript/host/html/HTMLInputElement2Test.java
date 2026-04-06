@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HTMLInputElement2Test extends SimpleWebTestCase {
 

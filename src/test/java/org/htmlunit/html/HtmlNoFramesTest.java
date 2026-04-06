@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class HtmlNoFramesTest extends SimpleWebTestCase {
 

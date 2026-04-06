@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class IEConditionalCommentsTest extends WebDriverTestCase {
 

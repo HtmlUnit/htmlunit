@@ -34,6 +34,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link FalsifyingWebConnection}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
 

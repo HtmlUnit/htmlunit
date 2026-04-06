@@ -26,6 +26,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlTableCellTest extends WebDriverTestCase {
 

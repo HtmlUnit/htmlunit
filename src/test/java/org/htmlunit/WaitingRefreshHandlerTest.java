@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link WaitingRefreshHandlerTest}.
  *
  * @author Brad Clarke
+ * @author Ronald Brill
  */
 public final class WaitingRefreshHandlerTest extends SimpleWebTestCase {
 

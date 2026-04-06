@@ -32,6 +32,7 @@ import org.junit.jupiter.api.Test;
  * @author Marc Guillemot
  * @author Sudhan Moghe
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HTMLAnchorElementTest extends SimpleWebTestCase {
     private static final URL URL_GARGOYLE;

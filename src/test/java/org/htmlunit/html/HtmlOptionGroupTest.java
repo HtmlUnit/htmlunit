@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class HtmlOptionGroupTest extends SimpleWebTestCase {
 

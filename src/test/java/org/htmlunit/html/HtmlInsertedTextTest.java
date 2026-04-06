@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link HtmlInsertedText}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class HtmlInsertedTextTest extends WebDriverTestCase {
 

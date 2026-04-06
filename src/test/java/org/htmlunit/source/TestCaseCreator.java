@@ -26,6 +26,7 @@ import org.apache.commons.io.FileUtils;
  * Prints out a tiny test case, from a provided HTML file.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class TestCaseCreator {
 

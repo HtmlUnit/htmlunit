@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link HtmlTimeInput}.
  *
  * @author Anton Demydenko
+ * @author Ronald Brill
  */
 public class HtmlTimeInput2Test extends SimpleWebTestCase {
 

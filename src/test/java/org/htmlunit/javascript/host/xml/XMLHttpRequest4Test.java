@@ -34,6 +34,7 @@ import org.junit.jupiter.api.Test;
  * @author Sudhan Moghe
  * @author Thorsten Wendelmuth
  * @author Atsushi Nakagawa
+ * @author Ronald Brill
  */
 public class XMLHttpRequest4Test extends SimpleWebTestCase {
 

@@ -26,6 +26,7 @@ import org.htmlunit.javascript.configuration.JavaScriptConfigurationTest;
  * Use to generate test cases similar to the ones in the 'general' package.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class ElementTestSource {
 

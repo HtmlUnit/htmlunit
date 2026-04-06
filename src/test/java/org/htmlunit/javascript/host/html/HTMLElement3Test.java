@@ -43,6 +43,7 @@ import org.junit.jupiter.api.Test;
  * @author Sudhan Moghe
  * @author Ethan Glasser-Camp
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HTMLElement3Test extends SimpleWebTestCase {
 

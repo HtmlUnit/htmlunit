@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HTMLDocumentWriteTest extends SimpleWebTestCase {
 

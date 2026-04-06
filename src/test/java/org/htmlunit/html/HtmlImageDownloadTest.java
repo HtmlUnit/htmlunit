@@ -38,6 +38,7 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Lukas Botsch
+ * @author Ronald Brill
  */
 public class HtmlImageDownloadTest extends WebServerTestCase {
     private static final String BASE_FILE_PATH = "src/test/resources/org/htmlunit/html";

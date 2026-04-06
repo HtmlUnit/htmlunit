@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link HtmlItalic}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class HtmlItalicTest extends SimpleWebTestCase {
 

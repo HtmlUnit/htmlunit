@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 public class HtmlSpanTest extends SimpleWebTestCase {
 

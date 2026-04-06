@@ -36,6 +36,7 @@ import org.htmlunit.html.HtmlPage;
  * are defined in {@link HostClassNameTest}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class HostExtractor {
 

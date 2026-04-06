@@ -27,6 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class SvgSetTest extends WebDriverTestCase {
 

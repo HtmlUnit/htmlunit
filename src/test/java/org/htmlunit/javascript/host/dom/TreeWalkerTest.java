@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
  * @author Mike Dirolf
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class TreeWalkerTest extends WebDriverTestCase {
     private static final String CONTENT_START = DOCTYPE_HTML

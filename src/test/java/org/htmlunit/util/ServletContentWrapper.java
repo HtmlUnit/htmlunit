@@ -25,6 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * A servlet that wraps static content.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public abstract class ServletContentWrapper extends HttpServlet {
 

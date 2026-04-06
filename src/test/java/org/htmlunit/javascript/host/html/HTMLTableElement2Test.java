@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HTMLTableElement2Test extends SimpleWebTestCase {
 

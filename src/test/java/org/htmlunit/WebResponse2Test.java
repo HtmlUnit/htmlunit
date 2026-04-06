@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class WebResponse2Test extends SimpleWebTestCase {
 

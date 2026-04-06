@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link Locale}.
  *
  * @author Lai Quang Duong
+ * @author Ronald Brill
  */
 public class LocaleTest extends WebDriverTestCase {
 

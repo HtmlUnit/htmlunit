@@ -26,6 +26,7 @@ import org.htmlunit.RefreshHandler;
  *
  * @author Mike Bowler
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class LoggingRefreshHandler implements RefreshHandler {
     private final List<Object> list_;

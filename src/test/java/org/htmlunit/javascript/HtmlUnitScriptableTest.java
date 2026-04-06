@@ -32,6 +32,7 @@ import org.junit.jupiter.api.Test;
  * @author Sudhan Moghe
  * @author Mike Dirolf
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlUnitScriptableTest extends SimpleWebTestCase {
 

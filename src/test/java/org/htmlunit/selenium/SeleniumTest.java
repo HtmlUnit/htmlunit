@@ -22,6 +22,7 @@ import org.openqa.selenium.WebDriver;
  * The parent class of Selenium tests.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SeleniumTest extends WebDriverTestCase {
 

@@ -29,6 +29,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link WebConnectionWrapper}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class WebConnectionWrapperTest extends SimpleWebTestCase {
 

@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HTMLBaseElementTest extends WebDriverTestCase {
 

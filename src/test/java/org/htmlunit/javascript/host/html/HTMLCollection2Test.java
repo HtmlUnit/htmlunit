@@ -34,6 +34,7 @@ import org.junit.jupiter.api.Test;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HTMLCollection2Test extends SimpleWebTestCase {
 

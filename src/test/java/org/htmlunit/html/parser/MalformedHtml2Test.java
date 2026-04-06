@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
  * @author Marc Guillemot
  * @author Sudhan Moghe
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class MalformedHtml2Test extends SimpleWebTestCase {
 

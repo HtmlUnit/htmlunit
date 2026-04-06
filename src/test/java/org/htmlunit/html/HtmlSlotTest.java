@@ -24,6 +24,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * Tests for {@link HtmlSlot}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlSlotTest extends WebDriverTestCase {
 

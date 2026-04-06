@@ -27,6 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HTMLParagraphElementTest extends WebDriverTestCase {
 

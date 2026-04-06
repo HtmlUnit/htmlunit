@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link HtmlUnitContextFactory}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlUnitContextFactoryTest extends SimpleWebTestCase {
 

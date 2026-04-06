@@ -24,6 +24,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * Tests for {@link SgmlPage}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class SgmlPage2Test extends WebDriverTestCase {
 

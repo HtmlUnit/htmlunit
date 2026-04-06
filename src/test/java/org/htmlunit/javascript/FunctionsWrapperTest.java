@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link FunctionWrapper}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class FunctionsWrapperTest extends WebDriverTestCase {
 

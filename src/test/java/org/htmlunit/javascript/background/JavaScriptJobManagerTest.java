@@ -32,6 +32,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Brad Clarke
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class JavaScriptJobManagerTest extends SimpleWebTestCase {
     private long startTime_;

@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link HtmlRangeInput}.
  *
  * @author Anton Demydenko
+ * @author Ronald Brill
  */
 public class HtmlRangeInput2Test extends SimpleWebTestCase {
 

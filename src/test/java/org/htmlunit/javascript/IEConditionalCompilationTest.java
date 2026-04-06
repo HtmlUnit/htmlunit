@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
  * @author Marc Guillemot
  * @author Adam Doupe
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class IEConditionalCompilationTest extends WebDriverTestCase {
 

@@ -42,6 +42,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 public class HTMLParser3Test extends WebServerTestCase {
 

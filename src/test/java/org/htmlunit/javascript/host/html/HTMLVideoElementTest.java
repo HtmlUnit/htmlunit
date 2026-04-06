@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HTMLVideoElementTest extends WebDriverTestCase {
 

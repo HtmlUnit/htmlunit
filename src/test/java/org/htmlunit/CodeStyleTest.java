@@ -170,6 +170,11 @@ public class CodeStyleTest {
                 classNameUsed(lines, classNames, relativePath);
                 spaces(lines, relativePath);
                 indentation(lines, relativePath);
+                if (!"package-info.java".equals(file.getName())) {
+                    authorTagAtLeastOne(lines, relativePath);
+                    authorTagNoDuplicates(lines, relativePath);
+                    authorTagRonaldBrill(lines, relativePath);
+                }
             }
         }
     }
@@ -823,6 +828,48 @@ public class CodeStyleTest {
                 break;
 
             default:
+        }
+    }
+
+    /**
+     * Checks that the file contains at least one {@code @author} tag.
+     */
+    private void authorTagAtLeastOne(final List<String> lines, final String path) {
+        final boolean hasAuthor = lines.stream()
+                .anyMatch(line -> line.trim().startsWith("* @author"));
+        if (!hasAuthor) {
+            addFailure(path, 0, "Missing @author tag");
+        }
+    }
+
+    /**
+     * Checks that the file contains no duplicate {@code @author} tags
+     * (same author name listed more than once).
+     */
+    private void authorTagNoDuplicates(final List<String> lines, final String path) {
+        final List<String> authors = new ArrayList<>();
+        for (int i = 0; i < lines.size(); i++) {
+            final String trimmed = lines.get(i).trim();
+            if (trimmed.startsWith("* @author")) {
+                final String author = trimmed.substring("* @author".length()).trim();
+                if (authors.contains(author)) {
+                    addFailure(path, i + 1, "Duplicate @author tag: " + author);
+                }
+                else {
+                    authors.add(author);
+                }
+            }
+        }
+    }
+
+    /**
+     * Checks that the file contains an {@code @author Ronald Brill} tag.
+     */
+    private void authorTagRonaldBrill(final List<String> lines, final String path) {
+        final boolean hasRonaldBrill = lines.stream()
+                .anyMatch(line -> line.trim().equals("* @author Ronald Brill"));
+        if (!hasRonaldBrill) {
+            addFailure(path, 0, "Missing @author Ronald Brill tag");
         }
     }
 

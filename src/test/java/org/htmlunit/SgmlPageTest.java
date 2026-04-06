@@ -37,6 +37,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link SgmlPage}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class SgmlPageTest extends WebServerTestCase {
 

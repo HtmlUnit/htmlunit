@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link NicelyResynchronizingAjaxController}.
  *
  * @author Nick Kralevich
+ * @author Ronald Brill
  */
 public class NicelyResynchronizingAjaxControllerTest extends WebServerTestCase {
 

@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link ObjectInstantiationException}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class ObjectInstantiationExceptionTest {
 

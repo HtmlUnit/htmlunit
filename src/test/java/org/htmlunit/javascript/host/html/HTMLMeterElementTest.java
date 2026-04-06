@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HTMLMeterElementTest extends WebDriverTestCase {
 

@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link SVGAngle}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class SVGAngleTest extends WebDriverTestCase {
 

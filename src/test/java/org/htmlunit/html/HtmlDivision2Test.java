@@ -26,6 +26,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlDivision2Test extends WebDriverTestCase {
 

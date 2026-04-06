@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Test;
  * @author David K. Taylor
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HTMLFrameElementTest extends SimpleWebTestCase {
 

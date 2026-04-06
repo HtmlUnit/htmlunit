@@ -32,6 +32,7 @@ import org.junit.jupiter.api.Test;
  * Tests the HtmlUnitCookieStore, which is a wrapper around the CookieManager.
  *
  * @author James Phillpotts
+ * @author Ronald Brill
  */
 public class HtmlUnitCookieStoreTest {
 

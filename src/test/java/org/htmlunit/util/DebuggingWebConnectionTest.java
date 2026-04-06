@@ -35,6 +35,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link DebuggingWebConnection}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class DebuggingWebConnectionTest extends SimpleWebTestCase {
 

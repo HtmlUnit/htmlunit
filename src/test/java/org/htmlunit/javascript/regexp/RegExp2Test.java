@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Carsten Steul
+ * @author Ronald Brill
  */
 public class RegExp2Test extends SimpleWebTestCase {
 

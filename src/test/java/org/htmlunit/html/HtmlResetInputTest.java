@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Mike Bowler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlResetInputTest extends SimpleWebTestCase {
 

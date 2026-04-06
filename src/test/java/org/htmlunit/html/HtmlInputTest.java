@@ -36,6 +36,7 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author Anton Demydenko
  * @author Ronny Shapiro
+ * @author Ronald Brill
  */
 public final class HtmlInputTest extends SimpleWebTestCase {
 

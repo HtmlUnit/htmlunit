@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
  * @author Ahmed Ashour
  * @author David Gileadi
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class TextRangeTest extends WebDriverTestCase {
 

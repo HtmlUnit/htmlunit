@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link XHtmlPage}.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class XHtmlPageTest extends SimpleWebTestCase {
 

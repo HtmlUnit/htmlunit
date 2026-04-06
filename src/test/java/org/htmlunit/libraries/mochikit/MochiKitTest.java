@@ -27,7 +27,7 @@ import org.openqa.selenium.WebElement;
  *
  * @author Marc Guillemot
  * @author Frank Danek
- * @author Ronald Brill#
+ * @author Ronald Brill
  */
 public abstract class MochiKitTest extends WebDriverTestCase {
 
