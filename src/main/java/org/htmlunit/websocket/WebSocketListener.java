@@ -15,7 +15,7 @@
 package org.htmlunit.websocket;
 
 /**
- * Helper to have no direct dependency to the WebSockt client
+ * Helper to have no direct dependency to the WebSocket client
  * implementation used by HtmlUnit.
  *
  * @author Ronald Brill

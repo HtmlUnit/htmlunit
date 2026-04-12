@@ -14,6 +14,7 @@
  */
 package org.htmlunit.websocket;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.CookieHandler;
 import java.net.URI;
@@ -135,7 +136,7 @@ public final class JdkWebSocketAdapter implements WebSocketAdapter {
             }
             else {
                 throw new IllegalStateException(
-                        "Not Yet Implemented: WebSocket.send() was used to send non-string value");
+                        "Unsupported content type for WebSocket.send(): expected String or ByteBuffer");
             }
         }
         catch (final IllegalStateException e) {
@@ -150,7 +151,7 @@ public final class JdkWebSocketAdapter implements WebSocketAdapter {
      * {@inheritDoc}
      */
     @Override
-    public void closeIncommingSession() {
+    public void closeIncomingSession() {
         if (incomingSession_ != null) {
             incomingSession_.sendClose(java.net.http.WebSocket.NORMAL_CLOSURE, "").join();
         }
@@ -239,7 +240,7 @@ public final class JdkWebSocketAdapter implements WebSocketAdapter {
     private class JdkWebSocketListenerImpl implements java.net.http.WebSocket.Listener {
 
         private StringBuilder textAccumulator_;
-        private ByteBuffer binaryAccumulator_;
+        private ByteArrayOutputStream binaryAccumulator_;
 
         JdkWebSocketListenerImpl() {
             super();
@@ -274,22 +275,20 @@ public final class JdkWebSocketAdapter implements WebSocketAdapter {
         public CompletionStage<?> onBinary(final java.net.http.WebSocket webSocket,
                 final ByteBuffer data, final boolean last) {
             if (binaryAccumulator_ == null) {
-                binaryAccumulator_ = ByteBuffer.allocate(data.remaining());
-                binaryAccumulator_.put(data);
+                binaryAccumulator_ = new ByteArrayOutputStream();
+            }
+            if (data.hasArray()) {
+                binaryAccumulator_.write(data.array(),
+                        data.arrayOffset() + data.position(), data.remaining());
             }
             else {
-                final ByteBuffer newBuffer = ByteBuffer.allocate(
-                        binaryAccumulator_.position() + data.remaining());
-                binaryAccumulator_.flip();
-                newBuffer.put(binaryAccumulator_);
-                newBuffer.put(data);
-                binaryAccumulator_ = newBuffer;
+                final byte[] temp = new byte[data.remaining()];
+                data.get(temp);
+                binaryAccumulator_.write(temp, 0, temp.length);
             }
 
             if (last) {
-                binaryAccumulator_.flip();
-                final byte[] bytes = new byte[binaryAccumulator_.remaining()];
-                binaryAccumulator_.get(bytes);
+                final byte[] bytes = binaryAccumulator_.toByteArray();
                 binaryAccumulator_ = null;
                 listener_.onWebSocketBinary(bytes, 0, bytes.length);
             }
