@@ -1,0 +1,9 @@
+-d
+/tmp/test-compile
+-sourcepath
+src/main/java
+--module-path
+
+-cp
+
+src/main/java/org/htmlunit/websocket/JdkWebSocketAdapter.java

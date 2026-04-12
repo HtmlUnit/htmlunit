@@ -100,7 +100,7 @@ import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
 import org.htmlunit.util.UrlUtils;
-import org.htmlunit.websocket.JettyWebSocketAdapter.JettyWebSocketAdapterFactory;
+import org.htmlunit.websocket.JdkWebSocketAdapter.JdkWebSocketAdapterFactory;
 import org.htmlunit.websocket.WebSocketAdapter;
 import org.htmlunit.websocket.WebSocketAdapterFactory;
 import org.htmlunit.websocket.WebSocketListener;
@@ -341,7 +341,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         loadQueue_ = new ArrayList<>();
 
-        webSocketAdapterFactory_ = new JettyWebSocketAdapterFactory();
+        webSocketAdapterFactory_ = new JdkWebSocketAdapterFactory();
 
         // The window must be constructed AFTER the script engine.
         currentWindowTracker_ = new CurrentWindowTracker(this, true);

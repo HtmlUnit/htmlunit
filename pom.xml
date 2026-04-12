@@ -44,7 +44,6 @@
         <htmlunit-cssparser.version>5.0.0-SNAPSHOT</htmlunit-cssparser.version>
         <htmlunit-corejs.version>5.0.0-SNAPSHOT</htmlunit-corejs.version>
         <htmlunit-neko.version>5.0.0-SNAPSHOT</htmlunit-neko.version>
-        <htmlunit-websocketclient.version>4.21.0</htmlunit-websocketclient.version>
         <htmlunit-xpath.version>5.0.0-SNAPSHOT</htmlunit-xpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
@@ -1406,11 +1405,6 @@
             <groupId>org.htmlunit</groupId>
             <artifactId>htmlunit-csp</artifactId>
             <version>${htmlunit-csp.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.htmlunit</groupId>
-            <artifactId>htmlunit-websocket-client</artifactId>
-            <version>${htmlunit-websocketclient.version}</version>
         </dependency>
 
         <dependency>
