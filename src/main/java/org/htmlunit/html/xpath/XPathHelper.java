@@ -127,7 +127,7 @@ public final class XPathHelper {
                 list.add((T) result.str());
             }
             else {
-                throw new RuntimeException("Unproccessed " + result.getClass().getName());
+                throw new RuntimeException("Unprocessed " + result.getClass().getName());
             }
         }
         finally {
