@@ -40,12 +40,12 @@
             --add-opens org.htmlunit/org.htmlunit.util.quercus.servlet=ALL-UNNAMED
         </surefire.argLine.modules>
 
-        <htmlunitcsp.version>5.0.0-SNAPSHOT</htmlunitcsp.version>
-        <htmlunitcssparser.version>5.0.0-SNAPSHOT</htmlunitcssparser.version>
-        <htmlunitcorejs.version>5.0.0-SNAPSHOT</htmlunitcorejs.version>
-        <htmlunitneko.version>5.0.0-SNAPSHOT</htmlunitneko.version>
-        <htmlunitwebsocketclient.version>4.21.0</htmlunitwebsocketclient.version>
-        <htmlunitxpath.version>5.0.0-SNAPSHOT</htmlunitxpath.version>
+        <htmlunit-csp.version>5.0.0-SNAPSHOT</htmlunit-csp.version>
+        <htmlunit-cssparser.version>5.0.0-SNAPSHOT</htmlunit-cssparser.version>
+        <htmlunit-corejs.version>5.0.0-SNAPSHOT</htmlunit-corejs.version>
+        <htmlunit-neko.version>5.0.0-SNAPSHOT</htmlunit-neko.version>
+        <htmlunit-websocketclient.version>4.21.0</htmlunit-websocketclient.version>
+        <htmlunit-xpath.version>5.0.0-SNAPSHOT</htmlunit-xpath.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
@@ -81,6 +81,7 @@
 
         <!-- plugins -->
         <central-publishing-plugin.version>0.9.0</central-publishing-plugin.version>
+        <build-helper-plugin.version>3.6.1</build-helper-plugin.version>
         <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
         <pmd-plugin.version>3.28.0</pmd-plugin.version>
         <spotbugs-plugin.version>4.9.8.2</spotbugs-plugin.version>
@@ -100,6 +101,26 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build-helper-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>add-module-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/main/module-info</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -1364,32 +1385,32 @@
         <dependency>
             <groupId>org.htmlunit</groupId>
             <artifactId>htmlunit-core-js</artifactId>
-            <version>${htmlunitcorejs.version}</version>
+            <version>${htmlunit-corejs.version}</version>
         </dependency>
         <dependency>
             <groupId>org.htmlunit</groupId>
             <artifactId>neko-htmlunit</artifactId>
-            <version>${htmlunitneko.version}</version>
+            <version>${htmlunit-neko.version}</version>
         </dependency>
         <dependency>
             <groupId>org.htmlunit</groupId>
             <artifactId>htmlunit-cssparser</artifactId>
-            <version>${htmlunitcssparser.version}</version>
+            <version>${htmlunit-cssparser.version}</version>
         </dependency>
         <dependency>
             <groupId>org.htmlunit</groupId>
             <artifactId>htmlunit-xpath</artifactId>
-            <version>${htmlunitxpath.version}</version>
+            <version>${htmlunit-xpath.version}</version>
         </dependency>
         <dependency>
             <groupId>org.htmlunit</groupId>
             <artifactId>htmlunit-csp</artifactId>
-            <version>${htmlunitcsp.version}</version>
+            <version>${htmlunit-csp.version}</version>
         </dependency>
         <dependency>
             <groupId>org.htmlunit</groupId>
             <artifactId>htmlunit-websocket-client</artifactId>
-            <version>${htmlunitwebsocketclient.version}</version>
+            <version>${htmlunit-websocketclient.version}</version>
         </dependency>
 
         <dependency>
