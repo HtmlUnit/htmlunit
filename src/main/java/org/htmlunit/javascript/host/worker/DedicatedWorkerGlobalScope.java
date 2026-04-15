@@ -305,7 +305,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final Function handlerFunction = getEventHandler(Event.TYPE_MESSAGE);
         if (handlerFunction != null) {
             final Object[] args = {event};
-            handlerFunction.call(cx, this, this, args);
+            handlerFunction.call(cx, getParentScope(), this, args);
         }
     }
 
