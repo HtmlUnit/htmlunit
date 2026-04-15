@@ -1008,6 +1008,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             return;
         }
 
+        if (newNode instanceof DomDocumentFragment) {
+            for (final DomNode child : newNode.getChildren()) {
+                insertBefore(child);
+            }
+            return;
+        }
+
         // clean up the new node, in case it is being moved
         if (newNode.getParentNode() != null) {
             newNode.detach();
