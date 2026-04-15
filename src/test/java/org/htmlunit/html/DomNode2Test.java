@@ -167,4 +167,72 @@ public class DomNode2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(content);
     }
 
+    @Test
+    @Alerts({"before:new,old", "after:old,new",
+             "prepend:new,old", "append:old,new", "appendChild:old,new",
+             "insertBefore:new,old",
+             "replaceWith:new", "replaceChild:new", "replaceChildren:new"})
+    public void documentFragment_dissolution() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function createFragment() {\n"
+                + "  var f = document.createDocumentFragment();\n"
+                + "  var s = document.createElement('span'); s.textContent = 'new';\n"
+                + "  f.appendChild(s);\n"
+                + "  return f;\n"
+                + "}\n"
+                + "function texts(id) {\n"
+                + "  var el = document.getElementById(id);\n"
+                + "  var r = [];\n"
+                + "  for (var i = 0; i < el.children.length; i++) r.push(el.children[i].textContent);\n"
+                + "  return r.join(',');\n"
+                + "}\n"
+                + "function test() {\n"
+                + "  document.getElementById('beforeRef').before(createFragment());\n"
+                + "  log('before:' + texts('before'));\n"
+                + "\n"
+                + "  document.getElementById('afterRef').after(createFragment());\n"
+                + "  log('after:' + texts('after'));\n"
+                + "\n"
+                + "  document.getElementById('prepend').prepend(createFragment());\n"
+                + "  log('prepend:' + texts('prepend'));\n"
+                + "\n"
+                + "  document.getElementById('append').append(createFragment());\n"
+                + "  log('append:' + texts('append'));\n"
+                + "\n"
+                + "  document.getElementById('appendChild').appendChild(createFragment());\n"
+                + "  log('appendChild:' + texts('appendChild'));\n"
+                + "\n"
+                + "  document.getElementById('insertBefore')\n"
+                + "    .insertBefore(createFragment(), document.getElementById('insertBeforeRef'));\n"
+                + "  log('insertBefore:' + texts('insertBefore'));\n"
+                + "\n"
+                + "  document.getElementById('replaceWithRef').replaceWith(createFragment());\n"
+                + "  log('replaceWith:' + texts('replaceWith'));\n"
+                + "\n"
+                + "  document.getElementById('replaceChild')\n"
+                + "    .replaceChild(createFragment(), document.getElementById('replaceChildRef'));\n"
+                + "  log('replaceChild:' + texts('replaceChild'));\n"
+                + "\n"
+                + "  document.getElementById('replaceChildren').replaceChildren(createFragment());\n"
+                + "  log('replaceChildren:' + texts('replaceChildren'));\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<div id='before'><span id='beforeRef'>old</span></div>\n"
+                + "<div id='after'><span id='afterRef'>old</span></div>\n"
+                + "<div id='prepend'><span>old</span></div>\n"
+                + "<div id='append'><span>old</span></div>\n"
+                + "<div id='appendChild'><span>old</span></div>\n"
+                + "<div id='insertBefore'><span id='insertBeforeRef'>old</span></div>\n"
+                + "<div id='replaceWith'><span id='replaceWithRef'>old</span></div>\n"
+                + "<div id='replaceChild'><span id='replaceChildRef'>old</span></div>\n"
+                + "<div id='replaceChildren'><span>old</span></div>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
 }
