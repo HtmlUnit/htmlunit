@@ -336,11 +336,11 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final URL fullUrl = page.getFullyQualifiedUrl(url);
 
         workerLocation_ = new WorkerLocation(fullUrl, origin_);
-        workerLocation_.setParentScope(this);
+        workerLocation_.setParentScope(getParentScope());
         workerLocation_.setPrototype(getPrototype(workerLocation_.getClass()));
 
         workerNavigator_ = new WorkerNavigator(webClient.getBrowserVersion());
-        workerNavigator_.setParentScope(this);
+        workerNavigator_.setParentScope(getParentScope());
         workerNavigator_.setPrototype(getPrototype(workerNavigator_.getClass()));
 
         final WebRequest webRequest = new WebRequest(fullUrl);
@@ -353,9 +353,8 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final String scriptCode = response.getContentAsString();
         final AbstractJavaScriptEngine<?> javaScriptEngine = webClient.getJavaScriptEngine();
 
-        final DedicatedWorkerGlobalScope thisScope = this;
         final ContextAction<Object> action =
-                cx -> javaScriptEngine.execute(page, thisScope, scriptCode, fullUrl.toExternalForm(), 1);
+                cx -> javaScriptEngine.execute(page, getParentScope(), scriptCode, fullUrl.toExternalForm(), 1);
 
         final HtmlUnitContextFactory cf = javaScriptEngine.getContextFactory();
 

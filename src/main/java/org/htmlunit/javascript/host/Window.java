@@ -744,7 +744,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxGetter
     public External getExternal() {
         final External external = new External();
-        external.setParentScope(this);
+        external.setParentScope(getParentScope());
         external.setPrototype(getPrototype(external.getClass()));
         return external;
     }
@@ -2155,7 +2155,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxGetter({CHROME, EDGE})
     public SpeechSynthesis getSpeechSynthesis() {
         final SpeechSynthesis speechSynthesis = new SpeechSynthesis();
-        speechSynthesis.setParentScope(this);
+        speechSynthesis.setParentScope(getParentScope());
         speechSynthesis.setPrototype(getPrototype(speechSynthesis.getClass()));
         return speechSynthesis;
     }

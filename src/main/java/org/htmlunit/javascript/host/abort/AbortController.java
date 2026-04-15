@@ -36,7 +36,7 @@ public class AbortController extends HtmlUnitScriptable {
     @JsxConstructor
     public void jsConstructor() {
         signal_ = new AbortSignal();
-        signal_.setParentScope(this);
+        signal_.setParentScope(getParentScope());
         signal_.setPrototype(getPrototype(signal_.getClass()));
     }
 
