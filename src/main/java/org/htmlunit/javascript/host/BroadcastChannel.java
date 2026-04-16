@@ -155,7 +155,7 @@ public class BroadcastChannel extends EventTarget {
 
                         final MessageEvent event = new MessageEvent();
                         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", null, ports);
-                        event.setParentScope(channelWindow);
+                        event.setParentScope(channelWebWindow.getTopLevelScope());
                         event.setPrototype(channelWindow.getPrototype(event.getClass()));
 
                         final PostponedAction action =
