@@ -70,4 +70,12 @@ public class Collator extends HtmlUnitScriptable {
         format.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return format;
     }
+
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (String.class.equals(hint) || hint == null) {
+            return "[object Intl.Collator]";
+        }
+        return super.getDefaultValue(hint);
+    }
 }

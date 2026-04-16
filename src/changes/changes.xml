@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Bugfixes">
+            <action type="fix" dev="rbri">
+                Fix toString result for Intl.Collator, Intl.DateTimeFormat, Intl.NumberFormat, and Intl.v8BreakIterator.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix v8BreakIterator ctor to accept langage-region.
+            </action>
             <action type="fix" dev="Lai Quang Duong">
                 Fix DomNode.insertBefore(DomNode) to dissolve DocumentFragment into its children before insertion.
             </action>

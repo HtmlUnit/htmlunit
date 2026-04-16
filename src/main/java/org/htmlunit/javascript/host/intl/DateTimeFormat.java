@@ -324,6 +324,14 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         return Intl.supportedLocalesOf(localesArgument);
     }
 
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (String.class.equals(hint) || hint == null) {
+            return "[object Intl.DateTimeFormat]";
+        }
+        return super.getDefaultValue(hint);
+    }
+
     /**
      * Helper.
      */

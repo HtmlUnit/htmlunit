@@ -4394,6 +4394,17 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function v8BreakIterator() { [native code] }",
+            EDGE = "function v8BreakIterator() { [native code] }")
+    public void intl_v8BreakIterator() throws Exception {
+        test("Intl.v8BreakIterator");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("function isFinite() { [native code] }")
     public void isFinite() throws Exception {
         test("isFinite");

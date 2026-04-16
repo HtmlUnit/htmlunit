@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.intl;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -93,6 +94,11 @@ public class IntlTest extends WebDriverTestCase {
     @Alerts({"de",
              "function Locale() { [native code] }",
              "TypeError"})
+    @HtmlUnitNYI(
+            CHROME = {"de", "function Locale() { [native code] }", "[object Locale]"},
+            EDGE = {"de", "function Locale() { [native code] }", "[object Locale]"},
+            FF = {"de", "function Locale() { [native code] }", "[object Locale]"},
+            FF_ESR = {"de", "function Locale() { [native code] }", "[object Locale]"})
     public void localeCtor() throws Exception {
         testCtor("new Intl.Locale('de')");
     }

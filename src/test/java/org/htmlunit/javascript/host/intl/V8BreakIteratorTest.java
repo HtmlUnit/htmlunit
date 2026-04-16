@@ -64,6 +64,32 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no support",
+            CHROME = "true",
+            EDGE = "true")
+    public void v8BreakIterator2() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    if (window.Intl && window.Intl.v8BreakIterator) {\n"
+                + "      var iterator = Intl.v8BreakIterator('de-DE');\n"
+                + "      log(iterator instanceof Intl.v8BreakIterator);\n"
+                + "    } else { log('no support'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "no support",
             CHROME = {"0", "none", "0", "none", "0", "none", "4", "letter", "5", "none", "8", "letter", "9", "none",
                 "13", "letter", "14", "none", "15", "none", "19", "letter", "20", "none", "24", "letter", "25", "none",
                 "29", "letter", "30", "none", "30", "none"},

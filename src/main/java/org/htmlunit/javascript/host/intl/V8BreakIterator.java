@@ -63,11 +63,11 @@ public class V8BreakIterator extends HtmlUnitScriptable {
             final Object locales = args[0];
             if (locales instanceof NativeArray array) {
                 if (array.getLength() != 0) {
-                    locale = new Locale.Builder().setLanguage(array.get(0).toString()).build();
+                    locale = new Locale.Builder().setLanguageTag(array.get(0).toString()).build();
                 }
             }
             else if (locales instanceof String) {
-                locale = new Locale.Builder().setLanguage(locales.toString()).build();
+                locale = new Locale.Builder().setLanguageTag(locales.toString()).build();
             }
             else if (!JavaScriptEngine.isUndefined(locales)) {
                 throw JavaScriptEngine.throwAsScriptRuntimeEx(
@@ -108,7 +108,10 @@ public class V8BreakIterator extends HtmlUnitScriptable {
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        return getClassName();
+        if (String.class.equals(hint) || hint == null) {
+            return "[object Object]";
+        }
+        return super.getDefaultValue(hint);
     }
 
     /**
