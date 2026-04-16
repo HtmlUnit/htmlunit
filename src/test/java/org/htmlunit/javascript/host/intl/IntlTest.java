@@ -127,6 +127,7 @@ public class IntlTest extends WebDriverTestCase {
     public void v8BreakIterator() throws Exception {
         test("Intl.v8BreakIterator");
     }
+
     /**
      * @throws Exception if the test fails
      */
