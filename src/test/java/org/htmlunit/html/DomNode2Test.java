@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class DomNode2Test extends WebDriverTestCase {
 
@@ -34,7 +35,7 @@ public class DomNode2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"HierarchyRequestError/DOMException", "0"})
-    public void appendChild_recursive() throws Exception {
+    public void apendChild_recursive() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "<script>\n"

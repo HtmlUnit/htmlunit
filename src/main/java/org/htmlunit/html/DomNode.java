@@ -77,6 +77,7 @@ import org.xml.sax.SAXException;
  * @author Ronald Brill
  * @author Chuck Dumont
  * @author Frank Danek
+ * @author Lai Quang Duong
  */
 public abstract class DomNode implements Cloneable, Serializable, Node {
 
