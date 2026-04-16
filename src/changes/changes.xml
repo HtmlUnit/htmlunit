@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Bugfixes">
+            <action type="fix" dev="Lai Quang Duong">
+                Fix DomNode.insertBefore(DomNode) to dissolve DocumentFragment into its children before insertion.
+            </action>
             <action type="update" dev="rbri">
                 cssparser: support for unicode characters in keywords removed, this is not used in real world
                 and the parser is much simpler without
