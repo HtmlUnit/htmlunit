@@ -59,6 +59,7 @@ public class HostTestsTest {
         }
 
         set.remove("Iterator");
+        set.remove("Locale");
         set.remove("URLSearchParamsIterator");
 
         // Worker

@@ -4385,6 +4385,15 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("function Locale() { [native code] }")
+    public void intl_Locale() throws Exception {
+        test("Intl.Locale");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("function NumberFormat() { [native code] }")
     public void intl_NumberFormat() throws Exception {
         test("Intl.NumberFormat");
