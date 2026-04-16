@@ -395,6 +395,51 @@
                 </executions>
             </plugin>
             -->
+
+            <!-- eclipse support -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.10</version>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <additionalBuildcommands>
+                        <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
+                    </additionalBuildcommands>
+                    <additionalProjectnatures>
+                        <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
+                    </additionalProjectnatures>
+                    <useProjectReferences>false</useProjectReferences>
+                    <additionalConfig>
+                        <file>
+                            <name>.checkstyle</name>
+                            <content>
+<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="false">
+    <local-check-config name="HtmlUnit" location="checkstyle.xml" type="project" description="HtmlUnit">
+        <property name="checkstyle.suppressions.file" value="$${project_loc}/checkstyle_suppressions.xml"/>
+        <additional-data name="protect-config-file" value="false"/>
+    </local-check-config>
+    <fileset name="all" enabled="true" check-config-name="HtmlUnit" local="true">
+        <file-match-pattern match-pattern="^src/.*\.java$" include-pattern="true"/>
+        <file-match-pattern match-pattern="^src/.*general/huge/.*\.java$" include-pattern="false"/>
+    </fileset>
+</fileset-config>
+]]>
+                            </content>
+                        </file>
+                    </additionalConfig>
+                    <additionalConfig>
+                        <file>
+                            <name>.settings/org.eclipse.core.resources.prefs</name>
+                            <content>
+                                <![CDATA[eclipse.preferences.version=1${line.separator}encoding/<project>=${project.build.sourceEncoding}${line.separator}]]>
+                            </content>
+                        </file>
+                    </additionalConfig>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <profiles>
