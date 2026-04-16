@@ -1985,7 +1985,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             }
         }
 
-        final Window sender = (Window) scope;
+        final Window sender = (Window) ScriptableObject.getTopLevelScope(scope).getGlobalThis();
         final Window receiver = (Window) thisObj;
         final URL receiverURL = receiver.getWebWindow().getEnclosedPage().getUrl();
 
