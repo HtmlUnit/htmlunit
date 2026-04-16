@@ -35,10 +35,6 @@ public class RhinoTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "true"})
-    @HtmlUnitNYI(CHROME = {"false", "false"},
-            EDGE = {"false", "false"},
-            FF = {"false", "false"},
-            FF_ESR = {"false", "false"})
     public void isStrict_GlobalThis() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
