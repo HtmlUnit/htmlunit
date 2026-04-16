@@ -92,14 +92,14 @@ public class Intl extends HtmlUnitScriptable {
             final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, scope);
             final FunctionObject constructorFn = new FunctionObject(config.getJsConstructor().getKey(),
                     config.getJsConstructor().getValue(), scope);
-            // constructorFn.addAsConstructor(scope, prototype, ScriptableObject.DONTENUM);
+
             ScriptRuntime.setFunctionProtoAndParent(constructorFn, Context.getCurrentContext(), scope);
             constructorFn.setImmunePrototypeProperty(prototype);
             prototype.setParentScope(scope);
-            constructorFn.defineProperty(prototype, "constructor", this, ScriptableObject.DONTENUM);
+            ScriptableObject.defineProperty(prototype, "constructor", constructorFn, ScriptableObject.DONTENUM);
             constructorFn.setParentScope(scope);
 
-            defineProperty(this, prototype.getClassName(), constructorFn, ScriptableObject.DONTENUM);
+            ScriptableObject.defineProperty(this, prototype.getClassName(), constructorFn, ScriptableObject.DONTENUM);
 
             defineStaticFunctions(config, scope, constructorFn);
         }
