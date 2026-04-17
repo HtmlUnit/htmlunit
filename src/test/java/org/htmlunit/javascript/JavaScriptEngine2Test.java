@@ -1252,10 +1252,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"anonymous", "false", "false", "true"})
-    @HtmlUnitNYI(CHROME = "org.htmlunit.ScriptException: TypeError: Cannot read property \"constructor\" from null",
-            EDGE = "org.htmlunit.ScriptException: TypeError: Cannot read property \"constructor\" from null",
-            FF = "org.htmlunit.ScriptException: TypeError: Cannot read property \"constructor\" from null",
-            FF_ESR = "org.htmlunit.ScriptException: TypeError: Cannot read property \"constructor\" from null")
     public void generatorFunction() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>"
