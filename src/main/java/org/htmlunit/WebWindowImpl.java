@@ -379,11 +379,13 @@ public abstract class WebWindowImpl implements WebWindow {
     private void writeObject(final ObjectOutputStream oos) throws IOException {
         oos.defaultWriteObject();
         oos.writeObject(scriptObject_);
+        oos.writeObject(topLevelScope_);
     }
 
     private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
         ois.defaultReadObject();
         scriptObject_ = (HtmlUnitScriptable) ois.readObject();
+        topLevelScope_ = (TopLevel) ois.readObject();
     }
 
     /**
