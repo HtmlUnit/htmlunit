@@ -110,7 +110,7 @@ public class MessagePort extends EventTarget {
             final URL currentURL = page.getUrl();
             final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
             event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", w, transfer);
-            event.setParentScope(port_);
+            event.setParentScope(getParentScope());
             event.setPrototype(getPrototype(event.getClass()));
 
             final AbstractJavaScriptEngine<?> jsEngine = webWindow.getWebClient().getJavaScriptEngine();

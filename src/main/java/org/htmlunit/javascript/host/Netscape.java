@@ -27,7 +27,7 @@ public class Netscape extends HtmlUnitScriptable {
 
     Netscape(final Window window) {
         super();
-        setParentScope(window);
+        setParentScope(window.getWebWindow().getTopLevelScope());
 
         // simply put "new Object()" for property "security"
         put("security", this, JavaScriptEngine.newObject(window));

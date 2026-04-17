@@ -1438,7 +1438,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             }
 
             final Object[] args = {msg, url, Integer.valueOf(line), Integer.valueOf(column), jsError};
-            f.call(Context.getCurrentContext(), this, this, args);
+            f.call(Context.getCurrentContext(), getWebWindow().getTopLevelScope(), this, args);
         }
     }
 
