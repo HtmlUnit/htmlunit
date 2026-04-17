@@ -246,10 +246,6 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1:true", "2:false", "3:false", "4:false"})
-    @HtmlUnitNYI(CHROME = {"1:false", "2:false", "3:false", "4:false"},
-            EDGE = {"1:false", "2:false", "3:false", "4:false"},
-            FF = {"1:false", "2:false", "3:false", "4:false"},
-            FF_ESR = {"1:false", "2:false", "3:false", "4:false"})
     public void createIframeFromStrictFunction() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
