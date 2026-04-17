@@ -63,6 +63,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.SubmittableElement;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptExecutor;
 import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
@@ -868,9 +869,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final HTMLElement elem = htmlElement.getScriptableObject();
             WithScope scope = new WithScope(topLevel, elem.getOwnerDocument());
 
-            final HtmlForm enclosingForm = htmlElement.getEnclosingForm();
-            if (enclosingForm != null) {
-                scope = new WithScope(scope, enclosingForm.getScriptableObject());
+            if (htmlElement instanceof SubmittableElement) {
+                final HtmlForm enclosingForm = htmlElement.getEnclosingForm();
+                if (enclosingForm != null) {
+                    scope = new WithScope(scope, enclosingForm.getScriptableObject());
+                }
             }
 
             return new WithScope(scope, node.getScriptableObject());
