@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="5.0.0" date="April 31, 2026" description="jdk17, Bugfixes">
+        <release version="5.0.0" date="April 31, 2026" description="jdk17, Bugfixes, Chrome 147">
             <action type="fix" dev="rbri">
                 Fix toString result for Intl.Collator, Intl.DateTimeFormat, Intl.NumberFormat, and Intl.v8BreakIterator.
             </action>

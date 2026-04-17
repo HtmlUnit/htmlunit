@@ -55,13 +55,13 @@
 
         <!-- selenium -->
         <htmlunitdriver.version>5.0.0-SNAPSHOT</htmlunitdriver.version>
-        <selenium.version>4.41.0</selenium.version>
-        <selenium.devtools.artifactId>selenium-devtools-v145</selenium.devtools.artifactId>
+        <selenium.version>4.43.0</selenium.version>
+        <selenium.devtools.artifactId>selenium-devtools-v147</selenium.devtools.artifactId>
 
         <!-- test dependencies -->
         <junit.version>6.0.3</junit.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
-        <jetty.version>12.1.7</jetty.version>
+        <jetty.version>12.1.8</jetty.version>
         <quercus.version>4.0.66</quercus.version>
         <logback-classic.version>1.5.32</logback-classic.version>
         <commons-text.version>1.15.0</commons-text.version>
@@ -69,8 +69,8 @@
         <image-comparison.version>4.4.0</image-comparison.version>
         <imageio-batik.version>3.13.1</imageio-batik.version>
         <jfreechart.version>1.5.6</jfreechart.version>
-        <maven-model.version>3.9.14</maven-model.version>
-        <maven-artifact.version>3.9.14</maven-artifact.version>
+        <maven-model.version>3.9.15</maven-model.version>
+        <maven-artifact.version>3.9.15</maven-artifact.version>
 
         <!-- quality -->
         <checkstyle.version>12.3.1</checkstyle.version>

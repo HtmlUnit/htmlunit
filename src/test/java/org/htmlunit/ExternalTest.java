@@ -51,7 +51,7 @@ public class ExternalTest {
     static final String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static final String CHROME_DRIVER_ = "146.0.7680";
+    static final String CHROME_DRIVER_ = "147.0.7727";
     static final String CHROME_DRIVER_URL_ =
             "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json";
 
