@@ -23,6 +23,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -158,7 +159,7 @@ public class NodeList extends AbstractList implements Callable {
         final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
 
         final ContextAction<Object> contextAction = cx -> {
-            final Scriptable scope = getParentScope();
+            final VarScope scope = getParentScope();
 
             List<DomNode> nodes = getElements();
             final int size = nodes.size();
@@ -205,7 +206,7 @@ public class NodeList extends AbstractList implements Callable {
      * {@inheritDoc}
      */
     @Override
-    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+    public Object call(final Context cx, final VarScope scope, final Scriptable thisObj, final Object[] args) {
         if (args.length == 0) {
             throw JavaScriptEngine.reportRuntimeError("Zero arguments; need an index or a key.");
         }

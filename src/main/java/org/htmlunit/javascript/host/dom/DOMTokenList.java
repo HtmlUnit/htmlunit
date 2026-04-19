@@ -23,6 +23,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -419,7 +420,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
         final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
 
         final ContextAction<Object> contextAction = cx -> {
-            final Scriptable scope = getParentScope();
+            final VarScope scope = getParentScope();
 
             List<String> parts = split(value);
             final int size = parts.size();

@@ -28,6 +28,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
@@ -519,7 +520,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * {@inheritDoc}
      */
     @Override
-    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+    public Object call(final Context cx, final VarScope scope, final Scriptable thisObj, final Object[] args) {
         throw JavaScriptEngine.typeError("Not a function.");
     }
 
@@ -527,7 +528,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * {@inheritDoc}
      */
     @Override
-    public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
+    public Scriptable construct(final Context cx, final VarScope scope, final Object[] args) {
         throw JavaScriptEngine.typeError("Not a function.");
     }
 

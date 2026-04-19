@@ -64,6 +64,7 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.html.impl.SimpleRange;
@@ -1116,7 +1117,7 @@ public class HtmlPage extends SgmlPage {
         final String scriptCode = response.getContentAsString(scriptEncoding);
         if (null != scriptCode) {
             final AbstractJavaScriptEngine<?> javaScriptEngine = client.getJavaScriptEngine();
-            final Scriptable scope = getEnclosingWindow().getScriptableObject();
+            final VarScope scope = getEnclosingWindow().getTopLevelScope();
             final Object script = javaScriptEngine.compile(this, scope, scriptCode, url.toExternalForm(), 1);
             if (script != null && cache.cacheIfPossible(request, response, script)) {
                 // no cleanup if the response is stored inside the cache

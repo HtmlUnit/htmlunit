@@ -25,6 +25,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -171,7 +172,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
         }
 
         final Function callback = (Function) args[0];
-        final Scriptable scope = ScriptableObject.getTopLevelScope(thisObj);
+        final VarScope scope = ScriptableObject.getTopLevelScope(thisObj);
         final Context cx = Context.getCurrentContext();
         cx.enqueueMicrotask(() -> {
             try {

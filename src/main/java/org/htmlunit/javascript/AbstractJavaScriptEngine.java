@@ -16,7 +16,7 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
@@ -120,7 +120,7 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
      * @param startLine the line at which the script source starts
      * @return the result of executing the specified code
      */
-    SCRIPT compile(HtmlPage owningPage, Scriptable scope, String sourceCode, String sourceName, int startLine);
+    SCRIPT compile(HtmlPage owningPage, VarScope scope, String sourceCode, String sourceName, int startLine);
 
     /**
      * Executes the specified JavaScript code in the context of a given page.
@@ -130,7 +130,7 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
      * @param script the script to execute
      * @return the result of executing the specified code
      */
-    Object execute(HtmlPage page, Scriptable scope, SCRIPT script);
+    Object execute(HtmlPage page, VarScope scope, SCRIPT script);
 
     /**
      * Executes the specified JavaScript code in the context of a given page.
@@ -143,10 +143,10 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
      * @return the result of executing the specified code
      */
     Object execute(HtmlPage page,
-                           Scriptable scope,
-                           String sourceCode,
-                           String sourceName,
-                           int startLine);
+                    VarScope scope,
+                    String sourceCode,
+                    String sourceName,
+                    int startLine);
 
     /**
      * @return this JavaScript engine's {@link HtmlUnitContextFactory}

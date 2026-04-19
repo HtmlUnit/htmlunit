@@ -476,7 +476,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @throws IOException in case of problems
      */
     public static void applyPolyfills(final WebClient webClient, final BrowserVersion browserVersion,
-            final Context context, final Scriptable scope, final HtmlUnitScriptable scriptable) throws IOException {
+            final Context context, final VarScope scope, final HtmlUnitScriptable scriptable) throws IOException {
 
         if (webClient.getOptions().isFetchPolyfillEnabled()) {
             Polyfill.getFetchPolyfill().apply(context, scope, scriptable);
@@ -738,7 +738,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * {@inheritDoc}
      */
     @Override
-    public Script compile(final HtmlPage owningPage, final Scriptable scope, final String sourceCode,
+    public Script compile(final HtmlPage owningPage, final VarScope scope, final String sourceCode,
             final String sourceName, final int startLine) {
         WebAssert.notNull("sourceCode", sourceCode);
 
@@ -773,7 +773,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     @Override
     public Object execute(final HtmlPage page,
-                           final Scriptable scope,
+                           final VarScope scope,
                            final String sourceCode,
                            final String sourceName,
                            final int startLine) {
@@ -789,7 +789,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * {@inheritDoc}
      */
     @Override
-    public Object execute(final HtmlPage page, final Scriptable scope, final Script script) {
+    public Object execute(final HtmlPage page, final VarScope scope, final Script script) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
             return null;
@@ -826,7 +826,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final Object[] args,
             final DomNode node) {
 
-        final Scriptable scope = getScope(page, node);
+        final VarScope scope = getScope(page, node);
 
         return callFunction(page, javaScriptFunction, scope, thisObject, args);
     }
@@ -841,7 +841,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @return the function result
      */
     public Object callFunction(final HtmlPage page, final Function function,
-            final Scriptable scope, final Scriptable thisObject, final Object[] args) {
+            final VarScope scope, final Scriptable thisObject, final Object[] args) {
         if (shutdownPending_ || webClient_ == null) {
             // shutdown was already called
             return null;

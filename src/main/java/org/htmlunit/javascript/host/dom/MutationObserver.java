@@ -21,6 +21,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.CharacterDataChangeEvent;
 import org.htmlunit.html.CharacterDataChangeListener;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
@@ -132,7 +133,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
         final HtmlUnitScriptable target = event.getCharacterData().getScriptableObject();
         if (subtree_ || target == node_) {
             final MutationRecord mutationRecord = new MutationRecord();
-            final Scriptable scope = getParentScope();
+            final VarScope scope = getParentScope();
             mutationRecord.setParentScope(scope);
             mutationRecord.setPrototype(getPrototype(mutationRecord.getClass()));
 
@@ -187,7 +188,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
             final String attributeName = event.getName();
             if (attributeFilter_ == null || attributeFilter_.contains(attributeName)) {
                 final MutationRecord mutationRecord = new MutationRecord();
-                final Scriptable scope = getParentScope();
+                final VarScope scope = getParentScope();
                 mutationRecord.setParentScope(scope);
                 mutationRecord.setPrototype(getPrototype(mutationRecord.getClass()));
 

@@ -29,6 +29,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
@@ -480,7 +481,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         if (function == null) {
             return;
         }
-        final Scriptable scope = function.getParentScope();
+        final VarScope scope = function.getParentScope();
         final JavaScriptEngine engine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
         engine.callFunction(containingPage_, function, scope, this, args);
     }

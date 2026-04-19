@@ -23,6 +23,7 @@ import org.apache.commons.io.IOUtils;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 
 /**
  * Support to use polyfills for js features not implemented so far
@@ -67,7 +68,7 @@ public class Polyfill {
      * @param scope the scope to execute relative to
      * @param thisObject the value "this" should be set to
      */
-    public void apply(final Context context, final Scriptable scope, final Scriptable thisObject) {
+    public void apply(final Context context, final VarScope scope, final Scriptable thisObject) {
         if (script_ == null) {
             script_ = context.compileString(source_, url_, 0, null);
         }

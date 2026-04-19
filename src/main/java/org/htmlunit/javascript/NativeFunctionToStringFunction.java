@@ -23,6 +23,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 
 /**
  * Replacement (in fact a wrapper) for Rhino's native toString function on Function prototype
@@ -70,7 +71,7 @@ public final class NativeFunctionToStringFunction {
          * {@inheritDoc}
          */
         @Override
-        public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+        public Object call(final Context cx, final VarScope scope, final Scriptable thisObj, final Object[] args) {
             final String s = (String) super.call(cx, scope, thisObj, args);
 
             if (thisObj instanceof BaseFunction function && s.contains("[native code")) {
@@ -91,7 +92,7 @@ public final class NativeFunctionToStringFunction {
          * {@inheritDoc}
          */
         @Override
-        public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+        public Object call(final Context cx, final VarScope scope, final Scriptable thisObj, final Object[] args) {
             final String s = (String) super.call(cx, scope, thisObj, args);
 
             if (thisObj instanceof BaseFunction function && s.contains("[native code")) {

@@ -19,6 +19,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 
 /**
@@ -50,7 +51,7 @@ public class EventHandler extends BaseFunction {
      * {@inheritDoc}
      */
     @Override
-    public Object call(final Context cx, final Scriptable scope,
+    public Object call(final Context cx, final VarScope scope,
         final Scriptable thisObj, final Object[] args)
         throws JavaScriptException {
 
@@ -90,7 +91,7 @@ public class EventHandler extends BaseFunction {
         if ("toString".equals(name)) {
             return new BaseFunction() {
                 @Override
-                public Object call(final Context cx, final Scriptable scope,
+                public Object call(final Context cx, final VarScope scope,
                         final Scriptable thisObj, final Object[] args) {
                     return "function on" + eventName_ + "(event) { " + jsSnippet_ + " }";
                 }

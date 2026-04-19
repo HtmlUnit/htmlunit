@@ -685,7 +685,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
         for (final AnimationFrame animationFrame : animationFrames) {
             jsEngine.callFunction((HtmlPage) ww.getEnclosedPage(),
-                        animationFrame.callback_, this, getParentScope(), args);
+                        animationFrame.callback_, getParentScope(), this, args);
         }
         return animationFrames_.size();
     }

@@ -35,6 +35,7 @@ import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.debug.Debugger;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
@@ -303,7 +304,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      */
     @Override
     protected Object doTopCall(final Script script,
-            final Context cx, final Scriptable scope,
+            final Context cx, final VarScope scope,
             final Scriptable thisObj) {
 
         final TimeoutContext tcx = (TimeoutContext) cx;
