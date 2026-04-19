@@ -42,6 +42,7 @@ import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlButtonInput;
 import org.htmlunit.html.HtmlElement;
@@ -859,7 +860,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         /** {@inheritDoc} */
         @Override
         public Object execute(
-                final HtmlPage page, final Scriptable scope,
+                final HtmlPage page, final VarScope scope,
                 final String sourceCode, final String sourceName, final int startLine) {
             scriptExecutionCount_++;
             return super.execute(page, scope, sourceCode, sourceName, startLine);
@@ -867,14 +868,14 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         /** {@inheritDoc} */
         @Override
-        public Object execute(final HtmlPage page, final Scriptable scope, final Script script) {
+        public Object execute(final HtmlPage page, final VarScope scope, final Script script) {
             scriptExecuteScriptCount_++;
             return super.execute(page, scope, script);
         }
 
         /** {@inheritDoc} */
         @Override
-        public Script compile(final HtmlPage page, final Scriptable scope,
+        public Script compile(final HtmlPage page, final VarScope scope,
                 final String sourceCode, final String sourceName, final int startLine) {
             scriptCompileCount_++;
             return super.compile(page, scope, sourceCode, sourceName, startLine);
@@ -1029,7 +1030,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.setJavaScriptEngine(new JavaScriptEngine(client) {
             @Override
-            public Object execute(final HtmlPage htmlPage, final Scriptable scope,
+            public Object execute(final HtmlPage htmlPage, final VarScope scope,
                     final String sourceCode, final String sourceName, final int startLine) {
                 collectedScripts.add(sourceCode);
                 return null;
