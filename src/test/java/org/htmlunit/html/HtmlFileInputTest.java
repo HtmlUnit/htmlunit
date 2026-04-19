@@ -98,10 +98,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"")
-    // since 2.28
-    // there is an option for IE, for local and trusted sites IE includes the file path
-    // because we do not support any IE specific setting we do not send the filename as
-    // done by the other browsers
     public void realFile() throws Exception {
         final String htmlContent = DOCTYPE_HTML
                 + "<html>\n"

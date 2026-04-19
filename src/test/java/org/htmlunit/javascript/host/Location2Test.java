@@ -15,6 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,6 @@ import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -1268,9 +1268,27 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§a.html",
-            FF = "null",
-            FF_ESR = "null")
+    @Alerts(DEFAULT = { "1", "2", "§§URL§§a.html", "§§URL§§a.html", "§§URL§§a.html#1",
+                        "load",
+                        "1 http://localhost:22222/a.html",
+                        "2 http://localhost:22222/a.html#1",
+                        "3 http://localhost:22222/a.html#1",
+                        "load",
+                        "4 http://localhost:22222/a.html#1"},
+            FF = { "1", "2", "§§URL§§a.html", "null", "§§URL§§a.html#1",
+                   "load",
+                   "1 http://localhost:22222/a.html",
+                   "2 http://localhost:22222/a.html#1",
+                   "3 http://localhost:22222/a.html#1",
+                   "load",
+                   "4 http://localhost:22222/a.html#1"},
+            FF_ESR = { "1", "2", "§§URL§§a.html", "null", "§§URL§§a.html#1",
+                       "load",
+                       "1 http://localhost:22222/a.html",
+                       "2 http://localhost:22222/a.html#1",
+                       "3 http://localhost:22222/a.html#1",
+                       "load",
+                        "4 http://localhost:22222/a.html#1"})
     public void reloadGetHashDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1292,30 +1310,29 @@ public class Location2Test extends WebDriverTestCase {
             + "    <button onclick='log(\"4 \" + window.location.toString());' id='log'>log location</button>\n"
             + "  </body>\n"
             + "</html>";
+        expandExpectedAlertsVariables(URL_FIRST);
 
         getMockWebConnection().setDefaultResponse(html);
         final WebDriver driver = loadPage2(html, new URL(URL_FIRST + "a.html"));
-        assertEquals(1, getMockWebConnection().getRequestCount());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("reload")).click();
         // real ff seems to process the reload a bit async
         Thread.sleep(100);
-        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount());
 
         assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
-        assertEquals(URL_FIRST + "a.html", getMockWebConnection().getLastWebRequest().getUrl());
-        expandExpectedAlertsVariables(URL_FIRST);
+
+        assertEquals(getExpectedAlerts()[2], getMockWebConnection().getLastWebRequest().getUrl());
         final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         assertNull(additionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[0], "" + additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[3], "" + additionalHeaders.get(HttpHeader.REFERER));
         assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
 
-        assertEquals(URL_FIRST + "a.html#1", driver.getCurrentUrl());
+        assertEquals(getExpectedAlerts()[4], driver.getCurrentUrl());
         driver.findElement(By.id("log")).click();
 
-        verifySessionStorage2(driver, "load", "1 http://localhost:22222/a.html",
-                "2 http://localhost:22222/a.html#1", "3 http://localhost:22222/a.html#1",
-                "load", "4 http://localhost:22222/a.html#1");
+        verifySessionStorage2(driver, Arrays.copyOfRange(getExpectedAlerts(), 5, getExpectedAlerts().length));
     }
 
     /**
@@ -1408,10 +1425,12 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
-            EDGE = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
-            FF = {"3", "§§URL§§", "§§URL§§/"},
-            FF_ESR = {"3", "§§URL§§", "§§URL§§/"})
+    @Alerts(DEFAULT = {"1", "2", "3", "a.html?urlParam=urlVal",
+                       "4", "http://§§URL§§", "http://§§URL§§/second/a.html?urlParam=urlVal", "§§URL§§"},
+            FF = {"1", "2", "2", "a.html?urlParam=urlVal",
+                  "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"},
+            FF_ESR = {"1", "2", "2", "a.html?urlParam=urlVal",
+                      "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"})
     public void reloadPost() throws Exception {
         final String form = DOCTYPE_HTML
               + "<html>\n"
@@ -1436,30 +1455,22 @@ public class Location2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(html);
 
         final WebDriver driver = loadPage2(form, URL_FIRST);
-        assertEquals(1, getMockWebConnection().getRequestCount());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("enter")).click();
         if (useRealBrowser()) {
             Thread.sleep(200);
         }
-        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("link")).click();
-
-        // works only in the debugger
-        try {
-            driver.switchTo().alert().accept();
-        }
-        catch (final NoAlertPresentException e) {
-            // ignore
-        }
-        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), getMockWebConnection().getRequestCount());
 
         assertEquals(HttpMethod.POST, getMockWebConnection().getLastWebRequest().getHttpMethod());
-        assertEquals(URL_SECOND + "a.html?urlParam=urlVal", getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(URL_SECOND + getExpectedAlerts()[3], getMockWebConnection().getLastWebRequest().getUrl());
 
         final List<NameValuePair> params = getMockWebConnection().getLastWebRequest().getRequestParameters();
-        assertEquals(4, params.size());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[4]), params.size());
 
         assertEquals("urlParam", params.get(0).getName());
         assertEquals("urlVal", params.get(0).getValue());
@@ -1472,11 +1483,11 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals("sub", params.get(3).getName());
         assertEquals("ok", params.get(3).getValue());
 
-        expandExpectedAlertsVariables("http://localhost:" + PORT);
+        expandExpectedAlertsVariables("localhost:" + PORT);
         final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[1], additionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[2], additionalHeaders.get(HttpHeader.REFERER));
-        assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
+        assertEquals(getExpectedAlerts()[5], additionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[6], additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[7], additionalHeaders.get(HttpHeader.HOST));
     }
 
     /**

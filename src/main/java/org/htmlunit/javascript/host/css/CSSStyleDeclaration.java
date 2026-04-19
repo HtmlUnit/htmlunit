@@ -15,8 +15,6 @@
 package org.htmlunit.javascript.host.css;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
-import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT;
-import static org.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static org.htmlunit.css.CssStyleSheet.AUTO;
 import static org.htmlunit.css.CssStyleSheet.FIXED;
@@ -967,8 +965,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxSetter
     public void setLetterSpacing(final Object letterSpacing) {
-        setStyleLengthAttribute(Definition.LETTER_SPACING.getAttributeName(), letterSpacing, "",
-                false, getBrowserVersion().hasFeature(JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT), null);
+        setStyleLengthAttribute(Definition.LETTER_SPACING.getAttributeName(), letterSpacing, "", false, true, null);
     }
 
     /**
@@ -1774,7 +1771,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxSetter
     public void setWordSpacing(final Object wordSpacing) {
         setStyleLengthAttribute(Definition.WORD_SPACING.getAttributeName(), wordSpacing, "",
-                false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), null);
+                false, true, null);
     }
 
     /**
@@ -1880,11 +1877,11 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         }
         else if (Definition.LETTER_SPACING.getAttributeName().equals(name)) {
             setStyleLengthAttribute(Definition.LETTER_SPACING.getAttributeName(), value, imp,
-                    false, getBrowserVersion().hasFeature(JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT), null);
+                    false, true, null);
         }
         else if (Definition.WORD_SPACING.getAttributeName().equals(name)) {
             setStyleLengthAttribute(Definition.WORD_SPACING.getAttributeName(), value, imp,
-                    false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), null);
+                    false, true, null);
         }
         else if (Definition.VERTICAL_ALIGN.getAttributeName().equals(name)) {
             setStyleLengthAttribute(Definition.VERTICAL_ALIGN.getAttributeName(), value, imp, false, true, null);

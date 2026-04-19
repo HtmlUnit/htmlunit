@@ -1168,7 +1168,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4.03333px",
             CHROME = "3.726px",
-            EDGE = "3.78px")
+            EDGE = "3.786px")
     @HtmlUnitNYI(CHROME = "4px",
             EDGE =  "4px",
             FF = "4px",
@@ -1231,7 +1231,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4.03333px",
             CHROME = "3.726px",
-            EDGE = "3.78px")
+            EDGE = "3.786px")
     @HtmlUnitNYI(CHROME = "4px",
             EDGE =  "4px",
             FF = "4px",
@@ -1326,7 +1326,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4.03333px",
             CHROME = "3.726px",
-            EDGE = "3.78px")
+            EDGE = "3.786px")
     @HtmlUnitNYI(CHROME = "4px",
             EDGE =  "4px",
             FF = "4px",
@@ -1357,7 +1357,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4.03333px",
             CHROME = "3.726px",
-            EDGE = "3.78px")
+            EDGE = "3.786px")
     @HtmlUnitNYI(CHROME = "4px",
             EDGE =  "4px",
             FF = "4px",
@@ -1452,7 +1452,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4.03333px",
             CHROME = "3.726px",
-            EDGE = "3.78px")
+            EDGE = "3.786px")
     @HtmlUnitNYI(CHROME = "4px",
             EDGE =  "4px",
             FF = "4px",
@@ -1483,7 +1483,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4.03333px",
             CHROME = "3.726px",
-            EDGE = "3.78px")
+            EDGE = "3.786px")
     @HtmlUnitNYI(CHROME = "4px",
             EDGE =  "4px",
             FF = "4px",
@@ -1578,7 +1578,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4.03333px",
             CHROME = "3.726px",
-            EDGE = "3.78px")
+            EDGE = "3.786px")
     @HtmlUnitNYI(CHROME = "4px",
             EDGE =  "4px",
             FF = "4px",
@@ -1609,7 +1609,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4.03333px",
             CHROME = "3.726px",
-            EDGE = "3.78px")
+            EDGE = "3.786px")
     @HtmlUnitNYI(CHROME = "4px",
             EDGE =  "4px",
             FF = "4px",

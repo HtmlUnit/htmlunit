@@ -889,9 +889,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "false", "true", "true", "false", "false", "true", "true"},
-            FF = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"},
-            FF_ESR = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"})
+    @Alerts({"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"})
     public void willValidate() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"

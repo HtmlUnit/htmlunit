@@ -122,7 +122,10 @@ accentColor
 alignContent
 alignItems
 alignSelf
+alignmentBaseline
 all
+anchorName
+anchorScope
 animation
 animationComposition
 animationDelay
@@ -149,6 +152,7 @@ backgroundPositionX
 backgroundPositionY
 backgroundRepeat
 backgroundSize
+baselineShift
 baselineSource
 blockSize
 border
@@ -442,6 +446,12 @@ placeItems
 placeSelf
 pointerEvents
 position
+positionAnchor
+positionArea
+positionTry
+positionTryFallbacks
+positionTryOrder
+positionVisibility
 printColorAdjust
 quotes
 r

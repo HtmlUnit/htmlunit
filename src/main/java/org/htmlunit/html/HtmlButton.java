@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY;
 import static org.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
 
 import java.io.IOException;
@@ -357,8 +356,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
             return false;
         }
 
-        return !isDisabled()
-                && (hasFeature(HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly());
+        return !isDisabled();
     }
 
     /**

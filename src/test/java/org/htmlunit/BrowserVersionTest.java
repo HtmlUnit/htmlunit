@@ -40,8 +40,8 @@ public class BrowserVersionTest {
     public void getBrowserVersionNumeric() {
         assertEquals(146, BrowserVersion.FIREFOX.getBrowserVersionNumeric());
         assertEquals(140, BrowserVersion.FIREFOX_ESR.getBrowserVersionNumeric());
-        assertEquals(143, BrowserVersion.CHROME.getBrowserVersionNumeric());
-        assertEquals(143, BrowserVersion.EDGE.getBrowserVersionNumeric());
+        assertEquals(147, BrowserVersion.CHROME.getBrowserVersionNumeric());
+        assertEquals(147, BrowserVersion.EDGE.getBrowserVersionNumeric());
     }
 
     /**

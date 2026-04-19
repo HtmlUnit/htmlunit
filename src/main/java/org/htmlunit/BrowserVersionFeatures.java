@@ -106,10 +106,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     HTMLBASEFONT_END_TAG_FORBIDDEN,
 
-    /** willValidate does not check the readonly property. */
-    @BrowserFeature({FF, FF_ESR})
-    HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY,
-
     /** HtmlCollection.namedItem searches by id first. */
     @BrowserFeature({CHROME, EDGE})
     HTMLCOLLECTION_NAMED_ITEM_ID_FIRST,
@@ -383,14 +379,6 @@ public enum BrowserVersionFeatures {
     /** Whether to add to the storage even preserved words. */
     @BrowserFeature({FF, FF_ESR})
     JS_STORAGE_PRESERVED_INCLUDED,
-
-    /** Indicates letterSpacing support percent values. */
-    @BrowserFeature({FF, FF_ESR})
-    JS_STYLE_LETTER_SPACING_ACCEPTS_PERCENT,
-
-    /** Indicates wordSpacing support percent values. */
-    @BrowserFeature({FF, FF_ESR})
-    JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT,
 
     /** window.getComputedStyle works with pseudo selectors without colon in front. */
     @BrowserFeature({CHROME, EDGE})

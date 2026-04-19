@@ -93,6 +93,10 @@ abstract class BrowserConfiguration {
         return new ChromeAndEdgeNotIterable(defaultValue);
     }
 
+    static BrowserConfiguration ffAuto() {
+        return new FF("auto");
+    }
+
     static BrowserConfiguration ffNone() {
         return new FF("none");
     }
