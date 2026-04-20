@@ -65,7 +65,7 @@ import org.htmlunit.util.MimeType;
 public final class BrowserVersion implements Serializable {
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(146, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(149, "FF");
 
     private static final int FIREFOX_ESR_NUMERIC = 140;
 
@@ -151,7 +151,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.SEC_FETCH_USER,
             HttpHeader.PRIORITY};
         FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-        FIREFOX.acceptLanguageHeader_ = "en-US,en;q=0.5";
+        FIREFOX.acceptLanguageHeader_ = "en-US,en;q=0.9";
         FIREFOX.xmlHttpRequestAcceptHeader_ = "*/*";
         FIREFOX.imgAcceptHeader_ = "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5";
         FIREFOX.cssAcceptHeader_ = "text/css,*/*;q=0.1";
@@ -236,7 +236,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT_ENCODING,
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.COOKIE};
-        EDGE.acceptLanguageHeader_ = "en-US,en;q=0.9";
+        EDGE.acceptLanguageHeader_ = "en-US,en;q=0.5";
         EDGE.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
                                             + "q=0.9,image/avif,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.7";
@@ -245,8 +245,8 @@ public final class BrowserVersion implements Serializable {
         EDGE.scriptAcceptHeader_ = "*/*";
 
         EDGE.secClientHintUserAgentHeader_ = "\"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Not A(Brand\";v=\"24\"";
+                + EDGE.getBrowserVersionNumeric() + "\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\""
+                + EDGE.getBrowserVersionNumeric() + "\"";
 
         EDGE.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,

@@ -1290,6 +1290,8 @@ public class Location2Test extends WebDriverTestCase {
                        "load",
                         "4 http://localhost:22222/a.html#1"})
     public void reloadGetHashDetails() throws Exception {
+        shutDownAll();
+
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "  <head>\n"
@@ -1550,14 +1552,14 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "ancestorOrigins,assign,hash,host,hostname,href,origin,"
                     + "pathname,port,protocol,reload,replace,search,toString",
-            FF = "assign,hash,host,hostname,href,origin,"
-               + "pathname,port,protocol,reload,replace,search,toString",
             FF_ESR = "assign,hash,host,hostname,href,origin,"
-                   + "pathname,port,protocol,reload,replace,search,toString")
+                    + "pathname,port,protocol,reload,replace,search,toString")
     @HtmlUnitNYI(CHROME = "assign,hash,host,hostname,href,origin,"
-                        + "pathname,port,protocol,reload,replace,search,toString",
+                    + "pathname,port,protocol,reload,replace,search,toString",
                  EDGE = "assign,hash,host,hostname,href,origin,"
-                      + "pathname,port,protocol,reload,replace,search,toString")
+                    + "pathname,port,protocol,reload,replace,search,toString",
+                 FF = "assign,hash,host,hostname,href,origin,"
+                    + "pathname,port,protocol,reload,replace,search,toString")
     public void keys() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head></head>\n"

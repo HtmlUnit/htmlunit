@@ -15,6 +15,7 @@
 package org.htmlunit.html;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.Collections;
 
 import org.htmlunit.WebDriverTestCase;
@@ -41,7 +42,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_MetaTag_DefaultRefreshHandler() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=§§URL§§\">");
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL=§§URL§§\">");
@@ -51,7 +52,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_MetaTag_caseSensitivity() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; Url=§§URL§§\">");
     }
@@ -61,7 +62,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_MetaTag_spaceSeparator() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0 Url=§§URL§§\">");
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0\nUrl=§§URL§§\">");
@@ -73,7 +74,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_MetaTag_commaSeparator() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0,Url=§§URL§§\">");
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0, Url=§§URL§§\">");
@@ -83,7 +84,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"first", "1"})
+    @Alerts({"first§", "1"})
     public void refresh_MetaTag_noSeparator() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0Url=§§URL§§\">");
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0§§URL§§\">");
@@ -96,7 +97,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_MetaTag_no_url_label() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;§§URL§§\">");
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; §§URL§§\">");
@@ -108,11 +109,11 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"wrong", "2", "§§URL§§abcd=§§URL§§second/"})
-    @HtmlUnitNYI(CHROME = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
-            EDGE = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
-            FF = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
-            FF_ESR = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"})
+    @Alerts({"Error 400 Ambiguous URI empty segment", "1", "§§URL§§"})
+    @HtmlUnitNYI(CHROME = {"wrong§", "2", "§§URL§§abcd=§§URL1§§second/"},
+            EDGE = {"wrong§", "2", "§§URL§§abcd=§§URL1§§second/"},
+            FF = {"wrong§", "2", "§§URL§§abcd=§§URL1§§second/"},
+            FF_ESR = {"wrong§", "2", "§§URL§§abcd=§§URL1§§second/"})
     public void refresh_MetaTag_wrong_url_label() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;abcd=§§URL§§\">");
         testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; abcd=§§URL§§\">");
@@ -138,7 +139,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_MetaTag_Quoted() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='0;URL=\"§§URL§§\"'>");
     }
@@ -148,7 +149,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_MetaTag_PartlyQuoted() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT=\"0;URL='§§URL§§\">");
     }
@@ -159,7 +160,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_MetaTag_Whitespace() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='0  ;  URL=§§URL§§'>");
     }
@@ -170,7 +171,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_MetaTag_Double() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='1.2  ;  URL=§§URL§§'>");
     }
@@ -179,11 +180,11 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"wrong", "2", "§§URL§§2;URL=§§URL§§second/"})
-    @HtmlUnitNYI(CHROME = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            EDGE = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            FF = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            FF_ESR = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"})
+    @Alerts({"Error 400 Ambiguous URI empty segment", "1", "§§URL§§"})
+    @HtmlUnitNYI(CHROME = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            EDGE = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            FF = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            FF_ESR = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"})
     public void refresh_MetaTag_DoubleComma() throws Exception {
         testRefresh_MetaTag("<META HTTP-EQUIV='Refresh' CONTENT='1,2;URL=§§URL§§'>");
     }
@@ -214,7 +215,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
         if (useRealBrowser()) {
             Thread.sleep(DEFAULT_WAIT_TIME.multipliedBy(3).toMillis());
         }
-        verifyTitle2(DEFAULT_WAIT_TIME, driver, expectedAlerts[0]);
+        verifyTitle(DEFAULT_WAIT_TIME, driver, expectedAlerts[0]);
         assertEquals(Integer.parseInt(expectedAlerts[1]), getMockWebConnection().getRequestCount() - count);
         if (expectedAlerts.length > 2) {
             assertEquals(expectedAlerts[2], getMockWebConnection().getLastWebRequest().getUrl().toString());
@@ -225,7 +226,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_HttpResponseHeader_DefaultRefreshHandler() throws Exception {
         testRefresh_HttpResponseHeader("0;URL=§§URL§§");
         testRefresh_HttpResponseHeader("0; URL=§§URL§§");
@@ -235,7 +236,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_HttpResponseHeader_caseSensitivity() throws Exception {
         testRefresh_HttpResponseHeader("0; Url=§§URL§§");
     }
@@ -244,7 +245,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_HttpResponseHeader_spaceSeparator() throws Exception {
         testRefresh_HttpResponseHeader("0 Url=§§URL§§");
         testRefresh_HttpResponseHeader("0\nUrl=§§URL§§");
@@ -256,7 +257,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_HttpResponseHeader_commaSeparator() throws Exception {
         testRefresh_HttpResponseHeader("0,Url=§§URL§§");
         testRefresh_HttpResponseHeader("0, Url=§§URL§§");
@@ -266,7 +267,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"first", "1"})
+    @Alerts({"first§", "1"})
     public void refresh_HttpResponseHeader_noSeparator() throws Exception {
         testRefresh_HttpResponseHeader("0Url=§§URL§§");
         testRefresh_HttpResponseHeader("0§§URL§§");
@@ -279,7 +280,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_HttpResponseHeader_no_url_label() throws Exception {
         testRefresh_HttpResponseHeader("0;§§URL§§");
         testRefresh_HttpResponseHeader("0; §§URL§§");
@@ -291,11 +292,11 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"wrong", "2", "§§URL§§abcd=§§URL§§second/"})
-    @HtmlUnitNYI(CHROME = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
-            EDGE = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
-            FF = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"},
-            FF_ESR = {"wrong", "2", "§§URL§§abcd=§§URL1§§second/"})
+    @Alerts({"Error 400 Ambiguous URI empty segment", "1", "§§URL§§"})
+    @HtmlUnitNYI(CHROME = {"wrong§", "2", "§§URL§§abcd=§§URL1§§second/"},
+            EDGE = {"wrong§", "2", "§§URL§§abcd=§§URL1§§second/"},
+            FF = {"wrong§", "2", "§§URL§§abcd=§§URL1§§second/"},
+            FF_ESR = {"wrong§", "2", "§§URL§§abcd=§§URL1§§second/"})
     public void refresh_HttpResponseHeader_wrong_url_label() throws Exception {
         testRefresh_HttpResponseHeader("0;abcd=§§URL§§");
         testRefresh_HttpResponseHeader("0; abcd=§§URL§§");
@@ -321,7 +322,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_HttpResponseHeader_Quoted() throws Exception {
         testRefresh_HttpResponseHeader("0;URL=\"§§URL§§\"");
     }
@@ -331,7 +332,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_HttpResponseHeader_PartlyQuoted() throws Exception {
         testRefresh_HttpResponseHeader("0;URL='§§URL§§");
     }
@@ -342,7 +343,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_HttpResponseHeader_Whitespace() throws Exception {
         testRefresh_HttpResponseHeader("0  ;  URL=§§URL§§");
     }
@@ -351,7 +352,7 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"second", "2", "§§URL§§second/"})
+    @Alerts({"second§", "2", "§§URL§§second/"})
     public void refresh_HttpResponseHeader_Double() throws Exception {
         testRefresh_HttpResponseHeader("1.2  ;  URL=§§URL§§");
     }
@@ -360,11 +361,11 @@ public class HtmlPage6Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"wrong", "2", "§§URL§§2;URL=§§URL§§second/"})
-    @HtmlUnitNYI(CHROME = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            EDGE = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            FF = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"},
-            FF_ESR = {"wrong", "2", "§§URL§§2;URL=§§URL1§§second/"})
+    @Alerts({"Error 400 Ambiguous URI empty segment", "1", "§§URL§§"})
+    @HtmlUnitNYI(CHROME = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            EDGE = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            FF = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"},
+            FF_ESR = {"wrong§", "2", "§§URL§§2;URL=§§URL1§§second/"})
     public void refresh_HttpResponseHeader_DoubleComma() throws Exception {
         testRefresh_HttpResponseHeader("1,2;URL=§§URL§§");
     }
@@ -396,10 +397,33 @@ public class HtmlPage6Test extends WebDriverTestCase {
         if (useRealBrowser()) {
             Thread.sleep(DEFAULT_WAIT_TIME.multipliedBy(3).toMillis());
         }
-        verifyTitle2(DEFAULT_WAIT_TIME, driver, expectedAlerts[0]);
+
+        // verifyTitle2(DEFAULT_WAIT_TIME, driver, expectedAlerts[0]);
+        verifyTitle(DEFAULT_WAIT_TIME, driver, expectedAlerts[0]);
+
         assertEquals(Integer.parseInt(expectedAlerts[1]), getMockWebConnection().getRequestCount() - count);
         if (expectedAlerts.length > 2) {
             assertEquals(expectedAlerts[2], getMockWebConnection().getLastWebRequest().getUrl().toString());
         }
     }
+
+    private final WebDriver verifyTitle(final Duration maxWaitTime, final WebDriver driver,
+            final String expectedTitle) throws Exception {
+        final long maxWait = System.currentTimeMillis() + maxWaitTime.toMillis();
+
+        while (System.currentTimeMillis() < maxWait) {
+            try {
+                final String title = driver.getTitle();
+                assertEquals(expectedTitle, title);
+                return driver;
+            }
+            catch (final AssertionError e) {
+                // ignore and wait
+            }
+        }
+
+        assertEquals(expectedTitle, driver.getTitle());
+        return driver;
+    }
+
 }

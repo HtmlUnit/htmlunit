@@ -7,7 +7,16 @@
     </properties>
 
     <body>
-        <release version="5.0.0" date="April 31, 2026" description="jdk17, Bugfixes, Chrome 147">
+        <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 149, Chrome 147, Bugfixes">
+            <action type="fix" dev="rbri">
+                XMLHttpRequest adds the origin header to patch requests.
+            </action>
+            <action type="update" dev="rbri">
+                ChromeEdgeFF: document.createElement tagName character validation adjusted.
+            </action>
+            <action type="update" dev="rbri">
+                ChromeEdge: willValidate returns true for readonly buttons.
+            </action>
             <action type="fix" dev="rbri">
                 Fix toString result for Intl.Collator, Intl.DateTimeFormat, Intl.NumberFormat, and Intl.v8BreakIterator.
             </action>
