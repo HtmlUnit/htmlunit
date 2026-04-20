@@ -9,6 +9,9 @@
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 149, Chrome 147, Bugfixes">
             <action type="fix" dev="rbri">
+                Input type image returns false for willValidate.
+            </action>
+            <action type="fix" dev="rbri">
                 XMLHttpRequest adds the origin header to patch requests.
             </action>
             <action type="update" dev="rbri">

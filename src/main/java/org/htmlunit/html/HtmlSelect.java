@@ -14,8 +14,6 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -737,7 +735,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public boolean willValidate() {
-        return !isDisabled() && (hasFeature(HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly());
+        return !isDisabled();
     }
 
     /**

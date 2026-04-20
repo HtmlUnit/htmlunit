@@ -190,6 +190,14 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
      * {@inheritDoc}
      */
     @Override
+    public boolean willValidate() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected boolean isRequiredSupported() {
         return false;
     }

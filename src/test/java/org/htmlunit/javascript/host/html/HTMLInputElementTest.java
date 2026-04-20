@@ -2463,6 +2463,221 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
+        willValidate("");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false", "false", "false", "false"})
+    public void willValidateButton() throws Exception {
+        willValidate("type='button'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateCheckbox() throws Exception {
+        willValidate("type='checkbox'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateColor() throws Exception {
+        willValidate("type='color'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateDate() throws Exception {
+        willValidate("type='date'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateDatetime() throws Exception {
+        willValidate("type='datetime'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateDatetimelocal() throws Exception {
+        willValidate("type='datetime-local'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateEmail() throws Exception {
+        willValidate("type='email'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateFile() throws Exception {
+        willValidate("type='file'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false", "false", "false", "false"})
+    public void willValidateHidden() throws Exception {
+        willValidate("type='hidden'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "false", "false", "false", "false"},
+            FF = {"true", "false", "true", "false", "true"},
+            FF_ESR = {"true", "false", "true", "false", "true"})
+    @HtmlUnitNYI(FF = {"false", "false", "false", "false", "false"},
+            FF_ESR = {"false", "false", "false", "false", "false"})
+    public void willValidateImage() throws Exception {
+        willValidate("type='image'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateMonth() throws Exception {
+        willValidate("type='month'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateNumber() throws Exception {
+        willValidate("type='number'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidatePassword() throws Exception {
+        willValidate("type='password'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateRadio() throws Exception {
+        willValidate("type='radio'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateRange() throws Exception {
+        willValidate("type='range'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false", "false", "false", "false"})
+    public void willValidateReset() throws Exception {
+        willValidate("type='reset'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateSearch() throws Exception {
+        willValidate("type='search'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateSubmit() throws Exception {
+        willValidate("type='submit'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateTel() throws Exception {
+        willValidate("type='tel'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateText() throws Exception {
+        willValidate("type='text'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateTime() throws Exception {
+        willValidate("type='time'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateUrl() throws Exception {
+        willValidate("type='url'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidateWeek() throws Exception {
+        willValidate("type='week'");
+    }
+
+    private void willValidate(final String type) throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
                 + "  <script>\n"
@@ -2478,11 +2693,11 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "  <form>\n"
-                + "    <input id='i1'>\n"
-                + "    <input id='i2' disabled>\n"
-                + "    <input id='i3' hidden>\n"
-                + "    <input id='i4' readonly>\n"
-                + "    <input id='i5' style='display: none'>\n"
+                + "    <input id='i1' " + type + ">\n"
+                + "    <input id='i2' " + type + "disabled>\n"
+                + "    <input id='i3' " + type + "hidden>\n"
+                + "    <input id='i4' " + type + "readonly>\n"
+                + "    <input id='i5' " + type + "style='display: none'>\n"
                 + "  </form>\n"
                 + "</body></html>";
 
