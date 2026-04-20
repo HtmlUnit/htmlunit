@@ -95,6 +95,9 @@ public class NumberFormat extends HtmlUnitScriptable {
         commonFormats.put("ar-YE", "\u066c\u066b\u0660");
 
         FF_FORMATS_.putAll(commonFormats);
+        FF_FORMATS_.put("de-CH", "'");
+        FF_FORMATS_.put("it-CH", "'");
+
         FF_ESR_FORMATS_.putAll(commonFormats);
 
         commonFormats.put("be", ",.");

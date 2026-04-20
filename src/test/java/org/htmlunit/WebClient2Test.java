@@ -193,7 +193,7 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "en-US,en;q=0.9",
-            FF = "en-US,en;q=0.5",
+            FF = "en-US,en;q=0.9",
             FF_ESR = "en-US,en;q=0.5")
     public void acceptLanguage() throws Exception {
         final String html = DOCTYPE_HTML + "<html><body></body></html>";

@@ -334,14 +334,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"left", "right", "center", "justify", "bottom", "middle",
                        "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
-            FF = {"left", "right", "middle", "justify", "bottom", "middle",
-                  "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             FF_ESR = {"left", "right", "middle", "justify", "bottom", "middle",
                       "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""})
-    @HtmlUnitNYI(FF = {"left", "right", "center", "justify", "bottom", "middle",
-                       "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
-            FF_ESR = {"left", "right", "center", "justify", "bottom", "middle",
-                      "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""})
+    @HtmlUnitNYI(FF_ESR = {"left", "right", "center", "justify", "bottom", "middle",
+                           "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""})
     public void getAlign() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"
@@ -376,14 +372,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "center", "justify",
                        "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
-            FF = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
-                  "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
             FF_ESR = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
                       "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"})
-    @HtmlUnitNYI(FF = {"CenTer", "8", "foo", "left", "right", "center", "justify",
-                       "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
-            FF_ESR = {"CenTer", "8", "foo", "left", "right", "center", "justify",
-                      "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"})
+    @HtmlUnitNYI(FF_ESR = {"CenTer", "8", "foo", "left", "right", "center", "justify",
+                           "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"})
     public void setAlign() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body>\n"

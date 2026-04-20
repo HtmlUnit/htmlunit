@@ -1227,7 +1227,10 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"32 commands supported", "not supported: foo, 123"})
-    @BuggyWebDriver({"31 commands supported", "not supported: Paste, foo, 123"})
+    @BuggyWebDriver(
+            CHROME = {"31 commands supported", "not supported: Paste, foo, 123"},
+            EDGE = {"31 commands supported", "not supported: Paste, foo, 123"},
+            FF_ESR = {"31 commands supported", "not supported: Paste, foo, 123"})
     public void queryCommandSupported_common() throws Exception {
         final String[] commands = {"BackColor", "Bold",
             "Copy", "CreateLink", "Cut", "Delete",
