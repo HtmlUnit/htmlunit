@@ -606,12 +606,22 @@ public class Document extends Node {
 
         // but I have no idea what the browsers are doing
         // the following code is a wild guess that might be good enough for the moment
+
+        // April 2026
+        // looks like the browsers using a more simple approach now
+        // see
+        //   org.htmlunit.javascript.host.dom.DocumentTest.documentCreateElementValidTagNames()
+        //   org.htmlunit.javascript.host.dom.DocumentTest.documentCreateElementValidTagNames1000()
+        //   org.htmlunit.javascript.host.dom.DocumentTest.documentCreateElementValidTagNames2000()
+        //   org.htmlunit.javascript.host.dom.DocumentTest.documentCreateElementValidTagNames3000()
+        //   org.htmlunit.javascript.host.dom.DocumentTest.documentCreateElementValidTagNames4000()
+
         final String tagNameString = JavaScriptEngine.toString(tagName);
         if (tagNameString.length() > 0) {
             final int firstChar = tagNameString.charAt(0);
-            if (!(isLetter(firstChar)
-                    || ':' == firstChar
-                    || '_' == firstChar)) {
+            if (firstChar < 128
+                    && !Character.isLetter(firstChar)
+                    && firstChar != ':' && firstChar != '_') {
                 if (LOG.isInfoEnabled()) {
                     LOG.info("createElement: Provided string '" + tagNameString + "' contains an invalid character");
                 }
@@ -620,23 +630,29 @@ public class Document extends Node {
                         "createElement: Provided string '" + tagNameString + "' contains an invalid character",
                         org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
             }
+
             final int length = tagNameString.length();
             for (int i = 1; i < length; i++) {
                 final int c = tagNameString.charAt(i);
-                if (!(Character.isLetterOrDigit(c)
-                        || ':' == c
-                        || '_' == c
-                        || '-' == c
-                        || '.' == c)) {
-                    if (LOG.isInfoEnabled()) {
-                        LOG.info("createElement: Provided string '"
-                                    + tagNameString + "' contains an invalid character");
+                if (c < 128) {
+                    if (c == 0
+                            || c == 9
+                            || c == 10
+                            || c == 12
+                            || c == 13
+                            || c == ' '
+                            || c == '/'
+                            || c == '>') {
+                        if (LOG.isInfoEnabled()) {
+                            LOG.info("createElement: Provided string '"
+                                        + tagNameString + "' contains an invalid character");
+                        }
+                        throw JavaScriptEngine.asJavaScriptException(
+                                getWindow(),
+                                "createElement: Provided string '" + tagNameString
+                                    + "' contains an invalid character",
+                                org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
                     }
-                    throw JavaScriptEngine.asJavaScriptException(
-                            getWindow(),
-                            "createElement: Provided string '" + tagNameString
-                                + "' contains an invalid character",
-                            org.htmlunit.javascript.host.dom.DOMException.INVALID_CHARACTER_ERR);
                 }
             }
         }
@@ -675,15 +691,6 @@ public class Document extends Node {
             }
         }
         return jsElement;
-    }
-
-    // our version of the Character.isLetter() without MODIFIER_LETTER
-    private static boolean isLetter(final int codePoint) {
-        return ((((1 << Character.UPPERCASE_LETTER)
-                    | (1 << Character.LOWERCASE_LETTER)
-                    | (1 << Character.TITLECASE_LETTER)
-                    | (1 << Character.OTHER_LETTER)
-                ) >> Character.getType(codePoint)) & 1) != 0;
     }
 
     /**
