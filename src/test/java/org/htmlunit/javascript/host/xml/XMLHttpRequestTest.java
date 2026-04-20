@@ -1472,11 +1472,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"§§URL§§/", "null", "null"})
-    @HtmlUnitNYI(CHROME = {"§§URL§§/foo.xml", "null", "null"},
-            EDGE = {"§§URL§§/foo.xml", "null", "null"},
-            FF = {"§§URL§§/foo.xml", "null", "null"},
-            FF_ESR = {"§§URL§§/foo.xml", "null", "null"})
+    @Alerts({"§§URL§§/foo.xml", "§§URL§§", "null"})
     public void originHeaderPatch() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><script>\n"

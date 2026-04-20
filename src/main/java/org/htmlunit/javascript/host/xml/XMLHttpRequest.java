@@ -715,7 +715,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             else {
                 isSameOrigin_ = UrlUtils.isSameOrigin(pageUrl, fullUrl);
                 final boolean alwaysAddOrigin = HttpMethod.GET != request.getHttpMethod()
-                                                && HttpMethod.PATCH != request.getHttpMethod()
                                                 && HttpMethod.HEAD != request.getHttpMethod();
                 if (alwaysAddOrigin || !isSameOrigin_) {
                     final StringBuilder origin = new StringBuilder().append(pageUrl.getProtocol()).append("://")
