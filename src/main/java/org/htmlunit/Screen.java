@@ -14,6 +14,8 @@
  */
 package org.htmlunit;
 
+import static org.htmlunit.BrowserVersionFeatures.COLOR_DEPHT_32;
+
 import java.io.Serializable;
 
 /**
@@ -31,6 +33,8 @@ public class Screen implements Serializable {
     private final int screenHeight_;
     private final int screenWidth_;
 
+    private final int colorDepth_;
+
     /**
      * Creates an instance.
      * @param webClient the client this belongs to
@@ -39,6 +43,13 @@ public class Screen implements Serializable {
         super();
         screenHeight_ = webClient.getOptions().getScreenHeight();
         screenWidth_ =  webClient.getOptions().getScreenWidth();
+
+        if (webClient.getBrowserVersion().hasFeature(COLOR_DEPHT_32)) {
+            colorDepth_ = 32;
+        }
+        else {
+            colorDepth_ = 24;
+        }
     }
 
     /**
@@ -105,7 +116,7 @@ public class Screen implements Serializable {
      * @return the {@code colorDepth} property
      */
     public int getColorDepth() {
-        return 24;
+        return colorDepth_;
     }
 
     /**
@@ -180,7 +191,7 @@ public class Screen implements Serializable {
      * @return the {@code pixelDepth} property
      */
     public int getPixelDepth() {
-        return 24;
+        return colorDepth_;
     }
 
     /**

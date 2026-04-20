@@ -38,6 +38,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     ANCHOR_SEND_PING_REQUEST,
 
+    /** Screen colorDepth is 32 instead of 24. */
+    @BrowserFeature({CHROME, EDGE})
+    COLOR_DEPHT_32,
+
     /** Background image is 'initial'. */
     @BrowserFeature({CHROME, EDGE})
     CSS_BACKGROUND_INITIAL,
@@ -155,10 +159,6 @@ public enum BrowserVersionFeatures {
     /** If the type is present for a link only use if type is text/css. */
     @BrowserFeature({CHROME, EDGE})
     HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,
-
-    /** willValidate does not check the readonly property. */
-    @BrowserFeature({FF, FF_ESR})
-    HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY,
 
     /** Should org.htmlunit.javascript.host.html.HTMLTrackElement#isEndTagForbidden(). */
     @BrowserFeature({FF, FF_ESR})
