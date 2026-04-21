@@ -1347,7 +1347,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param arrayLike the backend
      * @return the new NativeArrayIterator
      */
-    public static Scriptable newArrayIteratorTypeKeys(final Scriptable scope, final Scriptable arrayLike) {
+    public static Scriptable newArrayIteratorTypeKeys(final VarScope scope, final Scriptable arrayLike) {
         return new NativeArrayIterator(scope, arrayLike, NativeArrayIterator.ARRAY_ITERATOR_TYPE.KEYS);
     }
 
@@ -1360,7 +1360,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param arrayLike the backend
      * @return the new NativeArrayIterator
      */
-    public static Scriptable newArrayIteratorTypeValues(final Scriptable scope, final Scriptable arrayLike) {
+    public static Scriptable newArrayIteratorTypeValues(final VarScope scope, final Scriptable arrayLike) {
         return new NativeArrayIterator(scope, arrayLike, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
     }
 
@@ -1373,7 +1373,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param arrayLike the backend
      * @return the new NativeArrayIterator
      */
-    public static Scriptable newArrayIteratorTypeEntries(final Scriptable scope, final Scriptable arrayLike) {
+    public static Scriptable newArrayIteratorTypeEntries(final VarScope scope, final Scriptable arrayLike) {
         return new NativeArrayIterator(scope, arrayLike, NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
     }
 
