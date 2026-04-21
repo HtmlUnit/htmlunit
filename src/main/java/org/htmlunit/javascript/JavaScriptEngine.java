@@ -75,11 +75,13 @@ import org.htmlunit.javascript.configuration.ProxyAutoConfigJavaScriptConfigurat
 import org.htmlunit.javascript.host.ConsoleCustom;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.WindowOrWorkerGlobalScope;
 import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLImageElement;
 import org.htmlunit.javascript.host.html.HTMLOptionElement;
 import org.htmlunit.javascript.host.intl.Intl;
+import org.htmlunit.javascript.host.worker.WorkerGlobalScope;
 import org.htmlunit.javascript.host.xml.FormData;
 import org.htmlunit.javascript.polyfill.Polyfill;
 import org.htmlunit.util.StringUtils;
@@ -1286,7 +1288,14 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public static RhinoException asJavaScriptException(final HtmlUnitScriptable scriptable, final String message, final int type) {
         final DOMException domException = new DOMException(message, type);
         domException.setParentScope(scriptable.getParentScope());
-        domException.setPrototype(scriptable.getWindow().getPrototype(DOMException.class));
+
+        final WindowOrWorkerGlobalScope wow = HtmlUnitScriptable.getWindowOrWorkerGlobalScope(scriptable);
+        if (wow instanceof Window window) {
+            domException.setPrototype(window.getPrototype(DOMException.class));
+        }
+        else if (wow instanceof WorkerGlobalScope w) {
+            domException.setPrototype(w.getPrototype(DOMException.class));
+        }
 
         final EcmaError helper = ScriptRuntime.syntaxError("helper");
         String fileName = helper.sourceName();

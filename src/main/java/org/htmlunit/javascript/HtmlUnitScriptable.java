@@ -38,6 +38,7 @@ import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.WindowOrWorkerGlobalScope;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLUnknownElement;
 
@@ -337,6 +338,19 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
             return window;
         }
         throw new RuntimeException("Unable to find window associated with " + s);
+    }
+
+    protected static WindowOrWorkerGlobalScope getWindowOrWorkerGlobalScope(
+                        final Scriptable s) throws RuntimeException {
+        if (s instanceof WindowOrWorkerGlobalScope wow) {
+            return wow;
+        }
+
+        final TopLevel topLevel = ScriptableObject.getTopLevelScope(s);
+        if (topLevel.getGlobalThis() instanceof WindowOrWorkerGlobalScope wow) {
+            return wow;
+        }
+        throw new RuntimeException("Unable to find WindowOrWorkerGlobalScope associated with " + s);
     }
 
     /**
