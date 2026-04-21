@@ -236,7 +236,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT_ENCODING,
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.COOKIE};
-        EDGE.acceptLanguageHeader_ = "en-US,en;q=0.5";
+        EDGE.acceptLanguageHeader_ = "en-US,en;q=0.9";
         EDGE.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
                                             + "q=0.9,image/avif,image/webp,image/apng,*/*;"
                                             + "q=0.8,application/signed-exchange;v=b3;q=0.7";
