@@ -434,7 +434,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         console.defineFunctionProperties(scope, new String[] {"timeStamp"}, ConsoleCustom.class, ScriptableObject.DONTENUM);
 
         // remove some objects, that Rhino defines in top scope but that we don't want
-        deleteProperties(globalThis, "Continuation", "StopIteration", "uneval", "global");
+        deleteProperties(globalThis, "Continuation", "StopIteration", "uneval", "global", "__GeneratorFunction");
 
         // Rhino defines too many methods for us, particularly since implementation of ECMAScript5
         final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, "String");
