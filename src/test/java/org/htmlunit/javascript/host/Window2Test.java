@@ -984,6 +984,8 @@ public class Window2Test extends WebDriverTestCase {
             EDGE = {"true", "0", "137", "true", "true", "24"},
             FF = {"true", "0", "94", "true", "true", "16"},
             FF_ESR = {"true", "0", "94", "true", "true", "16"})
+    @HtmlUnitNYI(CHROME = {"true", "0", "147", "true", "true", "16"},
+            EDGE = {"true", "0", "138", "true", "true", "24"})
     public void heightsAndWidthsQuirks() throws Exception {
         final String html =
             "<html><body onload='test()'><script>\n"
@@ -1047,6 +1049,7 @@ public class Window2Test extends WebDriverTestCase {
             EDGE = {"true", "1234"},
             FF = {"true", "1234"},
             FF_ESR = {"true", "1234"})
+    @HtmlUnitNYI(CHROME = {"true", "1234"})
     public void setOuterWidth() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body onload='test()'><script>\n"
@@ -1069,6 +1072,7 @@ public class Window2Test extends WebDriverTestCase {
             EDGE = {"true", "1234"},
             FF = {"true", "1234"},
             FF_ESR = {"true", "1234"})
+    @HtmlUnitNYI(CHROME = {"true", "1234"})
     public void setOuterHeight() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><body onload='test()'><script>\n"

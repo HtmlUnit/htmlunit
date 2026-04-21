@@ -154,7 +154,14 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     msgEvent.setParentScope(scope);
                     msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
                     if (originSet_) {
-                        msgEvent.setOrigin(getUrl());
+                        try {
+                            URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
+                            originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
+                            msgEvent.setOrigin(originUrl.toExternalForm());
+                        }
+                        catch (final MalformedURLException e) {
+                            // ignore
+                        }
                     }
                     msgEvent.setSrcElement(WebSocket.this);
                     fire(msgEvent);
@@ -172,7 +179,14 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     msgEvent.setParentScope(scope);
                     msgEvent.setPrototype(getPrototype(msgEvent.getClass()));
                     if (originSet_) {
-                        msgEvent.setOrigin(getUrl());
+                        try {
+                            URL originUrl = UrlUtils.toUrlUnsafe(getUrl());
+                            originUrl = UrlUtils.getUrlWithoutPathRefQuery(originUrl);
+                            msgEvent.setOrigin(originUrl.toExternalForm());
+                        }
+                        catch (final MalformedURLException e) {
+                            // ignore
+                        }
                     }
                     msgEvent.setSrcElement(WebSocket.this);
                     fire(msgEvent);
