@@ -17885,7 +17885,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "arrayBuffer(),bytes(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
             FF = "arrayBuffer(),bytes(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
             FF_ESR = "arrayBuffer(),bytes(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]")
-    @HtmlUnitNYI(FF = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
+    @HtmlUnitNYI(CHROME = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
+            EDGE = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
+            FF = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]",
             FF_ESR = "arrayBuffer(),constructor(),size[GCE],slice(),stream(),text(),type[GCE]")
     public void blob() throws Exception {
         testString("", "new Blob([1, 2], { type: \"text/html\" })");
