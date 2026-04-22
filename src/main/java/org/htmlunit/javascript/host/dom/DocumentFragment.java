@@ -21,6 +21,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
@@ -70,7 +71,7 @@ public class DocumentFragment extends Node {
      * @param function the function
      */
     @JsxFunction
-    public static void append(final Context context, final Scriptable scope,
+    public static void append(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.append(context, thisObj, args, function);
     }
@@ -85,7 +86,7 @@ public class DocumentFragment extends Node {
      * @param function the function
      */
     @JsxFunction
-    public static void prepend(final Context context, final Scriptable scope,
+    public static void prepend(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.prepend(context, thisObj, args, function);
     }
@@ -100,7 +101,7 @@ public class DocumentFragment extends Node {
      * @param function the function
      */
     @JsxFunction
-    public static void replaceChildren(final Context context, final Scriptable scope,
+    public static void replaceChildren(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.replaceChildren(context, thisObj, args, function);
     }
@@ -115,7 +116,7 @@ public class DocumentFragment extends Node {
      * @param function the function
      */
     @JsxFunction({CHROME, EDGE, FF})
-    public static void moveBefore(final Context context, final Scriptable scope,
+    public static void moveBefore(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.moveBefore(context, scope, thisObj, args, function);
     }

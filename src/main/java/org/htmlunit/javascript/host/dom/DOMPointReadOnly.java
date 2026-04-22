@@ -18,6 +18,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -71,7 +72,7 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static DOMPointReadOnly jsConstructor(final Context cx, final Scriptable scope,
+    public static DOMPointReadOnly jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final DOMPointReadOnly point = new DOMPointReadOnly(0, 0, 0, 1);
@@ -79,7 +80,7 @@ public class DOMPointReadOnly extends HtmlUnitScriptable {
         return point;
     }
 
-    protected void init(final Object[] args, final Scriptable scope, final Function ctorObj) {
+    protected void init(final Object[] args, final VarScope scope, final Function ctorObj) {
         setParentScope(scope);
         setPrototype(((FunctionObject) ctorObj).getClassPrototype());
 

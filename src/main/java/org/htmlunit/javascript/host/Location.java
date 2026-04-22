@@ -31,8 +31,8 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -158,7 +158,7 @@ public class Location extends HtmlUnitScriptable {
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static Location jsConstructor(final Context cx, final Scriptable scope,
+    public static Location jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final Location location = new Location();
@@ -177,7 +177,7 @@ public class Location extends HtmlUnitScriptable {
      * @param window the window that this location belongs to
      * @param page the page that will become the enclosing page
      */
-    public void initialize(final Scriptable scope, final Window window, final Page page) {
+    public void initialize(final VarScope scope, final Window window, final Page page) {
         final int attributes = ScriptableObject.PERMANENT | ScriptableObject.READONLY;
 
         FunctionObject functionObject = new FunctionObject(METHOD_ASSIGN.getName(), METHOD_ASSIGN, scope);

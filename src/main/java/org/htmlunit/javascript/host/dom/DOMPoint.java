@@ -16,7 +16,7 @@ package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
@@ -41,7 +41,7 @@ public class DOMPoint extends DOMPointReadOnly {
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static DOMPoint jsConstructor(final Context cx, final Scriptable scope,
+    public static DOMPoint jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final DOMPoint point = new DOMPoint();

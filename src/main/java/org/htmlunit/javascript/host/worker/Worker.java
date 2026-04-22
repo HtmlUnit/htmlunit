@@ -18,6 +18,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -49,7 +50,7 @@ public class Worker extends EventTarget {
         workerScope_ = null;
     }
 
-    private Worker(final Context cx, final Scriptable scope,
+    private Worker(final Context cx, final VarScope scope,
                     final Window owningWindow, final String url,
                     final Scriptable options) throws Exception {
         super();
@@ -77,7 +78,7 @@ public class Worker extends EventTarget {
      * @throws Exception in case of problem
      */
     @JsxConstructor
-    public static Worker jsConstructor(final Context cx, final Scriptable scope,
+    public static Worker jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) throws Exception {
         if (args.length < 1 || args.length > 2) {
             throw JavaScriptEngine.reportRuntimeError(

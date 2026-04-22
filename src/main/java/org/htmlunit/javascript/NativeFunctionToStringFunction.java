@@ -40,7 +40,7 @@ public final class NativeFunctionToStringFunction {
      * @param scope the scope
      * @param browserVersion the simulated browser
      */
-    public static void installFix(final Scriptable scope, final BrowserVersion browserVersion) {
+    public static void installFix(final VarScope scope, final BrowserVersion browserVersion) {
         if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_COMPACT)) {
             final ScriptableObject fnPrototype =
                     (ScriptableObject) ScriptableObject.getClassPrototype(scope, "Function");

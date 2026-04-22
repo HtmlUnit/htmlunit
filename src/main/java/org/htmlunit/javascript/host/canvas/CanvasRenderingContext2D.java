@@ -22,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -242,7 +243,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @param function the function
      */
     @JsxFunction
-    public static void clip(final Context context, final Scriptable scope,
+    public static void clip(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof CanvasRenderingContext2D canvas)) {
             throw JavaScriptEngine.reportRuntimeError(
@@ -295,7 +296,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @return the {@code ImageData} object
      */
     @JsxFunction
-    public static ImageData createImageData(final Context context, final Scriptable scope,
+    public static ImageData createImageData(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof CanvasRenderingContext2D canvas)) {
             throw JavaScriptEngine.reportRuntimeError(

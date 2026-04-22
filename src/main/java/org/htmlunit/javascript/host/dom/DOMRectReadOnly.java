@@ -18,6 +18,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -73,7 +74,7 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static DOMRectReadOnly jsConstructor(final Context cx, final Scriptable scope,
+    public static DOMRectReadOnly jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final DOMRectReadOnly rect = new DOMRectReadOnly(0, 0, 0, 0);
@@ -81,7 +82,7 @@ public class DOMRectReadOnly extends HtmlUnitScriptable {
         return rect;
     }
 
-    protected void init(final Object[] args, final Scriptable scope, final Function ctorObj) {
+    protected void init(final Object[] args, final VarScope scope, final Function ctorObj) {
         setParentScope(scope);
         setPrototype(((FunctionObject) ctorObj).getClassPrototype());
 

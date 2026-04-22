@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -74,7 +75,7 @@ public class DataTransferItemList extends HtmlUnitScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536782.aspx">MSDN documentation</a>
      */
     @JsxFunction
-    public static DataTransferItem add(final Context context, final Scriptable scope,
+    public static DataTransferItem add(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         final DataTransferItemList itemList = (DataTransferItemList) thisObj;
         if (args.length == 1) {

@@ -19,6 +19,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeFloat32Array;
 import org.htmlunit.corejs.javascript.typedarrays.NativeFloat64Array;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -98,7 +99,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static DOMMatrixReadOnly jsConstructor(final Context cx, final Scriptable scope,
+    public static DOMMatrixReadOnly jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final DOMMatrixReadOnly matrix = new DOMMatrixReadOnly();
@@ -106,7 +107,7 @@ public class DOMMatrixReadOnly extends HtmlUnitScriptable {
         return matrix;
     }
 
-    protected void init(final Object[] args, final Scriptable scope, final Function ctorObj) {
+    protected void init(final Object[] args, final VarScope scope, final Function ctorObj) {
         setParentScope(scope);
         setPrototype(((FunctionObject) ctorObj).getClassPrototype());
 

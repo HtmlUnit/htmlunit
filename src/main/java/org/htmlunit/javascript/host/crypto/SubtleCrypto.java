@@ -50,6 +50,7 @@ import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -503,7 +504,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             final String algorithm = resolveAlgorithmName(keyGenParams);
             ensureAlgorithmIsSupported("generateKey", algorithm);
 
-            final Scriptable scope = keyGenParams.getParentScope();
+            final VarScope scope = keyGenParams.getParentScope();
 
             switch (algorithm) {
                 case "RSASSA-PKCS1-v1_5":
@@ -591,7 +592,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * private gets {decrypt,sign,unwrapKey,deriveBits,deriveKey}.
      */
     private Scriptable createKeyPair(final KeyPair keyPair, final Scriptable algoObj,
-            final boolean isExtractable, final List<String> allUsages, final Scriptable scope) {
+            final boolean isExtractable, final List<String> allUsages, final VarScope scope) {
         final Set<String> publicUsageSet = Set.of("encrypt", "verify", "wrapKey");
         final Set<String> privateUsageSet = Set.of("decrypt", "sign", "unwrapKey", "deriveBits", "deriveKey");
 

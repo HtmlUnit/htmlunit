@@ -22,6 +22,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -56,7 +57,7 @@ public class BroadcastChannel extends EventTarget {
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static BroadcastChannel jsConstructor(final Context cx, final Scriptable scope,
+    public static BroadcastChannel jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         if (args.length < 1 || JavaScriptEngine.isUndefined(args[0])) {
             throw JavaScriptEngine.typeError("BroadcastChannel constructor requires a channel name argument");

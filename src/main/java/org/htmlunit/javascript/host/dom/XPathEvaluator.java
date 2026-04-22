@@ -19,6 +19,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -119,7 +120,7 @@ public class XPathEvaluator extends HtmlUnitScriptable {
      * @return a XPathExpression representing the compiled form of the XPath expression.
      */
     @JsxFunction
-    public static XPathExpression createExpression(final Context context, final Scriptable scope,
+    public static XPathExpression createExpression(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (args.length < 1) {
             throw JavaScriptEngine.reportRuntimeError("Missing 'expression' parameter");

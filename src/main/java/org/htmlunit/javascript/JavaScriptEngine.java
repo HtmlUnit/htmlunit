@@ -375,7 +375,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     private static void addAsConstructorAndAlias(final FunctionObject function,
-            final Scriptable scope,
+            final VarScope scope,
             final HtmlUnitScriptable destination,
             final Scriptable prototype,
             final ClassConfiguration config) {
@@ -398,7 +398,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
     }
 
-    private static void additionalCtor(final Scriptable scope, final Window window, final Scriptable proto,
+    private static void additionalCtor(final VarScope scope, final Window window, final Scriptable proto,
             final Method ctorMethod, final String prop, final String clazzName) throws Exception {
         final FunctionObject function = new FunctionObject(prop, ctorMethod, scope);
         final Object prototypeProperty = ScriptableObject.getProperty(window, clazzName);
@@ -489,7 +489,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
     }
 
-    private static void defineConstructor(final Scriptable scope,
+    private static void defineConstructor(final VarScope scope,
             final Scriptable prototype, final ScriptableObject constructor) {
         constructor.setParentScope(scope);
         try {
@@ -538,7 +538,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param className the class for which properties should be removed
      * @param properties the properties to remove
      */
-    private static void removePrototypeProperties(final Scriptable scope, final String className,
+    private static void removePrototypeProperties(final VarScope scope, final String className,
             final String... properties) {
         final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, className);
         for (final String property : properties) {
@@ -1415,7 +1415,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param elements the initial elements..
      * @return the new Uint8Array
      */
-    public static NativeUint8Array newUint8Array(final Scriptable scope, final byte[] elements) {
+    public static NativeUint8Array newUint8Array(final VarScope scope, final byte[] elements) {
         final NativeArrayBuffer arrayBuffer = new NativeArrayBuffer(elements.length);
         ScriptRuntime.setBuiltinProtoAndParent(arrayBuffer, scope, TopLevel.Builtins.ArrayBuffer);
         System.arraycopy(elements, 0, arrayBuffer.getBuffer(), 0, elements.length);

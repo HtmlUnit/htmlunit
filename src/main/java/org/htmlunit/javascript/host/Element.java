@@ -39,6 +39,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.ElementCssStyleDeclaration;
@@ -858,7 +859,7 @@ public class Element extends Node {
      * @param function the function
      */
     @JsxFunction({CHROME, EDGE, FF})
-    public static void moveBefore(final Context context, final Scriptable scope,
+    public static void moveBefore(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.moveBefore(context, scope, thisObj, args, function);
     }
@@ -1556,7 +1557,7 @@ public class Element extends Node {
      * @param function the function
      */
     @JsxFunction
-    public static void before(final Context context, final Scriptable scope,
+    public static void before(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.before(context, thisObj, args, function);
     }
@@ -1571,7 +1572,7 @@ public class Element extends Node {
      * @param function the function
      */
     @JsxFunction
-    public static void after(final Context context, final Scriptable scope,
+    public static void after(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.after(context, thisObj, args, function);
     }
@@ -1585,7 +1586,7 @@ public class Element extends Node {
      * @param function the function
      */
     @JsxFunction
-    public static void replaceWith(final Context context, final Scriptable scope,
+    public static void replaceWith(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         Node.replaceWith(context, thisObj, args, function);
     }
@@ -1600,7 +1601,7 @@ public class Element extends Node {
      * @return the value
      */
     @JsxFunction
-    public static boolean matches(final Context context, final Scriptable scope,
+    public static boolean matches(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
             throw JavaScriptEngine.typeError("Illegal invocation");
@@ -1630,7 +1631,7 @@ public class Element extends Node {
      * @return the value
      */
     @JsxFunction({FF, FF_ESR})
-    public static boolean mozMatchesSelector(final Context context, final Scriptable scope,
+    public static boolean mozMatchesSelector(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return matches(context, scope, thisObj, args, function);
     }
@@ -1645,7 +1646,7 @@ public class Element extends Node {
      * @return the value
      */
     @JsxFunction
-    public static boolean webkitMatchesSelector(final Context context, final Scriptable scope,
+    public static boolean webkitMatchesSelector(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return matches(context, scope, thisObj, args, function);
     }
@@ -1661,7 +1662,7 @@ public class Element extends Node {
      * @return the found element or null
      */
     @JsxFunction
-    public static Element closest(final Context context, final Scriptable scope,
+    public static Element closest(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
             throw JavaScriptEngine.typeError("Illegal invocation");
@@ -1730,7 +1731,7 @@ public class Element extends Node {
      * @param function the function
      */
     @JsxFunction
-    public static void append(final Context context, final Scriptable scope,
+    public static void append(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
             throw JavaScriptEngine.typeError("Illegal invocation");
@@ -1750,7 +1751,7 @@ public class Element extends Node {
      * @param function the function
      */
     @JsxFunction
-    public static void prepend(final Context context, final Scriptable scope,
+    public static void prepend(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
             throw JavaScriptEngine.typeError("Illegal invocation");
@@ -1770,7 +1771,7 @@ public class Element extends Node {
      * @param function the function
      */
     @JsxFunction
-    public static void replaceChildren(final Context context, final Scriptable scope,
+    public static void replaceChildren(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
             throw JavaScriptEngine.typeError("Illegal invocation");

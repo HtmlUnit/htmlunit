@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
@@ -99,7 +100,7 @@ final class EcKeyAlgorithm {
      * @param scope the JS scope for prototype/parent setup
      * @return the JS algorithm object
      */
-    Scriptable toScriptableObject(final Scriptable scope) {
+    Scriptable toScriptableObject(final VarScope scope) {
         final Scriptable algorithm = JavaScriptEngine.newObject(scope);
         ScriptableObject.putProperty(algorithm, "name", getName());
         ScriptableObject.putProperty(algorithm, "namedCurve", getNamedCurve());

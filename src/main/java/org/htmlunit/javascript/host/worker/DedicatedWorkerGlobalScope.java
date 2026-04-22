@@ -35,6 +35,7 @@ import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.TopLevel;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
@@ -319,7 +320,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
      * @throws IOException in case of problem loading/executing the scripts
      */
     @JsxFunction
-    public static void importScripts(final Context cx, final Scriptable scope,
+    public static void importScripts(final Context cx, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function funObj) throws IOException {
         final DedicatedWorkerGlobalScope workerScope = (DedicatedWorkerGlobalScope) thisObj;
 
@@ -383,7 +384,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
      * @return the id of the created timer
      */
     @JsxFunction
-    public static Object setTimeout(final Context context, final Scriptable scope,
+    public static Object setTimeout(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setTimeout(context,
                 ((DedicatedWorkerGlobalScope) thisObj).owningWindow_, args, function);
@@ -402,7 +403,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
      * @return the id of the created interval
      */
     @JsxFunction
-    public static Object setInterval(final Context context, final Scriptable scope,
+    public static Object setInterval(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setInterval(context,
                 ((DedicatedWorkerGlobalScope) thisObj).owningWindow_, args, function);

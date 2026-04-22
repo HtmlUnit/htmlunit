@@ -16,7 +16,7 @@ package org.htmlunit.javascript.host.dom;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxConstructorAlias;
@@ -44,7 +44,7 @@ public class DOMMatrix extends DOMMatrixReadOnly {
      */
     @JsxConstructor
     @JsxConstructorAlias(alias = "WebKitCSSMatrix")
-    public static DOMMatrix jsConstructor(final Context cx, final Scriptable scope,
+    public static DOMMatrix jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
 
         final DOMMatrix matrix = new DOMMatrix();

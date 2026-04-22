@@ -66,6 +66,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Slot;
 import org.htmlunit.corejs.javascript.TopLevel;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.DomElement;
@@ -227,7 +228,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
+    public static Scriptable jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         throw JavaScriptEngine.typeError("Illegal constructor");
     }
@@ -489,7 +490,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the id of the created timer
      */
     @JsxFunction
-    public static Object setTimeout(final Context context, final Scriptable scope,
+    public static Object setTimeout(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setTimeout(context, thisObj, args, function);
     }
@@ -507,7 +508,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return undefined
      */
     @JsxFunction
-    public static Object queueMicrotask(final Context context, final Scriptable scope,
+    public static Object queueMicrotask(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.queueMicrotask(thisObj, args);
     }
@@ -525,7 +526,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the id of the created interval
      */
     @JsxFunction
-    public static Object setInterval(final Context context, final Scriptable scope,
+    public static Object setInterval(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setInterval(context, thisObj, args, function);
     }
@@ -1958,7 +1959,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @JsxFunction
-    public static void postMessage(final Context context, final Scriptable scope,
+    public static void postMessage(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function funObj) {
 
         // support the structured clone algorithm

@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.corejs.javascript.typedarrays.NativeUint8Array;
@@ -147,7 +148,7 @@ final class RsaHashedKeyAlgorithm {
      * @param scope the JS scope for prototype/parent setup
      * @return the JS algorithm object
      */
-    Scriptable toScriptableObject(final Scriptable scope) {
+    Scriptable toScriptableObject(final VarScope scope) {
         final Scriptable hashObj = JavaScriptEngine.newObject(scope);
         ScriptableObject.putProperty(hashObj, "name", getHash());
 

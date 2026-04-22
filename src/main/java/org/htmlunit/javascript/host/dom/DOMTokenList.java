@@ -146,7 +146,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
      * @param function the function
      */
     @JsxFunction
-    public static void add(final Context context, final Scriptable scope,
+    public static void add(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (args.length > 0) {
             final DOMTokenList list = (DOMTokenList) thisObj;
@@ -186,7 +186,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
      * @param function the function
      */
     @JsxFunction
-    public static void remove(final Context context, final Scriptable scope,
+    public static void remove(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         final DOMTokenList list = (DOMTokenList) thisObj;
 

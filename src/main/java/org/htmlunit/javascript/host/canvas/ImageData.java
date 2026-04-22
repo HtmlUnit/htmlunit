@@ -16,8 +16,8 @@ package org.htmlunit.javascript.host.canvas;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeUint8ClampedArray;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -59,7 +59,7 @@ public class ImageData extends HtmlUnitScriptable {
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static ImageData jsConstructor(final Context cx, final Scriptable scope,
+    public static ImageData jsConstructor(final Context cx, final VarScope scope,
             final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         if (args.length < 2) {
             throw JavaScriptEngine.typeError("ImageData ctor - too less arguments");

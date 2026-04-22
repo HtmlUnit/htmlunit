@@ -103,7 +103,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * @param scope  the scope
      * @param window the top level window
      */
-    private WebSocket(final String url, final Scriptable scope, final Window window) {
+    private WebSocket(final String url, final VarScope scope, final Window window) {
         super();
         try {
             final WebWindow webWindow = window.getWebWindow();
@@ -249,7 +249,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static Scriptable jsConstructor(final Context cx, final Scriptable scope, final Object[] args,
+    public static Scriptable jsConstructor(final Context cx, final VarScope scope, final Object[] args,
             final Function ctorObj, final boolean inNewExpr) {
         if (args.length < 1 || args.length > 2) {
             throw JavaScriptEngine

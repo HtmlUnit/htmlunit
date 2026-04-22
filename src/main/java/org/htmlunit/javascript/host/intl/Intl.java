@@ -35,6 +35,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.corejs.javascript.TopLevel;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
@@ -109,7 +110,7 @@ public class Intl extends HtmlUnitScriptable {
     }
 
     private static void defineStaticFunctions(final ClassConfiguration config,
-            final Scriptable scope, final ScriptableObject target) {
+            final VarScope scope, final ScriptableObject target) {
         final Map<String, Method> staticFunctionMap = config.getStaticFunctionMap();
         if (staticFunctionMap != null) {
             for (final Map.Entry<String, Method> entry : staticFunctionMap.entrySet()) {

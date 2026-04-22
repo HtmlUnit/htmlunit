@@ -21,6 +21,7 @@ import java.util.List;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.HtmlOption;
 import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -91,7 +92,7 @@ public class HTMLSelectElement extends HTMLElement {
      * @param function the function
      */
     @JsxFunction
-    public static void remove(final Context context, final Scriptable scope,
+    public static void remove(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof HTMLSelectElement htmlSelect)) {
             throw JavaScriptEngine.reportRuntimeError(

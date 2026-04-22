@@ -26,6 +26,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -285,7 +286,7 @@ public class Node extends EventTarget {
      * @return the newly added child node
      */
     @JsxFunction
-    public static Node insertBefore(final Context context, final Scriptable scope,
+    public static Node insertBefore(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         return ((Node) thisObj).insertBeforeImpl(args);
     }
@@ -472,7 +473,7 @@ public class Node extends EventTarget {
      * @param args the arguments passed into the method
      * @param function the function
      */
-    public static void moveBefore(final Context context, final Scriptable scope,
+    public static void moveBefore(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (args.length < 2) {
             throw JavaScriptEngine.typeError(

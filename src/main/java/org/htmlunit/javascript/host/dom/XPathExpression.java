@@ -19,6 +19,7 @@ import javax.xml.transform.TransformerException;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.xpath.HtmlUnitPrefixResolver;
 import org.htmlunit.html.xpath.XPathAdapter;
@@ -82,7 +83,7 @@ public class XPathExpression extends HtmlUnitScriptable {
      * @return the result of the evaluation of the XPath expression
      */
     @JsxFunction
-    public static XPathResult evaluate(final Context context, final Scriptable scope,
+    public static XPathResult evaluate(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (args.length < 1) {
             throw JavaScriptEngine.reportRuntimeError("Missing 'contextNode' parameter");

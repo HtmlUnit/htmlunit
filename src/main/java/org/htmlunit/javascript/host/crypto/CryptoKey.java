@@ -19,18 +19,17 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.crypto.SecretKey;
 
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.host.Window;
 
 /**
  * A JavaScript object for {@code CryptoKey}.
@@ -68,10 +67,14 @@ public class CryptoKey extends HtmlUnitScriptable {
      * @param usages the permitted key usages
      * @return the new CryptoKey
      */
-    static CryptoKey create(final Scriptable scope, final Key internalKey, final boolean isExtractable,
+    static CryptoKey create(final VarScope scope, final Key internalKey, final boolean isExtractable,
             final Scriptable algorithm, final Collection<String> usages) {
+        if (internalKey == null) {
+            throw new NullPointerException("The provided key can't be null");
+        }
+
         final CryptoKey key = new CryptoKey();
-        key.internalKey_ = Objects.requireNonNull(internalKey);
+        key.internalKey_ = internalKey;
 
         if (internalKey instanceof PublicKey) {
             key.type_ = "public";
@@ -90,9 +93,8 @@ public class CryptoKey extends HtmlUnitScriptable {
         key.algorithm_ = algorithm;
         key.usages_ = new LinkedHashSet<>(usages);
 
-        final Window window = getWindow(Objects.requireNonNull(scope));
-        key.setParentScope(window.getWebWindow().getTopLevelScope());
-        key.setPrototype(window.getPrototype(CryptoKey.class));
+        key.setParentScope(scope);
+        key.setPrototype(getWindow(scope).getPrototype(CryptoKey.class));
         return key;
     }
 

@@ -18,6 +18,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeConsole;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 
 /**
  * Contains some missing features of Rhino {@link NativeConsole}.
@@ -41,7 +42,7 @@ public final class ConsoleCustom {
      * @param args the arguments passed into the method
      * @param function the function
      */
-    public static void timeStamp(final Context context, final Scriptable scope,
+    public static void timeStamp(final Context context, final VarScope scope,
             final Scriptable thisObj, final Object[] args, final Function function) {
         // noop
     }
