@@ -1974,25 +1974,4 @@ public class HtmlPageTest extends SimpleWebTestCase {
         page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST + path));
         assertEquals(URL_FIRST.toExternalForm() + path, page.getBaseURL().toExternalForm());
     }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void asyncScriptExecutedWithoutEventHandlers() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head>\n"
-            + "<script async src='async.js'></script>\n"
-            + "</head><body></body></html>";
-
-        final WebClient client = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(html);
-        webConnection.setResponse(new URL(URL_FIRST, "async.js"),
-                "document.title = 'async-executed';", "text/javascript");
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals("async-executed", page.getTitleText());
-    }
 }

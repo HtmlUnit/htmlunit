@@ -720,4 +720,43 @@ public class HtmlPage3Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(content);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"sync-executed", "async-executed"})
+    public void asyncScriptExecuted() throws Exception {
+        final String content = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script async src='async.js'></script>\n"
+            + "<script>document.title += 'sync-executed§';</script>\n"
+            + "</head>"
+            + "<body></body>"
+            + "</html>";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "async.js"),
+                "document.title += 'async-executed§';", MimeType.TEXT_JAVASCRIPT);
+
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("async-executed")
+    public void asyncScriptExecutedWithoutSyncScript() throws Exception {
+        final String content = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script async src='async.js'></script>\n"
+                + "</head>"
+                + "<body></body>"
+                + "</html>";
+
+            getMockWebConnection().setResponse(new URL(URL_FIRST, "async.js"),
+                    "document.title += 'async-executed§';", MimeType.TEXT_JAVASCRIPT);
+
+        loadPageVerifyTitle2(content);
+    }
 }
