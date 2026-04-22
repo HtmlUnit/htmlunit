@@ -47,12 +47,9 @@ import javax.crypto.spec.PSource;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.htmlunit.corejs.javascript.EcmaError;
-import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.NativePromise;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -620,8 +617,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         final CryptoKey privateKey = CryptoKey.create(
                 getParentScope(), keyPair.getPrivate(), isExtractable, algoObj, privateUsages);
 
-        final NativeObject keyPairObj = new NativeObject();
-        ScriptRuntime.setBuiltinProtoAndParent(keyPairObj, scope, TopLevel.Builtins.Object);
+        final Scriptable keyPairObj = JavaScriptEngine.newObject(scope);
         ScriptableObject.putProperty(keyPairObj, "publicKey", publicKey);
         ScriptableObject.putProperty(keyPairObj, "privateKey", privateKey);
         return keyPairObj;
@@ -917,12 +913,12 @@ public class SubtleCrypto extends HtmlUnitScriptable {
      * @throws IllegalArgumentException if usages array is invalid or contains unrecognized values
      */
     static List<String> resolveKeyUsages(final String algorithm, final Scriptable keyUsages) {
-        if (!ScriptRuntime.isArrayLike(keyUsages)) {
+        if (!JavaScriptEngine.isArrayLike(keyUsages)) {
             throw new IllegalArgumentException("An invalid or illegal string was specified");
         }
 
         final Set<String> supportedKeyUsages = new HashSet<>();
-        for (final Object usage : ScriptRuntime.getArrayElements(keyUsages)) {
+        JavaScriptEngine.iterateArrayLike(null, keyUsages, usage -> {
             if (!(usage instanceof String usageStr)) {
                 throw new IllegalArgumentException("An invalid or illegal string was specified");
             }
@@ -934,7 +930,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
             if (supportedAlgorithms != null && supportedAlgorithms.contains(algorithm)) {
                 supportedKeyUsages.add(usageStr);
             }
-        }
+        });
 
         // maintain canonical ordering per RECOGNIZED_KEY_USAGES
         final List<String> sortedKeyUsages = new ArrayList<>();

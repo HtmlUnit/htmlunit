@@ -27,7 +27,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 
+import org.apache.commons.lang3.ObjectUtils.Null;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -59,6 +61,8 @@ import org.htmlunit.corejs.javascript.Symbol;
 import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.WithScope;
+import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
+import org.htmlunit.corejs.javascript.typedarrays.NativeUint8Array;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
@@ -1405,6 +1409,24 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Create an Uint8Array with a specified elements.
+     *
+     * @param scope the scope to create the object in
+     * @param elements the initial elements..
+     * @return the new Uint8Array
+     */
+    public static NativeUint8Array newUint8Array(final Scriptable scope, final byte[] elements) {
+        final NativeArrayBuffer arrayBuffer = new NativeArrayBuffer(elements.length);
+        ScriptRuntime.setBuiltinProtoAndParent(arrayBuffer, scope, TopLevel.Builtins.ArrayBuffer);
+        System.arraycopy(elements, 0, arrayBuffer.getBuffer(), 0, elements.length);
+
+        final NativeUint8Array uint8Array = new NativeUint8Array(arrayBuffer, 0, elements.length);
+        ScriptRuntime.setBuiltinProtoAndParent(uint8Array, scope, TopLevel.Builtins.Uint8Array);
+
+        return uint8Array;
+    }
+
+    /**
      * @param o the object to convert
      * @return int value
      */
@@ -1469,6 +1491,23 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static long lengthOfArrayLike(final Context cx, final Scriptable obj) {
         return AbstractEcmaObjectOperations.lengthOfArrayLike(cx, obj);
+    }
+
+    /**
+     * Iterates an arrayLike {@link Scriptable} calling the {@link Consumer} on
+     * every item.
+     * @param cx the context or {@link Null}
+     * @param arrayLike the {@link Scriptable} to iterate
+     * @param consumer the {@link Consumer} to call
+     */
+    public static void iterateArrayLike(final Context cx, final Scriptable arrayLike, final Consumer<Object> consumer) {
+        final Context context = cx == null ? Context.getCurrentContext() : cx;
+
+        final long len = lengthOfArrayLike(context, arrayLike);
+        for (int i = 0; i < len; i++) {
+            final Object item = arrayLike.get(i, arrayLike);
+            consumer.accept(item);
+        }
     }
 
     /**

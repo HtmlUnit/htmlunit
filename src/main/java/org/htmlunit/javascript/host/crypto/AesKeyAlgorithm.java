@@ -16,11 +16,9 @@ package org.htmlunit.javascript.host.crypto;
 
 import java.util.Set;
 
-import org.htmlunit.corejs.javascript.NativeObject;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.TopLevel;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Internal helper representing AES key algorithm parameters.
@@ -89,8 +87,7 @@ final class AesKeyAlgorithm {
      * @return the JS algorithm object
      */
     Scriptable toScriptableObject(final Scriptable scope) {
-        final NativeObject algorithm = new NativeObject();
-        ScriptRuntime.setBuiltinProtoAndParent(algorithm, scope, TopLevel.Builtins.Object);
+        final Scriptable algorithm = JavaScriptEngine.newObject(scope);
         ScriptableObject.putProperty(algorithm, "name", getName());
         ScriptableObject.putProperty(algorithm, "length", getLength());
         return algorithm;

@@ -17,14 +17,12 @@ package org.htmlunit.javascript.host.crypto;
 import java.math.BigInteger;
 import java.util.Set;
 
-import org.htmlunit.corejs.javascript.NativeObject;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.corejs.javascript.typedarrays.NativeUint8Array;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Internal helper representing RSA hashed key algorithm parameters.
@@ -150,18 +148,12 @@ final class RsaHashedKeyAlgorithm {
      * @return the JS algorithm object
      */
     Scriptable toScriptableObject(final Scriptable scope) {
-        final NativeObject hashObj = new NativeObject();
-        ScriptRuntime.setBuiltinProtoAndParent(hashObj, scope, TopLevel.Builtins.Object);
+        final Scriptable hashObj = JavaScriptEngine.newObject(scope);
         ScriptableObject.putProperty(hashObj, "name", getHash());
 
-        final NativeArrayBuffer arrayBuffer = new NativeArrayBuffer(publicExponent_.length);
-        System.arraycopy(publicExponent_, 0, arrayBuffer.getBuffer(), 0, publicExponent_.length);
-        ScriptRuntime.setBuiltinProtoAndParent(arrayBuffer, scope, TopLevel.Builtins.ArrayBuffer);
-        final NativeUint8Array uint8Array = new NativeUint8Array(arrayBuffer, 0, publicExponent_.length);
-        ScriptRuntime.setBuiltinProtoAndParent(uint8Array, scope, TopLevel.Builtins.Uint8Array);
+        final NativeUint8Array uint8Array = JavaScriptEngine.newUint8Array(scope, publicExponent_);
 
-        final NativeObject algorithm = new NativeObject();
-        ScriptRuntime.setBuiltinProtoAndParent(algorithm, scope, TopLevel.Builtins.Object);
+        final Scriptable algorithm = JavaScriptEngine.newObject(scope);
         ScriptableObject.putProperty(algorithm, "name", getName());
         ScriptableObject.putProperty(algorithm, "hash", hashObj);
         ScriptableObject.putProperty(algorithm, "modulusLength", getModulusLength());

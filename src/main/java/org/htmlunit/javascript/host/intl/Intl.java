@@ -149,9 +149,7 @@ public class Intl extends HtmlUnitScriptable {
         }
         else if (localesArgument instanceof Scriptable scriptable) {
             if (JavaScriptEngine.isArrayLike(scriptable)) {
-                final long len = JavaScriptEngine.lengthOfArrayLike(cx, scriptable);
-                for (int i = 0; i < len; i++) {
-                    final Object elem = scriptable.get(i, scriptable);
+                JavaScriptEngine.iterateArrayLike(cx, scriptable, elem -> {
                     if (elem instanceof String s) {
                         languageTags.add(s);
                     }
@@ -161,7 +159,7 @@ public class Intl extends HtmlUnitScriptable {
                     else {
                         throw JavaScriptEngine.typeError("Invalid element in locales argument");
                     }
-                }
+                });
             }
             else {
                 languageTags.add(JavaScriptEngine.toString(localesArgument));
