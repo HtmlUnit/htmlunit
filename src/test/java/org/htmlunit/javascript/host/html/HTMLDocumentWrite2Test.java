@@ -233,18 +233,19 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({" after-write Hello", " after-write Hello after-write Hello"})
+    @Alerts({"after-write§js§Hello", "after-write§js§Hello"})
     public void writeExternalScriptAfterClick() throws Exception {
         shutDownAll();
 
         final String html = DOCTYPE_HTML
             + "<html><head>\n"
             + "<script>\n"
-            + "document.write('<scr'+'ipt src=\"script.js\"></scr'+'ipt>');\n"
-            + "window.name += ' after-write ';\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "  document.write('<scr'+'ipt src=\"script.js\"></scr'+'ipt>');\n"
+            + "  log('after-write');\n"
             + "</script>\n"
             + "<script>\n"
-            + "window.name += window.foo;\n"
+            + "  log(window.foo);\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
@@ -252,12 +253,43 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse("window.foo = 'Hello'", MimeType.TEXT_JAVASCRIPT);
+        getMockWebConnection().setDefaultResponse("log('js'); window.foo = 'Hello'", MimeType.TEXT_JAVASCRIPT);
         final WebDriver driver = loadPage2(html);
-        verifyJsVariable(driver, "window.top.name", getExpectedAlerts()[0]);
+        verifyWindowName2(driver, getExpectedAlerts()[0]);
 
         driver.findElement(By.linkText("a link")).click();
-        verifyJsVariable(driver, "window.top.name", getExpectedAlerts()[1]);
+        verifyWindowName2(driver, getExpectedAlerts()[1]);
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"after-write§undefined§js", "after-write§undefined§js"})
+    public void writeExternalAsyncScriptAfterClick() throws Exception {
+        shutDownAll();
+
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "  document.write('<scr'+'ipt async src=\"script.js\"></scr'+'ipt>');\n"
+            + "  log('after-write');\n"
+            + "</script>\n"
+            + "<script>\n"
+            + "  log(window.foo);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<a href='?again'>a link</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("log('js'); window.foo = 'Hello'", MimeType.TEXT_JAVASCRIPT);
+        final WebDriver driver = loadPage2(html);
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[0]);
+
+        driver.findElement(By.linkText("a link")).click();
+        verifyWindowName2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts()[1]);
     }
 
     /**
