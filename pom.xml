@@ -84,7 +84,7 @@
         <build-helper-plugin.version>3.6.1</build-helper-plugin.version>
         <checkstyle-plugin.version>3.6.0</checkstyle-plugin.version>
         <pmd-plugin.version>3.28.0</pmd-plugin.version>
-        <spotbugs-plugin.version>4.9.8.2</spotbugs-plugin.version>
+        <spotbugs-plugin.version>4.9.8.3</spotbugs-plugin.version>
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
         <enforcer-plugin.version>3.6.2</enforcer-plugin.version>
         <changes-plugin.version>2.12.1</changes-plugin.version>
