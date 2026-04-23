@@ -666,7 +666,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxFunction({FF, FF_ESR})
     public void dump(final String message) {
         final WebConsole console = getWebWindow().getWebClient().getWebConsole();
-        console.print(Context.getCurrentContext(), this, Level.INFO, new String[] {message}, null);
+        console.print(Context.getCurrentContext(), getParentScope(), Level.INFO, new String[] {message}, null);
     }
 
     /**
