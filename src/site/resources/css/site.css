@@ -8,3 +8,4 @@ a.externalLink[href^=https]{background:inherit;padding-right:inherit}
 a.externalLink[href^=file]{background:url('../images/drive-harddisk.png') right center no-repeat;padding-right:18px}
 a.externalLink[href^=ftp]{background:url('../images/network-server.png') right center no-repeat;padding-right:18px}
 a.externalLink[href^=mailto]{background:url('../images/contact-new.png') right center no-repeat;padding-right:18px}
+#publishDate,#projectVersion{display:none}
