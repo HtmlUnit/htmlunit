@@ -260,6 +260,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         driver.findElement(By.linkText("a link")).click();
         verifyWindowName2(driver, getExpectedAlerts()[1]);
     }
+
     /**
      * @throws Exception if the test fails
      */
