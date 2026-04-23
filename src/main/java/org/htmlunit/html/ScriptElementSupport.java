@@ -84,6 +84,8 @@ public final class ScriptElementSupport {
         final String srcAttrib = script.getScriptSource();
         final boolean hasNoSrcAttrib = ATTRIBUTE_NOT_DEFINED == srcAttrib;
         if (!hasNoSrcAttrib && script.isDeferred()) {
+            // HtmlPage.executeDeferredScriptsIfNeeded() will process these
+            // directly after the load
             return;
         }
 

@@ -261,11 +261,13 @@ public class HtmlPage extends SgmlPage {
             executeEventHandlersIfNeeded(Event.TYPE_READY_STATE_CHANGE);
         }
 
-        executePostponedScriptsIfNeeded();
-
         executeDeferredScriptsIfNeeded();
 
         executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
+
+        // postponed actions are more or less the async scripts,
+        // they are running in real browsers whenever the download is done
+        processPostponedActionsIfNeeded();
 
         loadFrames();
 
@@ -1480,7 +1482,7 @@ public class HtmlPage extends SgmlPage {
         return getWebResponse().getResponseHeaderValue("Refresh");
     }
 
-    private void executePostponedScriptsIfNeeded() {
+    private void processPostponedActionsIfNeeded() {
         if (!getWebClient().isJavaScriptEnabled()) {
             return;
         }
