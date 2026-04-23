@@ -19,10 +19,10 @@ import static org.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATT
 
 import java.util.Date;
 
-import org.apache.http.client.utils.DateUtils;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SetCookie;
-import org.apache.http.impl.cookie.BasicExpiresHandler;
+import org.apache.hc.client5.http.utils.DateUtils;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.cookie.SetCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicExpiresHandler;
 import org.htmlunit.BrowserVersion;
 
 /**

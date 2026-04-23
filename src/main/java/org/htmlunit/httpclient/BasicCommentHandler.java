@@ -14,22 +14,37 @@
  */
 package org.htmlunit.httpclient;
 
+import org.apache.hc.client5.http.cookie.CommonCookieAttributeHandler;
 import org.apache.hc.client5.http.cookie.Cookie;
 import org.apache.hc.client5.http.cookie.CookieOrigin;
-import org.apache.hc.client5.http.impl.cookie.BasicSecureHandler;
-import org.apache.hc.core5.util.Args;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.cookie.SetCookie;
 
 /**
- * Customized BasicSecureHandler for HtmlUnit.
+ * Basic comment handler for cookies.
+ * This is a replacement for the BasicCommentHandler that was removed in HttpClient 5.
  *
  * @author Ronald Brill
  */
-final class HtmlUnitSecureHandler extends BasicSecureHandler {
+public class BasicCommentHandler implements CommonCookieAttributeHandler {
+
+    @Override
+    public void parse(final SetCookie cookie, final String value) throws MalformedCookieException {
+        cookie.setComment(value);
+    }
+
+    @Override
+    public String getAttributeName() {
+        return "comment";
+    }
 
     @Override
     public boolean match(final Cookie cookie, final CookieOrigin origin) {
-        Args.notNull(cookie, "Cookie");
-        Args.notNull(origin, "Cookie origin");
-        return !cookie.isSecure() || origin.isSecure() || "localhost".equalsIgnoreCase(origin.getHost());
+        return true;
+    }
+
+    @Override
+    public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
+        // Do nothing
     }
 }
