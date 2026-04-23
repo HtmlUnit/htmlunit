@@ -25,7 +25,7 @@ import org.htmlunit.corejs.javascript.NativeConsole;
 import org.htmlunit.corejs.javascript.NativeConsole.ConsolePrinter;
 import org.htmlunit.corejs.javascript.NativeConsole.Level;
 import org.htmlunit.corejs.javascript.ScriptStackElement;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 
 /**
  * This class can be used to print messages to the logger. The first parameter
@@ -157,7 +157,7 @@ public class WebConsole implements ConsolePrinter, Serializable {
     }
 
     @Override
-    public void print(final Context cx, final Scriptable scope, final Level level,
+    public void print(final Context cx, final VarScope scope, final Level level,
             final Object[] args, final ScriptStackElement[] stack) {
         switch (level) {
             case TRACE:
@@ -205,7 +205,7 @@ public class WebConsole implements ConsolePrinter, Serializable {
         }
     }
 
-    private static String format(final Context cx, final Scriptable scope, final Object[] args) {
+    private static String format(final Context cx, final VarScope scope, final Object[] args) {
         String msg = NativeConsole.format(cx, scope, args);
         msg = msg.replaceAll("\\r?\\n", "\n");
         return msg;

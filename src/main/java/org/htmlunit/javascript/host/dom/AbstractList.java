@@ -25,6 +25,7 @@ import java.util.function.Supplier;
 
 import org.htmlunit.corejs.javascript.ExternalArrayData;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.DomChangeEvent;
 import org.htmlunit.html.DomChangeListener;
 import org.htmlunit.html.DomElement;
@@ -471,7 +472,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      * {@inheritDoc}
      */
     @Override
-    public void defineProperty(final Scriptable scope,
+    public void defineProperty(final VarScope scope,
             final String propertyName, final Object delegateTo,
             final Method getter, final Method setter, final int attributes) {
         // length is defined on the prototype, don't define it again

@@ -118,12 +118,12 @@ public class URLSearchParams extends HtmlUnitScriptable {
         }
 
         @Override
-        protected boolean isDone(final Context cx, final Scriptable scope) {
+        protected boolean isDone(final Context cx, final VarScope scope) {
             return !iterator_.hasNext();
         }
 
         @Override
-        protected Object nextValue(final Context cx, final Scriptable scope) {
+        protected Object nextValue(final Context cx, final VarScope scope) {
             final NameValuePair e = iterator_.next();
             return switch (type_) {
                 case KEYS -> e.getName();

@@ -26,6 +26,7 @@ import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.TopLevel;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -117,7 +118,7 @@ public class FormData extends HtmlUnitScriptable {
          * {@inheritDoc}
          */
         @Override
-        protected boolean isDone(final Context cx, final Scriptable scope) {
+        protected boolean isDone(final Context cx, final VarScope scope) {
             return index_ >= nameValuePairList_.size();
         }
 
@@ -125,7 +126,7 @@ public class FormData extends HtmlUnitScriptable {
          * {@inheritDoc}
          */
         @Override
-        protected Object nextValue(final Context cx, final Scriptable scope) {
+        protected Object nextValue(final Context cx, final VarScope scope) {
             if (isDone(cx, scope)) {
                 return Context.getUndefinedValue();
             }

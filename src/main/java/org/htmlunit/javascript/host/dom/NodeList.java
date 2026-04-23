@@ -89,7 +89,7 @@ public class NodeList extends AbstractList implements Callable {
      * Creates an instance.
      * @param parentScope the parent scope
      */
-    NodeList(final Scriptable parentScope) {
+    NodeList(final VarScope parentScope) {
         super();
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
@@ -103,7 +103,7 @@ public class NodeList extends AbstractList implements Callable {
      * @param elements the elements
      * @return an empty collection
      */
-    public static NodeList staticNodeList(final Scriptable parentScope, final List<DomNode> elements) {
+    public static NodeList staticNodeList(final VarScope parentScope, final List<DomNode> elements) {
         return new NodeList(parentScope) {
             @Override
             public List<DomNode> getElements() {
