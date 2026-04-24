@@ -25,6 +25,7 @@ import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.debug.DebuggableScript;
 import org.htmlunit.javascript.host.event.Event;
 
@@ -74,7 +75,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      * {@inheritDoc}
      */
     @Override
-    public void onEnter(final Context cx, final Scriptable activation, final Scriptable thisObj, final Object[] args) {
+    public void onEnter(final Context cx, final VarScope activation, final Scriptable thisObj, final Object[] args) {
         if (LOG.isTraceEnabled()) {
             final StringBuilder sb = new StringBuilder();
 

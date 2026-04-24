@@ -403,7 +403,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
 
                 try {
-                    return new JsonParser(Context.getCurrentContext(), this).parseValue(content);
+                    return new JsonParser(Context.getCurrentContext(), getParentScope()).parseValue(content);
                 }
                 catch (final ParseException e) {
                     webResponse_ = new NetworkErrorWebResponse(webRequest_, new IOException(e));

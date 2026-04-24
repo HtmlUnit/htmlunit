@@ -1423,6 +1423,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             final int line = e.getFailingLineNumber();
             final int column = e.getFailingColumnNumber();
 
+            final VarScope scope = getWebWindow().getTopLevelScope();
+
             Object jsError = e.getMessage();
             if (e.getCause() instanceof JavaScriptException) {
                 msg = "uncaught exception: " + e.getCause().getMessage();
@@ -1431,7 +1433,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             else if (e.getCause() instanceof EcmaError ecmaError) {
                 msg = "uncaught " + e.getCause().getMessage();
 
-                final Scriptable err = Context.getCurrentContext().newObject(this, "Error");
+                final Scriptable err = JavaScriptEngine.newObject(scope, "Error", JavaScriptEngine.EMPTY_ARGS);
                 ScriptableObject.putProperty(err, "message", ecmaError.getMessage());
                 ScriptableObject.putProperty(err, "fileName", ecmaError.sourceName());
                 ScriptableObject.putProperty(err, "lineNumber", Integer.valueOf(ecmaError.lineNumber()));
@@ -1439,7 +1441,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             }
 
             final Object[] args = {msg, url, Integer.valueOf(line), Integer.valueOf(column), jsError};
-            f.call(Context.getCurrentContext(), getWebWindow().getTopLevelScope(), this, args);
+            f.call(Context.getCurrentContext(), scope, this, args);
         }
     }
 
