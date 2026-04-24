@@ -213,7 +213,7 @@ public class FormData extends HtmlUnitScriptable {
     @JsxFunction
     public Scriptable getAll(final String name) {
         if (StringUtils.isEmptyOrNull(name)) {
-            return JavaScriptEngine.newArray(this, 0);
+            return JavaScriptEngine.newArray(getParentScope(), 0);
         }
 
         final List<Object> values = new ArrayList<>();
@@ -224,7 +224,7 @@ public class FormData extends HtmlUnitScriptable {
         }
 
         final Object[] stringValues = values.toArray(new Object[0]);
-        return JavaScriptEngine.newArray(this, stringValues);
+        return JavaScriptEngine.newArray(getParentScope(), stringValues);
     }
 
     /**

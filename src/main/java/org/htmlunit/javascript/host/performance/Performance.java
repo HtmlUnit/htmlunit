@@ -86,7 +86,7 @@ public class Performance extends EventTarget {
      */
     @JsxFunction
     public Scriptable getEntries() {
-        return JavaScriptEngine.newArray(this, 0);
+        return JavaScriptEngine.newArray(getParentScope(), 0);
     }
 
     /**
@@ -98,7 +98,7 @@ public class Performance extends EventTarget {
      */
     @JsxFunction
     public Scriptable getEntriesByName() {
-        return JavaScriptEngine.newArray(this, 0);
+        return JavaScriptEngine.newArray(getParentScope(), 0);
     }
 
     /**
@@ -108,6 +108,6 @@ public class Performance extends EventTarget {
      */
     @JsxFunction
     public Scriptable getEntriesByType() {
-        return JavaScriptEngine.newArray(this, 0);
+        return JavaScriptEngine.newArray(getParentScope(), 0);
     }
 }

@@ -134,7 +134,7 @@ public class CryptoKey extends HtmlUnitScriptable {
      */
     @JsxGetter
     public Scriptable getUsages() {
-        return JavaScriptEngine.newArray(this, usages_.toArray());
+        return JavaScriptEngine.newArray(getParentScope(), usages_.toArray());
     }
 
     /**

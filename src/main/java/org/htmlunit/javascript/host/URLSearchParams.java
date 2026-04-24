@@ -365,7 +365,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
             }
         }
 
-        return JavaScriptEngine.newArray(getWindow(this), result.toArray());
+        return JavaScriptEngine.newArray(getParentScope(), result.toArray());
     }
 
     /**

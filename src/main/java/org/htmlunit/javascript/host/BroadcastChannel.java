@@ -22,6 +22,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
@@ -152,11 +153,12 @@ public class BroadcastChannel extends EventTarget {
                     final Page channelPage = channelWebWindow.getEnclosedPage();
 
                     if (UrlUtils.isSameOrigin(currentURL, channelPage.getUrl())) {
-                        final Scriptable ports = JavaScriptEngine.newArray(w, 0);
+                        final TopLevel scope = channelWebWindow.getTopLevelScope();
+                        final Scriptable ports = JavaScriptEngine.newArray(scope, 0);
 
                         final MessageEvent event = new MessageEvent();
                         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", null, ports);
-                        event.setParentScope(channelWebWindow.getTopLevelScope());
+                        event.setParentScope(scope);
                         event.setPrototype(channelWindow.getPrototype(event.getClass()));
 
                         final PostponedAction action =

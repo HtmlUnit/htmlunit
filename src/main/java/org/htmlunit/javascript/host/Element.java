@@ -686,7 +686,7 @@ public class Element extends Node {
         final org.w3c.dom.NamedNodeMap attributes = getDomNodeOrDie().getAttributes();
 
         if (attributes.getLength() == 0) {
-            return JavaScriptEngine.newArray(this, 0);
+            return JavaScriptEngine.newArray(getParentScope(), 0);
         }
 
         final ArrayList<String> res = new ArrayList<>();
@@ -694,7 +694,7 @@ public class Element extends Node {
             res.add(attributes.item(i).getNodeName());
         }
 
-        return JavaScriptEngine.newArray(this, res.toArray());
+        return JavaScriptEngine.newArray(getParentScope(), res.toArray());
     }
 
     /**

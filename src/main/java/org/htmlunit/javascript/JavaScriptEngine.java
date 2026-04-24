@@ -1345,7 +1345,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      *     dynamically).
      * @return the new array object
      */
-    public static Scriptable newArray(final Scriptable scope, final int length) {
+    public static Scriptable newArray(final VarScope scope, final int length) {
         final NativeArray result = new NativeArray(length);
         ScriptRuntime.setBuiltinProtoAndParent(result, scope, TopLevel.Builtins.Array);
         return result;
@@ -1398,7 +1398,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      *     JavaScript type and type of array should be exactly Object[], not SomeObjectSubclass[].
      * @return the new array object
      */
-    public static Scriptable newArray(final Scriptable scope, final Object[] elements) {
+    public static Scriptable newArray(final VarScope scope, final Object[] elements) {
         if (elements.getClass().getComponentType() != ScriptRuntime.ObjectClass) {
             throw new IllegalArgumentException();
         }

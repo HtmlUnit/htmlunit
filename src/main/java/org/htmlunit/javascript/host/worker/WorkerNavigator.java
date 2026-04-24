@@ -112,7 +112,7 @@ public class WorkerNavigator extends HtmlUnitScriptable {
     public Scriptable getLanguages() {
         final String acceptLang = getBrowserVersion().getAcceptLanguageHeader();
         if (StringUtils.isEmptyOrNull(acceptLang)) {
-            return JavaScriptEngine.newArray(this, 0);
+            return JavaScriptEngine.newArray(getParentScope(), 0);
         }
 
         final ArrayList<String> res = new ArrayList<>();
@@ -126,7 +126,7 @@ public class WorkerNavigator extends HtmlUnitScriptable {
             }
         }
 
-        return JavaScriptEngine.newArray(this, res.toArray());
+        return JavaScriptEngine.newArray(getParentScope(), res.toArray());
     }
 
     /**
