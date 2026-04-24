@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host;
 
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 
@@ -25,12 +26,12 @@ import org.htmlunit.javascript.JavaScriptEngine;
  */
 public class Netscape extends HtmlUnitScriptable {
 
-    Netscape(final Window window) {
+    Netscape(final VarScope scope) {
         super();
-        setParentScope(window.getWebWindow().getTopLevelScope());
+        setParentScope(scope);
 
         // simply put "new Object()" for property "security"
-        put("security", this, JavaScriptEngine.newObject(window));
+        put("security", this, JavaScriptEngine.newObject(scope));
     }
 
     @Override

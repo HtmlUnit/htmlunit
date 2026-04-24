@@ -1887,7 +1887,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxGetter({FF, FF_ESR})
     public Netscape getNetscape() {
-        return new Netscape(this);
+        return new Netscape(getParentScope());
     }
 
     /**

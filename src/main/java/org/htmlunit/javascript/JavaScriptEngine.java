@@ -1319,7 +1319,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param args the args
      * @return the new object
      */
-    public static Scriptable newObject(final Scriptable scope, final String constructorName, final Object[] args) {
+    public static Scriptable newObject(final VarScope scope, final String constructorName, final Object[] args) {
         return ScriptRuntime.newObject(Context.getCurrentContext(), scope, constructorName, args);
     }
 
@@ -1331,7 +1331,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param scope the scope to search for the constructor and to evaluate against
      * @return the new object
      */
-    public static Scriptable newObject(final Scriptable scope) {
+    public static Scriptable newObject(final VarScope scope) {
         final NativeObject result = new NativeObject();
         ScriptRuntime.setBuiltinProtoAndParent(result, scope, TopLevel.Builtins.Object);
         return result;
