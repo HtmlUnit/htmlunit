@@ -19,7 +19,6 @@ import java.util.HashSet;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
-import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.impl.SimpleRange;
@@ -442,9 +441,8 @@ public class Range extends AbstractRange {
      */
     @JsxFunction
     public DOMRectList getClientRects() {
-        final Scriptable topScope = getTopLevelScope(this);
         final DOMRectList rectList = new DOMRectList();
-        rectList.setParentScope(topScope);
+        rectList.setParentScope(getParentScope());
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
         try {
@@ -453,7 +451,7 @@ public class Range extends AbstractRange {
                 final HtmlUnitScriptable scriptable = node.getScriptableObject();
                 if (scriptable instanceof HTMLElement) {
                     final DOMRect rect = new DOMRect(0, 0, 1, 1);
-                    rect.setParentScope(topScope);
+                    rect.setParentScope(getParentScope());
                     rect.setPrototype(getPrototype(rect.getClass()));
                     rectList.add(rect);
                 }
@@ -474,7 +472,7 @@ public class Range extends AbstractRange {
     @JsxFunction
     public DOMRect getBoundingClientRect() {
         final DOMRect rect = new DOMRect();
-        rect.setParentScope(getTopLevelScope(this));
+        rect.setParentScope(getParentScope());
         rect.setPrototype(getPrototype(rect.getClass()));
 
         try {

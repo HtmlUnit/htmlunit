@@ -130,7 +130,7 @@ public class Element extends Node {
         style_ = new CSSStyleDeclaration(this, new ElementCssStyleDeclaration(getDomNodeOrDie()));
 
         // Convert JavaScript snippets defined in the attribute map to executable event handlers.
-        //Should be called only on construction.
+        // Should be called only on construction.
         final DomElement htmlElt = (DomElement) domNode;
         for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
             final String eventName = StringUtils.toRootLowerCase(attr.getName());

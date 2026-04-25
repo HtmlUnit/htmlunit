@@ -209,7 +209,7 @@ public class Selection extends HtmlUnitScriptable {
         }
         final SimpleRange range = ranges.get(index);
         final Range jsRange = new Range(range);
-        jsRange.setParentScope(getTopLevelScope(this));
+        jsRange.setParentScope(getParentScope());
         jsRange.setPrototype(getPrototype(Range.class));
 
         return jsRange;

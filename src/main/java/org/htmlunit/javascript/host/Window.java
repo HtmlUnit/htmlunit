@@ -1423,7 +1423,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             final int line = e.getFailingLineNumber();
             final int column = e.getFailingColumnNumber();
 
-            final VarScope scope = getWebWindow().getTopLevelScope();
+            final TopLevel scope = getWebWindow().getTopLevelScope();
 
             Object jsError = e.getMessage();
             if (e.getCause() instanceof JavaScriptException) {

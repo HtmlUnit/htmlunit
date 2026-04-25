@@ -484,7 +484,7 @@ public class Document extends Node {
     public DOMImplementation getImplementation() {
         if (implementation_ == null) {
             implementation_ = new DOMImplementation();
-            implementation_.setParentScope(getTopLevelScope(this));
+            implementation_.setParentScope(getParentScope());
             implementation_.setPrototype(getPrototype(implementation_.getClass()));
         }
         return implementation_;
@@ -501,7 +501,7 @@ public class Document extends Node {
     public NativeXPathNSResolver createNSResolver(final Node nodeResolver) {
         final NativeXPathNSResolver resolver = new NativeXPathNSResolver();
         resolver.setElement(nodeResolver);
-        resolver.setParentScope(getTopLevelScope(this));
+        resolver.setParentScope(getParentScope());
         resolver.setPrototype(getPrototype(resolver.getClass()));
         return resolver;
     }
@@ -1181,7 +1181,7 @@ public class Document extends Node {
 
         try {
             final Event event = clazz.getDeclaredConstructor().newInstance();
-            event.setParentScope(getTopLevelScope(this));
+            event.setParentScope(getParentScope());
             event.setPrototype(getPrototype(clazz));
             event.eventCreated();
             return event;
@@ -1264,7 +1264,7 @@ public class Document extends Node {
 
         final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter, false);
         final TreeWalker t = new TreeWalker(root, whatToShowI, filterWrapper, false);
-        t.setParentScope(getTopLevelScope(this));
+        t.setParentScope(getParentScope());
         t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
         return t;
     }
@@ -1287,7 +1287,7 @@ public class Document extends Node {
     @JsxFunction
     public Range createRange() {
         final Range range = new Range(this);
-        range.setParentScope(getTopLevelScope(this));
+        range.setParentScope(getParentScope());
         range.setPrototype(getPrototype(Range.class));
         return range;
     }
@@ -3462,7 +3462,7 @@ public class Document extends Node {
     public ScriptableObject getFonts() {
         if (fonts_ == null) {
             final FontFaceSet fonts = new FontFaceSet();
-            fonts.setParentScope(getTopLevelScope(this));
+            fonts.setParentScope(getParentScope());
             fonts.setPrototype(getPrototype(fonts.getClass()));
             fonts_ = fonts;
         }
