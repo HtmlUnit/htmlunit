@@ -97,7 +97,7 @@ public class FormData extends HtmlUnitScriptable {
          * @param type the type
          * @param nameValuePairList the list of name value pairs
          */
-        public FormDataIterator(final Scriptable scope, final String className, final Type type,
+        public FormDataIterator(final VarScope scope, final String className, final Type type,
                 final List<NameValuePair> nameValuePairList) {
             super(scope, FORM_DATA_TAG);
             type_ = type;
@@ -298,7 +298,8 @@ public class FormData extends HtmlUnitScriptable {
     @JsxFunction
     @JsxSymbol(symbolName = "iterator")
     public Scriptable entries() {
-        return new FormDataIterator(this, "FormData Iterator", FormDataIterator.Type.BOTH, requestParameters_);
+        return new FormDataIterator(getParentScope(),
+                    "FormData Iterator", FormDataIterator.Type.BOTH, requestParameters_);
     }
 
     /**

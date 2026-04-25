@@ -57,7 +57,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
     /**
      * Decodes a string of data which has been encoded using base-64 encoding.
      * @param encodedData the encoded string
-     * @param scriptable the HtmlUnitScriptable scope
+     * @param scriptable the HtmlUnitScriptable
      * @return the decoded value
      */
     public static String atob(final String encodedData, final HtmlUnitScriptable scriptable) {
@@ -77,7 +77,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
     /**
      * Creates a base-64 encoded ASCII string from a string of binary data.
      * @param stringToEncode string to encode
-     * @param scriptable the HtmlUnitScriptable scope
+     * @param scriptable the HtmlUnitScriptable
      * @return the encoded string
      */
     public static String btoa(final String stringToEncode, final HtmlUnitScriptable scriptable) {

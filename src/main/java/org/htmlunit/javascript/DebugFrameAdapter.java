@@ -16,6 +16,7 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.debug.DebugFrame;
 
 /**
@@ -35,7 +36,7 @@ public class DebugFrameAdapter implements DebugFrame {
 
     /** {@inheritDoc} */
     @Override
-    public void onEnter(final Context cx, final Scriptable activation, final Scriptable thisObj, final Object[] args) {
+    public void onEnter(final Context cx, final VarScope activation, final Scriptable thisObj, final Object[] args) {
         // Empty.
     }
 
