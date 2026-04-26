@@ -81,7 +81,7 @@ public class DataTransferItemList extends HtmlUnitScriptable {
         if (args.length == 1) {
             if (args[0] instanceof File file) {
                 final DataTransferItem item = DataTransferItem.buildFileItem(file);
-                item.setParentScope(itemList.getParentScope());
+                item.setParentScope(scope);
                 item.setPrototype(itemList.getPrototype(item.getClass()));
 
                 if (itemList.items_ == null) {
@@ -100,7 +100,7 @@ public class DataTransferItemList extends HtmlUnitScriptable {
             final String data = JavaScriptEngine.toString(args[0]);
             final String type = JavaScriptEngine.toString(args[1]);
             final DataTransferItem item = DataTransferItem.buildStringItem(data, type);
-            item.setParentScope(itemList.getParentScope());
+            item.setParentScope(scope);
             item.setPrototype(itemList.getPrototype(item.getClass()));
 
             if (itemList.items_ == null) {

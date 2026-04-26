@@ -306,7 +306,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         if (args.length > 0 && args[0] instanceof ImageData imageDataParameter) {
             final ImageData imageData = new ImageData(null,
                     0, 0, imageDataParameter.getWidth(), imageDataParameter.getHeight());
-            imageData.setParentScope(canvas.getParentScope());
+            imageData.setParentScope(scope);
             imageData.setPrototype(canvas.getPrototype(imageData.getClass()));
             return imageData;
         }

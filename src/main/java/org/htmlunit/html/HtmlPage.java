@@ -2576,26 +2576,21 @@ public class HtmlPage extends SgmlPage {
      * @param function the JavaScript Function to call
      * @param thisObject the "this" object to be used during invocation
      * @param args the arguments to pass into the call
-     * @param htmlElementScope the HTML element for which this script is being executed
+     * @param htmlElement the HTML element for which this script is being executed
      *        This element will be the context during the JavaScript execution. If null,
      *        the context will default to the page.
      * @return a ScriptResult which will contain both the current page (which may be different from
      *        the previous page) and a JavaScript result object.
      */
     public ScriptResult executeJavaScriptFunction(final Object function, final Object thisObject,
-            final Object[] args, final DomNode htmlElementScope) {
+            final Object[] args, final DomNode htmlElement) {
         if (!getWebClient().isJavaScriptEnabled()) {
             return new ScriptResult(null);
         }
 
-        return executeJavaScriptFunction((Function) function, (Scriptable) thisObject, args, htmlElementScope);
-    }
-
-    private ScriptResult executeJavaScriptFunction(final Function function, final Scriptable thisObject,
-            final Object[] args, final DomNode htmlElementScope) {
-
         final JavaScriptEngine engine = (JavaScriptEngine) getWebClient().getJavaScriptEngine();
-        final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
+        final Object result = engine.callFunction(this,
+                                (Function) function, (Scriptable) thisObject, args, htmlElement);
 
         return new ScriptResult(result);
     }
