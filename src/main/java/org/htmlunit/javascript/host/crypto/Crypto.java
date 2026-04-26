@@ -60,7 +60,7 @@ public class Crypto extends HtmlUnitScriptable {
      */
     public Crypto(final Window window) {
         this();
-        setParentScope(window.getWebWindow().getTopLevelScope());
+        setParentScope(getTopLevelScope(window.getParentScope()));
         setPrototype(window.getPrototype(Crypto.class));
     }
 

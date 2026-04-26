@@ -64,6 +64,7 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
@@ -950,8 +951,11 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
+        final Window window = getEnclosingWindow().getScriptableObject();
+        final VarScope scope = ScriptableObject.getTopLevelScope(window.getParentScope());
+
         final Object result = getWebClient().getJavaScriptEngine()
-                .execute(this, getEnclosingWindow().getTopLevelScope(), sourceCode, sourceName, startLine);
+                .execute(this, scope, sourceCode, sourceName, startLine);
         return new ScriptResult(result);
     }
 
@@ -1029,9 +1033,12 @@ public class HtmlPage extends SgmlPage {
             return JavaScriptLoadResult.COMPILATION_ERROR;
         }
 
+        final Window window = getEnclosingWindow().getScriptableObject();
+        final VarScope scope = ScriptableObject.getTopLevelScope(window.getParentScope());
+
         @SuppressWarnings("unchecked")
         final AbstractJavaScriptEngine<Object> engine = (AbstractJavaScriptEngine<Object>) client.getJavaScriptEngine();
-        engine.execute(this, getEnclosingWindow().getTopLevelScope(), script);
+        engine.execute(this, scope, script);
         return JavaScriptLoadResult.SUCCESS;
     }
 
@@ -1119,7 +1126,10 @@ public class HtmlPage extends SgmlPage {
         final String scriptCode = response.getContentAsString(scriptEncoding);
         if (null != scriptCode) {
             final AbstractJavaScriptEngine<?> javaScriptEngine = client.getJavaScriptEngine();
-            final VarScope scope = getEnclosingWindow().getTopLevelScope();
+
+            final Window window = getEnclosingWindow().getScriptableObject();
+            final VarScope scope = ScriptableObject.getTopLevelScope(window.getParentScope());
+
             final Object script = javaScriptEngine.compile(this, scope, scriptCode, url.toExternalForm(), 1);
             if (script != null && cache.cacheIfPossible(request, response, script)) {
                 // no cleanup if the response is stored inside the cache

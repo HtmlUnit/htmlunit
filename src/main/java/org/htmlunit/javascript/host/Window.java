@@ -759,7 +759,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public void initialize(final TopLevel scope, final WebWindow webWindow, final Page pageToEnclose) {
         webWindow_ = webWindow;
         webWindow_.setScriptableObject(this);
-        webWindow.setTopLevelScope(scope);
 
         defineProperty(scope, "length", null, GETTER_LENGTH, SETTER_LENGTH, ScriptableObject.READONLY);
         defineProperty(scope, "self", null, GETTER_SELF, SETTER_SELF, ScriptableObject.READONLY);
@@ -1423,7 +1422,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             final int line = e.getFailingLineNumber();
             final int column = e.getFailingColumnNumber();
 
-            final TopLevel scope = getWebWindow().getTopLevelScope();
+            final TopLevel scope = getTopLevelScope(getParentScope());
 
             Object jsError = e.getMessage();
             if (e.getCause() instanceof JavaScriptException) {
@@ -1769,7 +1768,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public Selection getSelectionImpl() {
         if (selection_ == null) {
             selection_ = new Selection();
-            selection_.setParentScope(getWebWindow().getTopLevelScope());
+            selection_.setParentScope(getParentScope());
             selection_.setPrototype(getPrototype(selection_.getClass()));
         }
         return selection_;
@@ -2079,7 +2078,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public Scriptable getPerformance() {
         if (performance_ == null) {
             final Performance performance = new Performance();
-            performance.setParentScope(getWebWindow().getTopLevelScope());
+            performance.setParentScope(getParentScope());
             performance.setPrototype(getPrototype(performance.getClass()));
             performance_ = performance;
         }

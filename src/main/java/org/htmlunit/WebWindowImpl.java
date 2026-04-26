@@ -190,22 +190,6 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     @Override
-    public void setTopLevelScope(final TopLevel topLevelScope) {
-        topLevelScope_ = topLevelScope;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public TopLevel getTopLevelScope() {
-        return topLevelScope_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public JavaScriptJobManager getJobManager() {
         return jobManager_;
     }

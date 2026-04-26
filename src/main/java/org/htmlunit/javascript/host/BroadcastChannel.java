@@ -149,11 +149,10 @@ public class BroadcastChannel extends EventTarget {
             for (final BroadcastChannel channel : broadcastChannels) {
                 if (channel != this && name_.equals(channel.name_)) {
                     final Window channelWindow = channel.getWindow();
-                    final WebWindow channelWebWindow = channelWindow.getWebWindow();
-                    final Page channelPage = channelWebWindow.getEnclosedPage();
+                    final Page channelPage = channelWindow.getWebWindow().getEnclosedPage();
 
                     if (UrlUtils.isSameOrigin(currentURL, channelPage.getUrl())) {
-                        final TopLevel scope = channelWebWindow.getTopLevelScope();
+                        final TopLevel scope = getTopLevelScope(channelWindow.getParentScope());
                         final Scriptable ports = JavaScriptEngine.newArray(scope, 0);
 
                         final MessageEvent event = new MessageEvent();

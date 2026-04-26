@@ -16,7 +16,6 @@ package org.htmlunit;
 
 import java.io.Serializable;
 
-import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -76,9 +75,6 @@ public interface WebWindow extends Serializable {
      *         window if there is no parent.
      */
     WebWindow getTopWindow();
-
-    TopLevel getTopLevelScope();
-    void setTopLevelScope(TopLevel topLevelScope);
 
     /**
      * Returns the web client that "owns" this window.

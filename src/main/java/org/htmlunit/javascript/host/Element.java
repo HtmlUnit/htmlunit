@@ -125,7 +125,7 @@ public class Element extends Node {
         super.setDomNode(domNode);
 
         final Window window = getWindow();
-        setParentScope(new WithScope(window.getWebWindow().getTopLevelScope(), window.getDocument()));
+        setParentScope(new WithScope(getTopLevelScope(getParentScope()), window.getDocument()));
         // CSSStyleDeclaration uses the parent scope
         style_ = new CSSStyleDeclaration(this, new ElementCssStyleDeclaration(getDomNodeOrDie()));
 

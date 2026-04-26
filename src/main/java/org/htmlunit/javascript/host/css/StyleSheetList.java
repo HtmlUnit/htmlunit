@@ -87,7 +87,7 @@ public class StyleSheetList extends HtmlUnitScriptable {
         super();
 
         final WebWindow webWindow = document.getWindow().getWebWindow();
-        setParentScope(new WithScope(webWindow.getTopLevelScope(), document));
+        setParentScope(new WithScope(getTopLevelScope(document.getParentScope()), document));
         setPrototype(getPrototype(getClass()));
 
         final WebClient webClient = webWindow.getWebClient();

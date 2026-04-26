@@ -832,7 +832,21 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final Object[] args,
             final DomNode node) {
 
-        final VarScope scope = getScope(page, node);
+        VarScope scope = ScriptableObject.getTopLevelScope(thisObject.getParentScope());
+
+        if (node != null && node instanceof HtmlElement htmlElement) {
+            final HTMLElement elem = htmlElement.getScriptableObject();
+            scope = new WithScope(scope, elem.getOwnerDocument());
+
+            if (htmlElement instanceof SubmittableElement) {
+                final HtmlForm enclosingForm = htmlElement.getEnclosingForm();
+                if (enclosingForm != null) {
+                    scope = new WithScope(scope, enclosingForm.getScriptableObject());
+                }
+            }
+
+            scope = new WithScope(scope, node.getScriptableObject());
+        }
 
         return callFunction(page, javaScriptFunction, scope, thisObject, args);
     }
@@ -867,25 +881,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
         };
         return getContextFactory().callSecured(action, page);
-    }
-
-    private static VarScope getScope(final HtmlPage page, final DomNode node) {
-        final TopLevel topLevel = page.getEnclosingWindow().getTopLevelScope();
-        if (node != null && node instanceof HtmlElement htmlElement) {
-            final HTMLElement elem = htmlElement.getScriptableObject();
-            WithScope scope = new WithScope(topLevel, elem.getOwnerDocument());
-
-            if (htmlElement instanceof SubmittableElement) {
-                final HtmlForm enclosingForm = htmlElement.getEnclosingForm();
-                if (enclosingForm != null) {
-                    scope = new WithScope(scope, enclosingForm.getScriptableObject());
-                }
-            }
-
-            return new WithScope(scope, node.getScriptableObject());
-        }
-
-        return topLevel;
     }
 
     /**
