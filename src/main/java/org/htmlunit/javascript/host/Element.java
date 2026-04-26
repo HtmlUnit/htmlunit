@@ -150,7 +150,7 @@ public class Element extends Node {
 
         // TODO: check that it is an "allowed" event for the browser, and take care to the case
         final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
-        eventHandler.setPrototype(ScriptableObject.getClassPrototype(htmlElt.getScriptableObject(), "Function"));
+        eventHandler.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), "Function"));
 
         setEventHandler(eventName, eventHandler);
     }
@@ -346,7 +346,7 @@ public class Element extends Node {
     @JsxFunction
     public DOMRect getBoundingClientRect() {
         final DOMRect textRectangle = new DOMRect(1, 1, 0, 0);
-        textRectangle.setParentScope(getTopLevelScope(this));
+        textRectangle.setParentScope(getTopLevelScope(getParentScope()));
         textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
         return textRectangle;
     }
@@ -662,7 +662,7 @@ public class Element extends Node {
      */
     @JsxFunction
     public DOMRectList getClientRects() {
-        final Scriptable topScope = getTopLevelScope(this);
+        final Scriptable topScope = getTopLevelScope(getParentScope());
         final DOMRectList rectList = new DOMRectList();
         rectList.setParentScope(topScope);
         rectList.setPrototype(getPrototype(rectList.getClass()));
@@ -1614,7 +1614,7 @@ public class Element extends Node {
         }
         catch (final CSSException e) {
             throw JavaScriptEngine.asJavaScriptException(
-                    (HtmlUnitScriptable) getTopLevelScope(thisObj).getGlobalThis(),
+                    (HtmlUnitScriptable) getTopLevelScope(scope).getGlobalThis(),
                     "An invalid or illegal selector was specified (selector: '"
                             + selectorString + "' error: " + e.getMessage() + ").",
                     DOMException.SYNTAX_ERR);

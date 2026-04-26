@@ -355,7 +355,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
                 nativeArrayBuffer.setParentScope(getParentScope());
                 nativeArrayBuffer.setPrototype(
-                        ScriptableObject.getClassPrototype(getWindow(), nativeArrayBuffer.getClassName()));
+                        ScriptableObject.getClassPrototype(getParentScope(), nativeArrayBuffer.getClassName()));
 
                 return nativeArrayBuffer;
             }
@@ -370,7 +370,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     try (InputStream inputStream = webResponse_.getContentAsStream()) {
                         final Blob blob = new Blob(IOUtils.toByteArray(inputStream), webResponse_.getContentType());
                         blob.setParentScope(getParentScope());
-                        blob.setPrototype(ScriptableObject.getClassPrototype(getWindow(), blob.getClassName()));
+                        blob.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), blob.getClassName()));
 
                         return blob;
                     }

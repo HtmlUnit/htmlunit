@@ -832,7 +832,7 @@ public class HTMLInputElement extends HTMLElement {
     public DOMRectList getClientRects() {
         if ("hidden".equals(getType())) {
             final DOMRectList rectList = new DOMRectList();
-            rectList.setParentScope(getTopLevelScope(this));
+            rectList.setParentScope(getTopLevelScope(getParentScope()));
             rectList.setPrototype(getPrototype(rectList.getClass()));
 
             return rectList;

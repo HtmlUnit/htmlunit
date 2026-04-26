@@ -353,7 +353,7 @@ public class HTMLElement extends Element {
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
                     final Method method = getClass().getMethod("set" + name, METHOD_PARAMS_OBJECT);
                     final EventHandler eventHandler = new EventHandler(getDomNodeOrDie(), name.substring(2), value);
-                    eventHandler.setPrototype(ScriptableObject.getClassPrototype(this, "Function"));
+                    eventHandler.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), "Function"));
                     method.invoke(this, eventHandler);
                 }
                 catch (final NoSuchMethodException | IllegalAccessException ignored) {

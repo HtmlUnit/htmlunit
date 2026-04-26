@@ -344,7 +344,7 @@ public class Blob extends HtmlUnitScriptable {
             final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
             System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
             buffer.setParentScope(getParentScope());
-            buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
+            buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), buffer.getClassName()));
             return buffer;
         });
     }

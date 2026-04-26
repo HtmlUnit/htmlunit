@@ -902,7 +902,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
         final NativeArrayBuffer buffer = new NativeArrayBuffer(data.length);
         System.arraycopy(data, 0, buffer.getBuffer(), 0, data.length);
         buffer.setParentScope(getParentScope());
-        buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
+        buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), buffer.getClassName()));
         return buffer;
     }
 

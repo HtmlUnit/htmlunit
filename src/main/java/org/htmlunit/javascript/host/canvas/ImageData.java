@@ -169,7 +169,7 @@ public class ImageData extends HtmlUnitScriptable {
 
             data_ = new NativeUint8ClampedArray(arrayBuffer, 0, bytes_.length);
             data_.setParentScope(getParentScope());
-            data_.setPrototype(ScriptableObject.getClassPrototype(getWindow(this), data_.getClassName()));
+            data_.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), data_.getClassName()));
         }
 
         return data_;

@@ -155,7 +155,7 @@ public class HTMLLinkElement extends HTMLElement {
         if (sheet_ == null) {
             try {
                 final CssStyleSheet sheet = getDomNodeOrDie().getSheet();
-                sheet_ = new CSSStyleSheet(this, getTopLevelScope(this), sheet);
+                sheet_ = new CSSStyleSheet(this, getTopLevelScope(getParentScope()), sheet);
             }
             catch (final RuntimeException e) {
                 // Got something unexpected; we can throw an exception in this case.

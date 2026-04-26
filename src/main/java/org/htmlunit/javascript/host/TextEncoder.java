@@ -60,7 +60,7 @@ public class TextEncoder extends HtmlUnitScriptable {
         if (JavaScriptEngine.isUndefined(toEncode)) {
             final NativeUint8Array result = new NativeUint8Array(0);
             result.setParentScope(getParentScope());
-            result.setPrototype(ScriptableObject.getClassPrototype(getWindow(this), result.getClassName()));
+            result.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), result.getClassName()));
             return result;
         }
 
@@ -79,7 +79,7 @@ public class TextEncoder extends HtmlUnitScriptable {
 
         final NativeUint8Array result = new NativeUint8Array(arrayBuffer, 0, bytes.length);
         result.setParentScope(getParentScope());
-        result.setPrototype(ScriptableObject.getClassPrototype(getWindow(this), result.getClassName()));
+        result.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), result.getClassName()));
         return result;
     }
 }

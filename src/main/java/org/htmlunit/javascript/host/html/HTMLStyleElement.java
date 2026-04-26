@@ -56,7 +56,7 @@ public class HTMLStyleElement extends HTMLElement {
         }
 
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
-        sheet_ = new CSSStyleSheet(this, getTopLevelScope(this), style.getSheet());
+        sheet_ = new CSSStyleSheet(this, getTopLevelScope(getParentScope()), style.getSheet());
 
         return sheet_;
     }

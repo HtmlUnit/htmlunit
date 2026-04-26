@@ -173,7 +173,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     final NativeArrayBuffer buffer = new NativeArrayBuffer(length);
                     System.arraycopy(data, offset, buffer.getBuffer(), 0, length);
                     buffer.setParentScope(getParentScope());
-                    buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
+                    buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), buffer.getClassName()));
 
                     final MessageEvent msgEvent = new MessageEvent(buffer);
                     msgEvent.setParentScope(scope);
@@ -270,7 +270,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             throw JavaScriptEngine.reportRuntimeError(
                     "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.");
         }
-        return new WebSocket(urlString, getTopLevelScope(ctorObj), win);
+        return new WebSocket(urlString, getTopLevelScope(scope), win);
     }
 
     /**

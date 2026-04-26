@@ -24,7 +24,6 @@ import org.apache.commons.lang3.function.FailableSupplier;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
@@ -267,22 +266,12 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
                 throw JavaScriptEngine.throwAsScriptRuntimeEx(e);
             }
         }
-        initParentScope(domNode, scriptable);
 
+        scriptable.setParentScope(getParentScope());
         scriptable.setPrototype(getPrototype(javaScriptClass));
         scriptable.setDomNode(domNode);
 
         return scriptable;
-    }
-
-    /**
-     * Initialize the parent scope of a newly created scriptable.
-     * @param domNode the DOM node for the script object
-     * @param scriptable the script object to initialize
-     */
-    protected void initParentScope(final DomNode domNode, final HtmlUnitScriptable scriptable) {
-        final SgmlPage page = domNode.getPage();
-        scriptable.setParentScope(ScriptableObject.getTopLevelScope(page.getScriptableObject()));
     }
 
     /**
@@ -333,7 +322,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
             return window;
         }
 
-        final TopLevel topLevel = ScriptableObject.getTopLevelScope(s);
+        final TopLevel topLevel = ScriptableObject.getTopLevelScope(s.getParentScope());
         if (topLevel.getGlobalThis() instanceof Window window) {
             return window;
         }
@@ -346,7 +335,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
             return wow;
         }
 
-        final TopLevel topLevel = ScriptableObject.getTopLevelScope(s);
+        final TopLevel topLevel = ScriptableObject.getTopLevelScope(s.getParentScope());
         if (topLevel.getGlobalThis() instanceof WindowOrWorkerGlobalScope wow) {
             return wow;
         }
@@ -433,7 +422,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
     }
 
     protected NativePromise setupPromise(final FailableSupplier<Object, IOException> resolver) {
-        final VarScope scope = ScriptableObject.getTopLevelScope(this);
+        final VarScope scope = ScriptableObject.getTopLevelScope(getParentScope());
         final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
 
         try {
@@ -448,7 +437,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
     }
 
     protected NativePromise setupRejectedPromise(final Supplier<Object> resolver) {
-        final VarScope scope = ScriptableObject.getTopLevelScope(this);
+        final VarScope scope = ScriptableObject.getTopLevelScope(getParentScope());
         final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
         final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
         return (NativePromise) reject.call(Context.getCurrentContext(), scope, ctor, new Object[] {resolver.get()});

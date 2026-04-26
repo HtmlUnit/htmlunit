@@ -1988,7 +1988,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             }
         }
 
-        final Window sender = (Window) ScriptableObject.getTopLevelScope(scope).getGlobalThis();
+        final TopLevel topLevel = ScriptableObject.getTopLevelScope(scope);
+        final Window sender = (Window) topLevel.getGlobalThis();
         final Window receiver = (Window) thisObj;
         final URL receiverURL = receiver.getWebWindow().getEnclosedPage().getUrl();
 
@@ -2007,7 +2008,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
                 }
                 catch (final Exception e) {
                     throw JavaScriptEngine.asJavaScriptException(
-                            (HtmlUnitScriptable) getTopLevelScope(thisObj).getGlobalThis(),
+                            sender,
                             "Failed to execute 'postMessage' on 'Window': Invalid target origin '"
                                     + targetOrigin + "' was specified (reason: " + e.getMessage() + ".",
                             DOMException.SYNTAX_ERR);

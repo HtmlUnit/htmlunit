@@ -180,14 +180,6 @@ public class XMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    protected void initParentScope(final DomNode domNode, final HtmlUnitScriptable scriptable) {
-        scriptable.setParentScope(getParentScope());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     @JsxFunction
     public HTMLCollection getElementsByTagName(final String tagName) {
         final DomNode firstChild = getDomNodeOrDie().getFirstChild();

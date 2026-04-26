@@ -125,6 +125,7 @@ public class Intl extends HtmlUnitScriptable {
      * Duplicates will be omitted and elements will be validated as structurally valid language tags.
      *
      * @param cx the current context
+     * @param scope the scope
      * @param thisObj the scriptable this
      * @param args the arguments
      * @param funObj the function object
@@ -133,10 +134,10 @@ public class Intl extends HtmlUnitScriptable {
      * @see <a href="https://tc39.es/ecma402/#sec-intl.getcanonicallocales">spec</a>
      */
     @JsxStaticFunction
-    public static Object getCanonicalLocales(final Context cx, final Scriptable thisObj,
-            final Object[] args, final Function funObj) {
+    public static Object getCanonicalLocales(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
         if (args.length == 0 || JavaScriptEngine.isUndefined(args[0])) {
-            return cx.newArray(ScriptableObject.getTopLevelScope(thisObj), new Object[0]);
+            return cx.newArray(ScriptableObject.getTopLevelScope(scope), new Object[0]);
         }
 
         final Object localesArgument = args[0];
@@ -178,7 +179,7 @@ public class Intl extends HtmlUnitScriptable {
             }
         }
 
-        return cx.newArray(ScriptableObject.getTopLevelScope(thisObj), canonicalLocales.toArray());
+        return cx.newArray(ScriptableObject.getTopLevelScope(scope), canonicalLocales.toArray());
     }
 
     /**
@@ -210,6 +211,6 @@ public class Intl extends HtmlUnitScriptable {
         }
 
         return Context.getCurrentContext().newArray(
-                ScriptableObject.getTopLevelScope(localesArgument), supportedLocales.toArray());
+                ScriptableObject.getTopLevelScope(localesArgument.getParentScope()), supportedLocales.toArray());
     }
 }

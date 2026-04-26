@@ -172,7 +172,7 @@ public final class WindowOrWorkerGlobalScopeMixin {
         }
 
         final Function callback = (Function) args[0];
-        final VarScope scope = ScriptableObject.getTopLevelScope(thisObj);
+        final VarScope scope = ScriptableObject.getTopLevelScope(thisObj.getParentScope());
         final Context cx = Context.getCurrentContext();
         cx.enqueueMicrotask(() -> {
             try {

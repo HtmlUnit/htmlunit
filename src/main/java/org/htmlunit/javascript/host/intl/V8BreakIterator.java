@@ -99,7 +99,7 @@ public class V8BreakIterator extends HtmlUnitScriptable {
             iterator.breakIterator_ = BreakIterator.getWordInstance(locale);
         }
 
-        iterator.setParentScope(getTopLevelScope(ctorObj));
+        iterator.setParentScope(getTopLevelScope(scope));
         iterator.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return iterator;
     }

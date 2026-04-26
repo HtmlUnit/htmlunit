@@ -59,7 +59,7 @@ public class XPathEvaluator extends HtmlUnitScriptable {
     public NativeXPathNSResolver createNSResolver(final Node nodeResolver) {
         final NativeXPathNSResolver resolver = new NativeXPathNSResolver();
         resolver.setElement(nodeResolver);
-        resolver.setParentScope(getTopLevelScope(this));
+        resolver.setParentScope(getTopLevelScope(getParentScope()));
         resolver.setPrototype(getPrototype(resolver.getClass()));
         return resolver;
     }

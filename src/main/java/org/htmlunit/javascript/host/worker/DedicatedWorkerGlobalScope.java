@@ -247,7 +247,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final MessageEvent event = new MessageEvent();
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "",
                                     owningWindow_, JavaScriptEngine.UNDEFINED);
-        event.setParentScope(getTopLevelScope(this));
+        event.setParentScope(getTopLevelScope(getParentScope()));
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 
         if (LOG.isDebugEnabled()) {
@@ -274,7 +274,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
         final MessageEvent event = new MessageEvent();
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "",
                                     owningWindow_, JavaScriptEngine.UNDEFINED);
-        event.setParentScope(getTopLevelScope(this));
+        event.setParentScope(getTopLevelScope(getParentScope()));
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 
         final JavaScriptEngine jsEngine =
@@ -298,7 +298,7 @@ public class DedicatedWorkerGlobalScope extends WorkerGlobalScope {
             final Object[] args = {event};
             for (final Scriptable scriptable : handlers) {
                 if (scriptable instanceof Function handlerFunction) {
-                    handlerFunction.call(cx, ScriptableObject.getTopLevelScope(event), this, args);
+                    handlerFunction.call(cx, ScriptableObject.getTopLevelScope(event.getParentScope()), this, args);
                 }
             }
         }

@@ -123,7 +123,7 @@ public class Locale extends HtmlUnitScriptable {
         }
 
         final Locale l = new Locale(locale);
-        l.setParentScope(getTopLevelScope(ctorObj));
+        l.setParentScope(getTopLevelScope(scope));
         l.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return l;
     }
@@ -310,7 +310,7 @@ public class Locale extends HtmlUnitScriptable {
                 .build();
 
         final Locale l = new Locale(locale);
-        l.setParentScope(getTopLevelScope(this));
+        l.setParentScope(getTopLevelScope(getParentScope()));
         l.setPrototype(this.getPrototype());
         return l;
     }
@@ -327,7 +327,7 @@ public class Locale extends HtmlUnitScriptable {
                 .build();
 
         final Locale l = new Locale(locale);
-        l.setParentScope(getTopLevelScope(this));
+        l.setParentScope(getTopLevelScope(getParentScope()));
         l.setPrototype(this.getPrototype());
         return l;
     }

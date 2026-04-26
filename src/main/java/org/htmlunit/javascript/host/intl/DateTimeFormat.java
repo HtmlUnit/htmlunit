@@ -278,7 +278,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
         final Window window = getWindow(ctorObj);
         final DateTimeFormat format = new DateTimeFormat(locales, window.getBrowserVersion());
-        format.setParentScope(getTopLevelScope(ctorObj));
+        format.setParentScope(getTopLevelScope(scope));
         format.setPrototype(((FunctionObject) ctorObj).getClassPrototype());
         return format;
     }

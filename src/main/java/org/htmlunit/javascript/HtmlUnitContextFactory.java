@@ -198,7 +198,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         }
 
         @Override
-        protected Function compileFunction(final Scriptable scope, String source,
+        protected Function compileFunction(final VarScope scope, String source,
                 final Evaluator compiler, final ErrorReporter compilationErrorReporter,
                 final String sourceName, final int lineno, final Object securityDomain) {
 

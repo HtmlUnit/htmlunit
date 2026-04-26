@@ -138,7 +138,7 @@ public class DOMParser extends HtmlUnitScriptable {
 
         // document knows the window but is not the windows document
         final HTMLDocument document = new HTMLDocument();
-        document.setParentScope(getTopLevelScope(scriptable));
+        document.setParentScope(getTopLevelScope(scriptable.getParentScope()));
         document.setPrototype(window.getPrototype(document.getClass()));
         // document.setWindow(window);
         document.setDomNode(page);
