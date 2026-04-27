@@ -1865,12 +1865,15 @@ public class HtmlPage extends SgmlPage {
         if (mappedElementsBuilt_) {
             return;
         }
-        mappedElementsBuilt_ = true;
         final DomElement root = getDocumentElement();
         if (root != null) {
             addElement(idMap_, root, DomElement.ID_ATTRIBUTE, true);
             addElement(nameMap_, root, DomElement.NAME_ATTRIBUTE, true);
         }
+        // Flip the flag only after the maps are populated, so a partial
+        // failure mid-walk leaves us with built_=false and the next read
+        // tries again rather than seeing a half-populated index.
+        mappedElementsBuilt_ = true;
     }
 
     private void addElement(final Map<String, MappedElementIndexEntry> map, final DomElement element,
