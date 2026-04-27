@@ -295,7 +295,7 @@ public class LocationTest extends SimpleWebTestCase {
 
         // Verify that we didn't reload the page.
         assertTrue(page == page2);
-        assertEquals(URL_FIRST, conn.getLastWebRequest().getUrl());
+        assertEquals(1, conn.getRequestCount());
     }
 
     /**
@@ -380,6 +380,46 @@ public class LocationTest extends SimpleWebTestCase {
         final HtmlPage c = (HtmlPage) a.getFrameByName("c").getEnclosedPage();
         c.getHtmlElementById("anchor").click();
         assertEquals(getExpectedAlerts(), alerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setHashUpdatesPageUrl() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+
+        final String html = DOCTYPE_HTML
+            + "<html><head><title>Test</title></head><body>\n"
+            + "<a id='a' onclick='location.hash=\"newHash\"'>go</a>\n"
+            + "</body></html>";
+
+        conn.setResponse(URL_FIRST, html);
+        webClient.setWebConnection(conn);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        assertNull(page.getUrl().getRef());
+
+        page.getHtmlElementById("a").click();
+        assertEquals("newHash", page.getUrl().getRef());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setHashAboutBlank() throws Exception {
+        try (WebClient webClient = new WebClient()) {
+            HtmlPage page = webClient.getPage("about:blank");
+            assertNull(page.getUrl().getRef());
+
+            page.executeJavaScript("location.hash = 'foo'");
+            assertEquals("foo", page.getUrl().getRef());
+
+            page = (HtmlPage) page.refresh();
+            assertEquals("foo", page.getUrl().getRef());
+        }
     }
 
     /**

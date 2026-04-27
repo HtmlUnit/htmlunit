@@ -441,10 +441,18 @@ public class Location extends HtmlUnitScriptable {
         final boolean hasChanged = hash != null && !hash.equals(hash_);
         hash_ = hash;
 
-        if (triggerHashChanged && hasChanged) {
+        if (hasChanged) {
             final Window w = getWindow();
-            final Event event = new HashChangeEvent(w, Event.TYPE_HASH_CHANGE, oldURL, getHref());
-            w.executeEventLocally(event);
+            final Page page = w.getWebWindow().getEnclosedPage();
+            if (page != null) {
+                final WebRequest request = page.getWebResponse().getWebRequest();
+                request.setUrl(UrlUtils.toUrlSafe(getHref()));
+            }
+
+            if (triggerHashChanged) {
+                final Event event = new HashChangeEvent(w, Event.TYPE_HASH_CHANGE, oldURL, getHref());
+                w.executeEventLocally(event);
+            }
         }
     }
 
