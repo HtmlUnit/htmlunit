@@ -72,7 +72,7 @@ public class ImageData extends HtmlUnitScriptable {
             data = array;
             if (data.getArrayLength() % 4 != 0) {
                 throw JavaScriptEngine.asJavaScriptException(
-                        (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope().getGlobalThis(),
+                        (HtmlUnitScriptable) getTopLevelScope(scope).getGlobalThis(),
                         "ImageData ctor - data length mod 4 not zero",
                         DOMException.INVALID_STATE_ERR);
             }
@@ -83,7 +83,7 @@ public class ImageData extends HtmlUnitScriptable {
 
                 if (data.getArrayLength() != 4 * width * height) {
                     throw JavaScriptEngine.asJavaScriptException(
-                            (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope().getGlobalThis(),
+                            (HtmlUnitScriptable) getTopLevelScope(scope).getGlobalThis(),
                             "ImageData ctor - width not correct",
                             DOMException.INDEX_SIZE_ERR);
                 }
@@ -94,7 +94,7 @@ public class ImageData extends HtmlUnitScriptable {
 
             if (data.getArrayLength() != 4 * width * height) {
                 throw JavaScriptEngine.asJavaScriptException(
-                        (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope().getGlobalThis(),
+                        (HtmlUnitScriptable) getTopLevelScope(scope).getGlobalThis(),
                         "ImageData ctor - width/height not correct",
                         DOMException.INDEX_SIZE_ERR);
             }
@@ -106,13 +106,13 @@ public class ImageData extends HtmlUnitScriptable {
 
         if (width < 0) {
             throw JavaScriptEngine.asJavaScriptException(
-                    (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope().getGlobalThis(),
+                    (HtmlUnitScriptable) getTopLevelScope(scope).getGlobalThis(),
                     "ImageData ctor - width negative",
                     DOMException.INDEX_SIZE_ERR);
         }
         if (height < 0) {
             throw JavaScriptEngine.asJavaScriptException(
-                    (HtmlUnitScriptable) JavaScriptEngine.getTopCallScope().getGlobalThis(),
+                    (HtmlUnitScriptable) getTopLevelScope(scope).getGlobalThis(),
                     "ImageData ctor - height negative",
                     DOMException.INDEX_SIZE_ERR);
         }
