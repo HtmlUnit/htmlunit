@@ -1856,8 +1856,7 @@ public class HtmlPage extends SgmlPage {
             return;
         }
         if (isAncestorOf(element)) {
-            addElement(idMap_, element, DomElement.ID_ATTRIBUTE, recurse);
-            addElement(nameMap_, element, DomElement.NAME_ATTRIBUTE, recurse);
+            addElement(element, recurse);
         }
     }
 
@@ -1865,39 +1864,52 @@ public class HtmlPage extends SgmlPage {
         if (mappedElementsBuilt_) {
             return;
         }
+
         final DomElement root = getDocumentElement();
         if (root != null) {
-            addElement(idMap_, root, DomElement.ID_ATTRIBUTE, true);
-            addElement(nameMap_, root, DomElement.NAME_ATTRIBUTE, true);
+            addElement(root, true);
         }
+
         // Flip the flag only after the maps are populated, so a partial
         // failure mid-walk leaves us with built_=false and the next read
         // tries again rather than seeing a half-populated index.
         mappedElementsBuilt_ = true;
     }
 
-    private void addElement(final Map<String, MappedElementIndexEntry> map, final DomElement element,
-            final String attribute, final boolean recurse) {
-        final String value = element.getAttribute(attribute);
-
-        if (ATTRIBUTE_NOT_DEFINED != value) {
-            MappedElementIndexEntry elements = map.get(value);
+    private void addElement(final DomElement element, final boolean recurse) {
+        final String idValue = element.getAttribute(DomElement.ID_ATTRIBUTE);
+        if (ATTRIBUTE_NOT_DEFINED != idValue) {
+            MappedElementIndexEntry elements = idMap_.get(idValue);
             if (elements == null) {
                 elements = new MappedElementIndexEntry();
                 elements.add(element);
-                map.put(value, elements);
+                idMap_.put(idValue, elements);
             }
             else {
                 elements.add(element);
             }
         }
+
+        final String nameValue = element.getAttribute(DomElement.NAME_ATTRIBUTE);
+        if (ATTRIBUTE_NOT_DEFINED != nameValue) {
+            MappedElementIndexEntry elements = nameMap_.get(nameValue);
+            if (elements == null) {
+                elements = new MappedElementIndexEntry();
+                elements.add(element);
+                nameMap_.put(nameValue, elements);
+            }
+            else {
+                elements.add(element);
+            }
+        }
+
         if (recurse) {
             // poor man's approach - we don't use getChildElements()
             // to avoid a bunch of object constructions
             DomNode nextChild = element.getFirstChild();
             while (nextChild != null) {
                 if (nextChild instanceof DomElement domElement) {
-                    addElement(map, domElement, attribute, true);
+                    addElement(domElement, true);
                 }
                 nextChild = nextChild.getNextSibling();
             }
@@ -1916,27 +1928,36 @@ public class HtmlPage extends SgmlPage {
             return;
         }
         if (descendant || isAncestorOf(element)) {
-            removeElement(idMap_, element, DomElement.ID_ATTRIBUTE, recurse);
-            removeElement(nameMap_, element, DomElement.NAME_ATTRIBUTE, recurse);
+            removeElement(element, recurse);
         }
     }
 
-    private void removeElement(final Map<String, MappedElementIndexEntry> map, final DomElement element,
-            final String attribute, final boolean recurse) {
-        final String value = element.getAttribute(attribute);
-
-        if (ATTRIBUTE_NOT_DEFINED != value) {
-            final MappedElementIndexEntry elements = map.remove(value);
+    private void removeElement(final DomElement element, final boolean recurse) {
+        final String idValue = element.getAttribute(DomElement.ID_ATTRIBUTE);
+        if (ATTRIBUTE_NOT_DEFINED != idValue) {
+            final MappedElementIndexEntry elements = idMap_.remove(idValue);
             if (elements != null) {
                 elements.remove(element);
                 if (!elements.elements_.isEmpty()) {
-                    map.put(value, elements);
+                    idMap_.put(idValue, elements);
                 }
             }
         }
+
+        final String nameValue = element.getAttribute(DomElement.NAME_ATTRIBUTE);
+        if (ATTRIBUTE_NOT_DEFINED != nameValue) {
+            final MappedElementIndexEntry elements = nameMap_.remove(nameValue);
+            if (elements != null) {
+                elements.remove(element);
+                if (!elements.elements_.isEmpty()) {
+                    nameMap_.put(nameValue, elements);
+                }
+            }
+        }
+
         if (recurse) {
             for (final DomElement child : element.getChildElements()) {
-                removeElement(map, child, attribute, true);
+                removeElement(child, true);
             }
         }
     }
