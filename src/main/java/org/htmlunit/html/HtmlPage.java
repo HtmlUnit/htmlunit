@@ -154,6 +154,10 @@ public class HtmlPage extends SgmlPage {
 
     private Map<String, MappedElementIndexEntry> idMap_ = new ConcurrentHashMap<>();
     private Map<String, MappedElementIndexEntry> nameMap_ = new ConcurrentHashMap<>();
+    // The id/name lookup index is built lazily on first use. Until then,
+    // notifyNodeAdded / fireAttributeChange skip the per-element index updates.
+    // Reads must call ensureMappedElementsBuilt() before consulting idMap_/nameMap_.
+    private boolean mappedElementsBuilt_;
 
     private List<BaseFrameElement> frameElements_ = new ArrayList<>();
     private int parserCount_;
@@ -631,6 +635,7 @@ public class HtmlPage extends SgmlPage {
     @Override
     public DomElement getElementById(final String elementId) {
         if (elementId != null) {
+            ensureMappedElementsBuilt();
             final MappedElementIndexEntry elements = idMap_.get(elementId);
             if (elements != null) {
                 return elements.first();
@@ -1708,6 +1713,7 @@ public class HtmlPage extends SgmlPage {
      */
     public List<DomElement> getElementsById(final String elementId) {
         if (elementId != null) {
+            ensureMappedElementsBuilt();
             final MappedElementIndexEntry elements = idMap_.get(elementId);
             if (elements != null) {
                 return new ArrayList<>(elements.elements());
@@ -1728,6 +1734,7 @@ public class HtmlPage extends SgmlPage {
     @SuppressWarnings("unchecked")
     public <E extends DomElement> E getElementByName(final String name) throws ElementNotFoundException {
         if (name != null) {
+            ensureMappedElementsBuilt();
             final MappedElementIndexEntry elements = nameMap_.get(name);
             if (elements != null) {
                 return (E) elements.first();
@@ -1746,6 +1753,7 @@ public class HtmlPage extends SgmlPage {
      */
     public List<DomElement> getElementsByName(final String name) {
         if (name != null) {
+            ensureMappedElementsBuilt();
             final MappedElementIndexEntry elements = nameMap_.get(name);
             if (elements != null) {
                 return new ArrayList<>(elements.elements());
@@ -1765,6 +1773,7 @@ public class HtmlPage extends SgmlPage {
         if (idAndOrName == null) {
             return Collections.emptyList();
         }
+        ensureMappedElementsBuilt();
         final MappedElementIndexEntry list1 = idMap_.get(idAndOrName);
         final MappedElementIndexEntry list2 = nameMap_.get(idAndOrName);
         final List<DomElement> list = new ArrayList<>();
@@ -1841,9 +1850,26 @@ public class HtmlPage extends SgmlPage {
      * @param recurse indicates if children must be added too
      */
     void addMappedElement(final DomElement element, final boolean recurse) {
+        // Index is built lazily; skip while not built. ensureMappedElementsBuilt()
+        // walks the tree once and populates everything on first read.
+        if (!mappedElementsBuilt_) {
+            return;
+        }
         if (isAncestorOf(element)) {
             addElement(idMap_, element, DomElement.ID_ATTRIBUTE, recurse);
             addElement(nameMap_, element, DomElement.NAME_ATTRIBUTE, recurse);
+        }
+    }
+
+    private void ensureMappedElementsBuilt() {
+        if (mappedElementsBuilt_) {
+            return;
+        }
+        mappedElementsBuilt_ = true;
+        final DomElement root = getDocumentElement();
+        if (root != null) {
+            addElement(idMap_, root, DomElement.ID_ATTRIBUTE, true);
+            addElement(nameMap_, root, DomElement.NAME_ATTRIBUTE, true);
         }
     }
 
@@ -1882,6 +1908,10 @@ public class HtmlPage extends SgmlPage {
      * @param descendant indicates of the element was descendant of this HtmlPage, but now its parent might be null
      */
     void removeMappedElement(final DomElement element, final boolean recurse, final boolean descendant) {
+        // see addMappedElement: while the index is unbuilt, removals are also no-ops.
+        if (!mappedElementsBuilt_) {
+            return;
+        }
         if (descendant || isAncestorOf(element)) {
             removeElement(idMap_, element, DomElement.ID_ATTRIBUTE, recurse);
             removeElement(nameMap_, element, DomElement.NAME_ATTRIBUTE, recurse);
@@ -1998,6 +2028,7 @@ public class HtmlPage extends SgmlPage {
 
         result.idMap_ = new ConcurrentHashMap<>();
         result.nameMap_ = new ConcurrentHashMap<>();
+        result.mappedElementsBuilt_ = false;
 
         return result;
     }
