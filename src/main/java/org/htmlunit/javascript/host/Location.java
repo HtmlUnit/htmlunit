@@ -35,6 +35,7 @@ import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.host.event.Event;
@@ -314,17 +315,21 @@ public class Location extends HtmlUnitScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
      */
     public void setHref(final String newLocation) throws IOException {
-        WebWindow webWindow = getWindowFromTopCallScope().getWebWindow();
-        final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
+            final HtmlPage page = (HtmlPage) window_.getWebWindow().getEnclosedPage();
             page.executeJavaScript(script, "new location value", 1);
             return;
         }
+
         try {
+            // we need to get the caller window to get the calling page
+            WebWindow webWindow = ((Window) JavaScriptEngine.getTopCallScope().getGlobalThis()).getWebWindow();
+            final HtmlPage callingPage = (HtmlPage) webWindow.getEnclosedPage();
+
             final BrowserVersion browserVersion = webWindow.getWebClient().getBrowserVersion();
 
-            URL url = page.getFullyQualifiedUrl(newLocation);
+            URL url = callingPage.getFullyQualifiedUrl(newLocation);
             // fix for empty url
             if (StringUtils.isEmptyOrNull(newLocation)) {
                 url = UrlUtils.getUrlWithNewRef(url, null);
@@ -332,7 +337,7 @@ public class Location extends HtmlUnitScriptable {
 
             final WebRequest request = new WebRequest(url,
                         browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
-            request.setRefererHeader(page.getUrl());
+            request.setRefererHeader(callingPage.getUrl());
 
             webWindow = window_.getWebWindow();
             webWindow.getWebClient().download(webWindow, "", request, true, null, "JS set location");

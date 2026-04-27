@@ -1093,7 +1093,65 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§menu.html")
+    @Alerts({"§§URL§§path1/newContent.html", "§§URL§§path1/menu.html"})
+    public void settingRelativeLocation() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head><title>Frameset</title></head>\n"
+                + "<frameset rows='20%,80%'>\n"
+                + "  <frame src='path1/menu.html' name='menu'>\n"
+                + "  <frame src='path2/content.html' name='content'>\n"
+                + "</frameset></html>";
+
+        final String menu = DOCTYPE_HTML
+                + "<html><head><title>Menu</title></head>\n"
+                + "<body>\n"
+                + "  <a id='link' href='newContent.html' target='content'>Link</a>\n"
+                + "  <a id='jsLink' href='#' "
+                        + "onclick=\"javascript:top.content.location='newContent.html';\">jsLink</a>\n"
+                + "</body></html>";
+
+        final String content = DOCTYPE_HTML
+                + "<html><head><title>Content</title></head><body><p>content</p></body></html>";
+        final String newContent = DOCTYPE_HTML
+                + "<html><head><title>New Content</title></head><body><p>new content</p></body></html>";
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(new URL(URL_FIRST, "path1/menu.html"), menu);
+        conn.setResponse(new URL(URL_FIRST, "path2/content.html"), content);
+        conn.setResponse(new URL(URL_FIRST, "path1/newContent.html"), newContent);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final WebDriver driver = loadPage2(html);
+
+        assertEquals(3, conn.getRequestCount());
+
+        // click an anchor with href and target
+        driver.switchTo().frame(0);
+        driver.findElement(By.id("link")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
+        assertEquals(4, conn.getRequestCount());
+        assertEquals(getExpectedAlerts()[0], conn.getLastWebRequest().getUrl());
+        Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[1], lastAdditionalHeaders.get(HttpHeader.REFERER));
+
+        // click an anchor with onclick which sets frame.location
+        driver.findElement(By.id("jsLink")).click();
+        if (useRealBrowser()) {
+            Thread.sleep(400);
+        }
+        assertEquals(5, conn.getRequestCount());
+        assertEquals(getExpectedAlerts()[0], conn.getLastWebRequest().getUrl());
+        lastAdditionalHeaders = conn.getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[1], lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"§§URL§§newContent.html", "§§URL§§menu.html"})
     public void refererHeaderWhenSettingFrameLocation() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head><title>Frameset</title></head>\n"
@@ -1132,8 +1190,9 @@ public class Location2Test extends WebDriverTestCase {
             Thread.sleep(400);
         }
         assertEquals(4, conn.getRequestCount());
+        assertEquals(getExpectedAlerts()[0], conn.getLastWebRequest().getUrl());
         Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[1], lastAdditionalHeaders.get(HttpHeader.REFERER));
 
         // click an anchor with onclick which sets frame.location
         driver.findElement(By.id("jsLink")).click();
@@ -1141,8 +1200,9 @@ public class Location2Test extends WebDriverTestCase {
             Thread.sleep(400);
         }
         assertEquals(5, conn.getRequestCount());
+        assertEquals(getExpectedAlerts()[0], conn.getLastWebRequest().getUrl());
         lastAdditionalHeaders = conn.getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[1], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**

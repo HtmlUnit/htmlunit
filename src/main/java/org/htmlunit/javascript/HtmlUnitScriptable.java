@@ -343,22 +343,6 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * @return the window that is set as the top call scope
-     */
-    protected static Window getWindowFromTopCallScope() throws RuntimeException {
-        final Scriptable top = JavaScriptEngine.getTopCallScope();
-        if (top instanceof TopLevel topLevel) {
-            final ScriptableObject globalThis = topLevel.getGlobalThis();
-            if (globalThis instanceof Window window) {
-                return window;
-            }
-        }
-        throw new RuntimeException("Unable to find window in scope");
-    }
-
-    /**
      * Gets the browser version currently used.
      * @return the browser version
      */
