@@ -39,6 +39,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
@@ -662,7 +663,7 @@ public class Element extends Node {
      */
     @JsxFunction
     public DOMRectList getClientRects() {
-        final Scriptable topScope = getTopLevelScope(getParentScope());
+        final TopLevel topScope = getTopLevelScope(getParentScope());
         final DOMRectList rectList = new DOMRectList();
         rectList.setParentScope(topScope);
         rectList.setPrototype(getPrototype(rectList.getClass()));

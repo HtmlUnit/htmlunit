@@ -15,7 +15,7 @@
 package org.htmlunit.javascript.host;
 
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptableProxy;
 
 /**
@@ -50,7 +50,7 @@ public class WindowProxy extends HtmlUnitScriptableProxy<Window> {
      * @param parent the new parent scope
      */
     @Override
-    public void setParentScope(final Scriptable parent) {
+    public void setParentScope(final VarScope parent) {
         // nothing as the window is the top level scope and its parent scope should stay null
     }
 }

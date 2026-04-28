@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
@@ -121,7 +121,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param parentScope the parent scope
      * @param cssStyleSheet the CSS stylesheet which this stylesheet host object represents
      */
-    public CSSStyleSheet(final HTMLElement element, final Scriptable parentScope,
+    public CSSStyleSheet(final HTMLElement element, final VarScope parentScope,
             final CssStyleSheet cssStyleSheet) {
         super(element);
 

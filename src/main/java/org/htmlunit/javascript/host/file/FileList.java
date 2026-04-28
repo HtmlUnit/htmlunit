@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.file;
 import java.util.ArrayList;
 
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -77,7 +78,7 @@ public class FileList extends HtmlUnitScriptable {
      * {@inheritDoc}
      */
     @Override
-    public void setParentScope(final Scriptable scope) {
+    public void setParentScope(final VarScope scope) {
         super.setParentScope(scope);
         if (files_ != null) {
             for (final File file : files_) {

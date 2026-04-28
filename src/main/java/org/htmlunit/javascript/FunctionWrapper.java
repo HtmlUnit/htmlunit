@@ -190,7 +190,7 @@ public class FunctionWrapper implements Function, SymbolScriptable, Serializable
      * {@inheritDoc}
      */
     @Override
-    public void setParentScope(final Scriptable scope) {
+    public void setParentScope(final VarScope scope) {
         wrapped_.setParentScope(scope);
     }
 
