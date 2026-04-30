@@ -22,7 +22,7 @@ module org.htmlunit {
     requires java.xml;
     requires jdk.xml.dom;
 
-    requires htmlunit.websocket.client;
+    requires java.net.http;
 
     requires org.htmlunit.cssparser;
     requires org.htmlunit.corejs;

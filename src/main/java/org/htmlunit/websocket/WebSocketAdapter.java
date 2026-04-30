@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URI;
 
 /**
- * Helper to have no direct dependency to the WebSockt client
+ * Helper to have no direct dependency to the WebSocket client
  * implementation used by HtmlUnit.
  *
  * @author Ronald Brill
@@ -49,11 +49,11 @@ public interface WebSocketAdapter {
     void send(Object content) throws IOException;
 
     /**
-     * Close the incomming session.
+     * Close the incoming session.
      *
      * @throws Exception in case of error
      */
-    void closeIncommingSession() throws Exception;
+    void closeIncomingSession() throws Exception;
 
     /**
      * Close the outgoing session.

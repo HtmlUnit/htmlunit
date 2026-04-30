@@ -173,15 +173,12 @@ public class ArchitectureTest {
         .should().dependOnClassesThat().haveFullyQualifiedName("org.apache.commons.lang3.math.NumberUtils");
 
     /**
-     * The jetty websocket stuff is only used by one class.
+     * The jetty websocket stuff is no longer used (replaced by JDK HttpClient WebSocket).
      */
     @ArchTest
     public static final ArchRule webSocketPackageRule = noClasses()
             .that()
                 .resideOutsideOfPackage("org.htmlunit.jetty..")
-                .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter")
-                .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter$JettyWebSocketAdapterFactory")
-                .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter$JettyWebSocketAdapterImpl")
             .should()
                 .dependOnClassesThat().resideInAnyPackage("org.htmlunit.jetty..");
 
