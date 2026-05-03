@@ -30,6 +30,7 @@ import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.TopLevel;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.WithScope;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlPage;
@@ -283,22 +284,27 @@ public class EventListenersContainer implements Serializable {
                 page = (HtmlPage) jsNode_.getDomNodeOrDie();
             }
             else {
-                Scriptable parentScope = jsNode_.getParentScope();
+                Scriptable scriptableObj = null;
+                final VarScope parentScope = jsNode_.getParentScope();
                 if (parentScope instanceof TopLevel topLevel) {
-                    parentScope = topLevel.getGlobalThis();
+                    scriptableObj = topLevel.getGlobalThis();
                 }
                 else if (parentScope instanceof WithScope withScope) {
-                    parentScope = withScope.getObject();
+                    scriptableObj = withScope.getObject();
                 }
 
-                if (parentScope instanceof Window window) {
+                if (scriptableObj instanceof Window window) {
                     page = (HtmlPage) window.getDomNodeOrDie();
                 }
-                else if (parentScope instanceof HTMLDocument document) {
+                else if (scriptableObj instanceof HTMLDocument document) {
                     page = document.getPage();
                 }
+                else if (scriptableObj != null) {
+                    page = ((HTMLElement) scriptableObj).getDomNodeOrDie().getHtmlPageOrNull();
+                }
                 else {
-                    page = ((HTMLElement) parentScope).getDomNodeOrDie().getHtmlPageOrNull();
+                    page = null;
+                    throw new UnsupportedOperationException("TODO ");
                 }
             }
 

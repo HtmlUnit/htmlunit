@@ -94,17 +94,6 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public void setParentScope(final VarScope scope) {
-        if (scope == this) {
-            throw new IllegalArgumentException("Object can't be its own parentScope");
-        }
-        super.setParentScope(scope);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void put(final String name, final Scriptable start, final Object value) {
         try {
             super.put(name, start, value);

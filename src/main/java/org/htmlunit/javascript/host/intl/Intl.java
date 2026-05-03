@@ -30,7 +30,6 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeArray;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.SymbolKey;
@@ -94,7 +93,7 @@ public class Intl extends HtmlUnitScriptable {
             final FunctionObject constructorFn = new FunctionObject(config.getJsConstructor().getKey(),
                     config.getJsConstructor().getValue(), scope);
 
-            ScriptRuntime.setFunctionProtoAndParent(constructorFn, Context.getCurrentContext(), scope);
+            JavaScriptEngine.setFunctionProtoAndParent(constructorFn, Context.getCurrentContext(), scope);
             constructorFn.setImmunePrototypeProperty(prototype);
             prototype.setParentScope(scope);
             ScriptableObject.defineProperty(prototype, "constructor", constructorFn, ScriptableObject.DONTENUM);

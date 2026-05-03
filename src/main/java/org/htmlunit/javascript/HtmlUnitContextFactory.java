@@ -291,7 +291,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
      */
     @Override
     protected Object doTopCall(final Callable callable,
-            final Context cx, final Scriptable scope,
+            final Context cx, final VarScope scope,
             final Scriptable thisObj, final Object[] args) {
 
         final TimeoutContext tcx = (TimeoutContext) cx;

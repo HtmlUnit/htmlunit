@@ -83,7 +83,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
             final String source = getSourceName(cx);
             sb.append(source).append(':').append(line).append(' ');
 
-            Scriptable parent = activation.getParentScope();
+            VarScope parent = activation.getParentScope();
             while (parent != null) {
                 sb.append("   ");
                 parent = parent.getParentScope();

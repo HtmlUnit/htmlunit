@@ -39,6 +39,7 @@ import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.AbstractEcmaObjectOperations;
+import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Callable;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
@@ -1307,6 +1308,17 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * Todo.
+     *
+     * @param fn the function
+     * @param cx the context
+     * @param scope the scope
+     */
+    public static void setFunctionProtoAndParent(final BaseFunction fn, final Context cx, final VarScope scope) {
+        ScriptRuntime.setFunctionProtoAndParent(fn, cx, scope);
+    }
+
+    /**
      * Create a new javascript object by calling the ctor with the provided args.
      *
      * @param scope the scope to create the object in
@@ -1553,7 +1565,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
             final Object[] functionArgs = {url.toExternalForm(), url.getHost()};
             final Function f = (Function) scope.get("FindProxyForURL", scope);
-            final Object result = f.call(cx, scope, scope, functionArgs);
+            final Object result = f.call(cx, scope, globalThis, functionArgs);
             return toString(result);
         }
     }
