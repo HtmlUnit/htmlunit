@@ -560,6 +560,17 @@ public class ElementCreationTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlUnknownElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object HTMLUnknownElement]")
+    public void hgroup() throws Exception {
+        test("hgroup");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlHeading1}.
      *
      * @throws Exception if an error occurs

@@ -107,4 +107,29 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
         final String xml = driver.getPageSource();
         assertTrue("Node not expanded in: " + xml, xml.contains("</foo>"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object HTMLUnknownElement]")
+    public void hgroupScriptable() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<hgroup id='myId'></hgroup>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageVerifyTitle2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
+            assertTrue(page.getHtmlElementById("myId") instanceof HtmlUnknownElement);
+        }
+    }
 }
