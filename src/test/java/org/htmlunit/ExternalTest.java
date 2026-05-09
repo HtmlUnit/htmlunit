@@ -51,11 +51,11 @@ public class ExternalTest {
     static final String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static final String CHROME_DRIVER_ = "147.0.7727";
+    static final String CHROME_DRIVER_ = "148.0.7778";
     static final String CHROME_DRIVER_URL_ =
             "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json";
 
-    static final String EDGE_DRIVER_ = "147.0.3912";
+    static final String EDGE_DRIVER_ = "148.0.3967";
     static final String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
