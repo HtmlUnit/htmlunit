@@ -7,7 +7,19 @@
     </properties>
 
     <body>
-        <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 149, Chrome 147, Bugfixes">
+        <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
+            <action type="update" dev="rbri">
+                ChromeEdge: document.createEvent('CloseEvent') throws.
+            </action>
+            <action type="update" dev="rbri">
+                ChromeEdge: document.createEvent('AnimationEvent') throws.
+            </action>
+            <action type="update" dev="rbri">
+                ChromeEdge: document.createEvent('PopStateEvent') throws.
+            </action>
+            <action type="update" dev="rbri">
+                ChromeEdge: NumberFormat for de-CH and it-CH updated.
+            </action>
             <action type="fix" dev="rbri">
                 neko: invalid numeric entity handling improved
             </action>

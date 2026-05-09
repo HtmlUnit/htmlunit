@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host.dom;
 
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MUTATIONEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
@@ -99,7 +96,6 @@ import org.htmlunit.javascript.host.animations.AnimationEvent;
 import org.htmlunit.javascript.host.css.StyleSheetList;
 import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import org.htmlunit.javascript.host.event.BeforeUnloadEvent;
-import org.htmlunit.javascript.host.event.CloseEvent;
 import org.htmlunit.javascript.host.event.CompositionEvent;
 import org.htmlunit.javascript.host.event.CustomEvent;
 import org.htmlunit.javascript.host.event.DragEvent;
@@ -199,7 +195,6 @@ public class Document extends Node {
                 Map.entry("MutationEvent", MutationEvent.class),
                 Map.entry("UIEvent", UIEvent.class),
                 Map.entry("CustomEvent", CustomEvent.class),
-                Map.entry("CloseEvent", CloseEvent.class),
                 Map.entry("CompositionEvent", CompositionEvent.class),
                 Map.entry("DragEvent", DragEvent.class),
                 Map.entry("TextEvent", TextEvent.class));
@@ -1141,10 +1136,6 @@ public class Document extends Node {
         Class<? extends Event> clazz = SUPPORTED_DOM2_EVENT_TYPE_MAP.get(eventType);
         if (clazz == null) {
             clazz = SUPPORTED_DOM3_EVENT_TYPE_MAP.get(eventType);
-            if (CloseEvent.class == clazz
-                    && getBrowserVersion().hasFeature(EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED)) {
-                clazz = null;
-            }
         }
 
         if (MutationEvent.class == clazz
@@ -1155,21 +1146,10 @@ public class Document extends Node {
                 && ("Events".equals(eventType)
                     || "HashChangeEvent".equals(eventType)
                     || "BeforeUnloadEvent".equals(eventType)
-                    || "PopStateEvent".equals(eventType)
                     || "FocusEvent".equals(eventType)
                     || "WheelEvent".equals(eventType)
-                            && getBrowserVersion().hasFeature(EVENT_TYPE_WHEELEVENT)
-                    || "AnimationEvent".equals(eventType))) {
+                            && getBrowserVersion().hasFeature(EVENT_TYPE_WHEELEVENT))) {
             clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
-
-            if (PopStateEvent.class == clazz
-                    && getBrowserVersion().hasFeature(EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED)) {
-                clazz = null;
-            }
-            if (AnimationEvent.class == clazz
-                    && getBrowserVersion().hasFeature(EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED)) {
-                clazz = null;
-            }
         }
 
         if (clazz == null) {

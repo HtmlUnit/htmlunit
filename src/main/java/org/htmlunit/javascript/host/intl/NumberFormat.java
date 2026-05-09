@@ -68,12 +68,12 @@ public class NumberFormat extends HtmlUnitScriptable {
         commonFormats.put("ar-TN", ".,");
         commonFormats.put("id", ".,");
         commonFormats.put("de-AT", "\u00a0");
-        commonFormats.put("de-CH", "\u2019");
+        commonFormats.put("de-CH", "'");
         commonFormats.put("en-ZA", "\u00a0,");
         commonFormats.put("es-CR", "\u00a0,");
         commonFormats.put("fr-LU", ".,");
         commonFormats.put("hi-IN", ",.0");
-        commonFormats.put("it-CH", "\u2019");
+        commonFormats.put("it-CH", "'");
         commonFormats.put("pt-PT", "\u00a0,");
         commonFormats.put("sq", "\u00a0,");
 
@@ -96,10 +96,10 @@ public class NumberFormat extends HtmlUnitScriptable {
         commonFormats.put("ar-YE", "\u066c\u066b\u0660");
 
         FF_FORMATS_.putAll(commonFormats);
-        FF_FORMATS_.put("de-CH", "'");
-        FF_FORMATS_.put("it-CH", "'");
 
         FF_ESR_FORMATS_.putAll(commonFormats);
+        FF_ESR_FORMATS_.put("de-CH", "\u2019");
+        FF_ESR_FORMATS_.put("it-CH", "\u2019");
 
         commonFormats.put("be", ",.");
         commonFormats.put("mk", ",.");

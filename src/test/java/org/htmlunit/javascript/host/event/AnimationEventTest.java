@@ -62,9 +62,7 @@ public class AnimationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object AnimationEvent]", "", "false", "false", "false"},
-            FF = "NotSupportedError/DOMException",
-            FF_ESR = "NotSupportedError/DOMException")
+    @Alerts("NotSupportedError/DOMException")
     public void create_createEvent() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

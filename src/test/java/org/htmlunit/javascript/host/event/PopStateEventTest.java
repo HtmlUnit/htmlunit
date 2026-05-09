@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -93,9 +92,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "false", "null"},
-            FF = "NotSupportedError/DOMException",
-            FF_ESR = "NotSupportedError/DOMException")
+    @Alerts("NotSupportedError/DOMException")
     public void create_createEvent() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -117,9 +114,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "false", "null"},
-            FF = "NotSupportedError/DOMException",
-            FF_ESR = "NotSupportedError/DOMException")
+    @Alerts("NotSupportedError/DOMException")
     public void setState() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -142,9 +137,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "dispatched",
-            FF = "exception ctor",
-            FF_ESR = "exception ctor")
+    @Alerts("exception ctor")
     public void dispatchEvent() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -174,11 +167,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "InvalidStateError/DOMException",
-            FF = "ctor NotSupportedError",
-            FF_ESR = "ctor NotSupportedError")
-    @HtmlUnitNYI(CHROME = "dispatched",
-            EDGE = "dispatched")
+    @Alerts("ctor NotSupportedError")
     public void dispatchEventWithoutInit() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -207,9 +196,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no initPopStateEvent",
-            FF = "exception ctor",
-            FF_ESR = "exception ctor")
+    @Alerts("exception ctor")
     public void initPopStateEvent() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

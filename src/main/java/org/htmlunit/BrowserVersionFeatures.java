@@ -74,18 +74,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_FOCUS_ON_LOAD,
 
-    /** <code>AnimationEvent</code> can not be created by calling document.createEvent('AnimationEvent'). */
-    @BrowserFeature({FF, FF_ESR})
-    EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED,
-
-    /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */
-    @BrowserFeature({FF, FF_ESR})
-    EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,
-
-    /** <code>PopStateEvent</code> can not be created by calling document.createEvent('PopStateEvent'). */
-    @BrowserFeature({FF, FF_ESR})
-    EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED,
-
     /** Scroll events are of type 'UIEvent'. */
     @BrowserFeature({FF, FF_ESR})
     EVENT_SCROLL_UIEVENT,
