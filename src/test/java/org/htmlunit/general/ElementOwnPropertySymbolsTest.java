@@ -2276,10 +2276,19 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [WheelEvent]",
-            FF = "NotSupportedError/DOMException",
-            FF_ESR = "NotSupportedError/DOMException")
+    @Alerts("Symbol(Symbol.toStringTag) [C] [WheelEvent]")
     public void wheelEvent() throws Exception {
+        testString("", "new WheelEvent('wheel')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.WheelEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("NotSupportedError/DOMException")
+    public void wheelEvent2() throws Exception {
         testString("", "document.createEvent('WheelEvent')");
     }
 

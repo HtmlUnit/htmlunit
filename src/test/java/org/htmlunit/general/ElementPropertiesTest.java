@@ -684,8 +684,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ariaColSpan,ariaControlsElements,ariaCurrent,ariaDescribedByElements,ariaDescription,"
                 + "ariaDetailsElements,ariaDisabled,ariaErrorMessageElements,ariaExpanded,ariaFlowToElements,"
                 + "ariaHasPopup,ariaHidden,ariaInvalid,ariaKeyShortcuts,ariaLabel,ariaLabelledByElements,ariaLevel,"
-                + "ariaLive,ariaModal,ariaMultiLine,ariaMultiSelectable,ariaOrientation,ariaOwnsElements,"
-                + "ariaPlaceholder,ariaPosInSet,ariaPressed,ariaReadOnly,ariaRelevant,ariaRequired,"
+                + "ariaLive,ariaModal,ariaMultiLine,ariaMultiSelectable,ariaNotify(),ariaOrientation,"
+                + "ariaOwnsElements,ariaPlaceholder,ariaPosInSet,ariaPressed,ariaReadOnly,ariaRelevant,ariaRequired,"
                 + "ariaRoleDescription,ariaRowCount,ariaRowIndex,ariaRowIndexText,ariaRowSpan,ariaSelected,"
                 + "ariaSetSize,ariaSort,ariaValueMax,ariaValueMin,ariaValueNow,ariaValueText,attachShadow(),"
                 + "attributes,checkVisibility(),childElementCount,children,classList,className,clientHeight,"
@@ -859,8 +859,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ariaColSpan,ariaControlsElements,ariaCurrent,ariaDescribedByElements,ariaDescription,"
                 + "ariaDetailsElements,ariaDisabled,ariaErrorMessageElements,ariaExpanded,ariaFlowToElements,"
                 + "ariaHasPopup,ariaHidden,ariaInvalid,ariaKeyShortcuts,ariaLabel,ariaLabelledByElements,ariaLevel,"
-                + "ariaLive,ariaModal,ariaMultiLine,ariaMultiSelectable,ariaOrientation,ariaOwnsElements,"
-                + "ariaPlaceholder,ariaPosInSet,ariaPressed,ariaReadOnly,ariaRelevant,ariaRequired,"
+                + "ariaLive,ariaModal,ariaMultiLine,ariaMultiSelectable,ariaNotify(),ariaOrientation,"
+                + "ariaOwnsElements,ariaPlaceholder,ariaPosInSet,ariaPressed,ariaReadOnly,ariaRelevant,ariaRequired,"
                 + "ariaRoleDescription,ariaRowCount,ariaRowIndex,ariaRowIndexText,ariaRowSpan,ariaSelected,"
                 + "ariaSetSize,ariaSort,ariaValueMax,ariaValueMin,ariaValueNow,ariaValueText,assignedSlot,"
                 + "attachShadow(),attributes,before(),checkVisibility(),classList,className,clientHeight,clientLeft,"
@@ -1411,25 +1411,21 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "addTextTrack(),autoplay,buffered,"
-                + "canPlayType(),captureStream(),controls,controlsList,crossOrigin,currentSrc,currentTime,"
-                + "defaultMuted,defaultPlaybackRate,disableRemotePlayback,duration,"
-                + "ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
-                + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mediaKeys,muted,NETWORK_EMPTY,NETWORK_IDLE,"
-                + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
-                + "onwaitingforkey,pause(),paused,play(),playbackRate,played,preload,preservesPitch,readyState,remote,"
-                + "seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,srcObject,textTracks,"
-                + "volume,webkitAudioDecodedByteCount,"
+    @Alerts(CHROME = "addTextTrack(),autoplay,buffered,canPlayType(),captureStream(),controls,controlsList,crossOrigin,"
+                + "currentSrc,currentTime,defaultMuted,defaultPlaybackRate,disableRemotePlayback,duration,ended,"
+                + "error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),"
+                + "loading,loop,mediaKeys,muted,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,"
+                + "networkState,onencrypted,onwaitingforkey,pause(),paused,play(),playbackRate,played,preload,"
+                + "preservesPitch,readyState,remote,seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,"
+                + "srcObject,textTracks,volume,webkitAudioDecodedByteCount,"
                 + "webkitVideoDecodedByteCount",
-            EDGE = "addTextTrack(),autoplay,buffered,"
-                + "canPlayType(),captureStream(),controls,controlsList,crossOrigin,currentSrc,currentTime,"
-                + "defaultMuted,defaultPlaybackRate,disableRemotePlayback,duration,"
-                + "ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
-                + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mediaKeys,muted,NETWORK_EMPTY,NETWORK_IDLE,"
-                + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
-                + "onwaitingforkey,pause(),paused,play(),playbackRate,played,preload,preservesPitch,readyState,remote,"
-                + "seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,srcObject,textTracks,"
-                + "volume,webkitAudioDecodedByteCount,"
+            EDGE = "addTextTrack(),autoplay,buffered,canPlayType(),captureStream(),controls,controlsList,crossOrigin,"
+                + "currentSrc,currentTime,defaultMuted,defaultPlaybackRate,disableRemotePlayback,duration,ended,"
+                + "error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),"
+                + "loading,loop,mediaKeys,muted,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,"
+                + "networkState,onencrypted,onwaitingforkey,pause(),paused,play(),playbackRate,played,preload,"
+                + "preservesPitch,readyState,remote,seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,"
+                + "srcObject,textTracks,volume,webkitAudioDecodedByteCount,"
                 + "webkitVideoDecodedByteCount",
             FF = "addTextTrack(),autoplay,buffered,canPlayType(),captureStream(),controls,crossOrigin,currentSrc,"
                 + "currentTime,defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),HAVE_CURRENT_DATA,"
@@ -3256,9 +3252,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "controls,controlsList,crossOrigin,currentSrc,currentTime,defaultMuted,defaultPlaybackRate,"
                 + "disablePictureInPicture,disableRemotePlayback,duration,ended,error,getVideoPlaybackQuality(),"
                 + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),"
-                + "loop,mediaKeys,muted,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,"
-                + "onencrypted,onenterpictureinpicture,onleavepictureinpicture,onwaitingforkey,pause(),paused,"
-                + "play(),playbackRate,played,playsInline,poster,preload,preservesPitch,readyState,remote,"
+                + "loading,loop,mediaKeys,muted,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,"
+                + "networkState,onencrypted,onenterpictureinpicture,onleavepictureinpicture,onwaitingforkey,pause(),"
+                + "paused,play(),playbackRate,played,playsInline,poster,preload,preservesPitch,readyState,remote,"
                 + "requestPictureInPicture(),requestVideoFrameCallback(),seekable,seeking,setMediaKeys(),"
                 + "setSinkId(),sinkId,src,srcObject,textTracks,videoHeight,videoWidth,volume,"
                 + "webkitAudioDecodedByteCount,webkitDecodedFrameCount,webkitDroppedFrameCount,"
@@ -3268,8 +3264,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "controls,controlsList,crossOrigin,currentSrc,currentTime,defaultMuted,defaultPlaybackRate,"
                 + "disablePictureInPicture,disableRemotePlayback,duration,ended,error,getVideoPlaybackQuality(),"
                 + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),"
-                + "loop,mediaKeys,msGetVideoProcessingTypes(),msVideoProcessing,muted,NETWORK_EMPTY,NETWORK_IDLE,"
-                + "NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,onenterpictureinpicture,"
+                + "loading,loop,mediaKeys,msGetVideoProcessingTypes(),msVideoProcessing,muted,NETWORK_EMPTY,"
+                + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,onenterpictureinpicture,"
                 + "onleavepictureinpicture,onwaitingforkey,pause(),paused,play(),playbackRate,played,playsInline,"
                 + "poster,preload,preservesPitch,readyState,remote,requestPictureInPicture(),"
                 + "requestVideoFrameCallback(),seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,srcObject,"
@@ -3867,18 +3863,48 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "altitudeAngle,azimuthAngle,getCoalescedEvents(),getPredictedEvents(),height,isPrimary,"
-                + "persistentDeviceId,pointerId,pointerType,pressure,tangentialPressure,tiltX,tiltY,twist,"
-                + "width",
-            EDGE = "altitudeAngle,azimuthAngle,getCoalescedEvents(),getPredictedEvents(),height,isPrimary,"
-                + "persistentDeviceId,pointerId,pointerType,pressure,tangentialPressure,tiltX,tiltY,twist,"
-                + "width",
-            FF = "altitudeAngle,azimuthAngle,getCoalescedEvents(),getPredictedEvents(),height,isPrimary,"
-                + "persistentDeviceId,pointerId,pointerType,pressure,tangentialPressure,tiltX,tiltY,twist,"
-                + "width",
-            FF_ESR = "altitudeAngle,azimuthAngle,getCoalescedEvents(),getPredictedEvents(),height,isPrimary,pointerId,"
-                + "pointerType,pressure,tangentialPressure,tiltX,tiltY,twist,"
-                + "width")
+    @Alerts(CHROME = "altitudeAngle,altKey,AT_TARGET,azimuthAngle,bubbles,BUBBLING_PHASE,button,buttons,cancelable,"
+                + "cancelBubble,CAPTURING_PHASE,clientX,clientY,composed,composedPath(),ctrlKey,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,fromElement,getCoalescedEvents(),getModifierState(),"
+                + "getPredictedEvents(),height,initEvent(),initMouseEvent(),initUIEvent(),isPrimary,isTrusted,"
+                + "layerX,layerY,metaKey,movementX,movementY,NONE,offsetX,offsetY,pageX,pageY,persistentDeviceId,"
+                + "pointerId,pointerType,pressure,preventDefault(),relatedTarget,returnValue,screenX,screenY,"
+                + "shiftKey,sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "tangentialPressure,target,tiltX,tiltY,timeStamp,toElement,twist,type,view,which,width,x,"
+                + "y",
+            EDGE = "altitudeAngle,altKey,AT_TARGET,azimuthAngle,bubbles,BUBBLING_PHASE,button,buttons,cancelable,"
+                + "cancelBubble,CAPTURING_PHASE,clientX,clientY,composed,composedPath(),ctrlKey,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,fromElement,getCoalescedEvents(),getModifierState(),"
+                + "getPredictedEvents(),height,initEvent(),initMouseEvent(),initUIEvent(),isPrimary,isTrusted,"
+                + "layerX,layerY,metaKey,movementX,movementY,NONE,offsetX,offsetY,pageX,pageY,persistentDeviceId,"
+                + "pointerId,pointerType,pressure,preventDefault(),relatedTarget,returnValue,screenX,screenY,"
+                + "shiftKey,sourceCapabilities,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "tangentialPressure,target,tiltX,tiltY,timeStamp,toElement,twist,type,view,which,width,x,"
+                + "y",
+            FF = "ALT_MASK,altitudeAngle,altKey,AT_TARGET,azimuthAngle,bubbles,BUBBLING_PHASE,button,buttons,"
+                + "cancelable,cancelBubble,CAPTURING_PHASE,clientX,clientY,composed,composedPath(),CONTROL_MASK,"
+                + "ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,explicitOriginalTarget,"
+                + "getCoalescedEvents(),getModifierState(),getPredictedEvents(),height,initEvent(),initMouseEvent(),"
+                + "initNSMouseEvent(),initUIEvent(),isPrimary,isTrusted,layerX,layerY,META_MASK,metaKey,movementX,"
+                + "movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,"
+                + "MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,mozInputSource,mozPressure,NONE,offsetX,"
+                + "offsetY,originalTarget,pageX,pageY,persistentDeviceId,pointerId,pointerType,pressure,"
+                + "preventDefault(),rangeOffset,rangeParent,relatedTarget,returnValue,screenX,screenY,"
+                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),tangentialPressure,target,tiltX,tiltY,timeStamp,twist,type,view,which,width,x,"
+                + "y",
+            FF_ESR = "ALT_MASK,altitudeAngle,altKey,AT_TARGET,azimuthAngle,bubbles,BUBBLING_PHASE,button,buttons,"
+                + "cancelable,cancelBubble,CAPTURING_PHASE,clientX,clientY,composed,composedPath(),CONTROL_MASK,"
+                + "ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,explicitOriginalTarget,"
+                + "getCoalescedEvents(),getModifierState(),getPredictedEvents(),height,initEvent(),initMouseEvent(),"
+                + "initNSMouseEvent(),initUIEvent(),isPrimary,isTrusted,layerX,layerY,META_MASK,metaKey,movementX,"
+                + "movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,"
+                + "MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,mozInputSource,mozPressure,NONE,offsetX,"
+                + "offsetY,originalTarget,pageX,pageY,pointerId,pointerType,pressure,preventDefault(),rangeOffset,"
+                + "rangeParent,relatedTarget,returnValue,screenX,screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,"
+                + "shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),tangentialPressure,target,tiltX,"
+                + "tiltY,timeStamp,twist,type,view,which,width,x,"
+                + "y")
     @HtmlUnitNYI(CHROME = "altitudeAngle,azimuthAngle,height,isPrimary,persistentDeviceId,pointerId,"
                 + "pointerType,pressure,tiltX,tiltY,width",
             EDGE = "altitudeAngle,azimuthAngle,height,isPrimary,persistentDeviceId,pointerId,"
@@ -3888,7 +3914,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "altitudeAngle,azimuthAngle,height,isPrimary,persistentDeviceId,pointerId,pointerType,pressure,"
                 + "tiltX,tiltY,width")
     public void pointerEvent() throws Exception {
-        testString("", "new PointerEvent('click'), document.createEvent('MouseEvent')");
+        testString("", "new PointerEvent('click')");
     }
 
     /**
@@ -3897,12 +3923,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "NotSupportedError/DOMException",
-            EDGE = "NotSupportedError/DOMException",
-            FF = "NotSupportedError/DOMException",
-            FF_ESR = "NotSupportedError/DOMException")
+    @Alerts("NotSupportedError/DOMException")
     public void pointerEvent2() throws Exception {
-        testString("", " document.createEvent('PointerEvent'), document.createEvent('MouseEvent')");
+        testString("", " document.createEvent('PointerEvent')");
     }
 
     /**
@@ -3911,16 +3934,86 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "deltaMode,deltaX,deltaY,deltaZ,DOM_DELTA_LINE,DOM_DELTA_PAGE,"
-                + "DOM_DELTA_PIXEL,wheelDelta,wheelDeltaX,wheelDeltaY",
-            EDGE = "deltaMode,deltaX,deltaY,deltaZ,DOM_DELTA_LINE,DOM_DELTA_PAGE,"
-                + "DOM_DELTA_PIXEL,wheelDelta,wheelDeltaX,wheelDeltaY",
-            FF = "NotSupportedError/DOMException",
-            FF_ESR = "NotSupportedError/DOMException")
-    @HtmlUnitNYI(CHROME = "DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL",
-            EDGE = "DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL")
+    @Alerts(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "clientX,clientY,composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,deltaMode,deltaX,"
+                + "deltaY,deltaZ,detail,DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL,eventPhase,fromElement,"
+                + "getModifierState(),initEvent(),initMouseEvent(),initUIEvent(),isTrusted,layerX,layerY,metaKey,"
+                + "movementX,movementY,NONE,offsetX,offsetY,pageX,pageY,preventDefault(),relatedTarget,returnValue,"
+                + "screenX,screenY,shiftKey,sourceCapabilities,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,toElement,type,view,wheelDelta,wheelDeltaX,wheelDeltaY,which,"
+                + "x,"
+                + "y",
+            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "clientX,clientY,composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,deltaMode,deltaX,"
+                + "deltaY,deltaZ,detail,DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL,eventPhase,fromElement,"
+                + "getModifierState(),initEvent(),initMouseEvent(),initUIEvent(),isTrusted,layerX,layerY,metaKey,"
+                + "movementX,movementY,NONE,offsetX,offsetY,pageX,pageY,preventDefault(),relatedTarget,returnValue,"
+                + "screenX,screenY,shiftKey,sourceCapabilities,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,toElement,type,view,wheelDelta,wheelDeltaX,wheelDeltaY,which,"
+                + "x,"
+                + "y",
+            FF = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,composedPath(),CONTROL_MASK,ctrlKey,currentTarget,"
+                + "defaultPrevented,deltaMode,deltaX,deltaY,deltaZ,detail,DOM_DELTA_LINE,DOM_DELTA_PAGE,"
+                + "DOM_DELTA_PIXEL,eventPhase,explicitOriginalTarget,getModifierState(),initEvent(),"
+                + "initMouseEvent(),initNSMouseEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,metaKey,"
+                + "movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,"
+                + "MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,mozInputSource,mozPressure,NONE,offsetX,"
+                + "offsetY,originalTarget,pageX,pageY,preventDefault(),rangeOffset,rangeParent,relatedTarget,"
+                + "returnValue,screenX,screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,wheelDelta,wheelDeltaX,"
+                + "wheelDeltaY,which,x,"
+                + "y",
+            FF_ESR = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,composedPath(),CONTROL_MASK,ctrlKey,currentTarget,"
+                + "defaultPrevented,deltaMode,deltaX,deltaY,deltaZ,detail,DOM_DELTA_LINE,DOM_DELTA_PAGE,"
+                + "DOM_DELTA_PIXEL,eventPhase,explicitOriginalTarget,getModifierState(),initEvent(),"
+                + "initMouseEvent(),initNSMouseEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,metaKey,"
+                + "movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,"
+                + "MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,mozInputSource,mozPressure,NONE,offsetX,"
+                + "offsetY,originalTarget,pageX,pageY,preventDefault(),rangeOffset,rangeParent,relatedTarget,"
+                + "returnValue,screenX,screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,shiftKey,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,wheelDelta,wheelDeltaX,"
+                + "wheelDeltaY,which,x,"
+                + "y")
+    @HtmlUnitNYI(
+            CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,ctrlKey,currentTarget,defaultPrevented,detail,"
+                + "DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL,eventPhase,initEvent(),initMouseEvent(),"
+                + "initUIEvent(),metaKey,NONE,pageX,pageY,preventDefault(),returnValue,screenX,screenY,shiftKey,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,ctrlKey,currentTarget,defaultPrevented,detail,"
+                + "DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL,eventPhase,initEvent(),initMouseEvent(),"
+                + "initUIEvent(),metaKey,NONE,pageX,pageY,preventDefault(),returnValue,screenX,screenY,shiftKey,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            FF = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,CONTROL_MASK,ctrlKey,currentTarget,defaultPrevented,"
+                + "detail,DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL,eventPhase,initEvent(),initMouseEvent(),"
+                + "initUIEvent(),META_MASK,metaKey,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,"
+                + "MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,NONE,pageX,pageY,"
+                + "preventDefault(),returnValue,screenX,screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,"
+                + "shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            FF_ESR = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,button,buttons,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,clientX,clientY,composed,CONTROL_MASK,ctrlKey,currentTarget,defaultPrevented,"
+                + "detail,DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL,eventPhase,initEvent(),initMouseEvent(),"
+                + "initUIEvent(),META_MASK,metaKey,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,"
+                + "MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,NONE,pageX,pageY,"
+                + "preventDefault(),returnValue,screenX,screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,"
+                + "shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which")
     public void wheelEvent() throws Exception {
-        testString("", "document.createEvent('WheelEvent'), document.createEvent('MouseEvent')");
+        testString("", "new WheelEvent('wheel')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.WheelEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("NotSupportedError/DOMException")
+    public void wheelEvent2() throws Exception {
+        testString("", "document.createEvent('WheelEvent')");
     }
 
     /**
@@ -4427,15 +4520,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitVisibilityState,when(),write(),writeln(),xmlEncoding,xmlStandalone,"
                 + "xmlVersion",
             FF = "activeElement,activeViewTransition,addEventListener(),adoptedStyleSheets,adoptNode(),alinkColor,"
-                + "all,anchors,append(),appendChild(),applets,ATTRIBUTE_NODE,baseURI,bgColor,body,captureEvents(),"
-                + "caretPositionFromPoint(),CDATA_SECTION_NODE,characterSet,charset,childElementCount,childNodes,"
-                + "children,clear(),cloneNode(),close(),COMMENT_NODE,compareDocumentPosition(),compatMode,"
-                + "contains(),contentType,cookie,createAttribute(),createAttributeNS(),createCDATASection(),"
-                + "createComment(),createDocumentFragment(),createElement(),createElementNS(),createEvent(),"
-                + "createExpression(),createNodeIterator(),createNSResolver(),createProcessingInstruction(),"
-                + "createRange(),createTextNode(),createTreeWalker(),currentScript,defaultView,designMode,dir,"
-                + "dispatchEvent(),doctype,DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,DOCUMENT_POSITION_CONTAINED_BY,"
-                + "DOCUMENT_POSITION_CONTAINS,DOCUMENT_POSITION_DISCONNECTED,DOCUMENT_POSITION_FOLLOWING,"
+                + "all,anchors,append(),appendChild(),applets,ariaNotify(),ATTRIBUTE_NODE,baseURI,bgColor,body,"
+                + "captureEvents(),caretPositionFromPoint(),caretRangeFromPoint(),CDATA_SECTION_NODE,characterSet,"
+                + "charset,childElementCount,childNodes,children,clear(),cloneNode(),close(),COMMENT_NODE,"
+                + "compareDocumentPosition(),compatMode,contains(),contentType,cookie,createAttribute(),"
+                + "createAttributeNS(),createCDATASection(),createComment(),createDocumentFragment(),"
+                + "createElement(),createElementNS(),createEvent(),createExpression(),createNodeIterator(),"
+                + "createNSResolver(),createProcessingInstruction(),createRange(),createTextNode(),"
+                + "createTreeWalker(),currentScript,defaultView,designMode,dir,dispatchEvent(),doctype,"
+                + "DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,"
+                + "DOCUMENT_POSITION_DISCONNECTED,DOCUMENT_POSITION_FOLLOWING,"
                 + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC,DOCUMENT_POSITION_PRECEDING,DOCUMENT_TYPE_NODE,"
                 + "documentElement,documentURI,domain,ELEMENT_NODE,elementFromPoint(),elementsFromPoint(),embeds,"
                 + "enableStyleSheetsForSet(),ENTITY_NODE,ENTITY_REFERENCE_NODE,evaluate(),execCommand(),"
@@ -4637,15 +4731,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitVisibilityState,when(),write(),writeln(),xmlEncoding,xmlStandalone,"
                 + "xmlVersion",
             FF = "activeElement,activeViewTransition,addEventListener(),adoptedStyleSheets,adoptNode(),alinkColor,"
-                + "all,anchors,append(),appendChild(),applets,ATTRIBUTE_NODE,baseURI,bgColor,body,captureEvents(),"
-                + "caretPositionFromPoint(),CDATA_SECTION_NODE,characterSet,charset,childElementCount,childNodes,"
-                + "children,clear(),cloneNode(),close(),COMMENT_NODE,compareDocumentPosition(),compatMode,"
-                + "contains(),contentType,cookie,createAttribute(),createAttributeNS(),createCDATASection(),"
-                + "createComment(),createDocumentFragment(),createElement(),createElementNS(),createEvent(),"
-                + "createExpression(),createNodeIterator(),createNSResolver(),createProcessingInstruction(),"
-                + "createRange(),createTextNode(),createTreeWalker(),currentScript,defaultView,designMode,dir,"
-                + "dispatchEvent(),doctype,DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,DOCUMENT_POSITION_CONTAINED_BY,"
-                + "DOCUMENT_POSITION_CONTAINS,DOCUMENT_POSITION_DISCONNECTED,DOCUMENT_POSITION_FOLLOWING,"
+                + "all,anchors,append(),appendChild(),applets,ariaNotify(),ATTRIBUTE_NODE,baseURI,bgColor,body,"
+                + "captureEvents(),caretPositionFromPoint(),caretRangeFromPoint(),CDATA_SECTION_NODE,characterSet,"
+                + "charset,childElementCount,childNodes,children,clear(),cloneNode(),close(),COMMENT_NODE,"
+                + "compareDocumentPosition(),compatMode,contains(),contentType,cookie,createAttribute(),"
+                + "createAttributeNS(),createCDATASection(),createComment(),createDocumentFragment(),"
+                + "createElement(),createElementNS(),createEvent(),createExpression(),createNodeIterator(),"
+                + "createNSResolver(),createProcessingInstruction(),createRange(),createTextNode(),"
+                + "createTreeWalker(),currentScript,defaultView,designMode,dir,dispatchEvent(),doctype,"
+                + "DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,"
+                + "DOCUMENT_POSITION_DISCONNECTED,DOCUMENT_POSITION_FOLLOWING,"
                 + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC,DOCUMENT_POSITION_PRECEDING,DOCUMENT_TYPE_NODE,"
                 + "documentElement,documentURI,domain,ELEMENT_NODE,elementFromPoint(),elementsFromPoint(),embeds,"
                 + "enableStyleSheetsForSet(),ENTITY_NODE,ENTITY_REFERENCE_NODE,evaluate(),execCommand(),"
@@ -4971,15 +5066,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "webkitVisibilityState,when(),write(),writeln(),xmlEncoding,xmlStandalone,"
                 + "xmlVersion",
             FF = "activeElement,activeViewTransition,addEventListener(),adoptedStyleSheets,adoptNode(),alinkColor,"
-                + "all,anchors,append(),appendChild(),applets,ATTRIBUTE_NODE,baseURI,bgColor,body,captureEvents(),"
-                + "caretPositionFromPoint(),CDATA_SECTION_NODE,characterSet,charset,childElementCount,childNodes,"
-                + "children,clear(),cloneNode(),close(),COMMENT_NODE,compareDocumentPosition(),compatMode,"
-                + "contains(),contentType,cookie,createAttribute(),createAttributeNS(),createCDATASection(),"
-                + "createComment(),createDocumentFragment(),createElement(),createElementNS(),createEvent(),"
-                + "createExpression(),createNodeIterator(),createNSResolver(),createProcessingInstruction(),"
-                + "createRange(),createTextNode(),createTreeWalker(),currentScript,defaultView,designMode,dir,"
-                + "dispatchEvent(),doctype,DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,DOCUMENT_POSITION_CONTAINED_BY,"
-                + "DOCUMENT_POSITION_CONTAINS,DOCUMENT_POSITION_DISCONNECTED,DOCUMENT_POSITION_FOLLOWING,"
+                + "all,anchors,append(),appendChild(),applets,ariaNotify(),ATTRIBUTE_NODE,baseURI,bgColor,body,"
+                + "captureEvents(),caretPositionFromPoint(),caretRangeFromPoint(),CDATA_SECTION_NODE,characterSet,"
+                + "charset,childElementCount,childNodes,children,clear(),cloneNode(),close(),COMMENT_NODE,"
+                + "compareDocumentPosition(),compatMode,contains(),contentType,cookie,createAttribute(),"
+                + "createAttributeNS(),createCDATASection(),createComment(),createDocumentFragment(),"
+                + "createElement(),createElementNS(),createEvent(),createExpression(),createNodeIterator(),"
+                + "createNSResolver(),createProcessingInstruction(),createRange(),createTextNode(),"
+                + "createTreeWalker(),currentScript,defaultView,designMode,dir,dispatchEvent(),doctype,"
+                + "DOCUMENT_FRAGMENT_NODE,DOCUMENT_NODE,DOCUMENT_POSITION_CONTAINED_BY,DOCUMENT_POSITION_CONTAINS,"
+                + "DOCUMENT_POSITION_DISCONNECTED,DOCUMENT_POSITION_FOLLOWING,"
                 + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC,DOCUMENT_POSITION_PRECEDING,DOCUMENT_TYPE_NODE,"
                 + "documentElement,documentURI,domain,ELEMENT_NODE,elementFromPoint(),elementsFromPoint(),embeds,"
                 + "enableStyleSheetsForSet(),ENTITY_NODE,ENTITY_REFERENCE_NODE,evaluate(),execCommand(),"
