@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host.dom;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MUTATIONEVENT;
-import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -1146,9 +1145,7 @@ public class Document extends Node {
                 && ("Events".equals(eventType)
                     || "HashChangeEvent".equals(eventType)
                     || "BeforeUnloadEvent".equals(eventType)
-                    || "FocusEvent".equals(eventType)
-                    || "WheelEvent".equals(eventType)
-                            && getBrowserVersion().hasFeature(EVENT_TYPE_WHEELEVENT))) {
+                    || "FocusEvent".equals(eventType))) {
             clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
         }
 

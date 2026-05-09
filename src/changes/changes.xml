@@ -12,6 +12,9 @@
                 ChromeEdge: The &lt;command&gt; html tag is no longer supported.
             </action>
             <action type="update" dev="rbri">
+                ChromeEdge: document.createEvent('WheelEvent') throws.
+            </action>
+            <action type="update" dev="rbri">
                 ChromeEdge: document.createEvent('CloseEvent') throws.
             </action>
             <action type="update" dev="rbri">

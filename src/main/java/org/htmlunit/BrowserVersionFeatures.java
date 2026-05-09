@@ -82,10 +82,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF_ESR)
     EVENT_TYPE_MUTATIONEVENT,
 
-    /** Supports event type 'WheelEvent'. */
-    @BrowserFeature({CHROME, EDGE})
-    EVENT_TYPE_WHEELEVENT,
-
     /** Form elements are able to refer to the for by using the form attribute. */
     @BrowserFeature({CHROME, EDGE})
     FORM_IGNORE_REL_NOREFERRER,
