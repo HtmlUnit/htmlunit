@@ -8,6 +8,24 @@
 
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 149, Chrome 147, Bugfixes">
+            <action type="fix" dev="rbri">
+                neko: invalid numeric entity handling improved
+            </action>
+            <action type="add" dev="rbri">
+                neko: hgroup support added
+            </action>
+            <action type="fix" dev="rbri">
+                neko: null character handling in script content fixed
+            </action>
+            <action type="fix" dev="rbri">
+                neko: update translation of 0x98 to \u02DC
+            </action>
+            <action type="fix" dev="rbri">
+                neko: fix surrogate-character-reference parse error handling
+            </action>
+            <action type="fix" dev="rbri">
+                neko: fix consecutive ampersands before named entity parsing
+            </action>
             <action type="update" dev="Ronny Shapiro">
                 Defer building the HtmlPage id/name lookup index until first read.
             </action>
