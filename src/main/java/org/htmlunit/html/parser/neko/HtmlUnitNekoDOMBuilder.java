@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html.parser.neko;
 
-import static org.htmlunit.BrowserVersionFeatures.HTML_COMMAND_TAG;
 import static org.htmlunit.BrowserVersionFeatures.JS_SCRIPT_IN_TEMPLATE_EXECUTED_ON_ATTACH;
 
 import java.io.IOException;
@@ -97,22 +96,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         implements ContentHandler, LexicalHandler, HTMLTagBalancingListener, HTMLParserDOMBuilder {
 
     // cache Neko Elements for performance and memory efficiency
-    private static final HTMLElements HTMLELEMENTS;
-    private static final HTMLElements HTMLELEMENTS_WITH_CMD;
-
-    static {
-        // continue short code enumeration
-        final short commandShortCode = HTMLElements.UNKNOWN + 1;
-
-        final HTMLElements.Element command = new HTMLElements.Element(commandShortCode, "COMMAND",
-                HTMLElements.Element.EMPTY, new short[] {HTMLElements.BODY, HTMLElements.HEAD}, null);
-
-        HTMLELEMENTS = new HTMLElements();
-
-        final HTMLElements value = new HTMLElements();
-        value.setElement(command);
-        HTMLELEMENTS_WITH_CMD = value;
-    }
+    private static final HTMLElements HTMLELEMENTS = new HTMLElements();
 
     private enum HeadParsed { YES, SYNTHESIZED, NO }
 
@@ -210,10 +194,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         // HTMLElements.HTMLElementsWithCache are not thread safe
         // because the cache is not synchronized
         // we have to create a new one for each parser run
-
-        if (browserVersion.hasFeature(HTML_COMMAND_TAG)) {
-            return new HTMLConfiguration(new HTMLElements.HTMLElementsWithCache(HTMLELEMENTS_WITH_CMD));
-        }
         return new HTMLConfiguration(new HTMLElements.HTMLElementsWithCache(HTMLELEMENTS));
     }
 

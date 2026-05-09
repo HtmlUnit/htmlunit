@@ -152,10 +152,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     HTMLTRACK_END_TAG_FORBIDDEN,
 
-    /** HTML parser supports the 'command' tag. */
-    @BrowserFeature({CHROME, EDGE})
-    HTML_COMMAND_TAG,
-
     /** HTML parser supports the 'layer' tag. */
     @BrowserFeature({CHROME, EDGE})
     HTML_LAYER_TAG,
