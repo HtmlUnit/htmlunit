@@ -901,6 +901,11 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _p_table() throws Exception {
+        test("p", "table");
+    }
+
+    @Alerts("0")
     void _p_ul() throws Exception {
         test("p", "ul");
     }

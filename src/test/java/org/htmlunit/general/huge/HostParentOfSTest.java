@@ -112,6 +112,41 @@ public class HostParentOfSTest extends HostParentOf {
         test("SourceBufferList", "SourceBufferList");
     }
 
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    void _SpeechGrammar_SpeechGrammar() throws Exception {
+        test("SpeechGrammar", "SpeechGrammar");
+    }
+
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    void _SpeechGrammarList_SpeechGrammarList() throws Exception {
+        test("SpeechGrammarList", "SpeechGrammarList");
+    }
+
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    void _SpeechRecognition_SpeechRecognition() throws Exception {
+        test("SpeechRecognition", "SpeechRecognition");
+    }
+
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    void _SpeechRecognitionErrorEvent_SpeechRecognitionErrorEvent() throws Exception {
+        test("SpeechRecognitionErrorEvent", "SpeechRecognitionErrorEvent");
+    }
+
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    void _SpeechRecognitionEvent_SpeechRecognitionEvent() throws Exception {
+        test("SpeechRecognitionEvent", "SpeechRecognitionEvent");
+    }
+
     @Alerts("true/false")
     void _SpeechSynthesis_SpeechSynthesis() throws Exception {
         test("SpeechSynthesis", "SpeechSynthesis");
@@ -672,7 +707,7 @@ public class HostParentOfSTest extends HostParentOf {
         test("SVGElement", "SVGSwitchElement");
     }
 
-    @Alerts("true/true")
+    @Alerts(DEFAULT = "true/false", FF_ESR = "true/true")
     void _SVGElement_SVGSymbolElement() throws Exception {
         test("SVGElement", "SVGSymbolElement");
     }

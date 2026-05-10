@@ -2238,6 +2238,13 @@ public class HostParentOfDTest extends HostParentOf {
         test("EventTarget", "SourceBufferList");
     }
 
+    @Alerts(DEFAULT = "true/true",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    void _EventTarget_SpeechRecognition() throws Exception {
+        test("EventTarget", "SpeechRecognition");
+    }
+
     @Alerts("true/true")
     void _EventTarget_SpeechSynthesis() throws Exception {
         test("EventTarget", "SpeechSynthesis");
@@ -2702,6 +2709,20 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts("true/false")
     void _EventTarget_XMLHttpRequestUpload() throws Exception {
         test("EventTarget", "XMLHttpRequestUpload");
+    }
+
+    @Alerts(DEFAULT = "true/true",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    void _Event_SpeechRecognitionEvent() throws Exception {
+        test("Event", "SpeechRecognitionEvent");
+    }
+
+    @Alerts(DEFAULT = "true/true",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    void _Event_SpeechRecognitionErrorEvent() throws Exception {
+        test("Event", "SpeechRecognitionErrorEvent");
     }
 
     @Alerts("true/false")

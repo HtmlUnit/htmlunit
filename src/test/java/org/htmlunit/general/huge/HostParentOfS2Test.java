@@ -188,6 +188,11 @@ public class HostParentOfS2Test extends HostParentOf {
         test("SVGGraphicsElement", "SVGSwitchElement");
     }
 
+    @Alerts(DEFAULT = "true/true", FF_ESR = "false/false")
+    void _SVGGraphicsElement_SVGSymbolElement() throws Exception {
+        test("SVGGraphicsElement", "SVGSymbolElement");
+    }
+
     @Alerts("true/true")
     void _SVGGraphicsElement_SVGTextContentElement() throws Exception {
         test("SVGGraphicsElement", "SVGTextContentElement");
