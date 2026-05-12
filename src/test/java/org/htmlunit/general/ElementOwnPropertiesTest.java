@@ -15205,6 +15205,40 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.event.WebGLContextEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),statusMessage[GCE]",
+            EDGE = "constructor(),statusMessage[GCE]",
+            FF = "constructor(),statusMessage[GCE]",
+            FF_ESR = "constructor(),statusMessage[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void webGLContextEvent() throws Exception {
+        testString("", "new WebGLContextEvent('WebGLContext')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.WebkitSpeechRecognitionError}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),error[GCE],message[GCE]",
+            EDGE = "constructor(),error[GCE],message[GCE]",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()")
+    public void webkitSpeechRecognitionError() throws Exception {
+        testString("", "new webkitSpeechRecognitionError('webkitSpeechRecognition')");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.event.WebkitSpeechRecognitionEvent}.
      *
      * @throws Exception if the test fails

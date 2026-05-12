@@ -3929,6 +3929,77 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.event.WebGLContextEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,NONE,preventDefault(),"
+                + "returnValue,srcElement,statusMessage,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,"
+                + "type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,NONE,preventDefault(),"
+                + "returnValue,srcElement,statusMessage,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,"
+                + "type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,explicitOriginalTarget,"
+                + "initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),returnValue,SHIFT_MASK,"
+                + "srcElement,statusMessage,stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
+                + "type",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,explicitOriginalTarget,"
+                + "initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),returnValue,SHIFT_MASK,"
+                + "srcElement,statusMessage,stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
+                + "type")
+    @HtmlUnitNYI(
+            CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
+    public void webGLContextEvent() throws Exception {
+        testString("", "new WebGLContextEvent('WebGLContext')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.WebkitSpeechRecognitionError}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,error,eventPhase,initEvent(),isTrusted,message,NONE,"
+                + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,"
+                + "type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,error,eventPhase,initEvent(),isTrusted,message,NONE,"
+                + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,"
+                + "type",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
+    public void webkitSpeechRecognitionError() throws Exception {
+        testString("", "new webkitSpeechRecognitionError('webkitSpeechRecognition')");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.event.WebkitSpeechRecognitionEvent}.
      *
      * @throws Exception if the test fails

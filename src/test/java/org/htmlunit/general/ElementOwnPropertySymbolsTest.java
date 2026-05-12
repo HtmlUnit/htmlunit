@@ -2271,6 +2271,36 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.event.WebGLContextEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [WebGLContextEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [WebGLContextEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [WebGLContextEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [WebGLContextEvent]")
+    public void webGLContextEvent() throws Exception {
+        testString("", "new WebGLContextEvent('WebGLContext')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.WebkitSpeechRecognitionError}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionErrorEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionErrorEvent]",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [WebkitSpeechRecognitionError]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [WebkitSpeechRecognitionError]")
+    public void webkitSpeechRecognitionError() throws Exception {
+        testString("", "new webkitSpeechRecognitionError('webkitSpeechRecognition')");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.event.WebkitSpeechRecognitionEvent}.
      *
      * @throws Exception if the test fails
