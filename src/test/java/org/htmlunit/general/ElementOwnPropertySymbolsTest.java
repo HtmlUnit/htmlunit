@@ -2260,6 +2260,66 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.event.PresentationConnectionAvailableEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [PresentationConnectionAvailableEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [PresentationConnectionAvailableEvent]")
+    public void presentationConnectionAvailableEvent() throws Exception {
+        testString("", "new PresentationConnectionAvailableEvent('close')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.PresentationConnectionCloseEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [PresentationConnectionCloseEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [PresentationConnectionCloseEvent]")
+    public void presentationConnectionCloseEvent() throws Exception {
+        testString("", "new PresentationConnectionCloseEvent('close')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.ProgressEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]")
+    public void progressEvent() throws Exception {
+        testString("", "new ProgressEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.StorageEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [StorageEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [StorageEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [StorageEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [StorageEvent]")
+    public void storageEvent() throws Exception {
+        testString("", "new StorageEvent('event')");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.event.SubmitEvent}.
      *
      * @throws Exception if the test fails

@@ -20,11 +20,11 @@ import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for {@link StorageEvent}.
+ * Tests for {@link PresentationConnectionAvailableEvent}.
  *
  * @author Ronald Brill
  */
-public class StorageEventTest extends WebDriverTestCase {
+public class PresentationConnectionAvailableEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
             + "    log(event);\n"
@@ -38,14 +38,18 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object StorageEvent]", "storage", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            CHROME = "TypeError",
+            EDGE = "TypeError")
+    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
+            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new StorageEvent('storage');\n"
+            + "      var event = new PresentationConnectionAvailableEvent('connectionavailable');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -60,18 +64,18 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
-    @HtmlUnitNYI(CHROME = {"[object StorageEvent]", "undefined", "false", "false", "false"},
-                EDGE = {"[object StorageEvent]", "undefined", "false", "false", "false"},
-                FF = {"[object StorageEvent]", "undefined", "false", "false", "false"},
-                FF_ESR = {"[object StorageEvent]", "undefined", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            CHROME = "TypeError",
+            EDGE = "TypeError")
+    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
+                EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new StorageEvent();\n"
+            + "      var event = new PresentationConnectionAvailableEvent();\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -86,14 +90,18 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object StorageEvent]", "42", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            CHROME = "TypeError",
+            EDGE = "TypeError")
+    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
+            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new StorageEvent(42);\n"
+            + "      var event = new PresentationConnectionAvailableEvent(42);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -108,14 +116,18 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object StorageEvent]", "null", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            CHROME = "TypeError",
+            EDGE = "TypeError")
+    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
+            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new StorageEvent(null);\n"
+            + "      var event = new PresentationConnectionAvailableEvent(null);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -137,7 +149,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new StorageEvent(unknown);\n"
+            + "      var event = new PresentationConnectionAvailableEvent(unknown);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -152,14 +164,18 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object StorageEvent]", "HtmlUnitEvent", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            CHROME = "TypeError",
+            EDGE = "TypeError")
+    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
+            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new StorageEvent('HtmlUnitEvent');\n"
+            + "      var event = new PresentationConnectionAvailableEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -174,20 +190,21 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object StorageEvent]", "storage", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            CHROME = "TypeError",
+            EDGE = "TypeError")
+    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
+            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var debug = {hello: 'world'};\n"
-            + "      var event = new StorageEvent('storage', {\n"
-            + "        'key': 'aKey',\n"
-            + "        'newValue': 'aNewValue',\n"
-            + "        'oldValue': 'anOldValue',\n"
-            + "        'storageArea': null,\n"
-            + "        'url': 'aUrl'\n"
+            + "      var event = new PresentationConnectionAvailableEvent('connectionavailable', {\n"
+            + "        'bubbles': false,\n"
+            + "        'cancelable': false,\n"
+            + "        'composed': false\n"
             + "      });\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
@@ -203,14 +220,18 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object StorageEvent]", "storage", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            CHROME = "TypeError",
+            EDGE = "TypeError")
+    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
+            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new StorageEvent('storage', {\n"
+            + "      var event = new PresentationConnectionAvailableEvent('connectionavailable', {\n"
             + "      });\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
@@ -226,46 +247,14 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
-    @HtmlUnitNYI(CHROME = {"[object StorageEvent]", "storage", "false", "false", "false"},
-                EDGE = {"[object StorageEvent]", "storage", "false", "false", "false"},
-                FF = {"[object StorageEvent]", "storage", "false", "false", "false"},
-                FF_ESR = {"[object StorageEvent]", "storage", "false", "false", "false"})
-    public void create_ctorAllDetailsWrongData() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      var event = new StorageEvent('storage', {\n"
-            + "        'storageArea': 'wrong'\n"
-            + "      });\n"
-            + "      dump(event);\n"
-            + "    } catch(e) { logEx(e) }\n"
-            + "  }\n"
-            + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"[object StorageEvent]", "", "false", "false", "false"})
-    @HtmlUnitNYI(CHROME = "NotSupportedError/DOMException",
-            EDGE = "NotSupportedError/DOMException",
-            FF = "NotSupportedError/DOMException",
-            FF_ESR = "NotSupportedError/DOMException")
+    @Alerts("NotSupportedError/DOMException")
     public void create_createEvent() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = document.createEvent('StorageEvent');\n"
+            + "      var event = document.createEvent('PresentationConnectionAvailableEvent');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -280,7 +269,9 @@ public class StorageEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            EDGE = "true")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -288,7 +279,7 @@ public class StorageEventTest extends WebDriverTestCase {
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      log('StorageEvent' in window);\n"
+            + "      log('PresentationConnectionAvailableEvent' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

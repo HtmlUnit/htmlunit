@@ -15181,15 +15181,70 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.event.PresentationConnectionAvailableEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()")
+    public void presentationConnectionAvailableEvent() throws Exception {
+        testString("", "new PresentationConnectionAvailableEvent('close')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.PresentationConnectionCloseEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()")
+    public void presentationConnectionCloseEvent() throws Exception {
+        testString("", "new PresentationConnectionCloseEvent('close')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.ProgressEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("constructor(),lengthComputable[GCE],loaded[GCE],total[GCE]")
+    public void progressEvent() throws Exception {
+        testString("", "new ProgressEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.StorageEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("constructor(),initStorageEvent(),key[GCE],newValue[GCE],oldValue[GCE],storageArea[GCE],url[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void storageEvent() throws Exception {
+        testString("", "new StorageEvent('event')");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.event.SubmitEvent}.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "constructor(),submitter[GCE]",
-            EDGE = "constructor(),submitter[GCE]",
-            FF = "constructor(),submitter[GCE]",
-            FF_ESR = "constructor(),submitter[GCE]")
+    @Alerts("constructor(),submitter[GCE]")
     public void submitEvent() throws Exception {
         testString("", "new SubmitEvent('event')");
     }
@@ -15200,10 +15255,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "constructor(),data[GCE],initTextEvent()",
-            EDGE = "constructor(),data[GCE],initTextEvent()",
-            FF = "constructor(),data[GCE],initTextEvent()",
-            FF_ESR = "constructor(),data[GCE],initTextEvent()")
+    @Alerts("constructor(),data[GCE],initTextEvent()")
     @HtmlUnitNYI(CHROME = "constructor(),data[GCE]",
             EDGE = "constructor(),data[GCE]",
             FF_ESR = "constructor(),data[GCE]",

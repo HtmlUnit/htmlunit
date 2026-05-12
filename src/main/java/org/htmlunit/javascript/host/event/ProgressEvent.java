@@ -52,12 +52,7 @@ public class ProgressEvent extends Event {
 
         if (details != null && !JavaScriptEngine.isUndefined(details)) {
             final Object lengthComputable = details.get("lengthComputable");
-            if (lengthComputable instanceof Boolean boolean1) {
-                lengthComputable_ = boolean1;
-            }
-            else {
-                lengthComputable_ = Boolean.parseBoolean(lengthComputable.toString());
-            }
+            lengthComputable_ = JavaScriptEngine.toBoolean(lengthComputable);
 
             final Object loaded = details.get("loaded");
             loaded_ = JavaScriptEngine.toNumber(loaded);
