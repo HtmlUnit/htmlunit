@@ -36,7 +36,7 @@ public class HistoryTest extends WebServerTestCase {
      */
     @BeforeEach
     public void setUp() throws Exception {
-        startWebServer("src/test/resources/org/htmlunit/javascript/host");
+        startWebServer("./src/test/resources/org/htmlunit/javascript/host");
     }
 
     /**

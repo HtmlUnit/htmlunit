@@ -707,7 +707,8 @@ public class HostParentOfSTest extends HostParentOf {
         test("SVGElement", "SVGSwitchElement");
     }
 
-    @Alerts(DEFAULT = "true/false", FF_ESR = "true/true")
+    @Alerts(DEFAULT = "true/false",
+            FF_ESR = "true/true")
     void _SVGElement_SVGSymbolElement() throws Exception {
         test("SVGElement", "SVGSymbolElement");
     }

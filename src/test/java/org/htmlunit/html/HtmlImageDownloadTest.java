@@ -29,6 +29,7 @@ import org.htmlunit.platform.image.ImageData;
 import org.htmlunit.platform.image.ImageIOImageData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -41,14 +42,14 @@ import org.junit.jupiter.api.Test;
  * @author Ronald Brill
  */
 public class HtmlImageDownloadTest extends WebServerTestCase {
-    private static final String BASE_FILE_PATH = "src/test/resources/org/htmlunit/html";
 
     /**
-     * Constructor.
-     * @throws Exception if an exception occurs
+     * Starts the web server prior to test execution.
+     * @throws Exception if an error occurs
      */
-    public HtmlImageDownloadTest() throws Exception {
-        startWebServer(BASE_FILE_PATH);
+    @BeforeEach
+    public void setUp() throws Exception {
+        startWebServer("src/test/resources/org/htmlunit/html");
     }
 
     /**

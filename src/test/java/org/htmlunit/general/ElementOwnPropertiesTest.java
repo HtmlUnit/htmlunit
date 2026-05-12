@@ -15230,6 +15230,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void wheelEvent() throws Exception {
         testString("", "new WheelEvent('wheel')");
     }
+
     /**
      * Test {@link org.htmlunit.javascript.host.event.WheelEvent}.
      *
