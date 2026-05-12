@@ -3929,6 +3929,35 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.event.WebkitSpeechRecognitionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,NONE,preventDefault(),"
+                + "resultIndex,results,returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,"
+                + "type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,NONE,preventDefault(),"
+                + "resultIndex,results,returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
+                + "timeStamp,"
+                + "type",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(
+            CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                    + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                    + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
+    public void webkitSpeechRecognitionEvent() throws Exception {
+        testString("", "new webkitSpeechRecognitionEvent('webkitSpeechRecognition')");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.event.WheelEvent}.
      *
      * @throws Exception if the test fails
@@ -4003,17 +4032,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which")
     public void wheelEvent() throws Exception {
         testString("", "new WheelEvent('wheel')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.WheelEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("NotSupportedError/DOMException")
-    public void wheelEvent2() throws Exception {
-        testString("", "document.createEvent('WheelEvent')");
     }
 
     /**

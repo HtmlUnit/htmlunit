@@ -15205,6 +15205,22 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.event.WebkitSpeechRecognitionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),resultIndex[GCE],results[GCE]",
+            EDGE = "constructor(),resultIndex[GCE],results[GCE]",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()")
+    public void webkitSpeechRecognitionEvent() throws Exception {
+        testString("", "new webkitSpeechRecognitionEvent('webkitSpeechRecognition')");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.event.WheelEvent}.
      *
      * @throws Exception if the test fails
@@ -15229,17 +15245,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "constructor(),DOM_DELTA_LINE[E],DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E]")
     public void wheelEvent() throws Exception {
         testString("", "new WheelEvent('wheel')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.WheelEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("NotSupportedError/DOMException")
-    public void wheelEvent2() throws Exception {
-        testString("", "document.createEvent('WheelEvent')");
     }
 
     /**

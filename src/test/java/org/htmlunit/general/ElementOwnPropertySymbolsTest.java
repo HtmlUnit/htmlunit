@@ -2271,14 +2271,20 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.WheelEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.WebkitSpeechRecognitionEvent}.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [WheelEvent]")
-    public void wheelEvent() throws Exception {
-        testString("", "new WheelEvent('wheel')");
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionEvent]",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(
+            CHROME = "Symbol(Symbol.toStringTag) [C] [WebkitSpeechRecognitionEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [WebkitSpeechRecognitionEvent]")
+    public void webkitSpeechRecognitionEvent() throws Exception {
+        testString("", "new webkitSpeechRecognitionEvent('webkitSpeechRecognition')");
     }
 
     /**
@@ -2287,9 +2293,9 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError/DOMException")
-    public void wheelEvent2() throws Exception {
-        testString("", "document.createEvent('WheelEvent')");
+    @Alerts("Symbol(Symbol.toStringTag) [C] [WheelEvent]")
+    public void wheelEvent() throws Exception {
+        testString("", "new WheelEvent('wheel')");
     }
 
     /**
