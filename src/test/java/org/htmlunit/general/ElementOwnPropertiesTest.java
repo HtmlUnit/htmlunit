@@ -15066,30 +15066,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),detail[GCE],initUIEvent(),sourceCapabilities[GCE],view[GCE],which[GCE]",
-            EDGE = "constructor(),detail[GCE],initUIEvent(),sourceCapabilities[GCE],view[GCE],which[GCE]",
-            FF = "constructor(),detail[GCE],initUIEvent(),layerX[GCE],layerY[GCE],rangeOffset[GCE],"
-                + "rangeParent[GCE],SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],view[GCE],"
-                + "which[GCE]",
-            FF_ESR = "constructor(),detail[GCE],initUIEvent(),layerX[GCE],layerY[GCE],rangeOffset[GCE],"
-                + "rangeParent[GCE],SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],view[GCE],"
-                + "which[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor(),detail[GCE],initUIEvent(),view[GCE],which[GCE]",
-            EDGE = "constructor(),detail[GCE],initUIEvent(),view[GCE],which[GCE]",
-            FF_ESR = "constructor(),detail[GCE],initUIEvent(),SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],"
-                + "view[GCE],which[GCE]",
-            FF = "constructor(),detail[GCE],initUIEvent(),SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],"
-                + "view[GCE],which[GCE]")
-    public void uiEvent() throws Exception {
-        testString("", "document.createEvent('UIEvent')");
-    }
-
-    /**
      * Test {@link org.htmlunit.javascript.host.URL}.
      *
      * @throws Exception if the test fails
@@ -15202,6 +15178,132 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "NotSupportedError/DOMException")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.SubmitEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),submitter[GCE]",
+            EDGE = "constructor(),submitter[GCE]",
+            FF = "constructor(),submitter[GCE]",
+            FF_ESR = "constructor(),submitter[GCE]")
+    public void submitEvent() throws Exception {
+        testString("", "new SubmitEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TextEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),data[GCE],initTextEvent()",
+            EDGE = "constructor(),data[GCE],initTextEvent()",
+            FF = "constructor(),data[GCE],initTextEvent()",
+            FF_ESR = "constructor(),data[GCE],initTextEvent()")
+    @HtmlUnitNYI(CHROME = "constructor(),data[GCE]",
+            EDGE = "constructor(),data[GCE]",
+            FF_ESR = "constructor(),data[GCE]",
+            FF = "constructor(),data[GCE]")
+    public void textEvent() throws Exception {
+        testString("", "document.createEvent('TextEvent')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TimeEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "ReferenceError",
+            EDGE = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void timeEvent() throws Exception {
+        testString("", "new TimeEvent('time')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TouchEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "altKey[GCE],changedTouches[GCE],constructor(),ctrlKey[GCE],metaKey[GCE],shiftKey[GCE],"
+                + "targetTouches[GCE],"
+                + "touches[GCE]",
+            EDGE = "altKey[GCE],changedTouches[GCE],constructor(),ctrlKey[GCE],metaKey[GCE],shiftKey[GCE],"
+                + "targetTouches[GCE],"
+                + "touches[GCE]",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()")
+    public void touchEvent() throws Exception {
+        testString("", "new TouchEvent('touch')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TrackEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),track[GCE]",
+            EDGE = "constructor(),track[GCE]",
+            FF = "constructor(),track[GCE]",
+            FF_ESR = "constructor(),track[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void trackEvent() throws Exception {
+        testString("", "new TrackEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TransitionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]",
+            EDGE = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]",
+            FF = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]",
+            FF_ESR = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF_ESR = "constructor()",
+            FF = "constructor()")
+    public void transitionEvent() throws Exception {
+        testString("", "new TransitionEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),detail[GCE],initUIEvent(),sourceCapabilities[GCE],view[GCE],which[GCE]",
+            EDGE = "constructor(),detail[GCE],initUIEvent(),sourceCapabilities[GCE],view[GCE],which[GCE]",
+            FF = "constructor(),detail[GCE],initUIEvent(),layerX[GCE],layerY[GCE],rangeOffset[GCE],"
+                + "rangeParent[GCE],SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],view[GCE],"
+                + "which[GCE]",
+            FF_ESR = "constructor(),detail[GCE],initUIEvent(),layerX[GCE],layerY[GCE],rangeOffset[GCE],"
+                + "rangeParent[GCE],SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],view[GCE],"
+                + "which[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor(),detail[GCE],initUIEvent(),view[GCE],which[GCE]",
+            EDGE = "constructor(),detail[GCE],initUIEvent(),view[GCE],which[GCE]",
+            FF_ESR = "constructor(),detail[GCE],initUIEvent(),SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],"
+                + "view[GCE],which[GCE]",
+            FF = "constructor(),detail[GCE],initUIEvent(),SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],"
+                + "view[GCE],which[GCE]")
+    public void uiEvent() throws Exception {
+        testString("", "new UIEvent('event')");
     }
 
     /**
@@ -15408,44 +15510,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts("NotSupportedError/DOMException")
     public void svgZoomEvent() throws Exception {
         testString("", "document.createEvent('SVGZoomEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.TextEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),data[GCE],initTextEvent()",
-            EDGE = "constructor(),data[GCE],initTextEvent()",
-            FF = "constructor(),data[GCE],initTextEvent()",
-            FF_ESR = "constructor(),data[GCE],initTextEvent()")
-    @HtmlUnitNYI(CHROME = "constructor(),data[GCE]",
-            EDGE = "constructor(),data[GCE]",
-            FF_ESR = "constructor(),data[GCE]",
-            FF = "constructor(),data[GCE]")
-    public void textEvent() throws Exception {
-        testString("", "document.createEvent('TextEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.TouchEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "altKey[GCE],changedTouches[GCE],constructor(),ctrlKey[GCE],metaKey[GCE],shiftKey[GCE],"
-                + "targetTouches[GCE],"
-                + "touches[GCE]",
-            EDGE = "altKey[GCE],changedTouches[GCE],constructor(),ctrlKey[GCE],metaKey[GCE],shiftKey[GCE],"
-                + "targetTouches[GCE],"
-                + "touches[GCE]",
-            FF = "ReferenceError",
-            FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()")
-    public void touchEvent2() throws Exception {
-        testString("", "new TouchEvent('touch')");
     }
 
     /**
@@ -16113,26 +16177,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
         testString("var debug = {hello: 'world'};"
                     + "var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});",
                     "new BlobEvent('blob', { 'data': blob })");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.TouchEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "altKey[GCE],changedTouches[GCE],constructor(),ctrlKey[GCE],metaKey[GCE],shiftKey[GCE],"
-                + "targetTouches[GCE],"
-                + "touches[GCE]",
-            EDGE = "altKey[GCE],changedTouches[GCE],constructor(),ctrlKey[GCE],metaKey[GCE],shiftKey[GCE],"
-                + "targetTouches[GCE],"
-                + "touches[GCE]",
-            FF = "ReferenceError",
-            FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()")
-    public void touchEvent() throws Exception {
-        testString("", "new TouchEvent('touch')");
     }
 
     /**

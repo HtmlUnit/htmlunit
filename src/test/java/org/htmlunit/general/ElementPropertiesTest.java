@@ -3699,58 +3699,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
-                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),isTrusted,NONE,"
-                + "preventDefault(),returnValue,sourceCapabilities,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type,view,"
-                + "which",
-            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
-                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),isTrusted,NONE,"
-                + "preventDefault(),returnValue,sourceCapabilities,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type,view,"
-                + "which",
-            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
-                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,"
-                + "explicitOriginalTarget,initEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,NONE,"
-                + "originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,SCROLL_PAGE_DOWN,"
-                + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type,view,which",
-            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
-                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,"
-                + "explicitOriginalTarget,initEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,NONE,"
-                + "originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,SCROLL_PAGE_DOWN,"
-                + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type,view,which")
-    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,currentTarget,"
-                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
-                + "view,which",
-            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,currentTarget,"
-                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
-                + "view,which",
-            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,CONTROL_MASK,"
-                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
-                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
-            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,CONTROL_MASK,"
-                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
-                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which")
-    public void uiEvent() throws Exception {
-        testString("", "document.createEvent('UIEvent')");
-    }
-
-    /**
      * Test {@link org.htmlunit.javascript.host.URL}.
      *
      * @throws Exception if the test fails
@@ -3926,6 +3874,284 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts("NotSupportedError/DOMException")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.SubmitEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),submitter,target,timeStamp,"
+                + "type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),submitter,target,timeStamp,"
+                + "type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,explicitOriginalTarget,"
+                + "initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),returnValue,SHIFT_MASK,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),submitter,target,timeStamp,"
+                + "type",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,explicitOriginalTarget,"
+                + "initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),returnValue,SHIFT_MASK,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),submitter,target,timeStamp,"
+                + "type")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),submitter,target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),submitter,target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),submitter,target,timeStamp,type",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),submitter,target,timeStamp,type")
+    public void submitEvent() throws Exception {
+        testString("", "new SubmitEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TextEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,data,defaultPrevented,detail,eventPhase,initEvent(),initTextEvent(),initUIEvent(),"
+                + "isTrusted,NONE,preventDefault(),returnValue,sourceCapabilities,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,"
+                + "which",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,data,defaultPrevented,detail,eventPhase,initEvent(),initTextEvent(),initUIEvent(),"
+                + "isTrusted,NONE,preventDefault(),returnValue,sourceCapabilities,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,"
+                + "which",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),CONTROL_MASK,currentTarget,data,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),initTextEvent(),initUIEvent(),isTrusted,layerX,layerY,"
+                + "META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,"
+                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,"
+                + "which",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),CONTROL_MASK,currentTarget,data,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),initTextEvent(),initUIEvent(),isTrusted,layerX,layerY,"
+                + "META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,"
+                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,"
+                + "which")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,composed,currentTarget,data,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,composed,currentTarget,data,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,composed,CONTROL_MASK,currentTarget,"
+                + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,composed,CONTROL_MASK,currentTarget,"
+                + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which")
+    public void textEvent() throws Exception {
+        testString("", "document.createEvent('TextEvent')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TimeEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "ReferenceError",
+            EDGE = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void timeEvent() throws Exception {
+        testString("", "new TimeEvent('time')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TouchEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,changedTouches,"
+                + "composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initUIEvent(),isTrusted,metaKey,NONE,preventDefault(),returnValue,shiftKey,sourceCapabilities,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,timeStamp,touches,"
+                + "type,view,"
+                + "which",
+            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,changedTouches,"
+                + "composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initUIEvent(),isTrusted,metaKey,NONE,preventDefault(),returnValue,shiftKey,sourceCapabilities,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,timeStamp,touches,"
+                + "type,view,"
+                + "which",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,composed,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
+                + "view,which",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,composed,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
+                + "view,which")
+    public void touchEvent() throws Exception {
+        testString("", "new TouchEvent('touch')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TrackEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,track,"
+                + "type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,track,"
+                + "type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,explicitOriginalTarget,"
+                + "initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),returnValue,SHIFT_MASK,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,track,"
+                + "type",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,explicitOriginalTarget,"
+                + "initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),returnValue,SHIFT_MASK,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,track,"
+                + "type")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
+    public void trackEvent() throws Exception {
+        testString("", "new TrackEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TransitionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,elapsedTime,eventPhase,initEvent(),isTrusted,NONE,"
+                + "preventDefault(),propertyName,pseudoElement,returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,"
+                + "type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,elapsedTime,eventPhase,initEvent(),isTrusted,NONE,"
+                + "preventDefault(),propertyName,pseudoElement,returnValue,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,"
+                + "type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,elapsedTime,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),"
+                + "propertyName,pseudoElement,returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,"
+                + "type",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,elapsedTime,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),isTrusted,META_MASK,NONE,originalTarget,preventDefault(),"
+                + "propertyName,pseudoElement,returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,"
+                + "type")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
+                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
+    public void transitionEvent() throws Exception {
+        testString("", "new TransitionEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),isTrusted,NONE,"
+                + "preventDefault(),returnValue,sourceCapabilities,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,"
+                + "which",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),isTrusted,NONE,"
+                + "preventDefault(),returnValue,sourceCapabilities,srcElement,stopImmediatePropagation(),"
+                + "stopPropagation(),target,timeStamp,type,view,"
+                + "which",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,NONE,"
+                + "originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,SCROLL_PAGE_DOWN,"
+                + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
+                + "composed,composedPath(),CONTROL_MASK,currentTarget,defaultPrevented,detail,eventPhase,"
+                + "explicitOriginalTarget,initEvent(),initUIEvent(),isTrusted,layerX,layerY,META_MASK,NONE,"
+                + "originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,SCROLL_PAGE_DOWN,"
+                + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,composed,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
+                + "view,which",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,composed,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
+                + "view,which",
+            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,composed,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
+            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,composed,CONTROL_MASK,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
+                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which")
+    public void uiEvent() throws Exception {
+        testString("", "new UIEvent('event')");
     }
 
     /**
@@ -4360,124 +4586,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts("NotSupportedError/DOMException")
     public void svgZoomEvent() throws Exception {
         testString("", "document.createEvent('SVGZoomEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.TextEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
-                + "currentTarget,data,defaultPrevented,detail,eventPhase,initEvent(),initTextEvent(),initUIEvent(),"
-                + "isTrusted,NONE,preventDefault(),returnValue,sourceCapabilities,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,"
-                + "which",
-            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
-                + "currentTarget,data,defaultPrevented,detail,eventPhase,initEvent(),initTextEvent(),initUIEvent(),"
-                + "isTrusted,NONE,preventDefault(),returnValue,sourceCapabilities,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,"
-                + "which",
-            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
-                + "composedPath(),CONTROL_MASK,currentTarget,data,defaultPrevented,detail,eventPhase,"
-                + "explicitOriginalTarget,initEvent(),initTextEvent(),initUIEvent(),isTrusted,layerX,layerY,"
-                + "META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,"
-                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type,view,"
-                + "which",
-            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
-                + "composedPath(),CONTROL_MASK,currentTarget,data,defaultPrevented,detail,eventPhase,"
-                + "explicitOriginalTarget,initEvent(),initTextEvent(),initUIEvent(),isTrusted,layerX,layerY,"
-                + "META_MASK,NONE,originalTarget,preventDefault(),rangeOffset,rangeParent,returnValue,"
-                + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type,view,"
-                + "which")
-    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,currentTarget,data,"
-                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),returnValue,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
-            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,currentTarget,data,"
-                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),returnValue,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
-            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,CONTROL_MASK,currentTarget,"
-                + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
-                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
-            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,CONTROL_MASK,currentTarget,"
-                + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
-                + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which")
-    public void textEvent() throws Exception {
-        testString("", "document.createEvent('TextEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.TouchEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,changedTouches,"
-                + "composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
-                + "initUIEvent(),isTrusted,metaKey,NONE,preventDefault(),returnValue,shiftKey,sourceCapabilities,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,timeStamp,touches,"
-                + "type,view,"
-                + "which",
-            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,changedTouches,"
-                + "composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
-                + "initUIEvent(),isTrusted,metaKey,NONE,preventDefault(),returnValue,shiftKey,sourceCapabilities,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,timeStamp,touches,"
-                + "type,view,"
-                + "which",
-            FF = "ReferenceError",
-            FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,currentTarget,"
-                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
-                + "view,which",
-            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
-                + "CAPTURING_PHASE,composed,currentTarget,"
-                + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
-                + "view,which")
-    public void touchEvent() throws Exception {
-        testString("", "new TouchEvent('touch')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.TouchEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,changedTouches,"
-                + "composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
-                + "initUIEvent(),isTrusted,metaKey,NONE,preventDefault(),returnValue,shiftKey,sourceCapabilities,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,timeStamp,touches,"
-                + "type,view,"
-                + "which",
-            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,changedTouches,"
-                + "composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
-                + "initUIEvent(),isTrusted,metaKey,NONE,preventDefault(),returnValue,shiftKey,sourceCapabilities,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,timeStamp,touches,"
-                + "type,view,"
-                + "which",
-            FF = "ReferenceError",
-            FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
-                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type,view,which",
-            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
-                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type,view,which")
-    public void touchEvent2() throws Exception {
-        testString("", "new TouchEvent('touch')");
     }
 
     /**

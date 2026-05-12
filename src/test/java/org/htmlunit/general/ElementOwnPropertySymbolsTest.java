@@ -2205,17 +2205,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [UIEvent]")
-    public void uiEvent() throws Exception {
-        testString("", "document.createEvent('UIEvent')");
-    }
-
-    /**
      * Test {@link org.htmlunit.javascript.host.URL}.
      *
      * @throws Exception if the test fails
@@ -2268,6 +2257,94 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Alerts("NotSupportedError/DOMException")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.SubmitEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]")
+    public void submitEvent() throws Exception {
+        testString("", "new SubmitEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TextEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Symbol(Symbol.toStringTag) [C] [TextEvent]")
+    public void textEvent() throws Exception {
+        testString("", "document.createEvent('TextEvent')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TimeEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "ReferenceError",
+            EDGE = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void timeEvent() throws Exception {
+        testString("", "new TimeEvent('time')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TouchEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TouchEvent]",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    public void touchEvent() throws Exception {
+        testString("", "new TouchEvent('touch')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TrackEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [TrackEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [TrackEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [TrackEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [TrackEvent]")
+    public void trackEvent() throws Exception {
+        testString("", "new TrackEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.TransitionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TransitionEvent]")
+    public void transitionEvent() throws Exception {
+        testString("", "new TransitionEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Symbol(Symbol.toStringTag) [C] [UIEvent]")
+    public void uiEvent() throws Exception {
+        testString("", "new UIEvent('event')");
     }
 
     /**
@@ -2394,30 +2471,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Alerts("NotSupportedError/DOMException")
     public void svgZoomEvent() throws Exception {
         testString("", "document.createEvent('SVGZoomEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.TextEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [TextEvent]")
-    public void textEvent() throws Exception {
-        testString("", "document.createEvent('TextEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.TouchEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TouchEvent]",
-            FF = "ReferenceError",
-            FF_ESR = "ReferenceError")
-    public void touchEvent2() throws Exception {
-        testString("", "new TouchEvent('touch')");
     }
 
     /**
@@ -2584,19 +2637,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
         testString("var debug = {hello: 'world'};"
                     + "var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});",
                     "new BlobEvent('blob', { 'data': blob })");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.TouchEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TouchEvent]",
-            FF = "ReferenceError",
-            FF_ESR = "ReferenceError")
-    public void touchEvent() throws Exception {
-        testString("", "new TouchEvent('touch')");
     }
 
     /**
