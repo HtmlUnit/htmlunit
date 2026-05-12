@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -37,14 +38,16 @@ public class UIEventTest extends WebDriverTestCase {
             + "    log(event.cancelable);\n"
             + "    log(event.composed);\n"
 
+            + "    log(event.detail);\n"
             + "    log(event.view == window);\n"
+            + "    log(event.which);\n"
             + "  }\n";
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object UIEvent]", "event", "false", "false", "false", "false"})
+    @Alerts({"[object UIEvent]", "event", "false", "false", "false", "0", "false", "0"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -66,7 +69,7 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object UIEvent]", "event", "true", "false", "false", "true"})
+    @Alerts({"[object UIEvent]", "event", "true", "false", "false", "0", "true", "0"})
     public void create_ctorWithDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -76,6 +79,168 @@ public class UIEventTest extends WebDriverTestCase {
             + "      var event = new UIEvent('event', {\n"
             + "        'bubbles': true,\n"
             + "        'view': window\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    @HtmlUnitNYI(CHROME = {"[object UIEvent]", "undefined", "false", "false", "false", "0", "false", "0"},
+            EDGE = {"[object UIEvent]", "undefined", "false", "false", "false", "0", "false", "0"},
+            FF = {"[object UIEvent]", "undefined", "false", "false", "false", "0", "false", "0"},
+            FF_ESR = {"[object UIEvent]", "undefined", "false", "false", "false", "0", "false", "0"})
+    public void create_ctorWithoutType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new UIEvent();\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object UIEvent]", "42", "false", "false", "false", "0", "false", "0"})
+    public void create_ctorNumericType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new UIEvent(42);\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object UIEvent]", "null", "false", "false", "false", "0", "false", "0"})
+    public void create_ctorNullType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new UIEvent(null);\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ReferenceError")
+    public void create_ctorUnknownType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new UIEvent(unknown);\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object UIEvent]", "HtmlUnitEvent", "false", "false", "false", "0", "false", "0"})
+    public void create_ctorArbitraryType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new UIEvent('HtmlUnitEvent');\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object UIEvent]", "event", "true", "false", "false", "0", "true", "0"})
+    public void create_ctorAllDetails() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new UIEvent('event', {\n"
+            + "        'bubbles': true,\n"
+            + "        'view': window\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object UIEvent]", "event", "false", "false", "false", "0", "false", "0"})
+    public void create_ctorAllDetailsMissingData() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new UIEvent('event', {\n"
             + "      });\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
@@ -129,6 +294,28 @@ public class UIEventTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object UIEvent]", "", "false", "false", "false", "0", "false", "0"})
+    public void create_createEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('UIEvent');\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -328,5 +515,28 @@ public class UIEventTest extends WebDriverTestCase {
 
         driver.findElement(By.id("b")).click();
         verifyTitle2(driver, alerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void inWindow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      log('UIEvent' in window);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

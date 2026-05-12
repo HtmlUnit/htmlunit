@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -136,4 +137,265 @@ public class CloseEventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    @HtmlUnitNYI(CHROME = {"[object CloseEvent]", "undefined", "false", "false", "false", "0", "", "false"},
+            EDGE = {"[object CloseEvent]", "undefined", "false", "false", "false", "0", "", "false"},
+            FF = {"[object CloseEvent]", "undefined", "false", "false", "false", "0", "", "false"},
+            FF_ESR = {"[object CloseEvent]", "undefined", "false", "false", "false", "0", "", "false"})
+    public void create_ctorWithoutType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new CloseEvent();
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object CloseEvent]", "42", "false", "false", "false", "0", "", "false"})
+    public void create_ctorNumericType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new CloseEvent(42);
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object CloseEvent]", "null", "false", "false", "false", "0", "", "false"})
+    public void create_ctorNullType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new CloseEvent(null);
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ReferenceError")
+    public void create_ctorUnknownType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new CloseEvent(unknown);
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object CloseEvent]", "HtmlUnitEvent", "false", "false", "false", "0", "", "false"})
+    public void create_ctorArbitraryType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new CloseEvent('HtmlUnitEvent');
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object CloseEvent]", "type-close", "true", "false", "false", "42", "test-reason", "true"})
+    public void create_ctorAllDetails() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new CloseEvent('type-close', {
+"
+            + "        'bubbles': true,
+"
+            + "        'reason': 'test-reason',
+"
+            + "        'code': 42,
+"
+            + "        'wasClean': true
+"
+            + "      });
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object CloseEvent]", "type-close", "false", "false", "false", "0", "", "false"})
+    public void create_ctorAllDetailsMissingData() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new CloseEvent('type-close', {
+"
+            + "      });
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void inWindow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>
+"
+            + "<head>
+"
+            + "  <script>
+"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {
+"
+            + "      log('CloseEvent' in window);
+"
+            + "    }
+"
+            + "  </script>
+"
+            + "</head>
+"
+            + "<body onload='test()'>
+"
+            + "</body>
+"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
 }

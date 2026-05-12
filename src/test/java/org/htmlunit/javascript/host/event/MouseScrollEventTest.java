@@ -16,14 +16,15 @@ package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for {@link BlobEvent}.
+ * Tests for {@link MouseScrollEvent}.
  *
  * @author Ronald Brill
  */
-public class BlobEventTest extends WebDriverTestCase {
+public class MouseScrollEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
             + "    log(event);\n"
@@ -31,21 +32,19 @@ public class BlobEventTest extends WebDriverTestCase {
             + "    log(event.bubbles);\n"
             + "    log(event.cancelable);\n"
             + "    log(event.composed);\n"
-            + "    log(event.data);\n"
             + "  }\n";
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = {"[object MouseScrollEvent]", "DOMMouseScroll", "false", "false", "false"},
+            FF_ESR = {"[object MouseScrollEvent]", "DOMMouseScroll", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent('blob');\n"
+            + "      var event = new MouseScrollEvent('DOMMouseScroll');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -56,18 +55,19 @@ public class BlobEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    @HtmlUnitNYI(FF = {"[object MouseScrollEvent]", "undefined", "false", "false", "false"},
+            FF_ESR = {"[object MouseScrollEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent();\n"
+            + "      var event = new MouseScrollEvent();\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -78,18 +78,17 @@ public class BlobEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = {"[object MouseScrollEvent]", "42", "false", "false", "false"},
+            FF_ESR = {"[object MouseScrollEvent]", "42", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent(42);\n"
+            + "      var event = new MouseScrollEvent(42);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -100,18 +99,17 @@ public class BlobEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = {"[object MouseScrollEvent]", "null", "false", "false", "false"},
+            FF_ESR = {"[object MouseScrollEvent]", "null", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent(null);\n"
+            + "      var event = new MouseScrollEvent(null);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -122,9 +120,6 @@ public class BlobEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
     @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
@@ -133,7 +128,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent(unknown);\n"
+            + "      var event = new MouseScrollEvent(unknown);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -144,18 +139,17 @@ public class BlobEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = {"[object MouseScrollEvent]", "HtmlUnitEvent", "false", "false", "false"},
+            FF_ESR = {"[object MouseScrollEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent('HtmlUnitEvent');\n"
+            + "      var event = new MouseScrollEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -166,21 +160,20 @@ public class BlobEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts({"[object BlobEvent]", "blob", "false", "false", "false", "[object Blob]"})
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = {"[object MouseScrollEvent]", "DOMMouseScroll", "true", "true", "false"},
+            FF_ESR = {"[object MouseScrollEvent]", "DOMMouseScroll", "true", "true", "false"})
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var debug = {hello: 'world'};\n"
-            + "      var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});\n"
-            + "      var event = new BlobEvent('blob', {\n"
-            + "        'data': blob\n"
+            + "      var event = new MouseScrollEvent('DOMMouseScroll', {\n"
+            + "        'bubbles': true,\n"
+            + "        'cancelable': true,\n"
+            + "        'composed': true\n"
             + "      });\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
@@ -192,19 +185,17 @@ public class BlobEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = {"[object MouseScrollEvent]", "DOMMouseScroll", "false", "false", "false"},
+            FF_ESR = {"[object MouseScrollEvent]", "DOMMouseScroll", "false", "false", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent('blob', {\n"
-            + "      });\n"
+            + "      var event = new MouseScrollEvent('DOMMouseScroll', {});\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -215,20 +206,15 @@ public class BlobEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts("TypeError")
-    public void create_ctorAllDetailsWrongData() throws Exception {
+    @Alerts("NotSupportedError/DOMException")
+    public void create_createEvent() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new BlobEvent('blob', {\n"
-            + "        'data': 'blob'\n"
-            + "      });\n"
+            + "      var event = document.createEvent('MouseScrollEvent');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -239,11 +225,10 @@ public class BlobEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "false",
+            FF = "true",
+            FF_ESR = "true")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -251,7 +236,7 @@ public class BlobEventTest extends WebDriverTestCase {
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      log('BlobEvent' in window);\n"
+            + "      log('MouseScrollEvent' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -261,60 +246,4 @@ public class BlobEventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
-
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("NotSupportedError/DOMException")
-    public void create_createEvent() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = document.createEvent('BlobEvent');
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("NotSupportedError/DOMException")
-    public void create_createEvent() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      var event = document.createEvent('BlobEvent');\n"
-            + "      dump(event);\n"
-            + "    } catch(e) { logEx(e) }\n"
-            + "  }\n"
-            + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
 }

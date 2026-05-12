@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -234,4 +235,264 @@ public class HashChangeEventTest extends WebDriverTestCase {
 
         verifyTitle2(driver, getExpectedAlerts());
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    @HtmlUnitNYI(CHROME = {"[object HashChangeEvent]", "undefined", "false", "false", "false", "", ""},
+            EDGE = {"[object HashChangeEvent]", "undefined", "false", "false", "false", "", ""},
+            FF = {"[object HashChangeEvent]", "undefined", "false", "false", "false", "", ""},
+            FF_ESR = {"[object HashChangeEvent]", "undefined", "false", "false", "false", "", ""})
+    public void create_ctorWithoutType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new HashChangeEvent();
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HashChangeEvent]", "42", "false", "false", "false", "", ""})
+    public void create_ctorNumericType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new HashChangeEvent(42);
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HashChangeEvent]", "null", "false", "false", "false", "", ""})
+    public void create_ctorNullType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new HashChangeEvent(null);
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ReferenceError")
+    public void create_ctorUnknownType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new HashChangeEvent(unknown);
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HashChangeEvent]", "HtmlUnitEvent", "false", "false", "false", "", ""})
+    public void create_ctorArbitraryType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new HashChangeEvent('HtmlUnitEvent');
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HashChangeEvent]", "hashchange", "true", "false", "false", "null", "§§URL§§#1"})
+    public void create_ctorAllDetails() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new HashChangeEvent('hashchange', {
+"
+            + "        'bubbles': true,
+"
+            + "        'oldURL': null,
+"
+            + "        'newURL': '" + URL_FIRST + "#1'
+"
+            + "      });
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HashChangeEvent]", "hashchange", "false", "false", "false", "", ""})
+    public void create_ctorAllDetailsMissingData() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new HashChangeEvent('hashchange', {
+"
+            + "      });
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void inWindow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>
+"
+            + "<head>
+"
+            + "  <script>
+"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {
+"
+            + "      log('HashChangeEvent' in window);
+"
+            + "    }
+"
+            + "  </script>
+"
+            + "</head>
+"
+            + "<body onload='test()'>
+"
+            + "</body>
+"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
 }

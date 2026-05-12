@@ -227,4 +227,70 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object BeforeInstallPromptEvent]", "click", "false", "false", "false"},
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    public void create_ctorAllDetailsMissingData() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new BeforeInstallPromptEvent('click', {
+"
+            + "      });
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("NotSupportedError/DOMException")
+    public void create_createEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = document.createEvent('BeforeInstallPromptEvent');
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
 }

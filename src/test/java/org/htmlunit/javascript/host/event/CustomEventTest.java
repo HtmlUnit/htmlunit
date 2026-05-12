@@ -278,4 +278,101 @@ public class CustomEventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object CustomEvent]", "click", "false", "false", "false", "null"})
+    public void create_ctorAllDetailsMissingData() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new CustomEvent('click', {
+"
+            + "      });
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object CustomEvent]", "", "false", "false", "false", "null"})
+    public void create_createEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = document.createEvent('CustomEvent');
+"
+            + "      dump(event);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void inWindow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>
+"
+            + "<head>
+"
+            + "  <script>
+"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {
+"
+            + "      log('CustomEvent' in window);
+"
+            + "    }
+"
+            + "  </script>
+"
+            + "</head>
+"
+            + "<body onload='test()'>
+"
+            + "</body>
+"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
 }

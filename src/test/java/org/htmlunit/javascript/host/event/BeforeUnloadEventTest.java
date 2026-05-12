@@ -169,4 +169,238 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void create_ctorWithoutType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new BeforeUnloadEvent();
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void create_ctorNumericType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new BeforeUnloadEvent(42);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void create_ctorNullType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new BeforeUnloadEvent(null);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ReferenceError")
+    public void create_ctorUnknownType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new BeforeUnloadEvent(unknown);
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void create_ctorArbitraryType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new BeforeUnloadEvent('HtmlUnitEvent');
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void create_ctorAllDetails() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new BeforeUnloadEvent('beforeunload', {
+"
+            + "        'bubbles': true,
+"
+            + "        'cancelable': true,
+"
+            + "        'returnValue': 'changed'
+"
+            + "      });
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void create_ctorAllDetailsMissingData() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>
+"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {
+"
+            + "    try {
+"
+            + "      var event = new BeforeUnloadEvent('beforeunload', {
+"
+            + "      });
+"
+            + "    } catch(e) { logEx(e) }
+"
+            + "  }
+"
+            + "</script></head><body onload='test()'>
+"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void inWindow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>
+"
+            + "<head>
+"
+            + "  <script>
+"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {
+"
+            + "      log('BeforeUnloadEvent' in window);
+"
+            + "    }
+"
+            + "  </script>
+"
+            + "</head>
+"
+            + "<body onload='test()'>
+"
+            + "</body>
+"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
 }
