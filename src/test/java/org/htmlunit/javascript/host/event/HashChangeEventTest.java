@@ -248,24 +248,16 @@ public class HashChangeEventTest extends WebDriverTestCase {
             FF_ESR = {"[object HashChangeEvent]", "undefined", "false", "false", "false", "", ""})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new HashChangeEvent();
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new HashChangeEvent();\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -278,24 +270,16 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Alerts({"[object HashChangeEvent]", "42", "false", "false", "false", "", ""})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new HashChangeEvent(42);
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new HashChangeEvent(42);\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -308,24 +292,16 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Alerts({"[object HashChangeEvent]", "null", "false", "false", "false", "", ""})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new HashChangeEvent(null);
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new HashChangeEvent(null);\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -338,24 +314,16 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new HashChangeEvent(unknown);
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new HashChangeEvent(unknown);\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -368,24 +336,16 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Alerts({"[object HashChangeEvent]", "HtmlUnitEvent", "false", "false", "false", "", ""})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new HashChangeEvent('HtmlUnitEvent');
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new HashChangeEvent('HtmlUnitEvent');\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -398,32 +358,20 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Alerts({"[object HashChangeEvent]", "hashchange", "true", "false", "false", "null", "§§URL§§#1"})
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new HashChangeEvent('hashchange', {
-"
-            + "        'bubbles': true,
-"
-            + "        'oldURL': null,
-"
-            + "        'newURL': '" + URL_FIRST + "#1'
-"
-            + "      });
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new HashChangeEvent('hashchange', {\n"
+            + "        'bubbles': true,\n"
+            + "        'oldURL': null,\n"
+            + "        'newURL': '" + URL_FIRST + "#1'\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
@@ -437,26 +385,17 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Alerts({"[object HashChangeEvent]", "hashchange", "false", "false", "false", "", ""})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new HashChangeEvent('hashchange', {
-"
-            + "      });
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new HashChangeEvent('hashchange', {\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -469,27 +408,17 @@ public class HashChangeEventTest extends WebDriverTestCase {
     @Alerts("true")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html>
-"
-            + "<head>
-"
-            + "  <script>
-"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
             + LOG_TITLE_FUNCTION
-            + "    function test() {
-"
-            + "      log('HashChangeEvent' in window);
-"
-            + "    }
-"
-            + "  </script>
-"
-            + "</head>
-"
-            + "<body onload='test()'>
-"
-            + "</body>
-"
+            + "    function test() {\n"
+            + "      log('HashChangeEvent' in window);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
             + "</html>";
 
         loadPageVerifyTitle2(html);

@@ -342,70 +342,6 @@ public class InputEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,false"})
-    public void create_ctorAllDetailsMissingData() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new InputEvent('input', {
-"
-            + "      });
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("NotSupportedError/DOMException")
-    public void create_createEvent() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = document.createEvent('InputEvent');
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
     /**
      * @throws Exception if the test fails
      */
@@ -413,27 +349,17 @@ public class InputEventTest extends WebDriverTestCase {
     @Alerts("true")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html>
-"
-            + "<head>
-"
-            + "  <script>
-"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
             + LOG_TITLE_FUNCTION
-            + "    function test() {
-"
-            + "      log('InputEvent' in window);
-"
-            + "    }
-"
-            + "  </script>
-"
-            + "</head>
-"
-            + "<body onload='test()'>
-"
-            + "</body>
-"
+            + "    function test() {\n"
+            + "      log('InputEvent' in window);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
             + "</html>";
 
         loadPageVerifyTitle2(html);

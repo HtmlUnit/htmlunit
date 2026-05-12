@@ -287,26 +287,17 @@ public class CustomEventTest extends WebDriverTestCase {
     @Alerts({"[object CustomEvent]", "click", "false", "false", "false", "null"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new CustomEvent('click', {
-"
-            + "      });
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new CustomEvent('click', {\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -319,24 +310,16 @@ public class CustomEventTest extends WebDriverTestCase {
     @Alerts({"[object CustomEvent]", "", "false", "false", "false", "null"})
     public void create_createEvent() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = document.createEvent('CustomEvent');
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('CustomEvent');\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -349,27 +332,17 @@ public class CustomEventTest extends WebDriverTestCase {
     @Alerts("true")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html>
-"
-            + "<head>
-"
-            + "  <script>
-"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
             + LOG_TITLE_FUNCTION
-            + "    function test() {
-"
-            + "      log('CustomEvent' in window);
-"
-            + "    }
-"
-            + "  </script>
-"
-            + "</head>
-"
-            + "<body onload='test()'>
-"
-            + "</body>
-"
+            + "    function test() {\n"
+            + "      log('CustomEvent' in window);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
             + "</html>";
 
         loadPageVerifyTitle2(html);

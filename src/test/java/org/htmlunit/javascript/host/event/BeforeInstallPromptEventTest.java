@@ -238,26 +238,17 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
             FF_ESR = "ReferenceError")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new BeforeInstallPromptEvent('click', {
-"
-            + "      });
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new BeforeInstallPromptEvent('click', {\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -270,24 +261,16 @@ public class BeforeInstallPromptEventTest extends WebDriverTestCase {
     @Alerts("NotSupportedError/DOMException")
     public void create_createEvent() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = document.createEvent('BeforeInstallPromptEvent');
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('BeforeInstallPromptEvent');\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

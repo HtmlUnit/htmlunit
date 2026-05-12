@@ -178,21 +178,14 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Alerts("TypeError")
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new BeforeUnloadEvent();
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new BeforeUnloadEvent();\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -205,21 +198,14 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Alerts("TypeError")
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new BeforeUnloadEvent(42);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new BeforeUnloadEvent(42);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -232,21 +218,14 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Alerts("TypeError")
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new BeforeUnloadEvent(null);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new BeforeUnloadEvent(null);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -259,21 +238,14 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new BeforeUnloadEvent(unknown);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new BeforeUnloadEvent(unknown);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -286,21 +258,14 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Alerts("TypeError")
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new BeforeUnloadEvent('HtmlUnitEvent');
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new BeforeUnloadEvent('HtmlUnitEvent');\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -313,29 +278,18 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Alerts("TypeError")
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new BeforeUnloadEvent('beforeunload', {
-"
-            + "        'bubbles': true,
-"
-            + "        'cancelable': true,
-"
-            + "        'returnValue': 'changed'
-"
-            + "      });
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new BeforeUnloadEvent('beforeunload', {\n"
+            + "        'bubbles': true,\n"
+            + "        'cancelable': true,\n"
+            + "        'returnValue': 'changed'\n"
+            + "      });\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -348,23 +302,15 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Alerts("TypeError")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new BeforeUnloadEvent('beforeunload', {
-"
-            + "      });
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new BeforeUnloadEvent('beforeunload', {\n"
+            + "      });\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -377,27 +323,17 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Alerts("true")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html>
-"
-            + "<head>
-"
-            + "  <script>
-"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
             + LOG_TITLE_FUNCTION
-            + "    function test() {
-"
-            + "      log('BeforeUnloadEvent' in window);
-"
-            + "    }
-"
-            + "  </script>
-"
-            + "</head>
-"
-            + "<body onload='test()'>
-"
-            + "</body>
-"
+            + "    function test() {\n"
+            + "      log('BeforeUnloadEvent' in window);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
             + "</html>";
 
         loadPageVerifyTitle2(html);

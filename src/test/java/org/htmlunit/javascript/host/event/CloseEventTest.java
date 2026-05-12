@@ -150,24 +150,16 @@ public class CloseEventTest extends WebDriverTestCase {
             FF_ESR = {"[object CloseEvent]", "undefined", "false", "false", "false", "0", "", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new CloseEvent();
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new CloseEvent();\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -180,24 +172,16 @@ public class CloseEventTest extends WebDriverTestCase {
     @Alerts({"[object CloseEvent]", "42", "false", "false", "false", "0", "", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new CloseEvent(42);
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new CloseEvent(42);\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -210,24 +194,16 @@ public class CloseEventTest extends WebDriverTestCase {
     @Alerts({"[object CloseEvent]", "null", "false", "false", "false", "0", "", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new CloseEvent(null);
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new CloseEvent(null);\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -240,24 +216,16 @@ public class CloseEventTest extends WebDriverTestCase {
     @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new CloseEvent(unknown);
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new CloseEvent(unknown);\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -270,24 +238,16 @@ public class CloseEventTest extends WebDriverTestCase {
     @Alerts({"[object CloseEvent]", "HtmlUnitEvent", "false", "false", "false", "0", "", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new CloseEvent('HtmlUnitEvent');
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new CloseEvent('HtmlUnitEvent');\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -300,34 +260,21 @@ public class CloseEventTest extends WebDriverTestCase {
     @Alerts({"[object CloseEvent]", "type-close", "true", "false", "false", "42", "test-reason", "true"})
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new CloseEvent('type-close', {
-"
-            + "        'bubbles': true,
-"
-            + "        'reason': 'test-reason',
-"
-            + "        'code': 42,
-"
-            + "        'wasClean': true
-"
-            + "      });
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new CloseEvent('type-close', {\n"
+            + "        'bubbles': true,\n"
+            + "        'reason': 'test-reason',\n"
+            + "        'code': 42,\n"
+            + "        'wasClean': true\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -340,26 +287,17 @@ public class CloseEventTest extends WebDriverTestCase {
     @Alerts({"[object CloseEvent]", "type-close", "false", "false", "false", "0", "", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new CloseEvent('type-close', {
-"
-            + "      });
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new CloseEvent('type-close', {\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
             + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>
-"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -372,27 +310,17 @@ public class CloseEventTest extends WebDriverTestCase {
     @Alerts("true")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html>
-"
-            + "<head>
-"
-            + "  <script>
-"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
             + LOG_TITLE_FUNCTION
-            + "    function test() {
-"
-            + "      log('CloseEvent' in window);
-"
-            + "    }
-"
-            + "  </script>
-"
-            + "</head>
-"
-            + "<body onload='test()'>
-"
-            + "</body>
-"
+            + "    function test() {\n"
+            + "      log('CloseEvent' in window);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
             + "</html>";
 
         loadPageVerifyTitle2(html);

@@ -165,21 +165,14 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
     @Alerts("TypeError")
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new AudioProcessingEvent();
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new AudioProcessingEvent();\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -192,21 +185,14 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
     @Alerts("TypeError")
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new AudioProcessingEvent(42);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new AudioProcessingEvent(42);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -219,21 +205,14 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
     @Alerts("TypeError")
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new AudioProcessingEvent(null);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new AudioProcessingEvent(null);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -246,21 +225,14 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
     @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new AudioProcessingEvent(unknown);
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new AudioProcessingEvent(unknown);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -273,21 +245,14 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
     @Alerts("TypeError")
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new AudioProcessingEvent('HtmlUnitEvent');
-"
-            + "    } catch(e) { logEx(e) }
-"
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new AudioProcessingEvent('HtmlUnitEvent');\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -304,26 +269,17 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             EDGE = "TypeError")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>
-"
+            + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  function test() {
-"
-            + "    try {
-"
-            + "      var event = new AudioProcessingEvent('audioprocessing', {
-"
-            + "      });
-"
-            + "      dump(event);
-"
-            + "    } catch(e) { logEx(e) }
-"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new AudioProcessingEvent('audioprocessing', {\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
             + DUMP_EVENT_FUNCTION
-            + "  }
-"
-            + "</script></head><body onload='test()'>
-"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
