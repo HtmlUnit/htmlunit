@@ -16,7 +16,6 @@ package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -41,8 +40,6 @@ public class PresentationConnectionAvailableEventTest extends WebDriverTestCase 
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -67,8 +64,6 @@ public class PresentationConnectionAvailableEventTest extends WebDriverTestCase 
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
-                EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -93,8 +88,6 @@ public class PresentationConnectionAvailableEventTest extends WebDriverTestCase 
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -119,8 +112,6 @@ public class PresentationConnectionAvailableEventTest extends WebDriverTestCase 
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -167,8 +158,6 @@ public class PresentationConnectionAvailableEventTest extends WebDriverTestCase 
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -193,8 +182,6 @@ public class PresentationConnectionAvailableEventTest extends WebDriverTestCase 
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -223,8 +210,6 @@ public class PresentationConnectionAvailableEventTest extends WebDriverTestCase 
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionAvailableEvent]", "", "true", "true", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

@@ -2183,17 +2183,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.KeyboardEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [KeyboardEvent]")
-    public void keyboardEvent() throws Exception {
-        testString("", "document.createEvent('KeyboardEvent')");
-    }
-
-    /**
      * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
      *
      * @throws Exception if the test fails
@@ -2227,14 +2216,463 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.event.AnimationEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [AnimationEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [AnimationEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [AnimationEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [AnimationEvent]")
+    public void animationEvent() throws Exception {
+        testString("", "new AnimationEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.AudioProcessingEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void audioProcessingEvent() throws Exception {
+        testString("", "new AudioProcessingEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.BeforeInstallPromptEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [BeforeInstallPromptEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [BeforeInstallPromptEvent]",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    public void beforeInstallPromptEvent() throws Exception {
+        testString("", "new BeforeInstallPromptEvent('event')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [BeforeUnloadEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [BeforeUnloadEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [BeforeUnloadEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [BeforeUnloadEvent]")
+    public void beforeUnloadEvent() throws Exception {
+        testString("", "document.createEvent('BeforeUnloadEvent')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [BlobEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [BlobEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [BlobEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [BlobEvent]")
+    public void blobEvent() throws Exception {
+        testString("var debug = {hello: 'world'};"
+                    + "var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});",
+                    "new BlobEvent('blob', { 'data': blob })");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.ClipboardEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [ClipboardEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [ClipboardEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [ClipboardEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [ClipboardEvent]")
+    public void clipboardEvent() throws Exception {
+        testString("", "new ClipboardEvent('event')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [CloseEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [CloseEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [CloseEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [CloseEvent]")
+    public void closeEvent() throws Exception {
+        testString("", "new CloseEvent('type-close')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.CompositionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [CompositionEvent]")
+    public void compositionEvent() throws Exception {
+        testString("", "document.createEvent('CompositionEvent')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.CustomEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [CustomEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [CustomEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [CustomEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [CustomEvent]")
+    public void customEvent() throws Exception {
+        testString("", "new CustomEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.DeviceMotionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [DeviceMotionEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [DeviceMotionEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DeviceMotionEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DeviceMotionEvent]")
+    public void deviceMotionEvent() throws Exception {
+        testString("", "new DeviceMotionEvent('motion')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.DeviceOrientationEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [DeviceOrientationEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [DeviceOrientationEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DeviceOrientationEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DeviceOrientationEvent]")
+    public void deviceOrientationEvent() throws Exception {
+        testString("", "new DeviceOrientationEvent('event')");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.event.DragEvent}.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [DragEvent]")
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [DragEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [DragEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [DragEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [DragEvent]")
     public void dragEvent() throws Exception {
-        testString("", "document.createEvent('DragEvent')");
+        testString("", "new DragEvent('error')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.ErrorEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [ErrorEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [ErrorEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [ErrorEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [ErrorEvent]")
+    public void errorEvent() throws Exception {
+        testString("", "new ErrorEvent('error')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.FocusEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [Event]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [Event]",
+            FF = "Symbol(Symbol.toStringTag) [C] [Event]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [Event]")
+    public void eventEvent() throws Exception {
+        testString("", "new Event('event')");
+    }
+
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.FocusEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [FocusEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [FocusEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [FocusEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [FocusEvent]")
+    public void focusEvent() throws Exception {
+        testString("", "new FocusEvent('FocusEvent')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.GamepadEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [GamepadEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [GamepadEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [GamepadEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [GamepadEvent]")
+    public void gamepadEvent() throws Exception {
+        testString("", "new GamepadEvent('gamepad')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.HashChangeEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [HashChangeEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [HashChangeEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [HashChangeEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [HashChangeEvent]")
+    public void hashChangeEvent() throws Exception {
+        testString("", "new HashChangeEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.IDBVersionChangeEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [IDBVersionChangeEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [IDBVersionChangeEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [IDBVersionChangeEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [IDBVersionChangeEvent]")
+    public void idbVersionChangeEvent() throws Exception {
+        testString("", "new IDBVersionChangeEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.InputEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [InputEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [InputEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [InputEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [InputEvent]")
+    public void inputEvent() throws Exception {
+        testString("", "new InputEvent('input')");
+    }
+
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.KeyboardEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [KeyboardEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [KeyboardEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [KeyboardEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [KeyboardEvent]")
+    public void keyboardEvent() throws Exception {
+        testString("", "new KeyboardEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MediaEncryptedEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [MediaEncryptedEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [MediaEncryptedEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [MediaEncryptedEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [MediaEncryptedEvent]")
+    public void mediaEncryptedEvent() throws Exception {
+        testString("", "new MediaEncryptedEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MediaKeyMessageEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void mediaKeyMessageEvent() throws Exception {
+        testString("", "new MediaKeyMessageEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MediaQueryListEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [MediaQueryListEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [MediaQueryListEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [MediaQueryListEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [MediaQueryListEvent]")
+    public void mediaQueryListEvent() throws Exception {
+        testString("", "new MediaQueryListEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MediaStreamEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [MediaStreamEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [MediaStreamEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [MediaStreamEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [MediaStreamEvent]")
+    public void mediaStreamEvent() throws Exception {
+        testString("", "new MediaStreamEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MediaStreamTrackEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void mediaStreamTrackEvent() throws Exception {
+        testString("", "new MediaStreamTrackEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MessageEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [MessageEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [MessageEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [MessageEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [MessageEvent]")
+    public void messageEvent() throws Exception {
+        testString("", "new MessageEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MIDIConnectionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [MIDIConnectionEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [MIDIConnectionEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [MIDIConnectionEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [MIDIConnectionEvent]")
+    public void midiConnectionEvent() throws Exception {
+        testString("", "new MIDIConnectionEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MIDIMessageEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [MIDIMessageEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [MIDIMessageEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [MIDIMessageEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [MIDIMessageEvent]")
+    public void midiMessageEvent() throws Exception {
+        testString("", "new MIDIMessageEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MouseEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [MouseEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [MouseEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [MouseEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [MouseEvent]")
+    public void mouseEvent() throws Exception {
+        testString("", "new MouseEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MouseScrollEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "ReferenceError",
+            EDGE = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void mouseScrollEvent() throws Exception {
+        testString("", "new MouseScrollEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MutationEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "ReferenceError",
+            EDGE = "ReferenceError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    public void mutationEvent() throws Exception {
+        testString("", "new MutationEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.OfflineAudioCompletionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void offlineAudioCompletionEvent() throws Exception {
+        testString("", "new OfflineAudioCompletionEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.PageTransitionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [PageTransitionEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [PageTransitionEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [PageTransitionEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [PageTransitionEvent]")
+    public void pageTransitionEvent() throws Exception {
+        testString("", "new PageTransitionEvent('transition')");
     }
 
     /**
@@ -2243,20 +2681,26 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [PointerEvent]")
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [PointerEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [PointerEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [PointerEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [PointerEvent]")
     public void pointerEvent() throws Exception {
         testString("", "new PointerEvent('click')");
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.PointerEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.PopStateEvent}.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError/DOMException")
-    public void pointerEvent2() throws Exception {
-        testString("", " document.createEvent('PointerEvent')");
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [PopStateEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [PopStateEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [PopStateEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [PopStateEvent]")
+    public void popStateEvent() throws Exception {
+        testString("", "new PopStateEvent('event')");
     }
 
     /**
@@ -2269,8 +2713,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             EDGE = "TypeError",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [PresentationConnectionAvailableEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [C] [PresentationConnectionAvailableEvent]")
     public void presentationConnectionAvailableEvent() throws Exception {
         testString("", "new PresentationConnectionAvailableEvent('close')");
     }
@@ -2285,8 +2727,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             EDGE = "TypeError",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [PresentationConnectionCloseEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [C] [PresentationConnectionCloseEvent]")
     public void presentationConnectionCloseEvent() throws Exception {
         testString("", "new PresentationConnectionCloseEvent('close')");
     }
@@ -2297,7 +2737,8 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]",
+    @Alerts(DEFAULT = "constructor(),lengthComputable[GCE],loaded[GCE],total[GCE]",
+            CHROME = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]",
             EDGE = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]",
             FF = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]",
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]")
@@ -2311,7 +2752,8 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [StorageEvent]",
+    @Alerts(DEFAULT = "constructor(),initStorageEvent(),key[GCE],newValue[GCE],oldValue[GCE],storageArea[GCE],url[GCE]",
+            CHROME = "Symbol(Symbol.toStringTag) [C] [StorageEvent]",
             EDGE = "Symbol(Symbol.toStringTag) [C] [StorageEvent]",
             FF = "Symbol(Symbol.toStringTag) [C] [StorageEvent]",
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [StorageEvent]")
@@ -2325,7 +2767,8 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]",
+    @Alerts(DEFAULT = "constructor(),submitter[GCE]",
+            CHROME = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]",
             EDGE = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]",
             FF = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]",
             FF_ESR = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]")
@@ -2339,7 +2782,11 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [TextEvent]")
+    @Alerts(DEFAULT = "constructor(),data[GCE],initTextEvent()",
+            CHROME = "Symbol(Symbol.toStringTag) [C] [TextEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [TextEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [TextEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [TextEvent]")
     public void textEvent() throws Exception {
         testString("", "document.createEvent('TextEvent')");
     }
@@ -2364,7 +2811,8 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TouchEvent]",
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [TouchEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [TouchEvent]",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
     public void touchEvent() throws Exception {
@@ -2391,7 +2839,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [TransitionEvent]")
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [TransitionEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [TransitionEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [TransitionEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [TransitionEvent]")
     public void transitionEvent() throws Exception {
         testString("", "new TransitionEvent('event')");
     }
@@ -2402,7 +2853,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [UIEvent]")
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [UIEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [UIEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [UIEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [UIEvent]")
     public void uiEvent() throws Exception {
         testString("", "new UIEvent('event')");
     }
@@ -2447,8 +2901,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             EDGE = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionEvent]",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(
-            CHROME = "Symbol(Symbol.toStringTag) [C] [WebkitSpeechRecognitionEvent]",
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [WebkitSpeechRecognitionEvent]",
             EDGE = "Symbol(Symbol.toStringTag) [C] [WebkitSpeechRecognitionEvent]")
     public void webkitSpeechRecognitionEvent() throws Exception {
         testString("", "new webkitSpeechRecognitionEvent('webkitSpeechRecognition')");
@@ -2460,55 +2913,12 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [WheelEvent]")
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [C] [WheelEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [C] [WheelEvent]",
+            FF = "Symbol(Symbol.toStringTag) [C] [WheelEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [C] [WheelEvent]")
     public void wheelEvent() throws Exception {
         testString("", "new WheelEvent('wheel')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.MouseEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [MouseEvent]")
-    public void mouseEvent() throws Exception {
-        testString("", "document.createEvent('MouseEvent')");
-    }
-
-
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.CompositionEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [CompositionEvent]")
-    public void compositionEvent() throws Exception {
-        testString("", "document.createEvent('CompositionEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.FocusEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [FocusEvent]")
-    public void focusEvent() throws Exception {
-        testString("", "document.createEvent('FocusEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.InputEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [InputEvent]")
-    public void inputEvent() throws Exception {
-        testString("", "new InputEvent('input')");
     }
 
     /**
@@ -2517,7 +2927,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("NotSupportedError/DOMException")
+    @Alerts(CHROME = "NotSupportedError/DOMException",
+            EDGE = "NotSupportedError/DOMException",
+            FF = "NotSupportedError/DOMException",
+            FF_ESR = "NotSupportedError/DOMException")
     public void mouseWheelEvent() throws Exception {
         testString("", "document.createEvent('MouseWheelEvent')");
     }
@@ -2668,100 +3081,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Alerts("Symbol(Symbol.toStringTag) [C] [GainNode]")
     public void gainNode() throws Exception {
         testString("var audioCtx = new AudioContext();", "new GainNode(audioCtx)");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [BeforeUnloadEvent]")
-    public void beforeUnloadEvent() throws Exception {
-        testString("", "document.createEvent('BeforeUnloadEvent')");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [CloseEvent]")
-    public void closeEvent() throws Exception {
-        testString("", "new CloseEvent('type-close')");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [BlobEvent]")
-    public void blobEvent() throws Exception {
-        testString("var debug = {hello: 'world'};"
-                    + "var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});",
-                    "new BlobEvent('blob', { 'data': blob })");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.DeviceMotionEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [DeviceMotionEvent]")
-    public void deviceMotionEvent() throws Exception {
-        testString("", "new DeviceMotionEvent('motion')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.ErrorEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [ErrorEvent]")
-    public void errorEvent() throws Exception {
-        testString("", "new ErrorEvent('error')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.GamepadEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [GamepadEvent]")
-    public void gamepadEvent() throws Exception {
-        testString("", "new GamepadEvent('gamepad')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.MutationEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "NotSupportedError/DOMException",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [MutationEvent]")
-    public void mutationEvent() throws Exception {
-        testString("", "document.createEvent('MutationEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.OfflineAudioCompletionEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("NotSupportedError/DOMException")
-    public void offlineAudioCompletionEvent() throws Exception {
-        testString("", "document.createEvent('OfflineAudioCompletionEvent')");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Symbol(Symbol.toStringTag) [C] [PageTransitionEvent]")
-    public void pageTransitionEvent() throws Exception {
-        testString("", "new PageTransitionEvent('transition')");
     }
 
     /**

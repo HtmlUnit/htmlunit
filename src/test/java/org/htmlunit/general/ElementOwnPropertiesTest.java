@@ -14822,6 +14822,454 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],"
+                + "srcElement[GCE],stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]",
+            EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],"
+                + "srcElement[GCE],stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]",
+            FF = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),CONTROL_MASK[E],currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],explicitOriginalTarget[GCE],initEvent(),META_MASK[E],"
+                + "NONE[E],originalTarget[GCE],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]",
+            FF_ESR = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),CONTROL_MASK[E],currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],explicitOriginalTarget[GCE],initEvent(),META_MASK[E],"
+                + "NONE[E],originalTarget[GCE],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]")
+    @HtmlUnitNYI(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],"
+                + "eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
+            EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],"
+                + "eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
+            FF_ESR = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),CONTROL_MASK[E],"
+                + "currentTarget[GCE],defaultPrevented[GCE],"
+                + "eventPhase[GCE],initEvent(),META_MASK[E],NONE[E],"
+                + "preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
+            FF = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),CONTROL_MASK[E],"
+                + "currentTarget[GCE],defaultPrevented[GCE],"
+                + "eventPhase[GCE],initEvent(),META_MASK[E],NONE[E],"
+                + "preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]")
+    public void event2() throws Exception {
+        testString("", "document.createEvent('Event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.URL}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
+                + "username[GSCE]",
+            EDGE = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
+                + "username[GSCE]",
+            FF = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
+                + "username[GSCE]",
+            FF_ESR = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
+                + "username[GSCE]")
+    public void url() throws Exception {
+        testString("", "new URL('http://developer.mozilla.org')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.URL}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
+                + "username[GSCE]",
+            EDGE = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
+                + "username[GSCE]",
+            FF = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
+                + "username[GSCE]",
+            FF_ESR = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
+                + "username[GSCE]")
+    public void webkitURL() throws Exception {
+        testString("", "new webkitURL('http://developer.mozilla.org')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.AnimationEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]",
+            EDGE = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]",
+            FF = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]",
+            FF_ESR = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void animationEvent() throws Exception {
+        testString("", "new AnimationEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.AudioProcessingEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void audioProcessingEvent() throws Exception {
+        testString("", "new AudioProcessingEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.BeforeInstallPromptEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),platforms[GCE],prompt(),userChoice[GCE]",
+            EDGE = "constructor(),platforms[GCE],prompt(),userChoice[GCE]",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()")
+    public void beforeInstallPromptEvent() throws Exception {
+        testString("", "new BeforeInstallPromptEvent('event')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),returnValue[GSCE]",
+            EDGE = "constructor(),returnValue[GSCE]",
+            FF = "constructor(),returnValue[GSCE]",
+            FF_ESR = "constructor(),returnValue[GSCE]")
+    public void beforeUnloadEvent() throws Exception {
+        testString("", "document.createEvent('BeforeUnloadEvent')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),data[GCE],timecode[GCE]",
+            EDGE = "constructor(),data[GCE],timecode[GCE]",
+            FF = "constructor(),data[GCE]",
+            FF_ESR = "constructor(),data[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor(),data[GCE]",
+            EDGE = "constructor(),data[GCE]")
+    public void blobEvent() throws Exception {
+        testString("var debug = {hello: 'world'};"
+                    + "var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});",
+                    "new BlobEvent('blob', { 'data': blob })");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.ClipboardEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "clipboardData[GCE],constructor()",
+            EDGE = "clipboardData[GCE],constructor()",
+            FF = "clipboardData[GCE],constructor()",
+            FF_ESR = "clipboardData[GCE],constructor()")
+    @HtmlUnitNYI(CHROME = "constructor()",
+        EDGE = "constructor()",
+        FF = "constructor()",
+        FF_ESR = "constructor()")
+    public void clipboardEvent() throws Exception {
+        testString("", "new ClipboardEvent('event')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "code[GCE],constructor(),reason[GCE],wasClean[GCE]",
+            EDGE = "code[GCE],constructor(),reason[GCE],wasClean[GCE]",
+            FF = "code[GCE],constructor(),reason[GCE],wasClean[GCE]",
+            FF_ESR = "code[GCE],constructor(),reason[GCE],wasClean[GCE]")
+    public void closeEvent() throws Exception {
+        testString("", "new CloseEvent('type-close')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.CompositionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),data[GCE],initCompositionEvent()",
+            EDGE = "constructor(),data[GCE],initCompositionEvent()",
+            FF = "constructor(),data[GCE],initCompositionEvent()",
+            FF_ESR = "constructor(),data[GCE],initCompositionEvent(),locale[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor(),data[GCE]",
+            EDGE = "constructor(),data[GCE]",
+            FF_ESR = "constructor(),data[GCE]",
+            FF = "constructor(),data[GCE]")
+    public void compositionEvent() throws Exception {
+        testString("", "document.createEvent('CompositionEvent')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.CustomEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),detail[GCE],initCustomEvent()",
+            EDGE = "constructor(),detail[GCE],initCustomEvent()",
+            FF = "constructor(),detail[GCE],initCustomEvent()",
+            FF_ESR = "constructor(),detail[GCE],initCustomEvent()")
+    public void customEvent() throws Exception {
+        testString("", "new CustomEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.DeviceMotionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "acceleration[GCE],accelerationIncludingGravity[GCE],constructor(),interval[GCE],"
+                + "rotationRate[GCE]",
+            EDGE = "acceleration[GCE],accelerationIncludingGravity[GCE],constructor(),interval[GCE],"
+                + "rotationRate[GCE]",
+            FF = "acceleration[GCE],accelerationIncludingGravity[GCE],constructor(),initDeviceMotionEvent(),"
+                + "interval[GCE],"
+                + "rotationRate[GCE]",
+            FF_ESR = "acceleration[GCE],accelerationIncludingGravity[GCE],constructor(),initDeviceMotionEvent(),"
+                + "interval[GCE],"
+                + "rotationRate[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void deviceMotionEvent() throws Exception {
+        testString("", "new DeviceMotionEvent('motion')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.DeviceOrientationEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "absolute[GCE],alpha[GCE],beta[GCE],constructor(),gamma[GCE]",
+            EDGE = "absolute[GCE],alpha[GCE],beta[GCE],constructor(),gamma[GCE]",
+            FF = "absolute[GCE],alpha[GCE],beta[GCE],constructor(),gamma[GCE],initDeviceOrientationEvent()",
+            FF_ESR = "absolute[GCE],alpha[GCE],beta[GCE],constructor(),gamma[GCE],initDeviceOrientationEvent()")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void deviceOrientationEvent() throws Exception {
+        testString("", "new DeviceOrientationEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.DragEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),dataTransfer[GCE]",
+            EDGE = "constructor(),dataTransfer[GCE]",
+            FF = "constructor(),dataTransfer[GCE],initDragEvent()",
+            FF_ESR = "constructor(),dataTransfer[GCE],initDragEvent()")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF_ESR = "constructor()",
+            FF = "constructor()")
+    public void dragEvent() throws Exception {
+        testString("", "new DragEvent('error')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.ErrorEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
+            EDGE = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
+            FF = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
+            FF_ESR = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF_ESR = "constructor()",
+            FF = "constructor()")
+    public void errorEvent() throws Exception {
+        testString("", "new ErrorEvent('error')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.FocusEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],"
+                + "srcElement[GCE],stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]",
+            EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],"
+                + "srcElement[GCE],stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]",
+            FF = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),CONTROL_MASK[E],currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],explicitOriginalTarget[GCE],initEvent(),META_MASK[E],"
+                + "NONE[E],originalTarget[GCE],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]",
+            FF_ESR = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),CONTROL_MASK[E],currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],explicitOriginalTarget[GCE],initEvent(),META_MASK[E],"
+                + "NONE[E],originalTarget[GCE],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]")
+    @HtmlUnitNYI(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],CAPTURING_PHASE[E],"
+                + "composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],eventPhase[GCE],initEvent(),"
+                + "NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
+                + "target[GCE],timeStamp[GCE],type[GCE]",
+            EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],CAPTURING_PHASE[E],"
+                + "composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],eventPhase[GCE],initEvent(),"
+                + "NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
+                + "target[GCE],timeStamp[GCE],type[GCE]",
+            FF_ESR = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],CAPTURING_PHASE[E],"
+                + "composed[GCE],constructor(),CONTROL_MASK[E],currentTarget[GCE],defaultPrevented[GCE],eventPhase[GCE],"
+                + "initEvent(),META_MASK[E],NONE[E],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
+            FF = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],CAPTURING_PHASE[E],"
+                + "composed[GCE],constructor(),CONTROL_MASK[E],currentTarget[GCE],defaultPrevented[GCE],eventPhase[GCE],"
+                + "initEvent(),META_MASK[E],NONE[E],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]")
+    public void eventEvent() throws Exception {
+        testString("", "new Event('event')");
+    }
+
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.FocusEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),relatedTarget[GCE]",
+            EDGE = "constructor(),relatedTarget[GCE]",
+            FF = "constructor(),relatedTarget[GCE]",
+            FF_ESR = "constructor(),relatedTarget[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF_ESR = "constructor()",
+            FF = "constructor()")
+    public void focusEvent() throws Exception {
+        testString("", "new FocusEvent('FocusEvent')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.GamepadEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),gamepad[GCE]",
+            EDGE = "constructor(),gamepad[GCE]",
+            FF = "constructor(),gamepad[GCE]",
+            FF_ESR = "constructor(),gamepad[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF_ESR = "constructor()",
+            FF = "constructor()")
+    public void gamepadEvent() throws Exception {
+        testString("", "new GamepadEvent('gamepad')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.HashChangeEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),newURL[GCE],oldURL[GCE]",
+            EDGE = "constructor(),newURL[GCE],oldURL[GCE]",
+            FF = "constructor(),newURL[GCE],oldURL[GCE]",
+            FF_ESR = "constructor(),newURL[GCE],oldURL[GCE]")
+    public void hashChangeEvent() throws Exception {
+        testString("", "new HashChangeEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.IDBVersionChangeEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),dataLoss[GCE],dataLossMessage[GCE],newVersion[GCE],oldVersion[GCE]",
+            EDGE = "constructor(),dataLoss[GCE],dataLossMessage[GCE],newVersion[GCE],oldVersion[GCE]",
+            FF = "constructor(),newVersion[GCE],oldVersion[GCE]",
+            FF_ESR = "constructor(),newVersion[GCE],oldVersion[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void idbVersionChangeEvent() throws Exception {
+        testString("", "new IDBVersionChangeEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.InputEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]",
+            EDGE = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]",
+            FF = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]",
+            FF_ESR = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor(),data[GCE],inputType[GCE],isComposing[GCE]",
+            EDGE = "constructor(),data[GCE],inputType[GCE],isComposing[GCE]",
+            FF_ESR = "constructor(),data[GCE],inputType[GCE],isComposing[GCE]",
+            FF = "constructor(),data[GCE],inputType[GCE],isComposing[GCE]")
+    public void inputEvent() throws Exception {
+        testString("", "new InputEvent('input')");
+    }
+
+
+    /**
      * Test {@link org.htmlunit.javascript.host.event.KeyboardEvent}.
      *
      * @throws Exception if the test fails
@@ -15010,121 +15458,251 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "initKeyboardEvent(),isComposing[GCE],key[GCE],keyCode[GCE],location[GCE],"
                 + "metaKey[GCE],repeat[GCE],shiftKey[GCE]")
     public void keyboardEvent() throws Exception {
-        testString("", "document.createEvent('KeyboardEvent')");
+        testString("", "new KeyboardEvent('event')");
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.MediaEncryptedEvent}.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
-                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),currentTarget[GCE],"
-                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],"
-                + "srcElement[GCE],stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
-                + "type[GCE]",
-            EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
-                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),currentTarget[GCE],"
-                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],"
-                + "srcElement[GCE],stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
-                + "type[GCE]",
-            FF = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
-                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),CONTROL_MASK[E],currentTarget[GCE],"
-                + "defaultPrevented[GCE],eventPhase[GCE],explicitOriginalTarget[GCE],initEvent(),META_MASK[E],"
-                + "NONE[E],originalTarget[GCE],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
-                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
-                + "type[GCE]",
-            FF_ESR = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
-                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),CONTROL_MASK[E],currentTarget[GCE],"
-                + "defaultPrevented[GCE],eventPhase[GCE],explicitOriginalTarget[GCE],initEvent(),META_MASK[E],"
-                + "NONE[E],originalTarget[GCE],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
-                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
-                + "type[GCE]")
-    @HtmlUnitNYI(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
-                + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],"
-                + "eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],"
-                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
-            EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
-                + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],"
-                + "eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],"
-                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
-            FF_ESR = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
-                + "CAPTURING_PHASE[E],composed[GCE],constructor(),CONTROL_MASK[E],"
-                + "currentTarget[GCE],defaultPrevented[GCE],"
-                + "eventPhase[GCE],initEvent(),META_MASK[E],NONE[E],"
-                + "preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
-                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
-            FF = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
-                + "CAPTURING_PHASE[E],composed[GCE],constructor(),CONTROL_MASK[E],"
-                + "currentTarget[GCE],defaultPrevented[GCE],"
-                + "eventPhase[GCE],initEvent(),META_MASK[E],NONE[E],"
-                + "preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
-                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]")
-    public void event2() throws Exception {
-        testString("", "document.createEvent('Event')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.URL}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
-                + "username[GSCE]",
-            EDGE = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
-                + "username[GSCE]",
-            FF = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
-                + "username[GSCE]",
-            FF_ESR = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
-                + "username[GSCE]")
-    public void url() throws Exception {
-        testString("", "new URL('http://developer.mozilla.org')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.URL}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
-                + "username[GSCE]",
-            EDGE = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
-                + "username[GSCE]",
-            FF = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
-                + "username[GSCE]",
-            FF_ESR = "constructor(),hash[GSCE],host[GSCE],hostname[GSCE],href[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],port[GSCE],protocol[GSCE],search[GSCE],searchParams[GCE],toJSON(),toString(),"
-                + "username[GSCE]")
-    public void webkitURL() throws Exception {
-        testString("", "new webkitURL('http://developer.mozilla.org')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.DragEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),dataTransfer[GCE]",
-            EDGE = "constructor(),dataTransfer[GCE]",
-            FF = "constructor(),dataTransfer[GCE],initDragEvent()",
-            FF_ESR = "constructor(),dataTransfer[GCE],initDragEvent()")
+    @Alerts(CHROME = "constructor(),initData[GCE],initDataType[GCE]",
+            EDGE = "constructor(),initData[GCE],initDataType[GCE]",
+            FF = "constructor(),initData[GCE],initDataType[GCE]",
+            FF_ESR = "constructor(),initData[GCE],initDataType[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
-            FF_ESR = "constructor()",
-            FF = "constructor()")
-    public void dragEvent() throws Exception {
-        testString("", "document.createEvent('DragEvent')");
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void mediaEncryptedEvent() throws Exception {
+        testString("", "new MediaEncryptedEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MediaKeyMessageEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void mediaKeyMessageEvent() throws Exception {
+        testString("", "new MediaKeyMessageEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MediaQueryListEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),matches[GCE],media[GCE]",
+            EDGE = "constructor(),matches[GCE],media[GCE]",
+            FF = "constructor(),matches[GCE],media[GCE]",
+            FF_ESR = "constructor(),matches[GCE],media[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void mediaQueryListEvent() throws Exception {
+        testString("", "new MediaQueryListEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MediaStreamEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),stream[GCE]",
+            EDGE = "constructor(),stream[GCE]",
+            FF = "constructor(),stream[GCE]",
+            FF_ESR = "constructor(),stream[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void mediaStreamEvent() throws Exception {
+        testString("", "new MediaStreamEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MediaStreamTrackEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void mediaStreamTrackEvent() throws Exception {
+        testString("", "new MediaStreamTrackEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MessageEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),data[GCE],initMessageEvent(),lastEventId[GCE],origin[GCE],ports[GCE],source[GCE],"
+                + "userActivation[GCE]",
+            EDGE = "constructor(),data[GCE],initMessageEvent(),lastEventId[GCE],origin[GCE],ports[GCE],source[GCE],"
+                + "userActivation[GCE]",
+            FF = "constructor(),data[GCE],initMessageEvent(),lastEventId[GCE],origin[GCE],ports[GCE],source[GCE]",
+            FF_ESR = "constructor(),data[GCE],initMessageEvent(),lastEventId[GCE],origin[GCE],ports[GCE],source[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor(),data[GCE],initMessageEvent(),lastEventId[GCE],origin[GCE],ports[GCE],source[GCE]",
+            EDGE = "constructor(),data[GCE],initMessageEvent(),lastEventId[GCE],origin[GCE],ports[GCE],source[GCE]")
+    public void messageEvent() throws Exception {
+        testString("", "new MessageEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MIDIConnectionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),port[GCE]",
+            EDGE = "constructor(),port[GCE]",
+            FF = "constructor(),port[GCE]",
+            FF_ESR = "constructor(),port[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void midiConnectionEvent() throws Exception {
+        testString("", "new MIDIConnectionEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MIDIMessageEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),data[GCE]",
+            EDGE = "constructor(),data[GCE]",
+            FF = "constructor(),data[GCE]",
+            FF_ESR = "constructor(),data[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void midiMessageEvent() throws Exception {
+        testString("", "new MIDIMessageEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MouseEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "fromElement[GCE],getModifierState(),initMouseEvent(),layerX[GCE],layerY[GCE],metaKey[GCE],"
+                + "movementX[GCE],movementY[GCE],offsetX[GCE],offsetY[GCE],pageX[GCE],pageY[GCE],relatedTarget[GCE],"
+                + "screenX[GCE],screenY[GCE],shiftKey[GCE],toElement[GCE],x[GCE],"
+                + "y[GCE]",
+            EDGE = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "fromElement[GCE],getModifierState(),initMouseEvent(),layerX[GCE],layerY[GCE],metaKey[GCE],"
+                + "movementX[GCE],movementY[GCE],offsetX[GCE],offsetY[GCE],pageX[GCE],pageY[GCE],relatedTarget[GCE],"
+                + "screenX[GCE],screenY[GCE],shiftKey[GCE],toElement[GCE],x[GCE],"
+                + "y[GCE]",
+            FF = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "getModifierState(),initMouseEvent(),initNSMouseEvent(),metaKey[GCE],movementX[GCE],"
+                + "movementY[GCE],MOZ_SOURCE_CURSOR[E],MOZ_SOURCE_ERASER[E],MOZ_SOURCE_KEYBOARD[E],"
+                + "MOZ_SOURCE_MOUSE[E],MOZ_SOURCE_PEN[E],MOZ_SOURCE_TOUCH[E],MOZ_SOURCE_UNKNOWN[E],"
+                + "mozInputSource[GCE],mozPressure[GCE],offsetX[GCE],offsetY[GCE],pageX[GCE],pageY[GCE],"
+                + "relatedTarget[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE],x[GCE],"
+                + "y[GCE]",
+            FF_ESR = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "getModifierState(),initMouseEvent(),initNSMouseEvent(),metaKey[GCE],movementX[GCE],"
+                + "movementY[GCE],MOZ_SOURCE_CURSOR[E],MOZ_SOURCE_ERASER[E],MOZ_SOURCE_KEYBOARD[E],"
+                + "MOZ_SOURCE_MOUSE[E],MOZ_SOURCE_PEN[E],MOZ_SOURCE_TOUCH[E],MOZ_SOURCE_UNKNOWN[E],"
+                + "mozInputSource[GCE],mozPressure[GCE],offsetX[GCE],offsetY[GCE],pageX[GCE],pageY[GCE],"
+                + "relatedTarget[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE],x[GCE],"
+                + "y[GCE]")
+    @HtmlUnitNYI(CHROME = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "initMouseEvent(),metaKey[GCE],pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]",
+            EDGE = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "initMouseEvent(),metaKey[GCE],pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]",
+            FF_ESR = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "initMouseEvent(),metaKey[GCE],MOZ_SOURCE_CURSOR[E],"
+                + "MOZ_SOURCE_ERASER[E],MOZ_SOURCE_KEYBOARD[E],MOZ_SOURCE_MOUSE[E],MOZ_SOURCE_PEN[E],"
+                + "MOZ_SOURCE_TOUCH[E],MOZ_SOURCE_UNKNOWN[E],"
+                + "pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]",
+            FF = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
+                + "initMouseEvent(),metaKey[GCE],MOZ_SOURCE_CURSOR[E],"
+                + "MOZ_SOURCE_ERASER[E],MOZ_SOURCE_KEYBOARD[E],MOZ_SOURCE_MOUSE[E],MOZ_SOURCE_PEN[E],"
+                + "MOZ_SOURCE_TOUCH[E],MOZ_SOURCE_UNKNOWN[E],"
+                + "pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]")
+    public void mouseEvent() throws Exception {
+        testString("", "new MouseEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MouseScrollEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "ReferenceError",
+            EDGE = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void mouseScrollEvent() throws Exception {
+        testString("", "new MouseScrollEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.MutationEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "ReferenceError",
+            EDGE = "ReferenceError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    public void mutationEvent() throws Exception {
+        testString("", "new MutationEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.OfflineAudioCompletionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "TypeError",
+            EDGE = "TypeError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
+    public void offlineAudioCompletionEvent() throws Exception {
+        testString("", "new OfflineAudioCompletionEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.PageTransitionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),persisted[GCE]",
+            EDGE = "constructor(),persisted[GCE]",
+            FF = "constructor(),persisted[GCE]",
+            FF_ESR = "constructor(),persisted[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void pageTransitionEvent() throws Exception {
+        testString("", "new PageTransitionEvent('transition')");
     }
 
     /**
@@ -15160,24 +15738,27 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "persistentDeviceId[GCE],pointerId[GCE],pointerType[GCE],pressure[GCE],"
                 + "tiltX[GCE],tiltY[GCE],width[GCE]",
             FF_ESR = "altitudeAngle[GCE],azimuthAngle[GCE],constructor(),height[GCE],isPrimary[GCE],"
-                + "persistentDeviceId[GCE],pointerId[GCE],pointerType[GCE],pressure[GCE],"
-                + "tiltX[GCE],tiltY[GCE],width[GCE]")
+                + "pointerId[GCE],pointerType[GCE],pressure[GCE],tiltX[GCE],tiltY[GCE],width[GCE]")
     public void pointerEvent() throws Exception {
         testString("", "new PointerEvent('click')");
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.PointerEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.PopStateEvent}.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "NotSupportedError/DOMException",
-            EDGE = "NotSupportedError/DOMException",
-            FF = "NotSupportedError/DOMException",
-            FF_ESR = "NotSupportedError/DOMException")
-    public void pointerEvent2() throws Exception {
-        testString("", " document.createEvent('PointerEvent')");
+    @Alerts(CHROME = "constructor(),hasUAVisualTransition[GCE],state[GCE]",
+            EDGE = "constructor(),hasUAVisualTransition[GCE],state[GCE]",
+            FF = "constructor(),hasUAVisualTransition[GCE],state[GCE]",
+            FF_ESR = "constructor(),state[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor(),state[GCE]",
+            EDGE = "constructor(),state[GCE]",
+            FF = "constructor(),state[GCE]",
+            FF_ESR = "constructor(),state[GCE]")
+    public void popStateEvent() throws Exception {
+        testString("", "new PopStateEvent('event')");
     }
 
     /**
@@ -15190,8 +15771,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "TypeError",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()")
     public void presentationConnectionAvailableEvent() throws Exception {
         testString("", "new PresentationConnectionAvailableEvent('close')");
     }
@@ -15206,8 +15785,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "TypeError",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()")
     public void presentationConnectionCloseEvent() throws Exception {
         testString("", "new PresentationConnectionCloseEvent('close')");
     }
@@ -15433,110 +16010,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "constructor(),DOM_DELTA_LINE[E],DOM_DELTA_PAGE[E],DOM_DELTA_PIXEL[E]")
     public void wheelEvent() throws Exception {
         testString("", "new WheelEvent('wheel')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.MouseEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
-                + "fromElement[GCE],getModifierState(),initMouseEvent(),layerX[GCE],layerY[GCE],metaKey[GCE],"
-                + "movementX[GCE],movementY[GCE],offsetX[GCE],offsetY[GCE],pageX[GCE],pageY[GCE],relatedTarget[GCE],"
-                + "screenX[GCE],screenY[GCE],shiftKey[GCE],toElement[GCE],x[GCE],"
-                + "y[GCE]",
-            EDGE = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
-                + "fromElement[GCE],getModifierState(),initMouseEvent(),layerX[GCE],layerY[GCE],metaKey[GCE],"
-                + "movementX[GCE],movementY[GCE],offsetX[GCE],offsetY[GCE],pageX[GCE],pageY[GCE],relatedTarget[GCE],"
-                + "screenX[GCE],screenY[GCE],shiftKey[GCE],toElement[GCE],x[GCE],"
-                + "y[GCE]",
-            FF = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
-                + "getModifierState(),initMouseEvent(),initNSMouseEvent(),metaKey[GCE],movementX[GCE],"
-                + "movementY[GCE],MOZ_SOURCE_CURSOR[E],MOZ_SOURCE_ERASER[E],MOZ_SOURCE_KEYBOARD[E],"
-                + "MOZ_SOURCE_MOUSE[E],MOZ_SOURCE_PEN[E],MOZ_SOURCE_TOUCH[E],MOZ_SOURCE_UNKNOWN[E],"
-                + "mozInputSource[GCE],mozPressure[GCE],offsetX[GCE],offsetY[GCE],pageX[GCE],pageY[GCE],"
-                + "relatedTarget[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE],x[GCE],"
-                + "y[GCE]",
-            FF_ESR = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
-                + "getModifierState(),initMouseEvent(),initNSMouseEvent(),metaKey[GCE],movementX[GCE],"
-                + "movementY[GCE],MOZ_SOURCE_CURSOR[E],MOZ_SOURCE_ERASER[E],MOZ_SOURCE_KEYBOARD[E],"
-                + "MOZ_SOURCE_MOUSE[E],MOZ_SOURCE_PEN[E],MOZ_SOURCE_TOUCH[E],MOZ_SOURCE_UNKNOWN[E],"
-                + "mozInputSource[GCE],mozPressure[GCE],offsetX[GCE],offsetY[GCE],pageX[GCE],pageY[GCE],"
-                + "relatedTarget[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE],x[GCE],"
-                + "y[GCE]")
-    @HtmlUnitNYI(CHROME = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
-                + "initMouseEvent(),metaKey[GCE],pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]",
-            EDGE = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
-                + "initMouseEvent(),metaKey[GCE],pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]",
-            FF_ESR = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
-                + "initMouseEvent(),metaKey[GCE],MOZ_SOURCE_CURSOR[E],"
-                + "MOZ_SOURCE_ERASER[E],MOZ_SOURCE_KEYBOARD[E],MOZ_SOURCE_MOUSE[E],MOZ_SOURCE_PEN[E],"
-                + "MOZ_SOURCE_TOUCH[E],MOZ_SOURCE_UNKNOWN[E],"
-                + "pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]",
-            FF = "altKey[GCE],button[GCE],buttons[GCE],clientX[GCE],clientY[GCE],constructor(),ctrlKey[GCE],"
-                + "initMouseEvent(),metaKey[GCE],MOZ_SOURCE_CURSOR[E],"
-                + "MOZ_SOURCE_ERASER[E],MOZ_SOURCE_KEYBOARD[E],MOZ_SOURCE_MOUSE[E],MOZ_SOURCE_PEN[E],"
-                + "MOZ_SOURCE_TOUCH[E],MOZ_SOURCE_UNKNOWN[E],"
-                + "pageX[GCE],pageY[GCE],screenX[GCE],screenY[GCE],shiftKey[GCE]")
-    public void mouseEvent() throws Exception {
-        testString("", "document.createEvent('MouseEvent')");
-    }
-
-
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.CompositionEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),data[GCE],initCompositionEvent()",
-            EDGE = "constructor(),data[GCE],initCompositionEvent()",
-            FF = "constructor(),data[GCE],initCompositionEvent()",
-            FF_ESR = "constructor(),data[GCE],initCompositionEvent(),locale[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor(),data[GCE]",
-            EDGE = "constructor(),data[GCE]",
-            FF_ESR = "constructor(),data[GCE]",
-            FF = "constructor(),data[GCE]")
-    public void compositionEvent() throws Exception {
-        testString("", "document.createEvent('CompositionEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.FocusEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),relatedTarget[GCE]",
-            EDGE = "constructor(),relatedTarget[GCE]",
-            FF = "constructor(),relatedTarget[GCE]",
-            FF_ESR = "constructor(),relatedTarget[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF_ESR = "constructor()",
-            FF = "constructor()")
-    public void focusEvent() throws Exception {
-        testString("", "document.createEvent('FocusEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.InputEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]",
-            EDGE = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]",
-            FF = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]",
-            FF_ESR = "constructor(),data[GCE],dataTransfer[GCE],getTargetRanges(),inputType[GCE],isComposing[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor(),data[GCE],inputType[GCE],isComposing[GCE]",
-            EDGE = "constructor(),data[GCE],inputType[GCE],isComposing[GCE]",
-            FF_ESR = "constructor(),data[GCE],inputType[GCE],isComposing[GCE]",
-            FF = "constructor(),data[GCE],inputType[GCE],isComposing[GCE]")
-    public void inputEvent() throws Exception {
-        testString("", "new InputEvent('input')");
     }
 
     /**
@@ -16189,150 +16662,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "constructor(),gain[GCE]")
     public void gainNode() throws Exception {
         testString("var audioCtx = new AudioContext();", "new GainNode(audioCtx)");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),returnValue[GSCE]",
-            EDGE = "constructor(),returnValue[GSCE]",
-            FF = "constructor(),returnValue[GSCE]",
-            FF_ESR = "constructor(),returnValue[GSCE]")
-    public void beforeUnloadEvent() throws Exception {
-        testString("", "document.createEvent('BeforeUnloadEvent')");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "code[GCE],constructor(),reason[GCE],wasClean[GCE]",
-            EDGE = "code[GCE],constructor(),reason[GCE],wasClean[GCE]",
-            FF = "code[GCE],constructor(),reason[GCE],wasClean[GCE]",
-            FF_ESR = "code[GCE],constructor(),reason[GCE],wasClean[GCE]")
-    public void closeEvent() throws Exception {
-        testString("", "new CloseEvent('type-close')");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),data[GCE],timecode[GCE]",
-            EDGE = "constructor(),data[GCE],timecode[GCE]",
-            FF = "constructor(),data[GCE]",
-            FF_ESR = "constructor(),data[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor(),data[GCE]",
-            EDGE = "constructor(),data[GCE]")
-    public void blobEvent() throws Exception {
-        testString("var debug = {hello: 'world'};"
-                    + "var blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});",
-                    "new BlobEvent('blob', { 'data': blob })");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.DeviceMotionEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "acceleration[GCE],accelerationIncludingGravity[GCE],constructor(),interval[GCE],"
-                + "rotationRate[GCE]",
-            EDGE = "acceleration[GCE],accelerationIncludingGravity[GCE],constructor(),interval[GCE],"
-                + "rotationRate[GCE]",
-            FF = "acceleration[GCE],accelerationIncludingGravity[GCE],constructor(),initDeviceMotionEvent(),"
-                + "interval[GCE],"
-                + "rotationRate[GCE]",
-            FF_ESR = "acceleration[GCE],accelerationIncludingGravity[GCE],constructor(),initDeviceMotionEvent(),"
-                + "interval[GCE],"
-                + "rotationRate[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF = "constructor()",
-            FF_ESR = "constructor()")
-    public void deviceMotionEvent() throws Exception {
-        testString("", "new DeviceMotionEvent('motion')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.ErrorEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
-            EDGE = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
-            FF = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]",
-            FF_ESR = "colno[GCE],constructor(),error[GCE],filename[GCE],lineno[GCE],message[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF_ESR = "constructor()",
-            FF = "constructor()")
-    public void errorEvent() throws Exception {
-        testString("", "new ErrorEvent('error')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.GamepadEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),gamepad[GCE]",
-            EDGE = "constructor(),gamepad[GCE]",
-            FF = "constructor(),gamepad[GCE]",
-            FF_ESR = "constructor(),gamepad[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF_ESR = "constructor()",
-            FF = "constructor()")
-    public void gamepadEvent() throws Exception {
-        testString("", "new GamepadEvent('gamepad')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.MutationEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "NotSupportedError/DOMException",
-            EDGE = "NotSupportedError/DOMException",
-            FF = "NotSupportedError/DOMException",
-            FF_ESR = "ADDITION[E],attrChange[GCE],attrName[GCE],constructor(),initMutationEvent(),MODIFICATION[E],"
-                + "newValue[GCE],prevValue[GCE],relatedNode[GCE],"
-                + "REMOVAL[E]")
-    @HtmlUnitNYI(FF_ESR = "ADDITION[E],constructor(),MODIFICATION[E],REMOVAL[E]")
-    public void mutationEvent() throws Exception {
-        testString("", "document.createEvent('MutationEvent')");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.event.OfflineAudioCompletionEvent}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("NotSupportedError/DOMException")
-    public void offlineAudioCompletionEvent() throws Exception {
-        testString("", "document.createEvent('OfflineAudioCompletionEvent')");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(CHROME = "constructor(),persisted[GCE]",
-            EDGE = "constructor(),persisted[GCE]",
-            FF = "constructor(),persisted[GCE]",
-            FF_ESR = "constructor(),persisted[GCE]")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF = "constructor()",
-            FF_ESR = "constructor()")
-    public void pageTransitionEvent() throws Exception {
-        testString("", "new PageTransitionEvent('transition')");
     }
 
     /**

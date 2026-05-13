@@ -41,8 +41,6 @@ public class PresentationConnectionCloseEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -67,8 +65,6 @@ public class PresentationConnectionCloseEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"},
-                EDGE = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -93,8 +89,6 @@ public class PresentationConnectionCloseEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -119,8 +113,6 @@ public class PresentationConnectionCloseEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -167,8 +159,6 @@ public class PresentationConnectionCloseEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -193,8 +183,8 @@ public class PresentationConnectionCloseEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = {"[object PresentationConnectionCloseEvent]", "close", "false", "false", "false"},
             EDGE = {"[object PresentationConnectionCloseEvent]", "close", "false", "false", "false"})
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"})
+    @HtmlUnitNYI(CHROME = "TypeError",
+            EDGE = "TypeError")
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -222,8 +212,6 @@ public class PresentationConnectionCloseEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "TypeError",
             EDGE = "TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"},
-            EDGE = {"[object PresentationConnectionCloseEvent]", "", "true", "true", "false"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
