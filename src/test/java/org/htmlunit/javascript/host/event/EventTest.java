@@ -948,7 +948,6 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "activeElement BODY",
-            FF = {"activeElement BODY", "focus #document", "handler: activeElement BODY"},
             FF_ESR = {"activeElement BODY", "focus #document", "handler: activeElement BODY"})
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @HtmlUnitNYI(FF = {"activeElement BODY", "focus undefined", "handler: activeElement BODY"},
@@ -986,7 +985,9 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"focus INPUT", "focus INPUT"})
+    @Alerts(DEFAULT = {"focus INPUT", "focus INPUT"},
+            FF = {"focus #document", "focus INPUT", "focus INPUT"},
+            FF_ESR = {"focus #document", "focus INPUT", "focus INPUT"})
     @HtmlUnitNYI(FF = {"focus undefined", "focus INPUT", "focus INPUT"},
             FF_ESR = {"focus undefined", "focus INPUT", "focus INPUT"})
     public void document_input_focus() throws Exception {

@@ -265,4 +265,32 @@ public class FocusEventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object FocusEvent]", "", "false", "false", "false"},
+            FF = {"[object FocusEvent]", "", "false", "false", "true"},
+            FF_ESR = {"[object FocusEvent]", "", "false", "false", "true"})
+    @HtmlUnitNYI(FF = {"[object FocusEvent]", "", "false", "false", "false"},
+            FF_ESR = {"[object FocusEvent]", "", "false", "false", "false"})
+    public void create_createEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('FocusEvent');\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
 }

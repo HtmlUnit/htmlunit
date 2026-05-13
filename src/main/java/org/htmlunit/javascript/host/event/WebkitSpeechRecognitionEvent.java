@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.event;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -30,10 +31,22 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class WebkitSpeechRecognitionEvent extends Event {
 
     /**
-     * JavaScript constructor.
+     * {@inheritDoc}
      */
-    @JsxConstructor(functionName = "SpeechRecognitionEvent")
-    public void jsConstructor() {
-        // nothing to do
+    @Override
+    @JsxConstructor
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (String.class.equals(hint) || hint == null) {
+            return "[object SpeechRecognitionEvent]";
+        }
+        return super.getDefaultValue(hint);
     }
 }

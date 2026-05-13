@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.event;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -79,7 +78,7 @@ public class UIEvent extends Event {
             if (view instanceof Window) {
                 view_ = view;
             }
-            else if (view != Scriptable.NOT_FOUND) {
+            else if (NOT_FOUND != view) {
                 throw JavaScriptEngine.typeError("View must be a window.");
             }
         }

@@ -64,8 +64,13 @@ public class CloseEvent extends Event {
 
         if (details != null && !JavaScriptEngine.isUndefined(details)) {
             code_ = JavaScriptEngine.toInt32(details.get("code"));
-            reason_ = JavaScriptEngine.toString(details.get("reason"));
             wasClean_ = JavaScriptEngine.toBoolean(details.get("wasClean"));
+
+            final Object reason = details.get("reason");
+            if (!isNullMissingOrUndefined(reason)) {
+                reason_ = JavaScriptEngine.toString(reason);
+            }
+
         }
     }
 

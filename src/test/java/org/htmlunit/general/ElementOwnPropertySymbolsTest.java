@@ -2391,7 +2391,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [TransitionEvent]")
+    @Alerts("Symbol(Symbol.toStringTag) [C] [TransitionEvent]")
     public void transitionEvent() throws Exception {
         testString("", "new TransitionEvent('event')");
     }

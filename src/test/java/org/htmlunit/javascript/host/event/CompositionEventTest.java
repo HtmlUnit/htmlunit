@@ -267,4 +267,32 @@ public class CompositionEventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object CompositionEvent]", "", "false", "false", "false", "false", ""},
+            FF = {"[object CompositionEvent]", "", "false", "false", "false", "true", ""},
+            FF_ESR = {"[object CompositionEvent]", "", "false", "false", "false", "true", ""})
+    @HtmlUnitNYI(CHROME = {"[object CompositionEvent]", "", "false", "false", "false", "true", ""},
+            EDGE = {"[object CompositionEvent]", "", "false", "false", "false", "true", ""})
+    public void create_createEvent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('CompositionEvent');\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
 }

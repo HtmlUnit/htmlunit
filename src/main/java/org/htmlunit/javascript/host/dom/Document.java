@@ -97,6 +97,8 @@ import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import org.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import org.htmlunit.javascript.host.event.CompositionEvent;
 import org.htmlunit.javascript.host.event.CustomEvent;
+import org.htmlunit.javascript.host.event.DeviceMotionEvent;
+import org.htmlunit.javascript.host.event.DeviceOrientationEvent;
 import org.htmlunit.javascript.host.event.DragEvent;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.FocusEvent;
@@ -196,19 +198,21 @@ public class Document extends Node {
                 Map.entry("CustomEvent", CustomEvent.class),
                 Map.entry("CompositionEvent", CompositionEvent.class),
                 Map.entry("DragEvent", DragEvent.class),
-                Map.entry("TextEvent", TextEvent.class));
+                Map.entry("TextEvent", TextEvent.class),
+                Map.entry("DeviceMotionEvent", DeviceMotionEvent.class),
+                Map.entry("DeviceOrientationEvent", DeviceOrientationEvent.class));
 
-        SUPPORTED_VENDOR_EVENT_TYPE_MAP = Map.of(
-                "BeforeUnloadEvent", BeforeUnloadEvent.class,
-                "Events", Event.class,
-                "HashChangeEvent", HashChangeEvent.class,
-                "KeyEvents", KeyboardEvent.class,
-                "PointerEvent", PointerEvent.class,
-                "PopStateEvent", PopStateEvent.class,
-                "ProgressEvent", ProgressEvent.class,
-                "FocusEvent", FocusEvent.class,
-                "WheelEvent", WheelEvent.class,
-                "AnimationEvent", AnimationEvent.class);
+        SUPPORTED_VENDOR_EVENT_TYPE_MAP = Map.ofEntries(
+                Map.entry("BeforeUnloadEvent", BeforeUnloadEvent.class),
+                Map.entry("Events", Event.class),
+                Map.entry("HashChangeEvent", HashChangeEvent.class),
+                Map.entry("KeyEvents", KeyboardEvent.class),
+                Map.entry("PointerEvent", PointerEvent.class),
+                Map.entry("PopStateEvent", PopStateEvent.class),
+                Map.entry("ProgressEvent", ProgressEvent.class),
+                Map.entry("FocusEvent", FocusEvent.class),
+                Map.entry("WheelEvent", WheelEvent.class),
+                Map.entry("AnimationEvent", AnimationEvent.class));
     }
 
     private Window window_;

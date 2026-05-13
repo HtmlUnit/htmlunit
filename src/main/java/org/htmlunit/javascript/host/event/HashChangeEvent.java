@@ -68,14 +68,15 @@ public class HashChangeEvent extends Event {
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
-        String oldURL = "";
-        String newURL = "";
         if (details != null && !JavaScriptEngine.isUndefined(details)) {
-            oldURL = (String) details.get("oldURL");
-            newURL = (String) details.get("newURL");
+            if (details.has("oldURL", details)) {
+                oldURL_ = JavaScriptEngine.toString(details.get("oldURL"));
+            }
+
+            if (details.has("newURL", details)) {
+                newURL_ = JavaScriptEngine.toString(details.get("newURL"));
+            }
         }
-        oldURL_ = oldURL;
-        newURL_ = newURL;
     }
 
     /**

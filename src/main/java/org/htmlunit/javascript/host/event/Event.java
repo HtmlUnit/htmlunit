@@ -1009,4 +1009,13 @@ public class Event extends HtmlUnitScriptable {
     protected static boolean isMissingOrUndefined(final Object value) {
         return value == Scriptable.NOT_FOUND || JavaScriptEngine.isUndefined(value);
     }
+
+    /**
+     * Returns whether the given value indicates null, a missing or undefined property.
+     * @param value the new value
+     * @return whether the given value indicates null, a missing or undefined property
+     */
+    protected static boolean isNullMissingOrUndefined(final Object value) {
+        return value == null || value == Scriptable.NOT_FOUND || JavaScriptEngine.isUndefined(value);
+    }
 }

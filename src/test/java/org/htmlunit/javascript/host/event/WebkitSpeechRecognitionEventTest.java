@@ -66,9 +66,7 @@ public class WebkitSpeechRecognitionEventTest extends WebDriverTestCase {
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
     @HtmlUnitNYI(CHROME = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"},
-                EDGE = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"},
-                FF = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"},
-                FF_ESR = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"})
+            EDGE = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

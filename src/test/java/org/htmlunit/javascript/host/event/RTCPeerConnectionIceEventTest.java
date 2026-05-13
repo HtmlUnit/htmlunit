@@ -20,11 +20,11 @@ import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for {@link InputEvent}.
+ * Tests for {@link RTCPeerConnectionIceEvent}.
  *
  * @author Ronald Brill
  */
-public class InputEventTest extends WebDriverTestCase {
+public class RTCPeerConnectionIceEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
             + "    log(event);\n"
@@ -32,29 +32,26 @@ public class InputEventTest extends WebDriverTestCase {
             + "    log(event.bubbles);\n"
             + "    log(event.cancelable);\n"
             + "    log(event.composed);\n"
-
-            + "    var details = [event.data, event.inputType, event.isComposing].join(',');\n"
-            + "    log(details);\n"
             + "  }\n";
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object InputEvent]", "type", "false", "false", "false", ",,false"})
+    @Alerts({"[object RTCPeerConnectionIceEvent]", "icecandidate", "false", "false", "false"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
-                + "<html><head><script>\n"
-                + LOG_TITLE_FUNCTION
-                + "  function test() {\n"
-                + "    try {\n"
-                + "      var event = new InputEvent('type');\n"
-                + "      dump(event);\n"
-                + "    } catch(e) { logEx(e) }\n"
-                + "  }\n"
-                + DUMP_EVENT_FUNCTION
-                + "</script></head><body onload='test()'>\n"
-                + "</body></html>";
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new RTCPeerConnectionIceEvent('icecandidate');\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -64,21 +61,17 @@ public class InputEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("TypeError")
-    @HtmlUnitNYI(CHROME = {"[object InputEvent]", "undefined", "false", "false", "false",
-                           ",,false"},
-            EDGE = {"[object InputEvent]", "undefined", "false", "false", "false",
-                    ",,false"},
-            FF = {"[object InputEvent]", "undefined", "false", "false", "false",
-                  ",,false"},
-            FF_ESR = {"[object InputEvent]", "undefined", "false", "false", "false",
-                      ",,false"})
+    @HtmlUnitNYI(CHROME = {"[object RTCPeerConnectionIceEvent]", "undefined", "false", "false", "false"},
+            EDGE = {"[object RTCPeerConnectionIceEvent]", "undefined", "false", "false", "false"},
+            FF = {"[object RTCPeerConnectionIceEvent]", "undefined", "false", "false", "false"},
+            FF_ESR = {"[object RTCPeerConnectionIceEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new InputEvent();\n"
+            + "      var event = new RTCPeerConnectionIceEvent();\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -93,14 +86,14 @@ public class InputEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object InputEvent]", "42", "false", "false", "false", ",,false"})
+    @Alerts({"[object RTCPeerConnectionIceEvent]", "42", "false", "false", "false"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new InputEvent(42);\n"
+            + "      var event = new RTCPeerConnectionIceEvent(42);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -115,14 +108,14 @@ public class InputEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object InputEvent]", "null", "false", "false", "false", ",,false"})
+    @Alerts({"[object RTCPeerConnectionIceEvent]", "null", "false", "false", "false"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new InputEvent(null);\n"
+            + "      var event = new RTCPeerConnectionIceEvent(null);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -144,7 +137,7 @@ public class InputEventTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new InputEvent(unknown);\n"
+            + "      var event = new RTCPeerConnectionIceEvent(unknown);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -159,14 +152,14 @@ public class InputEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object InputEvent]", "HtmlUnitEvent", "false", "false", "false", ",,false"})
+    @Alerts({"[object RTCPeerConnectionIceEvent]", "HtmlUnitEvent", "false", "false", "false"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new InputEvent('HtmlUnitEvent');\n"
+            + "      var event = new RTCPeerConnectionIceEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -181,65 +174,21 @@ public class InputEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object InputEvent]", "input", "false", "false", "false",
-                       "data,inputType,true"},
-            CHROME = {"[object InputEvent]", "input", "false", "false", "false",
-                      "data,,true"},
-            EDGE = {"[object InputEvent]", "input", "false", "false", "false",
-                    "data,,true"})
+    @Alerts({"[object RTCPeerConnectionIceEvent]", "icecandidate", "true", "true", "true"})
+    @HtmlUnitNYI(CHROME = {"[object RTCPeerConnectionIceEvent]", "icecandidate", "true", "true", "false"},
+            EDGE = {"[object RTCPeerConnectionIceEvent]", "icecandidate", "true", "true", "false"},
+            FF = {"[object RTCPeerConnectionIceEvent]", "icecandidate", "true", "true", "false"},
+            FF_ESR = {"[object RTCPeerConnectionIceEvent]", "icecandidate", "true", "true", "false"})
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new InputEvent('input', "
-                             + "{ inputType: 'inputType', data: 'data', isComposing: true });\n"
-            + "      dump(event);\n"
-            + "    } catch(e) { logEx(e) }\n"
-            + "  }\n"
-            + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,true"})
-    public void create_ctorSomeDetails() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      var event = new InputEvent('input', "
-                             + "{ isComposing: true });\n"
-            + "      dump(event);\n"
-            + "    } catch(e) { logEx(e) }\n"
-            + "  }\n"
-            + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,false"})
-    public void create_ctorMissingData() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      var event = new InputEvent('input', {\n"
+            + "      var event = new RTCPeerConnectionIceEvent('icecandidate', {\n"
+            + "        'bubbles': true,\n"
+            + "        'cancelable': true,\n"
+            + "        'composed': true\n"
             + "      });\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
@@ -255,14 +204,14 @@ public class InputEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,false"})
-    public void create_ctorNullData() throws Exception {
+    @Alerts({"[object RTCPeerConnectionIceEvent]", "icecandidate", "false", "false", "false"})
+    public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new InputEvent('input', null);\n"
+            + "      var event = new RTCPeerConnectionIceEvent('icecandidate', {});\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -272,53 +221,6 @@ public class InputEventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"[object InputEvent]", "input", "false", "false", "false", ",,false"})
-    public void create_ctorUndefinedData() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      var event = new InputEvent('input', undefined);\n"
-            + "      dump(event);\n"
-            + "    } catch(e) { logEx(e) }\n"
-            + "  }\n"
-            + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"[object InputEvent]", "input", "false", "false", "false", "Html,Unit,,false"})
-    public void create_ctorWrongData() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      var event = new InputEvent('input', {\n"
-            + "        'data': ['Html', 'Unit']\n"
-            + "      });\n"
-            + "      dump(event);\n"
-            + "    } catch(e) { logEx(e) }\n"
-            + "  }\n"
-            + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
 
     /**
      * @throws Exception if the test fails
@@ -331,7 +233,7 @@ public class InputEventTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = document.createEvent('InputEvent');\n"
+            + "      var event = document.createEvent('RTCPeerConnectionIceEvent');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -354,7 +256,7 @@ public class InputEventTest extends WebDriverTestCase {
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      log('InputEvent' in window);\n"
+            + "      log('RTCPeerConnectionIceEvent' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -364,5 +266,4 @@ public class InputEventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
-
 }

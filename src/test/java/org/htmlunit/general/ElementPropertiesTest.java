@@ -3853,14 +3853,34 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),tangentialPressure,target,tiltX,"
                 + "tiltY,timeStamp,twist,type,view,which,width,x,"
                 + "y")
-    @HtmlUnitNYI(CHROME = "altitudeAngle,azimuthAngle,height,isPrimary,persistentDeviceId,pointerId,"
-                + "pointerType,pressure,tiltX,tiltY,width",
-            EDGE = "altitudeAngle,azimuthAngle,height,isPrimary,persistentDeviceId,pointerId,"
-                + "pointerType,pressure,tiltX,tiltY,width",
-            FF = "altitudeAngle,azimuthAngle,height,isPrimary,persistentDeviceId,pointerId,pointerType,pressure,"
-                + "tiltX,tiltY,width",
-            FF_ESR = "altitudeAngle,azimuthAngle,height,isPrimary,persistentDeviceId,pointerId,pointerType,pressure,"
-                + "tiltX,tiltY,width")
+    @HtmlUnitNYI(CHROME = "altitudeAngle,altKey,AT_TARGET,azimuthAngle,bubbles,BUBBLING_PHASE,button,buttons,cancelable,"
+                + "cancelBubble,CAPTURING_PHASE,clientX,clientY,composed,ctrlKey,currentTarget,defaultPrevented,detail,"
+                + "eventPhase,height,initEvent(),initMouseEvent(),initUIEvent(),isPrimary,metaKey,NONE,pageX,pageY,"
+                + "persistentDeviceId,pointerId,pointerType,pressure,preventDefault(),returnValue,screenX,screenY,"
+                + "shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,tiltX,tiltY,"
+                + "timeStamp,type,view,which,width",
+            EDGE = "altitudeAngle,altKey,AT_TARGET,azimuthAngle,bubbles,BUBBLING_PHASE,button,buttons,cancelable,"
+                + "cancelBubble,CAPTURING_PHASE,clientX,clientY,composed,ctrlKey,currentTarget,defaultPrevented,detail,"
+                + "eventPhase,height,initEvent(),initMouseEvent(),initUIEvent(),isPrimary,metaKey,NONE,pageX,pageY,"
+                + "persistentDeviceId,pointerId,pointerType,pressure,preventDefault(),returnValue,screenX,screenY,"
+                + "shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,tiltX,tiltY,"
+                + "timeStamp,type,view,which,width",
+            FF = "ALT_MASK,altitudeAngle,altKey,AT_TARGET,azimuthAngle,bubbles,BUBBLING_PHASE,button,buttons,cancelable,"
+                + "cancelBubble,CAPTURING_PHASE,clientX,clientY,composed,CONTROL_MASK,ctrlKey,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,height,initEvent(),initMouseEvent(),initUIEvent(),isPrimary,"
+                + "META_MASK,metaKey,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,"
+                + "MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,NONE,pageX,pageY,persistentDeviceId,pointerId,"
+                + "pointerType,pressure,preventDefault(),returnValue,screenX,screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,"
+                + "SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,tiltX,tiltY,"
+                + "timeStamp,type,view,which,width",
+            FF_ESR = "ALT_MASK,altitudeAngle,altKey,AT_TARGET,azimuthAngle,bubbles,BUBBLING_PHASE,button,buttons,cancelable,"
+                + "cancelBubble,CAPTURING_PHASE,clientX,clientY,composed,CONTROL_MASK,ctrlKey,currentTarget,"
+                + "defaultPrevented,detail,eventPhase,height,initEvent(),initMouseEvent(),initUIEvent(),isPrimary,"
+                + "META_MASK,metaKey,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,"
+                + "MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,NONE,pageX,pageY,pointerId,"
+                + "pointerType,pressure,preventDefault(),returnValue,screenX,screenY,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,"
+                + "SHIFT_MASK,shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),target,tiltX,tiltY,"
+                + "timeStamp,type,view,which,width")
     public void pointerEvent() throws Exception {
         testString("", "new PointerEvent('click')");
     }

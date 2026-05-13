@@ -14,6 +14,8 @@
  */
 package org.htmlunit.javascript.host.event;
 
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -27,10 +29,11 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 public class RTCDataChannelEvent extends Event {
 
     /**
-     * JavaScript constructor.
+     * {@inheritDoc}
      */
+    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        // nothing to do
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        throw JavaScriptEngine.typeErrorIllegalConstructor();
     }
 }

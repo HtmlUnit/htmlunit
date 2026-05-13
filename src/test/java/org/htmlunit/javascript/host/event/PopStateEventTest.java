@@ -30,7 +30,6 @@ public class PopStateEventTest extends WebDriverTestCase {
           "  function dump(event) {\n"
         + "    if (event) {\n"
         + "      log(event);\n"
-        + "      log(event.target);\n"
         + "      log(event.type);\n"
         + "      log(event.bubbles);\n"
         + "      log(event.cancelable);\n"
@@ -46,7 +45,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object PopStateEvent]", "null", "popstate", "false", "false", "false", "null"})
+    @Alerts({"[object PopStateEvent]", "popstate", "false", "false", "false", "null"})
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -68,11 +67,36 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"[object PopStateEvent]", "popstate", "true", "false", "false", "2"})
+    public void create_ctorWithDetails() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new PopStateEvent('popstate', {\n"
+            + "        'bubbles': true,\n"
+            + "        'state': 2,\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PopStateEvent]", "null", "undefined", "false", "false", "false", "null"},
-                EDGE = {"[object PopStateEvent]", "null", "undefined", "false", "false", "false", "null"},
-                FF = {"[object PopStateEvent]", "null", "undefined", "false", "false", "false", "null"},
-                FF_ESR = {"[object PopStateEvent]", "null", "undefined", "false", "false", "false", "null"})
+    @HtmlUnitNYI(CHROME = {"[object PopStateEvent]", "undefined", "false", "false", "false", "null"},
+            EDGE = {"[object PopStateEvent]", "undefined", "false", "false", "false", "null"},
+            FF = {"[object PopStateEvent]", "undefined", "false", "false", "false", "null"},
+            FF_ESR = {"[object PopStateEvent]", "undefined", "false", "false", "false", "null"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -94,7 +118,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object PopStateEvent]", "null", "42", "false", "false", "false", "null"})
+    @Alerts({"[object PopStateEvent]", "42", "false", "false", "false", "null"})
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -116,7 +140,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object PopStateEvent]", "null", "null", "false", "false", "false", "null"})
+    @Alerts({"[object PopStateEvent]", "null", "false", "false", "false", "null"})
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -160,7 +184,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object PopStateEvent]", "null", "HtmlUnitEvent", "false", "false", "false", "null"})
+    @Alerts({"[object PopStateEvent]", "HtmlUnitEvent", "false", "false", "false", "null"})
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -182,7 +206,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object PopStateEvent]", "null", "popstate", "true", "false", "false", "2"})
+    @Alerts({"[object PopStateEvent]", "popstate", "true", "false", "false", "2"})
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -191,7 +215,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = new PopStateEvent('popstate', {\n"
             + "        'bubbles': true,\n"
-            + "        'state': 2,\n"
+            + "        'state': 2\n"
             + "      });\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
@@ -207,15 +231,14 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object PopStateEvent]", "null", "popstate", "false", "false", "false", "null"})
+    @Alerts({"[object PopStateEvent]", "popstate", "false", "false", "false", "null"})
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new PopStateEvent('popstate', {\n"
-            + "      });\n"
+            + "      var event = new PopStateEvent('popstate', {});\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -244,29 +267,6 @@ public class PopStateEventTest extends WebDriverTestCase {
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void inWindow() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + LOG_TITLE_FUNCTION
-            + "    function test() {\n"
-            + "      log('PopStateEvent' in window);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "</body>\n"
-            + "</html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -375,6 +375,29 @@ public class PopStateEventTest extends WebDriverTestCase {
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void inWindow() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      log('PopStateEvent' in window);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
 
         loadPageVerifyTitle2(html);
     }

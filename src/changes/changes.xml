@@ -9,6 +9,12 @@
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
             <action type="update" dev="rbri">
+                Bunch of event constructor fixes.
+            </action>
+            <action type="update" dev="rbri">
+                Unified and enhanced test for all the js event objects, many missing test classes added.
+            </action>
+            <action type="update" dev="rbri">
                 ChromeEdge: The &lt;command&gt; html tag is no longer supported.
             </action>
             <action type="update" dev="rbri">

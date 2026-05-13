@@ -17,6 +17,8 @@ package org.htmlunit.javascript.host.event;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -39,10 +41,12 @@ public class MouseScrollEvent extends MouseEvent {
     public static final int VERTICAL_AXIS = 2;
 
     /**
-     * JavaScript constructor.
+     * {@inheritDoc}
      */
+    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        // nothing to do
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        throw JavaScriptEngine.typeErrorIllegalConstructor();
     }
+
 }

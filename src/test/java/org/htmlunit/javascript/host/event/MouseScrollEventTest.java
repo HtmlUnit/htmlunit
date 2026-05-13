@@ -16,15 +16,14 @@ package org.htmlunit.javascript.host.event;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for {@link PageTransitionEvent}.
+ * Tests for {@link MouseScrollEvent}.
  *
  * @author Ronald Brill
  */
-public class PageTransitionEventTest extends WebDriverTestCase {
+public class MouseScrollEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
             + "    log(event);\n"
@@ -32,22 +31,19 @@ public class PageTransitionEventTest extends WebDriverTestCase {
             + "    log(event.bubbles);\n"
             + "    log(event.cancelable);\n"
             + "    log(event.composed);\n"
-
-            // TODO all properties
             + "  }\n";
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts({"[object PageTransitionEvent]", "transition", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new PageTransitionEvent('transition');\n"
+            + "      var event = new MouseScrollEvent('DOMMouseScroll');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -58,22 +54,17 @@ public class PageTransitionEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts("TypeError")
-    @HtmlUnitNYI(CHROME = {"[object PageTransitionEvent]", "undefined", "false", "false", "false"},
-            EDGE = {"[object PageTransitionEvent]", "undefined", "false", "false", "false"},
-            FF = {"[object PageTransitionEvent]", "undefined", "false", "false", "false"},
-            FF_ESR = {"[object PageTransitionEvent]", "undefined", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new PageTransitionEvent();\n"
+            + "      var event = new MouseScrollEvent();\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -84,18 +75,17 @@ public class PageTransitionEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts({"[object PageTransitionEvent]", "42", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new PageTransitionEvent(42);\n"
+            + "      var event = new MouseScrollEvent(42);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -106,18 +96,17 @@ public class PageTransitionEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts({"[object PageTransitionEvent]", "null", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new PageTransitionEvent(null);\n"
+            + "      var event = new MouseScrollEvent(null);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -128,9 +117,6 @@ public class PageTransitionEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
     @Alerts("ReferenceError")
     public void create_ctorUnknownType() throws Exception {
@@ -139,7 +125,7 @@ public class PageTransitionEventTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new PageTransitionEvent(unknown);\n"
+            + "      var event = new MouseScrollEvent(unknown);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -150,18 +136,17 @@ public class PageTransitionEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts({"[object PageTransitionEvent]", "HtmlUnitEvent", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new PageTransitionEvent('HtmlUnitEvent');\n"
+            + "      var event = new MouseScrollEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -172,19 +157,20 @@ public class PageTransitionEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts({"[object PageTransitionEvent]", "transition", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new PageTransitionEvent('transition', {\n"
-            // + "        'data': 'mozart'\n"
+            + "      var event = new MouseScrollEvent('DOMMouseScroll', {\n"
+            + "        'bubbles': true,\n"
+            + "        'cancelable': true,\n"
+            + "        'composed': true\n"
             + "      });\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
@@ -196,19 +182,17 @@ public class PageTransitionEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts({"[object PageTransitionEvent]", "transition", "false", "false", "false"})
+    @Alerts(DEFAULT = "ReferenceError",
+            FF = "TypeError",
+            FF_ESR = "TypeError")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new PageTransitionEvent('transition', {\n"
-            + "      });\n"
+            + "      var event = new MouseScrollEvent('DOMMouseScroll', {});\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -219,20 +203,15 @@ public class PageTransitionEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts({"[object PageTransitionEvent]", "transition", "false", "false", "false"})
-    public void create_ctorAllDetailsWrongData() throws Exception {
+    @Alerts("NotSupportedError/DOMException")
+    public void create_createEvent() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new PageTransitionEvent('transition', {\n"
-            + "        'data': ['Html', 'Unit']\n"
-            + "      });\n"
+            + "      var event = document.createEvent('MouseScrollEvent');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -243,11 +222,10 @@ public class PageTransitionEventTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "false",
+            FF = "true",
+            FF_ESR = "true")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -255,7 +233,7 @@ public class PageTransitionEventTest extends WebDriverTestCase {
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      log('PageTransitionEvent' in window);\n"
+            + "      log('MouseScrollEvent' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -265,28 +243,4 @@ public class PageTransitionEventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
-
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("NotSupportedError/DOMException")
-    public void create_createEvent() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      var event = document.createEvent('PageTransitionEvent');\n"
-            + "      dump(event);\n"
-            + "    } catch(e) { logEx(e) }\n"
-            + "  }\n"
-            + DUMP_EVENT_FUNCTION
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
 }
