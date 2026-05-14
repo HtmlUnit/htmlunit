@@ -25,7 +25,7 @@ import org.htmlunit.svg.SvgSymbol;
  * @author Ronald Brill
  */
 @JsxClass(domClass = SvgSymbol.class)
-public class SVGSymbolElement extends SVGElement {
+public class SVGSymbolElement extends SVGGraphicsElement {
 
     /**
      * Creates an instance.

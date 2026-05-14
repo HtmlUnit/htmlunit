@@ -9,6 +9,9 @@
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
             <action type="update" dev="rbri">
+                SVGSymbolElement is a child of SVGGraphicsElement.
+            </action>
+            <action type="update" dev="rbri">
                 Bunch of event constructor fixes.
             </action>
             <action type="update" dev="rbri">

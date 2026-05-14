@@ -190,6 +190,7 @@ public class HostParentOfS2Test extends HostParentOf {
 
     @Alerts(DEFAULT = "true/true",
             FF_ESR = "false/false")
+    @HtmlUnitNYI(FF_ESR = "true/true")
     void _SVGGraphicsElement_SVGSymbolElement() throws Exception {
         test("SVGGraphicsElement", "SVGSymbolElement");
     }
