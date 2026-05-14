@@ -41,15 +41,4 @@ public class SpeechRecognitionEvent extends Event {
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if (String.class.equals(hint) || hint == null) {
-            return "[object SpeechRecognitionEvent]";
-        }
-        return super.getDefaultValue(hint);
-    }
 }

@@ -20,34 +20,24 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 import org.htmlunit.javascript.host.event.Event;
 
 /**
- * A JavaScript object for {@code webkitSpeechRecognitionError}.
+ * A JavaScript object for {@code SpeechRecognitionErrorEvent}.
  *
- * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(value = {CHROME, EDGE}, className = "webkitSpeechRecognitionError")
-public class WebkitSpeechRecognitionError extends Event {
+@JsxClass({CHROME, EDGE})
+public class SpeechRecognitionErrorEvent extends Event {
 
     /**
      * {@inheritDoc}
      */
     @Override
     @JsxConstructor
+    @JsxConstructorAlias(alias = "webkitSpeechRecognitionError")
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if (String.class.equals(hint) || hint == null) {
-            return "[object SpeechRecognitionErrorEvent]";
-        }
-        return super.getDefaultValue(hint);
     }
 }

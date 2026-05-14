@@ -9,6 +9,10 @@
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
             <action type="add" dev="rbri">
+                Introduce SpeechRecognitionEvent and SpeechRecognitionErrorEvent and make them also available as 
+                webkitSpeechRecognitionEvent and webkitSpeechRecognitionError.
+            </action>
+            <action type="add" dev="rbri">
                 Introduce SpeechGrammar, SpeechGrammarList, and SpeechRecognition and make them also available as
                 webkitSpeechGrammar, webkitSpeechGrammarList, and webkitSpeechRecognition.
             </action>

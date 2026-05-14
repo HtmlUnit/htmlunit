@@ -2758,6 +2758,19 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.speech.SpeechRecognitionErrorEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionErrorEvent]",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    public void speechRecognitionErrorEvent() throws Exception {
+        testString("", "new SpeechRecognitionErrorEvent('event')");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent}.
      *
      * @throws Exception if the test fails
@@ -2934,8 +2947,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             EDGE = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionEvent]",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [WebkitSpeechRecognitionEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [C] [WebkitSpeechRecognitionEvent]")
     public void webkitSpeechRecognitionEvent() throws Exception {
         testString("", "new webkitSpeechRecognitionEvent('webkitSpeechRecognition')");
     }

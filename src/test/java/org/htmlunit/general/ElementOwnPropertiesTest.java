@@ -15004,9 +15004,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "clipboardData[GCE],constructor()",
             FF_ESR = "clipboardData[GCE],constructor()")
     @HtmlUnitNYI(CHROME = "constructor()",
-        EDGE = "constructor()",
-        FF = "constructor()",
-        FF_ESR = "constructor()")
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
     public void clipboardEvent() throws Exception {
         testString("", "new ClipboardEvent('event')");
     }
@@ -15809,6 +15809,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts("ReferenceError")
     public void speechRecognitionError() throws Exception {
         testString("", "new SpeechRecognitionError('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.speech.SpeechRecognitionErrorEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "constructor(),error[GCE],message[GCE]",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    public void speechRecognitionErrorEvent() throws Exception {
+        testString("", "new SpeechRecognitionErrorEvent('event')");
     }
 
     /**

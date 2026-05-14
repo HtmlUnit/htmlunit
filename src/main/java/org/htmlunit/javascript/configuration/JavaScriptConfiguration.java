@@ -409,16 +409,16 @@ import org.htmlunit.javascript.host.security.Credential;
 import org.htmlunit.javascript.host.security.CredentialsContainer;
 import org.htmlunit.javascript.host.security.FederatedCredential;
 import org.htmlunit.javascript.host.security.PasswordCredential;
+import org.htmlunit.javascript.host.speech.SpeechGrammar;
+import org.htmlunit.javascript.host.speech.SpeechGrammarList;
+import org.htmlunit.javascript.host.speech.SpeechRecognition;
+import org.htmlunit.javascript.host.speech.SpeechRecognitionErrorEvent;
+import org.htmlunit.javascript.host.speech.SpeechRecognitionEvent;
 import org.htmlunit.javascript.host.speech.SpeechSynthesis;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisEvent;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisUtterance;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisVoice;
-import org.htmlunit.javascript.host.speech.SpeechRecognitionEvent;
-import org.htmlunit.javascript.host.speech.SpeechGrammar;
-import org.htmlunit.javascript.host.speech.SpeechGrammarList;
-import org.htmlunit.javascript.host.speech.SpeechRecognition;
-import org.htmlunit.javascript.host.speech.WebkitSpeechRecognitionError;
 import org.htmlunit.javascript.host.svg.SVGAElement;
 import org.htmlunit.javascript.host.svg.SVGAngle;
 import org.htmlunit.javascript.host.svg.SVGAnimateElement;
@@ -573,6 +573,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGAnimatedTransformList.class, SVGLength.class, SVGLengthList.class, SVGMatrix.class, SVGNumber.class,
         SVGNumberList.class, SVGPoint.class, SVGPointList.class, SVGPreserveAspectRatio.class, SVGRect.class,
         SVGStringList.class, SVGTransform.class, SVGTransformList.class, SVGUnitTypes.class, Selection.class,
+        SpeechGrammar.class, SpeechGrammarList.class,
         SpeechSynthesisVoice.class, Storage.class, StorageManager.class, StyleMedia.class, StyleSheet.class,
         StyleSheetList.class, SubtleCrypto.class, SyncManager.class, TextDecoder.class, TextEncoder.class,
         TextMetrics.class, TextTrackCueList.class, TimeRanges.class, Touch.class, TouchList.class, TreeWalker.class,
@@ -580,9 +581,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebGLActiveInfo.class, WebGLBuffer.class, WebGLFramebuffer.class, WebGLProgram.class, WebGLQuery.class,
         WebGLRenderbuffer.class, WebGLRenderingContext.class, WebGLSampler.class, WebGLShader.class,
         WebGLShaderPrecisionFormat.class, WebGLSync.class, WebGLTexture.class, WebGLTransformFeedback.class,
-        WebGLUniformLocation.class, WebGLVertexArrayObject.class, SpeechGrammar.class,
-        SpeechGrammarList.class, XMLSerializer.class, XPathEvaluator.class, XPathEvaluator.class,
-        XPathExpression.class, XPathResult.class, XSLTProcessor.class,
+        WebGLUniformLocation.class, WebGLVertexArrayObject.class, XMLSerializer.class, XPathEvaluator.class,
+        XPathEvaluator.class, XPathExpression.class, XPathResult.class, XSLTProcessor.class,
         // level 2
         AbortSignal.class, Animation.class, AnimationEvent.class, AudioNode.class, AudioProcessingEvent.class,
         BaseAudioContext.class, BatteryManager.class, BeforeInstallPromptEvent.class, BeforeUnloadEvent.class,
@@ -608,10 +608,10 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         RTCPeerConnectionIceEvent.class, RTCSctpTransport.class, Range.class, RemotePlayback.class, Screen.class,
         ScreenOrientation.class, SecurityPolicyViolationEvent.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, SharedWorker.class, SourceBuffer.class, SourceBufferList.class,
-        SpeechSynthesis.class, SpeechSynthesisEvent.class, SpeechSynthesisUtterance.class, StorageEvent.class,
-        SubmitEvent.class, TextTrack.class, TextTrackCue.class, TextTrackList.class, TimeEvent.class, TrackEvent.class,
-        TransitionEvent.class, UIEvent.class, WebGLContextEvent.class, WebSocket.class, SpeechRecognition.class,
-        WebkitSpeechRecognitionError.class, SpeechRecognitionEvent.class, Window.class, Worker.class,
+        SpeechRecognition.class, SpeechRecognitionErrorEvent.class, SpeechRecognitionEvent.class, SpeechSynthesis.class,
+        SpeechSynthesisEvent.class, SpeechSynthesisUtterance.class, StorageEvent.class, SubmitEvent.class,
+        TextTrack.class, TextTrackCue.class, TextTrackList.class, TimeEvent.class, TrackEvent.class,
+        TransitionEvent.class, UIEvent.class, WebGLContextEvent.class, WebSocket.class, Window.class, Worker.class,
         XMLHttpRequestEventTarget.class,
         // level 3
         AnalyserNode.class, Attr.class, AudioContext.class, AudioDestinationNode.class, AudioScheduledSourceNode.class,
@@ -658,14 +658,14 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGFETileElement.class, SVGFETurbulenceElement.class, SVGFilterElement.class, SVGGradientElement.class,
         SVGGraphicsElement.class, SVGMPathElement.class, SVGMarkerElement.class, SVGMaskElement.class,
         SVGMetadataElement.class, SVGPatternElement.class, SVGScriptElement.class, SVGStopElement.class,
-        SVGStyleElement.class, SVGSymbolElement.class, SVGTitleElement.class, SVGViewElement.class,
+        SVGStyleElement.class, SVGTitleElement.class, SVGViewElement.class,
         // level 6
         HTMLAudioElement.class, HTMLVideoElement.class, SVGAElement.class, SVGAnimateElement.class,
         SVGAnimateMotionElement.class, SVGAnimateTransformElement.class, SVGDefsElement.class,
         SVGFEFuncAElement.class, SVGFEFuncBElement.class, SVGFEFuncGElement.class, SVGFEFuncRElement.class,
         SVGForeignObjectElement.class, SVGGElement.class, SVGGeometryElement.class, SVGImageElement.class,
         SVGLinearGradientElement.class, SVGRadialGradientElement.class, SVGSVGElement.class, SVGSetElement.class,
-        SVGSwitchElement.class, SVGTextContentElement.class, SVGUseElement.class,
+        SVGSwitchElement.class, SVGSymbolElement.class, SVGTextContentElement.class, SVGUseElement.class,
         // level 7
         Audio.class, SVGCircleElement.class, SVGEllipseElement.class, SVGLineElement.class, SVGPathElement.class,
         SVGPolygonElement.class, SVGPolylineElement.class, SVGRectElement.class, SVGTextPathElement.class,

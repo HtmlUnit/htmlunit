@@ -5193,6 +5193,21 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.speech.SpeechRecognitionErrorEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+                + "currentTarget,defaultPrevented,error,eventPhase,initEvent(),isTrusted,message,NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    public void speechRecognitionErrorEvent() throws Exception {
+        testString("", "new SpeechRecognitionErrorEvent('event')");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent}.
      *
      * @throws Exception if the test fails
