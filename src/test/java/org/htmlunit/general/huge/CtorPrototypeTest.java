@@ -23,6 +23,7 @@ import org.htmlunit.TestCaseTest;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -1756,7 +1757,6 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "true",
             FF = "exception",
             FF_ESR = "exception")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
     void _SpeechGrammar() throws Exception {
         test("SpeechGrammar");
     }
@@ -1764,7 +1764,6 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "true",
             FF = "exception",
             FF_ESR = "exception")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
     void _SpeechGrammarList() throws Exception {
         test("SpeechGrammarList");
     }
@@ -1772,7 +1771,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "exception",
             FF_ESR = "exception")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
+    @Test
     void _SpeechRecognition() throws Exception {
         test("SpeechRecognition");
     }
@@ -2039,6 +2038,27 @@ public class CtorPrototypeTest extends WebDriverTestCase {
             FF_ESR = "exception")
     void _WebKitMediaStream() throws Exception {
         test("webkitMediaStream");
+    }
+
+    @Alerts(DEFAULT = "false",
+            FF = "exception",
+            FF_ESR = "exception")
+    void _WebKitSpeechRecognition() throws Exception {
+        test("webkitSpeechRecognition");
+    }
+
+    @Alerts(DEFAULT = "false",
+            FF = "exception",
+            FF_ESR = "exception")
+    void _WebKitSpeechRecognitionError() throws Exception {
+        test("webkitSpeechRecognitionError");
+    }
+
+    @Alerts(DEFAULT = "false",
+            FF = "exception",
+            FF_ESR = "exception")
+    void _WebKitSpeechRecognitionEvent() throws Exception {
+        test("webkitSpeechRecognitionEvent");
     }
 
     @Alerts("false")

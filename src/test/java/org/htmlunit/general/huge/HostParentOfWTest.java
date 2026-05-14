@@ -206,6 +206,13 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false/false",
             CHROME = "true/false",
             EDGE = "true/false")
+    void _webkitSpeechGrammar_SpeechGrammar() throws Exception {
+        test("webkitSpeechGrammar", "SpeechGrammar");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     void _webkitSpeechGrammar_webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar", "webkitSpeechGrammar");
     }
@@ -213,8 +220,22 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false/false",
             CHROME = "true/false",
             EDGE = "true/false")
+    void _webkitSpeechGrammarList_SpeechGrammarList() throws Exception {
+        test("webkitSpeechGrammarList", "SpeechGrammarList");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     void _webkitSpeechGrammarList_webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList", "webkitSpeechGrammarList");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
+    void _webkitSpeechRecognition_SpeechRecognition() throws Exception {
+        test("webkitSpeechRecognition", "SpeechRecognition");
     }
 
     @Alerts(DEFAULT = "false/false",

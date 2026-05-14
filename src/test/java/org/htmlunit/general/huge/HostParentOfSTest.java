@@ -122,6 +122,13 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts(DEFAULT = "true/false",
             FF = "false/false",
             FF_ESR = "false/false")
+    void _SpeechGrammar_webkitSpeechGrammar() throws Exception {
+        test("SpeechGrammar", "webkitSpeechGrammar");
+    }
+
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
     void _SpeechGrammarList_SpeechGrammarList() throws Exception {
         test("SpeechGrammarList", "SpeechGrammarList");
     }
@@ -129,8 +136,22 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts(DEFAULT = "true/false",
             FF = "false/false",
             FF_ESR = "false/false")
+    void _SpeechGrammarList_webkitSpeechGrammarList() throws Exception {
+        test("SpeechGrammarList", "webkitSpeechGrammarList");
+    }
+
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
     void _SpeechRecognition_SpeechRecognition() throws Exception {
         test("SpeechRecognition", "SpeechRecognition");
+    }
+
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    void _SpeechRecognition_webkitSpeechRecognition() throws Exception {
+        test("SpeechRecognition", "webkitSpeechRecognition");
     }
 
     @Alerts(DEFAULT = "true/false",

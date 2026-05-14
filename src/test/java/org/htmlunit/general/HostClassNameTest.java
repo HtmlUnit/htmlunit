@@ -7177,7 +7177,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechGrammar() { [native code] }",
             EDGE = "function SpeechGrammar() { [native code] }")
-    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError")
     public void speechGrammar() throws Exception {
         test("SpeechGrammar");
     }
