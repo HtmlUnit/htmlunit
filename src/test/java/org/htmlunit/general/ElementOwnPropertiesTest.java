@@ -15755,8 +15755,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "constructor(),state[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),state[GCE]",
             EDGE = "constructor(),state[GCE]",
-            FF = "constructor(),state[GCE]",
-            FF_ESR = "constructor(),state[GCE]")
+            FF = "constructor(),state[GCE]")
     public void popStateEvent() throws Exception {
         testString("", "new PopStateEvent('event')");
     }
@@ -15820,6 +15819,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "constructor(),error[GCE],message[GCE]",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()")
     public void speechRecognitionErrorEvent() throws Exception {
         testString("", "new SpeechRecognitionErrorEvent('event')");
     }

@@ -2737,11 +2737,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),lengthComputable[GCE],loaded[GCE],total[GCE]",
-            CHROME = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]",
-            FF = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [ProgressEvent]")
+    @Alerts("Symbol(Symbol.toStringTag) [C] [ProgressEvent]")
     public void progressEvent() throws Exception {
         testString("", "new ProgressEvent('event')");
     }
@@ -2798,11 +2794,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),initStorageEvent(),key[GCE],newValue[GCE],oldValue[GCE],storageArea[GCE],url[GCE]",
-            CHROME = "Symbol(Symbol.toStringTag) [C] [StorageEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [C] [StorageEvent]",
-            FF = "Symbol(Symbol.toStringTag) [C] [StorageEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [StorageEvent]")
+    @Alerts("Symbol(Symbol.toStringTag) [C] [StorageEvent]")
     public void storageEvent() throws Exception {
         testString("", "new StorageEvent('event')");
     }
@@ -2813,11 +2805,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),submitter[GCE]",
-            CHROME = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]",
-            FF = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [SubmitEvent]")
+    @Alerts("Symbol(Symbol.toStringTag) [C] [SubmitEvent]")
     public void submitEvent() throws Exception {
         testString("", "new SubmitEvent('event')");
     }
@@ -2828,11 +2816,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),data[GCE],initTextEvent()",
-            CHROME = "Symbol(Symbol.toStringTag) [C] [TextEvent]",
-            EDGE = "Symbol(Symbol.toStringTag) [C] [TextEvent]",
-            FF = "Symbol(Symbol.toStringTag) [C] [TextEvent]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [C] [TextEvent]")
+    @Alerts("Symbol(Symbol.toStringTag) [C] [TextEvent]")
     public void textEvent() throws Exception {
         testString("", "document.createEvent('TextEvent')");
     }

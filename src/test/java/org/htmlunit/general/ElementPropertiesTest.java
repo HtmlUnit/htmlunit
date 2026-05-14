@@ -5139,8 +5139,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),lengthComputable[GCE],loaded[GCE],total[GCE]",
-            CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
                 + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,lengthComputable,loaded,NONE,"
                 + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
                 + "timeStamp,total,"
@@ -5235,8 +5234,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),initStorageEvent(),key[GCE],newValue[GCE],oldValue[GCE],storageArea[GCE],url[GCE]",
-            CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
                 + "currentTarget,defaultPrevented,eventPhase,initEvent(),initStorageEvent(),isTrusted,key,newValue,"
                 + "NONE,oldValue,preventDefault(),returnValue,srcElement,stopImmediatePropagation(),"
                 + "stopPropagation(),storageArea,target,timeStamp,type,"
@@ -5281,8 +5279,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),submitter[GCE]",
-            CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
                 + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,NONE,preventDefault(),"
                 + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),submitter,target,timeStamp,"
                 + "type",
@@ -5323,8 +5320,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),data[GCE],initTextEvent()",
-            CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
+    @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
                 + "currentTarget,data,defaultPrevented,detail,eventPhase,initEvent(),initTextEvent(),initUIEvent(),"
                 + "isTrusted,NONE,preventDefault(),returnValue,sourceCapabilities,srcElement,"
                 + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,"

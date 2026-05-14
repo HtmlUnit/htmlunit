@@ -9959,8 +9959,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechRecognitionErrorEvent() { [native code] }",
             EDGE = "function SpeechRecognitionErrorEvent() { [native code] }")
-    @HtmlUnitNYI(CHROME = "function webkitSpeechRecognitionError() { [native code] }",
-            EDGE = "function webkitSpeechRecognitionError() { [native code] }")
     public void webkitSpeechRecognitionError() throws Exception {
         test("webkitSpeechRecognitionError");
     }
