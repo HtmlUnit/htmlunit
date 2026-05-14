@@ -5202,6 +5202,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(
+            CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,currentTarget,"
+                + "defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,srcElement,"
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type")
     public void speechRecognitionErrorEvent() throws Exception {
         testString("", "new SpeechRecognitionErrorEvent('event')");
     }

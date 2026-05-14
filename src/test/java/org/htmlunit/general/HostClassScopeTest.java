@@ -326,6 +326,41 @@ public class HostClassScopeTest extends WebDriverTestCase {
         test("RemotePlayback");
     }
 
+    @Alerts(DEFAULT = {"true", "function", "function"},
+            FF = {"false", "undefined", "undefined"},
+            FF_ESR = {"false", "undefined", "undefined"})
+    void _SpeechGrammar() throws Exception {
+        test("SpeechGrammar");
+    }
+
+    @Alerts(DEFAULT = {"true", "function", "function"},
+            FF = {"false", "undefined", "undefined"},
+            FF_ESR = {"false", "undefined", "undefined"})
+    void _SpeechGrammarList() throws Exception {
+        test("SpeechGrammarList");
+    }
+
+    @Alerts(DEFAULT = {"true", "function", "function"},
+            FF = {"false", "undefined", "undefined"},
+            FF_ESR = {"false", "undefined", "undefined"})
+    void _SpeechRecognition() throws Exception {
+        test("SpeechRecognition");
+    }
+
+    @Alerts(DEFAULT = {"true", "function", "function"},
+            FF = {"false", "undefined", "undefined"},
+            FF_ESR = {"false", "undefined", "undefined"})
+    void _SpeechRecognitionErrorEvent() throws Exception {
+        test("SpeechRecognitionErrorEvent");
+    }
+
+    @Alerts(DEFAULT = {"true", "function", "function"},
+            FF = {"false", "undefined", "undefined"},
+            FF_ESR = {"false", "undefined", "undefined"})
+    void _SpeechRecognitionEvent() throws Exception {
+        test("SpeechRecognitionEvent");
+    }
+
     @Alerts({"false", "undefined", "undefined"})
     void _StyleMedia() throws Exception {
         test("StyleMedia");
@@ -377,7 +412,7 @@ public class HostClassScopeTest extends WebDriverTestCase {
             FF = {"false", "undefined", "undefined"},
             FF_ESR = {"false", "undefined", "undefined"})
     void _webkitSpeechGrammarList() throws Exception {
-        test("WebkitSpeechGrammarList");
+        test("webkitSpeechGrammarList");
     }
 
     @Alerts(DEFAULT = {"true", "function", "function"},
