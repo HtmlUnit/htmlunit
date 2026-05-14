@@ -416,9 +416,9 @@ import org.htmlunit.javascript.host.speech.SpeechSynthesis;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisUtterance;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisVoice;
-import org.htmlunit.javascript.host.speech.WebkitSpeechGrammar;
-import org.htmlunit.javascript.host.speech.WebkitSpeechGrammarList;
-import org.htmlunit.javascript.host.speech.WebkitSpeechRecognition;
+import org.htmlunit.javascript.host.speech.SpeechGrammar;
+import org.htmlunit.javascript.host.speech.SpeechGrammarList;
+import org.htmlunit.javascript.host.speech.SpeechRecognition;
 import org.htmlunit.javascript.host.svg.SVGAElement;
 import org.htmlunit.javascript.host.svg.SVGAngle;
 import org.htmlunit.javascript.host.svg.SVGAnimateElement;
@@ -580,8 +580,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebGLActiveInfo.class, WebGLBuffer.class, WebGLFramebuffer.class, WebGLProgram.class, WebGLQuery.class,
         WebGLRenderbuffer.class, WebGLRenderingContext.class, WebGLSampler.class, WebGLShader.class,
         WebGLShaderPrecisionFormat.class, WebGLSync.class, WebGLTexture.class, WebGLTransformFeedback.class,
-        WebGLUniformLocation.class, WebGLVertexArrayObject.class, WebkitSpeechGrammar.class,
-        WebkitSpeechGrammarList.class, XMLSerializer.class, XPathEvaluator.class, XPathEvaluator.class,
+        WebGLUniformLocation.class, WebGLVertexArrayObject.class, SpeechGrammar.class,
+        SpeechGrammarList.class, XMLSerializer.class, XPathEvaluator.class, XPathEvaluator.class,
         XPathExpression.class, XPathResult.class, XSLTProcessor.class,
         // level 2
         AbortSignal.class, Animation.class, AnimationEvent.class, AudioNode.class, AudioProcessingEvent.class,
@@ -610,7 +610,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ServiceWorkerRegistration.class, SharedWorker.class, SourceBuffer.class, SourceBufferList.class,
         SpeechSynthesis.class, SpeechSynthesisEvent.class, SpeechSynthesisUtterance.class, StorageEvent.class,
         SubmitEvent.class, TextTrack.class, TextTrackCue.class, TextTrackList.class, TimeEvent.class, TrackEvent.class,
-        TransitionEvent.class, UIEvent.class, WebGLContextEvent.class, WebSocket.class, WebkitSpeechRecognition.class,
+        TransitionEvent.class, UIEvent.class, WebGLContextEvent.class, WebSocket.class, SpeechRecognition.class,
         WebkitSpeechRecognitionError.class, WebkitSpeechRecognitionEvent.class, Window.class, Worker.class,
         XMLHttpRequestEventTarget.class,
         // level 3

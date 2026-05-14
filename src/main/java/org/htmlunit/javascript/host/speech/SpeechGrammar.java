@@ -20,20 +20,22 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 
 /**
- * A JavaScript object for {@code webkitSpeechGrammar}.
+ * A JavaScript object for {@code SpeechGrammar}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(value = {CHROME, EDGE}, className = "webkitSpeechGrammar")
-public class WebkitSpeechGrammar extends HtmlUnitScriptable {
+@JsxClass({CHROME, EDGE})
+public class SpeechGrammar extends HtmlUnitScriptable {
 
     /**
      * JavaScript constructor.
      */
-    @JsxConstructor(functionName = "SpeechGrammar")
+    @JsxConstructor
+    @JsxConstructorAlias(alias = "webkitSpeechGrammar")
     public void jsConstructor() {
         // nothing to do
     }

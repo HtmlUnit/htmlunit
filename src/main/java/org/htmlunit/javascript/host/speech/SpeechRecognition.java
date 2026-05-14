@@ -19,22 +19,24 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxConstructorAlias;
 import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code webkitSpeechRecognition}.
+ * A JavaScript object for {@code SpeechRecognition}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(value = {CHROME, EDGE}, className = "webkitSpeechRecognition")
-public class WebkitSpeechRecognition extends EventTarget {
+@JsxClass({CHROME, EDGE})
+public class SpeechRecognition extends EventTarget {
 
     /**
      * JavaScript constructor.
      */
     @Override
-    @JsxConstructor(functionName = "SpeechRecognition")
+    @JsxConstructor
+    @JsxConstructorAlias(alias = "webkitSpeechRecognition")
     public void jsConstructor() {
         super.jsConstructor();
     }
