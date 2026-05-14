@@ -2915,8 +2915,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             EDGE = "Symbol(Symbol.toStringTag) [C] [SpeechRecognitionErrorEvent]",
             FF = "ReferenceError",
             FF_ESR = "ReferenceError")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [C] [WebkitSpeechRecognitionError]",
-            EDGE = "Symbol(Symbol.toStringTag) [C] [WebkitSpeechRecognitionError]")
     public void webkitSpeechRecognitionError() throws Exception {
         testString("", "new webkitSpeechRecognitionError('webkitSpeechRecognition')");
     }

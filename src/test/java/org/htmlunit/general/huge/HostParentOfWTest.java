@@ -17,6 +17,7 @@ package org.htmlunit.general.huge;
 import java.util.Collection;
 
 import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.Arguments;
 
 /**
@@ -241,6 +242,13 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false/false",
             CHROME = "true/false",
             EDGE = "true/false")
+    void _webkitSpeechRecognitionError_SpeechRecognitionErrorEvent() throws Exception {
+        test("webkitSpeechRecognitionError", "SpeechRecognitionErrorEvent");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
     void _webkitSpeechRecognition_webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition", "webkitSpeechRecognition");
     }
@@ -250,6 +258,14 @@ public class HostParentOfWTest extends HostParentOf {
             EDGE = "true/false")
     void _webkitSpeechRecognitionError_webkitSpeechRecognitionError() throws Exception {
         test("webkitSpeechRecognitionError", "webkitSpeechRecognitionError");
+    }
+
+    @Alerts(DEFAULT = "false/false",
+            CHROME = "true/false",
+            EDGE = "true/false")
+    @Test
+    void _webkitSpeechRecognitionEvent_SpeechRecognitionEvent() throws Exception {
+        test("webkitSpeechRecognitionEvent", "SpeechRecognitionEvent");
     }
 
     @Alerts(DEFAULT = "false/false",
