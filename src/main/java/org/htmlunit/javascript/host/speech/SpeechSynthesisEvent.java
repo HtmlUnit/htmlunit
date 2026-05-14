@@ -12,23 +12,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host.event;
-
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+package org.htmlunit.javascript.host.speech;
 
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.host.event.Event;
 
 /**
- * A JavaScript object for {@code webkitSpeechRecognitionEvent}.
+ * A JavaScript object for {@code SpeechSynthesisEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(value = {CHROME, EDGE}, className = "webkitSpeechRecognitionEvent")
-public class WebkitSpeechRecognitionEvent extends Event {
+@JsxClass
+public class SpeechSynthesisEvent extends Event {
 
     /**
      * {@inheritDoc}
@@ -36,17 +35,6 @@ public class WebkitSpeechRecognitionEvent extends Event {
     @Override
     @JsxConstructor
     public void jsConstructor(final String type, final ScriptableObject details) {
-        super.jsConstructor(type, details);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if (String.class.equals(hint) || hint == null) {
-            return "[object SpeechRecognitionEvent]";
-        }
-        return super.getDefaultValue(hint);
+        throw JavaScriptEngine.typeErrorIllegalConstructor();
     }
 }

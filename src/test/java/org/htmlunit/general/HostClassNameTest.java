@@ -7188,7 +7188,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechGrammarList() { [native code] }",
             EDGE = "function SpeechGrammarList() { [native code] }")
-    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError")
     public void speechGrammarList() throws Exception {
         test("SpeechGrammarList");
     }
@@ -7200,7 +7199,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechRecognition() { [native code] }",
             EDGE = "function SpeechRecognition() { [native code] }")
-    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError")
     public void speechRecognition() throws Exception {
         test("SpeechRecognition");
     }
@@ -7242,7 +7240,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechRecognitionEvent() { [native code] }",
             EDGE = "function SpeechRecognitionEvent() { [native code] }")
-    @HtmlUnitNYI(CHROME = "ReferenceError", EDGE = "ReferenceError")
     public void speechRecognitionEvent() throws Exception {
         test("SpeechRecognitionEvent");
     }
@@ -9976,8 +9973,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "ReferenceError",
             CHROME = "function SpeechRecognitionEvent() { [native code] }",
             EDGE = "function SpeechRecognitionEvent() { [native code] }")
-    @HtmlUnitNYI(CHROME = "function webkitSpeechRecognitionEvent() { [native code] }",
-    EDGE = "function webkitSpeechRecognitionEvent() { [native code] }")
     public void webkitSpeechRecognitionEvent() throws Exception {
         test("webkitSpeechRecognitionEvent");
     }

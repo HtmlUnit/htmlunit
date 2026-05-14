@@ -12,28 +12,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host.event;
+package org.htmlunit.javascript.host.speech;
+
+import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxConstructorAlias;
+import org.htmlunit.javascript.host.event.Event;
 
 /**
- * A JavaScript object for {@code SpeechSynthesisEvent}.
+ * A JavaScript object for {@code SpeechRecognitionEvent}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass
-public class SpeechSynthesisEvent extends Event {
+@JsxClass({CHROME, EDGE})
+public class SpeechRecognitionEvent extends Event {
 
     /**
      * {@inheritDoc}
      */
     @Override
     @JsxConstructor
+    @JsxConstructorAlias(alias = "webkitSpeechRecognitionEvent")
     public void jsConstructor(final String type, final ScriptableObject details) {
-        throw JavaScriptEngine.typeErrorIllegalConstructor();
+        super.jsConstructor(type, details);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (String.class.equals(hint) || hint == null) {
+            return "[object SpeechRecognitionEvent]";
+        }
+        return super.getDefaultValue(hint);
     }
 }

@@ -211,7 +211,6 @@ import org.htmlunit.javascript.host.event.PromiseRejectionEvent;
 import org.htmlunit.javascript.host.event.RTCDataChannelEvent;
 import org.htmlunit.javascript.host.event.RTCPeerConnectionIceEvent;
 import org.htmlunit.javascript.host.event.SecurityPolicyViolationEvent;
-import org.htmlunit.javascript.host.event.SpeechSynthesisEvent;
 import org.htmlunit.javascript.host.event.StorageEvent;
 import org.htmlunit.javascript.host.event.SubmitEvent;
 import org.htmlunit.javascript.host.event.TextEvent;
@@ -221,8 +220,6 @@ import org.htmlunit.javascript.host.event.TrackEvent;
 import org.htmlunit.javascript.host.event.TransitionEvent;
 import org.htmlunit.javascript.host.event.UIEvent;
 import org.htmlunit.javascript.host.event.WebGLContextEvent;
-import org.htmlunit.javascript.host.event.WebkitSpeechRecognitionError;
-import org.htmlunit.javascript.host.event.WebkitSpeechRecognitionEvent;
 import org.htmlunit.javascript.host.event.WheelEvent;
 import org.htmlunit.javascript.host.fetch.Headers;
 import org.htmlunit.javascript.host.fetch.Request;
@@ -414,11 +411,14 @@ import org.htmlunit.javascript.host.security.FederatedCredential;
 import org.htmlunit.javascript.host.security.PasswordCredential;
 import org.htmlunit.javascript.host.speech.SpeechSynthesis;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent;
+import org.htmlunit.javascript.host.speech.SpeechSynthesisEvent;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisUtterance;
 import org.htmlunit.javascript.host.speech.SpeechSynthesisVoice;
+import org.htmlunit.javascript.host.speech.SpeechRecognitionEvent;
 import org.htmlunit.javascript.host.speech.SpeechGrammar;
 import org.htmlunit.javascript.host.speech.SpeechGrammarList;
 import org.htmlunit.javascript.host.speech.SpeechRecognition;
+import org.htmlunit.javascript.host.speech.WebkitSpeechRecognitionError;
 import org.htmlunit.javascript.host.svg.SVGAElement;
 import org.htmlunit.javascript.host.svg.SVGAngle;
 import org.htmlunit.javascript.host.svg.SVGAnimateElement;
@@ -611,7 +611,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SpeechSynthesis.class, SpeechSynthesisEvent.class, SpeechSynthesisUtterance.class, StorageEvent.class,
         SubmitEvent.class, TextTrack.class, TextTrackCue.class, TextTrackList.class, TimeEvent.class, TrackEvent.class,
         TransitionEvent.class, UIEvent.class, WebGLContextEvent.class, WebSocket.class, SpeechRecognition.class,
-        WebkitSpeechRecognitionError.class, WebkitSpeechRecognitionEvent.class, Window.class, Worker.class,
+        WebkitSpeechRecognitionError.class, SpeechRecognitionEvent.class, Window.class, Worker.class,
         XMLHttpRequestEventTarget.class,
         // level 3
         AnalyserNode.class, Attr.class, AudioContext.class, AudioDestinationNode.class, AudioScheduledSourceNode.class,

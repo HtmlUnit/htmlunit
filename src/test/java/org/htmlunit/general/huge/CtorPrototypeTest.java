@@ -1779,7 +1779,6 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "exception",
             FF_ESR = "exception")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
     void _SpeechRecognitionErrorEvent() throws Exception {
         test("SpeechRecognitionErrorEvent");
     }
@@ -1787,7 +1786,6 @@ public class CtorPrototypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             FF = "exception",
             FF_ESR = "exception")
-    @HtmlUnitNYI(CHROME = "exception", EDGE = "exception")
     void _SpeechRecognitionEvent() throws Exception {
         test("SpeechRecognitionEvent");
     }
@@ -2040,24 +2038,38 @@ public class CtorPrototypeTest extends WebDriverTestCase {
         test("webkitMediaStream");
     }
 
+    @Alerts(DEFAULT = "true",
+            FF = "exception",
+            FF_ESR = "exception")
+    void _webkitSpeechGrammar() throws Exception {
+        test("webkitSpeechGrammar");
+    }
+
+    @Alerts(DEFAULT = "true",
+            FF = "exception",
+            FF_ESR = "exception")
+    void _webkitSpeechGrammarList() throws Exception {
+        test("webkitSpeechGrammarList");
+    }
+
     @Alerts(DEFAULT = "false",
             FF = "exception",
             FF_ESR = "exception")
-    void _WebKitSpeechRecognition() throws Exception {
+    void _webkitSpeechRecognition() throws Exception {
         test("webkitSpeechRecognition");
     }
 
     @Alerts(DEFAULT = "false",
             FF = "exception",
             FF_ESR = "exception")
-    void _WebKitSpeechRecognitionError() throws Exception {
+    void _webkitSpeechRecognitionError() throws Exception {
         test("webkitSpeechRecognitionError");
     }
 
     @Alerts(DEFAULT = "false",
             FF = "exception",
             FF_ESR = "exception")
-    void _WebKitSpeechRecognitionEvent() throws Exception {
+    void _webkitSpeechRecognitionEvent() throws Exception {
         test("webkitSpeechRecognitionEvent");
     }
 

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host.event;
+package org.htmlunit.javascript.host.speech;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -20,6 +20,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.host.event.Event;
 
 /**
  * A JavaScript object for {@code webkitSpeechRecognitionError}.

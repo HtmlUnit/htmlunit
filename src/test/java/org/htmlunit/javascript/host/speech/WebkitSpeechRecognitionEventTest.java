@@ -12,18 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit.javascript.host.event;
+package org.htmlunit.javascript.host.speech;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for {@link SpeechSynthesisEvent}.
+ * Tests for {@link SpeechRecognitionEvent}.
  *
  * @author Ronald Brill
  */
-public class SpeechSynthesisEventTest extends WebDriverTestCase {
+public class WebkitSpeechRecognitionEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
             + "    log(event);\n"
@@ -37,14 +38,16 @@ public class SpeechSynthesisEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "result", "false", "false", "false"},
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void create_ctor() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new SpeechSynthesisEvent('start');\n"
+            + "      var event = new webkitSpeechRecognitionEvent('result');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -59,14 +62,18 @@ public class SpeechSynthesisEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = "TypeError",
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
+    @HtmlUnitNYI(CHROME = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"},
+            EDGE = {"[object SpeechRecognitionEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new SpeechSynthesisEvent();\n"
+            + "      var event = new webkitSpeechRecognitionEvent();\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -81,14 +88,16 @@ public class SpeechSynthesisEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "42", "false", "false", "false"},
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void create_ctorNumericType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new SpeechSynthesisEvent(42);\n"
+            + "      var event = new webkitSpeechRecognitionEvent(42);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -103,14 +112,16 @@ public class SpeechSynthesisEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "null", "false", "false", "false"},
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void create_ctorNullType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new SpeechSynthesisEvent(null);\n"
+            + "      var event = new webkitSpeechRecognitionEvent(null);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -132,7 +143,7 @@ public class SpeechSynthesisEventTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new SpeechSynthesisEvent(unknown);\n"
+            + "      var event = new webkitSpeechRecognitionEvent(unknown);\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -147,14 +158,16 @@ public class SpeechSynthesisEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "HtmlUnitEvent", "false", "false", "false"},
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void create_ctorArbitraryType() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new SpeechSynthesisEvent('HtmlUnitEvent');\n"
+            + "      var event = new webkitSpeechRecognitionEvent('HtmlUnitEvent');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -169,17 +182,17 @@ public class SpeechSynthesisEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "result", "false", "false", "false"},
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new SpeechSynthesisEvent('start', {\n"
-            + "        'bubbles': true,\n"
-            + "        'cancelable': true,\n"
-            + "        'composed': true\n"
+            + "      var event = new webkitSpeechRecognitionEvent('result', {\n"
+            + "        'resultIndex': 0\n"
             + "      });\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
@@ -195,14 +208,17 @@ public class SpeechSynthesisEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("TypeError")
+    @Alerts(DEFAULT = {"[object SpeechRecognitionEvent]", "result", "false", "false", "false"},
+            FF = "ReferenceError",
+            FF_ESR = "ReferenceError")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = new SpeechSynthesisEvent('start', {});\n"
+            + "      var event = new webkitSpeechRecognitionEvent('result', {\n"
+            + "      });\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -224,7 +240,7 @@ public class SpeechSynthesisEventTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      var event = document.createEvent('SpeechSynthesisEvent');\n"
+            + "      var event = document.createEvent('webkitSpeechRecognitionEvent');\n"
             + "      dump(event);\n"
             + "    } catch(e) { logEx(e) }\n"
             + "  }\n"
@@ -239,7 +255,10 @@ public class SpeechSynthesisEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(CHROME = "true",
+            EDGE = "true",
+            FF = "false",
+            FF_ESR = "false")
     public void inWindow() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -247,7 +266,7 @@ public class SpeechSynthesisEventTest extends WebDriverTestCase {
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      log('SpeechSynthesisEvent' in window);\n"
+            + "      log('webkitSpeechRecognitionEvent' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

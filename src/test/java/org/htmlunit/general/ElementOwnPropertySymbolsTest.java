@@ -2747,6 +2747,39 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.speech.SpeechRecognitionError}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("ReferenceError")
+    public void speechRecognitionError() throws Exception {
+        testString("", "new SpeechRecognitionError('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void speechSynthesisErrorEvent() throws Exception {
+        testString("", "new SpeechSynthesisErrorEvent('event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.speech.SpeechSynthesisEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("TypeError")
+    public void SpeechSynthesisEvent() throws Exception {
+        testString("", "new SpeechSynthesisEvent('event')");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.event.StorageEvent}.
      *
      * @throws Exception if the test fails
@@ -2876,7 +2909,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.WebkitSpeechRecognitionError}.
+     * Test {@link org.htmlunit.javascript.host.speech.WebkitSpeechRecognitionError}.
      *
      * @throws Exception if the test fails
      */
@@ -2892,7 +2925,7 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.WebkitSpeechRecognitionEvent}.
+     * Test {@link org.htmlunit.javascript.host.speech.SpeechRecognitionEvent}.
      *
      * @throws Exception if the test fails
      */
