@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: Fix for ignored spreads in array construction.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Fix uint8 overflow in array literal skipIndexesId and sourcePositions.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Tidy up serial version ids; applied openrewrite to add `@Serial` annotations.
+            </action>
             <action type="add" dev="rbri">
                 Introduce SpeechRecognitionEvent and SpeechRecognitionErrorEvent and make them also available as
                 webkitSpeechRecognitionEvent and webkitSpeechRecognitionError.
