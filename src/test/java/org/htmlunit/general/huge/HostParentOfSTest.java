@@ -18,6 +18,7 @@ import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.Arguments;
 
 /**
@@ -164,8 +165,23 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts(DEFAULT = "true/false",
             FF = "false/false",
             FF_ESR = "false/false")
+    @Test
+    void _SpeechRecognitionErrorEvent_webkitSpeechRecognitionError() throws Exception {
+        test("SpeechRecognitionErrorEvent", "webkitSpeechRecognitionError");
+    }
+
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
     void _SpeechRecognitionEvent_SpeechRecognitionEvent() throws Exception {
         test("SpeechRecognitionEvent", "SpeechRecognitionEvent");
+    }
+
+    @Alerts(DEFAULT = "true/false",
+            FF = "false/false",
+            FF_ESR = "false/false")
+    void _SpeechRecognitionEvent_webkitSpeechRecognitionEvent() throws Exception {
+        test("SpeechRecognitionEvent", "webkitSpeechRecognitionEvent");
     }
 
     @Alerts("true/false")
