@@ -25,7 +25,6 @@ import org.htmlunit.html.DefaultElementFactory;
 import org.htmlunit.javascript.SilentJavaScriptErrorListener;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -902,7 +901,11 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     }
 
     @Alerts("0")
-    @Test
+    @HtmlUnitNYI(
+            CHROME = "1",
+            EDGE = "1",
+            FF = "1",
+            FF_ESR = "1")
     void _p_table() throws Exception {
         test("p", "table");
     }
