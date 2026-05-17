@@ -8,6 +8,13 @@
 
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix Object.assign with array target losing length update.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Introduce ClassSizeException (extends ClassFileFormatException) and tighten up
+                exceptions related to class compilation.
+            </action>
             <action type="fix" dev="rbri">
                 core-js: Fix for ignored spreads in array construction.
             </action>
