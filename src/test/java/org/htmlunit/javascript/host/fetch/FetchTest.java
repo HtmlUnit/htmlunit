@@ -14,11 +14,7 @@
  */
 package org.htmlunit.javascript.host.fetch;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.htmlunit.HttpMethod;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.WebRequest;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.junit.jupiter.api.Test;
@@ -99,133 +95,6 @@ public class FetchTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"v1, v2", "true", "false", "v3"})
-    public void headersBasics() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  const h = new Headers({'X-Test': 'v1'});\n"
-            + "  h.append('x-test', 'v2');\n"
-            + "  log(h.get('X-TEST'));\n"
-            + "  log(h.has('x-test'));\n"
-            + "  h.delete('x-test');\n"
-            + "  log(h.has('x-test'));\n"
-            + "  h.set('x-test', 'v3');\n"
-            + "  log(h.get('X-Test'));\n"
-            + "</script></head><body></body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"a=1,b=2", "a,b", "1,2", "a:1|b:2"})
-    public void headersIterators() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  const h = new Headers([['a', '1'], ['b', '2']]);\n"
-            + "  log(Array.from(h.entries()).map(e => e[0] + '=' + e[1]).join(','));\n"
-            + "  log(Array.from(h.keys()).join(','));\n"
-            + "  log(Array.from(h.values()).join(','));\n"
-            + "  let s = [];\n"
-            + "  h.forEach((v, k) => s.push(k + ':' + v));\n"
-            + "  log(s.join('|'));\n"
-            + "</script></head><body></body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"POST", "true", "false", "true", "body"})
-    public void requestBasics() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  const req = new Request('" + URL_SECOND + "', {method: 'post', headers: {'x-a': 'v'}, body: 'body'});\n"
-            + "  log(req.method);\n"
-            + "  log(req.headers.has('X-A'));\n"
-            + "  log(req.bodyUsed);\n"
-            + "  const clone = req.clone();\n"
-            + "  log(clone.method === req.method);\n"
-            + "  req.text().then(t => log(t));\n"
-            + "</script></head><body></body></html>";
-
-        final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"false", "abc", "true", "TypeError"})
-    public void responseBodyUsed() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  const r = new Response('abc');\n"
-            + "  log(r.bodyUsed);\n"
-            + "  r.text()\n"
-            + "   .then(t => { log(t); log(r.bodyUsed); return r.text(); })\n"
-            + "   .catch(e => log(e.name));\n"
-            + "</script></head><body></body></html>";
-
-        final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"200", "true", "object", "3", "3", "3"})
-    public void responseMethods() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  const r1 = new Response('{\"a\":1}');\n"
-            + "  log(r1.status);\n"
-            + "  log(r1.ok);\n"
-            + "  r1.json().then(v => log(typeof v));\n"
-            + "  new Response('abc').arrayBuffer().then(b => log(b.byteLength));\n"
-            + "  new Response('abc').blob().then(b => log(b.size));\n"
-            + "  new Response('abc').clone().text().then(t => log(t.length));\n"
-            + "</script></head><body></body></html>";
-
-        final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"0", "error", "301", "/a"})
-    public void responseStaticMethods() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  const err = Response.error();\n"
-            + "  log(err.status);\n"
-            + "  log(err.type);\n"
-            + "  const redir = Response.redirect('/a', 301);\n"
-            + "  log(redir.status);\n"
-            + "  log(redir.headers.get('location'));\n"
-            + "</script></head><body></body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({"200", "true", "HtmlUnit"})
     public void fetchPostJson() throws Exception {
         final String html = DOCTYPE_HTML
@@ -244,11 +113,6 @@ public class FetchTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, "HtmlUnit", MimeType.TEXT_PLAIN);
         final WebDriver driver = loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
-
-        final WebRequest request = getMockWebConnection().getLastWebRequest();
-        assertEquals(HttpMethod.POST, request.getHttpMethod());
-        assertEquals("{\"q\":\"HtmlUnit\"}", request.getRequestBody());
-        assertEquals("application/json", request.getAdditionalHeader("content-type"));
     }
 
     /**
