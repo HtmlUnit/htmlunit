@@ -173,7 +173,7 @@ public class RequestTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  try { new Request('%%%'); log('ok'); } catch (e) { log(e.name); }\n"
+            + "  try { new Request('ftp://example.com/path'); log('ok'); } catch (e) { log(e.name); }\n"
             + "  try { new Request('" + URL_SECOND + "', {method: 'GET', body: 'x'}); log('ok'); }\n"
             + "  catch (e) { log(e.name); }\n"
             + "</script></head><body></body></html>";
