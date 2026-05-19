@@ -146,13 +146,17 @@ public class RequestTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  new Request('" + URL_SECOND + "', {method: 'POST', body: '{\"a\":1}'}).json().then(v => log(v.a));\n"
-            + "  new Request('" + URL_SECOND + "', {method: 'POST', body: 'abc'}).arrayBuffer().then(b => log(b.byteLength));\n"
-            + "  new Request('" + URL_SECOND + "', {method: 'POST', body: 'abc'}).blob().then(b => log(b.size));\n"
-            + "  new Request('" + URL_SECOND + "', {method: 'POST', body: 'x'}).clone().text().then(t => log(t.length));\n"
-            + "  new Request('" + URL_SECOND + "', {method: 'POST', body: 'q=v&x=y',\n"
-            + "      headers: {'content-type': 'application/x-www-form-urlencoded'}})\n"
-            + "      .formData().then(f => { log(f.get('q')); log(f.get('x')); });\n"
+            + "  Promise.resolve()\n"
+            + "      .then(() => new Request('" + URL_SECOND + "', {method: 'POST', body: '{\"a\":1}'}).json())\n"
+            + "      .then(v => { log(v.a); return new Request('" + URL_SECOND + "', {method: 'POST', body: 'abc'}).arrayBuffer(); })\n"
+            + "      .then(b => { log(b.byteLength); return new Request('" + URL_SECOND + "', {method: 'POST', body: 'abc'}).blob(); })\n"
+            + "      .then(b => { log(b.size); return new Request('" + URL_SECOND + "', {method: 'POST', body: 'x'}).clone().text(); })\n"
+            + "      .then(t => {\n"
+            + "          log(t.length);\n"
+            + "          return new Request('" + URL_SECOND + "', {method: 'POST', body: 'q=v&x=y',\n"
+            + "              headers: {'content-type': 'application/x-www-form-urlencoded'}}).formData();\n"
+            + "      })\n"
+            + "      .then(f => { log(f.get('q')); log(f.get('x')); });\n"
             + "</script></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
