@@ -65,12 +65,8 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
                         deserialized.isWebSocketEnabled());
         assertEquals(original.getWebSocketMaxTextMessageSize(),
                         deserialized.getWebSocketMaxTextMessageSize());
-        assertEquals(original.getWebSocketMaxTextMessageBufferSize(),
-                        deserialized.getWebSocketMaxTextMessageBufferSize());
         assertEquals(original.getWebSocketMaxBinaryMessageSize(),
                         deserialized.getWebSocketMaxBinaryMessageSize());
-        assertEquals(original.getWebSocketMaxBinaryMessageBufferSize(),
-                        deserialized.getWebSocketMaxBinaryMessageBufferSize());
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
     }
@@ -97,9 +93,7 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
 
         original.setWebSocketEnabled(false);
         original.setWebSocketMaxTextMessageSize(77);
-        original.setWebSocketMaxTextMessageBufferSize(771);
         original.setWebSocketMaxBinaryMessageSize(44);
-        original.setWebSocketMaxBinaryMessageBufferSize(441);
 
         original.setFetchPolyfillEnabled(true);
 
@@ -132,12 +126,8 @@ public class WebClientOptionsTest extends SimpleWebTestCase {
                         deserialized.isWebSocketEnabled());
         assertEquals(original.getWebSocketMaxTextMessageSize(),
                         deserialized.getWebSocketMaxTextMessageSize());
-        assertEquals(original.getWebSocketMaxTextMessageBufferSize(),
-                        deserialized.getWebSocketMaxTextMessageBufferSize());
         assertEquals(original.getWebSocketMaxBinaryMessageSize(),
                         deserialized.getWebSocketMaxBinaryMessageSize());
-        assertEquals(original.getWebSocketMaxBinaryMessageBufferSize(),
-                        deserialized.getWebSocketMaxBinaryMessageBufferSize());
 
         assertEquals(original.isFetchPolyfillEnabled(), deserialized.isFetchPolyfillEnabled());
     }

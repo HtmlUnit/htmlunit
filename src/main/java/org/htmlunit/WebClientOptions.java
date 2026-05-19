@@ -99,9 +99,7 @@ public class WebClientOptions implements Serializable {
 
     private boolean webSocketEnabled_ = true;
     private int webSocketMaxTextMessageSize_ = -1;
-    private int webSocketMaxTextMessageBufferSize_ = -1;
     private int webSocketMaxBinaryMessageSize_ = -1;
-    private int webSocketMaxBinaryMessageBufferSize_ = -1;
 
     private boolean isFetchPolyfillEnabled_;
 
@@ -834,28 +832,6 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns the maximum buffer size in bytes for assembling WebSocket text messages.
-     * Set to -1 to use the default.
-     *
-     * @return the maximum text message buffer size in bytes, or -1 for default
-     */
-    public int getWebSocketMaxTextMessageBufferSize() {
-        return webSocketMaxTextMessageBufferSize_;
-    }
-
-    /**
-     * Sets the maximum buffer size in bytes for assembling WebSocket text messages.
-     * This controls the memory used when reconstructing fragmented text messages.
-     * The buffer size should typically be larger than the maximum message size to
-     * accommodate message assembly overhead.
-     *
-     * @param webSocketMaxTextMessageBufferSize the maximum buffer size in bytes, or -1 for default
-     */
-    public void setWebSocketMaxTextMessageBufferSize(final int webSocketMaxTextMessageBufferSize) {
-        webSocketMaxTextMessageBufferSize_ = webSocketMaxTextMessageBufferSize;
-    }
-
-    /**
      * Returns the maximum size in bytes for WebSocket binary messages.
      * Set to -1 to use the default.
      *
@@ -873,26 +849,6 @@ public class WebClientOptions implements Serializable {
      */
     public void setWebSocketMaxBinaryMessageSize(final int webSocketMaxBinaryMessageSize) {
         webSocketMaxBinaryMessageSize_ = webSocketMaxBinaryMessageSize;
-    }
-
-    /**
-     * Returns the maximum buffer size in bytes for assembling WebSocket binary messages.
-     * Set to -1 to use the container default.
-     *
-     * @return the maximum binary message buffer size in bytes, or -1 for default
-     */
-    public int getWebSocketMaxBinaryMessageBufferSize() {
-        return webSocketMaxBinaryMessageBufferSize_;
-    }
-
-    /**
-     * Sets the maximum buffer size in bytes for assembling WebSocket binary messages.
-     * This controls the memory used when reconstructing fragmented binary messages.
-     *
-     * @param webSocketMaxBinaryMessageBufferSize the maximum buffer size in bytes, or -1 for default
-     */
-    public void setWebSocketMaxBinaryMessageBufferSize(final int webSocketMaxBinaryMessageBufferSize) {
-        webSocketMaxBinaryMessageBufferSize_ = webSocketMaxBinaryMessageBufferSize;
     }
 
     /**
