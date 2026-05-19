@@ -55,12 +55,12 @@ public class RequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"POST", "v", "body", "false", "cors", "include", "no-cache", "manual", "x-ref", "strict-origin", "abc", "true", "true"})
+    @Alerts({"POST", "v", "body", "false", "cors", "include", "no-cache", "manual", "", "strict-origin", "abc", "true", "true"})
     public void constructorWithInit() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  const sig = {};\n"
+            + "  const sig = new AbortController().signal;\n"
             + "  const req = new Request('" + URL_SECOND + "', {\n"
             + "    method: 'post',\n"
             + "    headers: {'x-a': 'v'},\n"
@@ -69,7 +69,7 @@ public class RequestTest extends WebDriverTestCase {
             + "    credentials: 'include',\n"
             + "    cache: 'no-cache',\n"
             + "    redirect: 'manual',\n"
-            + "    referrer: 'x-ref',\n"
+            + "    referrer: '',\n"
             + "    referrerPolicy: 'strict-origin',\n"
             + "    integrity: 'abc',\n"
             + "    keepalive: true,\n"
