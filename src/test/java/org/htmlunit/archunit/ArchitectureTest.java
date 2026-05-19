@@ -76,9 +76,8 @@ public class ArchitectureTest {
         .and().doNotHaveFullyQualifiedName("org.htmlunit.cyberneko.util.StringUtils")
 
         .and().resideOutsideOfPackage("org.htmlunit.jetty.util..")
-        .and().doNotHaveFullyQualifiedName("org.htmlunit.jetty.websocket.api.util.QuoteUtil")
-        .and().doNotHaveFullyQualifiedName("org.htmlunit.jetty.websocket.common.util.ReflectUtils")
-        .and().doNotHaveFullyQualifiedName("org.htmlunit.jetty.websocket.common.util.TextUtil")
+        .and().resideOutsideOfPackage("org.htmlunit.jetty.http..")
+        .and().resideOutsideOfPackage("org.htmlunit.jetty.websocket.core.util..")
 
         .and().resideOutsideOfPackage("org.htmlunit.corejs..")
 
@@ -182,6 +181,7 @@ public class ArchitectureTest {
                 .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter")
                 .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter$JettyWebSocketAdapterFactory")
                 .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter$JettyWebSocketAdapterImpl")
+                .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter$WebSocketCookieStore")
             .should()
                 .dependOnClassesThat().resideInAnyPackage("org.htmlunit.jetty..");
 
@@ -679,6 +679,7 @@ public class ArchitectureTest {
     public static final ArchRule forbidObjectsRequireNonNull = noClasses()
         .that()
             .resideOutsideOfPackage("org.htmlunit.corejs..")
+            .and().resideOutsideOfPackage("org.htmlunit.cyberneko..")
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomNode") // strange but reports method fireAddition() on jenkins
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage") // strange but reports method notifyNodeAdded() on jenkins

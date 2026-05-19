@@ -144,7 +144,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     closeEvent.setPrototype(getPrototype(closeEvent.getClass()));
                     closeEvent.setCode(statusCode);
                     closeEvent.setReason(reason);
-                    closeEvent.setWasClean(true);
+                    closeEvent.setWasClean(statusCode == 1000);
                     fire(closeEvent);
                     callFunction(closeHandler_, new Object[] {closeEvent});
                 }
@@ -465,9 +465,13 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxFunction
     public void close(final Object code, final Object reason) {
+        if (webSocketImpl_ == null) {
+            return;
+        }
+
         if (readyState_ != CLOSED) {
             try {
-                webSocketImpl_.closeIncommingSession();
+                webSocketImpl_.closeIncomingSession();
             }
             catch (final Throwable e) {
                 LOG.error("WS close error - incomingSession_.close() failed", e);

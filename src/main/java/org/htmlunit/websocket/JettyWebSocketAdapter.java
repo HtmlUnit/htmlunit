@@ -218,7 +218,7 @@ public final class JettyWebSocketAdapter implements WebSocketAdapter {
      * {@inheritDoc}
      */
     @Override
-    public void closeIncommingSession() {
+    public void closeIncomingSession() {
         if (incomingSession_ != null) {
             incomingSession_.close();
         }

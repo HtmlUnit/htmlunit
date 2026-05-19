@@ -49,11 +49,11 @@ public interface WebSocketAdapter {
     void send(Object content) throws IOException;
 
     /**
-     * Close the incomming session.
+     * Close the incoming session.
      *
      * @throws Exception in case of error
      */
-    void closeIncommingSession() throws Exception;
+    void closeIncomingSession() throws Exception;
 
     /**
      * Close the outgoing session.

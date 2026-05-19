@@ -9,6 +9,12 @@
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
             <action type="fix" dev="rbri">
+                WebSocket close() check for null web socket impl.
+            </action>
+            <action type="fix" dev="rbri">
+                WebSocket close event - set the was clean flag only if statusCode is 1000.
+            </action>
+            <action type="fix" dev="rbri">
                 WebSocket constructor improved, better checking/handling of the url and throw the correct error types.
             </action>
             <action type="fix" dev="rbri">
@@ -18,7 +24,10 @@
                 INCOMPATIBLE CHANGE: WebSocketListener.onWebSocketBinary(byte[] data, int offset, int length) changed to onWebSocketBinary(ByteBuffer payload).
             </action>
             <action type="update" dev="rbri">
-                INCOMPATIBLE CHANGE: WebSocketListener.onWebSocketConnect() renamed to onWebSocketOpen().
+                INCOMPATIBLE CHANGE: WebSocketListener.onWebSocketBinary(byte[] data, int offset, int length) changed to onWebSocketBinary(ByteBuffer payload).
+            </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: WebSocketAdapter.closeIncommingSession() renamed to closeIncomingSession().
             </action>
             <action type="update" dev="rbri">
                 websocket-client: jetty updated to 12.1.8.
