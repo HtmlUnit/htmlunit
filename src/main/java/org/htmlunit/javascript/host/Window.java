@@ -52,6 +52,8 @@ import org.htmlunit.StorageHolder.Type;
 import org.htmlunit.TopLevelWindow;
 import org.htmlunit.WebAssert;
 import org.htmlunit.WebClient;
+import org.htmlunit.WebRequest;
+import org.htmlunit.WebResponse;
 import org.htmlunit.WebConsole;
 import org.htmlunit.WebWindow;
 import org.htmlunit.WebWindowNotFoundException;
@@ -61,6 +63,7 @@ import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeConsole.Level;
+import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -110,6 +113,8 @@ import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MessageEvent;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.javascript.host.event.UIEvent;
+import org.htmlunit.javascript.host.fetch.Request;
+import org.htmlunit.javascript.host.fetch.Response;
 import org.htmlunit.javascript.host.html.DocumentProxy;
 import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.html.HTMLDocument;
@@ -302,6 +307,40 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @Override
     public String atob(final String encodedData) {
         return WindowOrWorkerGlobalScopeMixin.atob(encodedData, this);
+    }
+
+    /**
+     * The JavaScript function {@code fetch()}.
+     * @param input a string or a Request
+     * @param init optional init dictionary
+     * @return a promise resolving to the response
+     */
+    @JsxFunction
+    public NativePromise fetch(final Object input, final Object init) {
+        try {
+            final VarScope scope = JavaScriptEngine.getTopCallScope();
+            final Request request =
+                    (Request) JavaScriptEngine.newObject(scope, "Request", new Object[] {input, init});
+            final WebRequest webRequest = request.toWebRequest(this);
+            final WebResponse webResponse = getWebWindow().getWebClient().loadWebResponse(webRequest);
+
+            final Response response = (Response) JavaScriptEngine.newObject(scope,
+                    "Response", new Object[] {JavaScriptEngine.UNDEFINED, JavaScriptEngine.UNDEFINED});
+            response.setFromWebResponse(webResponse, webRequest.getUrl().toExternalForm());
+            return setupPromise(() -> response);
+        }
+        catch (final Exception e) {
+            return setupRejectedPromise(() -> {
+                final VarScope scope = JavaScriptEngine.getTopCallScope();
+                final Object typeError = ScriptableObject.getProperty(scope, "TypeError");
+                if (typeError instanceof Function function) {
+                    final String message = org.htmlunit.util.StringUtils.isEmptyOrNull(e.getMessage())
+                            ? "Failed to fetch" : e.getMessage();
+                    return function.construct(Context.getCurrentContext(), scope, new Object[] {message});
+                }
+                return e.getMessage();
+            });
+        }
     }
 
     /**
