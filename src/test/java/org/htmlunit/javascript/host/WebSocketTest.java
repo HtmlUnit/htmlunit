@@ -438,7 +438,7 @@ public class WebSocketTest extends WebDriverTestCase {
         }
 
         @Override
-        public void onWebSocketClose(final int closeCode, final String message) {
+        public void onWebSocketClose(final int closeCode, final String message, Callback callback) {
             webSockets_.remove(this);
         }
     }
@@ -553,7 +553,7 @@ public class WebSocketTest extends WebDriverTestCase {
         }
 
         @Override
-        public void onWebSocketClose(final int closeCode, final String message) {
+        public void onWebSocketClose(final int closeCode, final String message, Callback callback) {
             webSockets_.remove(this);
         }
     }
