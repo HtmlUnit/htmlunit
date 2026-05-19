@@ -8,6 +8,21 @@
 
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
+            <action type="fix" dev="rbri">
+                WebSocket constructor improved, better checking/handling of the url and throw the correct error types.
+            </action>
+            <action type="fix" dev="rbri">
+                WebSocket should handle the socket connect error by setting the status and triggering the listeners.
+            </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: WebSocketListener.onWebSocketBinary(byte[] data, int offset, int length) changed to onWebSocketBinary(ByteBuffer payload).
+            </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: WebSocketListener.onWebSocketConnect() renamed to onWebSocketOpen().
+            </action>
+            <action type="update" dev="rbri">
+                websocket-client: jetty updated to 12.1.8.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Fix Object.assign with array target losing length update.
             </action>

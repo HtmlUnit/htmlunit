@@ -108,21 +108,17 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
-                       "ws://localhost:22222/", "ws://localhost:22222/", "exception invalid"},
-            FF = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
-                  "exception empty", "ws://localhost:22222/", "exception invalid"},
-            FF_ESR = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
-                      "exception empty", "ws://localhost:22222/", "exception invalid"})
+    @Alerts(DEFAULT = {"TypeError", "ws://localhost:§§URL§§/undefined", "ws://localhost:§§URL§§/null",
+                       "ws://localhost:§§URL§§/", "ws://localhost:§§URL§§/"},
+            FF = {"TypeError", "ws://localhost:§§URL§§/undefined", "ws://localhost:§§URL§§/null",
+                  "exception empty", "ws://localhost:§§URL§§/"},
+            FF_ESR = {"TypeError", "ws://localhost:§§URL§§/undefined", "ws://localhost:§§URL§§/null",
+                      "exception empty", "ws://localhost:§§URL§§/"})
     @HtmlUnitNYI(
-            CHROME = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
-                      "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"},
-            EDGE = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
-                    "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"},
-            FF = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
-                  "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"},
-            FF_ESR = {"exception no param", "ws://localhost:22222/undefined", "ws://localhost:22222/null",
-                      "ws://localhost:22222/", "ws://localhost:22222/", "ws://localhost:22222/#"})
+            FF = {"TypeError", "ws://localhost:§§URL§§/undefined", "ws://localhost:§§URL§§/null",
+                  "ws://localhost:§§URL§§/", "ws://localhost:§§URL§§/"},
+            FF_ESR = {"TypeError", "ws://localhost:§§URL§§/undefined", "ws://localhost:§§URL§§/null",
+                      "ws://localhost:§§URL§§/", "ws://localhost:§§URL§§/"})
     public void initialWithoutUrl() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -131,7 +127,7 @@ public class WebSocketTest extends WebDriverTestCase {
             + "    try {\n"
             + "      let ws = new WebSocket();\n"
             + "      log(ws.url);"
-            + "    } catch(e) { log('exception no param') }\n"
+            + "    } catch(e) { logEx(e) }\n"
 
             + "    try {\n"
             + "      let ws = new WebSocket(undefined);\n"
@@ -152,16 +148,186 @@ public class WebSocketTest extends WebDriverTestCase {
             + "      let ws = new WebSocket(' ');\n"
             + "      log(ws.url);"
             + "    } catch(e) { log('exception blank') }\n"
-
-            + "    try {\n"
-            + "      let ws = new WebSocket('#');\n"
-            + "      log(ws.url);"
-            + "    } catch(e) { log('exception invalid') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(""+ PORT);
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"SyntaxError/DOMException", "SyntaxError/DOMException", "ws://localhost:§§URL§§/",
+             "wss://localhost:§§URL§§/", "SyntaxError/DOMException", "SyntaxError/DOMException",
+             "SyntaxError/DOMException"})
+    @HtmlUnitNYI(
+            CHROME = {"SyntaxError/DOMException", "SyntaxError/DOMException", "ws://localhost:§§URL§§",
+                      "wss://localhost:§§URL§§", "SyntaxError/DOMException", "SyntaxError/DOMException",
+                      "SyntaxError/DOMException"},
+            EDGE = {"SyntaxError/DOMException", "SyntaxError/DOMException", "ws://localhost:§§URL§§",
+                    "wss://localhost:§§URL§§", "SyntaxError/DOMException", "SyntaxError/DOMException",
+                    "SyntaxError/DOMException"},
+            FF = {"SyntaxError/DOMException", "SyntaxError/DOMException", "ws://localhost:§§URL§§",
+                  "wss://localhost:§§URL§§", "SyntaxError/DOMException", "SyntaxError/DOMException",
+                  "SyntaxError/DOMException"},
+            FF_ESR = {"SyntaxError/DOMException", "SyntaxError/DOMException", "ws://localhost:§§URL§§",
+                      "wss://localhost:§§URL§§", "SyntaxError/DOMException", "SyntaxError/DOMException",
+                      "SyntaxError/DOMException"})
+    public void invalidUrl() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      let ws = new WebSocket('#');\n"
+            + "      log(ws.url);"
+            + "    } catch(e) { logEx(e) }\n"
+
+            + "    try {\n"
+            + "      let ws = new WebSocket('javascript:alert(1)');\n"
+            + "      log(ws.url);"
+            + "    } catch(e) { logEx(e) }\n"
+
+            + "    try {\n"
+            + "      let ws = new WebSocket('http://localhost:" + PORT + "');\n"
+            + "      log(ws.url);"
+            + "    } catch(e) { logEx(e) }\n"
+
+            + "    try {\n"
+            + "      let ws = new WebSocket('https://localhost:" + PORT + "');\n"
+            + "      log(ws.url);"
+            + "    } catch(e) { logEx(e) }\n"
+
+            + "    try {\n"
+            + "      let ws = new WebSocket('ftp://localhost:" + PORT + "');\n"
+            + "      log(ws.url);"
+            + "    } catch(e) { logEx(e) }\n"
+
+            + "    try {\n"
+            + "      let ws = new WebSocket('ftps://localhost:" + PORT + "');\n"
+            + "      log(ws.url);"
+            + "    } catch(e) { logEx(e) }\n"
+
+            + "    try {\n"
+            + "      let ws = new WebSocket('test://localhost:" + PORT + "');\n"
+            + "      log(ws.url);"
+            + "    } catch(e) { logEx(e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(""+ PORT);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test that a wss:// URL is NOT silently downgraded to ws://.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("wss://localhost:§§URL§§/")
+    public void urlWssSchemePreserved() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      let ws = new WebSocket('wss://localhost:" + PORT + "/');\n"
+            + "      log(ws.url);\n"
+            + "    } catch(e) { log('exception: ' + e) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(""+ PORT);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test that connect errors fire the onerror and onclose events in JS.
+     * When a WebSocket fails to connect, the spec requires an error event
+     * followed by a close event with code 1006 and wasClean=false.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onError", "onClose code: 1006 wasClean: false"})
+    public void connectErrorFiresEvents() throws Exception {
+        stopWebServers();
+
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var ws = new WebSocket('ws://localhost:" + PORT + "/');\n"
+            + "    ws.onerror = function(e) {\n"
+            + "      log('onError');\n"
+            + "    };\n"
+            + "    ws.onclose = function(e) {\n"
+            + "      log('onClose code: ' + e.code + ' wasClean: ' + e.wasClean);\n"
+            + "    };\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Same as connectErrorFiresEvents but using addEventListener instead of on* handlers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onErrorListener", "onCloseListener code: 1006 wasClean: false"})
+    public void connectErrorFiresEventsListener() throws Exception {
+        stopWebServers();
+
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var ws = new WebSocket('ws://localhost:" + PORT + "/');\n"
+            + "    ws.addEventListener('error', function(e) {\n"
+            + "      log('onErrorListener');\n"
+            + "    });\n"
+            + "    ws.addEventListener('close', function(e) {\n"
+            + "      log('onCloseListener code: ' + e.code + ' wasClean: ' + e.wasClean);\n"
+            + "    });\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * Test that readyState is set to CLOSED after a connect error.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "3"})
+    public void connectErrorReadyState() throws Exception {
+        stopWebServers();
+
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var ws = new WebSocket('ws://localhost:" + PORT + "/');\n"
+            + "    log(ws.readyState);\n"
+            + "    ws.onclose = function(e) {\n"
+            + "      log(ws.readyState);\n"
+            + "    };\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**

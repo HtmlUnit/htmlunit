@@ -40,6 +40,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.event.CloseEvent;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
@@ -123,7 +124,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 }
 
                 @Override
-                public void onWebSocketConnect() {
+                public void onWebSocketOpen() {
                     setReadyState(OPEN);
 
                     final Event openEvent = new Event(Event.TYPE_OPEN);
@@ -169,9 +170,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 }
 
                 @Override
-                public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
-                    final NativeArrayBuffer buffer = new NativeArrayBuffer(length);
-                    System.arraycopy(data, offset, buffer.getBuffer(), 0, length);
+                public void onWebSocketBinary(final ByteBuffer payload) {
+                    final NativeArrayBuffer buffer = new NativeArrayBuffer(payload.remaining());
+                    payload.get(buffer.getBuffer());
+
                     buffer.setParentScope(getParentScope());
                     buffer.setPrototype(ScriptableObject.getClassPrototype(getParentScope(), buffer.getClassName()));
 
@@ -198,10 +200,15 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                     if (LOG.isErrorEnabled()) {
                         LOG.error("WS connect error for url '" + url + "':", cause);
                     }
+                    onWebSocketError(cause);
                 }
 
                 @Override
                 public void onWebSocketError(final Throwable cause) {
+                    if (CLOSED == getReadyState()) {
+                        return;
+                    }
+
                     setReadyState(CLOSED);
 
                     final Event errorEvent = new Event(Event.TYPE_ERROR);
@@ -253,7 +260,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             final Function ctorObj, final boolean inNewExpr) {
         if (args.length < 1 || args.length > 2) {
             throw JavaScriptEngine
-                    .reportRuntimeError("WebSocket Error: constructor must have one or two String parameters.");
+                    .typeError("WebSocket Error: constructor must have one or two String parameters.");
         }
 
         final Window win = getWindow(ctorObj);
@@ -262,13 +269,37 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             final Page page = win.getWebWindow().getEnclosedPage();
             if (page instanceof HtmlPage htmlPage) {
                 URL url = htmlPage.getFullyQualifiedUrl(urlString);
-                url = UrlUtils.getUrlWithNewProtocol(url, "ws");
+
+                if (url.getRef() != null) {
+                    throw JavaScriptEngine.asJavaScriptException(
+                            win,
+                            "WebSocket Error: 'url' parameter '" + urlString + "' contains a fragment identifier.",
+                            DOMException.SYNTAX_ERR);
+                }
+
+                // Per spec: only ws/wss are valid; convert http/https (relative resolution), reject everything else
+                final String scheme = url.getProtocol();
+                if ("http".equals(scheme)) {
+                    url = UrlUtils.getUrlWithNewProtocol(url, "ws");
+                }
+                else if ("https".equals(scheme)) {
+                    url = UrlUtils.getUrlWithNewProtocol(url, "wss");
+                }
+                else if (!"ws".equals(scheme) && !"wss".equals(scheme)) {
+                    throw JavaScriptEngine.asJavaScriptException(
+                            win,
+                            "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.",
+                            DOMException.SYNTAX_ERR);
+                }
+
                 urlString = url.toExternalForm();
             }
         }
         catch (final MalformedURLException e) {
-            throw JavaScriptEngine.reportRuntimeError(
-                    "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.");
+            throw JavaScriptEngine.asJavaScriptException(
+                    win,
+                    "WebSocket Error: 'url' parameter '" + urlString + "' is not a valid url.",
+                    DOMException.SYNTAX_ERR);
         }
         return new WebSocket(urlString, getTopLevelScope(scope), win);
     }
@@ -485,10 +516,12 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         evt.setPrototype(getPrototype(evt.getClass()));
 
         final AbstractJavaScriptEngine<?> engine = containingPage_.getWebClient().getJavaScriptEngine();
-        engine.getContextFactory().call(cx -> {
-            executeEventLocally(evt);
-            return null;
-        });
+        if (engine != null) {
+            engine.getContextFactory().call(cx -> {
+                executeEventLocally(evt);
+                return null;
+            });
+        }
     }
 
     void callFunction(final Function function, final Object[] args) {
@@ -497,6 +530,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         }
         final VarScope scope = function.getParentScope();
         final JavaScriptEngine engine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-        engine.callFunction(containingPage_, function, scope, this, args);
+        if (engine != null) {
+            engine.callFunction(containingPage_, function, scope, this, args);
+        }
     }
 }

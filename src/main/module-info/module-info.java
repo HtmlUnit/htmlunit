@@ -22,12 +22,11 @@ module org.htmlunit {
     requires java.xml;
     requires jdk.xml.dom;
 
-    requires htmlunit.websocket.client;
-
     requires org.htmlunit.cssparser;
     requires org.htmlunit.corejs;
     requires org.htmlunit.csp;
     requires org.htmlunit.cyberneko;
+    requires org.htmlunit.websocket.client;
     requires org.htmlunit.xpath;
     requires org.apache.commons.io;
     requires org.apache.commons.lang3;

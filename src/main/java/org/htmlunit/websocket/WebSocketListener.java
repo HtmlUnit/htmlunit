@@ -14,6 +14,8 @@
  */
 package org.htmlunit.websocket;
 
+import java.nio.ByteBuffer;
+
 /**
  * Helper to have no direct dependency to the WebSockt client
  * implementation used by HtmlUnit.
@@ -28,9 +30,9 @@ public interface WebSocketListener {
     void onWebSocketConnecting();
 
     /**
-     * Callback to be called when connected.
+     * Callback to be called when opened.
      */
-    void onWebSocketConnect();
+    void onWebSocketOpen();
 
     /**
      * Callback to be called when closed.
@@ -50,11 +52,9 @@ public interface WebSocketListener {
     /**
      * Callback to be called when binary data retrieved.
      *
-     * @param data the bytes
-     * @param offset start offset
-     * @param length the length
+     * @param payload a {@link ByteBuffer}
      */
-    void onWebSocketBinary(byte[] data, int offset, int length);
+    void onWebSocketBinary(ByteBuffer payload);
 
     /**
      * Callback to be called on connect error.
