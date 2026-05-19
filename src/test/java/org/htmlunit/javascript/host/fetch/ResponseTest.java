@@ -143,21 +143,21 @@ public class ResponseTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"200", "true", "0", "error", "301", "/a", "302"})
+    @Alerts({"200", "true", "0", "error", "301", "https://example.com/a", "302"})
     public void staticMethods() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  const ok = Response.ok();\n"
+            + "  const ok = new Response();\n"
             + "  log(ok.status);\n"
             + "  log(ok.ok);\n"
             + "  const err = Response.error();\n"
             + "  log(err.status);\n"
             + "  log(err.type);\n"
-            + "  const redir = Response.redirect('/a', 301);\n"
+            + "  const redir = Response.redirect('https://example.com/a', 301);\n"
             + "  log(redir.status);\n"
             + "  log(redir.headers.get('location'));\n"
-            + "  log(Response.redirect('/b').status);\n"
+            + "  log(Response.redirect('https://example.com/b').status);\n"
             + "</script></head><body></body></html>";
 
         loadPageVerifyTitle2(html);
