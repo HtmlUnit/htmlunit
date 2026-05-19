@@ -36,6 +36,7 @@ import org.htmlunit.jetty.websocket.api.Callback;
 import org.htmlunit.jetty.websocket.api.Session;
 import org.htmlunit.jetty.websocket.api.Session.Listener.AutoDemanding;
 import org.htmlunit.jetty.websocket.client.WebSocketClient;
+
 /**
  * Jetty12 based impl of the WebSocketAdapter.
  * To avoid conflicts with other jetty versions used by projects, we use
