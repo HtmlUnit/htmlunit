@@ -255,16 +255,14 @@ public class URLSearchParams extends HtmlUnitScriptable {
 
     private static NameValuePair splitQueryParameter(final String singleParam) {
         final int idx = singleParam.indexOf('=');
+
         if (idx > -1) {
             final String key = singleParam.substring(0, idx);
-            String value = null;
-            if (idx < singleParam.length()) {
-                value = singleParam.substring(idx + 1);
-            }
+            final String value = singleParam.substring(idx + 1); // always safe, may be empty string
             return new NameValuePair(key, value);
         }
-        final String value = "";
-        return new NameValuePair(singleParam, value);
+
+        return new NameValuePair(singleParam, "");
     }
 
     private static IteratorLikeIterable buildIteratorLikeIterable(final Context cx, final Scriptable iterable) {
@@ -551,11 +549,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
 
         final List<NameValuePair> splitted = splitQuery();
         if (!splitted.isEmpty()) {
-            final List<NameValuePair> params = new ArrayList<>();
-            for (final NameValuePair entry : splitted) {
-                params.add(new NameValuePair(entry.getName(), entry.getValue()));
-            }
-            webRequest.setRequestParameters(params);
+            webRequest.setRequestParameters(new ArrayList<>(splitted));
         }
     }
 }

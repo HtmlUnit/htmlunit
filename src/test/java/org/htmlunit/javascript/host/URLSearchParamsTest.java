@@ -1089,4 +1089,92 @@ public class URLSearchParamsTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Tests that parameters with an '=' sign but no value, parameters with no '=' at all,
+     * and an empty key all return empty string "" not null.
+     * Relates to the dead-code branch in splitQueryParameter where value could be null.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", "", "", "1",
+             "", "", "", "1",
+             "1", "1", "1", "1"})
+    public void emptyValues() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+
+            // 'key=' - key with = but empty value
+            + "        var p = new URLSearchParams('key=');\n"
+            + "        log(p.get('key'));\n"             // expect ""
+            + "        log(p.getAll('key')[0]);\n"        // expect ""
+            + "        log('' + p.get('key'));\n"         // must NOT be "null"
+            + "        log(p.size);\n"                    // expect 1, not 0
+
+            // 'key' - key with no = at all
+            + "        p = new URLSearchParams('key');\n"
+            + "        log(p.get('key'));\n"              // expect ""
+            + "        log(p.getAll('key')[0]);\n"        // expect ""
+            + "        log('' + p.get('key'));\n"         // must NOT be "null"
+            + "        log(p.size);\n"                    // expect 1, not 0
+
+            // verify size=1 for each of the above independently
+            + "        log(new URLSearchParams('key=').size);\n"         // 1
+            + "        log(new URLSearchParams('key').size);\n"          // 1
+            + "        log(new URLSearchParams('=val').size);\n"         // 1
+            + "        log(new URLSearchParams('=').size);\n"            // 1
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests that get() on a param parsed from a no-equals string never returns the
+     * string "null" — i.e. that the value is truly empty string, not a null reference
+     * that gets stringified.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true", "0", "0"})
+    public void emptyValueIsEmptyString() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+
+            // 'key=' should yield value === "" (strictly), not null
+            + "        var p1 = new URLSearchParams('key=');\n"
+            + "        log(p1.get('key') === '');\n"     // true, NOT null
+
+            // 'key' (no equals) should also yield value === ""
+            + "        var p2 = new URLSearchParams('key');\n"
+            + "        log(p2.get('key') === '');\n"     // true, NOT null
+
+            // empty string value has length 0
+            + "        log(p1.get('key').length);\n"     // 0
+            + "        log(p2.get('key').length);\n"     // 0, would NPE if null
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
