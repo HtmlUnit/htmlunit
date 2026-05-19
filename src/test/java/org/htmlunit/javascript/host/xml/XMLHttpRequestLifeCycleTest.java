@@ -33,7 +33,6 @@ import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.MiniServer;
 import org.htmlunit.util.NameValuePair;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -1072,15 +1071,6 @@ public final class XMLHttpRequestLifeCycleTest {
         }
 
         /**
-         * Reset the {@link MiniServer}.
-         * @throws Exception in case of error.
-         */
-        @AfterEach
-        public void after() throws Exception {
-            MiniServer.resetDropRequests();
-        }
-
-        /**
          * NoHttpResponseException.
          * @throws Exception if the test fails
          */
@@ -1093,6 +1083,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(WebTestCase.URL_FIRST, buildHtml(Mode.SYNC, Execution.ONLY_SEND));
+
             MiniServer.configureDropRequest(new URL(WebTestCase.URL_FIRST + SUCCESS_URL));
 
             try (MiniServer miniServer = new MiniServer(PORT, mockWebConnection)) {
