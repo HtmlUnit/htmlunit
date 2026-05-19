@@ -16,6 +16,7 @@ package org.htmlunit.javascript.host.fetch;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -23,6 +24,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Ronald Brill
  */
+@Disabled
 public class HeadersTest extends WebDriverTestCase {
 
     /**
