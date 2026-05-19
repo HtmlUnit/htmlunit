@@ -82,12 +82,18 @@ public class ResponseTest extends WebDriverTestCase {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
-            + "  new Response('{\"a\":1}').json().then(v => log(typeof v));\n"
-            + "  new Response('{\"a\":1}').json().then(v => log(v.a));\n"
-            + "  new Response('abc').arrayBuffer().then(b => log(b.byteLength));\n"
-            + "  new Response('abc').blob().then(b => log(b.size));\n"
-            + "  new Response('q=v&x=y', {headers: {'content-type': 'application/x-www-form-urlencoded'}})\n"
-            + "    .formData().then(f => { log(f.get('q')); log(f.get('x')); });\n"
+            + "  Promise.resolve()\n"
+            + "    .then(() => new Response('{\"a\":1}').json())\n"
+            + "    .then(v => log(typeof v))\n"
+            + "    .then(() => new Response('{\"a\":1}').json())\n"
+            + "    .then(v => log(v.a))\n"
+            + "    .then(() => new Response('abc').arrayBuffer())\n"
+            + "    .then(b => log(b.byteLength))\n"
+            + "    .then(() => new Response('abc').blob())\n"
+            + "    .then(b => log(b.size))\n"
+            + "    .then(() => new Response('q=v&x=y',\n"
+            + "      {headers: {'content-type': 'application/x-www-form-urlencoded'}}).formData())\n"
+            + "    .then(f => { log(f.get('q')); log(f.get('x')); });\n"
             + "</script></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
