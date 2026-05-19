@@ -55,7 +55,8 @@ public class RequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"POST", "v", "body", "false", "cors", "include", "no-cache", "manual", "", "strict-origin", "abc", "true", "true"})
+    @Alerts({"POST", "v", "false", "cors", "include", "no-cache", "manual", "",
+        "strict-origin", "abc", "true", "true", "body"})
     public void constructorWithInit() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"
@@ -77,7 +78,6 @@ public class RequestTest extends WebDriverTestCase {
             + "  });\n"
             + "  log(req.method);\n"
             + "  log(req.headers.get('x-a'));\n"
-            + "  req.text().then(t => log(t));\n"
             + "  log(req.bodyUsed);\n"
             + "  log(req.mode);\n"
             + "  log(req.credentials);\n"
@@ -88,6 +88,7 @@ public class RequestTest extends WebDriverTestCase {
             + "  log(req.integrity);\n"
             + "  log(req.keepalive);\n"
             + "  log(req.signal === sig);\n"
+            + "  req.text().then(t => log(t));\n"
             + "</script></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);
