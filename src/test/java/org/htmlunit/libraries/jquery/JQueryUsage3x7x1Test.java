@@ -16,16 +16,22 @@ package org.htmlunit.libraries.jquery;
 
 import org.htmlunit.WebClient;
 import org.htmlunit.junit.annotation.Alerts;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
- * Tests jQuery 3.7.0 scenarios.
+ * Tests jQuery 3.7.1 scenarios.
  *
  * @author Ronald Brill
  */
 public class JQueryUsage3x7x1Test extends JQueryTestBase {
+
+    @BeforeAll
+    public static void startServer() throws Exception {
+        startWebServer("src/test/resources/libraries/jQuery/3.7.1", null);
+    }
 
     /**
      * {@inheritDoc}
