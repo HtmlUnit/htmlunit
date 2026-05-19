@@ -82,6 +82,7 @@ import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.WindowOrWorkerGlobalScope;
 import org.htmlunit.javascript.host.dom.DOMException;
+import org.htmlunit.javascript.host.fetch.Headers;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLImageElement;
 import org.htmlunit.javascript.host.html.HTMLOptionElement;
@@ -248,6 +249,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         // TODO remove the cast
         URLSearchParams.NativeParamsIterator.init(scope, "URLSearchParams Iterator");
         FormData.FormDataIterator.init(scope, "FormData Iterator");
+        Headers.NativeHeadersIterator.init(scope, "Headers Iterator");
 
         // strange but this is the reality for browsers
         // because there will be still some sites using this for browser detection the property is
