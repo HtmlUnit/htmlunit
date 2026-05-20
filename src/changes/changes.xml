@@ -8,27 +8,6 @@
 
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
-    /**
-     * Returns the maximum buffer size in bytes for assembling WebSocket text messages.
-     * Set to -1 to use the default.
-     *
-     * @return the maximum text message buffer size in bytes, or -1 for default
-     */
-    public int  {
-        return -1;
-    }
-
-    /**
-     * Sets the maximum buffer size in bytes for assembling WebSocket text messages.
-     * This controls the memory used when reconstructing fragmented text messages.
-     * The buffer size should typically be larger than the maximum message size to
-     * accommodate message assembly overhead.
-     *
-     * @param webSocketMaxTextMessageBufferSize the maximum buffer size in bytes, or -1 for default
-     */
-    public void setWebSocketMaxTextMessageBufferSize(final int webSocketMaxTextMessageBufferSize) {
-    }
-
             <action type="remove" dev="rbri">
                 INCOMPATIBLE CHANGE: WebClientOptions.getWebSocketMaxTextMessageBufferSize() / setWebSocketMaxTextMessageBufferSize() removed.
             </action>

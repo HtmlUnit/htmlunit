@@ -396,7 +396,7 @@ public class HeadersTest extends WebDriverTestCase {
     }
 
     /**
-     * entries() must yield the lowercased name, not the original casing.
+     * Method entries() must yield the lowercased name, not the original casing.
      *
      * @throws Exception if the test fails
      */
@@ -415,7 +415,7 @@ public class HeadersTest extends WebDriverTestCase {
     }
 
     /**
-     * forEach callback must receive the lowercased name.
+     * The forEach callback must receive the lowercased name.
      *
      * @throws Exception if the test fails
      */

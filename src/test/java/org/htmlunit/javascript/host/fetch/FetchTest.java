@@ -113,7 +113,7 @@ public class FetchTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("TypeError")
-    public void fetchGetWrongUrl() throws Exception {
+    public void fetchGetNotExistingUrl() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "  <body>\n"
