@@ -42,6 +42,7 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Callable;
@@ -50,6 +51,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomDocumentFragment;
@@ -86,6 +88,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.configuration.JsxStaticFunction;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.FontFaceSet;
 import org.htmlunit.javascript.host.Location;
@@ -275,6 +278,44 @@ public class Document extends Node {
     @JsxConstructor
     public void jsConstructor() {
         throw JavaScriptEngine.typeErrorIllegalConstructor();
+    }
+
+    /**
+     * Parses the given string of HTML without sanitizing it and returns a new HTMLDocument.
+     *
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj the scriptable this object
+     * @param args the arguments
+     * @param funObj the function object
+     * @return a newly created {@link HTMLDocument}
+     *
+     * @see <a href="https://html.spec.whatwg.org/multipage/dynamic-markup-insertion.html#dom-parsehtmlunsafe">
+     *     HTML spec - parseHTMLUnsafe</a>
+     */
+    @JsxStaticFunction
+    public static Document parseHTMLUnsafe(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+        if (args.length < 1) {
+            throw JavaScriptEngine
+                    .typeError("Document.parseHTMLUnsafe: At least 1 argument required, but only 0 passed");
+        }
+
+        final Window win = getWindow(thisObj);
+        if (JavaScriptEngine.isUndefined(args[0])) {
+            return win.getDocument();
+        }
+
+        final String html = JavaScriptEngine.toString(args[0]);
+
+        try {
+            final WebWindow webWindow = win.getWebWindow();
+            final WebResponse webResponse = new StringWebResponse(html, webWindow.getEnclosedPage().getUrl());
+            return DOMParser.parseHtmlDocument(win.getDocument(), webResponse, webWindow);
+        }
+        catch (final IOException e) {
+            throw JavaScriptEngine.syntaxError("Parsing failed" + e.getMessage());
+        }
     }
 
     /**

@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
+            <action type="add" dev="rbri">
+                Simple first impl of Document parseHTMLUnsafe() added.
+            </action>
             <action type="fix" dev="rbri">
                 Make sure elements not added twice to the id/name index.
             </action>

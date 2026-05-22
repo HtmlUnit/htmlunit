@@ -55,6 +55,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxStaticFunction;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import org.htmlunit.javascript.host.dom.Attr;
@@ -132,6 +133,25 @@ public class HTMLDocument extends Document {
     @Override
     public HtmlPage getPage() {
         return (HtmlPage) getDomNodeOrDie();
+    }
+
+    /**
+     * Parses the given string of HTML without sanitizing it and returns a new HTMLDocument.
+     *
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj the scriptable this object
+     * @param args the arguments
+     * @param funObj the function object
+     * @return a newly created {@link HTMLDocument}
+     *
+     * @see <a href="https://html.spec.whatwg.org/multipage/dynamic-markup-insertion.html#dom-parsehtmlunsafe">
+     *     HTML spec - parseHTMLUnsafe</a>
+     */
+    @JsxStaticFunction
+    public static HTMLDocument parseHTMLUnsafe(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+        return (HTMLDocument) Document.parseHTMLUnsafe(cx, scope, thisObj, args, funObj);
     }
 
     /**
