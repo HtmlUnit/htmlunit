@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
+            <action type="update" dev="rbri">
+                HtmxTwoZeroSevenScriptPreProcessor updated to support htmx 2.0.10 also.
+            </action>
             <action type="add" dev="rbri">
                 Simple first impl of Document parseHTMLUnsafe() added.
             </action>

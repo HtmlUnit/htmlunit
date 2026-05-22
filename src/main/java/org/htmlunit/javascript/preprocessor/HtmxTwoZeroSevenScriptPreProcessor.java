@@ -20,7 +20,7 @@ import org.htmlunit.html.HtmlPage;
 
 /**
  * A {@link ScriptPreProcessor} implementation that applies compatibility patches to
- * htmx 2.0.3 - 2.0.7 versions of the htmx JavaScript library.
+ * htmx 2.0.3 - 2.0.10 versions of the htmx JavaScript library.
  * <p>
  * This preprocessor rewrites certain ECMAScript syntax constructs
  * (such as spread operator usage in array push and for-of loops over array copies)
@@ -107,6 +107,15 @@ public class HtmxTwoZeroSevenScriptPreProcessor implements ScriptPreProcessor {
             patchedSourceCode = patchedSourceCode.replace(
                     "for(const t of[...e.children]){",
                     "for(const t of Array.from(e.children)){");
+
+            // 2.0.10
+            patchedSourceCode = patchedSourceCode.replace(
+                "i.push(...F(u.querySelectorAll(e)))",
+                "i.push.apply(i,F(u.querySelectorAll(e)))");
+
+            patchedSourceCode = patchedSourceCode.replace(
+                "r.push(...ve(i,n))",
+                "r.push.apply(r,ve(i,n))");
         }
 
         if (nextScriptPreProcessor_ != null) {
