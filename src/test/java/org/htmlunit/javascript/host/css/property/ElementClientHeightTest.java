@@ -783,6 +783,21 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlHeadingGroup}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(CHROME = "18",
+            EDGE = "18",
+            FF = "18",
+            FF_ESR = "18")
+    public void hgroup() throws Exception {
+        loadPageVerifyTitle2(test("hgroup"));
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlHorizontalRule}.
      *
      * @throws Exception if the test fails

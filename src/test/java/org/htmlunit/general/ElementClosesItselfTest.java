@@ -741,6 +741,17 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlHeadingGroup}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void hgroup() throws Exception {
+        test("hgroup");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlHorizontalRule}.
      *
      * @throws Exception if the test fails

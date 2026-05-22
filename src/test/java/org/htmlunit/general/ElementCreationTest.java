@@ -626,6 +626,17 @@ public class ElementCreationTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlHeadingGroup}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object HTMLElement]")
+    public void hgroup() throws Exception {
+        test("hgroup");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlHorizontalRule}.
      *
      * @throws Exception if an error occurs

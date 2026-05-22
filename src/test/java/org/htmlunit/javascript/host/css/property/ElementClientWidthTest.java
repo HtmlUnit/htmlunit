@@ -757,6 +757,17 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlHeadingGroup}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("-16")
+    public void hgroup() throws Exception {
+        loadPageVerifyTitle2(test("hgroup"));
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlHorizontalRule}.
      *
      * @throws Exception if the test fails

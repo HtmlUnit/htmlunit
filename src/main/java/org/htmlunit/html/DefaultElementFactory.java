@@ -77,8 +77,9 @@ public class DefaultElementFactory implements ElementFactory {
             HtmlHead.TAG_NAME, HtmlHeader.TAG_NAME,
             HtmlHeading1.TAG_NAME, HtmlHeading2.TAG_NAME, HtmlHeading3.TAG_NAME,
             HtmlHeading4.TAG_NAME, HtmlHeading5.TAG_NAME, HtmlHeading6.TAG_NAME,
-            HtmlHorizontalRule.TAG_NAME, HtmlHtml.TAG_NAME, HtmlInlineFrame.TAG_NAME,
-            HtmlInlineQuotation.TAG_NAME,
+            HtmlHeadingGroup.TAG_NAME, HtmlHorizontalRule.TAG_NAME,
+            HtmlHtml.TAG_NAME,
+            HtmlInlineFrame.TAG_NAME, HtmlInlineQuotation.TAG_NAME,
             HtmlImage.TAG_NAME, HtmlImage.TAG_NAME2,
             HtmlInput.TAG_NAME,
             HtmlInsertedText.TAG_NAME,
@@ -372,6 +373,10 @@ public class DefaultElementFactory implements ElementFactory {
 
             case HtmlHeading6.TAG_NAME:
                 element = new HtmlHeading6(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlHeadingGroup.TAG_NAME:
+                element = new HtmlHeadingGroup(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlHorizontalRule.TAG_NAME:

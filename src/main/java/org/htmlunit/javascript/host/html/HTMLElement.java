@@ -63,6 +63,7 @@ import org.htmlunit.html.HtmlFigureCaption;
 import org.htmlunit.html.HtmlFooter;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlHeader;
+import org.htmlunit.html.HtmlHeadingGroup;
 import org.htmlunit.html.HtmlItalic;
 import org.htmlunit.html.HtmlKeyboard;
 import org.htmlunit.html.HtmlLayer;
@@ -153,6 +154,7 @@ import org.htmlunit.util.StringUtils;
 @JsxClass(domClass = HtmlFigureCaption.class)
 @JsxClass(domClass = HtmlFooter.class)
 @JsxClass(domClass = HtmlHeader.class)
+@JsxClass(domClass = HtmlHeadingGroup.class)
 @JsxClass(domClass = HtmlItalic.class)
 @JsxClass(domClass = HtmlKeyboard.class)
 @JsxClass(domClass = HtmlLayer.class, value = {CHROME, EDGE})
