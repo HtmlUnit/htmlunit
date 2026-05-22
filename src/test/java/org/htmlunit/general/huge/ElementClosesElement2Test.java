@@ -466,6 +466,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _body_hgroup() throws Exception {
+        test("body", "hgroup");
+    }
+
+    @Alerts("0")
     void _body_hr() throws Exception {
         test("body", "hr");
     }
@@ -1156,6 +1161,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     }
 
     @Alerts("0")
+    void _frameset_hgroup() throws Exception {
+        test("frameset", "hgroup");
+    }
+
+    @Alerts("0")
     void _frameset_hr() throws Exception {
         test("frameset", "hr");
     }
@@ -1828,6 +1838,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("2")
     void _head_h6() throws Exception {
         test("head", "h6");
+    }
+
+    @Alerts("2")
+    void _head_hgroup() throws Exception {
+        test("head", "hgroup");
     }
 
     @Alerts("2")
@@ -2508,6 +2523,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _html_h6() throws Exception {
         test("html", "h6");
+    }
+
+    @Alerts("0")
+    void _html_hgroup() throws Exception {
+        test("html", "hgroup");
     }
 
     @Alerts("0")
@@ -3238,6 +3258,11 @@ public class ElementClosesElement2Test extends WebDriverTestCase {
     @Alerts("0")
     void _script_h6() throws Exception {
         test("script", "h6");
+    }
+
+    @Alerts("0")
+    void _script_hgroup() throws Exception {
+        test("script", "hgroup");
     }
 
     @Alerts("0")
