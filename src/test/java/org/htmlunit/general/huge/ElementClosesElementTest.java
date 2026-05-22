@@ -25,6 +25,7 @@ import org.htmlunit.html.DefaultElementFactory;
 import org.htmlunit.javascript.SilentJavaScriptErrorListener;
 import org.htmlunit.junit.annotation.Alerts;
 import org.htmlunit.junit.annotation.HtmlUnitNYI;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -833,6 +834,12 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     void _p_header() throws Exception {
         test("p", "header");
+    }
+
+    @Alerts("0")
+    @Test
+    void _p_hgroup() throws Exception {
+        test("p", "hgroup");
     }
 
     @Alerts("0")
