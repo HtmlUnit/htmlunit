@@ -151,9 +151,9 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      * @param url the page's URL
      * @param createdByJavascript if true the (script) tag was created by javascript
      */
-    HtmlUnitNekoDOMBuilder(final HTMLParser htmlParser,
+    HtmlUnitNekoDOMBuilder(final HTMLParser htmlParser, final WebClient webClient,
             final DomNode node, final URL url, final String htmlContent, final boolean createdByJavascript) {
-        super(createConfiguration(node.getPage().getWebClient().getBrowserVersion()));
+        super(createConfiguration(webClient.getBrowserVersion()));
 
         htmlParser_ = htmlParser;
         page_ = (HtmlPage) node.getPage();
@@ -164,7 +164,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         }
         createdByJavascript_ = createdByJavascript;
 
-        final WebClient webClient = page_.getWebClient();
         final HTMLParserListener listener = webClient.getHTMLParserListener();
         final boolean reportErrors = listener != null;
         if (reportErrors) {
