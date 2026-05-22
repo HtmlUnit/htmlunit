@@ -8,6 +8,15 @@
 
     <body>
         <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
+            <action type="fix" dev="rbri">
+                Make sure elements not added twice to the id/name index.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: 'BaseFunction' and 'NativeString' converted to descriptor.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: typed array constructor improved to be closer to spec.
+            </action>
             <action type="remove" dev="rbri">
                 INCOMPATIBLE CHANGE: WebClientOptions.getWebSocketMaxTextMessageBufferSize() / setWebSocketMaxTextMessageBufferSize() removed.
             </action>

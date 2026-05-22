@@ -2985,8 +2985,10 @@ public class HtmlPage extends SgmlPage {
         }
 
         void add(final DomElement element) {
-            elements_.add(element);
-            sorted_ = elements_.size() < 2;
+            if (elements_.indexOf(element) == -1) {
+                elements_.add(element);
+                sorted_ = elements_.size() < 2;
+            }
         }
 
         DomElement first() {
