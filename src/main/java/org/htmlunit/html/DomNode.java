@@ -1392,7 +1392,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             return;
         }
 
-        movedDomNode.basicDetach();
+        movedDomNode.detach();
         basicInsertBefore(movedDomNode);
 
         fireAddition(movedDomNode);
