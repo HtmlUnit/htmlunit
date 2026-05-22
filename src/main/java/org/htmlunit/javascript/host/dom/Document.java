@@ -42,6 +42,7 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.HttpHeader;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Callable;
@@ -50,6 +51,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomDocumentFragment;
@@ -86,6 +88,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.configuration.JsxStaticFunction;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.FontFaceSet;
 import org.htmlunit.javascript.host.Location;
@@ -117,6 +120,7 @@ import org.htmlunit.javascript.host.file.Blob;
 import org.htmlunit.javascript.host.html.HTMLAllCollection;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLCollection;
+import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLFrameSetElement;
 import org.htmlunit.util.StringUtils;
@@ -275,6 +279,37 @@ public class Document extends Node {
     @JsxConstructor
     public void jsConstructor() {
         throw JavaScriptEngine.typeErrorIllegalConstructor();
+    }
+
+    /**
+     * Parses the given string of HTML without sanitizing it and returns a new HTMLDocument.
+     *
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj the scriptable this object
+     * @param args the arguments
+     * @param funObj the function object
+     * @return a newly created {@link HTMLDocument}
+     *
+     * @see <a href="https://html.spec.whatwg.org/multipage/dynamic-markup-insertion.html#dom-parsehtmlunsafe">
+     *     HTML spec - parseHTMLUnsafe</a>
+     */
+    @JsxStaticFunction
+    public static HTMLDocument parseHTMLUnsafe(final Context cx, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+        final String html = args.length == 0 || JavaScriptEngine.isUndefined(args[0])
+                ? ""
+                : JavaScriptEngine.toString(args[0]);
+
+        final Window win = getWindow(funObj);
+        try {
+            final WebWindow webWindow = win.getWebWindow();
+            final WebResponse webResponse = new StringWebResponse(html, webWindow.getEnclosedPage().getUrl());
+            return (HTMLDocument) DOMParser.parseHtmlDocument(win.getDocument(), webResponse, webWindow);
+        }
+        catch (final IOException e) {
+            throw JavaScriptEngine.reportRuntimeError("parseHTMLUnsafe failed: " + e.getMessage());
+        }
     }
 
     /**
