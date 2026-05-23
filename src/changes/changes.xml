@@ -9,6 +9,9 @@
     <body>
         <release version="5.0.0" date="May 24, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
             <action type="add" dev="rbri">
+                Tests for htmx 2.0.10 added.
+            </action>
+            <action type="add" dev="rbri">
                 InnerOuterTextSerializer handles dt tags like li.
             </action>
             <action type="add" dev="rbri">
