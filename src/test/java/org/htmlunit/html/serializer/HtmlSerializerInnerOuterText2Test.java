@@ -1837,4 +1837,83 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
                 + "<script>var x = 'invisible';</script>"
                 + "</div>");
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Title\n\nSubtitle")
+    @HtmlUnitNYI(CHROME = "Title\nSubtitle",
+            EDGE = "Title\nSubtitle",
+            FF = "Title\nSubtitle",
+            FF_ESR = "Title\nSubtitle")
+    public void getInnerTextHgroup() throws Exception {
+        getInnerTextFormated("<hgroup id='tester'>"
+                + "<h1>Title</h1>"
+                + "<p>Subtitle</p>"
+                + "</hgroup>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Title")
+    public void getInnerTextHgroupHeadingOnly() throws Exception {
+        getInnerTextFormated("<hgroup id='tester'>"
+                + "<h1>Title</h1>"
+                + "</hgroup>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Title\n\nSubtitle\n\nTagline")
+    @HtmlUnitNYI(CHROME = "Title\nSubtitle\nTagline",
+            EDGE = "Title\nSubtitle\nTagline",
+            FF = "Title\nSubtitle\nTagline",
+            FF_ESR = "Title\nSubtitle\nTagline")
+    public void getInnerTextHgroupMultipleChildren() throws Exception {
+        getInnerTextFormated("<hgroup id='tester'>"
+                + "<h1>Title</h1>"
+                + "<p>Subtitle</p>"
+                + "<p>Tagline</p>"
+                + "</hgroup>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getInnerTextHgroupEmpty() throws Exception {
+        getInnerTextFormated("<hgroup id='tester'></hgroup>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Title\n\nSubtitle")
+    @HtmlUnitNYI(CHROME = "Title\nSubtitle",
+            EDGE = "Title\nSubtitle",
+            FF = "Title\nSubtitle",
+            FF_ESR = "Title\nSubtitle")
+    public void getOuterTextHgroup() throws Exception {
+        getOuterTextFormated("<hgroup id='tester'>"
+                + "<h1>Title</h1>"
+                + "<p>Subtitle</p>"
+                + "</hgroup>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Title")
+    public void getOuterTextHgroupHeadingOnly() throws Exception {
+        getOuterTextFormated("<hgroup id='tester'>"
+                + "<h1>Title</h1>"
+                + "</hgroup>");
+    }
 }

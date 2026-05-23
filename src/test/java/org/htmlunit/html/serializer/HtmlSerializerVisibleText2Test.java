@@ -1854,4 +1854,64 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Title\nSubtitle")
+    public void getVisibleHgroup() throws Exception {
+        getVisibleTextFormated("<hgroup id='tester'>"
+                + "<h1>Title</h1>"
+                + "<p>Subtitle</p>"
+                + "</hgroup>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Title")
+    public void getVisibleHgroupHeadingOnly() throws Exception {
+        getVisibleTextFormated("<hgroup id='tester'>"
+                + "<h1>Title</h1>"
+                + "</hgroup>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Title\nSubtitle\nTagline")
+    public void getVisibleHgroupMultipleChildren() throws Exception {
+        getVisibleTextFormated("<hgroup id='tester'>"
+                + "<h1>Title</h1>"
+                + "<p>Subtitle</p>"
+                + "<p>Tagline</p>"
+                + "</hgroup>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getVisibleHgroupEmpty() throws Exception {
+        getVisibleTextFormated("<hgroup id='tester'></hgroup>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Outer\nTitle\nSubtitle")
+    public void getVisibleHgroupNested() throws Exception {
+        getVisibleTextFormated("<div id='tester'>"
+                + "<p>Outer</p>"
+                + "<hgroup>"
+                + "<h2>Title</h2>"
+                + "<p>Subtitle</p>"
+                + "</hgroup>"
+                + "</div>");
+    }
 }
