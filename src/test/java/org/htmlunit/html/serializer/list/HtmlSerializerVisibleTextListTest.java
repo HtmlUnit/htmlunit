@@ -34,7 +34,7 @@ public class HtmlSerializerVisibleTextListTest extends WebDriverTestCase {
     // ── ol[reversed] ─────────────────────────────────────────────────────────
 
     /**
-     * ol[reversed] reverses the numbering but not the DOM order.
+     * The ol[reversed] reverses the numbering but not the DOM order.
      * Visible text should reflect the items in DOM order.
      * @throws Exception if the test fails
      */
@@ -50,7 +50,7 @@ public class HtmlSerializerVisibleTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * ol[reversed] single item.
+     * The ol[reversed] single item.
      * @throws Exception if the test fails
      */
     @Test
@@ -74,7 +74,7 @@ public class HtmlSerializerVisibleTextListTest extends WebDriverTestCase {
     // ── ol[start] ────────────────────────────────────────────────────────────
 
     /**
-     * ol[start] sets the starting number; visible text shows item content only.
+     * The ol[start] sets the starting number; visible text shows item content only.
      * @throws Exception if the test fails
      */
     @Test
@@ -88,7 +88,7 @@ public class HtmlSerializerVisibleTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * ol[start='1'] is just a normal list.
+     * The ol[start='1'] is just a normal list.
      * @throws Exception if the test fails
      */
     @Test
@@ -129,7 +129,7 @@ public class HtmlSerializerVisibleTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * dl with multiple dt for a single dd (synonyms).
+     * The dl with multiple dt for a single dd (synonyms).
      * @throws Exception if the test fails
      */
     @Test
@@ -143,7 +143,7 @@ public class HtmlSerializerVisibleTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * dl with multiple dt/dd pairs.
+     * The dl with multiple dt/dd pairs.
      * @throws Exception if the test fails
      */
     @Test
@@ -190,7 +190,7 @@ public class HtmlSerializerVisibleTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * dl with dt only (no dd) — orphaned term.
+     * The dl with dt only (no dd) — orphaned term.
      * @throws Exception if the test fails
      */
     @Test
@@ -204,7 +204,7 @@ public class HtmlSerializerVisibleTextListTest extends WebDriverTestCase {
     // ── menu ─────────────────────────────────────────────────────────────────
 
     /**
-     * menu as toolbar — visible text shows button labels.
+     * The menu as toolbar — visible text shows button labels.
      * @throws Exception if the test fails
      */
     @Test
@@ -230,7 +230,7 @@ public class HtmlSerializerVisibleTextListTest extends WebDriverTestCase {
     // ── Nested ordered/unordered lists ────────────────────────────────────────
 
     /**
-     * ol containing ul (recipe-style: ordered steps with unordered sub-items).
+     * The ol containing ul (recipe-style: ordered steps with unordered sub-items).
      * @throws Exception if the test fails
      */
     @Test
@@ -247,7 +247,7 @@ public class HtmlSerializerVisibleTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * ol containing ol (recipe with sub-steps).
+     * The ol containing ol (recipe with sub-steps).
      * @throws Exception if the test fails
      */
     @Test

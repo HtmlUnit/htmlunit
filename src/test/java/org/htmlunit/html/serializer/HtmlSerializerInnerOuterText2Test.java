@@ -1837,6 +1837,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
                 + "<script>var x = 'invisible';</script>"
                 + "</div>");
     }
+
     /**
      * @throws Exception if the test fails
      */

@@ -32,7 +32,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     // ── ol[reversed] ─────────────────────────────────────────────────────────
 
     /**
-     * innerText of ol[reversed] — content in DOM order.
+     * The innerText of ol[reversed] — content in DOM order.
      * @throws Exception if the test fails
      */
     @Test
@@ -47,7 +47,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * outerText of ol[reversed].
+     * The outerText of ol[reversed].
      * @throws Exception if the test fails
      */
     @Test
@@ -64,7 +64,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     // ── ol[start] ────────────────────────────────────────────────────────────
 
     /**
-     * innerText of ol[start] — numbering is visual, content is what matters.
+     * The innerText of ol[start] — numbering is visual, content is what matters.
      * @throws Exception if the test fails
      */
     @Test
@@ -78,7 +78,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * innerText of two ol[start] lists inside a div, continuing numbering.
+     * The innerText of two ol[start] lists inside a div, continuing numbering.
      * @throws Exception if the test fails
      */
     @Test
@@ -93,7 +93,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     // ── dl / dt / dd ─────────────────────────────────────────────────────────
 
     /**
-     * innerText of a simple dl.
+     * The innerText of a simple dl.
      * @throws Exception if the test fails
      */
     @Test
@@ -106,7 +106,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * innerText of dl with multiple dt per dd.
+     * The innerText of dl with multiple dt per dd.
      * @throws Exception if the test fails
      */
     @Test
@@ -120,7 +120,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * innerText of HTML5 dl with div wrappers.
+     * The innerText of HTML5 dl with div wrappers.
      * @throws Exception if the test fails
      */
     @Test
@@ -141,7 +141,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * outerText of dl with div wrappers — should match innerText for block elements.
+     * The outerText of dl with div wrappers — should match innerText for block elements.
      * @throws Exception if the test fails
      */
     @Test
@@ -162,7 +162,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * innerText of empty dl.
+     * The innerText of empty dl.
      * @throws Exception if the test fails
      */
     @Test
@@ -174,7 +174,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     // ── menu ─────────────────────────────────────────────────────────────────
 
     /**
-     * innerText of menu toolbar — button labels are visible.
+     * The innerText of menu toolbar — button labels are visible.
      * @throws Exception if the test fails
      */
     @Test
@@ -188,7 +188,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * outerText of menu toolbar.
+     * The outerText of menu toolbar.
      * @throws Exception if the test fails
      */
     @Test
@@ -202,7 +202,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * innerText of empty menu.
+     * The innerText of empty menu.
      * @throws Exception if the test fails
      */
     @Test
@@ -214,7 +214,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     // ── Nested lists ──────────────────────────────────────────────────────────
 
     /**
-     * innerText of ol containing ul.
+     * The innerText of ol containing ul.
      * @throws Exception if the test fails
      */
     @Test
@@ -231,7 +231,7 @@ public class HtmlSerializerInnerOuterTextListTest extends WebDriverTestCase {
     }
 
     /**
-     * innerText of ol containing ol.
+     * The innerText of ol containing ol.
      * @throws Exception if the test fails
      */
     @Test
