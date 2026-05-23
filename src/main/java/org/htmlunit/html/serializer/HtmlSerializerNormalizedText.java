@@ -456,6 +456,17 @@ public class HtmlSerializerNormalizedText {
         builder.appendBlockSeparator();
         boolean first = true;
         int i = 1;
+
+        final String start = htmlOrderedList.getStartAttribute();
+        if (ATTRIBUTE_NOT_DEFINED != start) {
+            try {
+                i = (int) Math.round(Double.parseDouble(start));
+            }
+            catch (final Exception e) {
+                // ignore start with 1
+            }
+        }
+
         for (final DomNode item : htmlOrderedList.getChildren()) {
             if (!first) {
                 builder.appendBlockSeparator();

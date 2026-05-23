@@ -25,6 +25,7 @@ import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlBreak;
+import org.htmlunit.html.HtmlDefinitionTerm;
 import org.htmlunit.html.HtmlDetails;
 import org.htmlunit.html.HtmlHead;
 import org.htmlunit.html.HtmlListItem;
@@ -144,6 +145,9 @@ public class HtmlSerializerInnerOuterText {
                 appendChildren(builder, node, mode, insideHead);
             }
         }
+        else if (node instanceof HtmlDefinitionTerm item) {
+            appendDefinitionTerm(builder, item, mode, insideHead);
+        }
         else if (node instanceof HtmlSvg) {
             if (browserVersion_.hasFeature(JS_INNER_TEXT_SVG_NL)) {
                 builder.appendRequiredLineBreak();
@@ -245,6 +249,21 @@ public class HtmlSerializerInnerOuterText {
                 appendNode(builder, child, mode, insideHead);
             }
         }
+    }
+
+    /**
+     * Process {@link HtmlDefinitionTermTerm}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlDefinitionTerm the target to process
+     * @param mode the {@link Mode} to use for processing
+     * @param insideHead true if inside head section
+     */
+    protected void appendDefinitionTerm(final HtmlSerializerTextBuilder builder,
+            final HtmlDefinitionTerm htmlDefinitionTerm, final Mode mode, final boolean insideHead) {
+        builder.appendRequiredLineBreak();
+        appendChildren(builder, htmlDefinitionTerm, mode, insideHead);
+        builder.appendRequiredLineBreak();
     }
 
     private static Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
