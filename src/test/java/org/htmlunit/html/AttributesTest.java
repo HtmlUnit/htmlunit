@@ -83,7 +83,7 @@ public class AttributesTest {
             "HtmlFieldSet", "HtmlFigureCaption", "HtmlFigure",
             "HtmlFont", "HtmlForm", "HtmlFooter",
             "HtmlFrame", "HtmlFrameSet",
-            "HtmlHead", "HtmlHeader",
+            "HtmlHead", "HtmlHeader", "HtmlHeadingGroup",
             "HtmlHeading1", "HtmlHeading2", "HtmlHeading3",
             "HtmlHeading4", "HtmlHeading5", "HtmlHeading6",
             "HtmlHorizontalRule", "HtmlHtml", "HtmlInlineFrame",
