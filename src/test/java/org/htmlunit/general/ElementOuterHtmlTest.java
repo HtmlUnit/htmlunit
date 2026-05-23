@@ -561,6 +561,15 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("<hgroup></hgroup>")
+    public void hgroup() throws Exception {
+        test("hgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("<hr>")
     public void hr() throws Exception {
         test("hr");
