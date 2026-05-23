@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="5.0.0" date="April 31, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
+        <release version="5.0.0" date="May 24, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
             <action type="add" dev="rbri">
                 InnerOuterTextSerializer handles dt tags like li.
             </action>
@@ -192,7 +192,7 @@
                 Fix toString result for Intl.Collator, Intl.DateTimeFormat, Intl.NumberFormat, and Intl.v8BreakIterator.
             </action>
             <action type="fix" dev="rbri">
-                Fix v8BreakIterator ctor to accept langage-region.
+                Fix v8BreakIterator ctor to accept language-region.
             </action>
             <action type="fix" dev="Lai Quang Duong">
                 Fix DomNode.insertBefore(DomNode) to dissolve DocumentFragment into its children before insertion.
@@ -339,7 +339,7 @@
                 core-js: Avoid compiling `a.eval()` as a direct eval call so all the prototypes are set up correctly.
             </action>
             <action type="update" dev="rbri">
-                Better separtion of the scope and the global this object.
+                Better separation of the scope and the global this object.
             </action>
             <action type="update" dev="RhinoTeam">
                 core-js: Support for rest parameters in destructuring.
@@ -348,7 +348,7 @@
                 core-js: Respect custom [Symbol.hasInstance] implementations; look up of hasInstance walks prototype chain.
             </action>
             <action type="update" dev="RhinoTeam">
-                core-js: NativeError and RegEexp setup modernized.
+                core-js: NativeError and RegExp setup modernized.
             </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Fix for setting of prototype and parent scopes on some new objects.
@@ -377,7 +377,7 @@
                 core-js: migrate NativeDate away from IdScriptable.
             </action>
             <action type="add" dev="RhinoTeam">
-                core-js: internal code cleanup - drop support for versiuon 1.0 - 1.4
+                core-js: internal code cleanup - drop support for version 1.0 - 1.4
             </action>
             <action type="add" dev="RhinoTeam">
                 core-js: add a method to temporarily suspend microtask processing
@@ -645,7 +645,7 @@
                 CSS2Properties now named CSSStyleProperties in Firefox 144
             </action>
             <action type="fix" dev="rbri">
-                Javascript configuration was broken if more than one JsxClass annotation defined for a single class
+                JavaScript configuration was broken if more than one JsxClass annotation defined for a single class
             </action>
             <action type="update" dev="rbri">
                 resync with the latest brotli code
@@ -1557,7 +1557,7 @@
             </action>
             <action type="fix" dev="rbri">
                 core-js: junit-vintage-engine was NOT marked as 'test' dependency, therefore we had junit
-                as part of our depenencies/lib/diestribution (regression from 4.8.0)
+                as part of our dependencies/lib/distribution (regression from 4.8.0)
             </action>
             <action type="add" dev="rbri">
                 BigInt support added.
