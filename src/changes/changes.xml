@@ -134,6 +134,45 @@
             <action type="fix" dev="rbri">
                 neko: fix consecutive ampersands before named entity parsing
             </action>
+            <action type="add" dev="rbri">
+                neko: include tests from https://github.com/html5lib/html5lib-tests.git
+            </action>
+            <action type="fix" dev="rbri">
+                neko: more fuzzer tests and fixes
+            </action>
+            <action type="update" dev="rbri">
+                neko: HTMLScanner.scanName: ASCII fast-path for the per-char inner loop
+            </action>
+            <action type="fix" dev="rbri">
+                neko: javadoc fixes
+            </action>
+            <action type="update" dev="rbri">
+                neko: handle empty attributes always the same way
+            </action>
+            <action type="update" dev="rbri">
+                neko: more robust collection handling, missing forcedEndElement_ reset fixed
+            </action>
+            <action type="add" dev="rbri">
+                neko: add missing methods to EmptyXMLAttributesImpl to make it more robust
+            </action>
+            <action type="add" dev="rbri">
+                neko: introduce and use immutable EmptyXMLAttributesImpl
+            </action>
+            <action type="update" dev="rbri">
+                neko: reuse the plaintext scanner (like the other scanners) and avoid toLowerCase if not needed
+            </action>
+            <action type="fix" dev="rbri">
+                neko: use the correct property (http://cyberneko.org/html/properties/names/attrs) in case of the error handling for strange attributes
+            </action>
+            <action type="fix" dev="rbri">
+                neko: adjust column now also when skipping
+            </action>
+            <action type="update" dev="rbri">
+                neko: modernize by using Arrays.mismatch()
+            </action>
+            <action type="update" dev="rbri">
+                neko: reuse the HTMLUnicodeEntitiesParser (like we do for many other things) and simplify the code a bit
+            </action>
             <action type="update" dev="Ronny Shapiro">
                 Defer building the HtmlPage id/name lookup index until first read.
             </action>
