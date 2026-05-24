@@ -1020,7 +1020,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     }
 
     /**
-     * count(@*) counts all attributes including id; p[a] has id,x,y=3, p[b] has id,y=2.
+     * Function count(@*) counts all attributes including id; p[a] has id,x,y=3, p[b] has id,y=2.
      * @throws Exception if the test fails
      */
     @Test
@@ -1134,6 +1134,47 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Alerts("ab")
     public void childAxis() throws Exception {
         compare("//div/child::p");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "d3d2d1",
+            FF = "d1d2d3",
+            FF_ESR = "d1d2d3")
+    @HtmlUnitNYI(CHROME = "d1d2d3",
+            EDGE= "d1d2d3")
+    public void anchestorOrder() throws Exception {
+        final String content = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    let res = '';\n"
+            + "    let tester = document.getElementById('d4');\n"
+            + "    let result = document.evaluate('ancestor::div',"
+                        + " tester, null, XPathResult.ANY_TYPE, null);\n"
+            + "    while (node = result.iterateNext()) {\n"
+            + "      res += node.id;\n"
+            + "    }\n"
+            + "    log(res);\n"
+            + "  } catch(e) { logEx(e) }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d1'>\n"
+            + "    <div id='d2'>\n"
+            + "      <div id='d3'>\n"
+            + "        <div id='d4'>Tester</div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(content);
     }
 
     // -----------------------------------------------------------------------
