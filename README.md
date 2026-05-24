@@ -1,6 +1,6 @@
 # ![HtmlUnit Logo](https://github.com/HtmlUnit/htmlunit/blob/master/src/site/resources/images/htmlunit.png)
 
-Version 4.21.0 / December 28, 2025
+Version 5.0.0 / May 24, 2025
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
@@ -50,23 +50,9 @@ HtmlUnit is typically used for testing purposes or to retrieve information from 
 
 #### Version 5
 
-Work on HtmlUnit 5.0 has started. This new major version will require **JDK 17 or higher**.
+Starting with version 5.0.0, **JDK 17 or higher is required**.  
+If you are still on JDK 8, see [Legacy Support (JDK 8)](#legacy-support-jdk-8) below.
 
-
-#### Legacy Support (JDK 8)
-
-If you need to continue using **JDK 8**, please note that versions 4.x will remain available as-is. However,
-**ongoing maintenance and fixes for JDK 8 compatibility are only available through sponsorship**.
-
-Maintaining separate fix versions for JDK 8 requires significant additional effort for __backporting__, testing, and release management.
-
-**To enable continued JDK 8 support**, please contact me via email to discuss sponsorship options. Sponsorship provides:
-
-- __Backporting__ security and bug fixes to the 4.x branch
-- Maintaining compatibility with older Java versions
-- Timely releases for critical issues
-
-Without sponsorship, the 4.x branch will not receive updates. Your support ensures the long-term __sustainability__ of this project across multiple Java versions.
 
 ## Get it!
 
@@ -82,7 +68,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>4.21.0</version>
+    <version>5.0.0</version>
 </dependency>
 ```
 
@@ -91,7 +77,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.21.0'
+implementation group: 'org.htmlunit', name: 'htmlunit', version: '5.0.0'
 ```
 
 ## Getting Started
@@ -210,6 +196,21 @@ Every contribution - from bug reports to feature requests, typos to full new fea
 
 Please try to keep your pull requests small (don't bundle unrelated changes) and try to include test cases.
 
+
+<a name="legacy-support-jdk-8"></a>
+### Legacy Support (JDK 8)
+
+If you need to continue using **JDK 8**, versions 4.x remain available as-is.
+Ongoing maintenance and fixes for JDK 8 are only available through sponsorship —
+please contact me via email to discuss options. Sponsorship provides:
+
+- Backporting security and bug fixes to the 4.x branch
+- Compatibility maintenance with older Java versions
+- Timely releases for critical issues
+
+Without sponsorship, the 4.x branch will not receive further updates.
+
+
 ## Last CI build
 The latest builds are available from our
 [Jenkins CI build server](https://jenkins.wetator.org/view/HtmlUnit/)
@@ -260,7 +261,7 @@ repositories {
 }
 // ...
 dependencies {
-    implementation group: 'org.htmlunit', name: 'htmlunit', version: '4.21.0-SNAPSHOT'
+    implementation group: 'org.htmlunit', name: 'htmlunit', version: '5.1.0-SNAPSHOT'
   // ...
 }
 ```

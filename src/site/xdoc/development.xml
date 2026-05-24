@@ -19,7 +19,7 @@
         <subsection name="Prerequisites">
             <p>Before starting, ensure you have the following installed:</p>
             <ul>
-                <li><strong>Java Development Kit (JDK 11)</strong> HtmlUnit is JDK 8 but for running the untit test JDK 11 is required</li>
+                <li><strong>Java Development Kit (JDK 17)</strong></li>
                 <li><strong>Eclipse IDE</strong></li>
                 <li><strong>Maven 3</strong></li>
                 <li><strong>Git</strong> use your favorite git client</li>

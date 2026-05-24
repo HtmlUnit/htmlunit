@@ -252,7 +252,7 @@ public class HtmlSerializerInnerOuterText {
     }
 
     /**
-     * Process {@link HtmlDefinitionTermTerm}.
+     * Process {@link HtmlDefinitionTerm}.
      *
      * @param builder the StringBuilder to add to
      * @param htmlDefinitionTerm the target to process

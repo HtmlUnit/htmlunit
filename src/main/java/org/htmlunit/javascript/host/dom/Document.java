@@ -288,7 +288,7 @@ public class Document extends Node {
      * @param thisObj the scriptable this object
      * @param args the arguments
      * @param funObj the function object
-     * @return a newly created {@link HTMLDocument}
+     * @return a newly created {@link org.htmlunit.javascript.host.html.HTMLDocument}
      *
      * @see <a href="https://html.spec.whatwg.org/multipage/dynamic-markup-insertion.html#dom-parsehtmlunsafe">
      *     HTML spec - parseHTMLUnsafe</a>
