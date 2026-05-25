@@ -17,7 +17,7 @@
             <action type="update" dev="RhinoTeam">
                 core-js: Convert NativeCallSite, NativeBigInt, NativeWeakSet, NativeWeakMap, NativeSet, NativeMap,
                 NativeDataView, ArrayBuffer, NativeGlobal, NativeIterator, NativeScript, NativeJSON, NativeMath,
-               and NativeNumber to descriptors.
+                and NativeNumber to descriptors.
             </action>
             <action type="add" dev="RhinoTeam">
                 core-js: source map support implemented.
