@@ -44,8 +44,7 @@ public class CtorPrototypeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     public static Collection<Arguments> data() throws Exception {
-        final List<String> jsClassNames = new ArrayList<>();
-        jsClassNames.addAll(TestCaseTest.getAllConfiguredJsConstructorNames());
+        final List<String> jsClassNames = new ArrayList<>(TestCaseTest.getAllConfiguredJsConstructorNames());
         Collections.sort(jsClassNames);
 
         final List<Arguments> list = new ArrayList<>(jsClassNames.size() * jsClassNames.size() / 10);

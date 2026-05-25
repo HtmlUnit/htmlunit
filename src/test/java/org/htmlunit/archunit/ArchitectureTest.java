@@ -195,7 +195,7 @@ public class ArchitectureTest {
 
     /**
      * Every JsxConstant should be public static final.
-     *
+     * <p>
      * AbstractJavaScriptConfiguration.process(ClassConfiguration, String, SupportedBrowser)
      * stores the value.
      */

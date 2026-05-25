@@ -38,7 +38,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  * Unit tests for {@link CookieManager}.
- *
+ * <p>
  * These tests require a special setup in {@code etc/hosts}:
  * <pre>
  * 127.0.0.1       host1.htmlunit-dev.org

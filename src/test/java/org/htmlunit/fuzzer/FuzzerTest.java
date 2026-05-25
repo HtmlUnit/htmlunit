@@ -179,9 +179,7 @@ public class FuzzerTest extends WebTestCase {
 
             webClient.loadHtmlCodeIntoCurrentWindow(input);
         }
-        catch (final IllegalArgumentException e) {
-        }
-        catch (final IOException e) {
+        catch (final IllegalArgumentException | IOException e) {
         }
     }
 }

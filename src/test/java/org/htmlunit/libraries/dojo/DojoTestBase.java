@@ -29,7 +29,7 @@ import org.openqa.selenium.WebElement;
 /**
  * Base class for the <a href="http://dojotoolkit.org/">Dojo
  * JavaScript library tests.</a>.
- *
+ * <p>
  * Timeout was changed in: /util/doh/runner.js, line # 682
  *
  * @author Ahmed Ashour
