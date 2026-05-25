@@ -21,7 +21,7 @@ import org.junit.jupiter.params.provider.Arguments;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
- *
+ * <p>
  * This class handles all host names which starts by character 'I' to 'L'.
  *
  * @author Ahmed Ashour

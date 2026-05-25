@@ -29,7 +29,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  * Tests the scope setup for JavaScript host objects.
- *
+ * <p>
  * For each host class this checks whether the constructor/object
  * is properly visible in the window scope by testing:
  * <ul>
