@@ -228,10 +228,7 @@ public class QuercusServletImpl extends HttpServlet
         }
         //   return;
       }
-      catch (QuercusExitException e) {
-        throw e;
-      }
-      catch (QuercusErrorException e) {
+      catch (QuercusExitException | QuercusErrorException e) {
         throw e;
       }
       catch (QuercusLineRuntimeException e) {

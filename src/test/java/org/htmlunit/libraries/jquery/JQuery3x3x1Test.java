@@ -32,7 +32,7 @@ import jakarta.servlet.Servlet;
 /**
  * Tests for compatibility with web server loading of
  * version 3.3.1 of the <a href="http://jquery.com/">jQuery</a> JavaScript library.
- *
+ * <p>
  * All test method inside this class are generated. Please have a look
  * at {@link org.htmlunit.libraries.jquery.JQueryExtractor}.
  *

@@ -132,7 +132,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
         conn.setDefaultResponse(html);
         client.setWebConnection(conn);
 
-        client.setScriptPreProcessor((p, src, srcName, lineNumber, htmlElement) -> src.replaceAll("aXert", "alert"));
+        client.setScriptPreProcessor((p, src, srcName, lineNumber, htmlElement) -> src.replace("aXert", "alert"));
 
         final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));

@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Tests the general host tests have all JavaScript objects names defined in all the other tests.
- *
+ * <p>
  * This classes parses all the test code, searching for [object some_name], and ensures that
  * {@link HostClassNameTest} and {@link HostTypeOfTest} include those objects.
  *

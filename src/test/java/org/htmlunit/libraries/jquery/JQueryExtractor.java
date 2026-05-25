@@ -43,7 +43,7 @@ import org.htmlunit.junit.annotation.TestedBrowser;
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
  * all the tests, then select all visible text and copy it to a local file.
- *
+ * <p>
  * Steps to generate the tests:
  * <ol>
  *   <li>Call {@link #extractExpectations(File, File)}, where <tt>input</tt> is the raw file from the browser</li>

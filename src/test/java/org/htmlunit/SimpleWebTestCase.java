@@ -28,9 +28,9 @@ import org.junit.jupiter.api.BeforeEach;
 
 /**
  * A simple WebTestCase which doesn't require server to run, and doens't use WebDriver.
- *
+ * <p>
  * It depends on {@link MockWebConnection} to simulate sending requests to the server.
- *
+ * <p>
  * <b>Note that {@link WebDriverTestCase} should be used unless HtmlUnit-specific feature
  * is needed and Selenium does not support it.</b>
  *

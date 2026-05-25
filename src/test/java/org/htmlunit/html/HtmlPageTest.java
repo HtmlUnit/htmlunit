@@ -985,7 +985,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         assertEquals(html, xml
                 .replaceAll("[\\n\\r]", "")
                 .replaceAll("\\s\\s+", "")
-                .replaceAll("\"", "'"));
+                .replace("\"", "'"));
     }
 
     /**

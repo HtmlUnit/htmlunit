@@ -446,7 +446,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
 
     /**
      * Test uploading a file with non-ASCII name.
-     *
+     * <p>
      * Test for http://sourceforge.net/p/htmlunit/bugs/535/
      *
      * @throws Exception if the test fails
@@ -545,9 +545,6 @@ public class HtmlFileInput2Test extends WebServerTestCase {
                 }
                 catch (final FileUploadSizeException e) {
                     writer.write("SizeLimitExceeded");
-                }
-                catch (final FileUploadException e) {
-                    writer.write("error");
                 }
                 catch (final Exception e) {
                     writer.write("error");

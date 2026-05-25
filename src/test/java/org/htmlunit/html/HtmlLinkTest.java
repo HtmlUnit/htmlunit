@@ -93,7 +93,7 @@ public class HtmlLinkTest extends SimpleWebTestCase {
                 + "</html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        final String text = page.getElementById("log").getAttribute("value").trim().replaceAll("\r", "");
+        final String text = page.getElementById("log").getAttribute("value").trim().replace("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
 
         assertEquals(1, getMockWebConnection().getRequestCount());

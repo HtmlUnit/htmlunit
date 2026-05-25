@@ -369,7 +369,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
     /**
      * Links with an href and a non-false returning onclick that opens a new window should still
      * open the href in the first window.
-     *
+     * <p>
      * http://sourceforge.net/p/htmlunit/bugs/394/
      *
      * @throws Exception on test failure

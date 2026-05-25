@@ -497,10 +497,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             final WebElement element = driver.findElement(By.xpath("//svg:svg//svg:text"));
             actual = element.getText();
         }
-        catch (final NoSuchElementException e) {
-            actual = "error";
-        }
-        catch (final InvalidSelectorException e) {
+        catch (final NoSuchElementException | InvalidSelectorException e) {
             actual = "error";
         }
         assertEquals(getExpectedAlerts()[0], actual);
