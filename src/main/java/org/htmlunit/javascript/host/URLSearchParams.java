@@ -27,6 +27,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.FormEncodingType;
 import org.htmlunit.WebRequest;
+import org.htmlunit.corejs.javascript.ClassDescriptor;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.EcmaError;
@@ -45,6 +46,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
+import org.htmlunit.javascript.host.xml.FormData.FormDataIterator;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 
@@ -63,7 +65,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
     private static final Log LOG = LogFactory.getLog(URLSearchParams.class);
 
     /** Constant used to register the prototype in the context. */
-    public static final String URL_SEARCH_PARMS_TAG = "URLSearchParams";
+    private static final String URL_SEARCH_PARMS_ITERATOR_TAG = "URLSearchParams Iterator";
 
     private URL url_;
 
@@ -71,6 +73,10 @@ public class URLSearchParams extends HtmlUnitScriptable {
      * {@link ES6Iterator} implementation for js support.
      */
     public static final class NativeParamsIterator extends ES6Iterator {
+
+        private static final ClassDescriptor DESCRIPTOR =
+                ES6Iterator.makeDescriptor(URL_SEARCH_PARMS_ITERATOR_TAG, URL_SEARCH_PARMS_ITERATOR_TAG);
+
         enum Type { KEYS, VALUES, BOTH }
 
         private final Type type_;
@@ -78,12 +84,15 @@ public class URLSearchParams extends HtmlUnitScriptable {
         private final transient Iterator<NameValuePair> iterator_;
 
         /**
-         * Init.
+         * JS initializer.
+         *
+         * @param cx the {@link Context}
          * @param scope the scope
          * @param className the class name
          */
-        public static void init(final TopLevel scope, final String className) {
-            ES6Iterator.init(scope, false, new NativeParamsIterator(className), URL_SEARCH_PARMS_TAG);
+        public static void init(final Context cx, final TopLevel scope, final String className) {
+            ES6Iterator.initialize(
+                    DESCRIPTOR, cx, scope, new FormDataIterator(className), false, URL_SEARCH_PARMS_ITERATOR_TAG);
         }
 
         /**
@@ -106,7 +115,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
          */
         public NativeParamsIterator(final VarScope scope, final String className, final Type type,
                                         final Iterator<NameValuePair> iterator) {
-            super(scope, URL_SEARCH_PARMS_TAG);
+            super(scope, className);
             iterator_ = iterator;
             type_ = type;
             className_ = className;
@@ -469,7 +478,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
         final List<NameValuePair> splitted = splitQuery();
 
         return new NativeParamsIterator(getParentScope(),
-                "URLSearchParams Iterator", NativeParamsIterator.Type.BOTH, splitted.iterator());
+                URL_SEARCH_PARMS_ITERATOR_TAG, NativeParamsIterator.Type.BOTH, splitted.iterator());
     }
 
     /**
@@ -483,7 +492,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
         final List<NameValuePair> splitted = splitQuery();
 
         return new NativeParamsIterator(getParentScope(),
-                "URLSearchParams Iterator", NativeParamsIterator.Type.KEYS, splitted.iterator());
+                URL_SEARCH_PARMS_ITERATOR_TAG, NativeParamsIterator.Type.KEYS, splitted.iterator());
     }
 
     /**
@@ -497,7 +506,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
         final List<NameValuePair> splitted = splitQuery();
 
         return new NativeParamsIterator(getParentScope(),
-                "URLSearchParams Iterator", NativeParamsIterator.Type.VALUES, splitted.iterator());
+                URL_SEARCH_PARMS_ITERATOR_TAG, NativeParamsIterator.Type.VALUES, splitted.iterator());
     }
 
     /**

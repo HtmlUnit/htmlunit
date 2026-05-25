@@ -7,6 +7,24 @@
     </properties>
 
     <body>
+        <release version="5.1.0" date="June xx, 2026" description="Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Array spread throws TypeError on non-iterable, null, or undefined targets.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: TokenStream sets back the cursor (to a value+1) when it shouldn't do that (only when EOF).
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Convert NativeCallSite, NativeBigInt, NativeWeakSet, NativeWeakMap, NativeSet, NativeMap,
+                NativeDataView, ArrayBuffer, NativeGlobal, NativeIterator, NativeScript, NativeJSON, NativeMath,
+               and NativeNumber to descriptors.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: source map support implemented.
+            </action>
+        </release>
+
+
         <release version="5.0.0" date="May 24, 2026" description="jdk17, Firefox 150, Chrome/Edge 148, Bugfixes">
             <action type="add" dev="rbri">
                 Tests for htmx 2.0.10 added.

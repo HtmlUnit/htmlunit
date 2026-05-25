@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.htmlunit.FormEncodingType;
 import org.htmlunit.WebRequest;
+import org.htmlunit.corejs.javascript.ClassDescriptor;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.Function;
@@ -50,7 +51,7 @@ import org.htmlunit.util.StringUtils;
 public class FormData extends HtmlUnitScriptable {
 
     /** Constant used to register the prototype in the context. */
-    public static final String FORM_DATA_TAG = "FormData";
+    private static final String FORM_DATA_ITERATOR_TAG = "FormData Iterator";
 
     private final List<NameValuePair> requestParameters_ = new ArrayList<>();
 
@@ -58,6 +59,9 @@ public class FormData extends HtmlUnitScriptable {
      * FormDate iterator support.
      */
     public static final class FormDataIterator extends ES6Iterator {
+        private static final ClassDescriptor DESCRIPTOR =
+                ES6Iterator.makeDescriptor(FORM_DATA_ITERATOR_TAG, FORM_DATA_ITERATOR_TAG);
+
         enum Type { KEYS, VALUES, BOTH }
 
         private final Type type_;
@@ -68,11 +72,13 @@ public class FormData extends HtmlUnitScriptable {
         /**
          * JS initializer.
          *
+         * @param cx the {@link Context}
          * @param scope the scope
          * @param className the class name
          */
-        public static void init(final TopLevel scope, final String className) {
-            ES6Iterator.init(scope, false, new FormDataIterator(className), FORM_DATA_TAG);
+        public static void init(final Context cx, final TopLevel scope, final String className) {
+            ES6Iterator.initialize(
+                    DESCRIPTOR, cx, scope, new FormDataIterator(className), false, FORM_DATA_ITERATOR_TAG);
         }
 
         /**
@@ -99,7 +105,7 @@ public class FormData extends HtmlUnitScriptable {
          */
         public FormDataIterator(final VarScope scope, final String className, final Type type,
                 final List<NameValuePair> nameValuePairList) {
-            super(scope, FORM_DATA_TAG);
+            super(scope, className);
             type_ = type;
             index_ = 0;
             nameValuePairList_ = nameValuePairList;
@@ -299,7 +305,7 @@ public class FormData extends HtmlUnitScriptable {
     @JsxSymbol(symbolName = "iterator")
     public Scriptable entries() {
         return new FormDataIterator(getParentScope(),
-                    "FormData Iterator", FormDataIterator.Type.BOTH, requestParameters_);
+                FORM_DATA_ITERATOR_TAG, FormDataIterator.Type.BOTH, requestParameters_);
     }
 
     /**
@@ -344,7 +350,7 @@ public class FormData extends HtmlUnitScriptable {
     @JsxFunction
     public FormDataIterator keys() {
         return new FormDataIterator(getParentScope(),
-                "FormData Iterator", FormDataIterator.Type.KEYS, requestParameters_);
+                FORM_DATA_ITERATOR_TAG, FormDataIterator.Type.KEYS, requestParameters_);
     }
 
     /**
@@ -356,6 +362,6 @@ public class FormData extends HtmlUnitScriptable {
     @JsxFunction
     public FormDataIterator values() {
         return new FormDataIterator(getParentScope(),
-                "FormData Iterator", FormDataIterator.Type.VALUES, requestParameters_);
+                FORM_DATA_ITERATOR_TAG, FormDataIterator.Type.VALUES, requestParameters_);
     }
 }

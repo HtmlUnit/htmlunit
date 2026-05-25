@@ -1167,11 +1167,6 @@ public class FormDataTest extends WebDriverTestCase {
             + "    function test() {\n"
             + "      var formData = new FormData();\n"
 
-            + "      if (!formData.forEach) {\n"
-            + "        log('no keys');\n"
-            + "        return;"
-            + "      }\n"
-
             + "      formData.append('key1', 'val1');\n"
             + "      formData.append('key2', undefined);\n"
             + "      formData.append('key1', 'val3');\n"
@@ -1203,46 +1198,100 @@ public class FormDataTest extends WebDriverTestCase {
     }
 
     /**
+     * Checks if the iterator works correctly.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"function values() { [native code] }", "[object FormData Iterator]",
+    @Alerts({"false", "function keys() { [native code] }",
+             "[object FormData Iterator]", "done", "value",
+             "myKey", "myKey2", "myKey"})
+    @HtmlUnitNYI(
+            CHROME = {"false", "function keys() { [native code] }",
+                      "[object FormData Iterator]", "value", "done",
+                      "myKey", "myKey2", "myKey"},
+            EDGE = {"false", "function keys() { [native code] }",
+                    "[object FormData Iterator]", "value", "done",
+                    "myKey", "myKey2", "myKey"},
+            FF = {"false", "function keys() { [native code] }",
+                  "[object FormData Iterator]", "value", "done",
+                  "myKey", "myKey2", "myKey"},
+            FF_ESR = {"false", "function keys() { [native code] }",
+                      "[object FormData Iterator]", "value", "done",
+                      "myKey", "myKey2", "myKey"})
+    public void keysIterator() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var formData = new FormData();\n"
+
+            + "  formData.append('myKey', 'myValue');\n"
+            + "  formData.append('myKey2', '');\n"
+            + "  formData.append('myKey', 'myvalue2');\n"
+
+            + "  log(formData[Symbol.iterator] === formData.keys);\n"
+
+            + "  log(formData.keys);\n"
+            + "  var iterator = formData.keys();\n"
+            + "  log(iterator);\n"
+
+            + "  var nextItem = iterator.next();\n"
+            + "  for (var x in nextItem) {\n"
+            + "    log(x);\n"
+            + "  }\n"
+
+            + "  while (nextItem.done == false) {\n"
+            + "    log(nextItem.value);\n"
+            + "    nextItem = iterator.next();\n"
+            + "  }\n"
+
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "function values() { [native code] }", "[object FormData Iterator]",
              "val1", "undefined", "val3", "val4", "true"})
-    public void values() throws Exception {
+    public void valuesIterator() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
             + "<head>\n"
-            + "  <script>\n"
+            + "<script>\n"
             + LOG_TITLE_FUNCTION
-            + "    function test() {\n"
-            + "      var formData = new FormData();\n"
+            + "function test() {\n"
+            + "  var formData = new FormData();\n"
 
-            + "      if (!formData.forEach) {\n"
-            + "        log('no values');\n"
-            + "        return;"
-            + "      }\n"
+            + "  formData.append('key1', 'val1');\n"
+            + "  formData.append('key2', undefined);\n"
+            + "  formData.append('key1', 'val3');\n"
+            + "  formData.append(undefined, 'val4');\n"
 
-            + "      formData.append('key1', 'val1');\n"
-            + "      formData.append('key2', undefined);\n"
-            + "      formData.append('key1', 'val3');\n"
-            + "      formData.append(undefined, 'val4');\n"
+            + "  log(formData[Symbol.iterator] === formData.values);\n"
 
-            + "      log(formData.values);\n"
-            + "      var iter = formData.values();\n"
-            + "      log(iter);\n"
+            + "  log(formData.values);\n"
+            + "  var iter = formData.values();\n"
+            + "  log(iter);\n"
 
-            + "      var entry = iter.next().value;\n"
-            + "      log(entry);\n"
-            + "      entry = iter.next().value;\n"
-            + "      log(entry);\n"
-            + "      entry = iter.next().value;\n"
-            + "      log(entry);\n"
-            + "      entry = iter.next().value;\n"
-            + "      log(entry);\n"
+            + "  var entry = iter.next().value;\n"
+            + "  log(entry);\n"
+            + "  entry = iter.next().value;\n"
+            + "  log(entry);\n"
+            + "  entry = iter.next().value;\n"
+            + "  log(entry);\n"
+            + "  entry = iter.next().value;\n"
+            + "  log(entry);\n"
 
-            + "      log(iter.next().done);\n"
-            + "    }\n"
-            + "  </script>\n"
+            + "  log(iter.next().done);\n"
+            + "}\n"
+            + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body>\n"
@@ -1264,11 +1313,6 @@ public class FormDataTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var formData = new FormData();\n"
-
-            + "      if (!formData.forEach) {\n"
-            + "        log('no values');\n"
-            + "        return;"
-            + "      }\n"
 
             + "      formData.append('key1', 'val1');\n"
             + "      formData.append('key2', undefined);\n"
@@ -1303,11 +1347,6 @@ public class FormDataTest extends WebDriverTestCase {
                 + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
                 + "      var formData = new FormData();\n"
-
-                + "      if (!formData.forEach) {\n"
-                + "        log('no forEach');\n"
-                + "        return;"
-                + "      }\n"
 
                 + "      formData.append('key1', 'val1');\n"
                 + "      formData.append('key2', 'val2');\n"
@@ -1350,10 +1389,6 @@ public class FormDataTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var formData = new FormData();\n"
-            + "  if (!formData.get) {\n"
-            + "    log('no entries');\n"
-            + "    return;"
-            + "  }\n"
 
             + "  formData.append('myKey', 'myValue');\n"
             + "  formData.append('myKey2', '');\n"
@@ -1377,15 +1412,21 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "[object FormData Iterator]", "done", "value",
+    @Alerts({"true", "function entries() { [native code] }",
+             "[object FormData Iterator]", "done", "value",
              "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
-    @HtmlUnitNYI(CHROME = {"true", "[object FormData Iterator]", "value", "done",
-                           "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
-            EDGE = {"true", "[object FormData Iterator]", "value", "done",
+    @HtmlUnitNYI(
+            CHROME = {"true", "function entries() { [native code] }",
+                      "[object FormData Iterator]", "value", "done",
+                      "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
+            EDGE = {"true", "function entries() { [native code] }",
+                    "[object FormData Iterator]", "value", "done",
                     "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
-            FF = {"true", "[object FormData Iterator]", "value", "done",
+            FF = {"true", "function entries() { [native code] }",
+                  "[object FormData Iterator]", "value", "done",
                   "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
-            FF_ESR = {"true", "[object FormData Iterator]", "value", "done",
+            FF_ESR = {"true", "function entries() { [native code] }",
+                      "[object FormData Iterator]", "value", "done",
                       "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
     public void entriesIterator() throws Exception {
         final String html = DOCTYPE_HTML
@@ -1393,19 +1434,14 @@ public class FormDataTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var formData = new FormData();\n"
-            + "  if (!formData.get) {\n"
-            + "    log('no entries');\n"
-            + "    return;"
-            + "  }\n"
 
             + "  formData.append('myKey', 'myValue');\n"
             + "  formData.append('myKey2', '');\n"
             + "  formData.append('myKey', 'myvalue2');\n"
 
-            + "  if (typeof Symbol != 'undefined') {\n"
-            + "    log(formData[Symbol.iterator] === formData.entries);\n"
-            + "  }\n"
+            + "  log(formData[Symbol.iterator] === formData.entries);\n"
 
+            + "  log(formData.entries);\n"
             + "  var iterator = formData.entries();\n"
             + "  log(iterator);\n"
 
@@ -1414,7 +1450,7 @@ public class FormDataTest extends WebDriverTestCase {
             + "    log(x);\n"
             + "  }\n"
 
-            + "  while (nextItem.done == false) {\n"
+            + "  while (!nextItem.done) {\n"
             + "    log(nextItem.value[0]);\n"
             + "    log(nextItem.value[1]);\n"
             + "    nextItem = iterator.next();\n"

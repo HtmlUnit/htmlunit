@@ -971,11 +971,10 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "      if (self.URLSearchParams) {\n"
             + "        var param = new URLSearchParams('key1=val1&key2=&key1=val3&=val4');\n"
 
-            + "        if (typeof Symbol != 'undefined') {\n"
-            + "          log(param[Symbol.iterator] === param.entries);\n"
-            + "        }\n"
+            + "        log(param[Symbol.iterator] === param.entries);\n"
 
             + "        log(param.entries);\n"
+
             + "        var iter = param.entries();\n"
             + "        log(iter);\n"
 

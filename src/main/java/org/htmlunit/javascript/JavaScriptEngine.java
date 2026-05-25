@@ -246,8 +246,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         configureGlobalThis(scope, jsWindow, windowConfig, functionObject, jsConfig_, browserVersion, prototypes, prototypesPerJSName);
 
         // TODO remove the cast
-        URLSearchParams.NativeParamsIterator.init(scope, "URLSearchParams Iterator");
-        FormData.FormDataIterator.init(scope, "FormData Iterator");
+        URLSearchParams.NativeParamsIterator.init(cx, scope, "URLSearchParams Iterator");
+        FormData.FormDataIterator.init(cx, scope, "FormData Iterator");
 
         // strange but this is the reality for browsers
         // because there will be still some sites using this for browser detection the property is
