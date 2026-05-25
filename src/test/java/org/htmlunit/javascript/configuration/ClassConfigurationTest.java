@@ -55,6 +55,7 @@ public class ClassConfigurationTest {
          * Dummy function.
          */
         public void function() {
+            // dummy
         }
 
         /**

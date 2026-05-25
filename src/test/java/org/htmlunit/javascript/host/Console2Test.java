@@ -43,10 +43,12 @@ public class Console2Test extends SimpleWebTestCase {
 
         @Override
         public void warn(final Object message) {
+            // ignore
         }
 
         @Override
         public void trace(final Object message) {
+            // ignore
         }
 
         @Override
@@ -56,10 +58,12 @@ public class Console2Test extends SimpleWebTestCase {
 
         @Override
         public void error(final Object message) {
+            // ignore
         }
 
         @Override
         public void debug(final Object message) {
+            // ignore
         }
 
         @Override

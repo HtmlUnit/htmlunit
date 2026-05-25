@@ -730,6 +730,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
 
             @Override
             public void setClipboardContent(final String string) {
+                // ignore
             }
 
         };

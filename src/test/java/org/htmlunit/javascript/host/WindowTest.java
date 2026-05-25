@@ -1442,10 +1442,12 @@ public class WindowTest extends SimpleWebTestCase {
 
             @Override
             public void warn(final Object message) {
+                // ignore
             }
 
             @Override
             public void trace(final Object message) {
+                // ignore
             }
 
             @Override
@@ -1455,10 +1457,12 @@ public class WindowTest extends SimpleWebTestCase {
 
             @Override
             public void error(final Object message) {
+                // ignore
             }
 
             @Override
             public void debug(final Object message) {
+                // ignore
             }
 
             @Override
@@ -1631,6 +1635,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         // without an print handler set the print method is a noop
         webClient.setPrintHandler((PrintHandler) page -> {
+            // noop
         });
 
 

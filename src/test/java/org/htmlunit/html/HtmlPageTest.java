@@ -1450,6 +1450,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             Assertions.fail("should have thrown ElementNotFoundException");
         }
         catch (final ElementNotFoundException expected) {
+            // ignore
         }
         assertNotNull(clone.getHtmlElementById("id2"));
     }
