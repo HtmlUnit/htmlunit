@@ -8,6 +8,14 @@
 
     <body>
         <release version="5.1.0" date="June xx, 2026" description="Bugfixes">
+            <action type="fix" dev="Lai Quang Duong">
+                Fix Location.setHash() to update the page's WebRequest URL when the hash changes,
+                ensuring page.getUrl() reflects the current hash.
+            </action>
+            <action type="fix" dev="Lai Quang Duong">
+                Fix WebClient.makeWebResponseForAboutUrl() to properly handle about:blank with hash fragments
+                (e.g., about:blank#foo) instead of throwing MalformedURLException.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: Array spread throws TypeError on non-iterable, null, or undefined targets.
             </action>

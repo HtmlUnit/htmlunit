@@ -1489,9 +1489,9 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "2", "3", "a.html?urlParam=urlVal",
                        "4", "http://§§URL§§", "http://§§URL§§/second/a.html?urlParam=urlVal", "§§URL§§"},
-            FF = {"1", "2", "2", "a.html?urlParam=urlVal",
+            FF = {"1", "2", "3", "a.html?urlParam=urlVal",
                   "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"},
-            FF_ESR = {"1", "2", "2", "a.html?urlParam=urlVal",
+            FF_ESR = {"1", "2", "3", "a.html?urlParam=urlVal",
                       "4", "http://§§URL§§", "http://§§URL§§/", "§§URL§§"})
     public void reloadPost() throws Exception {
         final String form = DOCTYPE_HTML
@@ -1690,5 +1690,83 @@ public class Location2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies that modifying <tt>window.location.hash</tt> works, but that it doesn't
+     * force the page to reload from the server. This is very important for the Dojo
+     * unit tests, which will keep reloading themselves if the page gets reloaded.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "#b"})
+    public void setHash() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<a id='a' onclick='log(location.hash);location.hash=\"b\";log(location.hash);'>go</a>\n"
+            + "<h2 id='b'>...</h2>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("a")).click();
+
+        verifyTitle2(driver, getExpectedAlerts());
+
+        assertEquals(URL_FIRST, getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§#newHash")
+    public void setHashUpdatesPageUrl() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<a id='a' onclick='location.hash=\"newHash\"'>go</a>'>go</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("a")).click();
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"about:blank", "about:blank#foo", "about:blank#foo"})
+    public void setHashAboutBlank() throws Exception {
+        WebDriver driver = getWebDriver();
+        driver.get("about:blank");
+
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+        assertEquals(0, getMockWebConnection().getRequestCount());
+
+        ((JavascriptExecutor) driver).executeScript("location.hash = 'foo'");
+        assertEquals(getExpectedAlerts()[1], driver.getCurrentUrl());
+        assertEquals(0, getMockWebConnection().getRequestCount());
+
+        driver.navigate().refresh();
+        assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
+        assertEquals(0, getMockWebConnection().getRequestCount());
     }
 }

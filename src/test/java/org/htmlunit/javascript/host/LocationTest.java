@@ -295,6 +295,7 @@ public class LocationTest extends SimpleWebTestCase {
 
         // Verify that we didn't reload the page.
         assertTrue(page == page2);
+        assertEquals(URL_FIRST + "#b", conn.getLastWebRequest().getUrl());
         assertEquals(1, conn.getRequestCount());
     }
 
