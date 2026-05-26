@@ -1414,6 +1414,9 @@
             <name>Mingyuan Wu</name>
             <email>my.wu@outlook.com</email>
         </contributor>
+        <contributor>
+            <name>Sebastian Peters</name>
+        </contributor>
     </contributors>
     <dependencies>
         <!-- this includes httpclient as dependency -->
