@@ -833,14 +833,9 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "1242",
-            EDGE = "1234",
-            FF = "1241",
-            FF_ESR = "1241")
-    @HtmlUnitNYI(CHROME = "1240",
-            EDGE = "1240",
-            FF = "1240",
-            FF_ESR = "1240")
+    @Alerts(DEFAULT = "1240",
+            EDGE = "1232")
+    @HtmlUnitNYI(EDGE = "1240")
     public void hgroup() throws Exception {
         test("hgroup");
     }

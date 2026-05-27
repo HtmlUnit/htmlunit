@@ -844,7 +844,8 @@ public class NumberFormat2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("31\u202f415,927")
+    @Alerts(DEFAULT = "31\u202f415,927",
+            FF = "31'415,927")
     public void format_fr_ch() throws Exception {
         test("new Intl.NumberFormat('fr-CH').format(number)");
     }

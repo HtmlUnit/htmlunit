@@ -15017,8 +15017,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "shadowRootDelegatesFocus[GSCE],shadowRootMode[GSCE],"
                 + "shadowRootSerializable[GSCE]",
             FF = "constructor(),content[GCE],shadowRootClonable[GSCE],shadowRootDelegatesFocus[GSCE],"
-                + "shadowRootMode[GSCE],"
-                + "shadowRootSerializable[GSCE]",
+                + "shadowRootMode[GSCE],shadowRootSerializable[GSCE],"
+                + "shadowRootSlotAssignment[GSCE]",
             FF_ESR = "constructor(),content[GCE],shadowRootClonable[GSCE],shadowRootDelegatesFocus[GSCE],"
                 + "shadowRootMode[GSCE],"
                 + "shadowRootSerializable[GSCE]")
@@ -19188,14 +19188,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "xr[GCE]",
             FF = "appCodeName[GCE],appName[GCE],appVersion[GCE],buildID[GCE],clipboard[GCE],constructor(),"
                 + "cookieEnabled[GCE],credentials[GCE],doNotTrack[GCE],geolocation[GCE],getAutoplayPolicy(),"
-                + "getGamepads(),globalPrivacyControl[GCE],gpu[GCE],"
-                + "hardwareConcurrency[GCE],javaEnabled(),language[GCE],"
-                + "languages[GCE],locks[GCE],login[GCE],maxTouchPoints[GCE],mediaCapabilities[GCE],"
+                + "getGamepads(),globalPrivacyControl[GCE],gpu[GCE],hardwareConcurrency[GCE],javaEnabled(),"
+                + "language[GCE],languages[GCE],locks[GCE],login[GCE],maxTouchPoints[GCE],mediaCapabilities[GCE],"
                 + "mediaDevices[GCE],mediaSession[GCE],mimeTypes[GCE],mozGetUserMedia(),onLine[GCE],oscpu[GCE],"
                 + "pdfViewerEnabled[GCE],permissions[GCE],platform[GCE],plugins[GCE],product[GCE],productSub[GCE],"
                 + "registerProtocolHandler(),requestMediaKeySystemAccess(),requestMIDIAccess(),sendBeacon(),"
-                + "serviceWorker[GCE],storage[GCE],taintEnabled(),userActivation[GCE],userAgent[GCE],vendor[GCE],"
-                + "vendorSub[GCE],wakeLock[GCE],"
+                + "serial[GCE],serviceWorker[GCE],storage[GCE],taintEnabled(),userActivation[GCE],userAgent[GCE],"
+                + "vendor[GCE],vendorSub[GCE],wakeLock[GCE],"
                 + "webdriver[GCE]",
             FF_ESR = "appCodeName[GCE],appName[GCE],appVersion[GCE],buildID[GCE],clipboard[GCE],constructor(),"
                 + "cookieEnabled[GCE],credentials[GCE],doNotTrack[GCE],geolocation[GCE],getAutoplayPolicy(),"

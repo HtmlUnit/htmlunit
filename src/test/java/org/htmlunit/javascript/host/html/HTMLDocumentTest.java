@@ -2693,7 +2693,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
-            FF = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
             FF_ESR = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-")
     @HtmlUnitNYI(CHROME = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
             EDGE = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",

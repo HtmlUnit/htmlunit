@@ -309,7 +309,7 @@ public enum BrowserVersionFeatures {
     JS_INTL_V8_BREAK_ITERATOR,
 
     /** For the 'about' protocol the location always returns an empty query. */
-    @BrowserFeature({FF, FF_ESR})
+    @BrowserFeature(FF_ESR)
     JS_LOCATION_IGNORE_QUERY_FOR_ABOUT_PROTOCOL,
 
     /** Reload sends a referrer header. */

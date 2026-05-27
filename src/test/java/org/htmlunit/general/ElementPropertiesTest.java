@@ -1108,14 +1108,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "addEventListener(),alert(),atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
                 + "cancelIdleCallback(),captureEvents(),clearInterval(),clearTimeout(),clientInformation,close(),"
                 + "closed,confirm(),cookieStore,createImageBitmap(),crossOriginIsolated,crypto,customElements,"
-                + "devicePixelRatio,dispatchEvent(),document,dump(),event,external,fetch(),find(),focus(),"
-                + "frameElement,frames,fullScreen,getComputedStyle(),getDefaultComputedStyle(),getSelection(),"
-                + "history,indexedDB,innerHeight,innerWidth,InstallTrigger,isSecureContext,length,localStorage,"
-                + "location,locationbar,log(),logEx(),matchMedia(),menubar,moveBy(),moveTo(),mozInnerScreenX,"
-                + "mozInnerScreenY,name,navigation,navigator,onabort,onafterprint,onanimationcancel,onanimationend,"
-                + "onanimationiteration,onanimationstart,onauxclick,onbeforeinput,onbeforematch,onbeforeprint,"
-                + "onbeforetoggle,onbeforeunload,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,"
-                + "onclose,oncommand,oncontentvisibilityautostatechange,oncontextlost,oncontextmenu,"
+                + "devicePixelRatio,dispatchEvent(),document,documentPictureInPicture,dump(),event,external,fetch(),"
+                + "find(),focus(),frameElement,frames,fullScreen,getComputedStyle(),getDefaultComputedStyle(),"
+                + "getSelection(),history,indexedDB,innerHeight,innerWidth,InstallTrigger,isSecureContext,length,"
+                + "localStorage,location,locationbar,log(),logEx(),matchMedia(),menubar,moveBy(),moveTo(),"
+                + "mozInnerScreenX,mozInnerScreenY,name,navigation,navigator,onabort,onafterprint,onanimationcancel,"
+                + "onanimationend,onanimationiteration,onanimationstart,onauxclick,onbeforeinput,onbeforematch,"
+                + "onbeforeprint,onbeforetoggle,onbeforeunload,onblur,oncancel,oncanplay,oncanplaythrough,onchange,"
+                + "onclick,onclose,oncommand,oncontentvisibilityautostatechange,oncontextlost,oncontextmenu,"
                 + "oncontextrestored,oncopy,oncuechange,oncut,ondblclick,ondevicemotion,ondeviceorientation,"
                 + "ondeviceorientationabsolute,ondrag,ondragend,ondragenter,ondragexit,ondragleave,ondragover,"
                 + "ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,onformdata,"
@@ -3456,7 +3456,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "content,shadowRootClonable,shadowRootCustomElementRegistry,shadowRootDelegatesFocus,"
                 + "shadowRootMode,"
                 + "shadowRootSerializable",
-            FF = "content,shadowRootClonable,shadowRootDelegatesFocus,shadowRootMode,shadowRootSerializable",
+            FF = "content,shadowRootClonable,shadowRootDelegatesFocus,shadowRootMode,shadowRootSerializable,"
+                + "shadowRootSlotAssignment",
             FF_ESR = "content,shadowRootClonable,shadowRootDelegatesFocus,shadowRootMode,shadowRootSerializable")
     @HtmlUnitNYI(CHROME = "content",
             EDGE = "content",
@@ -10613,8 +10614,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "javaEnabled(),language,languages,locks,login,maxTouchPoints,mediaCapabilities,mediaDevices,"
                 + "mediaSession,mimeTypes,mozGetUserMedia(),onLine,oscpu,pdfViewerEnabled,permissions,platform,"
                 + "plugins,product,productSub,registerProtocolHandler(),requestMediaKeySystemAccess(),"
-                + "requestMIDIAccess(),sendBeacon(),serviceWorker,storage,taintEnabled(),userActivation,userAgent,"
-                + "vendor,vendorSub,wakeLock,"
+                + "requestMIDIAccess(),sendBeacon(),serial,serviceWorker,storage,taintEnabled(),userActivation,"
+                + "userAgent,vendor,vendorSub,wakeLock,"
                 + "webdriver",
             FF_ESR = "appCodeName,appName,appVersion,buildID,clipboard,cookieEnabled,credentials,doNotTrack,"
                 + "geolocation,getAutoplayPolicy(),getGamepads(),globalPrivacyControl,hardwareConcurrency,"

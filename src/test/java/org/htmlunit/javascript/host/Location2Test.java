@@ -159,7 +159,6 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "about:blank?query", "blank", "", "about:", "?query"},
-            FF = {"", "about:blank?query", "blank", "", "about:", ""},
             FF_ESR = {"", "about:blank?query", "blank", "", "about:", ""})
     public void about_blank_query_attributes() throws Exception {
         final String html = DOCTYPE_HTML
@@ -294,7 +293,6 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"#hash", "about:blank?query#hash", "blank", "", "about:", "?query"},
-            FF = {"#hash", "about:blank?query#hash", "blank", "", "about:", ""},
             FF_ESR = {"#hash", "about:blank?query#hash", "blank", "", "about:", ""})
     public void about_blank_query_hash_attributes() throws Exception {
         final String html = DOCTYPE_HTML

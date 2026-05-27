@@ -2599,10 +2599,10 @@ public final class StyleAttributes implements Serializable {
         POSITION("position", "position", chromeAndEdge("static"), ff("static")),
 
         /** The style property {@code positionAnchor}. */
-        POSITION_ANCHOR("positionAnchor", "position-anchor", chromeAndEdgeNone(), ffLatest("none")),
+        POSITION_ANCHOR("positionAnchor", "position-anchor", chromeAndEdgeNone(), ffLatest("normal")),
 
         /** The style property {@code position-anchor}. */
-        POSITION_ANCHOR_("position-anchor", "position-anchor", ffLatest("none")),
+        POSITION_ANCHOR_("position-anchor", "position-anchor", ffLatest("normal")),
 
         /** The style property {@code positionArea}. */
         POSITION_AREA("positionArea", "position-area", chromeAndEdgeNone(), ffLatest("none")),
