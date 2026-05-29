@@ -94,25 +94,50 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"b=2; a=1",
+             "c=1; d=2",
+             "lA=2; lB=3; sA=1; sB=4"})
     public void orderCookiesByPath_fromJs() throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><body><script>\n"
-            + "document.cookie = 'exampleCookie=rootPath;path=/';\n"
-            + "document.cookie = 'exampleCookie=currentPath;path=/testpages/';\n"
-            + "</script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function clear(n, p) {\n"
+            + "    document.cookie = n + '=; path=' + p + '; max-age=0';\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    document.cookie = 'a=1; path=/';\n"
+            + "    document.cookie = 'b=2; path=/testpages';\n"
+            + "    log(document.cookie);\n"
+            + "    clear('a', '/'); clear('b', '/testpages');\n"
+            + "    document.cookie = 'c=1; path=/testpages';\n"
+            + "    document.cookie = 'd=2; path=/testpages';\n"
+            + "    log(document.cookie);\n"
+            + "    clear('c', '/testpages'); clear('d', '/testpages');\n"
+            + "    document.cookie = 'sA=1; path=/';\n"
+            + "    document.cookie = 'lA=2; path=/testpages';\n"
+            + "    document.cookie = 'lB=3; path=/testpages';\n"
+            + "    document.cookie = 'sB=4; path=/';\n"
+            + "    log(document.cookie);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "<a href='/testpages/next.html'>next page</a>\n"
             + "</body></html>";
 
+        final URL pageUrl = new URL(URL_FIRST, "testpages/test.html");
+        getMockWebConnection().setResponse(pageUrl, html);
         getMockWebConnection().setDefaultResponse("");
 
         final WebDriver webDriver = getWebDriver();
         webDriver.manage().deleteAllCookies();
 
-        loadPage2(html);
+        loadPage2(pageUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+
         webDriver.findElement(By.linkText("next page")).click();
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
-        assertEquals("exampleCookie=currentPath; exampleCookie=rootPath",
+        assertEquals("lA=2; lB=3; sA=1; sB=4",
             lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
     }
 

@@ -28,9 +28,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -1133,10 +1135,23 @@ public class Document extends Node {
 
         final StringBuilder builder = new StringBuilder();
         final Set<Cookie> cookies = sgmlPage.getWebClient().getCookies(sgmlPage.getUrl());
+        final List<Cookie> visibleCookies = new ArrayList<>();
         for (final Cookie cookie : cookies) {
             if (cookie.isHttpOnly()) {
                 continue;
             }
+            visibleCookies.add(cookie);
+        }
+
+        visibleCookies.sort((a, b) -> {
+            final String pathA = a.getPath();
+            final String pathB = b.getPath();
+            final int lenA = pathA == null ? 0 : pathA.length();
+            final int lenB = pathB == null ? 0 : pathB.length();
+            return Integer.compare(lenB, lenA);
+        });
+
+        for (final Cookie cookie : visibleCookies) {
             if (builder.length() != 0) {
                 builder.append("; ");
             }
