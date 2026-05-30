@@ -64,7 +64,6 @@ public class TestScopeDependencyTest {
 
     @Test
     void allTestOnlyDependenciesMustHaveTestScope() throws Exception {
-
         // ── 1. Parse pom.xml ──────────────────────────────────────────────────
         Model model = readPomModel();
 
