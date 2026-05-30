@@ -1143,6 +1143,8 @@ public class Document extends Node {
             visibleCookies.add(cookie);
         }
 
+        // RFC 6265 §5.4: longer path first; equal-length paths sorted by creation time ascending
+        // TODO time ascending
         visibleCookies.sort((a, b) -> {
             final String pathA = a.getPath();
             final String pathB = b.getPath();

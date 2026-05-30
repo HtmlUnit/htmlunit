@@ -40,6 +40,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class CookieManagerTest extends WebDriverTestCase {
 
