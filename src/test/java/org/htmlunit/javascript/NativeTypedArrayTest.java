@@ -29,6 +29,42 @@ public class NativeTypedArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"BigInt64Array", "false", "true",
+             "undefined", "false", "true",
+             "undefined", "true", "true",
+             "Symbol(Symbol.iterator),Symbol(Symbol.toStringTag)"})
+    public void toStringBigInt64Array() throws Exception {
+        loadPageVerifyTitle2(toStringTagTest("new BigInt64Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"BigUint64Array", "false", "true",
+             "undefined", "false", "true",
+             "undefined", "true", "true",
+             "Symbol(Symbol.iterator),Symbol(Symbol.toStringTag)"})
+    public void toStringBigUint64Array() throws Exception {
+        loadPageVerifyTitle2(toStringTagTest("new BigUint64Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"Float16Array", "false", "true",
+             "undefined", "false", "true",
+             "undefined", "true", "true",
+             "Symbol(Symbol.iterator),Symbol(Symbol.toStringTag)"})
+    public void toStringFloat16Array() throws Exception {
+        loadPageVerifyTitle2(toStringTagTest("new Float16Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"Float32Array", "false", "true",
              "undefined", "false", "true",
              "undefined", "true", "true",
