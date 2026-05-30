@@ -27,8 +27,7 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebAssert;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.LambdaConstructor;
-import org.htmlunit.corejs.javascript.LambdaFunction;
+import org.htmlunit.corejs.javascript.JSFunction;
 import org.htmlunit.corejs.javascript.NativePromise;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -396,23 +395,23 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
 
     protected NativePromise setupPromise(final FailableSupplier<Object, IOException> resolver) {
         final VarScope scope = ScriptableObject.getTopLevelScope(getParentScope());
-        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
+        final JSFunction ctor = (JSFunction) getProperty(scope, "Promise");
 
         try {
-            final LambdaFunction resolve = (LambdaFunction) getProperty(ctor, "resolve");
+            final JSFunction resolve = (JSFunction) getProperty(ctor, "resolve");
             return (NativePromise) resolve.call(Context.getCurrentContext(), scope,
                                                 ctor, new Object[] {resolver.get()});
         }
         catch (final IOException e) {
-            final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
+            final JSFunction reject = (JSFunction) getProperty(ctor, "reject");
             return (NativePromise) reject.call(Context.getCurrentContext(), scope, ctor, new Object[] {e.getMessage()});
         }
     }
 
     protected NativePromise setupRejectedPromise(final Supplier<Object> resolver) {
         final VarScope scope = ScriptableObject.getTopLevelScope(getParentScope());
-        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
-        final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
+        final JSFunction ctor = (JSFunction) getProperty(scope, "Promise");
+        final JSFunction reject = (JSFunction) getProperty(ctor, "reject");
         return (NativePromise) reject.call(Context.getCurrentContext(), scope, ctor, new Object[] {resolver.get()});
     }
 }
