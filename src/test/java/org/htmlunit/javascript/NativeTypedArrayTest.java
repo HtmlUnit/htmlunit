@@ -209,4 +209,137 @@ public class NativeTypedArrayTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyBigInt64Array() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new BigInt64Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyBigUint64Array() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new BigUint64Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyFloat16Array() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new Float16Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyFloat32Array() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new Float32Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyFloat64Array() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new Float64Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyInt8Array() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new Int8Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyInt16Array() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new Int16Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyInt32Array() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new Int32Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyUint8Array() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new Uint8Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyUint16Array() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new Uint16Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyUint32Array() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new Uint32Array(1)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false"})
+    public void definePropertyUint8ClampedArray() throws Exception {
+        loadPageVerifyTitle2(definePropertyTest("new Uint8ClampedArray(1)"));
+    }
+
+    private static String definePropertyTest(final String init) {
+        return
+            DOCTYPE_HTML
+            + "<html></head>\n"
+            + "<body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  let typedArray = " + init + ";\n"
+            + "  try {\n"
+            + "    Object.defineProperty(typedArray, '100', { value: 42 });\n"
+            + "    log('TypeError expected');\n"
+            + "  } catch(e) {\n"
+            + "    log(e instanceof TypeError);\n"
+            + "  }\n"
+
+            + "  try {\n"
+            + "    log(Reflect.defineProperty(ta, '100', { value: 42 }));\n"
+            + "  } catch(e) {\n"
+            + "    log(e instanceof TypeError);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+    }
 }
