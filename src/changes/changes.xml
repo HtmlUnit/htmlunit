@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="5.1.0" date="June xx, 2026" description="Bugfixes">
+        <release version="5.1.0" date="June xx, 2026" description="Firefox 151, Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: reworked constructor/prototypes setup to use descriptors.
+            </action>
             <action type="fix" dev="Sebastian Peters" issue="#1124">
                 Dependencies maven-model and maven-artifact were declared without test scope.
             </action>
@@ -24,11 +27,6 @@
             </action>
             <action type="fix" dev="rbri">
                 core-js: TokenStream sets back the cursor (to a value+1) when it shouldn't do that (only when EOF).
-            </action>
-            <action type="update" dev="RhinoTeam">
-                core-js: Convert NativeCallSite, NativeBigInt, NativeWeakSet, NativeWeakMap, NativeSet, NativeMap,
-                NativeDataView, ArrayBuffer, NativeGlobal, NativeIterator, NativeScript, NativeJSON, NativeMath,
-                and NativeNumber to descriptors.
             </action>
             <action type="add" dev="RhinoTeam">
                 core-js: source map support implemented.
