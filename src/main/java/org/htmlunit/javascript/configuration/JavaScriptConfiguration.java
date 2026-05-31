@@ -544,17 +544,17 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     static final Class<? extends HtmlUnitScriptable>[] CLASSES_ = new Class[] {
         // level 1
         AbortController.class, AbstractRange.class, Atomics.class, AudioBuffer.class, AudioListener.class,
-        AudioParam.class, BarProp.class, Blob.class, CSS.class, CSSRule.class, CSSRuleList.class,
+        AudioParam.class, Blob.class, CSS.class, CSSRule.class, CSSRuleList.class,
         CSSStyleDeclaration.class, Cache.class, CacheStorage.class, CanvasGradient.class, CanvasPattern.class,
         CanvasRenderingContext2D.class, CaretPosition.class, Credential.class, CredentialsContainer.class, Crypto.class,
         CryptoKey.class, CustomElementRegistry.class, DOMError.class, DOMException.class, DOMImplementation.class,
         DOMMatrixReadOnly.class, DOMParser.class, DOMPointReadOnly.class, DOMRectList.class, DOMRectReadOnly.class,
         DOMStringList.class, DOMStringMap.class, DOMTokenList.class, DataTransfer.class, DataTransferItem.class,
         DataTransferItemList.class, Event.class, EventTarget.class, External.class, FileList.class, FileSystem.class,
-        FileSystemDirectoryReader.class, FileSystemEntry.class, FontFace.class, FormData.class, Gamepad.class,
-        GamepadButton.class, Geolocation.class, GeolocationCoordinates.class, GeolocationPosition.class,
+        FileSystemDirectoryReader.class, FileSystemEntry.class, FontFace.class, FormData.class,
+        Geolocation.class, GeolocationPosition.class,
         GeolocationPositionError.class, HTMLOptionsCollection.class, Headers.class, History.class, IDBCursor.class,
-        IDBFactory.class, IDBIndex.class, IDBKeyRange.class, IDBObjectStore.class, IdleDeadline.class,
+        IDBFactory.class, IDBIndex.class, IDBKeyRange.class, IDBObjectStore.class,
         ImageBitmap.class, ImageBitmapRenderingContext.class, ImageData.class, InputDeviceCapabilities.class,
         IntersectionObserver.class, IntersectionObserverEntry.class, KeyframeEffect.class, Location.class,
         MIDIInputMap.class, MIDIOutputMap.class, MediaDeviceInfo.class, MediaError.class, MediaKeyStatusMap.class,
@@ -708,6 +708,17 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     @Override
     protected Class<? extends HtmlUnitScriptable>[] getClasses() {
         return CLASSES_;
+    }
+
+    @Override
+    protected HtmlUnitClassDescriptor[] getDescriptors() {
+        return new HtmlUnitClassDescriptor[] {
+            BarProp.HTMLUNIT_DESCRIPTOR,
+            Gamepad.HTMLUNIT_DESCRIPTOR,
+            GamepadButton.HTMLUNIT_DESCRIPTOR,
+            GeolocationCoordinates.HTMLUNIT_DESCRIPTOR,
+            IdleDeadline.HTMLUNIT_DESCRIPTOR,
+        };
     }
 
     /**
