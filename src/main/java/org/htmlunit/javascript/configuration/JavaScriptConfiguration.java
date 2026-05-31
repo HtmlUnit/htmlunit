@@ -571,7 +571,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGAnimatedLengthList.class, SVGAnimatedNumber.class, SVGAnimatedNumberList.class,
         SVGAnimatedPreserveAspectRatio.class, SVGAnimatedRect.class, SVGAnimatedString.class,
         SVGAnimatedTransformList.class, SVGLength.class, SVGLengthList.class, SVGMatrix.class, SVGNumber.class,
-        SVGNumberList.class, SVGPoint.class, SVGPointList.class, SVGPreserveAspectRatio.class, SVGRect.class,
+        SVGNumberList.class, SVGPoint.class, SVGPointList.class, SVGPreserveAspectRatio.class,
         SVGStringList.class, SVGTransform.class, SVGTransformList.class, SVGUnitTypes.class, Selection.class,
         SpeechGrammar.class, SpeechGrammarList.class,
         SpeechSynthesisVoice.class, Storage.class, StorageManager.class, StyleMedia.class, StyleSheet.class,
@@ -718,6 +718,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
             GamepadButton.HTMLUNIT_DESCRIPTOR,
             GeolocationCoordinates.HTMLUNIT_DESCRIPTOR,
             IdleDeadline.HTMLUNIT_DESCRIPTOR,
+            SVGRect.HTMLUNIT_DESCRIPTOR,
         };
     }
 
