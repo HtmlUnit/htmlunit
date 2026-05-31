@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.1.0" date="June xx, 2026" description="Firefox 151, Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: fix for calling Reflect.set() without a value argument.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: add ECMA-426 source map support.
+            </action>
             <action type="fix" dev="Lai Quang Duong">
                 Fix Document.getCookie() to serialize cookies in the order required by RFC 6265 section 2;
                 cookies with longer paths first, then by creation time.
