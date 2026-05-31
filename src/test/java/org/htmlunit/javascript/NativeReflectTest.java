@@ -20,7 +20,7 @@ import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the various TypedArray's.
+ * Tests for the Reflect.
  *
  * @author Ronald Brill
  */
