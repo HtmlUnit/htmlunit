@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="5.1.0" date="June xx, 2026" description="Firefox 151, Bugfixes">
+        <release version="5.1.0" date="May 31, 2026" description="Firefox 151, Bugfixes">
             <action type="fix" dev="rbri">
                 core-js: fix for calling Reflect.set() without a value argument.
             </action>
