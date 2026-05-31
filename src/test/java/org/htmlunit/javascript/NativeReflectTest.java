@@ -29,7 +29,7 @@ public class NativeReflectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true undefined true"})
+    @Alerts("true undefined true")
     public void setMissingValueArgumentTreatedAsUndefined() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html></head>\n"
@@ -49,7 +49,7 @@ public class NativeReflectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true"})
+    @Alerts("true")
     public void setMissingValueWithReceiverTreatedAsUndefined() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html></head>\n"
