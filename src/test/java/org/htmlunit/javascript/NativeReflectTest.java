@@ -16,6 +16,7 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -24,6 +25,131 @@ import org.junit.jupiter.api.Test;
  * @author Ronald Brill
  */
 public class NativeReflectTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void getReceiverDefaultsToTarget() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var o = {};\n"
+                + "  Object.defineProperty(o, 'p', {\n"
+                + "    get() { return this === o; }\n"
+                + "  });\n"
+                + "  log('' + Reflect.get(o, 'p'));\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false",
+            FF = "false",
+            FF_ESR = "false")
+    public void getReceiverPassedToGetter() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var target = {};\n"
+                + "  var receiver = {};\n"
+                + "  Object.defineProperty(target, 'p', {\n"
+                + "    get() { return this === receiver; }\n"
+                + "  });\n"
+                + "  log('' + Reflect.get(target, 'p', receiver));\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false",
+            FF = "false",
+            FF_ESR = "false")
+    public void getReceiverPassedToGetterOnPrototype() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var receiver = {};\n"
+                + "  var proto = {};\n"
+                + "  Object.defineProperty(proto, 'p', {\n"
+                + "    get() { return this === receiver; }\n"
+                + "  });\n"
+                + "  var target = Object.create(proto);\n"
+                + "  log('' + Reflect.get(target, 'p', receiver));\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("42")
+    public void getReceiverDoesNotAffectDataProperty() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var target = { p: 42 };\n"
+                + "  var receiver = { p: 99 };\n"
+                + "  log('' + Reflect.get(target, 'p', receiver));\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false",
+            FF = "false",
+            FF_ESR = "false")
+    public void getReceiverWithSymbolKey() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var sym = Symbol('test');\n"
+                + "  var target = {};\n"
+                + "  var receiver = {};\n"
+                + "  Object.defineProperty(target, sym, {\n"
+                + "    get() { return this === receiver; }\n"
+                + "  });\n"
+                + "  log('' + Reflect.get(target, sym, receiver));"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 
     /**
      * @throws Exception if the test fails
