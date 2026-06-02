@@ -400,14 +400,18 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] clearRect(" + x + ", " + y + ", " + w + ", " + h + ")");
         }
 
-        final Composite saved = graphics2D_.getComposite();
+        final Composite savedComposite = graphics2D_.getComposite();
+        final Color savedColor = graphics2D_.getColor();
 
-        graphics2D_.setColor(Color.BLACK);
-        graphics2D_.setComposite(AlphaComposite.Clear); // overpaint
-        final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
-        graphics2D_.fill(transformation_.createTransformedShape(rect));
-
-        graphics2D_.setComposite(saved);
+        try {
+            graphics2D_.setComposite(AlphaComposite.Clear); // force transparent clear
+            final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
+            graphics2D_.fill(transformation_.createTransformedShape(rect));
+        }
+        finally {
+            graphics2D_.setComposite(savedComposite);
+            graphics2D_.setColor(savedColor);
+        }
     }
 
     /**
@@ -588,7 +592,7 @@ public class AwtRenderingBackend implements RenderingBackend {
         try {
             graphics2D_.setTransform(transformation_);
             graphics2D_.setColor(fillColor_);
-            graphics2D_.drawString(text, (int) x, (int) y);
+            graphics2D_.drawString(text, (float) x, (float) y);
         }
         finally {
             graphics2D_.setTransform(savedTransform);
