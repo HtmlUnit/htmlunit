@@ -606,31 +606,26 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         final byte[] array = new byte[width * height * 4];
         int index = 0;
-        for (int x = sx; x < sx + width; x++) {
-            if (x < 0 || x >= image_.getWidth()) {
-                array[index++] = (byte) 0;
-                array[index++] = (byte) 0;
-                array[index++] = (byte) 0;
-                array[index++] = (byte) 0;
-            }
-            else {
-                for (int y = sy; y < sy + height; y++) {
-                    if (y < 0 || y >= image_.getHeight()) {
-                        array[index++] = (byte) 0;
-                        array[index++] = (byte) 0;
-                        array[index++] = (byte) 0;
-                        array[index++] = (byte) 0;
-                    }
-                    else {
-                        final int color = image_.getRGB(x, y);
-                        array[index++] = (byte) ((color & 0xff0000) >> 16);
-                        array[index++] = (byte) ((color & 0xff00) >> 8);
-                        array[index++] = (byte) (color & 0xff);
-                        array[index++] = (byte) ((color & 0xff000000) >>> 24);
-                    }
+
+        // Canvas ImageData order is row-major
+        for (int y = sy; y < sy + height; y++) {
+            for (int x = sx; x < sx + width; x++) {
+                if (x < 0 || x >= image_.getWidth() || y < 0 || y >= image_.getHeight()) {
+                    array[index++] = (byte) 0;
+                    array[index++] = (byte) 0;
+                    array[index++] = (byte) 0;
+                    array[index++] = (byte) 0;
+                }
+                else {
+                    final int color = image_.getRGB(x, y);
+                    array[index++] = (byte) ((color >> 16) & 0xFF);  // R
+                    array[index++] = (byte) ((color >> 8) & 0xFF);   // G
+                    array[index++] = (byte) (color & 0xFF);          // B
+                    array[index++] = (byte) ((color >>> 24) & 0xFF); // A
                 }
             }
         }
+
         return array;
     }
 
@@ -1001,7 +996,7 @@ public class AwtRenderingBackend implements RenderingBackend {
         private final Shape clip_;
 
         SaveState(final AwtRenderingBackend backend) {
-            transformation_ = backend.transformation_;
+            transformation_ = new AffineTransform(backend.transformation_);
             globalAlpha_ = backend.globalAlpha_;
             lineWidth_ = backend.lineWidth_;
             fillColor_ = backend.fillColor_;
@@ -1011,7 +1006,7 @@ public class AwtRenderingBackend implements RenderingBackend {
         }
 
         void applyOn(final AwtRenderingBackend backend) {
-            backend.transformation_ = transformation_;
+            backend.transformation_ = new AffineTransform(transformation_);
             backend.globalAlpha_ = globalAlpha_;
             backend.lineWidth_ = lineWidth_;
             backend.fillColor_ = fillColor_;
