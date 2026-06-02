@@ -1932,6 +1932,113 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     }
 
     /**
+     * Verifies putImageData() maps source pixels row-major into destination.
+     * Source 2x2:
+     *   (0,0)=red, (1,0)=green
+     *   (0,1)=blue,(1,1)=yellow
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("255,0,0,255|0,255,0,255|0,0,255,255|255,255,0,255")
+    public void putImageDataPixelOrder() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "function test() {\n"
+            + "  var c = document.getElementById('c');\n"
+            + "  var ctx = c.getContext('2d');\n"
+            + "  try {\n"
+            + "    var src = new Uint8ClampedArray([\n"
+            + "      255,0,0,255,    0,255,0,255,\n"
+            + "      0,0,255,255,    255,255,0,255\n"
+            + "    ]);\n"
+            + "    var img = new ImageData(src, 2, 2);\n"
+            + "    ctx.putImageData(img, 0, 0);\n"
+            + "    var d = ctx.getImageData(0, 0, 2, 2).data;\n"
+            + "    log(d[0]+','+d[1]+','+d[2]+','+d[3] + '|'\n"
+            + "      + d[4]+','+d[5]+','+d[6]+','+d[7] + '|'\n"
+            + "      + d[8]+','+d[9]+','+d[10]+','+d[11] + '|'\n"
+            + "      + d[12]+','+d[13]+','+d[14]+','+d[15]);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<canvas id='c' width='2' height='2'></canvas>\n"
+            + LOG_TEXTAREA
+            + "</body></html>";
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * Verifies dirty rectangle picks exactly one source pixel (1,0)=green
+     * and writes it to destination (0,0).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0,0,0,0|0,255,0,255")
+    public void putImageDataDirtySinglePixel() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "function test() {\n"
+            + "  var c = document.getElementById('c');\n"
+            + "  var ctx = c.getContext('2d');\n"
+            + "  try {\n"
+            + "    var src = new Uint8ClampedArray([\n"
+            + "      255,0,0,255,    0,255,0,255,\n"
+            + "      0,0,255,255,    255,255,0,255\n"
+            + "    ]);\n"
+            + "    var img = new ImageData(src, 2, 2);\n"
+            + "    ctx.putImageData(img, 0, 0, 1, 0, 1, 1);\n"
+            + "    var p00 = ctx.getImageData(0, 0, 1, 1).data;\n"
+            + "    var p10 = ctx.getImageData(1, 0, 1, 1).data;\n"
+            + "    log(p00[0]+','+p00[1]+','+p00[2]+','+p00[3] + '|'\n"
+            + "      + p10[0]+','+p10[1]+','+p10[2]+','+p10[3]);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<canvas id='c' width='2' height='2'></canvas>\n"
+            + LOG_TEXTAREA
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * Verifies dirty rectangle clips correctly when destination is offset.
+     * Takes source pixel (1,1)=yellow and places it at dest (2,1).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("255,255,0,255")
+    public void putImageDataDirtyWithDestinationOffset() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "function test() {\n"
+            + "  var c = document.getElementById('c');\n"
+            + "  var ctx = c.getContext('2d');\n"
+            + "  try {\n"
+            + "    var src = new Uint8ClampedArray([\n"
+            + "      255,0,0,255,    0,255,0,255,\n"
+            + "      0,0,255,255,    255,255,0,255\n"
+            + "    ]);\n"
+            + "    var img = new ImageData(src, 2, 2);\n"
+            + "    ctx.putImageData(img, 1, 0, 1, 1, 1, 1);\n"
+            + "    var d = ctx.getImageData(2, 1, 1, 1).data;\n"
+            + "    log(d[0]+','+d[1]+','+d[2]+','+d[3]);\n"
+            + "  } catch(e) { logEx(e); }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<canvas id='c' width='4' height='3'></canvas>\n"
+            + LOG_TEXTAREA
+            + "</body></html>";
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

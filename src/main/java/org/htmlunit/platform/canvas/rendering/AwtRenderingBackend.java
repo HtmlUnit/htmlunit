@@ -673,43 +673,62 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] putImageData()");
         }
 
-        final Color orgColor = graphics2D_.getColor();
+        if (imageDataBytes == null || imageDataWidth <= 0 || imageDataHeight <= 0) {
+            return;
+        }
 
-        final int width = dx + imageDataWidth;
-        final int height = dy + imageDataHeight;
-        final int imageWidth = dirtyX + dirtyWidth;
-        final int imageHeight = dirtyY + dirtyHeight;
+        // Normalize dirty rect like canvas behavior for negative sizes
+        int sx = dirtyX;
+        int sy = dirtyY;
+        int sw = dirtyWidth;
+        int sh = dirtyHeight;
+        if (sw < 0) {
+            sx += sw;
+            sw = -sw;
+        }
+        if (sh < 0) {
+            sy += sh;
+            sh = -sh;
+        }
+        if (sw == 0 || sh == 0) {
+            return;
+        }
 
-        int byteIdx = 0;
-        int imageX = 0;
-        int imageY = 0;
-        for (int insertY = dy; insertY < height; insertY++) {
-            for (int insertX = dx; insertX < width; insertX++) {
-                if (0 <= insertX && insertX < image_.getWidth()
-                        && 0 <= insertY && insertY < image_.getHeight()
-                        && dirtyX <= imageX && imageX < imageWidth
-                        && dirtyY <= imageY && imageY < imageHeight) {
+        // Clip dirty rect to source image bounds
+        final int srcStartX = Math.max(0, sx);
+        final int srcStartY = Math.max(0, sy);
+        final int srcEndX = Math.min(imageDataWidth, sx + sw);
+        final int srcEndY = Math.min(imageDataHeight, sy + sh);
+        if (srcStartX >= srcEndX || srcStartY >= srcEndY) {
+            return;
+        }
+
+        final Color oldColor = graphics2D_.getColor();
+        try {
+            int byteIdx = 0;
+            for (int srcY = srcStartY; srcY < srcEndY; srcY++) {
+                for (int srcX = srcStartX; srcX < srcEndX; srcX++) {
+                    final int destX = dx + srcX;
+                    final int destY = dy + srcY;
+
+                    // putImageData is not affected by current transform; direct pixel write
+                    if (destX < 0 || destX >= image_.getWidth() || destY < 0 || destY >= image_.getHeight()) {
+                        continue;
+                    }
+
                     final int r = imageDataBytes[byteIdx++] & 0xFF;
                     final int g = imageDataBytes[byteIdx++] & 0xFF;
                     final int b = imageDataBytes[byteIdx++] & 0xFF;
                     final int a = imageDataBytes[byteIdx++] & 0xFF;
-                    final Color color = new Color(r, g, b, a);
-                    graphics2D_.setColor(color);
-                    graphics2D_.drawLine(insertX, insertY, insertX, insertY);
-                }
-                else {
-                    byteIdx += 4;
-                }
 
-                imageX++;
-                if (imageX == imageDataWidth) {
-                    imageX = 0;
-                    imageY++;
+                    graphics2D_.setColor(new Color(r, g, b, a));
+                    graphics2D_.drawLine(destX, destY, destX, destY);
                 }
             }
         }
-
-        graphics2D_.setColor(orgColor);
+        finally {
+            graphics2D_.setColor(oldColor);
+        }
     }
 
     /**
