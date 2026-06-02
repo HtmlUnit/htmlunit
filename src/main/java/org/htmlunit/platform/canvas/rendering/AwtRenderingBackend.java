@@ -677,7 +677,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             return;
         }
 
-        // Normalize dirty rect like canvas behavior for negative sizes
+        // Normalize dirty rect (negative width/height)
         int sx = dirtyX;
         int sy = dirtyY;
         int sw = dirtyWidth;
@@ -694,7 +694,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             return;
         }
 
-        // Clip dirty rect to source image bounds
+        // Clip dirty rect to source bounds
         final int srcStartX = Math.max(0, sx);
         final int srcStartY = Math.max(0, sy);
         final int srcEndX = Math.min(imageDataWidth, sx + sw);
@@ -705,21 +705,24 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         final Color oldColor = graphics2D_.getColor();
         try {
-            int byteIdx = 0;
             for (int srcY = srcStartY; srcY < srcEndY; srcY++) {
                 for (int srcX = srcStartX; srcX < srcEndX; srcX++) {
                     final int destX = dx + srcX;
                     final int destY = dy + srcY;
 
-                    // putImageData is not affected by current transform; direct pixel write
-                    if (destX < 0 || destX >= image_.getWidth() || destY < 0 || destY >= image_.getHeight()) {
+                    // putImageData ignores current transform; direct device coords
+                    if (destX < 0 || destX >= image_.getWidth()
+                            || destY < 0 || destY >= image_.getHeight()) {
                         continue;
                     }
 
-                    final int r = imageDataBytes[byteIdx++] & 0xFF;
-                    final int g = imageDataBytes[byteIdx++] & 0xFF;
-                    final int b = imageDataBytes[byteIdx++] & 0xFF;
-                    final int a = imageDataBytes[byteIdx++] & 0xFF;
+                    // CRITICAL: index from full source image coordinates
+                    final int byteIdx = (srcY * imageDataWidth + srcX) * 4;
+
+                    final int r = imageDataBytes[byteIdx] & 0xFF;
+                    final int g = imageDataBytes[byteIdx + 1] & 0xFF;
+                    final int b = imageDataBytes[byteIdx + 2] & 0xFF;
+                    final int a = imageDataBytes[byteIdx + 3] & 0xFF;
 
                     graphics2D_.setColor(new Color(r, g, b, a));
                     graphics2D_.drawLine(destX, destY, destX, destY);
@@ -1026,10 +1029,11 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         void applyOn(final AwtRenderingBackend backend) {
             backend.transformation_ = new AffineTransform(transformation_);
-            backend.globalAlpha_ = globalAlpha_;
             backend.lineWidth_ = lineWidth_;
             backend.fillColor_ = fillColor_;
             backend.strokeColor_ = strokeColor_;
+
+            backend.updateGlobalAlpha(globalAlpha_);
 
             backend.graphics2D_.setClip(clip_);
         }

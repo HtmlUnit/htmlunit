@@ -815,28 +815,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
         loadPageVerifyTextArea2(html);
     }
 
-    private void draw(final String canvasSetup, final String drawJS) throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head>\n"
-            + "<script>\n"
-            + LOG_TEXTAREA_FUNCTION
-            + "  function test() {\n"
-            + "    var canvas = document.getElementById('myCanvas');\n"
-            + "    if (canvas.getContext) {\n"
-            + "      var context = canvas.getContext('2d');\n"
-            + drawJS
-            + "      log(canvas.toDataURL());\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + canvasSetup
-            + LOG_TEXTAREA
-            + "</body></html>";
-
-        loadPageVerifyTextArea2(html);
-    }
-
     /**
      * @throws Exception if an error occurs
      */
@@ -1942,31 +1920,18 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts("255,0,0,255|0,255,0,255|0,0,255,255|255,255,0,255")
     public void putImageDataPixelOrder() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TEXTAREA_FUNCTION
-            + "function test() {\n"
-            + "  var c = document.getElementById('c');\n"
-            + "  var ctx = c.getContext('2d');\n"
-            + "  try {\n"
-            + "    var src = new Uint8ClampedArray([\n"
-            + "      255,0,0,255,    0,255,0,255,\n"
-            + "      0,0,255,255,    255,255,0,255\n"
-            + "    ]);\n"
-            + "    var img = new ImageData(src, 2, 2);\n"
-            + "    ctx.putImageData(img, 0, 0);\n"
-            + "    var d = ctx.getImageData(0, 0, 2, 2).data;\n"
-            + "    log(d[0]+','+d[1]+','+d[2]+','+d[3] + '|'\n"
-            + "      + d[4]+','+d[5]+','+d[6]+','+d[7] + '|'\n"
-            + "      + d[8]+','+d[9]+','+d[10]+','+d[11] + '|'\n"
-            + "      + d[12]+','+d[13]+','+d[14]+','+d[15]);\n"
-            + "  } catch(e) { logEx(e); }\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<canvas id='c' width='2' height='2'></canvas>\n"
-            + LOG_TEXTAREA
-            + "</body></html>";
-        loadPageVerifyTextArea2(html);
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+                "    var src = new Uint8ClampedArray([\n"
+                + "      255,0,0,255,    0,255,0,255,\n"
+                + "      0,0,255,255,    255,255,0,255\n"
+                + "    ]);\n"
+                + "    var img = new ImageData(src, 2, 2);\n"
+                + "    context.putImageData(img, 0, 0);\n"
+                + "    var d = context.getImageData(0, 0, 2, 2).data;\n"
+                + "    log(d[0]+','+d[1]+','+d[2]+','+d[3] + '|'\n"
+                + "      + d[4]+','+d[5]+','+d[6]+','+d[7] + '|'\n"
+                + "      + d[8]+','+d[9]+','+d[10]+','+d[11] + '|'\n"
+                + "      + d[12]+','+d[13]+','+d[14]+','+d[15]);\n");
     }
 
     /**
@@ -1978,31 +1943,17 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts("0,0,0,0|0,255,0,255")
     public void putImageDataDirtySinglePixel() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TEXTAREA_FUNCTION
-            + "function test() {\n"
-            + "  var c = document.getElementById('c');\n"
-            + "  var ctx = c.getContext('2d');\n"
-            + "  try {\n"
-            + "    var src = new Uint8ClampedArray([\n"
-            + "      255,0,0,255,    0,255,0,255,\n"
-            + "      0,0,255,255,    255,255,0,255\n"
-            + "    ]);\n"
-            + "    var img = new ImageData(src, 2, 2);\n"
-            + "    ctx.putImageData(img, 0, 0, 1, 0, 1, 1);\n"
-            + "    var p00 = ctx.getImageData(0, 0, 1, 1).data;\n"
-            + "    var p10 = ctx.getImageData(1, 0, 1, 1).data;\n"
-            + "    log(p00[0]+','+p00[1]+','+p00[2]+','+p00[3] + '|'\n"
-            + "      + p10[0]+','+p10[1]+','+p10[2]+','+p10[3]);\n"
-            + "  } catch(e) { logEx(e); }\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<canvas id='c' width='2' height='2'></canvas>\n"
-            + LOG_TEXTAREA
-            + "</body></html>";
-
-        loadPageVerifyTextArea2(html);
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+                "    var src = new Uint8ClampedArray([\n"
+                + "      255,0,0,255,    0,255,0,255,\n"
+                + "      0,0,255,255,    255,255,0,255\n"
+                + "    ]);\n"
+                + "    var img = new ImageData(src, 2, 2);\n"
+                + "    context.putImageData(img, 0, 0, 1, 0, 1, 1);\n"
+                + "    var p00 = context.getImageData(0, 0, 1, 1).data;\n"
+                + "    var p10 = context.getImageData(1, 0, 1, 1).data;\n"
+                + "    log(p00[0]+','+p00[1]+','+p00[2]+','+p00[3] + '|'\n"
+                + "      + p10[0]+','+p10[1]+','+p10[2]+','+p10[3]);\n");
     }
 
     /**
@@ -2014,28 +1965,15 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts("255,255,0,255")
     public void putImageDataDirtyWithDestinationOffset() throws Exception {
-        final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
-            + LOG_TEXTAREA_FUNCTION
-            + "function test() {\n"
-            + "  var c = document.getElementById('c');\n"
-            + "  var ctx = c.getContext('2d');\n"
-            + "  try {\n"
-            + "    var src = new Uint8ClampedArray([\n"
-            + "      255,0,0,255,    0,255,0,255,\n"
-            + "      0,0,255,255,    255,255,0,255\n"
-            + "    ]);\n"
-            + "    var img = new ImageData(src, 2, 2);\n"
-            + "    ctx.putImageData(img, 1, 0, 1, 1, 1, 1);\n"
-            + "    var d = ctx.getImageData(2, 1, 1, 1).data;\n"
-            + "    log(d[0]+','+d[1]+','+d[2]+','+d[3]);\n"
-            + "  } catch(e) { logEx(e); }\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<canvas id='c' width='4' height='3'></canvas>\n"
-            + LOG_TEXTAREA
-            + "</body></html>";
-        loadPageVerifyTextArea2(html);
+        verify("<canvas id='myCanvas' width='4' height='3'></canvas>\n",
+                "    var src = new Uint8ClampedArray([\n"
+                + "      255,0,0,255,    0,255,0,255,\n"
+                + "      0,0,255,255,    255,255,0,255\n"
+                + "    ]);\n"
+                + "    var img = new ImageData(src, 2, 2);\n"
+                + "    context.putImageData(img, 1, 0, 1, 1, 1, 1);\n"
+                + "    var d = context.getImageData(2, 1, 1, 1).data;\n"
+                + "    log(d[0]+','+d[1]+','+d[2]+','+d[3]);\n");
     }
 
     /**
@@ -2292,6 +2230,20 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "      context.fillRect(16, 16, 4, 4);\n");
     }
 
+    @Test
+    @Alerts("255")
+    public void saveRestoreRestoresGlobalAlphaForRendering() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+                "  context.save();\n"
+                + "  context.globalAlpha = 0.5;\n"
+                // should restore to 1.0 for both property and drawing behavior
+                + "  context.restore();\n"
+                + "  context.fillStyle = 'rgba(255,0,0,1)';\n"
+                + "  context.fillRect(0,0,1,1);\n"
+                + "  var d = context.getImageData(0,0,1,1).data;\n"
+                + "  log('' + d[3]);\n");
+    }
+
     /**
      * @throws Exception if the test fails
      */
@@ -2355,33 +2307,61 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts("255,0,0,255|0,255,0,255|0,0,255,255|255,255,0,255")
     public void getImageDataPixelOrder() throws Exception {
+        verify("<canvas id='myCanvas' width='2' height='2'></canvas>\n",
+                // 2x2 image with unique colors per pixel:\n"
+                // (0,0)=red,   (1,0)=green\n"
+                // (0,1)=blue,  (1,1)=yellow\n"
+                "    context.fillStyle = 'rgba(255,0,0,1)'; context.fillRect(0, 0, 1, 1);\n"
+                + "context.fillStyle = 'rgba(0,255,0,1)'; context.fillRect(1, 0, 1, 1);\n"
+                + "context.fillStyle = 'rgba(0,0,255,1)'; context.fillRect(0, 1, 1, 1);\n"
+                + "context.fillStyle = 'rgba(255,255,0,1)'; context.fillRect(1, 1, 1, 1);\n"
+
+                + "var d = context.getImageData(0, 0, 2, 2).data;\n"
+                + "var s = ''\n"
+                + "  + d[0] + ',' + d[1] + ',' + d[2] + ',' + d[3] + '|'   // (0,0)\n"
+                + "  + d[4] + ',' + d[5] + ',' + d[6] + ',' + d[7] + '|'   // (1,0)\n"
+                + "  + d[8] + ',' + d[9] + ',' + d[10] + ',' + d[11] + '|' // (0,1)\n"
+                + "  + d[12] + ',' + d[13] + ',' + d[14] + ',' + d[15];    // (1,1)\n"
+                + "log(s);\n");
+    }
+
+    private void draw(final String canvasSetup, final String drawJS) throws Exception {
         final String html = DOCTYPE_HTML
-            + "<html><head><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
             + LOG_TEXTAREA_FUNCTION
-            + "function test() {\n"
-            + "  var canvas = document.getElementById('c');\n"
-            + "  var ctx = canvas.getContext('2d');\n"
-            + "  try {\n"
-            + "    // 2x2 image with unique colors per pixel:\n"
-            + "    // (0,0)=red,   (1,0)=green\n"
-            + "    // (0,1)=blue,  (1,1)=yellow\n"
-            + "    ctx.fillStyle = 'rgba(255,0,0,1)'; ctx.fillRect(0, 0, 1, 1);\n"
-            + "    ctx.fillStyle = 'rgba(0,255,0,1)'; ctx.fillRect(1, 0, 1, 1);\n"
-            + "    ctx.fillStyle = 'rgba(0,0,255,1)'; ctx.fillRect(0, 1, 1, 1);\n"
-            + "    ctx.fillStyle = 'rgba(255,255,0,1)'; ctx.fillRect(1, 1, 1, 1);\n"
-            + "\n"
-            + "    var d = ctx.getImageData(0, 0, 2, 2).data;\n"
-            + "    var s = ''\n"
-            + "      + d[0] + ',' + d[1] + ',' + d[2] + ',' + d[3] + '|'   // (0,0)\n"
-            + "      + d[4] + ',' + d[5] + ',' + d[6] + ',' + d[7] + '|'   // (1,0)\n"
-            + "      + d[8] + ',' + d[9] + ',' + d[10] + ',' + d[11] + '|' // (0,1)\n"
-            + "      + d[12] + ',' + d[13] + ',' + d[14] + ',' + d[15];    // (1,1)\n"
-            + "    log(s);\n"
-            + "  } catch(e) { logEx(e); }\n"
-            + "}\n"
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "<canvas id='c' width='2' height='2'></canvas>\n"
+            + "  function test() {\n"
+            + "    var canvas = document.getElementById('myCanvas');\n"
+            + "    if (canvas.getContext) {\n"
+            + "      var context = canvas.getContext('2d');\n"
+            + drawJS
+            + "      log(canvas.toDataURL());\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + canvasSetup
+            + LOG_TEXTAREA
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    private void verify(final String canvasSetup, final String drawJS) throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  function test() {\n"
+            + "    var canvas = document.getElementById('myCanvas');\n"
+            + "    if (canvas.getContext) {\n"
+            + "      var context = canvas.getContext('2d');\n"
+            + drawJS
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + canvasSetup
             + LOG_TEXTAREA
             + "</body></html>";
 

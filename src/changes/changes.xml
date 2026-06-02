@@ -9,6 +9,9 @@
     <body>
         <release version="5.1.0" date="May 31, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                CanvasRenderingContext2D#restore(() fix alpha handling.
+            </action>
+            <action type="fix" dev="rbri">
                 CanvasRenderingContext2D#putImageData() maps source pixels row-major into destination.
             </action>
             <action type="fix" dev="rbri">
