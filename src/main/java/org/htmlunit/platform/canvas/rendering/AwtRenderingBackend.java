@@ -964,29 +964,31 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] clip(" + windingRule + ", " + path + ")");
         }
 
-        if (path == null && subPaths_.isEmpty()) {
-            graphics2D_.setClip(null);
+        final Path2D clipPath = new Path2D.Double();
+
+        if (path == null) {
+            if (subPaths_.isEmpty()) {
+                return;
+            }
+            for (final Path2D p : subPaths_) {
+                clipPath.append(p, false);
+            }
+        }
+        else {
+            // TODO integrate external Path2D host object once available
             return;
         }
 
-        final Path2D currentPath;
-        if (path == null) {
-            currentPath = subPaths_.get(subPaths_.size() - 1);
-        }
-        else {
-            // currentPath = path.getPath2D();
-            currentPath = null;
-        }
-        currentPath.closePath();
-
         if (windingRule == WindingRule.NON_ZERO) {
-            currentPath.setWindingRule(Path2D.WIND_NON_ZERO);
+            clipPath.setWindingRule(Path2D.WIND_NON_ZERO);
         }
         else {
-            currentPath.setWindingRule(Path2D.WIND_EVEN_ODD);
+            clipPath.setWindingRule(Path2D.WIND_EVEN_ODD);
         }
 
-        graphics2D_.clip(currentPath);
+        clipPath.closePath();
+
+        graphics2D_.clip(clipPath);
     }
 
     /**

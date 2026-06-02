@@ -2039,6 +2039,41 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "context.fillStyle = 'deeppink';context.fill();\n");
     }
 
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAiklEQVR4AazSQQ6AIAwEwOqfvfsA/4wuCQa00G2BpAkHOm3I"
+            + "7rL4ZDCJJKNOdm4GjcfXJrIMBHaI44w2dGOY2wNDWA8MYxo4hX1BFTPiVOL2pqD8oYphIlHobcEnZ65oVEOANb1lw+oNff1h"
+            + "6IyCKhYFu1gEHGJe0MQ8IIWxII1RoDej0dhgGbVuAAAA//84BJj8AAAABklEQVQDAC8YNymOsx6WAAAAAElFTkSuQmCC",
+        FF = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAhElEQVQ4T63SSw6AIAwEUDm0e13rnRVIJBHazrTQsKN5fDpp"
+            + "W1ypeE9dZh258WTOZsA7N+0MVnoQ6MIQ6MYsMIRpYBiTwCmsB0WMiFRxWqy+KV9aNAjwd5EKWgXA4VUzoPhFUVAdXgQ0k+AF"
+            + "Yaw8IMRaDokpUxgLqhmVLgKfjHLa7y8HXybpNxX5BeGTAAAAEGRlQkcwNEI0NzJBRDMzQkY3OTk10kkJJQAAAABJRU5ErkJg"
+            + "gg==",
+        FF_ESR = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAhElEQVQ4T63SSw6AIAwEUDm0e13rnRVIJBHazrTQsKN5fDpp"
+            + "W1ypeE9dZh258WTOZsA7N+0MVnoQ6MIQ6MYsMIRpYBiTwCmsB0WMiFRxWqy+KV9aNAjwd5EKWgXA4VUzoPhFUVAdXgQ0k+AF"
+            + "Yaw8IMRaDokpUxgLqhmVLgKfjHLa7y8HXybpNxX5BeGTAAAAAElFTkSuQmCC")
+    public void clipUsesAllSubpaths() throws Exception {
+        draw("<canvas id='myCanvas' width='20', height='20'></canvas>\n",
+                "  context.beginPath();\n"
+                + "\n"
+                + "  // subpath #1: small triangle near top-left\n"
+                + "  context.moveTo(1,1);\n"
+                + "  context.lineTo(10,1);\n"
+                + "  context.lineTo(1,10);\n"
+                + "  context.closePath();\n"
+                + "\n"
+                + "  // subpath #2: small triangle near bottom-right\n"
+                + "  context.moveTo(8,8);\n"
+                + "  context.lineTo(18,8);\n"
+                + "  context.lineTo(8,18);\n"
+                + "  context.closePath();\n"
+                + "\n"
+                + "  context.clip();\n"
+                + "  context.fillStyle = 'red';\n"
+                + "  context.fillRect(0,0,20,20);\n");
+    }
+
     /**
      * @throws Exception if the test fails
      */
