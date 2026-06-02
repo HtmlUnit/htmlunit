@@ -85,6 +85,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.htmlunit.options.HtmlUnitDriverOptions;
 import org.openqa.selenium.htmlunit.options.HtmlUnitOption;
 import org.openqa.selenium.remote.UnreachableBrowserException;
+import org.opentest4j.AssertionFailedError;
 
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
@@ -1102,20 +1103,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected final WebDriver verifyTextArea2(final WebDriver driver,
             final String... expectedAlerts) throws Exception {
         final WebElement textArea = driver.findElement(By.id("myLog"));
+        String value = textArea.getDomProperty("value");
 
         if (expectedAlerts.length == 0) {
-            assertEquals("", textArea.getDomProperty("value"));
-            return driver;
-        }
-
-        if (!useRealBrowser()
-                && expectedAlerts.length == 1
-                && expectedAlerts[0].startsWith("data:image/png;base64,")) {
-            String value = textArea.getDomProperty("value");
-            if (value.endsWith("\u00A7")) {
-                value = value.substring(0, value.length() - 1);
-            }
-            compareImages(expectedAlerts[0], value);
+            assertEquals("", value);
             return driver;
         }
 
@@ -1123,8 +1114,30 @@ public abstract class WebDriverTestCase extends WebTestCase {
         for (String expectedAlert : expectedAlerts) {
             expected.append(expectedAlert).append('\u00A7');
         }
-        verify(() -> textArea.getDomProperty("value"), expected.toString());
 
+        if (expectedAlerts.length == 1 && expectedAlerts[0].startsWith("data:image/png;base64,")) {
+            try {
+                // fastpath
+                assertEquals(expected.toString(), value);
+            } catch (final AssertionFailedError e) {
+                // starting wiht FF151 we have canvas fingerprinting protection
+                // therefore we have to compare the pictures
+                if (useRealBrowser()
+                        && !(getBrowserVersion().isFirefox() && !getBrowserVersion().isFirefoxESR())) {
+                    throw e;
+                }
+
+                // fails -> compare images
+                if (value.endsWith("\u00A7")) {
+                    value = value.substring(0, value.length() - 1);
+                }
+
+                compareImages(expectedAlerts[0], value);
+                return driver;
+            }
+        }
+
+        verify(() -> textArea.getDomProperty("value"), expected.toString());
         return driver;
     }
 

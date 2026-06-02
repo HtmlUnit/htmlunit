@@ -15,7 +15,6 @@
 package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -599,7 +598,9 @@ public abstract class WebTestCase {
                 if (current != null) {
                     fail += "; current data: '" + current + "'";
                 }
-                fail(fail);
+
+                // fail(fail);
+                assertEquals(expected, current, fail);
             }
             else if (ImageComparisonState.MISMATCH == imageComparisonState) {
                 final String dir = "target/" + testInfo_.getDisplayName();
@@ -618,7 +619,9 @@ public abstract class WebTestCase {
                 if (current != null) {
                     fail += "; current data: '" + current + "'";
                 }
-                fail(fail);
+
+                // fail(fail);
+                assertEquals(expected, current, fail);
             }
         }
     }
