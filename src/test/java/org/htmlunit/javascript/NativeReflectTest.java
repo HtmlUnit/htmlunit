@@ -16,7 +16,6 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -53,10 +52,6 @@ public class NativeReflectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false",
-            FF = "false",
-            FF_ESR = "false")
     public void getReceiverPassedToGetter() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html></head>\n"
@@ -80,10 +75,6 @@ public class NativeReflectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false",
-            FF = "false",
-            FF_ESR = "false")
     public void getReceiverPassedToGetterOnPrototype() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html></head>\n"
@@ -128,10 +119,6 @@ public class NativeReflectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false",
-            FF = "false",
-            FF_ESR = "false")
     public void getReceiverWithSymbolKey() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html></head>\n"

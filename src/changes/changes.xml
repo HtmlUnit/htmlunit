@@ -9,6 +9,18 @@
     <body>
         <release version="5.1.0" date="May 31, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                core-js: Reflect get if receiver is not present, then use the target instead
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Reflect get use the receiver when searching for the property
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Reflect get mast walk the prototype chain when searching for the property
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Proxy has to use the correct receiver when calling the get trap
+            </action>
+            <action type="fix" dev="rbri">
                 CanvasRenderingContext2D#clip() clip the entire current path, not just last subpath.
             </action>
             <action type="fix" dev="rbri">

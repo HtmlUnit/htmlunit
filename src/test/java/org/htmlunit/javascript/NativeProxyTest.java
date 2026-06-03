@@ -16,7 +16,6 @@ package org.htmlunit.javascript;
 
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.annotation.Alerts;
-import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -28,10 +27,6 @@ public class NativeProxyTest extends WebDriverTestCase {
 
     @Test
     @Alerts("correct")
-    @HtmlUnitNYI(CHROME = "wrong",
-            EDGE = "wrong",
-            FF = "wrong",
-            FF_ESR = "wrong")
     public void getTrapReceivesCorrectReceiverWhenDifferentFromProxy() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html></head>\n"
@@ -102,10 +97,6 @@ public class NativeProxyTest extends WebDriverTestCase {
 
     @Test
     @Alerts("correct")
-    @HtmlUnitNYI(CHROME = "wrong",
-            EDGE = "wrong",
-            FF = "wrong",
-            FF_ESR = "wrong")
     public void getTrapReceivesCorrectReceiverWithIndexKey() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html></head>\n"
@@ -133,10 +124,6 @@ public class NativeProxyTest extends WebDriverTestCase {
 
     @Test
     @Alerts("correct")
-    @HtmlUnitNYI(CHROME = "wrong",
-            EDGE = "wrong",
-            FF = "wrong",
-            FF_ESR = "wrong")
     public void getTrapReceivesCorrectReceiverWithSymbolKey() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html></head>\n"
