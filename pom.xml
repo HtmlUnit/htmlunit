@@ -61,7 +61,7 @@
         <!-- test dependencies -->
         <junit.version>6.1.0</junit.version>
         <junit-pioneer.version>2.3.0</junit-pioneer.version>
-        <jetty.version>12.1.8</jetty.version>
+        <jetty.version>12.1.10</jetty.version>
         <quercus.version>4.0.66</quercus.version>
         <logback-classic.version>1.5.33</logback-classic.version>
         <commons-text.version>1.15.0</commons-text.version>
