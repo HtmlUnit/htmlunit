@@ -581,20 +581,16 @@ public abstract class WebTestCase {
             final ImageComparisonResult imageComparisonResult = imageComparison.compareImages();
             final ImageComparisonState imageComparisonState = imageComparisonResult.getImageComparisonState();
 
-            if (ImageComparisonState.SIZE_MISMATCH == imageComparisonState) {
-                final String dir = "target/" + testInfo_.getDisplayName();
-                Files.createDirectories(Paths.get(dir));
+            // debugOutput(expectedImage, currentImage, imageComparisonResult.getResult());
 
-                final File expectedOut = new File(dir, "expected.png");
-                final File currentOut = new File(dir, "current.png");
-                ImageComparisonUtil.saveImage(expectedOut, expectedImage);
-                ImageComparisonUtil.saveImage(currentOut, currentImage);
+            if (ImageComparisonState.SIZE_MISMATCH == imageComparisonState) {
+                final List<String> result = debugOutput(expectedImage, currentImage, null);
 
                 String fail = "The images are different in size - "
                         + "expected: " + expectedImage.getWidth() + "x" + expectedImage.getHeight()
                         + " current: " + currentImage.getWidth() + "x" + currentImage.getHeight()
-                        + " (expected: " + expectedOut.getAbsolutePath()
-                            + " current: " + currentOut.getAbsolutePath() + ")";
+                        + " (expected: " + result.get(0)
+                            + " current: " + result.get(1) + ")";
                 if (current != null) {
                     fail += "; current data: '" + current + "'";
                 }
@@ -603,19 +599,11 @@ public abstract class WebTestCase {
                 assertEquals(expected, current, fail);
             }
             else if (ImageComparisonState.MISMATCH == imageComparisonState) {
-                final String dir = "target/" + testInfo_.getDisplayName();
-                Files.createDirectories(Paths.get(dir));
+                final List<String> result = debugOutput(expectedImage, currentImage, imageComparisonResult.getResult());
 
-                final File expectedOut = new File(dir, "expected.png");
-                final File currentOut = new File(dir, "current.png");
-                final File differenceOut = new File(dir, "difference.png");
-                ImageComparisonUtil.saveImage(expectedOut, expectedImage);
-                ImageComparisonUtil.saveImage(currentOut, currentImage);
-                ImageComparisonUtil.saveImage(differenceOut, imageComparisonResult.getResult());
-
-                String fail = "The images are different (expected: " + expectedOut.getAbsolutePath()
-                            + " current: " + currentOut.getAbsolutePath()
-                            + " difference: " + differenceOut.getAbsolutePath() + ")";
+                String fail = "The images are different (expected: " + result.get(0)
+                            + " current: " + result.get(1)
+                            + " difference: " + result.get(2) + ")";
                 if (current != null) {
                     fail += "; current data: '" + current + "'";
                 }
@@ -624,5 +612,31 @@ public abstract class WebTestCase {
                 assertEquals(expected, current, fail);
             }
         }
+    }
+
+    private List<String> debugOutput(final BufferedImage expectedImage,
+            final BufferedImage currentImage,
+            final BufferedImage differenceImage) throws IOException {
+        final List<String> result = new ArrayList<>();
+
+        final String dir = "target/imageComparison/" + testInfo_.getDisplayName();
+        Files.createDirectories(Paths.get(dir));
+
+        final String browser = getBrowserVersion().getNickname();
+
+        final File expectedOut = new File(dir, "expected_" + browser + ".png");
+        ImageComparisonUtil.saveImage(expectedOut, expectedImage);
+        result.add(expectedOut.getAbsolutePath());
+
+        final File currentOut = new File(dir, "current_" + browser + ".png");
+        ImageComparisonUtil.saveImage(currentOut, currentImage);
+        result.add(currentOut.getAbsolutePath());
+
+        if (differenceImage != null) {
+            final File differenceOut = new File(dir, "difference_" + browser + ".png");
+            ImageComparisonUtil.saveImage(differenceOut, differenceImage);
+            result.add(differenceOut.getAbsolutePath());
+        }
+        return result;
     }
 }

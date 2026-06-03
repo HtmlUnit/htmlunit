@@ -326,23 +326,21 @@ public class AwtRenderingBackend implements RenderingBackend {
         }
 
         final Path2D subPath = getCurrentSubPath();
-        if (subPath != null) {
-            final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-            final double startAngleDegree = 360 - (startAngle * 180 / Math.PI);
-            final double endAngleDegree = 360 - (endAngle * 180 / Math.PI);
+        final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
+        final double startAngleDegree = 360 - (startAngle * 180 / Math.PI);
+        final double endAngleDegree = 360 - (endAngle * 180 / Math.PI);
 
-            double extendAngle = startAngleDegree - endAngleDegree;
-            extendAngle = Math.min(360, Math.abs(extendAngle));
-            if (anticlockwise && extendAngle < 360) {
-                extendAngle = extendAngle - 360;
-            }
-
-            final AffineTransform transformation = new AffineTransform();
-            transformation.rotate(rotation, p.getX(), p.getY());
-            final Arc2D arc = new Arc2D.Double(p.getX() - radiusX, p.getY() - radiusY, radiusX * 2, radiusY * 2,
-                                            startAngleDegree, extendAngle * -1, Arc2D.OPEN);
-            subPath.append(transformation.createTransformedShape(arc), false);
+        double extendAngle = startAngleDegree - endAngleDegree;
+        extendAngle = Math.min(360, Math.abs(extendAngle));
+        if (anticlockwise && extendAngle < 360) {
+            extendAngle = extendAngle - 360;
         }
+
+        final AffineTransform transformation = new AffineTransform();
+        transformation.rotate(rotation, p.getX(), p.getY());
+        final Arc2D arc = new Arc2D.Double(p.getX() - radiusX, p.getY() - radiusY, radiusX * 2, radiusY * 2,
+                                        startAngleDegree, extendAngle * -1, Arc2D.OPEN);
+        subPath.append(transformation.createTransformedShape(arc), false);
     }
 
     /**
@@ -356,12 +354,10 @@ public class AwtRenderingBackend implements RenderingBackend {
         }
 
         final Path2D subPath = getCurrentSubPath();
-        if (subPath != null) {
-            final Point2D cp1 = transformation_.transform(new Point2D.Double(cp1x, cp1y), null);
-            final Point2D cp2 = transformation_.transform(new Point2D.Double(cp2x, cp2y), null);
-            final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-            subPath.curveTo(cp1.getX(), cp1.getY(), cp2.getX(), cp2.getY(), p.getX(), p.getY());
-        }
+        final Point2D cp1 = transformation_.transform(new Point2D.Double(cp1x, cp1y), null);
+        final Point2D cp2 = transformation_.transform(new Point2D.Double(cp2x, cp2y), null);
+        final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
+        subPath.curveTo(cp1.getX(), cp1.getY(), cp2.getX(), cp2.getY(), p.getX(), p.getY());
     }
 
     /**
@@ -375,20 +371,19 @@ public class AwtRenderingBackend implements RenderingBackend {
         }
 
         final Path2D subPath = getCurrentSubPath();
-        if (subPath != null) {
-            final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-            final double startAngleDegree = 360 - (startAngle * 180 / Math.PI);
-            final double endAngleDegree = 360 - (endAngle * 180 / Math.PI);
 
-            double extendAngle = startAngleDegree - endAngleDegree;
-            extendAngle = Math.min(360, Math.abs(extendAngle));
-            if (anticlockwise && extendAngle < 360) {
-                extendAngle = extendAngle - 360;
-            }
-            final Arc2D arc = new Arc2D.Double(p.getX() - radius, p.getY() - radius, radius * 2, radius * 2,
-                                            startAngleDegree, extendAngle * -1, Arc2D.OPEN);
-            subPath.append(arc, false);
+        final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
+        final double startAngleDegree = 360 - (startAngle * 180 / Math.PI);
+        final double endAngleDegree = 360 - (endAngle * 180 / Math.PI);
+
+        double extendAngle = startAngleDegree - endAngleDegree;
+        extendAngle = Math.min(360, Math.abs(extendAngle));
+        if (anticlockwise && extendAngle < 360) {
+            extendAngle = extendAngle - 360;
         }
+        final Arc2D arc = new Arc2D.Double(p.getX() - radius, p.getY() - radius, radius * 2, radius * 2,
+                                        startAngleDegree, extendAngle * -1, Arc2D.OPEN);
+        subPath.append(arc, true);
     }
 
     /**
@@ -643,10 +638,8 @@ public class AwtRenderingBackend implements RenderingBackend {
         }
 
         final Path2D subPath = getCurrentSubPath();
-        if (subPath != null) {
-            final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-            subPath.lineTo(p.getX(), p.getY());
-        }
+        final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
+        subPath.lineTo(p.getX(), p.getY());
     }
 
     /**
@@ -749,11 +742,9 @@ public class AwtRenderingBackend implements RenderingBackend {
         }
 
         final Path2D subPath = getCurrentSubPath();
-        if (subPath != null) {
-            final Point2D cp = transformation_.transform(new Point2D.Double(cpx, cpy), null);
-            final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-            subPath.quadTo(cp.getX(), cp.getY(), p.getX(), p.getY());
-        }
+        final Point2D cp = transformation_.transform(new Point2D.Double(cpx, cpy), null);
+        final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
+        subPath.quadTo(cp.getX(), cp.getY(), p.getX(), p.getY());
     }
 
     /**
@@ -766,11 +757,8 @@ public class AwtRenderingBackend implements RenderingBackend {
         }
 
         final Path2D subPath = getCurrentSubPath();
-        if (subPath != null) {
-            final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-            final Rectangle2D rect = new Rectangle2D.Double(p.getX(), p.getY(), w, h);
-            subPath.append(rect, false);
-        }
+        final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
+        subPath.append(transformation_.createTransformedShape(rect), false);
     }
 
     /**

@@ -9,6 +9,12 @@
     <body>
         <release version="5.1.0" date="May 31, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                CanvasRenderingContext2D#arc() appends to the current path.
+            </action>
+            <action type="fix" dev="rbri">
+                CanvasRenderingContext2D#rect() now respects the current transformation for the whole rect.
+            </action>
+            <action type="fix" dev="rbri">
                 core-js: Reflect get if receiver is not present, then use the target instead
             </action>
             <action type="fix" dev="rbri">
