@@ -534,13 +534,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],"
                 + "onfullscreenchange[GSCE],onfullscreenerror[GSCE],onsearch[GSCE],onwebkitfullscreenchange[GSCE],"
                 + "onwebkitfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],prepend(),"
-                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releasePointerCapture(),remove(),"
-                + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
-                + "requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),scrollBy(),scrollHeight[GCE],"
-                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],"
-                + "scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),"
-                + "setHTML(),setHTMLUnsafe(),setPointerCapture(),shadowRoot[GCE],slot[GSCE],startViewTransition(),"
-                + "tagName[GCE],toggleAttribute(),webkitMatchesSelector(),webkitRequestFullScreen(),"
+                + "previousElementSibling[GCE],pseudo(),querySelector(),querySelectorAll(),releasePointerCapture(),"
+                + "remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
+                + "replaceWith(),requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),scrollBy(),"
+                + "scrollHeight[GCE],scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),"
+                + "scrollTop[GSCE],scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNodeNS(),"
+                + "setAttributeNS(),setHTML(),setHTMLUnsafe(),setPointerCapture(),shadowRoot[GCE],slot[GSCE],"
+                + "startViewTransition(),tagName[GCE],toggleAttribute(),webkitMatchesSelector(),"
+                + "webkitRequestFullScreen(),"
                 + "webkitRequestFullscreen()",
             EDGE = "activeViewTransition[GCE],after(),animate(),append(),ariaActiveDescendantElement[GSCE],"
                 + "ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],ariaBrailleRoleDescription[GSCE],"
@@ -567,13 +568,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],"
                 + "onfullscreenchange[GSCE],onfullscreenerror[GSCE],onsearch[GSCE],onwebkitfullscreenchange[GSCE],"
                 + "onwebkitfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],prepend(),"
-                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releasePointerCapture(),remove(),"
-                + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
-                + "requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),scrollBy(),scrollHeight[GCE],"
-                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],"
-                + "scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),"
-                + "setHTML(),setHTMLUnsafe(),setPointerCapture(),shadowRoot[GCE],slot[GSCE],startViewTransition(),"
-                + "tagName[GCE],toggleAttribute(),webkitMatchesSelector(),webkitRequestFullScreen(),"
+                + "previousElementSibling[GCE],pseudo(),querySelector(),querySelectorAll(),releasePointerCapture(),"
+                + "remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
+                + "replaceWith(),requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),scrollBy(),"
+                + "scrollHeight[GCE],scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),"
+                + "scrollTop[GSCE],scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNodeNS(),"
+                + "setAttributeNS(),setHTML(),setHTMLUnsafe(),setPointerCapture(),shadowRoot[GCE],slot[GSCE],"
+                + "startViewTransition(),tagName[GCE],toggleAttribute(),webkitMatchesSelector(),"
+                + "webkitRequestFullScreen(),"
                 + "webkitRequestFullscreen()",
             FF = "after(),animate(),append(),ariaActiveDescendantElement[GSCE],ariaAtomic[GSCE],"
                 + "ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],ariaBrailleRoleDescription[GSCE],ariaBusy[GSCE],"
@@ -739,13 +741,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],"
                 + "onfullscreenchange[GSCE],onfullscreenerror[GSCE],onsearch[GSCE],onwebkitfullscreenchange[GSCE],"
                 + "onwebkitfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],prepend(),"
-                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releasePointerCapture(),remove(),"
-                + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
-                + "requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),scrollBy(),scrollHeight[GCE],"
-                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],"
-                + "scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),"
-                + "setHTML(),setHTMLUnsafe(),setPointerCapture(),shadowRoot[GCE],slot[GSCE],startViewTransition(),"
-                + "tagName[GCE],toggleAttribute(),webkitMatchesSelector(),webkitRequestFullScreen(),"
+                + "previousElementSibling[GCE],pseudo(),querySelector(),querySelectorAll(),releasePointerCapture(),"
+                + "remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
+                + "replaceWith(),requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),scrollBy(),"
+                + "scrollHeight[GCE],scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),"
+                + "scrollTop[GSCE],scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNodeNS(),"
+                + "setAttributeNS(),setHTML(),setHTMLUnsafe(),setPointerCapture(),shadowRoot[GCE],slot[GSCE],"
+                + "startViewTransition(),tagName[GCE],toggleAttribute(),webkitMatchesSelector(),"
+                + "webkitRequestFullScreen(),"
                 + "webkitRequestFullscreen()",
             EDGE = "activeViewTransition[GCE],after(),animate(),append(),ariaActiveDescendantElement[GSCE],"
                 + "ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],ariaBrailleRoleDescription[GSCE],"
@@ -772,13 +775,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],"
                 + "onfullscreenchange[GSCE],onfullscreenerror[GSCE],onsearch[GSCE],onwebkitfullscreenchange[GSCE],"
                 + "onwebkitfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],prepend(),"
-                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releasePointerCapture(),remove(),"
-                + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
-                + "requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),scrollBy(),scrollHeight[GCE],"
-                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],"
-                + "scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),"
-                + "setHTML(),setHTMLUnsafe(),setPointerCapture(),shadowRoot[GCE],slot[GSCE],startViewTransition(),"
-                + "tagName[GCE],toggleAttribute(),webkitMatchesSelector(),webkitRequestFullScreen(),"
+                + "previousElementSibling[GCE],pseudo(),querySelector(),querySelectorAll(),releasePointerCapture(),"
+                + "remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),"
+                + "replaceWith(),requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),scrollBy(),"
+                + "scrollHeight[GCE],scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),"
+                + "scrollTop[GSCE],scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNodeNS(),"
+                + "setAttributeNS(),setHTML(),setHTMLUnsafe(),setPointerCapture(),shadowRoot[GCE],slot[GSCE],"
+                + "startViewTransition(),tagName[GCE],toggleAttribute(),webkitMatchesSelector(),"
+                + "webkitRequestFullScreen(),"
                 + "webkitRequestFullscreen()",
             FF = "after(),animate(),append(),ariaActiveDescendantElement[GSCE],ariaAtomic[GSCE],"
                 + "ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],ariaBrailleRoleDescription[GSCE],ariaBusy[GSCE],"
@@ -15132,8 +15136,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]",
-            EDGE = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]",
+    @Alerts(CHROME = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
+            EDGE = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
             FF = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]",
             FF_ESR = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
@@ -16155,8 +16159,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]",
-            EDGE = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]",
+    @Alerts(CHROME = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
+            EDGE = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
             FF = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]",
             FF_ESR = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
@@ -16173,8 +16177,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "constructor(),detail[GCE],initUIEvent(),sourceCapabilities[GCE],view[GCE],which[GCE]",
-            EDGE = "constructor(),detail[GCE],initUIEvent(),sourceCapabilities[GCE],view[GCE],which[GCE]",
+    @Alerts(CHROME = "constructor(),detail[GCE],initUIEvent(),pseudoTarget[GCE],sourceCapabilities[GCE],view[GCE],"
+                + "which[GCE]",
+            EDGE = "constructor(),detail[GCE],initUIEvent(),pseudoTarget[GCE],sourceCapabilities[GCE],view[GCE],"
+                + "which[GCE]",
             FF = "constructor(),detail[GCE],initUIEvent(),layerX[GCE],layerY[GCE],rangeOffset[GCE],"
                 + "rangeParent[GCE],SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],view[GCE],"
                 + "which[GCE]",
@@ -19644,13 +19650,13 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "baseName[GC],calendar[GC],caseFirst[GC],collation[GC],constructor(),firstDayOfWeek[GC],"
                 + "getCalendars(),getCollations(),getHourCycles(),getNumberingSystems(),getTextInfo(),"
                 + "getTimeZones(),getWeekInfo(),hourCycle[GC],language[GC],maximize(),minimize(),"
-                + "numberingSystem[GC],numeric[GC],region[GC],script[GC],"
-                + "toString()",
+                + "numberingSystem[GC],numeric[GC],region[GC],script[GC],toString(),"
+                + "variants[GC]",
             EDGE = "baseName[GC],calendar[GC],caseFirst[GC],collation[GC],constructor(),firstDayOfWeek[GC],"
                 + "getCalendars(),getCollations(),getHourCycles(),getNumberingSystems(),getTextInfo(),"
                 + "getTimeZones(),getWeekInfo(),hourCycle[GC],language[GC],maximize(),minimize(),"
-                + "numberingSystem[GC],numeric[GC],region[GC],script[GC],"
-                + "toString()",
+                + "numberingSystem[GC],numeric[GC],region[GC],script[GC],toString(),"
+                + "variants[GC]",
             FF = "baseName[GC],calendar[GC],caseFirst[GC],collation[GC],constructor(),hourCycle[GC],language[GC],"
                 + "maximize(),minimize(),numberingSystem[GC],numeric[GC],region[GC],script[GC],toString(),"
                 + "variants[GC]",

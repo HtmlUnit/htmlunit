@@ -2754,10 +2754,10 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code rowRuleInsetStart}. */
         ROW_RULE_INSET_START("rowRuleInsetStart", "row-rule-inset-start", chromeAndEdge("0px")),
 
-        /** The style property {@code rowRuleInsetStyle}. */
+        /** The style property {@code rowRuleStyle}. */
         ROW_RULE_STYLE("rowRuleStyle", "row-rule-style", chromeAndEdgeNone()),
 
-        /** The style property {@code rowRuleInsetVisibilityItems}. */
+        /** The style property {@code rowRuleVisibilityItems}. */
         ROW_RULE_VISIBILITY_ITEMS("rowRuleVisibilityItems", "row-rule-visibility-items", chromeAndEdgeNormal()),
 
         /** The style property {@code rowRuleWidth}. */
