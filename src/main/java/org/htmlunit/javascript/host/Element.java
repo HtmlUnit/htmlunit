@@ -15,7 +15,6 @@
 package org.htmlunit.javascript.host;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_SCROLL_UIEVENT;
-import static org.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -981,12 +980,6 @@ public class Element extends Node {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode parent = domNode.getParentNode();
         if (null == parent) {
-            if (getBrowserVersion().hasFeature(JS_OUTER_HTML_THROWS_FOR_DETACHED)) {
-                throw JavaScriptEngine.asJavaScriptException(
-                        getWindow(),
-                        "outerHTML is readonly for detached nodes",
-                        DOMException.NO_MODIFICATION_ALLOWED_ERR);
-            }
             return;
         }
 

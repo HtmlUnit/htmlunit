@@ -1533,10 +1533,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                       "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
-            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError/DOMException"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError/DOMException"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
+             "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"})
     public void setOuterHTMLDetachedElementNull() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -1567,10 +1565,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                       "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
-            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError/DOMException"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError/DOMException"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
+             "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"})
     public void setOuterHTMLDetachedElementUndefined() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -1635,10 +1631,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                       "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
-            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError/DOMException"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError/DOMException"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
+             "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"})
     public void setOuterHTMLDetachedElementBlank() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
@@ -1669,10 +1663,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Old = <span id=\"innerNode\">Old outerHTML</span>",
-                       "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"},
-            CHROME = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError/DOMException"},
-            EDGE = {"Old = <span id=\"innerNode\">Old outerHTML</span>", "NoModificationAllowedError/DOMException"})
+    @Alerts({"Old = <span id=\"innerNode\">Old outerHTML</span>",
+             "New = <span id=\"innerNode\">Old outerHTML</span>", "Children: 1"})
     public void setOuterHTMLDetachedElement() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"

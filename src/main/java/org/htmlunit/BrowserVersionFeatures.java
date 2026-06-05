@@ -336,10 +336,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF})
     JS_OFFSET_PARENT_NULL_IF_FIXED,
 
-    /** element.outerHTML removes all children from detached node. */
-    @BrowserFeature({CHROME, EDGE})
-    JS_OUTER_HTML_THROWS_FOR_DETACHED,
-
     /** Indicates that the {@code Object.getOwnPropertyDescriptor.get} contains name. */
     @BrowserFeature({FF, FF_ESR})
     JS_PROPERTY_DESCRIPTOR_NAME,

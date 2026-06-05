@@ -9,6 +9,9 @@
     <body>
         <release version="5.1.0" date="May 31, 2026" description="Chrome/Edge 149, Bugfixes">
             <action type="update" dev="rbri">
+                Chrome/Edge 149: setting outerHTML no longer throws when called on a detached element.
+            </action>
+            <action type="update" dev="rbri">
                 websocket-client: jetty updated to 12.1.10.
             </action>
             <action type="fix" dev="rbri">
