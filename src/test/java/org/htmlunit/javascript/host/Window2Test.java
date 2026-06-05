@@ -950,8 +950,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"true", "621", "-621", "true", "16", "-1256"},
-            EDGE = {"true", "631", "137", "true", "16", "24"},
+    @Alerts(CHROME = {"true", "617", "-617", "true", "16", "-1256"},
+            EDGE = {"true", "629", "139", "true", "16", "24"},
             FF = {"true", "674", "94", "true", "16", "16"},
             FF_ESR = {"true", "674", "94", "true", "16", "16"})
     @HtmlUnitNYI(CHROME = {"true", "605", "147", "true", "0", "16"},
@@ -980,8 +980,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"true", "0", "-621", "true", "true", "-1256"},
-            EDGE = {"true", "0", "137", "true", "true", "24"},
+    @Alerts(CHROME = {"true", "0", "-617", "true", "true", "-1256"},
+            EDGE = {"true", "0", "139", "true", "true", "24"},
             FF = {"true", "0", "94", "true", "true", "16"},
             FF_ESR = {"true", "0", "94", "true", "true", "16"})
     @HtmlUnitNYI(CHROME = {"true", "0", "147", "true", "true", "16"},
@@ -1131,8 +1131,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"621", "1256", "606", "1241"},
-            EDGE = {"631", "1248", "616", "1233"},
+    @Alerts(CHROME = {"617", "1256", "602", "1241"},
+            EDGE = {"629", "1248", "614", "1233"},
             FF = {"674", "1256", "674", "1256"},
             FF_ESR = {"674", "1256", "674", "1256"})
     // TODO width and height calculation needs to be reworked in HtmlUnit
