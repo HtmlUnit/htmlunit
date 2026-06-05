@@ -925,6 +925,9 @@ public final class StyleAttributes implements Serializable {
         COLUMN_RULE_("column-rule", "column-rule",
                 ffEsr("0px none rgb(0, 0, 0)"), ffLatest("3px none rgb(0, 0, 0)")),
 
+        /** The style property {@code columnRuleBreak}. */
+        COLUMN_RULE_BREAK("columnRuleBreak", "column-rule-break", chromeAndEdgeNormal()),
+
         /** The style property {@code columnRuleColor}. */
         COLUMN_RULE_COLOR("columnRuleColor", "column-rule-color",
                 chromeAndEdge("rgb(0, 0, 0)"), ff("rgb(0, 0, 0)")),
@@ -932,11 +935,44 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code column-rule-color}. */
         COLUMN_RULE_COLOR_("column-rule-color", "column-rule-color", ff("rgb(0, 0, 0)")),
 
+        /** The style property {@code columnRuleInset}. */
+        COLUMN_RULE_INSET("columnRuleInset", "column-rule-inset", chromeAndEdge("0px")),
+
+        /** The style property {@code columnRuleInsetCap}. */
+        COLUMN_RULE_INSET_CAP("columnRuleInsetCap", "column-rule-inset-cap", chromeAndEdge("0px")),
+
+        /** The style property {@code columnRuleInsetCapEnd}. */
+        COLUMN_RULE_INSET_CAP_END("columnRuleInsetCapEnd", "column-rule-inset-cap-end", chromeAndEdge("0px")),
+
+        /** The style property {@code columnRuleInsetCapStart}. */
+        COLUMN_RULE_INSET_CAP_START("columnRuleInsetCapStart", "column-rule-inset-cap-start", chromeAndEdge("0px")),
+
+        /** The style property {@code columnRuleInsetEnd}. */
+        COLUMN_RULE_INSET_END("columnRuleInsetEnd", "column-rule-inset-end", chromeAndEdge("0px")),
+
+        /** The style property {@code columnRuleInsetJunction}. */
+        COLUMN_RULE_INSET_JUNCTION("columnRuleInsetJunction", "column-rule-inset-junction", chromeAndEdge("0px")),
+
+        /** The style property {@code columnRuleInsetJunctionEnd}. */
+        COLUMN_RULE_INSET_JUNCTION_END("columnRuleInsetJunctionEnd", "column-rule-inset-junction-end",
+                chromeAndEdge("0px")),
+
+        /** The style property {@code columnRuleInsetJunctionStart}. */
+        COLUMN_RULE_INSET_JUNCTION_START("columnRuleInsetJunctionStart", "column-rule-inset-junction-start",
+                chromeAndEdge("0px")),
+
+        /** The style property {@code columnRuleInsetStart}. */
+        COLUMN_RULE_INSET_START("columnRuleInsetStart", "column-rule-inset-start", chromeAndEdge("0px")),
+
         /** The style property {@code columnRuleStyle}. */
         COLUMN_RULE_STYLE("columnRuleStyle", "column-rule-style", chromeAndEdgeNone(), ffNone()),
 
         /** The style property {@code column-rule-style}. */
         COLUMN_RULE_STYLE_("column-rule-style", "column-rule-style", ffNone()),
+
+        /** The style property {@code columnRuleVisibilityItems}. */
+        COLUMN_RULE_VisibilityItems("columnRuleVisibilityItems", "column-rule-visibility-items",
+                chromeAndEdgeNormal()),
 
         /** The style property {@code columnRuleWidth}. */
         COLUMN_RULE_WIDTH("columnRuleWidth", "column-rule-width", chromeAndEdge("3px"),
@@ -2681,6 +2717,52 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code row-gap}. */
         ROW_GAP_("row-gap", "row-gap", ffNormal()),
 
+        /** The style property {@code rowRule}. */
+        ROW_RULE("rowRule", "row-rule", chromeAndEdge("3px rgb(0, 0, 0)")),
+
+        /** The style property {@code rowRuleBreak}. */
+        ROW_RULE_BREAK("rowRuleBreak", "row-rule-break", chromeAndEdgeNormal()),
+
+        /** The style property {@code rowRuleColor}. */
+        ROW_RULE_COLOR("rowRuleColor", "row-rule-color", chromeAndEdge("rgb(0, 0, 0)")),
+
+        /** The style property {@code rowRuleInset}. */
+        ROW_RULE_INSET("rowRuleInset", "row-rule-inset", chromeAndEdge("0px")),
+
+        /** The style property {@code rowRuleInsetCap}. */
+        ROW_RULE_INSET_CAP("rowRuleInsetCap", "row-rule-inset-cap", chromeAndEdge("0px")),
+
+        /** The style property {@code rowRuleInsetCapEnd}. */
+        ROW_RULE_INSET_CAP_END("rowRuleInsetCapEnd", "row-rule-inset-cap-end", chromeAndEdge("0px")),
+
+        /** The style property {@code rowRuleInsetCapStart}. */
+        ROW_RULE_INSET_CAP_START("rowRuleInsetCapStart", "row-rule-inset-cap-start", chromeAndEdge("0px")),
+
+        /** The style property {@code rowRuleInsetEnd}. */
+        ROW_RULE_INSET_END("rowRuleInsetEnd", "row-rule-inset-end", chromeAndEdge("0px")),
+
+        /** The style property {@code rowRuleInsetJunction}. */
+        ROW_RULE_INSET_JUNCTION("rowRuleInsetJunction", "row-rule-inset-junction", chromeAndEdge("0px")),
+
+        /** The style property {@code rowRuleInsetJunctionEnd}. */
+        ROW_RULE_INSET_JUNCTION_END("rowRuleInsetJunctionEnd", "row-rule-inset-junction-end", chromeAndEdge("0px")),
+
+        /** The style property {@code rowRuleInsetJunctionStart}. */
+        ROW_RULE_INSET_JUNCTION_START("rowRuleInsetJunctionStart", "row-rule-inset-junction-start",
+                chromeAndEdge("0px")),
+
+        /** The style property {@code rowRuleInsetStart}. */
+        ROW_RULE_INSET_START("rowRuleInsetStart", "row-rule-inset-start", chromeAndEdge("0px")),
+
+        /** The style property {@code rowRuleInsetStyle}. */
+        ROW_RULE_STYLE("rowRuleStyle", "row-rule-style", chromeAndEdgeNone()),
+
+        /** The style property {@code rowRuleInsetVisibilityItems}. */
+        ROW_RULE_VISIBILITY_ITEMS("rowRuleVisibilityItems", "row-rule-visibility-items", chromeAndEdgeNormal()),
+
+        /** The style property {@code rowRuleWidth}. */
+        ROW_RULE_WIDTH("rowRuleWidth", "row-rule-width", chromeAndEdge("3px")),
+
         /** The style property {@code rubyAlign}. */
         RUBY_ALIGN("rubyAlign", "ruby-align", chromeAndEdge("space-around"), ff("space-around")),
 
@@ -2693,6 +2775,42 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code ruby-position}. */
         RUBY_POSITION_("ruby-position", "ruby-position", ff("alternate")),
+
+        /** The style property {@code rule}. */
+        RULE("rule", "rule", chromeAndEdge("3px rgb(0, 0, 0)")),
+
+        /** The style property {@code ruleBreak}. */
+        RULE_BREAK("ruleBreak", "rule-break", chromeAndEdgeNormal()),
+
+        /** The style property {@code ruleColor}. */
+        RULE_COLOR("ruleColor", "rule-color", chromeAndEdge("rgb(0, 0, 0)")),
+
+        /** The style property {@code ruleInset}. */
+        RULE_INSET("ruleInset", "rule-inset", chromeAndEdge("0px")),
+
+        /** The style property {@code ruleInsetCap}. */
+        RULE_INSET_CAP("ruleInsetCap", "rule-inset-cap", chromeAndEdge("0px")),
+
+        /** The style property {@code ruleInsetEnd}. */
+        RULE_INSET_END("ruleInsetEnd", "rule-inset-end", chromeAndEdge("0px")),
+
+        /** The style property {@code ruleInsetJunction}. */
+        RULE_INSET_JUNCTION("ruleInsetJunction", "rule-inset-junction", chromeAndEdge("0px")),
+
+        /** The style property {@code ruleInsetStart}. */
+        RULE_INSET_START("ruleInsetStart", "rule-inset-start", chromeAndEdge("0px")),
+
+        /** The style property {@code ruleOverlap}. */
+        RULE_OVERLAP("ruleOverlap", "rule-overlap", chromeAndEdge("row-over-column")),
+
+        /** The style property {@code ruleStyle}. */
+        RULE_STYLE("ruleStyle", "rule-style", chromeAndEdgeNone()),
+
+        /** The style property {@code ruleVisibilityItems}. */
+        RULE_VIISIBILITY_ITEMS("ruleVisibilityItems", "rule-visibility-items", chromeAndEdgeNormal()),
+
+        /** The style property {@code ruleWidth}. */
+        RULE_WIDTH("ruleWidth", "rule-width", chromeAndEdge("3px")),
 
         /** The style property {@code rx}. */
         RX("rx", "rx", chromeAndEdgeAuto(), ffAuto()),
