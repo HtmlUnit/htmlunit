@@ -3608,8 +3608,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "621", "1256"},
-            EDGE = {"0", "0", "631", "1248"},
+    @Alerts(DEFAULT = {"0", "0", "617", "1256"},
+            EDGE = {"0", "0", "629", "1248"},
             FF = {"0", "0", "8", "1256"},
             FF_ESR = {"0", "0", "8", "1256"})
     @HtmlUnitNYI(CHROME = {"0", "0", "613", "1256"},
@@ -3662,8 +3662,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "621", "1256"},
-            EDGE = {"0", "0", "631", "1248"},
+    @Alerts(DEFAULT = {"0", "0", "617", "1256"},
+            EDGE = {"0", "0", "629", "1248"},
             FF = {"0", "0", "8", "1256"},
             FF_ESR = {"0", "0", "8", "1256"})
     @HtmlUnitNYI(CHROME = {"0", "0", "613", "1256"},
@@ -3691,8 +3691,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "621", "1256"},
-            EDGE = {"0", "0", "631", "1248"},
+    @Alerts(DEFAULT = {"0", "0", "617", "1256"},
+            EDGE = {"0", "0", "629", "1248"},
             FF = {"0", "0", "674", "1256"},
             FF_ESR = {"0", "0", "674", "1256"})
     @HtmlUnitNYI(CHROME = {"0", "0", "605", "1256"},
@@ -3719,8 +3719,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "621", "1256"},
-            EDGE = {"0", "0", "631", "1248"},
+    @Alerts(DEFAULT = {"0", "0", "617", "1256"},
+            EDGE = {"0", "0", "629", "1248"},
             FF = {"0", "0", "8", "1256"},
             FF_ESR = {"0", "0", "8", "1256"})
     @HtmlUnitNYI(CHROME = {"0", "0", "605", "1256"},
