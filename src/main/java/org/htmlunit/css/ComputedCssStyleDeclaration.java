@@ -1679,7 +1679,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * @return the total width of the element's children
      */
     public int getContentWidth() {
-        int width = 0;
+        int inlineWidth = 0;
+        int maxBlockWidth = 0;
         final DomElement element = getDomElement();
         Iterable<DomNode> children = element.getChildren();
         if (element instanceof BaseFrameElement frameElement) {
@@ -1693,7 +1694,17 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             if (child instanceof HtmlElement e) {
                 final ComputedCssStyleDeclaration style = webWindow.getComputedStyle(e, null);
                 final int w = style.getCalculatedWidth(true, true);
-                width += w;
+                final String childDisplay = style.getDisplay();
+                if (BLOCK.equals(childDisplay)) {
+                    // Block children stack vertically; parent width = widest child
+                    if (w > maxBlockWidth) {
+                        maxBlockWidth = w;
+                    }
+                }
+                else {
+                    // Inline / inline-block children sit side-by-side; sum their widths
+                    inlineWidth += w;
+                }
             }
             else if (child instanceof DomText) {
                 final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
@@ -1703,14 +1714,14 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     final ComputedCssStyleDeclaration style = webWindow.getComputedStyle((DomElement) parent, null);
                     final int height = browserVersion.getFontHeight(
                                         style.getStyleAttribute(Definition.FONT_SIZE, true));
-                    width += child.getVisibleText().length() * (int) (height / 1.8f);
+                    inlineWidth += child.getVisibleText().length() * (int) (height / 1.8f);
                 }
                 else {
-                    width += child.getVisibleText().length() * browserVersion.getPixesPerChar();
+                    inlineWidth += child.getVisibleText().length() * browserVersion.getPixesPerChar();
                 }
             }
         }
-        return width;
+        return Math.max(maxBlockWidth, inlineWidth);
     }
 
     /**
