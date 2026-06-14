@@ -1581,23 +1581,16 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     || ABSOLUTE.equals(position)
                     || FIXED.equals(position)) {
 
-                if (BLOCK.equals(display)) {
-                    // Absolutely/fixed-positioned or floated BLOCK: shrink-wrap to child content.
-                    // Browsers size such a block around its children, not the document viewport.
-                    final int contentWidth = getContentWidth();
-                    if (contentWidth > 0) {
-                        width = contentWidth;
-                    }
-                    else {
-                        // No rendered children – fall back to text approximation.
-                        final BrowserVersion browserVersion =
-                                getDomElement().getPage().getWebClient().getBrowserVersion();
-                        width = element.getVisibleText().length() * browserVersion.getPixesPerChar();
-                    }
+                // Shrink-wrap to child content regardless of display type (block, inline, etc.).
+                // An absolutely/fixed-positioned or floated element sizes itself around its children.
+                final int contentWidth = getContentWidth();
+                if (contentWidth > 0) {
+                    width = contentWidth;
                 }
                 else {
-                    // Floating or absolutely-positioned inline/other: text content approximation.
-                    final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
+                    // No rendered children – fall back to text content approximation.
+                    final BrowserVersion browserVersion =
+                            getDomElement().getPage().getWebClient().getBrowserVersion();
                     width = element.getVisibleText().length() * browserVersion.getPixesPerChar();
                 }
             }

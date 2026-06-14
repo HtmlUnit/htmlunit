@@ -253,10 +253,6 @@ public class ElementOffsetWidth2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"220", "220"})
-    @HtmlUnitNYI(CHROME = {"110", "110"},
-            EDGE = {"110", "110"},
-            FF = {"110", "110"},
-            FF_ESR = {"110", "110"})
     public void absolutelyPositionedSpanWithBlockChild() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><body>\n"
