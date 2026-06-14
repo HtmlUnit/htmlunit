@@ -53,7 +53,7 @@ public class ElementOffsetWidth2Test extends WebDriverTestCase {
     }
 
     /**
-     * position:fixed should behave the same as position:absolute - shrink-wrap
+     * Style position:fixed should behave the same as position:absolute - shrink-wrap
      * to child content, not the document width.
      *
      * @throws Exception if the test fails
@@ -329,6 +329,174 @@ public class ElementOffsetWidth2Test extends WebDriverTestCase {
             + "  let e = document.getElementById('myDiv');\n"
             + "  log(e.offsetWidth);\n"
             + "  log(e.getBoundingClientRect().width);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Regression: a static block inside an un-styled parent inside a grandparent
+     * with width:500px should get 500px, not the window width.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"500", "500"})
+    public void blockInsideUnstyledParentGetsWidthFromGrandparent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div style='width:500px'>\n"
+            + "    <div>\n"
+            + "      <div id='elt'>\n"
+            + "        <div style='width:300px; height:300px'></div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const e = document.getElementById('elt');\n"
+            + "  log(e.offsetWidth);\n"
+            + "  log(e.getBoundingClientRect().width);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A block element directly inside a parent with width:400px should report 400px.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"400", "400"})
+    public void blockDirectlyInsideParentWithExplicitWidth() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div style='width:400px'>\n"
+            + "    <div id='elt'></div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const e = document.getElementById('elt');\n"
+            + "  log(e.offsetWidth);\n"
+            + "  log(e.getBoundingClientRect().width);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Three levels of un-styled parents inside a 300px grandparent.
+     * The target block should still resolve to 300px.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"300", "300"})
+    public void blockThreeLevelsDeepInheritsWidth() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div style='width:300px'>\n"
+            + "    <div>\n"
+            + "      <div>\n"
+            + "        <div id='elt'></div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const e = document.getElementById('elt');\n"
+            + "  log(e.offsetWidth);\n"
+            + "  log(e.getBoundingClientRect().width);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * When both the parent and grandparent have no explicit width, the block
+     * should expand to the body/window width (minus body margin).
+     * This verifies that the fix doesn't break the normal full-width case.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"1242", "1242"},
+            EDGE = {"1234", "1234"},
+            FF = {"1241", "1241.3333740234375"},
+            FF_ESR = {"1241", "1241.3333740234375"})
+    @HtmlUnitNYI(CHROME = {"1240", "1240"},
+            EDGE = {"1240", "1240"},
+            FF = {"1240", "1240"},
+            FF_ESR = {"1240", "1240"})
+    public void blockWithNoAncestorWidthUsesWindowWidth() throws Exception {
+        // window inner width (1272) - body margin 8px*2 = 1256 in real browsers
+        // exact value is browser/window-size dependent; the important thing is it is NOT 500px
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div>\n"
+            + "    <div id='elt'></div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const e = document.getElementById('elt');\n"
+            + "  log(e.offsetWidth);\n"
+            + "  log(e.getBoundingClientRect().width);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A block with an explicit width inside a narrower parent should use its own
+     * explicit width, not the parent's width.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"600", "600"})
+    public void blockExplicitWidthWiderThanParentUsesOwnWidth() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div style='width:400px'>\n"
+            + "    <div id='elt' style='width:600px'></div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const e = document.getElementById('elt');\n"
+            + "  log(e.offsetWidth);\n"
+            + "  log(e.getBoundingClientRect().width);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * The intermediate un-styled parent should itself report the grandparent's width (500px).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"500", "500"})
+    public void unstyledParentAlsoGetsGrandparentWidth() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><body>\n"
+            + "  <div style='width:500px'>\n"
+            + "    <div id='parent'>\n"
+            + "      <div id='child'></div>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  const p = document.getElementById('parent');\n"
+            + "  log(p.offsetWidth);\n"
+            + "  log(p.getBoundingClientRect().width);\n"
             + "</script>\n"
             + "</body></html>";
 

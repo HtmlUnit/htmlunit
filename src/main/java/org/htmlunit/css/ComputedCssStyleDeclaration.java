@@ -1529,7 +1529,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         if (!element.isAttachedToPage()) {
             return 0;
         }
-        int width = getCalculatedWidth();
+        int width = getCalculatedWidth(element);
         if (!"border-box".equals(getStyleAttribute(Definition.BOX_SIZING, true))) {
             if (includeBorder) {
                 width += getBorderHorizontal();
@@ -1545,13 +1545,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         return width;
     }
 
-    private int getCalculatedWidth() {
+    private int getCalculatedWidth(final DomElement element) {
         final Integer cachedWidth = getCachedWidth();
         if (cachedWidth != null) {
             return cachedWidth.intValue();
         }
 
-        final DomElement element = getDomElement();
         if (!element.mayBeDisplayed()) {
             return updateCachedWidth(0);
         }
@@ -1601,12 +1600,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 }
                 else {
                     // Block elements take up 100% of the parent's width.
-                    width = CssPixelValueConverter.pixelValue((DomElement) parent,
-                                        new CssPixelValueConverter.CssValue(0, windowWidth) {
-                            @Override public String get(final ComputedCssStyleDeclaration style) {
-                                return style.getWidth();
-                            }
-                        }) - (getBorderHorizontal() + getPaddingHorizontal());
+                    final ComputedCssStyleDeclaration parentStyle =
+                            parent.getPage().getEnclosingWindow().getComputedStyle((DomElement) parent, null);
+                    width = parentStyle.getCalculatedWidth(false, false)
+                                - (getBorderHorizontal() + getPaddingHorizontal());
                 }
             }
             else if (element instanceof HtmlSubmitInput
@@ -2114,7 +2111,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 overflow = getStyleAttribute(Definition.OVERFLOW, true);
             }
             scrollable = (element instanceof HtmlBody || SCROLL.equals(overflow) || AUTO.equals(overflow))
-                && (ignoreSize || getContentWidth() > getCalculatedWidth());
+                && (ignoreSize || getContentWidth() > getCalculatedWidth(element));
         }
         else {
             overflow = getStyleAttribute(Definition.OVERFLOW_Y_, false);
