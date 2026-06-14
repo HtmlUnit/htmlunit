@@ -30,6 +30,7 @@ import org.htmlunit.css.CssPixelValueConverter;
 import org.htmlunit.javascript.configuration.BrowserFeature;
 import org.htmlunit.javascript.configuration.SupportedBrowser;
 import org.htmlunit.util.MimeType;
+import org.htmlunit.util.StringUtils;
 
 /**
  * Objects of this class represent one specific version of a given browser. Predefined
@@ -789,7 +790,7 @@ public final class BrowserVersion implements Serializable {
      * @return the corresponding height
      */
     public int getFontHeight(final String fontSize) {
-        if (fontHeights_ == null || fontSize.isEmpty()) {
+        if (fontHeights_ == null || StringUtils.isEmptyOrNull(fontSize)) {
             return 18;
         }
 
