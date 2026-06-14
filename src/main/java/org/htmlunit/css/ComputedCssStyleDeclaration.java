@@ -1693,22 +1693,35 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         for (final DomNode child : children) {
             if (child instanceof HtmlElement e) {
                 final ComputedCssStyleDeclaration style = webWindow.getComputedStyle(e, null);
-                final int w = style.getCalculatedWidth(true, true);
                 final String childDisplay = style.getDisplay();
+                final int w;
                 if (BLOCK.equals(childDisplay)) {
-                    // Block children stack vertically; parent width = widest child
+                    // For block children, only use their full calculated width if they have
+                    // an explicit width set. Otherwise recurse into their own content width
+                    // so that shrink-wrap containers propagate the leaf width all the way up.
+                    final String childStyleWidth = style.getStyleAttribute(Definition.WIDTH, true);
+                    if (StringUtils.isEmptyOrNull(childStyleWidth) || AUTO.equals(childStyleWidth)) {
+                        // No explicit width: the child's contribution is whatever its own
+                        // content needs (recurse), plus its own border/padding.
+                        w = style.getContentWidth()
+                                + style.getBorderHorizontal()
+                                + style.getPaddingHorizontal();
+                    }
+                    else {
+                        w = style.getCalculatedWidth(true, true);
+                    }
                     if (w > maxBlockWidth) {
                         maxBlockWidth = w;
                     }
                 }
                 else {
-                    // Inline / inline-block children sit side-by-side; sum their widths
+                    // Inline / inline-block children sit side-by-side; sum their widths.
+                    w = style.getCalculatedWidth(true, true);
                     inlineWidth += w;
                 }
             }
             else if (child instanceof DomText) {
                 final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
-
                 final DomNode parent = child.getParentNode();
                 if (parent instanceof HtmlElement) {
                     final ComputedCssStyleDeclaration style = webWindow.getComputedStyle((DomElement) parent, null);

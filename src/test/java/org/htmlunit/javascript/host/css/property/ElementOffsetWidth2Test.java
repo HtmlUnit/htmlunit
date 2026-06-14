@@ -116,10 +116,6 @@ public class ElementOffsetWidth2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"150", "150"})
-    @HtmlUnitNYI(CHROME = {"28", "28"},
-            EDGE = {"28", "28"},
-            FF = {"28", "28"},
-            FF_ESR = {"28", "28"})
     public void absolutelyPositionedDeepNesting() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><body>\n"
@@ -320,10 +316,6 @@ public class ElementOffsetWidth2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"180", "180"})
-    @HtmlUnitNYI(CHROME = {"28", "28"},
-            EDGE = {"28", "28"},
-            FF = {"28", "28"},
-            FF_ESR = {"28", "28"})
     public void absolutelyPositionedFourLevelNesting() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><body>\n"
