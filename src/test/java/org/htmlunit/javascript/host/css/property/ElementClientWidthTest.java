@@ -800,10 +800,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("300")
-    @HtmlUnitNYI(CHROME = "0",
-            EDGE = "0",
-            FF = "0",
-            FF_ESR = "0")
     public void iframe() throws Exception {
         loadPageVerifyTitle2(test("iframe"));
     }

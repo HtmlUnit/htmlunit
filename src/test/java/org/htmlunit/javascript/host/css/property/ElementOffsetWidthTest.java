@@ -873,10 +873,10 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("304")
-    @HtmlUnitNYI(CHROME = "1256",
-            EDGE = "1256",
-            FF = "1256",
-            FF_ESR = "1256")
+    @HtmlUnitNYI(CHROME = "300",
+            EDGE = "300",
+            FF = "300",
+            FF_ESR = "300")
     public void iframe() throws Exception {
         test("iframe");
     }

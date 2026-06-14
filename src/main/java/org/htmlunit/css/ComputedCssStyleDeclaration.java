@@ -87,6 +87,7 @@ import org.htmlunit.html.HtmlFigure;
 import org.htmlunit.html.HtmlFigureCaption;
 import org.htmlunit.html.HtmlFileInput;
 import org.htmlunit.html.HtmlFooter;
+import org.htmlunit.html.HtmlFrame;
 import org.htmlunit.html.HtmlHeader;
 import org.htmlunit.html.HtmlHeading1;
 import org.htmlunit.html.HtmlHeading2;
@@ -1569,7 +1570,16 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 && parent instanceof HtmlElement) {
             // hack: TODO find a way to specify default values for different tags
             if (element instanceof HtmlCanvas) {
-                return 300;
+                return updateCachedWidth(300);
+            }
+
+            // iframes have a default width of 300px (like canvas)
+            if (element instanceof HtmlInlineFrame) {
+                return updateCachedWidth(300);
+            }
+
+            if (element instanceof HtmlFrame) {
+                return updateCachedWidth(element.getPage().getEnclosingWindow().getInnerWidth());
             }
 
             // Width not explicitly set.
@@ -1762,6 +1772,10 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         // height is ignored for inline elements
         final boolean explicitHeightSpecified = !isInline && !super.getHeight().isEmpty();
 
+        if (element instanceof HtmlInlineFrame) {
+            return updateCachedEmptyHeight(154);
+        }
+
         int defaultHeight;
         if ((element instanceof HtmlAbbreviated
                 || element instanceof HtmlAcronym
@@ -1852,9 +1866,6 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
             else if (element instanceof HtmlTextArea) {
                 defaultHeight = 49;
-            }
-            else if (element instanceof HtmlInlineFrame) {
-                defaultHeight = 154;
             }
             else {
                 defaultHeight = 0;
