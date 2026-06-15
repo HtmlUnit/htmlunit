@@ -162,6 +162,8 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope")
 
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.WebDriverTestCase")
+
             .and().doNotHaveFullyQualifiedName("org.htmlunit.css.BrowserConfiguration$FF")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.css.BrowserConfiguration$FFNotIterable")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.css.BrowserConfiguration$FFESR")
@@ -181,6 +183,8 @@ public class Architecture2Test {
             .doNotHaveFullyQualifiedName("org.htmlunit.BrowserVersion")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope")
+
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.WebDriverTestCase")
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
