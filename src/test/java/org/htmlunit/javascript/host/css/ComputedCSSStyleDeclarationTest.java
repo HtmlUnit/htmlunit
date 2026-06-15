@@ -2290,10 +2290,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("85")
-    @HtmlUnitNYI(CHROME = "154",
-            EDGE = "154",
-            FF = "154",
-            FF_ESR = "154")
+    @HtmlUnitNYI(CHROME = "77",
+            EDGE = "77",
+            FF = "77",
+            FF_ESR = "77")
     public void offsetHeight_with_childHeight() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

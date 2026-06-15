@@ -1574,7 +1574,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
 
             // iframes have a default width of 300px (like canvas)
-            if (element instanceof HtmlInlineFrame) {
+            if (element instanceof HtmlInlineFrame iframe) {
+                final String widthAttribute = iframe.getAttributeDirect("width");
+                if (DomElement.ATTRIBUTE_NOT_DEFINED != widthAttribute) {
+                    return updateCachedWidth(CssPixelValueConverter.pixelValue(widthAttribute));
+                }
+
                 return updateCachedWidth(300);
             }
 
@@ -1766,14 +1771,6 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
 
             return updateCachedEmptyHeight(0);
-        }
-
-        final boolean isInline = INLINE.equals(display) && !(element instanceof HtmlInlineFrame);
-        // height is ignored for inline elements
-        final boolean explicitHeightSpecified = !isInline && !super.getHeight().isEmpty();
-
-        if (element instanceof HtmlInlineFrame) {
-            return updateCachedEmptyHeight(154);
         }
 
         int defaultHeight;
@@ -2013,6 +2010,18 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             }
         }
 
+        if (element instanceof HtmlInlineFrame iframe) {
+            final String heightAttribute = iframe.getAttributeDirect("height");
+            if (DomElement.ATTRIBUTE_NOT_DEFINED != heightAttribute) {
+                final int height = CssPixelValueConverter.pixelValue(heightAttribute);
+                return updateCachedEmptyHeight(height);
+            }
+
+            defaultHeight = 154;
+        }
+
+        final boolean isInline = INLINE.equals(display) && !(element instanceof HtmlInlineFrame);
+
         final int defaultWindowHeight = element instanceof HtmlCanvas ? 150 : windowHeight;
 
         int height = CssPixelValueConverter.pixelValue(element,
@@ -2030,7 +2039,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 }
             });
 
-        if (height == 0 && !explicitHeightSpecified) {
+        if (height == 0 && (isInline || super.getHeight().isEmpty())) {
             height = defaultHeight;
         }
 
