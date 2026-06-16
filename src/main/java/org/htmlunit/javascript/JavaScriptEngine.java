@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
 
-import org.apache.commons.lang3.ObjectUtils.Null;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -1503,7 +1502,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     /**
      * Iterates an arrayLike {@link Scriptable} calling the {@link Consumer} on
      * every item.
-     * @param cx the context or {@link Null}
+     * @param cx the context or null
      * @param arrayLike the {@link Scriptable} to iterate
      * @param consumer the {@link Consumer} to call
      */
