@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="5.1.0" date="May 31, 2026" description="Chrome/Edge 149, Bugfixes">
+        <release version="5.2.0" date="June 31, 2026" description="Chrome/Edge 149, Bugfixes">
+            <action type="update" dev="RhinoTeam">
+                core-js: small code optimizations and improved tests.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: fix enter and exit frame bug when using generators.
+            </action>
             <action type="fix" dev="rbri">
                 Fixed offsetWitdth, offsetHeight, clientWitdth, and clienttHeight values for iframes and frames.
             </action>
