@@ -142,6 +142,128 @@ public class NativeReflectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
+    public void setReceiverDefaultsToTarget() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var o = {};\n"
+                + "  var receivedReceiver;\n"
+                + "  Object.defineProperty(o, 'p', {\n"
+                + "    set(v) { receivedReceiver = this; }\n"
+                + "  });\n"
+                + "  Reflect.set(o, 'p', 1);\n"
+                + "  log('' + (receivedReceiver === o));\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void setReceiverPassedToSetter() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var target = {};\n"
+                + "  var receiver = {};\n"
+                + "  var receivedReceiver;\n"
+                + "  Object.defineProperty(target, 'p', {\n"
+                + "    set(v) { receivedReceiver = this; }\n"
+                + "  });\n"
+                + "  Reflect.set(target, 'p', 1, receiver);\n"
+                + "  log('' + (receivedReceiver === receiver));\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void setReceiverPassedToSetterOnPrototype() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var receiver = {};\n"
+                + "  var proto = {};\n"
+                + "  var receivedReceiver;\n"
+                + "  Object.defineProperty(proto, 'p', {\n"
+                + "    set(v) { receivedReceiver = this; }\n"
+                + "  });\n"
+                + "  var target = Object.create(proto);\n"
+                + "  Reflect.set(target, 'p', 1, receiver);\n"
+                + "  log('' + (receivedReceiver === receiver));\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("99")
+    public void setReceiverAffectsWhereDataPropertyIsWritten() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var target = { p: 1 };\n"
+                + "  var receiver = { p: 0 };\n"
+                + "  Reflect.set(target, 'p', 99, receiver);\n"
+                + "  log('' + receiver.p);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void setReceiverWithSymbolKey() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var sym = Symbol('test');\n"
+                + "  var target = {};\n"
+                + "  var receiver = {};\n"
+                + "  var receivedReceiver;\n"
+                + "  Object.defineProperty(target, sym, {\n"
+                + "    set(v) { receivedReceiver = this; }\n"
+                + "  });\n"
+                + "  Reflect.set(target, sym, 1, receiver);\n"
+                + "  log('' + (receivedReceiver === receiver));\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true undefined true")
     public void setMissingValueArgumentTreatedAsUndefined() throws Exception {
         final String html = DOCTYPE_HTML
@@ -178,6 +300,167 @@ public class NativeReflectTest extends WebDriverTestCase {
                 + "     });\n"
                 + "  Reflect.set(proxy, 'p');\n"
                 + "  log('' + res);"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "0", "true"})
+    public void reflectSetTypedArray() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  let receiver = {};\n"
+                + "  let typedArray = new Int32Array(10);\n"
+                + "  let valueOfCalled = 0;\n"
+                + "  let value = { valueOf() { valueOfCalled++; return 1; } };\n"
+                + "  log(Reflect.set(typedArray, 0, value, receiver));\n"
+                + "  log(valueOfCalled);\n"
+                + "  log(receiver[0] === value);"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "1"})
+    public void reflectSetTypedArrayInvalidIndex() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  let result = '';\n"
+                + "  let receiver = new Int32Array(10);\n"
+                + "  let obj = Object.create(receiver);\n"
+                + "  let valueOfCalled = 0;\n"
+                + "  let value = { valueOf() { valueOfCalled++; return 1; } };\n"
+                + "  log(Reflect.set(obj, 100, value, receiver));\n"
+                + "  log(valueOfCalled);\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "1"})
+    public void reflectSetTypedArrayReceiverOobCoercesValue() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var receiver = new Int32Array(10);\n"
+                + "  var obj = Object.create(receiver);\n"
+                + "  var valueOfCalled = 0;\n"
+                + "  var value = { valueOf() { valueOfCalled++; return 1; } };\n"
+                + "  log(Reflect.set(obj, 100, value, receiver));\n"
+                + "  log(valueOfCalled);"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "1", "42"})
+    public void reflectSetTypedArrayReceiverInBoundsCoercesAndWrites() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var receiver = new Int32Array(10);\n"
+                + "  var obj = Object.create(receiver);\n"
+                + "  var valueOfCalled = 0;\n"
+                + "  var value = { valueOf() { valueOfCalled++; return 42; } };\n"
+                + "  log(Reflect.set(obj, 0, value, receiver));\n"
+                + "  log(valueOfCalled);\n"
+                + "  log(receiver[0]);"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "0", "true"})
+    public void reflectSetTypedArrayTargetPlainReceiverDoesNotCoerce() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var result = '';\n"
+                + "  var receiver = {};\n"
+                + "  var typedArray = new Int32Array(10);\n"
+                + "  var valueOfCalled = 0;\n"
+                + "  var value = { valueOf() { valueOfCalled++; return 1; } };\n"
+                + "  log(Reflect.set(typedArray, 0, value, receiver));\n"
+                + "  log(valueOfCalled);\n"
+                + "  log(receiver[0] === value);"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "undefined"})
+    public void defineOwnPropertyOutOfBoundsDoesNotThrowViaReflect() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var ta = new Int32Array(4);\n"
+                + "  log(Reflect.defineProperty(ta, '10', { value: 1 }));"
+                + "  log(ta[10]);"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "undefined"})
+    public void defineOwnPropertyOutOfBoundsWriteIsDiscarded() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  var ta = new Int32Array(4);\n"
+                + "  var value = { valueOf() { return 99; } };\n"
+                + "  log(Reflect.defineProperty(ta, '10', { value: value }));\n"
+                + "  log(ta[10]);"
                 + "</script>\n"
                 + "</body></html>";
 

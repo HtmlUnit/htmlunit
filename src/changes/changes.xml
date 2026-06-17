@@ -8,6 +8,24 @@
 
     <body>
         <release version="5.2.0" date="June 31, 2026" description="Chrome/Edge 149, Bugfixes">
+            <action type="update" dev="rbri">
+                core-js: introduce and use AbstractEcmaObjectOperations ordinarySet() and ordinarySetWithOwnDescriptor() for Reflect.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: improvements for Reflect set() when applying to TypedArrays.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: defineOwnProperty() should not throw when called vial Reflect.
+            </action>
+            <action type="update" dev="rbri">
+                core-js: support 'with (proxy) {...}' statements.
+            </action>
+            <action type="update" dev="rbri" due-to="Lai Quang Duong">
+                core-js: Proxy support the receiver when calling the set() trap.
+            </action>
+            <action type="update" dev="rbri" due-to="Lai Quang Duong">
+                core-js: Reflect set() uses the correct target when forwarding the call.
+            </action>
             <action type="update" dev="RhinoTeam">
                 core-js: small code optimizations and improved tests.
             </action>
