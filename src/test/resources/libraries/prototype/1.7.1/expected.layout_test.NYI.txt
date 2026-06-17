@@ -19,6 +19,6 @@ Info: -- skipped for comparison --
 test #toCSS, #toObject, #toHash passed 5 assertions, 0 failures, 0 errors
 test dimensions on absolutely-positioned, hidden elements failed 0 assertions, 2 failures, 0 errors
 Failure: width
-expected: <278>, actual: <0>
+expected: <278>, actual: <268>
 Failure: height
 expected: <591>, actual: <586>
