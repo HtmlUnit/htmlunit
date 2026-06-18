@@ -14,6 +14,8 @@
  */
 package org.htmlunit.javascript.host.svg;
 
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
+
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -31,21 +33,38 @@ public class SVGTextPathElement extends SVGTextContentElement {
     /** The constant {@code TEXTPATH_METHODTYPE_UNKNOWN}. */
     @JsxConstant
     public static final int TEXTPATH_METHODTYPE_UNKNOWN = 0;
+
     /** The constant {@code TEXTPATH_SPACINGTYPE_UNKNOWN}. */
     @JsxConstant
     public static final int TEXTPATH_SPACINGTYPE_UNKNOWN = 0;
+
+    /** The constant {@code TEXTPATH_SIDETYPE_UNKNOWN}. */
+    @JsxConstant(FF)
+    public static final int TEXTPATH_SIDETYPE_UNKNOWN = 0;
+
     /** The constant {@code TEXTPATH_METHODTYPE_ALIGN}. */
     @JsxConstant
     public static final int TEXTPATH_METHODTYPE_ALIGN = 1;
+
     /** The constant {@code TEXTPATH_SPACINGTYPE_AUTO}. */
     @JsxConstant
     public static final int TEXTPATH_SPACINGTYPE_AUTO = 1;
+
+    /** The constant {@code TEXTPATH_SIDETYPE_LEFT}. */
+    @JsxConstant(FF)
+    public static final int TEXTPATH_SIDETYPE_LEFT = 1;
+
     /** The constant {@code TEXTPATH_METHODTYPE_STRETCH}. */
     @JsxConstant
     public static final int TEXTPATH_METHODTYPE_STRETCH = 2;
+
     /** The constant {@code TEXTPATH_SPACINGTYPE_EXACT}. */
     @JsxConstant
     public static final int TEXTPATH_SPACINGTYPE_EXACT = 2;
+
+    /** The constant {@code TEXTPATH_SIDETYPE_RIGHT}. */
+    @JsxConstant(FF)
+    public static final int TEXTPATH_SIDETYPE_RIGHT = 2;
 
     /**
      * Creates an instance.
