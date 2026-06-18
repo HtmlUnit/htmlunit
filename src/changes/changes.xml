@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.2.0" date="June 31, 2026" description="Chrome/Edge 149, Firefox 152, Bugfixes">
+            <action type="fix" dev="rbri">
+                HtmlMeter's parent class is HtmlElement not HtmlMedia.
+            </action>
             <action type="add" dev="rbri">
                 FF: Notification constants maxActions added.
             </action>
