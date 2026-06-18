@@ -66,7 +66,7 @@ import org.htmlunit.util.StringUtils;
 public final class BrowserVersion implements Serializable {
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(151, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(152, "FF");
 
     private static final int FIREFOX_ESR_NUMERIC = 140;
 
