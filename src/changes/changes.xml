@@ -9,6 +9,9 @@
     <body>
         <release version="5.2.0" date="June 31, 2026" description="Chrome/Edge 149, Firefox 152, Bugfixes">
             <action type="add" dev="rbri">
+                FF: StyleAttribute fieldSizing/field-sizing available.
+            </action>
+            <action type="add" dev="rbri">
                 FF: SVGTextPathElement constants TEXTPATH_SIDETYPE_UNKNOWN, TEXTPATH_SIDETYPE_LEFT, and TEXTPATH_SIDETYPE_RIGHT added.
             </action>
             <action type="update" dev="rbri">

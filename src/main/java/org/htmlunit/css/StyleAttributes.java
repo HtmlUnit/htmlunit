@@ -1184,7 +1184,10 @@ public final class StyleAttributes implements Serializable {
         FALLBACK("fallback", "fallback", chromeAndEdgeEmpty()),
 
         /** The style property {@code fieldSizing}. */
-        FIELD_SIZING("fieldSizing", "field-sizing", chromeAndEdge("fixed")),
+        FIELD_SIZING("fieldSizing", "field-sizing", chromeAndEdge("fixed"), ffLatest("fixed")),
+
+        /** The style property {@code field-sizing}. */
+        FIELD_SIZING_("field-sizing", "field-sizing", ffLatest("fixed")),
 
         /** The style property {@code fill}. */
         FILL("fill", "fill", ff("rgb(0, 0, 0)"), chromeAndEdge("rgb(0, 0, 0)")),

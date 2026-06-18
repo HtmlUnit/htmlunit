@@ -270,6 +270,7 @@ direction
 display
 dominantBaseline
 emptyCells
+fieldSizing
 fill
 fillOpacity
 fillRule
