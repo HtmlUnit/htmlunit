@@ -15138,7 +15138,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
             EDGE = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
-            FF = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]",
+            FF = "animation[GCE],animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]",
             FF_ESR = "animationName[GCE],constructor(),elapsedTime[GCE],pseudoElement[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
@@ -16161,7 +16161,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
             EDGE = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE],pseudoTarget[GCE]",
-            FF = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]",
+            FF = "animation[GCE],constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]",
             FF_ESR = "constructor(),elapsedTime[GCE],propertyName[GCE],pseudoElement[GCE]")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
@@ -17222,18 +17222,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "counter-increment[GSCE],counter-reset[GSCE],counter-set[GSCE],counterIncrement[GSCE],"
                 + "counterReset[GSCE],counterSet[GSCE],cssFloat[GSCE],cursor[GSCE],cx[GSCE],cy[GSCE],d[GSCE],"
                 + "direction[GSCE],display[GSCE],dominant-baseline[GSCE],dominantBaseline[GSCE],empty-cells[GSCE],"
-                + "emptyCells[GSCE],fill-opacity[GSCE],fill-rule[GSCE],fill[GSCE],fillOpacity[GSCE],fillRule[GSCE],"
-                + "filter[GSCE],flex-basis[GSCE],flex-direction[GSCE],flex-flow[GSCE],flex-grow[GSCE],"
-                + "flex-shrink[GSCE],flex-wrap[GSCE],flex[GSCE],flexBasis[GSCE],flexDirection[GSCE],flexFlow[GSCE],"
-                + "flexGrow[GSCE],flexShrink[GSCE],flexWrap[GSCE],float[GSCE],flood-color[GSCE],flood-opacity[GSCE],"
-                + "floodColor[GSCE],floodOpacity[GSCE],font-family[GSCE],font-feature-settings[GSCE],"
-                + "font-kerning[GSCE],font-language-override[GSCE],font-optical-sizing[GSCE],font-palette[GSCE],"
-                + "font-size-adjust[GSCE],font-size[GSCE],font-stretch[GSCE],font-style[GSCE],"
-                + "font-synthesis-position[GSCE],font-synthesis-small-caps[GSCE],font-synthesis-style[GSCE],"
-                + "font-synthesis-weight[GSCE],font-synthesis[GSCE],font-variant-alternates[GSCE],"
-                + "font-variant-caps[GSCE],font-variant-east-asian[GSCE],font-variant-emoji[GSCE],"
-                + "font-variant-ligatures[GSCE],font-variant-numeric[GSCE],font-variant-position[GSCE],"
-                + "font-variant[GSCE],font-variation-settings[GSCE],font-weight[GSCE],font[GSCE],fontFamily[GSCE],"
+                + "emptyCells[GSCE],field-sizing[GSCE],fieldSizing[GSCE],fill-opacity[GSCE],fill-rule[GSCE],"
+                + "fill[GSCE],fillOpacity[GSCE],fillRule[GSCE],filter[GSCE],flex-basis[GSCE],flex-direction[GSCE],"
+                + "flex-flow[GSCE],flex-grow[GSCE],flex-shrink[GSCE],flex-wrap[GSCE],flex[GSCE],flexBasis[GSCE],"
+                + "flexDirection[GSCE],flexFlow[GSCE],flexGrow[GSCE],flexShrink[GSCE],flexWrap[GSCE],float[GSCE],"
+                + "flood-color[GSCE],flood-opacity[GSCE],floodColor[GSCE],floodOpacity[GSCE],font-family[GSCE],"
+                + "font-feature-settings[GSCE],font-kerning[GSCE],font-language-override[GSCE],"
+                + "font-optical-sizing[GSCE],font-palette[GSCE],font-size-adjust[GSCE],font-size[GSCE],"
+                + "font-stretch[GSCE],font-style[GSCE],font-synthesis-position[GSCE],"
+                + "font-synthesis-small-caps[GSCE],font-synthesis-style[GSCE],font-synthesis-weight[GSCE],"
+                + "font-synthesis[GSCE],font-variant-alternates[GSCE],font-variant-caps[GSCE],"
+                + "font-variant-east-asian[GSCE],font-variant-emoji[GSCE],font-variant-ligatures[GSCE],"
+                + "font-variant-numeric[GSCE],font-variant-position[GSCE],font-variant[GSCE],"
+                + "font-variation-settings[GSCE],font-weight[GSCE],font[GSCE],fontFamily[GSCE],"
                 + "fontFeatureSettings[GSCE],fontKerning[GSCE],fontLanguageOverride[GSCE],fontOpticalSizing[GSCE],"
                 + "fontPalette[GSCE],fontSize[GSCE],fontSizeAdjust[GSCE],fontStretch[GSCE],fontStyle[GSCE],"
                 + "fontSynthesis[GSCE],fontSynthesisPosition[GSCE],fontSynthesisSmallCaps[GSCE],"
@@ -17874,18 +17875,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "counter-increment[GSCE],counter-reset[GSCE],counter-set[GSCE],counterIncrement[GSCE],"
                 + "counterReset[GSCE],counterSet[GSCE],cssFloat[GSCE],cursor[GSCE],cx[GSCE],cy[GSCE],d[GSCE],"
                 + "direction[GSCE],display[GSCE],dominant-baseline[GSCE],dominantBaseline[GSCE],empty-cells[GSCE],"
-                + "emptyCells[GSCE],fill-opacity[GSCE],fill-rule[GSCE],fill[GSCE],fillOpacity[GSCE],fillRule[GSCE],"
-                + "filter[GSCE],flex-basis[GSCE],flex-direction[GSCE],flex-flow[GSCE],flex-grow[GSCE],"
-                + "flex-shrink[GSCE],flex-wrap[GSCE],flex[GSCE],flexBasis[GSCE],flexDirection[GSCE],flexFlow[GSCE],"
-                + "flexGrow[GSCE],flexShrink[GSCE],flexWrap[GSCE],float[GSCE],flood-color[GSCE],flood-opacity[GSCE],"
-                + "floodColor[GSCE],floodOpacity[GSCE],font-family[GSCE],font-feature-settings[GSCE],"
-                + "font-kerning[GSCE],font-language-override[GSCE],font-optical-sizing[GSCE],font-palette[GSCE],"
-                + "font-size-adjust[GSCE],font-size[GSCE],font-stretch[GSCE],font-style[GSCE],"
-                + "font-synthesis-position[GSCE],font-synthesis-small-caps[GSCE],font-synthesis-style[GSCE],"
-                + "font-synthesis-weight[GSCE],font-synthesis[GSCE],font-variant-alternates[GSCE],"
-                + "font-variant-caps[GSCE],font-variant-east-asian[GSCE],font-variant-emoji[GSCE],"
-                + "font-variant-ligatures[GSCE],font-variant-numeric[GSCE],font-variant-position[GSCE],"
-                + "font-variant[GSCE],font-variation-settings[GSCE],font-weight[GSCE],font[GSCE],fontFamily[GSCE],"
+                + "emptyCells[GSCE],field-sizing[GSCE],fieldSizing[GSCE],fill-opacity[GSCE],fill-rule[GSCE],"
+                + "fill[GSCE],fillOpacity[GSCE],fillRule[GSCE],filter[GSCE],flex-basis[GSCE],flex-direction[GSCE],"
+                + "flex-flow[GSCE],flex-grow[GSCE],flex-shrink[GSCE],flex-wrap[GSCE],flex[GSCE],flexBasis[GSCE],"
+                + "flexDirection[GSCE],flexFlow[GSCE],flexGrow[GSCE],flexShrink[GSCE],flexWrap[GSCE],float[GSCE],"
+                + "flood-color[GSCE],flood-opacity[GSCE],floodColor[GSCE],floodOpacity[GSCE],font-family[GSCE],"
+                + "font-feature-settings[GSCE],font-kerning[GSCE],font-language-override[GSCE],"
+                + "font-optical-sizing[GSCE],font-palette[GSCE],font-size-adjust[GSCE],font-size[GSCE],"
+                + "font-stretch[GSCE],font-style[GSCE],font-synthesis-position[GSCE],"
+                + "font-synthesis-small-caps[GSCE],font-synthesis-style[GSCE],font-synthesis-weight[GSCE],"
+                + "font-synthesis[GSCE],font-variant-alternates[GSCE],font-variant-caps[GSCE],"
+                + "font-variant-east-asian[GSCE],font-variant-emoji[GSCE],font-variant-ligatures[GSCE],"
+                + "font-variant-numeric[GSCE],font-variant-position[GSCE],font-variant[GSCE],"
+                + "font-variation-settings[GSCE],font-weight[GSCE],font[GSCE],fontFamily[GSCE],"
                 + "fontFeatureSettings[GSCE],fontKerning[GSCE],fontLanguageOverride[GSCE],fontOpticalSizing[GSCE],"
                 + "fontPalette[GSCE],fontSize[GSCE],fontSizeAdjust[GSCE],fontStretch[GSCE],fontStyle[GSCE],"
                 + "fontSynthesis[GSCE],fontSynthesisPosition[GSCE],fontSynthesisSmallCaps[GSCE],"
@@ -19535,15 +19537,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "icon[GCE],image[GCE],lang[GCE],onclick[GSCE],onclose[GSCE],onerror[GSCE],"
                 + "onshow[GSCE],renotify[GCE],requireInteraction[GCE],scenario[GCE],silent[GCE],"
                 + "tag[GCE],timestamp[GCE],title[GCE],vibrate[GCE]",
-            FF = "body[GCE],close(),constructor(),data[GCE],dir[GCE],icon[GCE],lang[GCE],onclick[GSCE],"
-                + "onclose[GSCE],onerror[GSCE],onshow[GSCE],requireInteraction[GCE],silent[GCE],"
-                + "tag[GCE],title[GCE]",
+            FF = "actions[GCE],body[GCE],close(),constructor(),data[GCE],dir[GCE],icon[GCE],lang[GCE],"
+                + "onclick[GSCE],onclose[GSCE],onerror[GSCE],onshow[GSCE],requireInteraction[GCE],silent[GCE],"
+                + "tag[GCE],"
+                + "title[GCE]",
             FF_ESR = "body[GCE],close(),constructor(),data[GCE],dir[GCE],icon[GCE],lang[GCE],onclick[GSCE],"
                 + "onclose[GSCE],onerror[GSCE],onshow[GSCE],requireInteraction[GCE],silent[GCE],tag[GCE],"
                 + "title[GCE]")
     @HtmlUnitNYI(CHROME = "constructor(),maxActions[E]",
             EDGE = "constructor(),maxActions[E]",
-            FF = "constructor()",
+            FF = "constructor(),maxActions[E]",
             FF_ESR = "constructor()")
     public void notification() throws Exception {
         testString("", "new Notification('not')");
