@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.apache.http.client.utils.DateUtils;
 import org.htmlunit.junit.annotation.Alerts;
+import org.htmlunit.junit.annotation.HtmlUnitNYI;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.jupiter.api.Test;
@@ -161,7 +162,9 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("value1")
+    @Alerts(DEFAULT = "value1",
+            FF = "")
+    @HtmlUnitNYI(FF = "value1")
     public void emptyCookieName() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "=value1"));

@@ -1595,7 +1595,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"", "a", "a", "b", "b"})
+    @Alerts(DEFAULT = {"", "a", "a", "b", "b"},
+            FF = {"", "a=", "a=", "a=; b=", "a=; b="})
+    @HtmlUnitNYI(FF = {"", "a", "a", "b", "b"})
     public void cookie_write2() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -1623,7 +1625,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"", "a", "b"})
+    @Alerts(DEFAULT = {"", "a", "b"},
+            FF = {"", "a=", "a="})
+    @HtmlUnitNYI(FF = {"", "a", "b"})
     public void cookie_write_valueOnly() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
