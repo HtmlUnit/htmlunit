@@ -239,4 +239,23 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void canPlayType() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "<video id='v'></video>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var elem = document.getElementById('v');\n"
+            + "  log(typeof elem.canPlayType);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

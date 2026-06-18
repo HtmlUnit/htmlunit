@@ -101,9 +101,9 @@ public class HTMLMediaElement extends HTMLElement {
     public String canPlayType(final String type) {
         final HtmlMedia element = (HtmlMedia) getDomNodeOrNull();
         if (element == null) {
-            return "maybe";
+            return "";
         }
-        return element.canPlayType(type);
+        return element.canPlayType(type, getBrowserVersion());
     }
 
     /**
