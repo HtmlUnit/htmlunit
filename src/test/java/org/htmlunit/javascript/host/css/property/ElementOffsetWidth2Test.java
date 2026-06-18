@@ -277,13 +277,7 @@ public class ElementOffsetWidth2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"319", "319.3333435058594"},
-            FF = {"319", "319.33331298828125"},
-            FF_ESR = {"319", "319.33331298828125"})
-    @HtmlUnitNYI(CHROME = {"320", "320"},
-            EDGE = {"320", "320"},
-            FF = {"320", "320"},
-            FF_ESR = {"320", "320"})
+    @Alerts({"320", "320"})
     public void absolutelyPositionedWithBorderAndPadding() throws Exception {
         // child width = 300px, padding = 5px each side, border = 5px each side
         // offsetWidth = 300 + 2*5 (padding) + 2*5 (border) = 320
@@ -425,14 +419,9 @@ public class ElementOffsetWidth2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"1242", "1242"},
-            EDGE = {"1234", "1234"},
-            FF = {"1241", "1241.3333740234375"},
-            FF_ESR = {"1241", "1241.3333740234375"})
-    @HtmlUnitNYI(CHROME = {"1240", "1240"},
-            EDGE = {"1240", "1240"},
-            FF = {"1240", "1240"},
-            FF_ESR = {"1240", "1240"})
+    @Alerts(DEFAULT = {"1240", "1240"},
+            EDGE = {"1232", "1232"})
+    @HtmlUnitNYI(EDGE = {"1240", "1240"})
     public void blockWithNoAncestorWidthUsesWindowWidth() throws Exception {
         // window inner width (1272) - body margin 8px*2 = 1256 in real browsers
         // exact value is browser/window-size dependent; the important thing is it is NOT 500px
