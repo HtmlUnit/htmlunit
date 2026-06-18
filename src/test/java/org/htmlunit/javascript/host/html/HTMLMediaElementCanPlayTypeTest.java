@@ -142,7 +142,7 @@ public class HTMLMediaElementCanPlayTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"probably", "probably"})
+    @Alerts({"probably", "probably"})
     public void canPlayType_VideoMp4_AV1_AAC() throws Exception {
         canPlayType("video/mp4; codecs=\"av01.0.01M.08, mp4a.40.2\"");
     }
@@ -151,7 +151,7 @@ public class HTMLMediaElementCanPlayTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"probably", "probably"})
+    @Alerts({"probably", "probably"})
     public void canPlayType_VideoMp4_AV1() throws Exception {
         canPlayType("video/mp4; codecs=\"av01.0.01M.08\"");
     }
