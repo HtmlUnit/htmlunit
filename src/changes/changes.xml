@@ -9,6 +9,9 @@
     <body>
         <release version="5.2.0" date="June 31, 2026" description="Chrome/Edge 149, Firefox 152, Bugfixes">
             <action type="add" dev="rbri">
+                FF: Notification constants maxActions added.
+            </action>
+            <action type="add" dev="rbri">
                 FF: StyleAttribute fieldSizing/field-sizing available.
             </action>
             <action type="add" dev="rbri">
