@@ -14,8 +14,13 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativePromise;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.html.HtmlMedia;
+import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -94,16 +99,32 @@ public class HTMLMediaElement extends HTMLElement {
 
     /**
      * Determines whether the specified media type can be played back.
-     * @param type the type
+     * @param context the context
+     * @param scope the scope
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
      * @return "probably", "maybe", or ""
      */
     @JsxFunction
-    public String canPlayType(final String type) {
-        final HtmlMedia element = (HtmlMedia) getDomNodeOrNull();
+    public static String canPlayType(final Context context, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (!(thisObj instanceof HTMLMediaElement htmlMedia)) {
+            throw JavaScriptEngine.reportRuntimeError(
+                    "HTMLMediaElement.canPlayType() failed - this is not a HTMLMediaElement");
+        }
+
+        if (args.length == 0) {
+            throw JavaScriptEngine.typeError(
+                    "HTMLMediaElement.canPlayType(): At least 1 argument required, but only 0 passed.");
+        }
+
+        final HtmlMedia element = (HtmlMedia) htmlMedia.getDomNodeOrNull();
         if (element == null) {
             return "";
         }
-        return element.canPlayType(type, getBrowserVersion());
+
+        return element.canPlayType(JavaScriptEngine.toString(args[0]), htmlMedia.getBrowserVersion());
     }
 
     /**
