@@ -149,7 +149,7 @@ public abstract class HtmlMedia extends HtmlElement {
      * @param browserVersion the browser version
      * @return "probably", "maybe", or "". The current implementation returns ""
      */
-    public String canPlayType(final String type, final BrowserVersion browserVersion) {
+    public static String canPlayType(final String type, final BrowserVersion browserVersion) {
         final MediaResourceType mediaType = MediaResourceType.parse(type);
         if (mediaType == null) {
             return "";

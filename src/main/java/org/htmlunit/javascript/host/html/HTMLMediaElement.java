@@ -119,12 +119,7 @@ public class HTMLMediaElement extends HTMLElement {
                     "HTMLMediaElement.canPlayType(): At least 1 argument required, but only 0 passed.");
         }
 
-        final HtmlMedia element = (HtmlMedia) htmlMedia.getDomNodeOrNull();
-        if (element == null) {
-            return "";
-        }
-
-        return element.canPlayType(JavaScriptEngine.toString(args[0]), htmlMedia.getBrowserVersion());
+        return HtmlMedia.canPlayType(JavaScriptEngine.toString(args[0]), htmlMedia.getBrowserVersion());
     }
 
     /**
