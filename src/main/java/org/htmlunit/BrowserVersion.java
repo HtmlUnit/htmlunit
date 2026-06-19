@@ -260,203 +260,8 @@ public final class BrowserVersion implements Serializable {
             113, 115, 116, 117, 118, 119, 121, 122, 123, 124, 126, 127, 128, 129, 130, 132, 132, 133, 134, 136, 137,
             138, 139, 140, 142, 142, 143, 144, 145, 147};
 
-        // default file upload mime types
-        CHROME.registerUploadMimeType("html", MimeType.TEXT_HTML);
-        CHROME.registerUploadMimeType("htm", MimeType.TEXT_HTML);
-        CHROME.registerUploadMimeType("css", MimeType.TEXT_CSS);
-        CHROME.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        CHROME.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
-        CHROME.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
-        CHROME.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
-        CHROME.registerUploadMimeType("png", MimeType.IMAGE_PNG);
-        CHROME.registerUploadMimeType("pdf", "application/pdf");
-        CHROME.registerUploadMimeType("webp", "image/webp");
-        CHROME.registerUploadMimeType("mp4", "video/mp4");
-        CHROME.registerUploadMimeType("m4v", "video/mp4");
-        CHROME.registerUploadMimeType("m4a", "audio/x-m4a");
-        CHROME.registerUploadMimeType("mp3", "audio/mpeg");
-        CHROME.registerUploadMimeType("ogv", "video/ogg");
-        CHROME.registerUploadMimeType("ogm", "video/ogg");
-        CHROME.registerUploadMimeType("ogg", "audio/ogg");
-        CHROME.registerUploadMimeType("oga", "audio/ogg");
-        CHROME.registerUploadMimeType("opus", "audio/ogg");
-        CHROME.registerUploadMimeType("webm", "video/webm");
-        CHROME.registerUploadMimeType("wav", "audio/wav");
-        CHROME.registerUploadMimeType("flac", "audio/flac");
-        CHROME.registerUploadMimeType("xhtml", "application/xhtml+xml");
-        CHROME.registerUploadMimeType("xht", "application/xhtml+xml");
-        CHROME.registerUploadMimeType("xhtm", "application/xhtml+xml");
-        CHROME.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
-        CHROME.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
-
-        EDGE.registerUploadMimeType("html", MimeType.TEXT_HTML);
-        EDGE.registerUploadMimeType("htm", MimeType.TEXT_HTML);
-        EDGE.registerUploadMimeType("css", MimeType.TEXT_CSS);
-        EDGE.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        EDGE.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
-        EDGE.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
-        EDGE.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
-        EDGE.registerUploadMimeType("png", MimeType.IMAGE_PNG);
-        EDGE.registerUploadMimeType("pdf", "application/pdf");
-        EDGE.registerUploadMimeType("webp", "image/webp");
-        EDGE.registerUploadMimeType("mp4", "video/mp4");
-        EDGE.registerUploadMimeType("m4v", "video/mp4");
-        EDGE.registerUploadMimeType("m4a", "audio/x-m4a");
-        EDGE.registerUploadMimeType("mp3", "audio/mpeg");
-        EDGE.registerUploadMimeType("ogv", "video/ogg");
-        EDGE.registerUploadMimeType("ogm", "video/ogg");
-        EDGE.registerUploadMimeType("ogg", "audio/ogg");
-        EDGE.registerUploadMimeType("oga", "audio/ogg");
-        EDGE.registerUploadMimeType("opus", "audio/ogg");
-        EDGE.registerUploadMimeType("webm", "video/webm");
-        EDGE.registerUploadMimeType("wav", "audio/wav");
-        EDGE.registerUploadMimeType("flac", "audio/flac");
-        EDGE.registerUploadMimeType("xhtml", "application/xhtml+xml");
-        EDGE.registerUploadMimeType("xht", "application/xhtml+xml");
-        EDGE.registerUploadMimeType("xhtm", "application/xhtml+xml");
-        EDGE.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
-        EDGE.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
-
-        FIREFOX_ESR.registerUploadMimeType("html", MimeType.TEXT_HTML);
-        FIREFOX_ESR.registerUploadMimeType("htm", MimeType.TEXT_HTML);
-        FIREFOX_ESR.registerUploadMimeType("css", MimeType.TEXT_CSS);
-        FIREFOX_ESR.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        FIREFOX_ESR.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
-        FIREFOX_ESR.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
-        FIREFOX_ESR.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
-        FIREFOX_ESR.registerUploadMimeType("pdf", "application/pdf");
-        FIREFOX_ESR.registerUploadMimeType("mp4", "video/mp4");
-        FIREFOX_ESR.registerUploadMimeType("m4v", "video/mp4");
-        FIREFOX_ESR.registerUploadMimeType("m4a", "audio/mp4");
-        FIREFOX_ESR.registerUploadMimeType("png", MimeType.IMAGE_PNG);
-        FIREFOX_ESR.registerUploadMimeType("mp3", "audio/mpeg");
-        FIREFOX_ESR.registerUploadMimeType("ogv", "video/ogg");
-        FIREFOX_ESR.registerUploadMimeType("ogm", "video/ogg");
-        FIREFOX_ESR.registerUploadMimeType("ogg", "application/ogg");
-        FIREFOX_ESR.registerUploadMimeType("oga", "audio/ogg");
-        FIREFOX_ESR.registerUploadMimeType("opus", "audio/ogg");
-        FIREFOX_ESR.registerUploadMimeType("webm", "video/webm");
-        FIREFOX_ESR.registerUploadMimeType("webp", "image/webp");
-        FIREFOX_ESR.registerUploadMimeType("wav", "audio/wav");
-        FIREFOX_ESR.registerUploadMimeType("flac", "audio/x-flac");
-        FIREFOX_ESR.registerUploadMimeType("xhtml", "application/xhtml+xml");
-        FIREFOX_ESR.registerUploadMimeType("xht", "application/xhtml+xml");
-        FIREFOX_ESR.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
-        FIREFOX_ESR.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
-
-        FIREFOX.registerUploadMimeType("html", MimeType.TEXT_HTML);
-        FIREFOX.registerUploadMimeType("htm", MimeType.TEXT_HTML);
-        FIREFOX.registerUploadMimeType("css", MimeType.TEXT_CSS);
-        FIREFOX.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        FIREFOX.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
-        FIREFOX.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
-        FIREFOX.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
-        FIREFOX.registerUploadMimeType("pdf", "application/pdf");
-        FIREFOX.registerUploadMimeType("mp4", "video/mp4");
-        FIREFOX.registerUploadMimeType("m4v", "video/mp4");
-        FIREFOX.registerUploadMimeType("m4a", "audio/mp4");
-        FIREFOX.registerUploadMimeType("png", MimeType.IMAGE_PNG);
-        FIREFOX.registerUploadMimeType("mp3", "audio/mpeg");
-        FIREFOX.registerUploadMimeType("ogv", "video/ogg");
-        FIREFOX.registerUploadMimeType("ogm", "video/ogg");
-        FIREFOX.registerUploadMimeType("ogg", "application/ogg");
-        FIREFOX.registerUploadMimeType("oga", "audio/ogg");
-        FIREFOX.registerUploadMimeType("opus", "audio/ogg");
-        FIREFOX.registerUploadMimeType("webm", "video/webm");
-        FIREFOX.registerUploadMimeType("webp", "image/webp");
-        FIREFOX.registerUploadMimeType("wav", "audio/wav");
-        FIREFOX.registerUploadMimeType("flac", "audio/x-flac");
-        FIREFOX.registerUploadMimeType("xhtml", "application/xhtml+xml");
-        FIREFOX.registerUploadMimeType("xht", "application/xhtml+xml");
-        FIREFOX.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
-        FIREFOX.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
-
-        // MediaResources
-        final HashSet<MediaResourceType> common = new HashSet<>();
-        common.add(new MediaResourceType("application/ogg", null));
-        common.add(new MediaResourceType("audio/mp4", null));
-        common.add(new MediaResourceType("audio/ogg", null));
-        common.add(new MediaResourceType("audio/wav", null));
-        common.add(new MediaResourceType("audio/webm", null));
-        common.add(new MediaResourceType("audio/x-m4a", null));
-        common.add(new MediaResourceType("audio/x-wav", null));
-        common.add(new MediaResourceType("video/mp4", null));
-        common.add(new MediaResourceType("video/webm", null));
-        common.add(new MediaResourceType("video/x-matroska", null));
-
-        HashSet<MediaResourceType> ff = new HashSet<>(common);
-        ff.add(new MediaResourceType("audio/aac", null));
-        ff.add(new MediaResourceType("audio/flac", null));
-        ff.add(new MediaResourceType("audio/mpeg", null));
-        ff.add(new MediaResourceType("audio/wave", null));
-        ff.add(new MediaResourceType("audio/x-aac", null));
-        ff.add(new MediaResourceType("audio/x-flac", null));
-        ff.add(new MediaResourceType("audio/x-pn-wav", null));
-        ff.add(new MediaResourceType("video/quicktime", null));
-        FIREFOX.maybeMediaResource_.addAll(ff);
-
-        FIREFOX_ESR.maybeMediaResource_.addAll(ff);
-        FIREFOX_ESR.maybeMediaResource_.remove(new MediaResourceType("video/x-matroska", null));
-
-        HashSet<MediaResourceType> chrome = new HashSet<>(common);
-        chrome.add(new MediaResourceType("application/vnd.apple.mpegurl", null));
-        chrome.add(new MediaResourceType("application/x-mpegURL", null));
-        chrome.add(new MediaResourceType("video/3gpp", null));
-        chrome.add(new MediaResourceType("video/ogg", null));
-        chrome.add(new MediaResourceType("video/x-matroska", "avc1,vorbis"));
-        CHROME.maybeMediaResource_.addAll(chrome);
-        chrome.add(new MediaResourceType("audio/3gpp", null));
-        EDGE.maybeMediaResource_.addAll(chrome);
-
-        common.clear();
-        common.add(new MediaResourceType("audio/mp4", "mp4a.40.2"));
-        common.add(new MediaResourceType("audio/mp4", "mp4a.40.5"));
-        common.add(new MediaResourceType("audio/mp4", "mp4a.40.29"));
-        common.add(new MediaResourceType("audio/mpeg", "mp3"));
-        common.add(new MediaResourceType("audio/ogg", "flac"));
-        common.add(new MediaResourceType("audio/ogg", "opus"));
-        common.add(new MediaResourceType("audio/ogg", "vorbis"));
-        common.add(new MediaResourceType("audio/wav", "1"));
-        common.add(new MediaResourceType("audio/webm", "opus"));
-        common.add(new MediaResourceType("audio/webm", "vorbis"));
-        common.add(new MediaResourceType("video/mp4", "mp4a.40.2"));
-        common.add(new MediaResourceType("video/mp4", "av01.0.01M.08"));
-        common.add(new MediaResourceType("video/mp4", "av01.0.01M.08,mp4a.40.2"));
-        common.add(new MediaResourceType("video/mp4", "avc1.42E01E"));
-        common.add(new MediaResourceType("video/mp4", "avc1.42E01E,mp4a.40.2"));
-        common.add(new MediaResourceType("video/mp4", "avc1.640028"));
-        common.add(new MediaResourceType("video/mp4", "avc1.640028,mp4a.40.2"));
-        common.add(new MediaResourceType("video/mp4", "avc1.4D401E"));
-        common.add(new MediaResourceType("video/mp4", "avc1.4D401E,mp4a.40.2"));
-        common.add(new MediaResourceType("video/mp4", "hev1.1.6.L93.90"));
-        common.add(new MediaResourceType("video/mp4", "hev1.1.6.L93.90,mp4a.40.2"));
-        common.add(new MediaResourceType("video/mp4", "hvc1.1.6.L93.90"));
-        common.add(new MediaResourceType("video/mp4", "hvc1.1.6.L93.90,mp4a.40.2"));
-        common.add(new MediaResourceType("video/webm", "opus"));
-        common.add(new MediaResourceType("video/webm", "opus,vp9"));
-        common.add(new MediaResourceType("video/webm", "vorbis"));
-        common.add(new MediaResourceType("video/webm", "vorbis,vp8"));
-        common.add(new MediaResourceType("video/webm", "vp8"));
-        common.add(new MediaResourceType("video/webm", "vp9"));
-
-        ff = new HashSet<>(common);
-        ff.add(new MediaResourceType("video/webm", "av1"));
-        ff.add(new MediaResourceType("video/webm", "av1,opus"));
-        FIREFOX.probablyMediaResources_.addAll(ff);
-        FIREFOX_ESR.probablyMediaResources_.addAll(ff);
-
-        chrome = new HashSet<>(common);
-        chrome.add(new MediaResourceType("audio/aac", null));
-        chrome.add(new MediaResourceType("audio/flac", null));
-        chrome.add(new MediaResourceType("audio/mp4", "mp4a.69"));
-        chrome.add(new MediaResourceType("audio/mpeg", null));
-        chrome.add(new MediaResourceType("video/3gpp", "avc1.42E01E,mp4a.40.2"));
-        CHROME.probablyMediaResources_.addAll(chrome);
-        chrome.add(new MediaResourceType("audio/mp4", "ac-3"));
-        chrome.add(new MediaResourceType("audio/mp4", "ec-3"));
-        chrome.add(new MediaResourceType("video/mp4", "ac-3"));
-        chrome.add(new MediaResourceType("video/mp4", "ec-3"));
-        EDGE.probablyMediaResources_.addAll(chrome);
+        initUploadMimeTypes();
+        initMediaResources();
     }
 
     private final int browserVersionNumeric_;
@@ -568,6 +373,164 @@ public final class BrowserVersion implements Serializable {
                 throw new IllegalStateException(e);
             }
         }
+    }
+
+    private static void initUploadMimeTypes() {
+        // --- Chrome / Edge (identical sets) ---
+        for (final BrowserVersion browser : new BrowserVersion[]{CHROME, EDGE}) {
+            browser.registerUploadMimeType("html",  MimeType.TEXT_HTML);
+            browser.registerUploadMimeType("htm",   MimeType.TEXT_HTML);
+            browser.registerUploadMimeType("css",   MimeType.TEXT_CSS);
+            browser.registerUploadMimeType("xml",   MimeType.TEXT_XML);
+            browser.registerUploadMimeType("gif",   MimeType.IMAGE_GIF);
+            browser.registerUploadMimeType("jpeg",  MimeType.IMAGE_JPEG);
+            browser.registerUploadMimeType("jpg",   MimeType.IMAGE_JPEG);
+            browser.registerUploadMimeType("png",   MimeType.IMAGE_PNG);
+            browser.registerUploadMimeType("pdf",   "application/pdf");
+            browser.registerUploadMimeType("webp",  "image/webp");
+            browser.registerUploadMimeType("mp4",   "video/mp4");
+            browser.registerUploadMimeType("m4v",   "video/mp4");
+            browser.registerUploadMimeType("m4a",   "audio/x-m4a");
+            browser.registerUploadMimeType("mp3",   "audio/mpeg");
+            browser.registerUploadMimeType("ogv",   "video/ogg");
+            browser.registerUploadMimeType("ogm",   "video/ogg");
+            browser.registerUploadMimeType("ogg",   "audio/ogg");
+            browser.registerUploadMimeType("oga",   "audio/ogg");
+            browser.registerUploadMimeType("opus",  "audio/ogg");
+            browser.registerUploadMimeType("webm",  "video/webm");
+            browser.registerUploadMimeType("wav",   "audio/wav");
+            browser.registerUploadMimeType("flac",  "audio/flac");
+            browser.registerUploadMimeType("xhtml", "application/xhtml+xml");
+            browser.registerUploadMimeType("xht",   "application/xhtml+xml");
+            browser.registerUploadMimeType("xhtm",  "application/xhtml+xml");
+            browser.registerUploadMimeType("txt",   MimeType.TEXT_PLAIN);
+            browser.registerUploadMimeType("text",  MimeType.TEXT_PLAIN);
+        }
+
+        // --- Firefox / Firefox ESR (identical sets) ---
+        for (final BrowserVersion browser : new BrowserVersion[]{FIREFOX, FIREFOX_ESR}) {
+            browser.registerUploadMimeType("html",  MimeType.TEXT_HTML);
+            browser.registerUploadMimeType("htm",   MimeType.TEXT_HTML);
+            browser.registerUploadMimeType("css",   MimeType.TEXT_CSS);
+            browser.registerUploadMimeType("xml",   MimeType.TEXT_XML);
+            browser.registerUploadMimeType("gif",   MimeType.IMAGE_GIF);
+            browser.registerUploadMimeType("jpeg",  MimeType.IMAGE_JPEG);
+            browser.registerUploadMimeType("jpg",   MimeType.IMAGE_JPEG);
+            browser.registerUploadMimeType("png",   MimeType.IMAGE_PNG);
+            browser.registerUploadMimeType("pdf",   "application/pdf");
+            browser.registerUploadMimeType("webp",  "image/webp");
+            browser.registerUploadMimeType("mp4",   "video/mp4");
+            browser.registerUploadMimeType("m4v",   "video/mp4");
+            browser.registerUploadMimeType("m4a",   "audio/mp4");          // differs: audio/x-m4a in Chrome/Edge
+            browser.registerUploadMimeType("mp3",   "audio/mpeg");
+            browser.registerUploadMimeType("ogv",   "video/ogg");
+            browser.registerUploadMimeType("ogm",   "video/ogg");
+            browser.registerUploadMimeType("ogg",   "application/ogg");    // differs: audio/ogg in Chrome/Edge
+            browser.registerUploadMimeType("oga",   "audio/ogg");
+            browser.registerUploadMimeType("opus",  "audio/ogg");
+            browser.registerUploadMimeType("webm",  "video/webm");
+            browser.registerUploadMimeType("wav",   "audio/wav");
+            browser.registerUploadMimeType("flac",  "audio/x-flac");       // differs: audio/flac in Chrome/Edge
+            browser.registerUploadMimeType("xhtml", "application/xhtml+xml");
+            browser.registerUploadMimeType("xht",   "application/xhtml+xml");
+            // no xhtm — differs from Chrome/Edge
+            browser.registerUploadMimeType("txt",   MimeType.TEXT_PLAIN);
+            browser.registerUploadMimeType("text",  MimeType.TEXT_PLAIN);
+        }
+    }
+
+    private static void initMediaResources() {
+        // --- maybe: entries shared across all browsers ---
+        final HashSet<MediaResourceType> common = new HashSet<>();
+        common.add(new MediaResourceType("application/ogg", null));
+        common.add(new MediaResourceType("audio/mp4", null));
+        common.add(new MediaResourceType("audio/ogg", null));
+        common.add(new MediaResourceType("audio/wav", null));
+        common.add(new MediaResourceType("audio/webm", null));
+        common.add(new MediaResourceType("audio/x-m4a", null));
+        common.add(new MediaResourceType("audio/x-wav", null));
+        common.add(new MediaResourceType("video/mp4", null));
+        common.add(new MediaResourceType("video/webm", null));
+        common.add(new MediaResourceType("video/x-matroska", null));
+
+        // --- maybe: Firefox / Firefox ESR ---
+        HashSet<MediaResourceType> ff = new HashSet<>(common);
+        ff.add(new MediaResourceType("audio/aac", null));
+        ff.add(new MediaResourceType("audio/flac", null));
+        ff.add(new MediaResourceType("audio/mpeg", null));
+        ff.add(new MediaResourceType("audio/wave", null));
+        ff.add(new MediaResourceType("audio/x-aac", null));
+        ff.add(new MediaResourceType("audio/x-flac", null));
+        ff.add(new MediaResourceType("audio/x-pn-wav", null));
+        ff.add(new MediaResourceType("video/quicktime", null));
+        FIREFOX.maybeMediaResource_.addAll(ff);
+
+        FIREFOX_ESR.maybeMediaResource_.addAll(ff);
+        FIREFOX_ESR.maybeMediaResource_.remove(new MediaResourceType("video/x-matroska", null));
+
+        // --- maybe: Chrome / Edge (Edge is a superset of Chrome) ---
+        HashSet<MediaResourceType> chrome = new HashSet<>(common);
+        chrome.add(new MediaResourceType("application/vnd.apple.mpegurl", null));
+        chrome.add(new MediaResourceType("application/x-mpegURL", null));
+        chrome.add(new MediaResourceType("video/3gpp", null));
+        chrome.add(new MediaResourceType("video/ogg", null));
+        chrome.add(new MediaResourceType("video/x-matroska", "avc1,vorbis"));
+        CHROME.maybeMediaResource_.addAll(chrome);
+        chrome.add(new MediaResourceType("audio/3gpp", null));
+        EDGE.maybeMediaResource_.addAll(chrome);
+
+        // --- probably: entries shared across all browsers ---
+        common.clear();
+        common.add(new MediaResourceType("audio/mp4", "mp4a.40.2"));
+        common.add(new MediaResourceType("audio/mp4", "mp4a.40.5"));
+        common.add(new MediaResourceType("audio/mp4", "mp4a.40.29"));
+        common.add(new MediaResourceType("audio/mpeg", "mp3"));
+        common.add(new MediaResourceType("audio/ogg", "flac"));
+        common.add(new MediaResourceType("audio/ogg", "opus"));
+        common.add(new MediaResourceType("audio/ogg", "vorbis"));
+        common.add(new MediaResourceType("audio/wav", "1"));
+        common.add(new MediaResourceType("audio/webm", "opus"));
+        common.add(new MediaResourceType("audio/webm", "vorbis"));
+        common.add(new MediaResourceType("video/mp4", "mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "av01.0.01M.08"));
+        common.add(new MediaResourceType("video/mp4", "av01.0.01M.08,mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "avc1.42E01E"));
+        common.add(new MediaResourceType("video/mp4", "avc1.42E01E,mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "avc1.640028"));
+        common.add(new MediaResourceType("video/mp4", "avc1.640028,mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "avc1.4D401E"));
+        common.add(new MediaResourceType("video/mp4", "avc1.4D401E,mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "hev1.1.6.L93.90"));
+        common.add(new MediaResourceType("video/mp4", "hev1.1.6.L93.90,mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "hvc1.1.6.L93.90"));
+        common.add(new MediaResourceType("video/mp4", "hvc1.1.6.L93.90,mp4a.40.2"));
+        common.add(new MediaResourceType("video/webm", "opus"));
+        common.add(new MediaResourceType("video/webm", "opus,vp9"));
+        common.add(new MediaResourceType("video/webm", "vorbis"));
+        common.add(new MediaResourceType("video/webm", "vorbis,vp8"));
+        common.add(new MediaResourceType("video/webm", "vp8"));
+        common.add(new MediaResourceType("video/webm", "vp9"));
+
+        // --- probably: Firefox / Firefox ESR (adds AV1-in-WebM) ---
+        ff = new HashSet<>(common);
+        ff.add(new MediaResourceType("video/webm", "av1"));
+        ff.add(new MediaResourceType("video/webm", "av1,opus"));
+        FIREFOX.probablyMediaResources_.addAll(ff);
+        FIREFOX_ESR.probablyMediaResources_.addAll(ff);
+
+        // --- probably: Chrome / Edge (Edge adds Dolby AC-3 / E-AC-3) ---
+        chrome = new HashSet<>(common);
+        chrome.add(new MediaResourceType("audio/aac", null));
+        chrome.add(new MediaResourceType("audio/flac", null));
+        chrome.add(new MediaResourceType("audio/mp4", "mp4a.69"));
+        chrome.add(new MediaResourceType("audio/mpeg", null));
+        chrome.add(new MediaResourceType("video/3gpp", "avc1.42E01E,mp4a.40.2"));
+        CHROME.probablyMediaResources_.addAll(chrome);
+        chrome.add(new MediaResourceType("audio/mp4", "ac-3"));
+        chrome.add(new MediaResourceType("audio/mp4", "ec-3"));
+        chrome.add(new MediaResourceType("video/mp4", "ac-3"));
+        chrome.add(new MediaResourceType("video/mp4", "ec-3"));
+        EDGE.probablyMediaResources_.addAll(chrome);
     }
 
     /**
