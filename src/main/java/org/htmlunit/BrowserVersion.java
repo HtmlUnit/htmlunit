@@ -17,13 +17,16 @@ package org.htmlunit;
 import java.io.File;
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
 import org.htmlunit.css.CssPixelValueConverter;
@@ -367,6 +370,93 @@ public final class BrowserVersion implements Serializable {
         FIREFOX.registerUploadMimeType("xht", "application/xhtml+xml");
         FIREFOX.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
         FIREFOX.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
+
+        // MediaResources
+        final HashSet<MediaResourceType> common = new HashSet<>();
+        common.add(new MediaResourceType("application/ogg", null));
+        common.add(new MediaResourceType("audio/mp4", null));
+        common.add(new MediaResourceType("audio/ogg", null));
+        common.add(new MediaResourceType("audio/wav", null));
+        common.add(new MediaResourceType("audio/webm", null));
+        common.add(new MediaResourceType("audio/x-m4a", null));
+        common.add(new MediaResourceType("audio/x-wav", null));
+        common.add(new MediaResourceType("video/mp4", null));
+        common.add(new MediaResourceType("video/webm", null));
+        common.add(new MediaResourceType("video/x-matroska", null));
+
+        HashSet<MediaResourceType> ff = new HashSet<>(common);
+        ff.add(new MediaResourceType("audio/aac", null));
+        ff.add(new MediaResourceType("audio/flac", null));
+        ff.add(new MediaResourceType("audio/mpeg", null));
+        ff.add(new MediaResourceType("audio/wave", null));
+        ff.add(new MediaResourceType("audio/x-aac", null));
+        ff.add(new MediaResourceType("audio/x-flac", null));
+        ff.add(new MediaResourceType("audio/x-pn-wav", null));
+        ff.add(new MediaResourceType("video/quicktime", null));
+        FIREFOX.maybeMediaResource_.addAll(ff);
+
+        FIREFOX_ESR.maybeMediaResource_.addAll(ff);
+        FIREFOX_ESR.maybeMediaResource_.remove(new MediaResourceType("video/x-matroska", null));
+
+        HashSet<MediaResourceType> chrome = new HashSet<>(common);
+        chrome.add(new MediaResourceType("application/vnd.apple.mpegurl", null));
+        chrome.add(new MediaResourceType("application/x-mpegURL", null));
+        chrome.add(new MediaResourceType("video/3gpp", null));
+        chrome.add(new MediaResourceType("video/ogg", null));
+        chrome.add(new MediaResourceType("video/x-matroska", "avc1,vorbis"));
+        CHROME.maybeMediaResource_.addAll(chrome);
+        chrome.add(new MediaResourceType("audio/3gpp", null));
+        EDGE.maybeMediaResource_.addAll(chrome);
+
+        common.clear();
+        common.add(new MediaResourceType("audio/mp4", "mp4a.40.2"));
+        common.add(new MediaResourceType("audio/mp4", "mp4a.40.5"));
+        common.add(new MediaResourceType("audio/mp4", "mp4a.40.29"));
+        common.add(new MediaResourceType("audio/mpeg", "mp3"));
+        common.add(new MediaResourceType("audio/ogg", "flac"));
+        common.add(new MediaResourceType("audio/ogg", "opus"));
+        common.add(new MediaResourceType("audio/ogg", "vorbis"));
+        common.add(new MediaResourceType("audio/wav", "1"));
+        common.add(new MediaResourceType("audio/webm", "opus"));
+        common.add(new MediaResourceType("audio/webm", "vorbis"));
+        common.add(new MediaResourceType("video/mp4", "mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "av01.0.01M.08"));
+        common.add(new MediaResourceType("video/mp4", "av01.0.01M.08,mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "avc1.42E01E"));
+        common.add(new MediaResourceType("video/mp4", "avc1.42E01E,mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "avc1.640028"));
+        common.add(new MediaResourceType("video/mp4", "avc1.640028,mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "avc1.4D401E"));
+        common.add(new MediaResourceType("video/mp4", "avc1.4D401E,mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "hev1.1.6.L93.90"));
+        common.add(new MediaResourceType("video/mp4", "hev1.1.6.L93.90,mp4a.40.2"));
+        common.add(new MediaResourceType("video/mp4", "hvc1.1.6.L93.90"));
+        common.add(new MediaResourceType("video/mp4", "hvc1.1.6.L93.90,mp4a.40.2"));
+        common.add(new MediaResourceType("video/webm", "opus"));
+        common.add(new MediaResourceType("video/webm", "opus,vp9"));
+        common.add(new MediaResourceType("video/webm", "vorbis"));
+        common.add(new MediaResourceType("video/webm", "vorbis,vp8"));
+        common.add(new MediaResourceType("video/webm", "vp8"));
+        common.add(new MediaResourceType("video/webm", "vp9"));
+
+        ff = new HashSet<>(common);
+        ff.add(new MediaResourceType("video/webm", "av1"));
+        ff.add(new MediaResourceType("video/webm", "av1,opus"));
+        FIREFOX.probablyMediaResources_.addAll(ff);
+        FIREFOX_ESR.probablyMediaResources_.addAll(ff);
+
+        chrome = new HashSet<>(common);
+        chrome.add(new MediaResourceType("audio/aac", null));
+        chrome.add(new MediaResourceType("audio/flac", null));
+        chrome.add(new MediaResourceType("audio/mp4", "mp4a.69"));
+        chrome.add(new MediaResourceType("audio/mpeg", null));
+        chrome.add(new MediaResourceType("video/3gpp", "avc1.42E01E,mp4a.40.2"));
+        CHROME.probablyMediaResources_.addAll(chrome);
+        chrome.add(new MediaResourceType("audio/mp4", "ac-3"));
+        chrome.add(new MediaResourceType("audio/mp4", "ec-3"));
+        chrome.add(new MediaResourceType("video/mp4", "ac-3"));
+        chrome.add(new MediaResourceType("video/mp4", "ec-3"));
+        EDGE.probablyMediaResources_.addAll(chrome);
     }
 
     private final int browserVersionNumeric_;
@@ -397,6 +487,9 @@ public final class BrowserVersion implements Serializable {
     private String[] headerNamesOrdered_;
     private int[] fontHeights_;
     private final Map<String, String> uploadMimeTypes_;
+    private final HashSet<MediaResourceType> maybeMediaResource_;
+    private final HashSet<MediaResourceType> probablyMediaResources_;
+
 
     /**
      * Creates a new browser version instance.
@@ -428,6 +521,9 @@ public final class BrowserVersion implements Serializable {
 
         features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
         uploadMimeTypes_ = new HashMap<>();
+
+        maybeMediaResource_ = new HashSet<>();
+        probablyMediaResources_ = new HashSet<>();
 
         initFeatures();
     }
@@ -841,6 +937,28 @@ public final class BrowserVersion implements Serializable {
         return 10;
     }
 
+    /**
+     * Determines whether the specified media type can be played back.
+     * @param type the type
+     * @return "probably", "maybe", or "". The current implementation returns ""
+     */
+    public String canPlayType(final String type) {
+        final MediaResourceType mediaType = MediaResourceType.parse(type);
+        if (mediaType == null) {
+            return "";
+        }
+
+        if (maybeMediaResource_.contains(mediaType)) {
+            return "maybe";
+        }
+
+        if (probablyMediaResources_.contains(mediaType)) {
+            return "probably";
+        }
+
+        return "";
+    }
+
     @Override
     public String toString() {
         return nickname_;
@@ -888,6 +1006,8 @@ public final class BrowserVersion implements Serializable {
 
             workPiece_.features_.addAll(version.features_);
             workPiece_.uploadMimeTypes_.putAll(version.uploadMimeTypes_);
+            workPiece_.maybeMediaResource_.addAll(version.maybeMediaResource_);
+            workPiece_.probablyMediaResources_.addAll(version.probablyMediaResources_);
         }
 
         /**
@@ -1107,6 +1227,156 @@ public final class BrowserVersion implements Serializable {
         BrowserVersionBuilder setBuildId(final String buildId) {
             workPiece_.buildId_ = buildId;
             return this;
+        }
+    }
+
+    /**
+     * Represents a media type that a browser can play, combining a MIME type
+     * with an optional set of codecs.
+     * <p>Instances are immutable.
+     *
+     * <p>Instances are used as keys in the two lookup sets held by each
+     * {@link BrowserVersion} ({@code maybeMediaResource_} and
+     * {@code probablyMediaResources_}) and are queried by
+     * {@link BrowserVersion#canPlayType(String)} to determine the value
+     * returned by the {@code HTMLMediaElement.canPlayType()} DOM method:
+     * <ul>
+     *   <li>{@code "maybe"}    — the MIME type alone is in the
+     *       {@code maybeMediaResource_} set (no codec information given).</li>
+     *   <li>{@code "probably"} — the MIME type together with the specific
+     *       codec list is in the {@code probablyMediaResources_} set.</li>
+     *   <li>{@code ""}         — neither set contains a matching entry.</li>
+     * </ul>
+     *
+     * <p>Equality and hashing are based on both the MIME type string and the
+     * normalised codec string, so {@code new MediaResourceType("video/mp4", null)}
+     * and {@code new MediaResourceType("video/mp4", "avc1.42E01E")} are
+     * considered distinct entries.
+     *
+     * @see BrowserVersion#canPlayType(String)
+     * @see <a href="https://html.spec.whatwg.org/multipage/media.html#dom-navigator-canplaytype">
+     *      HTML Living Standard – canPlayType</a>
+     */
+    public static class MediaResourceType {
+        /** The MIME type part of the media resource type, e.g. {@code "video/mp4"}. */
+        private final String mime_;
+
+        /**
+         * The normalised, comma-separated, alphabetically sorted codec list,
+         * or {@code null} when no {@code codecs} parameter was supplied.
+         */
+        private final String codecs_;
+
+         /**
+          * Creates a new {@code MediaResourceType} with the given MIME type and
+          * optional codec string.
+          *
+          * @param mime   the MIME type, e.g. {@code "audio/ogg"};
+          *               must not be {@code null}
+          * @param codecs the normalised codec list, e.g. {@code "opus"} or
+          *               {@code "avc1.42E01E,mp4a.40.2"}, or {@code null} if
+          *               no codec information is associated with this entry
+          */
+        public MediaResourceType(final String mime, final String codecs) {
+            mime_ = mime;
+            codecs_ = codecs;
+        }
+
+        /**
+         * Parses a raw {@code canPlayType()} argument string into a
+         * {@code MediaResourceType} suitable for a set lookup.
+         *
+         * <p>The parsing rules follow the
+         * <a href="https://html.spec.whatwg.org/multipage/media.html#dom-navigator-canplaytype">
+         * HTML Living Standard</a>:
+         * <ol>
+         *   <li>Blank or whitespace-only input returns {@code null} (the caller
+         *       will map this to {@code ""}).</li>
+         *   <li>If a semicolon ({@code ;}) is present, everything before it is
+         *       treated as the MIME type and the remainder is inspected for a
+         *       {@code codecs} parameter.</li>
+         *   <li>When a {@code codecs} parameter is found its value is
+         *       <em>normalised</em>: surrounding quotes are stripped, individual
+         *       codec tokens are trimmed and sorted alphabetically, then
+         *       re-joined with a comma. This ensures that
+         *       {@code "vp8, vorbis"} and {@code "vorbis,vp8"} resolve to the
+         *       same entry.</li>
+         *   <li>A {@code codecs} key without a value (e.g. {@code "video/mp4; codecs"})
+         *       is treated as if no codec information were present, yielding a
+         *       codec of {@code null}.</li>
+         *   <li>Input without a semicolon is used verbatim as the MIME type
+         *       with a {@code null} codec.</li>
+         * </ol>
+         *
+         * @param mediaResourceType the raw string passed to
+         *                          {@code HTMLMediaElement.canPlayType()},
+         *                          e.g. {@code "video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\""}
+         * @return the parsed {@code MediaResourceType}, or {@code null} if the
+         *         input is blank (indicating an immediate {@code ""} result)
+         */
+        public static MediaResourceType parse(final String mediaResourceType) {
+            if (StringUtils.isBlank(mediaResourceType)) {
+                return null;
+            }
+
+            final int semPos = mediaResourceType.indexOf(';');
+            if (semPos > -1) {
+                final String mime = mediaResourceType.substring(0, semPos).trim();
+
+                final int codecPos = mediaResourceType.indexOf("codecs", semPos);
+                if (codecPos > -1) {
+                    String codes = mediaResourceType.substring(codecPos + 6).trim();
+                    if (codes.length() > 1 && '=' == codes.charAt(0)) {
+                        codes = codes.substring(1).trim();
+
+                        if (codes.length() > 1
+                                && '"' == codes.charAt(0)
+                                && '"' == codes.charAt(codes.length() - 1)) {
+                            codes = codes.substring(1, codes.length() - 1).trim();
+                        }
+
+                        if (codes.length() == 0) {
+                            return new MediaResourceType(mime, null);
+                        }
+
+                        final String codecs = Arrays
+                                .stream(codes.split(","))
+                                .map(String :: trim)
+                                .sorted()
+                                .collect(Collectors.joining(","));
+                        return new MediaResourceType(mime, codecs);
+                    }
+                }
+                return new MediaResourceType(mime, null);
+            }
+
+            return new MediaResourceType(mediaResourceType, null);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int hashCode() {
+            return Objects.hash(codecs_, mime_);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean equals(final Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final MediaResourceType other = (MediaResourceType) obj;
+            return Objects.equals(codecs_, other.codecs_) && Objects.equals(mime_, other.mime_);
         }
     }
 }
