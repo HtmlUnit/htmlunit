@@ -1220,7 +1220,7 @@ public final class BrowserVersion implements Serializable {
      * @see <a href="https://html.spec.whatwg.org/multipage/media.html#dom-navigator-canplaytype">
      *      HTML Living Standard – canPlayType</a>
      */
-    public static class MediaResourceType {
+    public static class MediaResourceType implements Serializable {
         /** The MIME type part of the media resource type, e.g. {@code "video/mp4"}. */
         private final String mime_;
 
