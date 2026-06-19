@@ -376,8 +376,9 @@ public final class BrowserVersion implements Serializable {
     }
 
     private static void initUploadMimeTypes() {
-        // --- Chrome / Edge (identical sets) ---
-        for (final BrowserVersion browser : new BrowserVersion[]{CHROME, EDGE}) {
+        // shared by all four browsers
+        final BrowserVersion[] all = {CHROME, EDGE, FIREFOX, FIREFOX_ESR};
+        for (final BrowserVersion browser : all) {
             browser.registerUploadMimeType("html",  MimeType.TEXT_HTML);
             browser.registerUploadMimeType("htm",   MimeType.TEXT_HTML);
             browser.registerUploadMimeType("css",   MimeType.TEXT_CSS);
@@ -390,52 +391,33 @@ public final class BrowserVersion implements Serializable {
             browser.registerUploadMimeType("webp",  "image/webp");
             browser.registerUploadMimeType("mp4",   "video/mp4");
             browser.registerUploadMimeType("m4v",   "video/mp4");
-            browser.registerUploadMimeType("m4a",   "audio/x-m4a");
             browser.registerUploadMimeType("mp3",   "audio/mpeg");
             browser.registerUploadMimeType("ogv",   "video/ogg");
             browser.registerUploadMimeType("ogm",   "video/ogg");
-            browser.registerUploadMimeType("ogg",   "audio/ogg");
             browser.registerUploadMimeType("oga",   "audio/ogg");
             browser.registerUploadMimeType("opus",  "audio/ogg");
             browser.registerUploadMimeType("webm",  "video/webm");
             browser.registerUploadMimeType("wav",   "audio/wav");
-            browser.registerUploadMimeType("flac",  "audio/flac");
             browser.registerUploadMimeType("xhtml", "application/xhtml+xml");
             browser.registerUploadMimeType("xht",   "application/xhtml+xml");
-            browser.registerUploadMimeType("xhtm",  "application/xhtml+xml");
             browser.registerUploadMimeType("txt",   MimeType.TEXT_PLAIN);
             browser.registerUploadMimeType("text",  MimeType.TEXT_PLAIN);
         }
 
-        // --- Firefox / Firefox ESR (identical sets) ---
+        // Chrome / Edge overrides (and additions)
+        for (final BrowserVersion browser : new BrowserVersion[]{CHROME, EDGE}) {
+            browser.registerUploadMimeType("m4a",  "audio/x-m4a");   // differs
+            browser.registerUploadMimeType("ogg",  "audio/ogg");      // differs
+            browser.registerUploadMimeType("flac", "audio/flac");     // differs
+
+            browser.registerUploadMimeType("xhtm", "application/xhtml+xml"); // Chrome/Edge only
+        }
+        // Firefox / Firefox ESR overrides
         for (final BrowserVersion browser : new BrowserVersion[]{FIREFOX, FIREFOX_ESR}) {
-            browser.registerUploadMimeType("html",  MimeType.TEXT_HTML);
-            browser.registerUploadMimeType("htm",   MimeType.TEXT_HTML);
-            browser.registerUploadMimeType("css",   MimeType.TEXT_CSS);
-            browser.registerUploadMimeType("xml",   MimeType.TEXT_XML);
-            browser.registerUploadMimeType("gif",   MimeType.IMAGE_GIF);
-            browser.registerUploadMimeType("jpeg",  MimeType.IMAGE_JPEG);
-            browser.registerUploadMimeType("jpg",   MimeType.IMAGE_JPEG);
-            browser.registerUploadMimeType("png",   MimeType.IMAGE_PNG);
-            browser.registerUploadMimeType("pdf",   "application/pdf");
-            browser.registerUploadMimeType("webp",  "image/webp");
-            browser.registerUploadMimeType("mp4",   "video/mp4");
-            browser.registerUploadMimeType("m4v",   "video/mp4");
-            browser.registerUploadMimeType("m4a",   "audio/mp4");          // differs: audio/x-m4a in Chrome/Edge
-            browser.registerUploadMimeType("mp3",   "audio/mpeg");
-            browser.registerUploadMimeType("ogv",   "video/ogg");
-            browser.registerUploadMimeType("ogm",   "video/ogg");
-            browser.registerUploadMimeType("ogg",   "application/ogg");    // differs: audio/ogg in Chrome/Edge
-            browser.registerUploadMimeType("oga",   "audio/ogg");
-            browser.registerUploadMimeType("opus",  "audio/ogg");
-            browser.registerUploadMimeType("webm",  "video/webm");
-            browser.registerUploadMimeType("wav",   "audio/wav");
-            browser.registerUploadMimeType("flac",  "audio/x-flac");       // differs: audio/flac in Chrome/Edge
-            browser.registerUploadMimeType("xhtml", "application/xhtml+xml");
-            browser.registerUploadMimeType("xht",   "application/xhtml+xml");
-            // no xhtm — differs from Chrome/Edge
-            browser.registerUploadMimeType("txt",   MimeType.TEXT_PLAIN);
-            browser.registerUploadMimeType("text",  MimeType.TEXT_PLAIN);
+            browser.registerUploadMimeType("m4a",  "audio/mp4");       // differs
+            browser.registerUploadMimeType("ogg",  "application/ogg"); // differs
+            browser.registerUploadMimeType("flac", "audio/x-flac");    // differs
+            // xhtm absent in Firefox — intentionally not registered
         }
     }
 
@@ -564,7 +546,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Returns {@code true} if this <code>BrowserVersion</code> instance represents some
      * version of Microsoft Edge.
-     * @return whether this version is a version of a Chrome browser
+     * @return whether this version is a version of the Edge browser
      */
     public boolean isEdge() {
         return getNickname().startsWith("Edge");
@@ -581,7 +563,7 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * @return whether this is version 78  of a Firefox browser
+     * @return whether this is version 140  of a Firefox browser
      */
     public boolean isFirefoxESR() {
         return isFirefox() && getBrowserVersionNumeric() == FIREFOX_ESR_NUMERIC;
@@ -911,12 +893,12 @@ public final class BrowserVersion implements Serializable {
             return "";
         }
 
-        if (maybeMediaResource_.contains(mediaType)) {
-            return "maybe";
-        }
-
         if (probablyMediaResources_.contains(mediaType)) {
             return "probably";
+        }
+
+        if (maybeMediaResource_.contains(mediaType)) {
+            return "maybe";
         }
 
         return "";
@@ -1282,40 +1264,60 @@ public final class BrowserVersion implements Serializable {
                 return null;
             }
 
-            final int semPos = mediaResourceType.indexOf(';');
-            if (semPos > -1) {
-                final String mime = mediaResourceType.substring(0, semPos).trim();
+            final String[] parts = mediaResourceType.split(";", -1);
+            final String mime = parts[0].trim();
 
-                final int codecPos = mediaResourceType.indexOf("codecs", semPos);
-                if (codecPos > -1) {
-                    String codes = mediaResourceType.substring(codecPos + 6).trim();
-                    if (codes.length() > 1 && '=' == codes.charAt(0)) {
-                        codes = codes.substring(1).trim();
-
-                        if (codes.length() > 1
-                                && '"' == codes.charAt(0)
-                                && '"' == codes.charAt(codes.length() - 1)) {
-                            codes = codes.substring(1, codes.length() - 1).trim();
-                        }
-
-                        if (codes.length() == 0) {
-                            return new MediaResourceType(mime, null);
-                        }
-
-                        final String codecs = Arrays
-                                .stream(codes.split(","))
-                                .map(String :: trim)
-                                .sorted()
-                                .collect(Collectors.joining(","));
-                        return new MediaResourceType(mime, codecs);
-                    }
-                }
+            if (parts.length == 1) {
                 return new MediaResourceType(mime, null);
             }
 
-            return new MediaResourceType(mediaResourceType, null);
-        }
+            // Walk each parameter after the MIME type (parts[1..n]).
+            for (int i = 1; i < parts.length; i++) {
+                final String param = parts[i].trim();
+                final int eqPos = param.indexOf('=');
 
+                if (eqPos < 0) {
+                    continue; // bare key with no value — skip
+                }
+
+                final String key = param.substring(0, eqPos).trim();
+                if (!"codecs".equalsIgnoreCase(key)) {
+                    continue; // not the codecs param — keep looking
+                }
+
+                String value = param.substring(eqPos + 1).trim();
+
+                // Strip surrounding double-quotes if present.
+                if (value.length() >= 2
+                        && value.charAt(0) == '"'
+                        && value.charAt(value.length() - 1) == '"') {
+                    value = value.substring(1, value.length() - 1).trim();
+                }
+
+                // Strip surrounding single-quotes if present.
+                if (value.length() >= 2
+                        && value.charAt(0) == '\''
+                        && value.charAt(value.length() - 1) == '\'') {
+                    value = value.substring(1, value.length() - 1).trim();
+                }
+
+                if (value.isEmpty()) {
+                    return new MediaResourceType(mime, null);
+                }
+
+                // Normalise: trim each token, sort, re-join.
+                final String codecs = Arrays.stream(value.split(",", -1))
+                        .map(String::trim)
+                        .filter(s -> !s.isEmpty())
+                        .sorted()
+                        .collect(Collectors.joining(","));
+
+                return new MediaResourceType(mime, codecs.isEmpty() ? null : codecs);
+            }
+
+            // Semicolons present but no codecs param found.
+            return new MediaResourceType(mime, null);
+        }
         /**
          * {@inheritDoc}
          */
