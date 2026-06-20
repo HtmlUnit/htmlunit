@@ -130,7 +130,6 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.dom.Document")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlMedia")
 
         .should().callMethod(BrowserVersion.class, "isChrome");
 
@@ -150,7 +149,6 @@ public class Architecture2Test {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.dom.Document")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlMedia")
 
         .should().callMethod(BrowserVersion.class, "isEdge");
 
@@ -190,7 +188,6 @@ public class Architecture2Test {
 
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.DateTimeFormat")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.intl.NumberFormat")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlMedia")
 
         .should().callMethod(BrowserVersion.class, "isFirefoxESR");
 

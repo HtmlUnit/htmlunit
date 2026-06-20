@@ -1318,6 +1318,7 @@ public final class BrowserVersion implements Serializable {
             // Semicolons present but no codecs param found.
             return new MediaResourceType(mime, null);
         }
+
         /**
          * {@inheritDoc}
          */
