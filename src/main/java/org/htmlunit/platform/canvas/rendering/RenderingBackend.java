@@ -177,8 +177,8 @@ public interface RenderingBackend {
     /**
      * Paints data from the given ImageData object onto the canvas.
      * @param imageDataBytes an array of pixel values
-     * @param imageDataHeight the height of the imageData
      * @param imageDataWidth the width of the imageData
+     * @param imageDataHeight the height of the imageData
      * @param dx horizontal position (x coordinate) at which to place the image data in the destination canvas
      * @param dy vertical position (y coordinate) at which to place the image data in the destination canvas
      * @param dirtyX horizontal position (x coordinate) of the top-left corner
@@ -190,7 +190,7 @@ public interface RenderingBackend {
      * @param dirtyHeight height of the rectangle to be painted.
      *        Defaults to the height of the image data.
      */
-    void putImageData(byte[] imageDataBytes, int imageDataHeight, int imageDataWidth,
+    void putImageData(byte[] imageDataBytes, int imageDataWidth, int imageDataHeight,
             int dx, int dy, int dirtyX, int dirtyY, int dirtyWidth, int dirtyHeight);
 
     /**
@@ -250,13 +250,13 @@ public interface RenderingBackend {
      * Returns the {@code lineWidth} property.
      * @return the {@code lineWidth} property
      */
-    int getLineWidth();
+    float getLineWidth();
 
     /**
      * Sets the {@code lineWidth} property.
      * @param lineWidth the {@code lineWidth} property
      */
-    void setLineWidth(int lineWidth);
+    void setLineWidth(float lineWidth);
 
     /**
      * Resets (overrides) the current transformation to the identity matrix,
@@ -303,7 +303,7 @@ public interface RenderingBackend {
      * @param x the x
      * @param y the y
      */
-    void translate(int x, int y);
+    void translate(double x, double y);
 
     /**
      * Turns the current or given path into the current clipping region.

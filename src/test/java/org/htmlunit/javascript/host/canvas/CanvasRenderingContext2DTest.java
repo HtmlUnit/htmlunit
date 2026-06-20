@@ -1576,6 +1576,34 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     }
 
     /**
+     * Verifies that a line is drawn from the current path position to the
+     * start of the ellipse when ellipse() follows a moveTo().
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAApklEQVR4AeyQyw2DMBBEnZSRBpIGckwpqSQK4iPRCKVwowJo"
+            + "gDbgDbIRsiwhDCcEYphlvX5e790c/FzA/QM99wxfDOhr9cSnN/bKAvwhfKwSXAcYB0xJbFFJvaA9Lgn2Jp6Bip0GFyw8lLuF"
+            + "1kMdZhT63fq5HzUtelh1eIOCHSq/JsFyimqrAhc0Gsh+I0BFIOkAQrMLOAH8j5uhn4/+v4DRo5s3jgAAAP//GEme5wAAAAZJ"
+            + "REFUAwAaXx8pYc4j6gAAAABJRU5ErkJggg==",
+        FF = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAfklEQVQ4T+3QIQ7CQBCF4a9B4eEecIjegwSL4AZwCAQJouUc"
+            + "3AqHIWSTKQZEk1lR0d+8tyP+zE6jMs23VWIW5pncDfd4o6ux4RXPcCxxKMNBeIocyxYrPOLd4ob7IDxHjmWD9R9hn/nyBa/o"
+            + "CxxLyQgLu8g+Mi38YRbmmf4NPwbFDRWaALN4AAAAEGRlQkc3QjgxMkIwQzAxMjY1MDdFtbTXPQAAAABJRU5ErkJggg==",
+        FF_ESR = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAe0lEQVQ4T2NkoDJgpLJ5DKMGUh6igy4Mk4F++gfE82F+o8SF"
+            + "M4CGfAJikBmcQJwDMhRmYD2JoWcIVC8CxLuh+lyB9GwgXggzsIFEAw2A6kWxGLiAEi9PARr4E+oQZiBdgOxlEh0IV54AZS2g"
+            + "RqRgdQQlXh41EBICgz8MAQbFDRWlQ+mHAAAAAElFTkSuQmCC")
+    public void ellipseConnectsFromCurrentPoint() throws Exception {
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "if (!context.ellipse) { log('context.ellipse not supported'); return; }\n"
+                + "context.moveTo(1, 10);\n"
+                + "context.ellipse(16, 10, 2, 2, 0, 0, 2 * Math.PI);\n"
+                + "context.stroke();\n");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

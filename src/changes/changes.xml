@@ -7,6 +7,25 @@
     </properties>
 
     <body>
+        <release version="5.3.0" date="July xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                AwtRenderingBackend putImageData() now uses a BufferedImage for performance.
+            </action>
+            <action type="fix" dev="rbri">
+                CanvasRenderingContext2D translate() used float coordinates.
+            </action>
+            <action type="fix" dev="rbri">
+                CanvasRenderingContext2D putImageData() parameter handling fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                CanvasRenderingContext2D createLinearGradient() parameters fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                CanvasRenderingContext2D lineWidth is now a float.
+            </action>
+        </release>
+
+
         <release version="5.2.0" date="June 20, 2026" description="Chrome/Edge 149, Firefox 152, Bugfixes">
             <action type="update" dev="rbri">
                 Upgrade commons-logging to 1.4.0.

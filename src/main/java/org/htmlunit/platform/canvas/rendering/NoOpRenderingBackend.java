@@ -259,8 +259,8 @@ public class NoOpRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public int getLineWidth() {
-        return 1;
+    public float getLineWidth() {
+        return 1f;
     }
 
     /**
@@ -297,7 +297,7 @@ public class NoOpRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void setLineWidth(final int lineWidth) {
+    public void setLineWidth(final float lineWidth) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] setLineWidth(" + lineWidth + ")");
         }
@@ -350,7 +350,7 @@ public class NoOpRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void translate(final int x, final int y) {
+    public void translate(final double x, final double y) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] translate()");
         }

@@ -67,7 +67,7 @@ public class AwtRenderingBackend implements RenderingBackend {
 
     private AffineTransform transformation_;
     private float globalAlpha_;
-    private int lineWidth_;
+    private float lineWidth_;
     private Color fillColor_;
     private Color strokeColor_;
 
@@ -700,34 +700,31 @@ public class AwtRenderingBackend implements RenderingBackend {
             return;
         }
 
-        final Color oldColor = graphics2D_.getColor();
-        try {
-            for (int srcY = srcStartY; srcY < srcEndY; srcY++) {
-                for (int srcX = srcStartX; srcX < srcEndX; srcX++) {
-                    final int destX = dx + srcX;
-                    final int destY = dy + srcY;
+        final int srcWidth = srcEndX - srcStartX;
+        final int srcHeight = srcEndY - srcStartY;
 
-                    // putImageData ignores current transform; direct device coords
-                    if (destX < 0 || destX >= image_.getWidth()
-                            || destY < 0 || destY >= image_.getHeight()) {
-                        continue;
-                    }
-
-                    // CRITICAL: index from full source image coordinates
-                    final int byteIdx = (srcY * imageDataWidth + srcX) * 4;
-
-                    final int r = imageDataBytes[byteIdx] & 0xFF;
-                    final int g = imageDataBytes[byteIdx + 1] & 0xFF;
-                    final int b = imageDataBytes[byteIdx + 2] & 0xFF;
-                    final int a = imageDataBytes[byteIdx + 3] & 0xFF;
-
-                    graphics2D_.setColor(new Color(r, g, b, a));
-                    graphics2D_.drawLine(destX, destY, destX, destY);
-                }
+        final BufferedImage srcImage = new BufferedImage(srcWidth, srcHeight, BufferedImage.TYPE_INT_ARGB);
+        for (int row = 0; row < srcHeight; row++) {
+            for (int col = 0; col < srcWidth; col++) {
+                final int byteIdx = ((srcStartY + row) * imageDataWidth + (srcStartX + col)) * 4;
+                final int r = imageDataBytes[byteIdx]     & 0xFF;
+                final int g = imageDataBytes[byteIdx + 1] & 0xFF;
+                final int b = imageDataBytes[byteIdx + 2] & 0xFF;
+                final int a = imageDataBytes[byteIdx + 3] & 0xFF;
+                srcImage.setRGB(col, row, (a << 24) | (r << 16) | (g << 8) | b);
             }
         }
+
+        final Composite savedComposite = graphics2D_.getComposite();
+        final AffineTransform savedTransform = graphics2D_.getTransform();
+        try {
+            graphics2D_.setComposite(AlphaComposite.Src);
+            graphics2D_.setTransform(new AffineTransform());
+            graphics2D_.drawImage(srcImage, dx + srcStartX, dy + srcStartY, null);
+        }
         finally {
-            graphics2D_.setColor(oldColor);
+            graphics2D_.setComposite(savedComposite);
+            graphics2D_.setTransform(savedTransform);
         }
     }
 
@@ -817,7 +814,7 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public int getLineWidth() {
+    public float getLineWidth() {
         return lineWidth_;
     }
 
@@ -865,7 +862,7 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void setLineWidth(final int lineWidth) {
+    public void setLineWidth(final float lineWidth) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] setLineWidth(" + lineWidth + ")");
         }
@@ -934,7 +931,7 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void translate(final int x, final int y) {
+    public void translate(final double x, final double y) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] translate()");
         }
@@ -1006,7 +1003,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     private static final class SaveState {
         private final AffineTransform transformation_;
         private final float globalAlpha_;
-        private final int lineWidth_;
+        private final float lineWidth_;
         private final Color fillColor_;
         private final Color strokeColor_;
         private final Shape clip_;

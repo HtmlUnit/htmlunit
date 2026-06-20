@@ -165,7 +165,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         if (!JavaScriptEngine.isUndefined(lineWidth)) {
             final double width = JavaScriptEngine.toNumber(lineWidth);
             if (!Double.isNaN(width)) {
-                getRenderingBackend().setLineWidth((int) width);
+                getRenderingBackend().setLineWidth((float) width);
             }
         }
     }
@@ -257,6 +257,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                 windingRule = WindingRule.EVEN_ODD;
             }
             canvas.getRenderingBackend().clip(windingRule, null);
+            return;
         }
 
         if (args.length > 1) {
@@ -272,6 +273,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
             LOG.info("CanvasRenderingContext2D.clip(path, fillRule) not yet implemented");
             // canvas.getRenderingBackend().clip(windingRule, (Path2D) args[0]);
+            return;
         }
 
         canvas.getRenderingBackend().clip(WindingRule.NON_ZERO, null);
@@ -329,15 +331,13 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * Creates linear gradient.
      * @param x0 the x0
      * @param y0 the y0
-     * @param r0 the r0
      * @param x1 the x1
      * @param y1 the y1
-     * @param r1 the r1
      * @return the new CanvasGradient
      */
     @JsxFunction
-    public CanvasGradient createLinearGradient(final double x0, final double y0, final double r0, final double x1,
-            final Object y1, final Object r1) {
+    public CanvasGradient createLinearGradient(final double x0, final double y0, final double x1,
+            final Object y1) {
         final CanvasGradient canvasGradient = new CanvasGradient();
         canvasGradient.setParentScope(getParentScope());
         canvasGradient.setPrototype(getPrototype(canvasGradient.getClass()));
@@ -622,7 +622,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         }
 
         getRenderingBackend().putImageData(
-                imageData.getData().getBuffer().getBuffer(), imageData.getHeight(), imageData.getWidth(),
+                imageData.getData().getBuffer().getBuffer(), imageData.getWidth(), imageData.getHeight(),
                 dx, dy, dirtyXArg, dirtyYArg, dirtyWidthArg, dirtyHeightArg);
     }
 
@@ -762,7 +762,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @param y the translation distance in the vertical direction
      */
     @JsxFunction
-    public void translate(final int x, final int y) {
+    public void translate(final double x, final double y) {
         getRenderingBackend().translate(x, y);
     }
 
