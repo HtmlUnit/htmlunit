@@ -16,6 +16,8 @@ package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -573,7 +575,15 @@ public abstract class WebTestCase {
         try (ByteArrayInputStream expectedBis = new ByteArrayInputStream(expectedImageBytes)) {
             final BufferedImage expectedImage = ImageIO.read(expectedBis);
 
-            final ImageComparison imageComparison = new ImageComparison(expectedImage, currentImage);
+            if (expectedImage == null) {
+                assertEquals(expected, current, "Could not decode expected image from base64 data");
+                return;
+            }
+
+            final BufferedImage normalizedExpected = blurAndFlatten(toRgb(expectedImage), 1);
+            final BufferedImage normalizedCurrent = blurAndFlatten(toRgb(currentImage), 1);
+
+            final ImageComparison imageComparison = new ImageComparison(normalizedExpected, normalizedCurrent);
             // imageComparison.setMinimalRectangleSize(10);
             imageComparison.setPixelToleranceLevel(0.2);
             imageComparison.setAllowingPercentOfDifferentPixels(7);
@@ -614,6 +624,56 @@ public abstract class WebTestCase {
         }
     }
 
+    // flatten onto white background first to handle transparency
+    private static BufferedImage toRgb(final BufferedImage src) {
+        final int w = src.getWidth();
+        final int h = src.getHeight();
+        final BufferedImage dst = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+
+        final Graphics2D g = dst.createGraphics();
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, w, h);
+        g.drawImage(src, 0, 0, null);
+        g.dispose();
+
+        return dst;
+    }
+
+    // box blur to absorb antialiasing and small pixel shifts
+    private static BufferedImage blurAndFlatten(final BufferedImage img, final int radius) {
+        final int w = img.getWidth();
+        final int h = img.getHeight();
+        final int[] pixels = img.getRGB(0, 0, w, h, null, 0, w);
+        final int[] result = new int[pixels.length];
+
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                int r = 0, g = 0, b = 0, count = 0;
+                for (int dy = -radius; dy <= radius; dy++) {
+                    for (int dx = -radius; dx <= radius; dx++) {
+                        final int nx = x + dx;
+                        final int ny = y + dy;
+                        if (nx >= 0 && nx < w && ny >= 0 && ny < h) {
+                            final int pixel = pixels[ny * w + nx];
+                            r += (pixel >> 16) & 0xFF;
+                            g += (pixel >> 8)  & 0xFF;
+                            b +=  pixel        & 0xFF;
+                            count++;
+                        }
+                    }
+                }
+                result[y * w + x] = 0xFF000000
+                                   | ((r / count) << 16)
+                                   | ((g / count) << 8)
+                                   |  (b / count);
+            }
+        }
+
+        final BufferedImage dst = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        dst.setRGB(0, 0, w, h, result, 0, w);
+        return dst;
+    }
+
     private List<String> debugOutput(final BufferedImage expectedImage,
             final BufferedImage currentImage,
             final BufferedImage differenceImage) throws IOException {
@@ -624,16 +684,16 @@ public abstract class WebTestCase {
 
         final String browser = getBrowserVersion().getNickname();
 
-        final File expectedOut = new File(dir, "expected_" + browser + ".png");
+        final File expectedOut = new File(dir, browser + "_expected.png");
         ImageComparisonUtil.saveImage(expectedOut, expectedImage);
         result.add(expectedOut.getAbsolutePath());
 
-        final File currentOut = new File(dir, "current_" + browser + ".png");
+        final File currentOut = new File(dir, browser + "_current.png");
         ImageComparisonUtil.saveImage(currentOut, currentImage);
         result.add(currentOut.getAbsolutePath());
 
         if (differenceImage != null) {
-            final File differenceOut = new File(dir, "difference_" + browser + ".png");
+            final File differenceOut = new File(dir, browser + "_difference.png");
             ImageComparisonUtil.saveImage(differenceOut, differenceImage);
             result.add(differenceOut.getAbsolutePath());
         }
