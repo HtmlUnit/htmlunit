@@ -255,6 +255,11 @@ public class AwtRenderingBackend implements RenderingBackend {
         graphics2D_.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         graphics2D_.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
+        // without this AWT snaps strokes to pixel boundaries (hence the floor rounding).
+        // With VALUE_STROKE_PURE, strokes are rendered at their exact fractional coordinates,
+        // matching browser sub-pixel behavior.
+        graphics2D_.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+
         // reset
         fillColor_ = Color.black;
         strokeColor_ = Color.black;
@@ -905,11 +910,12 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void strokeRect(final int x, final int y, final int w, final int h) {
+    public void strokeRect(final double x, final double y, final double w, final double h) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] strokeRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
         }
 
+        graphics2D_.setStroke(new BasicStroke(getLineWidth()));
         graphics2D_.setColor(strokeColor_);
         final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
         graphics2D_.draw(transformation_.createTransformedShape(rect));

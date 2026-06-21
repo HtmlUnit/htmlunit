@@ -8,14 +8,26 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Improved image comparison for our test cases; this shows a bunch of problems that are hard to identify.
+            </action>
+            <action type="fix" dev="rbri">
+                CanvasRenderingContext2D strokeRect() has to respect the lineWidth.
+            </action>
+            <action type="update" dev="rbri">
+                CanvasRenderingContext2D strokeRect() now uses double coordinates.
+            </action>
+            <action type="fix" dev="rbri">
+                AwtRenderingBackend has to set the RenderingHints.VALUE_STROKE_PURE to correct draw at the right/bottom.
+            </action>
             <action type="fix" dev="rbri">
                 CanvasRenderingContext2D implicitly created subpath's do a moveTo to their start point.
             </action>
-            <action type="fix" dev="rbri">
+            <action type="update" dev="rbri">
                 AwtRenderingBackend putImageData() now uses a BufferedImage for performance.
             </action>
-            <action type="fix" dev="rbri">
-                CanvasRenderingContext2D translate() used float coordinates.
+            <action type="update" dev="rbri">
+                CanvasRenderingContext2D translate() now uses float coordinates.
             </action>
             <action type="fix" dev="rbri">
                 CanvasRenderingContext2D putImageData() parameter handling fixed.

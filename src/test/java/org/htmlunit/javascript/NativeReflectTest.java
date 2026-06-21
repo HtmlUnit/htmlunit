@@ -466,4 +466,29 @@ public class NativeReflectTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    @Test
+    @Alerts({"1,2,3,4", "true", "true", "true"})
+    public void constructSubclassBuiltin() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html></head>\n"
+                + "<body>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function CustomSet() {\n"
+                + "    return Reflect.construct(Set, arguments, this.constructor);\n"
+                + "  }\n"
+                + "  CustomSet.prototype = Object.create(Set.prototype);\n"
+                + "  CustomSet.prototype.constructor = CustomSet;\n"
+                + "  var set = new CustomSet([1, 2, 3]);\n"
+                + "  set.add(4);\n"
+                + "  log(Array.from(set));\n"
+                + "  log(set instanceof CustomSet);\n"
+                + "  log(set instanceof Set);\n"
+                + "  log(Object.getPrototypeOf(set) === CustomSet.prototype)\n;"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -283,7 +283,7 @@ public interface RenderingBackend {
      * @param w the width
      * @param h the height
      */
-    void strokeRect(int x, int y, int w, int h);
+    void strokeRect(double x, double y, double w, double h);
 
     /**
      * Multiplies the current transformation with the matrix described by the

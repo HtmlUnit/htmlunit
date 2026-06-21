@@ -727,7 +727,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * @param h the height
      */
     @JsxFunction
-    public void strokeRect(final int x, final int y, final int w, final int h) {
+    public void strokeRect(final double x, final double y, final double w, final double h) {
         getRenderingBackend().strokeRect(x, y, w, h);
     }
 
