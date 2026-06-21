@@ -585,8 +585,8 @@ public abstract class WebTestCase {
 
             final ImageComparison imageComparison = new ImageComparison(normalizedExpected, normalizedCurrent);
             // imageComparison.setMinimalRectangleSize(10);
-            imageComparison.setPixelToleranceLevel(0.2);
-            imageComparison.setAllowingPercentOfDifferentPixels(7);
+            imageComparison.setPixelToleranceLevel(0.15);
+            imageComparison.setAllowingPercentOfDifferentPixels(5);
 
             final ImageComparisonResult imageComparisonResult = imageComparison.compareImages();
             final ImageComparisonState imageComparisonState = imageComparisonResult.getImageComparisonState();
