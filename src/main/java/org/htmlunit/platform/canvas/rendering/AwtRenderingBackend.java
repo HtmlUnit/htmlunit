@@ -348,7 +348,20 @@ public class AwtRenderingBackend implements RenderingBackend {
         transformation.rotate(rotation, p.getX(), p.getY());
         final Arc2D arc = new Arc2D.Double(p.getX() - radiusX, p.getY() - radiusY, radiusX * 2, radiusY * 2,
                                         startAngleDegree, extendAngle * -1, Arc2D.OPEN);
-        getCurrentSubPath(startX, startY).append(transformation.createTransformedShape(arc), true);
+
+        // connect=true only if there is already a current point (implicit lineTo behaviour);
+        // connect=false when the subpath is new so we don't get a spurious line from (0,0)
+        // or from the moveTo seed point to the arc's own geometric start.
+        final boolean hasCurrentPoint;
+        if (subPaths_.isEmpty()) {
+            final Path2D subPath = new Path2D.Double();
+            subPaths_.add(subPath);
+            hasCurrentPoint = false;
+        }
+        else {
+            hasCurrentPoint = subPaths_.get(subPaths_.size() - 1).getCurrentPoint() != null;
+        }
+        getCurrentSubPath().append(transformation.createTransformedShape(arc), hasCurrentPoint);
     }
 
     /**
@@ -392,7 +405,20 @@ public class AwtRenderingBackend implements RenderingBackend {
         }
         final Arc2D arc = new Arc2D.Double(p.getX() - radius, p.getY() - radius, radius * 2, radius * 2,
                                         startAngleDegree, extendAngle * -1, Arc2D.OPEN);
-        getCurrentSubPath(startX, startY).append(arc, true);
+
+        // connect=true only if there is already a current point (implicit lineTo behaviour);
+        // connect=false when the subpath is new so we don't get a spurious line from (0,0)
+        // or from the moveTo seed point to the arc's own geometric start.
+        final boolean hasCurrentPoint;
+        if (subPaths_.isEmpty()) {
+            final Path2D subPath = new Path2D.Double();
+            subPaths_.add(subPath);
+            hasCurrentPoint = false;
+        }
+        else {
+            hasCurrentPoint = subPaths_.get(subPaths_.size() - 1).getCurrentPoint() != null;
+        }
+        getCurrentSubPath().append(arc, hasCurrentPoint);
     }
 
     /**

@@ -1331,6 +1331,40 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABxUlEQVR4AeyVPShFYRjHT0oZZUGKfJVkkJSPDFJkEBkQUjLI"
+                + "hEGZyOhjko9FRNmwKJHvJCwGyWAwYDEYLMx+z8kdvO4517nvueee4b39f+fp3vs+7/u///ue96RYIX8Zg7p/kEnQJKibgG6/"
+                + "2YMmQd0EdPvNHjQJ6iag22/2oElQNwHdfrMHTYI/CZRQe2EMxmEIWqAYEqpYe7Ca1Q/hBFohCzKgAobhAp5hEwYhD3yVm8F2"
+                + "VrqGLciBLogkKGaaeJ8NdXAE9fAIO9AGvsjJYC2zb4OYWKG66dWyrA0G9EAa7MEEXEE3aMnJ4BKzDoAkQ/GkNUZXwjTINjij"
+                + "NkNcimZQJn1iNkmFErd26ayBVViGdSgET4pmUJJb9DSL+2C5gQoY8gJ3MAL/lmowl85MOAe/NcmEVSDH0wG1HGJKNVhKh9yF"
+                + "lITogVkbYR9uYRRcpRqUX5jq2uHPl/NMI2HI2SqBOJ6fqsF0Gt8gCMmZ2cBC93ADHfBHqsEPRrxDkJpisT6YhRn4JdXgHN8u"
+                + "QNA6ZsEyyAd5tBZRbakGv+xPk3P5ZNlOOIVLsKUatD9M8kWeQP0RD2E0KN7knJRqhdWgbU4uoTf4DQAA//9d0N0DAAAABklE"
+                + "QVQDAD1/O1HLUOolAAAAAElFTkSuQmCC",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABgklEQVRYR+3Vv0tWURzH8ZdEGvUXBE4W0RARCK1B4OYUtAQt"
+                + "BYUS2BCUJgj9GC1oC2lqqggagobGDKJ/oCVag9RawqFJDhy+2FGfHjs+dYfzHj/nXs77fs6PO6TjDHXcrwlW05a4ltZgLa3B"
+                + "WlqDtbQGa2kN1tIarKU1WEtrsJZ+GxzGaRzHfvzCV3zA93hqAPQjuIiz+Ik3GM3CSXQSq3iZx97FW3tEL8GRPOlrPIh0K8dw"
+                + "CtdwGE+whLV4ooKdBA/gI05G0h9HcRkn8Bm3sR6jf8FOgsu4ifeR7J7ruI+HmI90l2wneA5nMBNJHanFu5jC40j7ZDvBZ3hU"
+                + "2V5JmmchH6qL+BQjf6AUPIgVHIpkbxnHU7zCXKQ9KAXT0l7A1UgGwyym81w9r6ZS8BKO5H0zaNJ9egffcCvSglIwfdk+3Itk"
+                + "8KTb4jwm8KOcrhS8kX9j6ZD8S9LefJu31ovNE5eC/5vnucU4A10TTFzJP4l0FjopmBjDly4LBl1c4t/ovOAGUngyKRdIPigA"
+                + "AAAQZGVCR0ZGNEIxQjE4N0Q5NUY1Qjb0UOldAAAAAElFTkSuQmCC",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABnElEQVRYR+2Yu0oDQRSGE8QL+gSClYqkEBEEW0GwsxJsBBsF"
+                + "gyJoIXgFwUupgp2IlZWKYBGwsFRBfAEbsRW8NmJh5XdgCMmQXWZzkmWKGfhIsefy558zs7DZjOcr67m+TBCo3aHgYHBQ64A2"
+                + "P8xgcFDrgDY/zGBwUOuANj/MYHBQ64A2P8xgWg420WgQctAIf/AKD/ClFRGX77LFexQYhh+4hg4QwSJ0FD7g0jy7rbXYOIHN"
+                + "pmmB3/2Yxj0864d5aIcTOIbPWoiNEthC8UfoS9ikm/hp6IVnWIffhDXKwqME3hG1DPeK4ovk7sIBbFRbp5LAMYoNwUK1Ra08"
+                + "cXEbZuEoac1KAs8ocqh0z9YhfTZBDtUkPLkKtQW2kvgOba4FEsYNEH8KV7DmkmsLlK2dgLxLsiJmldw50yv2arIFTpHUBTI3"
+                + "9V5yn27BG6xENbMFyj9rgJ16qyupL7fFOIzAt93XFrhEgLzG5JCkuWQ2b8xoXZQ2dnnVpSn03LhYPAO+CRQzZkC2Xc6Ct19Y"
+                + "O9H24rPA4lj5uMVlM++9wH9SeDIp/dhlMwAAAABJRU5ErkJggg==")
+    public void bezierCurveToWithoutMoveToUsesControlPoint1AsStart() throws Exception {
+        draw("<canvas id='myCanvas' width='40' height='40'></canvas>\n",
+                "context.beginPath(); context.bezierCurveTo(4, 34, 2, 8, 38, 36); context.stroke();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA+klEQVR4AazSPcuBURjA8btnfIZnf8iCQbJQZFM2RZRMJmX3"
                 + "EmUio08gm5VMBspiNFmYLcxSfAH/S+FE5OXS9TsOOf9O3X4s5ZcZLNNOwYOPxww6qOQxwg5j1ODHy2MGS5yKwwk32vjHAHMU"
                 + "8YunYwbNH275MEQBLlQQxBpVPJxHwdsDU77IIoowZgjgbl4Nng8u2KTRhUTlIbK9zrvB88kOmwR6iOEynwYlMGHJQG5r4/00"
@@ -1349,6 +1383,27 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     public void moveToQuadraticCurveToStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.moveTo(2, 2); context.quadraticCurveTo(19, 4, 19, 17); context.stroke();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAh0lEQVR4AezWQQqAMBBDUfHkHt10l003yQhCv0xxEFKHZxfe"
+                + "188vBmw/0FGCj7TW0m2ujhKcY7OdEDSMqEUwYrMQgoYRtQhGbBZC0DCidlJw/SisFQ2yC00OuHtH9ZwBKz6FERRCVQhWfAoP"
+                + "CWqnj4oBW1gEEWwF2jxnEMFWoM1zBhFsBdr8CwAA//8Lay2uAAAABklEQVQDAKHoAlHKHpf2AAAAAElFTkSuQmCC",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAd0lEQVRYR+3SMQqAMBBE0YknFrHXWsQz24S9wJ9AIPPKLWT9"
+                + "2abJtcn3y4KY84lPSZukpyYGzgWv/r27JgZLLXj0J37r9w2WKpgbpPZ+g19NDHKDVApSSxUcwllwiCxIpSCVglQKUilIpSCV"
+                + "glQKUilIpSA1fcEfX7kNKdMLfVYAAAAQZGVCRzY3NDMxMzk2NDAxRTJCQjmxPy2iAAAAAElFTkSuQmCC",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAiUlEQVRYR+3VMQqAMBBE0eiJRey1FvHMRkhhYbU/gaBfsJww"
+                + "vF2SIXX+DZ33SxakE6opuOQyY/53WuqZr1lwzQff520WDArMZcRHMP8ac8RU81eCU9nBk6p5zSgYFPAlCcK1jdW8B5s0tSBl"
+                + "VVBBKkDz7qCCVIDm3UEFqQDNu4MKUgGadwc/L3gBX7kNKeTInzcAAAAASUVORK5CYII=")
+    public void quadraticCurveToWithoutMoveToUsesControlPointAsStart() throws Exception {
+        draw("<canvas id='myCanvas' width='40' height='40'></canvas>\n",
+                "context.beginPath(); context.quadraticCurveTo(19, 4, 19, 17); context.stroke();\n");
     }
 
     /**
