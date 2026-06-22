@@ -27,7 +27,6 @@ import java.awt.geom.Arc2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.ByteArrayOutputStream;
@@ -433,8 +432,7 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         try {
             graphics2D_.setComposite(AlphaComposite.Clear); // force transparent clear
-            final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
-            graphics2D_.fill(transformation_.createTransformedShape(rect));
+            graphics2D_.fill(rectPath(x, y, w, h));
         }
         finally {
             graphics2D_.setComposite(savedComposite);
@@ -602,14 +600,13 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void fillRect(final int x, final int y, final int w, final int h) {
+    public void fillRect(final double x, final double y, final double w, final double h) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] fillRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
         }
 
         graphics2D_.setColor(fillColor_);
-        final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
-        graphics2D_.fill(transformation_.createTransformedShape(rect));
+        graphics2D_.fill(rectPath(x, y, w, h));
     }
 
     /**
@@ -694,8 +691,18 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] moveTo(" + x + ", " + y + ")");
         }
 
-        final Path2D subPath = new Path2D.Double();
         final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
+
+        if (!subPaths_.isEmpty()) {
+            final Path2D last = subPaths_.get(subPaths_.size() - 1);
+            if (!hasSegments(last)) {
+                last.reset();
+                last.moveTo(p.getX(), p.getY());
+                return;
+            }
+        }
+
+        final Path2D subPath = new Path2D.Double();
         subPath.moveTo(p.getX(), p.getY());
         subPaths_.add(subPath);
     }
@@ -795,20 +802,8 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] rect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
         }
 
-        // Build the four corners explicitly from the raw (possibly negative) w/h
-        // so the winding matches the Canvas spec: (x,y) → (x+w,y) → (x+w,y+h) → (x,y+h)
-        // Do NOT use Rectangle2D.Double — it normalises negative dimensions.
-        final Path2D rectPath = new Path2D.Double();
         final Point2D p0 = transformation_.transform(new Point2D.Double(x, y), null);
-        final Point2D p1 = transformation_.transform(new Point2D.Double(x + w, y), null);
-        final Point2D p2 = transformation_.transform(new Point2D.Double(x + w, y + h), null);
-        final Point2D p3 = transformation_.transform(new Point2D.Double(x, y + h), null);
-        rectPath.moveTo(p0.getX(), p0.getY());
-        rectPath.lineTo(p1.getX(), p1.getY());
-        rectPath.lineTo(p2.getX(), p2.getY());
-        rectPath.lineTo(p3.getX(), p3.getY());
-        rectPath.closePath();
-        subPaths_.add(rectPath);
+        subPaths_.add(rectPath(x, y, w, h));
 
         // Spec requires a fresh subpath seeded at (x, y) after the closed rect
         final Path2D nextPath = new Path2D.Double();
@@ -969,23 +964,9 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] strokeRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
         }
 
-        // Build the four corners explicitly from the raw (possibly negative) w/h
-        // so the winding matches the Canvas spec: (x,y) → (x+w,y) → (x+w,y+h) → (x,y+h)
-        // Do NOT use Rectangle2D.Double — it normalises negative dimensions.
-        final Path2D rectPath = new Path2D.Double();
-        final Point2D p0 = transformation_.transform(new Point2D.Double(x, y), null);
-        final Point2D p1 = transformation_.transform(new Point2D.Double(x + w, y), null);
-        final Point2D p2 = transformation_.transform(new Point2D.Double(x + w, y + h), null);
-        final Point2D p3 = transformation_.transform(new Point2D.Double(x, y + h), null);
-        rectPath.moveTo(p0.getX(), p0.getY());
-        rectPath.lineTo(p1.getX(), p1.getY());
-        rectPath.lineTo(p2.getX(), p2.getY());
-        rectPath.lineTo(p3.getX(), p3.getY());
-        rectPath.closePath();
-
         graphics2D_.setStroke(new BasicStroke(getLineWidth(), lineCap_, lineJoin_, miterLimit_));
         graphics2D_.setColor(strokeColor_);
-        graphics2D_.draw(rectPath);
+        graphics2D_.draw(rectPath(x, y, w, h));
     }
 
     /**
@@ -1047,8 +1028,6 @@ public class AwtRenderingBackend implements RenderingBackend {
             clipPath.setWindingRule(Path2D.WIND_EVEN_ODD);
         }
 
-        clipPath.closePath();
-
         graphics2D_.clip(clipPath);
     }
 
@@ -1109,6 +1088,24 @@ public class AwtRenderingBackend implements RenderingBackend {
             subPath.moveTo(x, y);
         }
         return subPath;
+    }
+
+    private Path2D rectPath(final double x, final double y, final double w, final double h) {
+        // Build the four corners explicitly from the raw (possibly negative) w/h
+        // so the winding matches the Canvas spec: (x,y) → (x+w,y) → (x+w,y+h) → (x,y+h)
+        // Do NOT use Rectangle2D.Double — it normalises negative dimensions.
+        final Path2D rectPath = new Path2D.Double();
+        final Point2D p0 = transformation_.transform(new Point2D.Double(x, y), null);
+        final Point2D p1 = transformation_.transform(new Point2D.Double(x + w, y), null);
+        final Point2D p2 = transformation_.transform(new Point2D.Double(x + w, y + h), null);
+        final Point2D p3 = transformation_.transform(new Point2D.Double(x, y + h), null);
+        rectPath.moveTo(p0.getX(), p0.getY());
+        rectPath.lineTo(p1.getX(), p1.getY());
+        rectPath.lineTo(p2.getX(), p2.getY());
+        rectPath.lineTo(p3.getX(), p3.getY());
+        rectPath.closePath();
+
+        return rectPath;
     }
 
     private static boolean hasSegments(final Path2D path) {

@@ -152,7 +152,7 @@ public class NoOpRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void fillRect(final int x, final int y, final int w, final int h) {
+    public void fillRect(final double x, final double y, final double w, final double h) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] fillRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
         }

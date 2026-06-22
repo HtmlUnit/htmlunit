@@ -138,7 +138,7 @@ public interface RenderingBackend {
      * @param w the width
      * @param h the height
      */
-    void fillRect(int x, int y, int w, int h);
+    void fillRect(double x, double y, double w, double h);
 
     /**
      * Fills a given text at the given (x, y) position.
