@@ -588,7 +588,6 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] fill()");
         }
 
-        graphics2D_.setStroke(new BasicStroke(getLineWidth()));
         graphics2D_.setColor(fillColor_);
         for (final Path2D path2d : subPaths_) {
             graphics2D_.fill(path2d);
@@ -673,7 +672,13 @@ public class AwtRenderingBackend implements RenderingBackend {
         }
 
         final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-        getCurrentSubPath(p.getX(), p.getY()).lineTo(p.getX(), p.getY());
+        final Path2D subPath = getCurrentSubPath();
+        if (subPath.getCurrentPoint() == null) {
+            subPath.moveTo(p.getX(), p.getY());
+        }
+        else {
+            subPath.lineTo(p.getX(), p.getY());
+        }
     }
 
     /**
@@ -782,12 +787,25 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void rect(final double x, final double y, final double w, final double h) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("[" + id_ + "] rect()");
-        }
+        // Build the four corners explicitly from the raw (possibly negative) w/h
+        // so the winding matches the Canvas spec: (x,y) → (x+w,y) → (x+w,y+h) → (x,y+h)
+        // Do NOT use Rectangle2D.Double — it normalises negative dimensions.
+        final Path2D rectPath = new Path2D.Double();
+        final Point2D p0 = transformation_.transform(new Point2D.Double(x, y), null);
+        final Point2D p1 = transformation_.transform(new Point2D.Double(x + w, y), null);
+        final Point2D p2 = transformation_.transform(new Point2D.Double(x + w, y + h), null);
+        final Point2D p3 = transformation_.transform(new Point2D.Double(x, y + h), null);
+        rectPath.moveTo(p0.getX(), p0.getY());
+        rectPath.lineTo(p1.getX(), p1.getY());
+        rectPath.lineTo(p2.getX(), p2.getY());
+        rectPath.lineTo(p3.getX(), p3.getY());
+        rectPath.closePath();
+        subPaths_.add(rectPath);
 
-        final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
-        getCurrentSubPath().append(transformation_.createTransformedShape(rect), false);
+        // Spec requires a fresh subpath seeded at (x, y) after the closed rect
+        final Path2D nextPath = new Path2D.Double();
+        nextPath.moveTo(p0.getX(), p0.getY());
+        subPaths_.add(nextPath);
     }
 
     /**

@@ -1578,6 +1578,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 "context.rect(2, 2, 16, 6); context.fill();\n");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAM0lEQVR4AeSQMQoAAAgCr/7/51qjSWgpEtwUTp2BFpQDolp"
@@ -1596,6 +1599,80 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + " context.beginPath();"
                 + " context.rect(2,1,8,4);"
                 + " context.fill();");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAtklEQVR4AeySzQ2CQBBGJ9ZjA3ryZgNWYgXagFZgBzagJ0+"
+                + "WYAPSABXA+w6TELILw8+FBDKPhdnJY9nZjc18zSU8+bqmCiX6IjvDEWyssCm6IdrDCwYLU6KnRE50hb2iqDAs6hMOFuWEo0"
+                + "VtoVr+J3mHAt6whUsCUvnwpuwoKeEBP1BUurU48K6PMKTDhZpV+1XsXEn6s48fcp3RFHYWRidXYXSn8nXL2kM/tH7mUqNq8"
+                + "v9rZjUAAAD//+rycfYAAAAGSURBVAMAU4goqXKrNPwAAAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAjElEQVQ4T+2U2w2AIAxFL5PpCk6kbuQI6iI6irlJS4jyxk/"
+                + "OD+WRE9oUDH7G2KiNAcDBoFVI0SKekQu1QlfEcdeNUmFQpOQKkyIlJcwWKSFhsUh5C6tFiiu8ZKTkltjHaiMPKpwBTAA2mY"
+                + "dgBmxg3t6LK9Q0YyTPdWG4NkKv4Re3bfhBpp4aG/uM9eEDBxwnFbCeB5YAAAAQZGVCRzU5OURBQjU0NzA2MEQ0QTTD2dNVA"
+                + "AAAAElFTkSuQmCC",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAiElEQVQ4T2NkoDJgpJJ59kBzDoLMotRAkEENUHMcKDEQ2SC"
+                + "QgQdgPiXVhTgNItVAggYRayDRBhEykGSDcBlItkHYDLwPFQTF2AM86bMRX9qFxXI9UFEgEG8gkNBhCRiUVLACZANBbJwKob"
+                + "pBFuNVN2rgaBhipjSSkg2ogISXazjSLShhH8KXXgEHHCcVPC38rQAAAABJRU5ErkJggg==")
+    public void rectCurrentPointIsTopLeft() throws Exception {
+        draw("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "context.beginPath(); context.rect(2, 10, 10, 10); context.lineTo(18, 2); context.stroke();");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABE0lEQVR4AeyTPa4BYRSGv9wF3PIm1wYkaj0hKoUoNRagV4i"
+                + "GQmxAFCo78NNKhF4tLMAO9DwHZ3KGmc9MojR5nzk/c743k5OZH/fhyxr28E4CYy+qaUcNxaioTRMvj1xjgVpmCTf9c5/CEG"
+                + "6makjtNs45Gbb03b2ncUutapEc4QQ5WICzhlInIcPQCupQgi4ESmsoBk1Oz6ACOwgpqaHsZ8/JXxjBGCL1ztAuvYPDHM4QK"
+                + "5+hLP3AydDSqb2KMsxzQpdeJg8tndqrZ8MB02uIXTrPvFLDLFNtqMIE/sB+j5oX6Xulhg2mlmCXrn8H7UD68QeN50QNpS+m"
+                + "+iYS9e+Q3CKzsVjD2KE0D76GabYVPfvxHV4BAAD//0OS0iMAAAAGSURBVAMAJ+czKZHzx5AAAAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAzElEQVQ4T+2SMRIBQRBF32Yy15BxA8UFpEKHkOMEhEJHECk"
+                + "y3ECVQ8gIhapVTxtqZmp2bSDwou7Zv69mf21BzRQ2wcSmNDObXrSBkwxOKLIesNc9Rhc4AFM7gbm+25HFF8rsB0P4uQGw0h"
+                + "svXKCKsAG0ND8Cbva0gnAD9IEhsLZTj1yhlC6fdwd2iVyW0JUunye9xXJPUsJQ6aHcGyFhU0Wyf5ZeWnjVG4koVHop4Rg4A"
+                + "1s9CyE/9jFHKCyBi21xojLBF9bCX/g9v9/hA2fSKRVyeZCUAAAAEGRlQkc4REQxQzZBNjlDQzQ5NjJG/7bzkwAAAABJRU5E"
+                + "rkJggg==",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA10lEQVQ4T2NkoDJgRDKvnkizG7Go0weKXQSJwwwEGeYIxAc"
+                + "IGGoPlD8IxA1I6vqheg3QDQQZjqwQm9kgi2Hq/IHsBUAMcvEEmGJkFxJrIAdQswbU4AQg/QHZZlIN3AbU7ATEEUC8AZsXiD"
+                + "UQFOgg7/0A4p34goYYA2GBDvIeKNzwBg0+A7EFOnKkYPMxSrKB2cwP9R6Ijx7oJBv4HpoMQAZhC3SSDCwBGnIFiHdg9QtEE"
+                + "JSwDxETKSDFM4D4BR7DYFIN+NQg52UizCKsZNRAwmFESMXgD0MAZ9IpFR4WhlUAAAAASUVORK5CYII=")
+    public void rectCurrentPointIsTopLeftNegativeHeight() throws Exception {
+        draw("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "context.beginPath(); context.rect(2, 12, 10, -10); context.lineTo(18, 2); context.stroke();");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAtklEQVR4AdzPQRHCQAyF4QUBKMAAClCAAgygAAUcYFCAAgy"
+                + "gAAUowAAKUAB/MpND222abffUTl7abtJvpstU+TLwh+uFcawMjG0HtuYDngJ/qyvRX76y/SVH4lYUFGRFu5EPOZBslYAGrH"
+                + "m4kzfZk0YZuODUy4V5uzYcPMiL7IiWgfritDOzHMpx2tKeRCsKyrKHylxTAsoHg2gpOIiOAV10LNiLTgGz6FSwg9YADZV7q"
+                + "gUqJu0PAAD//6TBlYMAAAAGSURBVAMAoyAaKSNu+dIAAAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAnUlEQVQ4T+3SMQrCMBSH8a8X9gSF2sHNuQfwAJ7C3bG7s6O"
+                + "TUCp/SR5aTNukb/SDEvIoP0JIhXNVWMewpor/LfYHk7XAEXjYJNHaO1R34AB0wNOmk3LA2A3YAydgsGmoBIz1QA2cbZLxvn"
+                + "SixnbfXYEdcNFmLajmUPW2ckA1hxaBKoUWg+oXuglUU3QzqD5RF1BF1A1UQvW5gZY7+AIswh0VBjqD9wAAABBkZUJHMzE0R"
+                + "jJEQUYyNjNBMDQzQ5qLT2IAAAAASUVORK5CYII=",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAn0lEQVQ4T2NkoDJghJr3n4C5MHUErR81EGcQNQJleoD4C6F"
+                + "AJDYMQea8AeJWIJ4GxL9wGUyKgTAzHgEZDUC8CIj/ohtMjoEwM64DGTVAvA7ZUGLTF8hF9Ti8eR4ongfER0DyxBoIUovPUL"
+                + "hZpBhIyFCwWaQaiM9Qsg3EZShFBmIzlGID0Q2lioHIhlLNQJihoGRFVizjSN8QYXKSDV4DASzCHRW9NsqlAAAAAElFTkSuQ"
+                + "mCC")
+    public void rectSeparatePath() throws Exception {
+        draw("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "context.beginPath(); context.rect(1, 1, 8, 8);\n"
+                + "context.lineTo(18, 10); context.lineTo(18, 18); context.closePath(); context.fill();");
     }
 
     /**
