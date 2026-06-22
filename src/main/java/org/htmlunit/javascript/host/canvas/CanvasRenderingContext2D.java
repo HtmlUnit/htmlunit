@@ -473,10 +473,48 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
     /**
      * Fills the shape.
+     * @param context the context
+     * @param scope the scope
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
      */
     @JsxFunction
-    public void fill() {
-        getRenderingBackend().fill();
+    public static void fill(final Context context, final VarScope scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        if (!(thisObj instanceof CanvasRenderingContext2D renderingCtx)) {
+            throw JavaScriptEngine.reportRuntimeError(
+                    "CanvasRenderingContext2D.fill() failed - this is not a CanvasRenderingContext2D");
+        }
+
+        // Determine which argument (if any) is the fill rule string.
+        // Signature 1: fill(optional CanvasFillRule fillRule)
+        // Signature 2: fill(Path2D path, optional CanvasFillRule fillRule)
+        String fillRuleStr = null;
+        if (args.length > 1) {
+            fillRuleStr = JavaScriptEngine.toString(args[1]);
+        }
+        else if (args.length > 0) {
+            fillRuleStr = JavaScriptEngine.toString(args[0]);
+        }
+
+        RenderingBackend.WindingRule windingRule = RenderingBackend.WindingRule.NON_ZERO;
+        if (fillRuleStr != null) {
+            if ("evenodd".equals(fillRuleStr)) {
+                windingRule = RenderingBackend.WindingRule.EVEN_ODD;
+            }
+            else if (!"nonzero".equals(fillRuleStr)) {
+                // Per spec: unrecognised values are ignored entirely.
+                // Since fill() has no persistent fill-rule state, we just
+                // use the default nonzero — which is already set above.
+                // Log it for debugging purposes.
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("fill() called with unrecognised fillRule: '" + fillRuleStr + "', using 'nonzero'.");
+                }
+            }
+        }
+
+        renderingCtx.getRenderingBackend().fill(windingRule);
     }
 
     /**

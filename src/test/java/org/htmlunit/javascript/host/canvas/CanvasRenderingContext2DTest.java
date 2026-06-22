@@ -1724,8 +1724,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "/1DbhVPBEzD3JBVTQqvpAAAAAElFTkSuQmCC")
     public void ellipseStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "if (!context.ellipse) { log('context.ellipse not supported'); return; }\n"
-                 + "context.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 1.5 * Math.PI); context.stroke();\n");
+                "context.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 1.5 * Math.PI); context.stroke();\n");
     }
 
     /**
@@ -1752,8 +1751,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "BbKrgDgMiJmg4k1AA+vJMhDJYC4gWwuIuUFhDDQQlN9JdyGuqCYpUog1hKYuBAD36EAVpWqveAAAAABJRU5ErkJggg==")
     public void ellipseFill() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "if (!context.ellipse) { log('context.ellipse not supported'); return; }\n"
-                + "context.fillStyle = 'yellow';"
+                "context.fillStyle = 'yellow';"
                 + "context.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 1.5 * Math.PI); context.fill();\n");
     }
 
@@ -1779,8 +1777,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "RqRgdQQlXh41EBICgz8MAQbFDRWlQ+mHAAAAAElFTkSuQmCC")
     public void ellipseConnectsFromCurrentPoint() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
-                "if (!context.ellipse) { log('context.ellipse not supported'); return; }\n"
-                + "context.moveTo(1, 10);\n"
+                "context.moveTo(1, 10);\n"
                 + "context.ellipse(16, 10, 2, 2, 0, 0, 2 * Math.PI);\n"
                 + "context.stroke();\n");
     }
@@ -1877,6 +1874,93 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     public void arcCircleAnticlockwiseStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
                 "context.arc(10, 10, 4, 0, 2 * Math.PI, true); context.stroke();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAALklEQVR4AezSIRIAAAgCQcf/P9pOPIlnM0DYYad8Fv5BNdQQ"
+                + "CDgbgBYRDQMEvAcAAP//GaAxmgAAAAZJREFUAwCLOAAp5PB2EAAAAABJRU5ErkJggg==",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAJUlEQVQ4T2NkoDJghLOoBEYNpByMhiHlYDQMKQejYUg5GPxh"
+                + "CABIxgAV3h2cLwAAABBkZUJHOUE0NTUyMEREQzBBQkMzMt9ZyuoAAAAASUVORK5CYII=",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
+                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==")
+    public void arcClockwiseFullCircle() throws Exception {
+        draw("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "context.fillStyle = 'green';"
+                + "context.beginPath();"
+                + "context.arc(10, 10, 8, 0, 0, false);"
+                + "context.fill();");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAvElEQVR4AczR3Q2CMBSG4VdGcRG9cwsvTHQMLY6h8cYpvMRB"
+                + "dBSwH/9BiJQ2kRM+KCXnyQmNCFx/BA0ZhpfNjTMrBsp1wqV1dqQkxFzoKVewITL2GB50ajpYQJvupL4gaNLWP/UHNWnKVg8l"
+                + "DAhrygoF6vRz0gWM844ft/GgwYA9U3vrud7V3nhQHcNoos+KG6gOw/ekEXfKcgfV2EYXXDny1LYyDVRnhZ446LXKdFBCgWpV"
+                + "xw+smWYxf/ADAAD//0Jyy1MAAAAGSURBVAMAL6geKQ+rf20AAAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAzUlEQVQ4T+WRsQ4BQRRFz4ZCJX6DKH2D75BodES1CeIVGhVK"
+                + "pU6l8xkKBQ2VRG8rzSbkkRm7icLOTudU995JTjJ5AZ4JbPLE70LhBuyBLbBGuNi3BFmED5t55Q0l2oREds0hNBwp0mTI1Qx5"
+                + "hcoKoWWKD2FMgRojTlp8CJUpQqjBl3CH0NDgSxghVDRkEQowtj2Ng1ARJsDA9g8HhLqGbEJFmAE92984HCVJWhoDVYSzFjeh"
+                + "IsyBLrBE6JjZXajoN8ss6HM3Uz7hF/5Q+ASPLzEVJSxJigAAABBkZUJHMUZDRDZDM0E0NzAxRUM4OOVKyr8AAAAASUVORK5C"
+                + "YII=",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA2ElEQVQ4T2NkoDJgpLJ5DMQb2MDwAWj5RSDeCsQrGBoYHmFz"
+                + "DCkG/kcyAMRex8DBkMxQwfAR2WByDYSZcY2BhcGNoYbhKUyAUgNB5iwEej+Bmgb+YWBm0GKoZbgNMpQaLgSZ0wl0ZQU1DTwL"
+                + "NNCEmgZ+BBooQKqBDUAN9TgyAhkGgkxqYGgBktVYDL0KlNMhzYUwUxoY+oHMAjRDyYgUZBNQDf0DlNIEuvAOeS5EuHQCkJkP"
+                + "xDOBhmWQnrCxxQYo7fExTGQoYvhOHQOxWEJ8TsGRXtCFB7+BAI8vMRUtkNPJAAAAAElFTkSuQmCC")
+    public void arcClockwiseWrapAround() throws Exception {
+        // Clockwise from 3π/2 (pointing down, 270°) to π/4 (pointing right+up, 45°).
+        // Correct clockwise span = 135°, sweeping through 315° (bottom-right).
+        // Pixel at angle 315° from centre (10,10) at radius ~7: approx (15, 15).
+        // Pixel at angle 180° (left side, x=2,y=10) must NOT be painted.
+        draw("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "context.fillStyle = 'green';"
+                + "context.beginPath();"
+                + "context.arc(10, 10, 8, 3 * Math.PI / 2, Math.PI / 4, false);"
+                + "context.lineTo(10, 10);"  // close to centre so fill() paints the sector
+                + "context.fill();");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABLElEQVR4AcyQoU4DQRRFDxv+AQ2CoPAgQWywOAzYJSgUrjwI"
+            + "CoWiaBQO2yAQCPgAVA3hG1AkkLZvdmf7ptt222mapjdz983OvHtmMglz1gKB1+wgNNVt9Z+3mzdxe4zW6Bs6UId3jWTqTfWq"
+            + "t5tnuD3Xo4vVMQwUWtrkQFpqR0bRS6hBYHFqGjZMmKcUGUoZsHiXaW5WZsuahW9qwA7HZUd0DbIGhL1okAX62RC4YfvRs342"
+            + "BEZTfOBJ6746HyHwK1+Z7vOrbXf8s4VwpH7DKwS++rW68k2XC21YQzjnhjYVGTDhsbJnvyt86M8JwjpX3Gr9YYwM2MhDD5W+"
+            + "Z71RyiW7SM2BmAzo1oRTLS31PQnbCId6oxciNAh0QeEA4YwGn8ygYeAMkDCy/MAeAAAA//+6th9mAAAABklEQVQDAAx2OinL"
+            + "04YhAAAAAElFTkSuQmCC",
+        FF = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABL0lEQVQ4T+XSv0tVcRyH8dfJC7bm1Ca4hBS4twdu/gEONukS"
+            + "OhkOol/QJeVKFDqmk4PYnjiK4CKBoklQ4ORqQ1CWKQf0c7/Xn/fC3Xqmz/M+5zzTKbSYIq4WcXtwWqe/+tGLpxfvfsa2innj"
+            + "DuPdjOvBpIJ3GERb7PWcYEaHacN+x3otuKLNvo/oi+1uNnR4kUfrg8kMRsMbY17y6lJqwSlPnDoIb5x/6JZ8LaUWTN5iJLw5"
+            + "ZiWvyyMP7uJZeHPsSHrKIw/+Qnt4cxxLHpVHHjyLu3HKb1YxJ9kqhzz4DV3hd/MTH1RUr/7geXARL8Nv5kjhvXYLxvyINSMP"
+            + "PsdmeD1fFN54bNmQP7HeQC1YkixhIJw1hapJ67Hcw9XgQ3zCdw9UTdiLZw1SH2wB/2HwHOqsPRXt5T+VAAAAEGRlQkcxNUJC"
+            + "OENFMDQ1NDZGN0NEUCTI8QAAAABJRU5ErkJggg==",
+        FF_ESR = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABPElEQVQ4T83UzyuEQRzH8feiuHJyUy4S5e6u3PwBDpy4iBM5"
+            + "iKndC1qJ1hEnB3EnRykXKfIjtVt7cuWg/OYz5Wlnxz7MPm3y1Pcw02deM8/MNClq/KVq7BEPZmjjlUFN2K/qUtnsqeqEBnLM"
+            + "UKy0mO+gURxWVCOq+pg/eFb/Ai1kGOfJzZSD2wIu2VVgIHArDoX2uWg5aDQrTAZiUSyHYSxqlMA0HbxxXSVm4++qTqE3tlEC"
+            + "DctqTyQA7ZBFgVM+eK6O7oTgmcAeH3xUR2NC8E5gsw9+JMDsmB3VksBjH8yroz0QfVBuXTc2619w91A2FBr+BbzVMa5qY9aY"
+            + "5r5S1gV7FTiKAa8EzdPKFqO8/DSpf7E3FR5yBuwLyjLHQeBWeI+DoUkD91QF6gTNchEKRbk/fL6qXdpX/v+v8BPqrD0V/Gmy"
+            + "MAAAAABJRU5ErkJggg==")
+    public void arcPartialClockwiseNoSpuriousLine() throws Exception {
+        draw("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "context.fillStyle = 'green';"
+                + "context.beginPath();"
+                + "context.arc(10, 10, 8, 2.3, 2 * Math.PI, false);"
+                + "context.fill();");
     }
 
     /**
@@ -2518,6 +2602,97 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "      context.lineTo(14, 2);\n"
                 + "      context.closePath();\n"
                 + "      context.fill();\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABh0lEQVR4AayTOUsDURSFv0QQCxXFpRFsBFERF7QSLVwKCxc"
+            + "ULATFSjsLyzTmBiwULCws/Q/GVFZiI5YKLkVQJGCnjajYCOOJkxCTzGSm8HC+uTdv7jtMhnlR/lnhAo0RjGFCKFwgbChrXQ"
+            + "Q6ODBGi1LWxAYxmlQrOjiwmsKT1bBSMU03gwMjLGvOtcOq2/hfywP3qCNOO8YAxhzQK/IeIsEsRg87tKnWUiI30JjAuNRwm"
+            + "i8yRMgAV+JEFNshpYU7vnlWfSLBLcaFmEaKCjDOgOzfyf5uVB/WzTg0AOsYp0jZABXZeOCdfnXHIqzPNdiFcU9OhcDswj6f"
+            + "GIvAoQjyEca4+OCPigPzN4xNtY/Cz2mMwudEQd6BS1RppEP4uRPDc6/nIt3MECSHKa8R78Aov59AbsOr6oKYFy/CdYRJtym"
+            + "+egfCaG7sAKNFJEVKtAK7AkIHGvXAmxjE2KJURkxvrw9HR8DwOSnFmyYwRsU1ftrmBmMMj6eMUiojSVjFKTua5YFhw3zmfg"
+            + "AAAP//QkE87wAAAAZJREFUAwCjf0gpzAOviQAAAABJRU5ErkJggg==",
+        FF = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABeklEQVQ4T63TPWsVQRTG8d9yDYgYsVKCBFFBgoWN2PgR1DJ"
+            + "aWaignWBhsAiac4UUvoCFlSiIpNOU0Y9gIzYWio34gsTYCL4hBInsZhwJO3u9YP7NnOc5zMPOmdnKOlPlahBXHGzWy54mp5"
+            + "PhAsO9tJ5KTif/Dgxb8CmpbcKXVBcZJvACric1JdxIdZHBgSsqfW8xnpz3ZuxUWUm6RTvwgZ4XxprjcQi3cm+Vc3higyV7f"
+            + "XTcr9zJgWE35rELW1NvWD7jDSaF13+/MOzHY+zI3nB8wGHheS3WHnnWdsse4UD2BvPMiCOmLf0x2jMMG/EQR7NXZgHHhJ/Z"
+            + "KQbWrN7uN2zK3lq+mzFauu1yYJjAy6xL9Ey45FXWia7As7iddZkzwt2sEl2BcziR1KLKVDMGrtG80Zr7wslUZ7oC67+j3ng"
+            + "TfeFH8uuZ9nEe74Q9aUemHThrzLJ5PadLM2oI+3DHiEnTFrNfDLxq1EVfsx5E2Cya15BpB/4n6x74GwzQSxWBq+FDAAAAEG"
+            + "RlQkc0NTkwNzE3NDI0MjkzNjNEaAUR+gAAAABJRU5ErkJggg==",
+        FF_ESR = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABiUlEQVQ4T7WUzytEURTHv69HSchqJEkoycJGNv4ELIeVhVH"
+            + "slMVMFsJ9ahZ+lIWVKMkOS/wJNpqNBdnIjzTDRvmVmjS+970b4/2Ye/269X3Tveeczzvn3PPGwh8vy4g3h27XbwZHOn8zoM"
+            + "CGCxJI/B4oUEPInQLFCH0oBdVnKJAkYFFBUgQu/RxYgAUHlwQ0Ksg1ZtHE00IUNJjhNmycoJ4BMaqHWvEFj3N/iDLcog05D"
+            + "OKt2O4BBVr43KWaqVpd4332e+4vqDg5558ZCnTy8IBq+Cbwhv69hB3LuK8lp1GHPPZ53mUIzaAcfZhi+WoFeyhQQdsO1a+B"
+            + "7tE+wMxegz30R3q3+8TjygjoM2+7Ouy2w+dQoJ2g05IZ2vSZxpnfJwo4RsdVTcmjLHfdFLhFxyHlnGVpKY6yfPkCJWdUrk0"
+            + "Ch02B8uuQgcuUw8AXN1C4PXWoCeqK+1Y9ME1QnkNuYySsRwrcwd81jkycI5MthgZ7OM/bm8Sjpn+eWaCKktPwsfT/Nkbkfw"
+            + "S+AwzQSxWgcpYbAAAAAElFTkSuQmCC")
+    public void fillWindingRuleNonZero() throws Exception {
+        draw("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "  context.fillStyle = 'green';"
+                + "  var cx = 10, cy = 10, r = 9, ir = 3.5;"
+                + "  context.beginPath();"
+                + "  for (var i = 0; i < 5; i++) {"
+                + "    var outer = (i * 4 * Math.PI / 5) - Math.PI / 2;"
+                + "    var inner = outer + 2 * Math.PI / 5;"
+                + "    if (i === 0) context.moveTo(cx + r * Math.cos(outer), cy + r * Math.sin(outer));"
+                + "    else         context.lineTo(cx + r * Math.cos(outer), cy + r * Math.sin(outer));"
+                + "    context.lineTo(cx + ir * Math.cos(inner), cy + ir * Math.sin(inner));"
+                + "  }"
+                + "  context.closePath();"
+                + "  context.fill('nonzero');\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABv0lEQVR4AayUP0gcYRDFf3uGQIoQMXXKEEJICIEQAgkniM31"
+            + "WiiCWAgiCtb+m0MRe+EqKzutrLSxFBEtBEsbwUIQREUURU/XN7eu3nmrt4rv5t1833xv3g4fd5vhlZHO0PiJ8YMUSGcY0ElA"
+            + "FymQzhC65eVUejpqG5omC3mHM0/H03ZQ2xDa7kzClxiaHjLJB8b5xDB/ZXYhFm5ZZJR/DPGZCT7iWiqRKW2NHHmWMTYJOOJc"
+            + "LLJDhv/4mdGr7MypluUNW1ywL+2J6tviqphDiA0XdNhHSL34ngi7qk1Hy7LvM3za3VLF7zWkTg/pwVhAyIhRjLDBW35rsyR6"
+            + "LGIc8BCTHKq0KHoslXq813fivaE2DLKH0QwUNN26cnIE+FkB13oP96g0jOt+ZyFf4m1VvqYJ11CNxwzrJR3AmBEbiGE04LWA"
+            + "FmXX8BDJhtBIBP8hr5CnvURYUdlrSsQaylHLEEKu9blUU1GsE+N4lmH2tmucb3zXdHOMMqvaV3FK9Ig1vr5j9YSG380xV/zC"
+            + "GKaVK2IYRYx+4A8Bp0RaylFt6PdnZBljo1xYsTbW8L+gaysOkl4OxjxpkaBNmjCtXaLuBgAA///Rj8HkAAAABklEQVQDAJG2"
+            + "ZykaQwoBAAAAAElFTkSuQmCC",
+        FF = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABwklEQVQ4T62UO0sDQRDH/0cURFSsIiJBVAjBwkb8EkklRCtB"
+            + "I6SxEh8oiGZPCBh8dRYmIsFOLWz0S4iNhaKFqEGiNoKKCEHify9rvOQuufOxMJeb3ZnfPHYuGv55aa54i+gz7BZw7GTvDiiw"
+            + "bYAEIn8HCjQR8qhAXkKfq0GdMxSYImBZQaYJXPk9MA8NOm4I8ClIBjG0czdfCWrNcBcenKGVDl46+ug6zPdLBfBzL829DGrw"
+            + "AD/uMYgPM7wAFOjkc5/SQWk2GYR4dlSSjUCQ+qFp74nv15Qwba++MxTo4aZ0bqtanrUNd7QPEnYq/UpLjqMFOSN6L2WNRpO2"
+            + "vRJY5f4E5QS1CGGO5atl7aFAHc/2KFsEHtgCdfSzj6M8G6DNu7WH5V6FsmZovFQhw1nedsLutu3nUCBA0DlFfiFjxSwK2W9Q"
+            + "IpyFAOZxUR7QHqgjypI2i5ejUZcrjySfXzMZZaCUO6DADg2HlHGWpcUIk8EFRc6oXGlqI26B8uuQjusUnY5vhqNAvaED45Rb"
+            + "6l3OwDhBOQ65h7do0yMF7uZvkiMT5shkzVBrDxNo5P2+lEe21QUamOVrdaArUmUj57+vHwb4BB9yZRXJStrYAAAAAElFTkSu"
+            + "QmCC",
+        FF_ESR = "data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABrUlEQVQ4T63TPWsVQRTG8d8SAyIqVkqQICqEYGEjfomkEqKV"
+            + "oAncxkp8IULQnAgBg2+dhVEk2GkKG/0SYmOhaCFqkBgbQUWEICu7Gccrd+81YP7NnOc5zLMzZ3cLG0yRq15cdrheL3manK6s"
+            + "LzDcS+t4crry78CwHZ+S2il8SXUj6wk8h6tJnReupbqR3oGlwox3GEzOkml7FMqkO+gMfKDPCwP19QqDSifwOnWHFBaUlmyy"
+            + "YshHx/xMvZq1wLAPi9iLHalXMSo8yaoijOBx1nzGW4wJb/6cMByk3rw7Oc3X6xzDB4wIzyvx95Vn7bJaP/0Qbghnc6+dcB1n"
+            + "8Ey/UVNWfrc6Zxg24yHuCo+y386MI0oTOCr8yH5jYMXatSaFK9lrJ1wwba5jHF0DwzBeUv8hp/Ip1k5/C+P6DLvoVdqRaQ6c"
+            + "0VK6ndSSQquuSvNtL6Ml3El1pjkw3MfxpJYVpusxVB31N1qxIJxMdaZbYPVZVBtv1ucN35O/pdacxnthf9qR6QycNWDVoj4T"
+            + "TTOqCQcwr9+YKcvZbwycs82kr1n3ImwVvmXdGPifbHjgLx9yZRVdLa+qAAAAEGRlQkc2NjMzNTUxOUYyMkFGRjQ10618dQAA"
+            + "AABJRU5ErkJggg==")
+    public void fillWindingRuleEvenOdd() throws Exception {
+        draw("<canvas id='myCanvas' width='20' height='20'></canvas>\n",
+                "  context.fillStyle = 'green';"
+                + "  var cx = 10, cy = 10, r = 9, ir = 3.5;"
+                + "  context.beginPath();"
+                + "  for (var i = 0; i < 5; i++) {"
+                + "    var outer = (i * 4 * Math.PI / 5) - Math.PI / 2;"
+                + "    var inner = outer + 2 * Math.PI / 5;"
+                + "    if (i === 0) context.moveTo(cx + r * Math.cos(outer), cy + r * Math.sin(outer));"
+                + "    else         context.lineTo(cx + r * Math.cos(outer), cy + r * Math.sin(outer));"
+                + "    context.lineTo(cx + ir * Math.cos(inner), cy + ir * Math.sin(inner));"
+                + "  }"
+                + "  context.closePath();"
+                + "  context.fill('evenodd');\n");
     }
 
     /**

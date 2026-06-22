@@ -339,24 +339,35 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] ellipse()");
         }
 
-        final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-        final double startX = p.getX() + radiusX * Math.cos(rotation) * Math.cos(-startAngle)
-                                - radiusY * Math.sin(rotation) * Math.sin(-startAngle);
-        final double startY = p.getY() + radiusX * Math.sin(rotation) * Math.cos(-startAngle)
-                                + radiusY * Math.cos(rotation) * Math.sin(-startAngle);
-        final double startAngleDegree = 360 - (startAngle * 180 / Math.PI);
-        final double endAngleDegree = 360 - (endAngle * 180 / Math.PI);
-
-        double extendAngle = startAngleDegree - endAngleDegree;
-        extendAngle = Math.min(360, Math.abs(extendAngle));
-        if (anticlockwise && extendAngle < 360) {
-            extendAngle = extendAngle - 360;
+        if (startAngle == endAngle) {
+            return;
         }
 
+        final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
         final AffineTransform transformation = new AffineTransform();
         transformation.rotate(rotation, p.getX(), p.getY());
-        final Arc2D arc = new Arc2D.Double(p.getX() - radiusX, p.getY() - radiusY, radiusX * 2, radiusY * 2,
-                                        startAngleDegree, extendAngle * -1, Arc2D.OPEN);
+
+        double startAngleDegree = Math.toDegrees(startAngle);
+        double endAngleDegree = Math.toDegrees(endAngle);
+
+        double extendAngle = endAngleDegree - startAngleDegree;
+        final Arc2D arc;
+        if (Math.abs(extendAngle) >= 360) {
+            arc = new Arc2D.Double(p.getX() - radiusX, p.getY() - radiusY, radiusX * 2, radiusY * 2,
+                    0, 360, Arc2D.OPEN);
+        }
+        else {
+            startAngleDegree = reverseAngle(startAngleDegree);
+            endAngleDegree = reverseAngle(endAngleDegree);
+
+            extendAngle = endAngleDegree - startAngleDegree;
+            if (!anticlockwise) {
+                extendAngle = -reverseAngle(extendAngle);
+            }
+
+            arc = new Arc2D.Double(p.getX() - radiusX, p.getY() - radiusY, radiusX * 2, radiusY * 2,
+                                            startAngleDegree, extendAngle, Arc2D.OPEN);
+        }
 
         // connect=true only if there is already a current point (implicit lineTo behaviour);
         // connect=false when the subpath is new so we don't get a spurious line from (0,0)
@@ -401,33 +412,11 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] arc()");
         }
 
-        final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-        final double startX = p.getX() + radius * Math.cos(-startAngle);
-        final double startY = p.getY() + radius * Math.sin(-startAngle);
-        final double startAngleDegree = 360 - (startAngle * 180 / Math.PI);
-        final double endAngleDegree = 360 - (endAngle * 180 / Math.PI);
+        ellipse(x, y, radius, radius, 0, startAngle, endAngle, anticlockwise);
+    }
 
-        double extendAngle = startAngleDegree - endAngleDegree;
-        extendAngle = Math.min(360, Math.abs(extendAngle));
-        if (anticlockwise && extendAngle < 360) {
-            extendAngle = extendAngle - 360;
-        }
-        final Arc2D arc = new Arc2D.Double(p.getX() - radius, p.getY() - radius, radius * 2, radius * 2,
-                                        startAngleDegree, extendAngle * -1, Arc2D.OPEN);
-
-        // connect=true only if there is already a current point (implicit lineTo behaviour);
-        // connect=false when the subpath is new so we don't get a spurious line from (0,0)
-        // or from the moveTo seed point to the arc's own geometric start.
-        final boolean hasCurrentPoint;
-        if (subPaths_.isEmpty()) {
-            final Path2D subPath = new Path2D.Double();
-            subPaths_.add(subPath);
-            hasCurrentPoint = false;
-        }
-        else {
-            hasCurrentPoint = subPaths_.get(subPaths_.size() - 1).getCurrentPoint() != null;
-        }
-        getCurrentSubPath().append(arc, hasCurrentPoint);
+    private static double reverseAngle(final double degrees) {
+        return ((-degrees % 360) + 360) % 360;
     }
 
     /**
@@ -592,13 +581,19 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void fill() {
+    public void fill(final RenderingBackend.WindingRule windingRule) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("[" + id_ + "] fill()");
+            LOG.debug("[" + id_ + "] fill("
+                    + (windingRule == RenderingBackend.WindingRule.EVEN_ODD ? "evenOdd" : "nonZero") + ")");
         }
+
+        final int awtRule = (windingRule == RenderingBackend.WindingRule.EVEN_ODD)
+                ? Path2D.WIND_EVEN_ODD
+                : Path2D.WIND_NON_ZERO;
 
         graphics2D_.setColor(fillColor_);
         for (final Path2D path2d : subPaths_) {
+            path2d.setWindingRule(awtRule);
             graphics2D_.fill(path2d);
         }
     }

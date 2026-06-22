@@ -127,8 +127,9 @@ public interface RenderingBackend {
 
     /**
      * Fills the current or given path with the current fillStyle.
+     * @param windingRule the {@link WindingRule}
      */
-    void fill();
+    void fill(RenderingBackend.WindingRule windingRule);
 
     /**
      * Paints the specified rectangular area.

@@ -9,6 +9,15 @@
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Bugfixes">
             <action type="update" dev="rbri">
+                Improved AwtRenderingBackend arc() now forwards to ellipse() as suggested by the spec.
+            </action>
+            <action type="update" dev="rbri">
+                Improved AwtRenderingBackend ellipse() angle conversation from canvas to AWT.
+            </action>
+            <action type="add" dev="rbri">
+                CanvasRenderingContext2D fill() supports the winding rule parameter.
+            </action>
+            <action type="update" dev="rbri">
                 AwtRenderingBackend more robust clip handling in the SaveState.
             </action>
             <action type="update" dev="rbri">

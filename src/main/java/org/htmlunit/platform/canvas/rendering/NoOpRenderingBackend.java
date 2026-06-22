@@ -142,7 +142,7 @@ public class NoOpRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void fill() {
+    public void fill(final WindingRule windingRule) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] fill()");
         }
