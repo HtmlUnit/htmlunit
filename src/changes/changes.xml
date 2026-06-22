@@ -9,6 +9,18 @@
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Bugfixes">
             <action type="update" dev="rbri">
+                AwtRenderingBackend more robust clip handling in the SaveState.
+            </action>
+            <action type="update" dev="rbri">
+                AwtRenderingBackend font is now part of the SaveState.
+            </action>
+            <action type="fix" dev="rbri">
+                CanvasRenderingContext2D close() creates a new subpath according to the spec.
+            </action>
+            <action type="fix" dev="rbri">
+                AwtRenderingBackend stroke() only drwas if th path is not empty.
+            </action>
+            <action type="update" dev="rbri">
                 Improved AwtRenderingBackend stroke handling by setting the lineCap, lineJoin, 
                 and miterLimit properties of BasicStroke.
             </action>
@@ -16,7 +28,7 @@
                 CanvasRenderingContext2D rect() creates a separate subpath.
             </action>
             <action type="fix" dev="rbri">
-                CanvasRenderingContext2D rect() handles negative width/hight.
+                CanvasRenderingContext2D rect()/strokeRect() handles negative width/hight.
             </action>
             <action type="fix" dev="rbri">
                 CanvasRenderingContext2D lineTo() is a moveTo() if currentPath is empty.

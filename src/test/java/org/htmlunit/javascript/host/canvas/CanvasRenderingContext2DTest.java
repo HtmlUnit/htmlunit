@@ -983,6 +983,28 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 "context.strokeRect(2, 2, 16, 6);\n");
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAUklEQVR4AexSQQoAIAiTXl4vr4EIXQpqSgiFedK5TYs4vw/I"
+                + "G5rHwwqxHl/CJd+yhECNcIY6hsj5GD5ZSt9ZbB6eMGsAXNXHHzaGc2GSOZSpewAAAP//Hp6MbgAAAAZJREFUAwDAtSEpzZc0"
+                + "HAAAAABJRU5ErkJggg==",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAT0lEQVQ4T2NkoDJghLOoBEYNpBzQLAwdoJgScACEYQY2QA0E"
+                + "CZID7BkYGA6CzEE2EJkmFdRDfTtqIJXDEBRT5MYyKIWgxDLV0yHVwAg0EACHiRQVPOJrRgAAABBkZUJHMkQ5QUUyQ0ZDRjhD"
+                + "QURGRF7KuR4AAAAASUVORK5CYII=",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXklEQVQ4T2NkoDJgpLJ5DKMGUh6iNAtDB6DbQJgScACo+QDM"
+                + "hQ1QA0GC5AB7oKaDQNyAbCDIIJDB5IB6oCaQWaMGUjkMQTFFbiyDkhxKLFM9HZKTVLDqoVnWG7wuBACHiRQV+zydrAAAAABJ"
+                + "RU5ErkJggg==")
+    public void strokeRectNegativeWidthHeight() throws Exception {
+        draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
+                "context.strokeRect(18, 15, -16, -7);\n");
+    }
+
     /**
      * @throws Exception if the test fails
      */

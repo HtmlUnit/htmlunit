@@ -25,6 +25,7 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Path2D;
+import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -795,6 +796,10 @@ public class AwtRenderingBackend implements RenderingBackend {
      */
     @Override
     public void rect(final double x, final double y, final double w, final double h) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("[" + id_ + "] rect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
+        }
+
         // Build the four corners explicitly from the raw (possibly negative) w/h
         // so the winding matches the Canvas spec: (x,y) → (x+w,y) → (x+w,y+h) → (x,y+h)
         // Do NOT use Rectangle2D.Double — it normalises negative dimensions.
@@ -954,7 +959,9 @@ public class AwtRenderingBackend implements RenderingBackend {
         graphics2D_.setStroke(new BasicStroke(getLineWidth(), lineCap_, lineJoin_, miterLimit_));
         graphics2D_.setColor(strokeColor_);
         for (final Path2D path2d : subPaths_) {
-            graphics2D_.draw(path2d);
+            if (hasSegments(path2d)) {
+                graphics2D_.draw(path2d);
+            }
         }
     }
 
@@ -967,10 +974,23 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] strokeRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
         }
 
+        // Build the four corners explicitly from the raw (possibly negative) w/h
+        // so the winding matches the Canvas spec: (x,y) → (x+w,y) → (x+w,y+h) → (x,y+h)
+        // Do NOT use Rectangle2D.Double — it normalises negative dimensions.
+        final Path2D rectPath = new Path2D.Double();
+        final Point2D p0 = transformation_.transform(new Point2D.Double(x, y), null);
+        final Point2D p1 = transformation_.transform(new Point2D.Double(x + w, y), null);
+        final Point2D p2 = transformation_.transform(new Point2D.Double(x + w, y + h), null);
+        final Point2D p3 = transformation_.transform(new Point2D.Double(x, y + h), null);
+        rectPath.moveTo(p0.getX(), p0.getY());
+        rectPath.lineTo(p1.getX(), p1.getY());
+        rectPath.lineTo(p2.getX(), p2.getY());
+        rectPath.lineTo(p3.getX(), p3.getY());
+        rectPath.closePath();
+
         graphics2D_.setStroke(new BasicStroke(getLineWidth(), lineCap_, lineJoin_, miterLimit_));
         graphics2D_.setColor(strokeColor_);
-        final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
-        graphics2D_.draw(transformation_.createTransformedShape(rect));
+        graphics2D_.draw(rectPath);
     }
 
     /**
@@ -1014,8 +1034,10 @@ public class AwtRenderingBackend implements RenderingBackend {
             if (subPaths_.isEmpty()) {
                 return;
             }
-            for (final Path2D p : subPaths_) {
-                clipPath.append(p, false);
+            for (final Path2D path2d : subPaths_) {
+                if (hasSegments(path2d)) {
+                    clipPath.append(path2d, false);
+                }
             }
         }
         else {
@@ -1047,7 +1069,27 @@ public class AwtRenderingBackend implements RenderingBackend {
         if (subPaths_.isEmpty()) {
             return;
         }
-        subPaths_.get(subPaths_.size() - 1).closePath();
+
+        final Path2D current = subPaths_.get(subPaths_.size() - 1);
+
+        // Extract the first point of the current subpath — this is where
+        // the spec requires the new subpath to be seeded after closing.
+        final double[] coords = new double[6];
+        final PathIterator it = current.getPathIterator(null);
+        if (it.isDone()) {
+            return; // empty path, nothing to close
+        }
+        it.currentSegment(coords); // first segment is always SEG_MOVETO
+        final double firstX = coords[0];
+        final double firstY = coords[1];
+
+        current.closePath();
+
+        // Spec: "Create a new subpath with the same first point as the
+        // previous subpath."
+        final Path2D nextPath = new Path2D.Double();
+        nextPath.moveTo(firstX, firstY);
+        subPaths_.add(nextPath);
     }
 
     private Path2D getCurrentSubPath() {
@@ -1074,6 +1116,17 @@ public class AwtRenderingBackend implements RenderingBackend {
         return subPath;
     }
 
+    private static boolean hasSegments(final Path2D path) {
+        final PathIterator it = path.getPathIterator(null);
+        while (!it.isDone()) {
+            if (it.currentSegment(new double[6]) != PathIterator.SEG_MOVETO) {
+                return true;
+            }
+            it.next();
+        }
+        return false;
+    }
+
     private static Color toAwtColor(final org.htmlunit.html.impl.Color color) {
         if (color == null) {
             return null;
@@ -1093,6 +1146,8 @@ public class AwtRenderingBackend implements RenderingBackend {
         private final int lineJoin_;
         private final float miterLimit_;
 
+        private final Font font_;
+
         SaveState(final AwtRenderingBackend backend) {
             transformation_ = new AffineTransform(backend.transformation_);
             globalAlpha_ = backend.globalAlpha_;
@@ -1100,11 +1155,17 @@ public class AwtRenderingBackend implements RenderingBackend {
             fillColor_ = backend.fillColor_;
             strokeColor_ = backend.strokeColor_;
 
-            clip_ = backend.graphics2D_.getClip();
-
             lineCap_ = backend.lineCap_;
             lineJoin_ = backend.lineJoin_;
             miterLimit_ = backend.miterLimit_;
+
+            // Defensive copy — getClip() can return a live mutable shape
+            // on some Graphics2D implementations
+            final Shape c = backend.graphics2D_.getClip();
+            clip_ = (c == null) ? null : new Path2D.Double(c);
+
+            // Font is immutable so no copy needed
+            font_ = backend.graphics2D_.getFont();
         }
 
         void applyOn(final AwtRenderingBackend backend) {
@@ -1115,11 +1176,15 @@ public class AwtRenderingBackend implements RenderingBackend {
 
             backend.updateGlobalAlpha(globalAlpha_);
 
-            backend.graphics2D_.setClip(clip_);
-
             backend.lineCap_ = lineCap_;
             backend.lineJoin_ = lineJoin_;
             backend.miterLimit_ = miterLimit_;
+
+            // Restore clip with another defensive copy so this SaveState
+            // remains reusable if somehow applyOn is called more than once
+            backend.graphics2D_.setClip((clip_ == null) ? null : new Path2D.Double(clip_));
+
+            backend.graphics2D_.setFont(font_);
         }
     }
 }
