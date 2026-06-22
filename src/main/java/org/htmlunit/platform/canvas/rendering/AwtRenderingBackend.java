@@ -71,6 +71,10 @@ public class AwtRenderingBackend implements RenderingBackend {
     private Color fillColor_;
     private Color strokeColor_;
 
+    private int lineCap_;
+    private int lineJoin_;
+    private float miterLimit_;
+
     private final List<Path2D> subPaths_;
     private final Deque<SaveState> savedStates_;
 
@@ -274,6 +278,10 @@ public class AwtRenderingBackend implements RenderingBackend {
         graphics2D_.setBackground(new Color(0f, 0f, 0f, 0f));
         graphics2D_.setColor(Color.black);
         graphics2D_.clearRect(0, 0, imageWidth, imageHeight);
+
+        lineCap_ = BasicStroke.CAP_BUTT;
+        lineJoin_ = BasicStroke.JOIN_MITER;
+        miterLimit_ = 10.0f;
 
         subPaths_ = new ArrayList<>();
         savedStates_ = new ArrayDeque<>();
@@ -943,7 +951,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] stroke()");
         }
 
-        graphics2D_.setStroke(new BasicStroke(getLineWidth()));
+        graphics2D_.setStroke(new BasicStroke(getLineWidth(), lineCap_, lineJoin_, miterLimit_));
         graphics2D_.setColor(strokeColor_);
         for (final Path2D path2d : subPaths_) {
             graphics2D_.draw(path2d);
@@ -959,7 +967,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] strokeRect(" + x + ", "  + y + ", "  + w + ", "  + h + ")");
         }
 
-        graphics2D_.setStroke(new BasicStroke(getLineWidth()));
+        graphics2D_.setStroke(new BasicStroke(getLineWidth(), lineCap_, lineJoin_, miterLimit_));
         graphics2D_.setColor(strokeColor_);
         final Rectangle2D rect = new Rectangle2D.Double(x, y, w, h);
         graphics2D_.draw(transformation_.createTransformedShape(rect));
@@ -1066,6 +1074,13 @@ public class AwtRenderingBackend implements RenderingBackend {
         return subPath;
     }
 
+    private static Color toAwtColor(final org.htmlunit.html.impl.Color color) {
+        if (color == null) {
+            return null;
+        }
+        return new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+    }
+
     private static final class SaveState {
         private final AffineTransform transformation_;
         private final float globalAlpha_;
@@ -1073,6 +1088,10 @@ public class AwtRenderingBackend implements RenderingBackend {
         private final Color fillColor_;
         private final Color strokeColor_;
         private final Shape clip_;
+
+        private final int lineCap_;
+        private final int lineJoin_;
+        private final float miterLimit_;
 
         SaveState(final AwtRenderingBackend backend) {
             transformation_ = new AffineTransform(backend.transformation_);
@@ -1082,6 +1101,10 @@ public class AwtRenderingBackend implements RenderingBackend {
             strokeColor_ = backend.strokeColor_;
 
             clip_ = backend.graphics2D_.getClip();
+
+            lineCap_ = backend.lineCap_;
+            lineJoin_ = backend.lineJoin_;
+            miterLimit_ = backend.miterLimit_;
         }
 
         void applyOn(final AwtRenderingBackend backend) {
@@ -1093,13 +1116,10 @@ public class AwtRenderingBackend implements RenderingBackend {
             backend.updateGlobalAlpha(globalAlpha_);
 
             backend.graphics2D_.setClip(clip_);
-        }
-    }
 
-    private static Color toAwtColor(final org.htmlunit.html.impl.Color color) {
-        if (color == null) {
-            return null;
+            backend.lineCap_ = lineCap_;
+            backend.lineJoin_ = lineJoin_;
+            backend.miterLimit_ = miterLimit_;
         }
-        return new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
 }
