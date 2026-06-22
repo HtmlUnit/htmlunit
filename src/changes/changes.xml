@@ -39,7 +39,7 @@
                 AwtRenderingBackend stroke() only drwas if th path is not empty.
             </action>
             <action type="update" dev="rbri">
-                Improved AwtRenderingBackend stroke handling by setting the lineCap, lineJoin, 
+                Improved AwtRenderingBackend stroke handling by setting the lineCap, lineJoin,
                 and miterLimit properties of BasicStroke.
             </action>
             <action type="fix" dev="rbri">
