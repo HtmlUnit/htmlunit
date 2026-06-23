@@ -201,7 +201,7 @@ public class HtmlSerializerInnerOuterText {
     }
 
     /**
-     * Process {@link HtmlListItem}.
+     * Process {@link HtmlParagraph}.
      *
      * @param builder the StringBuilder to add to
      * @param htmlParagraph the target to process
@@ -273,11 +273,11 @@ public class HtmlSerializerInnerOuterText {
                 if (page.getWebClient().getOptions().isCssEnabled()) {
                     DomNode node = domNode;
                     while (node != null) {
-                        if (node instanceof DomElement) {
+                        if (node instanceof DomElement domElement) {
                             final WebWindow window = page.getEnclosingWindow();
                             if (window != null) {
                                 final ComputedCssStyleDeclaration style =
-                                        window.getComputedStyle((DomElement) domNode, null);
+                                        window.getComputedStyle(domElement, null);
                                 final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
 
                                 if (!StringUtils.isEmptyOrNull(value)) {

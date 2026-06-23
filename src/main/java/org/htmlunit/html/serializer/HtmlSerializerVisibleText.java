@@ -619,6 +619,7 @@ public class HtmlSerializerVisibleText {
         if (parent instanceof HtmlTitle
                 || parent instanceof HtmlScript) {
             builder.append(domText.getData(), Mode.WHITE_SPACE_PRE_LINE);
+            return;
         }
 
         if (parent == null
