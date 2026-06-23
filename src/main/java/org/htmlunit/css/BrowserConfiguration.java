@@ -121,7 +121,7 @@ abstract class BrowserConfiguration {
         return new FFESR(defaultValue);
     }
 
-    static class ChromeAndEdgeNotIterable extends BrowserConfiguration {
+    private static class ChromeAndEdgeNotIterable extends BrowserConfiguration {
         ChromeAndEdgeNotIterable(final String defaultValue) {
             super(defaultValue);
         }
