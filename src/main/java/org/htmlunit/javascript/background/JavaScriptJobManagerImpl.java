@@ -139,25 +139,18 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             final int jobId = job.getId().intValue();
             if (jobId == id) {
                 scheduledJobsQ_.remove(job);
+                notify();
                 break;
             }
         }
-        notify();
     }
 
     /** {@inheritDoc} */
     @Override
     public synchronized void stopJob(final int id) {
-        for (final JavaScriptJob job : scheduledJobsQ_) {
-            final int jobId = job.getId().intValue();
-            if (jobId == id) {
-                scheduledJobsQ_.remove(job);
-
-                // TODO: should we try to interrupt the job if it is running?
-                break;
-            }
-        }
-        notify();
+        // at the moment the same as removeJob(int) because we
+        // do not touch the current job
+        removeJob(id);
     }
 
     /** {@inheritDoc} */
@@ -254,7 +247,10 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
             while (pending && (end == -1 || now < end)) {
                 try {
-                    wait(Math.max(40,  Math.min(interval, end - now)));
+                    final long waitTime = (end == -1)
+                                ? Math.max(40, interval)
+                                : Math.max(40, Math.min(interval, end - now));
+                    wait(waitTime);
                 }
                 catch (final InterruptedException e) {
                     LOG.error("InterruptedException while in waitForJobsStartingBefore", e);
@@ -433,7 +429,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             // queue
             synchronized (this) {
                 if (debug) {
-                    LOG.debug("Reschedulling job " + job);
+                    LOG.debug("Rescheduling job " + job);
                 }
                 scheduledJobsQ_.add(job);
                 notify();
@@ -466,7 +462,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /**
      * Our own serialization (to handle the weak reference)
-     * @param in the stream to read form
+     * @param in the stream to read from
      * @throws IOException in case of error
      * @throws ClassNotFoundException in case of error
      */
