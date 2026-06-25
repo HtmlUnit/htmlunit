@@ -409,34 +409,35 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         if (job.getTargetExecutionTime() > currentTime) {
             return false;
         }
+
+        final boolean debug = LOG.isDebugEnabled();
+
         synchronized (this) {
             if (scheduledJobsQ_.remove(job)) {
                 currentlyRunningJob_ = job;
+                // no need to notify if processing is started
             }
-            // no need to notify if processing is started
-        }
 
-        final boolean debug = LOG.isDebugEnabled();
-        final boolean isPeriodicJob = job.isPeriodic();
-        if (isPeriodicJob) {
-            final long jobPeriod = job.getPeriod().longValue();
+            // we have to do this inside the sync block because the removeJob() methods
+            // only looks at the scheduledJobsQ_
+            if (job.isPeriodic()) {
+                final long jobPeriod = job.getPeriod().longValue();
 
-            // reference: http://ejohn.org/blog/how-javascript-timers-work/
-            long timeDifference = currentTime - job.getTargetExecutionTime();
-            timeDifference = (timeDifference / jobPeriod) * jobPeriod + jobPeriod;
-            job.setTargetExecutionTime(job.getTargetExecutionTime() + timeDifference);
+                // reference: http://ejohn.org/blog/how-javascript-timers-work/
+                final long missedPeriods = (currentTime - job.getTargetExecutionTime()) / jobPeriod + 1;
+                job.setTargetExecutionTime(job.getTargetExecutionTime() + missedPeriods * jobPeriod);
 
-            // queue
-            synchronized (this) {
+                // queue to run again after the next period
                 if (debug) {
-                    LOG.debug("Rescheduling job " + job);
+                    LOG.debug("Rescheduling periodic job " + job);
                 }
                 scheduledJobsQ_.add(job);
                 notify();
             }
         }
+
         if (debug) {
-            final String periodicJob = isPeriodicJob ? "interval " : "";
+            final String periodicJob = job.isPeriodic() ? "interval " : "";
             LOG.debug("Starting " + periodicJob + "job " + job);
         }
         try {
@@ -454,7 +455,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             }
         }
         if (debug) {
-            final String periodicJob = isPeriodicJob ? "interval " : "";
+            final String periodicJob = job.isPeriodic() ? "interval " : "";
             LOG.debug("Finished " + periodicJob + "job " + job);
         }
         return true;
