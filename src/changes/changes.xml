@@ -8,6 +8,10 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="#1141">
+                Remove the 'cancelledJobs_' list from JavaScriptJobManagerImpl; this is not needed at all and
+                the root of a memory leak for some web pages.
+            </action>
             <action type="update" dev="rbri">
                 All colors form the recet css specs added CssColors.
             </action>

@@ -17,7 +17,6 @@ package org.htmlunit.javascript.background;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -52,8 +51,6 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      * by closest target execution time.
      */
     private transient PriorityQueue<JavaScriptJob> scheduledJobsQ_ = new PriorityQueue<>();
-
-    private transient ArrayList<Integer> cancelledJobs_ = new ArrayList<>();
 
     private transient JavaScriptJob currentlyRunningJob_;
 
@@ -145,7 +142,6 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 break;
             }
         }
-        cancelledJobs_.add(Integer.valueOf(id));
         notify();
     }
 
@@ -156,23 +152,17 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             final int jobId = job.getId().intValue();
             if (jobId == id) {
                 scheduledJobsQ_.remove(job);
+
                 // TODO: should we try to interrupt the job if it is running?
                 break;
             }
         }
-        cancelledJobs_.add(Integer.valueOf(id));
         notify();
     }
 
     /** {@inheritDoc} */
     @Override
     public synchronized void removeAllJobs() {
-        if (currentlyRunningJob_ != null) {
-            cancelledJobs_.add(currentlyRunningJob_.getId());
-        }
-        for (final JavaScriptJob job : scheduledJobsQ_) {
-            cancelledJobs_.add(job.getId());
-        }
         scheduledJobsQ_.clear();
         notify();
     }
@@ -200,7 +190,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                         // restore interrupted status
                         Thread.currentThread().interrupt();
                     }
-                    // maybe a change triggers the wakup; we have to recalculate the
+                    // maybe a change triggers the wakeup; we have to recalculate the
                     // wait time
                     now = System.currentTimeMillis();
                 }
@@ -442,13 +432,11 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
             // queue
             synchronized (this) {
-                if (!cancelledJobs_.contains(job.getId())) {
-                    if (debug) {
-                        LOG.debug("Reschedulling job " + job);
-                    }
-                    scheduledJobsQ_.add(job);
-                    notify();
+                if (debug) {
+                    LOG.debug("Reschedulling job " + job);
                 }
+                scheduledJobsQ_.add(job);
+                notify();
             }
         }
         if (debug) {
@@ -487,7 +475,6 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
         // we do not store the jobs (at the moment)
         scheduledJobsQ_ = new PriorityQueue<>();
-        cancelledJobs_ = new ArrayList<>();
         currentlyRunningJob_ = null;
     }
 }
