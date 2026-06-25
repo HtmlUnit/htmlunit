@@ -865,6 +865,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newnode.firstChild_ = null;
         newnode.attachedToPage_ = false;
 
+        // make sure isBodyParsed() returns true
+        newnode.startLineNumber_ = -1;
+        newnode.endLineNumber_ = -1;
+
         // if deep, clone the children too.
         if (deep) {
             for (DomNode child = firstChild_; child != null; child = child.nextSibling_) {

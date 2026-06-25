@@ -514,7 +514,13 @@ public class Document extends Node {
     @JsxFunction
     public HtmlUnitScriptable adoptNode(final Node externalNode) {
         externalNode.remove();
-        return importNode(externalNode, true);
+
+        final DomNode domNode = externalNode.getDomNodeOrDie();
+        domNode.processImportNode(this);
+        for (final DomNode childNode : domNode.getDescendants()) {
+            childNode.processImportNode(this);
+        }
+        return domNode.getScriptableObject();
     }
 
     /**
