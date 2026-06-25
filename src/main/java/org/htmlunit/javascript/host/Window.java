@@ -532,34 +532,69 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Cancels a time-out previously set with the
-     * {@link #setTimeout(Context, VarScope, Scriptable, Object[], Function)} method.
+     * Cancels a one-time timeout that was previously established by a call to
+     * {@link #setTimeout(Context, VarScope, Scriptable, Object[], Function)}.
      *
-     * @param timeoutId identifier for the timeout to clear
-     *        as returned by {@link #setTimeout(Context, VarScope, Scriptable, Object[], Function)}
+     * <p>If {@code timeoutId} is {@code 0} or negative, this method does nothing,
+     * since valid job IDs are always positive integers. This matches browser behavior
+     * where {@code clearTimeout(0)} is a safe no-op, commonly used when {@code 0}
+     * is employed as a sentinel value to indicate "no active timeout".</p>
+     *
+     * <p>If the given ID does not correspond to any active timeout (e.g. it has
+     * already fired or been cancelled), this method returns silently without
+     * throwing an error, consistent with the HTML Living Standard.</p>
+     *
+     * @param timeoutId the ID of the timeout to cancel, as returned by
+     *        {@link #setTimeout(Context, VarScope, Scriptable, Object[], Function)};
+     *        values of {@code 0} or less are ignored
+     * @see #setTimeout(Context, VarScope, Scriptable, Object[], Function)
+     * @see #clearInterval(int)
+     * @see <a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-cleartimeout">
+     *      HTML Living Standard – clearTimeout</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout">
+     *      MDN Web Docs – clearTimeout</a>
      */
     @JsxFunction
     public void clearTimeout(final int timeoutId) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("clearTimeout(" + timeoutId + ")");
+        if (timeoutId > 0) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("clearTimeout(" + timeoutId + ")");
+            }
+            getWebWindow().getJobManager().removeJob(timeoutId);
         }
-        getWebWindow().getJobManager().removeJob(timeoutId);
     }
 
     /**
-     * Cancels the interval previously started using the
-     * {@link #setInterval(Context, VarScope, Scriptable, Object[], Function)} method.
-     * Current implementation does nothing.
-     * @param intervalID specifies the interval to cancel as returned by the
-     *        {@link #setInterval(Context, VarScope, Scriptable, Object[], Function)} method
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
+     * Cancels a repeating interval that was previously established by a call to
+     * {@link #setInterval(Context, VarScope, Scriptable, Object[], Function)}.
+     *
+     * <p>If {@code intervalID} is {@code 0} or negative, this method does nothing,
+     * since valid job IDs are always positive integers. This matches browser behavior
+     * where {@code clearInterval(0)} is a safe no-op, commonly used when {@code 0}
+     * is employed as a sentinel value to indicate "no active interval".</p>
+     *
+     * <p>If the given ID does not correspond to any active interval (e.g. it has
+     * already fired or been cancelled), this method returns silently without
+     * throwing an error, consistent with the HTML Living Standard.</p>
+     *
+     * @param intervalID the ID of the interval to cancel, as returned by
+     *        {@link #setInterval(Context, VarScope, Scriptable, Object[], Function)};
+     *        values of {@code 0} or less are ignored
+     * @see #setInterval(Context, VarScope, Scriptable, Object[], Function)
+     * @see #clearTimeout(int)
+     * @see <a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-clearinterval">
+     *      HTML Living Standard – clearInterval</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/clearInterval">
+     *      MDN Web Docs – clearInterval</a>
      */
     @JsxFunction
     public void clearInterval(final int intervalID) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("clearInterval(" + intervalID + ")");
+        if (intervalID > 0) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("clearInterval(" + intervalID + ")");
+            }
+            getWebWindow().getJobManager().removeJob(intervalID);
         }
-        getWebWindow().getJobManager().removeJob(intervalID);
     }
 
     /**
