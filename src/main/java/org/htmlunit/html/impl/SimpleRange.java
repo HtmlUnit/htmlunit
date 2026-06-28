@@ -224,7 +224,6 @@ public class SimpleRange implements Serializable {
 
     private void deleteContents(final DomNode ancestor) {
         final DomNode start;
-        final DomNode end;
         if (isOffsetChars(startContainer_)) {
             start = startContainer_;
             String text = getText(start);
@@ -239,6 +238,8 @@ public class SimpleRange implements Serializable {
         else {
             start = startContainer_.getNextSibling();
         }
+
+        final DomNode end;
         if (isOffsetChars(endContainer_)) {
             end = endContainer_;
             String text = getText(end);
@@ -410,10 +411,10 @@ public class SimpleRange implements Serializable {
      * @param node Node to select from
      */
     public void selectNodeContents(final DomNode node) {
-        startContainer_ = node.getFirstChild();
+        startContainer_ = node;
         startOffset_ = 0;
-        endContainer_ = node.getLastChild();
-        endOffset_ = getMaxOffset(node.getLastChild());
+        endContainer_ = node;
+        endOffset_ = getMaxOffset(node);
     }
 
     /**

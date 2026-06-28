@@ -181,8 +181,8 @@ public class Range extends AbstractRange {
         if (refNode == null) {
             throw JavaScriptEngine.reportRuntimeError("It is illegal to call Range.setEndBefore() with a null node.");
         }
-        internSetStartContainer(refNode.getParent());
-        internSetStartOffset(getPositionInContainer(refNode));
+        internSetEndContainer(refNode.getParent());
+        internSetEndOffset(getPositionInContainer(refNode));
     }
 
     /**

@@ -504,8 +504,8 @@ public class RangeTest extends WebDriverTestCase {
               + "  log(r.toString());\n"
               + "</script></body></html>";
         loadPageVerifyTitle2(html);
-
     }
+
     /**
      * Test getClientRects for a range over a text node (setStart/setEnd on a text node with char offsets).
      *
@@ -617,6 +617,91 @@ public class RangeTest extends WebDriverTestCase {
             + "  r.setStart(textNode, 3);\n"
             + "  r.setEnd(textNode, 8);\n"
             + "  log(r.getClientRects().length);\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests all six boundary-point setters: setStart, setStartBefore, setStartAfter,
+     * setEnd, setEndBefore, setEndAfter.
+     * Verifies that each method sets the correct boundary (start vs end) and the
+     * correct container/offset. In particular, setEndBefore was bugged: it called
+     * internSetStartContainer/internSetStartOffset instead of the End variants.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({
+        // setStart(b, 1) -> startContainer=DIV, startOffset=1
+        "setStart: DIV 1 DIV 4",
+        // setStartBefore(b) -> startContainer=DIV, startOffset=1 (b is at index 1)
+        "setStartBefore: DIV 1 DIV 4",
+        // setStartAfter(b) -> startContainer=DIV, startOffset=2 (after b = index 2)
+        "setStartAfter: DIV 2 DIV 4",
+        // setEnd(c, 2) -> endContainer=DIV, endOffset=2
+        "setEnd: DIV 0 DIV 2",
+        // setEndBefore(c) -> endContainer=DIV, endOffset=2 (c is at index 2)
+        "setEndBefore: DIV 0 DIV 2",
+        // setEndAfter(c) -> endContainer=DIV, endOffset=3 (after c = index 3)
+        "setEndAfter: DIV 0 DIV 3"
+    })
+    public void setBoundaryPoints() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body>\n"
+            + "  <div id='d'>"
+            +      "<span id='a'>a</span>"
+            +      "<span id='b'>b</span>"
+            +      "<span id='c'>c</span>"
+            +      "<span id='e'>e</span>"
+            + "</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function rangeInfo(label, r) {\n"
+            + "  var sc = r.startContainer.nodeName;\n"
+            + "  var ec = r.endContainer.nodeName;\n"
+            + "  log(label + ': ' + sc + ' ' + r.startOffset + ' ' + ec + ' ' + r.endOffset);\n"
+            + "}\n"
+            + "var d = document.getElementById('d');\n"
+            + "var a = document.getElementById('a');\n"
+            + "var b = document.getElementById('b');\n"
+            + "var c = document.getElementById('c');\n"
+
+            // setStart: sets startContainer=d, startOffset=1; end untouched (stays at d,3 after selectNodeContents)
+            + "var r = document.createRange();\n"
+            + "r.selectNodeContents(d);\n"          // start=d/0, end=d/4
+            + "r.setStart(d, 1);\n"
+            + "rangeInfo('setStart', r);\n"
+
+            // setStartBefore(b): b is child index 1 of d -> startContainer=d, startOffset=1
+            + "r = document.createRange();\n"
+            + "r.selectNodeContents(d);\n"
+            + "r.setStartBefore(b);\n"
+            + "rangeInfo('setStartBefore', r);\n"
+
+            // setStartAfter(b): b is child index 1, so after = offset 2 -> startContainer=d, startOffset=2
+            + "r = document.createRange();\n"
+            + "r.selectNodeContents(d);\n"
+            + "r.setStartAfter(b);\n"
+            + "rangeInfo('setStartAfter', r);\n"
+
+            // setEnd: sets endContainer=d, endOffset=2; start untouched (stays at d,0)
+            + "r = document.createRange();\n"
+            + "r.selectNodeContents(d);\n"
+            + "r.setEnd(d, 2);\n"
+            + "rangeInfo('setEnd', r);\n"
+
+            // setEndBefore(c): c is child index 2 -> endContainer=d, endOffset=2; start must stay at d,0
+            // BUG: setEndBefore was calling internSetStartContainer instead of internSetEndContainer
+            + "r = document.createRange();\n"
+            + "r.selectNodeContents(d);\n"
+            + "r.setEndBefore(c);\n"
+            + "rangeInfo('setEndBefore', r);\n"
+
+            // setEndAfter(c): c is child index 2, so after = offset 3 -> endContainer=d, endOffset=3; start stays at d,0
+            + "r = document.createRange();\n"
+            + "r.selectNodeContents(d);\n"
+            + "r.setEndAfter(c);\n"
+            + "rangeInfo('setEndAfter', r);\n"
+
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
