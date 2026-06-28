@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Improved Range getClientRects() implementation.
+            </action>
             <action type="fix" dev="rbri">
                 Range setEndBefore() now really updates the end.
             </action>
