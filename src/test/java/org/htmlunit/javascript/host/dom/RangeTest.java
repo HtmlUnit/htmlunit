@@ -705,4 +705,26 @@ public class RangeTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"ello", "Hello World"})
+    public void cloneContentsSameTextNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'>Hello World</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var textNode = d.firstChild;\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(textNode, 1);\n"   // 'e' in Hello
+            + "  r.setEnd(textNode, 5);\n"     // up to space -> "ello"
+            + "  var fragment = r.cloneContents();\n"
+            + "  log(fragment.textContent);\n"       // must be "ello"
+            + "  log(d.textContent);\n"              // must be unchanged
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
 }
