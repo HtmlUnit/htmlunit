@@ -601,6 +601,34 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "x=8 y=8 w=78.85417175292969 h=17.33333396911621",
+            FF = "x=8 y=8.666671752929688 w=79.14999389648438 h=17.333328247070312",
+            FF_ESR = "x=8 y=8.666671752929688 w=79.14999389648438 h=17.333328247070312")
+    @HtmlUnitNYI(CHROME = "x=8 y=8 w=1240 h=18",
+            EDGE = "x=8 y=8 w=1240 h=18",
+            FF = "x=8 y=8 w=1240 h=18",
+            FF_ESR = "x=8 y=8 w=1240 h=18")
+    public void getBoundingClientRect() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'>Hello World</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(d, 0);\n"
+            + "  r.setEnd(d, 1);\n"
+            + "  var rect = r.getBoundingClientRect();\n"
+            + "  log('x=' + rect.x + ' y=' + rect.y + ' w=' + rect.width + ' h=' + rect.height);\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test getBoundingClientRect for a range over a text node.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("true")
     public void getBoundingClientRectOnTextNode() throws Exception {
         final String html = DOCTYPE_HTML

@@ -17,6 +17,7 @@ package org.htmlunit.html.impl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -306,15 +307,21 @@ public class SimpleRange implements Serializable {
      * @throws DOMException in case of error
      */
     public DomNode getCommonAncestorContainer() throws DOMException {
-        if (startContainer_ != null && endContainer_ != null) {
-            for (DomNode p1 = startContainer_; p1 != null; p1 = p1.getParentNode()) {
-                for (DomNode p2 = endContainer_; p2 != null; p2 = p2.getParentNode()) {
-                    if (p1 == p2) {
-                        return p1;
-                    }
-                }
-            }
+        final HashSet<DomNode> startAncestors = new HashSet<>();
+        DomNode ancestor = startContainer_;
+        while (ancestor != null) {
+            startAncestors.add(ancestor);
+            ancestor = ancestor.getParentNode();
         }
+
+        ancestor = endContainer_;
+        while (ancestor != null) {
+            if (startAncestors.contains(ancestor)) {
+                return ancestor;
+            }
+            ancestor = ancestor.getParentNode();
+        }
+
         return null;
     }
 

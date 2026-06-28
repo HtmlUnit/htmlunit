@@ -298,16 +298,16 @@ public class Range extends AbstractRange {
     public int compareBoundaryPoints(final int how, final Range sourceRange) {
         final Node nodeForThis;
         final int offsetForThis;
-        final int containingMoficator;
+        final int containingModifier;
         if (START_TO_START == how || END_TO_START == how) {
             nodeForThis = internGetStartContainer();
             offsetForThis = internGetStartOffset();
-            containingMoficator = 1;
+            containingModifier = 1;
         }
         else {
             nodeForThis = internGetEndContainer();
             offsetForThis = internGetEndOffset();
-            containingMoficator = -1;
+            containingModifier = -1;
         }
 
         final Node nodeForOther;
@@ -333,7 +333,7 @@ public class Range extends AbstractRange {
 
         final byte nodeComparision = (byte) nodeForThis.compareDocumentPosition(nodeForOther);
         if ((nodeComparision & Node.DOCUMENT_POSITION_CONTAINED_BY) != 0) {
-            return -1 * containingMoficator;
+            return -1 * containingModifier;
         }
         else if ((nodeComparision & Node.DOCUMENT_POSITION_PRECEDING) != 0) {
             return -1;
@@ -485,7 +485,7 @@ public class Range extends AbstractRange {
      */
     @JsxFunction
     public DOMRect getBoundingClientRect() {
-        final DOMRect rect = new DOMRect();
+        final DOMRect rect = new DOMRect(Integer.MAX_VALUE, Integer.MAX_VALUE, 0, 0);
         rect.setParentScope(getParentScope());
         rect.setPrototype(getPrototype(rect.getClass()));
 
