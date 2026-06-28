@@ -504,5 +504,120 @@ public class RangeTest extends WebDriverTestCase {
               + "  log(r.toString());\n"
               + "</script></body></html>";
         loadPageVerifyTitle2(html);
+
+    }
+    /**
+     * Test getClientRects for a range over a text node (setStart/setEnd on a text node with char offsets).
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("1")
+    public void getClientRectsOnTextNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'>Hello World</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var textNode = d.firstChild;\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(textNode, 0);\n"
+            + "  r.setEnd(textNode, 5);\n"
+            + "  log(r.getClientRects().length);\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test that getClientRects does not mutate the text content of the DOM.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"Hello World", "Hello World"})
+    public void getClientRectsDoesNotMutateTextContent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'>Hello World</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var textNode = d.firstChild;\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(textNode, 0);\n"
+            + "  r.setEnd(textNode, 5);\n"
+            + "  log(d.textContent);\n"
+            + "  r.getClientRects();\n"
+            + "  log(d.textContent);\n"  // must be unchanged
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test getBoundingClientRect for a range over a text node.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void getBoundingClientRectOnTextNode() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'>Hello World</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var textNode = d.firstChild;\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(textNode, 0);\n"
+            + "  r.setEnd(textNode, 5);\n"
+            + "  var rect = r.getBoundingClientRect();\n"
+            + "  log(rect.width > 0 && rect.height > 0);\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test that getBoundingClientRect does not mutate text content of the DOM.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"Hello World", "Hello World"})
+    public void getBoundingClientRectDoesNotMutateTextContent() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'>Hello World</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var textNode = d.firstChild;\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(textNode, 0);\n"
+            + "  r.setEnd(textNode, 5);\n"
+            + "  log(d.textContent);\n"
+            + "  r.getBoundingClientRect();\n"
+            + "  log(d.textContent);\n"  // must be unchanged
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test getClientRects for a mid-string text range (non-zero start offset).
+     * Verifies containedNodes() handles same-node text ranges at any offset.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("1")
+    public void getClientRectsOnTextNodeMidString() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><body><div id='d'>Hello World</div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var d = document.getElementById('d');\n"
+            + "  var textNode = d.firstChild;\n"
+            + "  var r = document.createRange();\n"
+            + "  r.setStart(textNode, 3);\n"
+            + "  r.setEnd(textNode, 8);\n"
+            + "  log(r.getClientRects().length);\n"
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
     }
 }

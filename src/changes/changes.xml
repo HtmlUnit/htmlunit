@@ -8,6 +8,18 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Bugfixes">
+            <action type="update" dev="rbri">
+                SimpleRange containedNodes() now works also if startNode and endNode are the same.
+            </action>
+            <action type="fix" dev="rbri">
+                SimpleRange containedNodes() no longer changes the node's text (stupid c&p from delete).
+            </action>
+            <action type="update" dev="rbri">
+                Range getBoundingClientRect() and getClientRects() supporting DomText node's also.
+            </action>
+            <action type="fix" dev="rbri">
+                Range getBoundingClientRect() now sets the X and Y value of the rect instead of setting the Y value twice.
+            </action>
             <action type="fix" dev="rbri" issue="#1141">
                 DomNode cloneNode() fixed to ensure isBodyParsed() returns true for the clone.
             </action>

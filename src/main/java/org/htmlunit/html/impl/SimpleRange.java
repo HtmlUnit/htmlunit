@@ -556,15 +556,15 @@ public class SimpleRange implements Serializable {
             return Collections.emptyList();
         }
 
+        // When start == end (same text node), just return it directly
+        if (startContainer_ == endContainer_ && isOffsetChars(startContainer_)) {
+            return Collections.singletonList(startContainer_);
+        }
+
+        // Resolve start node without mutating
         final DomNode start;
-        final DomNode end;
         if (isOffsetChars(startContainer_)) {
             start = startContainer_;
-            String text = getText(start);
-            if (startOffset_ > -1 && startOffset_ < text.length()) {
-                text = text.substring(0, startOffset_);
-            }
-            setText(start, text);
         }
         else if (startContainer_.getChildNodes().getLength() > startOffset_) {
             start = (DomNode) startContainer_.getChildNodes().item(startOffset_);
@@ -572,13 +572,11 @@ public class SimpleRange implements Serializable {
         else {
             start = startContainer_.getNextSibling();
         }
+
+        // Resolve end node without mutating
+        final DomNode end;
         if (isOffsetChars(endContainer_)) {
             end = endContainer_;
-            String text = getText(end);
-            if (endOffset_ > -1 && endOffset_ < text.length()) {
-                text = text.substring(endOffset_);
-            }
-            setText(end, text);
         }
         else if (endContainer_.getChildNodes().getLength() > endOffset_) {
             end = (DomNode) endContainer_.getChildNodes().item(endOffset_);

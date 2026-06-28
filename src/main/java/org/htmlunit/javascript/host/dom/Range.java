@@ -21,6 +21,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.html.DomText;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -455,6 +456,19 @@ public class Range extends AbstractRange {
                     rect.setPrototype(getPrototype(rect.getClass()));
                     rectList.add(rect);
                 }
+                else if (node instanceof DomText) {
+                    // Text nodes have no scriptable; delegate to the parent element
+                    final DomNode parent = node.getParentNode();
+                    if (parent != null) {
+                        final HtmlUnitScriptable parentScriptable = parent.getScriptableObject();
+                        if (parentScriptable instanceof HTMLElement parentElement) {
+                            final DOMRect rect = parentElement.getBoundingClientRect();
+                            rect.setParentScope(getParentScope());
+                            rect.setPrototype(getPrototype(rect.getClass()));
+                            rectList.add(rect);
+                        }
+                    }
+                }
             }
 
             return rectList;
@@ -481,10 +495,24 @@ public class Range extends AbstractRange {
                 final HtmlUnitScriptable scriptable = node.getScriptableObject();
                 if (scriptable instanceof HTMLElement element) {
                     final DOMRect childRect = element.getBoundingClientRect();
-                    rect.setY(Math.min(rect.getX(), childRect.getX()));
+                    rect.setX(Math.min(rect.getX(), childRect.getX()));
                     rect.setY(Math.min(rect.getY(), childRect.getY()));
                     rect.setWidth(Math.max(rect.getWidth(), childRect.getWidth()));
                     rect.setHeight(Math.max(rect.getHeight(), childRect.getHeight()));
+                }
+                else if (node instanceof DomText) {
+                    // Text nodes have no scriptable; delegate to the parent element
+                    final DomNode parent = node.getParentNode();
+                    if (parent != null) {
+                        final HtmlUnitScriptable parentScriptable = parent.getScriptableObject();
+                        if (parentScriptable instanceof HTMLElement parentElement) {
+                            final DOMRect childRect = parentElement.getBoundingClientRect();
+                            rect.setX(Math.min(rect.getX(), childRect.getX()));
+                            rect.setY(Math.min(rect.getY(), childRect.getY()));
+                            rect.setWidth(Math.max(rect.getWidth(), childRect.getWidth()));
+                            rect.setHeight(Math.max(rect.getHeight(), childRect.getHeight()));
+                        }
+                    }
                 }
             }
 
