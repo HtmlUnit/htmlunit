@@ -73,7 +73,7 @@
         <maven-artifact.version>3.9.16</maven-artifact.version>
 
         <!-- quality -->
-        <checkstyle.version>12.3.1</checkstyle.version>
+        <checkstyle.version>13.7.0</checkstyle.version>
         <spotbugs.version>4.10.2</spotbugs.version>
         <pmd.version>7.25.0</pmd.version>
         <archunit.version>1.4.2</archunit.version>
