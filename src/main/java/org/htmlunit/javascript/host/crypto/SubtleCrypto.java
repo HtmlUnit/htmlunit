@@ -555,7 +555,7 @@ public class SubtleCrypto extends HtmlUnitScriptable {
                 }
                 case "HMAC": {
                     final HmacKeyAlgorithm hmacParams = HmacKeyAlgorithm.from(keyGenParams);
-                    final List<String> usages = resolveKeyUsages("HMAC", keyUsages);
+                    final List<String> usages = resolveKeyUsages(algorithm, keyUsages);
                     if (usages.isEmpty()) {
                         throw new IllegalArgumentException("An invalid or illegal string was specified");
                     }
