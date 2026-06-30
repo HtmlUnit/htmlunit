@@ -728,8 +728,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     @Override
     public Attr setAttributeNode(final Attr attribute) {
-        attributes_.setNamedItem(attribute);
-        return null;
+        return attributes_.setNamedItem(attribute);
     }
 
     /**
