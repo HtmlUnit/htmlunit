@@ -14,6 +14,7 @@
  */
 package org.htmlunit.html;
 
+import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.htmlunit.SimpleWebTestCase;
@@ -103,5 +104,41 @@ public final class DomElement2Test extends SimpleWebTestCase {
         count.set(0);
         root.getChildren().forEach(e -> count.incrementAndGet());
         assertEquals(3, count.get());
+    }
+
+    @Test
+    public void childElementsIterator_removeFirstElement() throws Exception {
+        final String html = "<div id='outer'><p id='a'/><p id='b'/><p id='c'/></div>";
+        final HtmlPage page = loadPage(html);
+        final DomElement outer = page.getHtmlElementById("outer");
+
+        assertEquals(1, page.getElementsById("a").size());
+
+        final Iterator<DomElement> it = outer.getChildElements().iterator();
+        it.next();
+        it.remove();
+
+        assertEquals(2, outer.getChildElementCount());
+        assertEquals(0, page.getElementsById("a").size());
+    }
+
+    @Test
+    public void childElementsIterator_removeLastElement() throws Exception {
+        final String html = "<div id='outer'><p id='a'/><p id='b'/><p id='c'/></div>";
+        final HtmlPage page = loadPage(html);
+        final DomElement outer = page.getHtmlElementById("outer");
+
+        assertEquals(1, page.getElementsById("c").size());
+
+        final Iterator<DomElement> it = outer.getChildElements().iterator();
+        DomElement last = null;
+        while (it.hasNext()) {
+            last = it.next();
+        }
+        assertEquals("c", last.getId());
+        it.remove();
+
+        assertEquals(2, outer.getChildElementCount());
+        assertEquals(0, page.getElementsById("c").size());
     }
 }

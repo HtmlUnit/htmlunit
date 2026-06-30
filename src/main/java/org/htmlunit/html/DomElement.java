@@ -846,6 +846,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     protected static class ChildElementsIterator implements Iterator<DomElement> {
 
+        private DomElement currentElement_;
         private DomElement nextElement_;
 
         /**
@@ -878,9 +879,9 @@ public class DomElement extends DomNamespaceNode implements Element {
         @Override
         public DomElement next() {
             if (nextElement_ != null) {
-                final DomElement result = nextElement_;
+                currentElement_ = nextElement_;
                 setNextElement(nextElement_);
-                return result;
+                return currentElement_;
             }
             throw new NoSuchElementException();
         }
@@ -888,13 +889,11 @@ public class DomElement extends DomNamespaceNode implements Element {
         /** Removes the current one. */
         @Override
         public void remove() {
-            if (nextElement_ == null) {
+            if (currentElement_ == null) {
                 throw new IllegalStateException();
             }
-            final DomNode sibling = nextElement_.getPreviousSibling();
-            if (sibling != null) {
-                sibling.remove();
-            }
+            currentElement_.remove();
+            currentElement_ = null;
         }
 
         private void setNextElement(final DomNode node) {
