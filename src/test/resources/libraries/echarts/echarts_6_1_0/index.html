@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <!-- Include the ECharts file you just downloaded -->
+    <script src="echarts.js"></script>
+  </head>
+  <body>
+    <!-- Prepare a DOM with a defined width and height for ECharts -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+	
+    <button id="printButtonId" type="button" onclick="printOut()">Print</button> 
+    <textarea id='myLog' cols='80' rows='42'></textarea>
+
+    <script>
+      function printOut() {
+        document.getElementById('myLog').value = document.getElementById('myChartCanvas').toDataURL();
+      }
+    </script>
+
+    <script type="text/javascript">
+      // Initialize the echarts instance based on the prepared dom
+      var myChart = echarts.init(document.getElementById('main'));
+
+      // Specify the configuration items and data for the chart
+      var option = {
+        animation: false,
+        title: {
+          text: 'ECharts Getting Started Example'
+        },
+        tooltip: {},
+        legend: {
+          data: ['sales']
+        },
+        xAxis: {
+          data: ['Shirts', 'Cardigans', 'Chiffons', 'Pants', 'Heels', 'Socks']
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'sales',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+          }
+        ]
+      };
+
+      // Display the chart using the configuration and the data defined above.
+      myChart.setOption(option);
+
+      // Assign an id to the canvas ECharts generates inside #main
+      var chartCanvas = document.querySelector('#main canvas');
+      if (chartCanvas) {
+        chartCanvas.id = 'myChartCanvas';
+      }
+    </script>
+  </body>
+</html>
