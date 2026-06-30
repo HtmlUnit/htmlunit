@@ -857,4 +857,79 @@ public class DomNodeTest extends SimpleWebTestCase {
         assertTrue(elem1.isDisplayed());
         assertTrue(elem2.isDisplayed());
     }
+
+    @Test
+    public void closest_onTextNode_returnsAncestorElement() throws Exception {
+        final String html = "<html><body><div id='outer'><p id='target'>some text</p></div></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlParagraph p = page.getHtmlElementById("target");
+        final DomText text = (DomText) p.getFirstChild();
+
+        final DomElement closest = text.closest("div");
+        assertEquals("outer", closest.getId());
+    }
+
+    @Test
+    public void closest_onTextNode_matchesImmediateParent() throws Exception {
+        final String html = "<html><body><p id='target'>some text</p></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlParagraph p = page.getHtmlElementById("target");
+        final DomText text = (DomText) p.getFirstChild();
+
+        final DomElement closest = text.closest("p");
+        assertEquals("target", closest.getId());
+    }
+
+    @Test
+    public void closest_onTextNode_noMatchingAncestor_returnsNull() throws Exception {
+        final String html = "<html><body><div><p id='target'>some text</p></div></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlParagraph p = page.getHtmlElementById("target");
+        final DomText text = (DomText) p.getFirstChild();
+
+        assertNull(text.closest("section"));
+    }
+
+    @Test
+    public void closest_onCommentNode_returnsAncestorElement() throws Exception {
+        final String html = "<html><body><div id='outer'><!-- a comment --></div></body></html>";
+        final HtmlPage page = loadPage(html);
+        final DomComment comment = (DomComment) page.getHtmlElementById("outer").getFirstChild();
+
+        assertEquals("outer", comment.closest("div").getId());
+    }
+
+    @Test
+    public void normalize_mergesTextNodesNestedTwoLevelsDeep() throws Exception {
+        final String html = "<html><body><div id='outer'><p id='inner'></p></div></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlParagraph p = page.getHtmlElementById("inner");
+
+        p.appendChild(new DomText(page, "Hello "));
+        p.appendChild(new DomText(page, "World"));
+        p.appendChild(new DomText(page, "!"));
+        assertEquals(3, p.getChildNodes().getLength());
+
+        // normalize from two levels up, not directly on the parent of the text nodes
+        final HtmlDivision outer = page.getHtmlElementById("outer");
+        outer.normalize();
+
+        assertEquals(1, p.getChildNodes().getLength());
+        assertEquals("Hello World!", p.getFirstChild().getTextContent());
+    }
+
+    @Test
+    public void normalize_directChildrenStillMerged_regression() throws Exception {
+        final String html = "<html><body><div id='outer'></div></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlDivision outer = page.getHtmlElementById("outer");
+
+        outer.appendChild(new DomText(page, "a"));
+        outer.appendChild(new DomText(page, "b"));
+
+        outer.normalize();
+
+        assertEquals(1, outer.getChildNodes().getLength());
+        assertEquals("ab", outer.getFirstChild().getTextContent());
+    }
 }

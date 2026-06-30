@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Make DomNode.normalize() recurse into the full subtree, not just direct children.
+            </action>
             <action type="update" dev="rbri">
                 xpath: code cleanup.
             </action>

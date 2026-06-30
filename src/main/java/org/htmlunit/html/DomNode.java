@@ -421,7 +421,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 final StringBuilder dataBuilder = new StringBuilder();
                 DomNode toRemove = child;
                 DomText firstText = null;
-                //IE removes all child text nodes, but FF preserves the first
                 while (toRemove instanceof DomText && !(toRemove instanceof DomCDataSection)) {
                     final DomNode nextChild = toRemove.getNextSibling();
                     dataBuilder.append(toRemove.getTextContent());
@@ -436,6 +435,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 if (firstText != null) {
                     firstText.setData(dataBuilder.toString());
                 }
+            }
+            else {
+                // recurse so text runs nested inside child elements get merged too
+                child.normalize();
             }
         }
     }
@@ -2219,11 +2222,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             final WebClient webClient = getPage().getWebClient();
             final SelectorList selectorList = getSelectorList(selectorString, webClient);
 
-            DomNode current = this;
             if (selectorList != null) {
-                do {
+                // closest() only ever matches elements; if this node isn't one,
+                // start the search from the nearest ancestor element instead.
+                DomNode current = this;
+                while (current != null && !(current instanceof DomElement)) {
+                    current = current.getParentNode();
+                }
+
+                while (current != null) {
+                    final DomElement elem = (DomElement) current;
                     for (final Selector selector : selectorList) {
-                        final DomElement elem = (DomElement) current;
                         if (CssStyleSheet.selects(webClient.getBrowserVersion(), selector, elem, null, true, true)) {
                             return elem;
                         }
@@ -2234,7 +2243,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     }
                     while (current != null && !(current instanceof DomElement));
                 }
-                while (current != null);
             }
             return null;
         }

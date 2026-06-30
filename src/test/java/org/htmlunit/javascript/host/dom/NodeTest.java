@@ -1264,6 +1264,100 @@ public class NodeTest extends WebDriverTestCase {
     }
 
     /**
+     * Verifies that {@code normalize()} called on a parent recurses into a child
+     * element to merge adjacent text nodes one level down.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "1", "1", "Hello World!", "true"})
+    public void normalizeNestedInChildElement() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var outer = document.getElementById('outer');\n"
+            + "    var inner = document.createElement('p');\n"
+            + "    inner.id = 'inner';\n"
+            + "    outer.appendChild(inner);\n"
+            + "    var t1 = inner.appendChild(document.createTextNode('Hello '));\n"
+            + "    inner.appendChild(document.createTextNode('World'));\n"
+            + "    inner.appendChild(document.createTextNode('!'));\n"
+            + "    log(inner.childNodes.length);\n"
+            + "    outer.normalize();\n"
+            + "    log(outer.childNodes.length);\n"
+            + "    log(inner.childNodes.length);\n"
+            + "    log(inner.childNodes.item(0).data);\n"
+            + "    log(inner.childNodes.item(0) == t1);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'><div id='outer'></div></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies that {@code normalize()} recurses independently into multiple
+     * sibling subtrees, and that element boundaries between them are preserved
+     * (no merging across element nodes, and the element count itself doesn't change).
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "1", "foobar", "1", "baz", "2"})
+    public void normalizeAcrossSiblingSubtrees() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var outer = document.getElementById('outer');\n"
+            + "    var p1 = document.getElementById('p1');\n"
+            + "    var p2 = document.getElementById('p2');\n"
+            + "    p1.appendChild(document.createTextNode('foo'));\n"
+            + "    p1.appendChild(document.createTextNode('bar'));\n"
+            + "    p2.appendChild(document.createTextNode('baz'));\n"
+            + "    log(outer.childNodes.length);\n"
+            + "    outer.normalize();\n"
+            + "    log(p1.childNodes.length);\n"
+            + "    log(p1.childNodes.item(0).data);\n"
+            + "    log(p2.childNodes.length);\n"
+            + "    log(p2.childNodes.item(0).data);\n"
+            + "    log(outer.childNodes.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>"
+            + "<div id='outer'><p id='p1'></p><p id='p2'></p></div>"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies that {@code normalize()} called on {@code document.body} recurses
+     * down through an intermediate element to merge text nodes two levels deep.
+     * This is the direct regression case for the non-recursive normalize() bug.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "1", "123456", "true"})
+    public void normalizeFromBodyTwoLevelsDeep() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var inner = document.getElementById('inner');\n"
+            + "    var t1 = inner.appendChild(document.createTextNode('123'));\n"
+            + "    inner.appendChild(document.createTextNode('456'));\n"
+            + "    log(inner.childNodes.length);\n"
+            + "    document.body.normalize();\n"
+            + "    log(inner.childNodes.length);\n"
+            + "    log(inner.childNodes.item(0).data);\n"
+            + "    log(inner.childNodes.item(0) == t1);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>"
+            + "<div id='outer'><p id='inner'></p></div>"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
