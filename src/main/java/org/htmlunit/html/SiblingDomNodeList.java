@@ -100,10 +100,19 @@ class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomN
         private int nextIndex_;
 
         SiblingListIterator(final int index) {
+            if (index < 0) {
+                throw new IndexOutOfBoundsException("index: " + index);
+            }
+
             next_ = parent_.getFirstChild();
             nextIndex_ = 0;
             for (int i = 0; i < index; i++) {
-                next();
+                if (next_ == null) {
+                    throw new IndexOutOfBoundsException("index: " + index + ", size: " + nextIndex_);
+                }
+                prev_ = next_;
+                next_ = next_.getNextSibling();
+                nextIndex_++;
             }
         }
 
