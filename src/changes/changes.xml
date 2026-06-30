@@ -8,6 +8,12 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                window.crypto.subtle always returns the same object.
+            </action>
+            <action type="fix" dev="rbri">
+                Crypto randomUUID() fixed.
+            </action>
             <action type="update" dev="rbri">
                 Improved index checking for the SiblingListIterator ctor.
             </action>

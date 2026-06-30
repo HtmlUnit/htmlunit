@@ -38,6 +38,7 @@ import org.htmlunit.javascript.host.dom.DOMException;
 public class Crypto extends HtmlUnitScriptable {
 
     static final SecureRandom RANDOM = new SecureRandom();
+    private SubtleCrypto subtle_;
 
     /**
      * Creates an instance.
@@ -98,10 +99,14 @@ public class Crypto extends HtmlUnitScriptable {
      */
     @JsxGetter
     public SubtleCrypto getSubtle() {
-        final SubtleCrypto stuble = new SubtleCrypto();
-        stuble.setParentScope(getParentScope());
-        stuble.setPrototype(getWindow().getPrototype(SubtleCrypto.class));
-        return stuble;
+        if (subtle_ != null) {
+            return subtle_;
+        }
+        final SubtleCrypto subtle = new SubtleCrypto();
+        subtle.setParentScope(getParentScope());
+        subtle.setPrototype(getWindow().getPrototype(SubtleCrypto.class));
+        subtle_ = subtle;
+        return subtle_;
     }
 
     /**
@@ -119,7 +124,7 @@ public class Crypto extends HtmlUnitScriptable {
         bytes[6] = (byte) (bytes[6] & 0b01001111);
         // Set the 2 most significant bits of bytes[8], which represent the UUID variant, to 10.
         bytes[8] = (byte) (bytes[8] | 0b10000000);
-        bytes[8] = (byte) (bytes[6] & 0b10111111);
+        bytes[8] = (byte) (bytes[8] & 0b10111111);
 
         final StringBuilder result = new StringBuilder()
                                             .append(toHex(bytes[0]))

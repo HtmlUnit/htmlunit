@@ -145,4 +145,23 @@ public class CryptoTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void subtleSingleton() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  let s = window.crypto.subtle;\n"
+            + "  log(window.crypto.subtle === s);\n"
+            + "}\n"
+            + "catch(e) { logEx(e); }\n"
+            + "</script></head></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
