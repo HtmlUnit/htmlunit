@@ -1560,16 +1560,18 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Iterates over all descendants DomTypes, in document order.
+     * Iterates over all descendants DomElements, in document order.
+     *
+     * @param <T> the element type
      */
-    protected final class DescendantDomElementsIterator implements Iterator<DomElement> {
+    protected abstract class AbstractDescendantIterator<T extends DomNode> implements Iterator<T> {
         private DomNode currentNode_;
         private DomNode nextNode_;
 
         /**
          * Creates a new instance which iterates over the specified node type.
          */
-        public DescendantDomElementsIterator() {
+        protected AbstractDescendantIterator() {
             nextNode_ = getFirstChildElement(DomNode.this);
         }
 
@@ -1581,7 +1583,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         /** {@inheritDoc} */
         @Override
-        public DomElement next() {
+        public T next() {
             return nextNode();
         }
 
@@ -1601,7 +1603,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         /**
          * @return the next node, if there is one
          */
-        public DomElement nextNode() {
+        @SuppressWarnings("unchecked")
+        public T nextNode() {
             currentNode_ = nextNode_;
 
             DomNode next = getFirstChildElement(nextNode_);
@@ -1613,7 +1616,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
             nextNode_ = next;
 
-            return (DomElement) currentNode_;
+            return (T) currentNode_;
         }
 
         private DomNode getNextElementUpwards(final DomNode startingNode) {
@@ -1645,12 +1648,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         /**
          * Indicates if the node is accepted. If not it won't be explored at all.
+         *
          * @param node the node to test
          * @return {@code true} if accepted
          */
-        private boolean isAccepted(final DomNode node) {
-            return DomElement.class.isAssignableFrom(node.getClass());
-        }
+        protected abstract boolean isAccepted(DomNode node);
 
         private DomNode getNextDomSibling(final DomNode element) {
             DomNode node = element.getNextSibling();
@@ -1662,104 +1664,28 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Iterates over all descendants HtmlElements, in document order.
+     * Iterates over all descendants DomTypes, in document order.
      */
-    protected final class DescendantHtmlElementsIterator implements Iterator<HtmlElement> {
-        private DomNode currentNode_;
-        private DomNode nextNode_;
-
+    protected final class DescendantDomElementsIterator extends AbstractDescendantIterator<DomElement> {
         /**
-         * Creates a new instance which iterates over the specified node type.
+         * {@inheritDoc}
          */
-        public DescendantHtmlElementsIterator() {
-            nextNode_ = getFirstChildElement(DomNode.this);
-        }
-
-        /** {@inheritDoc} */
         @Override
-        public boolean hasNext() {
-            return nextNode_ != null;
+        protected boolean isAccepted(final DomNode node) {
+            return DomElement.class.isAssignableFrom(node.getClass());
         }
+    }
 
-        /** {@inheritDoc} */
-        @Override
-        public HtmlElement next() {
-            return nextNode();
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public void remove() {
-            if (currentNode_ == null) {
-                throw new IllegalStateException("Unable to remove current node, because there is no current node.");
-            }
-            final DomNode current = currentNode_;
-            while (nextNode_ != null && current.isAncestorOf(nextNode_)) {
-                next();
-            }
-            current.remove();
-        }
-
+    /**
+     * Iterates over all descendants DomTypes, in document order.
+     */
+    protected final class DescendantHtmlElementsIterator extends AbstractDescendantIterator<HtmlElement> {
         /**
-         * @return the next node, if there is one
+         * {@inheritDoc}
          */
-        public HtmlElement nextNode() {
-            currentNode_ = nextNode_;
-
-            DomNode next = getFirstChildElement(nextNode_);
-            if (next == null) {
-                next = getNextDomSibling(nextNode_);
-            }
-            if (next == null) {
-                next = getNextElementUpwards(nextNode_);
-            }
-            nextNode_ = next;
-
-            return (HtmlElement) currentNode_;
-        }
-
-        private DomNode getNextElementUpwards(final DomNode startingNode) {
-            if (startingNode == DomNode.this) {
-                return null;
-            }
-
-            DomNode parent = startingNode.getParentNode();
-            while (parent != null && parent != DomNode.this) {
-                DomNode next = parent.getNextSibling();
-                while (next != null && !isAccepted(next)) {
-                    next = next.getNextSibling();
-                }
-                if (next != null) {
-                    return next;
-                }
-                parent = parent.getParentNode();
-            }
-            return null;
-        }
-
-        private DomNode getFirstChildElement(final DomNode parent) {
-            DomNode node = parent.getFirstChild();
-            while (node != null && !isAccepted(node)) {
-                node = node.getNextSibling();
-            }
-            return node;
-        }
-
-        /**
-         * Indicates if the node is accepted. If not it won't be explored at all.
-         * @param node the node to test
-         * @return {@code true} if accepted
-         */
-        private boolean isAccepted(final DomNode node) {
+        @Override
+        protected boolean isAccepted(final DomNode node) {
             return HtmlElement.class.isAssignableFrom(node.getClass());
-        }
-
-        private DomNode getNextDomSibling(final DomNode element) {
-            DomNode node = element.getNextSibling();
-            while (node != null && !isAccepted(node)) {
-                node = node.getNextSibling();
-            }
-            return node;
         }
     }
 
