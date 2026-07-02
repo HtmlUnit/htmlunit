@@ -786,4 +786,60 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", ""})
+    public void setReadOnly() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var text = document.getElementById('testId');\n"
+            + "    text.readOnly = true;\n"
+            + "    log(text.readOnly);\n"
+            + "    log(text.hasAttribute('readonly'));\n"
+            + "    log(text.getAttribute('readonly'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <textarea id='testId' value='initial'></textarea>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false", "false", "null"})
+    public void removeReadOnly() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var text = document.getElementById('testId');\n"
+            + "    log(text.readOnly);\n"
+
+            + "    text.readOnly = false;\n"
+            + "    log(text.readOnly);\n"
+            + "    log(text.hasAttribute('readonly'));\n"
+            + "    log(text.getAttribute('readonly'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <textarea id='testId' value='initial' readonly></textarea>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

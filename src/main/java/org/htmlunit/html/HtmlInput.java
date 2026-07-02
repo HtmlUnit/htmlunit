@@ -542,10 +542,10 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public void setReadOnly(final boolean isReadOnly) {
         if (isReadOnly) {
-            setAttribute("readOnly", "readOnly");
+            setAttribute("readonly", "");
         }
         else {
-            removeAttribute("readOnly");
+            removeAttribute("readonly");
         }
     }
 

@@ -305,4 +305,76 @@ public final class HtmlInput2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "",
+             "true", "true", "",
+             "true", "true", "",
+             "true", "true", ""})
+    public void setReadOnly() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var form = document.getElementById('form1');\n"
+            + "    for (var i = 0; i < form.elements.length; i++) {\n"
+            + "      form.elements[i].readOnly = true;\n"
+            + "      log(form.elements[i].readOnly);\n"
+            + "      log(form.elements[i].hasAttribute('readonly'));\n"
+            + "      log(form.elements[i].getAttribute('readonly'));\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form id='form1'>\n"
+            + "<input type='radio' name='foo' value='1'/>\n"
+            + "<input type='password' name='pwd'/>\n"
+            + "<input type='checkbox' name='cb'/>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "false", "false", "null",
+             "true", "false", "false", "null",
+             "true", "false", "false", "null",
+             "true", "false", "false", "null"})
+    public void removeReadOnly() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var form = document.getElementById('form1');\n"
+            + "    for (var i = 0; i < form.elements.length; i++) {\n"
+            + "      log(form.elements[i].readOnly);\n"
+
+            + "      form.elements[i].readOnly = false;\n"
+            + "      log(form.elements[i].readOnly);\n"
+            + "      log(form.elements[i].hasAttribute('readonly'));\n"
+            + "      log(form.elements[i].getAttribute('readonly'));\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form id='form1'>\n"
+            + "<input type='radio' name='foo' value='1' readonly/>\n"
+            + "<input type='password' name='pwd' readonly/>\n"
+            + "<input type='checkbox' name='cb' readonly/>\n"
+            + "<input type='submit' name='button' value='foo' readonly/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

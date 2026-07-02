@@ -492,10 +492,10 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     public void setReadOnly(final boolean isReadOnly) {
         if (isReadOnly) {
-            setAttribute("readOnly", "readOnly");
+            setAttribute("readonly", "");
         }
         else {
-            removeAttribute("readOnly");
+            removeAttribute("readonly");
         }
     }
 
@@ -504,7 +504,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return {@code true} if this element is read only
      */
     public boolean isReadOnly() {
-        return hasAttribute("readOnly");
+        return hasAttribute("readonly");
     }
 
     /**

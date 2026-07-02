@@ -321,6 +321,35 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"false", "true", ""})
+    public void readOnlySet() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var t = document.getElementById('textArea');\n"
+            + "    log(t.readOnly);\n"
+            + "    t.readOnly = true;\n"
+            + "    log(t.readOnly);\n"
+            + "    log(t.getAttribute('readonly'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='form1'>\n"
+            + "    <textarea id='textArea'>\n foo \n bar </textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void accessKey() throws Exception {
         final String html = DOCTYPE_HTML

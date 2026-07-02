@@ -9,6 +9,12 @@
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Making a textarea element readonly sets the readonly attribute to '' instead of 'readOnly'.
+            </action>
+            <action type="fix" dev="rbri">
+                Making an input element readonly sets the readonly attribute to '' instead of 'readOnly'.
+            </action>
+            <action type="fix" dev="rbri">
                 Minor fixes for the replacement of select options.
             </action>
             <action type="fix" dev="rbri">
