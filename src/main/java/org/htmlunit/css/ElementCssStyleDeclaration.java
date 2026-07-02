@@ -144,8 +144,13 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return "";
         }
 
+        final Map<String, StyleElement> styles = getStyleMap();
+        if (index >= styles.size()) {
+            return "";
+        }
+
         int i = 0;
-        final Iterator<StyleElement> values = domElement_.getStyleMap().values().iterator();
+        final Iterator<StyleElement> values = styles.values().iterator();
         while (values.hasNext()) {
             if (index == i) {
                 return values.next().getName();

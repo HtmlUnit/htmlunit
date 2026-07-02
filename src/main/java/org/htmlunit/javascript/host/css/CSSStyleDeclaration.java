@@ -1986,19 +1986,14 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             unit = valueString.substring(valueString.length() - 1);
             valueString = valueString.substring(0, valueString.length() - 1);
         }
-        else if (valueString.endsWith("px")
-            || valueString.endsWith("em")
-            || valueString.endsWith("ex")
-            || valueString.endsWith("pt")
-            || valueString.endsWith("cm")
-            || valueString.endsWith("mm")
-            || valueString.endsWith("in")
-            || valueString.endsWith("pc")
-            || valueString.endsWith("ch")
-            || valueString.endsWith("vh")
-            || valueString.endsWith("vw")) {
-            unit = valueString.substring(valueString.length() - 2);
-            valueString = valueString.substring(0, valueString.length() - 2);
+        else if (valueString.endsWith("dvmin")
+            || valueString.endsWith("dvmax")
+            || valueString.endsWith("lvmin")
+            || valueString.endsWith("lvmax")
+            || valueString.endsWith("svmin")
+            || valueString.endsWith("svmax")) {
+            unit = valueString.substring(valueString.length() - 5);
+            valueString = valueString.substring(0, valueString.length() - 5);
         }
         else if (valueString.endsWith("rem")
             || valueString.endsWith("vmin")
@@ -2012,14 +2007,19 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             unit = valueString.substring(valueString.length() - 3);
             valueString = valueString.substring(0, valueString.length() - 3);
         }
-        else if (valueString.endsWith("dvmin")
-            || valueString.endsWith("dvmax")
-            || valueString.endsWith("lvmin")
-            || valueString.endsWith("lvmax")
-            || valueString.endsWith("svmin")
-            || valueString.endsWith("svmax")) {
-            unit = valueString.substring(valueString.length() - 5);
-            valueString = valueString.substring(0, valueString.length() - 5);
+        else if (valueString.endsWith("px")
+            || valueString.endsWith("em")
+            || valueString.endsWith("ex")
+            || valueString.endsWith("pt")
+            || valueString.endsWith("cm")
+            || valueString.endsWith("mm")
+            || valueString.endsWith("in")
+            || valueString.endsWith("pc")
+            || valueString.endsWith("ch")
+            || valueString.endsWith("vh")
+            || valueString.endsWith("vw")) {
+            unit = valueString.substring(valueString.length() - 2);
+            valueString = valueString.substring(0, valueString.length() - 2);
         }
         else {
             return;
