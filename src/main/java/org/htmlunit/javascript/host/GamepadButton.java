@@ -14,9 +14,11 @@
  */
 package org.htmlunit.javascript.host;
 
+import org.htmlunit.corejs.javascript.ClassDescriptor;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.HtmlUnitClassDescriptor;
+import org.htmlunit.javascript.configuration.SupportedBrowser;
 
 /**
  * A JavaScript object for {@code GamepadButton}.
@@ -24,14 +26,38 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass
 public class GamepadButton extends HtmlUnitScriptable {
 
-    /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor
-    public void jsConstructor() {
-        // nothing to do
-    }
+    /** Descriptor for registering this class with the JavaScript engine. */
+    public static final HtmlUnitClassDescriptor HTMLUNIT_DESCRIPTOR = new HtmlUnitClassDescriptor() {
+
+        private static final ClassDescriptor DESCRIPTOR_ = new ClassDescriptor.Builder("GamepadButton", 0,
+                (cx, f, callerObj, scope, thisObj, args) -> Undefined.instance)
+                .build();
+
+        @Override
+        public ClassDescriptor forBrowser(final SupportedBrowser browser) {
+            return DESCRIPTOR_;
+        }
+
+        @Override
+        public Class<? extends HtmlUnitScriptable> getHostClass() {
+            return GamepadButton.class;
+        }
+
+        @Override
+        public Class<?>[] getDomClasses() {
+            return new Class<?>[0];
+        }
+
+        @Override
+        public boolean isJsObject() {
+            return true;
+        }
+
+        @Override
+        public String getExtendedClassName() {
+            return "";
+        }
+    };
 }

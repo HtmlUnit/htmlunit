@@ -14,11 +14,13 @@
  */
 package org.htmlunit.javascript.host.svg;
 
+import org.htmlunit.corejs.javascript.ClassDescriptor;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstructor;
-import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.configuration.HtmlUnitClassDescriptor;
+import org.htmlunit.javascript.configuration.SupportedBrowser;
 
 /**
  * A JavaScript object for {@code SVGRect}.
@@ -26,8 +28,64 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass
 public class SVGRect extends HtmlUnitScriptable {
+
+    /** Descriptor for registering this class with the JavaScript engine. */
+    public static final HtmlUnitClassDescriptor HTMLUNIT_DESCRIPTOR = new HtmlUnitClassDescriptor() {
+
+        private static final ClassDescriptor DESCRIPTOR_ = new ClassDescriptor.Builder("SVGRect", 0,
+                (cx, f, callerObj, scope, thisObj, args) -> Undefined.instance)
+                .withProp(ClassDescriptor.Destination.PROTO, "x",
+                        (ScriptableObject.LambdaGetterFunction) thisObj ->
+                                ((SVGRect) thisObj).getX(),
+                        (ScriptableObject.LambdaSetterFunction) (owner, value) ->
+                                ((SVGRect) owner).setX(JavaScriptEngine.toNumber(value)),
+                        ScriptableObject.DONTENUM)
+                .withProp(ClassDescriptor.Destination.PROTO, "y",
+                        (ScriptableObject.LambdaGetterFunction) thisObj ->
+                                ((SVGRect) thisObj).getY(),
+                        (ScriptableObject.LambdaSetterFunction) (owner, value) ->
+                                ((SVGRect) owner).setY(JavaScriptEngine.toNumber(value)),
+                        ScriptableObject.DONTENUM)
+                .withProp(ClassDescriptor.Destination.PROTO, "width",
+                        (ScriptableObject.LambdaGetterFunction) thisObj ->
+                                ((SVGRect) thisObj).getWidth(),
+                        (ScriptableObject.LambdaSetterFunction) (owner, value) ->
+                                ((SVGRect) owner).setWidth(JavaScriptEngine.toNumber(value)),
+                        ScriptableObject.DONTENUM)
+                .withProp(ClassDescriptor.Destination.PROTO, "height",
+                        (ScriptableObject.LambdaGetterFunction) thisObj ->
+                                ((SVGRect) thisObj).getHeight(),
+                        (ScriptableObject.LambdaSetterFunction) (owner, value) ->
+                                ((SVGRect) owner).setHeight(JavaScriptEngine.toNumber(value)),
+                        ScriptableObject.DONTENUM)
+                .build();
+
+        @Override
+        public ClassDescriptor forBrowser(final SupportedBrowser browser) {
+            return DESCRIPTOR_;
+        }
+
+        @Override
+        public Class<? extends HtmlUnitScriptable> getHostClass() {
+            return SVGRect.class;
+        }
+
+        @Override
+        public Class<?>[] getDomClasses() {
+            return new Class<?>[0];
+        }
+
+        @Override
+        public boolean isJsObject() {
+            return true;
+        }
+
+        @Override
+        public String getExtendedClassName() {
+            return "";
+        }
+    };
 
     private double xValue_;
     private double yValue_;
@@ -35,18 +93,9 @@ public class SVGRect extends HtmlUnitScriptable {
     private double height_;
 
     /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor
-    public void jsConstructor() {
-        // nothing to do
-    }
-
-    /**
      * Gets x.
      * @return x
      */
-    @JsxGetter
     public double getX() {
         return xValue_;
     }
@@ -55,7 +104,6 @@ public class SVGRect extends HtmlUnitScriptable {
      * Sets x.
      * @param x the x
      */
-    @JsxSetter
     public void setX(final double x) {
         xValue_ = x;
     }
@@ -64,7 +112,6 @@ public class SVGRect extends HtmlUnitScriptable {
      * Gets y.
      * @return y
      */
-    @JsxGetter
     public double getY() {
         return yValue_;
     }
@@ -73,7 +120,6 @@ public class SVGRect extends HtmlUnitScriptable {
      * Sets y.
      * @param y the y
      */
-    @JsxSetter
     public void setY(final double y) {
         yValue_ = y;
     }
@@ -82,7 +128,6 @@ public class SVGRect extends HtmlUnitScriptable {
      * Gets width.
      * @return width
      */
-    @JsxGetter
     public double getWidth() {
         return width_;
     }
@@ -91,7 +136,6 @@ public class SVGRect extends HtmlUnitScriptable {
      * Sets width.
      * @param width the width
      */
-    @JsxSetter
     public void setWidth(final double width) {
         width_ = width;
     }
@@ -100,7 +144,6 @@ public class SVGRect extends HtmlUnitScriptable {
      * Gets height.
      * @return height
      */
-    @JsxGetter
     public double getHeight() {
         return height_;
     }
@@ -109,7 +152,6 @@ public class SVGRect extends HtmlUnitScriptable {
      * Sets height.
      * @param height the height
      */
-    @JsxSetter
     public void setHeight(final double height) {
         height_ = height;
     }

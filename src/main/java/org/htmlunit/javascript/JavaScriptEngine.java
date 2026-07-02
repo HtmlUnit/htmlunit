@@ -40,12 +40,14 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.AbstractEcmaObjectOperations;
 import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Callable;
+import org.htmlunit.corejs.javascript.ClassDescriptor;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.JSFunction;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
@@ -58,6 +60,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.StackStyle;
 import org.htmlunit.corejs.javascript.Symbol;
+import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.corejs.javascript.TopLevel;
 import org.htmlunit.corejs.javascript.VarScope;
 import org.htmlunit.corejs.javascript.WithScope;
@@ -322,6 +325,41 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 // adjust prototype if needed
                 if (extendedClassName != null) {
                     scopeContructorFunctionObject.setPrototype(ctorPrototypesPerJSName.get(extendedClassName));
+                }
+            }
+            else if (config.getDescriptor() != null) {
+                // Descriptor-based path (ClassDescriptor API)
+                final HtmlUnitScriptable classPrototype = config.getHostClass().getDeclaredConstructor().newInstance();
+                classPrototype.setParentScope(scope);
+                classPrototype.setClassName(jsClassName);
+
+                // buildConstructor wires up all methods/properties, sets proto.__proto__ to Object.prototype,
+                // and registers the constructor in the scope (which routes to globalThis via TopLevel.put)
+                final JSFunction ctor = config.getDescriptor().buildConstructor(
+                        Context.getCurrentContext(), scope, classPrototype, false);
+                ctorPrototypesPerJSName.put(jsClassName, ctor);
+
+                // Override proto chain after buildConstructor (it defaults to Object.prototype)
+                if (extendedClassName != null) {
+                    classPrototype.setPrototype(prototypesPerJSName.get(extendedClassName));
+                    ctor.setPrototype(ctorPrototypesPerJSName.get(extendedClassName));
+                }
+
+                prototypes.put(config.getHostClass(), classPrototype);
+                prototypesPerJSName.put(jsClassName, classPrototype);
+
+                // Add Symbol.toStringTag to match the annotation-based setup in process()
+                ScriptableObject.defineProperty(classPrototype, SymbolKey.TO_STRING_TAG, jsClassName,
+                        ScriptableObject.DONTENUM | ScriptableObject.READONLY);
+
+                if (!config.isJsObject()) {
+                    // buildConstructor registers the ctor in the scope (→ globalThis), so remove it
+                    globalThis.delete(jsClassName);
+                }
+
+                final String alias = config.getJsConstructorAlias();
+                if (alias != null) {
+                    ScriptableObject.defineProperty(globalThis, alias, ctor, ScriptableObject.DONTENUM);
                 }
             }
             else {

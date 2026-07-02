@@ -14,11 +14,12 @@
  */
 package org.htmlunit.javascript.host.geo;
 
+import org.htmlunit.corejs.javascript.ClassDescriptor;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstructor;
-import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.HtmlUnitClassDescriptor;
+import org.htmlunit.javascript.configuration.SupportedBrowser;
 
 /**
  * A JavaScript object for GeolocationCoordinates.
@@ -26,12 +27,61 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass
 public class GeolocationCoordinates extends HtmlUnitScriptable {
 
     private double latitude_;
     private double longitude_;
     private double accuracy_;
+
+    /** Descriptor for registering this class with the JavaScript engine. */
+    public static final HtmlUnitClassDescriptor HTMLUNIT_DESCRIPTOR = new HtmlUnitClassDescriptor() {
+
+        private static final ClassDescriptor DESCRIPTOR_ = new ClassDescriptor.Builder("GeolocationCoordinates", 0,
+                (cx, f, callerObj, scope, thisObj, args) -> {
+                    throw JavaScriptEngine.typeErrorIllegalConstructor();
+                })
+                .withProp(ClassDescriptor.Destination.PROTO, "latitude",
+                        (ScriptableObject.LambdaGetterFunction) thisObj ->
+                                ((GeolocationCoordinates) thisObj).getLatitude(),
+                        null,
+                        ScriptableObject.DONTENUM | ScriptableObject.READONLY)
+                .withProp(ClassDescriptor.Destination.PROTO, "longitude",
+                        (ScriptableObject.LambdaGetterFunction) thisObj ->
+                                ((GeolocationCoordinates) thisObj).getLongitude(),
+                        null,
+                        ScriptableObject.DONTENUM | ScriptableObject.READONLY)
+                .withProp(ClassDescriptor.Destination.PROTO, "accuracy",
+                        (ScriptableObject.LambdaGetterFunction) thisObj ->
+                                ((GeolocationCoordinates) thisObj).getAccuracy(),
+                        null,
+                        ScriptableObject.DONTENUM | ScriptableObject.READONLY)
+                .build();
+
+        @Override
+        public ClassDescriptor forBrowser(final SupportedBrowser browser) {
+            return DESCRIPTOR_;
+        }
+
+        @Override
+        public Class<? extends HtmlUnitScriptable> getHostClass() {
+            return GeolocationCoordinates.class;
+        }
+
+        @Override
+        public Class<?>[] getDomClasses() {
+            return new Class<?>[0];
+        }
+
+        @Override
+        public boolean isJsObject() {
+            return true;
+        }
+
+        @Override
+        public String getExtendedClassName() {
+            return "";
+        }
+    };
 
     /**
      * Creates an instance.
@@ -48,18 +98,9 @@ public class GeolocationCoordinates extends HtmlUnitScriptable {
     }
 
     /**
-     * Creates an instance.
-     */
-    @JsxConstructor
-    public void jsConstructor() {
-        throw JavaScriptEngine.typeErrorIllegalConstructor();
-    }
-
-    /**
      * Returns the latitude.
      * @return the latitude
      */
-    @JsxGetter
     public double getLatitude() {
         return latitude_;
     }
@@ -68,7 +109,6 @@ public class GeolocationCoordinates extends HtmlUnitScriptable {
      * Returns the longitude.
      * @return the longitude
      */
-    @JsxGetter
     public double getLongitude() {
         return longitude_;
     }
@@ -77,7 +117,6 @@ public class GeolocationCoordinates extends HtmlUnitScriptable {
      * Returns the accuracy.
      * @return the accuracy
      */
-    @JsxGetter
     public double getAccuracy() {
         return accuracy_;
     }
