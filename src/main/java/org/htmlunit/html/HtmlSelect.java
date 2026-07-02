@@ -715,10 +715,12 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
         int index = 0;
         for (final HtmlElement element : getHtmlElementDescendants()) {
-            if (option == element) {
-                return index;
+            if (element instanceof HtmlOption) {
+                if (option == element) {
+                    return index;
+                }
+                index++;
             }
-            index++;
         }
         return 0;
     }
