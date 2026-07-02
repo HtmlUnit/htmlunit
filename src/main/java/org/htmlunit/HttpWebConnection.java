@@ -44,69 +44,74 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.ConnectionClosedException;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpEntityEnclosingRequest;
-import org.apache.http.HttpException;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpRequestInterceptor;
-import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScheme;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.client.AuthCache;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpHead;
-import org.apache.http.client.methods.HttpPatch;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.methods.HttpTrace;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.client.protocol.RequestAcceptEncoding;
-import org.apache.http.client.protocol.RequestAddCookies;
-import org.apache.http.client.protocol.RequestAuthCache;
-import org.apache.http.client.protocol.RequestDefaultHeaders;
-import org.apache.http.client.protocol.RequestExpectContinue;
-import org.apache.http.client.protocol.ResponseProcessCookies;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.config.ConnectionConfig;
-import org.apache.http.config.RegistryBuilder;
-import org.apache.http.config.SocketConfig;
-import org.apache.http.conn.DnsResolver;
-import org.apache.http.conn.routing.RouteInfo;
-import org.apache.http.conn.socket.ConnectionSocketFactory;
-import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
-import org.apache.http.conn.ssl.DefaultHostnameVerifier;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.util.PublicSuffixMatcher;
-import org.apache.http.conn.util.PublicSuffixMatcherLoader;
-import org.apache.http.cookie.CookieSpecProvider;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.InputStreamBody;
-import org.apache.http.impl.client.BasicAuthCache;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.apache.http.protocol.HttpContext;
-import org.apache.http.protocol.HttpProcessorBuilder;
-import org.apache.http.protocol.RequestContent;
-import org.apache.http.protocol.RequestTargetHost;
-import org.apache.http.ssl.SSLContexts;
-import org.apache.http.util.TextUtils;
+import org.apache.hc.core5.http.ConnectionClosedException;
+import org.apache.hc.core5.http.Header;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpEntityContainer;
+import org.apache.hc.core5.http.HttpException;
+import org.apache.hc.core5.http.HttpHost;
+import org.apache.hc.core5.http.HttpRequest;
+import org.apache.hc.core5.http.HttpRequestInterceptor;
+import org.apache.hc.core5.http.HttpResponse;
+import org.apache.hc.client5.http.auth.AuthCache;
+import org.apache.hc.client5.http.auth.AuthScheme;
+import org.apache.hc.client5.http.auth.AuthScope;
+import org.apache.hc.client5.http.auth.Credentials;
+import org.apache.hc.client5.http.auth.CredentialsProvider;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.classic.methods.HttpHead;
+import org.apache.hc.client5.http.classic.methods.HttpPatch;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.classic.methods.HttpPut;
+import org.apache.hc.client5.http.classic.methods.HttpTrace;
+import org.apache.hc.client5.http.classic.methods.HttpDelete;
+import org.apache.hc.client5.http.classic.methods.HttpOptions;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequestBase;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.client5.http.impl.auth.BasicAuthCache;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.client5.http.protocol.HttpClientContext;
+import org.apache.hc.client5.http.protocol.RequestAcceptEncoding;
+import org.apache.hc.client5.http.protocol.RequestAddCookies;
+import org.apache.hc.client5.http.protocol.RequestAuthCache;
+import org.apache.hc.client5.http.protocol.RequestDefaultHeaders;
+import org.apache.hc.client5.http.protocol.RequestExpectContinue;
+import org.apache.hc.client5.http.protocol.ResponseProcessCookies;
+import org.apache.hc.client5.http.utils.URLEncodedUtils;
+import org.apache.hc.client5.http.config.ConnectionConfig;
+import org.apache.hc.client5.http.config.SocketConfig;
+import org.apache.hc.client5.http.config.TlsConfig;
+import org.apache.hc.client5.http.cookie.CookieSpecFactory;
+import org.apache.hc.client5.http.DnsResolver;
+import org.apache.hc.client5.http.HttpRoute;
+import org.apache.hc.client5.http.impl.routing.DefaultRoutePlanner;
+import org.apache.hc.client5.http.io.HttpClientConnectionManager;
+import org.apache.hc.client5.http.psl.PublicSuffixMatcher;
+import org.apache.hc.client5.http.psl.PublicSuffixMatcherLoader;
+import org.apache.hc.client5.http.routing.RoutingSupport;
+import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
+import org.apache.hc.client5.http.socket.LayeredConnectionSocketFactory;
+import org.apache.hc.client5.http.ssl.DefaultHostnameVerifier;
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
+import org.apache.hc.core5.http.config.RegistryBuilder;
+import org.apache.hc.core5.http.io.entity.ContentType;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
+import org.apache.hc.client5.http.entity.mime.InputStreamBody;
+import org.apache.hc.core5.http.protocol.HttpContext;
+import org.apache.hc.core5.http.protocol.HttpProcessorBuilder;
+import org.apache.hc.core5.http.protocol.RequestContent;
+import org.apache.hc.core5.http.protocol.RequestTargetHost;
+import org.apache.hc.core5.ssl.SSLContexts;
+import org.apache.hc.core5.util.TextUtils;
 import org.htmlunit.WebRequest.HttpHint;
 import org.htmlunit.http.HttpUtils;
-import org.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
+import org.htmlunit.httpclient.HtmlUnitCookieSpecFactory;
 import org.htmlunit.httpclient.HtmlUnitCookieStore;
-import org.htmlunit.httpclient.HtmlUnitRedirectStrategie;
+import org.htmlunit.httpclient.HtmlUnitRedirectStrategy;
 import org.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory;
 import org.htmlunit.httpclient.SocksConnectionSocketFactory;
 import org.htmlunit.util.KeyDataPair;
@@ -142,7 +147,7 @@ public class HttpWebConnection implements WebConnection {
     private final WebClient webClient_;
 
     private String virtualHost_;
-    private final HtmlUnitCookieSpecProvider htmlUnitCookieSpecProvider_;
+    private final HtmlUnitCookieSpecFactory htmlUnitCookieSpecFactory_;
     private final WebClientOptions usedOptions_;
     private PoolingHttpClientConnectionManager connectionManager_;
 
@@ -159,7 +164,7 @@ public class HttpWebConnection implements WebConnection {
     public HttpWebConnection(final WebClient webClient) {
         super();
         webClient_ = webClient;
-        htmlUnitCookieSpecProvider_ = new HtmlUnitCookieSpecProvider(webClient.getBrowserVersion());
+        htmlUnitCookieSpecFactory_ = new HtmlUnitCookieSpecFactory(webClient.getBrowserVersion());
         usedOptions_ = new WebClientOptions();
     }
 
@@ -170,7 +175,7 @@ public class HttpWebConnection implements WebConnection {
     public WebResponse getResponse(final WebRequest webRequest) throws IOException {
         final HttpClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder(), webRequest);
 
-        HttpUriRequest httpMethod = null;
+        HttpUriRequestBase httpMethod = null;
         try {
             try {
                 httpMethod = makeHttpMethod(webRequest, builder);
@@ -229,7 +234,7 @@ public class HttpWebConnection implements WebConnection {
      * the HttpMethod's connection. Subclasses may override.
      * @param httpMethod the httpMethod used (can be null)
      */
-    protected void onResponseGenerated(final HttpUriRequest httpMethod) {
+    protected void onResponseGenerated(final HttpUriRequestBase httpMethod) {
         // nothing to do
     }
 
@@ -249,7 +254,7 @@ public class HttpWebConnection implements WebConnection {
         return httpClientContext;
     }
 
-    private void setProxy(final HttpRequestBase httpRequest, final WebRequest webRequest) {
+    private void setProxy(final HttpUriRequestBase httpRequest, final WebRequest webRequest) {
         final InetAddress localAddress = webClient_.getOptions().getLocalAddress();
         final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(getTimeout(webRequest), localAddress);
 
@@ -277,7 +282,7 @@ public class HttpWebConnection implements WebConnection {
      * @return the <code>HttpMethod</code> instance constructed according to the specified parameters
      * @throws URISyntaxException in case of syntax problems
      */
-    private HttpUriRequest makeHttpMethod(final WebRequest webRequest, final HttpClientBuilder httpClientBuilder)
+    private HttpUriRequestBase makeHttpMethod(final WebRequest webRequest, final HttpClientBuilder httpClientBuilder)
         throws URISyntaxException {
 
         final HttpContext httpContext = getHttpContext();
@@ -292,7 +297,7 @@ public class HttpWebConnection implements WebConnection {
         if (getVirtualHost() != null) {
             uri = URI.create(getVirtualHost());
         }
-        final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
+        final HttpUriRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         setProxy(httpMethod, webRequest);
 
         // developer note:
@@ -302,10 +307,10 @@ public class HttpWebConnection implements WebConnection {
         if (httpMethod instanceof HttpPost
                 || httpMethod instanceof HttpPut
                 || httpMethod instanceof HttpPatch
-                || httpMethod instanceof org.htmlunit.httpclient.HttpDelete
-                || httpMethod instanceof org.htmlunit.httpclient.HttpOptions) {
+                || httpMethod instanceof HttpDelete
+                || httpMethod instanceof HttpOptions) {
 
-            final HttpEntityEnclosingRequest method = (HttpEntityEnclosingRequest) httpMethod;
+            final HttpEntityContainer method = (HttpEntityContainer) httpMethod;
 
             if (FormEncodingType.URL_ENCODED == webRequest.getEncodingType()) {
                 if (webRequest.getRequestBody() == null) {
@@ -395,7 +400,10 @@ public class HttpWebConnection implements WebConnection {
         final Credentials requestUrlCredentials = webRequest.getUrlCredentials();
         if (null != requestUrlCredentials) {
             final URL requestUrl = webRequest.getUrl();
-            final AuthScope authScope = new AuthScope(requestUrl.getHost(), requestUrl.getPort());
+            final AuthScope authScope = new AuthScope.Builder()
+                    .setHost(requestUrl.getHost())
+                    .setPort(requestUrl.getPort())
+                    .build();
             // updating our client to keep the credentials for the next request
             credentialsProvider.setCredentials(authScope, requestUrlCredentials);
         }
@@ -404,7 +412,10 @@ public class HttpWebConnection implements WebConnection {
         final Credentials requestCredentials = webRequest.getCredentials();
         if (null != requestCredentials) {
             final URL requestUrl = webRequest.getUrl();
-            final AuthScope authScope = new AuthScope(requestUrl.getHost(), requestUrl.getPort());
+            final AuthScope authScope = new AuthScope.Builder()
+                    .setHost(requestUrl.getHost())
+                    .setPort(requestUrl.getPort())
+                    .build();
             // updating our client to keep the credentials for the next request
             credentialsProvider.setCredentials(authScope, requestCredentials);
         }
@@ -484,13 +495,13 @@ public class HttpWebConnection implements WebConnection {
      * @param uri the uri being used
      * @return a new HttpClient HTTP method based on the specified parameters
      */
-    private static HttpRequestBase buildHttpMethod(final HttpMethod submitMethod, final URI uri) {
-        final HttpRequestBase method = switch (submitMethod) {
+    private static HttpUriRequestBase buildHttpMethod(final HttpMethod submitMethod, final URI uri) {
+        final HttpUriRequestBase method = switch (submitMethod) {
             case GET -> new HttpGet(uri);
             case POST -> new HttpPost(uri);
             case PUT -> new HttpPut(uri);
-            case DELETE -> new org.htmlunit.httpclient.HttpDelete(uri);
-            case OPTIONS -> new org.htmlunit.httpclient.HttpOptions(uri);
+            case DELETE -> new HttpDelete(uri);
+            case OPTIONS -> new HttpOptions(uri);
             case HEAD -> new HttpHead(uri);
             case TRACE -> new HttpTrace(uri);
             case PATCH -> new HttpPatch(uri);
@@ -513,10 +524,10 @@ public class HttpWebConnection implements WebConnection {
 
                 // this factory is required later
                 // to be sure this is done, we do it outside the createHttpClient() call
-                final RegistryBuilder<CookieSpecProvider> registeryBuilder
-                    = RegistryBuilder.<CookieSpecProvider>create()
-                                .register(HACKED_COOKIE_POLICY, htmlUnitCookieSpecProvider_);
-                builder.setDefaultCookieSpecRegistry(registeryBuilder.build());
+                final RegistryBuilder<CookieSpecFactory> registryBuilder
+                    = RegistryBuilder.<CookieSpecFactory>create()
+                                .register(HACKED_COOKIE_POLICY, htmlUnitCookieSpecFactory_);
+                builder.setDefaultCookieSpecRegistry(registryBuilder.build());
 
                 builder.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
                 builder.setUserAgent(webClient_.getBrowserVersion().getUserAgent());
@@ -552,7 +563,7 @@ public class HttpWebConnection implements WebConnection {
      */
     protected HttpClientBuilder createHttpClientBuilder() {
         final HttpClientBuilder builder = HttpClientBuilder.create();
-        builder.setRedirectStrategy(new HtmlUnitRedirectStrategie());
+        builder.setRedirectStrategy(new HtmlUnitRedirectStrategy());
         configureTimeout(builder, getTimeout(null));
         configureHttpsScheme(builder);
         builder.setMaxConnPerRoute(6);
@@ -713,14 +724,14 @@ public class HttpWebConnection implements WebConnection {
     /**
      * Downloads the response.
      * This calls {@link #downloadResponseBody(HttpResponse)} and constructs the {@link WebResponse}.
-     * @param httpMethod the HttpUriRequest
+     * @param httpMethod the HttpUriRequestBase
      * @param webRequest the {@link WebRequest}
      * @param httpResponse the web server's response
      * @param startTime the download start time
      * @return a wrapper for the downloaded body.
      * @throws IOException in case of problem reading/saving the body
      */
-    protected WebResponse downloadResponse(final HttpUriRequest httpMethod,
+    protected WebResponse downloadResponse(final HttpUriRequestBase httpMethod,
             final WebRequest webRequest, final HttpResponse httpResponse,
             final long startTime) throws IOException {
 
@@ -1189,7 +1200,7 @@ public class HttpWebConnection implements WebConnection {
             final HttpClientContext clientContext = HttpClientContext.adapt(context);
 
             // Obtain the client connection (required)
-            final RouteInfo route = clientContext.getHttpRoute();
+            final HttpRoute route = clientContext.getHttpRoute();
             if (route == null) {
                 return;
             }

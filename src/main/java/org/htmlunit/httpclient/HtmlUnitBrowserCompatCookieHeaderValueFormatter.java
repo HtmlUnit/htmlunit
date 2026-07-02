@@ -14,7 +14,7 @@
  */
 package org.htmlunit.httpclient;
 
-import org.apache.http.message.BasicHeaderValueFormatter;
+import org.apache.hc.core5.http.message.BasicHeaderValueFormatter;
 
 /**
  * Customized BasicHeaderValueFormatter for HtmlUnit.
