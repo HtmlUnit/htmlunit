@@ -221,15 +221,16 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             if (element instanceof HtmlOption) {
                 if (i == index) {
                     element.replace(newOption);
+
+                    if (newOption.isSelected() && !isMultipleSelectEnabled()) {
+                        setOnlySelected(newOption, true);
+                    }
                     ensureSelectedIndex();
+
                     return;
                 }
                 i++;
             }
-        }
-
-        if (newOption.isSelected()) {
-            setSelectedAttribute(newOption, true);
         }
     }
 

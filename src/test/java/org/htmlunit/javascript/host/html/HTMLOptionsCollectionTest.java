@@ -382,7 +382,9 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
 
             + "        log(oSelect.options.length);\n"
             + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
-            + "          log(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
+            + "          log(oSelect.options[i].text "
+                                + "+ (oSelect.options[i].selected ? '*' : '')"
+                                + "+ (oSelect.options[i].getAttribute('selected') ? '*' : ''));\n"
             + "        }\n"
             + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
@@ -704,7 +706,9 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
 
             + "        log(oSelect.options.length);\n"
             + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
-            + "          log(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
+            + "          log(oSelect.options[i].text "
+                                + "+ (oSelect.options[i].selected ? '*' : '')"
+                                + "+ (oSelect.options[i].getAttribute('selected') ? '*' : ''));\n"
             + "        }\n"
             + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
@@ -731,7 +735,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts({"0", "-1"})
     public void removeMinusOneEmpty() throws Exception {
         remove("-1", true, false);
     }
@@ -740,7 +744,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts({"0", "-1"})
     public void removeMinusOneEmptyMulti() throws Exception {
         remove("-1", true, true);
     }
@@ -749,7 +753,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "One", "Two*", "Three"})
+    @Alerts({"3", "One", "Two*", "Three", "1"})
     public void removeMinusOne() throws Exception {
         remove("-1", false, false);
     }
@@ -758,7 +762,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "One", "Two*", "Three*"})
+    @Alerts({"3", "One", "Two*", "Three*", "1"})
     public void removeMinusOneMulti() throws Exception {
         remove("-1", false, true);
     }
@@ -767,7 +771,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "Two*", "Three"})
+    @Alerts({"2", "Two*", "Three", "0"})
     public void removeZero() throws Exception {
         remove("0", false, false);
     }
@@ -776,7 +780,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "Two*", "Three*"})
+    @Alerts({"2", "Two*", "Three*", "0"})
     public void removeZeroMulti() throws Exception {
         remove("0", false, true);
     }
@@ -785,7 +789,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "One*", "Three"})
+    @Alerts({"2", "One*", "Three", "0"})
     public void removeOne() throws Exception {
         remove("1", false, false);
     }
@@ -794,7 +798,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "One", "Three*"})
+    @Alerts({"2", "One", "Three*", "1"})
     public void removeOneMulti() throws Exception {
         remove("1", false, true);
     }
@@ -803,7 +807,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "One", "Two*"})
+    @Alerts({"2", "One", "Two*", "1"})
     public void removeTwo() throws Exception {
         remove("2", false, false);
     }
@@ -812,7 +816,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "One", "Two*"})
+    @Alerts({"2", "One", "Two*", "1"})
     public void removeTwoMulti() throws Exception {
         remove("2", false, true);
     }
@@ -821,7 +825,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "One", "Two*", "Three"})
+    @Alerts({"3", "One", "Two*", "Three", "1"})
     public void removeThree() throws Exception {
         remove("3", false, false);
     }
@@ -830,7 +834,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "One", "Two*", "Three*"})
+    @Alerts({"3", "One", "Two*", "Three*", "1"})
     public void removeThreeMulti() throws Exception {
         remove("3", false, true);
     }
@@ -839,7 +843,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts({"0", "-1"})
     public void removeTenEmpty() throws Exception {
         remove("10", true, false);
     }
@@ -848,7 +852,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts({"0", "-1"})
     public void removeTenEmptyMulti() throws Exception {
         remove("10", true, true);
     }
@@ -857,7 +861,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "One", "Two*", "Three"})
+    @Alerts({"3", "One", "Two*", "Three", "1"})
     public void removeTen() throws Exception {
         remove("10", false, false);
     }
@@ -866,7 +870,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "One", "Two*", "Three*"})
+    @Alerts({"3", "One", "Two*", "Three*", "1"})
     public void removeTenMuti() throws Exception {
         remove("10", false, true);
     }
@@ -884,8 +888,189 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
 
             + "        log(oSelect.options.length);\n"
             + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
-            + "          log(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
+            + "          log(oSelect.options[i].text "
+                                + "+ (oSelect.options[i].selected ? '*' : '')"
+                                + "+ (oSelect.options[i].getAttribute('selected') ? '*' : ''));\n"
             + "        }\n"
+            + "        log(oSelect.selectedIndex);\n"
+            + "      } catch(e) { logEx(e); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form name='testForm'>\n"
+            + "    <select name='select1' " + (multi ? "multiple" : "") + ">\n";
+        if (!empty) {
+            html = html
+                    + "      <option name='option1' value='value1'>One</option>\n"
+                    + "      <option name='option2' value='value2' selected>Two</option>\n"
+                    + "      <option name='option3' value='value3'" + (multi ? "selected" : "") + ">Three</option>\n";
+        }
+        html = html
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "One", "New*", "Three", "1"})
+    public void replace_singleSelect_selectedOption() throws Exception {
+        replace("1", false, false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "One*", "New", "Three", "0"})
+    public void replace_singleSelect_unselectedOption() throws Exception {
+        replace("1", false, false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "One*", "New", "Three", "0"})
+    public void replace_singleSelect_replaceCurrentlySelected() throws Exception {
+        // index 1 ("Two") is the pre-selected option in the non-multi fixture
+        replace("1", false, false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "New*", "Two", "Three", "0"})
+    public void replace_singleSelect_firstIndex() throws Exception {
+        replace("0", false, false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "One", "Two", "New*", "2"})
+    public void replace_singleSelect_lastIndex() throws Exception {
+        replace("2", false, false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "One", "Two*", "Three", "1"})
+    public void replace_singleSelect_negativeIndex() throws Exception {
+        replace("-1", false, false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"6", "One", "Two", "Three", "", "", "New*", "5"})
+    public void replace_singleSelect_outOfRangeIndex() throws Exception {
+        replace("5", false, false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "New*", "0"})
+    public void replace_singleSelect_emptySelect() throws Exception {
+        replace("0", true, false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "One", "New*", "Three*", "1"})
+    public void replace_multipleSelect_selectedOption() throws Exception {
+        replace("1", false, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "One", "New", "Three*", "2"})
+    public void replace_multipleSelect_unselectedOption() throws Exception {
+        replace("1", false, true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "New*", "Two*", "Three*", "0"})
+    public void replace_multipleSelect_firstIndex() throws Exception {
+        replace("0", false, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "One", "Two*", "New*", "1"})
+    public void replace_multipleSelect_lastIndex() throws Exception {
+        replace("2", false, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "One", "Two*", "Three*", "1"})
+    public void replace_multipleSelect_negativeIndex() throws Exception {
+        replace("-1", false, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"6", "One", "Two*", "Three*", "", "", "New*", "1"})
+    public void replace_multipleSelect_outOfRangeIndex() throws Exception {
+        replace("5", false, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "New*", "0"})
+    public void replace_multipleSelect_emptySelect() throws Exception {
+        replace("0", true, true, true);
+    }
+
+    private void replace(final String pos, final boolean empty, final boolean multi, final boolean selected)
+            throws Exception {
+        String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function doTest() {\n"
+            + "      try {\n"
+            + "        var oSelect = document.forms.testForm.select1;\n"
+            + "        var opt = new Option('New', 'valueNew');\n"
+            + "        opt.selected = " + selected + ";\n"
+            + "        oSelect.options[" + pos + "] = opt;\n"
+
+            + "        log(oSelect.options.length);\n"
+            + "        for (var i = 0; i < oSelect.options.length; i++) {\n"
+            + "          log(oSelect.options[i].text "
+                                + "+ (oSelect.options[i].selected ? '*' : '')"
+                                + "+ (oSelect.options[i].getAttribute('selected') ? '*' : ''));\n"
+            + "        }\n"
+            + "        log(oSelect.selectedIndex);\n"
             + "      } catch(e) { logEx(e); }\n"
             + "    }\n"
             + "  </script>\n"
