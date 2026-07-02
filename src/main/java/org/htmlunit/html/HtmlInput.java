@@ -167,7 +167,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     protected void valueAttributeChanged(final String attributeValue, final boolean isValueDirty) {
-        if (!isValueDirty_) {
+        if (!isValueDirty) {
             setRawValue(attributeValue);
         }
     }
