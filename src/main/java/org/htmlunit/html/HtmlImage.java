@@ -633,10 +633,10 @@ public class HtmlImage extends HtmlElement {
             try {
                 imageData_.close();
             }
-            catch (final IOException e) {
-                throw e;
-            }
             catch (final Exception ex) {
+                if (ex instanceof IOException) {
+                    throw (IOException) ex;
+                }
                 throw new IOException("Exception during close()", ex);
             }
             imageData_ = null;
@@ -879,7 +879,7 @@ public class HtmlImage extends HtmlElement {
                 mouseEvent.setClientX(getPosX() + lastClickX_);
             }
             if (lastClickY_ >= 0) {
-                mouseEvent.setClientY(getPosX() + lastClickY_);
+                mouseEvent.setClientY(getPosY() + lastClickY_);
             }
         }
 
