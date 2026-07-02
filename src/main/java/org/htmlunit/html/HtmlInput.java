@@ -245,7 +245,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      *         or an empty string if that attribute isn't defined.
      */
     public final String getMaxLengthAttribute() {
-        return getAttribute("maxLength");
+        return getAttributeDirect("maxlength");
     }
 
     /**
@@ -275,7 +275,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      *         or an empty string if that attribute isn't defined.
      */
     public final String getMinLengthAttribute() {
-        return getAttribute("minLength");
+        return getAttributeDirect("minlength");
     }
 
     /**
@@ -1007,12 +1007,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return whether this is a checkbox or a radio button
      */
     public boolean isCheckable() {
-        final String type = getAttributeDirect(TYPE_ATTRIBUTE).toLowerCase(Locale.ROOT);
-        return "radio".equals(type) || "checkbox".equals(type);
+        final String type = getAttributeDirect(TYPE_ATTRIBUTE);
+        return "radio".equalsIgnoreCase(type) || "checkbox".equalsIgnoreCase(type);
     }
 
     /**
-     * @return false for type submit/resest/image/button otherwise true
+     * @return false for type submit/reset/image/button otherwise true
      */
     public boolean isSubmitable() {
         final String type = getAttributeDirect(TYPE_ATTRIBUTE);
@@ -1051,6 +1051,10 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     // not set the dirty flag, so tooLong stays false regardless of the value length.
     // see HtmlTextInputTest
     // maxLengthValidationInvalid()/maxLengthValidationInvalidInitial()/maxLengthValidationValid()
+    //    @Override
+    //    public boolean isTooLongValidityState() {
+    //        return false;
+    //    }
 
     @Override
     public boolean isValidValidityState() {
