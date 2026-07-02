@@ -914,6 +914,21 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"null",
+             "",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=x", "2"})
+    public void validationMinLengthJs() throws Exception {
+        validation("<input type='text' id='e1' name='k' minlength='2'>\n",
+                "elem.value = 'x';", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"null",
              "abcd",
              "true",
              "false-false-false-false-false-false-false-false-false-true-false",
@@ -995,6 +1010,64 @@ public class HtmlTextInputTest extends WebDriverTestCase {
              "§§URL§§?k=", "2"})
     public void validationEmpty() throws Exception {
         validation("<input type='text' id='e1' name='k'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"null",
+             "x",
+             "false",
+             "false-false-false-false-false-false-false-true-false-false-false",
+             "true",
+             "§§URL§§", "1"})
+    public void validationMinLength() throws Exception {
+        validation("<input type='text' id='e1' name='k' minlength='2'>\n", "", "x");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"null",
+             "xy",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=xy", "2"})
+    public void validationMaxLength() throws Exception {
+        validation("<input type='text' id='e1' name='k' maxlength='2'>\n", "", "xyz");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"null",
+             "",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=toooLong", "2"})
+    public void validationMaxLengthJs() throws Exception {
+        validation("<input type='text' id='e1' name='k' maxlength='2'>\n",
+                "elem.value = 'toooLong';", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"null",
+             "",
+             "true",
+             "false-false-false-false-false-false-false-false-false-true-false",
+             "true",
+             "§§URL§§?k=toooLong", "2"})
+    public void validationMaxLengthJsEvent() throws Exception {
+        validation("<input type='text' id='e1' name='k' maxlength='2'>\n",
+                "elem.value = 'toooLong';elem.dispatchEvent(new Event('input'));", null);
     }
 
     /**

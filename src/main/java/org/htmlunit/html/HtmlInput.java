@@ -1044,6 +1044,14 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         return getValue().length() < getMinLength();
     }
 
+    // no need to override isTooLongValidityState()
+    // The HTML spec (§4.10.18.5) has a deliberate rule: tooLong only fires
+    // if the user has interacted with the field ("the element has a dirty value flag").
+    // A value set via JS (elem.value = '...') that was never touched by the user does
+    // not set the dirty flag, so tooLong stays false regardless of the value length.
+    // see HtmlTextInputTest
+    // maxLengthValidationInvalid()/maxLengthValidationInvalidInitial()/maxLengthValidationValid()
+
     @Override
     public boolean isValidValidityState() {
         return !isCustomErrorValidityState()
