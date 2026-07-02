@@ -1249,6 +1249,146 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * Index of an option that was once part of a select but has since been removed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void index_afterRemovedFromSelect() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var opt = document.getElementById('o2');\n"
+            + "    opt.parentNode.removeChild(opt);\n"
+            + "    log(opt.index);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='form1'>\n"
+            + "    <select id='s1'>\n"
+            + "      <option id='o1' value='option1'>Option1</option>\n"
+            + "      <option id='o2' value='option2'>Option2</option>\n"
+            + "      <option id='o3' value='option3'>Option3</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Index of an option created and attached to a different select than the one
+     * originally queried against, to confirm 'not found' is distinguished sanely.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void index_attachedToDifferentSelect() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var opt = document.createElement('option');\n"
+            + "    document.getElementById('s2').appendChild(opt);\n"
+            + "    log(opt.index);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='form1'>\n"
+            + "    <select id='s1'>\n"
+            + "      <option id='o1' value='option1'>Option1</option>\n"
+            + "    </select>\n"
+            + "    <select id='s2'>\n"
+            + "      <option id='p1' value='p1'>P1</option>\n"
+            + "      <option id='p2' value='p2'>P2</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Index of options nested inside an optgroup, confirming document-order
+     * flattening across group boundaries.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "1", "2", "3"})
+    public void index_insideOptgroup() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.getElementById('o1').index);\n"
+            + "    log(document.getElementById('o2').index);\n"
+            + "    log(document.getElementById('o3').index);\n"
+            + "    log(document.getElementById('o4').index);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='form1'>\n"
+            + "    <select id='s1'>\n"
+            + "      <option id='o1' value='option1'>Option1</option>\n"
+            + "      <optgroup label='Group'>\n"
+            + "        <option id='o2' value='option2'>Option2</option>\n"
+            + "        <option id='o3' value='option3'>Option3</option>\n"
+            + "      </optgroup>\n"
+            + "      <option id='o4' value='option4'>Option4</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Index reflects live document position after an earlier option is removed,
+     * not a cached/stale value.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "1"})
+    public void index_afterSiblingRemoved() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var o3 = document.getElementById('o3');\n"
+            + "    log(o3.index);\n"
+
+            + "    var o1 = document.getElementById('o1');\n"
+            + "    o1.parentNode.removeChild(o1);\n"
+            + "    log(o3.index);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='form1'>\n"
+            + "    <select id='s1'>\n"
+            + "      <option id='o1' value='option1'>Option1</option>\n"
+            + "      <option id='o2' value='option2'>Option2</option>\n"
+            + "      <option id='o3' value='option3'>Option3</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

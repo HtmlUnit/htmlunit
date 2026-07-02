@@ -1133,6 +1133,68 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("4")
+    public void length_optionsInsideOptgroup() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var sel = document.form1.select1;\n"
+            + "  log(sel.options.length);\n"
+            + "}</script></head>\n"
+
+            + "<body onload='test()'>\n"
+            + "<form name='form1'>\n"
+            + "  <select name='select1'>\n"
+            + "    <option>One</option>\n"
+            + "    <optgroup label='Group'>\n"
+            + "      <option>Two</option>\n"
+            + "      <option>Three</option>\n"
+            + "    </optgroup>\n"
+            + "    <option>Four</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"One", "Two", "Three", "Four"})
+    public void optionsIndexing_acrossOptgroup() throws Exception {
+        final String html = DOCTYPE_HTML
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var sel = document.form1.select1;\n"
+            + "  for (var i = 0; i < sel.options.length; i++) {\n"
+            + "    log(sel.options[i].text);\n"
+            + "  }\n"
+            + "}</script></head>\n"
+
+            + "<body onload='test()'>\n"
+            + "<form name='form1'>\n"
+            + "  <select name='select1'>\n"
+            + "    <option>One</option>\n"
+            + "    <optgroup label='Group'>\n"
+            + "      <option>Two</option>\n"
+            + "      <option>Three</option>\n"
+            + "    </optgroup>\n"
+            + "    <option>Four</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"0", "1", "One", "3", "One", "Two", "Three"})
     public void setLengthMinusOne() throws Exception {
         setLength("-1");

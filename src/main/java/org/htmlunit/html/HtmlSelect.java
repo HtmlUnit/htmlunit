@@ -553,7 +553,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             try {
                 size = Integer.parseInt(sizeAttribute);
             }
-            catch (final Exception ignored) {
+            catch (final NumberFormatException ignored) {
                 // silently ignore
             }
         }
