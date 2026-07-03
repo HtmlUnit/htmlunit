@@ -167,6 +167,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private String responseType_;
 
     private Document responseXML_;
+    private XMLHttpRequestUpload upload_;
 
     /**
      * Creates a new instance.
@@ -1266,10 +1267,16 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      */
     @JsxGetter
     public XMLHttpRequestUpload getUpload() {
+        if (upload_ != null) {
+            return upload_;
+        }
+
         final XMLHttpRequestUpload upload = new XMLHttpRequestUpload();
         upload.setParentScope(getParentScope());
         upload.setPrototype(getPrototype(upload.getClass()));
-        return upload;
+
+        upload_ = upload;
+        return upload_;
     }
 
     /**

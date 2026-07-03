@@ -3701,4 +3701,254 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * getResponse() checks "state_ != DONE" only *after* the responseType default/text
+     * branch already returned. abort() leaves webResponse_ set to a (stale)
+     * NetworkErrorWebResponse while resetting readyState back to UNSENT -- so this
+     * exercises a state where webResponse_ is non-null but state_ is not DONE.
+     * xhr.response (default responseType) should not expose any content in that state;
+     * it should behave the same as a virgin, never-sent request (empty string), matching
+     * xhr.responseText's behavior for the same readyState.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"readyState: 0", "response: ", "responseText: "})
+    public void responseAfterAbortLeavesStaleWebResponseButUnsentState() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      function test() {\n"
+                + "        var xhr = new XMLHttpRequest();\n"
+                + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                + "        xhr.send();\n"
+                + "        xhr.abort();\n"
+
+                + "        log('readyState: ' + xhr.readyState);\n"
+                + "        try {\n"
+                + "          log('response: ' + xhr.response);\n"
+                + "        } catch(e) { log('response: ex'); }\n"
+                + "        try {\n"
+                + "          log('responseText: ' + xhr.responseText);\n"
+                + "        } catch(e) { log('responseText: ex'); }\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * abort() is documented (https://xhr.spec.whatwg.org/#the-abort()-method) to reset
+     * readyState to UNSENT as its very last step. Every other readyState change is
+     * announced via a 'readystatechange' event, so the UNSENT reset after abort()
+     * should be announced too. Currently no event is fired for that final transition,
+     * so the 'readystatechange' log only ever reports '4' (DONE) and never '0' (UNSENT),
+     * even though a synchronous read of xhr.readyState right after abort() returns is 0.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"readystatechange: 4", "abort: 4", "loadend: 4", "after abort(): 0"})
+    public void abortFiresReadyStateChangeForFinalUnsentReset() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      var xhr;\n"
+                + "      function test() {\n"
+                + "        xhr = new XMLHttpRequest();\n"
+                + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+
+                + "        xhr.onreadystatechange = function() {\n"
+                + "          log('readystatechange: ' + xhr.readyState);\n"
+                + "        };\n"
+                + "        xhr.onabort = function() {\n"
+                + "          log('abort: ' + xhr.readyState);\n"
+                + "        };\n"
+                + "        xhr.onloadend = function() {\n"
+                + "          log('loadend: ' + xhr.readyState);\n"
+                + "        };\n"
+
+                + "        xhr.send();\n"
+                + "        xhr.abort();\n"
+                + "        log('after abort(): ' + xhr.readyState);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Checks the readyState value as observed from inside the 'abort' and 'loadend'
+     * handlers fired by abort(). Since state_ is set to DONE before these events are
+     * fired (and only reset to UNSENT afterwards, without a follow-up event), listeners
+     * should see readyState === 4 (DONE) while handling 'abort'/'loadend', not 0.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"4", "4"})
+    public void abortReadyStateInsideAbortAndLoadEndHandlers() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      var xhr;\n"
+                + "      function test() {\n"
+                + "        xhr = new XMLHttpRequest();\n"
+                + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+
+                + "        xhr.onabort = function() {\n"
+                + "          log(xhr.readyState);\n"
+                + "        };\n"
+                + "        xhr.onloadend = function() {\n"
+                + "          log(xhr.readyState);\n"
+                + "        };\n"
+
+                + "        xhr.send();\n"
+                + "        xhr.abort();\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Calling abort() on a request that never reached OPENED/HEADERS_RECEIVED/LOADING
+     * (i.e. still UNSENT, open() was never called) must not fire any events at all,
+     * since none of the "in flight" states apply; readyState should simply stay UNSENT.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before: 0", "after: 0", "events: none"})
+    public void abortOnUnsentRequestFiresNoEvents() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      function test() {\n"
+                + "        var xhr = new XMLHttpRequest();\n"
+                + "        var fired = false;\n"
+
+                + "        xhr.onreadystatechange = function() { fired = true; };\n"
+                + "        xhr.onabort = function() { fired = true; };\n"
+                + "        xhr.onloadend = function() { fired = true; };\n"
+
+                + "        log('before: ' + xhr.readyState);\n"
+                + "        xhr.abort();\n"
+                + "        log('after: ' + xhr.readyState);\n"
+                + "        log('events: ' + (fired ? 'fired' : 'none'));\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * A second call to abort() must fire no events at all.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"readystatechange: 4", "abort: 4", "loadend: 4",
+             "after first abort(): 0", "after second abort(): 0", "second abort event count: 0"})
+    public void secondAbortCallFiresNoEvents() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      var xhr;\n"
+                + "      var eventCount = 0;\n"
+                + "      function test() {\n"
+                + "        xhr = new XMLHttpRequest();\n"
+                + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+
+                + "        xhr.onreadystatechange = function() {\n"
+                + "          log('readystatechange: ' + xhr.readyState);\n"
+                + "        };\n"
+                + "        xhr.onabort = function() {\n"
+                + "          log('abort: ' + xhr.readyState);\n"
+                + "        };\n"
+                + "        xhr.onloadend = function() {\n"
+                + "          log('loadend: ' + xhr.readyState);\n"
+                + "        };\n"
+
+                + "        xhr.send();\n"
+                + "        xhr.abort();\n"
+                + "        log('after first abort(): ' + xhr.readyState);\n"
+
+                + "        xhr.onreadystatechange = function() { eventCount++; };\n"
+                + "        xhr.onabort = function() { eventCount++; };\n"
+                + "        xhr.onloadend = function() { eventCount++; };\n"
+
+                + "        xhr.abort();\n"
+                + "        log('after second abort(): ' + xhr.readyState);\n"
+                + "        log('second abort event count: ' + eventCount);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * xhr.upload must return the same object on every access, per spec -- otherwise
+     * event listeners attached via xhr.upload.addEventListener(...) would be attached
+     * to a throwaway object and never see any upload progress events.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"identity: true", "listenerSurvived: true"})
+    public void uploadReturnsSameObjectOnRepeatedAccess() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      function test() {\n"
+                + "        var xhr = new XMLHttpRequest();\n"
+
+                + "        log('identity: ' + (xhr.upload === xhr.upload));\n"
+
+                + "        var marker = false;\n"
+                + "        xhr.upload.myMarker = 'set';\n"
+                + "        log('listenerSurvived: ' + (xhr.upload.myMarker === 'set'));\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
+
