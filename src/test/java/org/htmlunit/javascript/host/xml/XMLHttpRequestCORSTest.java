@@ -576,6 +576,50 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     }
 
     /**
+     * Same as {@link #preflight_incorrect_headers}, but the preflight (OPTIONS)
+     * response omits Access-Control-Allow-Origin entirely rather than
+     * Access-Control-Allow-Headers. This exercises isPreflightAuthorized()'s
+     * comparison of the request's Origin header against the
+     * Access-Control-Allow-Origin response header directly -- the request must be
+     * denied with a NetworkError.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"NetworkError/DOMException", "4", "0"})
+    public void preflight_missing_allow_origin() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "var xhr = new XMLHttpRequest();\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
+                + "    xhr.open('GET', url, false);\n"
+                + "    xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n"
+                + "    xhr.send();\n"
+                + "  } catch(e) { logEx(e) }\n"
+                + "  log(xhr.readyState);\n"
+                + "  log(xhr.status);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = null;
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PINGOTHER";
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
+        servlets2.put("/preflight2", PreflightServerServlet.class);
+        startWebServer2(".", servlets2);
+
+        loadPage2(html, new URL(URL_FIRST, "/preflight1"));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
      * @throws Exception if the test fails.
      */
     @Test

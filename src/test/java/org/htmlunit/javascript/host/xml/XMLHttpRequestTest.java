@@ -3950,5 +3950,43 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"readyState: 4", "status: 0", "statusText: ", "headers: "})
+    public void statusTextAndHeadersWhenLocalFileAccessForbidden() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      function test() {\n"
+                + "        var xhr = new XMLHttpRequest();\n"
+
+                + "        xhr.onerror = function() {\n"
+                + "          log('readyState: ' + xhr.readyState);\n"
+                + "          log('status: ' + xhr.status);\n"
+                + "          log('statusText: ' + xhr.statusText);\n"
+                + "          log('headers: ' + xhr.getAllResponseHeaders());\n"
+                + "        };\n"
+
+                + "        try {\n"
+                + "          xhr.open('GET', 'file:///no/such/file.txt', true);\n"
+                + "          xhr.send();\n"
+                + "        } catch (exception) { \n"
+                + "          log(exception.name);\n"
+                + "        }\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(10), getWebDriver(), getExpectedAlerts());
+    }
 }
 

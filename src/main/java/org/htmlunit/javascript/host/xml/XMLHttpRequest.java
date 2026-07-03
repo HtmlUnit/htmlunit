@@ -471,7 +471,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         if (webResponse_ instanceof NetworkErrorWebResponse resp) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("XMLHttpRequest.responseXML returns of a network error ("
+                LOG.debug("XMLHttpRequest.getResponseText returns of a network error ("
                         + resp.getError() + ")");
             }
             if (resp.getError() instanceof NoPermittedHeaderException) {
@@ -506,7 +506,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (webResponse_ == null) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("XMLHttpRequest.responseXML returns null because there "
-                        + "in no web resonse so far (has send() been called?)");
+                        + "is no web response so far (has send() been called?)");
             }
             return null;
         }
@@ -571,7 +571,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             LOG.error("XMLHttpRequest.statusText was retrieved without a response available (readyState: "
                 + state_ + ").");
         }
-        return null;
+        return "";
     }
 
     /**
@@ -624,7 +624,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             LOG.error("XMLHttpRequest.getAllResponseHeaders() was called without a response available (readyState: "
                 + state_ + ").");
         }
-        return null;
+        return "";
     }
 
     /**
@@ -911,20 +911,22 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (!wc.getOptions().isFileProtocolForXMLHttpRequestsAllowed()
                 && "file".equals(webRequest_.getUrl().getProtocol())) {
 
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Not allowed to load local resource: " + webRequest_.getUrl());
+            }
+
             if (async_) {
                 setState(DONE);
                 fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
                 fireJavascriptEvent(Event.TYPE_ERROR);
                 fireJavascriptEvent(Event.TYPE_LOAD_END);
             }
-
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Not allowed to load local resource: " + webRequest_.getUrl());
+            else {
+                throw JavaScriptEngine.asJavaScriptException(
+                        getWindow(),
+                        "Not allowed to load local resource: " + webRequest_.getUrl(),
+                        DOMException.NETWORK_ERR);
             }
-            throw JavaScriptEngine.asJavaScriptException(
-                    getWindow(),
-                    "Not allowed to load local resource: " + webRequest_.getUrl(),
-                    DOMException.NETWORK_ERR);
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
