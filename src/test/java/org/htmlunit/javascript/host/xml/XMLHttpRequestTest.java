@@ -3703,7 +3703,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
-     * getResponse() checks "state_ != DONE" only *after* the responseType default/text
+     * The getResponse() checks "state_ != DONE" only *after* the responseType default/text
      * branch already returned. abort() leaves webResponse_ set to a (stale)
      * NetworkErrorWebResponse while resetting readyState back to UNSENT -- so this
      * exercises a state where webResponse_ is non-null but state_ is not DONE.
@@ -3745,7 +3745,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
-     * abort() is documented (https://xhr.spec.whatwg.org/#the-abort()-method) to reset
+     * The abort() is documented (https://xhr.spec.whatwg.org/#the-abort()-method) to reset
      * readyState to UNSENT as its very last step. Every other readyState change is
      * announced via a 'readystatechange' event, so the UNSENT reset after abort()
      * should be announced too. Currently no event is fired for that final transition,
@@ -3919,7 +3919,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
-     * xhr.upload must return the same object on every access, per spec -- otherwise
+     * The upload must return the same object on every access, per spec -- otherwise
      * event listeners attached via xhr.upload.addEventListener(...) would be attached
      * to a throwaway object and never see any upload progress events.
      *
