@@ -413,8 +413,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"58", "29", "76", "178"},
-            EDGE = {"58", "29", "80", "164"},
+    @Alerts(CHROME = {"58", "29", "76", "182"},
+            EDGE = {"58", "29", "80", "166"},
             FF = {"58", "29", "70", "119"},
             FF_ESR = {"58", "29", "70", "119"})
     @HtmlUnitNYI(CHROME = {"18", "18", "18", "18"},

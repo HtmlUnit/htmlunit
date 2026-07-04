@@ -237,9 +237,11 @@ public class PointerEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object PointerEvent]", "click", "true", "false", "false",
-                       "2", "3", "4", "5.5", "6", "7", "touch", "true", "1.5707963267948966", "0", "0"},
+                       "2", "3", "4", "5.5", "6", "7", "touch",
+                       "true", "1.4105561004354874", "0.8628261898537035", "0"},
             FF_ESR = {"[object PointerEvent]", "click", "true", "false", "false",
-                    "2", "3", "4", "5.5", "6", "7", "touch", "true", "1.5707963267948966", "0", "undefined"})
+                      "2", "3", "4", "5.5", "6", "7", "touch",
+                      "true", "1.4105561004354874", "0.8628261898537035", "undefined"})
     public void create_ctorAllDetails() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html><head><script>\n"

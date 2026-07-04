@@ -78,9 +78,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"32", "32"},
-            FF = {"24", "24"},
-            FF_ESR = {"24", "24"})
+    @Alerts({"24", "24"})
     public void colorDepth() throws Exception {
         testNumericProperty("colorDepth");
     }
@@ -165,9 +163,7 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"32", "32"},
-            FF = {"24", "24"},
-            FF_ESR = {"24", "24"})
+    @Alerts({"24", "24"})
     public void pixelDepth() throws Exception {
         testNumericProperty("pixelDepth");
     }
