@@ -38,10 +38,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     ANCHOR_SEND_PING_REQUEST,
 
-    /** Screen colorDepth is 32 instead of 24. */
-    @BrowserFeature({CHROME, EDGE})
-    COLOR_DEPHT_32,
-
     /** Background image is 'initial'. */
     @BrowserFeature({CHROME, EDGE})
     CSS_BACKGROUND_INITIAL,

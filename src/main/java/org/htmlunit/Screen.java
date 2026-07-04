@@ -14,8 +14,6 @@
  */
 package org.htmlunit;
 
-import static org.htmlunit.BrowserVersionFeatures.COLOR_DEPHT_32;
-
 import java.io.Serializable;
 
 /**
@@ -44,12 +42,7 @@ public class Screen implements Serializable {
         screenHeight_ = webClient.getOptions().getScreenHeight();
         screenWidth_ =  webClient.getOptions().getScreenWidth();
 
-        if (webClient.getBrowserVersion().hasFeature(COLOR_DEPHT_32)) {
-            colorDepth_ = 32;
-        }
-        else {
-            colorDepth_ = 24;
-        }
+        colorDepth_ = 24;
     }
 
     /**

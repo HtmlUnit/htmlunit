@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Chrome/Edge 150, Bugfixes">
+            <action type="update" dev="rbri">
+                Chrome/Edge: Screen colorDepth/pixelDepth are 24 now.
+            </action>
             <action type="fix" dev="rbri">
                 XMLHttpRequest error handling when accessing to a local resource is forbidden for
                 security reason fixed including the correct values for allResponseHeaders and statusText.
