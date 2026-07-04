@@ -1120,14 +1120,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 // fastpath
                 assertEquals(expected.toString(), value);
             } catch (final AssertionFailedError e) {
-                // starting wiht FF151 we have canvas fingerprinting protection
+                // starting with FF151 we have canvas fingerprinting protection
                 // therefore we have to compare the pictures
-                if (useRealBrowser()
-                        && !(getBrowserVersion().isFirefox() && !getBrowserVersion().isFirefoxESR())) {
-                    throw e;
-                }
-
-                // fails -> compare images
                 if (value.endsWith("\u00A7")) {
                     value = value.substring(0, value.length() - 1);
                 }
