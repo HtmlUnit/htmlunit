@@ -1235,6 +1235,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code flex-grow}. */
         FLEX_GROW_("flex-grow", "flex-grow", ff("0")),
 
+        /** The style property {@code flexLineCount}. */
+        FLEX_LINE_COUNT("flexLineCount", "flex-line-count", chromeAndEdge("1")),
+
         /** The style property {@code flexShrink}. */
         FLEX_SHRINK("flexShrink", "flex-shrink", ff("1"), chromeAndEdge("1")),
 
@@ -2590,6 +2593,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code page-break-inside}. */
         PAGE_BREAK_INSIDE_("page-break-inside", "page-break-inside", ffAuto()),
 
+        /** The style property {@code pageMarginSafety}. */
+        PAGE_MARGIN_SAFETY("pageMarginSafety", "page-margin-safety", chromeAndEdgeEmpty()),
+
         /** The style property {@code pageOrientation}. */
         PAGE_ORIENTATION("pageOrientation", "page-orientation", chromeAndEdgeEmpty()),
 
@@ -3261,6 +3267,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code text-emphasis-style}. */
         TEXT_EMPHASIS_STYLE_("text-emphasis-style", "text-emphasis-style", ffNone()),
+
+        /** The style property {@code textFit}. */
+        TEXT_FIT("textFit", "text-fitt", chromeAndEdgeNone()),
 
         /** The style property {@code textIndent}. */
         TEXT_INDENT("textIndent", "text-indent", chromeAndEdge("0px"), ff("")),
