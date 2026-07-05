@@ -25,10 +25,15 @@ import java.util.Set;
 import org.htmlunit.http.Cookie;
 
 /**
- * Manages cookies for a {@link WebClient}. This class is thread-safe.
- * You can disable Cookies by calling setCookiesEnabled(false). The
- * CookieManager itself takes care of this and ignores all cookie request if
- * disabled. If you override this your methods have to do the same.
+ * Manages cookies for a {@link WebClient}.
+ *
+ * <p>This class is thread-safe: all mutator and accessor methods are
+ * synchronized on the {@code CookieManager} instance.
+ *
+ * <p>Cookie support can be turned off via {@link #setCookiesEnabled(boolean)}.
+ * While disabled, this manager ignores all cookie operations: additions and
+ * removals become no-ops, and accessors behave as if the cookie store were
+ * empty. Subclasses that override these methods must preserve this contract.
  *
  * @author Daniel Gredler
  * @author Ahmed Ashour
@@ -51,8 +56,11 @@ public class CookieManager implements Serializable {
     }
 
     /**
-     * Enables/disables cookie support. Cookies are enabled by default.
-     * @param enabled {@code true} to enable cookie support, {@code false} otherwise
+     * Enables or disables cookie support. Cookies are enabled by default.
+     * Disabling does not clear existing cookies; it only suppresses all
+     * cookie operations until re-enabled.
+     *
+     * @param enabled {@code true} to enable cookie support, {@code false} to disable it
      */
     public synchronized void setCookiesEnabled(final boolean enabled) {
         cookiesEnabled_ = enabled;
@@ -60,6 +68,7 @@ public class CookieManager implements Serializable {
 
     /**
      * Returns {@code true} if cookies are enabled. Cookies are enabled by default.
+     *
      * @return {@code true} if cookies are enabled, {@code false} otherwise
      */
     public synchronized boolean isCookiesEnabled() {
@@ -67,9 +76,12 @@ public class CookieManager implements Serializable {
     }
 
     /**
-     * Returns the currently configured cookies, in an unmodifiable set.
-     * If disabled, this returns an empty set.
-     * @return the currently configured cookies, in an unmodifiable set
+     * Returns a snapshot of the currently configured cookies as an
+     * unmodifiable set. The returned set is a copy and will not reflect
+     * later changes to this manager's cookie store.
+     *
+     * @return the currently configured cookies, in an unmodifiable set;
+     *         empty if cookie support is disabled
      */
     public synchronized Set<Cookie> getCookies() {
         if (!isCookiesEnabled()) {
@@ -81,10 +93,15 @@ public class CookieManager implements Serializable {
     }
 
     /**
-     * Clears all cookies that have expired before supplied date.
-     * If disabled, this returns false.
-     * @param date the date to use for comparison when clearing expired cookies
-     * @return whether any cookies were found expired, and were cleared
+     * Removes all cookies whose expiration date is strictly before the
+     * given date. A cookie expiring at exactly {@code date} is not
+     * considered expired by this comparison (consistent with RFC 6265's
+     * treatment of cookie expiry).
+     *
+     * @param date the date to compare against; if {@code null}, this method
+     *             does nothing and returns {@code false}
+     * @return {@code true} if one or more cookies were found expired and removed;
+     *         {@code false} otherwise, or if cookie support is disabled
      */
     public synchronized boolean clearExpired(final Date date) {
         if (!isCookiesEnabled()) {
@@ -107,10 +124,14 @@ public class CookieManager implements Serializable {
     }
 
     /**
-     * Returns the currently configured cookie with the specified name, or {@code null} if one does not exist.
-     * If disabled, this returns null.
-     * @param name the name of the cookie to return
-     * @return the currently configured cookie with the specified name, or {@code null} if one does not exist
+     * Returns the currently configured cookie with the specified name, or
+     * {@code null} if none exists. If multiple stored cookies happen to
+     * share a name (e.g., differing by domain or path), the first match
+     * encountered in iteration order is returned.
+     *
+     * @param name the cookie name to look up; may be {@code null}
+     * @return the matching cookie, or {@code null} if none exists or cookie
+     *         support is disabled
      */
     public synchronized Cookie getCookie(final String name) {
         if (!isCookiesEnabled()) {
@@ -126,8 +147,12 @@ public class CookieManager implements Serializable {
     }
 
     /**
-     * Adds the specified cookie.
-     * If disabled, this does nothing.
+     * Adds the specified cookie, replacing any existing cookie considered
+     * equal to it. If the cookie is already expired relative to the current
+     * time, it replaces the old entry (if any) but is not itself re-added —
+     * this is the mechanism by which a cookie can be deleted by supplying a
+     * past expiration date, per RFC 6265.
+     *
      * @param cookie the cookie to add
      */
     public synchronized void addCookie(final Cookie cookie) {
@@ -144,9 +169,11 @@ public class CookieManager implements Serializable {
     }
 
     /**
-     * Removes the specified cookie.
-     * If disabled, this does nothing.
-     * @param cookie the cookie to remove
+     * Removes the specified cookie, if present. Does nothing if cookie support
+     * is disabled.
+     *
+     * @param cookie the cookie to remove; may be {@code null}, in which case
+     *               this method does nothing
      */
     public synchronized void removeCookie(final Cookie cookie) {
         if (!isCookiesEnabled()) {
@@ -157,8 +184,8 @@ public class CookieManager implements Serializable {
     }
 
     /**
-     * Removes all cookies.
-     * If disabled, this does nothing.
+     * Removes all cookies from this manager. Does nothing if cookie support
+     * is disabled.
      */
     public synchronized void clearCookies() {
         if (!isCookiesEnabled()) {
