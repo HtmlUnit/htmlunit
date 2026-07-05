@@ -38,6 +38,8 @@ import org.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Lai Quang Duong
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAreaElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlArea.class)
 public class HTMLAreaElement extends HTMLElement {
@@ -52,7 +54,7 @@ public class HTMLAreaElement extends HTMLElement {
     }
 
     /**
-     * Calls for instance for implicit conversion to string.
+     * Called, for instance, for implicit conversion to a string.
      * @see org.htmlunit.javascript.HtmlUnitScriptable#getDefaultValue(java.lang.Class)
      * @param hint the type hint
      * @return the default value
@@ -76,8 +78,8 @@ public class HTMLAreaElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the {@code alt} property.
-     * @param alt the value
+     * Sets the value of the {@code alt} property.
+     * @param alt the {@code alt} property value
      */
     @JsxSetter
     public void setAlt(final String alt) {
@@ -102,8 +104,8 @@ public class HTMLAreaElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the {@code rel} property.
-     * @param rel the value
+     * Sets the value of the {@code rel} property.
+     * @param rel the {@code rel} property value
      */
     @JsxSetter
     public void setRel(final String rel) {
@@ -145,7 +147,7 @@ public class HTMLAreaElement extends HTMLElement {
 
     /**
      * Sets the {@code coords} attribute.
-     * @param coords {@code coords} attribute
+     * @param coords the {@code coords} attribute value
      */
     @JsxSetter
     public void setCoords(final String coords) {
