@@ -589,7 +589,7 @@ public final class BrowserVersion implements Serializable {
      * Returns the application code name, for example "Mozilla".
      * Default value is "Mozilla" if not explicitly configured.
      * @return the application code name
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533077.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/appCodeName">MDN documentation</a>
      */
     public String getApplicationCodeName() {
         return applicationCodeName_;
@@ -598,8 +598,9 @@ public final class BrowserVersion implements Serializable {
     /**
      * Returns the application minor version, for example "0".
      * Default value is "0" if not explicitly configured.
+     * This is a legacy, non-standard property that was only ever implemented by Internet
+     * Explorer (as {@code navigator.appMinorVersion}).
      * @return the application minor version
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533078.aspx">MSDN documentation</a>
      */
     public String getApplicationMinorVersion() {
         return applicationMinorVersion_;
@@ -608,7 +609,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Returns the application name, for example "Netscape".
      * @return the application name
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533079.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/appName">MDN documentation</a>
      */
     public String getApplicationName() {
         return applicationName_;
@@ -617,7 +618,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Returns the application version, for example "4.0 (compatible; MSIE 6.0b; Windows 98)".
      * @return the application version
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533080.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/appVersion">MDN documentation</a>
      */
     public String getApplicationVersion() {
         return applicationVersion_;
@@ -632,7 +633,7 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * Returns the browser locale.
-     * Default value is ENGLISH_US if not explicitly configured.
+     * Default value is {@code Locale.forLanguageTag("en-US")} if not explicitly configured.
      * @return the system locale
      */
     public Locale getBrowserLocale() {
@@ -641,9 +642,9 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * Returns the browser application language, for example "en-us".
-     * Default value is ENGLISH_US if not explicitly configured.
+     * Default value is {@code "en-US"} if not explicitly configured.
      * @return the browser application language
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533542.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/language">MDN documentation</a>
      */
     public String getBrowserLanguage() {
         return browserLocale_.toLanguageTag();
@@ -653,7 +654,7 @@ public final class BrowserVersion implements Serializable {
      * Returns {@code true} if the browser is currently online.
      * Default value is {@code true} if not explicitly configured.
      * @return {@code true} if the browser is currently online
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534307.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine">MDN documentation</a>
      */
     public boolean isOnLine() {
         return onLine_;
@@ -663,7 +664,7 @@ public final class BrowserVersion implements Serializable {
      * Returns the platform on which the application is running, for example "Win32".
      * Default value is 'Win32' if not explicitly configured.
      * @return the platform on which the application is running
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534340.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/platform">MDN documentation</a>
      */
     public String getPlatform() {
         return platform_;
