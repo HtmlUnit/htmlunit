@@ -1107,7 +1107,7 @@ public class HTMLElement extends Element {
     @JsxGetter
     public boolean isIsContentEditable() {
         final String attribute = getContentEditable();
-        if ("true".equals(attribute)) {
+        if ("true".equals(attribute) || "plaintext-only".equals(attribute)) {
             return true;
         }
 

@@ -194,12 +194,10 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("")
-    @HtmlUnitNYI(CHROME = "initialsomething",
-            EDGE = "initialsomething",
-            FF = "initialsomething",
-            FF_ESR = "initialsomething")
-    //TODO: fails because of HTMLElement.getContentEditable doesn't detect DomElement.ATTRIBUTE_VALUE_EMPTY
-    // this could be a general attribute issue
+    @HtmlUnitNYI(CHROME = "something",
+            EDGE = "something",
+            FF = "something",
+            FF_ESR = "something")
     public void contentEditableTrueBody() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -218,12 +216,10 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("")
-    @HtmlUnitNYI(CHROME = "initialsomething",
+    @HtmlUnitNYI(CHROME = "something",
             EDGE = "initialsomething",
-            FF = "initialsomething",
-            FF_ESR = "initialsomething")
-    //TODO: fails because of HTMLElement.getContentEditable doesn't detect DomElement.ATTRIBUTE_VALUE_EMPTY
-    // this could be a general attribute issue
+            FF = "something",
+            FF_ESR = "something")
     public void contentEditablePlaintextBody() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -266,12 +262,6 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("something")
-    @HtmlUnitNYI(CHROME = "initialsomething",
-            EDGE = "initialsomething",
-            FF = "initialsomething",
-            FF_ESR = "initialsomething")
-    //TODO: fails because of HTMLElement.getContentEditable doesn't detect DomElement.ATTRIBUTE_VALUE_EMPTY
-    // this could be a general attribute issue
     public void contentEditableTrueDiv() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -279,10 +269,10 @@ public class HtmlElement2Test extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        final WebElement body = driver.findElement(By.id("t"));
-        body.clear();
-        body.sendKeys("something");
-        assertEquals(getExpectedAlerts()[0], body.getText());
+        final WebElement div = driver.findElement(By.id("t"));
+        div.clear();
+        div.sendKeys("something");
+        assertEquals(getExpectedAlerts()[0], div.getText());
     }
 
     /**
@@ -290,12 +280,6 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("something")
-    @HtmlUnitNYI(CHROME = "initialsomething",
-            EDGE = "initialsomething",
-            FF = "initialsomething",
-            FF_ESR = "initialsomething")
-    //TODO: fails because of HTMLElement.getContentEditable doesn't detect DomElement.ATTRIBUTE_VALUE_EMPTY
-    // this could be a general attribute issue
     public void contentEditablePlaintextDiv() throws Exception {
         final String html = DOCTYPE_HTML
             + "<html>\n"
@@ -303,10 +287,10 @@ public class HtmlElement2Test extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        final WebElement body = driver.findElement(By.id("t"));
-        body.clear();
-        body.sendKeys("something");
-        assertEquals(getExpectedAlerts()[0], body.getText());
+        final WebElement div = driver.findElement(By.id("t"));
+        div.clear();
+        div.sendKeys("something");
+        assertEquals(getExpectedAlerts()[0], div.getText());
     }
 
     /**
