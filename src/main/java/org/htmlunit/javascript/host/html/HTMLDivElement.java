@@ -30,6 +30,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlDivision.class)
 @JsxClass(domClass = HtmlMarquee.class, value = {FF, FF_ESR})

@@ -27,6 +27,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlDialog.class)
 public class HTMLDialogElement extends HTMLElement {
@@ -41,6 +43,7 @@ public class HTMLDialogElement extends HTMLElement {
     }
 
     /**
+     * Returns the {@code open} property.
      * @return the {@code open} property
      */
     @JsxGetter
@@ -49,7 +52,7 @@ public class HTMLDialogElement extends HTMLElement {
     }
 
     /**
-     * Sets the open attribute.
+     * Sets the {@code open} property.
      * @param newValue the new value to set
      */
     @JsxSetter
@@ -60,7 +63,7 @@ public class HTMLDialogElement extends HTMLElement {
     }
 
     /**
-     *  Displays the dialog modelessly.
+     * Displays the dialog non-modally.
      */
     @JsxFunction
     public void show() {
@@ -76,8 +79,8 @@ public class HTMLDialogElement extends HTMLElement {
     }
 
     /**
-     *  Closes the dialog.
-     *  @param returnValue the return value
+     * Closes the dialog.
+     * @param returnValue the return value
      */
     @JsxFunction
     public void close(final Object returnValue) {
@@ -89,7 +92,7 @@ public class HTMLDialogElement extends HTMLElement {
     }
 
     /**
-     *  Displays the dialog modal.
+     * Displays the dialog modally.
      */
     @JsxFunction
     public void showModal() {
@@ -105,6 +108,7 @@ public class HTMLDialogElement extends HTMLElement {
     }
 
     /**
+     * Returns the {@code returnValue} property.
      * @return the {@code returnValue} property
      */
     @JsxGetter
@@ -113,7 +117,7 @@ public class HTMLDialogElement extends HTMLElement {
     }
 
     /**
-     * Sets the returnValue attribute.
+     * Sets the {@code returnValue} property.
      * @param newValue the new value to set
      */
     @JsxSetter

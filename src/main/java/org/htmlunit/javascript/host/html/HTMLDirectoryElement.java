@@ -27,6 +27,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dir">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlDirectory.class)
 public class HTMLDirectoryElement extends HTMLElement {

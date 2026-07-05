@@ -49,6 +49,8 @@ import org.htmlunit.javascript.host.dom.AbstractList;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection">MDN Documentation</a>
  */
 @JsxClass
 public class HTMLCollection extends AbstractList {
@@ -70,9 +72,9 @@ public class HTMLCollection extends AbstractList {
 
     /**
      * Creates an instance.
-     * @param domNode parent scope
+     * @param domNode the parent scope
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
-     *        of a descendant node of parentScope changes (attribute added, modified or removed)
+     *        of a descendant node of domNode changes (attribute added, modified or removed)
      */
     public HTMLCollection(final DomNode domNode, final boolean attributeChangeSensitive) {
         super(domNode, attributeChangeSensitive, null);
@@ -110,6 +112,7 @@ public class HTMLCollection extends AbstractList {
     }
 
     /**
+     * Returns the {@code Symbol.iterator} function that allows iterating over this collection.
      * @return the Iterator symbol
      */
     @JsxSymbol
@@ -171,7 +174,7 @@ public class HTMLCollection extends AbstractList {
      * Returns the item or items corresponding to the specified index or key.
      * @param index the index or key corresponding to the element or elements to return
      * @return the element or elements corresponding to the specified index or key
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection/item">MDN Documentation</a>
      */
     @JsxFunction
     public Object item(final Object index) {
@@ -191,9 +194,9 @@ public class HTMLCollection extends AbstractList {
     /**
      * Retrieves the item or items corresponding to the specified name (checks ids, and if
      * that does not work, then names).
-     * @param name the name or id the element or elements to return
+     * @param name the name or id of the element or elements to return
      * @return the element or elements corresponding to the specified name or id
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection/namedItem">MDN Documentation</a>
      */
     @JsxFunction
     public Scriptable namedItem(final String name) {

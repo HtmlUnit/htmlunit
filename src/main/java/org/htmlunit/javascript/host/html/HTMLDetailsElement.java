@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDetailsElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlDetails.class)
 public class HTMLDetailsElement extends HTMLElement {
@@ -49,7 +51,7 @@ public class HTMLDetailsElement extends HTMLElement {
     }
 
     /**
-     * Sets the open attribute.
+     * Sets the {@code open} property.
      * @param newValue the new value to set
      */
     @JsxSetter
@@ -70,7 +72,7 @@ public class HTMLDetailsElement extends HTMLElement {
     }
 
     /**
-     * Sets the name attribute.
+     * Sets the {@code name} property.
      * @param newValue the new value to set
      */
     @JsxSetter

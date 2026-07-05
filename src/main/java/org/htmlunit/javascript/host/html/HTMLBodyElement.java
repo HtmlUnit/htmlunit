@@ -34,6 +34,8 @@ import org.htmlunit.util.StringUtils;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlBody.class)
 public class HTMLBodyElement extends HTMLElement {
@@ -80,7 +82,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Returns the value of the {@code aLink} attribute.
      * @return the value of the {@code aLink} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533070.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxGetter
     public String getALink() {
@@ -90,7 +92,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Sets the value of the {@code aLink} attribute.
      * @param aLink the value of the {@code aLink} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533070.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxSetter
     public void setALink(final String aLink) {
@@ -100,7 +102,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Returns the value of the {@code background} attribute.
      * @return the value of the {@code background} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533498.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxGetter
     public String getBackground() {
@@ -111,7 +113,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Sets the value of the {@code background} attribute.
      * @param background the value of the {@code background} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533498.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxSetter
     public void setBackground(final String background) {
@@ -121,7 +123,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Returns the value of the {@code bgColor} attribute.
      * @return the value of the {@code bgColor} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxGetter
     public String getBgColor() {
@@ -131,7 +133,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Sets the value of the {@code bgColor} attribute.
      * @param bgColor the value of the {@code bgColor} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxSetter
     public void setBgColor(final String bgColor) {
@@ -141,7 +143,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Returns the value of the {@code link} attribute.
      * @return the value of the {@code link} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534119.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxGetter
     public String getLink() {
@@ -151,7 +153,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Sets the value of the {@code link} attribute.
      * @param link the value of the {@code link} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534119.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxSetter
     public void setLink(final String link) {
@@ -161,7 +163,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Returns the value of the {@code text} attribute.
      * @return the value of the {@code text} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxGetter
     public String getText() {
@@ -171,7 +173,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Sets the value of the {@code text} attribute.
      * @param text the value of the {@code text} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxSetter
     public void setText(final String text) {
@@ -181,7 +183,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Returns the value of the {@code vLink} attribute.
      * @return the value of the {@code vLink} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxGetter
     public String getVLink() {
@@ -191,7 +193,7 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Sets the value of the {@code vLink} attribute.
      * @param vLink the value of the {@code vLink} attribute
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement">MDN Documentation</a>
      */
     @JsxSetter
     public void setVLink(final String vLink) {
@@ -297,8 +299,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code ongamepadconnected} event handler.
-     * @return the {@code ongamepadconnected} event handler
+     * Returns the {@code ongamepadconnected} event handler for this element.
+     * @return the {@code ongamepadconnected} event handler for this element
      */
     @JsxGetter
     public Function getOngamepadconnected() {
@@ -306,8 +308,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code ongamepadconnected} event handler.
-     * @param gamepadconnected the {@code ongamepadconnected} event handler
+     * Sets the {@code ongamepadconnected} event handler for this element.
+     * @param gamepadconnected the {@code ongamepadconnected} event handler for this element
      */
     @JsxSetter
     public void setOngamepadconnected(final Object gamepadconnected) {
@@ -315,8 +317,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code ongamepaddisconnected} event handler.
-     * @return the {@code ongamepaddisconnected} event handler
+     * Returns the {@code ongamepaddisconnected} event handler for this element.
+     * @return the {@code ongamepaddisconnected} event handler for this element
      */
     @JsxGetter
     public Function getOngamepaddisconnected() {
@@ -324,8 +326,8 @@ public class HTMLBodyElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code ongamepaddisconnected} event handler.
-     * @param gamepaddisconnected the {@code ongamepaddisconnected} event handler
+     * Sets the {@code ongamepaddisconnected} event handler for this element.
+     * @param gamepaddisconnected the {@code ongamepaddisconnected} event handler for this element
      */
     @JsxSetter
     public void setOngamepaddisconnected(final Object gamepaddisconnected) {

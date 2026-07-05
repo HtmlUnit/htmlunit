@@ -31,6 +31,8 @@ import org.htmlunit.javascript.host.dom.NodeList;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlButton.class)
 public class HTMLButtonElement extends HTMLElement {
@@ -144,7 +146,7 @@ public class HTMLButtonElement extends HTMLElement {
 
     /**
      * Checks whether the element has any constraints and whether it satisfies them.
-     * @return if the element is valid
+     * @return {@code true} if the element is valid
      */
     @JsxFunction
     public boolean checkValidity() {
@@ -152,7 +154,8 @@ public class HTMLButtonElement extends HTMLElement {
     }
 
     /**
-     * @return a ValidityState with the validity states that this element is in.
+     * Returns a {@link ValidityState} object representing the validity states of this element.
+     * @return a {@link ValidityState} object representing the validity states of this element
      */
     @JsxGetter
     public ValidityState getValidity() {
@@ -164,7 +167,8 @@ public class HTMLButtonElement extends HTMLElement {
     }
 
     /**
-     * @return always false
+     * Returns whether this element will be validated when the form is submitted.
+     * @return always {@code false}
      */
     @JsxGetter
     public boolean isWillValidate() {
@@ -182,7 +186,7 @@ public class HTMLButtonElement extends HTMLElement {
 
     /**
      * Returns the value of the property {@code formnovalidate}.
-     * @return the value of this property
+     * @return the value of the {@code formnovalidate} property
      */
     @JsxGetter
     public boolean isFormNoValidate() {
@@ -191,7 +195,7 @@ public class HTMLButtonElement extends HTMLElement {
 
     /**
      * Sets the value of the property {@code formnovalidate}.
-     * @param value the new value
+     * @param value the new value of the {@code formnovalidate} property
      */
     @JsxSetter
     public void setFormNoValidate(final boolean value) {

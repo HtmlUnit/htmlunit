@@ -29,6 +29,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDataListElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlDataList.class)
 public class HTMLDataListElement extends HTMLElement {
