@@ -61,7 +61,7 @@ import org.htmlunit.util.UrlUtils;
  * @author Lai Quang Duong
  * @author Kanoko Yamamoto
  *
- * @see <a href="http://msdn.microsoft.com/en-us/library/ms535866.aspx">MSDN Documentation</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location">MDN Documentation</a>
  */
 @JsxClass
 public class Location extends HtmlUnitScriptable {
@@ -226,7 +226,7 @@ public class Location extends HtmlUnitScriptable {
      * Loads the new HTML document corresponding to the specified URL.
      * @param url the location of the new HTML document to load
      * @throws IOException if loading the specified location fails
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536342.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/assign">MDN Documentation</a>
      */
     public void assign(final String url) throws IOException {
         setHref(url);
@@ -237,7 +237,7 @@ public class Location extends HtmlUnitScriptable {
      * the browser cache contains the latest version of the document.
      * @param force if {@code true}, force reload from server; otherwise, may reload from cache
      * @throws IOException if there is a problem reloading the page
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536342.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/reload">MDN Documentation</a>
      */
     public void reload(final boolean force) throws IOException {
         final WebWindow webWindow = window_.getWebWindow();
@@ -257,7 +257,7 @@ public class Location extends HtmlUnitScriptable {
      * Reloads the window using the specified URL via a postponed action.
      * @param url the new URL to use to reload the window
      * @throws IOException if loading the specified location fails
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536712.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/replace">MDN Documentation</a>
      */
     public void replace(final String url) throws IOException {
         window_.getWebWindow().getHistory().removeCurrent();
@@ -278,7 +278,7 @@ public class Location extends HtmlUnitScriptable {
     /**
      * Returns the location URL.
      * @return the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/href">MDN Documentation</a>
      */
     public String getHref() {
         final WebWindow webWindow = window_.getWebWindow();
@@ -312,7 +312,7 @@ public class Location extends HtmlUnitScriptable {
      * Sets the location URL to an entirely new value.
      * @param newLocation the new location URL
      * @throws IOException if loading the specified location fails
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/href">MDN Documentation</a>
      */
     public void setHref(final String newLocation) throws IOException {
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
@@ -353,7 +353,7 @@ public class Location extends HtmlUnitScriptable {
     /**
      * Returns the search portion of the location URL (the portion following the '?').
      * @return the search portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/search">MDN Documentation</a>
      */
     public String getSearch() {
         final URL url = getUrl();
@@ -374,7 +374,7 @@ public class Location extends HtmlUnitScriptable {
      * Sets the search portion of the location URL (the portion following the '?').
      * @param search the new search portion of the location URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/search">MDN Documentation</a>
      */
     public void setSearch(final String search) throws Exception {
         setUrl(UrlUtils.getUrlWithNewQuery(getUrl(), search));
@@ -383,7 +383,7 @@ public class Location extends HtmlUnitScriptable {
     /**
      * Returns the hash portion of the location URL (the portion following the '#').
      * @return the hash portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/hash">MDN Documentation</a>
      */
     public String getHash() {
         if (StringUtils.isEmptyOrNull(hash_)) {
@@ -410,7 +410,7 @@ public class Location extends HtmlUnitScriptable {
      * Sets the hash portion of the location URL (the portion following the '#').
      *
      * @param hash the new hash portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/hash">MDN Documentation</a>
      */
     public void setHash(final String hash) {
         // IMPORTANT: This method must not call setUrl(), because
@@ -464,7 +464,7 @@ public class Location extends HtmlUnitScriptable {
     /**
      * Returns the hostname portion of the location URL.
      * @return the hostname portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/hostname">MDN Documentation</a>
      */
     public String getHostname() {
         return getUrl().getHost();
@@ -474,7 +474,7 @@ public class Location extends HtmlUnitScriptable {
      * Sets the hostname portion of the location URL.
      * @param hostname the new hostname portion of the location URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/hostname">MDN Documentation</a>
      */
     public void setHostname(final String hostname) throws Exception {
         setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
@@ -483,7 +483,7 @@ public class Location extends HtmlUnitScriptable {
     /**
      * Returns the host portion of the location URL (the '[hostname]:[port]' portion).
      * @return the host portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/host">MDN Documentation</a>
      */
     public String getHost() {
         final URL url = getUrl();
@@ -500,7 +500,7 @@ public class Location extends HtmlUnitScriptable {
      * Sets the host portion of the location URL (the '[hostname]:[port]' portion).
      * @param host the new host portion of the location URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/host">MDN Documentation</a>
      */
     public void setHost(final String host) throws Exception {
         final String hostname;
@@ -521,7 +521,7 @@ public class Location extends HtmlUnitScriptable {
     /**
      * Returns the pathname portion of the location URL.
      * @return the pathname portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname">MDN Documentation</a>
      */
     public String getPathname() {
         if (UrlUtils.URL_ABOUT_BLANK == getUrl()) {
@@ -534,7 +534,7 @@ public class Location extends HtmlUnitScriptable {
      * Sets the pathname portion of the location URL.
      * @param pathname the new pathname portion of the location URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname">MDN Documentation</a>
      */
     public void setPathname(final String pathname) throws Exception {
         setUrl(UrlUtils.getUrlWithNewPath(getUrl(), pathname));
@@ -543,7 +543,7 @@ public class Location extends HtmlUnitScriptable {
     /**
      * Returns the port portion of the location URL.
      * @return the port portion of the location URL
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/port">MDN Documentation</a>
      */
     public String getPort() {
         final int port = getUrl().getPort();
@@ -557,7 +557,7 @@ public class Location extends HtmlUnitScriptable {
      * Sets the port portion of the location URL.
      * @param port the new port portion of the location URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/port">MDN Documentation</a>
      */
     public void setPort(final String port) throws Exception {
         setUrl(UrlUtils.getUrlWithNewPort(getUrl(), Integer.parseInt(port)));
@@ -566,7 +566,7 @@ public class Location extends HtmlUnitScriptable {
     /**
      * Returns the protocol portion of the location URL, including the trailing ':'.
      * @return the protocol portion of the location URL, including the trailing ':'
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/protocol">MDN Documentation</a>
      */
     public String getProtocol() {
         return getUrl().getProtocol() + ":";
@@ -576,7 +576,7 @@ public class Location extends HtmlUnitScriptable {
      * Sets the protocol portion of the location URL.
      * @param protocol the new protocol portion of the location URL
      * @throws Exception if an error occurs
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/protocol">MDN Documentation</a>
      */
     public void setProtocol(final String protocol) throws Exception {
         setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), protocol));
