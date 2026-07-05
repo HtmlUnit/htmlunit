@@ -34,7 +34,7 @@ public class DocumentProxy extends HtmlUnitScriptableProxy<Document> {
     private final WebWindow webWindow_;
 
     /**
-     * Construct a proxy for the {@link Document} of the {@link WebWindow}.
+     * Constructs a proxy for the {@link Document} of the given {@link WebWindow}.
      * @param webWindow the window
      */
     public DocumentProxy(final WebWindow webWindow) {

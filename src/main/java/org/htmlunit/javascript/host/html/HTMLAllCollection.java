@@ -38,6 +38,8 @@ import org.htmlunit.javascript.host.dom.AbstractList;
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection">MDN Documentation</a>
  */
 @JsxClass
 public class HTMLAllCollection extends AbstractList implements Callable {
@@ -58,8 +60,8 @@ public class HTMLAllCollection extends AbstractList implements Callable {
     }
 
     /**
-     * Creates an instance.
-     * @param parentScope parent scope
+     * Creates an instance for the given parent scope.
+     * @param parentScope the parent scope
      */
     public HTMLAllCollection(final DomNode parentScope) {
         super(parentScope, false, null);
@@ -69,7 +71,7 @@ public class HTMLAllCollection extends AbstractList implements Callable {
      * Returns the item or items corresponding to the specified index or key.
      * @param index the index or key corresponding to the element or elements to return
      * @return the element or elements corresponding to the specified index or key
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection/item">MDN Documentation</a>
      */
     @JsxFunction
     public Object item(final Object index) {
@@ -107,9 +109,9 @@ public class HTMLAllCollection extends AbstractList implements Callable {
     /**
      * Retrieves the item or items corresponding to the specified name (checks ids, and if
      * that does not work, then names).
-     * @param name the name or id the element or elements to return
+     * @param name the name or id of the element or elements to return
      * @return the element or elements corresponding to the specified name or id
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAllCollection/namedItem">MDN Documentation</a>
      */
     @JsxFunction
     public final Scriptable namedItem(final String name) {
@@ -193,6 +195,7 @@ public class HTMLAllCollection extends AbstractList implements Callable {
     }
 
     /**
+     * Returns the {@code Symbol.iterator} function that allows iterating over this collection.
      * @return the Iterator symbol
      */
     @JsxSymbol
