@@ -563,7 +563,7 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * @return whether this is version 140  of a Firefox browser
+     * @return whether this represents the Firefox Extended Support Release (ESR) version
      */
     public boolean isFirefoxESR() {
         return isFirefox() && getBrowserVersionNumeric() == FIREFOX_ESR_NUMERIC;
@@ -781,15 +781,15 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * Returns the productSub.
-     * @return the buildId
+     * @return the productSub
      */
     public String getProductSub() {
         return productSub_;
     }
 
     /**
-     * Gets the headers names, so they are sent in the given order (if included in the request).
-     * @return headerNames the header names in ordered manner
+     * Gets the header names, so they are sent in the given order (if included in the request).
+     * @return the header names, in the order they should be sent
      */
     public String[] getHeaderNamesOrdered() {
         return headerNamesOrdered_;
@@ -876,16 +876,43 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
-     * @return the pixesPerChar based on the specified {@code fontSize}
+     * @return the pixesPerChar
+     *
+     * @deprecated as of version 5.3.0; use {@link #getPixelsPerChar()} instead.
      */
+    @Deprecated(since = "5.3.0", forRemoval = true)
     public int getPixesPerChar() {
-        return 10;
+        return getPixelsPerChar();
     }
 
     /**
-     * Determines whether the specified media type can be played back.
-     * @param type the type
-     * @return "probably", "maybe", or "". The current implementation returns ""
+     * @return the pixelsPerChar (currently hard coded 10)
+     */
+    public int getPixelsPerChar() {
+        return 10;
+    }
+
+
+    /**
+     * Determines whether this browser thinks it can play the given media resource type,
+     * mirroring the result of the DOM method {@code HTMLMediaElement.canPlayType()}.
+     *
+     * <p>The {@code type} is parsed into a MIME type and an optional {@code codecs}
+     * parameter (see {@link MediaResourceType#parse(String)} for the exact parsing rules).
+     * The parsed value is then looked up first against this browser's "probably" playable
+     * resources (MIME type plus a known-good codec list) and, failing that, against its
+     * "maybe" playable resources (MIME type alone, with no codec guarantee).
+     *
+     * @param type the media type string to test, e.g. {@code "video/mp4"} or
+     *             {@code "video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\""}
+     * @return {@code "probably"} if this exact MIME type and codec combination is known to
+     *         be supported, {@code "maybe"} if the MIME type alone (with no codec specified)
+     *         is known to be supported, or {@code ""} if {@code type} is blank, or if a
+     *         codec was specified but that exact MIME/codec pairing isn't a known
+     *         {@code "probably"} match
+     * @see MediaResourceType#parse(String)
+     * @see <a href="https://html.spec.whatwg.org/multipage/media.html#dom-navigator-canplaytype">
+     *      HTML Living Standard – canPlayType</a>
      */
     public String canPlayType(final String type) {
         final MediaResourceType mediaType = MediaResourceType.parse(type);

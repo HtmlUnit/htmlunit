@@ -53,6 +53,6 @@ public class SVGTextContentElement extends SVGGraphicsElement {
     @JsxFunction
     public double getComputedTextLength() {
         // simple estimation
-        return getDomNodeOrDie().getTextContent().length() * getBrowserVersion().getPixesPerChar();
+        return getDomNodeOrDie().getTextContent().length() * getBrowserVersion().getPixelsPerChar();
     }
 }

@@ -604,7 +604,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         final String textValue = JavaScriptEngine.toString(text);
 
         // TODO take font into account
-        final int width = textValue.length() * getBrowserVersion().getPixesPerChar();
+        final int width = textValue.length() * getBrowserVersion().getPixelsPerChar();
 
         final TextMetrics metrics = new TextMetrics(width);
         metrics.setParentScope(getParentScope());

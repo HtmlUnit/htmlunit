@@ -1339,7 +1339,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     final String content = prev.getVisibleText();
                     if (content != null) {
                         left += content.trim().length()
-                                * getDomElement().getPage().getWebClient().getBrowserVersion().getPixesPerChar();
+                                * getDomElement().getPage().getWebClient().getBrowserVersion().getPixelsPerChar();
                     }
                 }
                 prev = prev.getPreviousSibling();
@@ -1605,7 +1605,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     // No rendered children – fall back to text content approximation.
                     final BrowserVersion browserVersion =
                             getDomElement().getPage().getWebClient().getBrowserVersion();
-                    width = element.getVisibleText().length() * browserVersion.getPixesPerChar();
+                    width = element.getVisibleText().length() * browserVersion.getPixelsPerChar();
                 }
             }
             else if (BLOCK.equals(display)) {
@@ -1631,7 +1631,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 final String text = element.asNormalizedText();
                 final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
                 // default font for buttons is a bit smaller than the body font size
-                width = 10 + (int) (text.length() * browserVersion.getPixesPerChar() * 0.9);
+                width = 10 + (int) (text.length() * browserVersion.getPixelsPerChar() * 0.9);
             }
             else if (element instanceof HtmlTextInput || element instanceof HtmlPasswordInput) {
                 final BrowserVersion browserVersion = getDomElement().getPage().getWebClient().getBrowserVersion();
@@ -1735,7 +1735,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                     inlineWidth += child.getVisibleText().length() * (int) (height / 1.8f);
                 }
                 else {
-                    inlineWidth += child.getVisibleText().length() * browserVersion.getPixesPerChar();
+                    inlineWidth += child.getVisibleText().length() * browserVersion.getPixelsPerChar();
                 }
             }
         }
