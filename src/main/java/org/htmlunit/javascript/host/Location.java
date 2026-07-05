@@ -153,10 +153,10 @@ public class Location extends HtmlUnitScriptable {
      * JavaScript constructor.
      * @param cx the current context
      * @param scope the scope
-     * @param args the arguments to the WebSocket constructor
+     * @param args the arguments to the Location constructor
      * @param ctorObj the function object
-     * @param inNewExpr Is new or not
-     * @return the java object to allow JavaScript to access
+     * @param inNewExpr {@code true} if invoked with the {@code new} operator
+     * @return the Java object that JavaScript can access
      */
     @JsxConstructor
     public static Location jsConstructor(final Context cx, final VarScope scope,
@@ -254,8 +254,9 @@ public class Location extends HtmlUnitScriptable {
     }
 
     /**
-     * Reloads the window using the specified URL via a postponed action.
-     * @param url the new URL to use to reload the window
+     * Loads the document at the specified URL, replacing the current entry in the session
+     * history so that the previous page cannot be reached via the back button.
+     * @param url the new URL to load
      * @throws IOException if loading the specified location fails
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/replace">MDN Documentation</a>
      */
@@ -593,7 +594,7 @@ public class Location extends HtmlUnitScriptable {
     /**
      * Sets this location's URL, triggering a server hit and loading the resultant document
      * into this location's window.
-     * @param url This location's new URL
+     * @param url this location's new URL
      * @throws IOException if there is a problem loading the new location
      */
     private void setUrl(final URL url) throws IOException {
