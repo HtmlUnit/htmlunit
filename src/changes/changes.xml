@@ -8,6 +8,9 @@
 
     <body>
         <release version="5.3.0" date="July xx, 2026" description="Chrome/Edge 150, Bugfixes">
+            <action type="update" dev="rbri">
+                PointerEvent simulation of altitudeAngle/azimuthAngle improved.
+            </action>
             <action type="fix" dev="rbri">
                 XMLHttpRequest responseXML() has to check the responseType as first step.
             </action>

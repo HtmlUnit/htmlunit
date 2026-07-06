@@ -3897,12 +3897,12 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                 + "      }\n"
 
                 + "      function onError(e) {\n"
-                + "          log('onError: ' + e);\n"
-                + "          log('readyState: ' + xhr.readyState);\n"
-                + "          log('status: ' + xhr.status);\n"
-                + "          log('statusText: ' + xhr.statusText);\n"
-                + "          log('headers: ' + xhr.getAllResponseHeaders());\n"
-                + "        };\n"
+                + "        log('onError: ' + e);\n"
+                + "        log('readyState: ' + xhr.readyState);\n"
+                + "        log('status: ' + xhr.status);\n"
+                + "        log('statusText: ' + xhr.statusText);\n"
+                + "        log('headers: ' + xhr.getAllResponseHeaders());\n"
+                + "      };\n"
 
                 + "      function onStateChange(e) {\n"
                 + "        log('readyState: ' + xhr.readyState);\n"

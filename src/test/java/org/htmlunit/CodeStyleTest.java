@@ -451,7 +451,8 @@ public class CodeStyleTest {
                     addFailure(relativePath, i + 1,
                             "@deprecated must be immediately followed by \"As of \" or \"since \"");
                 }
-                if (!getAnnotations(lines, i).contains("@Deprecated")) {
+
+                if (getAnnotations(lines, i).stream().noneMatch(l -> l.startsWith("@Deprecated"))) {
                     addFailure(relativePath, i + 1, "No \"@Deprecated\" annotation");
                 }
             }
