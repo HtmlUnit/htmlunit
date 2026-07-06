@@ -3565,6 +3565,71 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"", "json", "readyState: 2", "readyState: 3", "readyState: 4",
+             "status: 200", "statusText: OK",
+             "null", "InvalidStateError/DOMException", "InvalidStateError/DOMException"})
+    public void responseResponseTypeJsonInvalid() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      var xhr;\n"
+                + "      function test() {\n"
+                + "        xhr = new XMLHttpRequest();\n"
+                + "        log(xhr.responseText);\n"
+
+                + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                + "        xhr.responseType = 'json';\n"
+                + "        log(xhr.responseType);\n"
+
+                + "        xhr.onreadystatechange = onStateChange;\n"
+                + "        xhr.onerror = onError;\n"
+                + "        xhr.send('');\n"
+                + "      }\n"
+
+                + "      function onError(e) {\n"
+                + "          log('onError: ' + e);\n"
+                + "          log('readyState: ' + xhr.readyState);\n"
+                + "          log('status: ' + xhr.status);\n"
+                + "          log('statusText: ' + xhr.statusText);\n"
+                + "          log('headers: ' + xhr.getAllResponseHeaders());\n"
+                + "        };\n"
+
+                + "      function onStateChange(e) {\n"
+                + "        log('readyState: ' + xhr.readyState);\n"
+                + "        if (xhr.readyState == 4) {\n"
+                + "          log('status: ' + xhr.status);\n"
+                + "          log('statusText: ' + xhr.statusText);\n"
+
+                + "          try {\n"
+                + "            log(xhr.response);\n"
+                + "          } catch(e) { logEx(e); }\n"
+                + "          try {\n"
+                + "            log(xhr.responseText);\n"
+                + "          } catch(e) { logEx(e); }\n"
+                + "          try {\n"
+                + "            log(xhr.responseXML);\n"
+                + "          } catch(e) { logEx(e); }\n"
+                + "        }\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final String json = "{{{{";
+
+        getMockWebConnection().setResponse(URL_SECOND, json, MimeType.APPLICATION_JSON);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"", "document", "[object XMLDocument]"})
     public void responseResponseTypeDocumentXml() throws Exception {
         final String html = DOCTYPE_HTML

@@ -407,7 +407,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     return new JsonParser(Context.getCurrentContext(), getParentScope()).parseValue(content);
                 }
                 catch (final ParseException e) {
-                    webResponse_ = new NetworkErrorWebResponse(webRequest_, new IOException(e));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("XMLHttpRequest json parsing faild (" + e.getMessage() + ")");
+                    }
                     return null;
                 }
             }
@@ -517,6 +519,15 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         + response.getError() + ")");
             }
             return null;
+        }
+
+        if (!RESPONSE_TYPE_DEFAULT.equals(responseType_) && !RESPONSE_TYPE_DOCUMENT.equals(responseType_)) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': "
+                            + "The value is only accessible if the object's 'responseType' is '' or 'document' "
+                            + "(was '" + getResponseType() + "').",
+                    DOMException.INVALID_STATE_ERR);
         }
 
         String contentType = webResponse_.getContentType();
