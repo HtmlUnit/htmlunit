@@ -24,6 +24,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSourceElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlSource.class)
 public class HTMLSourceElement extends HTMLElement {

@@ -29,6 +29,8 @@ import org.htmlunit.javascript.host.dom.NodeList;
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOutputElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlOutput.class)
 public class HTMLOutputElement extends HTMLElement {
@@ -94,7 +96,7 @@ public class HTMLOutputElement extends HTMLElement {
 
     /**
      * Checks whether the element has any constraints and whether it satisfies them.
-     * @return if the element is valid
+     * @return {@code true} if the element is valid
      */
     @JsxFunction
     public boolean checkValidity() {
@@ -102,7 +104,8 @@ public class HTMLOutputElement extends HTMLElement {
     }
 
     /**
-     * @return a ValidityState with the validity states that this element is in.
+     * Returns a {@link ValidityState} object representing the validity states of this element.
+     * @return a {@link ValidityState} object representing the validity states of this element
      */
     @JsxGetter
     public ValidityState getValidity() {
@@ -114,6 +117,7 @@ public class HTMLOutputElement extends HTMLElement {
     }
 
     /**
+     * Returns whether the element is a candidate for constraint validation.
      * @return whether the element is a candidate for constraint validation
      */
     @JsxGetter

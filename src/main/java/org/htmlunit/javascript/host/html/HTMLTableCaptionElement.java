@@ -25,6 +25,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCaptionElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlCaption.class)
 public class HTMLTableCaptionElement extends HTMLElement {

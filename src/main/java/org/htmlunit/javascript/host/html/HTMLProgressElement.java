@@ -28,6 +28,8 @@ import org.htmlunit.javascript.host.dom.NodeList;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLProgressElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlProgress.class)
 public class HTMLProgressElement extends HTMLElement {
@@ -45,8 +47,8 @@ public class HTMLProgressElement extends HTMLElement {
     }
 
     /**
-     * The getter for the "value" property.
-     * @return the value
+     * Returns the {@code value} property.
+     * @return the {@code value} property
      */
     @JsxGetter
     @Override
@@ -55,8 +57,8 @@ public class HTMLProgressElement extends HTMLElement {
     }
 
     /**
-     * The getter for the "max" property.
-     * @return the value
+     * Returns the {@code max} property.
+     * @return the {@code max} property
      */
     @JsxGetter
     public double getMax() {

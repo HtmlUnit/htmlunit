@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLModElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlDeletedText.class)
 @JsxClass(domClass = HtmlInsertedText.class)
@@ -50,8 +52,8 @@ public class HTMLModElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the {@code cite} property.
-     * @param cite the value
+     * Sets the value of the {@code cite} property.
+     * @param cite the {@code cite} property value
      */
     @JsxSetter
     public void setCite(final String cite) {
@@ -68,8 +70,8 @@ public class HTMLModElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the {@code dateTime} property.
-     * @param dateTime the value
+     * Sets the value of the {@code dateTime} property.
+     * @param dateTime the {@code dateTime} property value
      */
     @JsxSetter
     public void setDateTime(final String dateTime) {

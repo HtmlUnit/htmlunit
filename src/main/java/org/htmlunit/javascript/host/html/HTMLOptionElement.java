@@ -41,6 +41,8 @@ import org.xml.sax.helpers.AttributesImpl;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlOption.class)
 public class HTMLOptionElement extends HTMLElement {
@@ -49,7 +51,7 @@ public class HTMLOptionElement extends HTMLElement {
      * JavaScript constructor.
      * @param newText the text
      * @param newValue the value
-     * @param defaultSelected Whether the option is initially selected
+     * @param defaultSelected whether the option is initially selected
      * @param selected the current selection state of the option
      */
     @JsxConstructor
@@ -82,7 +84,7 @@ public class HTMLOptionElement extends HTMLElement {
      * JavaScript constructor.
      * @param newText the text
      * @param newValue the value
-     * @param defaultSelected Whether the option is initially selected
+     * @param defaultSelected whether the option is initially selected
      * @param selected the current selection state of the option
      */
     public void jsConstructorOption(final Object newText, final String newValue,
@@ -147,7 +149,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code selected} property.
-     * @return the text property
+     * @return the selected property
      */
     @JsxGetter
     public boolean isSelected() {
@@ -160,7 +162,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code selected} property.
-     * @param selected the new selected property
+     * @param selected the new value of the {@code selected} property
      */
     @JsxSetter
     public void setSelected(final boolean selected) {
@@ -180,7 +182,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Returns the value of the {@code defaultSelected} property.
-     * @return the text property
+     * @return the defaultSelected property
      */
     @JsxGetter
     public boolean isDefaultSelected() {
@@ -206,7 +208,7 @@ public class HTMLOptionElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code label} property.
-     * @param label the new label property
+     * @param label the new value of the {@code label} property
      */
     @JsxSetter
     public void setLabel(final String label) {

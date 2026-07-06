@@ -27,6 +27,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptGroupElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlOptionGroup.class)
 public class HTMLOptGroupElement extends HTMLElement {
@@ -72,7 +74,7 @@ public class HTMLOptGroupElement extends HTMLElement {
     }
 
     /**
-     * Updates the value of the {@code label} property.
+     * Sets the value of the {@code label} property.
      * @param newLabel the new value
      */
     @JsxSetter

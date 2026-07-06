@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLParagraphElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlParagraph.class)
 public class HTMLParagraphElement extends HTMLElement {

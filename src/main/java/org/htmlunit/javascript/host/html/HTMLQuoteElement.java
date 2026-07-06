@@ -27,6 +27,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Carsten Steul
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLQuoteElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlInlineQuotation.class)
 @JsxClass(domClass = HtmlBlockQuote.class)
@@ -51,8 +53,8 @@ public class HTMLQuoteElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the {@code cite} property.
-     * @param cite the value
+     * Sets the value of the {@code cite} property.
+     * @param cite the {@code cite} property value
      */
     @JsxSetter
     public void setCite(final String cite) {

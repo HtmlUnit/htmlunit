@@ -41,6 +41,8 @@ import org.htmlunit.javascript.host.dom.Node;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlScript.class)
 public class HTMLScriptElement extends HTMLElement {
@@ -77,7 +79,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Sets the {@code src} property.
-     * @param src the {@code src} property
+     * @param src the {@code src} property value
      */
     @JsxSetter
     public void setSrc(final String src) {
@@ -101,7 +103,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Sets the {@code text} property.
-     * @param text the {@code text} property
+     * @param text the {@code text} property value
      */
     @JsxSetter
     public void setText(final String text) {
@@ -124,7 +126,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Sets the {@code type} property.
-     * @param type the {@code type} property
+     * @param type the {@code type} property value
      */
     @JsxSetter
     public void setType(final String type) {
@@ -160,7 +162,7 @@ public class HTMLScriptElement extends HTMLElement {
 
     /**
      * Sets the {@code async} property.
-     * @param async the {@code async} property
+     * @param async the {@code async} property value
      */
     @JsxSetter
     public void setAsync(final boolean async) {

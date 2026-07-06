@@ -44,6 +44,8 @@ import org.htmlunit.javascript.host.dom.NodeList;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Carsten Steul
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlSelect.class)
 public class HTMLSelectElement extends HTMLElement {
@@ -64,7 +66,6 @@ public class HTMLSelectElement extends HTMLElement {
 
     /**
      * Initialize the object.
-     *
      */
     public void initialize() {
         final HtmlSelect htmlSelect = getDomNodeOrDie();
@@ -288,7 +289,7 @@ public class HTMLSelectElement extends HTMLElement {
 
     /**
      * Sets the {@code size} attribute.
-     * @param size the {@code size} attribute
+     * @param size the {@code size} attribute value
      */
     @JsxSetter
     public void setSize(final String size) {
@@ -395,7 +396,7 @@ public class HTMLSelectElement extends HTMLElement {
 
     /**
      * Checks whether the element has any constraints and whether it satisfies them.
-     * @return if the element is valid
+     * @return {@code true} if the element is valid
      */
     @JsxFunction
     public boolean checkValidity() {
@@ -403,7 +404,8 @@ public class HTMLSelectElement extends HTMLElement {
     }
 
     /**
-     * @return a ValidityState with the validity states that this element is in.
+     * Returns a {@link ValidityState} object representing the validity states of this element.
+     * @return a {@link ValidityState} object representing the validity states of this element
      */
     @JsxGetter
     public ValidityState getValidity() {
@@ -415,6 +417,7 @@ public class HTMLSelectElement extends HTMLElement {
     }
 
     /**
+     * Returns whether the element is a candidate for constraint validation.
      * @return whether the element is a candidate for constraint validation
      */
     @JsxGetter
@@ -432,6 +435,7 @@ public class HTMLSelectElement extends HTMLElement {
     }
 
     /**
+     * Returns the {@code Symbol.iterator} function that allows iterating over this element's options.
      * @return the Iterator symbol
      */
     @JsxSymbol

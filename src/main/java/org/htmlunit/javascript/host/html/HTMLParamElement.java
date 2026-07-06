@@ -25,6 +25,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLParamElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlParameter.class)
 public class HTMLParamElement extends HTMLElement {

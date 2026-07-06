@@ -29,6 +29,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLObjectElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlObject.class)
 public class HTMLObjectElement extends HTMLElement {
@@ -53,7 +55,7 @@ public class HTMLObjectElement extends HTMLElement {
 
     /**
      * Sets the {@code border} attribute.
-     * @param border the {@code border} attribute
+     * @param border the {@code border} attribute value
      */
     @JsxSetter
     public void setBorder(final String border) {
@@ -70,7 +72,7 @@ public class HTMLObjectElement extends HTMLElement {
 
     /**
      * Sets the {@code classid} attribute.
-     * @param classid the {@code classid} attribute
+     * @param classid the {@code classid} attribute value
      */
     public void setClassid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
@@ -167,7 +169,7 @@ public class HTMLObjectElement extends HTMLElement {
 
     /**
      * Checks whether the element has any constraints and whether it satisfies them.
-     * @return if the element is valid
+     * @return {@code true} if the element is valid
      */
     @JsxFunction
     public boolean checkValidity() {
@@ -175,7 +177,8 @@ public class HTMLObjectElement extends HTMLElement {
     }
 
     /**
-     * @return a ValidityState with the validity states that this element is in.
+     * Returns a {@link ValidityState} object representing the validity states of this element.
+     * @return a {@link ValidityState} object representing the validity states of this element
      */
     @JsxGetter
     public ValidityState getValidity() {
@@ -187,6 +190,7 @@ public class HTMLObjectElement extends HTMLElement {
     }
 
     /**
+     * Returns whether the element is a candidate for constraint validation.
      * @return whether the element is a candidate for constraint validation
      */
     @JsxGetter
