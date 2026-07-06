@@ -316,7 +316,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         if (webResponse_ instanceof NetworkErrorWebResponse response) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("XMLHttpRequest.responseXML returns of a network error ("
+                LOG.debug("XMLHttpRequest.responseXML returns because of a network error ("
                         + response.getError() + ")");
             }
             return null;
@@ -473,7 +473,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         if (webResponse_ instanceof NetworkErrorWebResponse resp) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("XMLHttpRequest.getResponseText returns of a network error ("
+                LOG.debug("XMLHttpRequest.responseXML returns because of a network error ("
                         + resp.getError() + ")");
             }
             if (resp.getError() instanceof NoPermittedHeaderException) {
@@ -515,7 +515,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         if (webResponse_ instanceof NetworkErrorWebResponse response) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("XMLHttpRequest.responseXML returns of a network error ("
+                LOG.debug("XMLHttpRequest.responseXML returns because of a network error ("
                         + response.getError() + ")");
             }
             return null;
