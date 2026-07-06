@@ -505,6 +505,15 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return responseXML_;
         }
 
+        if (!RESPONSE_TYPE_DEFAULT.equals(responseType_) && !RESPONSE_TYPE_DOCUMENT.equals(responseType_)) {
+            throw JavaScriptEngine.asJavaScriptException(
+                    getWindow(),
+                    "InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': "
+                            + "The value is only accessible if the object's 'responseType' is '' or 'document' "
+                            + "(was '" + getResponseType() + "').",
+                    DOMException.INVALID_STATE_ERR);
+        }
+
         if (webResponse_ == null) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("XMLHttpRequest.responseXML returns null because there "
@@ -519,15 +528,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         + response.getError() + ")");
             }
             return null;
-        }
-
-        if (!RESPONSE_TYPE_DEFAULT.equals(responseType_) && !RESPONSE_TYPE_DOCUMENT.equals(responseType_)) {
-            throw JavaScriptEngine.asJavaScriptException(
-                    getWindow(),
-                    "InvalidStateError: Failed to read the 'responseText' property from 'XMLHttpRequest': "
-                            + "The value is only accessible if the object's 'responseType' is '' or 'document' "
-                            + "(was '" + getResponseType() + "').",
-                    DOMException.INVALID_STATE_ERR);
         }
 
         String contentType = webResponse_.getContentType();

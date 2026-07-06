@@ -840,6 +840,94 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
+    public void responseTextCalledTwoTimes() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var xhr = new XMLHttpRequest();\n"
+                + "  xhr.open('GET', 'foo', false);\n"
+                + "  xhr.send('');\n"
+                + "  let xml1 = xhr.responseText;\n"
+                + "  let xml2 = xhr.responseText;\n"
+                + "  log(xml1 === xml2);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void responseTextCalledTwoTimesSetReset() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var xhr = new XMLHttpRequest();\n"
+                + "  xhr.open('GET', 'foo', false);\n"
+                + "  let xml1 = xhr.responseText;\n"
+                + "  xhr.send('');\n"
+                + "  let xml2 = xhr.responseText;\n"
+                + "  log(xml1 === xml2);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void responseTextAsyncCalledTwoTimes() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var xhr = new XMLHttpRequest();\n"
+                + "  xhr.onreadystatechange = () => {\n"
+                + "    if (xhr.readyState === 4) {\n"
+                + "      let xml1 = xhr.responseText;\n"
+                + "      let xml2 = xhr.responseText;\n"
+                + "      log(xml1 === xml2);\n"
+                + "    }\n"
+                + "  }\n"
+                + "  xhr.open('GET', 'foo', true);\n"
+                + "  xhr.send('');\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void responseXMLCalledTwoTimes() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html><head>\n"
@@ -850,6 +938,34 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                 + "  xhr.open('GET', 'foo', false);\n"
                 + "  xhr.send('');\n"
                 + "  let xml1 = xhr.responseXML;\n"
+                + "  let xml2 = xhr.responseXML;\n"
+                + "  log(xml1 === xml2);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME.multipliedBy(2), driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void responseXMLCalledTwoTimesSetReset() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var xhr = new XMLHttpRequest();\n"
+                + "  xhr.open('GET', 'foo', false);\n"
+                + "  let xml1 = xhr.responseXML;\n"
+                + "  xhr.send('');\n"
                 + "  let xml2 = xhr.responseXML;\n"
                 + "  log(xml1 === xml2);\n"
                 + "}\n"
@@ -985,6 +1101,130 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                 + "<body onload='test()'></body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "null", "arraybuffer", "InvalidStateError/DOMException",
+             "send done", "InvalidStateError/DOMException"})
+    public void responseXmlInvalidResponseTypeArraybuffer() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      var xhr;\n"
+                + "      function test() {\n"
+                + "        xhr = new XMLHttpRequest();\n"
+                + "        log(xhr.responseText);\n"
+
+                + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                + "        log(xhr.responseXML);\n"
+
+                + "        try {\n"
+                + "          xhr.responseType = 'arraybuffer';\n"
+                + "        } catch(e) { logEx(e); }\n"
+                + "        log(xhr.responseType);\n"
+
+                + "        try {\n"
+                + "          log(xhr.responseXML);\n"
+                + "        } catch(e) { logEx(e); }\n"
+
+                + "        try {\n"
+                + "          xhr.onreadystatechange = onStateChange;\n"
+                + "        } catch(e) { logEx(e); }\n"
+
+                + "        try {\n"
+                + "          xhr.send('');\n"
+                + "          log('send done');\n"
+                + "        } catch(e) { logEx(e); }\n"
+                + "      }\n"
+
+                + "      function onStateChange(e) {\n"
+                + "        if (xhr.readyState == 4) {\n"
+                + "          try {\n"
+                + "            log(xhr.responseXML);\n"
+                + "          } catch(e) { logEx(e); }\n"
+                + "        }\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final String xml =
+                "<xml>\n"
+                        + "<content>blah</content>\n"
+                        + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "null", "json", "InvalidStateError/DOMException",
+             "send done", "InvalidStateError/DOMException"})
+    public void responseXmlInvalidResponseTypeJson() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      var xhr;\n"
+                + "      function test() {\n"
+                + "        xhr = new XMLHttpRequest();\n"
+                + "        log(xhr.responseText);\n"
+
+                + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                + "        log(xhr.responseXML);\n"
+
+                + "        try {\n"
+                + "          xhr.responseType = 'json';\n"
+                + "        } catch(e) { logEx(e); }\n"
+                + "        log(xhr.responseType);\n"
+
+                + "        try {\n"
+                + "          log(xhr.responseXML);\n"
+                + "        } catch(e) { logEx(e); }\n"
+
+                + "        try {\n"
+                + "          xhr.onreadystatechange = onStateChange;\n"
+                + "        } catch(e) { logEx(e); }\n"
+
+                + "        try {\n"
+                + "          xhr.send('');\n"
+                + "          log('send done');\n"
+                + "        } catch(e) { logEx(e); }\n"
+                + "      }\n"
+
+                + "      function onStateChange(e) {\n"
+                + "        if (xhr.readyState == 4) {\n"
+                + "          try {\n"
+                + "            log(xhr.responseXML);\n"
+                + "          } catch(e) { logEx(e); }\n"
+                + "        }\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final String xml =
+                "<xml>\n"
+                        + "<content>blah</content>\n"
+                        + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -3014,10 +3254,12 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "arraybuffer", "InvalidStateError/DOMException",
-            "send done", "InvalidStateError/DOMException"},
-            FF = {"", "", "arraybuffer", "", "send done", "InvalidStateError/DOMException"},
-            FF_ESR = {"", "", "arraybuffer", "", "send done", "InvalidStateError/DOMException"})
-    public void responseTextInvalidResponseType() throws Exception {
+                       "send done", "InvalidStateError/DOMException"},
+            FF = {"", "", "arraybuffer", "",
+                  "send done", "InvalidStateError/DOMException"},
+            FF_ESR = {"", "", "arraybuffer", "",
+                      "send done", "InvalidStateError/DOMException"})
+    public void responseTextInvalidResponseTypeArraybuffer() throws Exception {
         final String html = DOCTYPE_HTML
                 + "<html>\n"
                 + "  <head>\n"
@@ -3033,6 +3275,72 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
                 + "        try {\n"
                 + "          xhr.responseType = 'arraybuffer';\n"
+                + "        } catch(e) { logEx(e); }\n"
+                + "        log(xhr.responseType);\n"
+
+                + "        try {\n"
+                + "          log(xhr.responseText);\n"
+                + "        } catch(e) { logEx(e); }\n"
+
+                + "        try {\n"
+                + "          xhr.onreadystatechange = onStateChange;\n"
+                + "        } catch(e) { logEx(e); }\n"
+
+                + "        try {\n"
+                + "          xhr.send('');\n"
+                + "          log('send done');\n"
+                + "        } catch(e) { logEx(e); }\n"
+                + "      }\n"
+
+                + "      function onStateChange(e) {\n"
+                + "        if (xhr.readyState == 4) {\n"
+                + "          try {\n"
+                + "            log(xhr.responseText);\n"
+                + "          } catch(e) { logEx(e); }\n"
+                + "        }\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body>\n"
+                + "</html>";
+
+        final String xml =
+                "<xml>\n"
+                        + "<content>blah</content>\n"
+                        + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "", "json", "InvalidStateError/DOMException",
+                       "send done", "InvalidStateError/DOMException"},
+            FF = {"", "", "json", "",
+                  "send done", "InvalidStateError/DOMException"},
+            FF_ESR = {"", "", "json", "",
+                      "send done", "InvalidStateError/DOMException"})
+    public void responseTextInvalidResponseTypeJson() throws Exception {
+        final String html = DOCTYPE_HTML
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      var xhr;\n"
+                + "      function test() {\n"
+                + "        xhr = new XMLHttpRequest();\n"
+                + "        log(xhr.responseText);\n"
+
+                + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+                + "        log(xhr.responseText);\n"
+
+                + "        try {\n"
+                + "          xhr.responseType = 'json';\n"
                 + "        } catch(e) { logEx(e); }\n"
                 + "        log(xhr.responseType);\n"
 

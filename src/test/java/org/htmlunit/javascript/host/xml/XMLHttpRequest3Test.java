@@ -107,7 +107,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(DEFAULT_WAIT_TIME.toMillis()));
         assertEquals(getExpectedAlerts(), getCollectedAlerts(null));
     }
 
@@ -174,7 +174,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(DEFAULT_WAIT_TIME.toMillis()));
 
         final String[] alerts = {URL_FIRST.toExternalForm(), "before long loop", "after long loop",
             urlPage2.toExternalForm(), "ready state handler, content loaded: j=5000" };
@@ -283,7 +283,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         startWebServer(resourceBase, servlets);
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "XMLHttpRequestTest_streaming.html");
-        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), client.waitForBackgroundJavaScriptStartingBefore(1000));
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), client.waitForBackgroundJavaScriptStartingBefore(DEFAULT_WAIT_TIME.toMillis()));
         final HtmlElement body = page.getBody();
         assertEquals(Integer.parseInt(getExpectedAlerts()[1]), body.asNormalizedText().split("\n").length);
     }
