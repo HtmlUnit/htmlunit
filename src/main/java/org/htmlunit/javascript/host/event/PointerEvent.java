@@ -48,6 +48,8 @@ public class PointerEvent extends MouseEvent {
     private double pressure_;
     private int tiltX_;
     private int tiltY_;
+    private double altitudeAngle_;
+    private double azimuthAngle_;
     private String pointerType_ = "";
     private boolean isPrimary_;
 
@@ -75,6 +77,8 @@ public class PointerEvent extends MouseEvent {
         event.setBubbles(false);
         event.setCancelable(false);
 
+        event.altitudeAngle_ = Math.PI / 2d;
+
         if (args.length != 0) {
             event.setType(JavaScriptEngine.toString(args[0]));
             event.width_ = 1;
@@ -93,6 +97,11 @@ public class PointerEvent extends MouseEvent {
             event.tiltY_ = (int) getValue(object, "tiltY", event.tiltY_);
             event.pointerType_ = (String) getValue(object, "pointerType", event.pointerType_);
             event.isPrimary_ = (boolean) getValue(object, "isPrimary", event.isPrimary_);
+
+            if (object.has("tiltX", object) || object.has("tiltY", object)) {
+                event.altitudeAngle_ = 1.4105561004354874;
+                event.azimuthAngle_ = 0.8628261898537035;
+            }
         }
         return event;
     }
@@ -211,7 +220,7 @@ public class PointerEvent extends MouseEvent {
     @JsxGetter
     @SuppressWarnings("PMD.UseUnderscoresInNumericLiterals")
     public double getAltitudeAngle() {
-        return 1.5707963267948966;
+        return altitudeAngle_;
     }
 
     /**
@@ -219,7 +228,7 @@ public class PointerEvent extends MouseEvent {
      */
     @JsxGetter
     public double getAzimuthAngle() {
-        return 0d;
+        return azimuthAngle_;
     }
 
     /**
