@@ -30,6 +30,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMenuElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlMenu.class)
 public class HTMLMenuElement extends HTMLElement {

@@ -35,6 +35,8 @@ import org.htmlunit.javascript.host.dom.Node;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">MDN Documentation</a>
  */
 @JsxClass
 public class HTMLMediaElement extends HTMLElement {

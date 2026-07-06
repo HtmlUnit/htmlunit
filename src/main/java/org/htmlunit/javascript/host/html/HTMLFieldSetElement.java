@@ -28,6 +28,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlFieldSet.class)
 public class HTMLFieldSetElement extends HTMLElement {
@@ -53,7 +55,7 @@ public class HTMLFieldSetElement extends HTMLElement {
 
     /**
      * Sets the {@code name} attribute.
-     * @param name the {@code name} attribute
+     * @param name the {@code name} attribute value
      */
     @JsxSetter
     @Override
@@ -78,7 +80,7 @@ public class HTMLFieldSetElement extends HTMLElement {
 
     /**
      * Checks whether the element has any constraints and whether it satisfies them.
-     * @return if the element is valid
+     * @return {@code true} if the element is valid
      */
     @JsxFunction
     public boolean checkValidity() {
@@ -104,7 +106,8 @@ public class HTMLFieldSetElement extends HTMLElement {
     }
 
     /**
-     * @return a ValidityState with the validity states that this element is in.
+     * Returns a {@link ValidityState} object representing the validity states of this element.
+     * @return a {@link ValidityState} object representing the validity states of this element
      */
     @JsxGetter
     public ValidityState getValidity() {
@@ -116,6 +119,7 @@ public class HTMLFieldSetElement extends HTMLElement {
     }
 
     /**
+     * Returns whether the element is a candidate for constraint validation.
      * @return whether the element is a candidate for constraint validation
      */
     @JsxGetter

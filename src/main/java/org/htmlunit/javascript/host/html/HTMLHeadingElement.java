@@ -30,6 +30,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLHeadingElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlHeading1.class)
 @JsxClass(domClass = HtmlHeading2.class)

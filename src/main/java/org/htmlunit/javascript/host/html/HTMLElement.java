@@ -131,6 +131,8 @@ import org.htmlunit.util.StringUtils;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlAbbreviated.class)
 @JsxClass(domClass = HtmlAcronym.class)
@@ -492,7 +494,7 @@ public class HTMLElement extends Element {
          * Constructor.
          * @param page the page
          * @param target the target
-         * @param append append or no
+         * @param append {@code true} to append the child; {@code false} to insert it before the target
          */
         public ProxyDomNode(final SgmlPage page, final DomNode target, final boolean append) {
             super(HtmlDivision.TAG_NAME, page, null);
@@ -522,8 +524,8 @@ public class HTMLElement extends Element {
         }
 
         /**
-         * Returns append or not.
-         * @return append or not
+         * Returns whether this proxy appends the child, as opposed to inserting it before the target.
+         * @return {@code true} if this proxy appends the child; {@code false} if it inserts before the target
          */
         public boolean isAppend() {
             return append_;
@@ -535,7 +537,7 @@ public class HTMLElement extends Element {
      * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
      * during mouse events.
      * @return this element's <code>offsetHeight</code>
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534199.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetHeight">MDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      */
     @JsxGetter
@@ -557,7 +559,7 @@ public class HTMLElement extends Element {
      * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
      * during mouse events.
      * @return this element's <code>offsetWidth</code>
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534304.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetWidth">MDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      */
     @JsxGetter
@@ -918,7 +920,7 @@ public class HTMLElement extends Element {
      * element relative to the {@code offsetParent}.
      *
      * @return this element's {@code offsetTop}
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534303.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop">MDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
      */
@@ -932,7 +934,7 @@ public class HTMLElement extends Element {
      * element relative to the <code>offsetParent</code>.
      *
      * @return this element's <code>offsetLeft</code>
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534200.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetLeft">MDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
      */
@@ -947,7 +949,7 @@ public class HTMLElement extends Element {
      *
      * @return this element's <code>offsetParent</code>. This may be <code>undefined</code> when this node is
      *         not attached or {@code null} for <code>body</code>.
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534302.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent">MDN Documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html">Gecko DOM Reference</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      * @see <a href="http://www.w3.org/TR/REC-CSS2/box.html">Box Model</a>
@@ -1013,6 +1015,7 @@ public class HTMLElement extends Element {
     }
 
     /**
+     * Returns whether the tag is lower case in {@code .outerHTML}/{@code .innerHTML}.
      * @return whether the tag is lower case in .outerHTML/.innerHTML
      */
     protected boolean isLowerCaseInOuterHtml() {

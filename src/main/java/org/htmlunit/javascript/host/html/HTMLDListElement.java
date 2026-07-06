@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDListElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlDefinitionList.class)
 public class HTMLDListElement extends HTMLElement {

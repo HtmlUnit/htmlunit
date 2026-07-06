@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlMeta.class)
 public class HTMLMetaElement extends HTMLElement {
@@ -50,7 +52,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code content} attribute.
-     * @param content the content attribute
+     * @param content the {@code content} attribute value
      */
     @JsxSetter
     public void setContent(final String content) {
@@ -68,7 +70,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code http-equiv} attribute.
-     * @param httpEquiv the http-equiv attribute
+     * @param httpEquiv the {@code http-equiv} attribute value
      */
     @JsxSetter
     public void setHttpEquiv(final String httpEquiv) {
@@ -87,7 +89,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code name} attribute.
-     * @param name the {@code name} attribute
+     * @param name the {@code name} attribute value
      */
     @JsxSetter
     @Override
@@ -106,7 +108,7 @@ public class HTMLMetaElement extends HTMLElement {
 
     /**
      * Sets the {@code scheme} attribute.
-     * @param scheme the {@code scheme} attribute
+     * @param scheme the {@code scheme} attribute value
      */
     @JsxSetter
     public void setScheme(final String scheme) {
@@ -114,7 +116,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * @return the {@code meta} attribute
+     * Returns the {@code media} attribute.
+     * @return the {@code media} attribute
      */
     @JsxGetter
     public String getMedia() {
@@ -122,7 +125,8 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
-     * @param media the media attribute
+     * Sets the {@code media} attribute.
+     * @param media the {@code media} attribute value
      */
     @JsxSetter
     public void setMedia(final String media) {

@@ -35,6 +35,8 @@ import org.htmlunit.javascript.host.dom.RadioNodeList;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Lai Quang Duong
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection">MDN Documentation</a>
  */
 @JsxClass
 public class HTMLFormControlsCollection extends HTMLCollection {
@@ -48,9 +50,9 @@ public class HTMLFormControlsCollection extends HTMLCollection {
 
     /**
      * Creates an instance.
-     * @param domNode parent scope
+     * @param domNode the parent scope
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
-     *        of a descendant node of parentScope changes (attribute added, modified or removed)
+     *        of a descendant node of domNode changes (attribute added, modified or removed)
      */
     public HTMLFormControlsCollection(final DomNode domNode, final boolean attributeChangeSensitive) {
         super(domNode, attributeChangeSensitive);
@@ -75,9 +77,9 @@ public class HTMLFormControlsCollection extends HTMLCollection {
     }
 
     /**
-     * Returns the element with ID or name match the specified value from the collection.
+     * Returns the element whose ID or name matches the specified value, from the collection.
      * If there are multiple matching elements, then a RadioNodeList object containing all those elements is returned.
-     * @param name the name or id the element or elements to return
+     * @param name the name or id of the element or elements to return
      * @return the element or elements corresponding to the specified name or id
      * @see <a href="https://html.spec.whatwg.org/multipage/common-dom-interfaces.html#the-htmlformcontrolscollection-interface">HTML Standard</a>
      */
@@ -140,6 +142,9 @@ public class HTMLFormControlsCollection extends HTMLCollection {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @JsxSymbol
     @Override
     public Scriptable iterator() {

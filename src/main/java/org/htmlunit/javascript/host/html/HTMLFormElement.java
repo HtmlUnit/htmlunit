@@ -64,7 +64,7 @@ import org.htmlunit.util.MimeType;
  * @author Frank Danek
  * @author Lai Quang Duong
  *
- * @see <a href="http://msdn.microsoft.com/en-us/library/ms535249.aspx">MSDN documentation</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlForm.class)
 public class HTMLFormElement extends HTMLElement implements Function {
@@ -143,6 +143,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
+     * Returns the {@code Symbol.iterator} function that allows iterating over the form's elements.
      * @return the Iterator symbol
      */
     @JsxSymbol
@@ -153,7 +154,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     /**
      * Returns the value of the property {@code length}.
      * Does not count input {@code type=image} elements
-     * (<a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>)
+     * (<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/length">MDN doc</a>)
      * @return the value of this property
      */
     @JsxGetter
@@ -199,7 +200,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
 
     /**
      * Sets the value of the property {@code method}.
-     * @param method the new property
+     * @param method the new value
      */
     @JsxSetter
     public void setMethod(final String method) {
@@ -227,8 +228,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the value of the rel property.
-     * @return the rel property
+     * Returns the value of the property {@code rel}.
+     * @return the value of this property
      */
     @JsxGetter
     public String getRel() {
@@ -236,8 +237,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the rel property.
-     * @param rel rel attribute value
+     * Sets the value of the property {@code rel}.
+     * @param rel the new value
      */
     @JsxSetter
     public void setRel(final String rel) {
@@ -254,8 +255,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Sets the relList property.
-     * @param rel attribute value
+     * Sets the {@code relList} attribute.
+     * @param rel the {@code relList} attribute value
      */
     @JsxSetter
     public void setRelList(final Object rel) {
@@ -310,6 +311,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
+     * Returns the {@link HtmlForm} associated with this element.
      * @return the associated HtmlForm
      */
     public HtmlForm getHtmlForm() {
@@ -325,8 +327,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Submits the form by submitted using a specific submit button.
-     * @param submitter The submit button whose attributes describe the method
+     * Submits the form using the specified submit button.
+     * @param submitter the submit button whose attributes describe the method
      *        by which the form is to be submitted. This may be either
      *        a &lt;input&gt; or &lt;button&gt; element whose type attribute is submit.
      *        If you omit the submitter parameter, the form element itself is used as the submitter.
@@ -545,7 +547,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
 
     /**
      * Checks whether the element has any constraints and whether it satisfies them.
-     * @return if the element is valid
+     * @return {@code true} if the element is valid
      */
     @JsxFunction
     public boolean checkValidity() {

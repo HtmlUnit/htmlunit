@@ -25,6 +25,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMarqueeElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlMarquee.class)
 public class HTMLMarqueeElement extends HTMLElement {
@@ -54,7 +56,7 @@ public class HTMLMarqueeElement extends HTMLElement {
 
     /**
      * Sets the {@code width} property.
-     * @param width the {@code width} property
+     * @param width the {@code width} property value
      */
     @JsxSetter
     public void setWidth(final int width) {
@@ -77,7 +79,7 @@ public class HTMLMarqueeElement extends HTMLElement {
 
     /**
      * Sets the {@code height} property.
-     * @param height the {@code height} property
+     * @param height the {@code height} property value
      */
     @JsxSetter
     public void setHeight(final int height) {

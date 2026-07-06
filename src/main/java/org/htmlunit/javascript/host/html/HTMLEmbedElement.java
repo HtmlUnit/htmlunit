@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLEmbedElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlEmbed.class)
 public class HTMLEmbedElement extends HTMLElement {
@@ -113,7 +115,7 @@ public class HTMLEmbedElement extends HTMLElement {
 
     /**
      * Sets the {@code name} attribute.
-     * @param name the {@code name} attribute
+     * @param name the {@code name} attribute value
      */
     @JsxSetter
     @Override

@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFontElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlFont.class)
 public class HTMLFontElement extends HTMLElement {
@@ -50,7 +52,7 @@ public class HTMLFontElement extends HTMLElement {
 
     /**
      * Sets the {@code color} property.
-     * @param color the {@code color} property
+     * @param color the {@code color} property value
      */
     @JsxSetter
     public void setColor(final String color) {
@@ -86,7 +88,7 @@ public class HTMLFontElement extends HTMLElement {
 
     /**
      * Sets the {@code size} attribute.
-     * @param size the {@code size} attribute
+     * @param size the {@code size} attribute value
      */
     @JsxSetter
     public void setSize(final int size) {

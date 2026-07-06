@@ -25,6 +25,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLHRElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlHorizontalRule.class)
 public class HTMLHRElement extends HTMLElement {
@@ -93,7 +95,7 @@ public class HTMLHRElement extends HTMLElement {
 
     /**
      * Sets the {@code color} property.
-     * @param color the {@code color} property
+     * @param color the {@code color} property value
      */
     @JsxSetter
     public void setColor(final String color) {

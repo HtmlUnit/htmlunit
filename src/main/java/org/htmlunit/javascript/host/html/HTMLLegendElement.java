@@ -26,6 +26,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLLegendElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlLegend.class)
 public class HTMLLegendElement extends HTMLElement {

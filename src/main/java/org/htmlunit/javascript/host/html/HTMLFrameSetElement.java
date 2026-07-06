@@ -28,6 +28,8 @@ import org.htmlunit.javascript.host.event.Event;
  * @author Bruce Chapman
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFrameSetElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlFrameSet.class)
 public class HTMLFrameSetElement extends HTMLElement {
@@ -50,9 +52,9 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the rows property.
+     * Sets the {@code rows} property.
      *
-     * @param rows the rows attribute value
+     * @param rows the {@code rows} attribute value
      */
     @JsxSetter
     public void setRows(final String rows) {
@@ -63,11 +65,10 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Gets the rows property.
+     * Gets the {@code rows} property.
      *
-     * @return the rows attribute value
+     * @return the {@code rows} attribute value
      */
-
     @JsxGetter
     public String getRows() {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
@@ -75,9 +76,9 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the cols property.
+     * Sets the {@code cols} property.
      *
-     * @param cols the cols attribute value
+     * @param cols the {@code cols} attribute value
      */
     @JsxSetter
     public void setCols(final String cols) {
@@ -88,9 +89,9 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Gets the cols property.
+     * Gets the {@code cols} property.
      *
-     * @return the cols attribute value
+     * @return the {@code cols} attribute value
      */
     @JsxGetter
     public String getCols() {
@@ -99,8 +100,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onbeforeunload} event handler.
-     * @return the {@code onbeforeunload} event handler
+     * Returns the {@code onbeforeunload} event handler for this element.
+     * @return the {@code onbeforeunload} event handler for this element
      */
     @JsxGetter
     public Function getOnbeforeunload() {
@@ -108,8 +109,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onbeforeunload} event handler.
-     * @param beforeunload the {@code onbeforeunload} event handler
+     * Sets the {@code onbeforeunload} event handler for this element.
+     * @param beforeunload the {@code onbeforeunload} event handler for this element
      */
     @JsxSetter
     public void setOnbeforeunload(final Object beforeunload) {
@@ -117,8 +118,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code ongamepadconnected} event handler.
-     * @return the {@code ongamepadconnected} event handler
+     * Returns the {@code ongamepadconnected} event handler for this element.
+     * @return the {@code ongamepadconnected} event handler for this element
      */
     @JsxGetter
     public Function getOngamepadconnected() {
@@ -126,8 +127,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code ongamepadconnected} event handler.
-     * @param gamepadconnected the {@code ongamepadconnected} event handler
+     * Sets the {@code ongamepadconnected} event handler for this element.
+     * @param gamepadconnected the {@code ongamepadconnected} event handler for this element
      */
     @JsxSetter
     public void setOngamepadconnected(final Object gamepadconnected) {
@@ -135,8 +136,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code ongamepaddisconnected} event handler.
-     * @return the {@code ongamepaddisconnected} event handler
+     * Returns the {@code ongamepaddisconnected} event handler for this element.
+     * @return the {@code ongamepaddisconnected} event handler for this element
      */
     @JsxGetter
     public Function getOngamepaddisconnected() {
@@ -144,8 +145,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code ongamepaddisconnected} event handler.
-     * @param gamepaddisconnected the {@code ongamepaddisconnected} event handler
+     * Sets the {@code ongamepaddisconnected} event handler for this element.
+     * @param gamepaddisconnected the {@code ongamepaddisconnected} event handler for this element
      */
     @JsxSetter
     public void setOngamepaddisconnected(final Object gamepaddisconnected) {
@@ -153,8 +154,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onhashchange} event handler.
-     * @return the {@code onhashchange} event handler
+     * Returns the {@code onhashchange} event handler for this element.
+     * @return the {@code onhashchange} event handler for this element
      */
     @JsxGetter
     public Function getOnhashchange() {
@@ -162,8 +163,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onhashchange} event handler.
-     * @param hashchange the {@code onhashchange} event handler
+     * Sets the {@code onhashchange} event handler for this element.
+     * @param hashchange the {@code onhashchange} event handler for this element
      */
     @JsxSetter
     public void setOnhashchange(final Object hashchange) {
@@ -171,8 +172,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onlanguagechange} event handler.
-     * @return the {@code onlanguagechange} event handler
+     * Returns the {@code onlanguagechange} event handler for this element.
+     * @return the {@code onlanguagechange} event handler for this element
      */
     @JsxGetter
     public Function getOnlanguagechange() {
@@ -180,8 +181,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onlanguagechange} event handler.
-     * @param languagechange the {@code onlanguagechange} event handler
+     * Sets the {@code onlanguagechange} event handler for this element.
+     * @param languagechange the {@code onlanguagechange} event handler for this element
      */
     @JsxSetter
     public void setOnlanguagechange(final Object languagechange) {
@@ -189,8 +190,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onmessage} event handler.
-     * @return the {@code onmessage} event handler
+     * Returns the {@code onmessage} event handler for this element.
+     * @return the {@code onmessage} event handler for this element
      */
     @JsxGetter
     public Function getOnmessage() {
@@ -198,8 +199,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onmessage} event handler.
-     * @param message the {@code onmessage} event handler
+     * Sets the {@code onmessage} event handler for this element.
+     * @param message the {@code onmessage} event handler for this element
      */
     @JsxSetter
     public void setOnmessage(final Object message) {
@@ -225,8 +226,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onoffline} event handler.
-     * @return the {@code onoffline} event handler
+     * Returns the {@code onoffline} event handler for this element.
+     * @return the {@code onoffline} event handler for this element
      */
     @JsxGetter
     public Function getOnoffline() {
@@ -234,8 +235,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onoffline} event handler.
-     * @param offline the {@code onoffline} event handler
+     * Sets the {@code onoffline} event handler for this element.
+     * @param offline the {@code onoffline} event handler for this element
      */
     @JsxSetter
     public void setOnoffline(final Object offline) {
@@ -243,8 +244,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code ononline} event handler.
-     * @return the {@code ononline} event handler
+     * Returns the {@code ononline} event handler for this element.
+     * @return the {@code ononline} event handler for this element
      */
     @JsxGetter
     public Function getOnonline() {
@@ -252,8 +253,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code ononline} event handler.
-     * @param online the {@code ononline} event handler
+     * Sets the {@code ononline} event handler for this element.
+     * @param online the {@code ononline} event handler for this element
      */
     @JsxSetter
     public void setOnonline(final Object online) {
@@ -261,8 +262,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onpagehide} event handler.
-     * @return the {@code onpagehide} event handler
+     * Returns the {@code onpagehide} event handler for this element.
+     * @return the {@code onpagehide} event handler for this element
      */
     @JsxGetter
     public Function getOnpagehide() {
@@ -270,8 +271,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onpagehide} event handler.
-     * @param pagehide the {@code onpagehide} event handler
+     * Sets the {@code onpagehide} event handler for this element.
+     * @param pagehide the {@code onpagehide} event handler for this element
      */
     @JsxSetter
     public void setOnpagehide(final Object pagehide) {
@@ -279,8 +280,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onpageshow} event handler.
-     * @return the {@code onpageshow} event handler
+     * Returns the {@code onpageshow} event handler for this element.
+     * @return the {@code onpageshow} event handler for this element
      */
     @JsxGetter
     public Function getOnpageshow() {
@@ -288,8 +289,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onpageshow} event handler.
-     * @param pageshow the {@code onpageshow} event handler
+     * Sets the {@code onpageshow} event handler for this element.
+     * @param pageshow the {@code onpageshow} event handler for this element
      */
     @JsxSetter
     public void setOnpageshow(final Object pageshow) {
@@ -297,8 +298,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onpopstate} event handler.
-     * @return the {@code onpopstate} event handler
+     * Returns the {@code onpopstate} event handler for this element.
+     * @return the {@code onpopstate} event handler for this element
      */
     @JsxGetter
     public Function getOnpopstate() {
@@ -306,8 +307,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onpopstate} event handler.
-     * @param popstate the {@code onpopstate} event handler
+     * Sets the {@code onpopstate} event handler for this element.
+     * @param popstate the {@code onpopstate} event handler for this element
      */
     @JsxSetter
     public void setOnpopstate(final Object popstate) {
@@ -315,8 +316,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onrejectionhandled} event handler.
-     * @return the {@code onrejectionhandled} event handler
+     * Returns the {@code onrejectionhandled} event handler for this element.
+     * @return the {@code onrejectionhandled} event handler for this element
      */
     @JsxGetter
     public Function getOnrejectionhandled() {
@@ -324,8 +325,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onrejectionhandled} event handler.
-     * @param rejectionhandled the {@code onrejectionhandled} event handler
+     * Sets the {@code onrejectionhandled} event handler for this element.
+     * @param rejectionhandled the {@code onrejectionhandled} event handler for this element
      */
     @JsxSetter
     public void setOnrejectionhandled(final Object rejectionhandled) {
@@ -333,8 +334,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onstorage} event handler.
-     * @return the {@code onstorage} event handler
+     * Returns the {@code onstorage} event handler for this element.
+     * @return the {@code onstorage} event handler for this element
      */
     @JsxGetter
     public Function getOnstorage() {
@@ -342,8 +343,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onstorage} event handler.
-     * @param storage the {@code onstorage} event handler
+     * Sets the {@code onstorage} event handler for this element.
+     * @param storage the {@code onstorage} event handler for this element
      */
     @JsxSetter
     public void setOnstorage(final Object storage) {
@@ -351,8 +352,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onunhandledrejection} event handler.
-     * @return the {@code onunhandledrejection} event handler
+     * Returns the {@code onunhandledrejection} event handler for this element.
+     * @return the {@code onunhandledrejection} event handler for this element
      */
     @JsxGetter
     public Function getOnunhandledrejection() {
@@ -360,8 +361,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onunhandledrejection} event handler.
-     * @param unhandledrejection the {@code onunhandledrejection} event handler
+     * Sets the {@code onunhandledrejection} event handler for this element.
+     * @param unhandledrejection the {@code onunhandledrejection} event handler for this element
      */
     @JsxSetter
     public void setOnunhandledrejection(final Object unhandledrejection) {
@@ -369,8 +370,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onunload} event handler.
-     * @return the {@code onunload} event handler
+     * Returns the {@code onunload} event handler for this element.
+     * @return the {@code onunload} event handler for this element
      */
     @JsxGetter
     public Function getOnunload() {
@@ -378,8 +379,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onunload} event handler.
-     * @param unload the {@code onunload} event handler
+     * Sets the {@code onunload} event handler for this element.
+     * @param unload the {@code onunload} event handler for this element
      */
     @JsxSetter
     public void setOnunload(final Object unload) {
@@ -387,8 +388,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onafterprint} event handler.
-     * @return the {@code onafterprint} event handler
+     * Returns the {@code onafterprint} event handler for this element.
+     * @return the {@code onafterprint} event handler for this element
      */
     @JsxGetter
     public Function getOnafterprint() {
@@ -396,8 +397,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onafterprint} event handler.
-     * @param afterprint the {@code onafterprint} event handler
+     * Sets the {@code onafterprint} event handler for this element.
+     * @param afterprint the {@code onafterprint} event handler for this element
      */
     @JsxSetter
     public void setOnafterprint(final Object afterprint) {
@@ -405,8 +406,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code onbeforeprint} event handler.
-     * @return the {@code onbeforeprint} event handler
+     * Returns the {@code onbeforeprint} event handler for this element.
+     * @return the {@code onbeforeprint} event handler for this element
      */
     @JsxGetter
     public Function getOnbeforeprint() {
@@ -414,8 +415,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onbeforeprint} event handler.
-     * @param beforeprint the {@code onbeforeprint} event handler
+     * Sets the {@code onbeforeprint} event handler for this element.
+     * @param beforeprint the {@code onbeforeprint} event handler for this element
      */
     @JsxSetter
     public void setOnbeforeprint(final Object beforeprint) {

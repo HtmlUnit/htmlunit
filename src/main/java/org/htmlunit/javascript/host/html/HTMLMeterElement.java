@@ -27,6 +27,8 @@ import org.htmlunit.javascript.host.dom.NodeList;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Ahmed Ashour
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMeterElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlMeter.class)
 public class HTMLMeterElement extends HTMLElement {
@@ -44,8 +46,8 @@ public class HTMLMeterElement extends HTMLElement {
     }
 
     /**
-     * The getter for the "value" property.
-     * @return the value
+     * Returns the {@code value} property.
+     * @return the {@code value} property
      */
     @JsxGetter
     @Override
@@ -54,8 +56,8 @@ public class HTMLMeterElement extends HTMLElement {
     }
 
     /**
-     * The getter for the "min" property.
-     * @return the value
+     * Returns the {@code min} property.
+     * @return the {@code min} property
      */
     @JsxGetter
     public double getMin() {
@@ -63,8 +65,8 @@ public class HTMLMeterElement extends HTMLElement {
     }
 
     /**
-     * The getter for the "max" property.
-     * @return the value
+     * Returns the {@code max} property.
+     * @return the {@code max} property
      */
     @JsxGetter
     public double getMax() {
@@ -72,8 +74,8 @@ public class HTMLMeterElement extends HTMLElement {
     }
 
     /**
-     * The getter for the "low" property.
-     * @return the value
+     * Returns the {@code low} property.
+     * @return the {@code low} property
      */
     @JsxGetter
     public double getLow() {
@@ -85,8 +87,8 @@ public class HTMLMeterElement extends HTMLElement {
     }
 
     /**
-     * The getter for the "high" property.
-     * @return the value
+     * Returns the {@code high} property.
+     * @return the {@code high} property
      */
     @JsxGetter
     public double getHigh() {
@@ -98,8 +100,8 @@ public class HTMLMeterElement extends HTMLElement {
     }
 
     /**
-     * The getter for the "optimum" property.
-     * @return the value
+     * Returns the {@code optimum} property.
+     * @return the {@code optimum} property
      */
     @JsxGetter
     public double getOptimum() {

@@ -28,6 +28,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlLabel.class)
 public class HTMLLabelElement extends HTMLElement {
@@ -52,8 +54,8 @@ public class HTMLLabelElement extends HTMLElement {
 
     /**
      * Sets or retrieves the object to which the given label object is assigned.
-     * @param id Specifies the identifier of the element to which the label element is assigned
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms533872.aspx">MSDN Documentation</a>
+     * @param id specifies the identifier of the element to which the label element is assigned
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement/htmlFor">MDN Documentation</a>
      */
     @JsxSetter
     public void setHtmlFor(final String id) {
@@ -61,6 +63,7 @@ public class HTMLLabelElement extends HTMLElement {
     }
 
     /**
+     * Returns the {@link HTMLElement} labeled by the given label object.
      * @return the HTMLElement labeled by the given label object
      */
     @JsxGetter

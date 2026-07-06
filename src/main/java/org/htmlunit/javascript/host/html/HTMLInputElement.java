@@ -54,6 +54,8 @@ import org.htmlunit.util.StringUtils;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Anton Demydenko
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlInput.class)
 public class HTMLInputElement extends HTMLElement {
@@ -120,11 +122,11 @@ public class HTMLInputElement extends HTMLElement {
 
     /**
      * Sets the checked property. Although this property is defined in Input it
-     * doesn't make any sense for input's other than checkbox and radio. This
+     * doesn't make any sense for inputs other than checkbox and radio. This
      * implementation does nothing. The implementations in Checkbox and Radio
      * actually do the work.
      *
-     * @param checked True if this input should have the {@code checked} attribute set
+     * @param checked {@code true} if this input should have the {@code checked} attribute set
      */
     @JsxSetter
     public void setChecked(final boolean checked) {
@@ -141,7 +143,7 @@ public class HTMLInputElement extends HTMLElement {
 
     /**
      * Returns the value of the checked property. Although this property is
-     * defined in Input it doesn't make any sense for input's other than
+     * defined in Input it doesn't make any sense for inputs other than
      * checkbox and radio. This implementation does nothing. The
      * implementations in Checkbox and Radio actually do the work.
      *
@@ -167,7 +169,7 @@ public class HTMLInputElement extends HTMLElement {
     /**
      * Returns the input's default value, used if the containing form gets reset.
      * @return the input's default value, used if the containing form gets reset
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533718.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/defaultValue">MDN Documentation</a>
      */
     @JsxGetter
     public String getDefaultValue() {
@@ -177,7 +179,7 @@ public class HTMLInputElement extends HTMLElement {
     /**
      * Sets the input's default value, used if the containing form gets reset.
      * @param defaultValue the input's default value, used if the containing form gets reset
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533718.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/defaultValue">MDN Documentation</a>
      */
     @JsxSetter
     public void setDefaultValue(final String defaultValue) {
@@ -187,7 +189,7 @@ public class HTMLInputElement extends HTMLElement {
     /**
      * Returns the input's default checked value, used if the containing form gets reset.
      * @return the input's default checked value, used if the containing form gets reset
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533715.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/defaultChecked">MDN Documentation</a>
      */
     @JsxGetter
     public boolean isDefaultChecked() {
@@ -197,7 +199,7 @@ public class HTMLInputElement extends HTMLElement {
     /**
      * Sets the input's default checked value, used if the containing form gets reset.
      * @param defaultChecked the input's default checked value, used if the containing form gets reset
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533715.aspx">MSDN Documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/defaultChecked">MDN Documentation</a>
      */
     @JsxSetter
     public void setDefaultChecked(final boolean defaultChecked) {
@@ -354,7 +356,7 @@ public class HTMLInputElement extends HTMLElement {
 
     /**
      * Sets the {@code min} property.
-     * @param min the {@code min} property
+     * @param min the {@code min} property value
      */
     @JsxSetter
     public void setMin(final String min) {
@@ -372,7 +374,7 @@ public class HTMLInputElement extends HTMLElement {
 
     /**
      * Sets the {@code max} property.
-     * @param max the {@code max} property
+     * @param max the {@code max} property value
      */
     @JsxSetter
     public void setMax(final String max) {
@@ -390,7 +392,7 @@ public class HTMLInputElement extends HTMLElement {
 
     /**
      * Sets the {@code step} property.
-     * @param step the {@code step} property
+     * @param step the {@code step} property value
      */
     @JsxSetter
     public void setStep(final String step) {
@@ -436,8 +438,8 @@ public class HTMLInputElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the {@code alt} property.
-     * @param alt the value
+     * Sets the value of the {@code alt} property.
+     * @param alt the {@code alt} property value
      */
     @JsxSetter
     public void setAlt(final String alt) {
@@ -682,7 +684,7 @@ public class HTMLInputElement extends HTMLElement {
 
     /**
      * Sets the {@code width} property.
-     * @param width the {@code width} property
+     * @param width the {@code width} property value
      */
     @JsxSetter
     public void setWidth(final int width) {
@@ -705,7 +707,7 @@ public class HTMLInputElement extends HTMLElement {
 
     /**
      * Sets the {@code height} property.
-     * @param height the {@code height} property
+     * @param height the {@code height} property value
      */
     @JsxSetter
     public void setHeight(final int height) {
@@ -726,7 +728,7 @@ public class HTMLInputElement extends HTMLElement {
 
     /**
      * Checks whether the element has any constraints and whether it satisfies them.
-     * @return if the element is valid
+     * @return {@code true} if the element is valid
      */
     @JsxFunction
     public boolean checkValidity() {
@@ -779,7 +781,8 @@ public class HTMLInputElement extends HTMLElement {
     }
 
     /**
-     * @return a ValidityState with the validity states that this element is in.
+     * Returns a {@link ValidityState} object representing the validity states of this element.
+     * @return a {@link ValidityState} object representing the validity states of this element
      */
     @JsxGetter
     public ValidityState getValidity() {
@@ -791,6 +794,7 @@ public class HTMLInputElement extends HTMLElement {
     }
 
     /**
+     * Returns whether the element is a candidate for constraint validation.
      * @return whether the element is a candidate for constraint validation
      */
     @JsxGetter

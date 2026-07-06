@@ -35,6 +35,8 @@ import org.htmlunit.javascript.host.event.Event;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlInlineFrame.class)
 public class HTMLIFrameElement extends HTMLElement {
@@ -52,7 +54,7 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of URL loaded in the frame.
+     * Returns the value of the URL loaded in the frame.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -88,7 +90,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * Returns the window the frame contains, if any.
      * @return the window
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref5.html">Gecko DOM Reference</a>
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533692.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentWindow">MDN Documentation</a>
      */
     @JsxGetter
     public WindowProxy getContentWindow() {
@@ -169,8 +171,8 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of the {@code width} property.
-     * @return the value of the {@code width} property
+     * Returns the value of the {@code height} property.
+     * @return the value of the {@code height} property
      */
     @JsxGetter(propertyName = "height")
     public String getHeight_js() {

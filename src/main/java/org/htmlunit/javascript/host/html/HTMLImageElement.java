@@ -36,6 +36,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlImage.class)
 public class HTMLImageElement extends HTMLElement {
@@ -118,7 +120,7 @@ public class HTMLImageElement extends HTMLElement {
 
     /**
      * Sets the value of the {@code alt} property.
-     * @param alt the value
+     * @param alt the {@code alt} property value
      */
     @JsxSetter
     public void setAlt(final String alt) {
@@ -136,7 +138,7 @@ public class HTMLImageElement extends HTMLElement {
 
     /**
      * Sets the {@code border} attribute.
-     * @param border the {@code border} attribute
+     * @param border the {@code border} attribute value
      */
     @JsxSetter
     public void setBorder(final String border) {

@@ -33,6 +33,8 @@ import org.htmlunit.javascript.host.WindowProxy;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/frame">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlFrame.class)
 public class HTMLFrameElement extends HTMLElement {
@@ -47,7 +49,7 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Returns the value of URL loaded in the frame.
+     * Returns the value of the URL loaded in the frame.
      * @return the value of this attribute
      */
     @JsxGetter
@@ -82,7 +84,7 @@ public class HTMLFrameElement extends HTMLElement {
      * Returns the window the frame contains, if any.
      * @return the window
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref5.html">Gecko DOM Reference</a>
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533692.aspx">MSDN documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/frame">MDN Documentation</a>
      */
     @JsxGetter
     public WindowProxy getContentWindow() {

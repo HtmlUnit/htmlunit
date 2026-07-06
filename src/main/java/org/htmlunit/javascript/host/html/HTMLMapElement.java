@@ -33,6 +33,8 @@ import org.htmlunit.javascript.configuration.JsxSetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMapElement">MDN Documentation</a>
  */
 @JsxClass(domClass = HtmlMap.class)
 public class HTMLMapElement extends HTMLElement {
@@ -84,7 +86,7 @@ public class HTMLMapElement extends HTMLElement {
 
     /**
      * Sets the {@code name} attribute.
-     * @param name the {@code name} attribute
+     * @param name the {@code name} attribute value
      */
     @JsxSetter
     @Override
