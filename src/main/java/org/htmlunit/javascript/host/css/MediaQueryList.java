@@ -28,6 +28,8 @@ import org.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList">MDN Documentation</a>
  */
 @JsxClass
 public class MediaQueryList extends EventTarget {

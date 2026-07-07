@@ -34,6 +34,8 @@ import org.htmlunit.util.StringUtils;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule">MDN Documentation</a>
  */
 @JsxClass
 public class CSSStyleRule extends CSSRule {

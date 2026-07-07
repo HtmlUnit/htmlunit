@@ -35,6 +35,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * A JavaScript object for {@code CryptoKey}.
  *
  * @see <a href="https://w3c.github.io/webcrypto/#dfn-CryptoKey">CryptoKey</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CryptoKey">MDN Documentation</a>
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -99,6 +100,7 @@ public class CryptoKey extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the underlying Java key.
      * @return the Java key (opaque {@code [[handle]]} internal slot)
      */
     public Key getInternalKey() {
@@ -106,6 +108,7 @@ public class CryptoKey extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the type of key this represents.
      * @return the key type: "public", "private", or "secret"
      */
     @JsxGetter
@@ -114,6 +117,7 @@ public class CryptoKey extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns whether the key material may be exported.
      * @return whether the key material may be exported
      */
     @JsxGetter
@@ -122,6 +126,7 @@ public class CryptoKey extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the algorithm descriptor object.
      * @return the algorithm descriptor object
      */
     @JsxGetter
@@ -130,6 +135,7 @@ public class CryptoKey extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the permitted key usages.
      * @return the permitted key usages as a JS array
      */
     @JsxGetter
@@ -138,6 +144,7 @@ public class CryptoKey extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the permitted key usages for internal use.
      * @return the permitted key usages as a Java set (for internal use)
      */
     public Set<String> getUsagesInternal() {

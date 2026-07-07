@@ -25,6 +25,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Ahmed Ashour
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSFontFaceRule">MDN Documentation</a>
  */
 @JsxClass
 public class CSSFontFaceRule extends CSSRule {

@@ -27,7 +27,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Ronald Brill
  * @author Ahmed Ashour
  * @author Frank Danek
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSMediaRule">MDN doc</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSMediaRule">MDN Documentation</a>
  */
 @JsxClass
 public class CSSMediaRule extends CSSConditionRule {
@@ -60,8 +60,8 @@ public class CSSMediaRule extends CSSConditionRule {
     }
 
     /**
-     * Returns the media types that the imported CSS style sheet applies to.
-     * @return the media types that the imported CSS style sheet applies to
+     * Returns the media types that this rule applies to.
+     * @return the media types that this rule applies to
      */
     @JsxGetter
     public MediaList getMedia() {

@@ -55,7 +55,7 @@ final class EcKeyAlgorithm {
     }
 
     /**
-     * Parse EC key algorithm parameters from a JS object.
+     * Parses EC key algorithm parameters from a JS object.
      *
      * @param keyGenParams the JS algorithm parameters object
      * @return the parsed EcKeyAlgorithm

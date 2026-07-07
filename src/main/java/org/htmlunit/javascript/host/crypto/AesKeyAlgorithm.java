@@ -49,7 +49,7 @@ final class AesKeyAlgorithm {
     }
 
     /**
-     * Parse AES key algorithm parameters from a JS object.
+     * Parses AES key algorithm parameters from a JS object.
      *
      * @param keyGenParams the JS algorithm parameters object
      * @return the parsed AesKeyAlgorithm

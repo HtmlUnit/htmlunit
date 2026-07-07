@@ -33,6 +33,8 @@ import org.htmlunit.javascript.host.dom.DOMException;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto">MDN Documentation</a>
  */
 @JsxClass
 public class Crypto extends HtmlUnitScriptable {
@@ -95,7 +97,7 @@ public class Crypto extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code subtle} property.
-     * @return the {@code stuble} property
+     * @return the {@code subtle} property
      */
     @JsxGetter
     public SubtleCrypto getSubtle() {
@@ -110,6 +112,7 @@ public class Crypto extends HtmlUnitScriptable {
     }
 
     /**
+     * Generates a random UUID.
      * @return a v4 UUID generated using a cryptographically secure random number generator
      */
     @JsxFunction

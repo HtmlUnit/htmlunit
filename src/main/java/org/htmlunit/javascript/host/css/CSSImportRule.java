@@ -29,6 +29,8 @@ import org.htmlunit.javascript.host.html.HTMLElement;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSImportRule">MDN Documentation</a>
  */
 @JsxClass
 public class CSSImportRule extends CSSRule {

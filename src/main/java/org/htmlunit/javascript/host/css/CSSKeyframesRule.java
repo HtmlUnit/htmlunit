@@ -24,6 +24,8 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule">MDN Documentation</a>
  */
 @JsxClass
 public class CSSKeyframesRule extends CSSRule {
@@ -55,7 +57,7 @@ public class CSSKeyframesRule extends CSSRule {
 
     /**
      * Returns the type of the rule.
-     * @return the type of the rule.
+     * @return the type of the rule
      */
     @Override
     @JsxGetter

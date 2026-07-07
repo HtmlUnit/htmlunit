@@ -48,7 +48,7 @@ final class HmacKeyAlgorithm {
     }
 
     /**
-     * Parse HMAC key algorithm parameters from a JS object.
+     * Parses HMAC key algorithm parameters from a JS object.
      *
      * @param keyGenParams the JS algorithm parameters object
      * @return the parsed HmacKeyAlgorithm
@@ -58,7 +58,7 @@ final class HmacKeyAlgorithm {
     }
 
     /**
-     * Parse HMAC key algorithm parameters from a JS object, with an optional fallback length.
+     * Parses HMAC key algorithm parameters from a JS object, with an optional fallback length.
      *
      * @param keyGenParams the JS algorithm parameters object
      * @param fallbackLength optional length to use when not specified in params;

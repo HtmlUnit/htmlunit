@@ -22,6 +22,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframeRule">MDN Documentation</a>
  */
 @JsxClass
 public class CSSKeyframeRule extends CSSRule {

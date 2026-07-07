@@ -42,8 +42,8 @@ import org.htmlunit.javascript.host.html.HTMLStyleElement;
 /**
  * <p>An ordered list of stylesheets, accessible via <code>document.styleSheets</code>, as specified by the
  * <a href="http://www.w3.org/TR/DOM-Level-2-Style/stylesheets.html#StyleSheets-StyleSheetList">DOM
- * Level 2 Style spec</a> and the <a href="https://developer.mozilla.org/en-US/docs/DOM/document.styleSheets">Gecko
- * DOM Guide</a>.</p>
+ * Level 2 Style spec</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets">MDN
+ * Documentation</a>.</p>
  *
  * <p>If CSS is disabled via {@link org.htmlunit.WebClientOptions#setCssEnabled(boolean)}, instances
  * of this class will always be empty. This allows us to check for CSS enablement/disablement in a single

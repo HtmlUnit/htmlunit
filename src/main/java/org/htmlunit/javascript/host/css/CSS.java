@@ -25,6 +25,8 @@ import org.htmlunit.util.StringUtils;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS">MDN Documentation</a>
  */
 @JsxClass
 public class CSS extends HtmlUnitScriptable {
@@ -41,6 +43,7 @@ public class CSS extends HtmlUnitScriptable {
     }
 
     /**
+     * Indicates whether the browser supports a given CSS feature.
      * @return a Boolean value indicating if the browser supports a given CSS feature, or not
      */
     @JsxStaticFunction
@@ -50,6 +53,7 @@ public class CSS extends HtmlUnitScriptable {
     }
 
     /**
+     * Escapes a string for use as part of a CSS selector.
      * @param ident the string to be escaped
      * @return a string containing the escaped string passed as parameter,
      *     mostly for use as part of a CSS selector

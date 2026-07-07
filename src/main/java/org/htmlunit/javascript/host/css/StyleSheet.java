@@ -34,6 +34,8 @@ import org.htmlunit.javascript.host.html.HTMLElement;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet">MDN Documentation</a>
  */
 @JsxClass
 public class StyleSheet extends HtmlUnitScriptable {

@@ -66,7 +66,7 @@ final class RsaHashedKeyAlgorithm {
     }
 
     /**
-     * Parse RSA hashed key algorithm parameters from a JS object.
+     * Parses RSA hashed key algorithm parameters from a JS object.
      *
      * @param keyGenParams the JS algorithm parameters object
      * @return the parsed RsaHashedKeyAlgorithm

@@ -25,7 +25,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSConditionRule">MDN doc</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSConditionRule">MDN Documentation</a>
  */
 @JsxClass
 public class CSSConditionRule extends CSSGroupingRule {
