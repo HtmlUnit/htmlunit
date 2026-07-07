@@ -46,6 +46,8 @@ import org.htmlunit.util.MimeType;
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">MDN Documentation</a>
  */
 @JsxClass
 public class CanvasRenderingContext2D extends HtmlUnitScriptable {
@@ -102,7 +104,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
     /**
      * Sets the {@code globalAlpha} property.
-     * @param globalAlpha the {@code globalAlpha} property
+     * @param globalAlpha the {@code globalAlpha} property value
      */
     @JsxSetter
     public void setGlobalAlpha(final double globalAlpha) {
@@ -121,7 +123,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
     /**
      * Sets the {@code fillStyle} property.
-     * @param fillStyle the {@code fillStyle} property
+     * @param fillStyle the {@code fillStyle} property value
      */
     @JsxSetter
     public void setFillStyle(final String fillStyle) {
@@ -140,7 +142,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
     /**
      * Sets the {@code strokeStyle} property.
-     * @param strokeStyle the {@code strokeStyle} property
+     * @param strokeStyle the {@code strokeStyle} property value
      */
     @JsxSetter
     public void setStrokeStyle(final String strokeStyle) {
@@ -158,7 +160,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
     /**
      * Sets the {@code lineWidth} property.
-     * @param lineWidth the {@code lineWidth} property
+     * @param lineWidth the {@code lineWidth} property value
      */
     @JsxSetter
     public void setLineWidth(final Object lineWidth) {
@@ -247,7 +249,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof CanvasRenderingContext2D canvas)) {
             throw JavaScriptEngine.reportRuntimeError(
-                    "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");
+                    "CanvasRenderingContext2D.clip() failed - this is not a CanvasRenderingContext2D");
         }
 
         RenderingBackend.WindingRule windingRule = WindingRule.NON_ZERO;
@@ -289,7 +291,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
 
     /**
      * Returns the {@code ImageData} object.
-     * this may accept a variable number of arguments.
+     * This may accept a variable number of arguments.
      * @param context the JavaScript context
      * @param scope the scope
      * @param thisObj the scriptable
@@ -302,7 +304,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
             final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof CanvasRenderingContext2D canvas)) {
             throw JavaScriptEngine.reportRuntimeError(
-                    "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");
+                    "CanvasRenderingContext2D.createImageData() failed - this is not a CanvasRenderingContext2D");
         }
 
         if (args.length > 0 && args[0] instanceof ImageData imageDataParameter) {
@@ -323,7 +325,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         }
 
         throw JavaScriptEngine.reportRuntimeError(
-                "CanvasRenderingContext2D.getImageData() failed - "
+                "CanvasRenderingContext2D.createImageData() failed - "
                 + "wrong parameters given (" + StringUtils.join(args, ", ") + ")");
     }
 
@@ -427,7 +429,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                 }
             }
             catch (final IOException ex) {
-                LOG.info("There is no ImageReader available for you imgage with src '" + imageElem.getSrc() + "'"
+                LOG.info("There is no ImageReader available for your image with src '" + imageElem.getSrc() + "'. "
                         + "Please have a look at https://www.htmlunit.org/images-howto.html "
                         + "for a possible solution.");
             }

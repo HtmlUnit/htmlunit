@@ -22,6 +22,8 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * A JavaScript object for {@code Animation}.
  *
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Animation">MDN Documentation</a>
  */
 @JsxClass
 public class Animation extends EventTarget {

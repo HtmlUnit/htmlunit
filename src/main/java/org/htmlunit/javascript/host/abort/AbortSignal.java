@@ -19,9 +19,11 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for AbortSignal.
+ * The JavaScript object {@code AbortSignal}.
  *
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal">MDN Documentation</a>
  */
 @JsxClass
 public class AbortSignal extends EventTarget {

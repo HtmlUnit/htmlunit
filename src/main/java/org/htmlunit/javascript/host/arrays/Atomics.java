@@ -21,6 +21,8 @@ import org.htmlunit.javascript.configuration.JsxClass;
  * A JavaScript object for {@code Atomics}.
  *
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics">MDN Documentation</a>
  */
 @JsxClass
 public class Atomics extends HtmlUnitScriptable {

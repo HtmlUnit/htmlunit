@@ -21,9 +21,11 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
- * A JavaScript object for AbortController.
+ * The JavaScript object {@code AbortController}.
  *
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController">MDN Documentation</a>
  */
 @JsxClass
 public class AbortController extends HtmlUnitScriptable {
@@ -41,6 +43,7 @@ public class AbortController extends HtmlUnitScriptable {
     }
 
     /**
+     * Returns the {@link AbortSignal} associated with this controller.
      * @return the {@link AbortSignal}
      */
     @JsxGetter

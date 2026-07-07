@@ -24,6 +24,8 @@ import org.htmlunit.javascript.host.event.Event;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/AnimationEvent">MDN Documentation</a>
  */
 @JsxClass
 public class AnimationEvent extends Event {

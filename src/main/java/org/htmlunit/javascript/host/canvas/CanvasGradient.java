@@ -24,6 +24,8 @@ import org.htmlunit.javascript.configuration.JsxFunction;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient">MDN Documentation</a>
  */
 @JsxClass
 public class CanvasGradient extends HtmlUnitScriptable {
@@ -38,10 +40,10 @@ public class CanvasGradient extends HtmlUnitScriptable {
 
     /**
      * Adds a new stop, defined by an offset and a color, to the gradient.
-     * @param offset A number between 0 and 1. An INDEX_SIZE_ERR is raised,
-     *        if the number is not in that range.
-     * @param color A CSS color. A SYNTAX_ERR is raised, if the value
-     *        can not be parsed as a CSS color value.
+     * @param offset a number between 0 and 1; an {@code INDEX_SIZE_ERR} is raised
+     *        if the number is not in that range
+     * @param color a CSS color; a {@code SYNTAX_ERR} is raised if the value
+     *        cannot be parsed as a CSS color value
      */
     @JsxFunction
     public void addColorStop(final double offset, final String color) {

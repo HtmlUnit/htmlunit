@@ -26,6 +26,8 @@ import org.htmlunit.javascript.host.media.MediaStreamTrack;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasCaptureMediaStreamTrack">MDN Documentation</a>
  */
 @JsxClass({CHROME, EDGE})
 public class CanvasCaptureMediaStreamTrack extends MediaStreamTrack {

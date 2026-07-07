@@ -26,6 +26,8 @@ import org.htmlunit.javascript.host.media.MediaStream;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasCaptureMediaStream">MDN Documentation</a>
  */
 @JsxClass({FF, FF_ESR})
 public class CanvasCaptureMediaStream extends MediaStream {
