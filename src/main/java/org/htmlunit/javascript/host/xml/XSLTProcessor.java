@@ -129,6 +129,18 @@ public class XSLTProcessor extends HtmlUnitScriptable {
             // which sets a number of processing limits on the processors. Conversely, by default,
             // the JDK turns off FSP for transformers and XPath, which enables extension functions for XSLT and XPath.
             transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            try {
+                transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            }
+            catch (final IllegalArgumentException ignored) {
+                // ignore
+            }
+            try {
+                transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+            }
+            catch (final IllegalArgumentException ignored) {
+                // ignore
+            }
 
             final SgmlPage page = sourceDomNode.getPage();
             if (page != null && page.getWebClient().getBrowserVersion()
@@ -191,6 +203,12 @@ public class XSLTProcessor extends HtmlUnitScriptable {
             }
 
             final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            try {
+                factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            }
+            catch (final javax.xml.parsers.ParserConfigurationException ignored) {
+                // ignore
+            }
             final org.w3c.dom.Document containerDocument = factory.newDocumentBuilder().newDocument();
             final org.w3c.dom.Element containerElement = containerDocument.createElement("container");
             containerDocument.appendChild(containerElement);
